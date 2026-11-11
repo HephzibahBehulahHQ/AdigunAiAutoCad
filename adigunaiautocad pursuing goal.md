@@ -1,0 +1,93 @@
+# adigunaiautocad pursuing goal
+## Autonomous Codex master execution specification — 2026-11-11
+
+**Product:** adigunaiautocad (display name: Adigun AI AutoCAD, subject to trademark review). **Owner:** Hephzibah Behulah / HB Elektroniker. **Product repository:** https://github.com/HephzibahBehulahHQ/AdigunAiAutoCad . **Target domain:** https://adigunaiautocad.hephzibahbehulah.com .
+
+### 0. Mission and autonomous operating contract
+You are the lead architect, electrical CAD engineer, frontend/backend developer, AI engineer, test engineer, security reviewer, technical writer and release engineer. Deliver a genuinely functional, professional browser-first electrical CAD and industrial automation design workstation—not a screenshot, static prototype, simulated feature list, or nonworking buttons. Work independently through research, implementation, tests, review and release preparation. Make reasonable documented choices, create small reviewable PRs, and continue iterating without routine questions. Never bypass approvals, security controls, repository policies or required human review. If deployment secrets, licensed specifications, paid services, or safety sign-off are missing, implement safe fallbacks, document the blocker and keep delivering verifiable code. Do not claim a successful deployment, certification, or tested hardware without evidence.
+
+**Repository precedence (inspect actual files, not assumptions):**
+1. https://github.com/HephzibahBehulahHQ/hb-AI-policy (canonical; the user-supplied hb-AI-policyy path may be a typo or inaccessible; verify).
+2. https://github.com/HephzibahBehulahHQ/hb-design-system — tokens, logos, icons, templates, Adigun BOT.
+3. https://github.com/HephzibahBehulahHQ/hb-elektroniker — engineering division identity and guidance.
+4. https://github.com/HephzibahBehulahHQ/HephzibahBehulahHQ.github.io — corporate identity.
+5. Product-local AGENTS.md and product specifications, where consistent with higher authority.
+Do not modify shared repositories or invent/replace official brand assets. Resolve any policy conflict by honoring the higher authority and recording it. Adopt the verified corporate palette and division accent (HB Elektroniker README lists navy #0B1220, cyan #22D3EE and gold #D4AF37); obtain exact current values and logo files from the canonical design system. No EPLAN, AutoCAD, SEW or other third-party logo or proprietary UI asset may be copied. The screenshots are interaction/layout references only; build an original branded implementation with similar workstation ergonomics. Avoid implying Autodesk affiliation.
+
+### 1. Visual acceptance contract — most important
+Recreate the **dense professional electrical-CAD workstation arrangement** shown in the supplied reference screenshots, while replacing all branding with authorized Hephzibah Behulah / HB Elektroniker identity:
+- Full-viewport desktop-class editor with **very large, open, central schematic drawing canvas**. At 1440×900 the canvas should occupy >=75% of viewport area in default compact mode, measured in a Playwright test; no marketing hero, giant cards, or permanently open chat pane.
+- Top: thin title/project tab strip (24–32px) and **compact icon-only command toolbar** (28–36px) grouped for file, edit, drawing, electrical, automation, views, output, AI. No persistent text labels. Keyboard-accessible tooltips, aria-labels, shortcuts and command palette provide discoverability.
+- Left: collapsible, icon-only 32–40px vertical rail; expandable on-demand project/page tree, devices, symbol libraries, layers, properties, macros. Expanded panels are resizable, detachable where feasible, and hideable with one click.
+- Right: collapsible icon-only 32–40px rail for inspector, electrical rules, terminal strip, BOM, AI assistant and comments. AI opens as an overlay or optional narrow pane, not an obstruction to drafting.
+- Bottom: **thin icon-only tool/status rail** (24–32px) with toggles for grid, snap, orthogonal, object snap, coordinates, zoom, units, sheet, validation, jobs and notifications. Values (e.g. zoom, coordinate, active sheet) may be tiny readable text when necessary for engineering precision, but tool commands remain icon-first.
+- Central canvas: crisp white engineering sheet in light mode and configurable dark drafting mode; fine grid, coordinate rulers, title block, border, page references, line numbers, electrical symbols, blue/red/black nets and annotations, connection dots, terminal rows, device labels, cable identifiers, cross-reference arrows, multiple drawing sheets, CAD-like zoom/pan. Include polished sample project matching the *type* and complexity of the screenshots (sensor-to-PLC wiring, motor-drive power/control, terminal strips), using original generic symbols and data.
+- Fast pan (middle mouse/space drag), wheel/pinch zoom around cursor, fit-to-page, multi-select, drag, resize, rotate, align, distribute, snapping, undo/redo, context menu, keyboard shortcuts, precision coordinates, layers, mini-map optional.
+- Default compact mode on desktop; responsive tablet adaptation; mobile opens a safe viewer rather than an unusable editor. Screen-reader labels, high contrast, focus visibility and reduced motion.
+- Provide reference screenshot comparison tests for workstation geometry and interaction, not unauthorized pixel copying.
+
+### 2. Product scope and real CAD engine
+Build a coherent electrical engineering CAD platform, prioritizing **2D electrical schematics and control panel design**; do not promise complete mechanical AutoCAD equivalence. Modules:
+1. Drawing/document core: projects, folders, sheets, page templates, title blocks, revisions, autosave, version history, reliable serialization, recoverable edits, copy/paste, grouping, layers, lock/hide, symbol definitions, reusable macros and templates.
+2. Geometry: world-coordinate model independent of screen pixels, precise primitives (lines, polylines, arcs, circles, rectangles, text, dimensioning), transformations, selection hit-testing, snapping and orthogonal routing, viewport culling, stable IDs and deterministic export.
+3. Electrical semantics: typed symbols, pins, ports, net connectivity graph, junction rules, wire numbering, signal names, potential and cross-sheet references, device tags, contact references, terminal strips, cables, conductor colors, core IDs, connection reports, power supplies, protective devices, PLC I/O mapping, sensors, actuators, relays, contactors, motors, VFDs, safety relays and distribution boards.
+4. Panel layout: DIN rails, ducts, footprints, mounting plate, clearance annotations, wire routing suggestions, panel schedules, parts/BOM, heat-load estimates as advisory only, configurable component dimensions and manufacturer catalog provenance.
+5. Industrial automation: PLC addressing and I/O mapping, electrical control schematics, ladder-logic **viewer/editor with explicit limited scope**, basic interlock logic and signal simulation with deterministic engine; clearly separate conceptual simulation from validated industrial control and safety PLC functionality.
+6. Reports: BOM, wire lists, terminal diagrams, cable schedules, device indexes, connection lists, revision logs, sheet index, validation findings, PDF print package, CSV and SVG; DXF import/export via an audited open library with documented subset/roundtrip limitations. DWG only with legally licensed technology; never falsely claim native DWG fidelity.
+7. Libraries: versioned IEC/ANSI-style symbols authored in-house or permissively licensed, pin metadata, editable symbols, searchable catalog, import/export, vendor-neutral parts, provenance and license checks.
+8. Multi-language UI: German (de-DE), English (en-US), international English; locale-aware units, paper sizes, numbering, decimal separators and documentation templates.
+9. Professional workflows: sample projects, project wizard, onboarding, searchable commands, printable engineering documentation, collaboration/roles if backend is enabled, audit trails, backups, restore and offline-first editing where feasible.
+
+### 3. 2026 standards-aware engineering — no unsupported certification claims
+Create a maintained **standards registry** with jurisdiction, standard ID, edition, status, applicability, license, authoritative reference, implementation mapping, evidence and last-reviewed date. Research latest authoritative editions before encoding any normative requirement. Start with applicable families, verifying current editions and national deviations:
+- Germany/EU: DIN VDE 0100 series / IEC 60364 (LV installations), DIN EN IEC 60204-1 (machine electrical equipment), DIN EN IEC 61439 (LV assemblies), DIN EN IEC 81346 (reference designations), IEC 61082 (electrotechnical documents), IEC 60617 (graphical symbols), IEC 60947 (switchgear), IEC 61131-3 (PLC programming), IEC 62443 (industrial cybersecurity), EN ISO 13849-1 and IEC 62061 (functional safety where applicable), IEC 61355 (document classification), EU Low Voltage/EMC/Machinery regulatory applicability including effective dates and transitions.
+- US: NFPA 70 / NEC (jurisdiction-adopted edition), NFPA 79, UL 508A, NFPA 70E, ANSI/IEEE 315 where applicable, relevant NEMA/IEEE/UL families and OSHA context. NEC editions are locally adopted; never assume nationwide adoption of a single edition.
+- International: IEC 60364, IEC 60204, IEC 61439, IEC 60617, IEC 61082, IEC 81346, IEC 61131, IEC 62443, ISO 12100, ISO 13849 and IEC 62061 as applicable.
+- Distinguish symbol/documentation checks from design safety certification; support configurable rules by project region, edition, system voltage and application. Do not redistribute copyrighted standards texts or use proprietary symbols without permission.
+- Implement verifiable **electrical rule checks**: unconnected pins, unintended dangling wires, duplicate device tags, shorted incompatible potentials, missing PE designation, inconsistent wire numbers, terminal conflicts, invalid cross references, mismatched PLC I/O types, basic conductor/circuit warnings and report generation. Safety-critical sizing, short-circuit withstand, selectivity, arc flash and compliance determinations must be clearly advisory or delegated to qualified engineer and verified calculations.
+- Every rule has rule ID, edition mapping, severity, explanation, exact sheet/object reference, suggested fix, test fixture and human-review status. Allow documented waivers with audit log.
+
+### 4. AI engineering copilot — Adigun BOT
+Reuse the official Adigun BOT component contract from hb-design-system. The copilot is an opt-in, context-aware engineering assistant with:
+- natural-language project creation, search, symbol insertion, wiring proposals, BOM explanations, sheet summaries, cross-reference suggestions, localization and documentation generation;
+- **preview -> diff -> explicit user confirmation -> deterministic validated edit transaction -> undo** for every modification; no unreviewed autonomous changes to live project, no hidden code execution, no silent external sharing;
+- retrieval grounded in the project's own symbols, standards registry, permitted documentation and manufacturer data, with citations and confidence/uncertainty; never fabricate standard clauses or certified safety results;
+- typed tools with JSON schemas, permissions, least privilege, prompt-injection defenses, rate limiting, cost controls, redaction, audit logs and provider abstraction; AI credentials only server-side;
+- offline/manual CAD remains fully usable without any AI provider key. Clearly label unavailable functions rather than presenting mock results as real.
+
+### 5. Architecture and engineering quality
+Inspect existing repo and follow its stack if established; otherwise propose and implement a pragmatic TypeScript monorepo: React + Vite + strict TypeScript, accessible component library derived from approved design tokens, Zustand or equivalent for editor state, SVG or Canvas/WebGL hybrid renderer (choose by measured performance), geometry/connectivity packages independent of UI, workers for heavy ERC/export, schema-validated project JSON with migrations, IndexedDB offline persistence, Playwright + Vitest. Add optional API (Node/TypeScript with Postgres) only when needed for auth, collaboration, server-side AI or storage. Keep deterministic CAD engine, rule engine, AI adapter, UI and persistence isolated and testable. Avoid overengineering and vendor lock-in. No secret values in frontend or repo. Use CSP, secure headers, dependency scanning, license inventory, input sanitization, upload limits, data export/deletion and privacy-by-design.
+
+Data entities: Project, Sheet, Layer, SymbolDefinition, SymbolInstance, Pin, Net, WireSegment, Junction, Terminal, Cable, Device, PLCAddress, Part, PanelFootprint, DrawingPrimitive, Constraint, Revision, ValidationFinding and AuditEvent. Define stable IDs, schema versions, coordinate units, explicit connectivity semantics and migrations. Ensure imported content cannot execute scripts.
+
+### 6. Autonomous phased delivery — every phase has a working demo
+**Phase A / discovery:** audit repositories, policy, brand, existing workflows, deployment, current standards sources and licenses. Record architecture decision records and exact acceptance checklist. Create a dedicated feature branch and PR; no silent main edits.
+**Phase B / workstation:** functional icon-only shell, high-fidelity workspace, project/page explorer, resizable panels, original branded SVG icons, accessibility, command palette, keyboard shortcuts, sample schematics, viewport layout screenshot tests.
+**Phase C / CAD kernel:** precision geometry, model serialization, editing commands, undo/redo, multi-sheet, snap, pan/zoom, symbol creation and reusable libraries; tests for topology and roundtrip.
+**Phase D / electrical intelligence:** pins/nets, ERC, cross references, terminal/wire numbering, PLC maps, BOM and deterministic reports; real test projects.
+**Phase E / panel/automation:** panel layout, device footprints, wire/terminal schedules, limited PLC logic and transparent simulation.
+**Phase F / AI:** provider abstraction, Adigun BOT integration, cited guidance, safe tool previews, validation and consent, graceful no-key mode.
+**Phase G / interchange and release:** PDF/SVG/CSV/DXF import/export tests, i18n, documentation, performance, security, accessibility, deployment checks and release candidate.
+
+For each phase: implement -> run checks -> fix failures -> capture screenshots -> update docs and progress -> open/update PR -> proceed when permitted. Do not wait for routine user input. Escalate only credentials, policy conflicts, legal licensing, safety approvals or actions requiring explicit authorization.
+
+### 7. Acceptance tests and release gates
+- On 1440×900 screenshot, central canvas >=75% viewport in compact mode; top/side/bottom icon-only controls present, keyboard-operable and non-overlapping. Compare with screenshot references conceptually.
+- Create/edit/save/reload a 10-sheet schematic with >=250 symbols and >=1000 wire segments without lost connections; verify deterministic undo/redo and project roundtrip.
+- Demonstrate net connectivity, branch junction behavior, cross-sheet references, PLC I/O and terminal indexing; include deliberate faults detected by ERC with sheet/object locations.
+- Export print-ready PDF and SVG, CSV BOM/wire/terminal reports and supported DXF subset; reimport test fixture and report unsupported constructs.
+- Verify German/US locale switch, project-level region and edition settings, standards registry provenance and explicit engineering disclaimers.
+- AI suggested wiring never changes model before approval; unauthorized tool calls are rejected; no-key mode works.
+- Automated unit/integration/e2e, a11y checks, visual snapshots, performance budgets, security/dependency/license scans, production build and deployment smoke test. Track exact pass/fail/skip and artifacts.
+- Serve correct site on the specified domain after authorized deployment, verify DNS/TLS, route fallback, content-type, asset paths and no blank screen; report actual URL and evidence. Never confuse a GitHub Pages static host with a persistent server runtime: use a separate secure backend host if required.
+- Define measurable render and interaction budgets on reference hardware and include CI regression tests; avoid unmeasured "fast" claims.
+- Release notes must list completed, partial, unsupported and safety-critical limitations. No fake certifications or simulated screenshots presented as real app output.
+
+### 8. Documentation and operations
+Maintain README, AGENTS.md (product-local, subordinate to global policy), architecture/ADRs, data schema, editor shortcuts, symbol authoring guide, AI security guide, standards provenance matrix, locale guide, deployment guide, rollback guide, accessibility report, licensing/SBOM, test evidence and CHANGELOG. Provide original sample projects: IEC-style motor starter, PLC sensor/actuator control, panel terminal layout and ANSI-style control circuit.
+
+### 9. Mandatory Codex behavior and finish condition
+Begin by reading actual policy/design/brand repositories and checking branch protection and workflows. Prioritize a working full-screen CAD workstation immediately, then engineering correctness. Maintain a task checklist in the product repository; use issue/PR checkpoints. Never substitute decorative mock screens for working commands. Keep output concise: STATUS; Done; Tested; Blocked; ESTIMATED FINISH TIME (hours/minutes); ETA; Next. Only claim work actually completed. A phase is complete only with tests and demonstrable artifacts. The overall project is complete only when the agreed acceptance suite passes, deployment is verified, documented limitations are explicit and required human approvals are obtained.
+
+### 10. Visual reference brief for mockup and implementation
+A 16:9, high-resolution **original** HB Elektroniker electrical CAD workstation: slim midnight navy top chrome with authorized brand logo and product name; tightly packed 28px cyan-accent icon-only toolbar; very narrow icon-only left and right rails; almost entire screen is a white professional A3 electrical schematic with clean black/blue/red wire routing, IEC-style relay/contactor/PLC/sensor symbols, pin numbers, terminal strips, cross references, engineering border and title block; slim bottom icon-only status strip; unobtrusive small floating cyan Adigun BOT icon. Crisp vector-like typography, realistic dense engineering details, no marketing panels, no copied third-party branding, no fake certification badge. The mockup is a **concept**, not proof of implemented functionality.
