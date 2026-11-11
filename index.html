@@ -204,7 +204,7 @@
   $('#paletteFillEnabled').addEventListener('change',e=>{state.fillEnabled=e.target.checked;$('#fillEnabledTool').setAttribute('aria-pressed',String(state.fillEnabled));persist();notify(state.fillEnabled?'Shape fill enabled.':'Shape fill disabled.');});
   $$('[data-palette-mode]').forEach(b=>b.addEventListener('click',()=>{paletteMode=b.dataset.paletteMode;renderPalette();}));
   $('#paletteSwatches').addEventListener('click',e=>{const b=e.target.closest('[data-color]');if(b)applyPaletteColor(b.dataset.color);});
-  $('#customColor').addEventListener('input',e=>applyPaletteColor(e.target.value));
+  $('#customColor').addEventListener('change',e=>applyPaletteColor(e.target.value));
   $('[data-action="palette"]').addEventListener('pointerenter',cancelPaletteClose);
   $('[data-action="palette"]').addEventListener('pointerleave',schedulePaletteClose);
   $('#colorPalette').addEventListener('pointerenter',cancelPaletteClose);
