@@ -28,11 +28,11 @@
       id: 'terminal.feedthrough.2-connection.v1',
       view: 'schematic',
       unit: 'mm',
-      width: 68,
+      width: 70,
       height: 26,
       pins: [
-        { id: 'connection-1', localNumber: '1', name: 'Connection 1', x: -34, y: 0, electricalType: 'passive', connectionType: 'push-in' },
-        { id: 'connection-2', localNumber: '2', name: 'Connection 2', x: 34, y: 0, electricalType: 'passive', connectionType: 'push-in' }
+        { id: 'connection-1', localNumber: '1', name: 'Connection 1', x: -35, y: 0, electricalType: 'passive', connectionType: 'push-in' },
+        { id: 'connection-2', localNumber: '2', name: 'Connection 2', x: 35, y: 0, electricalType: 'passive', connectionType: 'push-in' }
       ],
       internalConnections: [['connection-1', 'connection-2']],
       numberingNote: 'Terminal numbers 1 and 2 are stable model-local connection IDs. The manufacturer page specifies two connections but does not assign these numbers.'
