@@ -1,0 +1,32 @@
+name: Verify electrical CAD model
+
+on:
+  pull_request:
+    paths:
+      - "cad-engine.js"
+      - "cad-engine.test.js"
+      - ".github/workflows/cad-engine-tests.yml"
+      - "index.html"
+  push:
+    branches: [main]
+    paths:
+      - "cad-engine.js"
+      - "cad-engine.test.js"
+      - ".github/workflows/cad-engine-tests.yml"
+      - "index.html"
+
+permissions:
+  contents: read
+
+jobs:
+  cad-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Test source-backed component model and connectivity
+        run: node --test cad-engine.test.js
