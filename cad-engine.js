@@ -307,7 +307,7 @@
     });
     const nets = [];
     groups.forEach(function (group) {
-      if (group.wires.length || group.pins.length > 1) nets.push(group);
+      if (group.wires.length) nets.push(group);
     });
     nets.sort(function (a, b) {
       const aKey = a.wires[0] || a.pins[0].instanceId + ':' + a.pins[0].pinId;
