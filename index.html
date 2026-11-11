@@ -144,7 +144,52 @@
         else {el=document.createElementNS('http://www.w3.org/2000/svg','g');el.setAttribute('transform',`translate(${obj.x} ${obj.y})`);el.setAttribute('class',`drawing-object ${obj.id===state.selected?'selected-object':''}`);const shape=document.createElementNS('http://www.w3.org/2000/svg',obj.kind==='motor'?'circle':'rect');if(obj.kind==='motor'){shape.setAttribute('cx','0');shape.setAttribute('cy','0');shape.setAttribute('r','18');}else{shape.setAttribute('x','-21');shape.setAttribute('y','-14');shape.setAttribute('width','42');shape.setAttribute('height','28');}shape.setAttribute('fill','#fff');shape.setAttribute('stroke',stroke);shape.setAttribute('stroke-width','1.5');el.append(shape);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x','0');t.setAttribute('y','4');t.setAttribute('text-anchor','middle');t.setAttribute('font-size','9');t.setAttribute('fill',stroke);t.textContent=({terminal:'X1',relay:'K2',contact:'13/14',breaker:'F2',sensor:'B2',motor:'M2',plc:'I1',ground:'PE'})[obj.kind]||'DEV';el.append(t);}
         el.dataset.object=obj.id;el.addEventListener('click',e=>{if(state.tool==='select'){e.stopPropagation();state.selected=obj.id;renderObjects();showObject(obj);}});userDrawings.append(el);}}
 
-  function showObject(obj){$('#selectionDetails').innerHTML=`<div class="inspector-title">Drawing object</div><div class="property-row"><span>Type</span><strong>${symbolNames[obj.symbolId]||symbolNames[obj.kind]||obj.kind}</strong></div><div class="property-row"><span>Drawing position</span><strong>X ${obj.x} · Y ${obj.y} mm</strong></div><div class="property-row"><span>Object ID</span><strong>${obj.id.slice(0,13)}</strong></div><button class="command-item" data-delete-object="${obj.id}"><span>⌫</span><span>Remove selected drawing object</span><kbd>Delete</kbd></button>`;}
+  function escapeHtml(value){return String(value==null?'':value).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
+  function showObject(obj){
+    const host=$('#selectionDetails');
+    if(!host){openInspector('Properties');return showObject(obj);}
+    const def=obj.kind==='component-instance'?window.AdigunCADEngine.component(obj.componentId):null;
+    if(!def){
+      host.innerHTML='<div class="inspector-title">Drawing object</div><div class="property-row"><span>Type</span><strong>'+escapeHtml(symbolNames[obj.symbolId]||symbolNames[obj.kind]||obj.kind)+'</strong></div><div class="property-row"><span>Drawing position</span><strong>X '+escapeHtml(obj.x)+' · Y '+escapeHtml(obj.y)+' mm</strong></div><div class="property-row"><span>Object ID</span><strong>'+escapeHtml(obj.id.slice(0,13))+'</strong></div><button class="command-item" data-delete-object="'+escapeHtml(obj.id)+'"><span>⌫</span><span>Remove selected drawing object</span><kbd>Delete</kbd></button>';
+      return;
+    }
+    const spec=def.specifications;
+    const props=obj.properties||{};
+    const source=def.sources[0];
+    host.innerHTML='<div class="inspector-title">Verified component · '+escapeHtml(def.model)+'</div>'
+      +'<div class="property-row"><span>Manufacturer</span><strong>'+escapeHtml(def.manufacturer)+'</strong></div>'
+      +'<div class="property-row"><span>Part number</span><strong>'+escapeHtml(def.manufacturerPartNumber)+'</strong></div>'
+      +'<div class="property-row"><span>Rated voltage</span><strong>'+escapeHtml(spec.nominalVoltage.value+' '+spec.nominalVoltage.unit)+'</strong></div>'
+      +'<div class="property-row"><span>Rated current</span><strong>'+escapeHtml(spec.nominalCurrent.value+' '+spec.nominalCurrent.unit)+'</strong></div>'
+      +'<div class="property-row"><span>Rated cross-section</span><strong>'+escapeHtml(spec.ratedCrossSection.value+' '+spec.ratedCrossSection.unit)+'</strong></div>'
+      +'<div class="property-row"><span>Conductor range</span><strong>'+escapeHtml(spec.rigidConductorRange.minimum+'–'+spec.rigidConductorRange.maximum+' '+spec.rigidConductorRange.unit)+'</strong></div>'
+      +'<div class="property-row"><span>Dimensions</span><strong>'+escapeHtml(spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depthOnNS35_7_5.value+' mm (NS 35/7.5)')+'</strong></div>'
+      +'<div class="property-row"><span>Model pins</span><strong>2 · internally continuous</strong></div>'
+      +'<label class="property-row"><span>Reference</span><input class="component-edit" data-component-property="ref" data-component-object="'+escapeHtml(obj.id)+'" maxlength="32" value="'+escapeHtml(obj.ref)+'"></label>'
+      +'<label class="property-row"><span>Terminal strip</span><input class="component-edit" data-component-property="terminalStrip" data-component-object="'+escapeHtml(obj.id)+'" maxlength="40" value="'+escapeHtml(props.terminalStrip)+'"></label>'
+      +'<label class="property-row"><span>Position</span><input class="component-edit" data-component-property="position" data-component-object="'+escapeHtml(obj.id)+'" maxlength="24" value="'+escapeHtml(props.position)+'"></label>'
+      +'<label class="property-row"><span>Marking</span><input class="component-edit" data-component-property="marking" data-component-object="'+escapeHtml(obj.id)+'" maxlength="40" value="'+escapeHtml(props.marking)+'"></label>'
+      +'<label class="property-row"><span>Comment</span><input class="component-edit" data-component-property="comment" data-component-object="'+escapeHtml(obj.id)+'" maxlength="160" value="'+escapeHtml(props.comment)+'"></label>'
+      +'<a class="component-source" href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener noreferrer">Manufacturer source · '+escapeHtml(source.retrievedAt)+'</a>'
+      +'<p class="notice component-specs">'+escapeHtml(def.symbol.numberingNote)+' Part ratings are source data and remain read-only.</p>'
+      +'<button class="command-item" data-delete-object="'+escapeHtml(obj.id)+'"><span>⌫</span><span>Remove verified component</span><kbd>Delete</kbd></button>';
+  }
+  $('#inspectorContent').addEventListener('input',function(e){
+    const field=e.target.closest('[data-component-property]');
+    if(!field)return;
+    const obj=state.objects.find(function(item){return item.id===field.dataset.componentObject;});
+    if(!obj||obj.kind!=='component-instance')return;
+    const name=field.dataset.componentProperty;
+    const value=field.value;
+    if(name==='ref')obj.ref=value.slice(0,32);
+    else if(Object.prototype.hasOwnProperty.call(obj.properties,name)){
+      const rule=window.AdigunCADEngine.component(obj.componentId).instanceProperties[name];
+      obj.properties[name]=value.slice(0,rule.maximumLength);
+    }else return;
+    renderObjects();
+    persist();
+  });
+
   let drawStart=null,freehandPoints=null;
   function makeStyledObject(kind,a,b,extra={}){return makeObj(kind,a.x,a.y,{x1:a.x,y1:a.y,x2:b.x,y2:b.y,stroke:state.strokeColor,fill:state.fillEnabled?state.fillColor:'none',...extra});}
   drawing.addEventListener('pointerdown',e=>{if(e.button===1||e.altKey||state.tool==='pan'){state.pan={x:e.clientX,y:e.clientY,view:{...state.view}};drawing.style.cursor='grabbing';drawing.setPointerCapture(e.pointerId);return;}if(state.tool==='select')return;drawStart=svgPoint(e);if(state.tool==='freehand')freehandPoints=[drawStart];drawing.setPointerCapture(e.pointerId);});
