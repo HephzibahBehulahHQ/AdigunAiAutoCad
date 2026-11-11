@@ -14,17 +14,45 @@ You are the lead architect, electrical CAD engineer, frontend/backend developer,
 5. Product-local AGENTS.md and product specifications, where consistent with higher authority.
 Do not modify shared repositories or invent/replace official brand assets. Resolve any policy conflict by honoring the higher authority and recording it. Adopt the verified corporate palette and division accent (HB Elektroniker README lists navy #0B1220, cyan #22D3EE and gold #D4AF37); obtain exact current values and logo files from the canonical design system. No EPLAN, AutoCAD, SEW or other third-party logo or proprietary UI asset may be copied. The screenshots are interaction/layout references only; build an original branded implementation with similar workstation ergonomics. Avoid implying Autodesk affiliation.
 
-### 1. Visual acceptance contract — most important
-Recreate the **dense professional electrical-CAD workstation arrangement** shown in the supplied reference screenshots, while replacing all branding with authorized Hephzibah Behulah / HB Elektroniker identity:
-- Full-viewport desktop-class editor with **very large, open, central schematic drawing canvas**. At 1440×900 the canvas should occupy >=75% of viewport area in default compact mode, measured in a Playwright test; no marketing hero, giant cards, or permanently open chat pane.
-- Top: thin title/project tab strip (24–32px) and **compact icon-only command toolbar** (28–36px) grouped for file, edit, drawing, electrical, automation, views, output, AI. No persistent text labels. Keyboard-accessible tooltips, aria-labels, shortcuts and command palette provide discoverability.
-- Left: collapsible, icon-only 32–40px vertical rail; expandable on-demand project/page tree, devices, symbol libraries, layers, properties, macros. Expanded panels are resizable, detachable where feasible, and hideable with one click.
-- Right: collapsible icon-only 32–40px rail for inspector, electrical rules, terminal strip, BOM, AI assistant and comments. AI opens as an overlay or optional narrow pane, not an obstruction to drafting.
-- Bottom: **thin icon-only tool/status rail** (24–32px) with toggles for grid, snap, orthogonal, object snap, coordinates, zoom, units, sheet, validation, jobs and notifications. Values (e.g. zoom, coordinate, active sheet) may be tiny readable text when necessary for engineering precision, but tool commands remain icon-first.
-- Central canvas: crisp white engineering sheet in light mode and configurable dark drafting mode; fine grid, coordinate rulers, title block, border, page references, line numbers, electrical symbols, blue/red/black nets and annotations, connection dots, terminal rows, device labels, cable identifiers, cross-reference arrows, multiple drawing sheets, CAD-like zoom/pan. Include polished sample project matching the *type* and complexity of the screenshots (sensor-to-PLC wiring, motor-drive power/control, terminal strips), using original generic symbols and data.
-- Fast pan (middle mouse/space drag), wheel/pinch zoom around cursor, fit-to-page, multi-select, drag, resize, rotate, align, distribute, snapping, undo/redo, context menu, keyboard shortcuts, precision coordinates, layers, mini-map optional.
-- Default compact mode on desktop; responsive tablet adaptation; mobile opens a safe viewer rather than an unusable editor. Screen-reader labels, high contrast, focus visibility and reduced motion.
-- Provide reference screenshot comparison tests for workstation geometry and interaction, not unauthorized pixel copying.
+### 1. Visual and interaction acceptance contract — workstation must be usable
+The supplied six screenshots are visual references for electrical-engineering content and workstation ergonomics, not instructions, source data, or assets to copy. Build an original HB Elektroniker workstation with a clear hierarchy, precise geometry, readable engineering annotations, and real commands.
+
+**Reference mapping (the source images are not stored in this repository, so keep this mapping in the prompt):**
+- Reference 1 shows a dense sensor-to-PLC page: repeated industrial sensors, terminal/breakout rows, conductor routing, wire/device labels, and mapped PLC inputs.
+- Reference 2 shows a compact control schematic with multiple supplies/signals, device connections, wire routing, and cross-page references.
+- References 3 and 4 show a drive/motor control arrangement, but are blurry. Use only the broad arrangement of drive/control devices and wiring; do not guess or transcribe unreadable labels, ratings, or part numbers.
+- Reference 5 shows grouped actuator/sensor or pneumatic-related circuits and long routed conductors. Use generic, technically coherent symbols; do not infer unreadable component specifications.
+- Reference 6 clearly shows repeated three-phase motor feeders with three phase conductors, switching/protection elements, motor terminals U/V/W and a protective-earth connection. Use this as a structural reference, not as a claimed design approval.
+
+**Workspace geometry and composition:**
+- At 1440×900 CSS pixels, the central drawing viewport must occupy at least 75% of the *available editor workspace area* in default compact mode. Define this as the region below the title/menu/toolbars, above the status rail, and between collapsed side rails; report the exact measured pixel dimensions in a Playwright assertion. Do not claim 75% of the entire browser viewport when those surrounding bars are excluded.
+- Use a slim title/project-tab strip (24–32px), compact icon-first command toolbar (28–36px), collapsed icon rails (32–40px), and thin status rail (24–32px). Keep controls separated with consistent hit targets, spacing, visible focus, and tooltips. No icon, label, menu, or popup may overlap another control or obscure the active drawing area.
+- Project navigator and properties/inspector may expand as docked, resizable workspace panes. Docked panes are persistent editor regions, not transient popovers; opening one must resize/reflow the canvas and never cover controls or silently steal drawing input. On narrow screens, use a safe viewer or responsive layout instead of compressing the editor into an unusable state.
+- The central sheet is an editable, crisp engineering drawing with border, grid/rulers, title block, page/sheet references, device tags, pin numbers, connection points, wire/cable identifiers, terminal strips, and legible annotations. Include coherent sample content spanning sensor-to-PLC I/O, control/drive wiring, and three-phase motor feeder structure. Use generic or verified licensed symbols and explicitly illustrative assumptions; never make up vendor part numbers, ratings, certification, or suitability for construction.
+- Include fit-to-page, cursor-centered wheel/pinch zoom, pan (middle mouse or space-drag), selection, move, rotate, align, distribute, snap/grid, orthogonal routing, layers, context actions, undo/redo, and precision coordinates only when each command is actually implemented and validated. Clearly mark unsupported commands disabled with a concise reason; never present decorative controls as working features.
+- Preserve a large open canvas, fast keyboard access, screen-reader names, high contrast, visible focus, reduced motion, and tablet adaptation. Mobile may default to a safe viewer.
+
+**Original workstation requirements retained alongside the reference-specific additions:**
+- Default to a full-viewport desktop editor. At 1440×900, the central schematic canvas must occupy at least 75% of the complete viewport area in default compact mode, measured in Playwright; it must also satisfy the available-workspace measurement above. Do not use a marketing hero, giant cards, or a permanently open chat pane.
+- Keep the title/project strip 24–32px and the compact icon-only toolbar 28–36px, grouped for file, edit, drawing, electrical, automation, views, output, and AI. Use no persistent text labels; provide accessible tooltips, aria-labels, shortcuts, and a command palette.
+- Left collapsible icon rail: expandable project/page tree, devices, symbol libraries, layers, properties, and macros. Expanded panes are on demand, resizable, detachable where feasible, and hideable in one click.
+- Right collapsible icon rail: inspector, electrical rules, terminal strip, BOM, AI assistant, and comments. Keep Adigun BOT optional, unobtrusive, and out of the drafting path; never reserve a permanently open chat pane.
+- Bottom 24–32px icon-only tool/status rail: grid, snap, orthogonal, object snap, coordinates, zoom, units, sheet, validation, jobs, and notifications. Small readable values for zoom, coordinates, and active sheet are permitted where engineering precision needs them; commands stay icon-first.
+- Support a crisp white sheet and configurable dark drafting mode, fine grid, coordinate rulers, border/title block, page references, line numbers, IEC-style symbols, blue/red/black nets, annotations, true connection dots, terminal rows, device labels, cable IDs, cross-reference arrows, multiple sheets, CAD zoom/pan, and an original generic sample project covering sensor-to-PLC wiring, motor-drive power/control, and terminal strips.
+- Provide fast middle-mouse/space-drag pan, wheel/pinch zoom around the cursor, fit-to-page, multi-select, drag, resize, rotate, align, distribute, snapping, undo/redo, context actions, keyboard shortcuts, precision coordinates, layers, and optional mini-map. Each displayed command must be implemented and validated or clearly disabled with its reason.
+- Default to compact desktop mode, adapt for tablet, and provide a safe viewer on mobile rather than an unusable editor. Include screen-reader labels, high contrast, visible focus, and reduced motion.
+- Compare reference screenshots for workstation geometry and interactions conceptually; never copy pixels or unauthorized visual assets.
+
+### 1.1 Transient menu, toolbar, and flyout interaction contract
+Implement a lightweight, accessible controller for transient menus, tool panels, and icon flyouts. The one-open-at-a-time rule applies globally to transient popovers; docked editor panes remain separate workspace regions.
+- Every enabled trigger performs its named action or opens its real command panel. Do not add dummy entries or placeholder panels. Unsupported commands must be visibly disabled and explain why.
+- Clicking a trigger opens its panel. Clicking the same trigger again closes it. Clicking a different trigger closes the current transient panel and opens only the new one. At most one transient panel may be open at any time.
+- On desktop pointer input, keep a panel open while the pointer is inside either its trigger or panel. Close it when the pointer leaves the combined trigger-plus-panel region, with only a short measured grace delay to allow movement between them. Pointer movement alone must not execute a command.
+- Clicking outside the active trigger and panel closes it. Escape closes it and returns focus to its trigger. Tab navigation and Enter/Space must provide keyboard access; focus indicators and appropriate button/menu roles, aria-expanded, aria-controls, and menu semantics are required.
+- On touch devices, tapping a trigger opens/toggles its panel; tapping a different trigger switches panels; tapping outside closes the open panel. Do not depend on mouseleave/pointerleave for touch. Prevent synthetic mouse events from reopening a panel immediately after a touch.
+- Use native DOM event handling (for example click, pointerleave/mouseleave, pointerdown for outside detection, and keydown for Escape) and a small shared state controller. Do not add a heavy UI library solely for these interactions.
+- Anchor panels to their triggers, maintain a safe gap, and flip/shift them to remain within the viewport. Set a bounded max height with internal scrolling. Verify at desktop and touch viewport sizes that popovers do not overlap unrelated controls, escape the viewport, or cover the active trigger. Pointer movement from trigger into panel must not close it prematurely.
+- Add focused automated tests for: open, toggle closed, switch from one trigger to another, pointer remains within trigger/panel, pointer exit closes after grace delay, outside click closes, Escape closes and restores focus, keyboard opening, touch tap-outside close, no touch-generated duplicate reopen, and exactly one visible transient panel. Include a narrow-viewport test and overlap/overflow assertions. Keep a real-device/manual touch check in release evidence where available.
 
 ### 2. Product scope and real CAD engine
 Build a coherent electrical engineering CAD platform, prioritizing **2D electrical schematics and control panel design**; do not promise complete mechanical AutoCAD equivalence. Modules:
@@ -72,13 +100,13 @@ Data entities: Project, Sheet, Layer, SymbolDefinition, SymbolInstance, Pin, Net
 For each phase: implement -> run checks -> fix failures -> capture screenshots -> update docs and progress -> open/update PR -> proceed when permitted. Do not wait for routine user input. Escalate only credentials, policy conflicts, legal licensing, safety approvals or actions requiring explicit authorization.
 
 ### 7. Acceptance tests and release gates
-- On 1440×900 screenshot, central canvas >=75% viewport in compact mode; top/side/bottom icon-only controls present, keyboard-operable and non-overlapping. Compare with screenshot references conceptually.
+- At 1440×900, assert the central drawing viewport is at least 75% of the complete viewport area and meets the defined available-editor-workspace measurement in compact mode; record measured dimensions. Verify toolbar, rails, status bar, and any open transient panel are keyboard-operable, accessible, within the viewport, and non-overlapping. Compare screenshot references conceptually without copying their assets.
 - Create/edit/save/reload a 10-sheet schematic with >=250 symbols and >=1000 wire segments without lost connections; verify deterministic undo/redo and project roundtrip.
 - Demonstrate net connectivity, branch junction behavior, cross-sheet references, PLC I/O and terminal indexing; include deliberate faults detected by ERC with sheet/object locations.
 - Export print-ready PDF and SVG, CSV BOM/wire/terminal reports and supported DXF subset; reimport test fixture and report unsupported constructs.
 - Verify German/US locale switch, project-level region and edition settings, standards registry provenance and explicit engineering disclaimers.
 - AI suggested wiring never changes model before approval; unauthorized tool calls are rejected; no-key mode works.
-- Automated unit/integration/e2e, a11y checks, visual snapshots, performance budgets, security/dependency/license scans, production build and deployment smoke test. Track exact pass/fail/skip and artifacts.
+- Automated unit/integration/e2e, a11y checks, visual snapshots, performance budgets, security/dependency/license scans, production build and deployment smoke test. Include the full transient-panel interaction test matrix in section 1.1. Track exact pass/fail/skip and artifacts. No prompt or mockup can guarantee zero defects; release evidence must show no known blocking/high-severity defects and list every unverified or partial requirement.
 - Serve correct site on the specified domain after authorized deployment, verify DNS/TLS, route fallback, content-type, asset paths and no blank screen; report actual URL and evidence. Never confuse a GitHub Pages static host with a persistent server runtime: use a separate secure backend host if required.
 - Define measurable render and interaction budgets on reference hardware and include CI regression tests; avoid unmeasured "fast" claims.
 - Release notes must list completed, partial, unsupported and safety-critical limitations. No fake certifications or simulated screenshots presented as real app output.
@@ -90,4 +118,109 @@ Maintain README, AGENTS.md (product-local, subordinate to global policy), archit
 Begin by reading actual policy/design/brand repositories and checking branch protection and workflows. Prioritize a working full-screen CAD workstation immediately, then engineering correctness. Maintain a task checklist in the product repository; use issue/PR checkpoints. Never substitute decorative mock screens for working commands. Keep output concise: STATUS; Done; Tested; Blocked; ESTIMATED FINISH TIME (hours/minutes); ETA; Next. Only claim work actually completed. A phase is complete only with tests and demonstrable artifacts. The overall project is complete only when the agreed acceptance suite passes, deployment is verified, documented limitations are explicit and required human approvals are obtained.
 
 ### 10. Visual reference brief for mockup and implementation
-A 16:9, high-resolution **original** HB Elektroniker electrical CAD workstation: slim midnight navy top chrome with authorized brand logo and product name; tightly packed 28px cyan-accent icon-only toolbar; very narrow icon-only left and right rails; almost entire screen is a white professional A3 electrical schematic with clean black/blue/red wire routing, IEC-style relay/contactor/PLC/sensor symbols, pin numbers, terminal strips, cross references, engineering border and title block; slim bottom icon-only status strip; unobtrusive small floating cyan Adigun BOT icon. Crisp vector-like typography, realistic dense engineering details, no marketing panels, no copied third-party branding, no fake certification badge. The mockup is a **concept**, not proof of implemented functionality.
+Generate an original 16:9, 1440×900 concept mockup for the HB Elektroniker-branded Adigun AI AutoCAD electrical CAD workstation. Use the verified authorized brand assets when available; otherwise use a restrained text wordmark and the documented navy #0B1220, cyan #22D3EE, and gold #D4AF37 palette. Do not invent or imitate a logo.
+
+Show a slim 24–32px title/project-tab strip, compact 28–36px cyan-accent icon-first grouped toolbar, narrow 32–40px collapsed left and right icon rails, a very large central white A3-style engineering sheet, and a thin 24–32px icon-only status rail. Include the original brief’s crisp vector typography, no marketing panels, and an unobtrusive small cyan Adigun BOT affordance only when the approved asset and real behavior are available. The sheet should show a coherent, generic sample combining (1) a sensor-to-PLC terminal/I/O row, (2) a compact control/drive wiring group, and (3) a three-phase motor feeder with L1/L2/L3, switching/protection symbols, U/V/W and PE. Use fine grid, coordinate rulers, IEC-style relay/contactor/PLC/sensor symbols, clean black/blue/red wiring, pin numbers, terminal strips, cross references, page border, and title block as in the original visual brief. Include a restrained title block, border, wire paths, generic device tags, pin/terminal labels, and a few legible annotations. Use only labels and component data supported by the actual sample project; when data is unknown, omit it rather than guessing.
+
+Show exactly one transient command flyout open and anchored to its trigger, with no overlap or viewport clipping. It demonstrates the specified open-panel visual state only; the mockup itself cannot demonstrate pointer leave, click-outside, keyboard, or touch behavior. Keep any Adigun BOT affordance small and unobtrusive; omit it if a real approved asset/behavior is unavailable. Use original generic engineering graphics, not EPLAN/AutoCAD/SEW/Festo/SICK branding, logos, screenshots, or copied proprietary artwork. Do not show certification badges or imply construction approval. The mockup is a static concept, not proof that the product or pictured controls have been implemented.
+
+Implementation acceptance uses the same visual geometry and reference interpretation described in section 1. A generated image must not introduce text, ratings, components, functions, or safety claims absent from the implementation's real, reviewable project data. Treat image-generation text as unreliable: validate every visible label manually before using the image as a product reference.
+
+
+## 11. MANDATORY production-grade engineering project library: 50 × 100 sheets (minimum)
+
+**This section supersedes all smaller sample-project requirements as the final release acceptance criterion.** The earlier 10-sheet/250-symbol acceptance case remains a fast CI regression fixture, **not** the product's final project-library scope.
+
+### Required deliverable
+Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design projects, each containing at least 100 meaningfully populated, interconnected, editable sheets**: **minimum 5,000 real engineering drawing sheets**. These are genuine native project documents, **not** blank sheets, screenshot backgrounds, static SVG/PDF previews, duplicated filler, mocked APIs, nonfunctional demos, or unverified manufacturer reference designs. Each must open in the editor, permit selection/editing/rewiring, preserve semantic pin/net topology, save/reopen without loss, run ERC, produce cross-references, and generate usable BOM/wiring/terminal reports. All 50 must be accessible from a searchable **Engineering Project Library** with thumbnails, domain, standard profile, complexity, page count and validation status. Bundle compressed/versioned datasets or lazy-download content so first load stays fast; support offline availability for downloaded projects.
+
+### 50 project briefs — each >=100 sheets, independent electrical topology and domain-specific documentation
+**Industrial motor/control (01–10):**
+01. Reversing three-phase motor starter with interlocks.
+02. Star–delta motor starter and timing sequence.
+03. VFD-driven conveyor line with sensors and PLC.
+04. Multi-axis servo motion cell with encoder feedback.
+05. Soft-starter pump station with duty/standby operation.
+06. Multi-motor production line with segmented MCC.
+07. Industrial fan bank with process instrumentation.
+08. Packaging machine power and PLC controls.
+09. Hoist/crane control with advisory safety circuits.
+10. Hydraulic power unit and electrovalve controls.
+
+**PLC, process and automation (11–20):**
+11. Modular PLC I/O cabinet with remote I/O.
+12. Water-treatment dosing and monitoring plant.
+13. Wastewater lift-station control and telemetry.
+14. Food processing line with sensors and drives.
+15. Chemical batch reactor instrumentation/control.
+16. Brewery/CIP skid automation.
+17. Industrial oven heating and temperature loops.
+18. HVAC air-handling unit control system.
+19. Cold-storage refrigeration supervisory controls.
+20. Warehouse automated conveyor/sorter system.
+
+**Building, power and energy (21–30):**
+21. Commercial low-voltage distribution board.
+22. Industrial subdistribution and feeder schedules.
+23. Emergency lighting and transfer-control circuits.
+24. Building automation and field controller cabinets.
+25. Solar PV inverter and AC distribution documentation.
+26. Battery energy storage auxiliary/control circuits.
+27. EV charging site electrical/control schematics.
+28. Generator ATS supervisory/control panel.
+29. UPS monitoring and bypass control system.
+30. Data-center auxiliary electrical and alarm panels.
+
+**Manufacturing and robotics (31–40):**
+31. Robotic welding cell control cabinet.
+32. CNC machine auxiliary electrical controls.
+33. Assembly-line safety relay and access interlocks.
+34. Pneumatic pick-and-place automation.
+35. Injection molding machine auxiliary controls.
+36. Printing press multi-drive control.
+37. Textile production machine control system.
+38. Pharmaceutical filling-line control.
+39. Automated palletizer control.
+40. Industrial test bench and instrumentation rack.
+
+**Specialized international designs (41–50):**
+41. IEC-style European machine control panel.
+42. NFPA 79-oriented US machine control panel.
+43. UL 508A-oriented panel documentation example.
+44. International terminal/cable marshalling cabinet.
+45. Marine auxiliary electrical control panel (advisory only).
+46. Agricultural irrigation automation controller.
+47. Railway station auxiliary control circuits (not signaling safety design).
+48. Mining ventilation auxiliary control panel (not hazardous-area certification).
+49. Hospital facility auxiliary alarm/monitoring panel (not life-support design).
+50. Modular training/commissioning lab with realistic PLC, motors and sensors.
+
+### Mandatory 100-sheet content architecture PER PROJECT
+Use a project-specific engineering breakdown; a **minimum** viable sheet distribution is:
+- 001–005: cover, drawing index, legends, revisions, technical assumptions.
+- 006–015: single-line power architecture, supplies, distribution and protection schematics.
+- 016–035: power/control circuit schematics with actual connected components and nets.
+- 036–055: PLC/remote-I/O and sensor/actuator circuit sheets with mapped addresses.
+- 056–070: terminal, cable, wire and interconnection sheets.
+- 071–080: panel mounting/layout, DIN rail, enclosure, device placement and connection sheets.
+- 081–090: interlocks, drives, diagnostics, alarm and communication wiring sheets.
+- 091–100: cross-sheet connections, commissioning checklists, engineering schedules, BOM, validation and revision documentation.
+These categories are a baseline, not permission to add meaningless pages. Adapt to each domain; if a sheet is non-schematic, it must still be a meaningful native editable engineering document/report tied to project data. At least **70 sheets per project must contain editable, connected electrical schematics or panel/wiring topology**, not just text/report pages.
+
+### Real-data and generation integrity
+Implement a reproducible, seeded **engineering project generator** backed by typed CAD primitives, validated symbol definitions, connection graph, terminal rules, PLC maps and a domain-specific project configuration. Generate projects deterministically from unique, reviewed configurations; ensure distinct device topology, sheet structure, symbol placements, wire paths, labels, cable assignments, power architecture and cross-sheet links. Do not merely rename the same 100-page template 50 times. Include domain-specific component choices with **clearly identified illustrative ratings** and assumptions; no invented vendor part numbers, no falsely approved safety circuits, no assertion of suitability for physical construction. Include documented human engineering review requirements before any real installation.
+
+Each project must include: project metadata, jurisdiction/standard profile, engineering assumptions, minimum 100 unique sheet IDs, named devices, connected pins and nets, cross-page references, project-wide numbering, PLC I/O mapping where applicable, terminal and cable schedules, BOM with source/illustrative status, and ERC results. Use original or properly licensed symbols and fixtures. If a domain lacks PLCs, provide an equivalent meaningful control/interface design rather than fake PLC content.
+
+### Required executable quality gates
+1. Automated manifest asserts **exactly or more than 50 distinct projects**, **>=100 meaningful sheets each**, **>=5,000 total**, **>=70 electrically editable connected sheets per project**, unique sheet IDs, and zero empty/filler pages.
+2. For **every** project: deserialize all sheets; validate schema, IDs, symbols, pin references, wire graph, terminal/cable references, page cross-references and report generation; save/reload and compare deterministic topology hashes.
+3. For **every** project: programmatically perform an edit to a selected real wire/device, undo, redo, save/reload, and confirm changed topology/metadata persisted correctly; prove the editor uses the same engine for user and test operations.
+4. For **every** project: ERC runs and returns object-linked findings; any intentional illustrative violations are documented and visible, never hidden or called compliant.
+5. Generate PDF print set, BOM CSV, wire list and terminal list from **real model data** for all projects (heavy exports may run in scheduled CI with artifact retention); sample DXF roundtrip for representative sheets.
+6. Browser e2e: open at least one project from each of the five categories, navigate to sheet 100, inspect a real symbol and its pin/wire connectivity, modify a wire, save/reopen, verify ERC and export.
+7. Performance: lazy-load project list/sheets, virtualize trees, worker-based validation, background export, bounded memory. Benchmark a 100-sheet project and 50-project library on specified test hardware; measure startup, sheet switch, zoom/pan and save latency. Set and enforce realistic documented budgets from actual profiling.
+8. Document provenance and disclaimers: **educational/reference engineering designs, not construction-ready or certified** absent independent qualified engineering review. Never represent generated sample schematics as real approved electrical installations.
+
+### Release definition and sequencing
+Implement the CAD engine and one fully connected 100-sheet reference project first; then validate generation of 5 distinct projects; then 50. Keep all intermediate deliverables usable. **Do not declare final release complete until the entire 50 × 100 library and all quality gates pass.** Publish a machine-readable library manifest and per-project validation report. Clearly distinguish generated engineering examples from certified project deliverables. No fake progress metrics.
