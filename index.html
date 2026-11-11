@@ -205,7 +205,6 @@
   $$('[data-palette-mode]').forEach(b=>b.addEventListener('click',()=>{paletteMode=b.dataset.paletteMode;renderPalette();}));
   $('#paletteSwatches').addEventListener('click',e=>{const b=e.target.closest('[data-color]');if(b)applyPaletteColor(b.dataset.color);});
   $('#customColor').addEventListener('input',e=>applyPaletteColor(e.target.value));
-  $('[data-action="palette"]').addEventListener('click',()=>toggleColorPalette());
   $('[data-action="palette"]').addEventListener('pointerenter',cancelPaletteClose);
   $('[data-action="palette"]').addEventListener('pointerleave',schedulePaletteClose);
   $('#colorPalette').addEventListener('pointerenter',cancelPaletteClose);
