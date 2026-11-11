@@ -231,3 +231,22 @@ Each project must include: project metadata, jurisdiction/standard profile, engi
 
 ### Release definition and sequencing
 Implement the CAD engine and one fully connected 100-sheet reference project first; then validate generation of 5 distinct projects; then 50. Keep all intermediate deliverables usable. **Do not declare final release complete until the entire 50 × 100 library and all quality gates pass.** Publish a machine-readable library manifest and per-project validation report. Clearly distinguish generated engineering examples from certified project deliverables. No fake progress metrics.
+
+## 12. Binding client requirement: real engineering components only (2026-11-12)
+
+This section is a client acceptance requirement and takes precedence over any wording elsewhere that could be read as permission to use generic or decorative component placeholders.
+
+- Every placed/catalog component must represent a real, identifiable device or engineering item. For commercial parts, record the manufacturer and exact model/part number from an authoritative manufacturer datasheet or catalog, plus the source URL, document revision/date, and retrieval date. For standard-defined items without a commercial part number, use a verified standard symbol/type and document the applicable standard and exact definition.
+- Each component definition must include standards-correct vector symbol or part geometry; real pin/terminal names and numbers; pin locations and electrical/mechanical connection types; editable, type-appropriate properties and variable values; and the source/provenance of each factual value. Symbols must connect to actual pins/nets in the project model and remain selectable, editable, and reportable.
+- A visible symbol alone is not a component. Do not substitute a square, label, decorative glyph, or approximate icon for a diode, transistor, sensor, PLC module, valve, motor, or other device. Do not claim a component is functional merely because it can be drawn or moved.
+- Never invent a manufacturer, part number, pinout, rating, dimension, tolerance, standard clause, or suitability claim. If authoritative data is unavailable or licensing is unclear, exclude/defer that component or mark the capability unavailable with the reason; do not silently fall back to a fake or generic part.
+- Project topology and wiring must match the selected components' verified pins and ratings. Keep safety and code-compliance findings advisory until qualified review; sourced components do not make a design construction-ready.
+- Do not generate large libraries or repeated project sets by renaming generic templates. A component/project is accepted only after source-backed data validation, pin/net checks, edit/save/reopen, report generation, and explicit provenance review.
+
+### First implementation milestone under this requirement
+
+Start with the electrical CAD model before expanding the symbol count: define and validate a versioned component/symbol/pin/net schema; migrate one real, source-backed electrical device end to end; prove that its displayed geometry, named pins, wire connectivity, editable properties, save/reopen, undo/redo, and BOM/report entry all refer to the same model instance. Add more components in small verified batches. Preserve the approved interface and existing toolbar/canvas/panel geometry throughout.
+
+### Deferred header account/presence control
+
+The user requested a later compact account icon immediately beside the Command Search control at the top right. Its status must reflect real application account/session state: red when offline and green when online, with an accessible name and hover/focus tooltip. This is deferred until the project has a real account/presence source. Fit it inside the existing header allocation; do not increase header height or shift the navigation, toolbar, panels, or canvas. Record before/after geometry and verify no layout movement when implemented.
