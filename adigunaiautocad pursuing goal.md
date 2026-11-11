@@ -91,3 +91,102 @@ Begin by reading actual policy/design/brand repositories and checking branch pro
 
 ### 10. Visual reference brief for mockup and implementation
 A 16:9, high-resolution **original** HB Elektroniker electrical CAD workstation: slim midnight navy top chrome with authorized brand logo and product name; tightly packed 28px cyan-accent icon-only toolbar; very narrow icon-only left and right rails; almost entire screen is a white professional A3 electrical schematic with clean black/blue/red wire routing, IEC-style relay/contactor/PLC/sensor symbols, pin numbers, terminal strips, cross references, engineering border and title block; slim bottom icon-only status strip; unobtrusive small floating cyan Adigun BOT icon. Crisp vector-like typography, realistic dense engineering details, no marketing panels, no copied third-party branding, no fake certification badge. The mockup is a **concept**, not proof of implemented functionality.
+
+
+## 11. MANDATORY production-grade engineering project library: 50 × 100 sheets (minimum)
+
+**This section supersedes all smaller sample-project requirements as the final release acceptance criterion.** The earlier 10-sheet/250-symbol acceptance case remains a fast CI regression fixture, **not** the product's final project-library scope.
+
+### Required deliverable
+Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design projects, each containing at least 100 meaningfully populated, interconnected, editable sheets**: **minimum 5,000 real engineering drawing sheets**. These are genuine native project documents, **not** blank sheets, screenshot backgrounds, static SVG/PDF previews, duplicated filler, mocked APIs, nonfunctional demos, or unverified manufacturer reference designs. Each must open in the editor, permit selection/editing/rewiring, preserve semantic pin/net topology, save/reopen without loss, run ERC, produce cross-references, and generate usable BOM/wiring/terminal reports. All 50 must be accessible from a searchable **Engineering Project Library** with thumbnails, domain, standard profile, complexity, page count and validation status. Bundle compressed/versioned datasets or lazy-download content so first load stays fast; support offline availability for downloaded projects.
+
+### 50 project briefs — each >=100 sheets, independent electrical topology and domain-specific documentation
+**Industrial motor/control (01–10):**
+01. Reversing three-phase motor starter with interlocks.
+02. Star–delta motor starter and timing sequence.
+03. VFD-driven conveyor line with sensors and PLC.
+04. Multi-axis servo motion cell with encoder feedback.
+05. Soft-starter pump station with duty/standby operation.
+06. Multi-motor production line with segmented MCC.
+07. Industrial fan bank with process instrumentation.
+08. Packaging machine power and PLC controls.
+09. Hoist/crane control with advisory safety circuits.
+10. Hydraulic power unit and electrovalve controls.
+
+**PLC, process and automation (11–20):**
+11. Modular PLC I/O cabinet with remote I/O.
+12. Water-treatment dosing and monitoring plant.
+13. Wastewater lift-station control and telemetry.
+14. Food processing line with sensors and drives.
+15. Chemical batch reactor instrumentation/control.
+16. Brewery/CIP skid automation.
+17. Industrial oven heating and temperature loops.
+18. HVAC air-handling unit control system.
+19. Cold-storage refrigeration supervisory controls.
+20. Warehouse automated conveyor/sorter system.
+
+**Building, power and energy (21–30):**
+21. Commercial low-voltage distribution board.
+22. Industrial subdistribution and feeder schedules.
+23. Emergency lighting and transfer-control circuits.
+24. Building automation and field controller cabinets.
+25. Solar PV inverter and AC distribution documentation.
+26. Battery energy storage auxiliary/control circuits.
+27. EV charging site electrical/control schematics.
+28. Generator ATS supervisory/control panel.
+29. UPS monitoring and bypass control system.
+30. Data-center auxiliary electrical and alarm panels.
+
+**Manufacturing and robotics (31–40):**
+31. Robotic welding cell control cabinet.
+32. CNC machine auxiliary electrical controls.
+33. Assembly-line safety relay and access interlocks.
+34. Pneumatic pick-and-place automation.
+35. Injection molding machine auxiliary controls.
+36. Printing press multi-drive control.
+37. Textile production machine control system.
+38. Pharmaceutical filling-line control.
+39. Automated palletizer control.
+40. Industrial test bench and instrumentation rack.
+
+**Specialized international designs (41–50):**
+41. IEC-style European machine control panel.
+42. NFPA 79-oriented US machine control panel.
+43. UL 508A-oriented panel documentation example.
+44. International terminal/cable marshalling cabinet.
+45. Marine auxiliary electrical control panel (advisory only).
+46. Agricultural irrigation automation controller.
+47. Railway station auxiliary control circuits (not signaling safety design).
+48. Mining ventilation auxiliary control panel (not hazardous-area certification).
+49. Hospital facility auxiliary alarm/monitoring panel (not life-support design).
+50. Modular training/commissioning lab with realistic PLC, motors and sensors.
+
+### Mandatory 100-sheet content architecture PER PROJECT
+Use a project-specific engineering breakdown; a **minimum** viable sheet distribution is:
+- 001–005: cover, drawing index, legends, revisions, technical assumptions.
+- 006–015: single-line power architecture, supplies, distribution and protection schematics.
+- 016–035: power/control circuit schematics with actual connected components and nets.
+- 036–055: PLC/remote-I/O and sensor/actuator circuit sheets with mapped addresses.
+- 056–070: terminal, cable, wire and interconnection sheets.
+- 071–080: panel mounting/layout, DIN rail, enclosure, device placement and connection sheets.
+- 081–090: interlocks, drives, diagnostics, alarm and communication wiring sheets.
+- 091–100: cross-sheet connections, commissioning checklists, engineering schedules, BOM, validation and revision documentation.
+These categories are a baseline, not permission to add meaningless pages. Adapt to each domain; if a sheet is non-schematic, it must still be a meaningful native editable engineering document/report tied to project data. At least **70 sheets per project must contain editable, connected electrical schematics or panel/wiring topology**, not just text/report pages.
+
+### Real-data and generation integrity
+Implement a reproducible, seeded **engineering project generator** backed by typed CAD primitives, validated symbol definitions, connection graph, terminal rules, PLC maps and a domain-specific project configuration. Generate projects deterministically from unique, reviewed configurations; ensure distinct device topology, sheet structure, symbol placements, wire paths, labels, cable assignments, power architecture and cross-sheet links. Do not merely rename the same 100-page template 50 times. Include domain-specific component choices with **clearly identified illustrative ratings** and assumptions; no invented vendor part numbers, no falsely approved safety circuits, no assertion of suitability for physical construction. Include documented human engineering review requirements before any real installation.
+
+Each project must include: project metadata, jurisdiction/standard profile, engineering assumptions, minimum 100 unique sheet IDs, named devices, connected pins and nets, cross-page references, project-wide numbering, PLC I/O mapping where applicable, terminal and cable schedules, BOM with source/illustrative status, and ERC results. Use original or properly licensed symbols and fixtures. If a domain lacks PLCs, provide an equivalent meaningful control/interface design rather than fake PLC content.
+
+### Required executable quality gates
+1. Automated manifest asserts **exactly or more than 50 distinct projects**, **>=100 meaningful sheets each**, **>=5,000 total**, **>=70 electrically editable connected sheets per project**, unique sheet IDs, and zero empty/filler pages.
+2. For **every** project: deserialize all sheets; validate schema, IDs, symbols, pin references, wire graph, terminal/cable references, page cross-references and report generation; save/reload and compare deterministic topology hashes.
+3. For **every** project: programmatically perform an edit to a selected real wire/device, undo, redo, save/reload, and confirm changed topology/metadata persisted correctly; prove the editor uses the same engine for user and test operations.
+4. For **every** project: ERC runs and returns object-linked findings; any intentional illustrative violations are documented and visible, never hidden or called compliant.
+5. Generate PDF print set, BOM CSV, wire list and terminal list from **real model data** for all projects (heavy exports may run in scheduled CI with artifact retention); sample DXF roundtrip for representative sheets.
+6. Browser e2e: open at least one project from each of the five categories, navigate to sheet 100, inspect a real symbol and its pin/wire connectivity, modify a wire, save/reopen, verify ERC and export.
+7. Performance: lazy-load project list/sheets, virtualize trees, worker-based validation, background export, bounded memory. Benchmark a 100-sheet project and 50-project library on specified test hardware; measure startup, sheet switch, zoom/pan and save latency. Set and enforce realistic documented budgets from actual profiling.
+8. Document provenance and disclaimers: **educational/reference engineering designs, not construction-ready or certified** absent independent qualified engineering review. Never represent generated sample schematics as real approved electrical installations.
+
+### Release definition and sequencing
+Implement the CAD engine and one fully connected 100-sheet reference project first; then validate generation of 5 distinct projects; then 50. Keep all intermediate deliverables usable. **Do not declare final release complete until the entire 50 × 100 library and all quality gates pass.** Publish a machine-readable library manifest and per-project validation report. Clearly distinguish generated engineering examples from certified project deliverables. No fake progress metrics.
