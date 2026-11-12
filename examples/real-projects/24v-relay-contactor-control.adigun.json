@@ -1,0 +1,299 @@
+{
+  "product": "Adigun AI AutoCAD",
+  "project": "24 V DC relay-operated contactor coil — wiring example",
+  "revision": "1.0",
+  "status": "Educational wiring example; external supply and PLC output connect at X1–X3.",
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1,
+  "activeSheet": "control",
+  "theme": "light",
+  "zoom": 100,
+  "view": {
+    "x": 0,
+    "y": 0,
+    "w": 1200,
+    "h": 760
+  },
+  "sheets": [
+    {
+      "id": "control",
+      "number": "A1/001",
+      "name": "24 V DC Control"
+    }
+  ],
+  "sheetLabels": {},
+  "sheetViews": {},
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-x1",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X1",
+      "x": 150,
+      "y": 400,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "PLC Q0.0",
+        "comment": "External PLC output supplies the relay coil."
+      },
+      "sheetId": "control"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-x2",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X2",
+      "x": 150,
+      "y": 180,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "+24 V DC",
+        "comment": "External control supply feed for relay contact common."
+      },
+      "sheetId": "control"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-x3",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X3",
+      "x": 150,
+      "y": 560,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "0 V DC",
+        "comment": "External DC control return."
+      },
+      "sheetId": "control"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-k1",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K1",
+      "x": 520,
+      "y": 320,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Control relay",
+        "comment": "Static contact depiction; relay actuation is not simulated."
+      },
+      "sheetId": "control"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-km1",
+      "componentId": "schneider-electric-lc1d09bd",
+      "ref": "KM1",
+      "x": 900,
+      "y": 320,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Contactor coil",
+        "comment": "TeSys D LC1D09BD; see manufacturer source record."
+      },
+      "sheetId": "control"
+    },
+    {
+      "id": "W-Q0-1",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "PLC Q0.0 to K1 A1",
+      "x1": 185,
+      "y1": 400,
+      "x2": 450,
+      "y2": 400,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-Q0-2",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "PLC Q0.0 to K1 A1",
+      "x1": 450,
+      "y1": 400,
+      "x2": 450,
+      "y2": 340,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-0V-K1-1",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "K1 A2 to X3",
+      "x1": 450,
+      "y1": 300,
+      "x2": 400,
+      "y2": 300,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-0V-K1-2",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "K1 A2 to X3",
+      "x1": 400,
+      "y1": 300,
+      "x2": 400,
+      "y2": 560,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-0V-K1-3",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "K1 A2 to X3",
+      "x1": 400,
+      "y1": 560,
+      "x2": 115,
+      "y2": 560,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-0V-KM1-1",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "X3 to KM1 A2",
+      "x1": 780,
+      "y1": 345,
+      "x2": 820,
+      "y2": 345,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-0V-KM1-2",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "X3 to KM1 A2",
+      "x1": 820,
+      "y1": 345,
+      "x2": 820,
+      "y2": 560,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-0V-KM1-3",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "X3 to KM1 A2",
+      "x1": 820,
+      "y1": 560,
+      "x2": 185,
+      "y2": 560,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-24-K1-1",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "X2 to K1 pin 11",
+      "x1": 590,
+      "y1": 320,
+      "x2": 185,
+      "y2": 320,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-24-K1-2",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "X2 to K1 pin 11",
+      "x1": 185,
+      "y1": 320,
+      "x2": 185,
+      "y2": 180,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-K1-KM1-1",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "K1 pin 14 to KM1 A1",
+      "x1": 780,
+      "y1": 295,
+      "x2": 680,
+      "y2": 295,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-K1-KM1-2",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "K1 pin 14 to KM1 A1",
+      "x1": 680,
+      "y1": 295,
+      "x2": 680,
+      "y2": 345,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-K1-KM1-3",
+      "kind": "wire",
+      "sheetId": "control",
+      "name": "K1 pin 14 to KM1 A1",
+      "x1": 680,
+      "y1": 345,
+      "x2": 590,
+      "y2": 345,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "note-title",
+      "kind": "text",
+      "sheetId": "control",
+      "x": 50,
+      "y": 55,
+      "text": "24 V DC relay-operated contactor coil",
+      "stroke": "#0b1220"
+    },
+    {
+      "id": "note-scope",
+      "kind": "text",
+      "sheetId": "control",
+      "x": 50,
+      "y": 78,
+      "text": "Static wiring model · External PLC output at X1 · +24 V at X2 · 0 V return at X3",
+      "stroke": "#164eac"
+    },
+    {
+      "id": "note-limit",
+      "kind": "text",
+      "sheetId": "control",
+      "x": 50,
+      "y": 101,
+      "text": "NOT FOR CONSTRUCTION · protection and safety coordination are outside this example",
+      "stroke": "#b42318"
+    }
+  ],
+  "description": "A source-backed, one-sheet 24 V DC control wiring example. A PLC output energizes K1; K1's normally-open contact feeds the KM1 contactor coil. Relay state is not simulated."
+}
