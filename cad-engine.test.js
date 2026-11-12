@@ -36,6 +36,9 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function toggleObjectLock\(id\)/);
   assert.match(inlineScripts[0][2], /function toggleObjectHidden\(id\)/);
   assert.match(inlineScripts[0][2], /function changeObjectOrder\(id,front\)/);
+  assert.match(inlineScripts[0][2], /function stepObjectOrder\(id,direction\)/);
+  assert.match(inlineScripts[0][2], /bring-forward/);
+  assert.match(inlineScripts[0][2], /send-backward/);
   assert.match(inlineScripts[0][2], /function flipObject\(id,axis\)/);
   assert.match(inlineScripts[0][2], /selectedObjectIds/);
   assert.match(inlineScripts[0][2], /function toggleSelection\(id\)/);
@@ -101,6 +104,18 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /data-delete-sheet/);
   assert.match(inlineScripts[0][2], /data-close-sheet/);
   assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
+});
+
+test('object z-order moves by one slot and rejects invalid boundaries', () => {
+  const objects = [{ id: 'back' }, { id: 'middle' }, { id: 'front' }];
+  assert.equal(engine.reorderObject(objects, 'middle', 1), true);
+  assert.deepEqual(objects.map(object => object.id), ['back', 'front', 'middle']);
+  assert.equal(engine.reorderObject(objects, 'middle', -1), true);
+  assert.deepEqual(objects.map(object => object.id), ['back', 'middle', 'front']);
+  assert.equal(engine.reorderObject(objects, 'back', -1), false);
+  assert.equal(engine.reorderObject(objects, 'front', 1), false);
+  assert.equal(engine.reorderObject(objects, 'missing', 1), false);
+  assert.equal(engine.reorderObject(objects, 'middle', 0), false);
 });
 
 test('catalog contains only source-backed engineering components', () => {
