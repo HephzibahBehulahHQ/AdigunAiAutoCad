@@ -11,6 +11,7 @@ const engine = globalThis.AdigunCADEngine;
 const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
+const motorProtectionBreakerId = 'siemens-3rv2011-1ja10';
 
 test('the shipped workspace inline script parses before UI handlers initialize', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
@@ -151,11 +152,12 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 5);
+  assert.equal(items.length, 6);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
+    [motorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
     ['sew-eurodrive-drn63ms4', 'motor-induction', 'M']
   ]);
@@ -663,6 +665,59 @@ test('motor symbol and inspector render as a real seven-pin component without ch
   assert.ok(html.includes("case'motor-induction':"));
   assert.ok(html.includes("def.family==='motor-induction'"));
   assert.ok(html.includes("def.family==='motor-starter-reversing'"));
+});
+
+test('Siemens 3RV2011-1JA10 preserves six real terminals and manufacturer-backed settings', () => {
+  const def = engine.component(motorProtectionBreakerId);
+  assert.equal(def.manufacturer, 'Siemens');
+  assert.equal(def.manufacturerPartNumber, '3RV2011-1JA10');
+  assert.equal(def.specifications.frameSize.value, 'S00');
+  assert.equal(def.specifications.overloadTripClass.value, 10);
+  assert.deepEqual(def.specifications.adjustableOverloadRelease, { minimum: 7, maximum: 10, unit: 'A' });
+  assert.equal(def.specifications.instantaneousShortCircuitRelease.value, 130);
+  assert.equal(def.specifications.mainPoleCount.value, 3);
+  assert.equal(def.specifications.ratedOperationalVoltage.maximum, 690);
+  assert.deepEqual(def.symbol.pins.map(pin => pin.localNumber), ['1/L1','3/L2','5/L3','2/T1','4/T2','6/T3']);
+  assert.deepEqual(def.symbol.internalConnections, []);
+  assert.deepEqual(def.electricalFunctions.motorProtection.poles, [['line-l1','load-t1'],['line-l2','load-t2'],['line-l3','load-t3']]);
+  assert.match(def.sources[0].url, /support\.industry\.siemens\.com.*3RV2011-1JA10/);
+
+  const instance = engine.createInstance(motorProtectionBreakerId, 600, 400, 'Q3');
+  assert.equal(instance.properties.overloadSettingA, null);
+  assert.equal(engine.validateInstance(instance).valid, true);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number,pin.x,pin.y]), [
+    ['1/L1',550,310],['3/L2',600,310],['5/L3',650,310],
+    ['2/T1',550,490],['4/T2',600,490],['6/T3',650,490]
+  ]);
+  instance.properties.overloadSettingA = 8.5;
+  assert.equal(engine.validateInstance(instance).valid, true);
+  instance.properties.overloadSettingA = 10.1;
+  assert.equal(engine.validateInstance(instance).valid, false);
+  instance.properties.overloadSettingA = 7;
+  engine.rotateInstance(instance, 90);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number,pin.x,pin.y]), [
+    ['1/L1',690,350],['3/L2',690,400],['5/L3',690,450],
+    ['2/T1',510,350],['4/T2',510,400],['6/T3',510,450]
+  ]);
+  const report = engine.analyze([instance]);
+  assert.deepEqual([report.componentPinCount, report.netCount, report.connectedPinCount, report.unconnectedPinCount], [6,0,0,6]);
+  assert.deepEqual(engine.component(motorProtectionBreakerId).symbol.internalConnections, []);
+  const reopened = engine.parseProject(engine.serializeProject({
+    product: 'Adigun AI AutoCAD', project: 'Motor protector test', activeSheet: 'main',
+    zoom: 100, view: { x: 0, y: 0, w: 1200, h: 760 }, objects: [instance], sheets: []
+  }));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.equal(reopened.project.objects[0].properties.overloadSettingA, 7);
+});
+
+test('motor-protection symbol and numeric inspector setting preserve the workstation shell', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'motor-protection-breaker':"));
+  assert.ok(html.includes("def.family==='motor-protection-breaker'"));
+  assert.ok(html.includes('data-component-property="overloadSettingA"'));
+  assert.ok(html.includes('rule.type===\'number\''));
+  assert.ok(html.includes('.topbar{position:relative'));
+  assert.ok(html.includes('.toolbar{display:flex'));
 });
 
 test('Siemens reversing-starter example imports with every real terminal wired and a source-backed BOM', () => {
