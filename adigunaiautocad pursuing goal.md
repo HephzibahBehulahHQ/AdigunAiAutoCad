@@ -133,6 +133,7 @@ Show exactly one transient command flyout open and anchored to its trigger, with
 
 Implementation acceptance uses the same visual geometry and reference interpretation described in section 1. A generated image must not introduce text, ratings, components, functions, or safety claims absent from the implementation's real, reviewable project data. Treat image-generation text as unreliable: validate every visible label manually before using the image as a product reference.
 
+---
 
 ## 11. MANDATORY production-grade engineering project library: 50 × 100 sheets (minimum)
 
@@ -201,6 +202,57 @@ Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design proj
 48. Mining ventilation auxiliary control panel (not hazardous-area certification).
 49. Hospital facility auxiliary alarm/monitoring panel (not life-support design).
 50. Modular training/commissioning lab with realistic PLC, motors and sensors.
+
+---
+
+### Mandatory 100-sheet content architecture PER PROJECT
+Use a project-specific engineering breakdown; a **minimum** viable sheet distribution is:
+- 001–005: cover, drawing index, legends, revisions, technical assumptions.
+- 006–015: single-line power architecture, supplies, distribution and protection schematics.
+- 016–035: power/control circuit schematics with actual connected components and nets.
+- 036–055: PLC/remote-I/O and sensor/actuator circuit sheets with mapped addresses.
+- 056–070: terminal, cable, wire and interconnection sheets.
+- 071–080: panel mounting/layout, DIN rail, enclosure, device placement and connection sheets.
+- 081–090: interlocks, drives, diagnostics, alarm and communication wiring sheets.
+- 091–100: cross-sheet connections, commissioning checklists, engineering schedules, BOM, validation and revision documentation.
+These categories are a baseline, not permission to add meaningless pages. Adapt to each domain; if a sheet is non-schematic, it must still be a meaningful native editable engineering document/report tied to project data. At least **70 sheets per project must contain editable, connected electrical schematics or panel/wiring topology**, not just text/report pages.
+
+### Real-data and generation integrity
+Implement a reproducible, seeded **engineering project generator** backed by typed CAD primitives, validated symbol definitions, connection graph, terminal rules, PLC maps and a domain-specific project configuration. Generate projects deterministically from unique, reviewed configurations; ensure distinct device topology, sheet structure, symbol placements, wire paths, labels, cable assignments, power architecture and cross-sheet links. Do not merely rename the same 100-page template 50 times. Include domain-specific component choices with **clearly identified illustrative ratings** and assumptions; no invented vendor part numbers, no falsely approved safety circuits, no assertion of suitability for physical construction. Include documented human engineering review requirements before any real installation.
+
+Each project must include: project metadata, jurisdiction/standard profile, engineering assumptions, minimum 100 unique sheet IDs, named devices, connected pins and nets, cross-page references, project-wide numbering, PLC I/O mapping where applicable, terminal and cable schedules, BOM with source/illustrative status, and ERC results. Use original or properly licensed symbols and fixtures. If a domain lacks PLCs, provide an equivalent meaningful control/interface design rather than fake PLC content.
+
+### Required executable quality gates
+1. Automated manifest asserts **exactly or more than 50 distinct projects**, **>=100 meaningful sheets each**, **>=5,000 total**, **>=70 electrically editable connected sheets per project**, unique sheet IDs, and zero empty/filler pages.
+2. For **every** project: deserialize all sheets; validate schema, IDs, symbols, pin references, wire graph, terminal/cable references, page cross-references and report generation; save/reload and compare deterministic topology hashes.
+3. For **every** project: programmatically perform an edit to a selected real wire/device, undo, redo, save/reload, and confirm changed topology/metadata persisted correctly; prove the editor uses the same engine for user and test operations.
+4. For **every** project: ERC runs and returns object-linked findings; any intentional illustrative violations are documented and visible, never hidden or called compliant.
+5. Generate PDF print set, BOM CSV, wire list and terminal list from **real model data** for all projects (heavy exports may run in scheduled CI with artifact retention); sample DXF roundtrip for representative sheets.
+6. Browser e2e: open at least one project from each of the five categories, navigate to sheet 100, inspect a real symbol and its pin/wire connectivity, modify a wire, save/reopen, verify ERC and export.
+7. Performance: lazy-load project list/sheets, virtualize trees, worker-based validation, background export, bounded memory. Benchmark a 100-sheet project and 50-project library on specified test hardware; measure startup, sheet switch, zoom/pan and save latency. Set and enforce realistic documented budgets from actual profiling.
+8. Document provenance and disclaimers: **educational/reference engineering designs, not construction-ready or certified** absent independent qualified engineering review. Never represent generated sample schematics as real approved electrical installations.
+
+### Release definition and sequencing
+Implement the CAD engine and one fully connected 100-sheet reference project first; then validate generation of 5 distinct projects; then 50. Keep all intermediate deliverables usable. **Do not declare final release complete until the entire 50 × 100 library and all quality gates pass.** Publish a machine-readable library manifest and per-project validation report. Clearly distinguish generated engineering examples from certified project deliverables. No fake progress metrics.
+
+## 12. Binding client requirement: real engineering components only (2026-11-12)
+
+This section is a client acceptance requirement and takes precedence over any wording elsewhere that could be read as permission to use generic or decorative component placeholders.
+
+- Every placed/catalog component must represent a real, identifiable device or engineering item. For commercial parts, record the manufacturer and exact model/part number from an authoritative manufacturer datasheet or catalog, plus the source URL, document revision/date, and retrieval date. For standard-defined items without a commercial part number, use a verified standard symbol/type and document the applicable standard and exact definition.
+- Each component definition must include standards-correct vector symbol or part geometry; real pin/terminal names and numbers; pin locations and electrical/mechanical connection types; editable, type-appropriate properties and variable values; and the source/provenance of each factual value. Symbols must connect to actual pins/nets in the project model and remain selectable, editable, and reportable.
+- A visible symbol alone is not a component. Do not substitute a square, label, decorative glyph, or approximate icon for a diode, transistor, sensor, PLC module, valve, motor, or other device. Do not claim a component is functional merely because it can be drawn or moved.
+- Never invent a manufacturer, part number, pinout, rating, dimension, tolerance, standard clause, or suitability claim. If authoritative data is unavailable or licensing is unclear, exclude/defer that component or mark the capability unavailable with the reason; do not silently fall back to a fake or generic part.
+- Project topology and wiring must match the selected components' verified pins and ratings. Keep safety and code-compliance findings advisory until qualified review; sourced components do not make a design construction-ready.
+- Do not generate large libraries or repeated project sets by renaming generic templates. A component/project is accepted only after source-backed data validation, pin/net checks, edit/save/reopen, report generation, and explicit provenance review.
+
+### First implementation milestone under this requirement
+
+Start with the electrical CAD model before expanding the symbol count: define and validate a versioned component/symbol/pin/net schema; migrate one real, source-backed electrical device end to end; prove that its displayed geometry, named pins, wire connectivity, editable properties, save/reopen, undo/redo, and BOM/report entry all refer to the same model instance. Add more components in small verified batches. Preserve the approved interface and existing toolbar/canvas/panel geometry throughout.
+
+---
+
+## Appendix A — Mouse interaction function catalog (original 280-item list)
 
 ## 1. LEFT-CLICK FUNCTIONS
 1. Select Object
@@ -505,6 +557,10 @@ Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design proj
 280. Preview Object
 
 **TOTAL: 280 MOUSE-INTERACTION FUNCTIONS.**
+
+---
+
+## Appendix B — Component interaction function catalog (original 360-item list)
 
 # COMPONENT FUNCTIONS INSIDE AN ENGINEERING DESIGN CANVAS
 **CAD | Electrical Design | Circuit Design | PCB | Mechanical Design | CorelDRAW | PowerPoint | Diagram Editors**
@@ -909,51 +965,9 @@ Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design proj
 359. Automatically Update Netlist
 360. Automatically Save Canvas Changes
 
+---
 
-### Mandatory 100-sheet content architecture PER PROJECT
-Use a project-specific engineering breakdown; a **minimum** viable sheet distribution is:
-- 001–005: cover, drawing index, legends, revisions, technical assumptions.
-- 006–015: single-line power architecture, supplies, distribution and protection schematics.
-- 016–035: power/control circuit schematics with actual connected components and nets.
-- 036–055: PLC/remote-I/O and sensor/actuator circuit sheets with mapped addresses.
-- 056–070: terminal, cable, wire and interconnection sheets.
-- 071–080: panel mounting/layout, DIN rail, enclosure, device placement and connection sheets.
-- 081–090: interlocks, drives, diagnostics, alarm and communication wiring sheets.
-- 091–100: cross-sheet connections, commissioning checklists, engineering schedules, BOM, validation and revision documentation.
-These categories are a baseline, not permission to add meaningless pages. Adapt to each domain; if a sheet is non-schematic, it must still be a meaningful native editable engineering document/report tied to project data. At least **70 sheets per project must contain editable, connected electrical schematics or panel/wiring topology**, not just text/report pages.
-
-### Real-data and generation integrity
-Implement a reproducible, seeded **engineering project generator** backed by typed CAD primitives, validated symbol definitions, connection graph, terminal rules, PLC maps and a domain-specific project configuration. Generate projects deterministically from unique, reviewed configurations; ensure distinct device topology, sheet structure, symbol placements, wire paths, labels, cable assignments, power architecture and cross-sheet links. Do not merely rename the same 100-page template 50 times. Include domain-specific component choices with **clearly identified illustrative ratings** and assumptions; no invented vendor part numbers, no falsely approved safety circuits, no assertion of suitability for physical construction. Include documented human engineering review requirements before any real installation.
-
-Each project must include: project metadata, jurisdiction/standard profile, engineering assumptions, minimum 100 unique sheet IDs, named devices, connected pins and nets, cross-page references, project-wide numbering, PLC I/O mapping where applicable, terminal and cable schedules, BOM with source/illustrative status, and ERC results. Use original or properly licensed symbols and fixtures. If a domain lacks PLCs, provide an equivalent meaningful control/interface design rather than fake PLC content.
-
-### Required executable quality gates
-1. Automated manifest asserts **exactly or more than 50 distinct projects**, **>=100 meaningful sheets each**, **>=5,000 total**, **>=70 electrically editable connected sheets per project**, unique sheet IDs, and zero empty/filler pages.
-2. For **every** project: deserialize all sheets; validate schema, IDs, symbols, pin references, wire graph, terminal/cable references, page cross-references and report generation; save/reload and compare deterministic topology hashes.
-3. For **every** project: programmatically perform an edit to a selected real wire/device, undo, redo, save/reload, and confirm changed topology/metadata persisted correctly; prove the editor uses the same engine for user and test operations.
-4. For **every** project: ERC runs and returns object-linked findings; any intentional illustrative violations are documented and visible, never hidden or called compliant.
-5. Generate PDF print set, BOM CSV, wire list and terminal list from **real model data** for all projects (heavy exports may run in scheduled CI with artifact retention); sample DXF roundtrip for representative sheets.
-6. Browser e2e: open at least one project from each of the five categories, navigate to sheet 100, inspect a real symbol and its pin/wire connectivity, modify a wire, save/reopen, verify ERC and export.
-7. Performance: lazy-load project list/sheets, virtualize trees, worker-based validation, background export, bounded memory. Benchmark a 100-sheet project and 50-project library on specified test hardware; measure startup, sheet switch, zoom/pan and save latency. Set and enforce realistic documented budgets from actual profiling.
-8. Document provenance and disclaimers: **educational/reference engineering designs, not construction-ready or certified** absent independent qualified engineering review. Never represent generated sample schematics as real approved electrical installations.
-
-### Release definition and sequencing
-Implement the CAD engine and one fully connected 100-sheet reference project first; then validate generation of 5 distinct projects; then 50. Keep all intermediate deliverables usable. **Do not declare final release complete until the entire 50 × 100 library and all quality gates pass.** Publish a machine-readable library manifest and per-project validation report. Clearly distinguish generated engineering examples from certified project deliverables. No fake progress metrics.
-
-## 12. Binding client requirement: real engineering components only (2026-11-12)
-
-This section is a client acceptance requirement and takes precedence over any wording elsewhere that could be read as permission to use generic or decorative component placeholders.
-
-- Every placed/catalog component must represent a real, identifiable device or engineering item. For commercial parts, record the manufacturer and exact model/part number from an authoritative manufacturer datasheet or catalog, plus the source URL, document revision/date, and retrieval date. For standard-defined items without a commercial part number, use a verified standard symbol/type and document the applicable standard and exact definition.
-- Each component definition must include standards-correct vector symbol or part geometry; real pin/terminal names and numbers; pin locations and electrical/mechanical connection types; editable, type-appropriate properties and variable values; and the source/provenance of each factual value. Symbols must connect to actual pins/nets in the project model and remain selectable, editable, and reportable.
-- A visible symbol alone is not a component. Do not substitute a square, label, decorative glyph, or approximate icon for a diode, transistor, sensor, PLC module, valve, motor, or other device. Do not claim a component is functional merely because it can be drawn or moved.
-- Never invent a manufacturer, part number, pinout, rating, dimension, tolerance, standard clause, or suitability claim. If authoritative data is unavailable or licensing is unclear, exclude/defer that component or mark the capability unavailable with the reason; do not silently fall back to a fake or generic part.
-- Project topology and wiring must match the selected components' verified pins and ratings. Keep safety and code-compliance findings advisory until qualified review; sourced components do not make a design construction-ready.
-- Do not generate large libraries or repeated project sets by renaming generic templates. A component/project is accepted only after source-backed data validation, pin/net checks, edit/save/reopen, report generation, and explicit provenance review.
-
-### First implementation milestone under this requirement
-
-Start with the electrical CAD model before expanding the symbol count: define and validate a versioned component/symbol/pin/net schema; migrate one real, source-backed electrical device end to end; prove that its displayed geometry, named pins, wire connectivity, editable properties, save/reopen, undo/redo, and BOM/report entry all refer to the same model instance. Add more components in small verified batches. Preserve the approved interface and existing toolbar/canvas/panel geometry throughout.
+## Appendix C — Global UI/UX standard (GLOBAL-UI-UX-001)
 
 # GLOBAL UI/UX STANDARD
 ## UNIVERSAL MENU, ICON, DROPDOWN AND FLOATING PANEL BEHAVIOR
@@ -1178,7 +1192,55 @@ Do not proceed with unrelated development until the required menu correction and
 
 ---
 
+## 10. PERMANENT REPOSITORY REFERENCE
 
+Store this document in the project's designated goals, governance, or standards repository.
+
+**Recommended filename:**
+
+`GLOBAL_UI_UX_MENU_ICON_STANDARD.md`
+
+**Rule identifier:**
+
+`GLOBAL-UI-UX-001`
+
+Reference this standard from the project's `AGENTS.md` or equivalent development instructions.
+
+For future projects:
+
+- Load this standard during initial project setup.
+- Apply it to all relevant interactive menus and icons.
+- Include its acceptance tests in the normal development workflow.
+- Reuse existing compliant components where practical.
+- Do not unnecessarily rewrite working components.
+
+This standard remains active until the project owner explicitly approves a revision.
+
+---
+
+## 11. FINAL CODEX DIRECTIVE
+
+**CODEX:**
+
+Treat GLOBAL-UI-UX-001 as a reusable, project-independent development standard.
+
+Apply it consistently to all applicable current and future software projects.
+
+Never allow transient menus, dropdowns, or icon panels to disturb the underlying interface.
+
+Preserve existing functionality.
+
+Implement, test, commit, merge, deploy, and verify changes according to each project's authorized workflow.
+
+Save and reference this rule in the designated goals or standards repository for future development.
+
+**GLOBAL STANDARD:**
+
+**CLICK TO OPEN → FLOAT ABOVE CONTENT → INTERACT → AUTO-CLOSE ON MOUSE LEAVE OR OUTSIDE CLICK → ZERO LAYOUT SHIFT.**
+
+---
+
+## Appendix D — Real engineering components and project examples
 
 # ELECTRICAL ENGINEERING DESIGN LIBRARY — REAL COMPONENTS FOR 50 INDUSTRIAL PROJECTS
 
@@ -1569,53 +1631,9 @@ These are proposed documentation structures, not completed drawings. Sheet alloc
 
 ---
 
-
-## 10. PERMANENT REPOSITORY REFERENCE
-
-Store this document in the project's designated goals, governance, or standards repository.
-
-**Recommended filename:**
-
-`GLOBAL_UI_UX_MENU_ICON_STANDARD.md`
-
-**Rule identifier:**
-
-`GLOBAL-UI-UX-001`
-
-Reference this standard from the project's `AGENTS.md` or equivalent development instructions.
-
-For future projects:
-
-- Load this standard during initial project setup.
-- Apply it to all relevant interactive menus and icons.
-- Include its acceptance tests in the normal development workflow.
-- Reuse existing compliant components where practical.
-- Do not unnecessarily rewrite working components.
-
-This standard remains active until the project owner explicitly approves a revision.
-
 ---
 
-## 11. FINAL CODEX DIRECTIVE
-
-**CODEX:**
-
-Treat GLOBAL-UI-UX-001 as a reusable, project-independent development standard.
-
-Apply it consistently to all applicable current and future software projects.
-
-Never allow transient menus, dropdowns, or icon panels to disturb the underlying interface.
-
-Preserve existing functionality.
-
-Implement, test, commit, merge, deploy, and verify changes according to each project's authorized workflow.
-
-Save and reference this rule in the designated goals or standards repository for future development.
-
-**GLOBAL STANDARD:**
-
-**CLICK TO OPEN → FLOAT ABOVE CONTENT → INTERACT → AUTO-CLOSE ON MOUSE LEAVE OR OUTSIDE CLICK → ZERO LAYOUT SHIFT.**
-
+## Appendix E — Deferred interface requirements and full component catalog
 
 ### Deferred header account/presence control
 
