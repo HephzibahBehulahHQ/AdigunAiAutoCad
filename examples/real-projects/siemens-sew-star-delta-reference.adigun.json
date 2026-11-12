@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 0.9",
-  "status": "Authored opening set: A1/001–A1/013; A1/014–A1/100 not authored.",
+  "revision": "Opening set 1.0",
+  "status": "Authored opening set: A1/001–A1/014; A1/015–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -81,6 +81,11 @@
       "id": "ref-013",
       "number": "A1/013",
       "name": "PLC I/O assignment schedule"
+    },
+    {
+      "id": "ref-014",
+      "number": "A1/014",
+      "name": "PLC I/O schedule · KM4 NC feedback"
     }
   ],
   "sheetLabels": {
@@ -90,7 +95,8 @@
     "ref-010": "PLC output relay interface",
     "ref-011": "24 V DC contactor coil relay output",
     "ref-012": "PLC operator input wiring",
-    "ref-013": "PLC I/O assignment schedule"
+    "ref-013": "PLC I/O assignment schedule",
+    "ref-014": "PLC I/O schedule · KM4 NC feedback"
   },
   "sheetViews": {
     "ref-007": {
@@ -130,6 +136,12 @@
       "h": 760
     },
     "ref-013": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-014": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3576,7 +3588,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 0.1",
+      "text": "Engineering document set | Revision opening set 1.0",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3585,7 +3597,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/013",
+      "text": "Authored pages: A1/001–A1/014",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3603,7 +3615,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/014–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/015–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3735,7 +3747,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/013",
+      "text": "Component register | modeled devices on A1/006–A1/014",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3825,7 +3837,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/013.",
+      "text": "Component quantities match modeled devices through A1/014.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3939,7 +3951,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/013 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/014 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4207,7 +4219,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and source-backed PLC input/output links through A1/013.",
+      "text": "A1/007: CPU 1212C, IFM sensor and source-backed PLC input/output links through A1/014.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4225,7 +4237,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/013 contain PLC sensor, operator, contactor coil and auxiliary status wiring.",
+      "text": "A1/007–A1/014 contain PLC sensor, operator, contactor coil and auxiliary status wiring.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4234,7 +4246,7 @@
       "id": "doc-ref-005-line-10",
       "x": 120,
       "y": 1018,
-      "text": "A1/006 remains electrically separate. A1/007–A1/013 share only explicitly routed, named cross-sheet nets.",
+      "text": "A1/006 remains electrically separate. A1/007–A1/014 share only explicitly routed, named cross-sheet nets.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -5064,7 +5076,7 @@
       "sheetId": "ref-011",
       "x": 50,
       "y": 690,
-      "text": "KM4 main poles and auxiliary 21–22 remain open; NO 13–14 routes to PLC DI a.3 on A1/007 and is documented in the A1/013 I/O schedule. PLC logic, actuation and safety functions are not modeled.",
+      "text": "KM4 main poles remain open; NC 21–22 routes I0.4 to PLC DI a.4 on A1/007 and NO 13–14 routes I0.3 to DI a.3. PLC logic and contactor actuation are not modeled.",
       "stroke": "#13263b"
     },
     {
@@ -5469,9 +5481,81 @@
       "y": 762,
       "text": "A1/013: KM4 auxiliary NO 13–14 reports contact status to CPU DI a.3.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-014-w11-km4-13-21",
+      "sheetId": "ref-011",
+      "x1": 700,
+      "y1": 325,
+      "x2": 745,
+      "y2": 325
+    },
+    {
+      "kind": "wire",
+      "id": "a1-014-w11-km4-22-down",
+      "sheetId": "ref-011",
+      "x1": 745,
+      "y1": 435,
+      "x2": 745,
+      "y2": 535
+    },
+    {
+      "kind": "wire",
+      "id": "a1-014-w11-km4-22-out",
+      "sheetId": "ref-011",
+      "x1": 745,
+      "y1": 535,
+      "x2": 1110,
+      "y2": 535
+    },
+    {
+      "kind": "wire",
+      "id": "a1-014-w07-di-a4",
+      "sheetId": "ref-007",
+      "x1": 670,
+      "y1": 454,
+      "x2": 200,
+      "y2": 454
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-014-title",
+      "sheetId": "ref-014",
+      "x": 50,
+      "y": 54,
+      "text": "A1/014 · PLC input assignment · KM4 NC feedback",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-014-input-04",
+      "sheetId": "ref-014",
+      "x": 120,
+      "y": 250,
+      "text": "I0.4 · A1/007 CPU X10:11 / DI a.4 · KM4 NC auxiliary contact 21–22",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-014-source",
+      "sheetId": "ref-014",
+      "x": 120,
+      "y": 330,
+      "text": "Source-backed device: Schneider Electric TeSys D LC1D09BD · KM4",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-014-limit",
+      "sheetId": "ref-014",
+      "x": 50,
+      "y": 690,
+      "text": "Wiring assignment only; PLC program, feedback interpretation and diagnostic behavior are not defined.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Thirteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; and source-backed PLC I/O assignment schedule A1/013. The static model does not simulate PLC logic, contactor actuation, feedback interpretation, switching, or safety functions. A1/014–A1/100 are not authored.",
+  "description": "Fourteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; source-backed PLC I/O assignment schedule A1/013; and KM4 NC auxiliary contact I0.4 schedule A1/014. The static model does not simulate PLC logic, contactor actuation, feedback interpretation, switching, diagnostic behavior, or safety functions. A1/015–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
@@ -5932,6 +6016,38 @@
           "point": {
             "x": 200,
             "y": 436
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-011",
+            "targetRef": "KM4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-014-km4-nc-feedback",
+      "name": "KM4 auxiliary NC 22 · PLC DI a.4",
+      "endpoints": [
+        {
+          "sheetId": "ref-011",
+          "wireId": "a1-014-w11-km4-22-out",
+          "point": {
+            "x": 1110,
+            "y": 535
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-014-w07-di-a4",
+          "point": {
+            "x": 200,
+            "y": 454
           },
           "connector": {
             "direction": "left",
