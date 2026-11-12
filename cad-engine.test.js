@@ -574,3 +574,39 @@ test('Delete shortcut removes the whole selection and preserves editor inputs', 
   assert.equal(vm.runInNewContext('handleDeleteShortcut(event)', { ...context, event: inputEvent }), false);
   assert.deepEqual(deleted, ['selection', 'single']);
 });
+
+test('24 V DC relay-contactor example round-trips with source-backed parts and connected pin nets', () => {
+  const examplePath = path.join(__dirname, 'examples', 'real-projects', '24v-relay-contactor-control.adigun.json');
+  const source = fs.readFileSync(examplePath, 'utf8');
+  const parsed = engine.parseProject(source);
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+
+  const project = parsed.project;
+  const analysis = engine.analyze(project.objects);
+  assert.deepEqual(
+    [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
+    [5, 13, 0, 0]
+  );
+  const netPins = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
+  assert.deepEqual(netPins, [
+    'K1:11,X2:1,X2:2',
+    'K1:14,KM1:A1',
+    'K1:A1,X1:1,X1:2',
+    'K1:A2,KM1:A2,X3:1,X3:2'
+  ]);
+
+  const bom = engine.billOfMaterials(project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(
+    bom.rows.map(row => [row.partNumber, row.quantity]).sort((a, b) => a[0].localeCompare(b[0])),
+    [['2966171', 1], ['3212144', 3], ['LC1D09BD', 1]].sort((a, b) => a[0].localeCompare(b[0]))
+  );
+  const wireList = engine.wireList(project.objects);
+  assert.equal(wireList.valid, true, wireList.errors.join(' '));
+  assert.equal(wireList.rows.length, 13);
+
+  const savedAgain = engine.serializeProject(project);
+  const reopened = engine.parseProject(savedAgain);
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.equal(engine.analyze(reopened.project.objects).nets.length, 4);
+});
