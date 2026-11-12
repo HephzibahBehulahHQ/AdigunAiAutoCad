@@ -13,6 +13,8 @@ const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
 const motorProtectionBreakerId = 'siemens-3rv2011-1ja10';
 const lowRangeMotorProtectionBreakerId = 'siemens-3rv2011-0fa10';
+const startPushButtonId = 'schneider-electric-xb5aa31';
+const stopPushButtonId = 'schneider-electric-xb5aa42';
 
 test('the shipped workspace inline script parses before UI handlers initialize', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
@@ -153,16 +155,53 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 7);
+  assert.equal(items.length, 9);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
+    [startPushButtonId, 'pushbutton', 'S'],
+    [stopPushButtonId, 'pushbutton', 'S'],
     [motorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     [lowRangeMotorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
     ['sew-eurodrive-drn63ms4', 'motor-induction', 'M']
   ]);
+});
+
+test('Schneider XB5 start and stop push-buttons keep manufacturer terminal identities and contact semantics', () => {
+  const start = engine.component(startPushButtonId);
+  const stop = engine.component(stopPushButtonId);
+  assert.equal(start.manufacturerPartNumber, 'XB5AA31');
+  assert.equal(start.electricalFunctions.pushButton.normalContactState, 'open');
+  assert.equal(start.electricalFunctions.pushButton.pressedContactState, 'closed');
+  assert.equal(stop.manufacturerPartNumber, 'XB5AA42');
+  assert.equal(stop.electricalFunctions.pushButton.normalContactState, 'closed');
+  assert.equal(stop.electricalFunctions.pushButton.pressedContactState, 'open');
+  assert.equal(stop.specifications.positiveOpening.value, true);
+  assert.deepEqual(start.symbol.pins.map(pin => pin.localNumber), ['13','14']);
+  assert.deepEqual(stop.symbol.pins.map(pin => pin.localNumber), ['21','22']);
+  assert.deepEqual(start.symbol.internalConnections, []);
+  assert.deepEqual(stop.symbol.internalConnections, []);
+  assert.match(start.sources[0].url, /XB5AA31_DATA/);
+  assert.match(stop.sources[0].url, /XB5AA42/);
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'pushbutton':"));
+  assert.ok(html.includes("item.electricalFunctions.pushButton.normalContactState==='open'"));
+  assert.ok(html.includes("def.family==='pushbutton'"));
+
+  const instances = [
+    engine.createInstance(startPushButtonId, 400, 500, 'S1'),
+    engine.createInstance(stopPushButtonId, 600, 500, 'S0')
+  ];
+  assert.equal(engine.validateInstance(instances[0]).valid, true);
+  assert.equal(engine.validateInstance(instances[1]).valid, true);
+  const reopened = engine.parseProject(engine.serializeProject({
+    product: 'Adigun AI AutoCAD', project: 'Momentary control device test', activeSheet: 'main',
+    zoom: 100, view: { x: 0, y: 0, w: 1200, h: 760 }, objects: instances, sheets: []
+  }));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.deepEqual(reopened.project.objects.map(item => item.componentId), [startPushButtonId, stopPushButtonId]);
 });
 
 test('component instances preserve precise snapped drawing coordinates and pin locations', () => {
@@ -787,4 +826,50 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const reopened = engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).netCount, 17);
+});
+
+test('source-backed DOL motor-feeder example preserves its power, PE, star and control nets', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-starter.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  const analysis = engine.analyze(project.objects);
+  assert.deepEqual(
+    [analysis.componentCount, analysis.wireCount, analysis.componentPinCount, analysis.connectedPinCount, analysis.unconnectedPinCount, analysis.netCount, analysis.openEndpointCount, analysis.errors.length],
+    [11, 38, 41, 33, 8, 15, 0, 0]
+  );
+  const pinNet = (ref, number) => {
+    const net = analysis.nets.find(item => item.pins.some(pin => pin.ref === ref && pin.number === number));
+    assert.ok(net, `missing connected pin ${ref}:${number}`);
+    return net.pins.map(pin => `${pin.ref}:${pin.number}`).sort();
+  };
+  for (const [breaker, contactor, motor] of [
+    ['1/L1','1/L1','U1'], ['3/L2','3/L2','V1'], ['5/L3','5/L3','W1']
+  ]) {
+    assert.ok(pinNet('Q1', breaker).includes(`X${breaker === '1/L1' ? 1 : breaker === '3/L2' ? 2 : 3}:1`));
+    assert.ok(pinNet('Q1', breaker).includes(`X${breaker === '1/L1' ? 1 : breaker === '3/L2' ? 2 : 3}:2`));
+    assert.ok(pinNet('Q1', breaker === '1/L1' ? '2/T1' : breaker === '3/L2' ? '4/T2' : '6/T3').includes(`KM1:${contactor}`));
+    assert.ok(pinNet('KM1', `${breaker === '1/L1' ? '2/T1' : breaker === '3/L2' ? '4/T2' : '6/T3'}`).includes(`M1:${motor}`));
+  }
+  assert.deepEqual(pinNet('M1','U2').filter(pin => pin.startsWith('M1:')), ['M1:U2','M1:V2','M1:W2']);
+  assert.deepEqual(pinNet('M1','PE'), ['M1:PE','X4:1','X4:2']);
+  assert.deepEqual(pinNet('S0','21'), ['S0:21','X5:1','X5:2']);
+  assert.deepEqual(pinNet('S0','22'), ['KM1:13','S0:22','S1:13']);
+  assert.deepEqual(pinNet('S1','14'), ['KM1:14','KM1:A1','S1:14']);
+  assert.deepEqual(pinNet('KM1','A2'), ['KM1:A2','X6:1','X6:2']);
+  assert.equal(engine.component('siemens-3rv2011-0fa10').manufacturerPartNumber, '3RV2011-0FA10');
+  assert.equal(engine.component('schneider-electric-lc1d09bd').manufacturerPartNumber, 'LC1D09BD');
+  assert.equal(engine.component('schneider-electric-xb5aa31').manufacturerPartNumber, 'XB5AA31');
+  assert.equal(engine.component('schneider-electric-xb5aa42').manufacturerPartNumber, 'XB5AA42');
+  const wireList = engine.wireList(project.objects);
+  assert.equal(wireList.valid, true, wireList.errors.join(' '));
+  assert.equal(wireList.rows.length, 38);
+  const bom = engine.billOfMaterials(project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(bom.rows.map(row => [row.partNumber, row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
+    ['3212144',6], ['3RV2011-0FA10',1], ['DRN63MS4',1], ['LC1D09BD',1], ['XB5AA31',1], ['XB5AA42',1]
+  ]);
+  const reopened = engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.equal(engine.analyze(reopened.project.objects).netCount, 15);
 });
