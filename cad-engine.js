@@ -225,6 +225,45 @@
     return true;
   }
 
+  function resizeGraphicObject(object, corner, point) {
+    if (!object || !['rect', 'ellipse', 'triangle', 'circle'].includes(object.kind) ||
+        !['nw', 'ne', 'sw', 'se'].includes(corner) || !point ||
+        !finite(point.x) || !finite(point.y) ||
+        !finite(object.x) || !finite(object.y) || !finite(object.x2) || !finite(object.y2)) return false;
+    const minimum = 8; // 2 mm in the workspace's 4 SVG units per mm.
+    if (object.kind === 'circle') {
+      const radius = Math.hypot(point.x - object.x, point.y - object.y) / Math.SQRT2;
+      if (radius < minimum) return false;
+      object.x2 = object.x + radius;
+      object.y2 = object.y;
+      if (Object.prototype.hasOwnProperty.call(object, 'x1')) {
+        object.x1 = object.x;
+        object.y1 = object.y;
+      }
+      return true;
+    }
+    const left = Math.min(object.x, object.x2);
+    const right = Math.max(object.x, object.x2);
+    const top = Math.min(object.y, object.y2);
+    const bottom = Math.max(object.y, object.y2);
+    const fixedX = corner.endsWith('w') ? right : left;
+    const fixedY = corner.startsWith('n') ? bottom : top;
+    const nextLeft = Math.min(point.x, fixedX);
+    const nextRight = Math.max(point.x, fixedX);
+    const nextTop = Math.min(point.y, fixedY);
+    const nextBottom = Math.max(point.y, fixedY);
+    if (nextRight - nextLeft < minimum || nextBottom - nextTop < minimum) return false;
+    object.x = nextLeft;
+    object.y = nextTop;
+    object.x2 = nextRight;
+    object.y2 = nextBottom;
+    if (Object.prototype.hasOwnProperty.call(object, 'x1')) {
+      object.x1 = nextLeft;
+      object.y1 = nextTop;
+    }
+    return true;
+  }
+
   function component(id) { return COMPONENTS[id] || null; }
   function catalog() {
     return Object.keys(COMPONENTS).map(function (id) {
@@ -656,6 +695,7 @@
     createInstance: createInstance,
     moveInstance: moveInstance,
     reorderObject: reorderObject,
+    resizeGraphicObject: resizeGraphicObject,
     rotateInstance: rotateInstance,
     validateInstance: validateInstance,
     worldPins: worldPins,
