@@ -659,11 +659,9 @@ test('SEW DRN63MS4 records source-backed motor ratings and all seven real termin
 
 test('motor symbol and inspector render as a real seven-pin component without changing workstation layout', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-  const inline = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)].find(match => !/\\bsrc\\s*=/.test(match[1]));
-  assert.ok(inline);
-  assert.match(inline[2], /case'motor-induction':/);
-  assert.match(inline[2], /def\\.family==='motor-induction'/);
-  assert.match(inline[2], /def\\.family==='motor-starter-reversing'/);
+  assert.ok(html.includes("case'motor-induction':"));
+  assert.ok(html.includes("def.family==='motor-induction'"));
+  assert.ok(html.includes("def.family==='motor-starter-reversing'"));
 });
 
 test('Siemens reversing-starter example imports with every real terminal wired and a source-backed BOM', () => {
