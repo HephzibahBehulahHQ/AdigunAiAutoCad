@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 1.8",
-  "status": "Authored opening set: A1/001–A1/021; A1/022–A1/100 not authored.",
+  "revision": "Opening set 1.9",
+  "status": "Authored opening set: A1/001–A1/022; A1/023–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -121,6 +121,11 @@
       "id": "ref-021",
       "number": "A1/021",
       "name": "ifm PN2070 pressure-sensor interface proposal"
+    },
+    {
+      "id": "ref-022",
+      "number": "A1/022",
+      "name": "ifm PN2070 pressure-sensor connection"
     }
   ],
   "sheetLabels": {
@@ -139,7 +144,8 @@
     "ref-019": "PLC digital-output allocation · CPU 1212C",
     "ref-002": "Drawing index",
     "ref-020": "PLC analog-input allocation · CPU 1212C",
-    "ref-021": "ifm PN2070 pressure-sensor interface proposal"
+    "ref-021": "ifm PN2070 pressure-sensor interface proposal",
+    "ref-022": "PN2070 pressure sensor · CPU AI0"
   },
   "sheetViews": {
     "ref-007": {
@@ -227,6 +233,12 @@
       "h": 760
     },
     "ref-021": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-022": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -6194,7 +6206,7 @@
       "sheetId": "ref-020",
       "x": 120,
       "y": 330,
-      "text": "AI0 · X11:2 · 0–10 V DC · Unassigned in the modeled project scope.",
+      "text": "AI0 · X11:2 · 0–10 V DC · connected to B2 OUT2 on A1/022.",
       "stroke": "#13263b"
     },
     {
@@ -6302,7 +6314,7 @@
       "sheetId": "ref-021",
       "x": 120,
       "y": 560,
-      "text": "AI0 / X11:2 · 0–10 V DC; proposed OUT2 signal allocation; not wired",
+      "text": "AI0 / X11:2 · 0–10 V DC; OUT2 connection and channel assignment are shown on A1/022.",
       "stroke": "#13263b"
     },
     {
@@ -6320,7 +6332,7 @@
       "sheetId": "ref-021",
       "x": 50,
       "y": 705,
-      "text": "No sensor instance, wiring, scaling, or PLC logic is modeled; AI0 remains unassigned in the connected project.",
+      "text": "This proposal sheet adds no instance or wiring; B2 and its AI0 connection are modeled on A1/022. Pressure scaling and PLC logic are not modeled.",
       "stroke": "#13263b"
     },
     {
@@ -6331,9 +6343,267 @@
       "y": 755,
       "text": "Sources: ifm PN2070 data sheet / operating instructions; Siemens S7-1200 System Manual V4.7.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-pressure-a1-022",
+      "componentId": "ifm-pn2070",
+      "ref": "B2",
+      "x": 340,
+      "y": 360,
+      "rotation": 0,
+      "properties": {
+        "marking": "PN2070 · 0–400 bar",
+        "position": "Field station 2",
+        "processPoint": "",
+        "signalConfigurationNote": "OUT2: set U; verify ASP2/AEP2 before use.",
+        "comment": "Pin 4 OUT1 is not used. Pressure point, calibration, and PLC scaling/logic are unspecified."
+      },
+      "sheetId": "ref-022"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w-b2-lplus",
+      "sheetId": "ref-022",
+      "name": "B2 pin 1 BN L+ · +24 V DC",
+      "x1": 275,
+      "y1": 335,
+      "x2": 200,
+      "y2": 335,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w-b2-out2",
+      "sheetId": "ref-022",
+      "name": "B2 pin 2 WH OUT2 · 0–10 V to CPU AI0",
+      "x1": 405,
+      "y1": 335,
+      "x2": 1000,
+      "y2": 335,
+      "stroke": "#276749",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w-b2-lminus-1",
+      "sheetId": "ref-022",
+      "name": "B2 pin 3 BU L− · 0 V DC and CPU 2M common",
+      "x1": 275,
+      "y1": 385,
+      "x2": 200,
+      "y2": 385,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w-b2-lminus-2",
+      "sheetId": "ref-022",
+      "name": "B2 L− return route",
+      "x1": 200,
+      "y1": 385,
+      "x2": 200,
+      "y2": 500,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w-b2-lminus-3",
+      "sheetId": "ref-022",
+      "name": "B2 L− to CPU 2M common link",
+      "x1": 200,
+      "y1": 500,
+      "x2": 1000,
+      "y2": 500,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-title",
+      "sheetId": "ref-022",
+      "x": 50,
+      "y": 54,
+      "text": "A1/022 · ifm PN2070 pressure-sensor connection",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-product",
+      "sheetId": "ref-022",
+      "x": 120,
+      "y": 110,
+      "text": "B2 · PN-400-SER14-MFRKG/US/ /V · 0...400 bar relative · process point not assigned",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-pin-1",
+      "sheetId": "ref-022",
+      "x": 120,
+      "y": 165,
+      "text": "Pin 1 · BN brown · L+ · X14 +24 V DC distribution · sensor range 18–30 V DC",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-pin-2",
+      "sheetId": "ref-022",
+      "x": 120,
+      "y": 195,
+      "text": "Pin 2 · WH white · OUT2 · 0–10 V DC to CPU AI0 / X11:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-pin-3",
+      "sheetId": "ref-022",
+      "x": 120,
+      "y": 225,
+      "text": "Pin 3 · BU blue · L− · 0 V DC; commoned with CPU 2M / X11:1 and X15",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-pin-4",
+      "sheetId": "ref-022",
+      "x": 120,
+      "y": 255,
+      "text": "Pin 4 · BK black · OUT1 switching / IO-Link · not used",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-config",
+      "sheetId": "ref-022",
+      "x": 50,
+      "y": 625,
+      "text": "ifm factory default for OUT2 is 4–20 mA; set voltage mode U and verify ASP2/AEP2 at the device.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-limits",
+      "sheetId": "ref-022",
+      "x": 50,
+      "y": 675,
+      "text": "No process point, device setting, pressure scaling, calibration, PLC logic, or total supply-load calculation is modeled.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-022-source",
+      "sheetId": "ref-022",
+      "x": 50,
+      "y": 735,
+      "text": "Sources: ifm PN2070 data sheet / programming guide; Siemens S7-1200 System Manual V4.7.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w07-ai0-to-link",
+      "sheetId": "ref-007",
+      "name": "CPU AI0 X11:2 to A1/022 B2 OUT2",
+      "x1": 930,
+      "y1": 292,
+      "x2": 1000,
+      "y2": 292,
+      "stroke": "#276749",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w07-2m-to-link",
+      "sheetId": "ref-007",
+      "name": "CPU 2M X11:1 to A1/022 B2 L− and 0 V",
+      "x1": 930,
+      "y1": 274,
+      "x2": 1000,
+      "y2": 274,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w09-x14-branch-v",
+      "sheetId": "ref-009",
+      "name": "+24 V DC branch from X14 distribution",
+      "x1": 750,
+      "y1": 260,
+      "x2": 750,
+      "y2": 210,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w09-x14-branch-out",
+      "sheetId": "ref-009",
+      "name": "+24 V DC branch to A1/022 B2 L+",
+      "x1": 750,
+      "y1": 210,
+      "x2": 1000,
+      "y2": 210,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w09-x15-branch-v",
+      "sheetId": "ref-009",
+      "name": "0 V DC branch from X15 distribution",
+      "x1": 750,
+      "y1": 430,
+      "x2": 750,
+      "y2": 480,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "wire",
+      "id": "a1-022-w09-x15-branch-out",
+      "sheetId": "ref-009",
+      "name": "0 V DC branch to A1/022 B2 L− and CPU 2M",
+      "x1": 750,
+      "y1": 480,
+      "x2": 1000,
+      "y2": 480,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-21",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1575,
+      "text": "A1/022  PN2070 B2 OUT2 / CPU AI0 · common 0 V DC",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-24",
+      "sheetId": "ref-003",
+      "x": 120,
+      "y": 1530,
+      "text": "1     ifm                   PN-400-SER14-MFRKG/US/ /V      B2 · A1/022",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-13",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 1466,
+      "text": "Revision 1.7 | 2026-11-12 | A1/022 connects ifm PN2070 B2 OUT2 to CPU AI0 and links supply/common.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Twenty-one authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; and ifm PN2070 pressure-sensor interface proposal A1/021. The proposed OUT2-to-AI0 mapping is not wired, sensor output voltage mode and scaling must be configured and verified, and AI0 remains unassigned in the connected project. No sensor instance, wiring, scaling or PLC logic is modeled. A1/022–A1/100 are not authored.",
+  "description": "Twenty-two authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; and ifm PN2070 pressure-sensor interface proposal A1/021; A1/022 connects B2 to CPU AI0 and the shared 24 V DC supply. OUT2 voltage mode and endpoints require device configuration and verification; pressure scaling and PLC logic are not modeled. A1/023–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
@@ -6959,6 +7229,115 @@
             "direction": "left",
             "targetSheetId": "ref-006",
             "targetRef": "F1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-022-pn2070-supply",
+      "name": "+24 V DC · X14 to PN2070 B2 L+",
+      "endpoints": [
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-022-w09-x14-branch-out",
+          "point": {
+            "x": 1000,
+            "y": 210
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-022",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "ref-022",
+          "wireId": "a1-022-w-b2-lplus",
+          "point": {
+            "x": 200,
+            "y": 335
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-009",
+            "targetRef": "X14"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-022-pn2070-ai0",
+      "name": "PN2070 B2 OUT2 · CPU AI0 X11:2",
+      "endpoints": [
+        {
+          "sheetId": "ref-022",
+          "wireId": "a1-022-w-b2-out2",
+          "point": {
+            "x": 1000,
+            "y": 335
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-022-w07-ai0-to-link",
+          "point": {
+            "x": 1000,
+            "y": 292
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-022",
+            "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-022-pn2070-return-common",
+      "name": "PN2070 B2 L− · CPU 2M · X15 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "ref-022",
+          "wireId": "a1-022-w-b2-lminus-3",
+          "point": {
+            "x": 1000,
+            "y": 500
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-022-w07-2m-to-link",
+          "point": {
+            "x": 1000,
+            "y": 274
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-022",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-022-w09-x15-branch-out",
+          "point": {
+            "x": 1000,
+            "y": 480
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-022",
+            "targetRef": "B2"
           }
         }
       ]
