@@ -39,6 +39,11 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function flipObject\(id,axis\)/);
   assert.match(inlineScripts[0][2], /selectedObjectIds/);
   assert.match(inlineScripts[0][2], /function toggleSelection\(id\)/);
+  assert.match(inlineScripts[0][2], /function beginSelectionBox\(event\)/);
+  assert.match(inlineScripts[0][2], /function updateSelectionBox\(point\)/);
+  assert.match(inlineScripts[0][2], /function finishSelectionBox\(event\)/);
+  assert.match(inlineScripts[0][2], /function cancelSelectionBox\(\)/);
+  assert.match(inlineScripts[0][2], /selection-window/);
   assert.match(inlineScripts[0][2], /function groupSelection\(\)/);
   assert.match(inlineScripts[0][2], /function ungroupSelection\(\)/);
   assert.match(inlineScripts[0][2], /function deleteSelection\(\)/);
