@@ -2,7 +2,7 @@
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
   "revision": "Opening set 0.1",
-  "status": "Reference engineering project in progress. Sheets 001–006 are authored; sheets A1/007–A1/100 are not yet authored. Static wiring only; installation suitability and protection coordination require qualified engineering review. Coil, contactor, overload and timer states are not simulated.",
+  "status": "Authored opening set: A1/001–A1/007; A1/008–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -46,10 +46,24 @@
       "id": "ref-006",
       "number": "A1/006",
       "name": "Star-delta motor starter"
+    },
+    {
+      "id": "ref-007",
+      "number": "A1/007",
+      "name": "IFM IFS204 sensor input to Siemens PLC"
     }
   ],
-  "sheetLabels": {},
-  "sheetViews": {},
+  "sheetLabels": {
+    "ref-007": "IFM IFS204 sensor input to Siemens PLC"
+  },
+  "sheetViews": {
+    "ref-007": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    }
+  },
   "objects": [
     {
       "schemaVersion": 1,
@@ -3499,7 +3513,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/006",
+      "text": "Authored pages: A1/001–A1/007",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3517,7 +3531,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/007–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/008–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3619,7 +3633,7 @@
       "id": "doc-ref-002-line-06",
       "x": 120,
       "y": 570,
-      "text": "A1/006  Star-delta motor starter — 26 tested pin nets, 242 wire segments",
+      "text": "A1/006  Star-delta motor starter — source-backed, editable, 242 wire segments",
       "stroke": "#13263b",
       "sheetId": "ref-002"
     },
@@ -3628,7 +3642,7 @@
       "id": "doc-ref-002-line-07",
       "x": 120,
       "y": 634,
-      "text": "A1/007–A1/100  Not authored; not represented as completed sheets.",
+      "text": "A1/007  IFM IFS204 sensor input to Siemens S7-1200 — separate example page",
       "stroke": "#13263b",
       "sheetId": "ref-002"
     },
@@ -3649,7 +3663,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | derived from A1/006 BOM",
+      "text": "Component register | modeled devices on A1/006 and A1/007",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3667,7 +3681,7 @@
       "id": "doc-ref-003-line-02",
       "x": 120,
       "y": 314,
-      "text": "6    Phoenix Contact       PT 16 N OG / 3212144          X1–X6",
+      "text": "8    Phoenix Contact       PT 16 N OG / 3212144          X1–X8",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3739,7 +3753,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Quantities match the modeled A1/006 project objects.",
+      "text": "Terminal quantity includes X1–X8 across both authored electrical sheets.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3769,7 +3783,7 @@
       "id": "doc-ref-004-line-01",
       "x": 120,
       "y": 250,
-      "text": "Revision 0.1 | 2026-11-12 | Initial six-sheet opening set.",
+      "text": "Revision 0.2 | 2026-11-12 | Seven-sheet opening set with two independently validated electrical examples.",
       "stroke": "#13263b",
       "sheetId": "ref-004"
     },
@@ -3823,7 +3837,7 @@
       "id": "doc-ref-004-line-07",
       "x": 120,
       "y": 634,
-      "text": "Next engineering increment: add populated sheets and explicit cross-sheet links.",
+      "text": "Next engineering increment: define a source-backed interface before joining independent circuits across sheets.",
       "stroke": "#13263b",
       "sheetId": "ref-004"
     },
@@ -3853,7 +3867,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/006 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/007 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -3919,6 +3933,278 @@
       "text": "Not certified; not construction-ready.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 800,
+      "y": 400,
+      "rotation": 0,
+      "properties": {
+        "marking": "CPU 1212C DC/DC/DC",
+        "position": "PLC1",
+        "comment": "S7-1200 CPU 1212C; terminal identities per Siemens Table A-49."
+      },
+      "sheetId": "ref-007"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-b1",
+      "componentId": "ifm-ifs204",
+      "ref": "B1",
+      "x": 300,
+      "y": 350,
+      "rotation": 0,
+      "properties": {
+        "marking": "Inductive proximity sensor",
+        "position": "Field station 1",
+        "sensingTarget": "Metal target · 4 mm nominal range",
+        "comment": "PNP normally-open output; sensor actuation is not simulated."
+      },
+      "sheetId": "ref-007"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-x1",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X7",
+      "x": 450,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "+24 V DC external supply",
+        "comment": "Field supply boundary; external source not modeled."
+      },
+      "sheetId": "ref-007"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-x2",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X8",
+      "x": 450,
+      "y": 580,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "0 V DC external supply",
+        "comment": "Field supply boundary; external source not modeled."
+      },
+      "sheetId": "ref-007"
+    },
+    {
+      "id": "W001",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "+24 V DC supply to PLC X10:1",
+      "x1": 670,
+      "y1": 274,
+      "x2": 485,
+      "y2": 250,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W002",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "0 V DC supply to PLC X10:2",
+      "x1": 670,
+      "y1": 292,
+      "x2": 485,
+      "y2": 580,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W003",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "PLC sensor supply X10:4 to B1 pin 1 L+",
+      "x1": 670,
+      "y1": 328,
+      "x2": 250,
+      "y2": 330,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W004",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "B1 pin 3 L− to PLC sensor return X10:5",
+      "x1": 670,
+      "y1": 346,
+      "x2": 250,
+      "y2": 370,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W005",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "B1 pin 4 PNP output to PLC DI a.0 at X10:7",
+      "x1": 670,
+      "y1": 382,
+      "x2": 350,
+      "y2": 350,
+      "stroke": "#111827",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006A",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "0 V common jumper · out from CPU",
+      "x1": 670,
+      "y1": 292,
+      "x2": 600,
+      "y2": 292,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006B",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "0 V common jumper · rise outside the CPU outline",
+      "x1": 600,
+      "y1": 292,
+      "x2": 600,
+      "y2": 200,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006C",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "0 V common jumper · upper return run",
+      "x1": 600,
+      "y1": 200,
+      "x2": 1100,
+      "y2": 200,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006D",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "0 V common jumper · drop outside the CPU outline",
+      "x1": 1100,
+      "y1": 200,
+      "x2": 1100,
+      "y2": 364,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006E",
+      "kind": "wire",
+      "sheetId": "ref-007",
+      "name": "0 V common to PLC 1M",
+      "x1": 1100,
+      "y1": 364,
+      "x2": 670,
+      "y2": 364,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-08",
+      "x": 120,
+      "y": 762,
+      "text": "A1/008–A1/100  Not authored; not represented as completed sheets.",
+      "stroke": "#13263b",
+      "sheetId": "ref-002"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-11",
+      "x": 120,
+      "y": 954,
+      "text": "A1/007 components: Siemens CPU 1212C, IFM IFS204 and Phoenix Contact terminal blocks X7/X8.",
+      "stroke": "#13263b",
+      "sheetId": "ref-003"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-12",
+      "x": 120,
+      "y": 1018,
+      "text": "Part identities are source-backed; component records retain their own terminal definitions.",
+      "stroke": "#13263b",
+      "sheetId": "ref-003"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-005-line-09",
+      "x": 120,
+      "y": 954,
+      "text": "A1/007 is a source-backed IFM IFS204 and Siemens S7-1200 sensor input example.",
+      "stroke": "#13263b",
+      "sheetId": "ref-005"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-005-line-10",
+      "x": 120,
+      "y": 1018,
+      "text": "A1/006 and A1/007 remain separate circuits; no unverified supply or control-net tie is asserted.",
+      "stroke": "#13263b",
+      "sheetId": "ref-005"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-005-line-11",
+      "x": 120,
+      "y": 1082,
+      "text": "Supply adequacy and protection are not established; no PLC, sensor or motor behavior is simulated.",
+      "stroke": "#13263b",
+      "sheetId": "ref-005"
+    },
+    {
+      "kind": "rect",
+      "id": "doc-ref-007-frame",
+      "sheetId": "ref-007",
+      "x": 24,
+      "y": 24,
+      "x2": 1176,
+      "y2": 736,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "none"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-007-title",
+      "sheetId": "ref-007",
+      "x": 50,
+      "y": 54,
+      "text": "A1/007 · IFM IFS204 sensor input to Siemens S7-1200",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-007-note",
+      "sheetId": "ref-007",
+      "x": 50,
+      "y": 725,
+      "text": "Source-backed static example · verify external supply/protection · behavior not simulated",
+      "stroke": "#13263b"
     }
-  ]
+  ],
+  "description": "Seven authored sheets: editable project records A1/001–A1/005, Siemens/SEW star-delta motor starter A1/006, and the source-backed IFM IFS204 / Siemens S7-1200 sensor input example A1/007. The examples are electrically separate; no unverified inter-sheet connection is asserted. A1/008–A1/100 are not authored."
 }
