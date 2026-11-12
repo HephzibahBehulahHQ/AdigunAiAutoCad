@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
-  "project": "Siemens SIRIUS 3RM12 reversing starter — wiring example",
+  "project": "Siemens SIRIUS 3RM12 with SEW DRN63MS4 motor — wiring example",
   "revision": "1.0",
-  "status": "Educational source-backed wiring example; field and control interfaces terminate at X1–X15.",
+  "status": "Educational source-backed wiring example; three-phase and control interfaces terminate at X1–X3, X7–X16.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -73,57 +73,6 @@
         "terminalStrip": "XT1",
         "position": "",
         "marking": "L3 supply",
-        "comment": "External field/control boundary; verify conductor and protection for the actual installation."
-      },
-      "sheetId": "reversing"
-    },
-    {
-      "schemaVersion": 1,
-      "kind": "component-instance",
-      "id": "example-x4",
-      "componentId": "phoenix-contact-3212144",
-      "ref": "X4",
-      "x": 1060,
-      "y": 560,
-      "rotation": 0,
-      "properties": {
-        "terminalStrip": "XT1",
-        "position": "",
-        "marking": "Motor U",
-        "comment": "External field/control boundary; verify conductor and protection for the actual installation."
-      },
-      "sheetId": "reversing"
-    },
-    {
-      "schemaVersion": 1,
-      "kind": "component-instance",
-      "id": "example-x5",
-      "componentId": "phoenix-contact-3212144",
-      "ref": "X5",
-      "x": 1060,
-      "y": 590,
-      "rotation": 0,
-      "properties": {
-        "terminalStrip": "XT1",
-        "position": "",
-        "marking": "Motor V",
-        "comment": "External field/control boundary; verify conductor and protection for the actual installation."
-      },
-      "sheetId": "reversing"
-    },
-    {
-      "schemaVersion": 1,
-      "kind": "component-instance",
-      "id": "example-x6",
-      "componentId": "phoenix-contact-3212144",
-      "ref": "X6",
-      "x": 1060,
-      "y": 620,
-      "rotation": 0,
-      "properties": {
-        "terminalStrip": "XT1",
-        "position": "",
-        "marking": "Motor W",
         "comment": "External field/control boundary; verify conductor and protection for the actual installation."
       },
       "sheetId": "reversing"
@@ -479,150 +428,6 @@
       "strokeWidth": 1.5
     },
     {
-      "id": "W-T1-X4-1",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T1 X4",
-      "x1": 550,
-      "y1": 490,
-      "x2": 550,
-      "y2": 500,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T1-X4-2",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T1 X4",
-      "x1": 550,
-      "y1": 500,
-      "x2": 800,
-      "y2": 500,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T1-X4-3",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T1 X4",
-      "x1": 800,
-      "y1": 500,
-      "x2": 800,
-      "y2": 560,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T1-X4-4",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T1 X4",
-      "x1": 800,
-      "y1": 560,
-      "x2": 1025,
-      "y2": 560,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T2-X5-1",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T2 X5",
-      "x1": 600,
-      "y1": 490,
-      "x2": 600,
-      "y2": 520,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T2-X5-2",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T2 X5",
-      "x1": 600,
-      "y1": 520,
-      "x2": 830,
-      "y2": 520,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T2-X5-3",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T2 X5",
-      "x1": 830,
-      "y1": 520,
-      "x2": 830,
-      "y2": 590,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T2-X5-4",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T2 X5",
-      "x1": 830,
-      "y1": 590,
-      "x2": 1025,
-      "y2": 590,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T3-X6-1",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T3 X6",
-      "x1": 650,
-      "y1": 490,
-      "x2": 650,
-      "y2": 540,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T3-X6-2",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T3 X6",
-      "x1": 650,
-      "y1": 540,
-      "x2": 860,
-      "y2": 540,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T3-X6-3",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T3 X6",
-      "x1": 860,
-      "y1": 540,
-      "x2": 860,
-      "y2": 620,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
-      "id": "W-T3-X6-4",
-      "kind": "wire",
-      "sheetId": "reversing",
-      "name": "T3 X6",
-      "x1": 860,
-      "y1": 620,
-      "x2": 1025,
-      "y2": 620,
-      "stroke": "#b42318",
-      "strokeWidth": 1.5
-    },
-    {
       "id": "W-X7-A1-1",
       "kind": "wire",
       "sheetId": "reversing",
@@ -736,8 +541,42 @@
       "sheetId": "reversing",
       "x": 50,
       "y": 55,
-      "text": "Siemens SIRIUS 3RM12 reversing starter",
+      "text": "Siemens 3RM12 reversing starter · SEW DRN63MS4",
       "stroke": "#0b1220"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-x16",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X16",
+      "x": 760,
+      "y": 600,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "",
+        "marking": "PE",
+        "comment": "Protective-earth boundary; verify the installation bonding design."
+      },
+      "sheetId": "reversing"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "example-m1",
+      "componentId": "sew-eurodrive-drn63ms4",
+      "ref": "M1",
+      "x": 600,
+      "y": 600,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "IM B3",
+        "marking": "DRN63MS4",
+        "comment": "400 V, 50 Hz star connection; motor dynamics are not simulated."
+      },
+      "sheetId": "reversing"
     },
     {
       "id": "note-scope",
@@ -745,7 +584,7 @@
       "sheetId": "reversing",
       "x": 50,
       "y": 78,
-      "text": "Verified 3RM1201-1AA04 · 24 V DC control · 3-phase motor field boundary at X4–X6",
+      "text": "3RM1201-1AA04 · DRN63MS4 · 0.12 kW · 400 V / 50 Hz star",
       "stroke": "#164eac"
     },
     {
@@ -754,9 +593,129 @@
       "sheetId": "reversing",
       "x": 50,
       "y": 101,
-      "text": "NOT FOR CONSTRUCTION · verify supply, motor current, protection, wiring and interlocks for the actual installation",
+      "text": "NOT FOR CONSTRUCTION · verify protection, current setting, motor, wiring and application coordination",
       "stroke": "#b42318"
+    },
+    {
+      "id": "W-T1-M1-winding-u1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "Q1 T1 M1 winding-u1",
+      "x1": 550,
+      "y1": 490,
+      "x2": 550,
+      "y2": 540,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-T2-M1-winding-v1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "Q1 T2 M1 winding-v1",
+      "x1": 600,
+      "y1": 490,
+      "x2": 600,
+      "y2": 540,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-T3-M1-winding-w1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "Q1 T3 M1 winding-w1",
+      "x1": 650,
+      "y1": 490,
+      "x2": 650,
+      "y2": 540,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-M1-U2-star-1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "M1 U2 star",
+      "x1": 550,
+      "y1": 660,
+      "x2": 550,
+      "y2": 700,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-M1-U2-star-2",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "M1 U2 star",
+      "x1": 550,
+      "y1": 700,
+      "x2": 600,
+      "y2": 700,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-M1-V2-star-1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "M1 V2 star",
+      "x1": 600,
+      "y1": 660,
+      "x2": 600,
+      "y2": 700,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-M1-W2-star-1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "M1 W2 star",
+      "x1": 650,
+      "y1": 660,
+      "x2": 650,
+      "y2": 700,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-M1-W2-star-2",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "M1 W2 star",
+      "x1": 650,
+      "y1": 700,
+      "x2": 600,
+      "y2": 700,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "W-M1-PE-X16-1",
+      "kind": "wire",
+      "sheetId": "reversing",
+      "name": "M1 PE X16",
+      "x1": 660,
+      "y1": 600,
+      "x2": 725,
+      "y2": 600,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "star-junction-m1",
+      "kind": "circle",
+      "sheetId": "reversing",
+      "x": 600,
+      "y": 700,
+      "x2": 603,
+      "y2": 700,
+      "stroke": "#b42318",
+      "fill": "#b42318",
+      "strokeWidth": 1
     }
   ],
-  "description": "One-sheet wiring example for the Siemens SIRIUS 3RM12 reversing starter, with source-backed 3RM1201-1AA04 identity, manufacturer terminal designations, three-phase field boundaries, direction inputs, 24 V DC supply, reset, run and fault signals. No motor, control logic, reversing action or protective trip is simulated."
+  "description": "One-sheet preliminary wiring model pairing a Siemens SIRIUS 3RM1201-1AA04 reversing starter with a source-backed SEW-EURODRIVE DRN63MS4 0.12 kW three-phase motor. Manufacturer pin identities and a 400 V star connection are represented. Starter, motor, protection, load and rotation behavior are not simulated; this example is not for construction."
 }
