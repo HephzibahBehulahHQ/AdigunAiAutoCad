@@ -38,6 +38,14 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /data-export-wire-list/);
   assert.match(inlineScripts[0][2], /function deleteObject\(id\)/);
   assert.match(inlineScripts[0][2], /function deleteSheet\(id\)/);
+  assert.match(inlineScripts[0][2], /function openSheetContextMenu\(id,event\)/);
+  assert.match(inlineScripts[0][2], /data-sheet-command/);
+  assert.match(inlineScripts[0][2], /function renameSheet\(id\)/);
+  assert.match(inlineScripts[0][2], /function duplicateSheet\(id\)/);
+  assert.match(inlineScripts[0][2], /function moveSheetToPosition\(id\)/);
+  assert.match(inlineScripts[0][2], /function reorderSheetBefore\(sourceId,targetId\)/);
+  assert.match(inlineScripts[0][2], /adigun-sheet/);
+  assert.match(inlineScripts[0][2], /sheetLabels:state/);
   assert.match(inlineScripts[0][2], /function collectProjectObjects\(\)/);
   assert.match(inlineScripts[0][2], /state\.sheetObjects\[state\.sheet\]=state\.objects/);
   assert.match(inlineScripts[0][2], /data-delete-sheet/);
