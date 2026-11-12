@@ -1113,3 +1113,37 @@ test('multi-sheet project analysis isolates coincident geometry and rejects ambi
   duplicateSheet.sheets[1].id = duplicateSheet.sheets[0].id;
   assert.equal(engine.validateProject(duplicateSheet).valid, false);
 });
+
+
+test('six-sheet star-delta reference opening set has authored documentation and preserves exact electrical topology', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  assert.equal(project.sheets.length, 6);
+  assert.equal(project.activeSheet, 'ref-006');
+  assert.ok(project.status.includes('A1/007–A1/100 are not yet authored'));
+  const ids = new Set(project.objects.map(object => object.id));
+  assert.equal(ids.size, project.objects.length);
+  for (const sheet of project.sheets) {
+    const pageObjects = project.objects.filter(object => object.sheetId === sheet.id);
+    assert.ok(pageObjects.length >= 2, sheet.id + ' must contain native editable content');
+    if (sheet.id !== 'ref-006') assert.ok(pageObjects.some(object => object.kind === 'text'), sheet.id + ' must contain editable text');
+  }
+  const report = engine.analyzeProject(project);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [6, 15, 242, 26, 0]);
+  assert.deepEqual(report.sheets.slice(0, 5).map(sheet => [sheet.analysis.componentCount, sheet.analysis.wireCount, sheet.analysis.netCount]), [
+    [0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
+  ]);
+  const electrical = report.sheets[5].analysis;
+  assert.deepEqual([electrical.componentCount, electrical.wireCount, electrical.netCount], [15,242,26]);
+  const bom = engine.billOfMaterials(project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b)=>a[0].localeCompare(b[0])), [
+    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1],
+    ['3RV2021-4AA10',1], ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
+  ]);
+  const reopened = engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26]);
+});
