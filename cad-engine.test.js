@@ -413,10 +413,10 @@ test('wire list blocks duplicate IDs, invalid geometry and unverified legacy sym
 
 test('selecting component type selects all component instances on the active sheet', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-  const script = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)]
-    .find(match => !/\\bsrc\\s*=/.test(match[1]))[2];
+  const script = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+    .find(match => !/\bsrc\s*=/.test(match[1]))[2];
   const start = script.indexOf('function selectComponentsByType(id)');
-  const end = script.indexOf('\\n  function ', start);
+  const end = script.indexOf('\n  function ', start);
   assert.notEqual(start, -1);
   assert.notEqual(end, -1);
   const source = script.slice(start, end);
