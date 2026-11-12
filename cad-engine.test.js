@@ -44,6 +44,9 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function finishSelectionBox\(event\)/);
   assert.match(inlineScripts[0][2], /function renameComponent\(id\)/);
   assert.match(inlineScripts[0][2], /function selectSimilarObjects\(id\)/);
+  assert.match(inlineScripts[0][2], /function drawingLayerForObject\(obj\)/);
+  assert.match(inlineScripts[0][2], /function selectObjectsOnSameLayer\(id\)/);
+  assert.match(inlineScripts[0][2], /state\.layerVisibility\[el\.dataset\.layer\]===false/);
   assert.match(inlineScripts[0][2], /data-object-command="select-type"|select-type/);
   assert.match(inlineScripts[0][2], /function selectConnectedComponents\(id\)/);
   assert.match(inlineScripts[0][2], /AdigunCADEngine\.worldPins\(target\)/);
@@ -435,4 +438,33 @@ test('selecting component type selects all component instances on the active she
   vm.runInNewContext("selectComponentsByType('component-a')", context);
   assert.deepEqual(selected, ['component-a', 'component-b']);
   assert.match(notices[0], /2 components selected on this sheet/);
+});
+
+
+test('drawing layer visibility categories and same-layer selection use object data', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const script = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+    .find(match => !/\bsrc\s*=/.test(match[1]))[2];
+  const start = script.indexOf('function drawingLayerForObject(obj)');
+  const end = script.indexOf('\n  function selectComponentsByType(id)', start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  const source = script.slice(start, end);
+  const selected = [];
+  const context = {
+    state: { objects: [
+      { id: 'wire-a', kind: 'wire' },
+      { id: 'component-a', kind: 'component-instance' },
+      { id: 'component-b', kind: 'component-instance' },
+      { id: 'note-a', kind: 'text' }
+    ] },
+    setSelection(ids) { selected.splice(0, selected.length, ...ids); },
+    notify() {}
+  };
+  vm.runInNewContext(source, context);
+  assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'wire'})", context), 'connections');
+  assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'component-instance'})", context), 'devices');
+  assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'text'})", context), 'annotations');
+  vm.runInNewContext("selectObjectsOnSameLayer('component-a')", context);
+  assert.deepEqual(selected, ['component-a', 'component-b']);
 });
