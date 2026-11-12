@@ -1147,3 +1147,50 @@ test('six-sheet star-delta reference opening set has authored documentation and 
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26]);
 });
+
+
+test('project-level cross-sheet links merge only explicitly referenced wire nets', () => {
+  const objects = [];
+  ['sheet-power', 'sheet-control'].forEach((sheetId, index) => {
+    const terminal = engine.createInstance('phoenix-contact-3212144', 500, 260, index === 0 ? 'X1' : 'X2');
+    terminal.id = 'cross-sheet-terminal-' + index;
+    terminal.sheetId = sheetId;
+    objects.push(terminal);
+    objects.push({kind:'wire',id:'cross-sheet-wire-' + index,sheetId,x1:465,y1:260,x2:535,y2:260});
+  });
+  const project = {
+    format: engine.projectFormat, version: engine.projectVersion,
+    componentSchemaVersion: engine.componentSchemaVersion, netSchemaVersion: engine.netSchemaVersion,
+    activeSheet:'sheet-power',
+    sheets:[
+      {id:'sheet-power',number:'A1/006',name:'Power distribution'},
+      {id:'sheet-control',number:'A1/007',name:'Control supply'}
+    ],
+    objects,
+    crossSheetConnections:[{
+      id:'ref-L1',name:'L1',
+      endpoints:[
+        {sheetId:'sheet-power',wireId:'cross-sheet-wire-0'},
+        {sheetId:'sheet-control',wireId:'cross-sheet-wire-1'}
+      ]
+    }]
+  };
+  const parsed=engine.parseProject(engine.serializeProject(project));
+  assert.equal(parsed.valid,true,parsed.errors.join(' '));
+  const report=engine.analyzeProject(parsed.project);
+  assert.equal(report.valid,true,report.errors.join(' '));
+  assert.deepEqual([report.sheetCount,report.netCount,report.globalNetCount,report.crossSheetConnectionCount],[2,2,1,1]);
+  assert.deepEqual(report.globalNets[0].sheetIds,['sheet-control','sheet-power']);
+  assert.deepEqual(report.globalNets[0].pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),[
+    'sheet-control:X2:1','sheet-control:X2:2','sheet-power:X1:1','sheet-power:X1:2'
+  ]);
+  const invalid=JSON.parse(JSON.stringify(project));
+  invalid.crossSheetConnections[0].endpoints[1].wireId='missing-wire';
+  assert.equal(engine.validateProject(invalid).valid,false);
+  const sameSheet=JSON.parse(JSON.stringify(project));
+  sameSheet.crossSheetConnections[0].endpoints[1].sheetId='sheet-power';
+  assert.equal(engine.validateProject(sameSheet).valid,false);
+  const reopened=engine.parseProject(engine.serializeProject(parsed.project));
+  assert.equal(reopened.valid,true,reopened.errors.join(' '));
+  assert.equal(engine.analyzeProject(reopened.project).globalNetCount,1);
+});

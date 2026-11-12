@@ -31,7 +31,11 @@ The first data-engine milestone adds project-level sheet validation and independ
 
 This is a foundation milestone only. It does not add the 100 pages, cross-sheet references, report pages, or multi-page navigation behavior. Do not count a declared sheet as complete unless it contains real editable project content and passes project-wide validation.
 
-Next: add explicit, validated cross-sheet connection references, then publish the first connected multi-sheet circuit increment from source-backed devices while retaining the approved workstation geometry.
+## Cross-sheet connectivity model
+
+The CAD engine now supports project-level links between sheet-local wire nets. Each link names its endpoints by sheet ID and wire ID; analysis exposes local nets and deterministic project-wide nets, and validation rejects duplicate links, missing wires, unknown sheets, repeated endpoints, or links confined to one sheet. This is model data only; the current workstation does not yet draw off-page connector graphics.
+
+Next: add source-backed, visibly placed off-page connector behavior and the first populated multi-sheet electrical circuit. Preserve the approved workstation geometry.
 
 
 ## Component and project source-data guidance
