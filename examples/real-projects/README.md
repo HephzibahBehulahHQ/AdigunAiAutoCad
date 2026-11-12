@@ -114,3 +114,6 @@ Every page has editable native drawing content. The three electrical examples re
 
 Component source records: [Siemens SITOP PSU100C 6EP1332-5BA00](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md) and [Phoenix Contact PT 16 N-PE 3212147](../../docs/components/phoenix-contact-pt-16-n-pe-3212147.md). The PSU manual documents its L/N/PE and +/− terminals and ratings; the terminal product record verifies the PE terminal's two connections and grounding foot. The two physical PSU − screws are represented by one shared schematic return endpoint.
 
+
+
+For A1/008, the PT 16 N-PE endpoints labeled 1 and 2 are model-local indexes; Phoenix Contact confirms two connections but does not assign those numbers.
