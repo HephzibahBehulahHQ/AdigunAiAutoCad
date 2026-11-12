@@ -25,7 +25,13 @@ The next verified component milestone adds the IFM IFS204 PNP normally-open indu
 
 Apply this concurrent discovery rule to every example milestone: when official-source research establishes a required component missing from the catalog, add its verified definition, real terminal/pin geometry, supported specifications, editable properties, source record and focused tests in the same milestone. When completing the example exposes a missing CAD function, implement and regression-test that function with the example. Do not substitute generic glyphs or unconnected visual stand-ins for a modeled engineering component. Preserve the approved workstation geometry and verify that any required UI rendering fits the existing layout.
 
-Next: source and build the next distinct engineering example, while continuing the interaction audit and preserving the approved workstation geometry.
+## 100-sheet reference project — topology foundation
+
+The first data-engine milestone adds project-level sheet validation and independent electrical analysis per sheet. Multi-sheet projects now require each drawing object to identify a known sheet; duplicate and unknown sheet IDs are rejected. Coincident coordinates on separate pages produce separate sheet-qualified nets. Single-sheet files retain the existing unscoped-object compatibility path. Focused regression coverage uses the source-backed Phoenix Contact terminal and proves save/reopen plus page isolation.
+
+This is a foundation milestone only. It does not add the 100 pages, cross-sheet references, report pages, or multi-page navigation behavior. Do not count a declared sheet as complete unless it contains real editable project content and passes project-wide validation.
+
+Next: add explicit, validated cross-sheet connection references, then publish the first connected multi-sheet circuit increment from source-backed devices while retaining the approved workstation geometry.
 
 
 ## Component and project source-data guidance
