@@ -1,0 +1,219 @@
+{
+  "product": "Adigun AI AutoCAD",
+  "project": "IFM IFS204 sensor to Siemens S7-1200 CPU 1212C",
+  "revision": "1.0",
+  "status": "Source-backed educational 24 V DC PNP sensor wiring example; PLC logic and sensor actuation are not simulated.",
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1,
+  "activeSheet": "sensor-plc",
+  "theme": "light",
+  "zoom": 100,
+  "view": {
+    "x": 0,
+    "y": 0,
+    "w": 1500,
+    "h": 850
+  },
+  "sheets": [
+    {
+      "id": "sensor-plc",
+      "number": "A2/030",
+      "name": "Inductive Sensor · PLC Input"
+    }
+  ],
+  "sheetLabels": {},
+  "sheetViews": {},
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 800,
+      "y": 400,
+      "rotation": 0,
+      "properties": {
+        "marking": "CPU 1212C DC/DC/DC",
+        "position": "PLC1",
+        "comment": "S7-1200 CPU 1212C; terminal identities per Siemens Table A-49."
+      },
+      "sheetId": "sensor-plc"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-b1",
+      "componentId": "ifm-ifs204",
+      "ref": "B1",
+      "x": 300,
+      "y": 350,
+      "rotation": 0,
+      "properties": {
+        "marking": "Inductive proximity sensor",
+        "position": "Field station 1",
+        "sensingTarget": "Metal target · 4 mm nominal range",
+        "comment": "PNP normally-open output; sensor actuation is not simulated."
+      },
+      "sheetId": "sensor-plc"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-x1",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X1",
+      "x": 450,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "+24 V DC external supply",
+        "comment": "Field supply boundary; external source not modeled."
+      },
+      "sheetId": "sensor-plc"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "sensor-plc-x2",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X2",
+      "x": 450,
+      "y": 580,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "0 V DC external supply",
+        "comment": "Field supply boundary; external source not modeled."
+      },
+      "sheetId": "sensor-plc"
+    },
+    {
+      "id": "W001",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "+24 V DC supply to PLC X10:1",
+      "x1": 670,
+      "y1": 274,
+      "x2": 485,
+      "y2": 250,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W002",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "0 V DC supply to PLC X10:2",
+      "x1": 670,
+      "y1": 292,
+      "x2": 485,
+      "y2": 580,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W003",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "PLC sensor supply X10:4 to B1 pin 1 L+",
+      "x1": 670,
+      "y1": 328,
+      "x2": 250,
+      "y2": 330,
+      "stroke": "#b4232a",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W004",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "B1 pin 3 L− to PLC sensor return X10:5",
+      "x1": 670,
+      "y1": 346,
+      "x2": 250,
+      "y2": 370,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W005",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "B1 pin 4 PNP output to PLC DI a.0 at X10:7",
+      "x1": 670,
+      "y1": 382,
+      "x2": 350,
+      "y2": 350,
+      "stroke": "#111827",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006A",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "0 V common jumper · out from CPU",
+      "x1": 670,
+      "y1": 292,
+      "x2": 600,
+      "y2": 292,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006B",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "0 V common jumper · rise outside the CPU outline",
+      "x1": 600,
+      "y1": 292,
+      "x2": 600,
+      "y2": 200,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006C",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "0 V common jumper · upper return run",
+      "x1": 600,
+      "y1": 200,
+      "x2": 1100,
+      "y2": 200,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006D",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "0 V common jumper · drop outside the CPU outline",
+      "x1": 1100,
+      "y1": 200,
+      "x2": 1100,
+      "y2": 364,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    },
+    {
+      "id": "W006E",
+      "kind": "wire",
+      "sheetId": "sensor-plc",
+      "name": "0 V common to PLC 1M",
+      "x1": 1100,
+      "y1": 364,
+      "x2": 670,
+      "y2": 364,
+      "stroke": "#164eac",
+      "strokeWidth": 1.6
+    }
+  ],
+  "description": "Connects the IFM IFS204 3-wire PNP NO sensor to the Siemens CPU 1212C built-in sensor supply, DI a.0 and 1M common. Two PT 16 N terminal instances mark external 24 V DC supply boundaries. No sensing or PLC program simulation is claimed."
+}
+
