@@ -151,12 +151,13 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 4);
+  assert.equal(items.length, 5);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
-    ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q']
+    ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
+    ['sew-eurodrive-drn63ms4', 'motor-induction', 'M']
   ]);
 });
 
