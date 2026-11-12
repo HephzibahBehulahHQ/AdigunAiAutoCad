@@ -17,6 +17,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
     .filter(match => !/\bsrc\s*=/.test(match[1]));
   assert.equal(inlineScripts.length, 1);
+  assert.doesNotMatch(inlineScripts[0][2], /(?<!\$)\$\((['"])([^'"]*)\1\)\.forEach/);
   assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
 });
 
