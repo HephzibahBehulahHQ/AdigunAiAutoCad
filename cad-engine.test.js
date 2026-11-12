@@ -44,6 +44,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function finishSelectionBox\(event\)/);
   assert.match(inlineScripts[0][2], /function renameComponent\(id\)/);
   assert.match(inlineScripts[0][2], /function selectSimilarObjects\(id\)/);
+  assert.match(inlineScripts[0][2], /addEventListener\('dblclick',e=>handleObjectDoubleClick/);
   assert.match(inlineScripts[0][2], /function drawingLayerForObject\(obj\)/);
   assert.match(inlineScripts[0][2], /function selectObjectsOnSameLayer\(id\)/);
   assert.match(inlineScripts[0][2], /state\.layerVisibility\[el\.dataset\.layer\]===false/);
@@ -467,4 +468,31 @@ test('drawing layer visibility categories and same-layer selection use object da
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'text'})", context), 'annotations');
   vm.runInNewContext("selectObjectsOnSameLayer('component-a')", context);
   assert.deepEqual(selected, ['component-a', 'component-b']);
+});
+
+
+test('double-click selects an object and opens its properties in select mode only', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const script = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+    .find(match => !/\bsrc\s*=/.test(match[1]))[2];
+  const start = script.indexOf('function handleObjectDoubleClick(event,id)');
+  const end = script.indexOf('\n  function drawingLayerForObject(obj)', start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  const source = script.slice(start, end);
+  const selected = [];
+  const opened = [];
+  const context = {
+    state: { tool: 'select', objects: [{ id: 'text-1', kind: 'text' }] },
+    setSelection(ids) { selected.splice(0, selected.length, ...ids); },
+    openInspector(name) { opened.push(name); }
+  };
+  vm.runInNewContext(source, context);
+  const event = { preventDefault() {}, stopPropagation() {} };
+  vm.runInNewContext('handleObjectDoubleClick(event, "text-1")', { ...context, event });
+  assert.deepEqual(selected, ['text-1']);
+  assert.deepEqual(opened, ['Properties']);
+  context.state.tool = 'wire';
+  vm.runInNewContext('handleObjectDoubleClick(event, "text-1")', { ...context, event });
+  assert.deepEqual(opened, ['Properties']);
 });
