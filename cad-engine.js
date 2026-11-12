@@ -215,6 +215,16 @@
   });
   const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition });
 
+  function reorderObject(objects,id,direction) {
+    if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
+    const index = objects.findIndex(function (object) { return object && object.id === id; });
+    const target = index + direction;
+    if (index < 0 || target < 0 || target >= objects.length) return false;
+    const moved = objects.splice(index, 1)[0];
+    objects.splice(target, 0, moved);
+    return true;
+  }
+
   function component(id) { return COMPONENTS[id] || null; }
   function catalog() {
     return Object.keys(COMPONENTS).map(function (id) {
@@ -645,6 +655,7 @@
     catalog: catalog,
     createInstance: createInstance,
     moveInstance: moveInstance,
+    reorderObject: reorderObject,
     rotateInstance: rotateInstance,
     validateInstance: validateInstance,
     worldPins: worldPins,
