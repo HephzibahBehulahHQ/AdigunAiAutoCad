@@ -33,7 +33,7 @@ This is a foundation milestone only. It does not add the 100 pages, cross-sheet 
 
 ## Cross-sheet connectivity model
 
-The CAD engine now supports project-level links between sheet-local wire nets. Each link names its endpoints by sheet ID and wire ID; analysis exposes local nets and deterministic project-wide nets, and validation rejects duplicate links, missing wires, unknown sheets, repeated endpoints, or links confined to one sheet. This is model data only; the current workstation does not yet draw off-page connector graphics.
+The CAD engine now supports project-level links between sheet-local wire nets. Each link identifies a real open wire endpoint by sheet ID, wire ID and coordinates; project analysis exposes local and deterministic project-wide nets, treats linked endpoints as closed, and rejects endpoints that are not truly dangling. This is model data only; the current workstation does not yet draw off-page connector graphics.
 
 Next: add source-backed, visibly placed off-page connector behavior and the first populated multi-sheet electrical circuit. Preserve the approved workstation geometry.
 
