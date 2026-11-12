@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 0.4",
-  "status": "Authored opening set: A1/001–A1/008; A1/009–A1/100 not authored.",
+  "revision": "Opening set 0.5",
+  "status": "Authored opening set: A1/001–A1/009; A1/010–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -55,12 +55,18 @@
     {
       "id": "ref-008",
       "number": "A1/008",
-      "name": "SITOP PSU100C supply boundaries"
+      "name": "Siemens SITOP PSU100C supply"
+    },
+    {
+      "id": "ref-009",
+      "number": "A1/009",
+      "name": "24 V DC distribution connections"
     }
   ],
   "sheetLabels": {
     "ref-007": "IFM IFS204 sensor input to Siemens PLC",
-    "ref-008": "SITOP PSU100C supply boundaries"
+    "ref-008": "Siemens SITOP PSU100C supply",
+    "ref-009": "24 V DC distribution connections"
   },
   "sheetViews": {
     "ref-007": {
@@ -70,6 +76,12 @@
       "h": 760
     },
     "ref-008": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-009": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3525,7 +3537,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/008",
+      "text": "Authored pages: A1/001–A1/009",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3543,7 +3555,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/009–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/010–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3675,7 +3687,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/008",
+      "text": "Component register | modeled devices on A1/006–A1/009",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3693,7 +3705,7 @@
       "id": "doc-ref-003-line-02",
       "x": 120,
       "y": 314,
-      "text": "12    Phoenix Contact       PT 16 N OG / 3212144          X1–X10, X12–X13",
+      "text": "14    Phoenix Contact       PT 16 N OG / 3212144          X1–X10, X12–X15",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3765,7 +3777,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices and terminal boundaries on A1/006–A1/008.",
+      "text": "Component quantities match modeled devices on A1/006–A1/009.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3879,7 +3891,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/008 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/009 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -3991,8 +4003,8 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "1",
-        "marking": "+24 V DC external supply",
-        "comment": "Field supply boundary; external source not modeled."
+        "marking": "+24 V DC from PS1 via A1/009",
+        "comment": "A1/009 X14 connects to the source-backed SITOP output on A1/008."
       },
       "sheetId": "ref-007"
     },
@@ -4008,8 +4020,8 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "2",
-        "marking": "0 V DC external supply",
-        "comment": "Field supply boundary; external source not modeled."
+        "marking": "0 V DC from PS1 via A1/009",
+        "comment": "A1/009 X15 connects to the source-backed SITOP return on A1/008."
       },
       "sheetId": "ref-007"
     },
@@ -4138,7 +4150,7 @@
       "id": "doc-ref-002-line-08",
       "x": 120,
       "y": 762,
-      "text": "A1/008  SITOP PSU100C 24 V DC supply — independent external-boundary example",
+      "text": "A1/008  SITOP PSU100C 24 V DC supply — output connected to A1/009",
       "stroke": "#13263b",
       "sheetId": "ref-002"
     },
@@ -4147,7 +4159,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM IFS204, terminals X7/X8.",
+      "text": "A1/007: CPU 1212C, IFM IFS204, supply terminals X7/X8 linked through A1/009.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4156,7 +4168,7 @@
       "id": "doc-ref-003-line-12",
       "x": 120,
       "y": 1018,
-      "text": "A1/008: SITOP PSU100C, input L/N/PE and output +/− boundary terminals X9–X13.",
+      "text": "A1/008: SITOP PSU100C inputs L/N/PE; +/− outputs link to A1/009 at X12/X13.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4174,7 +4186,7 @@
       "id": "doc-ref-005-line-10",
       "x": 120,
       "y": 1018,
-      "text": "A1/006, A1/007 and A1/008 remain electrically separate; no cross-sheet connection is asserted.",
+      "text": "A1/006 remains electrically separate. A1/007 and A1/008 connect through source-backed +24 V/0 V terminals on A1/009.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4214,7 +4226,7 @@
       "sheetId": "ref-007",
       "x": 50,
       "y": 725,
-      "text": "A1/008 SITOP PS1 supplies CPU L+/M via X12/X13 → X7/X8 · downstream load not modeled",
+      "text": "A1/008 SITOP PS1 supplies CPU L+/M via A1/009 terminals X14/X15 · load current not calculated",
       "stroke": "#13263b"
     },
     {
@@ -4222,7 +4234,7 @@
       "id": "doc-ref-002-line-09",
       "x": 120,
       "y": 826,
-      "text": "A1/009–A1/100  Not authored; not represented as completed sheets.",
+      "text": "A1/009  24 V DC distribution — SITOP output to PLC CPU supply",
       "stroke": "#13263b",
       "sheetId": "ref-002"
     },
@@ -4269,7 +4281,7 @@
       "sheetId": "ref-003",
       "id": "doc-ref-003-line-17",
       "y": 1082,
-      "text": "No external AC source, input protective device, 24 V load, or A1/007 connection is modeled."
+      "text": "No external AC source or input protection is modeled; load current and protection coordination are unassessed."
     },
     {
       "kind": "text",
@@ -4359,8 +4371,8 @@
       "properties": {
         "terminalStrip": "XT3",
         "position": "01",
-        "marking": "+24 V DC boundary",
-        "comment": "External load boundary; no A1/007 connection is asserted."
+        "marking": "+24 V DC to A1/009",
+        "comment": "A1/009 X14 distributes this source-backed SITOP output to CPU L+."
       },
       "sheetId": "ref-008"
     },
@@ -4376,8 +4388,8 @@
       "properties": {
         "terminalStrip": "XT3",
         "position": "02",
-        "marking": "0 V DC boundary",
-        "comment": "External load boundary; no A1/007 connection is asserted."
+        "marking": "0 V DC to A1/009",
+        "comment": "A1/009 X15 distributes this source-backed SITOP return to CPU M."
       },
       "sheetId": "ref-008"
     },
@@ -4447,7 +4459,7 @@
       "sheetId": "ref-008",
       "x": 100,
       "y": 120,
-      "text": "A1/008 · Siemens SITOP PSU100C supply boundaries",
+      "text": "A1/008 · Siemens SITOP PSU100C 24 V supply",
       "stroke": "#13263b"
     },
     {
@@ -4465,7 +4477,7 @@
       "sheetId": "ref-008",
       "x": 100,
       "y": 630,
-      "text": "PS1 +/− connect to A1/007 CPU 24 V input via X12/X13 → X7/X8; no output load is modeled.",
+      "text": "PS1 +/− connect to A1/007 CPU L+/M through A1/009 terminals X14/X15; load current is not calculated.",
       "stroke": "#13263b"
     },
     {
@@ -4512,6 +4524,124 @@
       "y1": 430,
       "x2": 1030,
       "y2": 430
+    },
+    {
+      "kind": "rect",
+      "id": "doc-ref-009-frame",
+      "sheetId": "ref-009",
+      "x": 24,
+      "y": 24,
+      "x2": 1176,
+      "y2": 736,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "none"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-009-title",
+      "sheetId": "ref-009",
+      "x": 50,
+      "y": 54,
+      "text": "A1/009 · 24 V DC distribution connections",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "distribution-x14",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X14",
+      "x": 600,
+      "y": 260,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "01",
+        "marking": "+24 V DC",
+        "comment": "Phoenix Contact 3212144 feed-through terminal; source-backed definition; no current rating suitability is inferred."
+      },
+      "sheetId": "ref-009"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "distribution-x15",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X15",
+      "x": 600,
+      "y": 430,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "02",
+        "marking": "0 V DC",
+        "comment": "Phoenix Contact 3212144 feed-through terminal; source-backed definition; no current rating suitability is inferred."
+      },
+      "sheetId": "ref-009"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-distribution-plus-left",
+      "sheetId": "ref-009",
+      "x1": 565,
+      "y1": 260,
+      "x2": 200,
+      "y2": 260
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-distribution-plus-right",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 260,
+      "x2": 1000,
+      "y2": 260
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-distribution-return-left",
+      "sheetId": "ref-009",
+      "x1": 565,
+      "y1": 430,
+      "x2": 200,
+      "y2": 430
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-distribution-return-right",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 430,
+      "x2": 1000,
+      "y2": 430
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-009-plus",
+      "sheetId": "ref-009",
+      "x": 310,
+      "y": 325,
+      "text": "PS1 +24 V DC · A1/008 X12 → X14 → A1/007 X7 · CPU L+",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-009-return",
+      "sheetId": "ref-009",
+      "x": 310,
+      "y": 495,
+      "text": "PS1 0 V DC · A1/008 X13 → X15 → A1/007 X8 · CPU M",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-009-limit",
+      "sheetId": "ref-009",
+      "x": 50,
+      "y": 690,
+      "text": "Static connection reference · no load-current calculation or protection-coordination claim",
+      "stroke": "#13263b"
     }
   ],
   "description": "Eight authored sheets: editable project records A1/001–A1/005, Siemens/SEW star-delta motor starter A1/006, the source-backed IFM IFS204 / Siemens S7-1200 sensor input A1/007, and the standalone Siemens SITOP PSU100C AC/DC supply boundary example A1/008. Electrical examples remain independent; no unsupported inter-sheet connection is asserted. A1/009–A1/100 are not authored.",
@@ -4529,8 +4659,8 @@
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "ref-008",
-            "targetRef": "X12"
+            "targetSheetId": "ref-009",
+            "targetRef": "X14"
           }
         },
         {
@@ -4539,6 +4669,32 @@
           "point": {
             "x": 1030,
             "y": 370
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-009",
+            "targetRef": "X14"
+          }
+        },
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-009-distribution-plus-left",
+          "point": {
+            "x": 200,
+            "y": 260
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-008",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-009-distribution-plus-right",
+          "point": {
+            "x": 1000,
+            "y": 260
           },
           "connector": {
             "direction": "right",
@@ -4561,8 +4717,8 @@
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "ref-008",
-            "targetRef": "X13"
+            "targetSheetId": "ref-009",
+            "targetRef": "X15"
           }
         },
         {
@@ -4570,6 +4726,32 @@
           "wireId": "a1-009-w08-return",
           "point": {
             "x": 1030,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-009",
+            "targetRef": "X15"
+          }
+        },
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-009-distribution-return-left",
+          "point": {
+            "x": 200,
+            "y": 430
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-008",
+            "targetRef": "X13"
+          }
+        },
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-009-distribution-return-right",
+          "point": {
+            "x": 1000,
             "y": 430
           },
           "connector": {
