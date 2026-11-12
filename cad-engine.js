@@ -370,6 +370,36 @@
       }
     ]
   });
+  const lowRangeMotorProtectionBreakerDefinition = deepFreeze(Object.assign({}, motorProtectionBreakerDefinition, {
+    id: 'siemens-3rv2011-0fa10',
+    manufacturerPartNumber: '3RV2011-0FA10',
+    model: 'SIRIUS 3RV2 size S00',
+    name: 'Low-range motor-protection circuit breaker',
+    category: 'Electrical · Verified motor-protection breaker',
+    symbol: Object.assign({}, motorProtectionBreakerDefinition.symbol, {
+      id: 'breaker.sirius-3rv2.3rv2011-0fa10.v1'
+    }),
+    specifications: Object.assign({}, motorProtectionBreakerDefinition.specifications, {
+      adjustableOverloadRelease: { minimum: 0.35, maximum: 0.5, unit: 'A' },
+      instantaneousShortCircuitRelease: { value: 6.5, unit: 'A' },
+      ratedOperationalCurrent: { value: 0.5, unit: 'A' },
+      ratedMotorPower400V: { value: 0.12, unit: 'kW' }
+    }),
+    instanceProperties: Object.assign({}, motorProtectionBreakerDefinition.instanceProperties, {
+      overloadSettingA: { type: 'number', default: null, minimum: 0.35, maximum: 0.5, step: 'any' }
+    }),
+    sources: [
+      {
+        publisher: 'Siemens',
+        title: '3RV2011-0FA10 · product data sheet',
+        url: 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10',
+        documentRevision: 'Siemens product data sheet, 6 pages; retrieved 2026-11-12.',
+        revisionNote: 'Confirms S00 size, Class 10, adjustable overload release 0.35–0.5 A, instantaneous magnetic release 6.5 A, three main poles, 0.5 A rated operational current, 0.12 kW at 400 V and screw terminals.',
+        retrievedAt: '2026-11-12'
+      },
+      motorProtectionBreakerDefinition.sources[1]
+    ]
+  }));
   const motorDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
     id: 'sew-eurodrive-drn63ms4',
@@ -462,7 +492,7 @@
       }
     ]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
