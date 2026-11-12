@@ -867,11 +867,13 @@
     if (project.crossSheetConnections !== undefined && !Array.isArray(project.crossSheetConnections)) {
       errors.push('Project cross-sheet connections must be an array.');
     }
+
     if (Array.isArray(project.crossSheetConnections)) {
       const knownSheetIds = new Set((Array.isArray(project.sheets) ? project.sheets : []).filter(function (sheet) {
         return sheet && typeof sheet.id === 'string';
       }).map(function (sheet) { return sheet.id; }));
       const connectionIds = new Set();
+      const globallyUsedEndpoints = new Set();
       project.crossSheetConnections.forEach(function (connection, index) {
         const label = 'Cross-sheet connection ' + (connection && connection.id || index + 1);
         if (!connection || typeof connection !== 'object' || typeof connection.id !== 'string' ||
@@ -889,19 +891,25 @@
         const endpointSheets = new Set();
         connection.endpoints.forEach(function (endpoint) {
           if (!endpoint || typeof endpoint !== 'object' || typeof endpoint.sheetId !== 'string' ||
-              typeof endpoint.wireId !== 'string' || !endpoint.sheetId.trim() || !endpoint.wireId.trim()) {
-            errors.push(label + ' has an invalid endpoint.');
+              typeof endpoint.wireId !== 'string' || !endpoint.sheetId.trim() || !endpoint.wireId.trim() ||
+              !endpoint.point || !finite(endpoint.point.x) || !finite(endpoint.point.y)) {
+            errors.push(label + ' has an invalid endpoint; sheetId, wireId, and finite endpoint coordinates are required.');
             return;
           }
-          const key = endpoint.sheetId + '\u0000' + endpoint.wireId;
-          if (endpointKeys.has(key)) errors.push(label + ' repeats a wire endpoint.');
+          const key = endpoint.sheetId + '\u0000' + endpoint.wireId + '\u0000' + endpoint.point.x + ',' + endpoint.point.y;
+          if (endpointKeys.has(key) || globallyUsedEndpoints.has(key)) errors.push(label + ' repeats a linked wire endpoint.');
           endpointKeys.add(key);
+          globallyUsedEndpoints.add(key);
           endpointSheets.add(endpoint.sheetId);
           if (!knownSheetIds.has(endpoint.sheetId)) errors.push(label + ' refers to unknown sheet ' + endpoint.sheetId + '.');
           const wire = (Array.isArray(project.objects) ? project.objects : []).find(function (object) {
             return object && object.kind === 'wire' && object.id === endpoint.wireId && object.sheetId === endpoint.sheetId;
           });
           if (!wire) errors.push(label + ' refers to missing wire ' + endpoint.wireId + ' on sheet ' + endpoint.sheetId + '.');
+          else if (!((endpoint.point.x === wire.x1 && endpoint.point.y === wire.y1) ||
+                     (endpoint.point.x === wire.x2 && endpoint.point.y === wire.y2))) {
+            errors.push(label + ' point is not an endpoint of wire ' + endpoint.wireId + '.');
+          }
         });
         if (endpointSheets.size < 2) errors.push(label + ' must connect at least two different sheets.');
       });
@@ -1077,39 +1085,6 @@
     };
   }
 
-  function analyzeProject(project) {
-    const validation = validateProject(project);
-    if (!validation.valid) return { valid: false, errors: validation.errors, sheetCount: 0, sheets: [] };
-    const objects = Array.isArray(project.objects) ? project.objects : [];
-    const definitions = Array.isArray(project.sheets) ? project.sheets : [];
-    const sheets = definitions.length ? definitions : [{ id: project.activeSheet || 'main', number: '', name: 'Main sheet' }];
-    const reports = sheets.map(function (sheet) {
-      const sheetObjects = objects.filter(function (object) {
-        return object && (object.sheetId === sheet.id || (!object.sheetId && sheets.length === 1));
-      });
-      const analysis = analyze(sheetObjects);
-      analysis.nets.forEach(function (net) { net.id = sheet.id + ':' + net.id; });
-      return {
-        id: sheet.id,
-        number: sheet.number || '',
-        name: sheet.name || '',
-        analysis: analysis
-      };
-    });
-    return {
-      valid: true,
-      errors: [],
-      sheetCount: reports.length,
-      wireCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.wireCount; }, 0),
-      componentCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.componentCount; }, 0),
-      netCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.netCount; }, 0),
-      openEndpointCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.openEndpointCount; }, 0),
-      geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
-      sheets: reports,
-      scope: 'Each drawing sheet is analyzed independently; cross-sheet connectivity requires explicit project-level links.'
-    };
-  }
-
 
   function analyzeProject(project) {
     const validation = validateProject(project);
@@ -1129,9 +1104,8 @@
     const endpointToNet = new Map();
     reports.forEach(function (sheet) {
       sheet.analysis.nets.forEach(function (net) {
-        const key = net.id;
-        localNets.push({ key: key, sheetId: sheet.id, net: net });
-        net.wireIds.forEach(function (wireId) { endpointToNet.set(sheet.id + '\u0000' + wireId, key); });
+        localNets.push({ key: net.id, sheetId: sheet.id, net: net });
+        net.wireIds.forEach(function (wireId) { endpointToNet.set(sheet.id + '\u0000' + wireId, net.id); });
       });
     });
     const parents = new Map();
@@ -1148,20 +1122,31 @@
       const rootA = find(a), rootB = find(b);
       if (rootA !== rootB) parents.set(rootB, rootA);
     }
+    const linkedOpenEndpointKeys = new Set();
     const links = (Array.isArray(project.crossSheetConnections) ? project.crossSheetConnections : []).map(function (connection) {
       const endpointNets = connection.endpoints.map(function (endpoint) {
         return endpointToNet.get(endpoint.sheetId + '\u0000' + endpoint.wireId);
       });
-      if (endpointNets.some(function (key) { return !key; })) {
-        return { id: connection.id, name: connection.name, valid: false, errors: ['Endpoint wire is not part of a valid local net.'] };
+      const open = connection.endpoints.map(function (endpoint, index) {
+        const sheet = reports.find(function (entry) { return entry.id === endpoint.sheetId; });
+        const key = endpoint.sheetId + '\u0000' + endpoint.wireId + '\u0000' + endpoint.point.x + ',' + endpoint.point.y;
+        const isOpen = sheet && sheet.analysis.openEndpoints.some(function (candidate) {
+          return candidate.wireId === endpoint.wireId &&
+            candidate.point.x === endpoint.point.x && candidate.point.y === endpoint.point.y;
+        });
+        return { key: key, isOpen: Boolean(isOpen), netId: endpointNets[index] };
+      });
+      if (endpointNets.some(function (key) { return !key; }) || open.some(function (entry) { return !entry.isOpen; })) {
+        return { id: connection.id, name: connection.name, valid: false, errors: ['Every link must terminate at a real open endpoint on a valid sheet-local net.'] };
       }
       for (let i = 1; i < endpointNets.length; i += 1) join(endpointNets[0], endpointNets[i]);
+      open.forEach(function (endpoint) { linkedOpenEndpointKeys.add(endpoint.key); });
       return {
         id: connection.id,
         name: connection.name,
         valid: true,
         endpoints: connection.endpoints.map(function (endpoint, index) {
-          return { sheetId: endpoint.sheetId, wireId: endpoint.wireId, netId: endpointNets[index] };
+          return { sheetId: endpoint.sheetId, wireId: endpoint.wireId, point: endpoint.point, netId: endpointNets[index] };
         })
       };
     });
@@ -1177,20 +1162,19 @@
       group.localNetIds.push(entry.key);
       group.sheetIds.push(entry.sheetId);
       entry.net.wireIds.forEach(function (wireId) { group.wireIds.push(entry.sheetId + ':' + wireId); });
-      entry.net.pins.forEach(function (pin) {
-        group.pins.push({ sheetId: entry.sheetId, ref: pin.ref, number: pin.number, pinId: pin.pinId });
-      });
+      entry.net.pins.forEach(function (pin) { group.pins.push({ sheetId: entry.sheetId, ref: pin.ref, number: pin.number, pinId: pin.pinId }); });
     });
     const globalNets = Array.from(groups.values()).map(function (group) {
       group.localNetIds.sort();
       group.sheetIds = Array.from(new Set(group.sheetIds)).sort();
       group.wireIds.sort();
-      group.pins.sort(function (a, b) {
-        return a.sheetId.localeCompare(b.sheetId) || a.ref.localeCompare(b.ref) || a.number.localeCompare(b.number);
+      group.pins.sort(function (x, y) {
+        return x.sheetId.localeCompare(y.sheetId) || x.ref.localeCompare(y.ref) || x.number.localeCompare(y.number);
       });
       return group;
-    }).sort(function (a, b) { return a.localNetIds[0].localeCompare(b.localNetIds[0]); })
+    }).sort(function (x, y) { return x.localNetIds[0].localeCompare(y.localNetIds[0]); })
       .map(function (group, index) { return Object.assign({ id: 'global-net-' + (index + 1) }, group); });
+    const localOpenEndpointCount = reports.reduce(function (sum, sheet) { return sum + sheet.analysis.openEndpointCount; }, 0);
     return {
       valid: true,
       errors: [],
@@ -1202,10 +1186,11 @@
       crossSheetConnectionCount: links.length,
       crossSheetConnections: links,
       globalNets: globalNets,
-      openEndpointCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.openEndpointCount; }, 0),
+      localOpenEndpointCount: localOpenEndpointCount,
+      openEndpointCount: localOpenEndpointCount - linkedOpenEndpointKeys.size,
       geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
       sheets: reports,
-      scope: 'Sheet-local nets are merged only by validated project-level wire links; this model report does not draw connector graphics.'
+      scope: 'Sheet-local nets are joined only at exact, validated open endpoints; connector graphics are not yet rendered.'
     };
   }
 
