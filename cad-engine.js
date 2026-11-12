@@ -135,7 +135,85 @@
       retrievedAt: '2026-11-12'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition });
+  const contactorDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION,
+    id: 'schneider-electric-lc1d09bd',
+    manufacturer: 'Schneider Electric',
+    manufacturerPartNumber: 'LC1D09BD',
+    model: 'TeSys D LC1D09BD',
+    name: '3-pole contactor with 24 V DC coil',
+    family: 'contactor',
+    referencePrefix: 'KM',
+    category: 'Electrical · Verified motor-control contactor',
+    symbol: {
+      id: 'contactor.tesys-d.lc1d09bd.v1',
+      view: 'schematic',
+      unit: 'mm',
+      width: 280,
+      height: 130,
+      pins: [
+        { id: 'coil-a1', localNumber: 'A1', name: 'DC coil terminal A1', x: -120, y: -25, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'coil-a2', localNumber: 'A2', name: 'DC coil terminal A2', x: -120, y: 25, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'power-l1', localNumber: '1/L1', name: 'Main pole 1 line terminal', x: -50, y: -55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'power-t1', localNumber: '2/T1', name: 'Main pole 1 load terminal', x: -50, y: 55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'power-l2', localNumber: '3/L2', name: 'Main pole 2 line terminal', x: 0, y: -55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'power-t2', localNumber: '4/T2', name: 'Main pole 2 load terminal', x: 0, y: 55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'power-l3', localNumber: '5/L3', name: 'Main pole 3 line terminal', x: 50, y: -55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'power-t3', localNumber: '6/T3', name: 'Main pole 3 load terminal', x: 50, y: 55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'aux-13', localNumber: '13', name: 'Auxiliary normally-open contact terminal', x: 100, y: -55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'aux-14', localNumber: '14', name: 'Auxiliary normally-open contact terminal', x: 100, y: 55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'aux-21', localNumber: '21', name: 'Auxiliary normally-closed contact terminal', x: 145, y: -55, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'aux-22', localNumber: '22', name: 'Auxiliary normally-closed contact terminal', x: 145, y: 55, electricalType: 'passive', connectionType: 'screw-clamp' }
+      ],
+      internalConnections: [],
+      numberingNote: 'A1/A2, 1/L1–6/T3, 13/14 and 21/22 are the manufacturer wiring-diagram terminal designations. The schematic pins are electrical connection points, not the contactor physical footprint. Main and auxiliary contacts remain separate nets; contactor state is not simulated.'
+    },
+    electricalFunctions: {
+      contactor: {
+        coil: { pins: ['coil-a1', 'coil-a2'], nominalVoltage: { value: 24, unit: 'V DC' }, suppression: 'Built-in bidirectional peak-limiting diode suppressor' },
+        mainPoles: [
+          { line: 'power-l1', load: 'power-t1', normalState: 'open' },
+          { line: 'power-l2', load: 'power-t2', normalState: 'open' },
+          { line: 'power-l3', load: 'power-t3', normalState: 'open' }
+        ],
+        auxiliaryContacts: [
+          { first: 'aux-13', second: 'aux-14', normalState: 'open', type: 'mechanically-linked NO' },
+          { first: 'aux-21', second: 'aux-22', normalState: 'closed', type: 'mechanically-linked NC' }
+        ],
+        simulationNote: 'Three main poles and the mechanically-linked auxiliary NO/NC contacts are represented as separate external terminal pairs. Contact actuation and coil-state simulation are not implemented; only user-authored wires establish nets.'
+      }
+    },
+    specifications: {
+      poles: { value: '3P, 3 normally-open main poles' },
+      ac3RatedCurrent: { value: 9, unit: 'A at ≤440 V AC' },
+      ac3RatedOperationalVoltage: { value: 440, unit: 'V AC maximum for 9 A AC-3 rating' },
+      ratedOperationalVoltage: { value: 690, unit: 'V AC maximum' },
+      nominalCoilVoltage: { value: 24, unit: 'V DC' },
+      coilOperationalRangeAt60C: { minimum: 0.7, maximum: 1.25, unit: '× Uc' },
+      auxiliaryContactComposition: { value: '1 mechanically-linked NO + 1 mechanically-linked NC' },
+      coilSuppressor: { value: 'Built-in bidirectional peak-limiting diode' },
+      standards: { value: ['IEC 60947-4-1', 'IEC 60947-5-1', 'UL 508'] },
+      terminalConnection: { value: 'Screw clamp; manufacturer torque 1.7 N·m' },
+      dimensions: { width: { value: 45, unit: 'mm' }, height: { value: 77, unit: 'mm' }, depth: { value: 95, unit: 'mm' } },
+      mountingSupport: { value: ['Rail', 'Plate'] }
+    },
+    instanceProperties: {
+      terminalStrip: { type: 'string', default: '', maximumLength: 40 },
+      position: { type: 'string', default: '', maximumLength: 24 },
+      marking: { type: 'string', default: '', maximumLength: 40 },
+      comment: { type: 'string', default: '', maximumLength: 160 }
+    },
+    sources: [{
+      publisher: 'Schneider Electric',
+      title: 'LC1D09BD · TeSys D contactor · Product data sheet',
+      url: 'https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF',
+      productUrl: 'https://www.se.com/us/en/product/LC1D09BD/iec-contactor-tesys-deca-nonreversing-9a-5hp-at-480vac-up-to-100ka-sccr-3-phase-3-no-24vdc-coil-open-style/',
+      documentRevision: 'Manufacturer product data sheet; wiring diagram page 6; source document dated September 8, 2017.',
+      revisionNote: 'Manufacturer sheet supplies coil, main and auxiliary terminal identities, contact composition, ratings and dimensions. Verify the exact product and application limits against the current manufacturer documentation before engineering use.',
+      retrievedAt: '2026-11-12'
+    }]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition });
 
   function component(id) { return COMPONENTS[id] || null; }
   function catalog() {
