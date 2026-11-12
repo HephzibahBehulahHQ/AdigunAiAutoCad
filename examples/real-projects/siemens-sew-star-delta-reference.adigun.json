@@ -2,7 +2,7 @@
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
   "revision": "Opening set 0.1",
-  "status": "Reference engineering project in progress. Sheets 001–006 are authored; sheets 007–100 are not yet authored. Static wiring only; installation suitability and protection coordination require qualified engineering review. Coil, contactor, overload and timer states are not simulated.",
+  "status": "Reference engineering project in progress. Sheets 001–006 are authored; sheets A1/007–A1/100 are not yet authored. Static wiring only; installation suitability and protection coordination require qualified engineering review. Coil, contactor, overload and timer states are not simulated.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
