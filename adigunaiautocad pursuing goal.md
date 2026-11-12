@@ -2097,3 +2097,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Project analysis reports 9 sheets, 27 components, 265 wire segments, 38 sheet-local nets, 34 project-wide nets, eight linked open endpoints, and zero unlinked endpoints. The supply has no modeled total-current or protection-coordination result.
 - Focused local suite: 54 tests passed; save/reopen and exact global pin groups are covered. Push, merge, and deployment are pending this increment's PR and CI.
 - Next: push this focused increment, merge after green checks, and verify the deployed project before starting another page.
+
+
+## 2026-11-12 incremental execution record — A1/010
+
+- Added A1/010 with Phoenix Contact PLC-RSC-24DC/21 relay K2 driven from Siemens CPU 1212C DQ a.0. Connected the PLC 1L output group to the existing source-backed +24 V rail and returned coil A2 to 0 V through A1/009. The sourced coil draws 9 mA typically; the polarity-sensitive input and the relay contacts remain unsimulated. No contact-side load is specified.
+- Preserved the existing workstation interface. Expanded only the electrical project, drawing index, component register, assumptions, README, roadmap, and regression coverage. Updated project description and revision records; A1/011–A1/100 remain unauthored.
+- Expected project analysis after validation: 10 sheets, 28 components, 275 wire segments, 42 local nets, 35 global nets, 14 linked endpoints, and zero unlinked endpoints. No total load-current or protection-coordination result is claimed.
+- Next: run focused checks, then push a dedicated PR and wait for green CI before merging and verifying Pages production.
