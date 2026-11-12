@@ -36,6 +36,10 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function toggleObjectLock\(id\)/);
   assert.match(inlineScripts[0][2], /function toggleObjectHidden\(id\)/);
   assert.match(inlineScripts[0][2], /function changeObjectOrder\(id,front\)/);
+  assert.match(inlineScripts[0][2], /function renderResizeHandles\(\)/);
+  assert.match(inlineScripts[0][2], /beginObjectResize/);
+  assert.match(inlineScripts[0][2], /resizeGraphicObject/);
+  assert.match(inlineScripts[0][2], /data-resize-handle/);
   assert.match(inlineScripts[0][2], /function stepObjectOrder\(id,direction\)/);
   assert.match(inlineScripts[0][2], /bring-forward/);
   assert.match(inlineScripts[0][2], /send-backward/);
@@ -116,6 +120,33 @@ test('object z-order moves by one slot and rejects invalid boundaries', () => {
   assert.equal(engine.reorderObject(objects, 'front', 1), false);
   assert.equal(engine.reorderObject(objects, 'missing', 1), false);
   assert.equal(engine.reorderObject(objects, 'middle', 0), false);
+});
+
+test('resizable drawing geometry preserves anchors and rejects unsupported or undersized edits', () => {
+  const rectangle = { id: 'r1', kind: 'rect', x: 10, y: 20, x1: 10, y1: 20, x2: 50, y2: 70 };
+  assert.equal(engine.resizeGraphicObject(rectangle, 'nw', { x: 5, y: 15 }), true);
+  assert.deepEqual([rectangle.x, rectangle.y, rectangle.x1, rectangle.y1, rectangle.x2, rectangle.y2], [5, 15, 5, 15, 50, 70]);
+
+  const ellipse = { id: 'e1', kind: 'ellipse', x: 10, y: 20, x2: 50, y2: 70 };
+  assert.equal(engine.resizeGraphicObject(ellipse, 'se', { x: 60, y: 80 }), true);
+  assert.deepEqual([ellipse.x, ellipse.y, ellipse.x2, ellipse.y2], [10, 20, 60, 80]);
+
+  const triangle = { id: 't1', kind: 'triangle', x: 50, y: 70, x2: 10, y2: 20 };
+  assert.equal(engine.resizeGraphicObject(triangle, 'ne', { x: 60, y: 10 }), true);
+  assert.deepEqual([triangle.x, triangle.y, triangle.x2, triangle.y2], [10, 10, 60, 70]);
+
+  const circle = { id: 'c1', kind: 'circle', x: 100, y: 100, x1: 100, y1: 100, x2: 110, y2: 100 };
+  assert.equal(engine.resizeGraphicObject(circle, 'se', { x: 120, y: 120 }), true);
+  assert.equal(circle.x, 100);
+  assert.equal(circle.y, 100);
+  assert.equal(Math.hypot(circle.x2 - circle.x, circle.y2 - circle.y), 20);
+
+  const original = JSON.stringify(rectangle);
+  assert.equal(engine.resizeGraphicObject(rectangle, 'se', { x: 6, y: 16 }), false);
+  assert.equal(JSON.stringify(rectangle), original);
+  assert.equal(engine.resizeGraphicObject({ kind: 'wire', x: 0, y: 0, x2: 20, y2: 20 }, 'se', { x: 30, y: 30 }), false);
+  assert.equal(engine.resizeGraphicObject(rectangle, 'center', { x: 20, y: 20 }), false);
+  assert.equal(engine.resizeGraphicObject(rectangle, 'se', { x: NaN, y: 50 }), false);
 });
 
 test('catalog contains only source-backed engineering components', () => {
