@@ -25,7 +25,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /data-rotate-object/);
   assert.match(inlineScripts[0][2], /remapConnectedWireEnds/);
   assert.match(inlineScripts[0][2], /addEventListener\('contextmenu'/);
-  assert.match(inlineScripts[0][2], /e\\.button===2/);
+  assert.match(inlineScripts[0][2], /if\(e\.button===2\)/);
   assert.match(inlineScripts[0][2], /event\.target\.closest\('\[data-object\]'\)/);
   assert.match(inlineScripts[0][2], /data-object-command/);
   assert.match(inlineScripts[0][2], /finishObjectMove\(state.pendingMoveObjectId,svgPoint\(e\)\)/);
