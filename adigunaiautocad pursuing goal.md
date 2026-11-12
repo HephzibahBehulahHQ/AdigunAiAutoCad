@@ -2171,3 +2171,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated I0.7 allocation on A1/017, the index, cover, assumptions, revision, README and roadmap. Preserved the approved interface.
 - Model validation: 18 sheets, 31 components, 324 wire segments, 62 sheet-local nets, 42 project-wide nets, eighteen cross-sheet connections pairing 40 endpoints, and zero unlinked endpoints.
 - Next: run regressions, publish a dedicated A1/018 PR, merge after green CI, deploy, verify production, then continue at A1/019.
+
+
+## 2026-11-12 incremental execution record — A1/019
+
+- Added A1/019 as a native CPU 1212C digital-output allocation schedule. Q0.0 / X12:2 / DQ a.0 remains assigned to Phoenix Contact K2 coil A1; Q0.1–Q0.5 are explicitly unassigned within the modeled project scope. X12:6 / 2L is recorded as a group common, not an output. No devices or wires were added.
+- Updated the current Siemens S7-1200 System Manual source record (V4.7, Tables A-49/A-50), drawing index, cover, revision record, component register, assumptions, README and roadmap. Preserved the approved workstation interface and `index.html`.
+- Next: run model regressions, publish a focused A1/019 PR, merge only after green CI, deploy and verify production, then continue at A1/020.
