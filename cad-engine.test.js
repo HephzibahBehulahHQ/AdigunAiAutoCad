@@ -1156,7 +1156,7 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
     terminal.id = 'cross-sheet-terminal-' + index;
     terminal.sheetId = sheetId;
     objects.push(terminal);
-    objects.push({kind:'wire',id:'cross-sheet-wire-' + index,sheetId,x1:465,y1:260,x2:535,y2:260});
+    objects.push({kind:'wire',id:'cross-sheet-wire-' + index,sheetId,x1:400,y1:260,x2:465,y2:260});
   });
   const project = {
     format: engine.projectFormat, version: engine.projectVersion,
@@ -1170,8 +1170,8 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
     crossSheetConnections:[{
       id:'ref-L1',name:'L1',
       endpoints:[
-        {sheetId:'sheet-power',wireId:'cross-sheet-wire-0'},
-        {sheetId:'sheet-control',wireId:'cross-sheet-wire-1'}
+        {sheetId:'sheet-power',wireId:'cross-sheet-wire-0',point:{x:400,y:260}},
+        {sheetId:'sheet-control',wireId:'cross-sheet-wire-1',point:{x:400,y:260}}
       ]
     }]
   };
@@ -1180,6 +1180,7 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
   const report=engine.analyzeProject(parsed.project);
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([report.sheetCount,report.netCount,report.globalNetCount,report.crossSheetConnectionCount],[2,2,1,1]);
+  assert.deepEqual([report.localOpenEndpointCount,report.openEndpointCount],[2,0]);
   assert.deepEqual(report.globalNets[0].sheetIds,['sheet-control','sheet-power']);
   assert.deepEqual(report.globalNets[0].pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),[
     'sheet-control:X2:1','sheet-control:X2:2','sheet-power:X1:1','sheet-power:X1:2'
@@ -1190,6 +1191,9 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
   const sameSheet=JSON.parse(JSON.stringify(project));
   sameSheet.crossSheetConnections[0].endpoints[1].sheetId='sheet-power';
   assert.equal(engine.validateProject(sameSheet).valid,false);
+  const closedEndpoint=JSON.parse(JSON.stringify(project));
+  closedEndpoint.crossSheetConnections[0].endpoints[0].point={x:465,y:260};
+  assert.equal(engine.analyzeProject(closedEndpoint).valid,false);
   const reopened=engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   assert.equal(engine.analyzeProject(reopened.project).globalNetCount,1);
