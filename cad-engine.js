@@ -827,6 +827,27 @@
     if (project.format !== PROJECT_FORMAT) errors.push('Unsupported Adigun project format.');
     if (![1, PROJECT_VERSION].includes(project.version)) errors.push('Unsupported project version.');
     if (!Array.isArray(project.objects) || !Array.isArray(project.sheets)) errors.push('Project objects and sheets must be arrays.');
+    if (Array.isArray(project.sheets)) {
+      const sheetIds = new Set();
+      project.sheets.forEach(function (sheet, index) {
+        if (!sheet || typeof sheet !== 'object' || typeof sheet.id !== 'string' || !sheet.id.trim()) {
+          errors.push('Sheet ' + (index + 1) + ' must have a non-empty string ID.');
+          return;
+        }
+        if (sheetIds.has(sheet.id)) errors.push('Duplicate sheet ID: ' + sheet.id + '.');
+        sheetIds.add(sheet.id);
+      });
+      if (Array.isArray(project.objects)) {
+        project.objects.forEach(function (object, index) {
+          if (!object || typeof object !== 'object') return;
+          if (object.sheetId && !sheetIds.has(object.sheetId)) {
+            errors.push('Drawing object ' + (object.id || index + 1) + ' refers to unknown sheet ' + object.sheetId + '.');
+          } else if (project.sheets.length > 1 && !object.sheetId) {
+            errors.push('Drawing object ' + (object.id || index + 1) + ' must identify its sheet in a multi-sheet project.');
+          }
+        });
+      }
+    }
     if (Array.isArray(project.objects)) {
       project.objects.forEach(function (object, index) {
         if (!object || typeof object !== 'object') {
@@ -1014,6 +1035,39 @@
     };
   }
 
+  function analyzeProject(project) {
+    const validation = validateProject(project);
+    if (!validation.valid) return { valid: false, errors: validation.errors, sheetCount: 0, sheets: [] };
+    const objects = Array.isArray(project.objects) ? project.objects : [];
+    const definitions = Array.isArray(project.sheets) ? project.sheets : [];
+    const sheets = definitions.length ? definitions : [{ id: project.activeSheet || 'main', number: '', name: 'Main sheet' }];
+    const reports = sheets.map(function (sheet) {
+      const sheetObjects = objects.filter(function (object) {
+        return object && (object.sheetId === sheet.id || (!object.sheetId && sheets.length === 1));
+      });
+      const analysis = analyze(sheetObjects);
+      analysis.nets.forEach(function (net) { net.id = sheet.id + ':' + net.id; });
+      return {
+        id: sheet.id,
+        number: sheet.number || '',
+        name: sheet.name || '',
+        analysis: analysis
+      };
+    });
+    return {
+      valid: true,
+      errors: [],
+      sheetCount: reports.length,
+      wireCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.wireCount; }, 0),
+      componentCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.componentCount; }, 0),
+      netCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.netCount; }, 0),
+      openEndpointCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.openEndpointCount; }, 0),
+      geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
+      sheets: reports,
+      scope: 'Each drawing sheet is analyzed independently; cross-sheet connectivity requires explicit project-level links.'
+    };
+  }
+
   function billOfMaterials(objects) {
     const groups = new Map();
     const errors = [];
@@ -1171,6 +1225,7 @@
     serializeProject: serializeProject,
     parseProject: parseProject,
     analyze: analyze,
+    analyzeProject: analyzeProject,
     billOfMaterials: billOfMaterials,
     billOfMaterialsCsv: billOfMaterialsCsv,
     wireList: wireList,
