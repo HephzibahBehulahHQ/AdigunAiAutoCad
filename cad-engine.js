@@ -270,6 +270,24 @@
     }
     return { valid: errors.length === 0, errors: errors, definition: def };
   }
+
+  function moveInstance(instance, x, y) {
+    const result = validateInstance(instance);
+    if (!result.valid) throw new Error(result.errors.join(' '));
+    if (!finite(x) || !finite(y)) throw new TypeError('Component coordinates must be finite numbers.');
+    instance.x = x;
+    instance.y = y;
+    return instance;
+  }
+  function rotateInstance(instance, degrees) {
+    const result = validateInstance(instance);
+    if (!result.valid) throw new Error(result.errors.join(' '));
+    if (!finite(degrees) || degrees % 90 !== 0) throw new TypeError('Component rotation must use 90-degree increments.');
+    const next = ((instance.rotation + degrees) % 360 + 360) % 360;
+    if (![0, 90, 180, 270].includes(next)) throw new TypeError('Component rotation must be 0, 90, 180, or 270 degrees.');
+    instance.rotation = next;
+    return instance;
+  }
   function worldPins(instance) {
     const result = validateInstance(instance);
     if (!result.valid) return [];
@@ -487,6 +505,8 @@
     component: component,
     catalog: catalog,
     createInstance: createInstance,
+    moveInstance: moveInstance,
+    rotateInstance: rotateInstance,
     validateInstance: validateInstance,
     worldPins: worldPins,
     validateProject: validateProject,
