@@ -654,7 +654,7 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const bom = engine.billOfMaterials(parsed.project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber, row.quantity]).sort((a,b)=>a[0].localeCompare(b[0])), [
-    ['3RM1201-1AA04', 1], ['3212144', 15]
+    ['3212144', 15], ['3RM1201-1AA04', 1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
