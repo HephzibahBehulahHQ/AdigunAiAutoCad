@@ -151,12 +151,13 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 4);
+  assert.equal(items.length, 5);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
-    ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q']
+    ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
+    ['sew-eurodrive-drn63ms4', 'motor-induction', 'M']
   ]);
 });
 
@@ -637,26 +638,62 @@ test('Siemens 3RM1201-1AA04 records manufacturer terminals, rating, and source p
   ]);
 });
 
+const motorId = 'sew-eurodrive-drn63ms4';
+
+test('SEW DRN63MS4 records source-backed motor ratings and all seven real terminals', () => {
+  const def = engine.component(motorId);
+  assert.equal(def.manufacturer, 'SEW-EURODRIVE');
+  assert.equal(def.manufacturerPartNumber, 'DRN63MS4');
+  assert.equal(def.specifications.ratedOutputPower.value, 0.12);
+  assert.equal(def.specifications.ratedLineCurrentAt400V50Hz.value, 0.405);
+  assert.equal(def.specifications.ratedSpeed.value, 1380);
+  assert.deepEqual(def.symbol.pins.map(pin => pin.localNumber), ['U1','V1','W1','U2','V2','W2','PE']);
+  assert.deepEqual(def.symbol.internalConnections, []);
+  assert.equal(def.electricalFunctions.statorWindings.length, 3);
+  assert.ok(def.sources[0].url.startsWith('https://download.sew-eurodrive.com/'));
+  const instance = engine.createInstance(motorId, 600, 600, 'M1');
+  assert.equal(engine.validateInstance(instance).valid, true);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number, pin.x, pin.y]), [
+    ['U1',550,540],['V1',600,540],['W1',650,540],['U2',550,660],['V2',600,660],['W2',650,660],['PE',660,600]
+  ]);
+});
+
+test('motor symbol and inspector render as a real seven-pin component without changing workstation layout', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'motor-induction':"));
+  assert.ok(html.includes("def.family==='motor-induction'"));
+  assert.ok(html.includes("def.family==='motor-starter-reversing'"));
+});
+
 test('Siemens reversing-starter example imports with every real terminal wired and a source-backed BOM', () => {
   const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-3rm12-reversing-starter.adigun.json');
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
   const analysis = engine.analyze(parsed.project.objects);
-  assert.deepEqual([analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length], [16, 36, 0, 0]);
-  assert.equal(analysis.componentPinCount, 45);
+  assert.deepEqual([analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length], [15, 33, 0, 0]);
+  assert.equal(analysis.componentPinCount, 48);
   const wiredStarterPins = analysis.nets.flatMap(net => net.pins)
     .filter(pin => pin.ref === 'Q1').map(pin => pin.number).sort();
   assert.deepEqual(wiredStarterPins, ['1/L1','2/T1','3/L2','4/T2','5/L3','6/T3','95','96','98','A1','A2','IN1','IN2','IN3','OUT']);
-  assert.equal(analysis.netCount, 15);
+  assert.equal(analysis.netCount, 17);
+  const motorPins = analysis.nets.flatMap(net => net.pins).filter(pin => pin.ref === 'M1').map(pin => pin.number).sort();
+  assert.deepEqual(motorPins, ['PE','U1','U2','V1','V2','W1','W2']);
+  for (const [starterPin, motorPin] of [['2/T1','U1'],['4/T2','V1'],['6/T3','W1']]) {
+    const net = analysis.nets.find(item => item.pins.some(pin => pin.ref === 'Q1' && pin.number === starterPin));
+    assert.ok(net.pins.some(pin => pin.ref === 'M1' && pin.number === motorPin));
+    assert.equal(net.pins.filter(pin => /^M1:(U1|V1|W1)$/.test(pin.ref + ':' + pin.number)).length, 1);
+  }
+  const starNet = analysis.nets.find(net => net.pins.some(pin => pin.ref === 'M1' && pin.number === 'U2'));
+  assert.deepEqual(starNet.pins.filter(pin => pin.ref === 'M1').map(pin => pin.number).sort(), ['U2','V2','W2']);
   const wireList = engine.wireList(parsed.project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
-  assert.equal(wireList.rows.length, 36);
+  assert.equal(wireList.rows.length, 33);
   const bom = engine.billOfMaterials(parsed.project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber, row.quantity]).sort((a,b)=>a[0].localeCompare(b[0])), [
-    ['3212144', 15], ['3RM1201-1AA04', 1]
+    ['3212144', 13], ['3RM1201-1AA04', 1], ['DRN63MS4', 1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.equal(engine.analyze(reopened.project.objects).netCount, 15);
+  assert.equal(engine.analyze(reopened.project.objects).netCount, 17);
 });

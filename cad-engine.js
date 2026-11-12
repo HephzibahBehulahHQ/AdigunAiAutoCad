@@ -297,7 +297,99 @@
       }
     ]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorStarterDefinition.id]: motorStarterDefinition });
+  const motorDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION,
+    id: 'sew-eurodrive-drn63ms4',
+    manufacturer: 'SEW-EURODRIVE',
+    manufacturerPartNumber: 'DRN63MS4',
+    model: 'DRN63MS4',
+    name: 'Three-phase AC induction motor',
+    family: 'motor-induction',
+    referencePrefix: 'M',
+    category: 'Electrical · Verified 3-phase motor',
+    symbol: {
+      id: 'motor.induction.drn63ms4.v1',
+      view: 'schematic',
+      unit: 'mm',
+      width: 120,
+      height: 120,
+      representation: { standard: 'IEC', text: 'M 3~', symbolType: 'three-phase induction motor' },
+      pins: [
+        { id: 'winding-u1', localNumber: 'U1', name: 'Winding U line end', x: -50, y: -60, electricalType: 'passive', connectionType: 'terminal-block' },
+        { id: 'winding-v1', localNumber: 'V1', name: 'Winding V line end', x: 0, y: -60, electricalType: 'passive', connectionType: 'terminal-block' },
+        { id: 'winding-w1', localNumber: 'W1', name: 'Winding W line end', x: 50, y: -60, electricalType: 'passive', connectionType: 'terminal-block' },
+        { id: 'winding-u2', localNumber: 'U2', name: 'Winding U star end', x: -50, y: 60, electricalType: 'passive', connectionType: 'terminal-block' },
+        { id: 'winding-v2', localNumber: 'V2', name: 'Winding V star end', x: 0, y: 60, electricalType: 'passive', connectionType: 'terminal-block' },
+        { id: 'winding-w2', localNumber: 'W2', name: 'Winding W star end', x: 50, y: 60, electricalType: 'passive', connectionType: 'terminal-block' },
+        { id: 'protective-earth', localNumber: 'PE', name: 'Protective earth connection', x: 60, y: 0, electricalType: 'passive', connectionType: 'protective-earth' }
+      ],
+      internalConnections: [],
+      numberingNote: 'U1/V1/W1 and U2/V2/W2 are the manufacturer winding-terminal designations; PE is the motor protective-earth terminal. Winding pairs are electrical coils, not galvanically shorted nets. The example wires the high-voltage star point externally.'
+    },
+    electricalFunctions: {
+      statorWindings: [
+        { lineEnd: 'winding-u1', starEnd: 'winding-u2', nominalPower: { value: 0.12, unit: 'kW' } },
+        { lineEnd: 'winding-v1', starEnd: 'winding-v2', nominalPower: { value: 0.12, unit: 'kW' } },
+        { lineEnd: 'winding-w1', starEnd: 'winding-w2', nominalPower: { value: 0.12, unit: 'kW' } }
+      ],
+      terminalBoard: {
+        connection: 'Star (Y) for 400 V, 50 Hz operation',
+        phaseInputs: ['winding-u1', 'winding-v1', 'winding-w1'],
+        starPoint: ['winding-u2', 'winding-v2', 'winding-w2'],
+        protectiveEarth: 'protective-earth'
+      },
+      simulationNote: 'This component records source-backed winding and PE terminals. Motor torque, speed, rotation, load, thermal behavior and electrical dynamics are not simulated.'
+    },
+    specifications: {
+      frame: { value: '63M' },
+      ratedOutputPower: { value: 0.12, unit: 'kW' },
+      ratedLineCurrentAt400V50Hz: { value: 0.405, unit: 'A' },
+      ratedVoltage: { value: '230 V Δ / 400 V Y' },
+      ratedFrequency: { value: 50, unit: 'Hz' },
+      ratedSpeed: { value: 1380, unit: 'rpm' },
+      ratedTorque: { value: 0.83, unit: 'Nm' },
+      powerFactor: { value: 0.64 },
+      phaseCount: { value: 3 },
+      mountingMethod: { value: 'IEC foot-mounted IM B3' },
+      connectionMethod: { value: 'Six-terminal motor board; bolted winding connections' },
+      supplyConnectionAt400V: { value: 'Star (Y); U2/V2/W2 linked together' }
+    },
+    instanceProperties: {
+      terminalStrip: { type: 'string', default: '', maximumLength: 40 },
+      position: { type: 'string', default: '', maximumLength: 24 },
+      marking: { type: 'string', default: '', maximumLength: 40 },
+      comment: { type: 'string', default: '', maximumLength: 160 }
+    },
+    documentation: {
+      manufacturerCatalog: 'https://download.sew-eurodrive.com/download/pdf/30590116.pdf',
+      installationManual: 'https://download.sew-eurodrive.com/download/pdf/25957074.pdf',
+      wiringDiagram: 'https://download.sew-eurodrive.com/download/pdf/25957074.pdf',
+      connectionDiagram: 'https://download.sew-eurodrive.com/download/pdf/25957074.pdf',
+      diagramReference: 'Star connection for high voltage: U2/V2/W2 linked; L1/L2/L3 on U1/V1/W1.',
+      ansiNfpaRepresentation: 'Not included in this IEC-oriented component record; no ANSI/NFPA-specific source representation was verified.',
+      compatibleAccessories: [],
+      compatibilityNote: 'No motor-specific accessory list is recorded; do not infer accessories from this base motor record.'
+    },
+    sources: [
+      {
+        publisher: 'SEW-EURODRIVE',
+        title: 'DRN.. AC motors · motor data table, 400 V, 50 Hz, 4-pole',
+        url: 'https://download.sew-eurodrive.com/download/pdf/30590116.pdf',
+        documentRevision: 'Manufacturer catalog/document 30590116/EN, 03/2023.',
+        revisionNote: 'Manufacturer table identifies DRN63MS4, 0.12 kW, 0.405 A, 1380 rpm, 0.83 Nm and power factor 0.64 for 400 V / 50 Hz operation.',
+        retrievedAt: '2026-11-12'
+      },
+      {
+        publisher: 'SEW-EURODRIVE',
+        title: 'Operating Instructions · AC Motors DR..71–315, DRN63–315, DR2..56–80',
+        url: 'https://download.sew-eurodrive.com/download/pdf/25957074.pdf',
+        documentRevision: 'Manufacturer operating instructions 25957074/EN, 06/2019.',
+        revisionNote: 'Manufacturer wiring diagrams identify U1/V1/W1, U2/V2/W2, the 400 V star connection, terminal-board wiring and PE connection.',
+        retrievedAt: '2026-11-12'
+      }
+    ]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
