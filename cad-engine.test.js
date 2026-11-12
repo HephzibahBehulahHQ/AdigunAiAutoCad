@@ -1671,21 +1671,23 @@ test('A1/021 records a source-backed pressure-sensor interface proposal without 
   const page=report.sheets.find(sheet=>sheet.id==='ref-021').analysis;
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.openEndpointCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-021'&&object.kind==='text').map(object=>object.text);
-  for(const requirement of [
-    /PN2070.*PN-400-SER14-MFRKG\\/US\\/ \\/V/,
-    /0\\.\\.\\.400 bar.*relative pressure/,
-    /Pin 1.*BN.*L\\+.*18–30 V DC/,
-    /Pin 2.*WH.*OUT2.*0–10 V DC/,
-    /Pin 3.*BU.*L−/,
-    /Pin 4.*BK.*OUT1.*not used/,
-    /AI0.*X11:2.*proposed.*not wired/,
-    /factory default.*4–20 mA/,
-    /No sensor instance, wiring, scaling, or PLC logic is modeled/
-  ]) assert.ok(texts.some(text=>requirement.test(text)),`Missing pressure-sensor interface note ${requirement}`);
+  for(const required of [
+    'PN-400-SER14-MFRKG/US/ /V',
+    '0...400 bar · relative pressure',
+    'Pin 1 · BN brown · L+',
+    '18–30 V DC',
+    'Pin 2 · WH white · OUT2',
+    '0–10 V DC analog voltage output',
+    'Pin 3 · BU blue · L−',
+    'Pin 4 · BK black · OUT1 switching / IO-Link',
+    'AI0 / X11:2 · 0–10 V DC; proposed OUT2 signal allocation; not wired',
+    'factory default as 4–20 mA',
+    'No sensor instance, wiring, scaling, or PLC logic is modeled'
+  ]) assert.ok(texts.some(text=>text.includes(required)),`Missing pressure-sensor interface note: ${required}`);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
-  assert.match(source,/PN-400-SER14-MFRKG\\/US\\/ \\/V/);
-  assert.match(source,/OUT2 is factory configured for 4–20 mA/);
-  assert.match(source,/CPU 1212C.*0–10 V DC/);
+  assert.ok(source.includes('PN-400-SER14-MFRKG/US/ /V'));
+  assert.ok(source.includes('OUT2 is factory configured for 4–20 mA'));
+  assert.ok(source.includes('CPU 1212C')&&source.includes('0–10 V DC'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[21,31,324,18,42,0]);
