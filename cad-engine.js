@@ -562,7 +562,48 @@
       }
     ]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
+  const siemensCpuPinRows = [
+    ['X10', '1', 'L+ / 24 V DC'], ['X10', '2', 'M / 24 V DC'], ['X10', '3', 'Functional Earth'],
+    ['X10', '4', 'L+ / 24 V DC Sensor Out'], ['X10', '5', 'M / 24 V DC Sensor Out'], ['X10', '6', '1M'],
+    ['X10', '7', 'DI a.0'], ['X10', '8', 'DI a.1'], ['X10', '9', 'DI a.2'], ['X10', '10', 'DI a.3'],
+    ['X10', '11', 'DI a.4'], ['X10', '12', 'DI a.5'], ['X10', '13', 'DI a.6'], ['X10', '14', 'DI a.7'],
+    ['X11', '1', '2M'], ['X11', '2', 'AI 0'], ['X11', '3', 'AI 1'],
+    ['X12', '1', '1L'], ['X12', '2', 'DQ a.0'], ['X12', '3', 'DQ a.1'], ['X12', '4', 'DQ a.2'],
+    ['X12', '5', 'DQ a.3'], ['X12', '6', '2L'], ['X12', '7', 'DQ a.4'], ['X12', '8', 'DQ a.5']
+  ];
+  const siemensCpuPins = siemensCpuPinRows.map(function (row, index) {
+    const group = row[0], groupIndex = siemensCpuPinRows.slice(0, index).filter(function (item) { return item[0] === group; }).length;
+    const y = group === 'X10' ? -126 + groupIndex * 18 : group === 'X11' ? -126 + groupIndex * 18 : -8 + groupIndex * 16;
+    return { id: group.toLowerCase() + '-' + row[1], localNumber: group + ':' + row[1], name: row[2], x: group === 'X10' ? -130 : 130, y: y, electricalType: 'passive', connectionType: 'plug-in terminal' };
+  });
+  const siemensCpuDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION, id: 'siemens-6es7212-1ae40-0xb0', manufacturer: 'Siemens', manufacturerPartNumber: '6ES7212-1AE40-0XB0',
+    model: 'SIMATIC S7-1200 CPU 1212C DC/DC/DC', name: 'Compact PLC CPU', family: 'plc-cpu', referencePrefix: 'A', category: 'Automation · Verified PLC CPU',
+    symbol: { id: 'plc.siemens.cpu-1212c.dcdcdc.v1', view: 'schematic', unit: 'mm', width: 260, height: 290, pins: siemensCpuPins, internalConnections: [], numberingNote: 'Terminal group and pin identities X10, X11 and X12 match Siemens System Manual V4.7, Table A-49. Pin coordinates are schematic connection points, not physical connector geometry.' },
+    specifications: {
+      onboardDigitalInputs: { value: 8, unit: '24 V DC DI' }, onboardDigitalOutputs: { value: 6, unit: '24 V DC transistor DQ' }, onboardAnalogInputs: { value: 2, unit: '0–10 V DC AI' },
+      supplyVoltage: { minimum: 20.4, maximum: 28.8, unit: 'V DC' }, programDataMemory: { value: 100, unit: 'KB' },
+      terminalGroups: { value: ['X10 · power, sensor supply and 8 DI', 'X11 · 2 AI and 2M', 'X12 · 6 DQ and load supplies'] }
+    },
+    instanceProperties: { marking: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, comment: { type: 'string', default: '', maximumLength: 160 } },
+    sources: [
+      { publisher: 'Siemens', title: 'SIMATIC S7-1200 System Manual V4.7 · CPU 1212C DC/DC/DC · Tables A-49 and A-50', url: 'https://cache.industry.siemens.com/dl/files/302/109977302/att_1307432/v1/s71200_system_manual_en-US.pdf', documentRevision: 'V4.7 · 12/2024 · A5E02486680-AQ', revisionNote: 'Manufacturer manual supplies exact connector pin assignments for X10, X11 and X12.' , retrievedAt: '2026-11-12' },
+      { publisher: 'Siemens', title: 'SIMATIC S7-1200 CPU 1212C product record', url: 'https://mall.industry.siemens.com/mall/en/gb/Catalog/Product/6ES72121AE400XB0', documentRevision: 'Live manufacturer product record', revisionNote: 'Confirms onboard I/O counts and DC supply range.', retrievedAt: '2026-11-12' }
+    ]
+  });
+  const ifmInductiveSensorDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION, id: 'ifm-ifs204', manufacturer: 'ifm', manufacturerPartNumber: 'IFB3004BBPKG/US-104', model: 'IFS204', name: 'Inductive proximity sensor · PNP NO · 4 mm', family: 'sensor-inductive-pnp', referencePrefix: 'B', category: 'Automation · Verified inductive sensor',
+    symbol: { id: 'sensor.ifm.ifs204.pnp-no.v1', view: 'schematic', unit: 'mm', width: 100, height: 70, pins: [
+      { id: 'pin-1-lplus', localNumber: '1', name: 'L+ · brown', x: -50, y: -20, electricalType: 'passive', connectionType: 'M12 A-coded' },
+      { id: 'pin-3-lminus', localNumber: '3', name: 'L− · blue', x: -50, y: 20, electricalType: 'passive', connectionType: 'M12 A-coded' },
+      { id: 'pin-4-output', localNumber: '4', name: 'Switching output · black', x: 50, y: 0, electricalType: 'passive', connectionType: 'M12 A-coded' }
+    ], internalConnections: [], numberingNote: 'Pin numbers and wire colors follow the ifm connection diagram. Pin 2 is not a populated contact on this 3-contact connector.' },
+    electricalFunctions: { output: { type: 'PNP', normalState: 'open', outputPin: 'pin-4-output', positiveSupplyPin: 'pin-1-lplus', returnPin: 'pin-3-lminus', actuation: 'Object detection within the specified sensing range', simulation: 'Sensor actuation and PLC logic are not simulated; the drawing represents wiring and published device behavior only.' } },
+    specifications: { operatingVoltage: { minimum: 10, maximum: 30, unit: 'V DC' }, nominalSensingRange: { value: 4, unit: 'mm' }, outputFunction: { value: 'PNP normally open' }, maximumOutputCurrent: { value: 100, unit: 'mA' }, maximumSwitchingFrequency: { value: 700, unit: 'Hz' }, connection: { value: 'M12 × 1 · A-coded · 3 gold-plated contacts' }, protection: { value: 'IP67' } },
+    instanceProperties: { marking: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, sensingTarget: { type: 'string', default: '', maximumLength: 60 }, comment: { type: 'string', default: '', maximumLength: 160 } },
+    sources: [{ publisher: 'ifm electronic', title: 'IFS204 inductive sensor data sheet · IFB3004BBPKG/US-104', url: 'https://media.ifm.com/dam/546f88cf-4cdf-47ac-b6ee-bee685c33458/Original/IFS204-02_EN-GB.pdf', documentRevision: 'EN-GB · IFS204-02 · 26.06.2025', revisionNote: 'Manufacturer data sheet verifies PNP normally-open output, 4 mm nominal sensing range, 10–30 V DC and the 3-contact M12 connection. Pin 1=L+, pin 3=L−, pin 4=output per manufacturer connection drawing.', retrievedAt: '2026-11-12' }]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

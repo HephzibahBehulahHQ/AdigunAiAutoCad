@@ -15,6 +15,22 @@ This is a one-sheet, source-backed wiring example using five verified component 
 ## Verified source records
 
 - Phoenix Contact PLC-RSC- 24DC/21, item 2966171: <https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf>
+
+
+# IFM IFS204 inductive sensor to Siemens S7-1200 PLC input
+
+Open `ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json` from **Open project file**. The one-sheet wiring example uses the IFM IFS204 (manufacturer part IFB3004BBPKG/US-104), Siemens SIMATIC S7-1200 CPU 1212C DC/DC/DC (6ES7212-1AE40-0XB0), and two Phoenix Contact PT 16 N OG terminals as external 24 V DC supply boundaries.
+
+The drawing connects sensor pin 1 (L+) to CPU sensor supply X10:4, pin 3 (L−) to X10:5, and pin 4 (PNP normally-open output) to digital input DI a.0 at X10:7. CPU input common 1M at X10:6 is tied to 0 V at X10:2. The component records preserve all 25 CPU X10/X11/X12 terminals and the sensor’s three populated M12 contacts. The example contains 10 orthogonal wire segments, five derived nets, and no dangling wire endpoints or geometry errors; unused CPU pins and the field sides of the two supply terminals remain intentionally open.
+
+This is a sourced wiring drawing. It does not simulate target detection, sensor switching, PLC program logic, output loading or machine behavior. The two terminal blocks mark supply boundaries; no power supply or PLC program is included. Verify the installation, sensor suitability, input wiring, grounding and application safety against current manufacturer documentation and qualified engineering review before applying it to equipment.
+
+## Manufacturer sources
+
+- Siemens CPU 1212C product record: <https://mall.industry.siemens.com/mall/en/gb/Catalog/Product/6ES72121AE400XB0>
+- Siemens S7-1200 System Manual V4.7, Tables A-49 and A-50: <https://cache.industry.siemens.com/dl/files/302/109977302/att_1307432/v1/s71200_system_manual_en-US.pdf>
+- ifm IFS204 data sheet, EN-GB, 26.06.2025: <https://media.ifm.com/dam/546f88cf-4cdf-47ac-b6ee-bee685c33458/Original/IFS204-02_EN-GB.pdf>
+- Phoenix Contact PT 16 N OG, item 3212144: <https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144>
 - Phoenix Contact PT 16 N OG, item 3212144: <https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144>
 - Schneider Electric TeSys D LC1D09BD: <https://www.se.com/us/en/product/LC1D09BD/iec-contactor-tesys-deca-nonreversing-9a-5hp-at-480vac-up-to-100ka-sccr-3-phase-3-no-24vdc-coil-open-style/> and <https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF>
 

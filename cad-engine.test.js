@@ -155,7 +155,7 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 9);
+  assert.equal(items.length, 11);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -165,9 +165,46 @@ test('catalog contains only source-backed engineering components', () => {
     [motorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     [lowRangeMotorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
-    ['sew-eurodrive-drn63ms4', 'motor-induction', 'M']
+    ['sew-eurodrive-drn63ms4', 'motor-induction', 'M'],
+    ['siemens-6es7212-1ae40-0xb0', 'plc-cpu', 'A'],
+    ['ifm-ifs204', 'sensor-inductive-pnp', 'B']
   ]);
 });
+test('Siemens CPU 1212C and ifm IFS204 expose manufacturer terminal identities and source-backed behavior', () => {
+  const cpu = engine.component('siemens-6es7212-1ae40-0xb0');
+  const sensor = engine.component('ifm-ifs204');
+  assert.equal(cpu.manufacturerPartNumber, '6ES7212-1AE40-0XB0');
+  assert.equal(cpu.symbol.pins.length, 25);
+  assert.deepEqual(cpu.symbol.pins.filter(pin => pin.localNumber.startsWith('X10:')).map(pin => pin.name), [
+    'L+ / 24 V DC', 'M / 24 V DC', 'Functional Earth', 'L+ / 24 V DC Sensor Out', 'M / 24 V DC Sensor Out', '1M',
+    'DI a.0', 'DI a.1', 'DI a.2', 'DI a.3', 'DI a.4', 'DI a.5', 'DI a.6', 'DI a.7'
+  ]);
+  assert.ok(cpu.symbol.pins.every(pin => Number.isFinite(pin.x) && Number.isFinite(pin.y)));
+  assert.match(cpu.sources[0].url, /s71200_system_manual/);
+  assert.equal(sensor.manufacturerPartNumber, 'IFB3004BBPKG/US-104');
+  assert.deepEqual(sensor.symbol.pins.map(pin => [pin.localNumber, pin.name]), [['1', 'L+ · brown'], ['3', 'L− · blue'], ['4', 'Switching output · black']]);
+  assert.equal(sensor.electricalFunctions.output.type, 'PNP');
+  assert.equal(sensor.electricalFunctions.output.normalState, 'open');
+  assert.match(sensor.sources[0].url, /IFS204-02_EN-GB.pdf/);
+  for (const [id, ref] of [['siemens-6es7212-1ae40-0xb0', 'A1'], ['ifm-ifs204', 'B1']]) {
+    const instance = engine.createInstance(id, 200, 300, ref);
+    assert.equal(engine.validateInstance(instance).valid, true);
+    assert.equal(engine.moveInstance(instance, 225, 325).x, 225);
+    assert.equal(engine.rotateInstance(instance, 90).rotation, 90);
+  }
+});
+
+test('PLC and inductive sensor use dedicated schematic glyphs and verified inspector data in the existing shell', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'plc-cpu':"));
+  assert.ok(html.includes("case'sensor-inductive-pnp':"));
+  assert.ok(html.includes("def.family==='plc-cpu'"));
+  assert.ok(html.includes("def.family==='sensor-inductive-pnp'"));
+  assert.ok(html.includes('data-component-property="sensingTarget"'));
+  assert.ok(html.includes('manufacturer circuit diagram'));
+  assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
+});
+
 
 test('Schneider XB5 start and stop push-buttons keep manufacturer terminal identities and contact semantics', () => {
   const start = engine.component(startPushButtonId);
@@ -872,4 +909,37 @@ test('source-backed DOL motor-feeder example preserves its power, PE, star and c
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).netCount, 15);
+
+test('IFM IFS204 to Siemens CPU 1212C example preserves pin-accurate sensor, supply and input nets', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  const analysis = engine.analyze(project.objects);
+  assert.deepEqual(
+    [analysis.componentCount, analysis.wireCount, analysis.componentPinCount, analysis.connectedPinCount, analysis.unconnectedPinCount, analysis.netCount, analysis.openEndpointCount, analysis.errors.length],
+    [4, 10, 32, 11, 21, 5, 0, 0]
+  );
+  const pinNet = (ref, number) => {
+    const net = analysis.nets.find(item => item.pins.some(pin => pin.ref === ref && pin.number === number));
+    assert.ok(net, `missing connected pin ${ref}:${number}`);
+    return net.pins.map(pin => `${pin.ref}:${pin.number}`).sort();
+  };
+  assert.deepEqual(pinNet('A1', 'X10:1'), ['A1:X10:1','X1:1','X1:2']);
+  assert.deepEqual(pinNet('A1', 'X10:2'), ['A1:X10:2','A1:X10:6','X2:1','X2:2']);
+  assert.deepEqual(pinNet('A1', 'X10:4'), ['A1:X10:4','B1:1']);
+  assert.deepEqual(pinNet('A1', 'X10:5'), ['A1:X10:5','B1:3']);
+  assert.deepEqual(pinNet('A1', 'X10:7'), ['A1:X10:7','B1:4']);
+  const wireList = engine.wireList(project.objects);
+  assert.equal(wireList.valid, true, wireList.errors.join(' '));
+  assert.equal(wireList.rows.length, 10);
+  const bom = engine.billOfMaterials(project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
+    ['3212144',2], ['6ES7212-1AE40-0XB0',1], ['IFB3004BBPKG/US-104',1]
+  ]);
+  const reopened = engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.equal(engine.analyze(reopened.project.objects).netCount, 5);
+});
 });
