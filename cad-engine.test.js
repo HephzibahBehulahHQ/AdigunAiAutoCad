@@ -44,6 +44,8 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function deleteSelection\(\)/);
   assert.match(inlineScripts[0][2], /function translateObjectSet\(ids,dx,dy\)/);
   assert.match(inlineScripts[0][2], /function selectionCanAlign\(\)/);
+  assert.match(inlineScripts[0][2], /return obj&&obj.kind!=='wire'/);
+  assert.match(inlineScripts[0][2], /obj.rotation===90\|\|obj.rotation===270/);
   assert.match(inlineScripts[0][2], /function objectBounds\(obj\)/);
   assert.match(inlineScripts[0][2], /function alignSelection\(edge\)/);
   assert.match(inlineScripts[0][2], /function distributeSelection\(axis\)/);
