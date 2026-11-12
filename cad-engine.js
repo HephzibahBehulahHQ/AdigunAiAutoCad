@@ -23,6 +23,7 @@
     model: 'PT 16 N OG',
     name: 'Feed-through terminal block',
     family: 'feedthrough-terminal',
+    referencePrefix: 'X',
     category: 'Electrical · Verified DIN-rail terminal',
     symbol: {
       id: 'terminal.feedthrough.2-connection.v1',
@@ -70,13 +71,77 @@
       retrievedAt: '2026-11-12'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition });
+  const relayDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION,
+    id: 'phoenix-contact-2966171',
+    manufacturer: 'Phoenix Contact',
+    manufacturerPartNumber: '2966171',
+    model: 'PLC-RSC- 24DC/21',
+    name: 'PLC-INTERFACE relay module',
+    family: 'relay-module',
+    referencePrefix: 'K',
+    category: 'Electrical · Verified interface relay',
+    symbol: {
+      id: 'relay.interface.changeover.24vdc.v1',
+      view: 'schematic',
+      unit: 'mm',
+      width: 140,
+      height: 60,
+      pins: [
+        { id: 'coil-a2', localNumber: 'A2', name: 'Coil return', x: -70, y: -20, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'coil-a1', localNumber: 'A1', name: 'Coil supply', x: -70, y: 20, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'contact-11', localNumber: '11', name: 'Changeover common', x: 70, y: 0, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'contact-12', localNumber: '12', name: 'Normally closed', x: 70, y: -25, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'contact-14', localNumber: '14', name: 'Normally open', x: 70, y: 25, electricalType: 'passive', connectionType: 'screw' }
+      ],
+      internalConnections: [],
+      numberingNote: 'External terminal designations A1, A2, 11, 12 and 14 follow the manufacturer circuit diagram. Pin coordinates are schematic connection points, not a physical relay footprint.'
+    },
+    electricalFunctions: {
+      coil: { pins: ['coil-a1', 'coil-a2'], nominalVoltage: { value: 24, unit: 'V DC' }, polarity: { positive: 'A1', negative: 'A2' }, suppression: 'Integrated polarity/freewheeling diode and input circuit; preserve A1/A2 polarity.' },
+      changeoverContact: { common: 'contact-11', normallyClosed: 'contact-12', normallyOpen: 'contact-14', deenergizedConnections: [['contact-11', 'contact-12']], energizedConnections: [['contact-11', 'contact-14']], actuation: 'coil-a1/coil-a2', simulation: 'Not simulated; static connectivity reports only user-authored wires and does not assume a relay state.' }
+    },
+    specifications: {
+      nominalCoilVoltage: { value: 24, unit: 'V DC' },
+      coilInputRangeAt20C: { minimum: 18.5, maximum: 33.6, unit: 'V DC' },
+      typicalInputCurrent: { value: 9, unit: 'mA' },
+      responseTime: { value: 5, unit: 'ms' },
+      releaseTime: { value: 8, unit: 'ms' },
+      changeoverContactCount: { value: 1, unit: 'changeover contact' },
+      maximumSwitchingVoltage: { value: 250, unit: 'V AC/DC', note: 'Manufacturer installation note applies above 250 V between adjacent identical modules.' },
+      limitingContinuousCurrent: { value: 6, unit: 'A', note: 'Manufacturer parameter; temperature and mounting derating apply.' },
+      ratedImpulseWithstandVoltage: { value: 6, unit: 'kV' },
+      windingContactTestVoltage: { value: 4, unit: 'kV AC' },
+      contactStandard: { value: 'IEC 60947-5-1' },
+      connectionMethod: { value: 'Screw connection · M3 · 0.6–0.8 Nm' },
+      rigidConductorRange: { minimum: 0.14, maximum: 2.5, unit: 'mm²' },
+      flexibleConductorRange: { minimum: 0.14, maximum: 2.5, unit: 'mm²' },
+      connectionCount: { value: 5, unit: 'external electrical terminals' },
+      dimensions: { width: { value: 6.2, unit: 'mm' }, height: { value: 80, unit: 'mm' }, depth: { value: 94, unit: 'mm' } },
+      mountingRail: { value: 'NS 35/7.5' }
+    },
+    instanceProperties: {
+      terminalStrip: { type: 'string', default: '', maximumLength: 40 },
+      position: { type: 'string', default: '', maximumLength: 24 },
+      marking: { type: 'string', default: '', maximumLength: 40 },
+      comment: { type: 'string', default: '', maximumLength: 160 }
+    },
+    sources: [{
+      publisher: 'Phoenix Contact',
+      title: 'PLC-RSC- 24DC/21 · Relay module · Item 2966171, online catalog PDF',
+      url: 'https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf',
+      documentRevision: 'Manufacturer catalog PDF generated May 19, 2026 · circuit diagram page 9 of 12',
+      revisionNote: 'Manufacturer online catalog PDF; retrieved from Phoenix Contact product page. Circuit diagram supplies external pin identifiers and functional arrangement.',
+      retrievedAt: '2026-11-12'
+    }]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition });
 
   function component(id) { return COMPONENTS[id] || null; }
   function catalog() {
     return Object.keys(COMPONENTS).map(function (id) {
       const def = COMPONENTS[id];
-      return { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber, category: def.category, family: def.family, tag: 'X' };
+      return { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber, category: def.category, family: def.family, tag: def.referencePrefix || 'X' };
     });
   }
   function createInstance(componentId, x, y, ref) {
@@ -94,7 +159,7 @@
         ? root.crypto.randomUUID()
         : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 11)),
       componentId: componentId,
-      ref: typeof ref === 'string' && ref.trim() ? ref.trim().slice(0, 32) : 'X1',
+      ref: typeof ref === 'string' && ref.trim() ? ref.trim().slice(0, 32) : (def.referencePrefix || 'X') + '1',
       x: Math.round(x / 5) * 5,
       y: Math.round(y / 5) * 5,
       rotation: 0,
