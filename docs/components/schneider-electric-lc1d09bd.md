@@ -17,3 +17,8 @@
 - Reference prefix is `KM`; instance fields for terminal strip, position, marking and comment are editable. Manufacturer identity and ratings remain read-only and source-linked.
 - The drawing is a schematic symbol, not a physical footprint. Body dimensions and mounting support are recorded from the data sheet; actual panel-footprint geometry and contactor actuation simulation are not implemented in this milestone.
 - Product ratings are reference data only. Do not treat this symbol, static connectivity, or project as a construction/safety approval; validate a selected product and application against current manufacturer documentation and qualified engineering review.
+
+## Coil consumption source
+
+- Schneider Electric [FAQ FA33405](https://www.se.com/es/es/faqs/FA33405/), modified 2025-04-09, lists average coil consumption of 2.4 W at 20 °C and nominal control voltage for the low-consumption LC1D09–LC1D38 contactors. For LC1D09BD at 24 V DC, 2.4 W / 24 V = 0.10 A (100 mA).
+- This is a source-backed nominal reference value. It does not model pickup/transient behavior or establish supply, relay, protection, wiring, or application suitability.
