@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 1.6",
-  "status": "Authored opening set: A1/001–A1/019; A1/020–A1/100 not authored.",
+  "revision": "Opening set 1.7",
+  "status": "Authored opening set: A1/001–A1/020; A1/021–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -111,6 +111,11 @@
       "id": "ref-019",
       "number": "A1/019",
       "name": "PLC digital-output allocation · CPU 1212C"
+    },
+    {
+      "id": "ref-020",
+      "number": "A1/020",
+      "name": "PLC analog-input allocation · CPU 1212C"
     }
   ],
   "sheetLabels": {
@@ -127,7 +132,8 @@
     "ref-017": "PLC I/O allocation summary",
     "ref-018": "PLC overload trip feedback · F1 NO 97–98",
     "ref-019": "PLC digital-output allocation · CPU 1212C",
-    "ref-002": "Drawing index"
+    "ref-002": "Drawing index",
+    "ref-020": "PLC analog-input allocation · CPU 1212C"
   },
   "sheetViews": {
     "ref-007": {
@@ -203,6 +209,12 @@
       "h": 760
     },
     "ref-019": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-020": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3649,7 +3661,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 1.6",
+      "text": "Engineering document set | Revision opening set 1.7",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3658,7 +3670,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/019",
+      "text": "Authored pages: A1/001–A1/020",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3676,7 +3688,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/020–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/021–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3808,7 +3820,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/019",
+      "text": "Component register | modeled devices on A1/006–A1/020",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3898,7 +3910,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/019; A1/019 adds no device instance.",
+      "text": "Component quantities match modeled devices through A1/020; A1/020 adds no device instance.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4012,7 +4024,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/019 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/020 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4280,7 +4292,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/019; A1/017–A1/019 document I/O, overload feedback and output allocation.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/020; A1/017–A1/020 document I/O, overload feedback, output and analog-input allocation.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4298,7 +4310,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/019 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/019 summarize PLC I/O assignments.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -6136,9 +6148,90 @@
       "y": 890,
       "text": "Revision 1.6 | 2026-11-12 | A1/019 documents Siemens CPU 1212C output allocation; topology unchanged.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-title",
+      "sheetId": "ref-020",
+      "x": 50,
+      "y": 54,
+      "text": "A1/020 · Siemens CPU 1212C analog-input allocation",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-source",
+      "sheetId": "ref-020",
+      "x": 120,
+      "y": 130,
+      "text": "SIMATIC S7-1200 CPU 1212C DC/DC/DC · two onboard 0–10 V DC analog inputs",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-common",
+      "sheetId": "ref-020",
+      "x": 120,
+      "y": 235,
+      "text": "X11:1 · 2M · analog common; terminal, not an analog input channel.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-ai-00",
+      "sheetId": "ref-020",
+      "x": 120,
+      "y": 330,
+      "text": "AI0 · X11:2 · 0–10 V DC · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-ai-01",
+      "sheetId": "ref-020",
+      "x": 120,
+      "y": 425,
+      "text": "AI1 · X11:3 · 0–10 V DC · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-limit",
+      "sheetId": "ref-020",
+      "x": 50,
+      "y": 675,
+      "text": "No analog sensor or signal source is assigned; signal scaling, conversion and PLC logic are not modeled.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-020-source-note",
+      "sheetId": "ref-020",
+      "x": 50,
+      "y": 735,
+      "text": "Source: Siemens S7-1200 System Manual V4.7 · CPU 1212C Table A-49 · terminals are schematic points.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-20",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1530,
+      "text": "A1/020  Siemens CPU 1212C analog-input allocation · AI0/AI1 unassigned",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-12",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 954,
+      "text": "A1/020: CPU 1212C AI0 / X11:2 and AI1 / X11:3 are unassigned in modeled scope.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Nineteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; PLC I/O assignment schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens 3RU2126 F1 NO trip contact to PLC I0.7 on A1/018; and Siemens CPU 1212C digital-output allocation on A1/019. Q0.0 is assigned to K2 coil A1; Q0.1–Q0.5 are unassigned in the modeled scope. PLC logic, overload trip/reset behavior, signal interpretation, switching and safety functions are not simulated. A1/020–A1/100 are not authored.",
+  "description": "Twenty authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; and Siemens CPU 1212C analog-input allocation A1/020. AI0 / X11:2 and AI1 / X11:3 are unassigned in the modeled scope; 2M at X11:1 is their analog common. PLC logic, conversion, alarm interpretation, output switching, trip/reset behavior and safety functions are not simulated. A1/021–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",

@@ -2181,3 +2181,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 
 
 - A1/019 follow-up: corrected the A1/009 supply note wording and added a regression assertion for the exact text; no model or topology changed.
+
+
+## 2026-11-12 incremental execution record — A1/020
+
+- Added A1/020 as a native Siemens CPU 1212C analog-input allocation schedule. X11:1 / 2M is the analog common; AI0 / X11:2 and AI1 / X11:3 are the source-backed 0–10 V DC channels and remain unassigned within the modeled scope. No signal sources, devices or wires were added.
+- Updated the current Siemens System Manual V4.7 CPU source record, drawing index, cover, revision, component register, assumptions, README and roadmap. No interface changes.
+- Next: run model regressions, publish a focused A1/020 PR, merge only after green CI, deploy and verify production, then continue at A1/021.

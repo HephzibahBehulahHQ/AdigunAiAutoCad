@@ -661,7 +661,7 @@
     },
     instanceProperties: { marking: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, comment: { type: 'string', default: '', maximumLength: 160 } },
     sources: [
-      { publisher: 'Siemens', title: 'SIMATIC S7-1200 System Manual V4.7 · CPU 1212C DC/DC/DC · Tables A-49 and A-50', url: 'https://cache.industry.siemens.com/dl/files/302/109977302/att_1307432/v1/s71200_system_manual_en-US.pdf', documentRevision: 'V4.7 · 12/2024 · A5E02486680-AQ', revisionNote: 'Manufacturer manual supplies exact connector pin assignments for X10, X11 and X12.' , retrievedAt: '2026-11-12' },
+      { publisher: 'Siemens', title: 'SIMATIC S7-1200 System Manual V4.7 · CPU 1212C DC/DC/DC · Tables A-49 and A-50', url: 'https://support.industry.siemens.com/cs/attachments/109977302/s71200_system_manual_en-US.pdf', documentRevision: 'V4.7 · 12/2024 · A5E02486680-AQ', revisionNote: 'Manufacturer manual supplies exact connector pin assignments for X10, X11 and X12.' , retrievedAt: '2026-11-12' },
       { publisher: 'Siemens', title: 'SIMATIC S7-1200 CPU 1212C product record', url: 'https://mall.industry.siemens.com/mall/en/gb/Catalog/Product/6ES72121AE400XB0', documentRevision: 'Live manufacturer product record', revisionNote: 'Confirms onboard I/O counts and DC supply range.', retrievedAt: '2026-11-12' }
     ]
   });
