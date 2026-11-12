@@ -2162,3 +2162,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the drawing index, project status, README, roadmap, revision and this progress record. Preserved the workstation interface and `index.html`.
 - Model validation passed: 17 sheets, 31 component instances, 318 wire segments, 59 sheet-local nets, 41 project-wide nets, 16 cross-sheet links pairing 36 endpoints, and zero unlinked endpoints. Regression asserts all nine allocation entries and save/reopen.
 - Next: finish full regressions, publish a dedicated PR, merge only after green CI, deploy and verify production, then continue at A1/018.
+
+
+## 2026-11-12 incremental execution record — A1/018
+
+- Routed the existing Siemens SIRIUS 3RU2126-4AB0 overload relay F1 NO trip contact 97–98 into Siemens CPU 1212C DI a.7 / I0.7. X14 supplies +24 V DC to terminal 97; terminal 98 returns to X10:14. The existing F1 NC 95–96 contactor-control path remains unchanged. No new component was added.
+- Siemens Equipment Manual identifies 97–98 as an NO trip signal and says the overload relay auxiliary contacts are suitable for PLCs. Added a source record and explicit limits: no overload trip/reset simulation, PLC logic/alarm interpretation, protection validation, or safety behavior.
+- Updated I0.7 allocation on A1/017, the index, cover, assumptions, revision, README and roadmap. Preserved the approved interface.
+- Model validation: 18 sheets, 31 components, 324 wire segments, 62 sheet-local nets, 42 project-wide nets, eighteen cross-sheet connections pairing 40 endpoints, and zero unlinked endpoints.
+- Next: run regressions, publish a dedicated A1/018 PR, merge after green CI, deploy, verify production, then continue at A1/019.

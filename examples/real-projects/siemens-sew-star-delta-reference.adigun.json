@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 1.4",
-  "status": "Authored opening set: A1/001–A1/017; A1/018–A1/100 not authored.",
+  "revision": "Opening set 1.5",
+  "status": "Authored opening set: A1/001–A1/018; A1/019–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -101,6 +101,11 @@
       "id": "ref-017",
       "number": "A1/017",
       "name": "PLC I/O allocation summary"
+    },
+    {
+      "id": "ref-018",
+      "number": "A1/018",
+      "name": "PLC overload trip feedback · F1 NO 97–98"
     }
   ],
   "sheetLabels": {
@@ -114,7 +119,8 @@
     "ref-014": "PLC I/O schedule · KM4 NC feedback",
     "ref-015": "PLC I/O schedule · K2 NC feedback",
     "ref-016": "PLC I/O schedule · K2 NO feedback",
-    "ref-017": "PLC I/O allocation summary"
+    "ref-017": "PLC I/O allocation summary",
+    "ref-018": "PLC overload trip feedback · F1 NO 97–98"
   },
   "sheetViews": {
     "ref-007": {
@@ -178,6 +184,12 @@
       "h": 760
     },
     "ref-017": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-018": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3624,7 +3636,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 1.4",
+      "text": "Engineering document set | Revision opening set 1.5",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3633,7 +3645,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/017",
+      "text": "Authored pages: A1/001–A1/018",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3651,7 +3663,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/018–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/019–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3783,7 +3795,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/017",
+      "text": "Component register | modeled devices on A1/006–A1/018",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3873,7 +3885,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/017.",
+      "text": "Component quantities match modeled devices through A1/018; A1/018 adds no device instance.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3903,7 +3915,7 @@
       "id": "doc-ref-004-line-01",
       "x": 120,
       "y": 250,
-      "text": "Revision 0.9 | 2026-11-12 | Thirteen authored sheets; KM4 contact status input added.",
+      "text": "Revision 1.5 | 2026-11-12 | Siemens F1 overload trip signal routed to PLC input I0.7.",
       "stroke": "#13263b",
       "sheetId": "ref-004"
     },
@@ -3987,7 +3999,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/017 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/018 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4255,7 +4267,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and source-backed PLC input/output links through A1/016; A1/017 summarizes allocation.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/018; A1/017–A1/018 document I/O and overload feedback.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4273,7 +4285,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/016 contain PLC sensor, operator, contactor coil and auxiliary status wiring; A1/017 summarizes PLC I/O assignments.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017 summarizes assignments.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4282,7 +4294,7 @@
       "id": "doc-ref-005-line-10",
       "x": 120,
       "y": 1018,
-      "text": "A1/006 remains electrically separate. A1/007–A1/016 share only explicitly routed, named cross-sheet nets.",
+      "text": "A1/006 overload NO 97–98 feeds only the explicit 24 V DC diagnostic circuit; NC 95–96 remains in its existing control circuit.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4291,7 +4303,7 @@
       "id": "doc-ref-005-line-11",
       "x": 120,
       "y": 1082,
-      "text": "PLC logic, sensor detection, relay/contactor actuation, switched contacts and safety functions are not simulated; total current/protection are unassessed.",
+      "text": "PLC logic, overload trip/reset behavior, alarm interpretation, relay/contactor actuation and safety functions are not simulated; protection/current are unassessed.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4691,7 +4703,7 @@
       "sheetId": "ref-009",
       "x1": 700,
       "y1": 260,
-      "x2": 1000,
+      "x2": 800,
       "y2": 260
     },
     {
@@ -4718,7 +4730,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 325,
-      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11, S2/S3 and KM4 auxiliary 13 via A1/012.",
+      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11, S2/S3 and F1:97 via A1/018.",
       "stroke": "#13263b"
     },
     {
@@ -5830,7 +5842,7 @@
       "sheetId": "ref-017",
       "x": 120,
       "y": 610,
-      "text": "I0.7 · CPU X10:14 · unassigned in the current modeled scope",
+      "text": "I0.7 · CPU X10:14 · Siemens F1 NO trip contact 97–98 · A1/018",
       "stroke": "#13263b"
     },
     {
@@ -5848,7 +5860,7 @@
       "sheetId": "ref-017",
       "x": 50,
       "y": 730,
-      "text": "Allocation summary follows authored wiring; PLC logic, address configuration and signal interpretation are not modeled.",
+      "text": "Allocation follows modeled wiring; PLC address configuration, trip/reset behavior and signal interpretation are not modeled.",
       "stroke": "#13263b"
     },
     {
@@ -5857,11 +5869,137 @@
       "sheetId": "ref-002",
       "x": 120,
       "y": 1338,
-      "text": "A1/017  PLC I/O allocation summary — I0.7 unassigned in modeled scope",
+      "text": "A1/017  PLC I/O allocation summary — I0.7 overload trip · F1:97–98",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-distribution-plus-right-to-connector",
+      "sheetId": "ref-009",
+      "x1": 800,
+      "y1": 260,
+      "x2": 1000,
+      "y2": 260
+    },
+    {
+      "kind": "wire",
+      "id": "a1-018-w09-x14-branch-up",
+      "sheetId": "ref-009",
+      "x1": 800,
+      "y1": 260,
+      "x2": 800,
+      "y2": 220
+    },
+    {
+      "kind": "wire",
+      "id": "a1-018-w09-x14-to-f1-97",
+      "sheetId": "ref-009",
+      "x1": 800,
+      "y1": 220,
+      "x2": 1110,
+      "y2": 220
+    },
+    {
+      "kind": "wire",
+      "id": "a1-018-w06-f1-97-to-link",
+      "sheetId": "ref-006",
+      "x1": 970,
+      "y1": 415,
+      "x2": 1110,
+      "y2": 415
+    },
+    {
+      "kind": "wire",
+      "id": "a1-018-w06-f1-98-to-link",
+      "sheetId": "ref-006",
+      "x1": 970,
+      "y1": 430,
+      "x2": 1110,
+      "y2": 430
+    },
+    {
+      "kind": "wire",
+      "id": "a1-018-w07-di-a7",
+      "sheetId": "ref-007",
+      "x1": 670,
+      "y1": 508,
+      "x2": 200,
+      "y2": 508
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-018-title",
+      "sheetId": "ref-018",
+      "x": 50,
+      "y": 54,
+      "text": "A1/018 · Siemens F1 overload trip feedback to PLC DI a.7",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-018-source",
+      "sheetId": "ref-018",
+      "x": 120,
+      "y": 190,
+      "text": "F1 · Siemens SIRIUS 3RU2126-4AB0 · NO auxiliary contact 97–98 is the manufacturer-defined trip signal.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-018-path",
+      "sheetId": "ref-018",
+      "x": 120,
+      "y": 270,
+      "text": "X14 +24 V DC → F1:97; F1:98 → CPU 1212C X10:14 / DI a.7 (I0.7).",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-018-separation",
+      "sheetId": "ref-018",
+      "x": 120,
+      "y": 350,
+      "text": "F1:97–98 is a separate NO signal pair; existing F1:95–96 NC contactor-control wiring remains intact.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-018-plc",
+      "sheetId": "ref-018",
+      "x": 120,
+      "y": 430,
+      "text": "Siemens identifies the 97–98 trip signal and states the overload relay auxiliary contacts are suitable for PLCs.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-018-limit",
+      "sheetId": "ref-018",
+      "x": 50,
+      "y": 570,
+      "text": "Static wiring only; trip/reset response, PLC alarm logic, protection adequacy and safety behavior are not simulated.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-18",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1402,
+      "text": "A1/018  Siemens F1 overload trip NO 97–98 → PLC DI a.7 / I0.7",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-10",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 826,
+      "text": "A1/018: F1 NO trip contact 97–98 links X14 +24 V DC to CPU X10:14 / DI a.7.",
       "stroke": "#13263b"
     }
   ],
-  "description": "Seventeen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; PLC I/O assignment schedules A1/013–A1/016; and a consolidated PLC I/O allocation summary A1/017. DI a.7 / I0.7 has no assigned device or function in this model. PLC logic, relay/contactor actuation, feedback interpretation, switching, diagnostic behavior and safety functions are not simulated. A1/018–A1/100 are not authored.",
+  "description": "Eighteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; PLC I/O assignment schedules A1/013–A1/016; PLC allocation summary A1/017; and Siemens 3RU2126 F1 NO trip contact 97–98 wired to CPU DI a.7 / I0.7 on A1/018. F1 NC 95–96 remains in the existing contactor-control circuit. PLC logic, overload trip/reset behavior, signal interpretation, switching and safety functions are not simulated. A1/019–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
@@ -5908,7 +6046,7 @@
         },
         {
           "sheetId": "ref-009",
-          "wireId": "a1-009-distribution-plus-right",
+          "wireId": "a1-009-distribution-plus-right-to-connector",
           "point": {
             "x": 1000,
             "y": 260
@@ -6423,6 +6561,70 @@
             "direction": "left",
             "targetSheetId": "ref-010",
             "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-018-f1-trip-supply",
+      "name": "X14 +24 V DC · F1 overload trip contact 97",
+      "endpoints": [
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-018-w09-x14-to-f1-97",
+          "point": {
+            "x": 1110,
+            "y": 220
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-006",
+            "targetRef": "F1"
+          }
+        },
+        {
+          "sheetId": "ref-006",
+          "wireId": "a1-018-w06-f1-97-to-link",
+          "point": {
+            "x": 1110,
+            "y": 415
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-009",
+            "targetRef": "X14"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-018-f1-trip-input",
+      "name": "F1 overload trip contact 98 · PLC DI a.7",
+      "endpoints": [
+        {
+          "sheetId": "ref-006",
+          "wireId": "a1-018-w06-f1-98-to-link",
+          "point": {
+            "x": 1110,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-018-w07-di-a7",
+          "point": {
+            "x": 200,
+            "y": 508
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-006",
+            "targetRef": "F1"
           }
         }
       ]
