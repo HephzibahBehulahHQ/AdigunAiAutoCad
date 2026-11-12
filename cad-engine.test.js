@@ -25,11 +25,13 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /data-rotate-object/);
   assert.match(inlineScripts[0][2], /remapConnectedWireEnds/);
   assert.match(inlineScripts[0][2], /addEventListener\('contextmenu'/);
-  assert.match(inlineScripts[0][2], /e\\.button===2/);
+  assert.match(inlineScripts[0][2], /if\(e\.button===2\)/);
   assert.match(inlineScripts[0][2], /event\.target\.closest\('\[data-object\]'\)/);
   assert.match(inlineScripts[0][2], /data-object-command/);
   assert.match(inlineScripts[0][2], /finishObjectMove\(state.pendingMoveObjectId,svgPoint\(e\)\)/);
   assert.match(inlineScripts[0][2], /function duplicateObject\(id\)/);
+  assert.match(inlineScripts[0][2], /data-export-bom/);
+  assert.match(inlineScripts[0][2], /billOfMaterialsCsv/);
   assert.match(inlineScripts[0][2], /function deleteObject\(id\)/);
   assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
 });
@@ -260,3 +262,41 @@ test('contactor identity, pin numbering and editable properties survive project 
     'A1', 'A2', '1/L1', '2/T1', '3/L2', '4/T2', '5/L3', '6/T3', '13', '14', '21', '22'
   ]);
 });
+
+test('BOM rows and CSV come from valid component instances and include exact part provenance', () => {
+  const terminalB = engine.createInstance(componentId, 100, 100, 'X2');
+  const terminalA = engine.createInstance(componentId, 50, 100, 'X1');
+  const relay = engine.createInstance(relayId, 200, 100, 'K1');
+  const objects = [terminalB, relay, terminalA];
+  const report = engine.billOfMaterials(objects);
+  assert.equal(report.valid, true);
+  assert.deepEqual(report.rows.map(row => [row.partNumber, row.quantity, row.references]), [
+    ['2966171', 1, ['K1']],
+    ['3212144', 2, ['X1', 'X2']]
+  ]);
+  assert.ok(report.rows.every(row => row.sourcePublisher && row.sourceTitle && row.sourceUrl && row.sourceRetrievedAt));
+  const csv = engine.billOfMaterialsCsv(objects);
+  assert.ok(csv.startsWith('\uFEFF'));
+  assert.match(csv, /"Source URL"/);
+  assert.match(csv, /"3212144"/);
+  assert.match(csv, /"https:\/\/www\.phoenixcontact\.com\//);
+  assert.equal(csv, engine.billOfMaterialsCsv([terminalA, terminalB, relay]));
+});
+
+test('BOM CSV refuses malformed or unverified component instances rather than omitting them', () => {
+  const terminal = engine.createInstance(componentId, 100, 100, 'X1');
+  const invalid = { ...terminal, componentId: 'unverified-part' };
+  const report = engine.billOfMaterials([terminal, invalid]);
+  assert.equal(report.valid, false);
+  assert.ok(report.errors.some(error => error.includes('verified definition')));
+  assert.throws(() => engine.billOfMaterialsCsv([terminal, invalid]), /BOM export blocked/);
+});
+
+test('BOM refuses legacy visual-only engineering glyphs', () => {
+  const visualOnly = { id: 'legacy-diode', kind: 'catalog-symbol', symbolId: 'diode', x: 0, y: 0 };
+  const report = engine.billOfMaterials([visualOnly]);
+  assert.equal(report.valid, false);
+  assert.match(report.errors[0], /unverified legacy symbol/);
+  assert.throws(() => engine.billOfMaterialsCsv([visualOnly]), /BOM export blocked/);
+});
+

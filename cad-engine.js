@@ -497,6 +497,63 @@
     };
   }
 
+  function billOfMaterials(objects) {
+    const groups = new Map();
+    const errors = [];
+    (Array.isArray(objects) ? objects : []).forEach(function (instance, index) {
+      if (!instance) return;
+      if (instance.kind !== 'component-instance') {
+        if (['catalog-symbol', 'terminal', 'plc', 'motor', 'ground'].includes(instance.kind)) errors.push('Object ' + (instance.ref || index + 1) + ': unverified legacy symbol cannot be included in a verified BOM.');
+        return;
+      }
+      const validation = validateInstance(instance);
+      if (!validation.valid) {
+        errors.push('Object ' + (instance.ref || index + 1) + ': ' + validation.errors.join(' '));
+        return;
+      }
+      const definition = validation.definition;
+      if (!Array.isArray(definition.sources) || !definition.sources.length) {
+        errors.push('Object ' + instance.ref + ': verified source provenance is missing.');
+        return;
+      }
+      if (!groups.has(definition.id)) groups.set(definition.id, { definition: definition, references: [] });
+      groups.get(definition.id).references.push(instance.ref);
+    });
+    const rows = Array.from(groups.values()).map(function (group) {
+      const definition = group.definition;
+      const source = definition.sources[0];
+      return {
+        componentId: definition.id, manufacturer: definition.manufacturer, model: definition.model,
+        partNumber: definition.manufacturerPartNumber, description: definition.name,
+        quantity: group.references.length,
+        references: group.references.slice().sort(function (a, b) { return a.localeCompare(b); }),
+        sourcePublisher: source.publisher || '', sourceTitle: source.title || '',
+        sourceDocumentRevision: source.documentRevision || '', sourceRevisionNote: source.revisionNote || '',
+        sourceUrl: source.url, sourceRetrievedAt: source.retrievedAt || ''
+      };
+    }).sort(function (a, b) { return a.componentId.localeCompare(b.componentId); });
+    return { valid: errors.length === 0, errors: errors, rows: rows };
+  }
+  function billOfMaterialsCsv(objects) {
+    const report = billOfMaterials(objects);
+    if (!report.valid) throw new Error('BOM export blocked: ' + report.errors.join(' '));
+    const columns = [
+      ['Manufacturer', 'manufacturer'], ['Model', 'model'], ['Part number', 'partNumber'],
+      ['Description', 'description'], ['Quantity', 'quantity'], ['References', 'references'],
+      ['Source publisher', 'sourcePublisher'], ['Source title', 'sourceTitle'],
+      ['Source document revision', 'sourceDocumentRevision'], ['Source revision note', 'sourceRevisionNote'],
+      ['Source URL', 'sourceUrl'], ['Source retrieved date', 'sourceRetrievedAt']
+    ];
+    function cell(value) {
+      let text = Array.isArray(value) ? value.join(', ') : String(value == null ? '' : value);
+      if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;
+      return '"' + text.replace(/"/g, '""') + '"';
+    }
+    const lines = [columns.map(function (column) { return cell(column[0]); }).join(',')];
+    report.rows.forEach(function (row) { lines.push(columns.map(function (column) { return cell(row[column[1]]); }).join(',')); });
+    return '\uFEFF' + lines.join('\r\n') + '\r\n';
+  }
+
   root.AdigunCADEngine = Object.freeze({
     componentSchemaVersion: COMPONENT_SCHEMA_VERSION,
     netSchemaVersion: 1,
@@ -512,6 +569,8 @@
     validateProject: validateProject,
     serializeProject: serializeProject,
     parseProject: parseProject,
-    analyze: analyze
+    analyze: analyze,
+    billOfMaterials: billOfMaterials,
+    billOfMaterialsCsv: billOfMaterialsCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
