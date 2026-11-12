@@ -212,6 +212,19 @@ test('PLC and inductive sensor use dedicated schematic glyphs and verified inspe
   assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
 });
 
+test('off-page connector references navigate to their target components with mouse and keyboard', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("group.setAttribute('role','link')"));
+  assert.ok(html.includes("group.setAttribute('tabindex','0')"));
+  assert.ok(html.includes("group.dataset.layer='connections'"));
+  assert.ok(html.includes('.wire,.wire-blue,.wire-dark,.cross-sheet-connector'));
+  assert.ok(html.includes("event.key==='Enter'||event.key===' '"));
+  assert.ok(html.includes('openCrossSheetConnector(connector)'));
+  assert.ok(html.includes('setSheet(connector.targetSheetId)'));
+  assert.ok(html.includes('object.ref===connector.targetRef'));
+  assert.ok(html.includes('state.selectedObjectIds=[target.id]'));
+});
+
 test('Siemens SITOP PSU100C keeps source-backed terminals, ratings and a dedicated existing-shell symbol', () => {
   const psu = engine.component('siemens-sitop-psu100c-6ep1332-5ba00');
   assert.equal(psu.manufacturer, 'Siemens');

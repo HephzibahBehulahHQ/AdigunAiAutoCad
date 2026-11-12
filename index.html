@@ -339,13 +339,24 @@
     graphics.forEach(function(connector){
       const sign=connector.direction==='left'?-1:1,x=connector.point.x,y=connector.point.y,end=x+sign*18;
       const group=document.createElementNS('http://www.w3.org/2000/svg','g');
-      group.setAttribute('class','cross-sheet-connector');group.setAttribute('aria-label',connector.name+' · '+connector.targetSheetNumber+' · '+connector.targetRef);group.style.pointerEvents='none';
+      group.setAttribute('class','cross-sheet-connector');group.dataset.layer='connections';group.setAttribute('role','link');group.setAttribute('tabindex','0');group.setAttribute('aria-label','Open '+connector.targetSheetNumber+' · '+connector.targetRef+' · '+connector.name);group.style.cursor='pointer';if(state.layerVisibility.connections===false)group.style.display='none';
+      group.addEventListener('click',function(event){event.stopPropagation();openCrossSheetConnector(connector);});
+      group.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();openCrossSheetConnector(connector);}});
+      const hitArea=document.createElementNS('http://www.w3.org/2000/svg','path');
+      hitArea.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));hitArea.setAttribute('fill','none');hitArea.setAttribute('stroke','transparent');hitArea.setAttribute('stroke-width','14');group.append(hitArea);
       const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));path.setAttribute('fill','none');path.setAttribute('stroke','#164eac');path.setAttribute('stroke-width','2');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');group.append(path);
+      path.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));path.setAttribute('fill','none');path.setAttribute('stroke','#164eac');path.setAttribute('stroke-width','2');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');path.style.pointerEvents='none';group.append(path);
       const anchor=sign<0?'end':'start',labelX=end+sign*7;
       [[connector.targetSheetNumber+' · '+connector.targetRef,y-5,10],[connector.name,y+10,9]].forEach(function(line){const text=document.createElementNS('http://www.w3.org/2000/svg','text');text.setAttribute('x',labelX);text.setAttribute('y',line[1]);text.setAttribute('text-anchor',anchor);text.setAttribute('font-size',String(line[2]));text.setAttribute('font-weight','600');text.setAttribute('fill','#164eac');text.textContent=line[0];group.append(text);});
       userDrawings.append(group);
     });
+  }
+  function openCrossSheetConnector(connector){
+    if(!setSheet(connector.targetSheetId))return;
+    const target=state.objects.find(function(object){return object.kind==='component-instance'&&object.ref===connector.targetRef;});
+    if(!target)return;
+    state.selected=target.id;state.selectedObjectIds=[target.id];renderObjects();showObject(target);
+    notify('Opened '+connector.targetSheetNumber+' · '+connector.targetRef+' from '+connector.name+'.');
   }
   function escapeHtml(value){return String(value==null?'':value).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
     function showObject(obj){
@@ -586,7 +597,7 @@
   $('#symbolList').addEventListener('click',e=>{const b=e.target.closest('[data-insert]');if(b)insertCatalogSymbol(b.dataset.insert);});
   $('#symbolSearch').addEventListener('input',e=>renderSymbolSidebar(e.target.value));
 
-  $('#inspectorContent').addEventListener('change',e=>{const key=e.target.dataset.layer;if(!key)return;const map={connections:'.wire,.wire-blue,.wire-dark',devices:'.drawing-object[data-object]',annotations:'.accent,.small,.medium,.tiny'};drawing.querySelectorAll(map[key]).forEach(el=>el.style.display=e.target.checked?'':'none');notify(`${key} layer ${e.target.checked?'shown':'hidden'}.`);});
+  $('#inspectorContent').addEventListener('change',e=>{const key=e.target.dataset.layer;if(!key)return;const map={connections:'.wire,.wire-blue,.wire-dark,.cross-sheet-connector',devices:'.drawing-object[data-object]',annotations:'.accent,.small,.medium,.tiny'};drawing.querySelectorAll(map[key]).forEach(el=>el.style.display=e.target.checked?'':'none');notify(`${key} layer ${e.target.checked?'shown':'hidden'}.`);});
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}if(e.target.closest('[data-delete-object]')){const id=e.target.closest('[data-delete-object]').dataset.deleteObject;pushUndo();state.objects=state.objects.filter(o=>o.id!==id);state.selected=null;renderObjects();$('#selectionDetails').innerHTML='<div class="inspector-title">Selection</div><div class="empty-selection">Select an electrical object on the sheet to inspect its drawing designation.</div>';persist();notify('Drawing object removed.');}});
   $('#inspectorContent').addEventListener('change',e=>{const coordinate=e.target.closest('[data-object-coordinate]');if(coordinate){updateObjectCoordinate(coordinate.dataset.objectId,coordinate.dataset.objectCoordinate,coordinate.value);return;}const textField=e.target.closest('[data-object-text]');if(textField){const obj=state.objects.find(function(item){return item.id===textField.dataset.objectText;});if(!obj||obj.kind!=='text')return;const next=textField.value.slice(0,120);if(next===obj.text)return;pushUndo();obj.text=next;renderObjects();persist();refreshSelectedProperties();notify('Drawing text updated.');}});
   $$('[data-new-sheet]').forEach(b=>b.addEventListener('click',()=>{addSheet(b.dataset.newSheet);$('#sheetDialog').close();}));

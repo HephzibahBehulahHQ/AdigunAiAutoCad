@@ -2080,3 +2080,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Verified save/reopen, reciprocal targets and exact global pin groups. Focused local suite: 52 tests passed. The approved workstation geometry was not changed; connector graphics render inside the existing sheet canvas.
 - No downstream load, total current, protection coordination, supply adequacy, behavior simulation or construction approval is established.
 - Next: continue the 100-sheet reference project in similarly small, source-backed increments.
+
+
+## 2026-11-12 incremental execution record — off-page navigation
+
+- Extended the A1/009 cross-sheet connectors to work as keyboard-accessible links. Mouse click, Enter, and Space open the referenced sheet and select the named terminal in the existing Properties panel.
+- Connector targets remain checked against the project model; deleting a linked sheet removes its stale links, and renaming a referenced component updates the connector label.
+- Preserved the workstation shell geometry. Focused suite now includes a navigation regression alongside project link, pin-group and save/reopen checks.
+- Next: continue with the next small, source-backed project milestone after this interaction increment is merged and deployed.
