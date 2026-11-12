@@ -1178,6 +1178,398 @@ Do not proceed with unrelated development until the required menu correction and
 
 ---
 
+
+
+# ELECTRICAL ENGINEERING DESIGN LIBRARY — REAL COMPONENTS FOR 50 INDUSTRIAL PROJECTS
+
+**Requirement:** Every component must represent a real, commercially available engineering device with an identifiable manufacturer, model number, technical specifications, terminals, and electrical connections.
+
+**No dummy components. No placeholder symbols. No fictional manufacturer part numbers.**
+
+The following is a proposed component library for designing the 50 projects. It is **not a claim that these components are already installed in an accessible CAD library**.
+
+## 1. INDUSTRIAL POWER AND DISTRIBUTION COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 1 | Miniature circuit breaker (MCB) | Siemens SENTRON 5SY |
+| 2 | Molded-case circuit breaker (MCCB) | Schneider Electric ComPacT NSX |
+| 3 | Air circuit breaker (ACB) | ABB SACE Emax 2 |
+| 4 | Residual-current circuit breaker (RCCB) | ABB F200 |
+| 5 | RCBO | ABB DS201 |
+| 6 | Motor protection circuit breaker | Siemens SIRIUS 3RV2 |
+| 7 | Fuse switch disconnector | Siemens SENTRON 3NP1 |
+| 8 | Industrial fuse | Eaton Bussmann series |
+| 9 | Fuse holder | Phoenix Contact |
+| 10 | Switch disconnector | ABB OT series |
+| 11 | Main isolator | Schneider Electric TeSys Vario |
+| 12 | Automatic transfer switch | Socomec ATyS |
+| 13 | Surge protection device | DEHNguard |
+| 14 | Power distribution block | Phoenix Contact PTFIX |
+| 15 | Busbar system | Rittal RiLine |
+| 16 | Current transformer | Schneider Electric PowerLogic |
+| 17 | Voltage transformer | ABB instrument transformers |
+| 18 | Multifunction power meter | Siemens SENTRON PAC |
+| 19 | Energy meter | Schneider Electric PowerLogic PM5000 |
+| 20 | Power quality analyzer | Janitza UMG 96 |
+
+## 2. MOTOR CONTROL COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 21 | Three-phase contactor | Siemens SIRIUS 3RT2 |
+| 22 | Reversing contactor assembly | Schneider Electric TeSys Deca |
+| 23 | Thermal overload relay | Siemens SIRIUS 3RU2 |
+| 24 | Electronic overload relay | Siemens SIRIUS 3RB3 |
+| 25 | Motor starter | Eaton PKZM0 |
+| 26 | Soft starter | ABB PSTX |
+| 27 | Variable-frequency drive | Siemens SINAMICS G120 |
+| 28 | Compact variable-frequency drive | ABB ACS580 |
+| 29 | Servo drive | Siemens SINAMICS S210 |
+| 30 | Servo motor | Siemens SIMOTICS S-1FK2 |
+| 31 | Three-phase induction motor | Siemens SIMOTICS GP |
+| 32 | Geared motor | SEW-EURODRIVE DRN series |
+| 33 | Motor brake | SEW-EURODRIVE brake systems |
+| 34 | Motor braking resistor | Siemens SINAMICS accessories |
+| 35 | Motor line reactor | Schneider Electric Altivar accessories |
+| 36 | EMC filter | Schaffner FN series |
+| 37 | Motor encoder | SICK DFS60 |
+| 38 | Motor thermistor relay | Siemens SIRIUS 3RN2 |
+| 39 | Motor monitoring relay | Schneider Electric Harmony Control |
+| 40 | Motor control center | Siemens SIVACON S8 |
+
+## 3. PLC AND INDUSTRIAL AUTOMATION COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 41 | Compact PLC | Siemens SIMATIC S7-1200 |
+| 42 | Modular PLC | Siemens SIMATIC S7-1500 |
+| 43 | Safety PLC | Siemens SIMATIC S7-1500F |
+| 44 | PLC CPU | Siemens CPU 1511-1 PN |
+| 45 | Digital input module | Siemens SM 521 |
+| 46 | Digital output module | Siemens SM 522 |
+| 47 | Analog input module | Siemens SM 531 |
+| 48 | Analog output module | Siemens SM 532 |
+| 49 | Remote I/O interface | Siemens ET 200SP |
+| 50 | Remote I/O station | WAGO 750 series |
+| 51 | PLC power supply | Siemens SITOP |
+| 52 | Industrial communication processor | Siemens SIMATIC CP |
+| 53 | PLC memory card | Siemens SIMATIC Memory Card |
+| 54 | Industrial Ethernet switch | Siemens SCALANCE XC |
+| 55 | Industrial router | Siemens SCALANCE M |
+| 56 | HMI touch panel | Siemens SIMATIC HMI Unified |
+| 57 | Industrial panel PC | Siemens SIMATIC IPC |
+| 58 | Industrial edge computer | Siemens Industrial Edge |
+| 59 | PLC interface relay | Phoenix Contact PLC-INTERFACE |
+| 60 | Signal conditioner | Phoenix Contact MINI Analog Pro |
+
+## 4. INDUSTRIAL SENSORS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 61 | Inductive proximity sensor | SICK IME |
+| 62 | Capacitive proximity sensor | ifm KI |
+| 63 | Photoelectric sensor | SICK W4 |
+| 64 | Ultrasonic sensor | Pepperl+Fuchs UC |
+| 65 | Laser distance sensor | SICK DT |
+| 66 | Magnetic cylinder sensor | Festo SMT-8M |
+| 67 | Mechanical limit switch | Schneider Electric XCK |
+| 68 | Rotary encoder | SICK DFS60 |
+| 69 | Linear position sensor | Balluff BTL |
+| 70 | Pressure transmitter | Endress+Hauser Cerabar |
+| 71 | Differential pressure transmitter | Siemens SITRANS P |
+| 72 | Temperature transmitter | Endress+Hauser iTEMP |
+| 73 | RTD temperature sensor | WIKA TR series |
+| 74 | Thermocouple | WIKA TC series |
+| 75 | Flowmeter | Endress+Hauser Promag |
+| 76 | Level transmitter | Endress+Hauser Micropilot |
+| 77 | Level switch | Endress+Hauser Liquiphant |
+| 78 | Conductivity sensor | Endress+Hauser Memosens |
+| 79 | pH sensor | Endress+Hauser Memosens CPS |
+| 80 | Vibration sensor | ifm VSA |
+
+## 5. INDUSTRIAL CONTROL AND SWITCHING
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 81 | Start pushbutton | Schneider Electric Harmony XB5 |
+| 82 | Stop pushbutton | Schneider Electric Harmony XB5 |
+| 83 | Emergency-stop device | Schneider Electric Harmony XB5 |
+| 84 | Selector switch | Schneider Electric Harmony XB5 |
+| 85 | Key-operated switch | Schneider Electric Harmony XB5 |
+| 86 | Pilot light | Schneider Electric Harmony XB5 |
+| 87 | Illuminated pushbutton | Schneider Electric Harmony XB5 |
+| 88 | Control relay | Finder 55 series |
+| 89 | Timer relay | Siemens SIRIUS 3RP |
+| 90 | Monitoring relay | Siemens SIRIUS 3UG |
+| 91 | Safety relay | Pilz PNOZ X |
+| 92 | Safety controller | Pilz PNOZmulti 2 |
+| 93 | Solid-state relay | Carlo Gavazzi RGC |
+| 94 | Interface relay | Phoenix Contact PLC-RSC |
+| 95 | Latching relay | Finder 26 series |
+| 96 | Temperature controller | Omron E5CC |
+| 97 | PID process controller | Eurotherm 3200 |
+| 98 | Signal isolator | Phoenix Contact MINI Analog Pro |
+| 99 | Alarm annunciator | Eaton M22 |
+| 100 | Industrial buzzer | Werma |
+
+## 6. TERMINALS, WIRING AND CONNECTION COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 101 | Feed-through terminal | Phoenix Contact UK 5 N |
+| 102 | Ground terminal | Phoenix Contact USLKG |
+| 103 | Fuse terminal | Phoenix Contact UK 5-HESI |
+| 104 | Disconnect terminal | Phoenix Contact UT series |
+| 105 | Sensor terminal | Phoenix Contact PT series |
+| 106 | Multi-level terminal | Phoenix Contact ST series |
+| 107 | Terminal jumper | Phoenix Contact FBS |
+| 108 | Terminal end plate | Phoenix Contact |
+| 109 | Terminal end clamp | Phoenix Contact |
+| 110 | DIN rail | Phoenix Contact NS 35 |
+| 111 | Wire duct | Panduit |
+| 112 | Cable gland | LAPP SKINTOP |
+| 113 | Cable marker | Phoenix Contact |
+| 114 | Wire marker | Weidmüller |
+| 115 | Ferrule | Weidmüller |
+| 116 | Ring cable lug | Klauke |
+| 117 | Industrial connector | Harting Han |
+| 118 | M12 sensor connector | Phoenix Contact |
+| 119 | Multipole connector | Harting Han |
+| 120 | Industrial Ethernet connector | Siemens IE FC RJ45 |
+
+## 7. INDUSTRIAL POWER SUPPLIES
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 121 | 24 V DC power supply | Siemens SITOP PSU6200 |
+| 122 | Redundant power supply module | Siemens SITOP RED |
+| 123 | DC UPS | Siemens SITOP UPS1600 |
+| 124 | Industrial battery module | Siemens SITOP BAT1600 |
+| 125 | DC/DC converter | Phoenix Contact QUINT |
+| 126 | AC/DC converter | Mean Well SDR |
+| 127 | Control transformer | Schneider Electric Phaseo |
+| 128 | Isolation transformer | BLOCK |
+| 129 | Electronic circuit protector | Phoenix Contact CAPAROC |
+| 130 | Power monitoring module | Siemens SITOP |
+
+## 8. PNEUMATIC AND HYDRAULIC COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 131 | Pneumatic solenoid valve | Festo VUVG |
+| 132 | Pneumatic valve terminal | Festo VTUG |
+| 133 | Pneumatic cylinder | Festo DSBC |
+| 134 | Compact pneumatic cylinder | Festo ADN |
+| 135 | Pneumatic gripper | Festo DHPS |
+| 136 | Air preparation unit | Festo MS series |
+| 137 | Pressure regulator | Festo LR |
+| 138 | Pressure sensor | Festo SPAN |
+| 139 | Flow control valve | Festo GRLA |
+| 140 | Vacuum generator | Festo OVEM |
+| 141 | Hydraulic directional valve | Bosch Rexroth 4WE |
+| 142 | Hydraulic proportional valve | Bosch Rexroth |
+| 143 | Hydraulic pressure sensor | Bosch Rexroth |
+| 144 | Hydraulic power unit | Bosch Rexroth CytroPac |
+| 145 | Hydraulic cylinder | Bosch Rexroth |
+
+## 9. BUILDING, ENERGY AND POWER SYSTEM COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 146 | Solar inverter | SMA Sunny Tripower |
+| 147 | Hybrid inverter | Fronius GEN24 |
+| 148 | PV DC isolator | ABB OTDC |
+| 149 | PV surge protector | DEHNguard |
+| 150 | PV connector | Stäubli MC4 |
+| 151 | Battery inverter | SMA Sunny Island |
+| 152 | Battery energy storage system | Tesla Megapack |
+| 153 | EV charging station | ABB Terra |
+| 154 | EV charging controller | Phoenix Contact CHARX |
+| 155 | Generator controller | ComAp InteliLite |
+| 156 | Automatic transfer switch | Socomec ATyS |
+| 157 | UPS system | Schneider Electric Galaxy |
+| 158 | Power monitoring meter | Schneider Electric PowerLogic |
+| 159 | Building automation controller | Siemens Desigo PXC |
+| 160 | HVAC actuator | Belimo |
+| 161 | HVAC differential pressure sensor | Siemens |
+| 162 | Fire alarm interface module | Siemens Cerberus PRO |
+| 163 | Emergency lighting controller | Eaton |
+| 164 | Refrigeration controller | Danfoss AK-CC |
+| 165 | Energy management gateway | Siemens |
+
+## 10. ROBOTICS AND MACHINE SAFETY COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 166 | Industrial robot | ABB IRB 1200 |
+| 167 | Industrial robot controller | ABB OmniCore |
+| 168 | Collaborative robot | Universal Robots UR10e |
+| 169 | Robot gripper | SCHUNK |
+| 170 | Robot tool changer | ATI Industrial Automation |
+| 171 | Safety light curtain | SICK deTec4 |
+| 172 | Safety laser scanner | SICK microScan3 |
+| 173 | Safety door switch | Schmersal AZM |
+| 174 | Safety relay | Pilz PNOZ |
+| 175 | Safety PLC | Siemens S7-1500F |
+| 176 | Two-hand control station | Schneider Electric |
+| 177 | Emergency-stop pushbutton | Eaton M22 |
+| 178 | Safety enabling switch | EUCHNER |
+| 179 | Safety encoder | SICK |
+| 180 | Safety-rated drive | Siemens SINAMICS |
+
+## 11. ADDITIONAL SPECIALIZED COMPONENTS
+
+| # | Component | Real manufacturer / product family |
+|---|---|---|
+| 181 | Industrial weighing transmitter | Siemens SIWAREX |
+| 182 | Load cell | HBM Z6 |
+| 183 | Barcode scanner | SICK CLV |
+| 184 | RFID reader | Siemens SIMATIC RF |
+| 185 | Machine vision camera | Cognex In-Sight |
+| 186 | Industrial lighting | Banner Engineering |
+| 187 | Industrial network gateway | HMS Anybus |
+| 188 | Modbus gateway | Moxa MGate |
+| 189 | Industrial wireless access point | Siemens SCALANCE W |
+| 190 | Remote telemetry unit | Schneider Electric SCADAPack |
+| 191 | Data logger | Campbell Scientific CR1000X |
+| 192 | Industrial alarm dialer | Ewon |
+| 193 | Industrial vibration monitor | ifm VSE |
+| 194 | Condition monitoring system | SKF IMx |
+| 195 | Industrial panel enclosure | Rittal AX |
+| 196 | Floor-standing enclosure | Rittal VX25 |
+| 197 | Enclosure cooling unit | Rittal Blue e+ |
+| 198 | Enclosure thermostat | STEGO |
+| 199 | Enclosure heater | STEGO |
+| 200 | Cabinet fan/filter unit | Rittal |
+
+---
+
+# 12. REAL PROJECT EXAMPLES — ALL 50 PROJECTS
+
+Each project below uses real equipment families. The listed equipment is a starting bill of materials, **not a completed or verified electrical design**.
+
+| Project | Real components to use |
+|---|---|
+| 01. Reversing motor starter | Siemens 3RT2, 3RV2, 3RU2, SIMOTICS GP, Harmony XB5 |
+| 02. Star–delta starter | Siemens 3RT2 contactors, 3RP timer, 3RU2 overload, SIMOTICS GP |
+| 03. VFD conveyor | Siemens S7-1200, SINAMICS G120, SICK W4, SEW DRN |
+| 04. Servo motion cell | Siemens S7-1500, SINAMICS S210, SIMOTICS S-1FK2, SICK encoders |
+| 05. Duty/standby pump | ABB PSTX, Siemens S7-1200, Endress+Hauser Cerabar |
+| 06. Segmented MCC | Siemens SIVACON S8, 3RV2, 3RT2, SENTRON PAC |
+| 07. Industrial fan bank | ABB ACS580, Siemens S7-1500, SITRANS P |
+| 08. Packaging machine | Siemens S7-1500, ET 200SP, Festo VUVG, SICK W4 |
+| 09. Hoist/crane control | SEW drives and brakes, Siemens PLC, SICK encoders |
+| 10. Hydraulic power unit | Bosch Rexroth CytroPac, 4WE valves, Siemens PLC |
+| 11. Modular PLC cabinet | Siemens S7-1500, ET 200SP, SITOP, SCALANCE |
+| 12. Water-treatment plant | Siemens S7-1500, Endress+Hauser Memosens, Promag |
+| 13. Wastewater lift station | Schneider SCADAPack, ABB PSTX, Endress+Hauser Micropilot |
+| 14. Food processing line | Siemens S7-1500, SEW drives, SICK sensors |
+| 15. Chemical batch reactor | Siemens S7-1500, Endress+Hauser temperature/pressure instruments |
+| 16. Brewery/CIP skid | Siemens PLC, Endress+Hauser Promag, Memosens sensors |
+| 17. Industrial oven | Eurotherm 3200, WIKA thermocouples, Carlo Gavazzi SSR |
+| 18. HVAC AHU | Siemens Desigo PXC, Belimo actuators, Siemens sensors |
+| 19. Cold storage | Danfoss AK-CC, pressure sensors, refrigeration actuators |
+| 20. Warehouse sorter | Siemens S7-1500, SINAMICS G120, SICK scanners |
+| 21. LV distribution board | ABB SACE Emax 2, ComPacT NSX, PowerLogic |
+| 22. Industrial subdistribution | Siemens SENTRON, Janitza UMG, Phoenix terminals |
+| 23. Emergency lighting | Eaton emergency lighting equipment, Socomec ATS |
+| 24. Building automation | Siemens Desigo PXC, Belimo, Siemens field sensors |
+| 25. Solar PV | SMA Sunny Tripower, Stäubli MC4, ABB OTDC, DEHN |
+| 26. Battery storage | Tesla Megapack, Siemens monitoring equipment |
+| 27. EV charging | ABB Terra, Phoenix Contact CHARX, PowerLogic |
+| 28. Generator ATS | ComAp InteliLite, Socomec ATyS, SENTRON PAC |
+| 29. UPS bypass | Schneider Galaxy, Socomec switching, PowerLogic |
+| 30. Data-center alarms | Siemens PLC, Phoenix Contact relays, Rittal enclosures |
+| 31. Robotic welding | ABB IRB 1200, OmniCore, Siemens safety PLC |
+| 32. CNC auxiliary controls | Siemens S7-1500, SINAMICS, SICK sensors |
+| 33. Assembly-line safety | Pilz PNOZmulti 2, SICK deTec4, Schmersal AZM |
+| 34. Pneumatic pick-and-place | Festo DSBC, VUVG, SMT-8M, Siemens PLC |
+| 35. Injection molding | Siemens PLC, Bosch Rexroth hydraulics, WIKA sensors |
+| 36. Printing press | Siemens SINAMICS S210, S7-1500, SICK encoders |
+| 37. Textile machine | ABB ACS580, Siemens PLC, SICK sensors |
+| 38. Pharmaceutical filling | Siemens PLC, Festo pneumatics, Cognex vision |
+| 39. Automated palletizer | ABB robot, Siemens PLC, SICK scanners |
+| 40. Industrial test bench | Siemens PLC, HBM load cells, Janitza meters |
+| 41. IEC machine panel | Siemens SIRIUS, SIMATIC, Phoenix Contact, Rittal |
+| 42. NFPA 79 machine panel | Rockwell Automation, Allen-Bradley, Panduit |
+| 43. UL 508A panel example | Rockwell Automation, Eaton, Panduit, Rittal |
+| 44. Marshalling cabinet | Phoenix Contact terminals, Weidmüller markers, Harting |
+| 45. Marine auxiliary panel | ABB switching, Siemens monitoring, approved marine equipment |
+| 46. Irrigation automation | Siemens S7-1200, Festo valves, Endress+Hauser sensors |
+| 47. Railway auxiliary controls | Siemens PLC, Phoenix Contact terminals, industrial relays |
+| 48. Mining ventilation | ABB ACS580, Siemens PLC, industrial sensors |
+| 49. Hospital auxiliary alarms | Siemens monitoring, Phoenix Contact relays, Rittal cabinets |
+| 50. Training laboratory | Siemens S7-1200, SIRIUS contactors, Festo valves, SICK sensors |
+
+---
+
+# 13. COMPONENT DATA REQUIRED INSIDE THE ENGINEERING CANVAS
+
+Every real component entered into the library should contain these **30 fields**:
+
+1. Manufacturer
+2. Manufacturer part number
+3. Product family
+4. Component category
+5. Component description
+6. Electrical symbol
+7. IEC symbol representation
+8. ANSI/NFPA symbol representation, where applicable
+9. Rated operating voltage
+10. Rated operating current
+11. Rated power
+12. Operating frequency
+13. Terminal numbers
+14. Terminal names
+15. Pin definitions
+16. Connection types
+17. Electrical characteristics
+18. Mechanical dimensions
+19. Mounting method
+20. Protection rating
+21. Operating temperature
+22. Manufacturer datasheet
+23. Manufacturer installation manual
+24. Wiring diagram
+25. Connection diagram
+26. Compatible accessories
+27. Compatible components
+28. Component reference designation
+29. Component revision/version
+30. Verified source and verification date
+
+**Important:** Not every field applies to every component. A mechanical enclosure, for example, does not have an operating current or electrical pinout.
+
+---
+
+# 14. REAL ENGINEERING PROJECT DOCUMENTATION — 100+ SHEETS PER PROJECT
+
+Each of the 50 projects should have its own independent documentation package.
+
+| Sheet range | Documentation |
+|---|---|
+| 001–005 | Cover, project information, revision history |
+| 006–010 | Drawing index and standards |
+| 011–020 | Electrical power distribution |
+| 021–030 | Motor and drive circuits |
+| 031–040 | PLC and control circuits |
+| 041–050 | Sensors and instrumentation |
+| 051–060 | Safety and interlocking circuits |
+| 061–070 | Terminal and wiring diagrams |
+| 071–080 | Cable schedules and connections |
+| 081–090 | Equipment layouts and panel drawings |
+| 091–100 | Bills of materials, testing and commissioning |
+| 101–110 | Installation and maintenance documentation |
+| 111–120 | Calculations, verification and project-specific documentation |
+
+**120 sheets per project × 50 projects = 6,000 sheets.**
+
+These are proposed documentation structures, not completed drawings. Sheet allocation must be adapted to each project's actual topology, and every sheet must contain meaningful project-specific information.
+
+---
+
+
 ## 10. PERMANENT REPOSITORY REFERENCE
 
 Store this document in the project's designated goals, governance, or standards repository.
