@@ -2,12 +2,23 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
 require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
 const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
+
+test('the shipped workspace inline script parses before UI handlers initialize', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+    .filter(match => !/\bsrc\s*=/.test(match[1]));
+  assert.equal(inlineScripts.length, 1);
+  assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
+});
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();

@@ -97,7 +97,7 @@
 <dialog id="sheetDialog" aria-label="Add drawing sheet"><div class="dialog-head"><span>New drawing sheet</span><span class="grow"></span><button id="closeSheetDialog" aria-label="Close dialog">×</button></div><div class="dialog-body"><p class="notice">Choose a drawing type to add a properly indexed, titled project sheet.</p><button class="command-item" data-new-sheet="Power supply"><span>＋</span><span>Power supply · IEC A3</span></button><button class="command-item" data-new-sheet="Control circuit"><span>＋</span><span>Control circuit · IEC A3</span></button><button class="command-item" data-new-sheet="PLC / I/O"><span>＋</span><span>PLC / I/O · IEC A3</span></button></div></dialog>
 <script src="./cad-engine.js"></script>
 <script>(()=>{
-  const $=(s,root=document)=>root.querySelector(s), $=(s,root=document)=>Array.from(root.querySelectorAll(s));
+  const $=(s,root=document)=>root.querySelector(s), $$=(s,root=document)=>Array.from(root.querySelectorAll(s));
   const app=$('#app'), workspace=$('#workspace'), drawing=$('#drawing'), wrap=$('#drawingWrap'), stage=$('#canvasStage'), design=$('#sheetDesign'), userDrawings=$('#userDrawings'), toast=$('#toast'), status=$('#statusText');
   const state={sheet:'control',zoom:100,theme:'light',grid:true,snap:true,ortho:false,osnap:true,tool:'select',selected:null,objects:[],undo:[],redo:[],drawing:false,pan:null,strokeColor:'#164eac',fillColor:'#f8fafc',fillEnabled:false,view:{x:0,y:0,w:1200,h:760},sheets:[]};
   let dirty=false,initializing=true;
