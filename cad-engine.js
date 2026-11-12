@@ -213,7 +213,91 @@
       retrievedAt: '2026-11-12'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition });
+  const motorStarterDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION,
+    id: 'siemens-3rm1201-1aa04',
+    manufacturer: 'Siemens',
+    manufacturerPartNumber: '3RM1201-1AA04',
+    model: 'SIRIUS 3RM1 3RM1201-1AA04',
+    name: '24 V DC reversing motor starter',
+    family: 'motor-starter-reversing',
+    referencePrefix: 'Q',
+    category: 'Electrical · Verified reversing motor starter',
+    symbol: {
+      id: 'motor-starter.sirius-3rm12.3rm1201-1aa04.v1',
+      view: 'schematic',
+      unit: 'mm',
+      width: 240,
+      height: 220,
+      pins: [
+        { id: 'power-l1', localNumber: '1/L1', name: 'Phase L1 line terminal', x: -50, y: -110, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'power-l2', localNumber: '3/L2', name: 'Phase L2 line terminal', x: 0, y: -110, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'power-l3', localNumber: '5/L3', name: 'Phase L3 line terminal', x: 50, y: -110, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'power-t1', localNumber: '2/T1', name: 'Motor phase T1 output', x: -50, y: 110, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'power-t2', localNumber: '4/T2', name: 'Motor phase T2 output', x: 0, y: 110, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'power-t3', localNumber: '6/T3', name: 'Motor phase T3 output', x: 50, y: 110, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'control-a1', localNumber: 'A1', name: '24 V DC control supply positive', x: -120, y: -75, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'control-in1', localNumber: 'IN1', name: 'Start input, direction 1', x: -120, y: -45, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'control-in2', localNumber: 'IN2', name: 'Start input, direction 2', x: -120, y: -15, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'control-in3', localNumber: 'IN3', name: 'Reset input', x: -120, y: 15, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'control-a2', localNumber: 'A2', name: '24 V DC control supply return', x: -120, y: 45, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'signal-out', localNumber: 'OUT', name: 'Run signaling output, 24 V DC version', x: 120, y: -60, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'signal-95', localNumber: '95', name: 'Fault signaling contact common', x: 120, y: -20, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'signal-96', localNumber: '96', name: 'Fault signaling contact terminal 96', x: 120, y: 20, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'signal-98', localNumber: '98', name: 'Fault signaling contact terminal 98', x: 120, y: 60, electricalType: 'passive', connectionType: 'screw' }
+      ],
+      internalConnections: [],
+      numberingNote: 'Terminal designations and positions follow Siemens SIRIUS 3RM1 equipment manual circuit diagrams. The model preserves each external connection independently; direction switching, protection and signal-contact state are not simulated.'
+    },
+    electricalFunctions: {
+      reversingStarter: {
+        lineTerminals: ['power-l1', 'power-l2', 'power-l3'],
+        motorTerminals: ['power-t1', 'power-t2', 'power-t3'],
+        directionInputs: ['control-in1', 'control-in2'],
+        controlSupply: ['control-a1', 'control-a2'],
+        resetInput: 'control-in3',
+        runSignalOutput: 'signal-out',
+        faultSignalContacts: ['signal-95', 'signal-96', 'signal-98'],
+        simulationNote: 'The 3RM12 contains a reversing starter. Internal power switching, motor protection response, direction interlocking and signal-contact behavior are not simulated or included as phantom nets.'
+      }
+    },
+    specifications: {
+      maximumRatedOperationalVoltage: { value: 500, unit: 'V' },
+      ratedMotorPowerAt400V: { value: 0.12, unit: 'kW', note: 'Maximum motor power at 400 V AC per Siemens catalog.' },
+      adjustableRatedOperationalCurrent: { minimum: 0.1, maximum: 0.5, unit: 'A' },
+      controlSupplyVoltage: { value: 24, unit: 'V DC' },
+      connectionMethod: { value: 'Screw terminals' },
+      starterType: { value: 'Standard reversing starter, 3RM12' },
+      mainCircuitTerminals: { value: ['1/L1', '3/L2', '5/L3', '2/T1', '4/T2', '6/T3'] },
+      controlCircuitTerminals: { value: ['A1', 'A2', 'IN1', 'IN2', 'IN3', 'OUT'] },
+      faultSignalTerminals: { value: ['95', '96', '98'] }
+    },
+    instanceProperties: {
+      terminalStrip: { type: 'string', default: '', maximumLength: 40 },
+      position: { type: 'string', default: '', maximumLength: 24 },
+      marking: { type: 'string', default: '', maximumLength: 40 },
+      comment: { type: 'string', default: '', maximumLength: 160 }
+    },
+    sources: [
+      {
+        publisher: 'Siemens',
+        title: '3RM1201-1AA04 · SIRIUS 3RM1 reversing starter · Industry Mall',
+        url: 'https://mall.industry.siemens.com/mall/en/en/Catalog/Product/?mlfb=3RM1201-1AA04',
+        documentRevision: 'Live manufacturer product catalog; retrieved 2026-11-12.',
+        revisionNote: 'Confirms exact active article number, reversing-starter family, 500 V, 0–0.12 kW, 0.1–0.5 A, 24 V DC and screw terminals.',
+        retrievedAt: '2026-11-12'
+      },
+      {
+        publisher: 'Siemens',
+        title: 'SIRIUS 3RM1 Motor Starter · Equipment Manual',
+        url: 'https://cache.industry.siemens.com/dl/files/730/66295730/att_919653/v3/manual_motorstarter_SIRIUS_3RM1_en-US.pdf',
+        documentRevision: 'Equipment Manual, 09/2024, A5E0345285095020A/RS-AJ/009.',
+        revisionNote: 'Circuit diagrams and terminal-cover layout identify phase, motor, supply, direction, reset, run-signal and fault-signal terminals for the standard 24 V DC 3RM12 reversing starter.',
+        retrievedAt: '2026-11-12'
+      }
+    ]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorStarterDefinition.id]: motorStarterDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
