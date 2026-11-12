@@ -105,7 +105,7 @@
   function closeObjectContextMenu(){objectContextMenu.hidden=true;objectContextMenu.replaceChildren();}
   function openObjectContextMenu(obj,event){state.selected=obj.id;objectContextMenu.replaceChildren();const title=document.createElement('div');title.textContent=(obj.ref?obj.ref+' · ':'')+(obj.kind==='component-instance'?(window.AdigunCADEngine.component(obj.componentId)?.name||'Component'):obj.kind);Object.assign(title.style,{padding:'8px 10px',fontWeight:'700',color:'#67e8f9',borderBottom:'1px solid #28384d'});objectContextMenu.append(title);[['properties','Properties'],['move','Move to point…'],['rotate','Rotate 90° clockwise'],['duplicate','Duplicate'],['delete','Delete']].forEach(function(entry){const button=document.createElement('button');button.type='button';button.dataset.objectCommand=entry[0];button.setAttribute('role','menuitem');button.textContent=entry[1];Object.assign(button.style,{display:'block',width:'100%',padding:'8px 10px',borderRadius:'5px',textAlign:'left',color:entry[0]==='delete'?'#fca5a5':'#e9f2fa',background:'transparent',font:'inherit',cursor:'pointer'});button.addEventListener('mouseenter',function(){button.style.background='#21334b';});button.addEventListener('mouseleave',function(){button.style.background='transparent';});objectContextMenu.append(button);});objectContextMenu.hidden=false;objectContextMenu.style.left=Math.max(4,Math.min(event.clientX,innerWidth-objectContextMenu.offsetWidth-4))+'px';objectContextMenu.style.top=Math.max(4,Math.min(event.clientY,innerHeight-objectContextMenu.offsetHeight-4))+'px';}
   objectContextMenu.addEventListener('click',function(event){const button=event.target.closest('[data-object-command]');if(!button)return;const id=state.selected,command=button.dataset.objectCommand;closeObjectContextMenu();if(command==='properties'){const obj=state.objects.find(function(item){return item.id===id;});if(obj){showObject(obj);openInspector('Properties');}}else if(command==='move'){state.pendingMoveObjectId=id;state.tool='select';notify('Move mode: click the destination on the sheet · Esc to cancel.');}else if(command==='rotate')rotateObject(id);else if(command==='duplicate')duplicateObject(id);else if(command==='delete')deleteObject(id);});document.addEventListener('pointerdown',function(event){if(!objectContextMenu.hidden&&!objectContextMenu.contains(event.target)&&!(event.target.closest&&event.target.closest('[data-object]')))closeObjectContextMenu();});document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!objectContextMenu.hidden)closeObjectContextMenu();});
-  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();});
+  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();});
   const sheetNames={title:['A1/000','Title page'],contents:['A1/001','Contents'],device:['A1/005','Device list'],power:['A1/010','Power supply'],control:['A1/020','Control circuit'],plc:['A2/030','PLC / I/O'],drive:['A2/040','Drive interface'],safety:['A2/050','Safety circuit'],layout:['A3/100','Enclosure layout'],terminals:['A3/120','Terminal strip'],bom:['A3/200','Bill of materials']};
   const symbolNames={terminal:'Terminal · 2-pin',relay:'Relay coil · K',contact:'NO contact · 13 / 14',breaker:'Protective switch',sensor:'Sensor · 3-wire',motor:'Three-phase motor',plc:'PLC I/O module · 8-point',ground:'Protective earth'};
   const symbolCatalog=window.AdigunCADEngine.catalog();
@@ -363,6 +363,7 @@
   drawing.addEventListener('wheel',e=>{e.preventDefault();const before=svgPoint(e),factor=e.deltaY<0?.9:1.1;state.zoom=Math.max(35,Math.min(240,Math.round(state.zoom/factor/5)*5));const point=svgPoint(e);state.view.x+=(before.x-point.x);state.view.y+=(before.y-point.y);state.view.w*=factor;state.view.h*=factor;applyView();persist();},{passive:false});
   function saveLocal(){const payload={product:'Adigun AI AutoCAD',project:'Untitled electrical project',savedAt:new Date().toISOString(),activeSheet:state.sheet,theme:state.theme,zoom:state.zoom,view:state.view,objects:state.objects,sheets:state.sheets};let serialized;try{serialized=window.AdigunCADEngine.serializeProject(payload);}catch(error){notify('Project was not saved: '+error.message);return;}const blob=new Blob([serialized],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Adigun-AutoCAD-project.adigun.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);dirty=false;notify('Project downloaded with verified component data. Reopen it with Open project file.');}
   function exportBillOfMaterialsCsv(){try{const csv=window.AdigunCADEngine.billOfMaterialsCsv(state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-bom-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('BOM CSV exported with manufacturer sources and retrieval dates.');}catch(error){notify(error.message||'BOM CSV export failed.');}}
+  function exportWireListCsv(){try{const csv=window.AdigunCADEngine.wireListCsv(state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-wire-list-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('Wire list CSV exported from authored model geometry.');}catch(error){notify(error.message||'Wire list CSV export failed.');}}
   function exportSvg(){const clone=drawing.cloneNode(true);clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.removeAttribute('role');clone.removeAttribute('aria-label');const xml=new XMLSerializer().serializeToString(clone);const blob=new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${xml}`],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${sheetNames[state.sheet]?.[0]||state.sheets.find(s=>s.id===state.sheet)?.number||'sheet'}-drawing.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);notify('SVG drawing exported with embedded vector geometry.');}
   function selectPanel(id){const project=id==='project',symbols=id==='symbols';$('#projectPanel').hidden=!project;$('#symbolsPanel').hidden=!symbols;if(id==='layers'){openInspector('Layers and visibility');return;}$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.panel===id)));}
   function openInspector(name){
@@ -373,6 +374,7 @@
     const panel=$('#inspectorContent');
     if(name==='Electrical checks'){
       const report=window.AdigunCADEngine.analyze(state.objects);
+      const wireReport=window.AdigunCADEngine.wireList(state.objects);
       const findings=[];
       if(report.openEndpointCount)findings.push(report.openEndpointCount+' open wire endpoints.');
       if(report.unconnectedPinCount)findings.push(report.unconnectedPinCount+' component pins are not connected to a wire.');
@@ -384,6 +386,14 @@
         : findings.length
           ? '<div class="assistant-state"><span style="color:#f0bd4b">●</span><span><b>Review required</b><br>'+findings.join('<br>')+'</span></div>'
           : '<div class="assistant-state"><span style="color:#73e6f4">●</span><span><b>No wire geometry issues found</b><br>Connectivity is based on authored wire endpoints and orthogonal bends.</span></div>';
+      const wireRows=wireReport.rows.map(function(row){
+        const pins=row.netPinRefs.length?row.netPinRefs.join(', '):'No verified component pins are attached to this net.';
+        return '<div class="inspector-block"><div class="property-row"><span>'+escapeHtml(row.wireId)+' · '+escapeHtml(row.netId)+'</span><strong>'+row.lengthMm.toFixed(3)+' mm</strong></div>'
+          +'<div class="notice">Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div></div>';
+      }).join('');
+      const wireErrors=wireReport.errors.length
+        ? '<p class="notice">Wire list export unavailable: '+wireReport.errors.map(escapeHtml).join('<br>')+'</p>'
+        : '';
       panel.innerHTML='<div class="inspector-block"><div class="inspector-title">Electrical checks · project geometry</div>'
         +'<div class="property-row"><span>Authored wires</span><strong>'+report.wireCount+'</strong></div>'
         +'<div class="property-row"><span>Verified components</span><strong>'+report.componentCount+'</strong></div>'
@@ -393,7 +403,12 @@
         +'<div class="property-row"><span>Connected nets</span><strong>'+report.netCount+'</strong></div>'
         +'<div class="property-row"><span>Open endpoints</span><strong>'+report.openEndpointCount+'</strong></div>'
         +'<div class="property-row"><span>Geometry errors</span><strong>'+report.geometryErrorCount+'</strong></div>'
-        +details+'<p class="notice">This report checks source-backed component pins and authored wire geometry only. It does not evaluate electrical suitability, standards compliance, or safety.</p></div>';
+        +details+'<p class="notice">This report checks source-backed component pins and authored wire geometry only. It does not evaluate electrical suitability, standards compliance, or safety.</p></div>'
+        +'<div class="inspector-block"><div class="inspector-title">Wire list · authored model geometry</div>'
+        +(wireRows||'<p class="notice">No authored wire segments are available in the project model.</p>')
+        +wireErrors
+        +'<button type="button" data-export-wire-list '+(!wireReport.valid||!wireReport.rows.length?'disabled ':'')+'style="border:1px solid var(--line);padding:4px 8px;border-radius:5px;background:var(--navy-3);font:inherit;color:inherit;white-space:nowrap">Export wire list CSV</button>'
+        +'<p class="notice">Lengths follow the editor’s orthogonal route geometry. Pin references identify exact connected component pins; no wire numbers are inferred.</p></div>';
     }else if(name==='Bill of materials'){
       const report=window.AdigunCADEngine.billOfMaterials(state.objects);
       let rows='';

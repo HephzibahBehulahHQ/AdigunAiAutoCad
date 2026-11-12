@@ -32,6 +32,8 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function duplicateObject\(id\)/);
   assert.match(inlineScripts[0][2], /data-export-bom/);
   assert.match(inlineScripts[0][2], /billOfMaterialsCsv/);
+  assert.match(inlineScripts[0][2], /wireListCsv/);
+  assert.match(inlineScripts[0][2], /data-export-wire-list/);
   assert.match(inlineScripts[0][2], /function deleteObject\(id\)/);
   assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
 });
@@ -298,5 +300,53 @@ test('BOM refuses legacy visual-only engineering glyphs', () => {
   assert.equal(report.valid, false);
   assert.match(report.errors[0], /unverified legacy symbol/);
   assert.throws(() => engine.billOfMaterialsCsv([visualOnly]), /BOM export blocked/);
+});
+
+
+test('wire list derives IDs, pin references, nets and orthogonal route lengths from model geometry', () => {
+  const terminal = engine.createInstance(componentId, 580, 415, 'X1');
+  const wires = [
+    { id: 'W2', kind: 'wire', x1: 615, y1: 415, x2: 660, y2: 425 },
+    { id: 'W1', kind: 'wire', x1: 500, y1: 415, x2: 545, y2: 415 }
+  ];
+  const report = engine.wireList([terminal, ...wires]);
+  assert.equal(report.valid, true);
+  assert.deepEqual(report.rows.map(row => [row.wireId, row.netId, row.lengthMm]), [
+    ['W1', 'net-1', 45],
+    ['W2', 'net-1', 55]
+  ]);
+  assert.deepEqual(report.rows[0].endPinRefs, ['X1:1']);
+  assert.deepEqual(report.rows[1].startPinRefs, ['X1:2']);
+  assert.deepEqual(report.rows[0].netPinRefs, ['X1:1', 'X1:2']);
+  assert.equal('wireNumber' in report.rows[0], false);
+});
+
+test('wire list CSV is deterministic and protects spreadsheet formula prefixes', () => {
+  const terminal = engine.createInstance(componentId, 580, 415, 'X1');
+  const objects = [
+    terminal,
+    { id: '=1+1', kind: 'wire', x1: 0, y1: 0, x2: 10, y2: 0 },
+    { id: 'W2', kind: 'wire', x1: 615, y1: 415, x2: 660, y2: 425 },
+    { id: 'W1', kind: 'wire', x1: 500, y1: 415, x2: 545, y2: 415 }
+  ];
+  const csv = engine.wireListCsv(objects);
+  assert.ok(csv.startsWith('\uFEFF'));
+  assert.match(csv, /"Wire ID"/);
+  assert.match(csv, /"'=1\+1"/);
+  assert.equal(csv, engine.wireListCsv([...objects].reverse()));
+});
+
+test('wire list blocks duplicate IDs, invalid geometry and unverified legacy symbols', () => {
+  const duplicate = engine.wireList([
+    { id: 'W1', kind: 'wire', x1: 0, y1: 0, x2: 10, y2: 0 },
+    { id: 'W1', kind: 'wire', x1: 20, y1: 0, x2: 30, y2: 0 }
+  ]);
+  assert.equal(duplicate.valid, false);
+  assert.throws(() => engine.wireListCsv([
+    { id: 'bad', kind: 'wire', x1: 1, y1: 1, x2: 1, y2: 1 }
+  ]), /Wire list export blocked/);
+  assert.throws(() => engine.wireListCsv([
+    { id: 'legacy-diode', kind: 'catalog-symbol', symbolId: 'diode', x: 0, y: 0 }
+  ]), /Wire list export blocked/);
 });
 
