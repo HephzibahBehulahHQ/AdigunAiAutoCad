@@ -2060,3 +2060,13 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Kept A1/006 and A1/007 electrically separate. The candidate tie points on A1/006 resolve to unlabeled control nets, so no 24 V / 0 V connection is asserted without source evidence. Cross-sheet electrical links remain a future milestone after the interface is verified.
 - Supply adequacy, protection coordination, PLC/sensor behavior, motor behavior and construction readiness are not established. A1/008–A1/100 remain unauthored.
 - Next: source and document an interface definition, then continue with A1/008 in small verified PRs, merging and deploying after each accepted milestone.
+
+
+## 2026-11-12 incremental execution record — A1/008
+
+- Added the source-backed Siemens SITOP PSU100C 6EP1332-5BA00 component, terminal-aware schematic glyph and inspector fields within the existing workstation layout. The two physical output-minus screws are documented as one shared return endpoint; power conversion and isolation behavior are not simulated.
+- Added Phoenix Contact PT 16 N-PE 3212147 as a source-backed protective-conductor terminal. Its two connection points use explicit model-local indexes because the manufacturer does not number them; the rail bonding foot is documented but not a separate modeled endpoint.
+- Added A1/008 with five source-backed external terminal boundaries for L, N, PE, +24 V DC and 0 V DC. The page has six component instances, five routed wires and five local nets. It remains electrically separate from A1/006 and A1/007; no upstream supply, input protective device, output load or cross-sheet connection is asserted.
+- Verified the eight-sheet project model: 25 components, 257 wire segments, 36 sheet-local nets, zero open wire endpoints and five nets on A1/008. The component register and project README now reflect the modeled devices and boundaries; A1/009–A1/100 remain unauthored.
+- Supply capacity, protection coordination, conductor sizing, installation suitability and construction readiness are not established. Continue only from official source-backed device and terminal data.
+
