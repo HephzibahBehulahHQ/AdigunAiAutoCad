@@ -1225,7 +1225,7 @@ test('twenty-three-sheet connected reference opening set preserves the starter a
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3]);
+  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0]);
 });
 
 
@@ -1283,7 +1283,7 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
 });
 
 
-test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with linked source-backed power through A1/021', () => {
+test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with linked source-backed power through A1/023', () => {
   const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
@@ -1291,7 +1291,7 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   const report = engine.analyzeProject(project);
   assert.equal(report.valid, true, report.errors.join(' '));
   assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [23,32,335,67,21,0]);
-  assert.deepEqual(report.sheets.slice(-15).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[2,22,2,12],[1,13,5,6],[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0]]);
+  assert.deepEqual(report.sheets.slice(-15).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[2,22,2,12],[1,13,5,6],[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0]]);
   assert.equal(report.globalNetCount,43);
   assert.deepEqual(report.globalNets.filter(net=>net.sheetIds.includes('ref-007')&&net.sheetIds.includes('ref-008')).map(net=>net.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort()).sort((a,b)=>a[0].localeCompare(b[0])),[
     ['ref-006:F1:97','ref-007:A1:X10:1','ref-007:A1:X12:1','ref-007:X7:1','ref-007:X7:2','ref-008:PS1:+','ref-008:X12:1','ref-008:X12:2','ref-009:X14:1','ref-009:X14:2','ref-010:K2:11','ref-011:KM4:13','ref-011:KM4:21','ref-012:S2:13','ref-012:S3:21','ref-022:B2:1'],
@@ -1307,10 +1307,10 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   assert.equal(saved.valid, true, saved.errors.join(' '));
   const switchedContactorNet=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='14'));
   assert.deepEqual(switchedContactorNet.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:13','ref-010:K2:14','ref-011:KM4:A1']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0]);
   const relayNcInput=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='12'));
   assert.deepEqual(relayNcInput.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:12','ref-010:K2:12']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0]);
 });
 
 
