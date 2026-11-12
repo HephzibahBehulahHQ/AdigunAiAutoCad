@@ -1062,3 +1062,54 @@ test('SEW and Siemens star-delta example preserves separate power, control, star
     expected
   );
 });
+
+
+test('multi-sheet project analysis isolates coincident geometry and rejects ambiguous sheet membership', () => {
+  const terminal = engine.createInstance('phoenix-contact-3212144', 500, 260, 'X1');
+  const objects = [];
+  ['sheet-power', 'sheet-control'].forEach((sheetId, index) => {
+    const instance = JSON.parse(JSON.stringify(terminal));
+    instance.id = 'multi-sheet-terminal-' + index;
+    instance.sheetId = sheetId;
+    objects.push(instance);
+    objects.push({
+      kind: 'wire',
+      id: 'multi-sheet-wire-' + index,
+      sheetId,
+      x1: 465,
+      y1: 260,
+      x2: 535,
+      y2: 260
+    });
+  });
+  const project = {
+    format: engine.projectFormat,
+    version: engine.projectVersion,
+    componentSchemaVersion: engine.componentSchemaVersion,
+    netSchemaVersion: engine.netSchemaVersion,
+    activeSheet: 'sheet-power',
+    sheets: [
+      { id: 'sheet-power', number: 'A1/006', name: 'Power distribution' },
+      { id: 'sheet-control', number: 'A1/007', name: 'Control supply' }
+    ],
+    objects
+  };
+  const parsed = engine.parseProject(engine.serializeProject(project));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const report = engine.analyzeProject(parsed.project);
+  assert.equal(report.valid, true);
+  assert.deepEqual([report.sheetCount, report.wireCount, report.componentCount, report.netCount, report.openEndpointCount], [2, 2, 2, 2, 0]);
+  assert.deepEqual(report.sheets.map(sheet => sheet.analysis.nets[0].pins.map(pin => pin.ref + ':' + pin.number)), [
+    ['X1:1', 'X1:2'], ['X1:1', 'X1:2']
+  ]);
+  assert.deepEqual(report.sheets.map(sheet => sheet.analysis.nets[0].id), ['sheet-power:net-1', 'sheet-control:net-1']);
+  const missingSheet = JSON.parse(JSON.stringify(project));
+  delete missingSheet.objects[0].sheetId;
+  assert.equal(engine.validateProject(missingSheet).valid, false);
+  const unknownSheet = JSON.parse(JSON.stringify(project));
+  unknownSheet.objects[0].sheetId = 'missing-sheet';
+  assert.equal(engine.validateProject(unknownSheet).valid, false);
+  const duplicateSheet = JSON.parse(JSON.stringify(project));
+  duplicateSheet.sheets[1].id = duplicateSheet.sheets[0].id;
+  assert.equal(engine.validateProject(duplicateSheet).valid, false);
+});
