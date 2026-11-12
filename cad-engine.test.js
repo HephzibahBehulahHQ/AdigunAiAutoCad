@@ -44,6 +44,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function finishSelectionBox\(event\)/);
   assert.match(inlineScripts[0][2], /function renameComponent\(id\)/);
   assert.match(inlineScripts[0][2], /function selectSimilarObjects\(id\)/);
+  assert.match(inlineScripts[0][2], /function handleDeleteShortcut\(event\)/);
   assert.match(inlineScripts[0][2], /addEventListener\('dblclick',e=>handleObjectDoubleClick/);
   assert.match(inlineScripts[0][2], /function drawingLayerForObject\(obj\)/);
   assert.match(inlineScripts[0][2], /function selectObjectsOnSameLayer\(id\)/);
@@ -495,4 +496,35 @@ test('double-click selects an object and opens its properties in select mode onl
   context.state.tool = 'wire';
   vm.runInNewContext('handleObjectDoubleClick(event, "text-1")', { ...context, event });
   assert.deepEqual(opened, ['Properties']);
+});
+
+
+test('Delete shortcut removes the whole selection and preserves editor inputs', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const script = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+    .find(match => !/\bsrc\s*=/.test(match[1]))[2];
+  const start = script.indexOf('function handleDeleteShortcut(event)');
+  const end = script.indexOf('\n  document.addEventListener(\'keydown\',e=>', start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  const source = script.slice(start, end);
+  const deleted = [];
+  const context = {
+    state: { selected: 'b', selectedObjectIds: ['a', 'b'] },
+    deleteSelection() { deleted.push('selection'); },
+    deleteObject(id) { deleted.push(id); }
+  };
+  vm.runInNewContext(source, context);
+  let prevented = false;
+  const event = { key: 'Delete', target: { closest: () => null }, preventDefault() { prevented = true; } };
+  assert.equal(vm.runInNewContext('handleDeleteShortcut(event)', { ...context, event }), true);
+  assert.deepEqual(deleted, ['selection']);
+  assert.equal(prevented, true);
+  context.state.selectedObjectIds = [];
+  context.state.selected = 'single';
+  vm.runInNewContext('handleDeleteShortcut(event)', { ...context, event: { ...event, key: 'Backspace' } });
+  assert.deepEqual(deleted, ['selection', 'single']);
+  const inputEvent = { ...event, target: { closest: () => ({ tagName: 'INPUT' }) } };
+  assert.equal(vm.runInNewContext('handleDeleteShortcut(event)', { ...context, event: inputEvent }), false);
+  assert.deepEqual(deleted, ['selection', 'single']);
 });
