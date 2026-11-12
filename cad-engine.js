@@ -946,6 +946,21 @@
                      (endpoint.point.x === wire.x2 && endpoint.point.y === wire.y2))) {
             errors.push(label + ' point is not an endpoint of wire ' + endpoint.wireId + '.');
           }
+          if (endpoint.connector !== undefined) {
+            const graphic = endpoint.connector;
+            if (!graphic || typeof graphic !== 'object' ||
+                !['left', 'right'].includes(graphic.direction) ||
+                typeof graphic.targetSheetId !== 'string' || !graphic.targetSheetId.trim() ||
+                typeof graphic.targetRef !== 'string' || !graphic.targetRef.trim()) {
+              errors.push(label + ' has an invalid off-page connector graphic.');
+            } else if (graphic.targetSheetId === endpoint.sheetId || !knownSheetIds.has(graphic.targetSheetId)) {
+              errors.push(label + ' off-page connector must reference a different known sheet.');
+            } else if (!(Array.isArray(project.objects) ? project.objects : []).some(function (object) {
+              return object && object.kind === 'component-instance' && object.sheetId === graphic.targetSheetId && object.ref === graphic.targetRef;
+            })) {
+              errors.push(label + ' off-page connector target ' + graphic.targetRef + ' does not exist on sheet ' + graphic.targetSheetId + '.');
+            }
+          }
         });
         if (endpointSheets.size < 2) errors.push(label + ' must connect at least two different sheets.');
       });
@@ -1230,6 +1245,28 @@
     };
   }
 
+  function crossSheetConnectors(project, sheetId) {
+    const sheets = new Map((Array.isArray(project && project.sheets) ? project.sheets : []).map(function (sheet) {
+      return [sheet.id, sheet];
+    }));
+    return (Array.isArray(project && project.crossSheetConnections) ? project.crossSheetConnections : []).flatMap(function (connection) {
+      return (Array.isArray(connection.endpoints) ? connection.endpoints : []).filter(function (endpoint) {
+        return endpoint.sheetId === sheetId && endpoint.connector;
+      }).map(function (endpoint) {
+        const target = sheets.get(endpoint.connector.targetSheetId);
+        return {
+          id: connection.id + ':' + endpoint.sheetId,
+          name: connection.name,
+          point: { x: endpoint.point.x, y: endpoint.point.y },
+          direction: endpoint.connector.direction,
+          targetSheetId: endpoint.connector.targetSheetId,
+          targetSheetNumber: target && target.number || endpoint.connector.targetSheetId,
+          targetRef: endpoint.connector.targetRef
+        };
+      });
+    });
+  }
+
   function billOfMaterials(objects) {
     const groups = new Map();
     const errors = [];
@@ -1388,6 +1425,7 @@
     parseProject: parseProject,
     analyze: analyze,
     analyzeProject: analyzeProject,
+    crossSheetConnectors: crossSheetConnectors,
     billOfMaterials: billOfMaterials,
     billOfMaterialsCsv: billOfMaterialsCsv,
     wireList: wireList,

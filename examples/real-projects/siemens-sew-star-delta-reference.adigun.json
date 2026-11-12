@@ -1,7 +1,7 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 0.3",
+  "revision": "Opening set 0.4",
   "status": "Authored opening set: A1/001–A1/008; A1/009–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
@@ -4214,7 +4214,7 @@
       "sheetId": "ref-007",
       "x": 50,
       "y": 725,
-      "text": "Source-backed static example · verify external supply/protection · behavior not simulated",
+      "text": "A1/008 SITOP PS1 supplies CPU L+/M via X12/X13 → X7/X8 · downstream load not modeled",
       "stroke": "#13263b"
     },
     {
@@ -4465,7 +4465,7 @@
       "sheetId": "ref-008",
       "x": 100,
       "y": 630,
-      "text": "No upstream source, input protective device, output load, or A1/007 connection is included.",
+      "text": "PS1 +/− connect to A1/007 CPU 24 V input via X12/X13 → X7/X8; no output load is modeled.",
       "stroke": "#13263b"
     },
     {
@@ -4476,8 +4476,109 @@
       "y": 670,
       "text": "Static reference only; protection coordination and application suitability are not established.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-w07-plus",
+      "sheetId": "ref-007",
+      "x1": 415,
+      "y1": 250,
+      "x2": 350,
+      "y2": 250
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-w07-return",
+      "sheetId": "ref-007",
+      "x1": 415,
+      "y1": 580,
+      "x2": 350,
+      "y2": 580
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-w08-plus",
+      "sheetId": "ref-008",
+      "x1": 935,
+      "y1": 370,
+      "x2": 1030,
+      "y2": 370
+    },
+    {
+      "kind": "wire",
+      "id": "a1-009-w08-return",
+      "sheetId": "ref-008",
+      "x1": 935,
+      "y1": 430,
+      "x2": 1030,
+      "y2": 430
     }
   ],
-  "description": "Eight authored sheets: editable project records A1/001–A1/005, Siemens/SEW star-delta motor starter A1/006, the source-backed IFM IFS204 / Siemens S7-1200 sensor input A1/007, and the standalone Siemens SITOP PSU100C AC/DC supply boundary example A1/008. Electrical examples remain independent; no unsupported inter-sheet connection is asserted. A1/009–A1/100 are not authored."
+  "description": "Eight authored sheets: editable project records A1/001–A1/005, Siemens/SEW star-delta motor starter A1/006, the source-backed IFM IFS204 / Siemens S7-1200 sensor input A1/007, and the standalone Siemens SITOP PSU100C AC/DC supply boundary example A1/008. Electrical examples remain independent; no unsupported inter-sheet connection is asserted. A1/009–A1/100 are not authored.",
+  "crossSheetConnections": [
+    {
+      "id": "a1-009-24v-positive",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-009-w07-plus",
+          "point": {
+            "x": 350,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-008",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "ref-008",
+          "wireId": "a1-009-w08-plus",
+          "point": {
+            "x": 1030,
+            "y": 370
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "X7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-009-0v-return",
+      "name": "0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-009-w07-return",
+          "point": {
+            "x": 350,
+            "y": 580
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-008",
+            "targetRef": "X13"
+          }
+        },
+        {
+          "sheetId": "ref-008",
+          "wireId": "a1-009-w08-return",
+          "point": {
+            "x": 1030,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "X8"
+          }
+        }
+      ]
+    }
+  ]
 }
-

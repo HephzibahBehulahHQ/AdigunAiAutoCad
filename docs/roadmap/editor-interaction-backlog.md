@@ -33,9 +33,9 @@ This is a foundation milestone only. It does not add the 100 pages, cross-sheet 
 
 ## Cross-sheet connectivity model
 
-The CAD engine now supports project-level links between sheet-local wire nets. Each link identifies a real open wire endpoint by sheet ID, wire ID and coordinates; project analysis exposes local and deterministic project-wide nets, treats linked endpoints as closed, and rejects endpoints that are not truly dangling. This is model data only; the current workstation does not yet draw off-page connector graphics.
+The CAD engine validates visible off-page connector references against real target-sheet components and exact open wire endpoints. The existing workspace renderer draws reciprocal references from the same project model, and project JSON keeps those links on save and reopen. A1/009 connects the Siemens SITOP +24 V/0 V output terminals on A1/008 to the Siemens PLC CPU L+/M supply terminals on A1/007; the project reports 34 project-wide nets and zero unlinked endpoints. The supply remains unloaded: protection adequacy, total current, and application suitability are not established.
 
-Next: add source-backed, visibly placed off-page connector behavior and the first populated multi-sheet electrical circuit. Preserve the approved workstation geometry.
+Next: continue the 100-sheet project in small, source-backed increments. Preserve approved workstation geometry and verify each authored page with pin, net, save/reopen, and route checks.
 
 
 ## Component and project source-data guidance
