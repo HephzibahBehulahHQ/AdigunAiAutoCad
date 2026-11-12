@@ -17,7 +17,13 @@ Recent merged changes cover drawing-object properties on double-click, multi-sel
 
 ## Current priority
 
-Build source-backed electrical components and a small set of meaningful native example projects. The first one-sheet 24 V DC relay/contactor-coil example and a Siemens 3RM12 reversing-starter example are in `examples/real-projects/`. Both derive connectivity and BOMs from real catalogued parts, preserve their actual terminal IDs, and document application limits. The catalog includes two Siemens SIRIUS 3RV2 motor-protection breakers with six real line/load terminals and editable overload settings: 3RV2011-1JA10 (7–10 A) and 3RV2011-0FA10 (0.35–0.5 A). The latter's published range includes the SEW DRN63MS4 nameplate current of 0.405 A and its cataloged 400 V motor power is 0.12 kW, matching the motor's 0.12 kW. This is a ratings-envelope match only; it does not establish a selected setting, application suitability, short-circuit coordination or construction approval. Next: build a separate, fully source-backed motor-feeder example using verified protective-device, contactor and motor data; keep the integrated 3RM12 reversing-starter example distinct. Continue the interaction audit without changing approved workstation geometry.
+Build source-backed electrical components and meaningful native example projects. The 24 V DC relay/contactor example and the Siemens 3RM12 reversing-starter example remain separate and preserve real terminal identities, derived connectivity/BOMs, and documented limitations. The catalog includes two Siemens SIRIUS 3RV2 motor-protection breakers: 3RV2011-1JA10 (7–10 A) and 3RV2011-0FA10 (0.35–0.5 A). The 0FA10 rating range overlaps the SEW DRN63MS4 nameplate current of 0.405 A and its 400 V motor rating of 0.12 kW matches the motor's 0.12 kW; this does not select a breaker setting or establish application suitability, coordination or construction approval.
+
+The one-sheet DOL motor-feeder example `examples/real-projects/siemens-schneider-sew-dol-starter.adigun.json` is now modeled with the Siemens breaker, Schneider LC1D09BD contactor, source-backed XB5AA42 stop and XB5AA31 start push-buttons, SEW motor, and Phoenix terminal boundaries. Its full pin topology, wire list and BOM have regression coverage. The breaker setting remains unset; the static model does not simulate actuation or protective behavior.
+
+Apply this concurrent discovery rule to every example milestone: when official-source research establishes a required component missing from the catalog, add its verified definition, real terminal/pin geometry, supported specifications, editable properties, source record and focused tests in the same milestone. When completing the example exposes a missing CAD function, implement and regression-test that function with the example. Do not substitute generic glyphs or unconnected visual stand-ins for a modeled engineering component. Preserve the approved workstation geometry and verify that any required UI rendering fits the existing layout.
+
+Next: source and build the next distinct engineering example, while continuing the interaction audit and preserving the approved workstation geometry.
 
 
 ## Component and project source-data guidance
@@ -27,3 +33,4 @@ Continue with manufacturer-specific parts and small, internally consistent examp
 The user's separate 50-project list is a candidate backlog and starting BOM idea, not a set of verified designs. The proposed 120 sheets per project / 6,000-sheet target is an aspiration, not completed documentation or a release criterion. Select and validate each example against official sources before adding it.
 
 Future account indicator: add a compact user icon beside Command Search only when that milestone is reached; show offline red and online green states while preserving current header geometry and preventing layout shift. Treat it as a later isolated UI milestone; do not make room by moving or resizing existing header controls.
+

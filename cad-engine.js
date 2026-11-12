@@ -213,6 +213,76 @@
       retrievedAt: '2026-11-12'
     }]
   });
+  const createHarmonyPushButtonDefinition = function (partNumber, color, contactType, terminalA, terminalB, positiveOpening) {
+    const normallyOpen = contactType === 'normally-open';
+    const id = 'schneider-electric-' + partNumber.toLowerCase();
+    return deepFreeze({
+      schemaVersion: COMPONENT_SCHEMA_VERSION,
+      id: id,
+      manufacturer: 'Schneider Electric',
+      manufacturerPartNumber: partNumber,
+      model: 'Harmony XB5 ' + partNumber,
+      name: color + ' spring-return push-button, ' + (normallyOpen ? '1 NO' : '1 NC'),
+      family: 'pushbutton',
+      referencePrefix: 'S',
+      category: 'Electrical · Verified control-station push-button',
+      symbol: {
+        id: 'pushbutton.harmony-xb5.' + partNumber.toLowerCase() + '.v1',
+        view: 'schematic',
+        unit: 'mm',
+        width: 150,
+        height: 90,
+        representation: { standard: 'IEC-style functional representation', text: 'S', symbolType: 'momentary spring-return push-button contact; not manufacturer CAD geometry' },
+        pins: [
+          { id: 'contact-' + terminalA.toLowerCase().replace(/[^a-z0-9]+/g, '-'), localNumber: terminalA, name: 'Push-button contact terminal ' + terminalA, x: -55, y: 0, electricalType: 'passive', connectionType: 'screw-clamp' },
+          { id: 'contact-' + terminalB.toLowerCase().replace(/[^a-z0-9]+/g, '-'), localNumber: terminalB, name: 'Push-button contact terminal ' + terminalB, x: 55, y: 0, electricalType: 'passive', connectionType: 'screw-clamp' }
+        ],
+        internalConnections: [],
+        numberingNote: 'Terminal designations and normal contact type follow the exact Schneider Electric product data sheet. The static CAD net model does not change continuity when an operator is pressed.'
+      },
+      electricalFunctions: {
+        pushButton: {
+          actuation: 'momentary spring-return',
+          normalContactState: normallyOpen ? 'open' : 'closed',
+          pressedContactState: normallyOpen ? 'closed' : 'open',
+          terminalPair: [terminalA, terminalB],
+          simulationNote: 'The model documents momentary contact behavior but does not simulate actuation; pin continuity remains unmodeled and authored wires define nets.'
+        }
+      },
+      specifications: {
+        productFamily: { value: 'Harmony XB5' },
+        operatorProfile: { value: color + ' flush, unmarked' },
+        operatorType: { value: 'Spring return' },
+        contactComposition: { value: normallyOpen ? '1 NO' : '1 NC' },
+        contactOperation: { value: 'Slow-break' },
+        terminalDesignation: { value: '(' + terminalA + '-' + terminalB + ')' + (normallyOpen ? 'NO' : 'NC') },
+        terminalConnection: { value: 'Screw clamp' },
+        mountingDiameter: { value: 22, unit: 'mm' },
+        dimensions: { height: { value: 42, unit: 'mm' }, width: { value: 30, unit: 'mm' }, depth: { value: 52, unit: 'mm' } },
+        positiveOpening: { value: positiveOpening }
+      },
+      instanceProperties: {
+        terminalStrip: { type: 'string', default: '', maximumLength: 40 },
+        position: { type: 'string', default: '', maximumLength: 24 },
+        marking: { type: 'string', default: '', maximumLength: 40 },
+        comment: { type: 'string', default: '', maximumLength: 160 }
+      },
+      sources: [{
+        publisher: 'Schneider Electric',
+        title: partNumber + ' · product data sheet',
+        url: partNumber === 'XB5AA31'
+          ? 'https://iportal.se.com/Contents/docs/SQD-XB5AA31_DATA%20SHEET.PDF'
+          : 'https://www.se.com/id/id/product/XB5AA42/red-flush-complete-pushbutton-%C3%B822-spring-return-1nc-unmarked/',
+        documentRevision: partNumber === 'XB5AA31' ? 'Schneider Electric product data sheet, 09-Jan-2019; retrieved 2026-11-12.' : 'Schneider Electric product page and product data; retrieved 2026-11-12.',
+        revisionNote: partNumber === 'XB5AA31'
+          ? 'Confirms complete green flush Ø22 spring-return push-button, one slow-break normally-open contact, screw-clamp terminals 13-14, and 42 × 30 × 52 mm overall dimensions.'
+          : 'Confirms complete red flush Ø22 spring-return push-button, one slow-break normally-closed contact, screw-clamp terminals 21-22, positive opening per EN/IEC 60947-5-1 Appendix K, and 42 × 30 × 52 mm overall dimensions.',
+        retrievedAt: '2026-11-12'
+      }]
+    });
+  };
+  const schneiderStartPushButtonDefinition = createHarmonyPushButtonDefinition('XB5AA31', 'Green', 'normally-open', '13', '14', false);
+  const schneiderStopPushButtonDefinition = createHarmonyPushButtonDefinition('XB5AA42', 'Red', 'normally-closed', '21', '22', true);
   const motorStarterDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
     id: 'siemens-3rm1201-1aa04',
@@ -492,7 +562,7 @@
       }
     ]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -992,3 +1062,4 @@
     wireListCsv: wireListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
+

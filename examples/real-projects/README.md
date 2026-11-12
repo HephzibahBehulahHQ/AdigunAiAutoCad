@@ -23,20 +23,9 @@ This is a one-sheet, source-backed wiring example using five verified component 
 This is a control-wiring example, not a complete motor starter or construction package. It intentionally omits mains switching, motor, upstream protection, conductor sizing, panel layout, relay-state simulation and safety coordination. Verify the component variants, supply, external PLC interface and application limits against current manufacturer documentation and qualified engineering review before adapting it.
 
 
-# Siemens SIRIUS 3RM12 reversing starter
+# Siemens 3RM12 reversing starter and SEW DRN63MS4 motor
 
-Open `siemens-3rm12-reversing-starter.adigun.json` from the workstation's **Open project file** command. This one-sheet example uses one source-backed Siemens reversing starter and fifteen Phoenix Contact PT 16 N OG feed-through terminals as explicit line-side, motor-side and control/signal boundaries. Its schematic wires connect all fifteen manufacturer-designated 3RM1 pins to those terminal blocks. The CAD model derives the BOM and wire list from those instances and routes.
-
-- Siemens 3RM1201-1AA04 product catalog: <https://mall.industry.siemens.com/mall/en/en/Catalog/Product/?mlfb=3RM1201-1AA04>
-- Siemens SIRIUS 3RM1 Equipment Manual, 09/2024: <https://cache.industry.siemens.com/dl/files/730/66295730/att_919653/v3/manual_motorstarter_SIRIUS_3RM1_en-US.pdf>
-- Phoenix Contact PT 16 N OG, item 3212144: <https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144>
-
-The project records line terminals 1/L1, 3/L2, 5/L3; motor terminals 2/T1, 4/T2, 6/T3; control terminals A1, A2, IN1–IN3; 24 V DC run output OUT; and fault signaling terminals 95, 96, 98. It models wiring only. It does not include a motor or upstream protection, select conductor size, verify application suitability, simulate direction switching/protective trips/signal contacts, or provide a construction package. Siemens rates 3RM1201-1AA04 at 0.1–0.5 A and a maximum motor power of 0.12 kW at 400 V AC; confirm motor/application fit before use. NOT FOR CONSTRUCTION without qualified engineering review.
-
-
-# Siemens 3RM12 and SEW DRN63MS4 motor
-
-Open `siemens-3rm12-reversing-starter.adigun.json` from **Open project file**. The one-sheet model uses one Siemens SIRIUS 3RM1201-1AA04 starter, one SEW-EURODRIVE DRN63MS4 motor, and thirteen Phoenix Contact PT 16 N OG terminals. It contains 33 orthogonal wire segments, 17 isolated nets, and explicit U1/V1/W1, U2/V2/W2 and PE motor terminals. The U2/V2/W2 star point is wired explicitly; the motor winding ends remain separate from one another.
+Open `siemens-3rm12-reversing-starter.adigun.json` from **Open project file**. The one-sheet model uses one Siemens SIRIUS 3RM1201-1AA04 starter, one SEW-EURODRIVE DRN63MS4 motor, and thirteen Phoenix Contact PT 16 N OG terminals. It contains 33 orthogonal wire segments and 17 isolated nets. All seven motor terminals are represented; U2/V2/W2 form an explicit star link while each winding remains a separate external terminal.
 
 - SEW motor data, DRN63MS4, 400 V / 50 Hz / 4-pole: <https://download.sew-eurodrive.com/download/pdf/30590116.pdf>
 - SEW terminal identification and star connection manual: <https://download.sew-eurodrive.com/download/pdf/25957074.pdf>
@@ -63,4 +52,22 @@ The catalog also includes the SIRIUS 3RV2011-0FA10, a size S00, Class 10, three-
 - Siemens SIRIUS 3RV motor-starter-protector equipment manual: <https://support.industry.siemens.com/cs/attachments/60279172/manual_SIRIUS_circuit_breaker_3RV_en-US.pdf>
 - SEW DRN63MS4 motor data: <https://download.sew-eurodrive.com/download/pdf/30590116.pdf>
 
-No combined motor-feeder example is approved yet. Build it as a distinct project after sourcing and verifying the contactor, protection and motor arrangement. The CAD model does not simulate contact state, trip behavior, fault interruption or coordination. NOT FOR CONSTRUCTION without qualified engineering review.
+The DOL motor-feeder example below uses this variant. Its range overlaps the motor's catalog current, but that alone does not select an overload setting or establish application suitability. The CAD model does not simulate contact state, trip behavior, fault interruption or coordination. NOT FOR CONSTRUCTION without qualified engineering review.
+
+
+# DOL motor feeder — Siemens, Schneider Electric and SEW-EURODRIVE
+
+Open `siemens-schneider-sew-dol-starter.adigun.json` from the workstation's **Open project file** command. This one-sheet example contains a Siemens 3RV2011-0FA10 three-pole motor-protection breaker, Schneider Electric LC1D09BD 24 V DC contactor, XB5AA42 stop push-button (NC, 21–22), XB5AA31 start push-button (NO, 13–14), a SEW DRN63MS4 three-phase motor, and six Phoenix Contact PT 16 N OG feed-through terminals.
+
+The drawing wires incoming L1/L2/L3 through Q1 and KM1 to motor U1/V1/W1, the U2/V2/W2 star point, PE, the KM1 coil, and the stop/start holding circuit. S1 NO and KM1 auxiliary NO 13–14 share parallel control branches after S0 NC; coil A2 returns to the external 0 V terminal. KM1 auxiliary NC 21–22 remains a real, separately connectable contact pair and is intentionally unused in this circuit. Terminal blocks mark the external supply boundaries; their open field-side pins are intentional. The 0.35–0.5 A breaker setting is deliberately unset.
+
+The engine derives 15 nets, the 38-wire list and BOM from editable component instances and orthogonal wire routes. The static CAD model documents button and contactor behavior but does not simulate button actuation, contactor coil operation, overload trips, short-circuit interruption, protection coordination or installation suitability. The rating overlap alone does not choose a setting or establish engineering approval. NOT FOR CONSTRUCTION without qualified application review.
+
+## Manufacturer sources
+
+- Siemens 3RV2011-0FA10 data sheet and SIRIUS 3RV equipment manual: <https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10> and <https://support.industry.siemens.com/cs/attachments/60279172/manual_SIRIUS_circuit_breaker_3RV_en-US.pdf>
+- Schneider Electric LC1D09BD data sheet and product page: <https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF> and <https://www.se.com/us/en/product/LC1D09BD/iec-contactor-tesys-deca-nonreversing-9a-5hp-at-480vac-up-to-100ka-sccr-3-phase-3-no-24vdc-coil-open-style/>
+- Schneider Electric XB5AA31 data sheet and XB5AA42 product data: <https://iportal.se.com/Contents/docs/SQD-XB5AA31_DATA%20SHEET.PDF> and <https://www.se.com/id/id/product/XB5AA42/red-flush-complete-pushbutton-%C3%B822-spring-return-1nc-unmarked/>
+- SEW DRN63MS4 motor data and terminal diagram: <https://download.sew-eurodrive.com/download/pdf/30590116.pdf> and <https://download.sew-eurodrive.com/download/pdf/25957074.pdf>
+- Phoenix Contact PT 16 N OG, item 3212144: <https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144>
+
