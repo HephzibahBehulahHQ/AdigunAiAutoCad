@@ -5,11 +5,12 @@
 - Manufacturer: Siemens
 - Product: SIMATIC S7-1200 CPU 1212C DC/DC/DC
 - Exact article number: 6ES7212-1AE40-0XB0
-- Official S7-1200 System Manual, V4.5 (05/2021): <https://cache.industry.siemens.com/dl/files/241/109797241/att_1066673/v1/s71200_system_manual_en-US_en-US.pdf>
-- Table A-46 identifies X10 pin 11 as digital input DI a.4 for this exact CPU variant. The same table maps X10 pins 7–14 to DI a.0–a.7.
+- Official S7-1200 System Manual, V4.7 (12/2024), A5E02486680-AQ: <https://support.industry.siemens.com/cs/attachments/109977302/s71200_system_manual_en-US.pdf>
+- Table A-49 identifies the 25 X10/X11/X12 connector terminals for the CPU variant. X10:1–X10:6 provide L+, M, FE, sensor power and 1M; X10:7–X10:14 map DI a.0–a.7, including X10:11 / DI a.4. Its X12 group maps pin 1 to 1L, pins 2–5 to DQ a.0–a.3, pin 6 to 2L, and pins 7–8 to DQ a.4–a.5. Table A-50 shows the CPU 1212C DC/DC/DC wiring diagram.
+- The model uses those terminal identities and assigns DQ a.0 (Q0.0) to the existing K2 coil circuit. A1/019 records Q0.1–Q0.5 as unassigned only within this modeled project scope.
 
 ## CAD representation
 
-- The catalog model preserves the CPU's 25 manufacturer-designated X10/X11/X12 terminals. A1/014 uses the existing CPU instance and routes the existing X10:11 terminal; it does not add a duplicate PLC.
-- The cross-sheet drawing connects KM4's source-backed normally closed auxiliary contact terminals 21–22 to DI a.4. It documents wiring topology only. No PLC program, input logic, diagnostic alarm, or contactor behavior is modeled.
-- Pin coordinates are schematic connection locations, not a physical PLC footprint. Verify the selected hardware, wiring method and application against current Siemens documentation and qualified engineering review.
+- The catalog model preserves the CPU's 25 manufacturer-designated X10/X11/X12 terminals. Pin coordinates are schematic connection locations, not a physical PLC footprint.
+- A1/019 is an allocation schedule and adds no components or wires. Output logic, switching, load suitability, and a configured PLC address table are not modeled.
+- Verify the selected hardware, wiring method and application against current Siemens documentation and qualified engineering review.

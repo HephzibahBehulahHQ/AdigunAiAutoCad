@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 1.5",
-  "status": "Authored opening set: A1/001–A1/018; A1/019–A1/100 not authored.",
+  "revision": "Opening set 1.6",
+  "status": "Authored opening set: A1/001–A1/019; A1/020–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -106,6 +106,11 @@
       "id": "ref-018",
       "number": "A1/018",
       "name": "PLC overload trip feedback · F1 NO 97–98"
+    },
+    {
+      "id": "ref-019",
+      "number": "A1/019",
+      "name": "PLC digital-output allocation · CPU 1212C"
     }
   ],
   "sheetLabels": {
@@ -120,7 +125,9 @@
     "ref-015": "PLC I/O schedule · K2 NC feedback",
     "ref-016": "PLC I/O schedule · K2 NO feedback",
     "ref-017": "PLC I/O allocation summary",
-    "ref-018": "PLC overload trip feedback · F1 NO 97–98"
+    "ref-018": "PLC overload trip feedback · F1 NO 97–98",
+    "ref-019": "PLC digital-output allocation · CPU 1212C",
+    "ref-002": "Drawing index"
   },
   "sheetViews": {
     "ref-007": {
@@ -190,6 +197,12 @@
       "h": 760
     },
     "ref-018": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-019": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3636,7 +3649,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 1.5",
+      "text": "Engineering document set | Revision opening set 1.6",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3645,7 +3658,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/018",
+      "text": "Authored pages: A1/001–A1/019",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3663,7 +3676,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/019–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/020–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3795,7 +3808,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/018",
+      "text": "Component register | modeled devices on A1/006–A1/019",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3885,7 +3898,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/018; A1/018 adds no device instance.",
+      "text": "Component quantities match modeled devices through A1/019; A1/019 adds no device instance.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3999,7 +4012,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/018 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/019 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4267,7 +4280,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/018; A1/017–A1/018 document I/O and overload feedback.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/019; A1/017–A1/019 document I/O, overload feedback and output allocation.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4285,7 +4298,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017 summarizes assignments.",
+      "text": "A1/007–A1/019 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/019 summarize PLC I/O assignments.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4730,7 +4743,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 325,
-      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11, S2/S3 and F1:97 via A1/018.",
+      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11, S2/S3 F1:97 via A1/018; A1/019 leaves the output topology unchanged.",
       "stroke": "#13263b"
     },
     {
@@ -5997,9 +6010,135 @@
       "y": 826,
       "text": "A1/018: F1 NO trip contact 97–98 links X14 +24 V DC to CPU X10:14 / DI a.7.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-title",
+      "sheetId": "ref-019",
+      "x": 50,
+      "y": 54,
+      "text": "A1/019 · Siemens CPU 1212C digital-output allocation",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-source",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 125,
+      "text": "SIMATIC S7-1200 CPU 1212C DC/DC/DC · X12 onboard DQ group · article 6ES7212-1AE40-0XB0",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-01",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 205,
+      "text": "X12:1 · 1L · Group supply terminal; +24 V DC from A1/009, not an output address.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-02",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 265,
+      "text": "Q0.0 · X12:2 / DQ a.0 · Assigned to Phoenix Contact K2 coil A1 · A1/007–A1/010.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-03",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 325,
+      "text": "Q0.1 · X12:3 / DQ a.1 · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-04",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 385,
+      "text": "Q0.2 · X12:4 / DQ a.2 · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-05",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 445,
+      "text": "Q0.3 · X12:5 / DQ a.3 · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-06",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 505,
+      "text": "X12:6 · 2L · Output-group common; terminal identity, not a digital output channel.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-07",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 565,
+      "text": "Q0.4 · X12:7 / DQ a.4 · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-output-08",
+      "sheetId": "ref-019",
+      "x": 120,
+      "y": 625,
+      "text": "Q0.5 · X12:8 / DQ a.5 · Unassigned in the modeled project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-limit",
+      "sheetId": "ref-019",
+      "x": 50,
+      "y": 710,
+      "text": "Allocation follows modeled wiring; address configuration, PLC logic, output switching and load suitability are not modeled.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-019-source-note",
+      "sheetId": "ref-019",
+      "x": 50,
+      "y": 748,
+      "text": "Source: Siemens S7-1200 System Manual V4.7 · CPU 1212C Tables A-49/A-50. Pin points are schematic locations.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-19",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1466,
+      "text": "A1/019  Siemens CPU 1212C digital-output allocation · Q0.1–Q0.5 unassigned",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-11",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 890,
+      "text": "Revision 1.6 | 2026-11-12 | A1/019 documents Siemens CPU 1212C output allocation; topology unchanged.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Eighteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; PLC I/O assignment schedules A1/013–A1/016; PLC allocation summary A1/017; and Siemens 3RU2126 F1 NO trip contact 97–98 wired to CPU DI a.7 / I0.7 on A1/018. F1 NC 95–96 remains in the existing contactor-control circuit. PLC logic, overload trip/reset behavior, signal interpretation, switching and safety functions are not simulated. A1/019–A1/100 are not authored.",
+  "description": "Nineteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; PLC I/O assignment schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens 3RU2126 F1 NO trip contact to PLC I0.7 on A1/018; and Siemens CPU 1212C digital-output allocation on A1/019. Q0.0 is assigned to K2 coil A1; Q0.1–Q0.5 are unassigned in the modeled scope. PLC logic, overload trip/reset behavior, signal interpretation, switching and safety functions are not simulated. A1/020–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
