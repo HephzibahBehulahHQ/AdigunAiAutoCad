@@ -115,10 +115,11 @@
   function addSheet(name){const n=state.sheets.length+1,id=`custom-${Date.now()}`,number=`A3/${String(200+n).padStart(3,'0')}`;state.sheets.push({id,name,number});const tab=document.createElement('button');tab.className='document-tab';tab.role='tab';tab.dataset.sheet=id;tab.setAttribute('aria-selected','false');tab.innerHTML=`${number} · ${name} <span class="tab-close">×</span>`;$('#newSheet').before(tab);const row=document.createElement('div');row.className='tree-row tree-grand';row.dataset.sheet=id;row.innerHTML=`<span class="file">▱</span><span>${number} · ${name}</span><span class="detail">${number}</span>`;$('#projectTree').append(row);setSheet(id);notify(`${number} · ${name} added to this project.`);persist();}
   function setTool(tool){state.tool=tool;$$('[data-draw]').forEach(b=>{const on=b.dataset.draw===tool;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});drawing.style.cursor=tool==='select'?'default':tool==='pan'?'grab':'crosshair';const names={freehand:'Freehand pencil',ellipse:'Ellipse',curve:'Bézier curve',triangle:'Triangle',arrow:'Arrow',pan:'Pan'};notify((names[tool]||tool[0].toUpperCase()+tool.slice(1))+' tool selected · drag on the sheet to draw.');}
 
-  function pushUndo(){state.undo.push(JSON.stringify(state.objects));if(state.undo.length>40)state.undo.shift();state.redo=[];updateHistoryButtons();}
+  function pushUndo(snapshot){state.undo.push(snapshot||JSON.stringify(state.objects));if(state.undo.length>40)state.undo.shift();state.redo=[];updateHistoryButtons();}
   function updateHistoryButtons(){$('[data-action="undo"]').disabled=!state.undo.length;$('[data-action="redo"]').disabled=!state.redo.length;}
-  function undo(){if(!state.undo.length)return;state.redo.push(JSON.stringify(state.objects));state.objects=JSON.parse(state.undo.pop());renderObjects();updateHistoryButtons();persist();notify('Drawing command undone.');}
-  function redo(){if(!state.redo.length)return;state.undo.push(JSON.stringify(state.objects));state.objects=JSON.parse(state.redo.pop());renderObjects();updateHistoryButtons();persist();notify('Drawing command restored.');}
+  function refreshSelectedProperties(){if($('#rightPanelTitle').textContent!=='Properties'||!state.selected)return;const selected=state.objects.find(function(obj){return obj.id===state.selected;});if(selected)showObject(selected);}
+  function undo(){if(!state.undo.length)return;state.redo.push(JSON.stringify(state.objects));state.objects=JSON.parse(state.undo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command undone.');}
+  function redo(){if(!state.redo.length)return;state.undo.push(JSON.stringify(state.objects));state.objects=JSON.parse(state.redo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command restored.');}
   function snapDrawingPoint(point){
     if(state.osnap){
       const bounds=drawing.getBoundingClientRect();
@@ -190,18 +191,31 @@
       +'<p class="notice component-specs">'+escapeHtml(def.symbol.numberingNote)+' Part ratings are source data and remain read-only.</p>'
       +'<button class="command-item" data-delete-object="'+escapeHtml(obj.id)+'"><span>⌫</span><span>Remove verified component</span><kbd>Delete</kbd></button>';
   }
+  let activeComponentEdit=null;
+  $('#inspectorContent').addEventListener('focusin',function(e){
+    const field=e.target.closest('[data-component-property]');
+    if(field)activeComponentEdit={field:field,snapshot:JSON.stringify(state.objects),historyRecorded:false};
+  });
+  $('#inspectorContent').addEventListener('focusout',function(e){
+    if(activeComponentEdit&&activeComponentEdit.field===e.target)activeComponentEdit=null;
+  });
   $('#inspectorContent').addEventListener('input',function(e){
     const field=e.target.closest('[data-component-property]');
     if(!field)return;
     const obj=state.objects.find(function(item){return item.id===field.dataset.componentObject;});
     if(!obj||obj.kind!=='component-instance')return;
     const name=field.dataset.componentProperty;
-    const value=field.value;
-    if(name==='ref')obj.ref=value.slice(0,32);
+    let nextValue,currentValue;
+    if(name==='ref'){nextValue=field.value.slice(0,32);currentValue=obj.ref;}
     else if(Object.prototype.hasOwnProperty.call(obj.properties,name)){
       const rule=window.AdigunCADEngine.component(obj.componentId).instanceProperties[name];
-      obj.properties[name]=value.slice(0,rule.maximumLength);
+      nextValue=field.value.slice(0,rule.maximumLength);currentValue=obj.properties[name];
     }else return;
+    if(String(currentValue==null?'':currentValue)===nextValue)return;
+    if(!activeComponentEdit||activeComponentEdit.field!==field)activeComponentEdit={field:field,snapshot:JSON.stringify(state.objects),historyRecorded:false};
+    if(!activeComponentEdit.historyRecorded){pushUndo(activeComponentEdit.snapshot);activeComponentEdit.historyRecorded=true;}
+    if(name==='ref')obj.ref=nextValue;
+    else obj.properties[name]=nextValue;
     renderObjects();
     persist();
   });
