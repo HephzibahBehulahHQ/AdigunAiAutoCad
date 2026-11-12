@@ -68,6 +68,12 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.doesNotMatch(inlineScripts[0][2], /moveInstance\(copy,copy\.x\+50,copy\.y\+50\)/);
   assert.match(inlineScripts[0][2], /data-canvas-command/);
   assert.match(inlineScripts[0][2], /clipboardObject/);
+  assert.match(inlineScripts[0][2], /function copyObject\(id\)/);
+  assert.match(inlineScripts[0][2], /function cutObject\(id\)/);
+  assert.match(inlineScripts[0][2], /Array\.isArray\(state\.clipboardObject\)/);
+  assert.match(inlineScripts[0][2], /state\.objects\.push\.apply\(state\.objects,copies\)/);
+  assert.match(inlineScripts[0][2], /copy-selection/);
+  assert.match(inlineScripts[0][2], /duplicate-selection/);
   assert.match(inlineScripts[0][2], /finishObjectMove\(state.pendingMoveObjectId,svgPoint\(e\)\)/);
   assert.match(inlineScripts[0][2], /function duplicateObject\(id\)/);
   assert.match(inlineScripts[0][2], /data-export-bom/);
