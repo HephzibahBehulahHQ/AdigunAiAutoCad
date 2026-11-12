@@ -202,6 +202,310 @@ Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design proj
 49. Hospital facility auxiliary alarm/monitoring panel (not life-support design).
 50. Modular training/commissioning lab with realistic PLC, motors and sensors.
 
+## 1. LEFT-CLICK FUNCTIONS
+1. Select Object
+2. Select Text
+3. Select Shape
+4. Select Image
+5. Select Layer
+6. Select Tool
+7. Activate Menu
+8. Open Dropdown
+9. Place Object
+10. Insert Text
+11. Draw Shape
+12. Draw Line
+13. Draw Curve
+14. Add Point
+15. Select Node
+16. Move Cursor
+17. Activate Input Field
+18. Select Color
+19. Apply Fill
+20. Apply Outline
+21. Select Page
+22. Select Slide
+23. Select Artboard
+24. Select Component
+25. Activate Control Point
+26. Start Drawing
+27. Start Dragging
+28. Confirm Placement
+29. Select Multiple Objects (Shift + Click)
+30. Toggle Selection (Ctrl + Click)
+
+## 2. RIGHT-CLICK FUNCTIONS
+31. Open Context Menu
+32. Copy
+33. Cut
+34. Paste
+35. Delete
+36. Duplicate
+37. Rename
+38. Group
+39. Ungroup
+40. Lock Object
+41. Unlock Object
+42. Hide Object
+43. Show Object
+44. Bring to Front
+45. Send to Back
+46. Bring Forward
+47. Send Backward
+48. Align Objects
+49. Distribute Objects
+50. Rotate Object
+51. Flip Horizontal
+52. Flip Vertical
+53. Resize Object
+54. Transform Object
+55. Edit Object
+56. Edit Text
+57. Edit Nodes
+58. Convert to Curves
+59. Convert to Shape
+60. Convert to Symbol
+61. Object Properties
+62. Format Object
+63. Change Fill
+64. Change Outline
+65. Change Opacity
+66. Change Layer
+67. Move to Layer
+68. Create New Layer
+69. Merge Layers
+70. Export Selection
+71. Save as Component
+72. Add Hyperlink
+73. Remove Hyperlink
+74. Add Comment
+75. Inspect Object
+76. Reset Transformation
+77. Select Similar Objects
+78. Select All
+79. Invert Selection
+80. Deselect All
+
+## 3. DOUBLE-CLICK FUNCTIONS
+81. Edit Text
+82. Enter Group
+83. Edit Shape
+84. Edit Nodes
+85. Open Object Properties
+86. Open Component
+87. Rename Layer
+88. Rename Page
+89. Rename Slide
+90. Edit Symbol
+91. Enter Isolation Mode
+92. Open Image Editor
+93. Edit Table Cell
+94. Edit Chart
+95. Edit Formula
+
+## 4. MOUSE DRAG FUNCTIONS
+96. Move Object
+97. Resize Object
+98. Rotate Object
+99. Draw Selection Box
+100. Select Multiple Objects
+101. Draw Rectangle
+102. Draw Ellipse
+103. Draw Freehand Path
+104. Draw Bezier Curve
+105. Adjust Control Handles
+106. Move Anchor Points
+107. Adjust Gradient
+108. Adjust Transparency
+109. Crop Image
+110. Pan Canvas
+111. Drag Guide
+112. Drag Ruler
+113. Rearrange Layers
+114. Rearrange Slides
+115. Rearrange Pages
+116. Rearrange Objects
+117. Drag and Drop Files
+118. Drag and Drop Components
+119. Duplicate by Dragging
+120. Adjust Object Spacing
+
+## 5. MOUSE WHEEL FUNCTIONS
+121. Zoom In
+122. Zoom Out
+123. Scroll Up
+124. Scroll Down
+125. Horizontal Scroll
+126. Pan Canvas
+127. Adjust Brush Size
+128. Adjust Tool Value
+129. Navigate Pages
+130. Navigate Slides
+
+## 6. CANVAS RIGHT-CLICK FUNCTIONS
+131. Paste
+132. Paste Special
+133. Select All
+134. Deselect All
+135. Add New Object
+136. Insert Image
+137. Insert Text
+138. Insert Shape
+139. Insert Table
+140. Insert Chart
+141. Add Guide
+142. Remove Guides
+143. Show Grid
+144. Hide Grid
+145. Snap to Grid
+146. Snap to Objects
+147. Snap to Guides
+148. Change Canvas Color
+149. Change Page Size
+150. Change Orientation
+151. Canvas Properties
+152. Page Properties
+153. Zoom to Fit
+154. Zoom to Selection
+155. Reset View
+156. Show Rulers
+157. Hide Rulers
+158. Lock Guides
+159. Unlock Guides
+160. Export Canvas
+
+## 7. TOOLBAR RIGHT-CLICK FUNCTIONS
+161. Customize Toolbar
+162. Show Toolbar
+163. Hide Toolbar
+164. Reset Toolbar
+165. Add Tool
+166. Remove Tool
+167. Rearrange Tools
+168. Pin Tool
+169. Unpin Tool
+170. Tool Settings
+171. Tool Properties
+172. Reset Tool
+173. Assign Shortcut
+174. Change Tool Icon
+175. Expand Tool Group
+176. Collapse Tool Group
+177. Show Tool Labels
+178. Hide Tool Labels
+179. Dock Toolbar
+180. Undock Toolbar
+
+## 8. LAYER PANEL MOUSE FUNCTIONS
+181. Select Layer
+182. Create Layer
+183. Delete Layer
+184. Duplicate Layer
+185. Rename Layer
+186. Lock Layer
+187. Unlock Layer
+188. Hide Layer
+189. Show Layer
+190. Reorder Layer
+191. Merge Layer
+192. Flatten Layer
+193. Group Layers
+194. Ungroup Layers
+195. Change Layer Opacity
+196. Change Layer Color
+197. Move Object Between Layers
+198. Expand Layer
+199. Collapse Layer
+200. Export Layer
+
+## 9. ADVANCED CAD / VECTOR FUNCTIONS
+201. Trim
+202. Extend
+203. Offset
+204. Fillet
+205. Chamfer
+206. Weld
+207. Intersect
+208. Subtract
+209. Combine
+210. Break Apart
+211. Join Paths
+212. Split Path
+213. Close Path
+214. Simplify Path
+215. Smooth Nodes
+216. Convert Node Type
+217. Add Dimension
+218. Edit Dimension
+219. Measure Distance
+220. Measure Angle
+221. Measure Area
+222. Set Origin
+223. Set Pivot Point
+224. Mirror Object
+225. Create Array
+226. Create Pattern
+227. Apply Boolean Operation
+228. Extrude Object
+229. Apply Perspective
+230. Create Clipping Mask
+
+## 10. POWERPOINT / PRESENTATION FUNCTIONS
+231. Add Slide
+232. Duplicate Slide
+233. Delete Slide
+234. Hide Slide
+235. Change Slide Layout
+236. Change Slide Background
+237. Add Animation
+238. Edit Animation
+239. Add Transition
+240. Edit Transition
+241. Insert Media
+242. Insert Chart
+243. Insert SmartArt
+244. Insert Text Box
+245. Add Speaker Notes
+246. Start Presentation
+247. Preview Animation
+248. Arrange Slide Objects
+249. Group Slide Objects
+250. Export Slide
+
+## 11. ADDITIONAL PROFESSIONAL MOUSE FUNCTIONS
+251. Undo
+252. Redo
+253. Repeat Last Action
+254. Open Quick Actions
+255. Open Command Search
+256. Open Object Inspector
+257. Open Properties Panel
+258. Open Color Picker
+259. Open Font Picker
+260. Open Stroke Settings
+261. Open Fill Settings
+262. Open Effects Panel
+263. Open Animation Panel
+264. Open History Panel
+265. Open Asset Library
+266. Open Symbol Library
+267. Open Templates
+268. Open Plugins
+269. Open Help
+270. Open Keyboard Shortcuts
+271. Copy Style
+272. Paste Style
+273. Clear Formatting
+274. Reset Object
+275. Replace Image
+276. Relink Asset
+277. Embed Asset
+278. Detach Component
+279. Create Component
+280. Preview Object
+
+**TOTAL: 280 MOUSE-INTERACTION FUNCTIONS.**
+
 ### Mandatory 100-sheet content architecture PER PROJECT
 Use a project-specific engineering breakdown; a **minimum** viable sheet distribution is:
 - 001–005: cover, drawing index, legends, revisions, technical assumptions.
