@@ -44,6 +44,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function finishSelectionBox\(event\)/);
   assert.match(inlineScripts[0][2], /function renameComponent\(id\)/);
   assert.match(inlineScripts[0][2], /function selectSimilarObjects\(id\)/);
+  assert.match(inlineScripts[0][2], /data-object-command="select-type"|select-type/);
   assert.match(inlineScripts[0][2], /function selectConnectedComponents\(id\)/);
   assert.match(inlineScripts[0][2], /AdigunCADEngine\.worldPins\(target\)/);
   assert.match(inlineScripts[0][2], /direct electrical nets selected/);
@@ -409,3 +410,29 @@ test('wire list blocks duplicate IDs, invalid geometry and unverified legacy sym
   ]), /Wire list export blocked/);
 });
 
+
+test('selecting component type selects all component instances on the active sheet', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const script = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+    .find(match => !/\bsrc\s*=/.test(match[1]))[2];
+  const start = script.indexOf('function selectComponentsByType(id)');
+  const end = script.indexOf('\n  function ', start);
+  assert.notEqual(start, -1);
+  assert.notEqual(end, -1);
+  const source = script.slice(start, end);
+  const selected = [];
+  const notices = [];
+  const context = {
+    state: { objects: [
+      { id: 'component-a', kind: 'component-instance' },
+      { id: 'line-a', kind: 'line' },
+      { id: 'component-b', kind: 'component-instance' }
+    ] },
+    setSelection(ids) { selected.splice(0, selected.length, ...ids); },
+    notify(message) { notices.push(message); }
+  };
+  vm.runInNewContext(source, context);
+  vm.runInNewContext("selectComponentsByType('component-a')", context);
+  assert.deepEqual(selected, ['component-a', 'component-b']);
+  assert.match(notices[0], /2 components selected on this sheet/);
+});
