@@ -2114,3 +2114,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Preserved the workstation interface. Updated the opening-set description, index, register, revision/assumptions, README, roadmap, source record and regressions. A1/012–A1/100 remain unauthored.
 - Expected analysis after verification: 11 sheets, 29 components, 287 wire segments, 46 local nets, 36 global nets, 20 linked endpoints and zero unlinked endpoints.
 - Next: verify the project and focused tests, then ship this increment in a dedicated PR and verify the deployment.
+
+
+## 2026-11-12 incremental execution record — A1/012
+
+- Added A1/012 with source-backed Schneider Electric XB5AA31 S2 (NO 13–14) and XB5AA42 S3 (NC 21–22). Their contact outputs route to Siemens CPU 1212C X10:8 / DI a.1 and X10:9 / DI a.2. +24 V is branched from the existing X14 net; the CPU's existing 0 V common remains the input reference. No PLC program, command behavior, or safety function is represented.
+- Added exact open-end cross-sheet links, reciprocal connector references, editable drawing content, BOM entries, index/register/revision/assumption updates, and route/connectivity regressions. Preserved the workstation interface.
+- Current model analysis: 12 sheets, 31 components, 299 wire segments, 51 sheet-local nets, 38 project-wide nets, 11 cross-sheet connections pairing 26 endpoints, and zero unlinked endpoints. A1/013–A1/100 remain unauthored.
+- Next: run the focused CAD regression suite, then push a dedicated PR, merge only after green CI, deploy, verify production, and continue at A1/013.

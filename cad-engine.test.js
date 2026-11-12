@@ -1169,14 +1169,14 @@ test('multi-sheet project analysis isolates coincident geometry and rejects ambi
 });
 
 
-test('eleven-sheet connected reference opening set preserves the starter and source-backed PLC interfaces', () => {
+test('twelve-sheet connected reference opening set preserves the starter and source-backed PLC interfaces', () => {
   const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
   const project = parsed.project;
-  assert.equal(project.sheets.length, 11);
+  assert.equal(project.sheets.length, 12);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/012–A1/100 not authored'));
+  assert.ok(project.status.includes('A1/013–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
@@ -1185,32 +1185,34 @@ test('eleven-sheet connected reference opening set preserves the starter and sou
     if (sheet.id !== 'ref-006') assert.ok(pageObjects.some(object => object.kind === 'text'), sheet.id + ' must contain editable text');
   }
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [11, 29, 287, 46, 0]);
-  assert.deepEqual([report.crossSheetConnectionCount,report.globalNetCount],[8,36]);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [12, 31, 299, 51, 0]);
+  assert.deepEqual([report.crossSheetConnectionCount,report.globalNetCount,report.localOpenEndpointCount],[11,38,26]);
   assert.deepEqual(report.sheets.slice(0, 5).map(sheet => [sheet.analysis.componentCount, sheet.analysis.wireCount, sheet.analysis.netCount]), [
     [0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
   ]);
   const electrical = report.sheets[5].analysis;
   assert.deepEqual([electrical.componentCount, electrical.wireCount, electrical.netCount], [15,242,26]);
   const sensorPage = report.sheets[6].analysis;
-  assert.deepEqual([sensorPage.componentCount, sensorPage.wireCount, sensorPage.netCount, sensorPage.openEndpointCount], [4,16,7,4]);
+  assert.deepEqual([sensorPage.componentCount, sensorPage.wireCount, sensorPage.netCount, sensorPage.openEndpointCount], [4,18,9,6]);
   const supplyPage = report.sheets[7].analysis;
   assert.deepEqual([supplyPage.componentCount, supplyPage.wireCount, supplyPage.netCount, supplyPage.openEndpointCount], [6,7,5,2]);
   const distributionPage = report.sheets[8].analysis;
-  assert.deepEqual([distributionPage.componentCount, distributionPage.wireCount, distributionPage.netCount, distributionPage.openEndpointCount], [2,12,2,8]);
+  assert.deepEqual([distributionPage.componentCount, distributionPage.wireCount, distributionPage.netCount, distributionPage.openEndpointCount], [2,15,2,9]);
   const outputPage = report.sheets[9].analysis;
   assert.deepEqual([outputPage.componentCount,outputPage.wireCount,outputPage.netCount,outputPage.openEndpointCount,outputPage.unconnectedPinCount],[1,8,4,4,1]);
   const contactorPage = report.sheets[10].analysis;
   assert.deepEqual([contactorPage.componentCount,contactorPage.wireCount,contactorPage.netCount,contactorPage.openEndpointCount,contactorPage.unconnectedPinCount],[1,2,2,2,10]);
+  const operatorPage = report.sheets[11].analysis;
+  assert.deepEqual([operatorPage.componentCount,operatorPage.wireCount,operatorPage.netCount,operatorPage.openEndpointCount,operatorPage.unconnectedPinCount],[2,7,3,3,0]);
   const bom = engine.billOfMaterials(project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b)=>a[0].localeCompare(b[0])), [
     ['2966171',1], ['3212144',14], ['3212147',1], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1],
-    ['3RV2021-4AA10',1], ['6EP1332-5BA00',1], ['6ES7212-1AE40-0XB0',1], ['DRN132M4',1], ['IFB3004BBPKG/US-104',1], ['LC1D09BD',1], ['XB5AA31',1], ['XB5AA42',1]
+    ['3RV2021-4AA10',1], ['6EP1332-5BA00',1], ['6ES7212-1AE40-0XB0',1], ['DRN132M4',1], ['IFB3004BBPKG/US-104',1], ['LC1D09BD',1], ['XB5AA31',2], ['XB5AA42',2]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,7,5,2,4,2]);
+  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,9,5,2,4,2,3]);
 });
 
 
@@ -1275,11 +1277,11 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   const project = parsed.project;
   const report = engine.analyzeProject(project);
   assert.equal(report.valid, true, report.errors.join(' '));
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [11,29,287,46,8,0]);
-  assert.deepEqual(report.sheets.slice(-5).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[4,16,7,4],[6,7,5,2],[2,12,2,8],[1,8,4,4],[1,2,2,2]]);
-  assert.equal(report.globalNetCount,36);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [12,31,299,51,11,0]);
+  assert.deepEqual(report.sheets.slice(-6).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[4,18,9,6],[6,7,5,2],[2,15,2,9],[1,8,4,4],[1,2,2,2],[2,7,3,3]]);
+  assert.equal(report.globalNetCount,38);
   assert.deepEqual(report.globalNets.filter(net=>net.sheetIds.includes('ref-007')&&net.sheetIds.includes('ref-008')).map(net=>net.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort()).sort((a,b)=>a[0].localeCompare(b[0])),[
-    ['ref-007:A1:X10:1','ref-007:A1:X12:1','ref-007:X7:1','ref-007:X7:2','ref-008:PS1:+','ref-008:X12:1','ref-008:X12:2','ref-009:X14:1','ref-009:X14:2','ref-010:K2:11'],
+    ['ref-007:A1:X10:1','ref-007:A1:X12:1','ref-007:X7:1','ref-007:X7:2','ref-008:PS1:+','ref-008:X12:1','ref-008:X12:2','ref-009:X14:1','ref-009:X14:2','ref-010:K2:11','ref-012:S2:13','ref-012:S3:21'],
     ['ref-007:A1:X10:2','ref-007:A1:X10:6','ref-007:X8:1','ref-007:X8:2','ref-008:PS1:-','ref-008:X13:1','ref-008:X13:2','ref-009:X15:1','ref-009:X15:2','ref-010:K2:A2','ref-011:KM4:A2']
   ]);
   const coilCommand=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-007'&&pin.ref==='A1'&&pin.number==='X12:2'));
@@ -1292,7 +1294,7 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   assert.equal(saved.valid, true, saved.errors.join(' '));
   const switchedContactorNet=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='14'));
   assert.deepEqual(switchedContactorNet.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-010:K2:14','ref-011:KM4:A1']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,7,5,2,4,2]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,9,5,2,4,2,3]);
 });
 
 
@@ -1305,7 +1307,7 @@ test('A1/008 keeps explicit AC/PE/DC nets and visibly links SITOP outputs to the
   assert.equal(report.valid, true, report.errors.join(' '));
   const page = report.sheets.find(sheet => sheet.id === 'ref-008').analysis;
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.openEndpointCount], [6,7,5,2]);
-  assert.deepEqual([report.crossSheetConnectionCount,report.localOpenEndpointCount,report.openEndpointCount],[8,20,0]);
+  assert.deepEqual([report.crossSheetConnectionCount,report.localOpenEndpointCount,report.openEndpointCount],[11,26,0]);
   const pinNet = (ref, number) => {
     const net = page.nets.find(item => item.pins.some(pin => pin.ref === ref && pin.number === number));
     assert.ok(net, `missing connected pin ${ref}:${number}`);
@@ -1332,14 +1334,15 @@ test('A1/009 adds source-backed feed-through terminals to the PSU-to-PLC cross-s
   const parsed=engine.parseProject(fs.readFileSync(file,'utf8'));
   assert.equal(parsed.valid,true,parsed.errors.join(' '));
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-009').analysis;
-  assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.openEndpointCount],[2,12,2,8]);
+  assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.openEndpointCount],[2,15,2,9]);
   const terminalNet=ref=>page.nets.find(net=>net.pins.some(pin=>pin.ref===ref)).pins.map(pin=>ref+':'+pin.number).sort();
   assert.deepEqual(terminalNet('X14'),['X14:1','X14:2']);
   assert.deepEqual(terminalNet('X15'),['X15:1','X15:2']);
   assert.deepEqual(engine.crossSheetConnectors(project,'ref-009').map(item=>[item.name,item.targetSheetNumber,item.targetRef]),[
     ['+24 V DC','A1/008','X12'],['+24 V DC','A1/007','X7'],['0 V DC','A1/008','X13'],['0 V DC','A1/007','X8'],
     ['+24 V DC · output group 1L','A1/007','A1'],['0 V DC · relay coil return','A1/010','K2'],
-    ['+24 V DC · K2 common','A1/010','K2'],['0 V DC · KM4 coil return','A1/011','KM4']
+    ['+24 V DC · K2 common','A1/010','K2'],['0 V DC · KM4 coil return','A1/011','KM4'],
+    ['+24 V DC · operator inputs','A1/012','S2']
   ]);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
@@ -1365,11 +1368,11 @@ test('A1/010 wires the source-backed PLC transistor output to the Phoenix Contac
   const routed=project.objects.filter(object=>object.sheetId==='ref-007'&&object.kind==='wire'&&object.id.startsWith('a1-010-w07-'));
   assert.equal(routed.length,4);
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/010 PLC supply and output paths must stay orthogonal');
-  assert.match(project.description,/A1\/012–A1\/100 are not authored/);
+  assert.match(project.description,/A1\/013–A1\/100 are not authored/);
   assert.match(project.objects.find(object=>object.id==='doc-ref-003-line-19').text,/2966171.*K2/);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
-  assert.equal(engine.analyzeProject(roundTrip.project).globalNetCount,36);
+  assert.equal(engine.analyzeProject(roundTrip.project).globalNetCount,38);
 });
 
 test('A1/011 routes the rated PLC relay contact to the source-backed 24 V DC contactor coil', () => {
@@ -1397,7 +1400,38 @@ test('A1/011 routes the rated PLC relay contact to the source-backed 24 V DC con
   ]);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
-  assert.equal(engine.analyzeProject(roundTrip.project).globalNetCount,36);
+  assert.equal(engine.analyzeProject(roundTrip.project).globalNetCount,38);
+});
+
+test('A1/012 connects source-backed NO/NC operator contacts to unused Siemens PLC digital inputs', () => {
+  const file=path.join(__dirname,'examples','real-projects','siemens-sew-star-delta-reference.adigun.json');
+  const parsed=engine.parseProject(fs.readFileSync(file,'utf8'));
+  assert.equal(parsed.valid,true,parsed.errors.join(' '));
+  const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-012').analysis;
+  assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.openEndpointCount,page.unconnectedPinCount],[2,7,3,3,0]);
+  const s2=project.objects.find(object=>object.sheetId==='ref-012'&&object.ref==='S2');
+  const s3=project.objects.find(object=>object.sheetId==='ref-012'&&object.ref==='S3');
+  assert.equal(s2.componentId,'schneider-electric-xb5aa31');
+  assert.equal(s3.componentId,'schneider-electric-xb5aa42');
+  assert.deepEqual(engine.component(s2.componentId).symbol.pins.map(pin=>pin.localNumber),['13','14']);
+  assert.deepEqual(engine.component(s3.componentId).symbol.pins.map(pin=>pin.localNumber),['21','22']);
+  assert.equal(engine.component(s2.componentId).electricalFunctions.pushButton.normalContactState,'open');
+  assert.equal(engine.component(s3.componentId).electricalFunctions.pushButton.normalContactState,'closed');
+  const globalFor=(ref,pinNumber)=>report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-012'&&pin.ref===ref&&pin.number===pinNumber));
+  assert.deepEqual(globalFor('S2','14').pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort(),['ref-007:A1:X10:8','ref-012:S2:14']);
+  assert.deepEqual(globalFor('S3','22').pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort(),['ref-007:A1:X10:9','ref-012:S3:22']);
+  const controlSupply=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-012'&&pin.ref==='S2'&&pin.number==='13'));
+  assert.ok(controlSupply.pins.some(pin=>pin.sheetId==='ref-012'&&pin.ref==='S3'&&pin.number==='21'));
+  assert.ok(controlSupply.pins.some(pin=>pin.sheetId==='ref-009'&&pin.ref==='X14'));
+  assert.match(project.objects.find(object=>object.id==='doc-ref-012-limit').text,/PLC program.*safety function are not modeled/i);
+  assert.deepEqual(engine.crossSheetConnectors(project,'ref-012').map(item=>[item.name,item.targetSheetNumber,item.targetRef]),[
+    ['+24 V DC · operator inputs','A1/009','X14'],['S2 NO · PLC DI a.1','A1/007','A1'],['S3 NC · PLC DI a.2','A1/007','A1']
+  ]);
+  const routed=project.objects.filter(object=>['ref-009','ref-012'].includes(object.sheetId)&&object.kind==='wire'&&object.id.includes('a1-012'));
+  assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/012 routes must stay orthogonal');
+  const reopened=engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid,true,reopened.errors.join(' '));
+  assert.equal(engine.analyzeProject(reopened.project).globalNetCount,38);
 });
 
 

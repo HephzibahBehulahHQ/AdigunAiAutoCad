@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 0.7",
-  "status": "Authored opening set: A1/001–A1/011; A1/012–A1/100 not authored.",
+  "revision": "Opening set 0.8",
+  "status": "Authored opening set: A1/001–A1/012; A1/013–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -71,6 +71,11 @@
       "id": "ref-011",
       "number": "A1/011",
       "name": "24 V DC contactor coil relay output"
+    },
+    {
+      "id": "ref-012",
+      "number": "A1/012",
+      "name": "PLC operator input wiring"
     }
   ],
   "sheetLabels": {
@@ -78,7 +83,8 @@
     "ref-008": "Siemens SITOP PSU100C supply",
     "ref-009": "24 V DC distribution connections",
     "ref-010": "PLC output relay interface",
-    "ref-011": "24 V DC contactor coil relay output"
+    "ref-011": "24 V DC contactor coil relay output",
+    "ref-012": "PLC operator input wiring"
   },
   "sheetViews": {
     "ref-007": {
@@ -106,6 +112,12 @@
       "h": 760
     },
     "ref-011": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-012": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3561,7 +3573,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/011",
+      "text": "Authored pages: A1/001–A1/012",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3579,7 +3591,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/012–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/013–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3711,7 +3723,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/011",
+      "text": "Component register | modeled devices on A1/006–A1/012",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3801,7 +3813,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/011.",
+      "text": "Component quantities match modeled devices through A1/012.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3831,7 +3843,7 @@
       "id": "doc-ref-004-line-01",
       "x": 120,
       "y": 250,
-      "text": "Revision 0.7 | 2026-11-12 | Eleven authored sheets; source-backed contactor coil output added.",
+      "text": "Revision 0.8 | 2026-11-12 | Twelve authored sheets; PLC operator input wiring added.",
       "stroke": "#13263b",
       "sheetId": "ref-004"
     },
@@ -3915,7 +3927,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/011 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/012 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4183,7 +4195,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM IFS204, and source-backed supply/output links through A1/011.",
+      "text": "A1/007: CPU 1212C, IFM IFS204, and source-backed PLC command input links through A1/012.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4192,7 +4204,7 @@
       "id": "doc-ref-003-line-12",
       "x": 120,
       "y": 1018,
-      "text": "A1/008: SITOP PSU100C inputs L/N/PE; +/− outputs distribute through A1/009 to the PLC and relay circuit.",
+      "text": "A1/008: SITOP PSU100C inputs L/N/PE; +/− outputs distribute through A1/009 to PLC, relay, contactor and operator inputs.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4201,7 +4213,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/011 contain the PLC sensor input, source-backed supply, output relay, and contactor coil path.",
+      "text": "A1/007–A1/012 contain the PLC sensor input, supply, relay/contactor path and operator input contacts.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4210,7 +4222,7 @@
       "id": "doc-ref-005-line-10",
       "x": 120,
       "y": 1018,
-      "text": "A1/006 remains electrically separate. A1/007–A1/011 share only explicitly routed, named cross-sheet nets.",
+      "text": "A1/006 remains electrically separate. A1/007–A1/012 share only explicitly routed, named cross-sheet nets.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4219,7 +4231,7 @@
       "id": "doc-ref-005-line-11",
       "x": 120,
       "y": 1082,
-      "text": "PLC logic, sensor detection, relay/contactor actuation and main-pole switching are not simulated; total current and protection remain unassessed.",
+      "text": "PLC logic, sensor detection, relay/contactor actuation, main-pole switching and safety functions are not simulated; total current/protection are unassessed.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4250,7 +4262,7 @@
       "sheetId": "ref-007",
       "x": 50,
       "y": 725,
-      "text": "SITOP through A1/009 powers CPU L+/M and output group 1L; DQ a.0 drives K2 and the contactor coil path reaches A1/011.",
+      "text": "SITOP through A1/009 supplies CPU L+/M, output group 1L and S2/S3 input circuits via A1/012; PLC logic is not modeled.",
       "stroke": "#13263b"
     },
     {
@@ -4314,7 +4326,7 @@
       "sheetId": "ref-003",
       "id": "doc-ref-003-line-18",
       "y": 1146,
-      "text": "Manufacturer identities and terminal data remain linked to their source records."
+      "text": "Manufacturer identities, terminal data and component sources remain linked to their source records."
     },
     {
       "kind": "component-instance",
@@ -4617,7 +4629,7 @@
       "kind": "wire",
       "id": "a1-009-distribution-plus-right",
       "sheetId": "ref-009",
-      "x1": 635,
+      "x1": 700,
       "y1": 260,
       "x2": 1000,
       "y2": 260
@@ -4646,7 +4658,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 325,
-      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L and K2:11 via A1/010.",
+      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11 and S2/S3 operator contacts via A1/012.",
       "stroke": "#13263b"
     },
     {
@@ -4825,7 +4837,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 600,
-      "text": "X15 returns the A1/010 K2 coil and A1/011 KM4 coil circuits to 0 V DC.",
+      "text": "X15 returns CPU M/1M, A1/010 K2 coil and A1/011 KM4 coil circuits to 0 V DC.",
       "stroke": "#13263b"
     },
     {
@@ -5060,9 +5072,241 @@
       "x": 120,
       "y": 1274,
       "text": "1     Schneider Electric    LC1D09BD · TeSys D contactor       KM4"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "inst-a1-012-schneider-xb5aa31-s2",
+      "componentId": "schneider-electric-xb5aa31",
+      "ref": "S2",
+      "x": 600,
+      "y": 340,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "PLC DI a.1",
+        "comment": "Momentary NO input; PLC logic is not modeled."
+      },
+      "sheetId": "ref-012"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "inst-a1-012-schneider-xb5aa42-s3",
+      "componentId": "schneider-electric-xb5aa42",
+      "ref": "S3",
+      "x": 600,
+      "y": 500,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "PLC DI a.2",
+        "comment": "Momentary NC input; no safety function is modeled."
+      },
+      "sheetId": "ref-012"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-supply-in",
+      "sheetId": "ref-012",
+      "x1": 200,
+      "y1": 260,
+      "x2": 350,
+      "y2": 260
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-supply-down",
+      "sheetId": "ref-012",
+      "x1": 350,
+      "y1": 260,
+      "x2": 350,
+      "y2": 340
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-supply-s2",
+      "sheetId": "ref-012",
+      "x1": 350,
+      "y1": 340,
+      "x2": 545,
+      "y2": 340
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-supply-branch",
+      "sheetId": "ref-012",
+      "x1": 350,
+      "y1": 340,
+      "x2": 350,
+      "y2": 500
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-supply-s3",
+      "sheetId": "ref-012",
+      "x1": 350,
+      "y1": 500,
+      "x2": 545,
+      "y2": 500
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-s2-i01",
+      "sheetId": "ref-012",
+      "x1": 655,
+      "y1": 340,
+      "x2": 1110,
+      "y2": 340
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w12-s3-i02",
+      "sheetId": "ref-012",
+      "x1": 655,
+      "y1": 500,
+      "x2": 1110,
+      "y2": 500
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w07-i01",
+      "sheetId": "ref-007",
+      "x1": 670,
+      "y1": 400,
+      "x2": 1110,
+      "y2": 400
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w07-i02",
+      "sheetId": "ref-007",
+      "x1": 670,
+      "y1": 418,
+      "x2": 1110,
+      "y2": 418
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w09-x14-source-side",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 260,
+      "x2": 700,
+      "y2": 260
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w09-x14-branch-vertical",
+      "sheetId": "ref-009",
+      "x1": 700,
+      "y1": 260,
+      "x2": 700,
+      "y2": 400
+    },
+    {
+      "kind": "wire",
+      "id": "a1-012-w09-x14-branch-out",
+      "sheetId": "ref-009",
+      "x1": 700,
+      "y1": 400,
+      "x2": 1110,
+      "y2": 400
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-012-title",
+      "sheetId": "ref-012",
+      "x": 50,
+      "y": 54,
+      "text": "A1/012 · Schneider operator contacts to Siemens PLC inputs",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-012-supply",
+      "sheetId": "ref-012",
+      "x": 260,
+      "y": 225,
+      "text": "A1/009 X14 · +24 V DC control input supply",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-012-s2",
+      "sheetId": "ref-012",
+      "x": 260,
+      "y": 360,
+      "text": "S2 · XB5AA31 NO 13–14 → A1/007 CPU X10:8 · DI a.1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-012-s3",
+      "sheetId": "ref-012",
+      "x": 260,
+      "y": 535,
+      "text": "S3 · XB5AA42 NC 21–22 → A1/007 CPU X10:9 · DI a.2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-012-limit",
+      "sheetId": "ref-012",
+      "x": 50,
+      "y": 690,
+      "text": "Static wiring only; PLC program, command behavior and safety function are not modeled.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-12",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1018,
+      "text": "A1/012  Schneider NO/NC operator contacts to Siemens PLC DI a.1/a.2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-21",
+      "sheetId": "ref-003",
+      "x": 120,
+      "y": 1338,
+      "text": "1     Schneider Electric    XB5AA31 · green 1 NO             S2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-22",
+      "sheetId": "ref-003",
+      "x": 120,
+      "y": 1402,
+      "text": "1     Schneider Electric    XB5AA42 · red 1 NC               S3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-23",
+      "sheetId": "ref-003",
+      "x": 120,
+      "y": 1466,
+      "text": "No external AC source/input protection or PLC program is modeled; total load current and safety functions are unassessed.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-08",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 698,
+      "text": "A1/012: source-backed S2/S3 contacts connect to CPU digital inputs a.1/a.2.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Eleven authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V DC distribution A1/009; PLC relay interface A1/010; and PLC relay output to Schneider contactor coil A1/011. The static project does not simulate PLC logic, relay or contactor actuation, or switched-contact behavior. A1/012–A1/100 are not authored.",
+  "description": "Twelve authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V DC distribution A1/009; PLC relay interface A1/010; PLC relay output to Schneider contactor coil A1/011; and source-backed Schneider operator contacts to Siemens PLC DI a.1/a.2 A1/012. The static project does not simulate PLC logic, command behavior, safety functions, relay or contactor actuation, or switched-contact behavior. A1/013–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
@@ -5368,6 +5612,102 @@
             "direction": "right",
             "targetSheetId": "ref-011",
             "targetRef": "KM4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-012-x14-supply",
+      "name": "+24 V DC · operator inputs",
+      "endpoints": [
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-012-w09-x14-branch-out",
+          "point": {
+            "x": 1110,
+            "y": 400
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-012",
+            "targetRef": "S2"
+          }
+        },
+        {
+          "sheetId": "ref-012",
+          "wireId": "a1-012-w12-supply-in",
+          "point": {
+            "x": 200,
+            "y": 260
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-009",
+            "targetRef": "X14"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-012-s2-i01",
+      "name": "S2 NO · PLC DI a.1",
+      "endpoints": [
+        {
+          "sheetId": "ref-012",
+          "wireId": "a1-012-w12-s2-i01",
+          "point": {
+            "x": 1110,
+            "y": 340
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-012-w07-i01",
+          "point": {
+            "x": 1110,
+            "y": 400
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-012",
+            "targetRef": "S2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-012-s3-i02",
+      "name": "S3 NC · PLC DI a.2",
+      "endpoints": [
+        {
+          "sheetId": "ref-012",
+          "wireId": "a1-012-w12-s3-i02",
+          "point": {
+            "x": 1110,
+            "y": 500
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-012-w07-i02",
+          "point": {
+            "x": 1110,
+            "y": 418
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-012",
+            "targetRef": "S3"
           }
         }
       ]
