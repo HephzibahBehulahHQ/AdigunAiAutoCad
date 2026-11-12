@@ -21,3 +21,14 @@ This is a one-sheet, source-backed wiring example using five verified component 
 ## Scope and review
 
 This is a control-wiring example, not a complete motor starter or construction package. It intentionally omits mains switching, motor, upstream protection, conductor sizing, panel layout, relay-state simulation and safety coordination. Verify the component variants, supply, external PLC interface and application limits against current manufacturer documentation and qualified engineering review before adapting it.
+
+
+# Siemens SIRIUS 3RM12 reversing starter
+
+Open `siemens-3rm12-reversing-starter.adigun.json` from the workstation's **Open project file** command. This one-sheet example uses one source-backed Siemens reversing starter and fifteen Phoenix Contact PT 16 N OG feed-through terminals as explicit line-side, motor-side and control/signal boundaries. Its schematic wires connect all fifteen manufacturer-designated 3RM1 pins to those terminal blocks. The CAD model derives the BOM and wire list from those instances and routes.
+
+- Siemens 3RM1201-1AA04 product catalog: <https://mall.industry.siemens.com/mall/en/en/Catalog/Product/?mlfb=3RM1201-1AA04>
+- Siemens SIRIUS 3RM1 Equipment Manual, 09/2024: <https://cache.industry.siemens.com/dl/files/730/66295730/att_919653/v3/manual_motorstarter_SIRIUS_3RM1_en-US.pdf>
+- Phoenix Contact PT 16 N OG, item 3212144: <https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144>
+
+The project records line terminals 1/L1, 3/L2, 5/L3; motor terminals 2/T1, 4/T2, 6/T3; control terminals A1, A2, IN1–IN3; 24 V DC run output OUT; and fault signaling terminals 95, 96, 98. It models wiring only. It does not include a motor or upstream protection, select conductor size, verify application suitability, simulate direction switching/protective trips/signal contacts, or provide a construction package. Siemens rates 3RM1201-1AA04 at 0.1–0.5 A and a maximum motor power of 0.12 kW at 400 V AC; confirm motor/application fit before use. NOT FOR CONSTRUCTION without qualified engineering review.

@@ -151,11 +151,12 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 3);
+  assert.equal(items.length, 4);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
-    [contactorId, 'contactor', 'KM']
+    [contactorId, 'contactor', 'KM'],
+    ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q']
   ]);
 });
 
@@ -609,4 +610,53 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const reopened = engine.parseProject(savedAgain);
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).nets.length, 4);
+});
+
+const starterId = 'siemens-3rm1201-1aa04';
+
+test('Siemens 3RM1201-1AA04 records manufacturer terminals, rating, and source provenance', () => {
+  const def = engine.component(starterId);
+  assert.equal(def.manufacturer, 'Siemens');
+  assert.equal(def.manufacturerPartNumber, '3RM1201-1AA04');
+  assert.equal(def.specifications.controlSupplyVoltage.value, 24);
+  assert.equal(def.specifications.adjustableRatedOperationalCurrent.minimum, 0.1);
+  assert.equal(def.specifications.adjustableRatedOperationalCurrent.maximum, 0.5);
+  assert.deepEqual(def.symbol.pins.map(pin => pin.localNumber), [
+    '1/L1', '3/L2', '5/L3', '2/T1', '4/T2', '6/T3',
+    'A1', 'IN1', 'IN2', 'IN3', 'A2', 'OUT', '95', '96', '98'
+  ]);
+  assert.equal(def.symbol.pins.length, 15);
+  assert.deepEqual(def.symbol.internalConnections, []);
+  assert.match(def.sources[0].url, /^https:\/\/mall\.industry\.siemens\.com\//);
+  assert.match(def.sources[1].url, /^https:\/\/cache\.industry\.siemens\.com\//);
+  const instance = engine.createInstance(starterId, 600, 380, 'Q1');
+  instance.properties.position = 'DIN rail 1';
+  assert.equal(engine.validateInstance(instance).valid, true);
+  assert.deepEqual(engine.worldPins(instance).map(pin => pin.number), [
+    '1/L1','3/L2','5/L3','2/T1','4/T2','6/T3','A1','IN1','IN2','IN3','A2','OUT','95','96','98'
+  ]);
+});
+
+test('Siemens reversing-starter example imports with every real terminal wired and a source-backed BOM', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-3rm12-reversing-starter.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const analysis = engine.analyze(parsed.project.objects);
+  assert.deepEqual([analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length], [16, 36, 0, 0]);
+  assert.equal(analysis.componentPinCount, 45);
+  const wiredStarterPins = analysis.nets.flatMap(net => net.pins)
+    .filter(pin => pin.ref === 'Q1').map(pin => pin.number).sort();
+  assert.deepEqual(wiredStarterPins, ['1/L1','2/T1','3/L2','4/T2','5/L3','6/T3','95','96','98','A1','A2','IN1','IN2','IN3','OUT']);
+  assert.equal(analysis.netCount, 15);
+  const wireList = engine.wireList(parsed.project.objects);
+  assert.equal(wireList.valid, true, wireList.errors.join(' '));
+  assert.equal(wireList.rows.length, 36);
+  const bom = engine.billOfMaterials(parsed.project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(bom.rows.map(row => [row.partNumber, row.quantity]).sort((a,b)=>a[0].localeCompare(b[0])), [
+    ['3212144', 15], ['3RM1201-1AA04', 1]
+  ]);
+  const reopened = engine.parseProject(engine.serializeProject(parsed.project));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.equal(engine.analyze(reopened.project.objects).netCount, 15);
 });

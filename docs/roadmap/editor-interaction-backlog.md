@@ -17,4 +17,4 @@ Recent merged changes cover drawing-object properties on double-click, multi-sel
 
 ## Current priority
 
-Build source-backed electrical components and a small set of meaningful native example projects. The first one-sheet 24 V DC relay/contactor-coil example is in `examples/real-projects/`; its README states external connections and engineering limitations. Continue the interaction audit without changing approved workstation geometry, then expand the component/project milestone in verified batches.
+Build source-backed electrical components and a small set of meaningful native example projects. The first one-sheet 24 V DC relay/contactor-coil example and a Siemens 3RM12 reversing-starter example are in `examples/real-projects/`. Both derive connectivity and BOMs from real catalogued parts, preserve their actual terminal IDs, and document application limits. Next: add manufacturer-specific motors and protection devices, then expand motor-control example projects after matching verified part ratings and wiring data. Continue the interaction audit without changing approved workstation geometry.
