@@ -37,6 +37,16 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function toggleObjectHidden\(id\)/);
   assert.match(inlineScripts[0][2], /function changeObjectOrder\(id,front\)/);
   assert.match(inlineScripts[0][2], /function flipObject\(id,axis\)/);
+  assert.match(inlineScripts[0][2], /selectedObjectIds/);
+  assert.match(inlineScripts[0][2], /function toggleSelection\(id\)/);
+  assert.match(inlineScripts[0][2], /function groupSelection\(\)/);
+  assert.match(inlineScripts[0][2], /function ungroupSelection\(\)/);
+  assert.match(inlineScripts[0][2], /function deleteSelection\(\)/);
+  assert.match(inlineScripts[0][2], /function translateObjectSet\(ids,dx,dy\)/);
+  assert.match(inlineScripts[0][2], /e\.shiftKey\|\|e\.ctrlKey\|\|e\.metaKey/);
+  assert.match(inlineScripts[0][2], /groupId/);
+  assert.match(inlineScripts[0][2], /event\.key\.toLowerCase\(\)==='a'/);
+  assert.doesNotMatch(inlineScripts[0][2], /moveInstance\(copy,copy\.x\+50,copy\.y\+50\)/);
   assert.match(inlineScripts[0][2], /data-canvas-command/);
   assert.match(inlineScripts[0][2], /clipboardObject/);
   assert.match(inlineScripts[0][2], /finishObjectMove\(state.pendingMoveObjectId,svgPoint\(e\)\)/);
