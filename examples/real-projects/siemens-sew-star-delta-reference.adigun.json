@@ -4743,7 +4743,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 325,
-      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11, S2/S3 F1:97 via A1/018; A1/019 leaves the output topology unchanged.",
+      "text": "PS1 +24 V DC · X14 supplies CPU L+/1L, K2:11, S2/S3 and F1:97 via A1/018; A1/019 leaves the output topology unchanged.",
       "stroke": "#13263b"
     },
     {

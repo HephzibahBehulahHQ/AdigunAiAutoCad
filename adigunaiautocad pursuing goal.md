@@ -2178,3 +2178,6 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Added A1/019 as a native CPU 1212C digital-output allocation schedule. Q0.0 / X12:2 / DQ a.0 remains assigned to Phoenix Contact K2 coil A1; Q0.1–Q0.5 are explicitly unassigned within the modeled project scope. X12:6 / 2L is recorded as a group common, not an output. No devices or wires were added.
 - Updated the current Siemens S7-1200 System Manual source record (V4.7, Tables A-49/A-50), drawing index, cover, revision record, component register, assumptions, README and roadmap. Preserved the approved workstation interface and `index.html`.
 - Next: run model regressions, publish a focused A1/019 PR, merge only after green CI, deploy and verify production, then continue at A1/020.
+
+
+- A1/019 follow-up: corrected the A1/009 supply note wording and added a regression assertion for the exact text; no model or topology changed.
