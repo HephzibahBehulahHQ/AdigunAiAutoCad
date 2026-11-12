@@ -16,3 +16,8 @@
 - A1/021 records a candidate mapping from pin 2 / OUT2 to Siemens CPU 1212C AI0 / X11:2, with the analog return referenced to 2M / X11:1. The Siemens CPU source record identifies AI0 as a 0–10 V DC input and X11:1 as 2M.
 - This is a compatibility and allocation proposal only. The project contains no PN2070 instance or circuit wiring on A1/021; AI0 remains unassigned in the connected model. No pressure values, analog conversion, calibration, scaling, alarms or PLC logic are modeled.
 - Sensor pin identities come from the manufacturer's connection diagram. Project sheet coordinates are drawing locations, not device geometry. Physical installation, pressure medium, range selection, pressure rating, protection, total supply load and application suitability remain unassessed.
+
+## CAD catalog representation
+
+- The source-backed `ifm-pn2070` catalog definition preserves all four M12 terminal identities and keeps OUT1 distinct from analog-capable OUT2. It has a dedicated pressure-sensor glyph in the existing workstation renderer.
+- Instance notes for the process point and signal configuration are editable; manufacturer ratings and source evidence remain read-only. The component has no instance in the 21-sheet reference project yet.

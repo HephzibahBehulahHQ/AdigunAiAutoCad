@@ -2188,3 +2188,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Added A1/020 as a native Siemens CPU 1212C analog-input allocation schedule. X11:1 / 2M is the analog common; AI0 / X11:2 and AI1 / X11:3 are the source-backed 0–10 V DC channels and remain unassigned within the modeled scope. No signal sources, devices or wires were added.
 - Updated the current Siemens System Manual V4.7 CPU source record, drawing index, cover, revision, component register, assumptions, README and roadmap. No interface changes.
 - Next: run model regressions, publish a focused A1/020 PR, merge only after green CI, deploy and verify production, then continue at A1/021.
+
+
+## 2026-11-12 incremental execution record — A1/021 and A1/022 catalog tranche
+
+- A1/021 added a source-backed ifm PN2070 interface proposal; the candidate OUT2-to-AI0 route remains unwired and AI0 remains unassigned.
+- A1/022 catalog tranche adds the PN2070 definition with four manufacturer pins, sourced output defaults, editable process/signal notes, and a dedicated symbol in the existing workstation shell. No project instance, circuit, or interface-layout change is included.
+- Verification before PR: 68 local regression tests and whitespace checks pass. Next: publish/merge/deploy after green CI; then author the physical A1/022 circuit only after the 2M and 0 V references are confirmed.
