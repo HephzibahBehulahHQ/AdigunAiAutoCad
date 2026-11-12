@@ -1348,6 +1348,7 @@ test('A1/009 adds source-backed feed-through terminals to the PSU-to-PLC cross-s
   assert.equal(parsed.valid,true,parsed.errors.join(' '));
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-009').analysis;
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.openEndpointCount],[2,18,2,10]);
+  assert.match(project.objects.find(object=>object.id==='doc-ref-009-plus').text,/X14 supplies CPU L\+\/1L, K2:11, S2\/S3 and F1:97 via A1\/018; A1\/019 leaves the output topology unchanged/);
   const terminalNet=ref=>page.nets.find(net=>net.pins.some(pin=>pin.ref===ref)).pins.map(pin=>ref+':'+pin.number).sort();
   assert.deepEqual(terminalNet('X14'),['X14:1','X14:2']);
   assert.deepEqual(terminalNet('X15'),['X15:1','X15:2']);
