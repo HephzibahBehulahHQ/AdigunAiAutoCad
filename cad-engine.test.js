@@ -1000,3 +1000,65 @@ test('star-delta components render in the existing workstation shell with editab
   assert.ok(html.includes('.toolbar{display:flex'));
   assert.ok(html.includes('.topbar{position:relative'));
 });
+test('SEW and Siemens star-delta example preserves separate power, control, star, delta, and interlock nets', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-starter.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  const analysis = engine.analyze(project.objects);
+  assert.deepEqual(
+    [analysis.componentCount, analysis.wireCount, analysis.componentPinCount, analysis.connectedPinCount, analysis.unconnectedPinCount, analysis.netCount, analysis.openEndpointCount, analysis.errors.length],
+    [15, 242, 80, 72, 8, 26, 0, 0]
+  );
+  const actual = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort()).sort((a,b) => a[0].localeCompare(b[0]));
+  const expected = [
+    ['Q1:1/L1','X1:1','X1:2'],
+    ['KM2:1/L1','KM3:1/L1','M1:U2'],
+    ['KM1:1/L1','Q1:2/T1'],
+    ['KM2:3/L2','KM3:3/L2','M1:V2'],
+    ['KM2:5/L3','KM3:5/L3','M1:W2'],
+    ['KM3:2/T1','KM3:4/T2','KM3:6/T3'],
+    ['M1:PE','X4:1','X4:2'],
+    ['K1:17','S0:21','X5:1','X5:2'],
+    ['KM1:13','S0:22','S1:13'],
+    ['F1:95','KM1:14','S1:14'],
+    ['Q1:3/L2','X2:1','X2:2'],
+    ['F1:96','K1:A1','KM1:A1'],
+    ['K1:A2','KM1:A2','KM2:A2','KM3:A2','X6:1','X6:2'],
+    ['K1:18','KM2:21'],
+    ['KM2:22','KM3:A1'],
+    ['K1:28','KM3:21'],
+    ['KM2:A1','KM3:22'],
+    ['KM1:3/L2','Q1:4/T2'],
+    ['Q1:5/L3','X3:1','X3:2'],
+    ['KM1:5/L3','Q1:6/T3'],
+    ['F1:1/L1','KM1:2/T1'],
+    ['F1:3/L2','KM1:4/T2'],
+    ['F1:5/L3','KM1:6/T3'],
+    ['F1:2/T1','KM2:6/T3','M1:U1'],
+    ['F1:4/T2','KM2:2/T1','M1:V1'],
+    ['F1:6/T3','KM2:4/T2','M1:W1']
+  ].map(net => net.sort()).sort((a,b) => a[0].localeCompare(b[0]));
+  assert.deepEqual(actual, expected);
+  const components = project.objects.filter(object => object.kind === 'component-instance');
+  assert.equal(components.find(object => object.ref === 'K1').properties.delaySeconds, null);
+  assert.equal(components.find(object => object.ref === 'F1').properties.overloadSettingA, null);
+  assert.equal(components.find(object => object.ref === 'Q1').properties.overloadSettingA, null);
+  assert.equal(project.zoom, 50);
+  assert.ok(project.view.h >= 1500);
+  const wires = engine.wireList(project.objects);
+  assert.equal(wires.valid, true, wires.errors.join(' '));
+  assert.equal(wires.rows.length, 242);
+  const bom = engine.billOfMaterials(project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
+    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
+    ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
+  ]);
+  const reopened = engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.deepEqual(
+    engine.analyze(reopened.project.objects).nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort()).sort((a,b) => a[0].localeCompare(b[0])),
+    expected
+  );
+});

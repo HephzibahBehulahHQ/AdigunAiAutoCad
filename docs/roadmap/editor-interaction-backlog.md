@@ -40,3 +40,8 @@ Future account indicator: add a compact user icon beside Command Search only whe
 ## Completed library increment — star-delta component records
 
 Added source-backed Siemens 3RT2026-2KB40 contactor, 3RU2126-4AB0 overload relay, 3RV2021-4AA10 motor-protection breaker, 3RP2576-2NW30 timer, and SEW DRN132M4 motor definitions, including manufacturer terminal identities, editable overload/delay settings and dedicated timer/overload rendering in the existing shell. The timer and protection behaviors remain unsimulated. A draft full schematic was rejected after connectivity analysis revealed unintended wire joins; publish an example only after route/topology regression tests prove the intended independent nets.
+
+
+## Completed project increment — star-delta starter
+
+Added an editable source-backed Siemens/SEW star-delta starter project with a dedicated regression asserting all 26 exact pin nets, all 242 orthogonal wire segments, BOM quantities, save/reopen stability, and the eight intentionally unwired auxiliary terminals. Q1/F1 current settings and timer delay remain unselected. The static net model does not simulate contactor, overload, timer, or motor states. The project view includes the full drawing extents; workstation geometry and panels were not changed.
