@@ -42,6 +42,11 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /function beginSelectionBox\(event\)/);
   assert.match(inlineScripts[0][2], /function updateSelectionBox\(point\)/);
   assert.match(inlineScripts[0][2], /function finishSelectionBox\(event\)/);
+  assert.match(inlineScripts[0][2], /function renameComponent\(id\)/);
+  assert.match(inlineScripts[0][2], /function selectSimilarObjects\(id\)/);
+  assert.match(inlineScripts[0][2], /function selectConnectedComponents\(id\)/);
+  assert.match(inlineScripts[0][2], /AdigunCADEngine\.worldPins\(target\)/);
+  assert.match(inlineScripts[0][2], /direct electrical nets selected/);
   assert.match(inlineScripts[0][2], /function cancelSelectionBox\(\)/);
   assert.match(inlineScripts[0][2], /selection-window/);
   assert.match(inlineScripts[0][2], /function groupSelection\(\)/);
