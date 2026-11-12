@@ -155,7 +155,7 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 18);
+  assert.equal(items.length, 19);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -173,6 +173,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['sew-eurodrive-drn132m4', 'motor-induction', 'M'],
     ['siemens-6es7212-1ae40-0xb0', 'plc-cpu', 'A'],
     ['ifm-ifs204', 'sensor-inductive-pnp', 'B'],
+    ['ifm-pn2070', 'sensor-pressure-analog', 'B'],
     ['siemens-sitop-psu100c-6ep1332-5ba00', 'power-supply-ac-dc', 'PS'],
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X']
   ]);
@@ -1691,4 +1692,36 @@ test('A1/021 records a source-backed pressure-sensor interface proposal without 
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[21,31,324,18,42,0]);
+});
+
+test('ifm PN2070 exposes its exact M12 pins, configurable analog outputs, provenance, and editable instance notes', () => {
+  const sensor=engine.component('ifm-pn2070');
+  assert.equal(sensor.manufacturerPartNumber,'PN-400-SER14-MFRKG/US/ /V');
+  assert.deepEqual(sensor.symbol.pins.map(pin=>[pin.localNumber,pin.name]),[
+    ['1','L+ · BN brown'],['2','OUT2 · WH white · analog output'],['3','L− · BU blue'],['4','OUT1 · BK black · switching / IO-Link']
+  ]);
+  assert.deepEqual(sensor.symbol.pins.map(pin=>[pin.x,pin.y]),[[-65,-25],[65,-25],[-65,25],[65,25]]);
+  assert.equal(sensor.specifications.measuringRange.maximum,400);
+  assert.equal(sensor.specifications.operatingVoltage.minimum,18);
+  assert.equal(sensor.electricalFunctions.analogOutput.factoryConfiguration,'4–20 mA; verify actual device setting');
+  assert.equal(sensor.electricalFunctions.analogOutput.outputPin,'pin-2-out2');
+  assert.equal(sensor.electricalFunctions.analogOutput.digitalOutputPin,'pin-4-out1');
+  assert.ok(sensor.sources.some(source=>source.url.includes('PN2070-02_EN-GB.pdf')));
+  assert.ok(sensor.sources.some(source=>source.url.includes('/pressure/pn/programming')));
+  const instance=engine.createInstance(sensor.id,240,320,'B2');
+  assert.equal(instance.properties.processPoint,'');
+  instance.properties.processPoint='Hydraulic manifold outlet';
+  instance.properties.signalConfigurationNote='4–20 mA factory setting; verify before connection';
+  assert.equal(engine.validateInstance(instance).valid,true);
+  instance.properties.processPoint='x'.repeat(61);
+  assert.equal(engine.validateInstance(instance).valid,false);
+});
+
+test('PN2070 has a dedicated analog pressure-sensor glyph and editable notes without changing the workspace shell', () => {
+  const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+  assert.ok(html.includes("case'sensor-pressure-analog':"));
+  assert.ok(html.includes("def.family==='sensor-pressure-analog'"));
+  assert.ok(html.includes('data-component-property="processPoint"'));
+  assert.ok(html.includes('data-component-property="signalConfigurationNote"'));
+  assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
 });
