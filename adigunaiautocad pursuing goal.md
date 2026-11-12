@@ -2105,3 +2105,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Preserved the existing workstation interface. Expanded only the electrical project, drawing index, component register, assumptions, README, roadmap, and regression coverage. Updated project description and revision records; A1/011–A1/100 remain unauthored.
 - Expected project analysis after validation: 10 sheets, 28 components, 275 wire segments, 42 local nets, 35 global nets, 14 linked endpoints, and zero unlinked endpoints. No total load-current or protection-coordination result is claimed.
 - Next: run focused checks, then push a dedicated PR and wait for green CI before merging and verifying Pages production.
+
+
+## 2026-11-12 incremental execution record — A1/011
+
+- Added A1/011 with the source-backed Schneider Electric LC1D09BD contactor KM4. Routed the Phoenix Contact K2 relay common from +24 V, K2:14 to KM4:A1, and KM4:A2 to 0 V through A1/009. KM4 main and auxiliary contacts remain open; no downstream power load is specified.
+- Recorded manufacturer-supported coil and relay data: Schneider FAQ FA33405 lists 2.4 W average at 20 °C and nominal Uc (100 mA at 24 V DC); Phoenix Contact specifies K2 at 2 A DC13, 24 V DC. These ratings are a reference only and do not establish total supply adequacy or protection coordination.
+- Preserved the workstation interface. Updated the opening-set description, index, register, revision/assumptions, README, roadmap, source record and regressions. A1/012–A1/100 remain unauthored.
+- Expected analysis after verification: 11 sheets, 29 components, 287 wire segments, 46 local nets, 36 global nets, 20 linked endpoints and zero unlinked endpoints.
+- Next: verify the project and focused tests, then ship this increment in a dedicated PR and verify the deployment.
