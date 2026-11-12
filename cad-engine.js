@@ -238,8 +238,8 @@
         : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 11)),
       componentId: componentId,
       ref: typeof ref === 'string' && ref.trim() ? ref.trim().slice(0, 32) : (def.referencePrefix || 'X') + '1',
-      x: Math.round(x / 5) * 5,
-      y: Math.round(y / 5) * 5,
+      x: x,
+      y: y,
       rotation: 0,
       properties: properties
     };
