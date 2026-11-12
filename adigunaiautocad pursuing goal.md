@@ -1228,3 +1228,415 @@ Save and reference this rule in the designated goals or standards repository for
 ### Deferred header account/presence control
 
 The user requested a later compact account icon immediately beside the Command Search control at the top right. Its status must reflect real application account/session state: red when offline and green when online, with an accessible name and hover/focus tooltip. This is deferred until the project has a real account/presence source. Fit it inside the existing header allocation; do not increase header height or shift the navigation, toolbar, panels, or canvas. Record before/after geometry and verify no layout movement when implemented.
+
+
+### Component interaction catalog and presentation rule
+
+The user supplied the 360-item engineering-canvas interaction catalog as the functional backlog for component, connection, wiring, rotation, editing, duplication, grouping, alignment, pins, layers, constraints, simulation, validation, organization, replacement, routing, placement, and professional canvas interactions. Treat these as progressive product requirements, not decorative menu labels.
+
+**Presentation invariant:** expose applicable actions through floating context submenus, right-click menus, and direct mouse gestures in the existing CAD workspace. Do not add permanent toolbar rows, enlarge panels, shift the canvas, or alter approved header/tool geometry. Context menus must remain above content and scroll internally. Show an action only when it is valid for the selected object and implemented by the current model; never use a placeholder action. Continue implementing product-relevant items as real, testable milestones, with a capability/backlog audit to track what remains. Electrical wire routing, component pin connectivity, editable real symbols, connected movement, undo/redo, multi-selection/grouping, alignment/distribution, and validation remain core CAD priorities. Cross-domain features (for example hydraulic/optical ports or presentation animation) need an explicit model and should not be claimed as electrical CAD functionality without implementation.
+
+
+### Full user-supplied component function catalog
+
+**CAD | Electrical Design | Circuit Design | PCB | Mechanical Design | CorelDRAW | PowerPoint | Diagram Editors**
+
+### 1. COMPONENT SELECTION
+1. Select Component
+2. Multi-Select Components
+3. Select All Components
+4. Deselect Components
+5. Select Connected Components
+6. Select Similar Components
+7. Select Components by Type
+8. Select Components by Layer
+9. Select Components by Name
+10. Invert Selection
+
+### 2. COMPONENT MOVEMENT
+11. Move Component
+12. Drag Component
+13. Reposition Component
+14. Move Multiple Components
+15. Move Connected Components
+16. Move Component Horizontally
+17. Move Component Vertically
+18. Move Component Freely
+19. Move Component by Coordinates
+20. Move Component with Arrow Keys
+21. Snap Component to Grid
+22. Snap Component to Another Component
+23. Align Component to Guide
+24. Lock Component Position
+25. Unlock Component Position
+
+### 3. COMPONENT CONNECTION
+26. Connect Two Components
+27. Connect Multiple Components
+28. Connect Component Pins
+29. Connect Input to Output
+30. Connect Output to Input
+31. Connect Power Pins
+32. Connect Ground Pins
+33. Connect Signal Pins
+34. Connect Data Ports
+35. Connect Control Ports
+36. Connect Mechanical Joints
+37. Connect Hydraulic Ports
+38. Connect Pneumatic Ports
+39. Connect Optical Ports
+40. Connect Network Ports
+41. Auto-Connect Components
+42. Disconnect Components
+43. Reconnect Components
+44. Replace Existing Connection
+45. Validate Connection
+46. Highlight Connected Components
+47. Trace Component Connections
+48. Show Connection Path
+49. Hide Connection Path
+50. Detect Unconnected Components
+
+### 4. WIRING FUNCTIONS
+51. Start Wire
+52. Draw Wire
+53. End Wire
+54. Connect Wire to Pin
+55. Connect Wire to Terminal
+56. Connect Wire to Another Wire
+57. Extend Wire
+58. Shorten Wire
+59. Move Wire
+60. Drag Wire
+61. Bend Wire
+62. Split Wire
+63. Join Wires
+64. Merge Wires
+65. Delete Wire
+66. Duplicate Wire
+67. Copy Wire
+68. Paste Wire
+69. Rotate Wire
+70. Change Wire Direction
+71. Change Wire Thickness
+72. Change Wire Color
+73. Change Wire Style
+74. Change Wire Type
+75. Change Wire Material
+76. Change Wire Label
+77. Add Wire Junction
+78. Remove Wire Junction
+79. Add Wire Node
+80. Remove Wire Node
+81. Auto-Route Wire
+82. Manual-Route Wire
+83. Orthogonal Wire Routing
+84. Curved Wire Routing
+85. Straight Wire Routing
+86. Avoid Wire Crossing
+87. Detect Wire Crossing
+88. Detect Wire Short Circuit
+89. Highlight Wire Path
+90. Trace Wire Connection
+
+### 5. COMPONENT ROTATION
+91. Rotate Component
+92. Rotate 90 Degrees
+93. Rotate 180 Degrees
+94. Rotate 270 Degrees
+95. Rotate Clockwise
+96. Rotate Counterclockwise
+97. Free Rotation
+98. Rotate Around Center
+99. Rotate Around Custom Pivot
+100. Reset Rotation
+
+### 6. COMPONENT TRANSFORMATION
+101. Resize Component
+102. Scale Component
+103. Stretch Component
+104. Flip Horizontally
+105. Flip Vertically
+106. Mirror Component
+107. Skew Component
+108. Change Component Orientation
+109. Change Component Dimensions
+110. Reset Transformation
+
+### 7. COMPONENT EDITING
+111. Edit Component
+112. Edit Component Properties
+113. Edit Component Name
+114. Edit Component Label
+115. Edit Component Value
+116. Edit Component Description
+117. Edit Component Parameters
+118. Edit Component Dimensions
+119. Edit Component Material
+120. Edit Component Color
+121. Edit Component Shape
+122. Edit Component Symbol
+123. Edit Component Footprint
+124. Edit Component Pins
+125. Edit Component Terminals
+126. Edit Component Ports
+127. Edit Component Metadata
+128. Edit Component Reference ID
+129. Edit Component Orientation
+130. Reset Component Properties
+
+### 8. COMPONENT DUPLICATION
+131. Copy Component
+132. Cut Component
+133. Paste Component
+134. Duplicate Component
+135. Clone Component
+136. Duplicate Connected Components
+137. Duplicate Component with Wiring
+138. Duplicate Component without Wiring
+139. Create Component Array
+140. Create Repeated Component Pattern
+
+### 9. COMPONENT GROUPING
+141. Group Components
+142. Ungroup Components
+143. Create Component Assembly
+144. Break Component Assembly
+145. Add Component to Group
+146. Remove Component from Group
+147. Move Group
+148. Rotate Group
+149. Resize Group
+150. Lock Group
+151. Unlock Group
+152. Duplicate Group
+153. Connect Component Groups
+154. Save Group as Module
+155. Convert Group to Reusable Component
+
+### 10. COMPONENT ALIGNMENT
+156. Align Left
+157. Align Right
+158. Align Top
+159. Align Bottom
+160. Align Center
+161. Align Horizontally
+162. Align Vertically
+163. Distribute Horizontally
+164. Distribute Vertically
+165. Equalize Spacing
+166. Snap to Grid
+167. Snap to Component
+168. Snap to Connection Point
+169. Auto-Align Components
+170. Auto-Arrange Components
+
+### 11. COMPONENT PIN AND TERMINAL FUNCTIONS
+171. Select Pin
+172. Move Pin
+173. Add Pin
+174. Delete Pin
+175. Rename Pin
+176. Change Pin Number
+177. Change Pin Type
+178. Change Pin Direction
+179. Connect Pin
+180. Disconnect Pin
+181. Highlight Pin
+182. Show Pin Name
+183. Hide Pin Name
+184. Show Pin Number
+185. Hide Pin Number
+186. Swap Pins
+187. Lock Pin
+188. Unlock Pin
+189. Validate Pin Connection
+190. Detect Floating Pins
+
+### 12. COMPONENT LAYER FUNCTIONS
+191. Move Component to Layer
+192. Create Component Layer
+193. Delete Component Layer
+194. Hide Component Layer
+195. Show Component Layer
+196. Lock Component Layer
+197. Unlock Component Layer
+198. Change Component Layer
+199. Bring Component Forward
+200. Send Component Backward
+201. Bring Component to Front
+202. Send Component to Back
+203. Merge Component Layers
+204. Duplicate Component Layer
+205. Isolate Component Layer
+
+### 13. COMPONENT CONSTRAINTS
+206. Lock Component
+207. Unlock Component
+208. Fix Component Position
+209. Apply Distance Constraint
+210. Apply Angle Constraint
+211. Apply Alignment Constraint
+212. Apply Parallel Constraint
+213. Apply Perpendicular Constraint
+214. Apply Coincident Constraint
+215. Apply Tangent Constraint
+216. Apply Symmetry Constraint
+217. Apply Rotation Constraint
+218. Apply Movement Constraint
+219. Remove Constraint
+220. Validate Constraints
+
+### 14. COMPONENT SIMULATION
+221. Simulate Component
+222. Simulate Connected Components
+223. Start Simulation
+224. Stop Simulation
+225. Pause Simulation
+226. Resume Simulation
+227. Reset Simulation
+228. Monitor Component State
+229. Monitor Component Voltage
+230. Monitor Component Current
+231. Monitor Component Power
+232. Monitor Component Temperature
+233. Monitor Component Frequency
+234. Monitor Component Signal
+235. Display Simulation Results
+236. Highlight Active Connections
+237. Detect Simulation Errors
+238. Inspect Component Behavior
+239. Animate Component Operation
+240. Export Simulation Results
+
+### 15. COMPONENT TESTING AND VALIDATION
+241. Test Component
+242. Test Connection
+243. Test Wiring
+244. Test Circuit
+245. Check Connectivity
+246. Check Pin Compatibility
+247. Check Electrical Rules
+248. Check Design Rules
+249. Detect Short Circuits
+250. Detect Open Circuits
+251. Detect Overlapping Components
+252. Detect Invalid Connections
+253. Detect Missing Connections
+254. Detect Duplicate Connections
+255. Detect Component Conflicts
+256. Highlight Errors
+257. Show Error Details
+258. Auto-Fix Supported Errors
+259. Generate Validation Report
+260. Clear Validation Results
+
+### 16. COMPONENT ORGANIZATION
+261. Rename Component
+262. Number Component
+263. Tag Component
+264. Categorize Component
+265. Search Component
+266. Filter Components
+267. Sort Components
+268. Hide Component
+269. Show Component
+270. Isolate Component
+271. Highlight Component
+272. Add Component Notes
+273. Add Component Comments
+274. Add Component Documentation
+275. Assign Component Identifier
+276. Create Component Hierarchy
+277. Add Component to Library
+278. Remove Component from Library
+279. Save Component Template
+280. Load Component Template
+
+### 17. COMPONENT REPLACEMENT
+281. Replace Component
+282. Swap Component
+283. Change Component Type
+284. Change Component Model
+285. Change Component Symbol
+286. Change Component Footprint
+287. Replace Component While Preserving Connections
+288. Replace Component While Preserving Position
+289. Replace Component While Preserving Properties
+290. Restore Previous Component
+
+### 18. ADVANCED WIRING AND ROUTING
+291. Create Wire Bus
+292. Connect Component to Bus
+293. Add Bus Entry
+294. Remove Bus Entry
+295. Split Bus
+296. Merge Buses
+297. Rename Net
+298. Assign Net Label
+299. Assign Net Class
+300. Assign Wire Gauge
+301. Assign Wire Length
+302. Calculate Wire Length
+303. Calculate Wire Resistance
+304. Calculate Voltage Drop
+305. Auto-Optimize Wiring
+306. Route Around Obstacles
+307. Route Through Waypoints
+308. Add Wire Waypoint
+309. Remove Wire Waypoint
+310. Move Wire Waypoint
+311. Create Differential Pair
+312. Route Differential Pair
+313. Create Wire Harness
+314. Bundle Wires
+315. Unbundle Wires
+316. Create Terminal Block
+317. Connect to Terminal Block
+318. Generate Wiring Diagram
+319. Generate Netlist
+320. Export Wiring Data
+
+### 19. COMPONENT INTERACTION WITH THE CANVAS
+321. Drag Component from Sidebar to Canvas
+322. Drop Component onto Canvas
+323. Preview Component Before Placement
+324. Place Component at Cursor
+325. Place Multiple Components
+326. Cancel Component Placement
+327. Undo Component Placement
+328. Redo Component Placement
+329. Show Component Bounding Box
+330. Show Component Selection Handles
+331. Show Component Connection Points
+332. Show Component Alignment Guides
+333. Show Component Dimensions
+334. Show Component Coordinates
+335. Show Component Tooltip
+336. Open Component Context Menu
+337. Open Component Properties Panel
+338. Open Component Quick Actions
+339. Zoom to Component
+340. Center Component in View
+
+### 20. PROFESSIONAL CANVAS INTERACTION FUNCTIONS
+341. Drag Component Without Disconnecting Wires
+342. Drag Component and Automatically Reroute Wires
+343. Move Connected Components Together
+344. Move Component While Preserving Connection Geometry
+345. Rotate Component While Maintaining Connections
+346. Duplicate Component with Existing Connections
+347. Auto-Snap Wire to Nearest Valid Pin
+348. Preview Connection Before Completion
+349. Highlight Valid Connection Targets
+350. Highlight Invalid Connection Targets
+351. Prevent Invalid Pin Connections
+352. Automatically Create Wire Junctions
+353. Automatically Remove Redundant Junctions
+354. Automatically Update Connections After Movement
+355. Automatically Recalculate Wire Paths
+356. Automatically Update Component Coordinates
+357. Automatically Update Component Dimensions
+358. Automatically Update Component Labels
+359. Automatically Update Netlist
+360. Automatically Save Canvas Changes
