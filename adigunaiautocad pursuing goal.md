@@ -2050,3 +2050,13 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 358. Automatically Update Component Labels
 359. Automatically Update Netlist
 360. Automatically Save Canvas Changes
+
+
+## 2026-11-12 incremental execution record
+
+- Preserved the approved workstation interface and added A1/007 as a separate, source-backed IFM IFS204 / Siemens S7-1200 sensor input example.
+- A1/007 contains editable Siemens 6ES7212-1AE40-0XB0, IFM IFB3004BBPKG/US-104 and Phoenix Contact 3212144 instances with named, connectable terminals and the original example's ten wire segments. Terminal references continue as X7/X8 because X1–X6 are used on A1/006.
+- Verified the seven-sheet project model: 19 component instances, 252 wire segments, 31 sheet-local nets and 0 open endpoints. Existing A1/006 remains at 15 components, 242 wires and 26 nets; A1/007 has 4 components, 10 wires and 5 nets.
+- Kept A1/006 and A1/007 electrically separate. The candidate tie points on A1/006 resolve to unlabeled control nets, so no 24 V / 0 V connection is asserted without source evidence. Cross-sheet electrical links remain a future milestone after the interface is verified.
+- Supply adequacy, protection coordination, PLC/sensor behavior, motor behavior and construction readiness are not established. A1/008–A1/100 remain unauthored.
+- Next: source and document an interface definition, then continue with A1/008 in small verified PRs, merging and deploying after each accepted milestone.
