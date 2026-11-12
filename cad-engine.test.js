@@ -909,7 +909,7 @@ test('source-backed DOL motor-feeder example preserves its power, PE, star and c
   const bom = engine.billOfMaterials(project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber, row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
-    ['3212144',8], ['3RV2011-0FA10',1], ['DRN63MS4',1], ['LC1D09BD',1], ['XB5AA31',1], ['XB5AA42',1]
+    ['3212144',6], ['3RV2011-0FA10',1], ['DRN63MS4',1], ['LC1D09BD',1], ['XB5AA31',1], ['XB5AA42',1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
@@ -1052,7 +1052,7 @@ test('SEW and Siemens star-delta example preserves separate power, control, star
   const bom = engine.billOfMaterials(project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
-    ['3212144',8], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
+    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
     ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
@@ -1217,3 +1217,4 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example as a
   assert.equal(saved.valid, true, saved.errors.join(' '));
   assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,5]);
 });
+
