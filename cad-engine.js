@@ -554,6 +554,88 @@
     return '\uFEFF' + lines.join('\r\n') + '\r\n';
   }
 
+
+  function wireList(objects) {
+    const source = Array.isArray(objects) ? objects : [];
+    const wires = source.filter(function (object) { return object && object.kind === 'wire'; });
+    const errors = [];
+    const seen = new Set();
+    wires.forEach(function (wire, index) {
+      if (typeof wire.id !== 'string' || !wire.id.trim()) errors.push('Wire ' + (index + 1) + ' has no stable object ID.');
+      else if (seen.has(wire.id)) errors.push('Wire ID "' + wire.id + '" is duplicated.');
+      else seen.add(wire.id);
+    });
+    source.forEach(function (object, index) {
+      if (object && ['catalog-symbol', 'terminal', 'plc', 'motor', 'ground'].includes(object.kind)) {
+        errors.push('Object ' + (object.ref || object.id || index + 1) + ': unverified legacy symbols cannot be used for a connected wire list.');
+      }
+    });
+    const analysis = analyze(source);
+    analysis.errors.forEach(function (issue) {
+      errors.push((issue.objectId ? issue.objectId + ': ' : '') + issue.message);
+    });
+    if (errors.length) return { valid: false, errors: errors, rows: [] };
+
+    const netByWire = new Map();
+    analysis.nets.forEach(function (net) {
+      net.wireIds.forEach(function (id) { netByWire.set(id, net); });
+    });
+    const pinLocations = [];
+    source.forEach(function (instance) {
+      if (!instance || instance.kind !== 'component-instance') return;
+      const validation = validateInstance(instance);
+      if (!validation.valid) return;
+      worldPins(instance).forEach(function (pin) {
+        pinLocations.push({ ref: instance.ref, number: pin.number, x: pin.x, y: pin.y });
+      });
+    });
+    function refsAt(x, y) {
+      return pinLocations.filter(function (pin) {
+        return Math.abs(pin.x - x) <= EPSILON && Math.abs(pin.y - y) <= EPSILON;
+      }).map(function (pin) { return pin.ref + ':' + pin.number; }).sort();
+    }
+    const rows = wires.map(function (wire) {
+      const net = netByWire.get(wire.id);
+      const netPins = net ? net.pins.map(function (pin) { return pin.ref + ':' + pin.number; }).sort() : [];
+      return {
+        wireId: wire.id,
+        netId: net ? net.id : '',
+        startX: wire.x1,
+        startY: wire.y1,
+        bendX: wire.x2,
+        endX: wire.x2,
+        endY: wire.y2,
+        lengthMm: Number((Math.abs(wire.x2 - wire.x1) + Math.abs(wire.y2 - wire.y1)).toFixed(6)),
+        startPinRefs: refsAt(wire.x1, wire.y1),
+        endPinRefs: refsAt(wire.x2, wire.y2),
+        netPinRefs: netPins
+      };
+    }).sort(function (a, b) { return a.wireId.localeCompare(b.wireId); });
+    return { valid: true, errors: [], rows: rows };
+  }
+
+  function wireListCsv(objects) {
+    const report = wireList(objects);
+    if (!report.valid) throw new Error('Wire list export blocked: ' + report.errors.join(' '));
+    const columns = [
+      ['Wire ID', 'wireId'], ['Net ID', 'netId'], ['Start X (mm)', 'startX'],
+      ['Start Y (mm)', 'startY'], ['Bend X (mm)', 'bendX'], ['End X (mm)', 'endX'],
+      ['End Y (mm)', 'endY'], ['Route length (mm)', 'lengthMm'],
+      ['Start pin references', 'startPinRefs'], ['End pin references', 'endPinRefs'],
+      ['Connected pin references on net', 'netPinRefs']
+    ];
+    function cell(value) {
+      let text = Array.isArray(value) ? value.join('; ') : String(value == null ? '' : value);
+      if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;
+      return '"' + text.replace(/"/g, '""') + '"';
+    }
+    const lines = [columns.map(function (column) { return cell(column[0]); }).join(',')];
+    report.rows.forEach(function (row) {
+      lines.push(columns.map(function (column) { return cell(row[column[1]]); }).join(','));
+    });
+    return '\uFEFF' + lines.join('\r\n') + '\r\n';
+  }
+
   root.AdigunCADEngine = Object.freeze({
     componentSchemaVersion: COMPONENT_SCHEMA_VERSION,
     netSchemaVersion: 1,
@@ -571,6 +653,8 @@
     parseProject: parseProject,
     analyze: analyze,
     billOfMaterials: billOfMaterials,
-    billOfMaterialsCsv: billOfMaterialsCsv
+    billOfMaterialsCsv: billOfMaterialsCsv,
+    wireList: wireList,
+    wireListCsv: wireListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
