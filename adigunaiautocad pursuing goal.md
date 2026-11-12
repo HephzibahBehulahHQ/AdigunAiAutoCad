@@ -2130,3 +2130,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - The official Schneider LC1D09BD data sheet identifies auxiliary NO terminals 13–14 and NC 21–22; the existing Siemens CPU terminal map supplies X10:10 identity. No PLC program, feedback interpretation, contactor actuation, or safety behavior is modeled. Preserved the workstation interface.
 - Analysis: 13 sheets, 31 components, 307 wire segments, 54 sheet-local nets, 39 global nets, thirteen cross-sheet links pairing 30 endpoints, and zero unlinked endpoints. Regression covers the exact X14/KM4:13 net, KM4:14/CPU X10:10 connection, assignment schedule and save/reopen.
 - Next: finish verification, publish this focused change, merge after green CI, deploy, verify production, and continue with A1/014.
+
+
+## 2026-11-12 incremental execution record — A1/014
+
+- Added a source-backed PLC input point: wired Schneider LC1D09BD KM4 built-in NC auxiliary contact 21–22 to Siemens CPU 1212C X10:11 / DI a.4. The NC contact is supplied from the existing X14 +24 V net through KM4:13–21; 22 routes across the explicit A1/011↔A1/007 link to the CPU input. A1/014 documents assignment I0.4.
+- Siemens S7-1200 System Manual V4.5 Table A-46 identifies X10:11 as DI a.4 for CPU 1212C DC/DC/DC 6ES7212-1AE40-0XB0. Schneider LC1D09BD manufacturer data identifies 21–22 as NC. PLC logic, diagnostics, contactor actuation and safety behavior remain unsimulated. Interface geometry unchanged.
+- Analysis: 14 sheets, 31 component instances, 311 wire segments, 56 sheet-local nets, 40 global nets, fourteen cross-sheet links pairing 32 endpoints and zero unlinked endpoints. Tests cover the X14/KM4:21 supply net, KM4:22/X10:11 connection, route orthogonality and save/reopen.
+- Next: verify tests, publish this focused increment, merge after green CI, confirm production, then continue at A1/015.
