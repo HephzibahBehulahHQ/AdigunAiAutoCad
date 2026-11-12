@@ -1744,7 +1744,7 @@ test('A1/022 connects ifm PN2070 B2 OUT2 to CPU AI0 with source-backed power and
   assert.ok(pinNet('B2','3').pins.some(pin=>pin.sheetId==='ref-009'&&pin.ref==='X15'));
   assert.ok(page.nets.every(net=>!net.pins.some(pin=>pin.number==='4')),'OUT1 remains intentionally unused.');
   const texts=project.objects.filter(object=>object.sheetId==='ref-022'&&object.kind==='text').map(object=>object.text);
-  for(const requirement of [/factory default.*4–20 mA/i,/set voltage mode U.*verify ASP2\\/AEP2/i,/No process point.*PLC logic.*modeled/i])
+  for(const requirement of [/factory default.*4–20 mA/i,/set voltage mode U.*verify ASP2\/AEP2/i,/No process point.*PLC logic.*modeled/i])
     assert.ok(texts.some(text=>requirement.test(text)),`Missing commissioning or modeling boundary ${requirement}`);
   assert.equal(report.openEndpointCount,0);
   const reopened=engine.parseProject(engine.serializeProject(project));
