@@ -953,7 +953,7 @@
     }
     const lines = [columns.map(function (column) { return cell(column[0]); }).join(',')];
     report.rows.forEach(function (row) { lines.push(columns.map(function (column) { return cell(row[column[1]]); }).join(',')); });
-    return '\uFEFF' + lines.join('\r\n') + '\r\n';
+    return '\uFEFF' + lines.join('\n') + '\n';
   }
 
 
@@ -1035,7 +1035,7 @@
     report.rows.forEach(function (row) {
       lines.push(columns.map(function (column) { return cell(row[column[1]]); }).join(','));
     });
-    return '\uFEFF' + lines.join('\r\n') + '\r\n';
+    return '\uFEFF' + lines.join('\n') + '\n';
   }
 
   root.AdigunCADEngine = Object.freeze({
@@ -1062,4 +1062,3 @@
     wireListCsv: wireListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
-

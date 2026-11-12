@@ -873,4 +873,3 @@ test('source-backed DOL motor-feeder example preserves its power, PE, star and c
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).netCount, 15);
 });
-
