@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 1.7",
-  "status": "Authored opening set: A1/001–A1/020; A1/021–A1/100 not authored.",
+  "revision": "Opening set 1.8",
+  "status": "Authored opening set: A1/001–A1/021; A1/022–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -116,6 +116,11 @@
       "id": "ref-020",
       "number": "A1/020",
       "name": "PLC analog-input allocation · CPU 1212C"
+    },
+    {
+      "id": "ref-021",
+      "number": "A1/021",
+      "name": "ifm PN2070 pressure-sensor interface proposal"
     }
   ],
   "sheetLabels": {
@@ -133,7 +138,8 @@
     "ref-018": "PLC overload trip feedback · F1 NO 97–98",
     "ref-019": "PLC digital-output allocation · CPU 1212C",
     "ref-002": "Drawing index",
-    "ref-020": "PLC analog-input allocation · CPU 1212C"
+    "ref-020": "PLC analog-input allocation · CPU 1212C",
+    "ref-021": "ifm PN2070 pressure-sensor interface proposal"
   },
   "sheetViews": {
     "ref-007": {
@@ -215,6 +221,12 @@
       "h": 760
     },
     "ref-020": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-021": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3670,7 +3682,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/020",
+      "text": "Authored pages: A1/001–A1/021",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3688,7 +3700,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/021–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/022–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3820,7 +3832,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/020",
+      "text": "Component register | modeled devices on A1/006–A1/021",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3910,7 +3922,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/020; A1/020 adds no device instance.",
+      "text": "Component quantities match modeled devices through A1/021; A1/021 adds no sensor instance or wire.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4024,7 +4036,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/020 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/021 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4292,7 +4304,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/020; A1/017–A1/020 document I/O, overload feedback, output and analog-input allocation.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/021; A1/017–A1/021 document I/O, overload feedback, output allocation and the PN2070 interface proposal.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4310,7 +4322,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, and A1/021 records an unwired pressure-sensor interface proposal.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -6218,7 +6230,7 @@
       "sheetId": "ref-002",
       "x": 120,
       "y": 1530,
-      "text": "A1/020  Siemens CPU 1212C analog-input allocation · AI0/AI1 unassigned",
+      "text": "A1/020  CPU 1212C analog-input allocation; A1/021  PN2070 interface proposal",
       "stroke": "#13263b"
     },
     {
@@ -6229,9 +6241,99 @@
       "y": 954,
       "text": "A1/020: CPU 1212C AI0 / X11:2 and AI1 / X11:3 are unassigned in modeled scope.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-title",
+      "sheetId": "ref-021",
+      "x": 50,
+      "y": 54,
+      "text": "A1/021 · ifm PN2070 pressure-sensor interface proposal",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-product",
+      "sheetId": "ref-021",
+      "x": 120,
+      "y": 130,
+      "text": "ifm PN2070 · PN-400-SER14-MFRKG/US/ /V · 0...400 bar · relative pressure · G 1/4 internal thread",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-supply",
+      "sheetId": "ref-021",
+      "x": 120,
+      "y": 220,
+      "text": "Pin 1 · BN brown · L+ · sensor operating range 18–30 V DC",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-analog",
+      "sheetId": "ref-021",
+      "x": 120,
+      "y": 305,
+      "text": "Pin 2 · WH white · OUT2 · configurable 0–10 V DC analog voltage output",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-return",
+      "sheetId": "ref-021",
+      "x": 120,
+      "y": 390,
+      "text": "Pin 3 · BU blue · L− · proposed 0 V DC return; CPU analog common is 2M at X11:1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-unused",
+      "sheetId": "ref-021",
+      "x": 120,
+      "y": 475,
+      "text": "Pin 4 · BK black · OUT1 switching / IO-Link; not used in this interface proposal",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-channel",
+      "sheetId": "ref-021",
+      "x": 120,
+      "y": 560,
+      "text": "AI0 / X11:2 · 0–10 V DC; proposed OUT2 signal allocation; not wired",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-config",
+      "sheetId": "ref-021",
+      "x": 50,
+      "y": 655,
+      "text": "ifm lists OUT2 factory default as 4–20 mA; configure voltage mode and verify ASP2/AEP2 before connection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-limit",
+      "sheetId": "ref-021",
+      "x": 50,
+      "y": 705,
+      "text": "No sensor instance, wiring, scaling, or PLC logic is modeled; AI0 remains unassigned in the connected project.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-021-source",
+      "sheetId": "ref-021",
+      "x": 50,
+      "y": 755,
+      "text": "Sources: ifm PN2070 data sheet / operating instructions; Siemens S7-1200 System Manual V4.7.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Twenty authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; and Siemens CPU 1212C analog-input allocation A1/020. AI0 / X11:2 and AI1 / X11:3 are unassigned in the modeled scope; 2M at X11:1 is their analog common. PLC logic, conversion, alarm interpretation, output switching, trip/reset behavior and safety functions are not simulated. A1/021–A1/100 are not authored.",
+  "description": "Twenty-one authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; and ifm PN2070 pressure-sensor interface proposal A1/021. The proposed OUT2-to-AI0 mapping is not wired, sensor output voltage mode and scaling must be configured and verified, and AI0 remains unassigned in the connected project. No sensor instance, wiring, scaling or PLC logic is modeled. A1/022–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
