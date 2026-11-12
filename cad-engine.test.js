@@ -18,6 +18,12 @@ test('the shipped workspace inline script parses before UI handlers initialize',
     .filter(match => !/\bsrc\s*=/.test(match[1]));
   assert.equal(inlineScripts.length, 1);
   assert.doesNotMatch(inlineScripts[0][2], /(?<!\$)\$\((['"])([^'"]*)\1\)\.forEach/);
+  assert.doesNotMatch(inlineScripts[0][2], /createInstance\(item\.componentId,\s*580,\s*415/);
+  assert.match(inlineScripts[0][2], /state\.pendingComponentId=id/);
+  assert.match(inlineScripts[0][2], /beginObjectDrag/);
+  assert.match(inlineScripts[0][2], /data-object-coordinate/);
+  assert.match(inlineScripts[0][2], /data-rotate-object/);
+  assert.match(inlineScripts[0][2], /remapConnectedWireEnds/);
   assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
 });
 
@@ -28,6 +34,27 @@ test('catalog contains only source-backed engineering components', () => {
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM']
+  ]);
+});
+
+test('component instances preserve precise snapped drawing coordinates and pin locations', () => {
+  const instance = engine.createInstance(componentId, 582.5, 417.5, 'X1');
+  assert.deepEqual([instance.x, instance.y], [582.5, 417.5]);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number, pin.x, pin.y]), [
+    ['1', 547.5, 417.5], ['2', 617.5, 417.5]
+  ]);
+});
+
+test('moving and rotating verified components updates all world pin coordinates', () => {
+  const instance = engine.createInstance(relayId, 500, 400, 'K9');
+  engine.rotateInstance(instance, 90);
+  assert.deepEqual([instance.rotation, instance.x, instance.y], [90, 500, 400]);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number, Number(pin.x.toFixed(1)), Number(pin.y.toFixed(1))]), [
+    ['A2', 520, 330], ['A1', 480, 330], ['11', 500, 470], ['12', 525, 470], ['14', 475, 470]
+  ]);
+  engine.moveInstance(instance, 512.5, 427.5);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number, Number(pin.x.toFixed(1)), Number(pin.y.toFixed(1))]), [
+    ['A2', 532.5, 357.5], ['A1', 492.5, 357.5], ['11', 512.5, 497.5], ['12', 537.5, 497.5], ['14', 487.5, 497.5]
   ]);
 });
 
