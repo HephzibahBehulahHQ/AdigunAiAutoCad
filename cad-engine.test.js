@@ -909,7 +909,7 @@ test('source-backed DOL motor-feeder example preserves its power, PE, star and c
   const bom = engine.billOfMaterials(project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber, row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
-    ['3212144',6], ['3RV2011-0FA10',1], ['DRN63MS4',1], ['LC1D09BD',1], ['XB5AA31',1], ['XB5AA42',1]
+    ['3212144',8], ['3RV2011-0FA10',1], ['DRN63MS4',1], ['LC1D09BD',1], ['XB5AA31',1], ['XB5AA42',1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
@@ -1052,7 +1052,7 @@ test('SEW and Siemens star-delta example preserves separate power, control, star
   const bom = engine.billOfMaterials(project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
-    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
+    ['3212144',8], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
     ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
@@ -1115,14 +1115,14 @@ test('multi-sheet project analysis isolates coincident geometry and rejects ambi
 });
 
 
-test('six-sheet star-delta reference opening set has authored documentation and preserves exact electrical topology', () => {
+test('seven-sheet connected reference opening set has authored documentation and preserves the existing starter topology', () => {
   const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
   const project = parsed.project;
-  assert.equal(project.sheets.length, 6);
+  assert.equal(project.sheets.length, 7);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/007–A1/100 are not yet authored'));
+  assert.ok(project.status.includes('A1/008–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
@@ -1131,21 +1131,23 @@ test('six-sheet star-delta reference opening set has authored documentation and 
     if (sheet.id !== 'ref-006') assert.ok(pageObjects.some(object => object.kind === 'text'), sheet.id + ' must contain editable text');
   }
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [6, 15, 242, 26, 0]);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [7, 19, 252, 31, 0]);
   assert.deepEqual(report.sheets.slice(0, 5).map(sheet => [sheet.analysis.componentCount, sheet.analysis.wireCount, sheet.analysis.netCount]), [
     [0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
   ]);
   const electrical = report.sheets[5].analysis;
   assert.deepEqual([electrical.componentCount, electrical.wireCount, electrical.netCount], [15,242,26]);
+  const sensorPage = report.sheets[6].analysis;
+  assert.deepEqual([sensorPage.componentCount, sensorPage.wireCount, sensorPage.netCount, sensorPage.openEndpointCount], [4,10,5,0]);
   const bom = engine.billOfMaterials(project.objects);
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b)=>a[0].localeCompare(b[0])), [
-    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1],
-    ['3RV2021-4AA10',1], ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
+    ['3212144',8], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1],
+    ['3RV2021-4AA10',1], ['6ES7212-1AE40-0XB0',1], ['DRN132M4',1], ['IFB3004BBPKG/US-104',1], ['XB5AA31',1], ['XB5AA42',1]
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26]);
+  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,5]);
 });
 
 
@@ -1197,4 +1199,21 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
   const reopened=engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   assert.equal(engine.analyzeProject(reopened.project).globalNetCount,1);
+});
+
+
+test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example as an independent connected sheet', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  const report = engine.analyzeProject(project);
+  assert.equal(report.valid, true, report.errors.join(' '));
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [7,19,252,31,0,0]);
+  assert.deepEqual(report.sheets.slice(-2).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[15,242,26,0],[4,10,5,0]]);
+  assert.ok(project.objects.some(object => object.sheetId === 'ref-007' && object.ref === 'B1' && object.componentId === 'ifm-ifs204'));
+  assert.ok(project.objects.some(object => object.sheetId === 'ref-007' && object.ref === 'A1' && object.componentId === 'siemens-6es7212-1ae40-0xb0'));
+  const saved = engine.parseProject(engine.serializeProject(project));
+  assert.equal(saved.valid, true, saved.errors.join(' '));
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,5]);
 });
