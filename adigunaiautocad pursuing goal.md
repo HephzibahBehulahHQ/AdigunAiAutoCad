@@ -2138,3 +2138,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Siemens S7-1200 System Manual V4.5 Table A-46 identifies X10:11 as DI a.4 for CPU 1212C DC/DC/DC 6ES7212-1AE40-0XB0. Schneider LC1D09BD manufacturer data identifies 21–22 as NC. PLC logic, diagnostics, contactor actuation and safety behavior remain unsimulated. Interface geometry unchanged.
 - Analysis: 14 sheets, 31 component instances, 311 wire segments, 56 sheet-local nets, 40 global nets, fourteen cross-sheet links pairing 32 endpoints and zero unlinked endpoints. Tests cover the X14/KM4:21 supply net, KM4:22/X10:11 connection, route orthogonality and save/reopen.
 - Next: verify tests, publish this focused increment, merge after green CI, confirm production, then continue at A1/015.
+
+
+## 2026-11-12 incremental execution record — A1/015
+
+- Wired the source-backed Phoenix Contact PLC-RSC-24DC/21 K2 normally closed contact 11–12 to Siemens CPU 1212C X10:12 / DI a.5. A1/015 documents the point as I0.5. Manufacturer sourcing already records terminal 12 as NC and contact operation as unsimulated.
+- Updated the drawing index, cover, component register, assumptions, project status, revision and source-backed example documentation. Preserved the workstation interface; no PLC logic, relay state, or diagnostic meaning is modeled.
+- Analysis: 15 sheets, 31 component instances, 314 wire segments, 58 sheet-local nets, 41 global nets, fifteen cross-sheet links pairing 34 endpoints, and zero unlinked endpoints. Regression verifies K2:12↔CPU X10:12, source terminal identities, orthogonal routing and save/reopen.
+- Next: run verification, publish this focused increment, merge after green CI, confirm production, and continue at A1/016.
