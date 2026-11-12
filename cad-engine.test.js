@@ -17,6 +17,8 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
     .filter(match => !/\bsrc\s*=/.test(match[1]));
   assert.equal(inlineScripts.length, 1);
+  assert.match(html, /overflow-x:auto;overflow-y:hidden;scrollbar-width:thin/);
+  assert.match(html, /id="customSheetFrame"/);
   assert.doesNotMatch(inlineScripts[0][2], /(?<!\$)\$\((['"])([^'"]*)\1\)\.forEach/);
   assert.doesNotMatch(inlineScripts[0][2], /createInstance\(item\.componentId,\s*580,\s*415/);
   assert.match(inlineScripts[0][2], /state\.pendingComponentId=id/);
@@ -35,6 +37,11 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /wireListCsv/);
   assert.match(inlineScripts[0][2], /data-export-wire-list/);
   assert.match(inlineScripts[0][2], /function deleteObject\(id\)/);
+  assert.match(inlineScripts[0][2], /function deleteSheet\(id\)/);
+  assert.match(inlineScripts[0][2], /function collectProjectObjects\(\)/);
+  assert.match(inlineScripts[0][2], /state\.sheetObjects\[state\.sheet\]=state\.objects/);
+  assert.match(inlineScripts[0][2], /data-delete-sheet/);
+  assert.match(inlineScripts[0][2], /data-close-sheet/);
   assert.doesNotThrow(() => new vm.Script(inlineScripts[0][2], { filename: 'index.html inline script' }));
 });
 
