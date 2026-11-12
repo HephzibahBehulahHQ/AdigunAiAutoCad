@@ -7,13 +7,15 @@ require('./cad-engine.js');
 const engine = globalThis.AdigunCADEngine;
 const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
+const contactorId = 'schneider-electric-lc1d09bd';
 
-test('catalog contains only the source-backed terminal and relay parts', () => {
+test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 2);
+  assert.equal(items.length, 3);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
-    [relayId, 'relay-module', 'K']
+    [relayId, 'relay-module', 'K'],
+    [contactorId, 'contactor', 'KM']
   ]);
 });
 
@@ -153,4 +155,62 @@ test('relay model survives project save and reopen with its five real terminal i
   assert.equal(parsed.project.objects[0].properties.terminalStrip, 'XT2');
   assert.deepEqual(engine.worldPins(parsed.project.objects[0]).map(pin => pin.number), ['A2', 'A1', '11', '12', '14']);
   assert.equal(engine.analyze(parsed.project.objects).componentPinCount, 5);
+});
+
+test('Schneider LC1D09BD has manufacturer-backed coil, main poles, auxiliary contacts and editable data', () => {
+  const def = engine.component(contactorId);
+  assert.equal(def.manufacturer, 'Schneider Electric');
+  assert.equal(def.manufacturerPartNumber, 'LC1D09BD');
+  assert.equal(def.specifications.nominalCoilVoltage.value, 24);
+  assert.equal(def.specifications.ac3RatedCurrent.value, 9);
+  assert.equal(def.specifications.ac3RatedOperationalVoltage.value, 440);
+  assert.equal(def.specifications.dimensions.width.value, 45);
+  assert.equal(def.specifications.dimensions.height.value, 77);
+  assert.equal(def.specifications.dimensions.depth.value, 95);
+  assert.deepEqual(def.symbol.pins.map(pin => pin.localNumber), [
+    'A1', 'A2', '1/L1', '2/T1', '3/L2', '4/T2', '5/L3', '6/T3', '13', '14', '21', '22'
+  ]);
+  assert.equal(def.symbol.pins.length, 12);
+  assert.deepEqual(def.symbol.internalConnections, []);
+  assert.deepEqual(def.electricalFunctions.contactor.mainPoles.map(pole => pole.normalState), ['open', 'open', 'open']);
+  assert.deepEqual(def.electricalFunctions.contactor.auxiliaryContacts.map(contact => contact.normalState), ['open', 'closed']);
+  assert.match(def.sources[0].url, /^https:\/\/iportal\.se\.com\//);
+  const instance = engine.createInstance(contactorId, 580, 415);
+  assert.equal(instance.ref, 'KM1');
+  instance.properties.position = 'DIN rail 1';
+  assert.equal(engine.validateInstance(instance).valid, true);
+  assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number, pin.x, pin.y]), [
+    ['A1', 460, 390], ['A2', 460, 440], ['1/L1', 530, 360], ['2/T1', 530, 470],
+    ['3/L2', 580, 360], ['4/T2', 580, 470], ['5/L3', 630, 360], ['6/T3', 630, 470],
+    ['13', 680, 360], ['14', 680, 470], ['21', 725, 360], ['22', 725, 470]
+  ]);
+});
+
+test('all 12 real contactor terminals connect independently without invented contact-state nets', () => {
+  const contactor = engine.createInstance(contactorId, 580, 415, 'KM1');
+  const points = engine.worldPins(contactor);
+  const objects = [contactor].concat(points.map((pin, index) => ({
+    id: 'WC' + (index + 1), kind: 'wire', x1: pin.x - 20, y1: pin.y, x2: pin.x, y2: pin.y
+  })));
+  const report = engine.analyze(objects);
+  assert.equal(report.componentPinCount, 12);
+  assert.equal(report.connectedPinCount, 12);
+  assert.equal(report.unconnectedPinCount, 0);
+  assert.equal(report.netCount, 12);
+  assert.equal(report.openEndpointCount, 12);
+});
+
+test('contactor identity, pin numbering and editable properties survive project save and reopen', () => {
+  const contactor = engine.createInstance(contactorId, 580, 415, 'KM1');
+  contactor.properties.terminalStrip = 'XT3';
+  const parsed = engine.parseProject(engine.serializeProject({
+    product: 'Adigun AI AutoCAD', project: 'Contactor test', activeSheet: 'control',
+    zoom: 100, view: { x: 0, y: 0, w: 1200, h: 760 }, objects: [contactor], sheets: []
+  }));
+  assert.equal(parsed.valid, true);
+  assert.equal(parsed.project.objects[0].componentId, contactorId);
+  assert.equal(parsed.project.objects[0].properties.terminalStrip, 'XT3');
+  assert.deepEqual(engine.worldPins(parsed.project.objects[0]).map(pin => pin.number), [
+    'A1', 'A2', '1/L1', '2/T1', '3/L2', '4/T2', '5/L3', '6/T3', '13', '14', '21', '22'
+  ]);
 });
