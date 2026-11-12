@@ -1291,7 +1291,7 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   const report = engine.analyzeProject(project);
   assert.equal(report.valid, true, report.errors.join(' '));
   assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [23,32,335,67,21,0]);
-  assert.deepEqual(report.sheets.slice(-15).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[1,13,5,6],[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0]]);
+  assert.deepEqual(report.sheets.slice(-15).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[2,22,2,12],[1,13,5,6],[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0]]);
   assert.equal(report.globalNetCount,43);
   assert.deepEqual(report.globalNets.filter(net=>net.sheetIds.includes('ref-007')&&net.sheetIds.includes('ref-008')).map(net=>net.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort()).sort((a,b)=>a[0].localeCompare(b[0])),[
     ['ref-006:F1:97','ref-007:A1:X10:1','ref-007:A1:X12:1','ref-007:X7:1','ref-007:X7:2','ref-008:PS1:+','ref-008:X12:1','ref-008:X12:2','ref-009:X14:1','ref-009:X14:2','ref-010:K2:11','ref-011:KM4:13','ref-011:KM4:21','ref-012:S2:13','ref-012:S3:21','ref-022:B2:1'],
@@ -1385,7 +1385,7 @@ test('A1/010 wires the source-backed PLC transistor output to the Phoenix Contac
   const routed=project.objects.filter(object=>object.sheetId==='ref-007'&&object.kind==='wire'&&object.id.startsWith('a1-010-w07-'));
   assert.equal(routed.length,4);
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/010 PLC supply and output paths must stay orthogonal');
-  assert.match(project.description,/A1\/023–A1\/100 are not authored/);
+  assert.match(project.description,/A1\/024–A1\/100 are not authored/);
   assert.match(project.objects.find(object=>object.id==='doc-ref-003-line-19').text,/2966171.*K2/);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
