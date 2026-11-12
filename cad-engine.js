@@ -297,6 +297,79 @@
       }
     ]
   });
+  const motorProtectionBreakerDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION,
+    id: 'siemens-3rv2011-1ja10',
+    manufacturer: 'Siemens',
+    manufacturerPartNumber: '3RV2011-1JA10',
+    model: 'SIRIUS 3RV2 size S00',
+    name: 'Motor-protection circuit breaker',
+    family: 'motor-protection-breaker',
+    referencePrefix: 'Q',
+    category: 'Electrical · Verified motor-protection breaker',
+    symbol: {
+      id: 'breaker.sirius-3rv2.3rv2011-1ja10.v1',
+      view: 'schematic',
+      unit: 'mm',
+      width: 180,
+      height: 220,
+      representation: { standard: 'IEC-style functional representation', text: 'Q', symbolType: 'three-pole motor-protection circuit breaker; not manufacturer CAD geometry' },
+      pins: [
+        { id: 'line-l1', localNumber: '1/L1', name: 'Phase L1 line terminal', x: -50, y: -90, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'line-l2', localNumber: '3/L2', name: 'Phase L2 line terminal', x: 0, y: -90, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'line-l3', localNumber: '5/L3', name: 'Phase L3 line terminal', x: 50, y: -90, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'load-t1', localNumber: '2/T1', name: 'Phase T1 load terminal', x: -50, y: 90, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'load-t2', localNumber: '4/T2', name: 'Phase T2 load terminal', x: 0, y: 90, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'load-t3', localNumber: '6/T3', name: 'Phase T3 load terminal', x: 50, y: 90, electricalType: 'passive', connectionType: 'screw' }
+      ],
+      internalConnections: [],
+      numberingNote: 'Main terminals follow the Siemens SIRIUS 3RV2 equipment manual: 1/L1, 3/L2, 5/L3 line side and 2/T1, 4/T2, 6/T3 load side. The static drawing model does not assume a contact state, trip response, protection coordination or an electrical bridge between poles.'
+    },
+    electricalFunctions: {
+      motorProtection: {
+        lineTerminals: ['line-l1', 'line-l2', 'line-l3'],
+        loadTerminals: ['load-t1', 'load-t2', 'load-t3'],
+        poles: [['line-l1', 'load-t1'], ['line-l2', 'load-t2'], ['line-l3', 'load-t3']],
+        simulationNote: 'Three-pole motor-protection function is documented. Set the overload release against the actual motor nameplate and application review; the adjustment range alone does not establish suitability. Switching state, thermal/magnetic trip behavior, fault interruption and coordination are not simulated; connect only the external terminals with authored wires.'
+      }
+    },
+    specifications: {
+      productFamily: { value: 'SIRIUS 3RV2' },
+      frameSize: { value: 'S00' },
+      overloadTripClass: { value: 10, unit: 'Class' },
+      adjustableOverloadRelease: { minimum: 7, maximum: 10, unit: 'A' },
+      instantaneousShortCircuitRelease: { value: 130, unit: 'A' },
+      mainPoleCount: { value: 3 },
+      ratedOperationalVoltage: { minimum: 20, maximum: 690, unit: 'V AC' },
+      connectionMethod: { value: 'Screw terminals' },
+      referenceCode: { value: 'Q' }
+    },
+    instanceProperties: {
+      overloadSettingA: { type: 'number', default: null, minimum: 7, maximum: 10, step: 'any' },
+      terminalStrip: { type: 'string', default: '', maximumLength: 40 },
+      position: { type: 'string', default: '', maximumLength: 24 },
+      marking: { type: 'string', default: '', maximumLength: 40 },
+      comment: { type: 'string', default: '', maximumLength: 160 }
+    },
+    sources: [
+      {
+        publisher: 'Siemens',
+        title: '3RV2011-1JA10 · product data sheet',
+        url: 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-1JA10',
+        documentRevision: 'Siemens product data sheet, 6 pages; retrieved 2026-11-12.',
+        revisionNote: 'Confirms S00 size, Class 10, adjustable overload release 7–10 A, instantaneous N-release 130 A, three main poles and screw terminals.',
+        retrievedAt: '2026-11-12'
+      },
+      {
+        publisher: 'Siemens',
+        title: 'SIRIUS 3RV Motor Starter Protectors · Equipment Manual',
+        url: 'https://support.industry.siemens.com/cs/attachments/60279172/manual_SIRIUS_circuit_breaker_3RV_en-US.pdf',
+        documentRevision: 'Equipment Manual, 05/2025, A5E03656507320A/RS-AM/013.',
+        revisionNote: 'Identifies the 3RV2 main terminal designations and line/load sides; explains the S00 motor-setting control and connection guidance.',
+        retrievedAt: '2026-11-12'
+      }
+    ]
+  });
   const motorDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
     id: 'sew-eurodrive-drn63ms4',
@@ -389,7 +462,7 @@
       }
     ]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -485,7 +558,11 @@
       Object.keys(def.instanceProperties).forEach(function (name) {
         const value = instance.properties[name];
         const rule = def.instanceProperties[name];
-        if (value !== undefined && (typeof value !== 'string' || value.length > rule.maximumLength)) {
+        const invalidNumber = rule.type === 'number' && value !== undefined && value !== null &&
+          (!finite(value) || value < rule.minimum || value > rule.maximum);
+        const invalidString = rule.type !== 'number' && value !== undefined &&
+          (typeof value !== 'string' || value.length > rule.maximumLength);
+        if (invalidNumber || invalidString) {
           errors.push('Component property "' + name + '" is invalid.');
         }
       });
