@@ -649,7 +649,7 @@ test('SEW DRN63MS4 records source-backed motor ratings and all seven real termin
   assert.deepEqual(def.symbol.pins.map(pin => pin.localNumber), ['U1','V1','W1','U2','V2','W2','PE']);
   assert.deepEqual(def.symbol.internalConnections, []);
   assert.equal(def.electricalFunctions.statorWindings.length, 3);
-  assert.match(def.sources[0].url, /^https:\\/\\/download\\.sew-eurodrive\\.com\\//);
+  assert.ok(def.sources[0].url.startsWith('https://download.sew-eurodrive.com/'));
   const instance = engine.createInstance(motorId, 600, 600, 'M1');
   assert.equal(engine.validateInstance(instance).valid, true);
   assert.deepEqual(engine.worldPins(instance).map(pin => [pin.number, pin.x, pin.y]), [
