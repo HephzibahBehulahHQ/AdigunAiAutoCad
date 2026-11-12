@@ -562,6 +562,80 @@
       }
     ]
   });
+  const siemensPowerContactorDefinition = deepFreeze(Object.assign({}, contactorDefinition, {
+    id: 'siemens-3rt2026-2kb40', manufacturer: 'Siemens', manufacturerPartNumber: '3RT2026-2KB40',
+    model: 'SIRIUS 3RT2026-2KB40', name: 'Three-pole power contactor · 24 V DC coil', category: 'Electrical · Verified Siemens motor-control contactor',
+    symbol: Object.assign({}, contactorDefinition.symbol, { id: 'contactor.siemens-3rt2.3rt2026-2kb40.v1', numberingNote: 'A1+/A2−, 1/L1–6/T3, 13/14 (NO), and 21/22 (NC) follow the Siemens model-specific circuit diagram. Schematic terminal coordinates are connection points, not a physical footprint; contact and coil states are not simulated.' }),
+    electricalFunctions: Object.assign({}, contactorDefinition.electricalFunctions, { contactor: Object.assign({}, contactorDefinition.electricalFunctions.contactor, {
+      coil: { pins: ['coil-a1','coil-a2'], nominalVoltage: { value: 24, unit: 'V DC' }, polarity: { positive: 'A1', negative: 'A2' }, suppression: 'Plug-in varistor per Siemens product data sheet' },
+      simulationNote: 'Main poles, auxiliary contacts, coil actuation and interlocking are not simulated. Only explicitly wired external terminals are joined in the static net model.'
+    }) }),
+    specifications: Object.assign({}, contactorDefinition.specifications, { ac3RatedCurrent: { value: 25, unit: 'A' }, ratedOperationalCurrentAC3At400V: { value: 25, unit: 'A' }, ratedMotorPowerAt400V: { value: 11, unit: 'kW' }, auxiliaryContactComposition: { value: '1 NO + 1 NC' }, frameSize: { value: 'S0' }, connectionMethod: { value: 'Spring-loaded terminal' }, coilSuppression: { value: 'Plugged-in varistor' } }),
+    sources: [{ publisher: 'Siemens', title: 'SIRIUS 3RT2026-2KB40 product data sheet', url: 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RT2026-2KB40', documentRevision: 'Data sheet, 8 pages; retrieved 2026-11-12.', revisionNote: 'Confirms 25 A AC-3, 11 kW at 400 V, 24 V DC coil, 1 NO + 1 NC auxiliary contacts, spring terminals, S0 frame, and circuit diagram terminal labels A1+/A2−, 1/L1–6/T3, 13/14 and 21/22.', retrievedAt: '2026-11-12' }]
+  }));
+  const siemensOverloadRelayDefinition = deepFreeze(Object.assign({}, motorProtectionBreakerDefinition, {
+    id: 'siemens-3ru2126-4ab0', manufacturerPartNumber: '3RU2126-4AB0', model: 'SIRIUS 3RU2126-4AB0',
+    name: 'Thermal overload relay · 11–16 A', family: 'motor-overload-relay', category: 'Electrical · Verified thermal overload relay',
+    symbol: Object.assign({}, motorProtectionBreakerDefinition.symbol, { id: 'overload.siemens-3ru2.3ru2126-4ab0.v1', width: 280,
+      pins: motorProtectionBreakerDefinition.symbol.pins.concat([
+        { id: 'aux-95', localNumber: '95', name: 'Normally-closed trip contact common', x: 90, y: -20, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'aux-96', localNumber: '96', name: 'Normally-closed trip contact output', x: 90, y: -5, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'aux-97', localNumber: '97', name: 'Normally-open trip contact common', x: 90, y: 15, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'aux-98', localNumber: '98', name: 'Normally-open trip contact output', x: 90, y: 30, electricalType: 'passive', connectionType: 'screw' }
+      ]),
+      numberingNote: 'Main circuit terminals 1/L1, 3/L2, 5/L3 and 2/T1, 4/T2, 6/T3; auxiliary trip contact 95/96 (NC) and 97/98 (NO) follow Siemens SIRIUS 3RU2 wiring diagrams. The model does not infer internal conductive links or trip state.'
+    }),
+    electricalFunctions: { motorOverloadProtection: { lineTerminals: ['line-l1','line-l2','line-l3'], loadTerminals: ['load-t1','load-t2','load-t3'], tripContacts: [{ pins: ['aux-95','aux-96'], type: 'NC' }, { pins: ['aux-97','aux-98'], type: 'NO' }], simulationNote: 'Thermal response, reset, trip timing and motor protection are not simulated. The adjustable range alone does not establish application suitability or a selected setting.' } },
+    specifications: { productFamily: { value: 'SIRIUS 3RU2' }, frameSize: { value: 'S0' }, overloadTripClass: { value: 10, unit: 'Class' }, adjustableOverloadRelease: { minimum: 11, maximum: 16, unit: 'A' }, mainPoleCount: { value: 3 }, ratedOperationalVoltage: { minimum: 20, maximum: 690, unit: 'V AC' }, connectionMethod: { value: 'Screw terminals' }, resetMode: { value: 'Manual / automatic selectable' }, referenceCode: { value: 'F' } },
+    instanceProperties: Object.assign({}, motorProtectionBreakerDefinition.instanceProperties, { overloadSettingA: { type: 'number', default: null, minimum: 11, maximum: 16, step: 'any' } }),
+    sources: [
+      { publisher: 'Siemens', title: 'SIRIUS 3RU2126-4AB0 product data sheet', url: 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RU2126-4AB0', documentRevision: 'Data sheet, 5 pages; retrieved 2026-11-12.', revisionNote: 'Confirms thermal overload relay, 11–16 A adjustable range, three poles, S0, Class 10, screw terminals, contactor mounting and manual/automatic reset.', retrievedAt: '2026-11-12' },
+      { publisher: 'Siemens', title: 'SIRIUS 3RU / 3RB overload relays · Equipment Manual', url: 'https://support.industry.siemens.com/cs/attachments/60298164/manual_SIRIUS_overload_relay_3RU_3RB_en-US.pdf', documentRevision: 'Equipment Manual, 07/2024, A5E03656507420A/RS-AF/007.', revisionNote: 'Figure 13-3 identifies the S0 3RU2 main terminals and 95/96 and 97/98 auxiliary contacts.', retrievedAt: '2026-11-12' }
+    ]
+  }));
+  const starDeltaMotorProtectionBreakerDefinition = deepFreeze(Object.assign({}, motorProtectionBreakerDefinition, {
+    id: 'siemens-3rv2021-4aa10', manufacturerPartNumber: '3RV2021-4AA10', model: 'SIRIUS 3RV2021-4AA10', name: 'Motor-protection circuit breaker · 10–16 A',
+    symbol: Object.assign({}, motorProtectionBreakerDefinition.symbol, { id: 'breaker.sirius-3rv2.3rv2021-4aa10.v1' }),
+    specifications: Object.assign({}, motorProtectionBreakerDefinition.specifications, { adjustableOverloadRelease: { minimum: 10, maximum: 16, unit: 'A' }, instantaneousShortCircuitRelease: { value: 208, unit: 'A' }, ratedOperationalCurrent: { value: 16, unit: 'A' } }),
+    instanceProperties: Object.assign({}, motorProtectionBreakerDefinition.instanceProperties, { overloadSettingA: { type: 'number', default: null, minimum: 10, maximum: 16, step: 'any' } }),
+    sources: [
+      { publisher: 'Siemens', title: 'SIRIUS 3RV2021-4AA10 product data sheet', url: 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2021-4AA10', documentRevision: 'Product data sheet, 6 pages; retrieved 2026-11-12.', revisionNote: 'Confirms size S0, Class 10, 10–16 A adjustable overload release, 208 A instantaneous N-release, three poles and 690 V rated insulation.', retrievedAt: '2026-11-12' },
+      motorProtectionBreakerDefinition.sources[1]
+    ]
+  }));
+  const sewStarDeltaMotorDefinition = deepFreeze(Object.assign({}, motorDefinition, {
+    id: 'sew-eurodrive-drn132m4', manufacturerPartNumber: 'DRN132M4', model: 'DRN132M4', name: 'Three-phase AC induction motor · 400 V Δ / 690 V Y',
+    category: 'Electrical · Verified 3-phase star-delta motor',
+    symbol: Object.assign({}, motorDefinition.symbol, { id: 'motor.induction.drn132m4.v1', numberingNote: 'U1/V1/W1 and U2/V2/W2 are the six winding ends; PE is protective earth. SEW standard-voltage table specifies 400 V Δ / 690 V Y for DRN132M–DRN315 at 50 Hz.' }),
+    electricalFunctions: Object.assign({}, motorDefinition.electricalFunctions, {
+      statorWindings: [{ lineEnd: 'winding-u1', starEnd: 'winding-u2' }, { lineEnd: 'winding-v1', starEnd: 'winding-v2' }, { lineEnd: 'winding-w1', starEnd: 'winding-w2' }],
+      terminalBoard: { connection: '400 V Δ / 690 V Y at 50 Hz', phaseInputs: ['winding-u1','winding-v1','winding-w1'], starPoint: ['winding-u2','winding-v2','winding-w2'], protectiveEarth: 'protective-earth' }
+    }),
+    specifications: { frame: { value: '132M' }, ratedOutputPower: { value: 7.5, unit: 'kW' }, ratedLineCurrentAt400V50Hz: { value: 15.2, unit: 'A' }, ratedVoltage: { value: '400 V Δ / 690 V Y' }, ratedFrequency: { value: 50, unit: 'Hz' }, ratedSpeed: { value: 1468, unit: 'rpm' }, ratedTorque: { value: 49, unit: 'Nm' }, powerFactor: { value: 0.78 }, phaseCount: { value: 3 }, mountingMethod: { value: 'IEC frame 132M; mounting variant not specified' }, connectionMethod: { value: 'Six-terminal motor board; bolted winding connections' }, supplyConnectionAt400V: { value: 'Delta (Δ) after star-delta transition' } },
+    sources: [
+      { publisher: 'SEW-EURODRIVE', title: 'DRN.. motor data table · 400 V / 50 Hz / 4-pole', url: 'https://download.sew-eurodrive.com/download/pdf/30590116.pdf', documentRevision: 'Manufacturer document 30590116/EN, 03/2023.', revisionNote: 'Motor table records DRN132M4, 7.5 kW, 15.2 A, 1468 rpm, 49 Nm and power factor 0.78 at 400 V / 50 Hz.', retrievedAt: '2026-11-12' },
+      { publisher: 'SEW-EURODRIVE', title: 'DRN.. AC motors · standard-voltage table', url: 'https://download.sew-eurodrive.com/download/pdf/30590116.pdf', documentRevision: 'Manufacturer document 30590116/EN, 03/2023.', revisionNote: 'Standard voltage table assigns 400 V Δ / 690 V Y at 50 Hz to DRN132M–DRN315 (7.5–200 kW).', retrievedAt: '2026-11-12' },
+      { publisher: 'SEW-EURODRIVE', title: 'AC Motors DR..71–315, DRN63–315 · Operating Instructions', url: 'https://download.sew-eurodrive.com/download/pdf/25957074.pdf', documentRevision: 'Manufacturer operating instructions 25957074/EN, 06/2019.', revisionNote: 'Wiring diagrams identify the six winding ends U1/V1/W1, U2/V2/W2 and PE.', retrievedAt: '2026-11-12' }
+    ]
+  }));
+  const siemensStarDeltaTimerDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION, id: 'siemens-3rp2576-2nw30', manufacturer: 'Siemens', manufacturerPartNumber: '3RP2576-2NW30',
+    model: 'SIRIUS 3RP2576-2NW30', name: 'Star-delta timing relay · 3–60 s', family: 'star-delta-timer', referencePrefix: 'K', category: 'Electrical · Verified star-delta timing relay',
+    symbol: { id: 'timer.siemens.3rp2576-2nw30.v1', view: 'schematic', unit: 'mm', width: 150, height: 90, representation: { standard: 'IEC functional relay diagram', text: 'Y / Δ', symbolType: 'star-delta timing relay with shared output common' }, pins: [
+      { id: 'supply-a1', localNumber: 'A1', name: 'Control supply A1', x: -75, y: -25, electricalType: 'passive', connectionType: 'push-in' },
+      { id: 'supply-a2', localNumber: 'A2', name: 'Control supply A2', x: -75, y: 25, electricalType: 'passive', connectionType: 'push-in' },
+      { id: 'contact-common-17', localNumber: '17', name: 'Shared output contact common', x: 75, y: -25, electricalType: 'passive', connectionType: 'push-in' },
+      { id: 'star-output-18', localNumber: '18', name: 'Instantaneous star output', x: 75, y: 0, electricalType: 'passive', connectionType: 'push-in' },
+      { id: 'delta-output-28', localNumber: '28', name: 'Time-delayed delta output', x: 75, y: 25, electricalType: 'passive', connectionType: 'push-in' }
+    ], internalConnections: [], numberingNote: 'A1/A2 supply and 17 shared common with 18 instantaneous star and 28 delayed delta follow the Siemens model-specific data sheet. These external pins do not imply simulated contact state.' },
+    electricalFunctions: { starDeltaTiming: { supplyPins: ['supply-a1','supply-a2'], sharedOutputCommon: 'contact-common-17', instantaneousStarOutput: 'star-output-18', delayedDeltaOutput: 'delta-output-28', timeRangeSeconds: { minimum: 3, maximum: 60 }, changeoverDelayMilliseconds: 50, note: 'Siemens specifies a 50 ms star-to-delta changeover delay to prevent phase-to-phase shorts. Relay switching is not simulated.' } },
+    specifications: { function: { value: 'Star-delta (wye-delta) timing relay' }, outputContacts: { value: '2 NO with shared root' }, timeRangeSeconds: { minimum: 3, maximum: 60, unit: 's' }, controlSupply: { minimum: 12, maximum: 240, unit: 'V AC/DC' }, changeoverDelay: { value: 50, unit: 'ms' }, connectionMethod: { value: 'Spring-type push-in terminal' } },
+    instanceProperties: { delaySeconds: { type: 'number', default: null, minimum: 3, maximum: 60, step: 'any' }, terminalStrip: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, marking: { type: 'string', default: '', maximumLength: 40 }, comment: { type: 'string', default: '', maximumLength: 160 } },
+    sources: [
+      { publisher: 'Siemens', title: 'SIRIUS 3RP2576-2NW30 product data sheet', url: 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RP25762NW30', documentRevision: 'Data sheet, 6 pages; retrieved 2026-11-12.', revisionNote: 'Confirms 3–60 s star-delta function, 12–240 V AC/DC supply, two NO contacts and terminal identifiers A1, A2, 17, 18 and 28.', retrievedAt: '2026-11-12' },
+      { publisher: 'Siemens', title: 'SIRIUS 3RP25 Time Relays · Equipment Manual', url: 'https://support.industry.siemens.com/cs/attachments/103532830/manual_3RP25_time_relay_en-US.pdf', documentRevision: 'Equipment Manual, 09/2019, A5E31947765002A/RS-AC/003.', revisionNote: 'Section 6.6 documents shared-root instantaneous star and delayed delta outputs and the 50 ms transition pause.', retrievedAt: '2026-11-12' }
+    ]
+  });
   const siemensCpuPinRows = [
     ['X10', '1', 'L+ / 24 V DC'], ['X10', '2', 'M / 24 V DC'], ['X10', '3', 'Functional Earth'],
     ['X10', '4', 'L+ / 24 V DC Sensor Out'], ['X10', '5', 'M / 24 V DC Sensor Out'], ['X10', '6', '1M'],
@@ -603,7 +677,7 @@
     instanceProperties: { marking: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, sensingTarget: { type: 'string', default: '', maximumLength: 60 }, comment: { type: 'string', default: '', maximumLength: 160 } },
     sources: [{ publisher: 'ifm electronic', title: 'IFS204 inductive sensor data sheet · IFB3004BBPKG/US-104', url: 'https://media.ifm.com/dam/546f88cf-4cdf-47ac-b6ee-bee685c33458/Original/IFS204-02_EN-GB.pdf', documentRevision: 'EN-GB · IFS204-02 · 26.06.2025', revisionNote: 'Manufacturer data sheet verifies PNP normally-open output, 4 mm nominal sensing range, 10–30 V DC and the 3-contact M12 connection. Pin 1=L+, pin 3=L−, pin 4=output per manufacturer connection drawing.', retrievedAt: '2026-11-12' }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

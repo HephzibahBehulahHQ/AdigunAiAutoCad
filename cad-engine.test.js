@@ -155,17 +155,22 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 11);
+  assert.equal(items.length, 16);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
+    ['siemens-3rt2026-2kb40', 'contactor', 'KM'],
+    ['siemens-3ru2126-4ab0', 'motor-overload-relay', 'Q'],
+    ['siemens-3rp2576-2nw30', 'star-delta-timer', 'K'],
     [startPushButtonId, 'pushbutton', 'S'],
     [stopPushButtonId, 'pushbutton', 'S'],
     [motorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     [lowRangeMotorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
+    ['siemens-3rv2021-4aa10', 'motor-protection-breaker', 'Q'],
     ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
     ['sew-eurodrive-drn63ms4', 'motor-induction', 'M'],
+    ['sew-eurodrive-drn132m4', 'motor-induction', 'M'],
     ['siemens-6es7212-1ae40-0xb0', 'plc-cpu', 'A'],
     ['ifm-ifs204', 'sensor-inductive-pnp', 'B']
   ]);
@@ -942,4 +947,56 @@ test('IFM IFS204 to Siemens CPU 1212C example preserves pin-accurate sensor, sup
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).netCount, 5);
 });
+});
+test('star-delta catalog additions preserve source-backed Siemens and SEW terminal identities', () => {
+  const contactor = engine.component('siemens-3rt2026-2kb40');
+  assert.equal(contactor.manufacturerPartNumber, '3RT2026-2KB40');
+  assert.equal(contactor.specifications.ratedOperationalCurrentAC3At400V.value, 25);
+  assert.deepEqual(contactor.symbol.pins.map(pin => pin.localNumber), ['A1','A2','1/L1','2/T1','3/L2','4/T2','5/L3','6/T3','13','14','21','22']);
+  assert.match(contactor.sources[0].url, /3RT2026-2KB40/);
+
+  const overload = engine.component('siemens-3ru2126-4ab0');
+  assert.deepEqual(overload.specifications.adjustableOverloadRelease, { minimum: 11, maximum: 16, unit: 'A' });
+  assert.deepEqual(overload.symbol.pins.map(pin => pin.localNumber), ['1/L1','3/L2','5/L3','2/T1','4/T2','6/T3','95','96','97','98']);
+  const relay = engine.createInstance(overload.id, 500, 300, 'F1');
+  assert.equal(engine.validateInstance(relay).valid, true);
+  relay.properties.overloadSettingA = 15.2;
+  assert.equal(engine.validateInstance(relay).valid, true);
+  relay.properties.overloadSettingA = 16.1;
+  assert.equal(engine.validateInstance(relay).valid, false);
+
+  const breaker = engine.component('siemens-3rv2021-4aa10');
+  assert.deepEqual(breaker.specifications.adjustableOverloadRelease, { minimum: 10, maximum: 16, unit: 'A' });
+  assert.equal(breaker.specifications.instantaneousShortCircuitRelease.value, 208);
+  assert.deepEqual(breaker.symbol.pins.map(pin => pin.localNumber), ['1/L1','3/L2','5/L3','2/T1','4/T2','6/T3']);
+  assert.match(breaker.sources[0].url, /3RV2021-4AA10/);
+
+  const timer = engine.component('siemens-3rp2576-2nw30');
+  assert.deepEqual(timer.symbol.pins.map(pin => pin.localNumber), ['A1','A2','17','18','28']);
+  assert.deepEqual(timer.electricalFunctions.starDeltaTiming, {
+    supplyPins: ['supply-a1','supply-a2'], sharedOutputCommon: 'contact-common-17', instantaneousStarOutput: 'star-output-18',
+    delayedDeltaOutput: 'delta-output-28', timeRangeSeconds: { minimum: 3, maximum: 60 }, changeoverDelayMilliseconds: 50,
+    note: 'Siemens specifies a 50 ms star-to-delta changeover delay to prevent phase-to-phase shorts. Relay switching is not simulated.'
+  });
+  const timed = engine.createInstance(timer.id, 800, 300, 'K1');
+  timed.properties.delaySeconds = 12;
+  assert.equal(engine.validateInstance(timed).valid, true);
+  timed.properties.delaySeconds = 61;
+  assert.equal(engine.validateInstance(timed).valid, false);
+
+  const motor = engine.component('sew-eurodrive-drn132m4');
+  assert.equal(motor.specifications.ratedVoltage.value, '400 V Δ / 690 V Y');
+  assert.equal(motor.specifications.ratedLineCurrentAt400V50Hz.value, 15.2);
+  assert.deepEqual(motor.symbol.pins.map(pin => pin.localNumber), ['U1','V1','W1','U2','V2','W2','PE']);
+  assert.ok(motor.sources.every(source => source.publisher === 'SEW-EURODRIVE'));
+});
+
+test('star-delta components render in the existing workstation shell with editable settings', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'star-delta-timer':"));
+  assert.ok(html.includes("case'motor-overload-relay':"));
+  assert.ok(html.includes('data-component-property="delaySeconds"'));
+  assert.ok(html.includes('data-component-property="overloadSettingA"'));
+  assert.ok(html.includes('.toolbar{display:flex'));
+  assert.ok(html.includes('.topbar{position:relative'));
 });
