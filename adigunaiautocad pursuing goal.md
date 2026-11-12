@@ -1,2090 +1,15 @@
-# adigunaiautocad pursuing goal
-## Autonomous Codex master execution specification â€” 2026-11-11
-
-**Product:** adigunaiautocad (display name: Adigun AI AutoCAD, subject to trademark review). **Owner:** Hephzibah Behulah / HB Elektroniker. **Product repository:** https://github.com/HephzibahBehulahHQ/AdigunAiAutoCad . **Target domain:** https://adigunaiautocad.hephzibahbehulah.com .
-
-### 0. Mission and autonomous operating contract
-You are the lead architect, electrical CAD engineer, frontend/backend developer, AI engineer, test engineer, security reviewer, technical writer and release engineer. Deliver a genuinely functional, professional browser-first electrical CAD and industrial automation design workstationâ€”not a screenshot, static prototype, simulated feature list, or nonworking buttons. Work independently through research, implementation, tests, review and release preparation. Make reasonable documented choices, create small reviewable PRs, and continue iterating without routine questions. Never bypass approvals, security controls, repository policies or required human review. If deployment secrets, licensed specifications, paid services, or safety sign-off are missing, implement safe fallbacks, document the blocker and keep delivering verifiable code. Do not claim a successful deployment, certification, or tested hardware without evidence.
-
-**Repository precedence (inspect actual files, not assumptions):**
-1. https://github.com/HephzibahBehulahHQ/hb-AI-policy (canonical; the user-supplied hb-AI-policyy path may be a typo or inaccessible; verify).
-2. https://github.com/HephzibahBehulahHQ/hb-design-system â€” tokens, logos, icons, templates, Adigun BOT.
-3. https://github.com/HephzibahBehulahHQ/hb-elektroniker â€” engineering division identity and guidance.
-4. https://github.com/HephzibahBehulahHQ/HephzibahBehulahHQ.github.io â€” corporate identity.
-5. Product-local AGENTS.md and product specifications, where consistent with higher authority.
-Do not modify shared repositories or invent/replace official brand assets. Resolve any policy conflict by honoring the higher authority and recording it. Adopt the verified corporate palette and division accent (HB Elektroniker README lists navy #0B1220, cyan #22D3EE and gold #D4AF37); obtain exact current values and logo files from the canonical design system. No EPLAN, AutoCAD, SEW or other third-party logo or proprietary UI asset may be copied. The screenshots are interaction/layout references only; build an original branded implementation with similar workstation ergonomics. Avoid implying Autodesk affiliation.
-
-### 1. Visual and interaction acceptance contract â€” workstation must be usable
-The supplied six screenshots are visual references for electrical-engineering content and workstation ergonomics, not instructions, source data, or assets to copy. Build an original HB Elektroniker workstation with a clear hierarchy, precise geometry, readable engineering annotations, and real commands.
-
-**Reference mapping (the source images are not stored in this repository, so keep this mapping in the prompt):**
-- Reference 1 shows a dense sensor-to-PLC page: repeated industrial sensors, terminal/breakout rows, conductor routing, wire/device labels, and mapped PLC inputs.
-- Reference 2 shows a compact control schematic with multiple supplies/signals, device connections, wire routing, and cross-page references.
-- References 3 and 4 show a drive/motor control arrangement, but are blurry. Use only the broad arrangement of drive/control devices and wiring; do not guess or transcribe unreadable labels, ratings, or part numbers.
-- Reference 5 shows grouped actuator/sensor or pneumatic-related circuits and long routed conductors. Use generic, technically coherent symbols; do not infer unreadable component specifications.
-- Reference 6 clearly shows repeated three-phase motor feeders with three phase conductors, switching/protection elements, motor terminals U/V/W and a protective-earth connection. Use this as a structural reference, not as a claimed design approval.
-
-**Workspace geometry and composition:**
-- At 1440Ã—900 CSS pixels, the central drawing viewport must occupy at least 75% of the *available editor workspace area* in default compact mode. Define this as the region below the title/menu/toolbars, above the status rail, and between collapsed side rails; report the exact measured pixel dimensions in a Playwright assertion. Do not claim 75% of the entire browser viewport when those surrounding bars are excluded.
-- Use a slim title/project-tab strip (24â€“32px), compact icon-first command toolbar (28â€“36px), collapsed icon rails (32â€“40px), and thin status rail (24â€“32px). Keep controls separated with consistent hit targets, spacing, visible focus, and tooltips. No icon, label, menu, or popup may overlap another control or obscure the active drawing area.
-- Project navigator and properties/inspector may expand as docked, resizable workspace panes. Docked panes are persistent editor regions, not transient popovers; opening one must resize/reflow the canvas and never cover controls or silently steal drawing input. On narrow screens, use a safe viewer or responsive layout instead of compressing the editor into an unusable state.
-- The central sheet is an editable, crisp engineering drawing with border, grid/rulers, title block, page/sheet references, device tags, pin numbers, connection points, wire/cable identifiers, terminal strips, and legible annotations. Include coherent sample content spanning sensor-to-PLC I/O, control/drive wiring, and three-phase motor feeder structure. Use generic or verified licensed symbols and explicitly illustrative assumptions; never make up vendor part numbers, ratings, certification, or suitability for construction.
-- Include fit-to-page, cursor-centered wheel/pinch zoom, pan (middle mouse or space-drag), selection, move, rotate, align, distribute, snap/grid, orthogonal routing, layers, context actions, undo/redo, and precision coordinates only when each command is actually implemented and validated. Clearly mark unsupported commands disabled with a concise reason; never present decorative controls as working features.
-- Preserve a large open canvas, fast keyboard access, screen-reader names, high contrast, visible focus, reduced motion, and tablet adaptation. Mobile may default to a safe viewer.
-
-**Original workstation requirements retained alongside the reference-specific additions:**
-- Default to a full-viewport desktop editor. At 1440Ã—900, the central schematic canvas must occupy at least 75% of the complete viewport area in default compact mode, measured in Playwright; it must also satisfy the available-workspace measurement above. Do not use a marketing hero, giant cards, or a permanently open chat pane.
-- Keep the title/project strip 24â€“32px and the compact icon-only toolbar 28â€“36px, grouped for file, edit, drawing, electrical, automation, views, output, and AI. Use no persistent text labels; provide accessible tooltips, aria-labels, shortcuts, and a command palette.
-- Left collapsible icon rail: expandable project/page tree, devices, symbol libraries, layers, properties, and macros. Expanded panes are on demand, resizable, detachable where feasible, and hideable in one click.
-- Right collapsible icon rail: inspector, electrical rules, terminal strip, BOM, AI assistant, and comments. Keep Adigun BOT optional, unobtrusive, and out of the drafting path; never reserve a permanently open chat pane.
-- Bottom 24â€“32px icon-only tool/status rail: grid, snap, orthogonal, object snap, coordinates, zoom, units, sheet, validation, jobs, and notifications. Small readable values for zoom, coordinates, and active sheet are permitted where engineering precision needs them; commands stay icon-first.
-- Support a crisp white sheet and configurable dark drafting mode, fine grid, coordinate rulers, border/title block, page references, line numbers, IEC-style symbols, blue/red/black nets, annotations, true connection dots, terminal rows, device labels, cable IDs, cross-reference arrows, multiple sheets, CAD zoom/pan, and an original generic sample project covering sensor-to-PLC wiring, motor-drive power/control, and terminal strips.
-- Provide fast middle-mouse/space-drag pan, wheel/pinch zoom around the cursor, fit-to-page, multi-select, drag, resize, rotate, align, distribute, snapping, undo/redo, context actions, keyboard shortcuts, precision coordinates, layers, and optional mini-map. Each displayed command must be implemented and validated or clearly disabled with its reason.
-- Default to compact desktop mode, adapt for tablet, and provide a safe viewer on mobile rather than an unusable editor. Include screen-reader labels, high contrast, visible focus, and reduced motion.
-- Compare reference screenshots for workstation geometry and interactions conceptually; never copy pixels or unauthorized visual assets.
-
-### 1.1 Transient menu, toolbar, and flyout interaction contract
-Implement a lightweight, accessible controller for transient menus, tool panels, and icon flyouts. The one-open-at-a-time rule applies globally to transient popovers; docked editor panes remain separate workspace regions.
-- Every enabled trigger performs its named action or opens its real command panel. Do not add dummy entries or placeholder panels. Unsupported commands must be visibly disabled and explain why.
-- Clicking a trigger opens its panel. Clicking the same trigger again closes it. Clicking a different trigger closes the current transient panel and opens only the new one. At most one transient panel may be open at any time.
-- On desktop pointer input, keep a panel open while the pointer is inside either its trigger or panel. Close it when the pointer leaves the combined trigger-plus-panel region, with only a short measured grace delay to allow movement between them. Pointer movement alone must not execute a command.
-- Clicking outside the active trigger and panel closes it. Escape closes it and returns focus to its trigger. Tab navigation and Enter/Space must provide keyboard access; focus indicators and appropriate button/menu roles, aria-expanded, aria-controls, and menu semantics are required.
-- On touch devices, tapping a trigger opens/toggles its panel; tapping a different trigger switches panels; tapping outside closes the open panel. Do not depend on mouseleave/pointerleave for touch. Prevent synthetic mouse events from reopening a panel immediately after a touch.
-- Use native DOM event handling (for example click, pointerleave/mouseleave, pointerdown for outside detection, and keydown for Escape) and a small shared state controller. Do not add a heavy UI library solely for these interactions.
-- Anchor panels to their triggers, maintain a safe gap, and flip/shift them to remain within the viewport. Set a bounded max height with internal scrolling. Verify at desktop and touch viewport sizes that popovers do not overlap unrelated controls, escape the viewport, or cover the active trigger. Pointer movement from trigger into panel must not close it prematurely.
-- Add focused automated tests for: open, toggle closed, switch from one trigger to another, pointer remains within trigger/panel, pointer exit closes after grace delay, outside click closes, Escape closes and restores focus, keyboard opening, touch tap-outside close, no touch-generated duplicate reopen, and exactly one visible transient panel. Include a narrow-viewport test and overlap/overflow assertions. Keep a real-device/manual touch check in release evidence where available.
-
-**Top navigation dropdown invariant (explicit regression requirement):**
-- The Electrical, Automation, Panel Design, EPLAN-Style, IEC / DIN / US Standards, and any shared-system top menus open on hover for mouse users and on tap/click for touch and keyboard users.
-- Render each dropdown as a vertically stacked, absolutely positioned overlay anchored directly below its trigger, above the toolbar and drawing. It must not participate in document/grid layout or change any page, toolbar, canvas, or panel dimensions or coordinates.
-- Keep every option reachable while moving from trigger to panel; close after selection, outside click/tap, or pointer exit from the combined trigger-and-panel region. Switching triggers leaves only the new dropdown open.
-- Bound dropdown height to the viewport and scroll inside it with contained scroll chaining. Use an appropriate overlay z-index; preserve all current command behavior and the approved workstation styling.
-- Before merging any dropdown change, measure the topbar, toolbar, workspace, editor and drawing bounds before/after open and require unchanged coordinates and dimensions. Exercise every shared-system top menu and its options at desktop size; also verify touch tap-outside close where a touch viewport/device is available. Do not accept any grid-row expansion (including a menu-open state class), content reflow, overlap, or canvas movement.
-
-### 2. Product scope and real CAD engine
-Build a coherent electrical engineering CAD platform, prioritizing **2D electrical schematics and control panel design**; do not promise complete mechanical AutoCAD equivalence. Modules:
-1. Drawing/document core: projects, folders, sheets, page templates, title blocks, revisions, autosave, version history, reliable serialization, recoverable edits, copy/paste, grouping, layers, lock/hide, symbol definitions, reusable macros and templates.
-2. Geometry: world-coordinate model independent of screen pixels, precise primitives (lines, polylines, arcs, circles, rectangles, text, dimensioning), transformations, selection hit-testing, snapping and orthogonal routing, viewport culling, stable IDs and deterministic export.
-3. Electrical semantics: typed symbols, pins, ports, net connectivity graph, junction rules, wire numbering, signal names, potential and cross-sheet references, device tags, contact references, terminal strips, cables, conductor colors, core IDs, connection reports, power supplies, protective devices, PLC I/O mapping, sensors, actuators, relays, contactors, motors, VFDs, safety relays and distribution boards.
-4. Panel layout: DIN rails, ducts, footprints, mounting plate, clearance annotations, wire routing suggestions, panel schedules, parts/BOM, heat-load estimates as advisory only, configurable component dimensions and manufacturer catalog provenance.
-5. Industrial automation: PLC addressing and I/O mapping, electrical control schematics, ladder-logic **viewer/editor with explicit limited scope**, basic interlock logic and signal simulation with deterministic engine; clearly separate conceptual simulation from validated industrial control and safety PLC functionality.
-6. Reports: BOM, wire lists, terminal diagrams, cable schedules, device indexes, connection lists, revision logs, sheet index, validation findings, PDF print package, CSV and SVG; DXF import/export via an audited open library with documented subset/roundtrip limitations. DWG only with legally licensed technology; never falsely claim native DWG fidelity.
-7. Libraries: versioned IEC/ANSI-style symbols authored in-house or permissively licensed, pin metadata, editable symbols, searchable catalog, import/export, vendor-neutral parts, provenance and license checks.
-8. Multi-language UI: German (de-DE), English (en-US), international English; locale-aware units, paper sizes, numbering, decimal separators and documentation templates.
-9. Professional workflows: sample projects, project wizard, onboarding, searchable commands, printable engineering documentation, collaboration/roles if backend is enabled, audit trails, backups, restore and offline-first editing where feasible.
-
-### 3. 2026 standards-aware engineering â€” no unsupported certification claims
-Create a maintained **standards registry** with jurisdiction, standard ID, edition, status, applicability, license, authoritative reference, implementation mapping, evidence and last-reviewed date. Research latest authoritative editions before encoding any normative requirement. Start with applicable families, verifying current editions and national deviations:
-- Germany/EU: DIN VDE 0100 series / IEC 60364 (LV installations), DIN EN IEC 60204-1 (machine electrical equipment), DIN EN IEC 61439 (LV assemblies), DIN EN IEC 81346 (reference designations), IEC 61082 (electrotechnical documents), IEC 60617 (graphical symbols), IEC 60947 (switchgear), IEC 61131-3 (PLC programming), IEC 62443 (industrial cybersecurity), EN ISO 13849-1 and IEC 62061 (functional safety where applicable), IEC 61355 (document classification), EU Low Voltage/EMC/Machinery regulatory applicability including effective dates and transitions.
-- US: NFPA 70 / NEC (jurisdiction-adopted edition), NFPA 79, UL 508A, NFPA 70E, ANSI/IEEE 315 where applicable, relevant NEMA/IEEE/UL families and OSHA context. NEC editions are locally adopted; never assume nationwide adoption of a single edition.
-- International: IEC 60364, IEC 60204, IEC 61439, IEC 60617, IEC 61082, IEC 81346, IEC 61131, IEC 62443, ISO 12100, ISO 13849 and IEC 62061 as applicable.
-- Distinguish symbol/documentation checks from design safety certification; support configurable rules by project region, edition, system voltage and application. Do not redistribute copyrighted standards texts or use proprietary symbols without permission.
-- Implement verifiable **electrical rule checks**: unconnected pins, unintended dangling wires, duplicate device tags, shorted incompatible potentials, missing PE designation, inconsistent wire numbers, terminal conflicts, invalid cross references, mismatched PLC I/O types, basic conductor/circuit warnings and report generation. Safety-critical sizing, short-circuit withstand, selectivity, arc flash and compliance determinations must be clearly advisory or delegated to qualified engineer and verified calculations.
-- Every rule has rule ID, edition mapping, severity, explanation, exact sheet/object reference, suggested fix, test fixture and human-review status. Allow documented waivers with audit log.
-
-### 4. AI engineering copilot â€” Adigun BOT
-Reuse the official Adigun BOT component contract from hb-design-system. The copilot is an opt-in, context-aware engineering assistant with:
-- natural-language project creation, search, symbol insertion, wiring proposals, BOM explanations, sheet summaries, cross-reference suggestions, localization and documentation generation;
-- **preview -> diff -> explicit user confirmation -> deterministic validated edit transaction -> undo** for every modification; no unreviewed autonomous changes to live project, no hidden code execution, no silent external sharing;
-- retrieval grounded in the project's own symbols, standards registry, permitted documentation and manufacturer data, with citations and confidence/uncertainty; never fabricate standard clauses or certified safety results;
-- typed tools with JSON schemas, permissions, least privilege, prompt-injection defenses, rate limiting, cost controls, redaction, audit logs and provider abstraction; AI credentials only server-side;
-- offline/manual CAD remains fully usable without any AI provider key. Clearly label unavailable functions rather than presenting mock results as real.
-
-### 5. Architecture and engineering quality
-Inspect existing repo and follow its stack if established; otherwise propose and implement a pragmatic TypeScript monorepo: React + Vite + strict TypeScript, accessible component library derived from approved design tokens, Zustand or equivalent for editor state, SVG or Canvas/WebGL hybrid renderer (choose by measured performance), geometry/connectivity packages independent of UI, workers for heavy ERC/export, schema-validated project JSON with migrations, IndexedDB offline persistence, Playwright + Vitest. Add optional API (Node/TypeScript with Postgres) only when needed for auth, collaboration, server-side AI or storage. Keep deterministic CAD engine, rule engine, AI adapter, UI and persistence isolated and testable. Avoid overengineering and vendor lock-in. No secret values in frontend or repo. Use CSP, secure headers, dependency scanning, license inventory, input sanitization, upload limits, data export/deletion and privacy-by-design.
-
-Data entities: Project, Sheet, Layer, SymbolDefinition, SymbolInstance, Pin, Net, WireSegment, Junction, Terminal, Cable, Device, PLCAddress, Part, PanelFootprint, DrawingPrimitive, Constraint, Revision, ValidationFinding and AuditEvent. Define stable IDs, schema versions, coordinate units, explicit connectivity semantics and migrations. Ensure imported content cannot execute scripts.
-
-### 6. Autonomous phased delivery â€” every phase has a working demo
-**Phase A / discovery:** audit repositories, policy, brand, existing workflows, deployment, current standards sources and licenses. Record architecture decision records and exact acceptance checklist. Create a dedicated feature branch and PR; no silent main edits.
-**Phase B / workstation:** functional icon-only shell, high-fidelity workspace, project/page explorer, resizable panels, original branded SVG icons, accessibility, command palette, keyboard shortcuts, sample schematics, viewport layout screenshot tests.
-**Phase C / CAD kernel:** precision geometry, model serialization, editing commands, undo/redo, multi-sheet, snap, pan/zoom, symbol creation and reusable libraries; tests for topology and roundtrip.
-**Phase D / electrical intelligence:** pins/nets, ERC, cross references, terminal/wire numbering, PLC maps, BOM and deterministic reports; real test projects.
-**Phase E / panel/automation:** panel layout, device footprints, wire/terminal schedules, limited PLC logic and transparent simulation.
-**Phase F / AI:** provider abstraction, Adigun BOT integration, cited guidance, safe tool previews, validation and consent, graceful no-key mode.
-**Phase G / interchange and release:** PDF/SVG/CSV/DXF import/export tests, i18n, documentation, performance, security, accessibility, deployment checks and release candidate.
-
-For each phase: implement -> run checks -> fix failures -> capture screenshots -> update docs and progress -> open/update PR -> proceed when permitted. Do not wait for routine user input. Escalate only credentials, policy conflicts, legal licensing, safety approvals or actions requiring explicit authorization.
-
-### 7. Acceptance tests and release gates
-- At 1440Ã—900, assert the central drawing viewport is at least 75% of the complete viewport area and meets the defined available-editor-workspace measurement in compact mode; record measured dimensions. Verify toolbar, rails, status bar, and any open transient panel are keyboard-operable, accessible, within the viewport, and non-overlapping. Compare screenshot references conceptually without copying their assets.
-- Create/edit/save/reload a 10-sheet schematic with >=250 symbols and >=1000 wire segments without lost connections; verify deterministic undo/redo and project roundtrip.
-- Demonstrate net connectivity, branch junction behavior, cross-sheet references, PLC I/O and terminal indexing; include deliberate faults detected by ERC with sheet/object locations.
-- Export print-ready PDF and SVG, CSV BOM/wire/terminal reports and supported DXF subset; reimport test fixture and report unsupported constructs.
-- Verify German/US locale switch, project-level region and edition settings, standards registry provenance and explicit engineering disclaimers.
-- AI suggested wiring never changes model before approval; unauthorized tool calls are rejected; no-key mode works.
-- Automated unit/integration/e2e, a11y checks, visual snapshots, performance budgets, security/dependency/license scans, production build and deployment smoke test. Include the full transient-panel interaction test matrix in section 1.1. Track exact pass/fail/skip and artifacts. No prompt or mockup can guarantee zero defects; release evidence must show no known blocking/high-severity defects and list every unverified or partial requirement.
-- Serve correct site on the specified domain after authorized deployment, verify DNS/TLS, route fallback, content-type, asset paths and no blank screen; report actual URL and evidence. Never confuse a GitHub Pages static host with a persistent server runtime: use a separate secure backend host if required.
-- Define measurable render and interaction budgets on reference hardware and include CI regression tests; avoid unmeasured "fast" claims.
-- Release notes must list completed, partial, unsupported and safety-critical limitations. No fake certifications or simulated screenshots presented as real app output.
-
-### 8. Documentation and operations
-Maintain README, AGENTS.md (product-local, subordinate to global policy), architecture/ADRs, data schema, editor shortcuts, symbol authoring guide, AI security guide, standards provenance matrix, locale guide, deployment guide, rollback guide, accessibility report, licensing/SBOM, test evidence and CHANGELOG. Provide original sample projects: IEC-style motor starter, PLC sensor/actuator control, panel terminal layout and ANSI-style control circuit.
-
-### 9. Mandatory Codex behavior and finish condition
-Begin by reading actual policy/design/brand repositories and checking branch protection and workflows. Prioritize a working full-screen CAD workstation immediately, then engineering correctness. Maintain a task checklist in the product repository; use issue/PR checkpoints. Never substitute decorative mock screens for working commands. Keep output concise: STATUS; Done; Tested; Blocked; ESTIMATED FINISH TIME (hours/minutes); ETA; Next. Only claim work actually completed. A phase is complete only with tests and demonstrable artifacts. The overall project is complete only when the agreed acceptance suite passes, deployment is verified, documented limitations are explicit and required human approvals are obtained.
-
-### 10. Visual reference brief for mockup and implementation
-Generate an original 16:9, 1440Ã—900 concept mockup for the HB Elektroniker-branded Adigun AI AutoCAD electrical CAD workstation. Use the verified authorized brand assets when available; otherwise use a restrained text wordmark and the documented navy #0B1220, cyan #22D3EE, and gold #D4AF37 palette. Do not invent or imitate a logo.
-
-Show a slim 24â€“32px title/project-tab strip, compact 28â€“36px cyan-accent icon-first grouped toolbar, narrow 32â€“40px collapsed left and right icon rails, a very large central white A3-style engineering sheet, and a thin 24â€“32px icon-only status rail. Include the original briefâ€™s crisp vector typography, no marketing panels, and an unobtrusive small cyan Adigun BOT affordance only when the approved asset and real behavior are available. The sheet should show a coherent, generic sample combining (1) a sensor-to-PLC terminal/I/O row, (2) a compact control/drive wiring group, and (3) a three-phase motor feeder with L1/L2/L3, switching/protection symbols, U/V/W and PE. Use fine grid, coordinate rulers, IEC-style relay/contactor/PLC/sensor symbols, clean black/blue/red wiring, pin numbers, terminal strips, cross references, page border, and title block as in the original visual brief. Include a restrained title block, border, wire paths, generic device tags, pin/terminal labels, and a few legible annotations. Use only labels and component data supported by the actual sample project; when data is unknown, omit it rather than guessing.
-
-Show exactly one transient command flyout open and anchored to its trigger, with no overlap or viewport clipping. It demonstrates the specified open-panel visual state only; the mockup itself cannot demonstrate pointer leave, click-outside, keyboard, or touch behavior. Keep any Adigun BOT affordance small and unobtrusive; omit it if a real approved asset/behavior is unavailable. Use original generic engineering graphics, not EPLAN/AutoCAD/SEW/Festo/SICK branding, logos, screenshots, or copied proprietary artwork. Do not show certification badges or imply construction approval. The mockup is a static concept, not proof that the product or pictured controls have been implemented.
-
-Implementation acceptance uses the same visual geometry and reference interpretation described in section 1. A generated image must not introduce text, ratings, components, functions, or safety claims absent from the implementation's real, reviewable project data. Treat image-generation text as unreliable: validate every visible label manually before using the image as a product reference.
-
----
-
-## 11. MANDATORY production-grade engineering project library: 50 Ã— 100 sheets (minimum)
-
-**This section supersedes all smaller sample-project requirements as the final release acceptance criterion.** The earlier 10-sheet/250-symbol acceptance case remains a fast CI regression fixture, **not** the product's final project-library scope.
-
-### Required deliverable
-Ship **at least 50 DISTINCT, FULLY FUNCTIONAL electrical engineering design projects, each containing at least 100 meaningfully populated, interconnected, editable sheets**: **minimum 5,000 real engineering drawing sheets**. These are genuine native project documents, **not** blank sheets, screenshot backgrounds, static SVG/PDF previews, duplicated filler, mocked APIs, nonfunctional demos, or unverified manufacturer reference designs. Each must open in the editor, permit selection/editing/rewiring, preserve semantic pin/net topology, save/reopen without loss, run ERC, produce cross-references, and generate usable BOM/wiring/terminal reports. All 50 must be accessible from a searchable **Engineering Project Library** with thumbnails, domain, standard profile, complexity, page count and validation status. Bundle compressed/versioned datasets or lazy-download content so first load stays fast; support offline availability for downloaded projects.
-
-### 50 project briefs â€” each >=100 sheets, independent electrical topology and domain-specific documentation
-**Industrial motor/control (01â€“10):**
-01. Reversing three-phase motor starter with interlocks.
-02. Starâ€“delta motor starter and timing sequence.
-03. VFD-driven conveyor line with sensors and PLC.
-04. Multi-axis servo motion cell with encoder feedback.
-05. Soft-starter pump station with duty/standby operation.
-06. Multi-motor production line with segmented MCC.
-07. Industrial fan bank with process instrumentation.
-08. Packaging machine power and PLC controls.
-09. Hoist/crane control with advisory safety circuits.
-10. Hydraulic power unit and electrovalve controls.
-
-**PLC, process and automation (11â€“20):**
-11. Modular PLC I/O cabinet with remote I/O.
-12. Water-treatment dosing and monitoring plant.
-13. Wastewater lift-station control and telemetry.
-14. Food processing line with sensors and drives.
-15. Chemical batch reactor instrumentation/control.
-16. Brewery/CIP skid automation.
-17. Industrial oven heating and temperature loops.
-18. HVAC air-handling unit control system.
-19. Cold-storage refrigeration supervisory controls.
-20. Warehouse automated conveyor/sorter system.
-
-**Building, power and energy (21â€“30):**
-21. Commercial low-voltage distribution board.
-22. Industrial subdistribution and feeder schedules.
-23. Emergency lighting and transfer-control circuits.
-24. Building automation and field controller cabinets.
-25. Solar PV inverter and AC distribution documentation.
-26. Battery energy storage auxiliary/control circuits.
-27. EV charging site electrical/control schematics.
-28. Generator ATS supervisory/control panel.
-29. UPS monitoring and bypass control system.
-30. Data-center auxiliary electrical and alarm panels.
-
-**Manufacturing and robotics (31â€“40):**
-31. Robotic welding cell control cabinet.
-32. CNC machine auxiliary electrical controls.
-33. Assembly-line safety relay and access interlocks.
-34. Pneumatic pick-and-place automation.
-35. Injection molding machine auxiliary controls.
-36. Printing press multi-drive control.
-37. Textile production machine control system.
-38. Pharmaceutical filling-line control.
-39. Automated palletizer control.
-40. Industrial test bench and instrumentation rack.
-
-**Specialized international designs (41â€“50):**
-41. IEC-style European machine control panel.
-42. NFPA 79-oriented US machine control panel.
-43. UL 508A-oriented panel documentation example.
-44. International terminal/cable marshalling cabinet.
-45. Marine auxiliary electrical control panel (advisory only).
-46. Agricultural irrigation automation controller.
-47. Railway station auxiliary control circuits (not signaling safety design).
-48. Mining ventilation auxiliary control panel (not hazardous-area certification).
-49. Hospital facility auxiliary alarm/monitoring panel (not life-support design).
-50. Modular training/commissioning lab with realistic PLC, motors and sensors.
-
----
-
-### Mandatory 100-sheet content architecture PER PROJECT
-Use a project-specific engineering breakdown; a **minimum** viable sheet distribution is:
-- 001â€“005: cover, drawing index, legends, revisions, technical assumptions.
-- 006â€“015: single-line power architecture, supplies, distribution and protection schematics.
-- 016â€“035: power/control circuit schematics with actual connected components and nets.
-- 036â€“055: PLC/remote-I/O and sensor/actuator circuit sheets with mapped addresses.
-- 056â€“070: terminal, cable, wire and interconnection sheets.
-- 071â€“080: panel mounting/layout, DIN rail, enclosure, device placement and connection sheets.
-- 081â€“090: interlocks, drives, diagnostics, alarm and communication wiring sheets.
-- 091â€“100: cross-sheet connections, commissioning checklists, engineering schedules, BOM, validation and revision documentation.
-These categories are a baseline, not permission to add meaningless pages. Adapt to each domain; if a sheet is non-schematic, it must still be a meaningful native editable engineering document/report tied to project data. At least **70 sheets per project must contain editable, connected electrical schematics or panel/wiring topology**, not just text/report pages.
-
-### Real-data and generation integrity
-Implement a reproducible, seeded **engineering project generator** backed by typed CAD primitives, validated symbol definitions, connection graph, terminal rules, PLC maps and a domain-specific project configuration. Generate projects deterministically from unique, reviewed configurations; ensure distinct device topology, sheet structure, symbol placements, wire paths, labels, cable assignments, power architecture and cross-sheet links. Do not merely rename the same 100-page template 50 times. Include domain-specific component choices with **clearly identified illustrative ratings** and assumptions; no invented vendor part numbers, no falsely approved safety circuits, no assertion of suitability for physical construction. Include documented human engineering review requirements before any real installation.
-
-Each project must include: project metadata, jurisdiction/standard profile, engineering assumptions, minimum 100 unique sheet IDs, named devices, connected pins and nets, cross-page references, project-wide numbering, PLC I/O mapping where applicable, terminal and cable schedules, BOM with source/illustrative status, and ERC results. Use original or properly licensed symbols and fixtures. If a domain lacks PLCs, provide an equivalent meaningful control/interface design rather than fake PLC content.
-
-### Required executable quality gates
-1. Automated manifest asserts **exactly or more than 50 distinct projects**, **>=100 meaningful sheets each**, **>=5,000 total**, **>=70 electrically editable connected sheets per project**, unique sheet IDs, and zero empty/filler pages.
-2. For **every** project: deserialize all sheets; validate schema, IDs, symbols, pin references, wire graph, terminal/cable references, page cross-references and report generation; save/reload and compare deterministic topology hashes.
-3. For **every** project: programmatically perform an edit to a selected real wire/device, undo, redo, save/reload, and confirm changed topology/metadata persisted correctly; prove the editor uses the same engine for user and test operations.
-4. For **every** project: ERC runs and returns object-linked findings; any intentional illustrative violations are documented and visible, never hidden or called compliant.
-5. Generate PDF print set, BOM CSV, wire list and terminal list from **real model data** for all projects (heavy exports may run in scheduled CI with artifact retention); sample DXF roundtrip for representative sheets.
-6. Browser e2e: open at least one project from each of the five categories, navigate to sheet 100, inspect a real symbol and its pin/wire connectivity, modify a wire, save/reopen, verify ERC and export.
-7. Performance: lazy-load project list/sheets, virtualize trees, worker-based validation, background export, bounded memory. Benchmark a 100-sheet project and 50-project library on specified test hardware; measure startup, sheet switch, zoom/pan and save latency. Set and enforce realistic documented budgets from actual profiling.
-8. Document provenance and disclaimers: **educational/reference engineering designs, not construction-ready or certified** absent independent qualified engineering review. Never represent generated sample schematics as real approved electrical installations.
-
-### Release definition and sequencing
-Implement the CAD engine and one fully connected 100-sheet reference project first; then validate generation of 5 distinct projects; then 50. Keep all intermediate deliverables usable. **Do not declare final release complete until the entire 50 Ã— 100 library and all quality gates pass.** Publish a machine-readable library manifest and per-project validation report. Clearly distinguish generated engineering examples from certified project deliverables. No fake progress metrics.
-
-## 12. Binding client requirement: real engineering components only (2026-11-12)
-
-This section is a client acceptance requirement and takes precedence over any wording elsewhere that could be read as permission to use generic or decorative component placeholders.
-
-- Every placed/catalog component must represent a real, identifiable device or engineering item. For commercial parts, record the manufacturer and exact model/part number from an authoritative manufacturer datasheet or catalog, plus the source URL, document revision/date, and retrieval date. For standard-defined items without a commercial part number, use a verified standard symbol/type and document the applicable standard and exact definition.
-- Each component definition must include standards-correct vector symbol or part geometry; real pin/terminal names and numbers; pin locations and electrical/mechanical connection types; editable, type-appropriate properties and variable values; and the source/provenance of each factual value. Symbols must connect to actual pins/nets in the project model and remain selectable, editable, and reportable.
-- A visible symbol alone is not a component. Do not substitute a square, label, decorative glyph, or approximate icon for a diode, transistor, sensor, PLC module, valve, motor, or other device. Do not claim a component is functional merely because it can be drawn or moved.
-- Never invent a manufacturer, part number, pinout, rating, dimension, tolerance, standard clause, or suitability claim. If authoritative data is unavailable or licensing is unclear, exclude/defer that component or mark the capability unavailable with the reason; do not silently fall back to a fake or generic part.
-- Project topology and wiring must match the selected components' verified pins and ratings. Keep safety and code-compliance findings advisory until qualified review; sourced components do not make a design construction-ready.
-- Do not generate large libraries or repeated project sets by renaming generic templates. A component/project is accepted only after source-backed data validation, pin/net checks, edit/save/reopen, report generation, and explicit provenance review.
-
-### First implementation milestone under this requirement
-
-Start with the electrical CAD model before expanding the symbol count: define and validate a versioned component/symbol/pin/net schema; migrate one real, source-backed electrical device end to end; prove that its displayed geometry, named pins, wire connectivity, editable properties, save/reopen, undo/redo, and BOM/report entry all refer to the same model instance. Add more components in small verified batches. Preserve the approved interface and existing toolbar/canvas/panel geometry throughout.
-
----
-
-## Appendix A â€” Mouse interaction function catalog (original 280-item list)
-
-## 1. LEFT-CLICK FUNCTIONS
-1. Select Object
-2. Select Text
-3. Select Shape
-4. Select Image
-5. Select Layer
-6. Select Tool
-7. Activate Menu
-8. Open Dropdown
-9. Place Object
-10. Insert Text
-11. Draw Shape
-12. Draw Line
-13. Draw Curve
-14. Add Point
-15. Select Node
-16. Move Cursor
-17. Activate Input Field
-18. Select Color
-19. Apply Fill
-20. Apply Outline
-21. Select Page
-22. Select Slide
-23. Select Artboard
-24. Select Component
-25. Activate Control Point
-26. Start Drawing
-27. Start Dragging
-28. Confirm Placement
-29. Select Multiple Objects (Shift + Click)
-30. Toggle Selection (Ctrl + Click)
-
-## 2. RIGHT-CLICK FUNCTIONS
-31. Open Context Menu
-32. Copy
-33. Cut
-34. Paste
-35. Delete
-36. Duplicate
-37. Rename
-38. Group
-39. Ungroup
-40. Lock Object
-41. Unlock Object
-42. Hide Object
-43. Show Object
-44. Bring to Front
-45. Send to Back
-46. Bring Forward
-47. Send Backward
-48. Align Objects
-49. Distribute Objects
-50. Rotate Object
-51. Flip Horizontal
-52. Flip Vertical
-53. Resize Object
-54. Transform Object
-55. Edit Object
-56. Edit Text
-57. Edit Nodes
-58. Convert to Curves
-59. Convert to Shape
-60. Convert to Symbol
-61. Object Properties
-62. Format Object
-63. Change Fill
-64. Change Outline
-65. Change Opacity
-66. Change Layer
-67. Move to Layer
-68. Create New Layer
-69. Merge Layers
-70. Export Selection
-71. Save as Component
-72. Add Hyperlink
-73. Remove Hyperlink
-74. Add Comment
-75. Inspect Object
-76. Reset Transformation
-77. Select Similar Objects
-78. Select All
-79. Invert Selection
-80. Deselect All
-
-## 3. DOUBLE-CLICK FUNCTIONS
-81. Edit Text
-82. Enter Group
-83. Edit Shape
-84. Edit Nodes
-85. Open Object Properties
-86. Open Component
-87. Rename Layer
-88. Rename Page
-89. Rename Slide
-90. Edit Symbol
-91. Enter Isolation Mode
-92. Open Image Editor
-93. Edit Table Cell
-94. Edit Chart
-95. Edit Formula
-
-## 4. MOUSE DRAG FUNCTIONS
-96. Move Object
-97. Resize Object
-98. Rotate Object
-99. Draw Selection Box
-100. Select Multiple Objects
-101. Draw Rectangle
-102. Draw Ellipse
-103. Draw Freehand Path
-104. Draw Bezier Curve
-105. Adjust Control Handles
-106. Move Anchor Points
-107. Adjust Gradient
-108. Adjust Transparency
-109. Crop Image
-110. Pan Canvas
-111. Drag Guide
-112. Drag Ruler
-113. Rearrange Layers
-114. Rearrange Slides
-115. Rearrange Pages
-116. Rearrange Objects
-117. Drag and Drop Files
-118. Drag and Drop Components
-119. Duplicate by Dragging
-120. Adjust Object Spacing
-
-## 5. MOUSE WHEEL FUNCTIONS
-121. Zoom In
-122. Zoom Out
-123. Scroll Up
-124. Scroll Down
-125. Horizontal Scroll
-126. Pan Canvas
-127. Adjust Brush Size
-128. Adjust Tool Value
-129. Navigate Pages
-130. Navigate Slides
-
-## 6. CANVAS RIGHT-CLICK FUNCTIONS
-131. Paste
-132. Paste Special
-133. Select All
-134. Deselect All
-135. Add New Object
-136. Insert Image
-137. Insert Text
-138. Insert Shape
-139. Insert Table
-140. Insert Chart
-141. Add Guide
-142. Remove Guides
-143. Show Grid
-144. Hide Grid
-145. Snap to Grid
-146. Snap to Objects
-147. Snap to Guides
-148. Change Canvas Color
-149. Change Page Size
-150. Change Orientation
-151. Canvas Properties
-152. Page Properties
-153. Zoom to Fit
-154. Zoom to Selection
-155. Reset View
-156. Show Rulers
-157. Hide Rulers
-158. Lock Guides
-159. Unlock Guides
-160. Export Canvas
-
-## 7. TOOLBAR RIGHT-CLICK FUNCTIONS
-161. Customize Toolbar
-162. Show Toolbar
-163. Hide Toolbar
-164. Reset Toolbar
-165. Add Tool
-166. Remove Tool
-167. Rearrange Tools
-168. Pin Tool
-169. Unpin Tool
-170. Tool Settings
-171. Tool Properties
-172. Reset Tool
-173. Assign Shortcut
-174. Change Tool Icon
-175. Expand Tool Group
-176. Collapse Tool Group
-177. Show Tool Labels
-178. Hide Tool Labels
-179. Dock Toolbar
-180. Undock Toolbar
-
-## 8. LAYER PANEL MOUSE FUNCTIONS
-181. Select Layer
-182. Create Layer
-183. Delete Layer
-184. Duplicate Layer
-185. Rename Layer
-186. Lock Layer
-187. Unlock Layer
-188. Hide Layer
-189. Show Layer
-190. Reorder Layer
-191. Merge Layer
-192. Flatten Layer
-193. Group Layers
-194. Ungroup Layers
-195. Change Layer Opacity
-196. Change Layer Color
-197. Move Object Between Layers
-198. Expand Layer
-199. Collapse Layer
-200. Export Layer
-
-## 9. ADVANCED CAD / VECTOR FUNCTIONS
-201. Trim
-202. Extend
-203. Offset
-204. Fillet
-205. Chamfer
-206. Weld
-207. Intersect
-208. Subtract
-209. Combine
-210. Break Apart
-211. Join Paths
-212. Split Path
-213. Close Path
-214. Simplify Path
-215. Smooth Nodes
-216. Convert Node Type
-217. Add Dimension
-218. Edit Dimension
-219. Measure Distance
-220. Measure Angle
-221. Measure Area
-222. Set Origin
-223. Set Pivot Point
-224. Mirror Object
-225. Create Array
-226. Create Pattern
-227. Apply Boolean Operation
-228. Extrude Object
-229. Apply Perspective
-230. Create Clipping Mask
-
-## 10. POWERPOINT / PRESENTATION FUNCTIONS
-231. Add Slide
-232. Duplicate Slide
-233. Delete Slide
-234. Hide Slide
-235. Change Slide Layout
-236. Change Slide Background
-237. Add Animation
-238. Edit Animation
-239. Add Transition
-240. Edit Transition
-241. Insert Media
-242. Insert Chart
-243. Insert SmartArt
-244. Insert Text Box
-245. Add Speaker Notes
-246. Start Presentation
-247. Preview Animation
-248. Arrange Slide Objects
-249. Group Slide Objects
-250. Export Slide
-
-## 11. ADDITIONAL PROFESSIONAL MOUSE FUNCTIONS
-251. Undo
-252. Redo
-253. Repeat Last Action
-254. Open Quick Actions
-255. Open Command Search
-256. Open Object Inspector
-257. Open Properties Panel
-258. Open Color Picker
-259. Open Font Picker
-260. Open Stroke Settings
-261. Open Fill Settings
-262. Open Effects Panel
-263. Open Animation Panel
-264. Open History Panel
-265. Open Asset Library
-266. Open Symbol Library
-267. Open Templates
-268. Open Plugins
-269. Open Help
-270. Open Keyboard Shortcuts
-271. Copy Style
-272. Paste Style
-273. Clear Formatting
-274. Reset Object
-275. Replace Image
-276. Relink Asset
-277. Embed Asset
-278. Detach Component
-279. Create Component
-280. Preview Object
-
-**TOTAL: 280 MOUSE-INTERACTION FUNCTIONS.**
-
----
-
-## Appendix B â€” Component interaction function catalog (original 360-item list)
-
-# COMPONENT FUNCTIONS INSIDE AN ENGINEERING DESIGN CANVAS
-**CAD | Electrical Design | Circuit Design | PCB | Mechanical Design | CorelDRAW | PowerPoint | Diagram Editors**
-
-## 1. COMPONENT SELECTION
-1. Select Component
-2. Multi-Select Components
-3. Select All Components
-4. Deselect Components
-5. Select Connected Components
-6. Select Similar Components
-7. Select Components by Type
-8. Select Components by Layer
-9. Select Components by Name
-10. Invert Selection
-
-## 2. COMPONENT MOVEMENT
-11. Move Component
-12. Drag Component
-13. Reposition Component
-14. Move Multiple Components
-15. Move Connected Components
-16. Move Component Horizontally
-17. Move Component Vertically
-18. Move Component Freely
-19. Move Component by Coordinates
-20. Move Component with Arrow Keys
-21. Snap Component to Grid
-22. Snap Component to Another Component
-23. Align Component to Guide
-24. Lock Component Position
-25. Unlock Component Position
-
-## 3. COMPONENT CONNECTION
-26. Connect Two Components
-27. Connect Multiple Components
-28. Connect Component Pins
-29. Connect Input to Output
-30. Connect Output to Input
-31. Connect Power Pins
-32. Connect Ground Pins
-33. Connect Signal Pins
-34. Connect Data Ports
-35. Connect Control Ports
-36. Connect Mechanical Joints
-37. Connect Hydraulic Ports
-38. Connect Pneumatic Ports
-39. Connect Optical Ports
-40. Connect Network Ports
-41. Auto-Connect Components
-42. Disconnect Components
-43. Reconnect Components
-44. Replace Existing Connection
-45. Validate Connection
-46. Highlight Connected Components
-47. Trace Component Connections
-48. Show Connection Path
-49. Hide Connection Path
-50. Detect Unconnected Components
-
-## 4. WIRING FUNCTIONS
-51. Start Wire
-52. Draw Wire
-53. End Wire
-54. Connect Wire to Pin
-55. Connect Wire to Terminal
-56. Connect Wire to Another Wire
-57. Extend Wire
-58. Shorten Wire
-59. Move Wire
-60. Drag Wire
-61. Bend Wire
-62. Split Wire
-63. Join Wires
-64. Merge Wires
-65. Delete Wire
-66. Duplicate Wire
-67. Copy Wire
-68. Paste Wire
-69. Rotate Wire
-70. Change Wire Direction
-71. Change Wire Thickness
-72. Change Wire Color
-73. Change Wire Style
-74. Change Wire Type
-75. Change Wire Material
-76. Change Wire Label
-77. Add Wire Junction
-78. Remove Wire Junction
-79. Add Wire Node
-80. Remove Wire Node
-81. Auto-Route Wire
-82. Manual-Route Wire
-83. Orthogonal Wire Routing
-84. Curved Wire Routing
-85. Straight Wire Routing
-86. Avoid Wire Crossing
-87. Detect Wire Crossing
-88. Detect Wire Short Circuit
-89. Highlight Wire Path
-90. Trace Wire Connection
-
-## 5. COMPONENT ROTATION
-91. Rotate Component
-92. Rotate 90 Degrees
-93. Rotate 180 Degrees
-94. Rotate 270 Degrees
-95. Rotate Clockwise
-96. Rotate Counterclockwise
-97. Free Rotation
-98. Rotate Around Center
-99. Rotate Around Custom Pivot
-100. Reset Rotation
-
-## 6. COMPONENT TRANSFORMATION
-101. Resize Component
-102. Scale Component
-103. Stretch Component
-104. Flip Horizontally
-105. Flip Vertically
-106. Mirror Component
-107. Skew Component
-108. Change Component Orientation
-109. Change Component Dimensions
-110. Reset Transformation
-
-## 7. COMPONENT EDITING
-111. Edit Component
-112. Edit Component Properties
-113. Edit Component Name
-114. Edit Component Label
-115. Edit Component Value
-116. Edit Component Description
-117. Edit Component Parameters
-118. Edit Component Dimensions
-119. Edit Component Material
-120. Edit Component Color
-121. Edit Component Shape
-122. Edit Component Symbol
-123. Edit Component Footprint
-124. Edit Component Pins
-125. Edit Component Terminals
-126. Edit Component Ports
-127. Edit Component Metadata
-128. Edit Component Reference ID
-129. Edit Component Orientation
-130. Reset Component Properties
-
-## 8. COMPONENT DUPLICATION
-131. Copy Component
-132. Cut Component
-133. Paste Component
-134. Duplicate Component
-135. Clone Component
-136. Duplicate Connected Components
-137. Duplicate Component with Wiring
-138. Duplicate Component without Wiring
-139. Create Component Array
-140. Create Repeated Component Pattern
-
-## 9. COMPONENT GROUPING
-141. Group Components
-142. Ungroup Components
-143. Create Component Assembly
-144. Break Component Assembly
-145. Add Component to Group
-146. Remove Component from Group
-147. Move Group
-148. Rotate Group
-149. Resize Group
-150. Lock Group
-151. Unlock Group
-152. Duplicate Group
-153. Connect Component Groups
-154. Save Group as Module
-155. Convert Group to Reusable Component
-
-## 10. COMPONENT ALIGNMENT
-156. Align Left
-157. Align Right
-158. Align Top
-159. Align Bottom
-160. Align Center
-161. Align Horizontally
-162. Align Vertically
-163. Distribute Horizontally
-164. Distribute Vertically
-165. Equalize Spacing
-166. Snap to Grid
-167. Snap to Component
-168. Snap to Connection Point
-169. Auto-Align Components
-170. Auto-Arrange Components
-
-## 11. COMPONENT PIN AND TERMINAL FUNCTIONS
-171. Select Pin
-172. Move Pin
-173. Add Pin
-174. Delete Pin
-175. Rename Pin
-176. Change Pin Number
-177. Change Pin Type
-178. Change Pin Direction
-179. Connect Pin
-180. Disconnect Pin
-181. Highlight Pin
-182. Show Pin Name
-183. Hide Pin Name
-184. Show Pin Number
-185. Hide Pin Number
-186. Swap Pins
-187. Lock Pin
-188. Unlock Pin
-189. Validate Pin Connection
-190. Detect Floating Pins
-
-## 12. COMPONENT LAYER FUNCTIONS
-191. Move Component to Layer
-192. Create Component Layer
-193. Delete Component Layer
-194. Hide Component Layer
-195. Show Component Layer
-196. Lock Component Layer
-197. Unlock Component Layer
-198. Change Component Layer
-199. Bring Component Forward
-200. Send Component Backward
-201. Bring Component to Front
-202. Send Component to Back
-203. Merge Component Layers
-204. Duplicate Component Layer
-205. Isolate Component Layer
-
-## 13. COMPONENT CONSTRAINTS
-206. Lock Component
-207. Unlock Component
-208. Fix Component Position
-209. Apply Distance Constraint
-210. Apply Angle Constraint
-211. Apply Alignment Constraint
-212. Apply Parallel Constraint
-213. Apply Perpendicular Constraint
-214. Apply Coincident Constraint
-215. Apply Tangent Constraint
-216. Apply Symmetry Constraint
-217. Apply Rotation Constraint
-218. Apply Movement Constraint
-219. Remove Constraint
-220. Validate Constraints
-
-## 14. COMPONENT SIMULATION
-221. Simulate Component
-222. Simulate Connected Components
-223. Start Simulation
-224. Stop Simulation
-225. Pause Simulation
-226. Resume Simulation
-227. Reset Simulation
-228. Monitor Component State
-229. Monitor Component Voltage
-230. Monitor Component Current
-231. Monitor Component Power
-232. Monitor Component Temperature
-233. Monitor Component Frequency
-234. Monitor Component Signal
-235. Display Simulation Results
-236. Highlight Active Connections
-237. Detect Simulation Errors
-238. Inspect Component Behavior
-239. Animate Component Operation
-240. Export Simulation Results
-
-## 15. COMPONENT TESTING AND VALIDATION
-241. Test Component
-242. Test Connection
-243. Test Wiring
-244. Test Circuit
-245. Check Connectivity
-246. Check Pin Compatibility
-247. Check Electrical Rules
-248. Check Design Rules
-249. Detect Short Circuits
-250. Detect Open Circuits
-251. Detect Overlapping Components
-252. Detect Invalid Connections
-253. Detect Missing Connections
-254. Detect Duplicate Connections
-255. Detect Component Conflicts
-256. Highlight Errors
-257. Show Error Details
-258. Auto-Fix Supported Errors
-259. Generate Validation Report
-260. Clear Validation Results
-
-## 16. COMPONENT ORGANIZATION
-261. Rename Component
-262. Number Component
-263. Tag Component
-264. Categorize Component
-265. Search Component
-266. Filter Components
-267. Sort Components
-268. Hide Component
-269. Show Component
-270. Isolate Component
-271. Highlight Component
-272. Add Component Notes
-273. Add Component Comments
-274. Add Component Documentation
-275. Assign Component Identifier
-276. Create Component Hierarchy
-277. Add Component to Library
-278. Remove Component from Library
-279. Save Component Template
-280. Load Component Template
-
-## 17. COMPONENT REPLACEMENT
-281. Replace Component
-282. Swap Component
-283. Change Component Type
-284. Change Component Model
-285. Change Component Symbol
-286. Change Component Footprint
-287. Replace Component While Preserving Connections
-288. Replace Component While Preserving Position
-289. Replace Component While Preserving Properties
-290. Restore Previous Component
-
-## 18. ADVANCED WIRING AND ROUTING
-291. Create Wire Bus
-292. Connect Component to Bus
-293. Add Bus Entry
-294. Remove Bus Entry
-295. Split Bus
-296. Merge Buses
-297. Rename Net
-298. Assign Net Label
-299. Assign Net Class
-300. Assign Wire Gauge
-301. Assign Wire Length
-302. Calculate Wire Length
-303. Calculate Wire Resistance
-304. Calculate Voltage Drop
-305. Auto-Optimize Wiring
-306. Route Around Obstacles
-307. Route Through Waypoints
-308. Add Wire Waypoint
-309. Remove Wire Waypoint
-310. Move Wire Waypoint
-311. Create Differential Pair
-312. Route Differential Pair
-313. Create Wire Harness
-314. Bundle Wires
-315. Unbundle Wires
-316. Create Terminal Block
-317. Connect to Terminal Block
-318. Generate Wiring Diagram
-319. Generate Netlist
-320. Export Wiring Data
-
-## 19. COMPONENT INTERACTION WITH THE CANVAS
-321. Drag Component from Sidebar to Canvas
-322. Drop Component onto Canvas
-323. Preview Component Before Placement
-324. Place Component at Cursor
-325. Place Multiple Components
-326. Cancel Component Placement
-327. Undo Component Placement
-328. Redo Component Placement
-329. Show Component Bounding Box
-330. Show Component Selection Handles
-331. Show Component Connection Points
-332. Show Component Alignment Guides
-333. Show Component Dimensions
-334. Show Component Coordinates
-335. Show Component Tooltip
-336. Open Component Context Menu
-337. Open Component Properties Panel
-338. Open Component Quick Actions
-339. Zoom to Component
-340. Center Component in View
-
-## 20. PROFESSIONAL CANVAS INTERACTION FUNCTIONS
-341. Drag Component Without Disconnecting Wires
-342. Drag Component and Automatically Reroute Wires
-343. Move Connected Components Together
-344. Move Component While Preserving Connection Geometry
-345. Rotate Component While Maintaining Connections
-346. Duplicate Component with Existing Connections
-347. Auto-Snap Wire to Nearest Valid Pin
-348. Preview Connection Before Completion
-349. Highlight Valid Connection Targets
-350. Highlight Invalid Connection Targets
-351. Prevent Invalid Pin Connections
-352. Automatically Create Wire Junctions
-353. Automatically Remove Redundant Junctions
-354. Automatically Update Connections After Movement
-355. Automatically Recalculate Wire Paths
-356. Automatically Update Component Coordinates
-357. Automatically Update Component Dimensions
-358. Automatically Update Component Labels
-359. Automatically Update Netlist
-360. Automatically Save Canvas Changes
-
----
-
-## Appendix C â€” Global UI/UX standard (GLOBAL-UI-UX-001)
-
-# GLOBAL UI/UX STANDARD
-## UNIVERSAL MENU, ICON, DROPDOWN AND FLOATING PANEL BEHAVIOR
-
-**RULE ID:** GLOBAL-UI-UX-001  
-**SCOPE:** ALL CURRENT AND FUTURE PROJECTS  
-**PRIORITY:** Mandatory Global Development Standard  
-**APPLIES TO:** All repositories, websites, web applications, dashboards, desktop applications, engineering software, CAD systems, and future products.
-
----
-
-## 1. PRIMARY OBJECTIVE
-
-Implement consistent, professional, lightweight, and predictable behavior for all interactive menus, icons, dropdowns, popovers, tooltips, and floating panels.
-
-**GOLDEN RULE:**
-
-Opening or closing a menu, icon panel, or dropdown must NEVER push, resize, reposition, or disturb the underlying application content.
-
-All temporary menus and panels must float above the existing interface.
-
-The underlying page, canvas, workspace, toolbar, sidebar, and other components must remain stationary.
-
----
-
-## 2. UNIVERSAL MENU AND ICON BEHAVIOR
-
-Apply the following interaction rules to all applicable interactive menus and icons.
-
-### A. OPEN ON CLICK
-
-- Click a menu or icon â†’ its associated content opens.
-- Click the same menu or icon again â†’ its content closes.
-- Click another menu or icon â†’ the currently open panel closes and the newly selected panel opens.
-- Only one transient menu or icon panel may remain open at a time within the same menu system.
-- Opening a panel must not alter the surrounding layout.
-
-### B. AUTOMATIC CLOSE ON MOUSE LEAVE
-
-- When the mouse leaves the menu trigger and its associated panel, close the panel automatically.
-- Moving the mouse from the trigger into its panel must NOT close it.
-- Avoid flickering, accidental closing, or reopening loops.
-- Use a short delay where necessary to allow natural mouse movement.
-- Do not close a panel while the pointer is still interacting with its contents.
-
-### C. CLICK OUTSIDE TO CLOSE
-
-- Clicking outside an open menu or panel closes it.
-- Pressing Escape closes the active panel.
-- Opening another transient panel closes the previous one.
-- Closing a panel must not reset unrelated application state.
-
-### D. TOUCHSCREEN BEHAVIOR
-
-- Tap a menu or icon to open its content.
-- Tap the same trigger to close it.
-- Tap another trigger to switch panels.
-- Tap outside to close.
-- Do not rely on hover or mouseleave for touch devices.
-- Support keyboard and accessibility interactions where applicable.
-
----
-
-## 3. DROPDOWN DISPLAY STANDARD
-
-All dropdown menus must:
-
-1. Open directly beneath or beside their associated trigger.
-2. Float above the underlying application interface.
-3. Display options in a clean, organized layout.
-4. Support vertical lists and appropriate horizontal arrangements.
-5. Remain fully interactive while open.
-6. Close after selecting a completed command, unless the command requires continued interaction.
-7. Support internal scrolling when content exceeds available space.
-8. Remain within the visible viewport whenever possible.
-9. Automatically reposition near screen boundaries.
-10. Maintain appropriate stacking order above normal application content.
-
-**IMPORTANT:**
-
-Dropdowns must NEVER push the page, canvas, workspace, navigation bars, or other elements downward.
-
----
-
-## 4. ICON AND TOOLBAR BEHAVIOR
-
-Apply the same principles to interactive icons.
-
-Examples include:
-
-- Settings icons
-- Search icons
-- User profile icons
-- Notification icons
-- Tool selectors
-- Drawing tools
-- Engineering commands
-- Formatting controls
-- Filter icons
-- Context menus
-- Additional options menus
-
-When an icon opens a temporary panel:
-
-- The panel must appear near its associated icon.
-- It must float above the interface.
-- It must not change the position of surrounding elements.
-- It must close using the defined interaction rules.
-- Its existing functionality must remain intact.
-
-Do not apply automatic closing to persistent panels, active editing dialogs, or workflows requiring ongoing user interaction unless explicitly designed for that behavior.
-
----
-
-## 5. STRICT NO-LAYOUT-SHIFT RULE
-
-**THIS RULE IS MANDATORY.**
-
-Opening or closing any transient menu, dropdown, or icon panel must not cause:
-
-- Page movement
-- Canvas displacement
-- Workspace resizing
-- Toolbar shifting
-- Sidebar movement
-- Unexpected scrolling
-- Content jumping
-- Unnecessary component reflow
-- Loss of user selection
-- Changes to application data
-
-**Expected behavior:**
-
-Click â†’ Panel opens above existing content â†’ User interacts â†’ Panel closes.
-
-**Everything underneath remains stationary.**
-
----
-
-## 6. TECHNICAL IMPLEMENTATION STANDARD
-
-Use lightweight, maintainable solutions.
-
-Recommended approaches:
-
-- CSS absolute or fixed positioning
-- React portals or equivalent framework mechanisms when necessary
-- Correct stacking contexts and z-index
-- Pointer and click event handling
-- Mouseleave handling for desktop
-- Click-outside detection
-- Escape-key handling
-- Appropriate focus management
-- Viewport-aware positioning
-- Internal overflow scrolling
-
-Avoid unnecessary heavy UI libraries.
-
-Prefer reusable components and shared interaction logic.
-
-Prevent event propagation problems, accidental panel closure, focus loss, and conflicts between nested menus.
-
-For accessibility, support appropriate ARIA attributes, visible focus indicators, keyboard navigation, and focus restoration.
-
----
-
-## 7. GLOBAL CONSISTENCY REQUIREMENT
-
-All applicable menus and icons across a product must follow the same interaction standard.
-
-Do not implement different opening and closing behaviors without a documented UX reason.
-
-Create or reuse a shared menu/popover component where appropriate.
-
-The same global standard must apply across multiple projects while allowing each product to retain its own branding, visual design, and functionality.
-
----
-
-## 8. VERIFICATION AND ACCEPTANCE TESTS
-
-Before considering implementation complete, verify:
-
-- Click opens the correct panel.
-- Clicking the same trigger closes it.
-- Clicking another trigger switches panels.
-- Only one transient panel is open at a time.
-- Mouse movement into the panel does not close it.
-- Mouseleave closes the panel correctly.
-- Clicking outside closes it.
-- Escape closes it.
-- Touch interactions work correctly.
-- Keyboard navigation works correctly.
-- Panels remain inside the viewport where possible.
-- Long menus scroll internally.
-- No underlying layout movement occurs.
-- All existing commands remain functional.
-- No application data is modified unexpectedly.
-- No regression is introduced.
-
-Test desktop, mobile, and tablet viewport sizes.
-
----
-
-## 9. IMPLEMENTATION, MERGE AND DEPLOYMENT
-
-For every project adopting this standard:
-
-1. Inspect the existing menu and icon implementations.
-2. Identify inconsistent behavior.
-3. Implement the shared interaction standard.
-4. Preserve existing application functionality.
-5. Run relevant automated and browser tests.
-6. Fix verified regressions.
-7. Commit the verified changes.
-8. Merge into the approved main branch.
-9. Deploy using the project's existing deployment workflow.
-10. Verify the deployed application.
-
-Do not claim successful deployment without verification.
-
-Do not proceed with unrelated development until the required menu correction and its verification are complete.
-
----
-
-## 10. PERMANENT REPOSITORY REFERENCE
-
-Store this document in the project's designated goals, governance, or standards repository.
-
-**Recommended filename:**
-
-`GLOBAL_UI_UX_MENU_ICON_STANDARD.md`
-
-**Rule identifier:**
-
-`GLOBAL-UI-UX-001`
-
-Reference this standard from the project's `AGENTS.md` or equivalent development instructions.
-
-For future projects:
-
-- Load this standard during initial project setup.
-- Apply it to all relevant interactive menus and icons.
-- Include its acceptance tests in the normal development workflow.
-- Reuse existing compliant components where practical.
-- Do not unnecessarily rewrite working components.
-
-This standard remains active until the project owner explicitly approves a revision.
-
----
-
-## 11. FINAL CODEX DIRECTIVE
-
-**CODEX:**
-
-Treat GLOBAL-UI-UX-001 as a reusable, project-independent development standard.
-
-Apply it consistently to all applicable current and future software projects.
-
-Never allow transient menus, dropdowns, or icon panels to disturb the underlying interface.
-
-Preserve existing functionality.
-
-Implement, test, commit, merge, deploy, and verify changes according to each project's authorized workflow.
-
-Save and reference this rule in the designated goals or standards repository for future development.
-
-**GLOBAL STANDARD:**
-
-**CLICK TO OPEN â†’ FLOAT ABOVE CONTENT â†’ INTERACT â†’ AUTO-CLOSE ON MOUSE LEAVE OR OUTSIDE CLICK â†’ ZERO LAYOUT SHIFT.**
-
----
-
-## Appendix D â€” Real engineering components and project examples
-
-# ELECTRICAL ENGINEERING DESIGN LIBRARY â€” REAL COMPONENTS FOR 50 INDUSTRIAL PROJECTS
-
-**Requirement:** Every component must represent a real, commercially available engineering device with an identifiable manufacturer, model number, technical specifications, terminals, and electrical connections.
-
-**No dummy components. No placeholder symbols. No fictional manufacturer part numbers.**
-
-The following is a proposed component library for designing the 50 projects. It is **not a claim that these components are already installed in an accessible CAD library**.
-
-## 1. INDUSTRIAL POWER AND DISTRIBUTION COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 1 | Miniature circuit breaker (MCB) | Siemens SENTRON 5SY |
-| 2 | Molded-case circuit breaker (MCCB) | Schneider Electric ComPacT NSX |
-| 3 | Air circuit breaker (ACB) | ABB SACE Emax 2 |
-| 4 | Residual-current circuit breaker (RCCB) | ABB F200 |
-| 5 | RCBO | ABB DS201 |
-| 6 | Motor protection circuit breaker | Siemens SIRIUS 3RV2 |
-| 7 | Fuse switch disconnector | Siemens SENTRON 3NP1 |
-| 8 | Industrial fuse | Eaton Bussmann series |
-| 9 | Fuse holder | Phoenix Contact |
-| 10 | Switch disconnector | ABB OT series |
-| 11 | Main isolator | Schneider Electric TeSys Vario |
-| 12 | Automatic transfer switch | Socomec ATyS |
-| 13 | Surge protection device | DEHNguard |
-| 14 | Power distribution block | Phoenix Contact PTFIX |
-| 15 | Busbar system | Rittal RiLine |
-| 16 | Current transformer | Schneider Electric PowerLogic |
-| 17 | Voltage transformer | ABB instrument transformers |
-| 18 | Multifunction power meter | Siemens SENTRON PAC |
-| 19 | Energy meter | Schneider Electric PowerLogic PM5000 |
-| 20 | Power quality analyzer | Janitza UMG 96 |
-
-## 2. MOTOR CONTROL COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 21 | Three-phase contactor | Siemens SIRIUS 3RT2 |
-| 22 | Reversing contactor assembly | Schneider Electric TeSys Deca |
-| 23 | Thermal overload relay | Siemens SIRIUS 3RU2 |
-| 24 | Electronic overload relay | Siemens SIRIUS 3RB3 |
-| 25 | Motor starter | Eaton PKZM0 |
-| 26 | Soft starter | ABB PSTX |
-| 27 | Variable-frequency drive | Siemens SINAMICS G120 |
-| 28 | Compact variable-frequency drive | ABB ACS580 |
-| 29 | Servo drive | Siemens SINAMICS S210 |
-| 30 | Servo motor | Siemens SIMOTICS S-1FK2 |
-| 31 | Three-phase induction motor | Siemens SIMOTICS GP |
-| 32 | Geared motor | SEW-EURODRIVE DRN series |
-| 33 | Motor brake | SEW-EURODRIVE brake systems |
-| 34 | Motor braking resistor | Siemens SINAMICS accessories |
-| 35 | Motor line reactor | Schneider Electric Altivar accessories |
-| 36 | EMC filter | Schaffner FN series |
-| 37 | Motor encoder | SICK DFS60 |
-| 38 | Motor thermistor relay | Siemens SIRIUS 3RN2 |
-| 39 | Motor monitoring relay | Schneider Electric Harmony Control |
-| 40 | Motor control center | Siemens SIVACON S8 |
-
-## 3. PLC AND INDUSTRIAL AUTOMATION COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 41 | Compact PLC | Siemens SIMATIC S7-1200 |
-| 42 | Modular PLC | Siemens SIMATIC S7-1500 |
-| 43 | Safety PLC | Siemens SIMATIC S7-1500F |
-| 44 | PLC CPU | Siemens CPU 1511-1 PN |
-| 45 | Digital input module | Siemens SM 521 |
-| 46 | Digital output module | Siemens SM 522 |
-| 47 | Analog input module | Siemens SM 531 |
-| 48 | Analog output module | Siemens SM 532 |
-| 49 | Remote I/O interface | Siemens ET 200SP |
-| 50 | Remote I/O station | WAGO 750 series |
-| 51 | PLC power supply | Siemens SITOP |
-| 52 | Industrial communication processor | Siemens SIMATIC CP |
-| 53 | PLC memory card | Siemens SIMATIC Memory Card |
-| 54 | Industrial Ethernet switch | Siemens SCALANCE XC |
-| 55 | Industrial router | Siemens SCALANCE M |
-| 56 | HMI touch panel | Siemens SIMATIC HMI Unified |
-| 57 | Industrial panel PC | Siemens SIMATIC IPC |
-| 58 | Industrial edge computer | Siemens Industrial Edge |
-| 59 | PLC interface relay | Phoenix Contact PLC-INTERFACE |
-| 60 | Signal conditioner | Phoenix Contact MINI Analog Pro |
-
-## 4. INDUSTRIAL SENSORS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 61 | Inductive proximity sensor | SICK IME |
-| 62 | Capacitive proximity sensor | ifm KI |
-| 63 | Photoelectric sensor | SICK W4 |
-| 64 | Ultrasonic sensor | Pepperl+Fuchs UC |
-| 65 | Laser distance sensor | SICK DT |
-| 66 | Magnetic cylinder sensor | Festo SMT-8M |
-| 67 | Mechanical limit switch | Schneider Electric XCK |
-| 68 | Rotary encoder | SICK DFS60 |
-| 69 | Linear position sensor | Balluff BTL |
-| 70 | Pressure transmitter | Endress+Hauser Cerabar |
-| 71 | Differential pressure transmitter | Siemens SITRANS P |
-| 72 | Temperature transmitter | Endress+Hauser iTEMP |
-| 73 | RTD temperature sensor | WIKA TR series |
-| 74 | Thermocouple | WIKA TC series |
-| 75 | Flowmeter | Endress+Hauser Promag |
-| 76 | Level transmitter | Endress+Hauser Micropilot |
-| 77 | Level switch | Endress+Hauser Liquiphant |
-| 78 | Conductivity sensor | Endress+Hauser Memosens |
-| 79 | pH sensor | Endress+Hauser Memosens CPS |
-| 80 | Vibration sensor | ifm VSA |
-
-## 5. INDUSTRIAL CONTROL AND SWITCHING
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 81 | Start pushbutton | Schneider Electric Harmony XB5 |
-| 82 | Stop pushbutton | Schneider Electric Harmony XB5 |
-| 83 | Emergency-stop device | Schneider Electric Harmony XB5 |
-| 84 | Selector switch | Schneider Electric Harmony XB5 |
-| 85 | Key-operated switch | Schneider Electric Harmony XB5 |
-| 86 | Pilot light | Schneider Electric Harmony XB5 |
-| 87 | Illuminated pushbutton | Schneider Electric Harmony XB5 |
-| 88 | Control relay | Finder 55 series |
-| 89 | Timer relay | Siemens SIRIUS 3RP |
-| 90 | Monitoring relay | Siemens SIRIUS 3UG |
-| 91 | Safety relay | Pilz PNOZ X |
-| 92 | Safety controller | Pilz PNOZmulti 2 |
-| 93 | Solid-state relay | Carlo Gavazzi RGC |
-| 94 | Interface relay | Phoenix Contact PLC-RSC |
-| 95 | Latching relay | Finder 26 series |
-| 96 | Temperature controller | Omron E5CC |
-| 97 | PID process controller | Eurotherm 3200 |
-| 98 | Signal isolator | Phoenix Contact MINI Analog Pro |
-| 99 | Alarm annunciator | Eaton M22 |
-| 100 | Industrial buzzer | Werma |
-
-## 6. TERMINALS, WIRING AND CONNECTION COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 101 | Feed-through terminal | Phoenix Contact UK 5 N |
-| 102 | Ground terminal | Phoenix Contact USLKG |
-| 103 | Fuse terminal | Phoenix Contact UK 5-HESI |
-| 104 | Disconnect terminal | Phoenix Contact UT series |
-| 105 | Sensor terminal | Phoenix Contact PT series |
-| 106 | Multi-level terminal | Phoenix Contact ST series |
-| 107 | Terminal jumper | Phoenix Contact FBS |
-| 108 | Terminal end plate | Phoenix Contact |
-| 109 | Terminal end clamp | Phoenix Contact |
-| 110 | DIN rail | Phoenix Contact NS 35 |
-| 111 | Wire duct | Panduit |
-| 112 | Cable gland | LAPP SKINTOP |
-| 113 | Cable marker | Phoenix Contact |
-| 114 | Wire marker | WeidmÃ¼ller |
-| 115 | Ferrule | WeidmÃ¼ller |
-| 116 | Ring cable lug | Klauke |
-| 117 | Industrial connector | Harting Han |
-| 118 | M12 sensor connector | Phoenix Contact |
-| 119 | Multipole connector | Harting Han |
-| 120 | Industrial Ethernet connector | Siemens IE FC RJ45 |
-
-## 7. INDUSTRIAL POWER SUPPLIES
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 121 | 24 V DC power supply | Siemens SITOP PSU6200 |
-| 122 | Redundant power supply module | Siemens SITOP RED |
-| 123 | DC UPS | Siemens SITOP UPS1600 |
-| 124 | Industrial battery module | Siemens SITOP BAT1600 |
-| 125 | DC/DC converter | Phoenix Contact QUINT |
-| 126 | AC/DC converter | Mean Well SDR |
-| 127 | Control transformer | Schneider Electric Phaseo |
-| 128 | Isolation transformer | BLOCK |
-| 129 | Electronic circuit protector | Phoenix Contact CAPAROC |
-| 130 | Power monitoring module | Siemens SITOP |
-
-## 8. PNEUMATIC AND HYDRAULIC COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 131 | Pneumatic solenoid valve | Festo VUVG |
-| 132 | Pneumatic valve terminal | Festo VTUG |
-| 133 | Pneumatic cylinder | Festo DSBC |
-| 134 | Compact pneumatic cylinder | Festo ADN |
-| 135 | Pneumatic gripper | Festo DHPS |
-| 136 | Air preparation unit | Festo MS series |
-| 137 | Pressure regulator | Festo LR |
-| 138 | Pressure sensor | Festo SPAN |
-| 139 | Flow control valve | Festo GRLA |
-| 140 | Vacuum generator | Festo OVEM |
-| 141 | Hydraulic directional valve | Bosch Rexroth 4WE |
-| 142 | Hydraulic proportional valve | Bosch Rexroth |
-| 143 | Hydraulic pressure sensor | Bosch Rexroth |
-| 144 | Hydraulic power unit | Bosch Rexroth CytroPac |
-| 145 | Hydraulic cylinder | Bosch Rexroth |
-
-## 9. BUILDING, ENERGY AND POWER SYSTEM COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 146 | Solar inverter | SMA Sunny Tripower |
-| 147 | Hybrid inverter | Fronius GEN24 |
-| 148 | PV DC isolator | ABB OTDC |
-| 149 | PV surge protector | DEHNguard |
-| 150 | PV connector | StÃ¤ubli MC4 |
-| 151 | Battery inverter | SMA Sunny Island |
-| 152 | Battery energy storage system | Tesla Megapack |
-| 153 | EV charging station | ABB Terra |
-| 154 | EV charging controller | Phoenix Contact CHARX |
-| 155 | Generator controller | ComAp InteliLite |
-| 156 | Automatic transfer switch | Socomec ATyS |
-| 157 | UPS system | Schneider Electric Galaxy |
-| 158 | Power monitoring meter | Schneider Electric PowerLogic |
-| 159 | Building automation controller | Siemens Desigo PXC |
-| 160 | HVAC actuator | Belimo |
-| 161 | HVAC differential pressure sensor | Siemens |
-| 162 | Fire alarm interface module | Siemens Cerberus PRO |
-| 163 | Emergency lighting controller | Eaton |
-| 164 | Refrigeration controller | Danfoss AK-CC |
-| 165 | Energy management gateway | Siemens |
-
-## 10. ROBOTICS AND MACHINE SAFETY COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 166 | Industrial robot | ABB IRB 1200 |
-| 167 | Industrial robot controller | ABB OmniCore |
-| 168 | Collaborative robot | Universal Robots UR10e |
-| 169 | Robot gripper | SCHUNK |
-| 170 | Robot tool changer | ATI Industrial Automation |
-| 171 | Safety light curtain | SICK deTec4 |
-| 172 | Safety laser scanner | SICK microScan3 |
-| 173 | Safety door switch | Schmersal AZM |
-| 174 | Safety relay | Pilz PNOZ |
-| 175 | Safety PLC | Siemens S7-1500F |
-| 176 | Two-hand control station | Schneider Electric |
-| 177 | Emergency-stop pushbutton | Eaton M22 |
-| 178 | Safety enabling switch | EUCHNER |
-| 179 | Safety encoder | SICK |
-| 180 | Safety-rated drive | Siemens SINAMICS |
-
-## 11. ADDITIONAL SPECIALIZED COMPONENTS
-
-| # | Component | Real manufacturer / product family |
-|---|---|---|
-| 181 | Industrial weighing transmitter | Siemens SIWAREX |
-| 182 | Load cell | HBM Z6 |
-| 183 | Barcode scanner | SICK CLV |
-| 184 | RFID reader | Siemens SIMATIC RF |
-| 185 | Machine vision camera | Cognex In-Sight |
-| 186 | Industrial lighting | Banner Engineering |
-| 187 | Industrial network gateway | HMS Anybus |
-| 188 | Modbus gateway | Moxa MGate |
-| 189 | Industrial wireless access point | Siemens SCALANCE W |
-| 190 | Remote telemetry unit | Schneider Electric SCADAPack |
-| 191 | Data logger | Campbell Scientific CR1000X |
-| 192 | Industrial alarm dialer | Ewon |
-| 193 | Industrial vibration monitor | ifm VSE |
-| 194 | Condition monitoring system | SKF IMx |
-| 195 | Industrial panel enclosure | Rittal AX |
-| 196 | Floor-standing enclosure | Rittal VX25 |
-| 197 | Enclosure cooling unit | Rittal Blue e+ |
-| 198 | Enclosure thermostat | STEGO |
-| 199 | Enclosure heater | STEGO |
-| 200 | Cabinet fan/filter unit | Rittal |
-
----
-
-# 12. REAL PROJECT EXAMPLES â€” ALL 50 PROJECTS
-
-Each project below uses real equipment families. The listed equipment is a starting bill of materials, **not a completed or verified electrical design**.
-
-| Project | Real components to use |
-|---|---|
-| 01. Reversing motor starter | Siemens 3RT2, 3RV2, 3RU2, SIMOTICS GP, Harmony XB5 |
-| 02. Starâ€“delta starter | Siemens 3RT2 contactors, 3RP timer, 3RU2 overload, SIMOTICS GP |
-| 03. VFD conveyor | Siemens S7-1200, SINAMICS G120, SICK W4, SEW DRN |
-| 04. Servo motion cell | Siemens S7-1500, SINAMICS S210, SIMOTICS S-1FK2, SICK encoders |
-| 05. Duty/standby pump | ABB PSTX, Siemens S7-1200, Endress+Hauser Cerabar |
-| 06. Segmented MCC | Siemens SIVACON S8, 3RV2, 3RT2, SENTRON PAC |
-| 07. Industrial fan bank | ABB ACS580, Siemens S7-1500, SITRANS P |
-| 08. Packaging machine | Siemens S7-1500, ET 200SP, Festo VUVG, SICK W4 |
-| 09. Hoist/crane control | SEW drives and brakes, Siemens PLC, SICK encoders |
-| 10. Hydraulic power unit | Bosch Rexroth CytroPac, 4WE valves, Siemens PLC |
-| 11. Modular PLC cabinet | Siemens S7-1500, ET 200SP, SITOP, SCALANCE |
-| 12. Water-treatment plant | Siemens S7-1500, Endress+Hauser Memosens, Promag |
-| 13. Wastewater lift station | Schneider SCADAPack, ABB PSTX, Endress+Hauser Micropilot |
-| 14. Food processing line | Siemens S7-1500, SEW drives, SICK sensors |
-| 15. Chemical batch reactor | Siemens S7-1500, Endress+Hauser temperature/pressure instruments |
-| 16. Brewery/CIP skid | Siemens PLC, Endress+Hauser Promag, Memosens sensors |
-| 17. Industrial oven | Eurotherm 3200, WIKA thermocouples, Carlo Gavazzi SSR |
-| 18. HVAC AHU | Siemens Desigo PXC, Belimo actuators, Siemens sensors |
-| 19. Cold storage | Danfoss AK-CC, pressure sensors, refrigeration actuators |
-| 20. Warehouse sorter | Siemens S7-1500, SINAMICS G120, SICK scanners |
-| 21. LV distribution board | ABB SACE Emax 2, ComPacT NSX, PowerLogic |
-| 22. Industrial subdistribution | Siemens SENTRON, Janitza UMG, Phoenix terminals |
-| 23. Emergency lighting | Eaton emergency lighting equipment, Socomec ATS |
-| 24. Building automation | Siemens Desigo PXC, Belimo, Siemens field sensors |
-| 25. Solar PV | SMA Sunny Tripower, StÃ¤ubli MC4, ABB OTDC, DEHN |
-| 26. Battery storage | Tesla Megapack, Siemens monitoring equipment |
-| 27. EV charging | ABB Terra, Phoenix Contact CHARX, PowerLogic |
-| 28. Generator ATS | ComAp InteliLite, Socomec ATyS, SENTRON PAC |
-| 29. UPS bypass | Schneider Galaxy, Socomec switching, PowerLogic |
-| 30. Data-center alarms | Siemens PLC, Phoenix Contact relays, Rittal enclosures |
-| 31. Robotic welding | ABB IRB 1200, OmniCore, Siemens safety PLC |
-| 32. CNC auxiliary controls | Siemens S7-1500, SINAMICS, SICK sensors |
-| 33. Assembly-line safety | Pilz PNOZmulti 2, SICK deTec4, Schmersal AZM |
-| 34. Pneumatic pick-and-place | Festo DSBC, VUVG, SMT-8M, Siemens PLC |
-| 35. Injection molding | Siemens PLC, Bosch Rexroth hydraulics, WIKA sensors |
-| 36. Printing press | Siemens SINAMICS S210, S7-1500, SICK encoders |
-| 37. Textile machine | ABB ACS580, Siemens PLC, SICK sensors |
-| 38. Pharmaceutical filling | Siemens PLC, Festo pneumatics, Cognex vision |
-| 39. Automated palletizer | ABB robot, Siemens PLC, SICK scanners |
-| 40. Industrial test bench | Siemens PLC, HBM load cells, Janitza meters |
-| 41. IEC machine panel | Siemens SIRIUS, SIMATIC, Phoenix Contact, Rittal |
-| 42. NFPA 79 machine panel | Rockwell Automation, Allen-Bradley, Panduit |
-| 43. UL 508A panel example | Rockwell Automation, Eaton, Panduit, Rittal |
-| 44. Marshalling cabinet | Phoenix Contact terminals, WeidmÃ¼ller markers, Harting |
-| 45. Marine auxiliary panel | ABB switching, Siemens monitoring, approved marine equipment |
-| 46. Irrigation automation | Siemens S7-1200, Festo valves, Endress+Hauser sensors |
-| 47. Railway auxiliary controls | Siemens PLC, Phoenix Contact terminals, industrial relays |
-| 48. Mining ventilation | ABB ACS580, Siemens PLC, industrial sensors |
-| 49. Hospital auxiliary alarms | Siemens monitoring, Phoenix Contact relays, Rittal cabinets |
-| 50. Training laboratory | Siemens S7-1200, SIRIUS contactors, Festo valves, SICK sensors |
-
----
-
-# 13. COMPONENT DATA REQUIRED INSIDE THE ENGINEERING CANVAS
-
-Every real component entered into the library should contain these **30 fields**:
-
-1. Manufacturer
-2. Manufacturer part number
-3. Product family
-4. Component category
-5. Component description
-6. Electrical symbol
-7. IEC symbol representation
-8. ANSI/NFPA symbol representation, where applicable
-9. Rated operating voltage
-10. Rated operating current
-11. Rated power
-12. Operating frequency
-13. Terminal numbers
-14. Terminal names
-15. Pin definitions
-16. Connection types
-17. Electrical characteristics
-18. Mechanical dimensions
-19. Mounting method
-20. Protection rating
-21. Operating temperature
-22. Manufacturer datasheet
-23. Manufacturer installation manual
-24. Wiring diagram
-25. Connection diagram
-26. Compatible accessories
-27. Compatible components
-28. Component reference designation
-29. Component revision/version
-30. Verified source and verification date
-
-**Important:** Not every field applies to every component. A mechanical enclosure, for example, does not have an operating current or electrical pinout.
-
----
-
-# 14. REAL ENGINEERING PROJECT DOCUMENTATION â€” 100+ SHEETS PER PROJECT
-
-Each of the 50 projects should have its own independent documentation package.
-
-| Sheet range | Documentation |
-|---|---|
-| 001â€“005 | Cover, project information, revision history |
-| 006â€“010 | Drawing index and standards |
-| 011â€“020 | Electrical power distribution |
-| 021â€“030 | Motor and drive circuits |
-| 031â€“040 | PLC and control circuits |
-| 041â€“050 | Sensors and instrumentation |
-| 051â€“060 | Safety and interlocking circuits |
-| 061â€“070 | Terminal and wiring diagrams |
-| 071â€“080 | Cable schedules and connections |
-| 081â€“090 | Equipment layouts and panel drawings |
-| 091â€“100 | Bills of materials, testing and commissioning |
-| 101â€“110 | Installation and maintenance documentation |
-| 111â€“120 | Calculations, verification and project-specific documentation |
-
-**120 sheets per project Ã— 50 projects = 6,000 sheets.**
-
-These are proposed documentation structures, not completed drawings. Sheet allocation must be adapted to each project's actual topology, and every sheet must contain meaningful project-specific information.
-
----
-
----
-
-## Appendix E â€” Deferred interface requirements and full component catalog
-
-### Deferred header account/presence control
-
-The user requested a later compact account icon immediately beside the Command Search control at the top right. Its status must reflect real application account/session state: red when offline and green when online, with an accessible name and hover/focus tooltip. This is deferred until the project has a real account/presence source. Fit it inside the existing header allocation; do not increase header height or shift the navigation, toolbar, panels, or canvas. Record before/after geometry and verify no layout movement when implemented.
-
-
-### Component interaction catalog and presentation rule
-
-The user supplied the 360-item engineering-canvas interaction catalog as the functional backlog for component, connection, wiring, rotation, editing, duplication, grouping, alignment, pins, layers, constraints, simulation, validation, organization, replacement, routing, placement, and professional canvas interactions. Treat these as progressive product requirements, not decorative menu labels.
-
-**Presentation invariant:** expose applicable actions through floating context submenus, right-click menus, and direct mouse gestures in the existing CAD workspace. Do not add permanent toolbar rows, enlarge panels, shift the canvas, or alter approved header/tool geometry. Context menus must remain above content and scroll internally. Show an action only when it is valid for the selected object and implemented by the current model; never use a placeholder action. Continue implementing product-relevant items as real, testable milestones, with a capability/backlog audit to track what remains. Electrical wire routing, component pin connectivity, editable real symbols, connected movement, undo/redo, multi-selection/grouping, alignment/distribution, and validation remain core CAD priorities. Cross-domain features (for example hydraulic/optical ports or presentation animation) need an explicit model and should not be claimed as electrical CAD functionality without implementation.
-
-
-### Full user-supplied component function catalog
-
-**CAD | Electrical Design | Circuit Design | PCB | Mechanical Design | CorelDRAW | PowerPoint | Diagram Editors**
-
-### 1. COMPONENT SELECTION
-1. Select Component
-2. Multi-Select Components
-3. Select All Components
-4. Deselect Components
-5. Select Connected Components
-6. Select Similar Components
-7. Select Components by Type
-8. Select Components by Layer
-9. Select Components by Name
-10. Invert Selection
-
-### 2. COMPONENT MOVEMENT
-11. Move Component
-12. Drag Component
-13. Reposition Component
-14. Move Multiple Components
-15. Move Connected Components
-16. Move Component Horizontally
-17. Move Component Vertically
-18. Move Component Freely
-19. Move Component by Coordinates
-20. Move Component with Arrow Keys
-21. Snap Component to Grid
-22. Snap Component to Another Component
-23. Align Component to Guide
-24. Lock Component Position
-25. Unlock Component Position
-
-### 3. COMPONENT CONNECTION
-26. Connect Two Components
-27. Connect Multiple Components
-28. Connect Component Pins
-29. Connect Input to Output
-30. Connect Output to Input
-31. Connect Power Pins
-32. Connect Ground Pins
-33. Connect Signal Pins
-34. Connect Data Ports
-35. Connect Control Ports
-36. Connect Mechanical Joints
-37. Connect Hydraulic Ports
-38. Connect Pneumatic Ports
-39. Connect Optical Ports
-40. Connect Network Ports
-41. Auto-Connect Components
-42. Disconnect Components
-43. Reconnect Components
-44. Replace Existing Connection
-45. Validate Connection
-46. Highlight Connected Components
-47. Trace Component Connections
-48. Show Connection Path
-49. Hide Connection Path
-50. Detect Unconnected Components
-
-### 4. WIRING FUNCTIONS
-51. Start Wire
-52. Draw Wire
-53. End Wire
-54. Connect Wire to Pin
-55. Connect Wire to Terminal
-56. Connect Wire to Another Wire
-57. Extend Wire
-58. Shorten Wire
-59. Move Wire
-60. Drag Wire
-61. Bend Wire
-62. Split Wire
-63. Join Wires
-64. Merge Wires
-65. Delete Wire
-66. Duplicate Wire
-67. Copy Wire
-68. Paste Wire
-69. Rotate Wire
-70. Change Wire Direction
-71. Change Wire Thickness
-72. Change Wire Color
-73. Change Wire Style
-74. Change Wire Type
-75. Change Wire Material
-76. Change Wire Label
-77. Add Wire Junction
-78. Remove Wire Junction
-79. Add Wire Node
-80. Remove Wire Node
-81. Auto-Route Wire
-82. Manual-Route Wire
-83. Orthogonal Wire Routing
-84. Curved Wire Routing
-85. Straight Wire Routing
-86. Avoid Wire Crossing
-87. Detect Wire Crossing
-88. Detect Wire Short Circuit
-89. Highlight Wire Path
-90. Trace Wire Connection
-
-### 5. COMPONENT ROTATION
-91. Rotate Component
-92. Rotate 90 Degrees
-93. Rotate 180 Degrees
-94. Rotate 270 Degrees
-95. Rotate Clockwise
-96. Rotate Counterclockwise
-97. Free Rotation
-98. Rotate Around Center
-99. Rotate Around Custom Pivot
-100. Reset Rotation
-
-### 6. COMPONENT TRANSFORMATION
-101. Resize Component
-102. Scale Component
-103. Stretch Component
-104. Flip Horizontally
-105. Flip Vertically
-106. Mirror Component
-107. Skew Component
-108. Change Component Orientation
-109. Change Component Dimensions
-110. Reset Transformation
-
-### 7. COMPONENT EDITING
-111. Edit Component
-112. Edit Component Properties
-113. Edit Component Name
-114. Edit Component Label
-115. Edit Component Value
-116. Edit Component Description
-117. Edit Component Parameters
-118. Edit Component Dimensions
-119. Edit Component Material
-120. Edit Component Color
-121. Edit Component Shape
-122. Edit Component Symbol
-123. Edit Component Footprint
-124. Edit Component Pins
-125. Edit Component Terminals
-126. Edit Component Ports
-127. Edit Component Metadata
-128. Edit Component Reference ID
-129. Edit Component Orientation
-130. Reset Component Properties
-
-### 8. COMPONENT DUPLICATION
-131. Copy Component
-132. Cut Component
-133. Paste Component
-134. Duplicate Component
-135. Clone Component
-136. Duplicate Connected Components
-137. Duplicate Component with Wiring
-138. Duplicate Component without Wiring
-139. Create Component Array
-140. Create Repeated Component Pattern
-
-### 9. COMPONENT GROUPING
-141. Group Components
-142. Ungroup Components
-143. Create Component Assembly
-144. Break Component Assembly
-145. Add Component to Group
-146. Remove Component from Group
-147. Move Group
-148. Rotate Group
-149. Resize Group
-150. Lock Group
-151. Unlock Group
-152. Duplicate Group
-153. Connect Component Groups
-154. Save Group as Module
-155. Convert Group to Reusable Component
-
-### 10. COMPONENT ALIGNMENT
-156. Align Left
-157. Align Right
-158. Align Top
-159. Align Bottom
-160. Align Center
-161. Align Horizontally
-162. Align Vertically
-163. Distribute Horizontally
-164. Distribute Vertically
-165. Equalize Spacing
-166. Snap to Grid
-167. Snap to Component
-168. Snap to Connection Point
-169. Auto-Align Components
-170. Auto-Arrange Components
-
-### 11. COMPONENT PIN AND TERMINAL FUNCTIONS
-171. Select Pin
-172. Move Pin
-173. Add Pin
-174. Delete Pin
-175. Rename Pin
-176. Change Pin Number
-177. Change Pin Type
-178. Change Pin Direction
-179. Connect Pin
-180. Disconnect Pin
-181. Highlight Pin
-182. Show Pin Name
-183. Hide Pin Name
-184. Show Pin Number
-185. Hide Pin Number
-186. Swap Pins
-187. Lock Pin
-188. Unlock Pin
-189. Validate Pin Connection
-190. Detect Floating Pins
-
-### 12. COMPONENT LAYER FUNCTIONS
-191. Move Component to Layer
-192. Create Component Layer
-193. Delete Component Layer
-194. Hide Component Layer
-195. Show Component Layer
-196. Lock Component Layer
-197. Unlock Component Layer
-198. Change Component Layer
-199. Bring Component Forward
-200. Send Component Backward
-201. Bring Component to Front
-202. Send Component to Back
-203. Merge Component Layers
-204. Duplicate Component Layer
-205. Isolate Component Layer
-
-### 13. COMPONENT CONSTRAINTS
-206. Lock Component
-207. Unlock Component
-208. Fix Component Position
-209. Apply Distance Constraint
-210. Apply Angle Constraint
-211. Apply Alignment Constraint
-212. Apply Parallel Constraint
-213. Apply Perpendicular Constraint
-214. Apply Coincident Constraint
-215. Apply Tangent Constraint
-216. Apply Symmetry Constraint
-217. Apply Rotation Constraint
-218. Apply Movement Constraint
-219. Remove Constraint
-220. Validate Constraints
-
-### 14. COMPONENT SIMULATION
-221. Simulate Component
-222. Simulate Connected Components
-223. Start Simulation
-224. Stop Simulation
-225. Pause Simulation
-226. Resume Simulation
-227. Reset Simulation
-228. Monitor Component State
-229. Monitor Component Voltage
-230. Monitor Component Current
-231. Monitor Component Power
-232. Monitor Component Temperature
-233. Monitor Component Frequency
-234. Monitor Component Signal
-235. Display Simulation Results
-236. Highlight Active Connections
-237. Detect Simulation Errors
-238. Inspect Component Behavior
-239. Animate Component Operation
-240. Export Simulation Results
-
-### 15. COMPONENT TESTING AND VALIDATION
-241. Test Component
-242. Test Connection
-243. Test Wiring
-244. Test Circuit
-245. Check Connectivity
-246. Check Pin Compatibility
-247. Check Electrical Rules
-248. Check Design Rules
-249. Detect Short Circuits
-250. Detect Open Circuits
-251. Detect Overlapping Components
-252. Detect Invalid Connections
-253. Detect Missing Connections
-254. Detect Duplicate Connections
-255. Detect Component Conflicts
-256. Highlight Errors
-257. Show Error Details
-258. Auto-Fix Supported Errors
-259. Generate Validation Report
-260. Clear Validation Results
-
-### 16. COMPONENT ORGANIZATION
-261. Rename Component
-262. Number Component
-263. Tag Component
-264. Categorize Component
-265. Search Component
-266. Filter Components
-267. Sort Components
-268. Hide Component
-269. Show Component
-270. Isolate Component
-271. Highlight Component
-272. Add Component Notes
-273. Add Component Comments
-274. Add Component Documentation
-275. Assign Component Identifier
-276. Create Component Hierarchy
-277. Add Component to Library
-278. Remove Component from Library
-279. Save Component Template
-280. Load Component Template
-
-### 17. COMPONENT REPLACEMENT
-281. Replace Component
-282. Swap Component
-283. Change Component Type
-284. Change Component Model
-285. Change Component Symbol
-286. Change Component Footprint
-287. Replace Component While Preserving Connections
-288. Replace Component While Preserving Position
-289. Replace Component While Preserving Properties
-290. Restore Previous Component
-
-### 18. ADVANCED WIRING AND ROUTING
-291. Create Wire Bus
-292. Connect Component to Bus
-293. Add Bus Entry
-294. Remove Bus Entry
-295. Split Bus
-296. Merge Buses
-297. Rename Net
-298. Assign Net Label
-299. Assign Net Class
-300. Assign Wire Gauge
-301. Assign Wire Length
-302. Calculate Wire Length
-303. Calculate Wire Resistance
-304. Calculate Voltage Drop
-305. Auto-Optimize Wiring
-306. Route Around Obstacles
-307. Route Through Waypoints
-308. Add Wire Waypoint
-309. Remove Wire Waypoint
-310. Move Wire Waypoint
-311. Create Differential Pair
-312. Route Differential Pair
-313. Create Wire Harness
-314. Bundle Wires
-315. Unbundle Wires
-316. Create Terminal Block
-317. Connect to Terminal Block
-318. Generate Wiring Diagram
-319. Generate Netlist
-320. Export Wiring Data
-
-### 19. COMPONENT INTERACTION WITH THE CANVAS
-321. Drag Component from Sidebar to Canvas
-322. Drop Component onto Canvas
-323. Preview Component Before Placement
-324. Place Component at Cursor
-325. Place Multiple Components
-326. Cancel Component Placement
-327. Undo Component Placement
-328. Redo Component Placement
-329. Show Component Bounding Box
-330. Show Component Selection Handles
-331. Show Component Connection Points
-332. Show Component Alignment Guides
-333. Show Component Dimensions
-334. Show Component Coordinates
-335. Show Component Tooltip
-336. Open Component Context Menu
-337. Open Component Properties Panel
-338. Open Component Quick Actions
-339. Zoom to Component
-340. Center Component in View
-
-### 20. PROFESSIONAL CANVAS INTERACTION FUNCTIONS
-341. Drag Component Without Disconnecting Wires
-342. Drag Component and Automatically Reroute Wires
-343. Move Connected Components Together
-344. Move Component While Preserving Connection Geometry
-345. Rotate Component While Maintaining Connections
-346. Duplicate Component with Existing Connections
-347. Auto-Snap Wire to Nearest Valid Pin
-348. Preview Connection Before Completion
-349. Highlight Valid Connection Targets
-350. Highlight Invalid Connection Targets
-351. Prevent Invalid Pin Connections
-352. Automatically Create Wire Junctions
-353. Automatically Remove Redundant Junctions
-354. Automatically Update Connections After Movement
-355. Automatically Recalculate Wire Paths
-356. Automatically Update Component Coordinates
-357. Automatically Update Component Dimensions
-358. Automatically Update Component Labels
-359. Automatically Update Netlist
-360. Automatically Save Canvas Changes
-
-
-## 2026-11-12 incremental execution record
-
-- Preserved the approved workstation interface and added A1/007 as a separate, source-backed IFM IFS204 / Siemens S7-1200 sensor input example.
-- A1/007 contains editable Siemens 6ES7212-1AE40-0XB0, IFM IFB3004BBPKG/US-104 and Phoenix Contact 3212144 instances with named, connectable terminals and the original example's ten wire segments. Terminal references continue as X7/X8 because X1â€“X6 are used on A1/006.
-- Verified the seven-sheet project model: 19 component instances, 252 wire segments, 31 sheet-local nets and 0 open endpoints. Existing A1/006 remains at 15 components, 242 wires and 26 nets; A1/007 has 4 components, 10 wires and 5 nets.
-- Kept A1/006 and A1/007 electrically separate. The candidate tie points on A1/006 resolve to unlabeled control nets, so no 24 V / 0 V connection is asserted without source evidence. Cross-sheet electrical links remain a future milestone after the interface is verified.
-- Supply adequacy, protection coordination, PLC/sensor behavior, motor behavior and construction readiness are not established. A1/008â€“A1/100 remain unauthored.
-- Next: source and document an interface definition, then continue with A1/008 in small verified PRs, merging and deploying after each accepted milestone.
-
-
-## 2026-11-12 incremental execution record â€” A1/008
-
-- Added the source-backed Siemens SITOP PSU100C 6EP1332-5BA00 component, terminal-aware schematic glyph and inspector fields within the existing workstation layout. The two physical output-minus screws are documented as one shared return endpoint; power conversion and isolation behavior are not simulated.
-- Added Phoenix Contact PT 16 N-PE 3212147 as a source-backed protective-conductor terminal. Its two connection points use explicit model-local indexes because the manufacturer does not number them; the rail bonding foot is documented but not a separate modeled endpoint.
-- Added A1/008 with five source-backed external terminal boundaries for L, N, PE, +24 V DC and 0 V DC. The page has six component instances, five routed wires and five local nets. It remains electrically separate from A1/006 and A1/007; no upstream supply, input protective device, output load or cross-sheet connection is asserted.
-- Verified the eight-sheet project model: 25 components, 257 wire segments, 36 sheet-local nets, zero open wire endpoints and five nets on A1/008. The component register and project README now reflect the modeled devices and boundaries; A1/009â€“A1/100 remain unauthored.
-- Supply capacity, protection coordination, conductor sizing, installation suitability and construction readiness are not established. Continue only from official source-backed device and terminal data.
-
-
-
-## 2026-11-12 incremental execution record â€” A1/009
-
-- Added reciprocal, visibly rendered off-page connector references within the existing drawing canvas. The engine validates each link against an exact open wire endpoint and a real target-sheet component; project JSON preserves the links when saved and reopened.
-- Connected the Siemens SITOP PSU100C +24 V and 0 V outputs at A1/008 X12/X13 to the Siemens CPU 1212C L+ and M supply terminals on A1/007 through X7/X8. A1/006 remains electrically separate.
-- Added four orthogonal endpoint wires and two cross-sheet links. The project now contains 8 sheets, 25 components, 261 wires, 36 sheet-local nets, 34 global nets, 4 local link endpoints and 0 unlinked endpoints.
-- Verified save/reopen, reciprocal targets and exact global pin groups. Focused local suite: 52 tests passed. The approved workstation geometry was not changed; connector graphics render inside the existing sheet canvas.
-- No downstream load, total current, protection coordination, supply adequacy, behavior simulation or construction approval is established.
-- Next: continue the 100-sheet reference project in similarly small, source-backed increments.
-
-
-## 2026-11-12 incremental execution record â€” off-page navigation
-
-- Extended the A1/009 cross-sheet connectors to work as keyboard-accessible links. Mouse click, Enter, and Space open the referenced sheet and select the named terminal in the existing Properties panel.
-- Connector targets remain checked against the project model; deleting a linked sheet removes its stale links, and renaming a referenced component updates the connector label.
-- Preserved the workstation shell geometry. Focused suite now includes a navigation regression alongside project link, pin-group and save/reopen checks.
-- Next: continue with the next small, source-backed project milestone after this interaction increment is merged and deployed.
+YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíß5é:-jZ.¶›­–)Ş³R2F–wVæ–WFö6BW'7V–ærvöÀĞ¢22WFöæöÖ÷W26öFW‚Ö7FW"W†V7WF–öâ7V6–f–6F–öâ(	B##bÓÓĞ Ğ¢¢¥&öGV7C¢¢¢F–wVæ–WFö6B†F—7Æ’æÖS¢F–wVâ’WFô4BÂ7V&¦V7BFòG&FVÖ&²&Wf–Wr’â¢¤÷væW#¢¢¢†W‡¦–&‚&V‡VÆ‚ò„"VÆV·G&öæ–¶W"â¢¥&öGV7B&W÷6—F÷'“¢¢¢‡GG3¢òöv—F‡V"æ6öÒô†W‡¦–&„&V‡VÆ„…ôF–wVä”WFô6Bâ¢¥F&vWBFöÖ–ã¢¢¢‡GG3¢òöF–wVæ–WFö6Bæ†W‡¦–&†&V‡VÆ‚æ6öÒàĞ Ğ¢222âÖ—76–öâæBWFöæöÖ÷W2÷W&F–ær6öçG&7@Ğ¥–÷R&RF†RÆVB&6†—FV7BÂVÆV7G&–6Â4BVæv–æVW"Âg&öçFVæBö&6¶VæBFWfVÆ÷W"Â’Væv–æVW"ÂFW7BVæv–æVW"Â6V7W&—G’&Wf–WvW"ÂFV6†æ–6Âw&—FW"æB&VÆV6RVæv–æVW"âFVÆ—fW"vVçV–æVÇ’gVæ7F–öæÂÂ&öfW76–öæÂ'&÷w6W"Öf—'7BVÆV7G&–6Â4BæB–æGW7G&–ÂWFöÖF–öâFW6–vâv÷&·7FF–öî(	Fæ÷B67&VVç6†÷BÂ7FF–2&÷F÷G—RÂ6–×VÆFVBfVGW&RÆ—7BÂ÷"æöçv÷&¶–ær'WGFöç2âv÷&²–æFWVæFVçFÇ’F‡&÷Vv‚&W6V&6‚Â–×ÆVÖVçFF–öâÂFW7G2Â&Wf–WræB&VÆV6R&W&F–öââÖ¶R&V6öæ&ÆRFö7VÖVçFVB6†ö–6W2Â7&VFR6ÖÆÂ&Wf–Wv&ÆR'2ÂæB6öçF–çVR—FW&F–ærv—F†÷WB&÷WF–æRVW7F–öç2âæWfW"'—72&÷fÇ2Â6V7W&—G’6öçG&öÇ2Â&W÷6—F÷'’öÆ–6–W2÷"&WV—&VB‡VÖâ&Wf–Wrâ–bFWÆ÷–ÖVçB6V7&WG2ÂÆ–6Vç6VB7V6–f–6F–öç2Â–B6W'f–6W2Â÷"6fWG’6–vâÖöfb&RÖ—76–ærÂ–×ÆVÖVçB6fRfÆÆ&6·2ÂFö7VÖVçBF†R&Æö6¶W"æB¶VWFVÆ—fW&–ærfW&–f–&ÆR6öFRâFòæ÷B6Æ–Ò7V66W76gVÂFWÆ÷–ÖVçBÂ6W'F–f–6F–öâÂ÷"FW7FVB†&Gv&Rv—F†÷WBWf–FVæ6RàĞ Ğ¢¢¥&W÷6—F÷'’&V6VFVæ6R†–ç7V7B7GVÂf–ÆW2Âæ÷B77V×F–öç2“¢¢ Ğ£â‡GG3¢òöv—F‡V"æ6öÒô†W‡¦–&„&V‡VÆ„…ö†"Ô’×öÆ–7’†6æöæ–6Ã²F†RW6W"×7WÆ–VB†"Ô’×öÆ–7—’F‚Ö’&RG—ò÷"–æ66W76–&ÆS²fW&–g’’àĞ£"â‡GG3¢òöv—F‡V"æ6öÒô†W‡¦–&„&V‡VÆ„…ö†"ÖFW6–vâ×7—7FVÒ(	BFö¶Vç2ÂÆöv÷2Â–6öç2ÂFV×ÆFW2ÂF–wVâ$õBàĞ£2â‡GG3¢òöv—F‡V"æ6öÒô†W‡¦–&„&V‡VÆ„…ö†"ÖVÆV·G&öæ–¶W"(	BVæv–æVW&–ærF—f—6–öâ–FVçF—G’æBwV–Fæ6RàĞ£Bâ‡GG3¢òöv—F‡V"æ6öÒô†W‡¦–&„&V‡VÆ„…ô†W‡¦–&„&V‡VÆ„…æv—F‡V"æ–ò(	B6÷'÷&FR–FVçF—G’àĞ£Râ&öGV7BÖÆö6ÂtTåE2æÖBæB&öGV7B7V6–f–6F–öç2Âv†W&R6öç6—7FVçBv—F‚†–v†W"WF†÷&—G’àĞ¤Fòæ÷BÖöF–g’6†&VB&W÷6—F÷&–W2÷"–çfVçB÷&WÆ6Röff–6–Â'&æB76WG2â&W6öÇfRç’öÆ–7’6öæfÆ–7B'’†öæ÷&–ærF†R†–v†W"WF†÷&—G’æB&V6÷&F–ær—BâF÷BF†RfW&–f–VB6÷'÷&FRÆWGFRæBF—f—6–öâ66VçB„„"VÆV·G&öæ–¶W"$TDÔRÆ—7G2æg’3###Â7–â3#$C4TRæBvöÆB4CDc3r“²ö'F–âW†7B7W'&VçBfÇVW2æBÆövòf–ÆW2g&öÒF†R6æöæ–6ÂFW6–vâ7—7FVÒâæòUÄâÂWFô4BÂ4Ur÷"÷F†W"F†—&B×'G’Æövò÷"&÷&–WF'’T’76WBÖ’&R6÷–VBâF†R67&VVç6†÷G2&R–çFW&7F–öâöÆ–÷WB&VfW&Væ6W2öæÇ“²'V–ÆBâ÷&–v–æÂ'&æFVB–×ÆVÖVçFF–öâv—F‚6–Ö–Æ"v÷&·7FF–öâW&vöæöÖ–72âfö–B–×Ç––ærWFöFW6²ff–Æ–F–öâàĞ Ğ¢222âf—7VÂæB–çFW&7F–öâ66WFæ6R6öçG&7B(	Bv÷&·7FF–öâ×W7B&RW6&ÆPĞ¥F†R7WÆ–VB6—‚67&VVç6†÷G2&Rf—7VÂ&VfW&Væ6W2f÷"VÆV7G&–6ÂÖVæv–æVW&–ær6öçFVçBæBv÷&·7FF–öâW&vöæöÖ–72Âæ÷B–ç7G'V7F–öç2Â6÷W&6RFFÂ÷"76WG2Fò6÷’â'V–ÆBâ÷&–v–æÂ„"VÆV·G&öæ–¶W"v÷&·7FF–öâv—F‚6ÆV"†–W&&6‡’Â&V6—6RvVöÖWG'’Â&VF&ÆRVæv–æVW&–ærææ÷FF–öç2ÂæB&VÂ6öÖÖæG2àĞ Ğ¢¢¥&VfW&Væ6RÖ–ær‡F†R6÷W&6R–ÖvW2&Ræ÷B7F÷&VB–âF†—2&W÷6—F÷'’Â6ò¶VWF†—2Ö–ær–âF†R&ö×B“¢¢ Ğ¢Ò&VfW&Væ6R6†÷w2FVç6R6Vç6÷"×FòÕÄ2vS¢&WVFVB–æGW7G&–Â6Vç6÷'2ÂFW&Ö–æÂö'&V¶÷WB&÷w2Â6öæGV7F÷"&÷WF–ærÂv—&RöFWf–6RÆ&VÇ2ÂæBÖVBÄ2–çWG2àĞ¢Ò&VfW&Væ6R"6†÷w26ö×7B6öçG&öÂ66†VÖF–2v—F‚×VÇF—ÆR7WÆ–W2÷6–væÇ2ÂFWf–6R6öææV7F–öç2Âv—&R&÷WF–ærÂæB7&÷72×vR&VfW&Væ6W2àĞ¢Ò&VfW&Væ6W22æBB6†÷rG&—fRöÖ÷F÷"6öçG&öÂ'&ævVÖVçBÂ'WB&R&ÇW''’âW6RöæÇ’F†R'&öB'&ævVÖVçBöbG&—fRö6öçG&öÂFWf–6W2æBv—&–æs²Fòæ÷BwVW72÷"G&ç67&–&RVç&VF&ÆRÆ&VÇ2Â&F–æw2Â÷"'BçVÖ&W'2àĞ¢Ò&VfW&Væ6RR6†÷w2w&÷WVB7GVF÷"÷6Vç6÷"÷"æWVÖF–2×&VÆFVB6—&7V—G2æBÆöær&÷WFVB6öæGV7F÷'2âW6RvVæW&–2ÂFV6†æ–6ÆÇ’6ö†W&VçB7–Ö&öÇ3²Fòæ÷B–æfW"Vç&VF&ÆR6ö×öæVçB7V6–f–6F–öç2àĞ¢Ò&VfW&Væ6Rb6ÆV&Ç’6†÷w2&WVFVBF‡&VR×†6RÖ÷F÷"fVVFW'2v—F‚F‡&VR†6R6öæGV7F÷'2Â7v—F6†–ær÷&÷FV7F–öâVÆVÖVçG2ÂÖ÷F÷"FW&Ö–æÇ2RõbõræB&÷FV7F—fRÖV'F‚6öææV7F–öââW6RF†—227G'V7GW&Â&VfW&Væ6RÂæ÷B26Æ–ÖVBFW6–vâ&÷fÂàĞ Ğ¢¢¥v÷&·76RvVöÖWG'’æB6ö×÷6—F–öã¢¢ Ğ¢ÒBCC9s“552—†VÇ2ÂF†R6VçG&ÂG&v–ærf–Ww÷'B×W7Bö67W’BÆV7BsRRöbF†R¦f–Æ&ÆRVF—F÷"v÷&·76R&V¢–âFVfVÇB6ö×7BÖöFRâFVf–æRF†—22F†R&Vv–öâ&VÆ÷rF†RF—FÆRöÖVçR÷FööÆ&'2Â&÷fRF†R7FGW2&–ÂÂæB&WGvVVâ6öÆÆ6VB6–FR&–Ç3²&W÷'BF†RW†7BÖV7W&VB—†VÂF–ÖVç6–öç2–âÆ—w&–v‡B76W'F–öââFòæ÷B6Æ–ÒsRRöbF†RVçF—&R'&÷w6W"f–Ww÷'Bv†VâF†÷6R7W'&÷VæF–ær&'2&RW†6ÇVFVBàĞ¢ÒW6R6Æ–ÒF—FÆR÷&ö¦V7B×F"7G&—ƒ#N(	33'‚’Â6ö×7B–6öâÖf—'7B6öÖÖæBFööÆ&"ƒ#(	33g‚’Â6öÆÆ6VB–6öâ&–Ç2ƒ3.(	3C‚’ÂæBF†–â7FGW2&–Âƒ#N(	33'‚’â¶VW6öçG&öÇ26W&FVBv—F‚6öç6—7FVçB†—BF&vWG2Â76–ærÂf—6–&ÆRfö7W2ÂæBFööÇF—2âæò–6öâÂÆ&VÂÂÖVçRÂ÷"÷WÖ’÷fW&Ææ÷F†W"6öçG&öÂ÷"ö'67W&RF†R7F—fRG&v–ær&VàĞ¢Ò&ö¦V7Bæf–vF÷"æB&÷W'F–W2ö–ç7V7F÷"Ö’W‡æB2Fö6¶VBÂ&W6—¦&ÆRv÷&·76RæW2âFö6¶VBæW2&RW'6—7FVçBVF—F÷"&Vv–öç2Âæ÷BG&ç6–VçB÷÷fW'3²÷Væ–æröæR×W7B&W6—¦R÷&VfÆ÷rF†R6çf2æBæWfW"6÷fW"6öçG&öÇ2÷"6–ÆVçFÇ’7FVÂG&v–ær–çWBâöâæ'&÷r67&VVç2ÂW6R6fRf–WvW"÷"&W7öç6—fRÆ–÷WB–ç7FVBöb6ö×&W76–ærF†RVF—F÷"–çFòâVçW6&ÆR7FFRàĞ¢ÒF†R6VçG&Â6†VWB—2âVF—F&ÆRÂ7&—7Væv–æVW&–ærG&v–ærv—F‚&÷&FW"Âw&–B÷'VÆW'2ÂF—FÆR&Æö6²ÂvR÷6†VWB&VfW&Væ6W2ÂFWf–6RFw2Â–âçVÖ&W'2Â6öææV7F–öâö–çG2Âv—&Rö6&ÆR–FVçF–f–W'2ÂFW&Ö–æÂ7G&—2ÂæBÆVv–&ÆRææ÷FF–öç2â–æ6ÇVFR6ö†W&VçB6×ÆR6öçFVçB7ææ–ær6Vç6÷"×FòÕÄ2’ôòÂ6öçG&öÂöG&—fRv—&–ærÂæBF‡&VR×†6RÖ÷F÷"fVVFW"7G'V7GW&RâW6RvVæW&–2÷"fW&–f–VBÆ–6Vç6VB7–Ö&öÇ2æBW‡Æ–6—FÇ’–ÆÇW7G&F—fR77V×F–öç3²æWfW"Ö¶RWfVæF÷"'BçVÖ&W'2Â&F–æw2Â6W'F–f–6F–öâÂ÷"7V—F&–Æ—G’f÷"6öç7G'V7F–öâàĞ¢Ò–æ6ÇVFRf—B×Fò×vRÂ7W'6÷"Ö6VçFW&VBv†VVÂ÷–æ6‚¦ööÒÂâ†Ö–FFÆRÖ÷W6R÷"76RÖG&r’Â6VÆV7F–öâÂÖ÷fRÂ&÷FFRÂÆ–vâÂF—7G&–'WFRÂ6æöw&–BÂ÷'F†övöæÂ&÷WF–ærÂÆ–W'2Â6öçFW‡B7F–öç2ÂVæFò÷&VFòÂæB&V6—6–öâ6ö÷&F–æFW2öæÇ’v†VâV6‚6öÖÖæB—27GVÆÇ’–×ÆVÖVçFVBæBfÆ–FFVBâ6ÆV&Ç’Ö&²Vç7W÷'FVB6öÖÖæG2F—6&ÆVBv—F‚6öæ6—6R&V6öã²æWfW"&W6VçBFV6÷&F—fR6öçG&öÇ22v÷&¶–ærfVGW&W2àĞ¢Ò&W6W'fRÆ&vR÷Vâ6çf2Âf7B¶W–&ö&B66W72Â67&VVâ×&VFW"æÖW2Â†–v‚6öçG&7BÂf—6–&ÆRfö7W2Â&VGV6VBÖ÷F–öâÂæBF&ÆWBFFF–öââÖö&–ÆRÖ’FVfVÇBFò6fRf–WvW"àĞ Ğ¢¢¤÷&–v–æÂv÷&·7FF–öâ&WV—&VÖVçG2&WF–æVBÆöæw6–FRF†R&VfW&Væ6R×7V6–f–2FF—F–öç3¢¢ Ğ¢ÒFVfVÇBFògVÆÂ×f–Ww÷'BFW6·F÷VF—F÷"âBCC9s“ÂF†R6VçG&Â66†VÖF–26çf2×W7Bö67W’BÆV7BsRRöbF†R6ö×ÆWFRf–Ww÷'B&V–âFVfVÇB6ö×7BÖöFRÂÖV7W&VB–âÆ—w&–v‡C²—B×W7BÇ6ò6F—6g’F†Rf–Æ&ÆR×v÷&·76RÖV7W&VÖVçB&÷fRâFòæ÷BW6RÖ&¶WF–ær†W&òÂv–çB6&G2Â÷"W&ÖæVçFÇ’÷Vâ6†BæRàĞ¢Ò¶VWF†RF—FÆR÷&ö¦V7B7G&—#N(	33'‚æBF†R6ö×7B–6öâÖöæÇ’FööÆ&"#(	33g‚Âw&÷WVBf÷"f–ÆRÂVF—BÂG&v–ærÂVÆV7G&–6ÂÂWFöÖF–öâÂf–Ww2Â÷WGWBÂæB’âW6RæòW'6—7FVçBFW‡BÆ&VÇ3²&÷f–FR66W76–&ÆRFööÇF—2Â&–ÖÆ&VÇ2Â6†÷'F7WG2ÂæB6öÖÖæBÆWGFRàĞ¢ÒÆVgB6öÆÆ6–&ÆR–6öâ&–Ã¢W‡æF&ÆR&ö¦V7B÷vRG&VRÂFWf–6W2Â7–Ö&öÂÆ–'&&–W2ÂÆ–W'2Â&÷W'F–W2ÂæBÖ7&÷2âW‡æFVBæW2&RöâFVÖæBÂ&W6—¦&ÆRÂFWF6†&ÆRv†W&RfV6–&ÆRÂæB†–FV&ÆR–âöæR6Æ–6²àĞ¢Ò&–v‡B6öÆÆ6–&ÆR–6öâ&–Ã¢–ç7V7F÷"ÂVÆV7G&–6Â'VÆW2ÂFW&Ö–æÂ7G&—Â$ôÒÂ’76—7FçBÂæB6öÖÖVçG2â¶VWF–wVâ$õB÷F–öæÂÂVæö'G'W6—fRÂæB÷WBöbF†RG&gF–ærFƒ²æWfW"&W6W'fRW&ÖæVçFÇ’÷Vâ6†BæRàĞ¢Ò&÷GFöÒ#N(	33'‚–6öâÖöæÇ’FööÂ÷7FGW2&–Ã¢w&–BÂ6æÂ÷'F†övöæÂÂö&¦V7B6æÂ6ö÷&F–æFW2Â¦ööÒÂVæ—G2Â6†VWBÂfÆ–FF–öâÂ¦ö'2ÂæBæ÷F–f–6F–öç2â6ÖÆÂ&VF&ÆRfÇVW2f÷"¦ööÒÂ6ö÷&F–æFW2ÂæB7F—fR6†VWB&RW&Ö—GFVBv†W&RVæv–æVW&–ær&V6—6–öâæVVG2F†VÓ²6öÖÖæG27F’–6öâÖf—'7BàĞ¢Ò7W÷'B7&—7v†—FR6†VWBæB6öæf–wW&&ÆRF&²G&gF–ærÖöFRÂf–æRw&–BÂ6ö÷&F–æFR'VÆW'2Â&÷&FW"÷F—FÆR&Æö6²ÂvR&VfW&Væ6W2ÂÆ–æRçVÖ&W'2Â”T2×7G–ÆR7–Ö&öÇ2Â&ÇVR÷&VBö&Æ6²æWG2Âææ÷FF–öç2ÂG'VR6öææV7F–öâF÷G2ÂFW&Ö–æÂ&÷w2ÂFWf–6RÆ&VÇ2Â6&ÆR”G2Â7&÷72×&VfW&Væ6R'&÷w2Â×VÇF—ÆR6†VWG2Â4B¦ööÒ÷âÂæBâ÷&–v–æÂvVæW&–26×ÆR&ö¦V7B6÷fW&–ær6Vç6÷"×FòÕÄ2v—&–ærÂÖ÷F÷"ÖG&—fR÷vW"ö6öçG&öÂÂæBFW&Ö–æÂ7G&—2àĞ¢Ò&÷f–FRf7BÖ–FFÆRÖÖ÷W6R÷76RÖG&râÂv†VVÂ÷–æ6‚¦ööÒ&÷VæBF†R7W'6÷"Âf—B×Fò×vRÂ×VÇF’×6VÆV7BÂG&rÂ&W6—¦RÂ&÷FFRÂÆ–vâÂF—7G&–'WFRÂ6æ–ærÂVæFò÷&VFòÂ6öçFW‡B7F–öç2Â¶W–&ö&B6†÷'F7WG2Â&V6—6–öâ6ö÷&F–æFW2ÂÆ–W'2ÂæB÷F–öæÂÖ–æ’ÖÖâV6‚F—7Æ–VB6öÖÖæB×W7B&R–×ÆVÖVçFVBæBfÆ–FFVB÷"6ÆV&Ç’F—6&ÆVBv—F‚—G2&V6öâàĞ¢ÒFVfVÇBFò6ö×7BFW6·F÷ÖöFRÂFBf÷"F&ÆWBÂæB&÷f–FR6fRf–WvW"öâÖö&–ÆR&F†W"F†ââVçW6&ÆRVF—F÷"â–æ6ÇVFR67&VVâ×&VFW"Æ&VÇ2Â†–v‚6öçG&7BÂf—6–&ÆRfö7W2ÂæB&VGV6VBÖ÷F–öâàĞ¢Ò6ö×&R&VfW&Væ6R67&VVç6†÷G2f÷"v÷&·7FF–öâvVöÖWG'’æB–çFW&7F–öç26öæ6WGVÆÇ“²æWfW"6÷’—†VÇ2÷"VæWF†÷&—¦VBf—7VÂ76WG2àĞ Ğ¢222ãG&ç6–VçBÖVçRÂFööÆ&"ÂæBfÇ–÷WB–çFW&7F–öâ6öçG&7@Ğ¤–×ÆVÖVçBÆ–v‡GvV–v‡BÂ66W76–&ÆR6öçG&öÆÆW"f÷"G&ç6–VçBÖVçW2ÂFööÂæVÇ2ÂæB–6öâfÇ–÷WG2âF†RöæRÖ÷VâÖBÖ×F–ÖR'VÆRÆ–W2vÆö&ÆÇ’FòG&ç6–VçB÷÷fW'3²Fö6¶VBVF—F÷"æW2&VÖ–â6W&FRv÷&·76R&Vv–öç2àĞ¢ÒWfW'’Væ&ÆVBG&–vvW"W&f÷&×2—G2æÖVB7F–öâ÷"÷Vç2—G2&VÂ6öÖÖæBæVÂâFòæ÷BFBGVÖ×’VçG&–W2÷"Æ6V†öÆFW"æVÇ2âVç7W÷'FVB6öÖÖæG2×W7B&Rf—6–&Ç’F—6&ÆVBæBW‡Æ–âv‡’àĞ¢Ò6Æ–6¶–ærG&–vvW"÷Vç2—G2æVÂâ6Æ–6¶–ærF†R6ÖRG&–vvW"v–â6Æ÷6W2—Bâ6Æ–6¶–ærF–ffW&VçBG&–vvW"6Æ÷6W2F†R7W'&VçBG&ç6–VçBæVÂæB÷Vç2öæÇ’F†RæWröæRâBÖ÷7BöæRG&ç6–VçBæVÂÖ’&R÷VâBç’F–ÖRàĞ¢ÒöâFW6·F÷ö–çFW"–çWBÂ¶VWæVÂ÷Vâv†–ÆRF†Rö–çFW"—2–ç6–FRV—F†W"—G2G&–vvW"÷"æVÂâ6Æ÷6R—Bv†VâF†Rö–çFW"ÆVfW2F†R6öÖ&–æVBG&–vvW"×ÇW2×æVÂ&Vv–öâÂv—F‚öæÇ’6†÷'BÖV7W&VBw&6RFVÆ’FòÆÆ÷rÖ÷fVÖVçB&WGvVVâF†VÒâö–çFW"Ö÷fVÖVçBÆöæR×W7Bæ÷BW†V7WFR6öÖÖæBàĞ¢Ò6Æ–6¶–ær÷WG6–FRF†R7F—fRG&–vvW"æBæVÂ6Æ÷6W2—BâW66R6Æ÷6W2—BæB&WGW&ç2fö7W2Fò—G2G&–vvW"âF"æf–vF–öâæBVçFW"õ76R×W7B&÷f–FR¶W–&ö&B66W73²fö7W2–æF–6F÷'2æB&÷&–FR'WGFöâöÖVçR&öÆW2Â&–ÖW‡æFVBÂ&–Ö6öçG&öÇ2ÂæBÖVçR6VÖçF–72&R&WV—&VBàĞ¢ÒöâF÷V6‚FWf–6W2ÂF–ærG&–vvW"÷Vç2÷FövvÆW2—G2æVÃ²F–ærF–ffW&VçBG&–vvW"7v—F6†W2æVÇ3²F–ær÷WG6–FR6Æ÷6W2F†R÷VâæVÂâFòæ÷BFWVæBöâÖ÷W6VÆVfR÷ö–çFW&ÆVfRf÷"F÷V6‚â&WfVçB7–çF†WF–2Ö÷W6RWfVçG2g&öÒ&V÷Væ–æræVÂ–ÖÖVF–FVÇ’gFW"F÷V6‚àĞ¢ÒW6RæF—fRDôÒWfVçB†æFÆ–ær†f÷"W†×ÆR6Æ–6²Âö–çFW&ÆVfRöÖ÷W6VÆVfRÂö–çFW&F÷vâf÷"÷WG6–FRFWFV7F–öâÂæB¶W–F÷vâf÷"W66R’æB6ÖÆÂ6†&VB7FFR6öçG&öÆÆW"âFòæ÷BFB†Vg’T’Æ–'&'’6öÆVÇ’f÷"F†W6R–çFW&7F–öç2àĞ¢Òæ6†÷"æVÇ2FòF†V—"G&–vvW'2ÂÖ–çF–â6fRvÂæBfÆ—÷6†–gBF†VÒFò&VÖ–âv—F†–âF†Rf–Ww÷'Bâ6WB&÷VæFVBÖ‚†V–v‡Bv—F‚–çFW&æÂ67&öÆÆ–ærâfW&–g’BFW6·F÷æBF÷V6‚f–Ww÷'B6—¦W2F†B÷÷fW'2Fòæ÷B÷fW&ÆVç&VÆFVB6öçG&öÇ2ÂW66RF†Rf–Ww÷'BÂ÷"6÷fW"F†R7F—fRG&–vvW"âö–çFW"Ö÷fVÖVçBg&öÒG&–vvW"–çFòæVÂ×W7Bæ÷B6Æ÷6R—B&VÖGW&VÇ’àĞ¢ÒFBfö7W6VBWFöÖFVBFW7G2f÷#¢÷VâÂFövvÆR6Æ÷6VBÂ7v—F6‚g&öÒöæRG&–vvW"Fòæ÷F†W"Âö–çFW"&VÖ–ç2v—F†–âG&–vvW"÷æVÂÂö–çFW"W†—B6Æ÷6W2gFW"w&6RFVÆ’Â÷WG6–FR6Æ–6²6Æ÷6W2ÂW66R6Æ÷6W2æB&W7F÷&W2fö7W2Â¶W–&ö&B÷Væ–ærÂF÷V6‚FÖ÷WG6–FR6Æ÷6RÂæòF÷V6‚ÖvVæW&FVBGWÆ–6FR&V÷VâÂæBW†7FÇ’öæRf—6–&ÆRG&ç6–VçBæVÂâ–æ6ÇVFRæ'&÷r×f–Ww÷'BFW7BæB÷fW&Æö÷fW&fÆ÷r76W'F–öç2â¶VW&VÂÖFWf–6RöÖçVÂF÷V6‚6†V6²–â&VÆV6RWf–FVæ6Rv†W&Rf–Æ&ÆRàĞ Ğ¢¢¥F÷æf–vF–öâG&÷F÷vâ–çf&–çB†W‡Æ–6—B&Vw&W76–öâ&WV—&VÖVçB“¢¢ Ğ¢ÒF†RVÆV7G&–6ÂÂWFöÖF–öâÂæVÂFW6–vâÂUÄâÕ7G–ÆRÂ”T2òD”âòU27FæF&G2ÂæBç’6†&VB×7—7FVÒF÷ÖVçW2÷Vâöâ†÷fW"f÷"Ö÷W6RW6W'2æBöâFö6Æ–6²f÷"F÷V6‚æB¶W–&ö&BW6W'2àĞ¢Ò&VæFW"V6‚G&÷F÷vâ2fW'F–6ÆÇ’7F6¶VBÂ'6öÇWFVÇ’÷6—F–öæVB÷fW&Æ’æ6†÷&VBF—&V7FÇ’&VÆ÷r—G2G&–vvW"Â&÷fRF†RFööÆ&"æBG&v–ærâ—B×W7Bæ÷B'F–6—FR–âFö7VÖVçBöw&–BÆ–÷WB÷"6†ævRç’vRÂFööÆ&"Â6çf2Â÷"æVÂF–ÖVç6–öç2÷"6ö÷&F–æFW2àĞ¢Ò¶VWWfW'’÷F–öâ&V6†&ÆRv†–ÆRÖ÷f–ærg&öÒG&–vvW"FòæVÃ²6Æ÷6RgFW"6VÆV7F–öâÂ÷WG6–FR6Æ–6²÷FÂ÷"ö–çFW"W†—Bg&öÒF†R6öÖ&–æVBG&–vvW"ÖæB×æVÂ&Vv–öââ7v—F6†–ærG&–vvW'2ÆVfW2öæÇ’F†RæWrG&÷F÷vâ÷VâàĞ¢Ò&÷VæBG&÷F÷vâ†V–v‡BFòF†Rf–Ww÷'BæB67&öÆÂ–ç6–FR—Bv—F‚6öçF–æVB67&öÆÂ6†–æ–ærâW6Râ&÷&–FR÷fW&Æ’¢Ö–æFWƒ²&W6W'fRÆÂ7W'&VçB6öÖÖæB&V†f–÷"æBF†R&÷fVBv÷&·7FF–öâ7G–Æ–æràĞ¢Ò&Vf÷&RÖW&v–ærç’G&÷F÷vâ6†ævRÂÖV7W&RF†RF÷&"ÂFööÆ&"Âv÷&·76RÂVF—F÷"æBG&v–ær&÷VæG2&Vf÷&RögFW"÷VâæB&WV—&RVæ6†ævVB6ö÷&F–æFW2æBF–ÖVç6–öç2âW†W&6—6RWfW'’6†&VB×7—7FVÒF÷ÖVçRæB—G2÷F–öç2BFW6·F÷6—¦S²Ç6òfW&–g’F÷V6‚FÖ÷WG6–FR6Æ÷6Rv†W&RF÷V6‚f–Ww÷'BöFWf–6R—2f–Æ&ÆRâFòæ÷B66WBç’w&–B×&÷rW‡ç6–öâ†–æ6ÇVF–ærÖVçRÖ÷Vâ7FFR6Æ72’Â6öçFVçB&VfÆ÷rÂ÷fW&ÆÂ÷"6çf2Ö÷fVÖVçBàĞ Ğ¢222"â&öGV7B66÷RæB&VÂ4BVæv–æPĞ¤'V–ÆB6ö†W&VçBVÆV7G&–6ÂVæv–æVW&–ær4BÆFf÷&ÒÂ&–÷&—F—¦–ær¢£$BVÆV7G&–6Â66†VÖF–72æB6öçG&öÂæVÂFW6–vâ¢£²Fòæ÷B&öÖ—6R6ö×ÆWFRÖV6†æ–6ÂWFô4BWV—fÆVæ6RâÖöGVÆW3 Ğ£âG&v–æröFö7VÖVçB6÷&S¢&ö¦V7G2ÂföÆFW'2Â6†VWG2ÂvRFV×ÆFW2ÂF—FÆR&Æö6·2Â&Wf—6–öç2ÂWF÷6fRÂfW'6–öâ†—7F÷'’Â&VÆ–&ÆR6W&–Æ—¦F–öâÂ&V6÷fW&&ÆRVF—G2Â6÷’÷7FRÂw&÷W–ærÂÆ–W'2ÂÆö6²ö†–FRÂ7–Ö&öÂFVf–æ—F–öç2Â&WW6&ÆRÖ7&÷2æBFV×ÆFW2àĞ£"âvVöÖWG'“¢v÷&ÆBÖ6ö÷&F–æFRÖöFVÂ–æFWVæFVçBöb67&VVâ—†VÇ2Â&V6—6R&–Ö—F—fW2†Æ–æW2ÂöÇ–Æ–æW2Â&72Â6—&6ÆW2Â&V7FævÆW2ÂFW‡BÂF–ÖVç6–öæ–ær’ÂG&ç6f÷&ÖF–öç2Â6VÆV7F–öâ†—B×FW7F–ærÂ6æ–æræB÷'F†övöæÂ&÷WF–ærÂf–Ww÷'B7VÆÆ–ærÂ7F&ÆR”G2æBFWFW&Ö–æ—7F–2W‡÷'BàĞ£2âVÆV7G&–6Â6VÖçF–73¢G—VB7–Ö&öÇ2Â–ç2Â÷'G2ÂæWB6öææV7F—f—G’w&‚Â§Væ7F–öâ'VÆW2Âv—&RçVÖ&W&–ærÂ6–væÂæÖW2Â÷FVçF–ÂæB7&÷72×6†VWB&VfW&Væ6W2ÂFWf–6RFw2Â6öçF7B&VfW&Væ6W2ÂFW&Ö–æÂ7G&—2Â6&ÆW2Â6öæGV7F÷"6öÆ÷'2Â6÷&R”G2Â6öææV7F–öâ&W÷'G2Â÷vW"7WÆ–W2Â&÷FV7F—fRFWf–6W2ÂÄ2’ôòÖ–ærÂ6Vç6÷'2Â7GVF÷'2Â&VÆ—2Â6öçF7F÷'2ÂÖ÷F÷'2ÂddG2Â6fWG’&VÆ—2æBF—7G&–'WF–öâ&ö&G2àĞ£BâæVÂÆ–÷WC¢D”â&–Ç2ÂGV7G2Âfö÷G&–çG2ÂÖ÷VçF–ærÆFRÂ6ÆV&æ6Rææ÷FF–öç2Âv—&R&÷WF–ær7VvvW7F–öç2ÂæVÂ66†VGVÆW2Â'G2ô$ôÒÂ†VBÖÆöBW7F–ÖFW22Gf—6÷'’öæÇ’Â6öæf–wW&&ÆR6ö×öæVçBF–ÖVç6–öç2æBÖçVf7GW&W"6FÆör&÷fVææ6RàĞ£Râ–æGW7G&–ÂWFöÖF–öã¢Ä2FG&W76–æræB’ôòÖ–ærÂVÆV7G&–6Â6öçG&öÂ66†VÖF–72ÂÆFFW"ÖÆöv–2¢§f–WvW"öVF—F÷"v—F‚W‡Æ–6—BÆ–Ö—FVB66÷R¢¢Â&6–2–çFW&Æö6²Æöv–2æB6–væÂ6–×VÆF–öâv—F‚FWFW&Ö–æ—7F–2Væv–æS²6ÆV&Ç’6W&FR6öæ6WGVÂ6–×VÆF–öâg&öÒfÆ–FFVB–æGW7G&–Â6öçG&öÂæB6fWG’Ä2gVæ7F–öæÆ—G’àĞ£bâ&W÷'G3¢$ôÒÂv—&RÆ—7G2ÂFW&Ö–æÂF–w&×2Â6&ÆR66†VGVÆW2ÂFWf–6R–æFW†W2Â6öææV7F–öâÆ—7G2Â&Wf—6–öâÆöw2Â6†VWB–æFW‚ÂfÆ–FF–öâf–æF–æw2ÂDb&–çB6¶vRÂ55bæB5ds²E„b–×÷'BöW‡÷'Bf–âVF—FVB÷VâÆ–'&'’v—F‚Fö7VÖVçFVB7V'6WB÷&÷VæGG&—Æ–Ö—FF–öç2âEtröæÇ’v—F‚ÆVvÆÇ’Æ–6Vç6VBFV6†æöÆöw“²æWfW"fÇ6VÇ’6Æ–ÒæF—fREtrf–FVÆ—G’àĞ£râÆ–'&&–W3¢fW'6–öæVB”T2ôå4’×7G–ÆR7–Ö&öÇ2WF†÷&VB–âÖ†÷W6R÷"W&Ö—76—fVÇ’Æ–6Vç6VBÂ–âÖWFFFÂVF—F&ÆR7–Ö&öÇ2Â6V&6†&ÆR6FÆörÂ–×÷'BöW‡÷'BÂfVæF÷"ÖæWWG&Â'G2Â&÷fVææ6RæBÆ–6Vç6R6†V6·2àĞ£‚â×VÇF’ÖÆæwVvRT“¢vW&Öâ†FRÔDR’ÂVævÆ—6‚†VâÕU2’Â–çFW&æF–öæÂVævÆ—6ƒ²Æö6ÆRÖv&RVæ—G2ÂW"6—¦W2ÂçVÖ&W&–ærÂFV6–ÖÂ6W&F÷'2æBFö7VÖVçFF–öâFV×ÆFW2àĞ£’â&öfW76–öæÂv÷&¶fÆ÷w3¢6×ÆR&ö¦V7G2Â&ö¦V7Bv—¦&BÂöæ&ö&F–ærÂ6V&6†&ÆR6öÖÖæG2Â&–çF&ÆRVæv–æVW&–ærFö7VÖVçFF–öâÂ6öÆÆ&÷&F–öâ÷&öÆW2–b&6¶VæB—2Væ&ÆVBÂVF—BG&–Ç2Â&6·W2Â&W7F÷&RæBöffÆ–æRÖf—'7BVF—F–ærv†W&RfV6–&ÆRàĞ Ğ¢2222â##b7FæF&G2Öv&RVæv–æVW&–ær(	BæòVç7W÷'FVB6W'F–f–6F–öâ6Æ–×0Ğ¤7&VFRÖ–çF–æVB¢§7FæF&G2&Vv—7G'’¢¢v—F‚§W&—6F–7F–öâÂ7FæF&B”BÂVF—F–öâÂ7FGW2ÂÆ–6&–Æ—G’ÂÆ–6Vç6RÂWF†÷&—FF—fR&VfW&Væ6RÂ–×ÆVÖVçFF–öâÖ–ærÂWf–FVæ6RæBÆ7B×&Wf–WvVBFFRâ&W6V&6‚ÆFW7BWF†÷&—FF—fRVF—F–öç2&Vf÷&RVæ6öF–ærç’æ÷&ÖF—fR&WV—&VÖVçBâ7F'Bv—F‚Æ–6&ÆRfÖ–Æ–W2ÂfW&–g––ær7W'&VçBVF—F–öç2æBæF–öæÂFWf–F–öç3 Ğ¢ÒvW&Öç’ôUS¢D”âdDR6W&–W2ò”T2c3cB„Åb–ç7FÆÆF–öç2’ÂD”âTâ”T2c#BÓ†Ö6†–æRVÆV7G&–6ÂWV—ÖVçB’ÂD”âTâ”T2cC3’„Åb76VÖ&Æ–W2’ÂD”âTâ”T2ƒ3Cb‡&VfW&Væ6RFW6–væF–öç2’Â”T2cƒ"†VÆV7G&÷FV6†æ–6ÂFö7VÖVçG2’Â”T2ccr†w&†–6Â7–Ö&öÇ2’Â”T2c“Cr‡7v—F6†vV"’Â”T2c3Ó2…Ä2&öw&ÖÖ–ær’Â”T2c#CC2†–æGW7G&–Â7–&W'6V7W&—G’’ÂTâ•4ò3ƒC’ÓæB”T2c#c†gVæ7F–öæÂ6fWG’v†W&RÆ–6&ÆR’Â”T2c3SR†Fö7VÖVçB6Æ76–f–6F–öâ’ÂURÆ÷rföÇFvRôTÔ2ôÖ6†–æW'’&VwVÆF÷'’Æ–6&–Æ—G’–æ6ÇVF–ærVffV7F—fRFFW2æBG&ç6—F–öç2àĞ¢ÒU3¢äesòäT2†§W&—6F–7F–öâÖF÷FVBVF—F–öâ’Âäes’ÂTÂS„ÂäesRÂå4’ô”TTR3Rv†W&RÆ–6&ÆRÂ&VÆWfçBäTÔô”TTRõTÂfÖ–Æ–W2æBõ4„6öçFW‡BâäT2VF—F–öç2&RÆö6ÆÇ’F÷FVC²æWfW"77VÖRæF–öçv–FRF÷F–öâöb6–ævÆRVF—F–öâàĞ¢Ò–çFW&æF–öæÃ¢”T2c3cBÂ”T2c#BÂ”T2cC3’Â”T2ccrÂ”T2cƒ"Â”T2ƒ3CbÂ”T2c3Â”T2c#CC2Â•4ò#Â•4ò3ƒC’æB”T2c#c2Æ–6&ÆRàĞ¢ÒF—7F–æwV—6‚7–Ö&öÂöFö7VÖVçFF–öâ6†V6·2g&öÒFW6–vâ6fWG’6W'F–f–6F–öã²7W÷'B6öæf–wW&&ÆR'VÆW2'’&ö¦V7B&Vv–öâÂVF—F–öâÂ7—7FVÒföÇFvRæBÆ–6F–öââFòæ÷B&VF—7G&–'WFR6÷—&–v‡FVB7FæF&G2FW‡G2÷"W6R&÷&–WF'’7–Ö&öÇ2v—F†÷WBW&Ö—76–öâàĞ¢Ò–×ÆVÖVçBfW&–f–&ÆR¢¦VÆV7G&–6Â'VÆR6†V6·2¢£¢Væ6öææV7FVB–ç2ÂVæ–çFVæFVBFævÆ–ærv—&W2ÂGWÆ–6FRFWf–6RFw2Â6†÷'FVB–æ6ö×F–&ÆR÷FVçF–Ç2ÂÖ—76–ærRFW6–væF–öâÂ–æ6öç6—7FVçBv—&RçVÖ&W'2ÂFW&Ö–æÂ6öæfÆ–7G2Â–çfÆ–B7&÷72&VfW&Væ6W2ÂÖ—6ÖF6†VBÄ2’ôòG—W2Â&6–26öæGV7F÷"ö6—&7V—Bv&æ–æw2æB&W÷'BvVæW&F–öââ6fWG’Ö7&—F–6Â6—¦–ærÂ6†÷'BÖ6—&7V—Bv—F‡7FæBÂ6VÆV7F—f—G’Â&2fÆ6‚æB6ö×Æ–æ6RFWFW&Ö–æF–öç2×W7B&R6ÆV&Ç’Gf—6÷'’÷"FVÆVvFVBFòVÆ–f–VBVæv–æVW"æBfW&–f–VB6Æ7VÆF–öç2àĞ¢ÒWfW'’'VÆR†2'VÆR”BÂVF—F–öâÖ–ærÂ6WfW&—G’ÂW‡ÆæF–öâÂW†7B6†VWBöö&¦V7B&VfW&Væ6RÂ7VvvW7FVBf—‚ÂFW7Bf—‡GW&RæB‡VÖâ×&Wf–Wr7FGW2âÆÆ÷rFö7VÖVçFVBv—fW'2v—F‚VF—BÆöràĞ Ğ¢222Bâ’Væv–æVW&–ær6÷–Æ÷B(	BF–wVâ$õ@Ğ¥&WW6RF†Röff–6–ÂF–wVâ$õB6ö×öæVçB6öçG&7Bg&öÒ†"ÖFW6–vâ×7—7FVÒâF†R6÷–Æ÷B—2â÷BÖ–âÂ6öçFW‡BÖv&RVæv–æVW&–ær76—7FçBv—Fƒ Ğ¢ÒæGW&ÂÖÆæwVvR&ö¦V7B7&VF–öâÂ6V&6‚Â7–Ö&öÂ–ç6W'F–öâÂv—&–ær&÷÷6Ç2Â$ôÒW‡ÆæF–öç2Â6†VWB7VÖÖ&–W2Â7&÷72×&VfW&Væ6R7VvvW7F–öç2ÂÆö6Æ—¦F–öâæBFö7VÖVçFF–öâvVæW&F–öã°Ğ¢Ò¢§&Wf–WrÓâF–fbÓâW‡Æ–6—BW6W"6öæf—&ÖF–öâÓâFWFW&Ö–æ—7F–2fÆ–FFVBVF—BG&ç67F–öâÓâVæFò¢¢f÷"WfW'’ÖöF–f–6F–öã²æòVç&Wf–WvVBWFöæöÖ÷W26†ævW2FòÆ—fR&ö¦V7BÂæò†–FFVâ6öFRW†V7WF–öâÂæò6–ÆVçBW‡FW&æÂ6†&–æs°Ğ¢Ò&WG&–WfÂw&÷VæFVB–âF†R&ö¦V7Bw2÷vâ7–Ö&öÇ2Â7FæF&G2&Vv—7G'’ÂW&Ö—GFVBFö7VÖVçFF–öâæBÖçVf7GW&W"FFÂv—F‚6—FF–öç2æB6öæf–FVæ6R÷Væ6W'F–çG“²æWfW"f'&–6FR7FæF&B6ÆW6W2÷"6W'F–f–VB6fWG’&W7VÇG3°Ğ¢ÒG—VBFööÇ2v—F‚¥4ôâ66†VÖ2ÂW&Ö—76–öç2ÂÆV7B&—f–ÆVvRÂ&ö×BÖ–æ¦V7F–öâFVfVç6W2Â&FRÆ–Ö—F–ærÂ6÷7B6öçG&öÇ2Â&VF7F–öâÂVF—BÆöw2æB&÷f–FW"'7G&7F–öã²’7&VFVçF–Ç2öæÇ’6W'fW"×6–FS°Ğ¢ÒöffÆ–æRöÖçVÂ4B&VÖ–ç2gVÆÇ’W6&ÆRv—F†÷WBç’’&÷f–FW"¶W’â6ÆV&Ç’Æ&VÂVæf–Æ&ÆRgVæ7F–öç2&F†W"F†â&W6VçF–ærÖö6²&W7VÇG22&VÂàĞ Ğ¢222Râ&6†—FV7GW&RæBVæv–æVW&–ærVÆ—GĞ¤–ç7V7BW†—7F–ær&WòæBföÆÆ÷r—G27F6²–bW7F&Æ—6†VC²÷F†W'v—6R&÷÷6RæB–×ÆVÖVçB&vÖF–2G—U67&—BÖöæ÷&Wó¢&V7B²f—FR²7G&–7BG—U67&—BÂ66W76–&ÆR6ö×öæVçBÆ–'&'’FW&—fVBg&öÒ&÷fVBFW6–vâFö¶Vç2Â§W7FæB÷"WV—fÆVçBf÷"VF—F÷"7FFRÂ5dr÷"6çf2õvV$tÂ‡–'&–B&VæFW&W"†6†ö÷6R'’ÖV7W&VBW&f÷&Öæ6R’ÂvVöÖWG'’ö6öææV7F—f—G’6¶vW2–æFWVæFVçBöbT’Âv÷&¶W'2f÷"†Vg’U$2öW‡÷'BÂ66†VÖ×fÆ–FFVB&ö¦V7B¥4ôâv—F‚Ö–w&F–öç2Â–æFW†VDD"öffÆ–æRW'6—7FVæ6RÂÆ—w&–v‡B²f—FW7BâFB÷F–öæÂ’„æöFRõG—U67&—Bv—F‚÷7Fw&W2’öæÇ’v†VâæVVFVBf÷"WF‚Â6öÆÆ&÷&F–öâÂ6W'fW"×6–FR’÷"7F÷&vRâ¶VWFWFW&Ö–æ—7F–24BVæv–æRÂ'VÆRVæv–æRÂ’FFW"ÂT’æBW'6—7FVæ6R—6öÆFVBæBFW7F&ÆRâfö–B÷fW&Væv–æVW&–æræBfVæF÷"Æö6²Ö–ââæò6V7&WBfÇVW2–âg&öçFVæB÷"&WòâW6R55Â6V7W&R†VFW'2ÂFWVæFVæ7’66ææ–ærÂÆ–6Vç6R–çfVçF÷'’Â–çWB6æ—F—¦F–öâÂWÆöBÆ–Ö—G2ÂFFW‡÷'BöFVÆWF–öâæB&—f7’Ö'’ÖFW6–vâàĞ Ğ¤FFVçF—F–W3¢&ö¦V7BÂ6†VWBÂÆ–W"Â7–Ö&öÄFVf–æ—F–öâÂ7–Ö&öÄ–ç7Fæ6RÂ–âÂæWBÂv—&U6VvÖVçBÂ§Væ7F–öâÂFW&Ö–æÂÂ6&ÆRÂFWf–6RÂÄ4FG&W72Â'BÂæVÄfö÷G&–çBÂG&v–æu&–Ö—F—fRÂ6öç7G&–çBÂ&Wf—6–öâÂfÆ–FF–öäf–æF–æræBVF—DWfVçBâFVf–æR7F&ÆR”G2Â66†VÖfW'6–öç2Â6ö÷&F–æFRVæ—G2ÂW‡Æ–6—B6öææV7F—f—G’6VÖçF–72æBÖ–w&F–öç2âVç7W&R–×÷'FVB6öçFVçB6ææ÷BW†V7WFR67&—G2àĞ Ğ¢222bâWFöæöÖ÷W2†6VBFVÆ—fW'’(	BWfW'’†6R†2v÷&¶–ærFVÖğĞ¢¢¥†6RòF—66÷fW'“¢¢¢VF—B&W÷6—F÷&–W2ÂöÆ–7’Â'&æBÂW†—7F–ærv÷&¶fÆ÷w2ÂFWÆ÷–ÖVçBÂ7W'&VçB7FæF&G26÷W&6W2æBÆ–6Vç6W2â&V6÷&B&6†—FV7GW&RFV6—6–öâ&V6÷&G2æBW†7B66WFæ6R6†V6¶Æ—7Bâ7&VFRFVF–6FVBfVGW&R'&æ6‚æB#²æò6–ÆVçBÖ–âVF—G2àĞ¢¢¥†6R"òv÷&·7FF–öã¢¢¢gVæ7F–öæÂ–6öâÖöæÇ’6†VÆÂÂ†–v‚Öf–FVÆ—G’v÷&·76RÂ&ö¦V7B÷vRW‡Æ÷&W"Â&W6—¦&ÆRæVÇ2Â÷&–v–æÂ'&æFVB5dr–6öç2Â66W76–&–Æ—G’Â6öÖÖæBÆWGFRÂ¶W–&ö&B6†÷'F7WG2Â6×ÆR66†VÖF–72Âf–Ww÷'BÆ–÷WB67&VVç6†÷BFW7G2àĞ¢¢¥†6R2ò4B¶W&æVÃ¢¢¢&V6—6–öâvVöÖWG'’ÂÖöFVÂ6W&–Æ—¦F–öâÂVF—F–ær6öÖÖæG2ÂVæFò÷&VFòÂ×VÇF’×6†VWBÂ6æÂâ÷¦ööÒÂ7–Ö&öÂ7&VF–öâæB&WW6&ÆRÆ–'&&–W3²FW7G2f÷"F÷öÆöw’æB&÷VæGG&—àĞ¢¢¥†6RBòVÆV7G&–6Â–çFVÆÆ–vVæ6S¢¢¢–ç2öæWG2ÂU$2Â7&÷72&VfW&Væ6W2ÂFW&Ö–æÂ÷v—&RçVÖ&W&–ærÂÄ2Ö2Â$ôÒæBFWFW&Ö–æ—7F–2&W÷'G3²&VÂFW7B&ö¦V7G2àĞ¢¢¥†6RRòæVÂöWFöÖF–öã¢¢¢æVÂÆ–÷WBÂFWf–6Rfö÷G&–çG2Âv—&R÷FW&Ö–æÂ66†VGVÆW2ÂÆ–Ö—FVBÄ2Æöv–2æBG&ç7&VçB6–×VÆF–öâàĞ¢¢¥†6Rbò“¢¢¢&÷f–FW"'7G&7F–öâÂF–wVâ$õB–çFVw&F–öâÂ6—FVBwV–Fæ6RÂ6fRFööÂ&Wf–Ww2ÂfÆ–FF–öâæB6öç6VçBÂw&6VgVÂæòÖ¶W’ÖöFRàĞ¢¢¥†6Rrò–çFW&6†ævRæB&VÆV6S¢¢¢Dbõ5drô55bôE„b–×÷'BöW‡÷'BFW7G2Â“†âÂFö7VÖVçFF–öâÂW&f÷&Öæ6RÂ6V7W&—G’Â66W76–&–Æ—G’ÂFWÆ÷–ÖVçB6†V6·2æB&VÆV6R6æF–FFRàĞ Ğ¤f÷"V6‚†6S¢–×ÆVÖVçBÓâ'Vâ6†V6·2Óâf—‚f–ÇW&W2Óâ6GW&R67&VVç6†÷G2ÓâWFFRFö72æB&öw&W72Óâ÷Vâ÷WFFR"Óâ&ö6VVBv†VâW&Ö—GFVBâFòæ÷Bv—Bf÷"&÷WF–æRW6W"–çWBâW66ÆFRöæÇ’7&VFVçF–Ç2ÂöÆ–7’6öæfÆ–7G2ÂÆVvÂÆ–6Vç6–ærÂ6fWG’&÷fÇ2÷"7F–öç2&WV—&–ærW‡Æ–6—BWF†÷&—¦F–öâàĞ Ğ¢222râ66WFæ6RFW7G2æB&VÆV6RvFW0Ğ¢ÒBCC9s“Â76W'BF†R6VçG&ÂG&v–ærf–Ww÷'B—2BÆV7BsRRöbF†R6ö×ÆWFRf–Ww÷'B&VæBÖVWG2F†RFVf–æVBf–Æ&ÆRÖVF—F÷"×v÷&·76RÖV7W&VÖVçB–â6ö×7BÖöFS²&V6÷&BÖV7W&VBF–ÖVç6–öç2âfW&–g’FööÆ&"Â&–Ç2Â7FGW2&"ÂæBç’÷VâG&ç6–VçBæVÂ&R¶W–&ö&BÖ÷W&&ÆRÂ66W76–&ÆRÂv—F†–âF†Rf–Ww÷'BÂæBæöâÖ÷fW&Æ–ærâ6ö×&R67&VVç6†÷B&VfW&Væ6W26öæ6WGVÆÇ’v—F†÷WB6÷––ærF†V—"76WG2àĞ¢Ò7&VFRöVF—B÷6fR÷&VÆöB×6†VWB66†VÖF–2v—F‚ãÓ#S7–Ö&öÇ2æBãÓv—&R6VvÖVçG2v—F†÷WBÆ÷7B6öææV7F–öç3²fW&–g’FWFW&Ö–æ—7F–2VæFò÷&VFòæB&ö¦V7B&÷VæGG&—àĞ¢ÒFVÖöç7G&FRæWB6öææV7F—f—G’Â'&æ6‚§Væ7F–öâ&V†f–÷"Â7&÷72×6†VWB&VfW&Væ6W2ÂÄ2’ôòæBFW&Ö–æÂ–æFW†–æs²–æ6ÇVFRFVÆ–&W&FRfVÇG2FWFV7FVB'’U$2v—F‚6†VWBöö&¦V7BÆö6F–öç2àĞ¢ÒW‡÷'B&–çB×&VG’DbæB5drÂ55b$ôÒ÷v—&R÷FW&Ö–æÂ&W÷'G2æB7W÷'FVBE„b7V'6WC²&V–×÷'BFW7Bf—‡GW&RæB&W÷'BVç7W÷'FVB6öç7G'V7G2àĞ¢ÒfW&–g’vW&ÖâõU2Æö6ÆR7v—F6‚Â&ö¦V7BÖÆWfVÂ&Vv–öâæBVF—F–öâ6WGF–æw2Â7FæF&G2&Vv—7G'’&÷fVææ6RæBW‡Æ–6—BVæv–æVW&–ærF—66Æ–ÖW'2àĞ¢Ò’7VvvW7FVBv—&–æræWfW"6†ævW2ÖöFVÂ&Vf÷&R&÷fÃ²VæWF†÷&—¦VBFööÂ6ÆÇ2&R&V¦V7FVC²æòÖ¶W’ÖöFRv÷&·2àĞ¢ÒWFöÖFVBVæ—Bö–çFVw&F–öâöS&RÂ’6†V6·2Âf—7VÂ6æ6†÷G2ÂW&f÷&Öæ6R'VFvWG2Â6V7W&—G’öFWVæFVæ7’öÆ–6Vç6R66ç2Â&öGV7F–öâ'V–ÆBæBFWÆ÷–ÖVçB6Öö¶RFW7Bâ–æ6ÇVFRF†RgVÆÂG&ç6–VçB×æVÂ–çFW&7F–öâFW7BÖG&—‚–â6V7F–öâãâG&6²W†7B72öf–Â÷6¶—æB'F–f7G2âæò&ö×B÷"Öö6·W6âwV&çFVR¦W&òFVfV7G3²&VÆV6RWf–FVæ6R×W7B6†÷ræò¶æ÷vâ&Æö6¶–ærö†–v‚×6WfW&—G’FVfV7G2æBÆ—7BWfW'’VçfW&–f–VB÷"'F–Â&WV—&VÖVçBàĞ¢Ò6W'fR6÷'&V7B6—FRöâF†R7V6–f–VBFöÖ–âgFW"WF†÷&—¦VBFWÆ÷–ÖVçBÂfW&–g’Då2õDÅ2Â&÷WFRfÆÆ&6²Â6öçFVçB×G—RÂ76WBF‡2æBæò&Ææ²67&VVã²&W÷'B7GVÂU$ÂæBWf–FVæ6RâæWfW"6öægW6Rv—D‡V"vW27FF–2†÷7Bv—F‚W'6—7FVçB6W'fW"'VçF–ÖS¢W6R6W&FR6V7W&R&6¶VæB†÷7B–b&WV—&VBàĞ¢ÒFVf–æRÖV7W&&ÆR&VæFW"æB–çFW&7F–öâ'VFvWG2öâ&VfW&Væ6R†&Gv&RæB–æ6ÇVFR4’&Vw&W76–öâFW7G3²fö–BVæÖV7W&VB&f7B"6Æ–×2àĞ¢Ò&VÆV6Ræ÷FW2×W7BÆ—7B6ö×ÆWFVBÂ'F–ÂÂVç7W÷'FVBæB6fWG’Ö7&—F–6ÂÆ–Ö—FF–öç2âæòf¶R6W'F–f–6F–öç2÷"6–×VÆFVB67&VVç6†÷G2&W6VçFVB2&VÂ÷WGWBàĞ Ğ¢222‚âFö7VÖVçFF–öâæB÷W&F–öç0Ğ¤Ö–çF–â$TDÔRÂtTåE2æÖB‡&öGV7BÖÆö6ÂÂ7V&÷&F–æFRFòvÆö&ÂöÆ–7’’Â&6†—FV7GW&RôE'2ÂFF66†VÖÂVF—F÷"6†÷'F7WG2Â7–Ö&öÂWF†÷&–ærwV–FRÂ’6V7W&—G’wV–FRÂ7FæF&G2&÷fVææ6RÖG&—‚ÂÆö6ÆRwV–FRÂFWÆ÷–ÖVçBwV–FRÂ&öÆÆ&6²wV–FRÂ66W76–&–Æ—G’&W÷'BÂÆ–6Vç6–ærõ4$ôÒÂFW7BWf–FVæ6RæB4„ätTÄôrâ&÷f–FR÷&–v–æÂ6×ÆR&ö¦V7G3¢”T2×7G–ÆRÖ÷F÷"7F'FW"ÂÄ26Vç6÷"ö7GVF÷"6öçG&öÂÂæVÂFW&Ö–æÂÆ–÷WBæBå4’×7G–ÆR6öçG&öÂ6—&7V—BàĞ Ğ¢222’âÖæFF÷'’6öFW‚&V†f–÷"æBf–æ—6‚6öæF—F–öàĞ¤&Vv–â'’&VF–ær7GVÂöÆ–7’öFW6–vâö'&æB&W÷6—F÷&–W2æB6†V6¶–ær'&æ6‚&÷FV7F–öâæBv÷&¶fÆ÷w2â&–÷&—F—¦Rv÷&¶–ærgVÆÂ×67&VVâ4Bv÷&·7FF–öâ–ÖÖVF–FVÇ’ÂF†VâVæv–æVW&–ær6÷'&V7FæW72âÖ–çF–âF6²6†V6¶Æ—7B–âF†R&öGV7B&W÷6—F÷'“²W6R—77VRõ"6†V6·ö–çG2âæWfW"7V'7F—GWFRFV6÷&F—fRÖö6²67&VVç2f÷"v÷&¶–ær6öÖÖæG2â¶VW÷WGWB6öæ6—6S¢5DEU3²FöæS²FW7FVC²&Æö6¶VC²U5D”ÔDTBd”ä•4‚D”ÔR††÷W'2öÖ–çWFW2“²UD²æW‡BâöæÇ’6Æ–Òv÷&²7GVÆÇ’6ö×ÆWFVBâ†6R—26ö×ÆWFRöæÇ’v—F‚FW7G2æBFVÖöç7G&&ÆR'F–f7G2âF†R÷fW&ÆÂ&ö¦V7B—26ö×ÆWFRöæÇ’v†VâF†Rw&VVB66WFæ6R7V—FR76W2ÂFWÆ÷–ÖVçB—2fW&–f–VBÂFö7VÖVçFVBÆ–Ö—FF–öç2&RW‡Æ–6—BæB&WV—&VB‡VÖâ&÷fÇ2&Rö'F–æVBàĞ Ğ¢222âf—7VÂ&VfW&Væ6R'&–Vbf÷"Öö6·WæB–×ÆVÖVçFF–öàĞ¤vVæW&FRâ÷&–v–æÂc£’ÂCC9s“6öæ6WBÖö6·Wf÷"F†R„"VÆV·G&öæ–¶W"Ö'&æFVBF–wVâ’WFô4BVÆV7G&–6Â4Bv÷&·7FF–öââW6RF†RfW&–f–VBWF†÷&—¦VB'&æB76WG2v†Vâf–Æ&ÆS²÷F†W'v—6RW6R&W7G&–æVBFW‡Bv÷&FÖ&²æBF†RFö7VÖVçFVBæg’3###Â7–â3#$C4TRÂæBvöÆB4CDc3rÆWGFRâFòæ÷B–çfVçB÷"–Ö—FFRÆövòàĞ Ğ¥6†÷r6Æ–Ò#N(	33'‚F—FÆR÷&ö¦V7B×F"7G&—Â6ö×7B#(	33g‚7–âÖ66VçB–6öâÖf—'7Bw&÷WVBFööÆ&"Âæ'&÷r3.(	3C‚6öÆÆ6VBÆVgBæB&–v‡B–6öâ&–Ç2ÂfW'’Æ&vR6VçG&Âv†—FR2×7G–ÆRVæv–æVW&–ær6†VWBÂæBF†–â#N(	33'‚–6öâÖöæÇ’7FGW2&–Ââ–æ6ÇVFRF†R÷&–v–æÂ'&–Vn(	—27&—7fV7F÷"G—öw&‡’ÂæòÖ&¶WF–æræVÇ2ÂæBâVæö'G'W6—fR6ÖÆÂ7–âF–wVâ$õBff÷&Fæ6RöæÇ’v†VâF†R&÷fVB76WBæB&VÂ&V†f–÷"&Rf–Æ&ÆRâF†R6†VWB6†÷VÆB6†÷r6ö†W&VçBÂvVæW&–26×ÆR6öÖ&–æ–ærƒ’6Vç6÷"×FòÕÄ2FW&Ö–æÂô’ôò&÷rÂƒ"’6ö×7B6öçG&öÂöG&—fRv—&–ærw&÷WÂæBƒ2’F‡&VR×†6RÖ÷F÷"fVVFW"v—F‚ÃôÃ"ôÃ2Â7v—F6†–ær÷&÷FV7F–öâ7–Ö&öÇ2ÂRõbõræBRâW6Rf–æRw&–BÂ6ö÷&F–æFR'VÆW'2Â”T2×7G–ÆR&VÆ’ö6öçF7F÷"õÄ2÷6Vç6÷"7–Ö&öÇ2Â6ÆVâ&Æ6²ö&ÇVR÷&VBv—&–ærÂ–âçVÖ&W'2ÂFW&Ö–æÂ7G&—2Â7&÷72&VfW&Væ6W2ÂvR&÷&FW"ÂæBF—FÆR&Æö6²2–âF†R÷&–v–æÂf—7VÂ'&–Vbâ–æ6ÇVFR&W7G&–æVBF—FÆR&Æö6²Â&÷&FW"Âv—&RF‡2ÂvVæW&–2FWf–6RFw2Â–â÷FW&Ö–æÂÆ&VÇ2ÂæBfWrÆVv–&ÆRææ÷FF–öç2âW6RöæÇ’Æ&VÇ2æB6ö×öæVçBFF7W÷'FVB'’F†R7GVÂ6×ÆR&ö¦V7C²v†VâFF—2Væ¶æ÷vâÂöÖ—B—B&F†W"F†âwVW76–æràĞ Ğ¥6†÷rW†7FÇ’öæRG&ç6–VçB6öÖÖæBfÇ–÷WB÷VâæBæ6†÷&VBFò—G2G&–vvW"Âv—F‚æò÷fW&Æ÷"f–Ww÷'B6Æ—–ærâ—BFVÖöç7G&FW2F†R7V6–f–VB÷Vâ×æVÂf—7VÂ7FFRöæÇ“²F†RÖö6·W—G6VÆb6ææ÷BFVÖöç7G&FRö–çFW"ÆVfRÂ6Æ–6²Ö÷WG6–FRÂ¶W–&ö&BÂ÷"F÷V6‚&V†f–÷"â¶VWç’F–wVâ$õBff÷&Fæ6R6ÖÆÂæBVæö'G'W6—fS²öÖ—B—B–b&VÂ&÷fVB76WBö&V†f–÷"—2Væf–Æ&ÆRâW6R÷&–v–æÂvVæW&–2Væv–æVW&–ærw&†–72Âæ÷BUÄâôWFô4Bõ4UrôfW7Fòõ4”4²'&æF–ærÂÆöv÷2Â67&VVç6†÷G2Â÷"6÷–VB&÷&–WF'’'Gv÷&²âFòæ÷B6†÷r6W'F–f–6F–öâ&FvW2÷"–×Ç’6öç7G'V7F–öâ&÷fÂâF†RÖö6·W—27FF–26öæ6WBÂæ÷B&ööbF†BF†R&öGV7B÷"–7GW&VB6öçG&öÇ2†fR&VVâ–×ÆVÖVçFVBàĞ Ğ¤–×ÆVÖVçFF–öâ66WFæ6RW6W2F†R6ÖRf—7VÂvVöÖWG'’æB&VfW&Væ6R–çFW'&WFF–öâFW67&–&VB–â6V7F–öââvVæW&FVB–ÖvR×W7Bæ÷B–çG&öGV6RFW‡BÂ&F–æw2Â6ö×öæVçG2ÂgVæ7F–öç2Â÷"6fWG’6Æ–×2'6VçBg&öÒF†R–×ÆVÖVçFF–öâw2&VÂÂ&Wf–Wv&ÆR&ö¦V7BFFâG&VB–ÖvRÖvVæW&F–öâFW‡B2Vç&VÆ–&ÆS¢fÆ–FFRWfW'’f—6–&ÆRÆ&VÂÖçVÆÇ’&Vf÷&RW6–ærF†R–ÖvR2&öGV7B&VfW&Væ6RàĞ Ğ¢ÒÒĞĞ Ğ¢22âÔäDDõ%’&öGV7F–öâÖw&FRVæv–æVW&–ær&ö¦V7BÆ–'&'“¢S9r6†VWG2†Ö–æ–×VÒĞ Ğ¢¢¥F†—26V7F–öâ7WW'6VFW2ÆÂ6ÖÆÆW"6×ÆR×&ö¦V7B&WV—&VÖVçG22F†Rf–æÂ&VÆV6R66WFæ6R7&—FW&–öââ¢¢F†RV&Æ–W"×6†VWBó#S×7–Ö&öÂ66WFæ6R66R&VÖ–ç2f7B4’&Vw&W76–öâf—‡GW&RÂ¢¦æ÷B¢¢F†R&öGV7Bw2f–æÂ&ö¦V7BÖÆ–'&'’66÷RàĞ Ğ¢222&WV—&VBFVÆ—fW&&ÆPĞ¥6†—¢¦BÆV7BSD•5D”ä5BÂeTÄÅ’eTä5D”ôäÂVÆV7G&–6ÂVæv–æVW&–ærFW6–vâ&ö¦V7G2ÂV6‚6öçF–æ–ærBÆV7BÖVæ–ævgVÆÇ’÷VÆFVBÂ–çFW&6öææV7FVBÂVF—F&ÆR6†VWG2¢£¢¢¦Ö–æ–×VÒRÃ&VÂVæv–æVW&–ærG&v–ær6†VWG2¢¢âF†W6R&RvVçV–æRæF—fR&ö¦V7BFö7VÖVçG2Â¢¦æ÷B¢¢&Ææ²6†VWG2Â67&VVç6†÷B&6¶w&÷VæG2Â7FF–25drõDb&Wf–Ww2ÂGWÆ–6FVBf–ÆÆW"ÂÖö6¶VB—2ÂæöægVæ7F–öæÂFVÖ÷2Â÷"VçfW&–f–VBÖçVf7GW&W"&VfW&Væ6RFW6–vç2âV6‚×W7B÷Vâ–âF†RVF—F÷"ÂW&Ö—B6VÆV7F–öâöVF—F–ær÷&Wv—&–ærÂ&W6W'fR6VÖçF–2–âöæWBF÷öÆöw’Â6fR÷&V÷Vâv—F†÷WBÆ÷72Â'VâU$2Â&öGV6R7&÷72×&VfW&Væ6W2ÂæBvVæW&FRW6&ÆR$ôÒ÷v—&–ær÷FW&Ö–æÂ&W÷'G2âÆÂS×W7B&R66W76–&ÆRg&öÒ6V&6†&ÆR¢¤Væv–æVW&–ær&ö¦V7BÆ–'&'’¢¢v—F‚F‡VÖ&æ–Ç2ÂFöÖ–âÂ7FæF&B&öf–ÆRÂ6ö×ÆW†—G’ÂvR6÷VçBæBfÆ–FF–öâ7FGW2â'VæFÆR6ö×&W76VB÷fW'6–öæVBFF6WG2÷"Æ§’ÖF÷væÆöB6öçFVçB6òf—'7BÆöB7F—2f7C²7W÷'BöffÆ–æRf–Æ&–Æ—G’f÷"F÷væÆöFVB&ö¦V7G2àĞ Ğ¢222S&ö¦V7B'&–Vg2(	BV6‚ãÓ6†VWG2Â–æFWVæFVçBVÆV7G&–6ÂF÷öÆöw’æBFöÖ–â×7V6–f–2Fö7VÖVçFF–öàĞ¢¢¤–æGW7G&–ÂÖ÷F÷"ö6öçG&öÂƒ(	3“¢¢ Ğ£â&WfW'6–ærF‡&VR×†6RÖ÷F÷"7F'FW"v—F‚–çFW&Æö6·2àĞ£"â7F.(	6FVÇFÖ÷F÷"7F'FW"æBF–Ö–ær6WVVæ6RàĞ£2âddBÖG&—fVâ6öçfW–÷"Æ–æRv—F‚6Vç6÷'2æBÄ2àĞ£Bâ×VÇF’Ö†—26W'fòÖ÷F–öâ6VÆÂv—F‚Væ6öFW"fVVF&6²àĞ£Râ6ögB×7F'FW"V×7FF–öâv—F‚GWG’÷7FæF'’÷W&F–öâàĞ£bâ×VÇF’ÖÖ÷F÷"&öGV7F–öâÆ–æRv—F‚6VvÖVçFVBÔ42àĞ£râ–æGW7G&–Âfâ&æ²v—F‚&ö6W72–ç7G'VÖVçFF–öâàĞ£‚â6¶v–ærÖ6†–æR÷vW"æBÄ26öçG&öÇ2àĞ£’â†ö—7Bö7&æR6öçG&öÂv—F‚Gf—6÷'’6fWG’6—&7V—G2àĞ£â‡–G&VÆ–2÷vW"Væ—BæBVÆV7G&÷fÇfR6öçG&öÇ2àĞ Ğ¢¢¥Ä2Â&ö6W72æBWFöÖF–öâƒ(	3#“¢¢ Ğ£âÖöGVÆ"Ä2’ôò6&–æWBv—F‚&VÖ÷FR’ôòàĞ£"âvFW"×G&VFÖVçBF÷6–æræBÖöæ—F÷&–ærÆçBàĞ£2âv7FWvFW"Æ–gB×7FF–öâ6öçG&öÂæBFVÆVÖWG'’àĞ£BâfööB&ö6W76–ærÆ–æRv—F‚6Vç6÷'2æBG&—fW2àĞ£Râ6†VÖ–6Â&F6‚&V7F÷"–ç7G'VÖVçFF–öâö6öçG&öÂàĞ£bâ'&WvW'’ô4•6¶–BWFöÖF–öâàĞ£râ–æGW7G&–Â÷fVâ†VF–æræBFV×W&GW&RÆö÷2àĞ£‚â…d2—"Ö†æFÆ–ærVæ—B6öçG&öÂ7—7FVÒàĞ£’â6öÆB×7F÷&vR&Vg&–vW&F–öâ7WW'f—6÷'’6öçG&öÇ2àĞ£#âv&V†÷W6RWFöÖFVB6öçfW–÷"÷6÷'FW"7—7FVÒàĞ Ğ¢¢¤'V–ÆF–ærÂ÷vW"æBVæW&w’ƒ#(	33“¢¢ Ğ£#â6öÖÖW&6–ÂÆ÷r×föÇFvRF—7G&–'WF–öâ&ö&BàĞ£#"â–æGW7G&–Â7V&F—7G&–'WF–öâæBfVVFW"66†VGVÆW2àĞ£#2âVÖW&vVæ7’Æ–v‡F–æræBG&ç6fW"Ö6öçG&öÂ6—&7V—G2àĞ£#Bâ'V–ÆF–ærWFöÖF–öâæBf–VÆB6öçG&öÆÆW"6&–æWG2àĞ£#Râ6öÆ"b–çfW'FW"æB2F—7G&–'WF–öâFö7VÖVçFF–öâàĞ£#bâ&GFW'’VæW&w’7F÷&vRW†–Æ–'’ö6öçG&öÂ6—&7V—G2àĞ£#râUb6†&v–ær6—FRVÆV7G&–6Âö6öçG&öÂ66†VÖF–72àĞ£#‚âvVæW&F÷"E27WW'f—6÷'’ö6öçG&öÂæVÂàĞ£#’âU2Ööæ—F÷&–æræB'—726öçG&öÂ7—7FVÒàĞ£3âFFÖ6VçFW"W†–Æ–'’VÆV7G&–6ÂæBÆ&ÒæVÇ2àĞ Ğ¢¢¤ÖçVf7GW&–æræB&ö&÷F–72ƒ3(	3C“¢¢ Ğ£3â&ö&÷F–2vVÆF–ær6VÆÂ6öçG&öÂ6&–æWBàĞ£3"â4ä2Ö6†–æRW†–Æ–'’VÆV7G&–6Â6öçG&öÇ2àĞ£32â76VÖ&Ç’ÖÆ–æR6fWG’&VÆ’æB66W72–çFW&Æö6·2àĞ£3BâæWVÖF–2–6²ÖæB×Æ6RWFöÖF–öâàĞ£3Râ–æ¦V7F–öâÖöÆF–ærÖ6†–æRW†–Æ–'’6öçG&öÇ2àĞ£3bâ&–çF–ær&W72×VÇF’ÖG&—fR6öçG&öÂàĞ£3râFW‡F–ÆR&öGV7F–öâÖ6†–æR6öçG&öÂ7—7FVÒàĞ£3‚â†&Ö6WWF–6Âf–ÆÆ–ærÖÆ–æR6öçG&öÂàĞ£3’âWFöÖFVBÆÆWF—¦W"6öçG&öÂàĞ£Câ–æGW7G&–ÂFW7B&Væ6‚æB–ç7G'VÖVçFF–öâ&6²àĞ Ğ¢¢¥7V6–Æ—¦VB–çFW&æF–öæÂFW6–vç2ƒC(	3S“¢¢ Ğ£Câ”T2×7G–ÆRWW&÷VâÖ6†–æR6öçG&öÂæVÂàĞ£C"âäes’Ö÷&–VçFVBU2Ö6†–æR6öçG&öÂæVÂàĞ£C2âTÂS„Ö÷&–VçFVBæVÂFö7VÖVçFF–öâW†×ÆRàĞ£CBâ–çFW&æF–öæÂFW&Ö–æÂö6&ÆRÖ'6†ÆÆ–ær6&–æWBàĞ£CRâÖ&–æRW†–Æ–'’VÆV7G&–6Â6öçG&öÂæVÂ†Gf—6÷'’öæÇ’’àĞ£Cbâw&–7VÇGW&Â—'&–vF–öâWFöÖF–öâ6öçG&öÆÆW"àĞ£Crâ&–Çv’7FF–öâW†–Æ–'’6öçG&öÂ6—&7V—G2†æ÷B6–væÆ–ær6fWG’FW6–vâ’àĞ£C‚âÖ–æ–ærfVçF–ÆF–öâW†–Æ–'’6öçG&öÂæVÂ†æ÷B†¦&F÷W2Ö&V6W'F–f–6F–öâ’àĞ£C’â†÷7—FÂf6–Æ—G’W†–Æ–'’Æ&ÒöÖöæ—F÷&–æræVÂ†æ÷BÆ–fR×7W÷'BFW6–vâ’àĞ£SâÖöGVÆ"G&–æ–ærö6öÖÖ—76–öæ–ærÆ"v—F‚&VÆ—7F–2Ä2ÂÖ÷F÷'2æB6Vç6÷'2àĞ Ğ¢ÒÒĞĞ Ğ¢222ÖæFF÷'’×6†VWB6öçFVçB&6†—FV7GW&RU"$ô¤T5@Ğ¥W6R&ö¦V7B×7V6–f–2Væv–æVW&–ær'&V¶F÷vã²¢¦Ö–æ–×VÒ¢¢f–&ÆR6†VWBF—7G&–'WF–öâ—3 Ğ¢Ò(	3S¢6÷fW"ÂG&v–ær–æFW‚ÂÆVvVæG2Â&Wf—6–öç2ÂFV6†æ–6Â77V×F–öç2àĞ¢Òn(	3S¢6–ævÆRÖÆ–æR÷vW"&6†—FV7GW&RÂ7WÆ–W2ÂF—7G&–'WF–öâæB&÷FV7F–öâ66†VÖF–72àĞ¢Òn(	33S¢÷vW"ö6öçG&öÂ6—&7V—B66†VÖF–72v—F‚7GVÂ6öææV7FVB6ö×öæVçG2æBæWG2àĞ¢Ò3n(	3SS¢Ä2÷&VÖ÷FRÔ’ôòæB6Vç6÷"ö7GVF÷"6—&7V—B6†VWG2v—F‚ÖVBFG&W76W2àĞ¢ÒSn(	3s¢FW&Ö–æÂÂ6&ÆRÂv—&RæB–çFW&6öææV7F–öâ6†VWG2àĞ¢Òs(	3ƒ¢æVÂÖ÷VçF–æröÆ–÷WBÂD”â&–ÂÂVæ6Æ÷7W&RÂFWf–6RÆ6VÖVçBæB6öææV7F–öâ6†VWG2àĞ¢Òƒ(	3“¢–çFW&Æö6·2ÂG&—fW2ÂF–væ÷7F–72ÂÆ&ÒæB6öÖ×Væ–6F–öâv—&–ær6†VWG2àĞ¢Ò“(	3¢7&÷72×6†VWB6öææV7F–öç2Â6öÖÖ—76–öæ–ær6†V6¶Æ—7G2ÂVæv–æVW&–ær66†VGVÆW2Â$ôÒÂfÆ–FF–öâæB&Wf—6–öâFö7VÖVçFF–öâàĞ¥F†W6R6FVv÷&–W2&R&6VÆ–æRÂæ÷BW&Ö—76–öâFòFBÖVæ–ævÆW72vW2âFBFòV6‚FöÖ–ã²–b6†VWB—2æöâ×66†VÖF–2Â—B×W7B7F–ÆÂ&RÖVæ–ævgVÂæF—fRVF—F&ÆRVæv–æVW&–ærFö7VÖVçB÷&W÷'BF–VBFò&ö¦V7BFFâBÆV7B¢£s6†VWG2W"&ö¦V7B×W7B6öçF–âVF—F&ÆRÂ6öææV7FVBVÆV7G&–6Â66†VÖF–72÷"æVÂ÷v—&–ærF÷öÆöw’¢¢Âæ÷B§W7BFW‡B÷&W÷'BvW2àĞ Ğ¢222&VÂÖFFæBvVæW&F–öâ–çFVw&—GĞ¤–×ÆVÖVçB&W&öGV6–&ÆRÂ6VVFVB¢¦Væv–æVW&–ær&ö¦V7BvVæW&F÷"¢¢&6¶VB'’G—VB4B&–Ö—F—fW2ÂfÆ–FFVB7–Ö&öÂFVf–æ—F–öç2Â6öææV7F–öâw&‚ÂFW&Ö–æÂ'VÆW2ÂÄ2Ö2æBFöÖ–â×7V6–f–2&ö¦V7B6öæf–wW&F–öââvVæW&FR&ö¦V7G2FWFW&Ö–æ—7F–6ÆÇ’g&öÒVæ—VRÂ&Wf–WvVB6öæf–wW&F–öç3²Vç7W&RF—7F–æ7BFWf–6RF÷öÆöw’Â6†VWB7G'V7GW&RÂ7–Ö&öÂÆ6VÖVçG2Âv—&RF‡2ÂÆ&VÇ2Â6&ÆR76–væÖVçG2Â÷vW"&6†—FV7GW&RæB7&÷72×6†VWBÆ–æ·2âFòæ÷BÖW&VÇ’&VæÖRF†R6ÖR×vRFV×ÆFRSF–ÖW2â–æ6ÇVFRFöÖ–â×7V6–f–26ö×öæVçB6†ö–6W2v—F‚¢¦6ÆV&Ç’–FVçF–f–VB–ÆÇW7G&F—fR&F–æw2¢¢æB77V×F–öç3²æò–çfVçFVBfVæF÷"'BçVÖ&W'2ÂæòfÇ6VÇ’&÷fVB6fWG’6—&7V—G2Âæò76W'F–öâöb7V—F&–Æ—G’f÷"‡—6–6Â6öç7G'V7F–öââ–æ6ÇVFRFö7VÖVçFVB‡VÖâVæv–æVW&–ær&Wf–Wr&WV—&VÖVçG2&Vf÷&Rç’&VÂ–ç7FÆÆF–öâàĞ Ğ¤V6‚&ö¦V7B×W7B–æ6ÇVFS¢&ö¦V7BÖWFFFÂ§W&—6F–7F–öâ÷7FæF&B&öf–ÆRÂVæv–æVW&–ær77V×F–öç2ÂÖ–æ–×VÒVæ—VR6†VWB”G2ÂæÖVBFWf–6W2Â6öææV7FVB–ç2æBæWG2Â7&÷72×vR&VfW&Væ6W2Â&ö¦V7B×v–FRçVÖ&W&–ærÂÄ2’ôòÖ–ærv†W&RÆ–6&ÆRÂFW&Ö–æÂæB6&ÆR66†VGVÆW2Â$ôÒv—F‚6÷W&6Rö–ÆÇW7G&F—fR7FGW2ÂæBU$2&W7VÇG2âW6R÷&–v–æÂ÷"&÷W&Ç’Æ–6Vç6VB7–Ö&öÇ2æBf—‡GW&W2â–bFöÖ–âÆ6·2Ä72Â&÷f–FRâWV—fÆVçBÖVæ–ævgVÂ6öçG&öÂö–çFW&f6RFW6–vâ&F†W"F†âf¶RÄ26öçFVçBàĞ Ğ¢222&WV—&VBW†V7WF&ÆRVÆ—G’vFW0Ğ£âWFöÖFVBÖæ–fW7B76W'G2¢¦W†7FÇ’÷"Ö÷&RF†âSF—7F–æ7B&ö¦V7G2¢¢Â¢£ãÓÖVæ–ævgVÂ6†VWG2V6‚¢¢Â¢£ãÓRÃF÷FÂ¢¢Â¢£ãÓsVÆV7G&–6ÆÇ’VF—F&ÆR6öææV7FVB6†VWG2W"&ö¦V7B¢¢ÂVæ—VR6†VWB”G2ÂæB¦W&òV×G’öf–ÆÆW"vW2àĞ£"âf÷"¢¦WfW'’¢¢&ö¦V7C¢FW6W&–Æ—¦RÆÂ6†VWG3²fÆ–FFR66†VÖÂ”G2Â7–Ö&öÇ2Â–â&VfW&Væ6W2Âv—&Rw&‚ÂFW&Ö–æÂö6&ÆR&VfW&Væ6W2ÂvR7&÷72×&VfW&Væ6W2æB&W÷'BvVæW&F–öã²6fR÷&VÆöBæB6ö×&RFWFW&Ö–æ—7F–2F÷öÆöw’†6†W2àĞ£2âf÷"¢¦WfW'’¢¢&ö¦V7C¢&öw&ÖÖF–6ÆÇ’W&f÷&ÒâVF—BFò6VÆV7FVB&VÂv—&RöFWf–6RÂVæFòÂ&VFòÂ6fR÷&VÆöBÂæB6öæf—&Ò6†ævVBF÷öÆöw’öÖWFFFW'6—7FVB6÷'&V7FÇ“²&÷fRF†RVF—F÷"W6W2F†R6ÖRVæv–æRf÷"W6W"æBFW7B÷W&F–öç2àĞ£Bâf÷"¢¦WfW'’¢¢&ö¦V7C¢U$2'Vç2æB&WGW&ç2ö&¦V7BÖÆ–æ¶VBf–æF–æw3²ç’–çFVçF–öæÂ–ÆÇW7G&F—fRf–öÆF–öç2&RFö7VÖVçFVBæBf—6–&ÆRÂæWfW"†–FFVâ÷"6ÆÆVB6ö×Æ–çBàĞ£RâvVæW&FRDb&–çB6WBÂ$ôÒ55bÂv—&RÆ—7BæBFW&Ö–æÂÆ—7Bg&öÒ¢§&VÂÖöFVÂFF¢¢f÷"ÆÂ&ö¦V7G2††Vg’W‡÷'G2Ö’'Vâ–â66†VGVÆVB4’v—F‚'F–f7B&WFVçF–öâ“²6×ÆRE„b&÷VæGG&—f÷"&W&W6VçFF—fR6†VWG2àĞ£bâ'&÷w6W"S&S¢÷VâBÆV7BöæR&ö¦V7Bg&öÒV6‚öbF†Rf—fR6FVv÷&–W2Âæf–vFRFò6†VWBÂ–ç7V7B&VÂ7–Ö&öÂæB—G2–â÷v—&R6öææV7F—f—G’ÂÖöF–g’v—&RÂ6fR÷&V÷VâÂfW&–g’U$2æBW‡÷'BàĞ£râW&f÷&Öæ6S¢Æ§’ÖÆöB&ö¦V7BÆ—7B÷6†VWG2Âf—'GVÆ—¦RG&VW2Âv÷&¶W"Ö&6VBfÆ–FF–öâÂ&6¶w&÷VæBW‡÷'BÂ&÷VæFVBÖVÖ÷'’â&Væ6†Ö&²×6†VWB&ö¦V7BæBS×&ö¦V7BÆ–'&'’öâ7V6–f–VBFW7B†&Gv&S²ÖV7W&R7F'GWÂ6†VWB7v—F6‚Â¦ööÒ÷âæB6fRÆFVæ7’â6WBæBVæf÷&6R&VÆ—7F–2Fö7VÖVçFVB'VFvWG2g&öÒ7GVÂ&öf–Æ–æràĞ£‚âFö7VÖVçB&÷fVææ6RæBF—66Æ–ÖW'3¢¢¦VGV6F–öæÂ÷&VfW&Væ6RVæv–æVW&–ærFW6–vç2Âæ÷B6öç7G'V7F–öâ×&VG’÷"6W'F–f–VB¢¢'6VçB–æFWVæFVçBVÆ–f–VBVæv–æVW&–ær&Wf–WrâæWfW"&W&W6VçBvVæW&FVB6×ÆR66†VÖF–722&VÂ&÷fVBVÆV7G&–6Â–ç7FÆÆF–öç2àĞ Ğ¢222&VÆV6RFVf–æ—F–öâæB6WVVæ6–æpĞ¤–×ÆVÖVçBF†R4BVæv–æRæBöæRgVÆÇ’6öææV7FVB×6†VWB&VfW&Væ6R&ö¦V7Bf—'7C²F†VâfÆ–FFRvVæW&F–öâöbRF—7F–æ7B&ö¦V7G3²F†VâSâ¶VWÆÂ–çFW&ÖVF–FRFVÆ—fW&&ÆW2W6&ÆRâ¢¤Fòæ÷BFV6Æ&Rf–æÂ&VÆV6R6ö×ÆWFRVçF–ÂF†RVçF—&RS9rÆ–'&'’æBÆÂVÆ—G’vFW272â¢¢V&Æ—6‚Ö6†–æR×&VF&ÆRÆ–'&'’Öæ–fW7BæBW"×&ö¦V7BfÆ–FF–öâ&W÷'Bâ6ÆV&Ç’F—7F–æwV—6‚vVæW&FVBVæv–æVW&–ærW†×ÆW2g&öÒ6W'F–f–VB&ö¦V7BFVÆ—fW&&ÆW2âæòf¶R&öw&W72ÖWG&–72àĞ Ğ¢22"â&–æF–ær6Æ–VçB&WV—&VÖVçC¢&VÂVæv–æVW&–ær6ö×öæVçG2öæÇ’ƒ##bÓÓ"Ğ Ğ¥F†—26V7F–öâ—26Æ–VçB66WFæ6R&WV—&VÖVçBæBF¶W2&V6VFVæ6R÷fW"ç’v÷&F–ærVÇ6Wv†W&RF†B6÷VÆB&R&VB2W&Ö—76–öâFòW6RvVæW&–2÷"FV6÷&F—fR6ö×öæVçBÆ6V†öÆFW'2àĞ Ğ¢ÒWfW'’Æ6VBö6FÆör6ö×öæVçB×W7B&W&W6VçB&VÂÂ–FVçF–f–&ÆRFWf–6R÷"Væv–æVW&–ær—FVÒâf÷"6öÖÖW&6–Â'G2Â&V6÷&BF†RÖçVf7GW&W"æBW†7BÖöFVÂ÷'BçVÖ&W"g&öÒâWF†÷&—FF—fRÖçVf7GW&W"FF6†VWB÷"6FÆörÂÇW2F†R6÷W&6RU$ÂÂFö7VÖVçB&Wf—6–öâöFFRÂæB&WG&–WfÂFFRâf÷"7FæF&BÖFVf–æVB—FV×2v—F†÷WB6öÖÖW&6–Â'BçVÖ&W"ÂW6RfW&–f–VB7FæF&B7–Ö&öÂ÷G—RæBFö7VÖVçBF†RÆ–6&ÆR7FæF&BæBW†7BFVf–æ—F–öâàĞ¢ÒV6‚6ö×öæVçBFVf–æ—F–öâ×W7B–æ6ÇVFR7FæF&G2Ö6÷'&V7BfV7F÷"7–Ö&öÂ÷"'BvVöÖWG'“²&VÂ–â÷FW&Ö–æÂæÖW2æBçVÖ&W'3²–âÆö6F–öç2æBVÆV7G&–6ÂöÖV6†æ–6Â6öææV7F–öâG—W3²VF—F&ÆRÂG—RÖ&÷&–FR&÷W'F–W2æBf&–&ÆRfÇVW3²æBF†R6÷W&6R÷&÷fVææ6RöbV6‚f7GVÂfÇVRâ7–Ö&öÇ2×W7B6öææV7BFò7GVÂ–ç2öæWG2–âF†R&ö¦V7BÖöFVÂæB&VÖ–â6VÆV7F&ÆRÂVF—F&ÆRÂæB&W÷'F&ÆRàĞ¢Òf—6–&ÆR7–Ö&öÂÆöæR—2æ÷B6ö×öæVçBâFòæ÷B7V'7F—GWFR7V&RÂÆ&VÂÂFV6÷&F—fRvÇ—‚Â÷"&÷†–ÖFR–6öâf÷"F–öFRÂG&ç6—7F÷"Â6Vç6÷"ÂÄ2ÖöGVÆRÂfÇfRÂÖ÷F÷"Â÷"÷F†W"FWf–6RâFòæ÷B6Æ–Ò6ö×öæVçB—2gVæ7F–öæÂÖW&VÇ’&V6W6R—B6â&RG&vâ÷"Ö÷fVBàĞ¢ÒæWfW"–çfVçBÖçVf7GW&W"Â'BçVÖ&W"Â–æ÷WBÂ&F–ærÂF–ÖVç6–öâÂFöÆW&æ6RÂ7FæF&B6ÆW6RÂ÷"7V—F&–Æ—G’6Æ–Òâ–bWF†÷&—FF—fRFF—2Væf–Æ&ÆR÷"Æ–6Vç6–ær—2Væ6ÆV"ÂW†6ÇVFRöFVfW"F†B6ö×öæVçB÷"Ö&²F†R6&–Æ—G’Væf–Æ&ÆRv—F‚F†R&V6öã²Fòæ÷B6–ÆVçFÇ’fÆÂ&6²Fòf¶R÷"vVæW&–2'BàĞ¢Ò&ö¦V7BF÷öÆöw’æBv—&–ær×W7BÖF6‚F†R6VÆV7FVB6ö×öæVçG2rfW&–f–VB–ç2æB&F–æw2â¶VW6fWG’æB6öFRÖ6ö×Æ–æ6Rf–æF–æw2Gf—6÷'’VçF–ÂVÆ–f–VB&Wf–Ws²6÷W&6VB6ö×öæVçG2Fòæ÷BÖ¶RFW6–vâ6öç7G'V7F–öâ×&VG’àĞ¢ÒFòæ÷BvVæW&FRÆ&vRÆ–'&&–W2÷"&WVFVB&ö¦V7B6WG2'’&VæÖ–ærvVæW&–2FV×ÆFW2â6ö×öæVçB÷&ö¦V7B—266WFVBöæÇ’gFW"6÷W&6RÖ&6¶VBFFfÆ–FF–öâÂ–âöæWB6†V6·2ÂVF—B÷6fR÷&V÷VâÂ&W÷'BvVæW&F–öâÂæBW‡Æ–6—B&÷fVææ6R&Wf–WràĞ Ğ¢222f—'7B–×ÆVÖVçFF–öâÖ–ÆW7FöæRVæFW"F†—2&WV—&VÖVç@Ğ Ğ¥7F'Bv—F‚F†RVÆV7G&–6Â4BÖöFVÂ&Vf÷&RW‡æF–ærF†R7–Ö&öÂ6÷VçC¢FVf–æRæBfÆ–FFRfW'6–öæVB6ö×öæVçB÷7–Ö&öÂ÷–âöæWB66†VÖ²Ö–w&FRöæR&VÂÂ6÷W&6RÖ&6¶VBVÆV7G&–6ÂFWf–6RVæBFòVæC²&÷fRF†B—G2F—7Æ–VBvVöÖWG'’ÂæÖVB–ç2Âv—&R6öææV7F—f—G’ÂVF—F&ÆR&÷W'F–W2Â6fR÷&V÷VâÂVæFò÷&VFòÂæB$ôÒ÷&W÷'BVçG'’ÆÂ&VfW"FòF†R6ÖRÖöFVÂ–ç7Fæ6RâFBÖ÷&R6ö×öæVçG2–â6ÖÆÂfW&–f–VB&F6†W2â&W6W'fRF†R&÷fVB–çFW&f6RæBW†—7F–ærFööÆ&"ö6çf2÷æVÂvVöÖWG'’F‡&÷Vv†÷WBàĞ Ğ¢ÒÒĞĞ Ğ¢22VæF—‚(	BÖ÷W6R–çFW&7F–öâgVæ7F–öâ6FÆör†÷&–v–æÂ#ƒÖ—FVÒÆ—7BĞ Ğ¢22âÄTeBÔ4Ä”4²eTä5D”ôå0Ğ£â6VÆV7Bö&¦V7@Ğ£"â6VÆV7BFW‡@Ğ£2â6VÆV7B6†PĞ£Bâ6VÆV7B–ÖvPĞ£Râ6VÆV7BÆ–W Ğ£bâ6VÆV7BFööÀĞ£râ7F—fFRÖVçPĞ£‚â÷VâG&÷F÷vàĞ£’âÆ6Rö&¦V7@Ğ£â–ç6W'BFW‡@Ğ£âG&r6†PĞ£"âG&rÆ–æPĞ£2âG&r7W'fPĞ£BâFBö–ç@Ğ£Râ6VÆV7BæöFPĞ£bâÖ÷fR7W'6÷ Ğ£râ7F—fFR–çWBf–VÆ@Ğ£‚â6VÆV7B6öÆ÷ Ğ£’âÇ’f–ÆÀĞ£#âÇ’÷WFÆ–æPĞ£#â6VÆV7BvPĞ£#"â6VÆV7B6Æ–FPĞ£#2â6VÆV7B'F&ö&@Ğ£#Bâ6VÆV7B6ö×öæVç@Ğ£#Râ7F—fFR6öçG&öÂö–ç@Ğ£#bâ7F'BG&v–æpĞ£#râ7F'BG&vv–æpĞ£#‚â6öæf—&ÒÆ6VÖVç@Ğ£#’â6VÆV7B×VÇF—ÆRö&¦V7G2…6†–gB²6Æ–6²Ğ£3âFövvÆR6VÆV7F–öâ„7G&Â²6Æ–6²Ğ Ğ¢22"â$”t…BÔ4Ä”4²eTä5D”ôå0Ğ£3â÷Vâ6öçFW‡BÖVçPĞ£3"â6÷Ğ£32â7W@Ğ£3Bâ7FPĞ£3RâFVÆWFPĞ£3bâGWÆ–6FPĞ£3râ&VæÖPĞ£3‚âw&÷W Ğ£3’âVæw&÷W Ğ£CâÆö6²ö&¦V7@Ğ£CâVæÆö6²ö&¦V7@Ğ£C"â†–FRö&¦V7@Ğ£C2â6†÷rö&¦V7@Ğ£CBâ'&–ærFòg&öç@Ğ£CRâ6VæBFò&6°Ğ£Cbâ'&–ærf÷'v&@Ğ£Crâ6VæB&6·v&@Ğ£C‚âÆ–vâö&¦V7G0Ğ£C’âF—7G&–'WFRö&¦V7G0Ğ£Sâ&÷FFRö&¦V7@Ğ£SâfÆ—†÷&—¦öçFÀĞ£S"âfÆ—fW'F–6ÀĞ£S2â&W6—¦Rö&¦V7@Ğ£SBâG&ç6f÷&Òö&¦V7@Ğ£SRâVF—Bö&¦V7@Ğ£SbâVF—BFW‡@Ğ£SrâVF—BæöFW0Ğ£S‚â6öçfW'BFò7W'fW0Ğ£S’â6öçfW'BFò6†PĞ£câ6öçfW'BFò7–Ö&öÀĞ£câö&¦V7B&÷W'F–W0Ğ£c"âf÷&ÖBö&¦V7@Ğ£c2â6†ævRf–ÆÀĞ£cBâ6†ævR÷WFÆ–æPĞ£cRâ6†ævR÷6—GĞ£cbâ6†ævRÆ–W Ğ£crâÖ÷fRFòÆ–W Ğ£c‚â7&VFRæWrÆ–W Ğ£c’âÖW&vRÆ–W'0Ğ£sâW‡÷'B6VÆV7F–öàĞ£sâ6fR26ö×öæVç@Ğ£s"âFB‡—W&Æ–æ°Ğ£s2â&VÖ÷fR‡—W&Æ–æ°Ğ£sBâFB6öÖÖVç@Ğ£sRâ–ç7V7Bö&¦V7@Ğ£sbâ&W6WBG&ç6f÷&ÖF–öàĞ£srâ6VÆV7B6–Ö–Æ"ö&¦V7G0Ğ£s‚â6VÆV7BÆÀĞ£s’â–çfW'B6VÆV7F–öàĞ£ƒâFW6VÆV7BÆÀĞ Ğ¢222âDõT$ÄRÔ4Ä”4²eTä5D”ôå0Ğ£ƒâVF—BFW‡@Ğ£ƒ"âVçFW"w&÷W Ğ£ƒ2âVF—B6†PĞ£ƒBâVF—BæöFW0Ğ£ƒRâ÷Vâö&¦V7B&÷W'F–W0Ğ£ƒbâ÷Vâ6ö×öæVç@Ğ£ƒrâ&VæÖRÆ–W Ğ£ƒ‚â&VæÖRvPĞ£ƒ’â&VæÖR6Æ–FPĞ£“âVF—B7–Ö&öÀĞ£“âVçFW"—6öÆF–öâÖöFPĞ£“"â÷Vâ–ÖvRVF—F÷ Ğ£“2âVF—BF&ÆR6VÆÀĞ£“BâVF—B6†'@Ğ£“RâVF—Bf÷&×VÆĞ Ğ¢22BâÔõU4RE$reTä5D”ôå0Ğ£“bâÖ÷fRö&¦V7@Ğ£“râ&W6—¦Rö&¦V7@Ğ£“‚â&÷FFRö&¦V7@Ğ£“’âG&r6VÆV7F–öâ&÷€Ğ£â6VÆV7B×VÇF—ÆRö&¦V7G0Ğ£âG&r&V7FævÆPĞ£"âG&rVÆÆ—6PĞ£2âG&rg&VV†æBF€Ğ£BâG&r&W¦–W"7W'fPĞ£RâF§W7B6öçG&öÂ†æFÆW0Ğ£bâÖ÷fRæ6†÷"ö–çG0Ğ£râF§W7Bw&F–Vç@Ğ£‚âF§W7BG&ç7&Væ7Ğ£’â7&÷–ÖvPĞ£ââ6çf0Ğ£âG&rwV–FPĞ£"âG&r'VÆW Ğ£2â&V'&ævRÆ–W'0Ğ£Bâ&V'&ævR6Æ–FW0Ğ£Râ&V'&ævRvW0Ğ£bâ&V'&ævRö&¦V7G0Ğ£râG&ræBG&÷f–ÆW0Ğ£‚âG&ræBG&÷6ö×öæVçG0Ğ£’âGWÆ–6FR'’G&vv–æpĞ£#âF§W7Bö&¦V7B76–æpĞ Ğ¢22RâÔõU4Rt„TTÂeTä5D”ôå0Ğ£#â¦ööÒ–àĞ£#"â¦ööÒ÷W@Ğ£#2â67&öÆÂW Ğ£#Bâ67&öÆÂF÷vàĞ£#Râ†÷&—¦öçFÂ67&öÆÀĞ£#bââ6çf0Ğ£#râF§W7B''W6‚6—¦PĞ£#‚âF§W7BFööÂfÇVPĞ£#’âæf–vFRvW0Ğ£3âæf–vFR6Æ–FW0Ğ Ğ¢22bâ4åd2$”t…BÔ4Ä”4²eTä5D”ôå0Ğ£3â7FPĞ£3"â7FR7V6–ÀĞ£32â6VÆV7BÆÀĞ£3BâFW6VÆV7BÆÀĞ£3RâFBæWrö&¦V7@Ğ£3bâ–ç6W'B–ÖvPĞ£3râ–ç6W'BFW‡@Ğ£3‚â–ç6W'B6†PĞ£3’â–ç6W'BF&ÆPĞ£Câ–ç6W'B6†'@Ğ£CâFBwV–FPĞ£C"â&VÖ÷fRwV–FW0Ğ£C2â6†÷rw&–@Ğ£CBâ†–FRw&–@Ğ£CRâ6æFòw&–@Ğ£Cbâ6æFòö&¦V7G0Ğ£Crâ6æFòwV–FW0Ğ£C‚â6†ævR6çf26öÆ÷ Ğ£C’â6†ævRvR6—¦PĞ£Sâ6†ævR÷&–VçFF–öàĞ£Sâ6çf2&÷W'F–W0Ğ£S"âvR&÷W'F–W0Ğ£S2â¦ööÒFòf—@Ğ£SBâ¦ööÒFò6VÆV7F–öàĞ£SRâ&W6WBf–WpĞ£Sbâ6†÷r'VÆW'0Ğ£Srâ†–FR'VÆW'0Ğ£S‚âÆö6²wV–FW0Ğ£S’âVæÆö6²wV–FW0Ğ£câW‡÷'B6çf0Ğ Ğ¢22râDôôÄ$"$”t…BÔ4Ä”4²eTä5D”ôå0Ğ£câ7W7FöÖ—¦RFööÆ& Ğ£c"â6†÷rFööÆ& Ğ£c2â†–FRFööÆ& Ğ£cBâ&W6WBFööÆ& Ğ£cRâFBFööÀĞ£cbâ&VÖ÷fRFööÀĞ£crâ&V'&ævRFööÇ0Ğ£c‚â–âFööÀĞ£c’âVç–âFööÀĞ£sâFööÂ6WGF–æw0Ğ£sâFööÂ&÷W'F–W0Ğ£s"â&W6WBFööÀĞ£s2â76–vâ6†÷'F7W@Ğ£sBâ6†ævRFööÂ–6öàĞ£sRâW‡æBFööÂw&÷W Ğ£sbâ6öÆÆ6RFööÂw&÷W Ğ£srâ6†÷rFööÂÆ&VÇ0Ğ£s‚â†–FRFööÂÆ&VÇ0Ğ£s’âFö6²FööÆ& Ğ£ƒâVæFö6²FööÆ& Ğ Ğ¢22‚âÄ”U"äTÂÔõU4ReTä5D”ôå0Ğ£ƒâ6VÆV7BÆ–W Ğ£ƒ"â7&VFRÆ–W Ğ£ƒ2âFVÆWFRÆ–W Ğ£ƒBâGWÆ–6FRÆ–W Ğ£ƒRâ&VæÖRÆ–W Ğ£ƒbâÆö6²Æ–W Ğ£ƒrâVæÆö6²Æ–W Ğ£ƒ‚â†–N<×«h‘éì¶»§q«^wXÚÈ[›İ\ˆY[HÜˆXÛÛˆ8¡¤ˆHİ\œ™[HÜ[ˆ[™[ÛÜÙ\È[™H™]ÛHÙ[XİY[™[Ü[œËƒB‹HÛ›HÛ™H˜[œÚY[Y[HÜˆXÛÛˆ[™[X^H™[XZ[ˆÜ[ˆ]H[YHÚ][ˆHØ[YHY[HŞ\İ[KƒB‹HÜ[š[™ÈH[™[]\İ›İ[\ˆHİ\œ›İ[™[™È^[İ]ƒBƒBˆÈÈÈ‹ˆUUÓPUPÈÓÔÑHÓˆSÕTÑHPU‘CBƒB‹HÚ[ˆH[İ\ÙHX]™\ÈHY[HšYÙÙ\ˆ[™]È\ÜÛØÚX]Y[™[ÛÜÙHH[™[]]ÛX]XØ[KƒB‹H[İš[™ÈH[İ\ÙHœ›ÛHHšYÙÙ\ˆ[È]È[™[]\İ“ÕÛÜÙH]ƒB‹H]›ÚY›XÚÙ\š[™ËXØÚY[[ÛÜÚ[™ËÜˆ™[Ü[š[™ÈÛÜËƒB‹H\ÙHHÚÜ[^HÚ\™H™XÙ\ÜØ\HÈ[İÈ˜]\˜[[İ\ÙH[İ™[Y[ƒB‹HÈ›İÛÜÙHH[™[Ú[HHÚ[\ˆ\Èİ[[\˜Xİ[™ÈÚ]]ÈÛÛ[ËƒBƒBˆÈÈÈËˆÓPÒÈÕUÒQHÈÓÔÑCBƒB‹HÛXÚÚ[™Èİ]ÚYH[ˆÜ[ˆY[HÜˆ[™[ÛÜÙ\È]ƒB‹H™\ÜÚ[™È\ØØ\HÛÜÙ\ÈHXİ]™H[™[ƒB‹HÜ[š[™È[›İ\ˆ˜[œÚY[[™[ÛÜÙ\ÈH™]š[İ\ÈÛ™KƒB‹HÛÜÚ[™ÈH[™[]\İ›İ™\Ù][œ™[]Y\XØ][Ûˆİ]KƒBƒBˆÈÈÈˆÕPÒĞÔ‘QSˆ‘RU’SÔƒBƒB‹H\HY[HÜˆXÛÛˆÈÜ[ˆ]ÈÛÛ[ƒB‹H\HØ[YHšYÙÙ\ˆÈÛÜÙH]ƒB‹H\[›İ\ˆšYÙÙ\ˆÈİÚ]Ú[™[ËƒB‹H\İ]ÚYHÈÛÜÙKƒB‹HÈ›İ™[HÛˆİ™\ˆÜˆ[İ\Ù[X]™H›ÜˆİXÚ]šXÙ\ËƒB‹Hİ\ÜÙ^X›Ø\™[™XØÙ\ÜÚXš[]H[\˜Xİ[ÛœÈÚ\™H\XØX›KƒBƒB‹KKCBƒBˆÈÈËˆ“ÔÕÓˆTÔVHÕS‘T‘BƒB[›ÜİÛˆY[\È]\İƒBƒBŒKˆÜ[ˆ\™XİH™[™X]Üˆ™\ÚYHZ\ˆ\ÜÛØÚX]YšYÙÙ\‹ƒBŒ‹ˆ›Ø]X›İ™HH[™\›Z[™È\XØ][Ûˆ[\™˜XÙKƒBŒËˆ\Ü^HÜ[ÛœÈ[ˆHÛX[‹Ü™Ø[š^™Y^[İ]ƒBˆİ\Ü™\XØ[\İÈ[™\›ÜšX]HÜš^›Û[\œ˜[™Ù[Y[ËƒBKˆ™[XZ[ˆ[H[\˜Xİ]™HÚ[HÜ[‹ƒB‹ˆÛÜÙHY\ˆÙ[Xİ[™ÈHÛÛ\]YÛÛ[X[™[›\ÜÈHÛÛ[X[™™\]Z\™\ÈÛÛ[YY[\˜Xİ[Û‹ƒBËˆİ\Ü[\›˜[ØÜ›Û[™ÈÚ[ˆÛÛ[^ÙYYÈ]˜Z[X›HÜXÙKƒBˆ™[XZ[ˆÚ][ˆHš\ÚX›HšY]ÜÜÚ[™]™\ˆÜÜÚX›KƒBKˆ]]ÛX]XØ[H™\ÜÚ][Ûˆ™X\ˆØÜ™Y[ˆ›İ[™\šY\ËƒBŒLˆXZ[Z[ˆ\›ÜšX]HİXÚÚ[™ÈÜ™\ˆX›İ™H›Ü›X[\XØ][ÛˆÛÛ[ƒBƒBŠŠ’STÔ•S•ŠŠƒBƒB‘›ÜİÛœÈ]\İ‘U‘Tˆ\ÚHYÙKØ[˜\ËÛÜšÜÜXÙK˜]šYØ][Ûˆ˜\œËÜˆİ\ˆ[[Y[ÈİÛØ\™ƒBƒB‹KKCBƒBˆÈÈˆPÓÓˆS‘ÓÓTˆ‘RU’SÔƒBƒB\HHØ[YHš[˜Ú\\ÈÈ[\˜Xİ]™HXÛÛœËƒBƒB‘^[\\È[˜ÛYNƒBƒB‹HÙ][™ÜÈXÛÛœÃB‹HÙX\˜ÚXÛÛœÃB‹H\Ù\ˆ›Ùš[HXÛÛœÃB‹H›İYšXØ][ÛˆXÛÛœÃB‹HÛÛÙ[XİÜœÃB‹H˜]Ú[™ÈÛÛÃB‹H[™Ú[™Y\š[™ÈÛÛ[X[™ÃB‹H›Ü›X][™ÈÛÛ›ÛÃB‹Hš[\ˆXÛÛœÃB‹HÛÛ^Y[\ÃB‹HY][Û˜[Ü[ÛœÈY[\ÃBƒB•Ú[ˆ[ˆXÛÛˆÜ[œÈH[\Ü˜\H[™[ƒBƒB‹HH[™[]\İ\X\ˆ™X\ˆ]È\ÜÛØÚX]YXÛÛ‹ƒB‹H]]\İ›Ø]X›İ™HH[\™˜XÙKƒB‹H]]\İ›İÚ[™ÙHHÜÚ][ÛˆÙˆİ\œ›İ[™[™È[[Y[ËƒB‹H]]\İÛÜÙH\Ú[™ÈHYš[™Y[\˜Xİ[Ûˆ[\ËƒB‹H]È^\İ[™È[˜İ[Û˜[]H]\İ™[XZ[ˆ[XİƒBƒB‘È›İ\H]]ÛX]XÈÛÜÚ[™ÈÈ\œÚ\İ[[™[ËXİ]™HY][™ÈX[ÙÜËÜˆÛÜšÙ›İÜÈ™\]Z\š[™ÈÛ™ÛÚ[™È\Ù\ˆ[\˜Xİ[Ûˆ[›\ÜÈ^XÚ]H\ÚYÛ™Y›Üˆ]™Z]š[Ü‹ƒBƒB‹KKCBƒBˆÈÈKˆÕ’PÕ“ËSVSÕUTÒQ••SCBƒBŠŠ•TÈ•SHTÈPS‘UÔ–KŠŠƒBƒB“Ü[š[™ÈÜˆÛÜÚ[™È[H˜[œÚY[Y[K›ÜİÛ‹ÜˆXÛÛˆ[™[]\İ›İØ]\ÙNƒBƒB‹HYÙH[İ™[Y[B‹HØ[˜\È\ÜXÙ[Y[B‹HÛÜšÜÜXÙH™\Ú^š[™ÃB‹HÛÛ˜\ˆÚY[™ÃB‹HÚYX˜\ˆ[İ™[Y[B‹H[™^XİYØÜ›Û[™ÃB‹HÛÛ[[\[™ÃB‹H[›™XÙ\ÜØ\HÛÛ\Û™[™Y›İÃB‹HÜÜÈÙˆ\Ù\ˆÙ[Xİ[ÛƒB‹HÚ[™Ù\ÈÈ\XØ][Ûˆ]CBƒBŠŠ‘^XİY™Z]š[ÜŠŠƒBƒBÛXÚÈ8¡¤ˆ[™[Ü[œÈX›İ™H^\İ[™ÈÛÛ[8¡¤ˆ\Ù\ˆ[\˜XİÈ8¡¤ˆ[™[ÛÜÙ\ËƒBƒBŠŠ‘]™\][™È[™\›™X]™[XZ[œÈİ][Û˜\KŠŠƒBƒB‹KKCBƒBˆÈÈ‹ˆPÒ’PĞSSTSQS•USÓˆÕS‘T‘BƒB•\ÙHYÚÙZYÚXZ[Z[˜X›HÛÛ][ÛœËƒBƒB”™XÛÛ[Y[™Y\›ØXÚ\ÎƒBƒB‹HÔÔÈXœÛÛ]HÜˆš^YÜÚ][Ûš[™ÃB‹H™XXİÜ[ÈÜˆ\]Z]˜[[œ˜[Y]ÛÜšÈYXÚ[š\Û\ÈÚ[ˆ™XÙ\ÜØ\CB‹HÛÜœ™XİİXÚÚ[™ÈÛÛ^È[™‹Z[™^B‹HÚ[\ˆ[™ÛXÚÈ]™[[™[™ÃB‹H[İ\Ù[X]™H[™[™È›Üˆ\ÚİÜB‹HÛXÚË[İ]ÚYH]Xİ[ÛƒB‹H\ØØ\KZÙ^H[™[™ÃB‹H\›ÜšX]H›Øİ\ÈX[˜YÙ[Y[B‹HšY]ÜÜX]Ø\™HÜÚ][Ûš[™ÃB‹H[\›˜[İ™\™›İÈØÜ›Û[™ÃBƒB]›ÚY[›™XÙ\ÜØ\HX]HRHXœ˜\šY\ËƒBƒB”™Y™\ˆ™]\ØX›HÛÛ\Û™[È[™Ú\™Y[\˜Xİ[ÛˆÙÚXËƒBƒB”™]™[]™[›ÜYØ][Ûˆ›Ø›[\ËXØÚY[[[™[ÛÜİ\™K›Øİ\ÈÜÜË[™ÛÛ™›XİÈ™]ÙY[ˆ™\İYY[\ËƒBƒB‘›ÜˆXØÙ\ÜÚXš[]Kİ\Ü\›ÜšX]HT’PH]šX]\Ëš\ÚX›H›Øİ\È[™XØ]ÜœËÙ^X›Ø\™˜]šYØ][Û‹[™›Øİ\È™\İÜ˜][Û‹ƒBƒB‹KKCBƒBˆÈÈËˆÓĞSÓÓ”ÒTÕSÖH‘TURT‘SQS•BƒB[\XØX›HY[\È[™XÛÛœÈXÜ›ÜÜÈH›ÙXİ]\İ›ÛİÈHØ[YH[\˜Xİ[Ûˆİ[™\™ƒBƒB‘È›İ[\[Y[Y™™\™[Ü[š[™È[™ÛÜÚ[™È™Z]š[ÜœÈÚ]İ]HØİ[Y[YV™X\ÛÛ‹ƒBƒBÜ™X]HÜˆ™]\ÙHHÚ\™YY[KÜÜİ™\ˆÛÛ\Û™[Ú\™H\›ÜšX]KƒBƒB•HØ[YHÛØ˜[İ[™\™]\İ\HXÜ›ÜÜÈ][\H›Ú™XİÈÚ[H[İÚ[™ÈXXÚ›ÙXİÈ™]Z[ˆ]ÈİÛˆœ˜[™[™Ëš\İX[\ÚYÛ‹[™[˜İ[Û˜[]KƒBƒB‹KKCBƒBˆÈÈˆ‘T’Q’PĞUSÓˆS‘PĞÑTSÑHTÕÃBƒB™Y›Ü™HÛÛœÚY\š[™È[\[Y[][ÛˆÛÛ\]K™\šYNƒBƒB‹HÛXÚÈÜ[œÈHÛÜœ™Xİ[™[ƒB‹HÛXÚÚ[™ÈHØ[YHšYÙÙ\ˆÛÜÙ\È]ƒB‹HÛXÚÚ[™È[›İ\ˆšYÙÙ\ˆİÚ]Ú\È[™[ËƒB‹HÛ›HÛ™H˜[œÚY[[™[\ÈÜ[ˆ]H[YKƒB‹H[İ\ÙH[İ™[Y[[ÈH[™[Ù\È›İÛÜÙH]ƒB‹H[İ\Ù[X]™HÛÜÙ\ÈH[™[ÛÜœ™XİKƒB‹HÛXÚÚ[™Èİ]ÚYHÛÜÙ\È]ƒB‹H\ØØ\HÛÜÙ\È]ƒB‹HİXÚ[\˜Xİ[ÛœÈÛÜšÈÛÜœ™XİKƒB‹HÙ^X›Ø\™˜]šYØ][ÛˆÛÜšÜÈÛÜœ™XİKƒB‹H[™[È™[XZ[ˆ[œÚYHHšY]ÜÜÚ\™HÜÜÚX›KƒB‹HÛ™ÈY[\ÈØÜ›Û[\›˜[KƒB‹H›È[™\›Z[™È^[İ][İ™[Y[ØØİ\œËƒB‹H[^\İ[™ÈÛÛ[X[™È™[XZ[ˆ[˜İ[Û˜[ƒB‹H›È\XØ][Ûˆ]H\È[ÙYšYY[™^XİYKƒB‹H›È™YÜ™\ÜÚ[Ûˆ\È[›ÙXÙYƒBƒB•\İ\ÚİÜ[Øš[K[™X›]šY]ÜÜÚ^™\ËƒBƒB‹KKCBƒBˆÈÈKˆSTSQS•USÓ‹QT‘ÑHS‘TÖSQS•BƒB‘›Üˆ]™\H›Ú™XİYÜ[™È\Èİ[™\™ƒBƒBŒKˆ[œÜXİH^\İ[™ÈY[H[™XÛÛˆ[\[Y[][ÛœËƒBŒ‹ˆY[YH[˜ÛÛœÚ\İ[™Z]š[Ü‹ƒBŒËˆ[\[Y[HÚ\™Y[\˜Xİ[Ûˆİ[™\™ƒBˆ™\Ù\™H^\İ[™È\XØ][Ûˆ[˜İ[Û˜[]KƒBKˆ[ˆ™[]˜[]]ÛX]Y[™œ›İÜÙ\ˆ\İËƒB‹ˆš^™\šYšYY™YÜ™\ÜÚ[ÛœËƒBËˆÛÛ[Z]H™\šYšYYÚ[™Ù\ËƒBˆY\™ÙH[ÈH\›İ™YXZ[ˆœ˜[˜ÚƒBKˆ\ŞH\Ú[™ÈH›Ú™Xİ	ÜÈ^\İ[™È\Ş[Y[ÛÜšÙ›İËƒBŒLˆ™\šYHH\ŞYY\XØ][Û‹ƒBƒB‘È›İÛZ[HİXØÙ\ÜÙ[\Ş[Y[Ú]İ]™\šYšXØ][Û‹ƒBƒB‘È›İ›ØÙYYÚ][œ™[]Y]™[ÜY[[[H™\]Z\™YY[HÛÜœ™Xİ[Ûˆ[™]È™\šYšXØ][Ûˆ\™HÛÛ\]KƒBƒB‹KKCBƒBˆÈÈLˆT“PS‘S•‘TÔÒUÔ–H‘Q‘T‘SÑCBƒB”İÜ™H\ÈØİ[Y[[ˆH›Ú™Xİ	ÜÈ\ÚYÛ˜]YÛØ[ËÛİ™\›˜[˜ÙKÜˆİ[™\™È™\ÜÚ]ÜKƒBƒBŠŠ”™XÛÛ[Y[™Yš[[˜[YNŠŠƒBƒB˜ÓĞSÕRWÕVÓQS•WÒPÓÓ—ÔÕS‘T‘›YBƒBŠŠ”[HY[YšY\ŠŠƒBƒB˜ÓĞSURKUVLXBƒB”™Y™\™[˜ÙH\Èİ[™\™œ›ÛHH›Ú™Xİ	ÜÈQÑS•Ë›YÜˆ\]Z]˜[[]™[ÜY[[œİXİ[ÛœËƒBƒB‘›Üˆ]\™H›Ú™XİÎƒBƒB‹HØY\Èİ[™\™\š[™È[š]X[›Ú™XİÙ]\ƒB‹H\H]È[™[]˜[[\˜Xİ]™HY[\È[™XÛÛœËƒB‹H[˜ÛYH]ÈXØÙ\[˜ÙH\İÈ[ˆH›Ü›X[]™[ÜY[ÛÜšÙ›İËƒB‹H™]\ÙH^\İ[™ÈÛÛ\X[ÛÛ\Û™[ÈÚ\™H˜XİXØ[ƒB‹HÈ›İ[›™XÙ\ÜØ\š[H™]Üš]HÛÜšÚ[™ÈÛÛ\Û™[ËƒBƒB•\Èİ[™\™™[XZ[œÈXİ]™H[[H›Ú™XİİÛ™\ˆ^XÚ]H\›İ™\ÈH™]š\Ú[Û‹ƒBƒB‹KKCBƒBˆÈÈLKˆ’SSÓÑVT‘PÕU‘CBƒBŠŠÓÑVŠŠƒBƒB•™X]ÓĞSURKUVLH\ÈH™]\ØX›K›Ú™XİZ[™\[™[]™[ÜY[İ[™\™ƒBƒB\H]ÛÛœÚ\İ[HÈ[\XØX›Hİ\œ™[[™]\™HÛÙØ\™H›Ú™XİËƒBƒB“™]™\ˆ[İÈ˜[œÚY[Y[\Ë›ÜİÛœËÜˆXÛÛˆ[™[ÈÈ\İ\˜ˆH[™\›Z[™È[\™˜XÙKƒBƒB”™\Ù\™H^\İ[™È[˜İ[Û˜[]KƒBƒB’[\[Y[\İÛÛ[Z]Y\™ÙK\ŞK[™™\šYHÚ[™Ù\ÈXØÛÜ™[™ÈÈXXÚ›Ú™Xİ	ÜÈ]]Üš^™YÛÜšÙ›İËƒBƒB”Ø]™H[™™Y™\™[˜ÙH\È[H[ˆH\ÚYÛ˜]YÛØ[ÈÜˆİ[™\™È™\ÜÚ]ÜH›Üˆ]\™H]™[ÜY[ƒBƒBŠŠ‘ÓĞSÕS‘T‘ŠŠƒBƒBŠŠÓPÒÈÈÔSˆ8¡¤ˆ“ĞUP“Õ‘HÓÓ•S•8¡¤ˆS•TPÕ8¡¤ˆUUËPÓÔÑHÓˆSÕTÑHPU‘HÔˆÕUÒQHÓPÒÈ8¡¤ˆ‘T“ÈVSÕUÒQ•ŠŠƒBƒB‹KKCBƒBˆÈÈ\[™^8 %™X[[™Ú[™Y\š[™ÈÛÛ\Û™[È[™›Ú™Xİ^[\\ÃBƒBˆÈSPÕ’PĞSS‘ÒS‘QT’S‘ÈTÒQÓˆP”T–H8 %‘PSÓÓTÓ‘S•È“ÔˆLS‘TÕ’PS“Ò‘PÕÃBƒBŠŠ”™\]Z\™[Y[ŠŠˆ]™\HÛÛ\Û™[]\İ™\™\Ù[H™X[ÛÛ[Y\˜ÚX[H]˜Z[X›H[™Ú[™Y\š[™È]šXÙHÚ][ˆY[YšXX›HX[Y˜Xİ\™\‹[Ù[[X™\‹XÚšXØ[ÜXÚYšXØ][ÛœË\›Z[˜[Ë[™[XİšXØ[ÛÛ›™Xİ[ÛœËƒBƒBŠŠ“›È[[^HÛÛ\Û™[Ëˆ›ÈXÙZÛ\ˆŞ[X›ÛËˆ›ÈšXİ[Û˜[X[Y˜Xİ\™\ˆ\[X™\œËŠŠƒBƒB•H›ÛİÚ[™È\ÈH›ÜÜÙYÛÛ\Û™[Xœ˜\H›Üˆ\ÚYÛš[™ÈHL›Ú™XİËˆ]\È
+Š››İHÛZ[H]\ÙHÛÛ\Û™[È\™H[™XYH[œİ[Y[ˆ[ˆXØÙ\ÜÚX›HĞQXœ˜\JŠ‹ƒBƒBˆÈÈKˆS‘TÕ’PSÕÑTˆS‘TÕ’P•USÓˆÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸHZ[šX]\™HÚ\˜İZ]œ™XZÙ\ˆ
+PĞŠHÚY[Y[œÈÑS•“ÓˆTÖHBŸˆ[ÛYXØ\ÙHÚ\˜İZ]œ™XZÙ\ˆ
+PĞĞŠHØÚ™ZY\ˆ[XİšXÈÛÛTXÕ”ÖBŸÈZ\ˆÚ\˜İZ]œ™XZÙ\ˆ
+PĞŠHPˆĞPÑH[X^ˆBŸ™\ÚYX[Xİ\œ™[Ú\˜İZ]œ™XZÙ\ˆ
+ĞĞŠHPˆŒŒBŸHĞ“ÈPˆÌŒHBŸˆ[İÜˆ›İXİ[ÛˆÚ\˜İZ]œ™XZÙ\ˆÚY[Y[œÈÒT’UTÈÔ•ŒˆBŸÈ\ÙHİÚ]Ú\ØÛÛ›™XİÜˆÚY[Y[œÈÑS•“ÓˆÓ”HBŸ[™\İšX[\ÙHX]Ûˆ\ÜÛX[›ˆÙ\šY\ÈBŸH\ÙHÛ\ˆÙ[š^ÛÛXİBŸLİÚ]Ú\ØÛÛ›™XİÜˆPˆÕÙ\šY\ÈBŸLHXZ[ˆ\ÛÛ]ÜˆØÚ™ZY\ˆ[XİšXÈTŞ\È˜\š[ÈBŸLˆ]]ÛX]XÈ˜[œÙ™\ˆİÚ]ÚÛØÛÛYXÈUTÈBŸLÈİ\™ÙH›İXİ[Ûˆ]šXÙHR™İX\™BŸMİÙ\ˆ\İšX][Ûˆ›ØÚÈÙ[š^ÛÛXİ’VBŸMH\Ø˜\ˆŞ\İ[Hš][šS[™HBŸMˆİ\œ™[˜[œÙ›Ü›Y\ˆØÚ™ZY\ˆ[XİšXÈİÙ\“ÙÚXÈBŸMÈ›ÛYÙH˜[œÙ›Ü›Y\ˆPˆ[œİ[Y[˜[œÙ›Ü›Y\œÈBŸN][Y[˜İ[ÛˆİÙ\ˆY]\ˆÚY[Y[œÈÑS•“ÓˆPÈBŸNH[™\™ŞHY]\ˆØÚ™ZY\ˆ[XİšXÈİÙ\“ÙÚXÈMLBŸŒİÙ\ˆ]X[]H[˜[^™\ˆ˜[š]˜HSQÈMˆBƒBˆÈÈ‹ˆSÕÔˆÓÓ•“ÓÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸŒH™YK\\ÙHÛÛXİÜˆÚY[Y[œÈÒT’UTÈÔ•ˆBŸŒˆ™]™\œÚ[™ÈÛÛXİÜˆ\ÜÙ[X›HØÚ™ZY\ˆ[XİšXÈTŞ\ÈXØHBŸŒÈ\›X[İ™\›ØY™[^HÚY[Y[œÈÒT’UTÈÔ•LˆBŸ[Xİ›ÛšXÈİ™\›ØY™[^HÚY[Y[œÈÒT’UTÈÔŒÈBŸH[İÜˆİ\\ˆX]ÛˆÖ“LBŸˆÛÙİ\\ˆPˆÕBŸÈ˜\šXX›KYœ™\]Y[˜ŞHš]™HÚY[Y[œÈÒSSRPÔÈÌLŒBŸÛÛ\Xİ˜\šXX›KYœ™\]Y[˜ŞHš]™HPˆPÔÍNBŸHÙ\›Èš]™HÚY[Y[œÈÒSSRPÔÈÌŒLBŸÌÙ\›È[İÜˆÚY[Y[œÈÒSSÕPÔÈËLQ’ÌˆBŸÌH™YK\\ÙH[™Xİ[Ûˆ[İÜˆÚY[Y[œÈÒSSÕPÔÈÔBŸÌˆÙX\™Y[İÜˆÑUËQUT“Ñ’U‘H“ˆÙ\šY\ÈBŸÌÈ[İÜˆœ˜ZÙHÑUËQUT“Ñ’U‘Hœ˜ZÙHŞ\İ[\ÈBŸÍ[İÜˆœ˜ZÚ[™È™\Ú\İÜˆÚY[Y[œÈÒSSRPÔÈXØÙ\ÜÛÜšY\ÈBŸÍH[İÜˆ[™H™XXİÜˆØÚ™ZY\ˆ[XİšXÈ[]˜\ˆXØÙ\ÜÛÜšY\ÈBŸÍˆSPÈš[\ˆØÚY™›™\ˆ“ˆÙ\šY\ÈBŸÍÈ[İÜˆ[˜ÛÙ\ˆÒPÒÈ”ÍŒBŸÎ[İÜˆ\›Z\İÜˆ™[^HÚY[Y[œÈÒT’UTÈÔ“ŒˆBŸÎH[İÜˆ[Ûš]Üš[™È™[^HØÚ™ZY\ˆ[XİšXÈ\›[ÛHÛÛ›ÛBŸ[İÜˆÛÛ›ÛÙ[\ˆÚY[Y[œÈÒUPÓÓˆÎBƒBˆÈÈËˆÈS‘S‘TÕ’PSUUÓPUSÓˆÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸHÛÛ\XİÈÚY[Y[œÈÒSPUPÈÍËLLŒBŸˆ[Ù[\ˆÈÚY[Y[œÈÒSPUPÈÍËLMLBŸÈØY™]HÈÚY[Y[œÈÒSPUPÈÍËLMLˆBŸÈÔHÚY[Y[œÈÔHMLLKLHˆBŸHYÚ][[œ][Ù[HÚY[Y[œÈÓHLŒHBŸˆYÚ][İ]][Ù[HÚY[Y[œÈÓHLŒˆBŸÈ[˜[ÙÈ[œ][Ù[HÚY[Y[œÈÓHLÌHBŸ[˜[ÙÈİ]][Ù[HÚY[Y[œÈÓHLÌˆBŸH™[[İHKÓÈ[\™˜XÙHÚY[Y[œÈUŒÔBŸL™[[İHKÓÈİ][ÛˆĞQÓÈÍLÙ\šY\ÈBŸLHÈİÙ\ˆİ\HÚY[Y[œÈÒUÔBŸLˆ[™\İšX[ÛÛ[][šXØ][Ûˆ›ØÙ\ÜÛÜˆÚY[Y[œÈÒSPUPÈÔBŸLÈÈY[[ÜHØ\™ÚY[Y[œÈÒSPUPÈY[[ÜHØ\™BŸM[™\İšX[]\›™]İÚ]ÚÚY[Y[œÈĞĞSSÑHÈBŸMH[™\İšX[›İ]\ˆÚY[Y[œÈĞĞSSÑHHBŸMˆRHİXÚ[™[ÚY[Y[œÈÒSPUPÈRH[šYšYYBŸMÈ[™\İšX[[™[ÈÚY[Y[œÈÒSPUPÈTÈBŸN[™\İšX[YÙHÛÛ\]\ˆÚY[Y[œÈ[™\İšX[YÙHBŸNHÈ[\™˜XÙH™[^HÙ[š^ÛÛXİËRS•T‘PÑHBŸŒÚYÛ˜[ÛÛ™][Û™\ˆÙ[š^ÛÛXİRS’H[˜[ÙÈ›ÈBƒBˆÈÈˆS‘TÕ’PSÑS”ÓÔ”ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸŒH[™Xİ]™H›Ş[Z]HÙ[œÛÜˆÒPÒÈSQHBŸŒˆØ\XÚ]]™H›Ş[Z]HÙ[œÛÜˆY›HÒHBŸŒÈİÙ[XİšXÈÙ[œÛÜˆÒPÒÈÍBŸ[˜\ÛÛšXÈÙ[œÛÜˆ\\›
+ÑXÚÈPÈBŸH\Ù\ˆ\İ[˜ÙHÙ[œÛÜˆÒPÒÈBŸˆXYÛ™]XÈŞ[[™\ˆÙ[œÛÜˆ™\İÈÓUNHBŸÈYXÚ[šXØ[[Z]İÚ]ÚØÚ™ZY\ˆ[XİšXÈÒÈBŸ›İ\H[˜ÛÙ\ˆÒPÒÈ”ÍŒBŸH[™X\ˆÜÚ][ÛˆÙ[œÛÜˆ˜[Y™ˆ•BŸÌ™\Üİ\™H˜[œÛZ]\ˆ[™™\ÜÊÒ]\Ù\ˆÙ\˜X˜\ˆBŸÌHY™™\™[X[™\Üİ\™H˜[œÛZ]\ˆÚY[Y[œÈÒUS”ÈBŸÌˆ[\\˜]\™H˜[œÛZ]\ˆ[™™\ÜÊÒ]\Ù\ˆUSTBŸÌÈ•[\\˜]\™HÙ[œÛÜˆÒRĞHˆÙ\šY\ÈBŸÍ\›[ØÛİ\HÒRĞHÈÙ\šY\ÈBŸÍH›İÛY]\ˆ[™™\ÜÊÒ]\Ù\ˆ›ÛXYÈBŸÍˆ]™[˜[œÛZ]\ˆ[™™\ÜÊÒ]\Ù\ˆZXÜ›Ü[İBŸÍÈ]™[İÚ]Ú[™™\ÜÊÒ]\Ù\ˆ\]Z\[BŸÎÛÛ™Xİ]š]HÙ[œÛÜˆ[™™\ÜÊÒ]\Ù\ˆY[[ÜÙ[œÈBŸÎHÙ[œÛÜˆ[™™\ÜÊÒ]\Ù\ˆY[[ÜÙ[œÈÔÈBŸšXœ˜][ÛˆÙ[œÛÜˆY›H”ĞHBƒBˆÈÈKˆS‘TÕ’PSÓÓ•“ÓS‘ÕÒUÒS‘ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸHİ\\Ú]ÛˆØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸˆİÜ\Ú]ÛˆØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸÈ[Y\™Ù[˜ŞK\İÜ]šXÙHØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸÙ[XİÜˆİÚ]ÚØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸHÙ^K[Ü\˜]YİÚ]ÚØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸˆ[İYÚØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸÈ[[Z[˜]Y\Ú]ÛˆØÚ™ZY\ˆ[XİšXÈ\›[ÛHHBŸÛÛ›Û™[^Hš[™\ˆMHÙ\šY\ÈBŸH[Y\ˆ™[^HÚY[Y[œÈÒT’UTÈÔ”BŸL[Ûš]Üš[™È™[^HÚY[Y[œÈÒT’UTÈÕQÈBŸLHØY™]H™[^H[ˆ“ÖˆBŸLˆØY™]HÛÛ›Û\ˆ[ˆ“Ö›][HˆBŸLÈÛÛY\İ]H™[^HØ\›ÈØ]˜^šH‘ĞÈBŸM[\™˜XÙH™[^HÙ[š^ÛÛXİËT”ĞÈBŸMH]Ú[™È™[^Hš[™\ˆˆÙ\šY\ÈBŸMˆ[\\˜]\™HÛÛ›Û\ˆÛ\›ÛˆMPĞÈBŸMÈQ›ØÙ\ÜÈÛÛ›Û\ˆ]\›İ\›HÌŒBŸNÚYÛ˜[\ÛÛ]ÜˆÙ[š^ÛÛXİRS’H[˜[ÙÈ›ÈBŸNH[\›H[›[˜ÚX]ÜˆX]ÛˆLŒˆBŸL[™\İšX[^™\ˆÙ\›XHBƒBˆÈÈ‹ˆT“RSSËÒT’S‘ÈS‘ÓÓ“‘PÕSÓˆÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸLH™YY]›İYÚ\›Z[˜[Ù[š^ÛÛXİRÈHˆBŸLˆÜ›İ[™\›Z[˜[Ù[š^ÛÛXİTÓÑÈBŸLÈ\ÙH\›Z[˜[Ù[š^ÛÛXİRÈKRTÒHBŸL\ØÛÛ›™Xİ\›Z[˜[Ù[š^ÛÛXİUÙ\šY\ÈBŸLHÙ[œÛÜˆ\›Z[˜[Ù[š^ÛÛXİÙ\šY\ÈBŸLˆ][K[]™[\›Z[˜[Ù[š^ÛÛXİÕÙ\šY\ÈBŸLÈ\›Z[˜[[\\ˆÙ[š^ÛÛXİ”ÈBŸL\›Z[˜[[™]HÙ[š^ÛÛXİBŸLH\›Z[˜[[™Û[\Ù[š^ÛÛXİBŸLLSˆ˜Z[Ù[š^ÛÛXİ”ÈÍHBŸLLHÚ\™HXİ[™Z]BŸLLˆØX›HÛ[™TÒÒS•ÔBŸLLÈØX›HX\šÙ\ˆÙ[š^ÛÛXİBŸLMÚ\™HX\šÙ\ˆÙZYpï\ˆBŸLMH™\œ[HÙZYpï\ˆBŸLMˆš[™ÈØX›HYÈÛ]ZÙHBŸLMÈ[™\İšX[ÛÛ›™XİÜˆ\[™È[ˆBŸLNLLˆÙ[œÛÜˆÛÛ›™XİÜˆÙ[š^ÛÛXİBŸLNH][\ÛHÛÛ›™XİÜˆ\[™È[ˆBŸLŒ[™\İšX[]\›™]ÛÛ›™XİÜˆÚY[Y[œÈQHÈ’HBƒBˆÈÈËˆS‘TÕ’PSÕÑTˆÕTQTÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸLŒHˆÈİÙ\ˆİ\HÚY[Y[œÈÒUÔÕMŒŒBŸLŒˆ™Y[™[İÙ\ˆİ\H[Ù[HÚY[Y[œÈÒUÔ‘QBŸLŒÈÈTÈÚY[Y[œÈÒUÔTÌMŒBŸL[™\İšX[˜]\H[Ù[HÚY[Y[œÈÒUÔUMŒBŸLHËÑÈÛÛ™\\ˆÙ[š^ÛÛXİURS•BŸLˆPËÑÈÛÛ™\\ˆYX[ˆÙ[ÑˆBŸLÈÛÛ›Û˜[œÙ›Ü›Y\ˆØÚ™ZY\ˆ[XİšXÈ\Ù[ÈBŸL\ÛÛ][Ûˆ˜[œÙ›Ü›Y\ˆ“ĞÒÈBŸLH[Xİ›ÛšXÈÚ\˜İZ]›İXİÜˆÙ[š^ÛÛXİĞTT“ĞÈBŸLÌİÙ\ˆ[Ûš]Üš[™È[Ù[HÚY[Y[œÈÒUÔBƒBˆÈÈˆ‘USPUPÈS‘QUSPÈÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸLÌH™][X]XÈÛÛ[›ÚY˜[™H™\İÈ•U‘ÈBŸLÌˆ™][X]XÈ˜[™H\›Z[˜[™\İÈ•QÈBŸLÌÈ™][X]XÈŞ[[™\ˆ™\İÈĞÈBŸLÍÛÛ\Xİ™][X]XÈŞ[[™\ˆ™\İÈQˆBŸLÍH™][X]XÈÜš\\ˆ™\İÈÈBŸLÍˆZ\ˆ™\\˜][Ûˆ[š]™\İÈTÈÙ\šY\ÈBŸLÍÈ™\Üİ\™H™Yİ[]Üˆ™\İÈˆBŸLÎ™\Üİ\™HÙ[œÛÜˆ™\İÈÔSˆBŸLÎH›İÈÛÛ›Û˜[™H™\İÈÔ“HBŸM˜Xİ][HÙ[™\˜]Üˆ™\İÈÕ‘SHBŸMHY˜][XÈ\™Xİ[Û˜[˜[™H›ÜØÚ™^›İÑHBŸMˆY˜][XÈ›ÜÜ[Û˜[˜[™H›ÜØÚ™^›İBŸMÈY˜][XÈ™\Üİ\™HÙ[œÛÜˆ›ÜØÚ™^›İBŸMY˜][XÈİÙ\ˆ[š]›ÜØÚ™^›İŞ]›ÔXÈBŸMHY˜][XÈŞ[[™\ˆ›ÜØÚ™^›İBƒBˆÈÈKˆ•RSS‘ËS‘T‘ÖHS‘ÕÑTˆÖTÕSHÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸMˆÛÛ\ˆ[™\\ˆÓPHİ[›Hš\İÙ\ˆBŸMÈXœšY[™\\ˆœ›Ûš]\ÈÑSŒBŸMˆÈ\ÛÛ]ÜˆPˆÕÈBŸMHˆİ\™ÙH›İXİÜˆR™İX\™BŸMLˆÛÛ›™XİÜˆİ0éX›HPÍBŸMLH˜]\H[™\\ˆÓPHİ[›H\Û[™BŸMLˆ˜]\H[™\™ŞHİÜ˜YÙHŞ\İ[H\ÛHYYØ\XÚÈBŸMLÈUˆÚ\™Ú[™Èİ][ÛˆPˆ\œ˜HBŸMMUˆÚ\™Ú[™ÈÛÛ›Û\ˆÙ[š^ÛÛXİÒT–BŸMMHÙ[™\˜]ÜˆÛÛ›Û\ˆÛÛP\[[S]HBŸMMˆ]]ÛX]XÈ˜[œÙ™\ˆİÚ]ÚÛØÛÛYXÈUTÈBŸMMÈTÈŞ\İ[HØÚ™ZY\ˆ[XİšXÈØ[^HBŸMNİÙ\ˆ[Ûš]Üš[™ÈY]\ˆØÚ™ZY\ˆ[XİšXÈİÙ\“ÙÚXÈBŸMNHZ[[™È]]ÛX][ÛˆÛÛ›Û\ˆÚY[Y[œÈ\ÚYÛÈÈBŸMŒPÈXİX]Üˆ™[[[ÈBŸMŒHPÈY™™\™[X[™\Üİ\™HÙ[œÛÜˆÚY[Y[œÈBŸMŒˆš\™H[\›H[\™˜XÙH[Ù[HÚY[Y[œÈÙ\˜™\\È“ÈBŸMŒÈ[Y\™Ù[˜ŞHYÚ[™ÈÛÛ›Û\ˆX]ÛˆBŸM™YœšYÙ\˜][ÛˆÛÛ›Û\ˆ[™›ÜÜÈRËPĞÈBŸMH[™\™ŞHX[˜YÙ[Y[Ø]]Ø^HÚY[Y[œÈBƒBˆÈÈLˆ“Ğ“ÕPÔÈS‘PPÒS‘HĞQ‘UHÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸMˆ[™\İšX[›Ø›İPˆTˆLŒBŸMÈ[™\İšX[›Ø›İÛÛ›Û\ˆPˆÛ[šPÛÜ™HBŸMÛÛX›Ü˜]]™H›Ø›İ[š]™\œØ[›Ø›İÈTŒLHBŸMH›Ø›İÜš\\ˆĞÒS’ÈBŸMÌ›Ø›İÛÛÚ[™Ù\ˆUH[™\İšX[]]ÛX][ÛˆBŸMÌHØY™]HYÚİ\Z[ˆÒPÒÈUXÍBŸMÌˆØY™]H\Ù\ˆØØ[›™\ˆÒPÒÈZXÜ›ÔØØ[ŒÈBŸMÌÈØY™]HÛÜˆİÚ]ÚØÚY\œØ[V“HBŸMÍØY™]H™[^H[ˆ“ÖˆBŸMÍHØY™]HÈÚY[Y[œÈÍËLMLˆBŸMÍˆÛËZ[™ÛÛ›Ûİ][ÛˆØÚ™ZY\ˆ[XİšXÈBŸMÍÈ[Y\™Ù[˜ŞK\İÜ\Ú]ÛˆX]ÛˆLŒˆBŸMÎØY™]H[˜X›[™ÈİÚ]ÚUPÒ‘TˆBŸMÎHØY™]H[˜ÛÙ\ˆÒPÒÈBŸNØY™]K\˜]Yš]™HÚY[Y[œÈÒSSRPÔÈBƒBˆÈÈLKˆQUSÓSÔPÒPSV‘QÓÓTÓ‘S•ÃBƒBŸÈÛÛ\Û™[™X[X[Y˜Xİ\™\ˆÈ›ÙXİ˜[Z[HBŸKK_KK_KK_BŸNH[™\İšX[ÙZYÚ[™È˜[œÛZ]\ˆÚY[Y[œÈÒUĞT‘VBŸNˆØYÙ[“HˆBŸNÈ˜\˜ÛÙHØØ[›™\ˆÒPÒÈÓˆBŸN‘’Q™XY\ˆÚY[Y[œÈÒSPUPÈ‘ˆBŸNHXXÚ[™Hš\Ú[ÛˆØ[Y\˜HÛÙÛ™^[‹TÚYÚBŸNˆ[™\İšX[YÚ[™È˜[›™\ˆ[™Ú[™Y\š[™ÈBŸNÈ[™\İšX[™]ÛÜšÈØ]]Ø^HTÈ[X\ÈBŸN[Ù\ÈØ]]Ø^H[ŞHQØ]HBŸNH[™\İšX[Ú\™[\ÜÈXØÙ\ÜÈÚ[ÚY[Y[œÈĞĞSSÑHÈBŸNL™[[İH[[Y]H[š]ØÚ™ZY\ˆ[XİšXÈĞĞQTXÚÈBŸNLH]HÙÙÙ\ˆØ[\™[ØÚY[YšXÈÔŒLBŸNLˆ[™\İšX[[\›HX[\ˆ]ÛÛˆBŸNLÈ[™\İšX[šXœ˜][Ûˆ[Ûš]ÜˆY›H”ÑHBŸNMÛÛ™][Ûˆ[Ûš]Üš[™ÈŞ\İ[HÒÑˆS^BŸNMH[™\İšX[[™[[˜ÛÜİ\™Hš][VBŸNMˆ›ÛÜ‹\İ[™[™È[˜ÛÜİ\™Hš][–HBŸNMÈ[˜ÛÜİ\™HÛÛÛ[™È[š]š][›YHJÈBŸNN[˜ÛÜİ\™H\›[Üİ]ÕQÓÈBŸNNH[˜ÛÜİ\™HX]\ˆÕQÓÈBŸŒØXš[™]˜[‹Ùš[\ˆ[š]š][BƒB‹KKCBƒBˆÈL‹ˆ‘PS“Ò‘PÕVSTTÈ8 %SL“Ò‘PÕÃBƒB‘XXÚ›Ú™Xİ™[İÈ\Ù\È™X[\]Z\Y[˜[Z[Y\ËˆH\İY\]Z\Y[\ÈHİ\[™Èš[ÙˆX]\šX[Ë
+Š››İHÛÛ\]YÜˆ™\šYšYY[XİšXØ[\ÚYÛŠŠ‹ƒBƒBŸ›Ú™Xİ™X[ÛÛ\Û™[ÈÈ\ÙHBŸKK_KK_BŸKˆ™]™\œÚ[™È[İÜˆİ\\ˆÚY[Y[œÈÔ•‹Ô•Œ‹Ô•L‹ÒSSÕPÔÈÔ\›[ÛHHBŸ‹ˆİ\¸ $Ù[Hİ\\ˆÚY[Y[œÈÔ•ˆÛÛXİÜœËÔ”[Y\‹Ô•Lˆİ™\›ØYÒSSÕPÔÈÔBŸËˆ‘‘ÛÛ™^[ÜˆÚY[Y[œÈÍËLLŒÒSSRPÔÈÌLŒÒPÒÈÍÑUÈ“ˆBŸˆÙ\›È[İ[ÛˆÙ[ÚY[Y[œÈÍËLMLÒSSRPÔÈÌŒLÒSSÕPÔÈËLQ’Ì‹ÒPÒÈ[˜ÛÙ\œÈBŸKˆ]KÜİ[™H[\PˆÕÚY[Y[œÈÍËLLŒ[™™\ÜÊÒ]\Ù\ˆÙ\˜X˜\ˆBŸ‹ˆÙYÛY[YPĞÈÚY[Y[œÈÒUPÓÓˆÎÔ•Œ‹Ô•‹ÑS•“ÓˆPÈBŸËˆ[™\İšX[˜[ˆ˜[šÈPˆPÔÍNÚY[Y[œÈÍËLMLÒUS”ÈBŸˆXÚØYÚ[™ÈXXÚ[™HÚY[Y[œÈÍËLMLUŒÔ™\İÈ•U‘ËÒPÒÈÍBŸKˆÚ\İØÜ˜[™HÛÛ›ÛÑUÈš]™\È[™œ˜ZÙ\ËÚY[Y[œÈËÒPÒÈ[˜ÛÙ\œÈBŸLˆY˜][XÈİÙ\ˆ[š]›ÜØÚ™^›İŞ]›ÔXËÑH˜[™\ËÚY[Y[œÈÈBŸLKˆ[Ù[\ˆÈØXš[™]ÚY[Y[œÈÍËLMLUŒÔÒUÔĞĞSSÑHBŸL‹ˆØ]\‹]™X]Y[[ÚY[Y[œÈÍËLML[™™\ÜÊÒ]\Ù\ˆY[[ÜÙ[œË›ÛXYÈBŸLËˆØ\İ]Ø]\ˆYİ][ÛˆØÚ™ZY\ˆĞĞQTXÚËPˆÕ[™™\ÜÊÒ]\Ù\ˆZXÜ›Ü[İBŸMˆ›ÛÙ›ØÙ\ÜÚ[™È[™HÚY[Y[œÈÍËLMLÑUÈš]™\ËÒPÒÈÙ[œÛÜœÈBŸMKˆÚ[ZXØ[˜]Ú™XXİÜˆÚY[Y[œÈÍËLML[™™\ÜÊÒ]\Ù\ˆ[\\˜]\™KÜ™\Üİ\™H[œİ[Y[ÈBŸM‹ˆœ™]Ù\KĞÒTÚÚYÚY[Y[œÈË[™™\ÜÊÒ]\Ù\ˆ›ÛXYËY[[ÜÙ[œÈÙ[œÛÜœÈBŸMËˆ[™\İšX[İ™[ˆ]\›İ\›HÌŒÒRĞH\›[ØÛİ\\ËØ\›ÈØ]˜^šHÔÔˆBŸNˆPÈRHÚY[Y[œÈ\ÚYÛÈË™[[[ÈXİX]ÜœËÚY[Y[œÈÙ[œÛÜœÈBŸNKˆÛÛİÜ˜YÙH[™›ÜÜÈRËPĞË™\Üİ\™HÙ[œÛÜœË™YœšYÙ\˜][ÛˆXİX]ÜœÈBŸŒˆØ\™Zİ\ÙHÛÜ\ˆÚY[Y[œÈÍËLMLÒSSRPÔÈÌLŒÒPÒÈØØ[›™\œÈBŸŒKˆˆ\İšX][Ûˆ›Ø\™PˆĞPÑH[X^‹ÛÛTXÕ”ÖİÙ\“ÙÚXÈBŸŒ‹ˆ[™\İšX[İX™\İšX][ÛˆÚY[Y[œÈÑS•“Ó‹˜[š]˜HSQËÙ[š^\›Z[˜[ÈBŸŒËˆ[Y\™Ù[˜ŞHYÚ[™ÈX]Ûˆ[Y\™Ù[˜ŞHYÚ[™È\]Z\Y[ÛØÛÛYXÈUÈBŸˆZ[[™È]]ÛX][ÛˆÚY[Y[œÈ\ÚYÛÈË™[[[ËÚY[Y[œÈšY[Ù[œÛÜœÈBŸKˆÛÛ\ˆˆÓPHİ[›Hš\İÙ\‹İ0éX›HPÍPˆÕËRˆBŸ‹ˆ˜]\HİÜ˜YÙH\ÛHYYØ\XÚËÚY[Y[œÈ[Ûš]Üš[™È\]Z\Y[BŸËˆUˆÚ\™Ú[™ÈPˆ\œ˜KÙ[š^ÛÛXİÒT–İÙ\“ÙÚXÈBŸˆÙ[™\˜]ÜˆUÈÛÛP\[[S]KÛØÛÛYXÈUTËÑS•“ÓˆPÈBŸKˆTÈ\\ÜÈØÚ™ZY\ˆØ[^KÛØÛÛYXÈİÚ]Ú[™ËİÙ\“ÙÚXÈBŸÌˆ]KXÙ[\ˆ[\›\ÈÚY[Y[œÈËÙ[š^ÛÛXİ™[^\Ëš][[˜ÛÜİ\™\ÈBŸÌKˆ›Ø›İXÈÙ[[™ÈPˆTˆLŒÛ[šPÛÜ™KÚY[Y[œÈØY™]HÈBŸÌ‹ˆÓÈ]^[X\HÛÛ›ÛÈÚY[Y[œÈÍËLMLÒSSRPÔËÒPÒÈÙ[œÛÜœÈBŸÌËˆ\ÜÙ[X›K[[™HØY™]H[ˆ“Ö›][H‹ÒPÒÈUXÍØÚY\œØ[V“HBŸÍˆ™][X]XÈXÚËX[™\XÙH™\İÈĞË•U‘ËÓUNKÚY[Y[œÈÈBŸÍKˆ[š™Xİ[Ûˆ[Û[™ÈÚY[Y[œÈË›ÜØÚ™^›İY˜][XÜËÒRĞHÙ[œÛÜœÈBŸÍ‹ˆš[[™È™\ÜÈÚY[Y[œÈÒSSRPÔÈÌŒLÍËLMLÒPÒÈ[˜ÛÙ\œÈBŸÍËˆ^[HXXÚ[™HPˆPÔÍNÚY[Y[œÈËÒPÒÈÙ[œÛÜœÈBŸÎˆ\›XXÙ]]XØ[š[[™ÈÚY[Y[œÈË™\İÈ™][X]XÜËÛÙÛ™^š\Ú[ÛˆBŸÎKˆ]]ÛX]Y[]^™\ˆPˆ›Ø›İÚY[Y[œÈËÒPÒÈØØ[›™\œÈBŸˆ[™\İšX[\İ™[˜ÚÚY[Y[œÈË“HØYÙ[Ë˜[š]˜HY]\œÈBŸKˆQPÈXXÚ[™H[™[ÚY[Y[œÈÒT’UTËÒSPUPËÙ[š^ÛÛXİš][BŸ‹ˆ‘”HÎHXXÚ[™H[™[›ØÚİÙ[]]ÛX][Û‹[[‹Pœ˜Y^K[™Z]BŸËˆSLH[™[^[\H›ØÚİÙ[]]ÛX][Û‹X]Û‹[™Z]š][BŸˆX\œÚ[[™ÈØXš[™]Ù[š^ÛÛXİ\›Z[˜[ËÙZYpï\ˆX\šÙ\œË\[™ÈBŸKˆX\š[™H]^[X\H[™[PˆİÚ]Ú[™ËÚY[Y[œÈ[Ûš]Üš[™Ë\›İ™YX\š[™H\]Z\Y[BŸ‹ˆ\œšYØ][Ûˆ]]ÛX][ÛˆÚY[Y[œÈÍËLLŒ™\İÈ˜[™\Ë[™™\ÜÊÒ]\Ù\ˆÙ[œÛÜœÈBŸËˆ˜Z[Ø^H]^[X\HÛÛ›ÛÈÚY[Y[œÈËÙ[š^ÛÛXİ\›Z[˜[Ë[™\İšX[™[^\ÈBŸˆZ[š[™È™[[][ÛˆPˆPÔÍNÚY[Y[œÈË[™\İšX[Ù[œÛÜœÈBŸKˆÜÜ][]^[X\H[\›\ÈÚY[Y[œÈ[Ûš]Üš[™ËÙ[š^ÛÛXİ™[^\Ëš][ØXš[™]ÈBŸLˆ˜Z[š[™ÈX›Ü˜]ÜHÚY[Y[œÈÍËLLŒÒT’UTÈÛÛXİÜœË™\İÈ˜[™\ËÒPÒÈÙ[œÛÜœÈBƒB‹KKCBƒBˆÈLËˆÓÓTÓ‘S•UH‘TURT‘QS”ÒQHHS‘ÒS‘QT’S‘ÈĞS•TÃBƒB‘]™\H™X[ÛÛ\Û™[[\™Y[ÈHXœ˜\HÚİ[ÛÛZ[ˆ\ÙH
+ŠŒÌšY[ÊŠƒBƒBŒKˆX[Y˜Xİ\™\ƒBŒ‹ˆX[Y˜Xİ\™\ˆ\[X™\ƒBŒËˆ›ÙXİ˜[Z[CBˆÛÛ\Û™[Ø]YÛÜCBKˆÛÛ\Û™[\ØÜš\[ÛƒB‹ˆ[XİšXØ[Ş[X›ÛBËˆQPÈŞ[X›Û™\™\Ù[][ÛƒBˆS”ÒKÓ‘”HŞ[X›Û™\™\Ù[][Û‹Ú\™H\XØX›CBKˆ˜]YÜ\˜][™È›ÛYÙCBŒLˆ˜]YÜ\˜][™Èİ\œ™[BŒLKˆ˜]YİÙ\ƒBŒL‹ˆÜ\˜][™Èœ™\]Y[˜ŞCBŒLËˆ\›Z[˜[[X™\œÃBŒMˆ\›Z[˜[˜[Y\ÃBŒMKˆ[ˆYš[š][ÛœÃBŒM‹ˆÛÛ›™Xİ[Ûˆ\\ÃBŒMËˆ[XİšXØ[Ú\˜Xİ\š\İXÜÃBŒNˆYXÚ[šXØ[[Y[œÚ[ÛœÃBŒNKˆ[İ[[™ÈY]ÙBŒŒˆ›İXİ[Ûˆ˜][™ÃBŒŒKˆÜ\˜][™È[\\˜]\™CBŒŒ‹ˆX[Y˜Xİ\™\ˆ]\ÚY]BŒŒËˆX[Y˜Xİ\™\ˆ[œİ[][ÛˆX[X[BŒˆÚ\š[™ÈXYÜ˜[CBŒKˆÛÛ›™Xİ[ÛˆXYÜ˜[CBŒ‹ˆÛÛ\]X›HXØÙ\ÜÛÜšY\ÃBŒËˆÛÛ\]X›HÛÛ\Û™[ÃBŒˆÛÛ\Û™[™Y™\™[˜ÙH\ÚYÛ˜][ÛƒBŒKˆÛÛ\Û™[™]š\Ú[Û‹İ™\œÚ[ÛƒBŒÌˆ™\šYšYYÛİ\˜ÙH[™™\šYšXØ][Ûˆ]CBƒBŠŠ’[\Ü[ŠŠˆ›İ]™\HšY[\Y\ÈÈ]™\HÛÛ\Û™[ˆHYXÚ[šXØ[[˜ÛÜİ\™K›Üˆ^[\KÙ\È›İ]™H[ˆÜ\˜][™Èİ\œ™[Üˆ[XİšXØ[[›İ]ƒBƒB‹KKCBƒBˆÈMˆ‘PSS‘ÒS‘QT’S‘È“Ò‘PÕĞÕSQS•USÓˆ8 %L
+ÈÒQUÈTˆ“Ò‘PÕBƒB‘XXÚÙˆHL›Ú™XİÈÚİ[]™H]ÈİÛˆ[™\[™[Øİ[Y[][ÛˆXÚØYÙKƒBƒBŸÚY]˜[™ÙHØİ[Y[][ÛˆBŸKK_KK_BŸx $ÌHÛİ™\‹›Ú™Xİ[™›Ü›X][Û‹™]š\Ú[Ûˆ\İÜHBŸ¸ $ÌL˜]Ú[™È[™^[™İ[™\™ÈBŸLx $ÌŒ[XİšXØ[İÙ\ˆ\İšX][ÛˆBŸŒx $ÌÌ[İÜˆ[™š]™HÚ\˜İZ]ÈBŸÌx $ÌÈ[™ÛÛ›ÛÚ\˜İZ]ÈBŸx $ÌLÙ[œÛÜœÈ[™[œİ[Y[][ÛˆBŸLx $ÌŒØY™]H[™[\›ØÚÚ[™ÈÚ\˜İZ]ÈBŸŒx $ÌÌ\›Z[˜[[™Ú\š[™ÈXYÜ˜[\ÈBŸÌx $ÌØX›HØÚY[\È[™ÛÛ›™Xİ[ÛœÈBŸx $ÌL\]Z\Y[^[İ]È[™[™[˜]Ú[™ÜÈBŸLx $ÌLš[ÈÙˆX]\šX[Ë\İ[™È[™ÛÛ[Z\ÜÚ[Ûš[™ÈBŸLx $ÌLL[œİ[][Ûˆ[™XZ[[˜[˜ÙHØİ[Y[][ÛˆBŸLLx $ÌLŒØ[İ[][ÛœË™\šYšXØ][Ûˆ[™›Ú™Xİ\ÜXÚYšXÈØİ[Y[][ÛˆBƒBŠŠŒLŒÚY]È\ˆ›Ú™Xİ0åÈL›Ú™XİÈH‹ÚY]ËŠŠƒBƒB•\ÙH\™H›ÜÜÙYØİ[Y[][ÛˆİXİ\™\Ë›İÛÛ\]Y˜]Ú[™ÜËˆÚY][ØØ][Ûˆ]\İ™HY\YÈXXÚ›Ú™Xİ	ÜÈXİX[ÜÛÙŞK[™]™\HÚY]]\İÛÛZ[ˆYX[š[™Ù[›Ú™Xİ\ÜXÚYšXÈ[™›Ü›X][Û‹ƒBƒB‹KKCBƒB‹KKCBƒBˆÈÈ\[™^H8 %Y™\œ™Y[\™˜XÙH™\]Z\™[Y[È[™[ÛÛ\Û™[Ø][ÙÃBƒBˆÈÈÈY™\œ™YXY\ˆXØÛİ[Ü™\Ù[˜ÙHÛÛ›ÛBƒB•H\Ù\ˆ™\]Y\İYH]\ˆÛÛ\XİXØÛİ[XÛÛˆ[[YYX][H™\ÚYHHÛÛ[X[™ÙX\˜ÚÛÛ›Û]HÜšYÚˆ]Èİ]\È]\İ™Y›Xİ™X[\XØ][ÛˆXØÛİ[ÜÙ\ÜÚ[Ûˆİ]Nˆ™YÚ[ˆÙ™›[™H[™Ü™Y[ˆÚ[ˆÛ›[™KÚ][ˆXØÙ\ÜÚX›H˜[YH[™İ™\‹Ù›Øİ\ÈÛÛ\ˆ\È\ÈY™\œ™Y[[H›Ú™Xİ\ÈH™X[XØÛİ[Ü™\Ù[˜ÙHÛİ\˜ÙKˆš]][œÚYHH^\İ[™ÈXY\ˆ[ØØ][ÛÈÈ›İ[˜Ü™X\ÙHXY\ˆZYÚÜˆÚYH˜]šYØ][Û‹ÛÛ˜\‹[™[ËÜˆØ[˜\Ëˆ™XÛÜ™™Y›Ü™KØY\ˆÙ[ÛY]H[™™\šYH›È^[İ][İ™[Y[Ú[ˆ[\[Y[YƒBƒBƒBˆÈÈÈÛÛ\Û™[[\˜Xİ[ÛˆØ][ÙÈ[™™\Ù[][Ûˆ[CBƒB•H\Ù\ˆİ\YYHÍŒZ][H[™Ú[™Y\š[™ËXØ[˜\È[\˜Xİ[ÛˆØ][ÙÈ\ÈH[˜İ[Û˜[˜XÚÛÙÈ›ÜˆÛÛ\Û™[ÛÛ›™Xİ[Û‹Ú\š[™Ë›İ][Û‹Y][™Ë\XØ][Û‹Ü›İ\[™Ë[YÛ›Y[[œË^Y\œËÛÛœİ˜Z[ËÚ[][][Û‹˜[Y][Û‹Ü™Ø[š^˜][Û‹™\XÙ[Y[›İ][™ËXÙ[Y[[™›Ù™\ÜÚ[Û˜[Ø[˜\È[\˜Xİ[ÛœËˆ™X]\ÙH\È›ÙÜ™\ÜÚ]™H›ÙXİ™\]Z\™[Y[Ë›İXÛÜ˜]]™HY[HX™[ËƒBƒBŠŠ”™\Ù[][Ûˆ[˜\šX[ŠŠˆ^ÜÙH\XØX›HXİ[ÛœÈ›İYÚ›Ø][™ÈÛÛ^İX›Y[\ËšYÚXÛXÚÈY[\Ë[™\™Xİ[İ\ÙHÙ\İ\™\È[ˆH^\İ[™ÈĞQÛÜšÜÜXÙKˆÈ›İY\›X[™[ÛÛ˜\ˆ›İÜË[›\™ÙH[™[ËÚYHØ[˜\ËÜˆ[\ˆ\›İ™YXY\‹İÛÛÙ[ÛY]KˆÛÛ^Y[\È]\İ™[XZ[ˆX›İ™HÛÛ[[™ØÜ›Û[\›˜[KˆÚİÈ[ˆXİ[ÛˆÛ›HÚ[ˆ]\È˜[Y›ÜˆHÙ[XİYØš™Xİ[™[\[Y[YHHİ\œ™[[Ù[È™]™\ˆ\ÙHHXÙZÛ\ˆXİ[Û‹ˆÛÛ[YH[\[Y[[™È›ÙXİ\™[]˜[][\È\È™X[\İX›HZ[\İÛ™\ËÚ]HØ\Xš[]KØ˜XÚÛÙÈ]Y]È˜XÚÈÚ]™[XZ[œËˆ[XİšXØ[Ú\™H›İ][™ËÛÛ\Û™[[ˆÛÛ›™Xİ]š]KY]X›H™X[Ş[X›ÛËÛÛ›™XİY[İ™[Y[[™ËÜ™YË][K\Ù[Xİ[Û‹ÙÜ›İ\[™Ë[YÛ›Y[Ù\İšX][Û‹[™˜[Y][Ûˆ™[XZ[ˆÛÜ™HĞQš[Üš]Y\ËˆÜ›ÜÜËYÛXZ[ˆ™X]\™\È
+›Üˆ^[\HY˜][XËÛÜXØ[ÜÈÜˆ™\Ù[][Ûˆ[š[X][ÛŠH™YY[ˆ^XÚ][Ù[[™Úİ[›İ™HÛZ[YY\È[XİšXØ[ĞQ[˜İ[Û˜[]HÚ]İ][\[Y[][Û‹ƒBƒBƒBˆÈÈÈ[\Ù\‹\İ\YYÛÛ\Û™[[˜İ[ÛˆØ][ÙÃBƒBŠŠĞQ[XİšXØ[\ÚYÛˆÚ\˜İZ]\ÚYÛˆĞˆYXÚ[šXØ[\ÚYÛˆÛÜ™[UÈİÙ\”Ú[XYÜ˜[HY]ÜœÊŠƒBƒBˆÈÈÈKˆÓÓTÓ‘S•ÑSPÕSÓƒBŒKˆÙ[XİÛÛ\Û™[BŒ‹ˆ][KTÙ[XİÛÛ\Û™[ÃBŒËˆÙ[Xİ[ÛÛ\Û™[ÃBˆ\Ù[XİÛÛ\Û™[ÃBKˆÙ[XİÛÛ›™XİYÛÛ\Û™[ÃB‹ˆÙ[XİÚ[Z[\ˆÛÛ\Û™[ÃBËˆÙ[XİÛÛ\Û™[ÈH\CBˆÙ[XİÛÛ\Û™[ÈH^Y\ƒBKˆÙ[XİÛÛ\Û™[ÈH˜[YCBŒLˆ[™\Ù[Xİ[ÛƒBƒBˆÈÈÈ‹ˆÓÓTÓ‘S•SÕ‘SQS•BŒLKˆ[İ™HÛÛ\Û™[BŒL‹ˆ˜YÈÛÛ\Û™[BŒLËˆ™\ÜÚ][ÛˆÛÛ\Û™[BŒMˆ[İ™H][\HÛÛ\Û™[ÃBŒMKˆ[İ™HÛÛ›™XİYÛÛ\Û™[ÃBŒM‹ˆ[İ™HÛÛ\Û™[Üš^›Û[CBŒMËˆ[İ™HÛÛ\Û™[™\XØ[CBŒNˆ[İ™HÛÛ\Û™[œ™Y[CBŒNKˆ[İ™HÛÛ\Û™[HÛÛÜ™[˜]\ÃBŒŒˆ[İ™HÛÛ\Û™[Ú]\œ›İÈÙ^\ÃBŒŒKˆÛ˜\ÛÛ\Û™[ÈÜšYBŒŒ‹ˆÛ˜\ÛÛ\Û™[È[›İ\ˆÛÛ\Û™[BŒŒËˆ[YÛˆÛÛ\Û™[ÈİZYCBŒˆØÚÈÛÛ\Û™[ÜÚ][ÛƒBŒKˆ[›ØÚÈÛÛ\Û™[ÜÚ][ÛƒBƒBˆÈÈÈËˆÓÓTÓ‘S•ÓÓ“‘PÕSÓƒBŒ‹ˆÛÛ›™XİÛÈÛÛ\Û™[ÃBŒËˆÛÛ›™Xİ][\HÛÛ\Û™[ÃBŒˆÛÛ›™XİÛÛ\Û™[[œÃBŒKˆÛÛ›™Xİ[œ]Èİ]]BŒÌˆÛÛ›™Xİİ]]È[œ]BŒÌKˆÛÛ›™XİİÙ\ˆ[œÃBŒÌ‹ˆÛÛ›™XİÜ›İ[™[œÃBŒÌËˆÛÛ›™XİÚYÛ˜[[œÃBŒÍˆÛÛ›™Xİ]HÜÃBŒÍKˆÛÛ›™XİÛÛ›ÛÜÃBŒÍ‹ˆÛÛ›™XİYXÚ[šXØ[›Ú[ÃBŒÍËˆÛÛ›™XİY˜][XÈÜÃBŒÎˆÛÛ›™Xİ™][X]XÈÜÃBŒÎKˆÛÛ›™XİÜXØ[ÜÃBˆÛÛ›™Xİ™]ÛÜšÈÜÃBKˆ]]ËPÛÛ›™XİÛÛ\Û™[ÃB‹ˆ\ØÛÛ›™XİÛÛ\Û™[ÃBËˆ™XÛÛ›™XİÛÛ\Û™[ÃBˆ™\XÙH^\İ[™ÈÛÛ›™Xİ[ÛƒBKˆ˜[Y]HÛÛ›™Xİ[ÛƒB‹ˆYÚYÚÛÛ›™XİYÛÛ\Û™[ÃBËˆ˜XÙHÛÛ\Û™[ÛÛ›™Xİ[ÛœÃBˆÚİÈÛÛ›™Xİ[Ûˆ]BKˆYHÛÛ›™Xİ[Ûˆ]BLˆ]Xİ[˜ÛÛ›™XİYÛÛ\Û™[ÃBƒBˆÈÈÈˆÒT’S‘È•SÕSÓ”ÃBLKˆİ\Ú\™CBL‹ˆ˜]ÈÚ\™CBLËˆ[™Ú\™CBMˆÛÛ›™XİÚ\™HÈ[ƒBMKˆÛÛ›™XİÚ\™HÈ\›Z[˜[BM‹ˆÛÛ›™XİÚ\™HÈ[›İ\ˆÚ\™CBMËˆ^[™Ú\™CBNˆÚÜ[ˆÚ\™CBNKˆ[İ™HÚ\™CBŒˆ˜YÈÚ\™CBŒKˆ™[™Ú\™CBŒ‹ˆÜ]Ú\™CBŒËˆ›Ú[ˆÚ\™\ÃBˆY\™ÙHÚ\™\ÃBKˆ[]HÚ\™CB‹ˆ\XØ]HÚ\™CBËˆÛÜHÚ\™CBˆ\İHÚ\™CBKˆ›İ]HÚ\™CBÌˆÚ[™ÙHÚ\™H\™Xİ[ÛƒBÌKˆÚ[™ÙHÚ\™HXÚÛ™\ÜÃBÌ‹ˆÚ[™ÙHÚ\™HÛÛÜƒBÌËˆÚ[™ÙHÚ\™Hİ[CBÍˆÚ[™ÙHÚ\™H\CBÍKˆÚ[™ÙHÚ\™HX]\šX[BÍ‹ˆÚ[™ÙHÚ\™HX™[BÍËˆYÚ\™H[˜İ[ÛƒBÎˆ™[[İ™HÚ\™H[˜İ[ÛƒBÎKˆYÚ\™H›ÙCBˆ™[[İ™HÚ\™H›ÙCBKˆ]]ËT›İ]HÚ\™CB‹ˆX[X[T›İ]HÚ\™CBËˆÜÙÛÛ˜[Ú\™H›İ][™ÃBˆİ\™YÚ\™H›İ][™ÃBKˆİ˜ZYÚÚ\™H›İ][™ÃB‹ˆ]›ÚYÚ\™HÜ›ÜÜÚ[™ÃBËˆ]XİÚ\™HÜ›ÜÜÚ[™ÃBˆ]XİÚ\™HÚÜÚ\˜İZ]BKˆYÚYÚÚ\™H]BLˆ˜XÙHÚ\™HÛÛ›™Xİ[ÛƒBƒBˆÈÈÈKˆÓÓTÓ‘S•“ÕUSÓƒBLKˆ›İ]HÛÛ\Û™[BL‹ˆ›İ]HLYÜ™Y\ÃBLËˆ›İ]HNYÜ™Y\ÃBMˆ›İ]HÌYÜ™Y\ÃBMKˆ›İ]HÛØÚİÚ\ÙCBM‹ˆ›İ]HÛİ[\˜ÛØÚİÚ\ÙCBMËˆœ™YH›İ][ÛƒBNˆ›İ]H\›İ[™Ù[\ƒBNKˆ›İ]H\›İ[™İ\İÛH]›İBŒLˆ™\Ù]›İ][ÛƒBƒBˆÈÈÈ‹ˆÓÓTÓ‘S•S”Ñ“Ô“PUSÓƒBŒLKˆ™\Ú^™HÛÛ\Û™[BŒL‹ˆØØ[HÛÛ\Û™[BŒLËˆİ™]ÚÛÛ\Û™[BŒLˆ›\Üš^›Û[CBŒLKˆ›\™\XØ[CBŒL‹ˆZ\œ›ÜˆÛÛ\Û™[BŒLËˆÚÙ]ÈÛÛ\Û™[BŒLˆÚ[™ÙHÛÛ\Û™[ÜšY[][ÛƒBŒLKˆÚ[™ÙHÛÛ\Û™[[Y[œÚ[ÛœÃBŒLLˆ™\Ù]˜[œÙ›Ü›X][ÛƒBƒBˆÈÈÈËˆÓÓTÓ‘S•QUS‘ÃBŒLLKˆY]ÛÛ\Û™[BŒLL‹ˆY]ÛÛ\Û™[›Ü\Y\ÃBŒLLËˆY]ÛÛ\Û™[˜[YCBŒLMˆY]ÛÛ\Û™[X™[BŒLMKˆY]ÛÛ\Û™[˜[YCBŒLM‹ˆY]ÛÛ\Û™[\ØÜš\[ÛƒBŒLMËˆY]ÛÛ\Û™[\˜[Y]\œÃBŒLNˆY]ÛÛ\Û™[[Y[œÚ[ÛœÃBŒLNKˆY]ÛÛ\Û™[X]\šX[BŒLŒˆY]ÛÛ\Û™[ÛÛÜƒBŒLŒKˆY]ÛÛ\Û™[Ú\CBŒLŒ‹ˆY]ÛÛ\Û™[Ş[X›ÛBŒLŒËˆY]ÛÛ\Û™[›Ûİš[BŒLˆY]ÛÛ\Û™[[œÃBŒLKˆY]ÛÛ\Û™[\›Z[˜[ÃBŒL‹ˆY]ÛÛ\Û™[ÜÃBŒLËˆY]ÛÛ\Û™[Y]Y]CBŒLˆY]ÛÛ\Û™[™Y™\™[˜ÙHQBŒLKˆY]ÛÛ\Û™[ÜšY[][ÛƒBŒLÌˆ™\Ù]ÛÛ\Û™[›Ü\Y\ÃBƒBˆÈÈÈˆÓÓTÓ‘S•TPĞUSÓƒBŒLÌKˆÛÜHÛÛ\Û™[BŒLÌ‹ˆİ]ÛÛ\Û™[BŒLÌËˆ\İHÛÛ\Û™[BŒLÍˆ\XØ]HÛÛ\Û™[BŒLÍKˆÛÛ™HÛÛ\Û™[BŒLÍ‹ˆ\XØ]HÛÛ›™XİYÛÛ\Û™[ÃBŒLÍËˆ\XØ]HÛÛ\Û™[Ú]Ú\š[™ÃBŒLÎˆ\XØ]HÛÛ\Û™[Ú]İ]Ú\š[™ÃBŒLÎKˆÜ™X]HÛÛ\Û™[\œ˜^CBŒMˆÜ™X]H™\X]YÛÛ\Û™[]\›ƒBƒBˆÈÈÈKˆÓÓTÓ‘S•Ô“ÕTS‘ÃBŒMKˆÜ›İ\ÛÛ\Û™[ÃBŒM‹ˆ[™Ü›İ\ÛÛ\Û™[ÃBŒMËˆÜ™X]HÛÛ\Û™[\ÜÙ[X›CBŒMˆœ™XZÈÛÛ\Û™[\ÜÙ[X›CBŒMKˆYÛÛ\Û™[ÈÜ›İ\BŒM‹ˆ™[[İ™HÛÛ\Û™[œ›ÛHÜ›İ\BŒMËˆ[İ™HÜ›İ\BŒMˆ›İ]HÜ›İ\BŒMKˆ™\Ú^™HÜ›İ\BŒMLˆØÚÈÜ›İ\BŒMLKˆ[›ØÚÈÜ›İ\BŒML‹ˆ\XØ]HÜ›İ\BŒMLËˆÛÛ›™XİÛÛ\Û™[Ü›İ\ÃBŒMMˆØ]™HÜ›İ\\È[Ù[CBŒMMKˆÛÛ™\Ü›İ\È™]\ØX›HÛÛ\Û™[BƒBˆÈÈÈLˆÓÓTÓ‘S•SQÓ“QS•BŒMM‹ˆ[YÛˆYBŒMMËˆ[YÛˆšYÚBŒMNˆ[YÛˆÜBŒMNKˆ[YÛˆ›İÛCBŒMŒˆ[YÛˆÙ[\ƒBŒMŒKˆ[YÛˆÜš^›Û[CBŒMŒ‹ˆ[YÛˆ™\XØ[CBŒMŒËˆ\İšX]HÜš^›Û[CBŒMˆ\İšX]H™\XØ[CBŒMKˆ\]X[^™HÜXÚ[™ÃBŒM‹ˆÛ˜\ÈÜšYBŒMËˆÛ˜\ÈÛÛ\Û™[BŒMˆÛ˜\ÈÛÛ›™Xİ[ÛˆÚ[BŒMKˆ]]ËP[YÛˆÛÛ\Û™[ÃBŒMÌˆ]]ËP\œ˜[™ÙHÛÛ\Û™[ÃBƒBˆÈÈÈLKˆÓÓTÓ‘S•SˆS‘T“RSS•SÕSÓ”ÃBŒMÌKˆÙ[Xİ[ƒBŒMÌ‹ˆ[İ™H[ƒBŒMÌËˆY[ƒBŒMÍˆ[]H[ƒBŒMÍKˆ™[˜[YH[ƒBŒMÍ‹ˆÚ[™ÙH[ˆ[X™\ƒBŒMÍËˆÚ[™ÙH[ˆ\CBŒMÎˆÚ[™ÙH[ˆ\™Xİ[ÛƒBŒMÎKˆÛÛ›™Xİ[ƒBŒNˆ\ØÛÛ›™Xİ[ƒBŒNKˆYÚYÚ[ƒBŒN‹ˆÚİÈ[ˆ˜[YCBŒNËˆYH[ˆ˜[YCBŒNˆÚİÈ[ˆ[X™\ƒBŒNKˆYH[ˆ[X™\ƒBŒN‹ˆİØ\[œÃBŒNËˆØÚÈ[ƒBŒNˆ[›ØÚÈ[ƒBŒNKˆ˜[Y]H[ˆÛÛ›™Xİ[ÛƒBŒNLˆ]Xİ›Ø][™È[œÃBƒBˆÈÈÈL‹ˆÓÓTÓ‘S•VQTˆ•SÕSÓ”ÃBŒNLKˆ[İ™HÛÛ\Û™[È^Y\ƒBŒNL‹ˆÜ™X]HÛÛ\Û™[^Y\ƒBŒNLËˆ[]HÛÛ\Û™[^Y\ƒBŒNMˆYHÛÛ\Û™[^Y\ƒBŒNMKˆÚİÈÛÛ\Û™[^Y\ƒBŒNM‹ˆØÚÈÛÛ\Û™[^Y\ƒBŒNMËˆ[›ØÚÈÛÛ\Û™[^Y\ƒBŒNNˆÚ[™ÙHÛÛ\Û™[^Y\ƒBŒNNKˆœš[™ÈÛÛ\Û™[›ÜØ\™BŒŒˆÙ[™ÛÛ\Û™[˜XÚİØ\™BŒŒKˆœš[™ÈÛÛ\Û™[Èœ›ÛBŒŒ‹ˆÙ[™ÛÛ\Û™[È˜XÚÃBŒŒËˆY\™ÙHÛÛ\Û™[^Y\œÃBŒŒˆ\XØ]HÛÛ\Û™[^Y\ƒBŒŒKˆ\ÛÛ]HÛÛ\Û™[^Y\ƒBƒBˆÈÈÈLËˆÓÓTÓ‘S•ÓÓ”ÕRS•ÃBŒŒ‹ˆØÚÈÛÛ\Û™[BŒŒËˆ[›ØÚÈÛÛ\Û™[BŒŒˆš^ÛÛ\Û™[ÜÚ][ÛƒBŒŒKˆ\H\İ[˜ÙHÛÛœİ˜Z[BŒŒLˆ\H[™ÛHÛÛœİ˜Z[BŒŒLKˆ\H[YÛ›Y[ÛÛœİ˜Z[BŒŒL‹ˆ\H\˜[[ÛÛœİ˜Z[BŒŒLËˆ\H\œ[™Xİ[\ˆÛÛœİ˜Z[BŒŒMˆ\HÛÚ[˜ÚY[ÛÛœİ˜Z[BŒŒMKˆ\H[™Ù[ÛÛœİ˜Z[BŒŒM‹ˆ\HŞ[[Y]HÛÛœİ˜Z[BŒŒMËˆ\H›İ][ÛˆÛÛœİ˜Z[BŒŒNˆ\H[İ™[Y[ÛÛœİ˜Z[BŒŒNKˆ™[[İ™HÛÛœİ˜Z[BŒŒŒˆ˜[Y]HÛÛœİ˜Z[ÃBƒBˆÈÈÈMˆÓÓTÓ‘S•ÒSUSUSÓƒBŒŒŒKˆÚ[][]HÛÛ\Û™[BŒŒŒ‹ˆÚ[][]HÛÛ›™XİYÛÛ\Û™[ÃBŒŒŒËˆİ\Ú[][][ÛƒBŒŒˆİÜÚ[][][ÛƒBŒŒKˆ]\ÙHÚ[][][ÛƒBŒŒ‹ˆ™\İ[YHÚ[][][ÛƒBŒŒËˆ™\Ù]Ú[][][ÛƒBŒŒˆ[Ûš]ÜˆÛÛ\Û™[İ]CBŒŒKˆ[Ûš]ÜˆÛÛ\Û™[›ÛYÙCBŒŒÌˆ[Ûš]ÜˆÛÛ\Û™[İ\œ™[BŒŒÌKˆ[Ûš]ÜˆÛÛ\Û™[İÙ\ƒBŒŒÌ‹ˆ[Ûš]ÜˆÛÛ\Û™[[\\˜]\™CBŒŒÌËˆ[Ûš]ÜˆÛÛ\Û™[œ™\]Y[˜ŞCBŒŒÍˆ[Ûš]ÜˆÛÛ\Û™[ÚYÛ˜[BŒŒÍKˆ\Ü^HÚ[][][Ûˆ™\İ[ÃBŒŒÍ‹ˆYÚYÚXİ]™HÛÛ›™Xİ[ÛœÃBŒŒÍËˆ]XİÚ[][][Ûˆ\œ›ÜœÃBŒŒÎˆ[œÜXİÛÛ\Û™[™Z]š[ÜƒBŒŒÎKˆ[š[X]HÛÛ\Û™[Ü\˜][ÛƒBŒˆ^ÜÚ[][][Ûˆ™\İ[ÃBƒBˆÈÈÈMKˆÓÓTÓ‘S•TÕS‘ÈS‘SQUSÓƒBŒKˆ\İÛÛ\Û™[BŒ‹ˆ\İÛÛ›™Xİ[ÛƒBŒËˆ\İÚ\š[™ÃBŒˆ\İÚ\˜İZ]BŒKˆÚXÚÈÛÛ›™Xİ]š]CBŒ‹ˆÚXÚÈ[ˆÛÛ\]Xš[]CBŒËˆÚXÚÈ[XİšXØ[[\ÃBŒˆÚXÚÈ\ÚYÛˆ[\ÃBŒKˆ]XİÚÜÚ\˜İZ]ÃBŒLˆ]XİÜ[ˆÚ\˜İZ]ÃBŒLKˆ]Xİİ™\›\[™ÈÛÛ\Û™[ÃBŒL‹ˆ]Xİ[˜[YÛÛ›™Xİ[ÛœÃBŒLËˆ]XİZ\ÜÚ[™ÈÛÛ›™Xİ[ÛœÃBŒMˆ]Xİ\XØ]HÛÛ›™Xİ[ÛœÃBŒMKˆ]XİÛÛ\Û™[ÛÛ™›XİÃBŒM‹ˆYÚYÚ\œ›ÜœÃBŒMËˆÚİÈ\œ›Üˆ]Z[ÃBŒNˆ]]ËQš^İ\ÜY\œ›ÜœÃBŒNKˆÙ[™\˜]H˜[Y][Ûˆ™\ÜBŒŒˆÛX\ˆ˜[Y][Ûˆ™\İ[ÃBƒBˆÈÈÈM‹ˆÓÓTÓ‘S•Ô‘ĞS’VUSÓƒBŒŒKˆ™[˜[YHÛÛ\Û™[BŒŒ‹ˆ[X™\ˆÛÛ\Û™[BŒŒËˆYÈÛÛ\Û™[BŒˆØ]YÛÜš^™HÛÛ\Û™[BŒKˆÙX\˜ÚÛÛ\Û™[BŒ‹ˆš[\ˆÛÛ\Û™[ÃBŒËˆÛÜÛÛ\Û™[ÃBŒˆYHÛÛ\Û™[BŒKˆÚİÈÛÛ\Û™[BŒÌˆ\ÛÛ]HÛÛ\Û™[BŒÌKˆYÚYÚÛÛ\Û™[BŒÌ‹ˆYÛÛ\Û™[›İ\ÃBŒÌËˆYÛÛ\Û™[ÛÛ[Y[ÃBŒÍˆYÛÛ\Û™[Øİ[Y[][ÛƒBŒÍKˆ\ÜÚYÛˆÛÛ\Û™[Y[YšY\ƒBŒÍ‹ˆÜ™X]HÛÛ\Û™[Y\˜\˜ÚCBŒÍËˆYÛÛ\Û™[ÈXœ˜\CBŒÎˆ™[[İ™HÛÛ\Û™[œ›ÛHXœ˜\CBŒÎKˆØ]™HÛÛ\Û™[[\]CBŒˆØYÛÛ\Û™[[\]CBƒBˆÈÈÈMËˆÓÓTÓ‘S•‘TPÑSQS•BŒKˆ™\XÙHÛÛ\Û™[BŒ‹ˆİØ\ÛÛ\Û™[BŒËˆÚ[™ÙHÛÛ\Û™[\CBŒˆÚ[™ÙHÛÛ\Û™[[Ù[BŒKˆÚ[™ÙHÛÛ\Û™[Ş[X›ÛBŒ‹ˆÚ[™ÙHÛÛ\Û™[›Ûİš[BŒËˆ™\XÙHÛÛ\Û™[Ú[H™\Ù\š[™ÈÛÛ›™Xİ[ÛœÃBŒˆ™\XÙHÛÛ\Û™[Ú[H™\Ù\š[™ÈÜÚ][ÛƒBŒKˆ™\XÙHÛÛ\Û™[Ú[H™\Ù\š[™È›Ü\Y\ÃBŒLˆ™\İÜ™H™]š[İ\ÈÛÛ\Û™[BƒBˆÈÈÈNˆQSÑQÒT’S‘ÈS‘“ÕUS‘ÃBŒLKˆÜ™X]HÚ\™H\ÃBŒL‹ˆÛÛ›™XİÛÛ\Û™[È\ÃBŒLËˆY\È[CBŒMˆ™[[İ™H\È[CBŒMKˆÜ]\ÃBŒM‹ˆY\™ÙH\Ù\ÃBŒMËˆ™[˜[YH™]BŒNˆ\ÜÚYÛˆ™]X™[BŒNKˆ\ÜÚYÛˆ™]Û\ÜÃBŒÌˆ\ÜÚYÛˆÚ\™HØ]YÙCBŒÌKˆ\ÜÚYÛˆÚ\™H[™İBŒÌ‹ˆØ[İ[]HÚ\™H[™İBŒÌËˆØ[İ[]HÚ\™H™\Ú\İ[˜ÙCBŒÌˆØ[İ[]H›ÛYÙH›ÜBŒÌKˆ]]ËSÜ[Z^™HÚ\š[™ÃBŒÌ‹ˆ›İ]H\›İ[™ØœİXÛ\ÃBŒÌËˆ›İ]H›İYÚØ^\Ú[ÃBŒÌˆYÚ\™HØ^\Ú[BŒÌKˆ™[[İ™HÚ\™HØ^\Ú[BŒÌLˆ[İ™HÚ\™HØ^\Ú[BŒÌLKˆÜ™X]HY™™\™[X[Z\ƒBŒÌL‹ˆ›İ]HY™™\™[X[Z\ƒBŒÌLËˆÜ™X]HÚ\™H\›™\ÜÃBŒÌMˆ[™HÚ\™\ÃBŒÌMKˆ[˜[™HÚ\™\ÃBŒÌM‹ˆÜ™X]H\›Z[˜[›ØÚÃBŒÌMËˆÛÛ›™XİÈ\›Z[˜[›ØÚÃBŒÌNˆÙ[™\˜]HÚ\š[™ÈXYÜ˜[CBŒÌNKˆÙ[™\˜]H™]\İBŒÌŒˆ^ÜÚ\š[™È]CBƒBˆÈÈÈNKˆÓÓTÓ‘S•S•TPÕSÓˆÒUHĞS•TÃBŒÌŒKˆ˜YÈÛÛ\Û™[œ›ÛHÚYX˜\ˆÈØ[˜\ÃBŒÌŒ‹ˆ›ÜÛÛ\Û™[ÛÈØ[˜\ÃBŒÌŒËˆ™]šY]ÈÛÛ\Û™[™Y›Ü™HXÙ[Y[BŒÌˆXÙHÛÛ\Û™[]İ\œÛÜƒBŒÌKˆXÙH][\HÛÛ\Û™[ÃBŒÌ‹ˆØ[˜Ù[ÛÛ\Û™[XÙ[Y[BŒÌËˆ[™ÈÛÛ\Û™[XÙ[Y[BŒÌˆ™YÈÛÛ\Û™[XÙ[Y[BŒÌKˆÚİÈÛÛ\Û™[›İ[™[™È›ŞBŒÌÌˆÚİÈÛÛ\Û™[Ù[Xİ[Ûˆ[™\ÃBŒÌÌKˆÚİÈÛÛ\Û™[ÛÛ›™Xİ[ÛˆÚ[ÃBŒÌÌ‹ˆÚİÈÛÛ\Û™[[YÛ›Y[İZY\ÃBŒÌÌËˆÚİÈÛÛ\Û™[[Y[œÚ[ÛœÃBŒÌÍˆÚİÈÛÛ\Û™[ÛÛÜ™[˜]\ÃBŒÌÍKˆÚİÈÛÛ\Û™[ÛÛ\BŒÌÍ‹ˆÜ[ˆÛÛ\Û™[ÛÛ^Y[CBŒÌÍËˆÜ[ˆÛÛ\Û™[›Ü\Y\È[™[BŒÌÎˆÜ[ˆÛÛ\Û™[]ZXÚÈXİ[ÛœÃBŒÌÎKˆ›ÛÛHÈÛÛ\Û™[BŒÍˆÙ[\ˆÛÛ\Û™[[ˆšY]ÃBƒBˆÈÈÈŒˆ“Ñ‘TÔÒSÓSĞS•TÈS•TPÕSÓˆ•SÕSÓ”ÃBŒÍKˆ˜YÈÛÛ\Û™[Ú]İ]\ØÛÛ›™Xİ[™ÈÚ\™\ÃBŒÍ‹ˆ˜YÈÛÛ\Û™[[™]]ÛX]XØ[H™\›İ]HÚ\™\ÃBŒÍËˆ[İ™HÛÛ›™XİYÛÛ\Û™[ÈÙÙ]\ƒBŒÍˆ[İ™HÛÛ\Û™[Ú[H™\Ù\š[™ÈÛÛ›™Xİ[ÛˆÙ[ÛY]CBŒÍKˆ›İ]HÛÛ\Û™[Ú[HXZ[Z[š[™ÈÛÛ›™Xİ[ÛœÃBŒÍ‹ˆ\XØ]HÛÛ\Û™[Ú]^\İ[™ÈÛÛ›™Xİ[ÛœÃBŒÍËˆ]]ËTÛ˜\Ú\™HÈ™X\™\İ˜[Y[ƒBŒÍˆ™]šY]ÈÛÛ›™Xİ[Ûˆ™Y›Ü™HÛÛ\][ÛƒBŒÍKˆYÚYÚ˜[YÛÛ›™Xİ[Ûˆ\™Ù]ÃBŒÍLˆYÚYÚ[˜[YÛÛ›™Xİ[Ûˆ\™Ù]ÃBŒÍLKˆ™]™[[˜[Y[ˆÛÛ›™Xİ[ÛœÃBŒÍL‹ˆ]]ÛX]XØ[HÜ™X]HÚ\™H[˜İ[ÛœÃBŒÍLËˆ]]ÛX]XØ[H™[[İ™H™Y[™[[˜İ[ÛœÃBŒÍMˆ]]ÛX]XØ[H\]HÛÛ›™Xİ[ÛœÈY\ˆ[İ™[Y[BŒÍMKˆ]]ÛX]XØ[H™XØ[İ[]HÚ\™H]ÃBŒÍM‹ˆ]]ÛX]XØ[H\]HÛÛ\Û™[ÛÛÜ™[˜]\ÃBŒÍMËˆ]]ÛX]XØ[H\]HÛÛ\Û™[[Y[œÚ[ÛœÃBŒÍNˆ]]ÛX]XØ[H\]HÛÛ\Û™[X™[ÃBŒÍNKˆ]]ÛX]XØ[H\]H™]\İBŒÍŒˆ]]ÛX]XØ[HØ]™HØ[˜\ÈÚ[™Ù\ÃBƒBƒBˆÈÈŒ‹LLKLLˆ[˜Ü™[Y[[^Xİ][Ûˆ™XÛÜ™BƒB‹H™\Ù\™YH\›İ™YÛÜšÜİ][Ûˆ[\™˜XÙH[™YYLKÌÈ\ÈHÙ\\˜]KÛİ\˜ÙKX˜XÚÙYQ“HQ”ÌŒÈÚY[Y[œÈÍËLLŒÙ[œÛÜˆ[œ]^[\KƒB‹HLKÌÈÛÛZ[œÈY]X›HÚY[Y[œÈ‘TÍÌŒL‹LPQMLŒQ“HQŒÌ”ÑËÕTËLL[™Ù[š^ÛÛXİÌŒLŒM[œİ[˜Ù\ÈÚ]˜[YYÛÛ›™XİX›H\›Z[˜[È[™HÜšYÚ[˜[^[\IÜÈ[ˆÚ\™HÙYÛY[Ëˆ\›Z[˜[™Y™\™[˜Ù\ÈÛÛ[YH\ÈËÖ™XØ]\ÙHx $Öˆ\™H\ÙYÛˆLKÌ‹ƒB‹H™\šYšYYHÙ]™[‹\ÚY]›Ú™Xİ[Ù[ˆNHÛÛ\Û™[[œİ[˜Ù\ËLˆÚ\™HÙYÛY[ËÌHÚY][ØØ[™]È[™Ü[ˆ[™Ú[Ëˆ^\İ[™ÈLKÌˆ™[XZ[œÈ]MHÛÛ\Û™[ËˆÚ\™\È[™ˆ™]ÎÈLKÌÈ\ÈÛÛ\Û™[ËLÚ\™\È[™H™]ËƒB‹HÙ\LKÌˆ[™LKÌÈ[XİšXØ[HÙ\\˜]KˆHØ[™Y]HYHÚ[ÈÛˆLKÌˆ™\ÛÛ™HÈ[›X™[YÛÛ›Û™]ËÛÈ›ÈˆÈˆÛÛ›™Xİ[Ûˆ\È\ÜÙ\YÚ]İ]Ûİ\˜ÙH]šY[˜ÙKˆÜ›ÜÜË\ÚY][XİšXØ[[šÜÈ™[XZ[ˆH]\™HZ[\İÛ™HY\ˆH[\™˜XÙH\È™\šYšYYƒB‹Hİ\HY\]XXŞK›İXİ[ÛˆÛÛÜ™[˜][Û‹ËÜÙ[œÛÜˆ™Z]š[Ü‹[İÜˆ™Z]š[Üˆ[™ÛÛœİXİ[Ûˆ™XY[™\ÜÈ\™H›İ\İX›\ÚYˆLKÌ8 $ĞLKÌL™[XZ[ˆ[˜]]Ü™YƒB‹H™^ˆÛİ\˜ÙH[™Øİ[Y[[ˆ[\™˜XÙHYš[š][Û‹[ˆÛÛ[YHÚ]LKÌ[ˆÛX[™\šYšYYœËY\™Ú[™È[™\ŞZ[™ÈY\ˆXXÚXØÙ\YZ[\İÛ™KƒBƒBƒBˆÈÈŒ‹LLKLLˆ[˜Ü™[Y[[^Xİ][Ûˆ™XÛÜ™8 %LKÌBƒB‹HYYHÛİ\˜ÙKX˜XÚÙYÚY[Y[œÈÒUÔÕLLÈ‘TLÌÌ‹MPLÛÛ\Û™[\›Z[˜[X]Ø\™HØÚ[X]XÈÛ\[™[œÜXİÜˆšY[ÈÚ][ˆH^\İ[™ÈÛÜšÜİ][Ûˆ^[İ]ˆHÛÈ\ÚXØ[İ]][Z[\ÈØÜ™]ÜÈ\™HØİ[Y[Y\ÈÛ™HÚ\™Y™]\›ˆ[™Ú[ÈİÙ\ˆÛÛ™\œÚ[Ûˆ[™\ÛÛ][Ûˆ™Z]š[Üˆ\™H›İÚ[][]YƒB‹HYYÙ[š^ÛÛXİMˆ‹THÌŒLŒMÈ\ÈHÛİ\˜ÙKX˜XÚÙY›İXİ]™KXÛÛ™XİÜˆ\›Z[˜[ˆ]ÈÛÈÛÛ›™Xİ[ÛˆÚ[È\ÙH^XÚ][Ù[[ØØ[[™^\È™XØ]\ÙHHX[Y˜Xİ\™\ˆÙ\È›İ[X™\ˆ[NÈH˜Z[›Û™[™È›Ûİ\ÈØİ[Y[Y]›İHÙ\\˜]H[Ù[Y[™Ú[ƒB‹HYYLKÌÚ]š]™HÛİ\˜ÙKX˜XÚÙY^\›˜[\›Z[˜[›İ[™\šY\È›Üˆ‹K
+ÌˆÈ[™ˆËˆHYÙH\ÈÚ^ÛÛ\Û™[[œİ[˜Ù\Ëš]™H›İ]YÚ\™\È[™š]™HØØ[™]Ëˆ]™[XZ[œÈ[XİšXØ[HÙ\\˜]Hœ›ÛHLKÌˆ[™LKÌÎÈ›È\İ™X[Hİ\K[œ]›İXİ]™H]šXÙKİ]]ØYÜˆÜ›ÜÜË\ÚY]ÛÛ›™Xİ[Ûˆ\È\ÜÙ\YƒB‹H™\šYšYYHZYÚ\ÚY]›Ú™Xİ[Ù[ˆHÛÛ\Û™[ËMÈÚ\™HÙYÛY[ËÍˆÚY][ØØ[™]Ë™\›ÈÜ[ˆÚ\™H[™Ú[È[™š]™H™]ÈÛˆLKÌˆHÛÛ\Û™[™YÚ\İ\ˆ[™›Ú™Xİ‘PQQH›İÈ™Y›XİH[Ù[Y]šXÙ\È[™›İ[™\šY\ÎÈLKÌx $ĞLKÌL™[XZ[ˆ[˜]]Ü™YƒB‹Hİ\HØ\XÚ]K›İXİ[ÛˆÛÛÜ™[˜][Û‹ÛÛ™XİÜˆÚ^š[™Ë[œİ[][ÛˆİZ]Xš[]H[™ÛÛœİXİ[Ûˆ™XY[™\ÜÈ\™H›İ\İX›\ÚYˆÛÛ[YHÛ›Hœ›ÛHÙ™šXÚX[Ûİ\˜ÙKX˜XÚÙY]šXÙH[™\›Z[˜[]KƒBƒBƒBƒBˆÈÈŒ‹LLKLLˆ[˜Ü™[Y[[^Xİ][Ûˆ™XÛÜ™8 %LKÌCBƒB‹HYY™XÚ\›ØØ[š\ÚX›H™[™\™YÙ™‹\YÙHÛÛ›™XİÜˆ™Y™\™[˜Ù\ÈÚ][ˆH^\İ[™È˜]Ú[™ÈØ[˜\ËˆH[™Ú[™H˜[Y]\ÈXXÚ[šÈYØZ[œİ[ˆ^XİÜ[ˆÚ\™H[™Ú[[™H™X[\™Ù]\ÚY]ÛÛ\Û™[È›Ú™Xİ”ÓÓˆ™\Ù\™\ÈH[šÜÈÚ[ˆØ]™Y[™™[Ü[™YƒB‹HÛÛ›™XİYHÚY[Y[œÈÒUÔÕLLÈ
+Ìˆ[™ˆİ]]È]LKÌL‹ÖLÈÈHÚY[Y[œÈÔHLŒLÈ
+È[™Hİ\H\›Z[˜[ÈÛˆLKÌÈ›İYÚËÖˆLKÌˆ™[XZ[œÈ[XİšXØ[HÙ\\˜]KƒB‹HYY›İ\ˆÜÙÛÛ˜[[™Ú[Ú\™\È[™ÛÈÜ›ÜÜË\ÚY][šÜËˆH›Ú™Xİ›İÈÛÛZ[œÈÚY]ËHÛÛ\Û™[ËŒHÚ\™\ËÍˆÚY][ØØ[™]ËÍÛØ˜[™]ËØØ[[šÈ[™Ú[È[™[›[šÙY[™Ú[ËƒB‹H™\šYšYYØ]™KÜ™[Ü[‹™XÚ\›ØØ[\™Ù]È[™^XİÛØ˜[[ˆÜ›İ\Ëˆ›Øİ\ÙYØØ[İZ]NˆLˆ\İÈ\ÜÙYˆH\›İ™YÛÜšÜİ][ÛˆÙ[ÛY]HØ\È›İÚ[™ÙYÈÛÛ›™XİÜˆÜ˜\XÜÈ™[™\ˆ[œÚYHH^\İ[™ÈÚY]Ø[˜\ËƒB‹H›ÈİÛœİ™X[HØYİ[İ\œ™[›İXİ[ÛˆÛÛÜ™[˜][Û‹İ\HY\]XXŞK™Z]š[ÜˆÚ[][][ÛˆÜˆÛÛœİXİ[Ûˆ\›İ˜[\È\İX›\ÚYƒB‹H™^ˆÛÛ[YHHL\ÚY]™Y™\™[˜ÙH›Ú™Xİ[ˆÚ[Z[\›HÛX[Ûİ\˜ÙKX˜XÚÙY[˜Ü™[Y[ËƒBƒBƒBˆÈÈŒ‹LLKLLˆ[˜Ü™[Y[[^Xİ][Ûˆ™XÛÜ™8 %Ù™‹\YÙH˜]šYØ][ÛƒBƒB‹H^[™YHLKÌHÜ›ÜÜË\ÚY]ÛÛ›™XİÜœÈÈÛÜšÈ\ÈÙ^X›Ø\™XXØÙ\ÜÚX›H[šÜËˆ[İ\ÙHÛXÚË[\‹[™ÜXÙHÜ[ˆH™Y™\™[˜ÙYÚY][™Ù[XİH˜[YY\›Z[˜[[ˆH^\İ[™È›Ü\Y\È[™[ƒB‹HÛÛ›™XİÜˆ\™Ù]È™[XZ[ˆÚXÚÙYYØZ[œİH›Ú™Xİ[Ù[È[][™ÈH[šÙYÚY]™[[İ™\È]Èİ[H[šÜË[™™[˜[Z[™ÈH™Y™\™[˜ÙYÛÛ\Û™[\]\ÈHÛÛ›™XİÜˆX™[ƒB‹H™\Ù\™YHÛÜšÜİ][ÛˆÚ[Ù[ÛY]Kˆ›Øİ\ÙYİZ]H›İÈ[˜ÛY\ÈH˜]šYØ][Ûˆ™YÜ™\ÜÚ[Ûˆ[Û™ÜÚYH›Ú™Xİ[šË[‹YÜ›İ\[™Ø]™KÜ™[Ü[ˆÚXÚÜËƒB‹H™^ˆÛÛ[YHÚ]H™^ÛX[Ûİ\˜ÙKX˜XÚÙY›Ú™XİZ[\İÛ™HY\ˆ\È[\˜Xİ[Ûˆ[˜Ü™[Y[\ÈY\™ÙY[™\ŞYYƒBƒBƒBˆÈÈŒ‹LLKLLˆ[˜Ü™[Y[[^Xİ][Ûˆ™XÛÜ™8 %LKÌH\İšX][ÛˆYÙCBƒB‹HYYLKÌHÚ]Ûİ\˜ÙKX˜XÚÙYÙ[š^ÛÛXİMˆˆÑÈÌŒLŒM\›Z[˜[ÈMÖMH[™›İ\ˆÜÙÛÛ˜[Ú\™\ËˆH™XÚ\›ØØ[
+Ìˆ[™ˆ[šÜÈ›İÈ›İ]H›İYÚLKÌLKÌK[™LKÌË™\Ù\š[™ÈH^\İ[™ÈÛÜšÜİ][Ûˆ[\™˜XÙKƒB‹H\]YHÜ[š[™Ë\Ù]˜]Ú[™È[™^ÛÛ\Û™[™YÚ\İ\‹\Üİ[\[ÛœË‘PQQK[™›Ú™Xİ›ØYX\È™Y›XİH]]Ü™YYÙH[™]È[Z]ËƒB‹H›Ú™Xİ[˜[\Ú\È™\ÜÈHÚY]ËÈÛÛ\Û™[ËHÚ\™HÙYÛY[ËÎÚY][ØØ[™]ËÍ›Ú™Xİ]ÚYH™]ËZYÚ[šÙYÜ[ˆ[™Ú[Ë[™™\›È[›[šÙY[™Ú[ËˆHİ\H\È›È[Ù[Yİ[Xİ\œ™[Üˆ›İXİ[Û‹XÛÛÜ™[˜][Ûˆ™\İ[ƒB‹H›Øİ\ÙYØØ[İZ]NˆM\İÈ\ÜÙYÈØ]™KÜ™[Ü[ˆ[™^XİÛØ˜[[ˆÜ›İ\È\™HÛİ™\™Yˆ\ÚY\™ÙK[™\Ş[Y[\™H[™[™È\È[˜Ü™[Y[	ÜÈˆ[™ÒKƒB‹H™^ˆ\Ú\È›Øİ\ÙY[˜Ü™[Y[Y\™ÙHY\ˆÜ™Y[ˆÚXÚÜË[™™\šYHH\ŞYY›Ú™Xİ™Y›Ü™Hİ\[™È[›İ\ˆYÙKƒB
