@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 1.3",
-  "status": "Authored opening set: A1/001–A1/016; A1/017–A1/100 not authored.",
+  "revision": "Opening set 1.4",
+  "status": "Authored opening set: A1/001–A1/017; A1/018–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -96,6 +96,11 @@
       "id": "ref-016",
       "number": "A1/016",
       "name": "PLC I/O schedule · K2 NO feedback"
+    },
+    {
+      "id": "ref-017",
+      "number": "A1/017",
+      "name": "PLC I/O allocation summary"
     }
   ],
   "sheetLabels": {
@@ -108,7 +113,8 @@
     "ref-013": "PLC I/O assignment schedule",
     "ref-014": "PLC I/O schedule · KM4 NC feedback",
     "ref-015": "PLC I/O schedule · K2 NC feedback",
-    "ref-016": "PLC I/O schedule · K2 NO feedback"
+    "ref-016": "PLC I/O schedule · K2 NO feedback",
+    "ref-017": "PLC I/O allocation summary"
   },
   "sheetViews": {
     "ref-007": {
@@ -166,6 +172,12 @@
       "h": 760
     },
     "ref-016": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-017": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3612,7 +3624,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 1.3",
+      "text": "Engineering document set | Revision opening set 1.4",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3621,7 +3633,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/016",
+      "text": "Authored pages: A1/001–A1/017",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3639,7 +3651,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/017–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/018–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3771,7 +3783,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/016",
+      "text": "Component register | modeled devices on A1/006–A1/017",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3861,7 +3873,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/016.",
+      "text": "Component quantities match modeled devices through A1/017.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3975,7 +3987,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/016 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/017 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4243,7 +4255,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and source-backed PLC input/output links through A1/016.",
+      "text": "A1/007: CPU 1212C, IFM sensor and source-backed PLC input/output links through A1/016; A1/017 summarizes allocation.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4261,7 +4273,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/016 contain PLC sensor, operator, contactor coil and auxiliary status wiring.",
+      "text": "A1/007–A1/016 contain PLC sensor, operator, contactor coil and auxiliary status wiring; A1/017 summarizes PLC I/O assignments.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -5739,9 +5751,117 @@
       "y": 1274,
       "text": "A1/016  K2 NO relay output to PLC input DI a.6",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-title",
+      "sheetId": "ref-017",
+      "x": 50,
+      "y": 54,
+      "text": "A1/017 · PLC I/O allocation summary",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-00",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 190,
+      "text": "I0.0 · CPU X10:7 · IFM IFS204 PNP output B1:4 · A1/007",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-01",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 250,
+      "text": "I0.1 · CPU X10:8 · S2 NO contact 13–14 · A1/012",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-02",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 310,
+      "text": "I0.2 · CPU X10:9 · S3 NC contact 21–22 · A1/012",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-03",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 370,
+      "text": "I0.3 · CPU X10:10 · KM4 NO auxiliary 13–14 · A1/011",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-04",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 430,
+      "text": "I0.4 · CPU X10:11 · KM4 NC auxiliary 21–22 · A1/011",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-05",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 490,
+      "text": "I0.5 · CPU X10:12 · K2 NC contact 11–12 · A1/010",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-06",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 550,
+      "text": "I0.6 · CPU X10:13 · K2 NO contact 14 / KM4 coil A1 net · A1/010–A1/011",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-input-07",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 610,
+      "text": "I0.7 · CPU X10:14 · unassigned in the current modeled scope",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-output-00",
+      "sheetId": "ref-017",
+      "x": 120,
+      "y": 670,
+      "text": "Q0.0 · CPU X12:2 / DQ a.0 · Phoenix Contact K2 coil A1 · A1/007–A1/010",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-017-limit",
+      "sheetId": "ref-017",
+      "x": 50,
+      "y": 730,
+      "text": "Allocation summary follows authored wiring; PLC logic, address configuration and signal interpretation are not modeled.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-17",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1338,
+      "text": "A1/017  PLC I/O allocation summary — I0.7 unassigned in modeled scope",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Sixteen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; and source-backed PLC I/O assignments A1/013–A1/016, including KM4 NO/NC and K2 NC/NO points. The static model does not simulate PLC logic, relay/contactor actuation, feedback interpretation, switching, diagnostic behavior, or safety functions. A1/017–A1/100 are not authored.",
+  "description": "Seventeen authored sheets: editable records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and auxiliary feedback wiring A1/011; Schneider NO/NC operator inputs A1/012; PLC I/O assignment schedules A1/013–A1/016; and a consolidated PLC I/O allocation summary A1/017. DI a.7 / I0.7 has no assigned device or function in this model. PLC logic, relay/contactor actuation, feedback interpretation, switching, diagnostic behavior and safety functions are not simulated. A1/018–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",

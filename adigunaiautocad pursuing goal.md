@@ -2154,3 +2154,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the drawing index, cover, component register, assumptions, project status and source-backed example documentation. Preserved the workstation interface; relay switching, PLC logic and diagnostics remain unsimulated.
 - Analysis: 16 sheets, 31 component instances, 318 wire segments, 59 sheet-local nets, 41 global nets, sixteen cross-sheet links pairing 36 endpoints and zero unlinked endpoints. Regression checks exact K2:14/CPU X10:13/KM4:A1 membership, orthogonal routes and save/reopen.
 - Next: run tests, publish this focused increment, merge after CI passes, verify production, and continue at A1/017.
+
+
+## 2026-11-12 incremental execution record — A1/017
+
+- Added A1/017 as a native PLC I/O allocation summary for modeled I0.0–I0.6 and Q0.0, while explicitly recording I0.7 / CPU X10:14 as unassigned within the modeled scope. No components or topology were invented; PLC logic, address configuration and signal interpretation remain outside this static model.
+- Updated the drawing index, project status, README, roadmap, revision and this progress record. Preserved the workstation interface and `index.html`.
+- Model validation passed: 17 sheets, 31 component instances, 318 wire segments, 59 sheet-local nets, 41 project-wide nets, 16 cross-sheet links pairing 36 endpoints, and zero unlinked endpoints. Regression asserts all nine allocation entries and save/reopen.
+- Next: finish full regressions, publish a dedicated PR, merge only after green CI, deploy and verify production, then continue at A1/018.
