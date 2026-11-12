@@ -2146,3 +2146,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the drawing index, cover, component register, assumptions, project status, revision and source-backed example documentation. Preserved the workstation interface; no PLC logic, relay state, or diagnostic meaning is modeled.
 - Analysis: 15 sheets, 31 component instances, 314 wire segments, 58 sheet-local nets, 41 global nets, fifteen cross-sheet links pairing 34 endpoints, and zero unlinked endpoints. Regression verifies K2:12↔CPU X10:12, source terminal identities, orthogonal routing and save/reopen.
 - Next: run verification, publish this focused increment, merge after green CI, confirm production, and continue at A1/016.
+
+
+## 2026-11-12 incremental execution record — A1/016
+
+- Branched the source-backed Phoenix Contact K2 normally open output terminal 14 to Siemens CPU 1212C X10:13 / DI a.6. The branch remains on the existing K2:14 net that feeds KM4 coil A1; A1/016 records assignment I0.6. Split the existing wire at an explicit junction before routing the branch to preserve net topology.
+- Updated the drawing index, cover, component register, assumptions, project status and source-backed example documentation. Preserved the workstation interface; relay switching, PLC logic and diagnostics remain unsimulated.
+- Analysis: 16 sheets, 31 component instances, 318 wire segments, 59 sheet-local nets, 41 global nets, sixteen cross-sheet links pairing 36 endpoints and zero unlinked endpoints. Regression checks exact K2:14/CPU X10:13/KM4:A1 membership, orthogonal routes and save/reopen.
+- Next: run tests, publish this focused increment, merge after CI passes, verify production, and continue at A1/017.
