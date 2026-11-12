@@ -352,6 +352,7 @@
     }
     const spec=def.specifications;
     const props=obj.properties||{};
+    const overloadRule=def.instanceProperties.overloadSettingA;
     const source=def.sources[0];
     const rows=def.family==='motor-protection-breaker'
       ? [['Frame size',spec.frameSize.value],['Trip class',spec.overloadTripClass.value+' '+spec.overloadTripClass.unit],['Adjustable overload release',spec.adjustableOverloadRelease.minimum+'–'+spec.adjustableOverloadRelease.maximum+' '+spec.adjustableOverloadRelease.unit],['Instantaneous N-release',spec.instantaneousShortCircuitRelease.value+' '+spec.instantaneousShortCircuitRelease.unit],['Main poles',spec.mainPoleCount.value],['Rated operational voltage',spec.ratedOperationalVoltage.minimum+'–'+spec.ratedOperationalVoltage.maximum+' '+spec.ratedOperationalVoltage.unit],['Connection',spec.connectionMethod.value]]
@@ -371,7 +372,7 @@
       +'<div class="property-row"><span>Manufacturer</span><strong>'+escapeHtml(def.manufacturer)+'</strong></div>'
       +'<div class="property-row"><span>Part number</span><strong>'+escapeHtml(def.manufacturerPartNumber)+'</strong></div>'
       +specRows
-      +(def.family==='motor-protection-breaker' ? '<label class="property-row"><span>Overload setting (A)</span><input class="component-edit" type="number" min="7" max="10" step="any" data-component-property="overloadSettingA" data-component-object="'+escapeHtml(obj.id)+'" value="'+escapeHtml(props.overloadSettingA==null?'':props.overloadSettingA)+'"></label>' : '')
+      +(def.family==='motor-protection-breaker' ? '<label class="property-row"><span>Overload setting (A)</span><input class="component-edit" type="number" min="'+escapeHtml(overloadRule.minimum)+'" max="'+escapeHtml(overloadRule.maximum)+'" step="any" data-component-property="overloadSettingA" data-component-object="'+escapeHtml(obj.id)+'" value="'+escapeHtml(props.overloadSettingA==null?'':props.overloadSettingA)+'"></label>' : '')
       +'<div class="property-row"><span>External terminals</span><strong>'+escapeHtml(def.symbol.pins.length+' · '+pinSummary)+'</strong></div>'
       +'<div class="property-row"><span>Rotation</span><strong>'+escapeHtml(obj.rotation+'°')+'</strong></div>'
       +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.x)+'"></label>'

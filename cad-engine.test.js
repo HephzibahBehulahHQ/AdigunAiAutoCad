@@ -12,6 +12,7 @@ const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
 const motorProtectionBreakerId = 'siemens-3rv2011-1ja10';
+const lowRangeMotorProtectionBreakerId = 'siemens-3rv2011-0fa10';
 
 test('the shipped workspace inline script parses before UI handlers initialize', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
@@ -152,12 +153,13 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 6);
+  assert.equal(items.length, 7);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
     [motorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
+    [lowRangeMotorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     ['siemens-3rm1201-1aa04', 'motor-starter-reversing', 'Q'],
     ['sew-eurodrive-drn63ms4', 'motor-induction', 'M']
   ]);
@@ -710,11 +712,45 @@ test('Siemens 3RV2011-1JA10 preserves six real terminals and manufacturer-backed
   assert.equal(reopened.project.objects[0].properties.overloadSettingA, 7);
 });
 
+test('Siemens 3RV2011-0FA10 records the real low-current adjustment range for later motor examples', () => {
+  const def = engine.component(lowRangeMotorProtectionBreakerId);
+  assert.equal(def.manufacturer, 'Siemens');
+  assert.equal(def.manufacturerPartNumber, '3RV2011-0FA10');
+  assert.equal(def.specifications.frameSize.value, 'S00');
+  assert.equal(def.specifications.overloadTripClass.value, 10);
+  assert.deepEqual(def.specifications.adjustableOverloadRelease, { minimum: 0.35, maximum: 0.5, unit: 'A' });
+  assert.equal(def.specifications.instantaneousShortCircuitRelease.value, 6.5);
+  assert.equal(def.specifications.ratedOperationalCurrent.value, 0.5);
+  assert.equal(def.specifications.ratedMotorPower400V.value, 0.12);
+  assert.deepEqual(def.symbol.pins.map(pin => pin.localNumber), ['1/L1','3/L2','5/L3','2/T1','4/T2','6/T3']);
+  assert.deepEqual(def.symbol.internalConnections, []);
+  assert.match(def.sources[0].url, /support\.industry\.siemens\.com.*3RV2011-0FA10/);
+  assert.match(def.sources[0].revisionNote, /0\.35–0\.5 A.*6\.5 A.*0\.12 kW/);
+
+  const instance = engine.createInstance(lowRangeMotorProtectionBreakerId, 600, 400, 'Q4');
+  assert.equal(engine.validateInstance(instance).valid, true);
+  instance.properties.overloadSettingA = 0.405;
+  assert.equal(engine.validateInstance(instance).valid, true);
+  instance.properties.overloadSettingA = 0.34;
+  assert.equal(engine.validateInstance(instance).valid, false);
+  instance.properties.overloadSettingA = 0.51;
+  assert.equal(engine.validateInstance(instance).valid, false);
+  instance.properties.overloadSettingA = 0.405;
+  const reopened = engine.parseProject(engine.serializeProject({
+    product: 'Adigun AI AutoCAD', project: 'Low-current motor protector test', activeSheet: 'main',
+    zoom: 100, view: { x: 0, y: 0, w: 1200, h: 760 }, objects: [instance], sheets: []
+  }));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.equal(reopened.project.objects[0].properties.overloadSettingA, 0.405);
+});
+
 test('motor-protection symbol and numeric inspector setting preserve the workstation shell', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   assert.ok(html.includes("case'motor-protection-breaker':"));
   assert.ok(html.includes("def.family==='motor-protection-breaker'"));
   assert.ok(html.includes('data-component-property="overloadSettingA"'));
+  assert.ok(html.includes("escapeHtml(overloadRule.minimum)"));
+  assert.ok(html.includes("escapeHtml(overloadRule.maximum)"));
   assert.ok(html.includes('rule.type===\'number\''));
   assert.ok(html.includes('.topbar{position:relative'));
   assert.ok(html.includes('.toolbar{display:flex'));
