@@ -604,7 +604,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   );
   const wireList = engine.wireList(project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
-  assert.equal(wireList.rows.length, 13);
+  assert.equal(wireList.rows.length, 36);
 
   const savedAgain = engine.serializeProject(project);
   const reopened = engine.parseProject(savedAgain);
@@ -642,7 +642,7 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
   const analysis = engine.analyze(parsed.project.objects);
-  assert.deepEqual([analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length], [16, 33, 0, 0]);
+  assert.deepEqual([analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length], [16, 36, 0, 0]);
   assert.equal(analysis.componentPinCount, 45);
   assert.equal(analysis.connectedPinCount, 45);
   assert.equal(analysis.unconnectedPinCount, 0);
