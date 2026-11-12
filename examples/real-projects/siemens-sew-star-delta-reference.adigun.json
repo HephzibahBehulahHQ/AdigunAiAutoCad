@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.0",
-  "status": "Authored opening set: A1/001–A1/023; A1/024–A1/100 not authored.",
+  "revision": "Opening set 2.1",
+  "status": "Authored opening set: A1/001–A1/024; A1/025–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -131,6 +131,11 @@
       "id": "ref-023",
       "number": "A1/023",
       "name": "PN2070 to CPU AI0 analog scaling reference"
+    },
+    {
+      "id": "ref-024",
+      "number": "A1/024",
+      "name": "PN2070 24 V DC load allocation reference"
     }
   ],
   "sheetLabels": {
@@ -151,7 +156,8 @@
     "ref-020": "PLC analog-input allocation · CPU 1212C",
     "ref-021": "ifm PN2070 pressure-sensor interface proposal",
     "ref-022": "PN2070 pressure sensor · CPU AI0",
-    "ref-023": "PN2070 → AI0 scaling reference"
+    "ref-023": "PN2070 → AI0 scaling reference",
+    "ref-024": "PN2070 24 V load reference"
   },
   "sheetViews": {
     "ref-007": {
@@ -251,6 +257,12 @@
       "h": 760
     },
     "ref-023": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-024": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3724,7 +3736,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: A1/001–A1/023 authored; A1/024–A1/100 are not authored yet.",
+      "text": "Progress: A1/001–A1/024 authored; A1/025–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3856,7 +3868,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices through A1/023",
+      "text": "Component register | modeled devices through A1/024",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3946,7 +3958,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match the modeled devices through A1/022; A1/023 adds a source-backed scaling reference only.",
+      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/024 add source-backed analog and load references only.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4060,7 +4072,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/023 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/024 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4328,7 +4340,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/023; A1/017–A1/023 document I/O, overload feedback, and PN2070 analog interface/scaling.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/024; A1/017–A1/024 document I/O, overload feedback, PN2070 analog scaling and supply-current allocation.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4346,7 +4358,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 document the PN2070 interface, and A1/023 records its conditional scaling relation.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 document the PN2070 interface, A1/023 records conditional scaling, and A1/024 compares only the PN2070 load with the supply rating.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4364,7 +4376,7 @@
       "id": "doc-ref-005-line-11",
       "x": 120,
       "y": 1082,
-      "text": "PLC logic, overload trip/reset behavior, alarm interpretation, relay/contactor actuation and safety functions are not simulated; protection/current are unassessed.",
+      "text": "PLC logic, overload trip/reset behavior, alarm interpretation, relay/contactor actuation and safety functions are not simulated; full supply load and protection coordination remain unassessed.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -6719,11 +6731,110 @@
       "sheetId": "ref-004",
       "x": 120,
       "y": 1520,
-      "text": "Revision 1.9 | 2026-11-13 | A1/023 records conditional PN2070 / CPU AI0 scaling from source-backed ranges; no endpoints or PLC logic assigned.",
+      "text": "Revision 1.9 | 2026-11-13 | A1/023 records conditional PN2070 / CPU AI0 scaling; no endpoints or PLC logic assigned.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-title",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 54,
+      "text": "A1/024 · PN2070 24 V DC load allocation reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-supply",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 135,
+      "text": "Siemens SITOP PSU100C 6EP1332-5BA00 · 24 V DC · rated 2.5 A through +50 °C; 0.75 A at +70 °C.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-tolerance",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 215,
+      "text": "PSU static output tolerance ±3% gives 23.28–24.72 V at nominal 24 V, within PN2070's listed 18–30 V DC range (before wiring drop).",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-sensor",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 295,
+      "text": "PN2070 B2 current consumption is <35 mA; at 24 V nominal this branch is <0.84 W.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-share",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 375,
+      "text": "B2 alone is <1.4% of the 2.5 A rating through +50 °C; at +70 °C it is <4.67% of the 0.75 A derated rating.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-bound",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 465,
+      "text": "This compares only B2 with the PSU rating. CPU, relays, contactor coils, other loads, startup demand and wiring drop are not subtracted.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-limits",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 555,
+      "text": "No total load, ambient profile, protection coordination, conductor sizing, transient margin or supply adequacy is established.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-commissioning",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 645,
+      "text": "Confirm installed PSU variant, ambient derating, measured 24 V at B2 and actual sensor current before release.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-024-source",
+      "sheetId": "ref-024",
+      "x": 50,
+      "y": 735,
+      "text": "Sources: Siemens SITOP PSU100C Operating Instructions / product data; ifm PN2070-02 data sheet.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-23",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1685,
+      "text": "A1/024  PN2070 B2 supply-current allocation vs SITOP PSU rating",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-15",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 1574,
+      "text": "Revision 2.0 | 2026-11-13 | A1/024 compares B2 <35 mA against the SITOP rating; total supply load remains unassessed.",
       "stroke": "#13263b"
     }
   ],
-  "description": "Twenty-three authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; and A1/023 records conditional analog scaling for verified endpoints. A1/024–A1/100 are not authored.",
+  "description": "Twenty-four authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; and A1/024 compares the B2 current allocation with SITOP ratings. A1/025–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
