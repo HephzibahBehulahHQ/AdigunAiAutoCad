@@ -155,7 +155,7 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 16);
+  assert.equal(items.length, 17);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -172,7 +172,8 @@ test('catalog contains only source-backed engineering components', () => {
     ['sew-eurodrive-drn63ms4', 'motor-induction', 'M'],
     ['sew-eurodrive-drn132m4', 'motor-induction', 'M'],
     ['siemens-6es7212-1ae40-0xb0', 'plc-cpu', 'A'],
-    ['ifm-ifs204', 'sensor-inductive-pnp', 'B']
+    ['ifm-ifs204', 'sensor-inductive-pnp', 'B'],
+    ['siemens-sitop-psu100c-6ep1332-5ba00', 'power-supply-ac-dc', 'PS']
   ]);
 });
 test('Siemens CPU 1212C and ifm IFS204 expose manufacturer terminal identities and source-backed behavior', () => {
@@ -207,6 +208,27 @@ test('PLC and inductive sensor use dedicated schematic glyphs and verified inspe
   assert.ok(html.includes("def.family==='sensor-inductive-pnp'"));
   assert.ok(html.includes('data-component-property="sensingTarget"'));
   assert.ok(html.includes('manufacturer circuit diagram'));
+  assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
+});
+
+test('Siemens SITOP PSU100C keeps source-backed terminals, ratings and a dedicated existing-shell symbol', () => {
+  const psu = engine.component('siemens-sitop-psu100c-6ep1332-5ba00');
+  assert.equal(psu.manufacturer, 'Siemens');
+  assert.equal(psu.manufacturerPartNumber, '6EP1332-5BA00');
+  assert.deepEqual(psu.symbol.pins.map(pin => pin.localNumber), ['L', 'N', 'PE', '+', '-']);
+  assert.deepEqual([psu.specifications.acInputVoltage.minimum, psu.specifications.acInputVoltage.maximum], [85, 264]);
+  assert.deepEqual([psu.specifications.dcInputVoltage.minimum, psu.specifications.dcInputVoltage.maximum], [110, 300]);
+  assert.deepEqual([psu.specifications.outputVoltage.value, psu.specifications.ratedOutputCurrent.value], [24, 2.5]);
+  assert.match(psu.symbol.numberingNote, /two physical − output screw terminals/);
+  assert.match(psu.sources[0].url, /PSU100C_Handbuch_englisch/);
+  assert.match(psu.electricalFunctions.supply.simulation, /not simulated/);
+  const instance = engine.createInstance(psu.id, 400, 300, 'PS1');
+  assert.equal(engine.validateInstance(instance).valid, true);
+  assert.equal(engine.worldPins(instance).length, 5);
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'power-supply-ac-dc':"));
+  assert.ok(html.includes("def.family==='power-supply-ac-dc'"));
+  assert.ok(html.includes('data-component-property="marking"'));
   assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
 });
 
@@ -1217,4 +1239,5 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example as a
   assert.equal(saved.valid, true, saved.errors.join(' '));
   assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,26,5]);
 });
+
 
