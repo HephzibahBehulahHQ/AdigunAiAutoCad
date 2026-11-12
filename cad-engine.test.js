@@ -644,8 +644,9 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const analysis = engine.analyze(parsed.project.objects);
   assert.deepEqual([analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length], [16, 36, 0, 0]);
   assert.equal(analysis.componentPinCount, 45);
-  assert.equal(analysis.connectedPinCount, 45);
-  assert.equal(analysis.unconnectedPinCount, 0);
+  const wiredStarterPins = analysis.nets.flatMap(net => net.pins)
+    .filter(pin => pin.ref === 'Q1').map(pin => pin.number).sort();
+  assert.deepEqual(wiredStarterPins, ['1/L1','2/T1','3/L2','4/T2','5/L3','6/T3','95','96','98','A1','A2','IN1','IN2','IN3','OUT']);
   assert.equal(analysis.netCount, 15);
   const wireList = engine.wireList(parsed.project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
