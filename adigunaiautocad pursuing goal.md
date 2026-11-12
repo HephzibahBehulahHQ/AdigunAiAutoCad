@@ -551,6 +551,276 @@ This section is a client acceptance requirement and takes precedence over any wo
 
 Start with the electrical CAD model before expanding the symbol count: define and validate a versioned component/symbol/pin/net schema; migrate one real, source-backed electrical device end to end; prove that its displayed geometry, named pins, wire connectivity, editable properties, save/reopen, undo/redo, and BOM/report entry all refer to the same model instance. Add more components in small verified batches. Preserve the approved interface and existing toolbar/canvas/panel geometry throughout.
 
+# GLOBAL UI/UX STANDARD
+## UNIVERSAL MENU, ICON, DROPDOWN AND FLOATING PANEL BEHAVIOR
+
+**RULE ID:** GLOBAL-UI-UX-001  
+**SCOPE:** ALL CURRENT AND FUTURE PROJECTS  
+**PRIORITY:** Mandatory Global Development Standard  
+**APPLIES TO:** All repositories, websites, web applications, dashboards, desktop applications, engineering software, CAD systems, and future products.
+
+---
+
+## 1. PRIMARY OBJECTIVE
+
+Implement consistent, professional, lightweight, and predictable behavior for all interactive menus, icons, dropdowns, popovers, tooltips, and floating panels.
+
+**GOLDEN RULE:**
+
+Opening or closing a menu, icon panel, or dropdown must NEVER push, resize, reposition, or disturb the underlying application content.
+
+All temporary menus and panels must float above the existing interface.
+
+The underlying page, canvas, workspace, toolbar, sidebar, and other components must remain stationary.
+
+---
+
+## 2. UNIVERSAL MENU AND ICON BEHAVIOR
+
+Apply the following interaction rules to all applicable interactive menus and icons.
+
+### A. OPEN ON CLICK
+
+- Click a menu or icon → its associated content opens.
+- Click the same menu or icon again → its content closes.
+- Click another menu or icon → the currently open panel closes and the newly selected panel opens.
+- Only one transient menu or icon panel may remain open at a time within the same menu system.
+- Opening a panel must not alter the surrounding layout.
+
+### B. AUTOMATIC CLOSE ON MOUSE LEAVE
+
+- When the mouse leaves the menu trigger and its associated panel, close the panel automatically.
+- Moving the mouse from the trigger into its panel must NOT close it.
+- Avoid flickering, accidental closing, or reopening loops.
+- Use a short delay where necessary to allow natural mouse movement.
+- Do not close a panel while the pointer is still interacting with its contents.
+
+### C. CLICK OUTSIDE TO CLOSE
+
+- Clicking outside an open menu or panel closes it.
+- Pressing Escape closes the active panel.
+- Opening another transient panel closes the previous one.
+- Closing a panel must not reset unrelated application state.
+
+### D. TOUCHSCREEN BEHAVIOR
+
+- Tap a menu or icon to open its content.
+- Tap the same trigger to close it.
+- Tap another trigger to switch panels.
+- Tap outside to close.
+- Do not rely on hover or mouseleave for touch devices.
+- Support keyboard and accessibility interactions where applicable.
+
+---
+
+## 3. DROPDOWN DISPLAY STANDARD
+
+All dropdown menus must:
+
+1. Open directly beneath or beside their associated trigger.
+2. Float above the underlying application interface.
+3. Display options in a clean, organized layout.
+4. Support vertical lists and appropriate horizontal arrangements.
+5. Remain fully interactive while open.
+6. Close after selecting a completed command, unless the command requires continued interaction.
+7. Support internal scrolling when content exceeds available space.
+8. Remain within the visible viewport whenever possible.
+9. Automatically reposition near screen boundaries.
+10. Maintain appropriate stacking order above normal application content.
+
+**IMPORTANT:**
+
+Dropdowns must NEVER push the page, canvas, workspace, navigation bars, or other elements downward.
+
+---
+
+## 4. ICON AND TOOLBAR BEHAVIOR
+
+Apply the same principles to interactive icons.
+
+Examples include:
+
+- Settings icons
+- Search icons
+- User profile icons
+- Notification icons
+- Tool selectors
+- Drawing tools
+- Engineering commands
+- Formatting controls
+- Filter icons
+- Context menus
+- Additional options menus
+
+When an icon opens a temporary panel:
+
+- The panel must appear near its associated icon.
+- It must float above the interface.
+- It must not change the position of surrounding elements.
+- It must close using the defined interaction rules.
+- Its existing functionality must remain intact.
+
+Do not apply automatic closing to persistent panels, active editing dialogs, or workflows requiring ongoing user interaction unless explicitly designed for that behavior.
+
+---
+
+## 5. STRICT NO-LAYOUT-SHIFT RULE
+
+**THIS RULE IS MANDATORY.**
+
+Opening or closing any transient menu, dropdown, or icon panel must not cause:
+
+- Page movement
+- Canvas displacement
+- Workspace resizing
+- Toolbar shifting
+- Sidebar movement
+- Unexpected scrolling
+- Content jumping
+- Unnecessary component reflow
+- Loss of user selection
+- Changes to application data
+
+**Expected behavior:**
+
+Click → Panel opens above existing content → User interacts → Panel closes.
+
+**Everything underneath remains stationary.**
+
+---
+
+## 6. TECHNICAL IMPLEMENTATION STANDARD
+
+Use lightweight, maintainable solutions.
+
+Recommended approaches:
+
+- CSS absolute or fixed positioning
+- React portals or equivalent framework mechanisms when necessary
+- Correct stacking contexts and z-index
+- Pointer and click event handling
+- Mouseleave handling for desktop
+- Click-outside detection
+- Escape-key handling
+- Appropriate focus management
+- Viewport-aware positioning
+- Internal overflow scrolling
+
+Avoid unnecessary heavy UI libraries.
+
+Prefer reusable components and shared interaction logic.
+
+Prevent event propagation problems, accidental panel closure, focus loss, and conflicts between nested menus.
+
+For accessibility, support appropriate ARIA attributes, visible focus indicators, keyboard navigation, and focus restoration.
+
+---
+
+## 7. GLOBAL CONSISTENCY REQUIREMENT
+
+All applicable menus and icons across a product must follow the same interaction standard.
+
+Do not implement different opening and closing behaviors without a documented UX reason.
+
+Create or reuse a shared menu/popover component where appropriate.
+
+The same global standard must apply across multiple projects while allowing each product to retain its own branding, visual design, and functionality.
+
+---
+
+## 8. VERIFICATION AND ACCEPTANCE TESTS
+
+Before considering implementation complete, verify:
+
+- Click opens the correct panel.
+- Clicking the same trigger closes it.
+- Clicking another trigger switches panels.
+- Only one transient panel is open at a time.
+- Mouse movement into the panel does not close it.
+- Mouseleave closes the panel correctly.
+- Clicking outside closes it.
+- Escape closes it.
+- Touch interactions work correctly.
+- Keyboard navigation works correctly.
+- Panels remain inside the viewport where possible.
+- Long menus scroll internally.
+- No underlying layout movement occurs.
+- All existing commands remain functional.
+- No application data is modified unexpectedly.
+- No regression is introduced.
+
+Test desktop, mobile, and tablet viewport sizes.
+
+---
+
+## 9. IMPLEMENTATION, MERGE AND DEPLOYMENT
+
+For every project adopting this standard:
+
+1. Inspect the existing menu and icon implementations.
+2. Identify inconsistent behavior.
+3. Implement the shared interaction standard.
+4. Preserve existing application functionality.
+5. Run relevant automated and browser tests.
+6. Fix verified regressions.
+7. Commit the verified changes.
+8. Merge into the approved main branch.
+9. Deploy using the project's existing deployment workflow.
+10. Verify the deployed application.
+
+Do not claim successful deployment without verification.
+
+Do not proceed with unrelated development until the required menu correction and its verification are complete.
+
+---
+
+## 10. PERMANENT REPOSITORY REFERENCE
+
+Store this document in the project's designated goals, governance, or standards repository.
+
+**Recommended filename:**
+
+`GLOBAL_UI_UX_MENU_ICON_STANDARD.md`
+
+**Rule identifier:**
+
+`GLOBAL-UI-UX-001`
+
+Reference this standard from the project's `AGENTS.md` or equivalent development instructions.
+
+For future projects:
+
+- Load this standard during initial project setup.
+- Apply it to all relevant interactive menus and icons.
+- Include its acceptance tests in the normal development workflow.
+- Reuse existing compliant components where practical.
+- Do not unnecessarily rewrite working components.
+
+This standard remains active until the project owner explicitly approves a revision.
+
+---
+
+## 11. FINAL CODEX DIRECTIVE
+
+**CODEX:**
+
+Treat GLOBAL-UI-UX-001 as a reusable, project-independent development standard.
+
+Apply it consistently to all applicable current and future software projects.
+
+Never allow transient menus, dropdowns, or icon panels to disturb the underlying interface.
+
+Preserve existing functionality.
+
+Implement, test, commit, merge, deploy, and verify changes according to each project's authorized workflow.
+
+Save and reference this rule in the designated goals or standards repository for future development.
+
+**GLOBAL STANDARD:**
+
+**CLICK TO OPEN → FLOAT ABOVE CONTENT → INTERACT → AUTO-CLOSE ON MOUSE LEAVE OR OUTSIDE CLICK → ZERO LAYOUT SHIFT.**
+
+
 ### Deferred header account/presence control
 
 The user requested a later compact account icon immediately beside the Command Search control at the top right. Its status must reflect real application account/session state: red when offline and green when online, with an accessible name and hover/focus tooltip. This is deferred until the project has a real account/presence source. Fit it inside the existing header allocation; do not increase header height or shift the navigation, toolbar, panels, or canvas. Record before/after geometry and verify no layout movement when implemented.
