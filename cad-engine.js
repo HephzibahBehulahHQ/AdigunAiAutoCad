@@ -677,7 +677,27 @@
     instanceProperties: { marking: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, sensingTarget: { type: 'string', default: '', maximumLength: 60 }, comment: { type: 'string', default: '', maximumLength: 160 } },
     sources: [{ publisher: 'ifm electronic', title: 'IFS204 inductive sensor data sheet · IFB3004BBPKG/US-104', url: 'https://media.ifm.com/dam/546f88cf-4cdf-47ac-b6ee-bee685c33458/Original/IFS204-02_EN-GB.pdf', documentRevision: 'EN-GB · IFS204-02 · 26.06.2025', revisionNote: 'Manufacturer data sheet verifies PNP normally-open output, 4 mm nominal sensing range, 10–30 V DC and the 3-contact M12 connection. Pin 1=L+, pin 3=L−, pin 4=output per manufacturer connection drawing.', retrievedAt: '2026-11-12' }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition });
+  const siemensSitopPsuDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION, id: 'siemens-sitop-psu100c-6ep1332-5ba00', manufacturer: 'Siemens', manufacturerPartNumber: '6EP1332-5BA00',
+    model: 'SITOP PSU100C · 24 V/2.5 A', name: 'Single-phase AC/DC power supply', family: 'power-supply-ac-dc', referencePrefix: 'PS', category: 'Power · Verified supply',
+    symbol: { id: 'power.siemens.sitop-psu100c.v1', view: 'schematic', unit: 'mm', width: 180, height: 160, pins: [
+      { id: 'line-l', localNumber: 'L', name: 'Line input L', x: -90, y: -30, electricalType: 'passive', connectionType: 'screw terminal' },
+      { id: 'line-n', localNumber: 'N', name: 'Line input N', x: -90, y: 0, electricalType: 'passive', connectionType: 'screw terminal' },
+      { id: 'line-pe', localNumber: 'PE', name: 'Protective earth input', x: -90, y: 30, electricalType: 'passive', connectionType: 'screw terminal' },
+      { id: 'output-positive', localNumber: '+', name: '24 V DC positive output', x: 90, y: -30, electricalType: 'passive', connectionType: 'screw terminal' },
+      { id: 'output-negative', localNumber: '-', name: 'DC return output', x: 90, y: 30, electricalType: 'passive', connectionType: 'screw terminal' }
+    ], internalConnections: [], numberingNote: 'Manufacturer terminal designations L, N, PE, + and − are retained. Siemens specifies two physical − output screw terminals; this schematic symbol represents their shared return as one functional pin. Pin coordinates are schematic connection points, not physical terminal geometry.' },
+    electricalFunctions: { supply: { input: 'Single-phase AC or DC', output: '24 V DC', ratedOutputCurrent: '2.5 A', simulation: 'Power conversion, startup, protection response and isolation behavior are not simulated; input and output pins remain separate electrical endpoints.' } },
+    specifications: {
+      acInputVoltage: { minimum: 85, maximum: 264, unit: 'V AC' }, dcInputVoltage: { minimum: 110, maximum: 300, unit: 'V DC' },
+      outputVoltage: { value: 24, unit: 'V DC' }, ratedOutputCurrent: { value: 2.5, unit: 'A' },
+      inputConnections: { value: 'L, N, PE · one screw terminal each' }, outputConnections: { value: '+ · one screw terminal; − · two screw terminals' },
+      connectionSystem: { value: 'Screw terminal' }, mounting: { value: 'EN 60715 35 × 7.5/15 mm rail' }, degreeOfProtection: { value: 'IP20' }
+    },
+    instanceProperties: { marking: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, comment: { type: 'string', default: '', maximumLength: 160 } },
+    sources: [{ publisher: 'Siemens', title: 'SITOP PSU100C operating instructions · 6EP1332-5BA00', url: 'https://support.industry.siemens.com/cs/attachments/65647808/PSU100C_Handbuch_englisch_en-US.pdf', documentRevision: 'C98130-A7599-A1-2-762937 · 06/2013', revisionNote: 'Manufacturer sections 2.2 and 6.1–6.7 identify L/N/PE line input, + and − DC output, 85–264 V AC / 110–300 V DC input ranges, 24 V/2.5 A output and two physical − output screw terminals. Schematic coordinates are not physical geometry.', retrievedAt: '2026-11-12' }]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -1358,3 +1378,4 @@
     wireListCsv: wireListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
+
