@@ -2122,3 +2122,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Added exact open-end cross-sheet links, reciprocal connector references, editable drawing content, BOM entries, index/register/revision/assumption updates, and route/connectivity regressions. Preserved the workstation interface.
 - Current model analysis: 12 sheets, 31 components, 299 wire segments, 51 sheet-local nets, 38 project-wide nets, 11 cross-sheet connections pairing 26 endpoints, and zero unlinked endpoints. A1/013–A1/100 remain unauthored.
 - Next: run the focused CAD regression suite, then push a dedicated PR, merge only after green CI, deploy, verify production, and continue at A1/013.
+
+
+## 2026-11-12 incremental execution record — A1/013
+
+- Added the editable PLC I/O assignment schedule. Wired Schneider LC1D09BD KM4 built-in NO auxiliary 13–14 from +24 V at Phoenix Contact X14 to Siemens CPU 1212C X10:10 / DI a.3 using explicit reciprocal cross-sheet links. The schedule maps this feedback as I0.3 and preserves Q0.0/DQ a.0 → K2 coil A1.
+- The official Schneider LC1D09BD data sheet identifies auxiliary NO terminals 13–14 and NC 21–22; the existing Siemens CPU terminal map supplies X10:10 identity. No PLC program, feedback interpretation, contactor actuation, or safety behavior is modeled. Preserved the workstation interface.
+- Analysis: 13 sheets, 31 components, 307 wire segments, 54 sheet-local nets, 39 global nets, thirteen cross-sheet links pairing 30 endpoints, and zero unlinked endpoints. Regression covers the exact X14/KM4:13 net, KM4:14/CPU X10:10 connection, assignment schedule and save/reopen.
+- Next: finish verification, publish this focused change, merge after green CI, deploy, verify production, and continue with A1/014.
