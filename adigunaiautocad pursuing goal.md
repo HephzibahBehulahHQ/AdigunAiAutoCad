@@ -2070,3 +2070,13 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Verified the eight-sheet project model: 25 components, 257 wire segments, 36 sheet-local nets, zero open wire endpoints and five nets on A1/008. The component register and project README now reflect the modeled devices and boundaries; A1/009–A1/100 remain unauthored.
 - Supply capacity, protection coordination, conductor sizing, installation suitability and construction readiness are not established. Continue only from official source-backed device and terminal data.
 
+
+
+## 2026-11-12 incremental execution record — A1/009
+
+- Added reciprocal, visibly rendered off-page connector references within the existing drawing canvas. The engine validates each link against an exact open wire endpoint and a real target-sheet component; project JSON preserves the links when saved and reopened.
+- Connected the Siemens SITOP PSU100C +24 V and 0 V outputs at A1/008 X12/X13 to the Siemens CPU 1212C L+ and M supply terminals on A1/007 through X7/X8. A1/006 remains electrically separate.
+- Added four orthogonal endpoint wires and two cross-sheet links. The project now contains 8 sheets, 25 components, 261 wires, 36 sheet-local nets, 34 global nets, 4 local link endpoints and 0 unlinked endpoints.
+- Verified save/reopen, reciprocal targets and exact global pin groups. Focused local suite: 52 tests passed. The approved workstation geometry was not changed; connector graphics render inside the existing sheet canvas.
+- No downstream load, total current, protection coordination, supply adequacy, behavior simulation or construction approval is established.
+- Next: continue the 100-sheet reference project in similarly small, source-backed increments.
