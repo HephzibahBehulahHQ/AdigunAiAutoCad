@@ -1122,7 +1122,7 @@ test('six-sheet star-delta reference opening set has authored documentation and 
   const project = parsed.project;
   assert.equal(project.sheets.length, 6);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.match(project.status, /A1\\/007–A1\\/100 are not yet authored/);
+  assert.ok(project.status.includes('A1/007–A1/100 are not yet authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
