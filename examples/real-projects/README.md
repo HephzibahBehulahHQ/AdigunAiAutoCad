@@ -100,7 +100,7 @@ The catalog includes Siemens SIRIUS 3RT2026-2KB40 contactor, 3RU2126-4AB0 therma
 
 # 100-sheet star-delta reference project opening set
 
-Open `siemens-sew-star-delta-reference.adigun.json` using **Open project file**. This is an honest nine-sheet opening set for the planned 100-sheet reference project:
+Open `siemens-sew-star-delta-reference.adigun.json` using **Open project file**. This is an honest ten-sheet opening set for the planned 100-sheet reference project:
 - A1/001 cover and project status
 - A1/002 authored drawing index
 - A1/003 source-backed component register derived from the model BOM
@@ -110,10 +110,11 @@ Open `siemens-sew-star-delta-reference.adigun.json` using **Open project file**.
 - A1/007 the IFM IFS204 / Siemens S7-1200 sensor input example
 - A1/008 the Siemens SITOP PSU100C supply boundary reference
 - A1/009 the source-backed 24 V DC distribution terminals between the supply and PLC
+- A1/010 the source-backed Siemens PLC output to Phoenix Contact relay interface
 
-Every page has editable native drawing content. A1/006 remains electrically separate. A1/007 has 4 components, 12 wire segments and 5 local nets; A1/008 has the Siemens 6EP1332-5BA00 supply and sourced Phoenix Contact input/PE/output terminals, with 6 components, 7 wire segments and 5 local nets. A1/009 adds two Phoenix Contact PT 16 N OG 3212144 feed-through terminals (X14/X15), four wire segments and two local nets. Two reciprocal off-page links carry +24 V and 0 V through X12/X13 on A1/008, X14/X15 on A1/009, and X7/X8 on A1/007. The project has 27 components, 265 wire segments, 38 sheet-local nets and 34 deterministic project-wide nets. Eight sheet-local endpoints are paired by the two explicit links, leaving zero unlinked wire endpoints. A1/008 marks L/N/PE input and +/− output; no upstream source, input protective device, total load current, protection coordination, or supply suitability is established. A1/010–A1/100 remain unauthored. The static project is not construction-ready.
+Every page has editable native drawing content. A1/006 remains electrically separate. A1/007 adds the PLC's 1L output-group supply and DQ a.0 channel. A1/008 has the Siemens 6EP1332-5BA00 supply and sourced Phoenix Contact input/PE/output terminals, with 6 components, 7 wire segments and 5 local nets. A1/009 adds two Phoenix Contact PT 16 N OG 3212144 feed-through terminals (X14/X15), distributing +24 V and 0 V from A1/008 to the PLC supply and output group. A1/010 uses the source-backed PLC output and Phoenix Contact PLC-RSC-24DC/21 relay K2; DQ a.0 drives its polarity-sensitive 24 V DC coil, whose typical input current is 9 mA. The relay contacts have no specified load, and PLC logic and relay actuation are not simulated. The project has 28 components, 275 wire segments, 42 sheet-local nets and 35 deterministic project-wide nets. Fourteen sheet-local endpoints are paired by five explicit cross-sheet links, leaving zero unlinked wire endpoints. No upstream AC source, input protection, total load-current calculation, protection coordination, or supply suitability is established. A1/011–A1/100 remain unauthored. The static project is not construction-ready.
 
-Component source records: [Siemens SITOP PSU100C 6EP1332-5BA00](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md) and [Phoenix Contact PT 16 N-PE 3212147](../../docs/components/phoenix-contact-pt-16-n-pe-3212147.md). The PSU manual documents its L/N/PE and +/− terminals and ratings; the terminal product record verifies the PE terminal's two connections and grounding foot. The two physical PSU − screws are represented by one shared schematic return endpoint.
+Component source records: [Siemens SITOP PSU100C 6EP1332-5BA00](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md), [Phoenix Contact PT 16 N-PE 3212147](../../docs/components/phoenix-contact-pt-16-n-pe-3212147.md), and [Phoenix Contact PLC-RSC-24DC/21 2966171](../../docs/components/phoenix-contact-2966171.md). The PSU manual documents its L/N/PE and +/− terminals and ratings; the terminal product record verifies the PE terminal's two connections and grounding foot. The relay record documents coil polarity, typical 24 V DC input current, and separate changeover-contact terminals. The two physical PSU − screws are represented by one shared schematic return endpoint.
 
 
 

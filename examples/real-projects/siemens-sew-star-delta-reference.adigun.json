@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 0.5",
-  "status": "Authored opening set: A1/001–A1/009; A1/010–A1/100 not authored.",
+  "revision": "Opening set 0.6",
+  "status": "Authored opening set: A1/001–A1/010; A1/011–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -61,12 +61,18 @@
       "id": "ref-009",
       "number": "A1/009",
       "name": "24 V DC distribution connections"
+    },
+    {
+      "id": "ref-010",
+      "number": "A1/010",
+      "name": "PLC output relay interface"
     }
   ],
   "sheetLabels": {
     "ref-007": "IFM IFS204 sensor input to Siemens PLC",
     "ref-008": "Siemens SITOP PSU100C supply",
-    "ref-009": "24 V DC distribution connections"
+    "ref-009": "24 V DC distribution connections",
+    "ref-010": "PLC output relay interface"
   },
   "sheetViews": {
     "ref-007": {
@@ -82,6 +88,12 @@
       "h": 760
     },
     "ref-009": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-010": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3537,7 +3549,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/009",
+      "text": "Authored pages: A1/001–A1/010",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3555,7 +3567,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: sheets A1/010–A1/100 are not authored yet.",
+      "text": "Progress: sheets A1/011–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3666,7 +3678,7 @@
       "id": "doc-ref-002-line-07",
       "x": 120,
       "y": 634,
-      "text": "A1/007  IFM IFS204 sensor input to Siemens S7-1200 — separate example page",
+      "text": "A1/007  IFM IFS204 sensor input and Siemens S7-1200 PLC supply/output group",
       "stroke": "#13263b",
       "sheetId": "ref-002"
     },
@@ -3687,7 +3699,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices on A1/006–A1/009",
+      "text": "Component register | modeled devices on A1/006–A1/010",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3777,7 +3789,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices on A1/006–A1/009.",
+      "text": "Component quantities match modeled devices through A1/010.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3807,7 +3819,7 @@
       "id": "doc-ref-004-line-01",
       "x": 120,
       "y": 250,
-      "text": "Revision 0.3 | 2026-11-12 | Eight authored sheets with a standalone source-backed supply reference.",
+      "text": "Revision 0.6 | 2026-11-12 | Ten authored sheets; source-backed PLC output relay interface added.",
       "stroke": "#13263b",
       "sheetId": "ref-004"
     },
@@ -3861,7 +3873,7 @@
       "id": "doc-ref-004-line-07",
       "x": 120,
       "y": 634,
-      "text": "Next engineering increment: define a source-backed interface before joining independent circuits across sheets.",
+      "text": "A1/010: PLC DQ a.0 drives the polarity-sensitive 24 V DC coil of source-backed relay K2. Contact-side load is unspecified.",
       "stroke": "#13263b",
       "sheetId": "ref-004"
     },
@@ -3891,7 +3903,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/009 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/010 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4159,7 +4171,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM IFS204, supply terminals X7/X8 linked through A1/009.",
+      "text": "A1/007: CPU 1212C, IFM IFS204, X7/X8 supply and DQ a.0 / 1L endpoints linked through A1/009 and A1/010.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4168,7 +4180,7 @@
       "id": "doc-ref-003-line-12",
       "x": 120,
       "y": 1018,
-      "text": "A1/008: SITOP PSU100C inputs L/N/PE; +/− outputs link to A1/009 at X12/X13.",
+      "text": "A1/008: SITOP PSU100C inputs L/N/PE; +/− outputs distribute through A1/009.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4177,7 +4189,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007 remains an independent IFM IFS204 / Siemens S7-1200 sensor example.",
+      "text": "A1/007 contains the IFM IFS204 input, Siemens CPU supply and the DQ a.0 output channel.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4186,7 +4198,7 @@
       "id": "doc-ref-005-line-10",
       "x": 120,
       "y": 1018,
-      "text": "A1/006 remains electrically separate. A1/007 and A1/008 connect through source-backed +24 V/0 V terminals on A1/009.",
+      "text": "A1/006 remains electrically separate. A1/007–A1/010 share only the explicitly modeled +24 V, 0 V and DQ a.0 links.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4195,7 +4207,7 @@
       "id": "doc-ref-005-line-11",
       "x": 120,
       "y": 1082,
-      "text": "Supply adequacy and protection are not established; no PLC, sensor or motor behavior is simulated.",
+      "text": "PLC logic and switching, sensor detection and relay contact behavior are not simulated; total current and protection remain unassessed.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4226,7 +4238,7 @@
       "sheetId": "ref-007",
       "x": 50,
       "y": 725,
-      "text": "A1/008 SITOP PS1 supplies CPU L+/M via A1/009 terminals X14/X15 · load current not calculated",
+      "text": "SITOP via A1/009 powers CPU L+/M and output group 1L; DQ a.0 links to relay K2 on A1/010.",
       "stroke": "#13263b"
     },
     {
@@ -4234,7 +4246,7 @@
       "id": "doc-ref-002-line-09",
       "x": 120,
       "y": 826,
-      "text": "A1/009  24 V DC distribution — SITOP output to PLC CPU supply",
+      "text": "A1/009  24 V DC distribution — SITOP supply to PLC and output group",
       "stroke": "#13263b",
       "sheetId": "ref-002"
     },
@@ -4281,7 +4293,7 @@
       "sheetId": "ref-003",
       "id": "doc-ref-003-line-17",
       "y": 1082,
-      "text": "No external AC source or input protection is modeled; load current and protection coordination are unassessed."
+      "text": "No external AC source or input protection is modeled; total load current and protection coordination are unassessed."
     },
     {
       "kind": "text",
@@ -4477,7 +4489,7 @@
       "sheetId": "ref-008",
       "x": 100,
       "y": 630,
-      "text": "PS1 +/− connect to A1/007 CPU L+/M through A1/009 terminals X14/X15; load current is not calculated.",
+      "text": "PS1 +/− connect to A1/007 CPU L+/M and 1L output supply through A1/009 X14/X15. Total current is not calculated.",
       "stroke": "#13263b"
     },
     {
@@ -4622,7 +4634,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 325,
-      "text": "PS1 +24 V DC · A1/008 X12 → X14 → A1/007 X7 · CPU L+",
+      "text": "PS1 +24 V DC · X14 supplies A1/007 CPU L+ and output group 1L",
       "stroke": "#13263b"
     },
     {
@@ -4631,7 +4643,7 @@
       "sheetId": "ref-009",
       "x": 310,
       "y": 495,
-      "text": "PS1 0 V DC · A1/008 X13 → X15 → A1/007 X8 · CPU M",
+      "text": "PS1 0 V DC · X15 supplies A1/007 CPU M and returns K2 coil A2 on A1/010",
       "stroke": "#13263b"
     },
     {
@@ -4640,11 +4652,199 @@
       "sheetId": "ref-009",
       "x": 50,
       "y": 690,
-      "text": "Static connection reference · no load-current calculation or protection-coordination claim",
+      "text": "Static connection reference · load current and protection coordination are not calculated",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "inst-a1-010-phoenix-2966171-k2",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K2",
+      "x": 600,
+      "y": 380,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "ref-010"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w07-1l",
+      "sheetId": "ref-007",
+      "x1": 930,
+      "y1": 392,
+      "x2": 1110,
+      "y2": 392
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w09-1l-up",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 260,
+      "x2": 635,
+      "y2": 180
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w09-1l-across",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 180,
+      "x2": 1100,
+      "y2": 180
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w09-return-down",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 430,
+      "x2": 635,
+      "y2": 550
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w09-return-across",
+      "sheetId": "ref-009",
+      "x1": 635,
+      "y1": 550,
+      "x2": 1100,
+      "y2": 550
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w10-k2-a1",
+      "sheetId": "ref-010",
+      "x1": 530,
+      "y1": 400,
+      "x2": 200,
+      "y2": 400
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w10-k2-a2",
+      "sheetId": "ref-010",
+      "x1": 530,
+      "y1": 360,
+      "x2": 200,
+      "y2": 360
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-010-title",
+      "sheetId": "ref-010",
+      "x": 50,
+      "y": 54,
+      "text": "A1/010 · Siemens PLC digital output relay interface",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-010-1l",
+      "sheetId": "ref-010",
+      "x": 260,
+      "y": 265,
+      "text": "A1/007 X12:1 (1L) · +24 V from A1/009 X14",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-010-coil",
+      "sheetId": "ref-010",
+      "x": 260,
+      "y": 465,
+      "text": "A1/007 X12:2 (DQ a.0) → K2:A1 · K2:A2 → A1/009 X15",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-010-source",
+      "sheetId": "ref-010",
+      "x": 260,
+      "y": 510,
+      "text": "PLC-RSC 24DC/21 coil: 24 V DC, 9 mA typical; observe A1/A2 polarity.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-010-limit",
+      "sheetId": "ref-010",
+      "x": 50,
+      "y": 690,
+      "text": "K2 contacts 11/12/14 have no specified load. PLC logic, relay actuation and protection coordination are not simulated.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-10",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 890,
+      "text": "A1/010  Siemens PLC DQ a.0 to source-backed Phoenix Contact relay K2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-003-line-19",
+      "sheetId": "ref-003",
+      "stroke": "#13263b",
+      "x": 120,
+      "y": 1210,
+      "text": "1     Phoenix Contact       PLC-RSC-24DC/21 / 2966171    K2"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-009-output",
+      "sheetId": "ref-009",
+      "x": 310,
+      "y": 370,
+      "text": "X14 also feeds PLC output group 1L at A1/007 X12:1.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-009-coil-return",
+      "sheetId": "ref-009",
+      "x": 310,
+      "y": 600,
+      "text": "X15 returns the A1/010 K2 coil circuit to 0 V DC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w07-dqa0-a",
+      "sheetId": "ref-007",
+      "x1": 930,
+      "y1": 408,
+      "x2": 1000,
+      "y2": 408
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w07-dqa0-b",
+      "sheetId": "ref-007",
+      "x1": 1000,
+      "y1": 408,
+      "x2": 1000,
+      "y2": 456
+    },
+    {
+      "kind": "wire",
+      "id": "a1-010-w07-dqa0-c",
+      "sheetId": "ref-007",
+      "x1": 1000,
+      "y1": 456,
+      "x2": 1110,
+      "y2": 456
     }
   ],
-  "description": "Eight authored sheets: editable project records A1/001–A1/005, Siemens/SEW star-delta motor starter A1/006, the source-backed IFM IFS204 / Siemens S7-1200 sensor input A1/007, and the standalone Siemens SITOP PSU100C AC/DC supply boundary example A1/008. Electrical examples remain independent; no unsupported inter-sheet connection is asserted. A1/009–A1/100 are not authored.",
+  "description": "Ten authored sheets: project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; source-backed IFM sensor and Siemens PLC input A1/007; Siemens SITOP supply A1/008; 24 V DC distribution A1/009; and a Siemens PLC output to Phoenix Contact relay interface A1/010. The static project does not simulate PLC logic, relay actuation, or switched-contact behavior. A1/011–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
@@ -4758,6 +4958,102 @@
             "direction": "right",
             "targetSheetId": "ref-007",
             "targetRef": "X8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-010-output-supply-1l",
+      "name": "+24 V DC · output group 1L",
+      "endpoints": [
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-010-w07-1l",
+          "point": {
+            "x": 1110,
+            "y": 392
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-009",
+            "targetRef": "X14"
+          }
+        },
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-010-w09-1l-across",
+          "point": {
+            "x": 1100,
+            "y": 180
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-010-output-dqa0",
+      "name": "PLC DQ a.0 → relay coil",
+      "endpoints": [
+        {
+          "sheetId": "ref-007",
+          "wireId": "a1-010-w07-dqa0-c",
+          "point": {
+            "x": 1110,
+            "y": 456
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-010",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "ref-010",
+          "wireId": "a1-010-w10-k2-a1",
+          "point": {
+            "x": 200,
+            "y": 400
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-007",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1-010-relay-coil-return",
+      "name": "0 V DC · relay coil return",
+      "endpoints": [
+        {
+          "sheetId": "ref-009",
+          "wireId": "a1-010-w09-return-across",
+          "point": {
+            "x": 1100,
+            "y": 550
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ref-010",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "ref-010",
+          "wireId": "a1-010-w10-k2-a2",
+          "point": {
+            "x": 200,
+            "y": 360
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ref-009",
+            "targetRef": "X15"
           }
         }
       ]
