@@ -76,3 +76,9 @@ This milestone adds the sourced schematic component and terminal-level wiring mo
 - Phoenix Contact lists maximum switching voltage of 250 V AC/DC and limiting continuous current of 6 A for PLC-RSC- 24DC/21 (item 2966171).
 - The manufacturer specifies that mounting and temperature derating apply. A1/099 records these product limits only; it does not select or validate project contact operating conditions.
 - Source: [Phoenix Contact manufacturer catalog PDF](https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf), output data table, catalog generated 13.11.2026.
+
+## A1/100 insulation ratings
+
+- Phoenix Contact lists rated insulation voltage of 250 V, rated impulse withstand voltage of 6 kV, overvoltage category III and degree of pollution 3 for PLC-RSC- 24DC/21 (item 2966171).
+- A1/100 records these manufacturer component ratings only. They do not verify project insulation coordination, installation conditions, or assembly suitability.
+- Source: [Phoenix Contact manufacturer catalog PDF](https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf), insulation characteristics table, catalog generated 13.11.2026.
