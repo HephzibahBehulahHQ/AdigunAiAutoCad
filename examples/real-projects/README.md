@@ -180,3 +180,6 @@ For A1/083, the ifm PN2070-02 Interfaces table lists IEC 61131-9 as its SDCI sta
 For A1/084, ifm lists an integrated watchdog for the PN2070-02; no timing, fault handling or project safety behavior is assigned.
 
 For A1/085, ifm lists 2 digital outputs and 1 analogue output for the PN2070-02; no channel mapping or simultaneous usage is assigned.
+
+
+For A1/086, ifm lists PN2070-02 switch point accuracy below ±0.4% of the span at turn-down 1:1; no threshold, span selection or project accuracy is assigned.
