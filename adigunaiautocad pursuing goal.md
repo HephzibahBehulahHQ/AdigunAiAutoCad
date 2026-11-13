@@ -2537,3 +2537,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 6.3, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #173 merged as `444b77a4a2a20d756182b7bfbba9b48021709f4d` after all 113 regression tests passed (PR workflow run `43375166885`). Main model verification run `43375222249` and Pages deployment `43375222269` succeeded. Cache-busted production JSON confirmed revision 6.3, 66 sheets through A1/066, 32 components and 335 wire objects.
 - Next: continue at A1/067 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/067
+
+- Added a text-only PN2070 reference for the 14-bit cyclical pressure field under CMPT=2. It does not assign a profile or decoded payload.
+- Updated opening set revision 6.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #175 merged as `26eedb832fef14dc479f537c491af46e7785db1d` after all 114 regression tests passed (PR workflow run `43375531039`). Main model verification run `43375581267` and Pages deployment `43375581326` succeeded. Cache-busted production JSON confirmed revision 6.4, 67 sheets through A1/067, 32 components and 335 wire objects.
+- Next: continue at A1/068 in a source-backed increment.
