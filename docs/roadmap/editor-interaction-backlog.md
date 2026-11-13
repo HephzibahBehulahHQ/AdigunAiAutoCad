@@ -385,3 +385,8 @@ Next project increment: A1/090, selected from verified project evidence after th
 A1/090 records the PN2070-02 hysteresis deviation specification below ±0.1% of span, turn-down 1:1. It assigns no device setting or measured project behavior. No component, wire or interface change.
 
 Next project increment: A1/091, selected from verified project evidence after this milestone.
+
+
+A1/091 records the PN2070-02 manufacturer-listed MTTF of 129 years as a product datum only. It is not a project reliability calculation, service-life claim or maintenance interval. No component, wire or interface change.
+
+Next project increment: A1/092, selected from verified project evidence after this milestone.
