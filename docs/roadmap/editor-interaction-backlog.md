@@ -113,7 +113,7 @@ A1/031 records the PN2070-02 800 bar pressure rating and 1,700 bar minimum burst
 
 A1/032 records the ifm PN2070-02 medium range of −25 to 80 °C and its listed media (liquids and gases). It does not assign a process medium, operating temperature or compatibility assessment. No component, wire or interface change.
 
-Next project increment: A1/048, selected from verified project evidence after this milestone.
+Next project increment: A1/049, selected from verified project evidence after this milestone.
 
 
 ## Completed project increment — PN2070 electrical supply data
@@ -171,4 +171,7 @@ A1/046 records the PN2070 manufacturer-listed shock and vibration test values wi
 
 
 A1/047 records the PN2070-02 wetted-parts material identifier without inferring chemical compatibility or corrosion suitability. No component, wire or interface changes.
+
+
+A1/048 records the PN2070-02 product materials list without assigning specific part locations, chemical compatibility or corrosion suitability. No component, wire or interface changes.
 
