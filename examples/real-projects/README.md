@@ -195,3 +195,6 @@ For A1/089, ifm lists zero-point and span temperature coefficients of 0.2% of sp
 
 
 For A1/090, ifm lists PN2070-02 hysteresis deviation below ±0.1% of span at turn-down 1:1; no device setting or measured project behavior is assigned.
+
+
+For A1/091, ifm lists PN2070-02 MTTF as 129 years; this product datum is not a project reliability calculation, service-life claim or maintenance interval.
