@@ -170,3 +170,5 @@ For A1/078, ifm lists PN2070 IO-Link master port type A, or type B when pin 2 is
 For A1/079, the ifm PN2070-02 Factory setting / CMPT=2 profile lists Device identification, Process data variable, and Device diagnosis; actual configured values or diagnosis are not asserted.
 
 For A1/080, the ifm PN2070-02 interface table lists IO-Link transmission type COM2 at 38,4 kBaud; no observed or configured link speed is asserted.
+
+For A1/081, the ifm PN2070-02 interface table lists IO-Link revision 1.1; negotiated master/device behavior is not asserted.
