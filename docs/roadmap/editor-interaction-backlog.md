@@ -345,3 +345,8 @@ Next project increment: A1/082, selected from verified project evidence after th
 A1/082 records the PN2070-02 SIO mode capability as supported by the manufacturer. It selects no project operating mode. No component, wire or interface change.
 
 Next project increment: A1/083, selected from verified project evidence after this milestone.
+
+
+A1/083 records IEC 61131-9 as the SDCI standard listed in the PN2070-02 Interfaces table. It makes no compliance assessment or project implementation claim. No component, wire or interface change.
+
+Next project increment: A1/084, selected from verified project evidence after this milestone.
