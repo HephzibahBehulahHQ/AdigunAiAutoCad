@@ -31,7 +31,7 @@
 ## CAD catalog representation
 
 - The source-backed `ifm-pn2070` catalog definition preserves all four M12 terminal identities and keeps OUT1 distinct from analog-capable OUT2. It has a dedicated pressure-sensor glyph in the existing workstation renderer.
-- Instance notes for the process point and signal configuration are editable; manufacturer ratings and source evidence remain read-only. The 31-sheet reference project contains B2 on A1/022, conditional AI0 scaling on A1/023 and the limited branch-current comparison on A1/024. Its process-point property is intentionally blank because no process point was supplied.
+- Instance notes for the process point and signal configuration are editable; manufacturer ratings and source evidence remain read-only. The 32-sheet reference project contains B2 on A1/022, conditional AI0 scaling on A1/023 and the limited branch-current comparison on A1/024. Its process-point property is intentionally blank because no process point was supplied.
 
 ## A1/030 analog output parameter ranges
 
@@ -42,3 +42,8 @@
 
 - The PN2070-02 data sheet lists a 0–400 bar relative measuring range, an 800 bar pressure rating and a minimum burst pressure of 1,700 bar.
 - A1/031 records manufacturer values only. It does not select a process operating pressure, establish a design limit, or verify application suitability.
+
+## A1/032 medium temperature
+
+- The PN2070-02 data sheet lists liquids and gases as media and a medium temperature range of −25 to 80 °C.
+- A1/032 records this as the sensor's medium-temperature specification, separate from ambient temperature. No process medium, operating temperature or compatibility assessment is assigned.
