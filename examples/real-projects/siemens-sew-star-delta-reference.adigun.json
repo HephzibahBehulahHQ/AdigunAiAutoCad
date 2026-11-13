@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.2",
-  "status": "Authored opening set: A1/001–A1/025; A1/026–A1/100 not authored.",
+  "revision": "Opening set 2.3",
+  "status": "Authored opening set: A1/001–A1/026; A1/027–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -141,6 +141,11 @@
       "id": "ref-025",
       "number": "A1/025",
       "name": "PN2070 / CPU AI0 accuracy reference"
+    },
+    {
+      "id": "ref-026",
+      "number": "A1/026",
+      "name": "CPU 1212C AI0 idealized resolution reference"
     }
   ],
   "sheetLabels": {
@@ -163,7 +168,8 @@
     "ref-022": "PN2070 pressure sensor · CPU AI0",
     "ref-023": "PN2070 → AI0 scaling reference",
     "ref-024": "PN2070 24 V load reference",
-    "ref-025": "PN2070 / CPU AI0 accuracy reference"
+    "ref-025": "PN2070 / CPU AI0 accuracy reference",
+    "ref-026": "CPU 1212C AI0 idealized resolution reference"
   },
   "sheetViews": {
     "ref-007": {
@@ -275,6 +281,12 @@
       "h": 760
     },
     "ref-025": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-026": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3721,7 +3733,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 2.2",
+      "text": "Engineering document set | Revision opening set 2.3",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3730,7 +3742,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/025",
+      "text": "Authored pages: A1/001–A1/026",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3748,7 +3760,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: A1/001–A1/025 authored; A1/026–A1/100 are not authored yet.",
+      "text": "Progress: A1/001–A1/026 authored; A1/027–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3880,7 +3892,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices through A1/025",
+      "text": "Component register | modeled devices through A1/026",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3970,7 +3982,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/025 add source-backed reference sheets only.",
+      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/026 add source-backed reference sheets only.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4084,7 +4096,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/025 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/026 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4352,7 +4364,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/025; A1/017–A1/025 document I/O, overload feedback and PN2070 signal references.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/026; A1/017–A1/026 document I/O, overload feedback and PN2070 signal references.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4370,7 +4382,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, and A1/025 a conditional partial signal-chain accuracy stack.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, and A1/026 an idealized CPU analog-resolution reference.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -6928,11 +6940,101 @@
     },
     {
       "kind": "text",
+      "id": "doc-ref-026-title",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 54,
+      "text": "A1/026 · CPU 1212C AI0 idealized resolution reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-condition",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 125,
+      "text": "Conditional illustration only: verify PN2070 OUT2 = U and a linear 0–400 bar / 0–10 V span; CPU AI0 is rated 0–10 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-resolution",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 215,
+      "text": "Siemens CPU 1212C Table A-41 specifies 10-bit analog-input resolution over the 0–10 V rated range.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-code-step",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 305,
+      "text": "Ideal uniform code interval: 10 V / 2^10 = 9.765625 mV; mapped 400 bar / 2^10 = 0.390625 bar per interval.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-quantization",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 405,
+      "text": "Ideal rounding quantization alone would be ±0.1953125 bar (half an interval); this is derived, not a Siemens accuracy specification.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-raw-word",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 495,
+      "text": "The 0–27648 PLC data-word scaling is a representation of rated full scale; it does not imply 15-bit analog resolution.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-scope",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 585,
+      "text": "This idealization excludes effective resolution, noise, smoothing configuration, sensor deviation, calibration and field measurements.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-accuracy-context",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 675,
+      "text": "The ideal half-step is much smaller than the CPU's published ±14 bar full-scale accuracy contribution over its rated temperature range.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-026-source",
+      "sheetId": "ref-026",
+      "x": 50,
+      "y": 745,
+      "text": "Source: Siemens S7-1200 System Manual V4.7 (12/2024), CPU 1212C Table A-41.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
       "id": "doc-ref-002-line-24",
       "sheetId": "ref-002",
       "x": 120,
       "y": 1740,
       "text": "A1/025  PN2070 / CPU AI0 conditional analog accuracy reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-25",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1795,
+      "text": "A1/026  CPU 1212C AI0 idealized resolution reference",
       "stroke": "#13263b"
     },
     {
@@ -6943,9 +7045,18 @@
       "y": 1638,
       "text": "Revision 2.1 | 2026-11-13 | A1/025 records a conditional partial sensor / CPU accuracy stack; no settings or calibration assumed.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-17",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 1702,
+      "text": "Revision 2.2 | 2026-11-13 | A1/026 records idealized 10-bit AI0 quantization; not measured or guaranteed performance.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Twenty-five authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; and A1/025 conditionally stacks the published PN2070 and CPU analog accuracy contributions. A1/026–A1/100 are not authored.",
+  "description": "Twenty-six authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only. A1/027–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",

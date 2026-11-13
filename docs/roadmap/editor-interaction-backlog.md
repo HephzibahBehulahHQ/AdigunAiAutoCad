@@ -1,6 +1,6 @@
 # Editor interaction backlog and milestone order
 
-Updated 2026-11-12. This records the remaining interaction work from the user's two pasted function catalogs while the product advances to real engineering components and example projects. The long generic lists are acceptance input, not proof that every item is applicable or implemented.
+Updated 2026-11-13. This records the remaining interaction work from the user's two pasted function catalogs while the product advances to real engineering components and example projects. The long generic lists are acceptance input, not proof that every item is applicable or implemented.
 
 ## Already shipped interaction foundations
 
@@ -71,3 +71,10 @@ Next project increment: A1/025, selected from verified project evidence after th
 A1/025 records a limited arithmetic sum of the ifm PN2070-02 limit-setting characteristic deviation and the Siemens CPU 1212C analog-input accuracy. The calculation is conditional on a verified 0–400 bar / 0–10 V mapping: less than ±14 bar at 25 °C and less than ±16 bar across the CPU's rated temperature range. It is not a complete uncertainty budget, measured accuracy, active device configuration or calibration. The page adds no component or wire and the workstation interface is unchanged.
 
 Next project increment: A1/026, selected from verified project evidence after this milestone.
+
+
+## Completed project increment — CPU 1212C analog resolution reference
+
+A1/026 records the Siemens CPU 1212C built-in analog input's published 10-bit resolution and derives an idealized code interval for a conditional 0–400 bar / 0–10 V sensor mapping. The page states the resulting 0.390625 bar ideal interval and ±0.1953125 bar rounding contribution as mathematical derivations, not guaranteed measurement performance. It distinguishes the 0–27648 PLC data-word representation from analog converter resolution and excludes noise, effective bits, smoothing configuration, sensor error and field measurements. No component, wire or interface change is made.
+
+Next project increment: A1/027, selected from verified project evidence after this milestone.
