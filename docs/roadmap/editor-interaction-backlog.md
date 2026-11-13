@@ -310,3 +310,8 @@ Next project increment: A1/075, selected from verified project evidence after th
 A1/075 records the PN2070-02 Common - I&D Identification and Diagnosis listing under Status_B High Resolution / CMPT=3. It does not assert actual diagnosis, event codes or master configuration. No component, wire or interface change.
 
 Next project increment: A1/076, selected from verified project evidence after this milestone.
+
+
+A1/076 records the PN2070-02 acyclical application-specific tag function under Factory setting / CMPT=2. It assigns no configured tag value or active device profile. No component, wire or interface change.
+
+Next project increment: A1/077, selected from verified project evidence after this milestone.
