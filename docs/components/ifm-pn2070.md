@@ -146,3 +146,10 @@
 - A1/046 records these manufacturer-listed values only. It does not assess installed machine vibration or shock or assign mounting conditions or application suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
 
+
+## A1/047 wetted-parts material
+
+- The PN2070-02 data sheet lists the wetted-parts material as stainless steel (630 / 1.4542 / 17-4 PH).
+- A1/047 records the manufacturer-listed identifier only. No process medium or chemical exposure is specified, and this entry does not establish chemical compatibility or corrosion suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
+
