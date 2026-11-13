@@ -335,3 +335,10 @@
 - The PN2070-02 profile table lists Smart Sensor - SSP 0 Generic Profiled Sensor under Factory setting / CMPT=2.
 - A1/073 records the manufacturer profile listing only. It asserts no master port, IODD, or active device configuration.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 profile table, 01.03.2024.
+
+
+## A1/074 IO-Link profile listing, Status_B High Resolution / CMPT=3
+
+- The PN2070-02 profile table lists Smart Sensor - SSP 3.1 Measuring Sensor under Status_B High Resolution / CMPT=3.
+- A1/074 records the manufacturer profile listing only. It asserts no master port, IODD, or active device configuration.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Status_B High Resolution / CMPT=3 profile table, 01.03.2024.
