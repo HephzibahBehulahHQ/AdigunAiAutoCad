@@ -198,3 +198,6 @@ For A1/090, ifm lists PN2070-02 hysteresis deviation below ±0.1% of span at tur
 
 
 For A1/091, ifm lists PN2070-02 MTTF as 129 years; this product datum is not a project reliability calculation, service-life claim or maintenance interval.
+
+
+For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000-6-3; no project compliance or test result is claimed.
