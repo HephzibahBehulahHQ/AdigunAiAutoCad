@@ -113,7 +113,7 @@ A1/031 records the PN2070-02 800 bar pressure rating and 1,700 bar minimum burst
 
 A1/032 records the ifm PN2070-02 medium range of −25 to 80 °C and its listed media (liquids and gases). It does not assign a process medium, operating temperature or compatibility assessment. No component, wire or interface change.
 
-Next project increment: A1/041, selected from verified project evidence after this milestone.
+Next project increment: A1/042, selected from verified project evidence after this milestone.
 
 
 ## Completed project increment — PN2070 electrical supply data
@@ -150,4 +150,7 @@ A1/039 records source-listed PN2070 CMPT=3 high-resolution set-point/reset-point
 
 
 A1/040 records the PN2070-02 manufacturer-recommended tightening torque and listed dependencies on lubrication, seal and pressure load. It does not assign an installed value or change project geometry, components, wires or interface.
+
+
+A1/041 records manufacturer-listed PN2070 ambient and storage temperatures. It assigns no project site conditions and makes no suitability claim; no component, wire or interface changes.
 
