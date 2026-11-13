@@ -360,3 +360,8 @@ Next project increment: A1/085, selected from verified project evidence after th
 A1/085 records the PN2070-02 manufacturer-listed output count of 2 digital and 1 analogue outputs. It assigns no channel-to-pin allocation or simultaneous signal usage. No component, wire or interface change.
 
 Next project increment: A1/086, selected from verified project evidence after this milestone.
+
+
+A1/086 records the PN2070-02 switch point accuracy specification (< ±0.4% of the span, turn-down 1:1). It selects no switching threshold, measuring span or project accuracy. No component, wire or interface change.
+
+Next project increment: A1/087, selected from verified project evidence after this milestone.
