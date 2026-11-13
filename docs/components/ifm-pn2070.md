@@ -265,3 +265,10 @@
 - The PN2070-02 data sheet lists the minimum IO-Link process cycle time as 2.3 ms for factory setting / CMPT=2.
 - A1/063 records the manufacturer profile datum only. It does not assign the device setting, master cycle or application response.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 table, 01.03.2024.
+
+
+## A1/064 IO-Link process cycle time, CMPT=3
+
+- The PN2070-02 data sheet lists the minimum IO-Link process cycle time as 3 ms for Status_B High Resolution / CMPT=3.
+- A1/064 records the manufacturer profile datum only. It does not assign this device profile, master cycle or application response.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Status_B High Resolution / CMPT=3 table, 01.03.2024.

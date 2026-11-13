@@ -250,3 +250,8 @@ Next project increment: A1/063, selected from verified project evidence after th
 A1/063 records the PN2070-02 minimum IO-Link process cycle time of 2.3 ms for factory setting / CMPT=2. It assigns no device configuration, master cycle or application response. No component, wire or interface change.
 
 Next project increment: A1/064, selected from verified project evidence after this milestone.
+
+
+A1/064 records the PN2070-02 minimum IO-Link process cycle time of 3 ms for Status_B High Resolution / CMPT=3. It assigns no device profile, master cycle or application response. No component, wire or interface change.
+
+Next project increment: A1/065, selected from verified project evidence after this milestone.
