@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.9",
-  "status": "Authored opening set: A1/001–A1/032; A1/033–A1/100 not authored.",
+  "revision": "Opening set 3.0",
+  "status": "Authored opening set: A1/001–A1/033; A1/034–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -176,6 +176,11 @@
       "id": "ref-032",
       "number": "A1/032",
       "name": "ifm PN2070 medium temperature range"
+    },
+    {
+      "id": "ref-033",
+      "number": "A1/033",
+      "name": "ifm PN2070 electrical supply data"
     }
   ],
   "sheetLabels": {
@@ -7639,9 +7644,81 @@
       "y": 2086,
       "text": "Revision 2.8 | 2026-11-13 | A1/032 records PN2070 medium-temperature limits; no process condition assigned.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-033-title",
+      "sheetId": "ref-033",
+      "x": 50,
+      "y": 54,
+      "text": "A1/033 · ifm PN2070 electrical supply data",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-033-voltage",
+      "sheetId": "ref-033",
+      "x": 50,
+      "y": 145,
+      "text": "ifm lists an operating-voltage range of 18–30 V DC (to SELV/PELV).",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-033-current",
+      "sheetId": "ref-033",
+      "x": 50,
+      "y": 245,
+      "text": "Listed current consumption: <35 mA.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-033-scope",
+      "sheetId": "ref-033",
+      "x": 50,
+      "y": 355,
+      "text": "These are manufacturer ratings; this reference does not verify the installed supply or branch conditions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-033-load",
+      "sheetId": "ref-033",
+      "x": 50,
+      "y": 455,
+      "text": "No total project load current or PSU headroom is established by this sheet.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-033-source",
+      "sheetId": "ref-033",
+      "x": 50,
+      "y": 555,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Electrical data table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-32",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 2215,
+      "text": "A1/033  ifm PN2070 electrical supply data",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-24",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 2156,
+      "text": "Revision 3.0 | 2026-11-13 | A1/033 records PN2070 electrical ratings; no supply adequacy claimed.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Thirty-two authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033–A1/100 are not authored.",
+  "description": "Thirty-three authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
