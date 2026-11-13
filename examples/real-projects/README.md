@@ -186,3 +186,6 @@ For A1/086, ifm lists PN2070-02 switch point accuracy below ±0.4% of the span a
 
 
 For A1/087, ifm lists PN2070-02 repeatability below ±0.1% of span for temperature fluctuations below 10 K at turn-down 1:1; no project measurement or operating temperature condition is assigned.
+
+
+For A1/088, ifm lists PN2070-02 long-term stability below ±0.05% of span per 6 months at turn-down 1:1; no project drift measurement, service life or maintenance interval is claimed.
