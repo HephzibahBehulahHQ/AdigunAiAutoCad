@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 3.6",
-  "status": "Authored opening set: A1/001–A1/039; A1/040–A1/100 not authored.",
+  "revision": "Opening set 3.7",
+  "status": "Authored opening set: A1/001–A1/040; A1/041–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -211,6 +211,11 @@
       "id": "ref-039",
       "number": "A1/039",
       "name": "ifm PN2070 switching-point ranges · CMPT 3"
+    },
+    {
+      "id": "ref-040",
+      "number": "A1/040",
+      "name": "ifm PN2070 recommended tightening torque"
     }
   ],
   "sheetLabels": {
@@ -8187,9 +8192,90 @@
       "y": 2576,
       "text": "Revision 3.6 | 2026-11-13 | A1/039 records CMPT=3 switching-point ranges; no threshold assigned.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-title",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 54,
+      "text": "A1/040 · ifm PN2070 recommended tightening torque",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-thread",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 145,
+      "text": "The PN2070 process connection is listed as G 1/4 internal thread (DIN EN ISO 1179-2).",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-torque",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 245,
+      "text": "ifm lists a recommended tightening torque of 25–35 N·m.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-conditions",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 345,
+      "text": "The recommendation depends on lubrication, the seal and the pressure load.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-scope",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 445,
+      "text": "This is manufacturer product data; the project does not specify the installed seal, lubrication or applied torque.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-limit",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 545,
+      "text": "This reference does not select an installation torque or assess the project pressure connection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-040-source",
+      "sheetId": "ref-040",
+      "x": 50,
+      "y": 645,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Mechanical data table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-39",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 2705,
+      "text": "A1/040  ifm PN2070 recommended tightening torque",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-31",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 2646,
+      "text": "Revision 3.7 | 2026-11-13 | A1/040 records recommended torque with dependencies; no installation value assigned.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Thirty-nine authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039 records the CMPT=3 parameter ranges without configuring thresholds. A1/040–A1/100 are not authored.",
+  "description": "Forty authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039 records the CMPT=3 parameter ranges without configuring thresholds. A1/040 records the manufacturer-recommended PN2070 tightening torque and its dependencies without selecting an installation value. A1/041–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
