@@ -280,3 +280,8 @@ Next project increment: A1/069, selected from verified project evidence after th
 A1/069 records the PN2070-02 CMPT=3 cyclical device status field width of 4 bits. It defines no status codes or diagnostic meaning. No component, wire or interface change.
 
 Next project increment: A1/070, selected from verified project evidence after this milestone.
+
+
+A1/070 records the PN2070-02 CMPT=3 cyclical binary switching information field width of 2 bits. It assigns no state-code meanings or project output configuration. No component, wire or interface change.
+
+Next project increment: A1/071, selected from verified project evidence after this milestone.

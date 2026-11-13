@@ -148,3 +148,5 @@ Component source records: [Siemens SITOP PSU100C 6EP1332-5BA00](../../docs/compo
 
 For A1/008, the PT 16 N-PE endpoints labeled 1 and 2 are model-local indexes; Phoenix Contact confirms two connections but does not assign those numbers.
 
+
+For A1/070, the PN2070-02 CMPT=3 cyclical binary switching information field is 2 bits; this records field width only and assigns no state-code meanings or project output configuration.

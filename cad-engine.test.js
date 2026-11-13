@@ -1172,14 +1172,14 @@ test('multi-sheet project analysis isolates coincident geometry and rejects ambi
 });
 
 
-test('sixty-nine-sheet connected reference opening set preserves the starter and source-backed PLC interfaces', () => {
+test('seventy-sheet connected reference opening set preserves the starter and source-backed PLC interfaces', () => {
   const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
   const project = parsed.project;
-  assert.equal(project.sheets.length, 69);
+  assert.equal(project.sheets.length, 70);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/070–A1/100 not authored'));
+  assert.ok(project.status.includes('A1/071–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
@@ -1188,7 +1188,7 @@ test('sixty-nine-sheet connected reference opening set preserves the starter and
     if (sheet.id !== 'ref-006') assert.ok(pageObjects.some(object => object.kind === 'text'), sheet.id + ' must contain editable text');
   }
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [69,32,335, 67, 0]);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [70,32,335, 67, 0]);
   assert.deepEqual([report.crossSheetConnectionCount,report.globalNetCount,report.localOpenEndpointCount],[21,43,47]);
   assert.deepEqual(report.sheets.slice(0, 5).map(sheet => [sheet.analysis.componentCount, sheet.analysis.wireCount, sheet.analysis.netCount]), [
     [0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
@@ -1225,7 +1225,7 @@ test('sixty-nine-sheet connected reference opening set preserves the starter and
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 });
 
 
@@ -1290,8 +1290,8 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   const project = parsed.project;
   const report = engine.analyzeProject(project);
   assert.equal(report.valid, true, report.errors.join(' '));
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [69,32,335,67,21,0]);
-  assert.deepEqual(report.sheets.slice(-59,-39).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [70,32,335,67,21,0]);
+  assert.deepEqual(report.sheets.slice(-60,-40).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]);
   assert.equal(report.globalNetCount,43);
   assert.deepEqual(report.globalNets.filter(net=>net.sheetIds.includes('ref-007')&&net.sheetIds.includes('ref-008')).map(net=>net.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort()).sort((a,b)=>a[0].localeCompare(b[0])),[
     ['ref-006:F1:97','ref-007:A1:X10:1','ref-007:A1:X12:1','ref-007:X7:1','ref-007:X7:2','ref-008:PS1:+','ref-008:X12:1','ref-008:X12:2','ref-009:X14:1','ref-009:X14:2','ref-010:K2:11','ref-011:KM4:13','ref-011:KM4:21','ref-012:S2:13','ref-012:S3:21','ref-022:B2:1'],
@@ -1307,10 +1307,10 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   assert.equal(saved.valid, true, saved.errors.join(' '));
   const switchedContactorNet=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='14'));
   assert.deepEqual(switchedContactorNet.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:13','ref-010:K2:14','ref-011:KM4:A1']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
   const relayNcInput=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='12'));
   assert.deepEqual(relayNcInput.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:12','ref-010:K2:12']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 });
 
 
@@ -1385,7 +1385,7 @@ test('A1/010 wires the source-backed PLC transistor output to the Phoenix Contac
   const routed=project.objects.filter(object=>object.sheetId==='ref-007'&&object.kind==='wire'&&object.id.startsWith('a1-010-w07-'));
   assert.equal(routed.length,4);
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/010 PLC supply and output paths must stay orthogonal');
-  assert.match(project.description,/A1\/070–A1\/100 are not authored/);
+  assert.match(project.description,/A1\/071–A1\/100 are not authored/);
   assert.match(project.objects.find(object=>object.id==='doc-ref-003-line-19').text,/2966171.*K2/);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
@@ -1550,7 +1550,7 @@ test('A1/016 documents K2 NO output 14 on PLC DI a.6 without simulating the rela
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/016 routes must stay orthogonal');
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,21,43,0]);
 });
 
 test('A1/017 summarizes modeled PLC I/O allocations and the current I0.7 assignment', () => {
@@ -1574,7 +1574,7 @@ test('A1/017 summarizes modeled PLC I/O allocations and the current I0.7 assignm
   assert.ok(project.objects.some(object=>object.id==='doc-ref-002-line-17'&&/A1\/017.*PLC I\/O allocation summary.*I0\.7 overload trip.*F1:97–98/.test(object.text)));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/018 routes Siemens F1 NO trip contact 97–98 to CPU DI a.7 through the existing 24 V supply', () => {
@@ -1606,7 +1606,7 @@ test('A1/018 routes Siemens F1 NO trip contact 97–98 to CPU DI a.7 through the
   assert.ok(project.objects.some(object=>object.id==='doc-ref-017-input-07'&&/I0\.7.*F1 NO trip contact 97–98.*A1\/018/.test(object.text)));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/019 documents Siemens CPU 1212C digital-output allocation without changing topology', () => {
@@ -1633,7 +1633,7 @@ test('A1/019 documents Siemens CPU 1212C digital-output allocation without chang
   assert.match(source,/pins 2–5 to DQ a\.0–a\.3, pin 6 to 2L, and pins 7–8 to DQ a\.4–a\.5/);
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/020 documents CPU 1212C analog-input allocation without adding components or wiring', () => {
@@ -1657,7 +1657,7 @@ test('A1/020 documents CPU 1212C analog-input allocation without adding componen
   assert.match(source,/two onboard 0–10 V DC analog inputs/);
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1691,7 +1691,7 @@ test('A1/021 records a source-backed pressure-sensor interface proposal without 
   assert.ok(source.includes('CPU 1212C')&&source.includes('0–10 V DC'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('ifm PN2070 exposes its exact M12 pins, configurable analog outputs, provenance, and editable instance notes', () => {
@@ -1749,7 +1749,7 @@ test('A1/022 connects ifm PN2070 B2 OUT2 to CPU AI0 with source-backed power and
   assert.equal(report.openEndpointCount,0);
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1768,7 +1768,7 @@ test('A1/023 records conditional PN2070-to-CPU AI0 scaling without assigning dev
   assert.ok(source.includes('Table A-41')&&source.includes('0–27648'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/024 documents PN2070 B2 load allocation against the exact SITOP variant without claiming supply adequacy', () => {
@@ -1790,7 +1790,7 @@ test('A1/024 documents PN2070 B2 load allocation against the exact SITOP variant
   assert.ok(sitop.includes('0.75 A at +70 °C')&&sitop.includes('±3%'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1813,7 +1813,7 @@ test('A1/025 records a conditional partial PN2070 / CPU AI0 accuracy stack witho
   assert.ok(cpu.includes('3.0% of full scale')&&cpu.includes('3.5% over −20…60 °C'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1824,7 +1824,7 @@ test('A1/026 documents idealized CPU 1212C AI0 quantization without claiming mea
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-026').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-026').number,'A1/026');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-27','A1/028  CPU 1212C AI0 rated, overshoot and overflow ranges'],['doc-ref-002-line-28','A1/029  CPU 1212C AI0 cable length'],['doc-ref-002-line-29','A1/030  ifm PN2070 analog output'],['doc-ref-004-line-19','Revision 2.4 | 2026-11-13 | A1/028'],['doc-ref-004-line-20','Revision 2.5 | 2026-11-13 | A1/029'],['doc-ref-004-line-21','Revision 2.6 | 2026-11-13 | A1/030']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),`Incorrect drawing index or revision record: ${id}`);
@@ -1840,7 +1840,7 @@ test('A1/026 documents idealized CPU 1212C AI0 quantization without claiming mea
   assert.ok(guide.includes('A1/026')&&guide.includes('idealized CPU 1212C 10-bit analog quantization'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1851,7 +1851,7 @@ test('A1/027 records CPU 1212C AI input response without assigning smoothing or 
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-027').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-027').number,'A1/027');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-027'&&object.kind==='text').map(object=>object.text);
   for(const required of ['4.17 ms','5 ms','25 ms','95%','None (1 cycle; no averaging)','50 ms at 60 Hz','Weak smoothing (4 samples)','200 ms at 10 Hz','Medium smoothing (16 samples)','1,150 ms','Strong smoothing (32 samples)','2,300 ms','not established','remain unassigned','Tables A-42/A-43'])
@@ -1862,7 +1862,7 @@ test('A1/027 records CPU 1212C AI input response without assigning smoothing or 
   assert.ok(guide.includes('A1/027')&&guide.includes('95% step response'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/028 documents CPU 1212C rated, overshoot and overflow codes without assigning diagnostics', () => {
@@ -1872,7 +1872,7 @@ test('A1/028 documents CPU 1212C rated, overshoot and overflow codes without ass
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-028').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-028').number,'A1/028');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-028'&&object.kind==='text').map(object=>object.text);
   for(const required of ['0–10 V','0–27648','10.001–11.759 V','27649–32511','11.760–11.852 V','32512–32767','27648 / 6C00','32511 / 7EFF','32512 / 7F00','32767 / 7FFF','35 V DC','Negative input values are not supported','does not assign overshoot or overflow values to sensor faults or alarms','No channel diagnostic','Tables A-41/A-44'])
@@ -1883,7 +1883,7 @@ test('A1/028 documents CPU 1212C rated, overshoot and overflow codes without ass
   assert.ok(guide.includes('A1/028')&&guide.includes('rated, overshoot and overflow'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1894,7 +1894,7 @@ test('A1/029 records CPU 1212C analog cable limit without assigning an installed
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-029').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-029').number,'A1/029');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-029'&&object.kind==='text').map(object=>object.text);
   for(const required of ['100 m','shielded twisted pair','assigns no cable length','No installed route','does not verify installation compliance','Table A-41'])
@@ -1905,7 +1905,7 @@ test('A1/029 records CPU 1212C analog cable limit without assigning an installed
   assert.ok(guide.includes('A1/029')&&guide.includes('without assigning installed cable details'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1916,8 +1916,8 @@ test('A1/030 records PN2070 output parameter ranges without assigning configured
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-030').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-030').number,'A1/030');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-030'&&object.kind==='text').map(object=>object.text);
   for(const required of ['0–10 V','1:5','2,000 Ω','0–320 bar','80–400 bar','manufacturer-listed parameter ranges','assigns no ASP2/AEP2','ifm PN2070-02'])
@@ -1926,7 +1926,7 @@ test('A1/030 records PN2070 output parameter ranges without assigning configured
   assert.ok(source.includes('analog start point 0–320 bar and analog end point 80–400 bar'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1937,8 +1937,8 @@ test('A1/031 PN2070 pressure limits remain manufacturer ratings rather than sele
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-031').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-031').number,'A1/031');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-30','A1/031  ifm PN2070 pressure rating'],['doc-ref-004-line-22','Revision 2.7 | 2026-11-13 | A1/031']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/031 index or revision record: '+id);
@@ -1950,7 +1950,7 @@ test('A1/031 PN2070 pressure limits remain manufacturer ratings rather than sele
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -1961,8 +1961,8 @@ test('A1/032 records the PN2070 medium temperature range without assigning proce
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-032').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-032').number,'A1/032');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-31','A1/032  ifm PN2070 medium temperature'],['doc-ref-004-line-23','Revision 2.8 | 2026-11-13 | A1/032']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/032 index or revision record: '+id);
@@ -1974,7 +1974,7 @@ test('A1/032 records the PN2070 medium temperature range without assigning proce
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
  
@@ -1985,8 +1985,8 @@ test('A1/033 records PN2070 electrical ratings without claiming supply adequacy'
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-033').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-033').number,'A1/033');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-32','A1/033  ifm PN2070 electrical supply data'],['doc-ref-004-line-24','Revision 3.0 | 2026-11-13 | A1/033']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/033 index or revision record: '+id);
@@ -1998,7 +1998,7 @@ test('A1/033 records PN2070 electrical ratings without claiming supply adequacy'
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2009,8 +2009,8 @@ test('A1/034 records the PN2070 power-on delay without assigning system response
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-034').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-034').number,'A1/034');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-33','A1/034  ifm PN2070 power-on delay time'],['doc-ref-004-line-25','Revision 3.1 | 2026-11-13 | A1/034']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/034 index or revision record: '+id);
@@ -2022,7 +2022,7 @@ test('A1/034 records the PN2070 power-on delay without assigning system response
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2033,8 +2033,8 @@ test('A1/035 records PN2070 electrical protection characteristics without making
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-035').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-035').number,'A1/035');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-34','A1/035  ifm PN2070 electrical protection characteristics'],['doc-ref-004-line-26','Revision 3.2 | 2026-11-13 | A1/035']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/035 index or revision record: '+id);
@@ -2046,7 +2046,7 @@ test('A1/035 records PN2070 electrical protection characteristics without making
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2057,8 +2057,8 @@ test('A1/036 records PN2070 minimum insulation resistance without implying a pro
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-036').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-036').number,'A1/036');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-35','A1/036  ifm PN2070 minimum insulation resistance'],['doc-ref-004-line-27','Revision 3.3 | 2026-11-13 | A1/036']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/036 index or revision record: '+id);
@@ -2070,7 +2070,7 @@ test('A1/036 records PN2070 minimum insulation resistance without implying a pro
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2081,8 +2081,8 @@ test('A1/037 records PN2070 switching-output specifications without assigning a 
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-037').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-037').number,'A1/037');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-36','A1/037  ifm PN2070 switching-output ratings'],['doc-ref-004-line-28','Revision 3.4 | 2026-11-13 | A1/037']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/037 index or revision record: '+id);
@@ -2094,7 +2094,7 @@ test('A1/037 records PN2070 switching-output specifications without assigning a 
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2105,8 +2105,8 @@ test('A1/038 records PN2070 CMPT 2 switching-point ranges without configuring th
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-038').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-038').number,'A1/038');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-37','A1/038  ifm PN2070 switching-point ranges · CMPT 2'],['doc-ref-004-line-29','Revision 3.5 | 2026-11-13 | A1/038']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/038 index or revision record: '+id);
@@ -2118,7 +2118,7 @@ test('A1/038 records PN2070 CMPT 2 switching-point ranges without configuring th
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2129,8 +2129,8 @@ test('A1/039 records PN2070 CMPT 3 switching-point ranges without configuring th
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-039').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-039').number,'A1/039');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-38','A1/039  ifm PN2070 switching-point ranges · CMPT 3'],['doc-ref-004-line-30','Revision 3.6 | 2026-11-13 | A1/039']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/039 index or revision record: '+id);
@@ -2142,7 +2142,7 @@ test('A1/039 records PN2070 CMPT 3 switching-point ranges without configuring th
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2153,8 +2153,8 @@ test('A1/040 records the PN2070 manufacturer tightening-torque recommendation wi
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-040').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-040').number,'A1/040');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-39','A1/040  ifm PN2070 recommended tightening torque'],['doc-ref-004-line-31','Revision 3.7 | 2026-11-13 | A1/040']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/040 index or revision record: '+id);
@@ -2166,7 +2166,7 @@ test('A1/040 records the PN2070 manufacturer tightening-torque recommendation wi
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2177,8 +2177,8 @@ test('A1/041 records PN2070 ambient and storage temperature ratings without assi
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-041').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-041').number,'A1/041');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-40','A1/041  ifm PN2070 ambient and storage temperatures'],['doc-ref-004-line-32','Revision 3.8 | 2026-11-13 | A1/041']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/041 index or revision record: '+id);
@@ -2190,7 +2190,7 @@ test('A1/041 records PN2070 ambient and storage temperature ratings without assi
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2201,8 +2201,8 @@ test('A1/042 records the PN2070 minimum pressure-cycle datum without claiming pr
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-042').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-042').number,'A1/042');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-41','A1/042  ifm PN2070 minimum pressure cycles'],['doc-ref-004-line-33','Revision 3.9 | 2026-11-13 | A1/042']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/042 index or revision record: '+id);
@@ -2214,7 +2214,7 @@ test('A1/042 records the PN2070 minimum pressure-cycle datum without claiming pr
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2225,8 +2225,8 @@ test('A1/043 records PN2070 product dimensions and weight without assigning inst
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-043').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-043').number,'A1/043');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-42','A1/043  ifm PN2070 dimensions and weight'],['doc-ref-004-line-34','Revision 4.0 | 2026-11-13 | A1/043']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/043 index or revision record: '+id);
@@ -2238,7 +2238,7 @@ test('A1/043 records PN2070 product dimensions and weight without assigning inst
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2249,8 +2249,8 @@ test('A1/044 records the PN2070 restrictor product datum without assigning a ret
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-044').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-044').number,'A1/044');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-43','A1/044  ifm PN2070 integrated restrictor datum'],['doc-ref-004-line-35','Revision 4.1 | 2026-11-13 | A1/044']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/044 index or revision record: '+id);
@@ -2262,7 +2262,7 @@ test('A1/044 records the PN2070 restrictor product datum without assigning a ret
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2273,8 +2273,8 @@ test('A1/045 records PN2070 manufacturer IP ratings without claiming assembly pr
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-045').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-045').number,'A1/045');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-44','A1/045  ifm PN2070 listed protection ratings'],['doc-ref-004-line-36','Revision 4.2 | 2026-11-13 | A1/045']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/045 index or revision record: '+id);
@@ -2286,7 +2286,7 @@ test('A1/045 records PN2070 manufacturer IP ratings without claiming assembly pr
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2297,8 +2297,8 @@ test('A1/046 records PN2070 shock and vibration data without claiming applicatio
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-046').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-046').number,'A1/046');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-45','A1/046  ifm PN2070 shock and vibration data'],['doc-ref-004-line-37','Revision 4.3 | 2026-11-13 | A1/046']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/046 index or revision record: '+id);
@@ -2311,7 +2311,7 @@ test('A1/046 records PN2070 shock and vibration data without claiming applicatio
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2322,8 +2322,8 @@ test('A1/047 records PN2070 wetted-parts material without assigning chemical com
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-047').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-047').number,'A1/047');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-46','A1/047  ifm PN2070 wetted-parts material'],['doc-ref-004-line-38','Revision 4.4 | 2026-11-13 | A1/047']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/047 index or revision record: '+id);
@@ -2335,7 +2335,7 @@ test('A1/047 records PN2070 wetted-parts material without assigning chemical com
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2346,8 +2346,8 @@ test('A1/048 records PN2070 listed materials without assigning part locations or
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-048').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-048').number,'A1/048');
-  assert.equal(project.revision,'Opening set 6.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-47','A1/048  ifm PN2070 listed materials'],['doc-ref-004-line-39','Revision 4.5 | 2026-11-13 | A1/048']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/048 index or revision record: '+id);
@@ -2359,7 +2359,7 @@ test('A1/048 records PN2070 listed materials without assigning part locations or
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2371,10 +2371,10 @@ test('A1/049 records PN2070 M12 connector details without selecting cable hardwa
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-049').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-049').number,'A1/049');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-049').name,'ifm PN2070 M12 connector details');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-48','A1/049  ifm PN2070 M12 connector details'],['doc-ref-004-line-40','Revision 4.6 | 2026-11-13 | A1/049']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/049 index or revision record: '+id);
   for(const required of ['1 × M12 connector','A-coded','4 gold-plated contacts','pin functions are documented separately on A1/021','No cable or mating connector is selected','physical fit','ifm PN2070-02'])
@@ -2384,7 +2384,7 @@ test('A1/049 records PN2070 M12 connector details without selecting cable hardwa
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2395,10 +2395,10 @@ test('A1/050 records PN2070 display indicators without inferring their behavior'
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-050').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-050').number,'A1/050');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-050').name,'ifm PN2070 display indicators');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-49','A1/050  ifm PN2070 display indicators'],['doc-ref-004-line-41','Revision 4.7 | 2026-11-13 | A1/050']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/050 index or revision record: '+id);
   for(const required of ['3 green LEDs','bar, psi and MPa','2 yellow LEDs','alphanumeric, red/green, 4-digit display','do not assign display-unit selection','the meaning of an indicator state','ifm PN2070-02'])
@@ -2408,7 +2408,7 @@ test('A1/050 records PN2070 display indicators without inferring their behavior'
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2419,10 +2419,10 @@ test('A1/051 records the PN2070 process connection designation without selecting
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-051').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-051').number,'A1/051');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-051').name,'ifm PN2070 process connection designation');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-50','A1/051  ifm PN2070 process connection designation'],['doc-ref-004-line-42','Revision 4.8 | 2026-11-13 | A1/051']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/051 index or revision record: '+id);
   for(const required of ['G 1/4 internal thread','DIN EN ISO 1179-2','No mating fitting or seal is selected','does not establish mechanical compatibility or installation suitability','ifm PN2070-02'])
@@ -2432,7 +2432,7 @@ test('A1/051 records the PN2070 process connection designation without selecting
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2443,10 +2443,10 @@ test('A1/052 records PN2070 upper-housing rotation without assigning installatio
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-052').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-052').number,'A1/052');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-052').name,'ifm PN2070 upper-housing rotation');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-51','A1/052  ifm PN2070 upper-housing rotation'],['doc-ref-004-line-43','Revision 4.9 | 2026-11-13 | A1/052']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/052 index or revision record: '+id);
   for(const required of ['upper housing portion rotation: up to 345°','does not specify the installed rotation angle','mounting clearance or installation suitability','ifm PN2070-02'])
@@ -2456,7 +2456,7 @@ test('A1/052 records PN2070 upper-housing rotation without assigning installatio
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2467,10 +2467,10 @@ test('A1/053 records the PN2070 programming-button callout without inferring but
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-053').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-053').number,'A1/053');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-053').name,'ifm PN2070 programming-button callout');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-52','A1/053  ifm PN2070 programming-button callout'],['doc-ref-004-line-44','Revision 5.0 | 2026-11-13 | A1/053']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/053 index or revision record: '+id);
   for(const required of ['labels a programming button as callout 3','does not document its function','does not assign an operating sequence','ifm PN2070-02'])
@@ -2480,7 +2480,7 @@ test('A1/053 records the PN2070 programming-button callout without inferring but
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2491,10 +2491,10 @@ test('A1/054 records the PN2070 relative-pressure classification without derivin
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-054').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-054').number,'A1/054');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-054').name,'ifm PN2070 pressure type');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-53','A1/054  ifm PN2070 pressure type'],['doc-ref-004-line-45','Revision 5.1 | 2026-11-13 | A1/054']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/054 index or revision record: '+id);
   for(const required of ['Type of pressure: relative pressure','does not specify a project pressure reference','does not derive an absolute-pressure conversion','ifm PN2070-02'])
@@ -2504,7 +2504,7 @@ test('A1/054 records the PN2070 relative-pressure classification without derivin
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 
@@ -2515,10 +2515,10 @@ test('A1/055 records PN2070 vacuum resistance without assigning project conditio
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-055').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-055').number,'A1/055');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-055').name,'ifm PN2070 vacuum resistance');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-54','A1/055  ifm PN2070 vacuum resistance'],['doc-ref-004-line-46','Revision 5.2 | 2026-11-13 | A1/055']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/055 index or revision record: '+id);
   for(const required of ['Vacuum resistance: −1000 mbar (−0.1 MPa)','does not assign a project vacuum condition','application suitability','ifm PN2070-02'])
@@ -2528,7 +2528,7 @@ test('A1/055 records PN2070 vacuum resistance without assigning project conditio
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/056 records PN2070 switching output options without selecting a configuration',()=>{
@@ -2538,10 +2538,10 @@ test('A1/056 records PN2070 switching output options without selecting a configu
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-056').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-056').number,'A1/056');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-056').name,'ifm PN2070 switching output options');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-55','A1/056  ifm PN2070 switching output options'],['doc-ref-004-line-47','Revision 5.3 | 2026-11-13 | A1/056']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/056 index or revision record: '+id);
   for(const required of ['Switching outputs: PNP/NPN.','Output function: normally open / normally closed (parameterisable).','does not select a project polarity or output function','ifm PN2070-02'])
@@ -2551,7 +2551,7 @@ test('A1/056 records PN2070 switching output options without selecting a configu
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/057 records PN2070 output protection specifications without claiming project protection',()=>{
@@ -2561,10 +2561,10 @@ test('A1/057 records PN2070 output protection specifications without claiming pr
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-057').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-057').number,'A1/057');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-057').name,'ifm PN2070 output protection');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-56','A1/057  ifm PN2070 output protection'],['doc-ref-004-line-48','Revision 5.4 | 2026-11-13 | A1/057']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/057 index or revision record: '+id);
   for(const required of ['Short-circuit protection: yes (pulsed).','Overload protection: yes.','does not establish project protection performance','ifm PN2070-02'])
@@ -2574,7 +2574,7 @@ test('A1/057 records PN2070 output protection specifications without claiming pr
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/058 records PN2070 analogue-output response rating without assigning system response',()=>{
@@ -2584,10 +2584,10 @@ test('A1/058 records PN2070 analogue-output response rating without assigning sy
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-058').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-058').number,'A1/058');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-058').name,'ifm PN2070 analogue-output response');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-57','A1/058  ifm PN2070 analogue-output response'],['doc-ref-004-line-49','Revision 5.5 | 2026-11-13 | A1/058']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/058 index or revision record: '+id);
   for(const required of ['Maximum analogue-output response time: 3 ms.','does not define configured damping or system response','ifm PN2070-02'])
@@ -2597,7 +2597,7 @@ test('A1/058 records PN2070 analogue-output response rating without assigning sy
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/059 records PN2070 analogue-output damping range without selecting a setting',()=>{
@@ -2607,10 +2607,10 @@ test('A1/059 records PN2070 analogue-output damping range without selecting a se
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-059').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-059').number,'A1/059');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-059').name,'ifm PN2070 analogue-output damping');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-58','A1/059  ifm PN2070 analogue-output damping'],['doc-ref-004-line-50','Revision 5.6 | 2026-11-13 | A1/059']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/059 index or revision record: '+id);
   for(const required of ['Analogue-output damping dAA: 0–4 s.','does not select a device setting','ifm PN2070-02'])
@@ -2620,7 +2620,7 @@ test('A1/059 records PN2070 analogue-output damping range without selecting a se
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/060 records PN2070 process-value damping range without selecting a setting',()=>{
@@ -2630,10 +2630,10 @@ test('A1/060 records PN2070 process-value damping range without selecting a sett
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-060').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-060').number,'A1/060');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-060').name,'ifm PN2070 process-value damping');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-59','A1/060  ifm PN2070 process-value damping'],['doc-ref-004-line-51','Revision 5.7 | 2026-11-13 | A1/060']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/060 index or revision record: '+id);
   for(const required of ['Process-value damping dAP: 0–4 s.','does not select a sensor setting','ifm PN2070-02'])
@@ -2643,7 +2643,7 @@ test('A1/060 records PN2070 process-value damping range without selecting a sett
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/061 records PN2070 programmable delay range without selecting a delay',()=>{
@@ -2653,10 +2653,10 @@ test('A1/061 records PN2070 programmable delay range without selecting a delay',
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-061').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-061').number,'A1/061');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-061').name,'ifm PN2070 programmable output delay');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-60','A1/061  ifm PN2070 programmable output delay'],['doc-ref-004-line-52','Revision 5.8 | 2026-11-13 | A1/061']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/061 index or revision record: '+id);
   for(const required of ['Programmable delay dS/dr: 0–50 s.','does not select a switch-on or switch-off delay','ifm PN2070-02'])
@@ -2666,7 +2666,7 @@ test('A1/061 records PN2070 programmable delay range without selecting a delay',
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/062 records PN2070 response-time rating without assigning system behavior',()=>{
@@ -2676,10 +2676,10 @@ test('A1/062 records PN2070 response-time rating without assigning system behavi
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-062').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-062').number,'A1/062');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-062').name,'ifm PN2070 response time');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-61','A1/062  ifm PN2070 response time'],['doc-ref-004-line-53','Revision 5.9 | 2026-11-13 | A1/062']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/062 index or revision record: '+id);
   for(const required of ['Response time: <1.5 ms.','does not establish project or system response time','ifm PN2070-02'])
@@ -2689,7 +2689,7 @@ test('A1/062 records PN2070 response-time rating without assigning system behavi
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/063 records PN2070 IO-Link process cycle time for CMPT 2 without assigning a configuration',()=>{
@@ -2699,10 +2699,10 @@ test('A1/063 records PN2070 IO-Link process cycle time for CMPT 2 without assign
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-063').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-063').number,'A1/063');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-063').name,'ifm PN2070 IO-Link cycle time');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-62','A1/063  ifm PN2070 IO-Link cycle time'],['doc-ref-004-line-54','Revision 6.0 | 2026-11-13 | A1/063']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/063 index or revision record: '+id);
   for(const required of ['CMPT=2 minimum process cycle time: 2.3 ms.','does not assign device or master configuration','ifm PN2070-02'])
@@ -2712,7 +2712,7 @@ test('A1/063 records PN2070 IO-Link process cycle time for CMPT 2 without assign
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/064 records PN2070 IO-Link cycle time for CMPT 3 without assigning a configuration',()=>{
@@ -2722,10 +2722,10 @@ test('A1/064 records PN2070 IO-Link cycle time for CMPT 3 without assigning a co
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-064').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-064').number,'A1/064');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-064').name,'ifm PN2070 IO-Link cycle time CMPT 3');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-63','A1/064  ifm PN2070 IO-Link cycle time CMPT 3'],['doc-ref-004-line-55','Revision 6.1 | 2026-11-13 | A1/064']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/064 index or revision record: '+id);
   for(const required of ['CMPT=3 minimum process cycle time: 3 ms.','does not assign this device profile, master cycle','ifm PN2070-02'])
@@ -2735,7 +2735,7 @@ test('A1/064 records PN2070 IO-Link cycle time for CMPT 3 without assigning a co
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/065 records PN2070 IO-Link pressure resolution for CMPT 2 without assigning a device mode',()=>{
@@ -2745,10 +2745,10 @@ test('A1/065 records PN2070 IO-Link pressure resolution for CMPT 2 without assig
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-065').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-065').number,'A1/065');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-065').name,'ifm PN2070 IO-Link pressure resolution CMPT 2');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-64','A1/065  ifm PN2070 IO-Link pressure resolution CMPT 2'],['doc-ref-004-line-56','Revision 6.2 | 2026-11-13 | A1/065']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/065 index or revision record: '+id);
   for(const required of ['CMPT=2 IO-Link pressure resolution: 0.1 bar.','does not assign the device mode','ifm PN2070-02'])
@@ -2758,7 +2758,7 @@ test('A1/065 records PN2070 IO-Link pressure resolution for CMPT 2 without assig
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/066 records PN2070 IO-Link pressure resolution for CMPT 3 without assigning a device mode',()=>{
@@ -2768,10 +2768,10 @@ test('A1/066 records PN2070 IO-Link pressure resolution for CMPT 3 without assig
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-066').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-066').number,'A1/066');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-066').name,'ifm PN2070 IO-Link pressure resolution CMPT 3');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-65','A1/066  ifm PN2070 IO-Link pressure resolution CMPT 3'],['doc-ref-004-line-57','Revision 6.3 | 2026-11-13 | A1/066']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/066 index or revision record: '+id);
   for(const required of ['CMPT=3 IO-Link pressure resolution: 0.2 bar.','does not assign the device mode','ifm PN2070-02'])
@@ -2781,7 +2781,7 @@ test('A1/066 records PN2070 IO-Link pressure resolution for CMPT 3 without assig
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/067 records PN2070 CMPT 2 IO-Link pressure field width without assigning a payload',()=>{
@@ -2791,10 +2791,10 @@ test('A1/067 records PN2070 CMPT 2 IO-Link pressure field width without assignin
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-067').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-067').number,'A1/067');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-067').name,'ifm PN2070 IO-Link pressure field CMPT 2');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-66','A1/067  ifm PN2070 IO-Link pressure field CMPT 2'],['doc-ref-004-line-58','Revision 6.4 | 2026-11-13 | A1/067']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/067 index or revision record: '+id);
   for(const required of ['CMPT=2 cyclical pressure field: 14 bits.','does not assign a profile or decoded payload','ifm PN2070-02'])
@@ -2804,7 +2804,7 @@ test('A1/067 records PN2070 CMPT 2 IO-Link pressure field width without assignin
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/068 records PN2070 CMPT 3 IO-Link pressure field width without assigning a payload',()=>{
@@ -2814,10 +2814,10 @@ test('A1/068 records PN2070 CMPT 3 IO-Link pressure field width without assignin
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-068').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-068').number,'A1/068');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-068').name,'ifm PN2070 IO-Link pressure field CMPT 3');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-67','A1/068  ifm PN2070 IO-Link pressure field CMPT 3'],['doc-ref-004-line-59','Revision 6.5 | 2026-11-13 | A1/068']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/068 index or revision record: '+id);
   for(const required of ['CMPT=3 cyclical pressure field: 16 bits.','does not assign a profile or decoded payload','ifm PN2070-02'])
@@ -2827,7 +2827,7 @@ test('A1/068 records PN2070 CMPT 3 IO-Link pressure field width without assignin
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
 
 test('A1/069 records PN2070 CMPT 3 device status field width without inventing diagnostics',()=>{
@@ -2837,10 +2837,10 @@ test('A1/069 records PN2070 CMPT 3 device status field width without inventing d
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-069').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 6.6');
+  assert.equal(project.revision,'Opening set 6.7');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-069').number,'A1/069');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-069').name,'ifm PN2070 IO-Link device status field CMPT 3');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/069; A1/070–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-68','A1/069  ifm PN2070 IO-Link device status field CMPT 3'],['doc-ref-004-line-60','Revision 6.6 | 2026-11-13 | A1/069']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/069 index or revision record: '+id);
   for(const required of ['CMPT=3 cyclical device status field: 4 bits.','does not define status codes or diagnostic meaning','ifm PN2070-02'])
@@ -2850,5 +2850,28 @@ test('A1/069 records PN2070 CMPT 3 device status field width without inventing d
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
-  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[69,32,335,21,43,0]);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
+});
+
+test('A1/070 records PN2070 CMPT 3 binary switching information width without assigning signal meaning',()=>{
+  const file=path.join(__dirname,'examples','real-projects','siemens-sew-star-delta-reference.adigun.json');
+  const parsed=engine.parseProject(fs.readFileSync(file,'utf8'));
+  assert.equal(parsed.valid,true,parsed.errors.join(' '));
+  const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-070').analysis;
+  assert.equal(report.valid,true,report.errors.join(' '));
+  assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
+  assert.equal(project.revision,'Opening set 6.7');
+  assert.equal(project.sheets.find(sheet=>sheet.id==='ref-070').number,'A1/070');
+  assert.equal(project.sheets.find(sheet=>sheet.id==='ref-070').name,'ifm PN2070 IO-Link binary switching information CMPT 3');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
+  for(const [id,required] of [['doc-ref-002-line-69','A1/070  ifm PN2070 IO-Link binary switching information CMPT 3'],['doc-ref-004-line-61','Revision 6.7 | 2026-11-13 | A1/070']])
+    assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/070 index or revision record: '+id);
+  for(const required of ['CMPT=3 cyclical binary switching information: 2 bits.','no state code meaning or project output configuration assigned','ifm PN2070-02'])
+    assert.ok(project.objects.some(object=>object.sheetId==='ref-070'&&object.text.includes(required)),'Missing switching information width or scope: '+required);
+  const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
+  assert.ok(source.includes('lists the CMPT=3 cyclical binary switching information field as 2 bits'));
+  const reopened=engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid,true,reopened.errors.join(' '));
+  const roundTrip=engine.analyzeProject(reopened.project);
+  assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[70,32,335,21,43,0]);
 });
