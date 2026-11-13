@@ -3211,7 +3211,7 @@ test('A1/085 records PN2070 digital and analogue output counts without assigning
   assert.equal(project.status,'Authored opening set: A1/001–A1/085; A1/086–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-84','A1/085  ifm PN2070 output counts'],['doc-ref-004-line-76','Revision 8.2 | 2026-11-13 | A1/085']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/085 index or revision record: '+id);
-  for(const required of ['Manufacturer-listed outputs: 2 digital and 1 analogue.','output count only; no channel-to-pin allocation or simultaneous signal usage is assigned','ifm PN2070-02'])
+  for(const required of ['Manufacturer-listed outputs: 2 digital and 1 analogue.','Output count only; no channel-to-pin allocation or simultaneous signal usage is assigned','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-085'&&object.text.includes(required)),'Missing output counts or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
   assert.ok(source.includes('lists 2 digital outputs and 1 analogue output'));
