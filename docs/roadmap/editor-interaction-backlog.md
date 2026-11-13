@@ -64,3 +64,10 @@ A1/022 connects the verified ifm PN2070 B2 instance to CPU AI0, X14 +24 V DC and
 A1/024 compares the ifm PN2070-02 B2 maximum listed current with Siemens SITOP PSU100C 6EP1332-5BA00 output ratings. The drawing records the 24 V ±3% output range and PN2070 input range, and labels the 2.5 A (+50 °C) and 0.75 A (+70 °C) comparison. Regression coverage preserves the 24-sheet project metrics, verifies save/reopen, source records and the stated limits. This is a B2-only allocation reference; total cabinet loading, voltage drop, protection, conductor sizing and supply adequacy remain unassessed. The workspace interface and electrical topology are unchanged.
 
 Next project increment: A1/025, selected from verified project evidence after this milestone.
+
+
+## Completed project increment — conditional PN2070 / CPU accuracy reference
+
+A1/025 records a limited arithmetic sum of the ifm PN2070-02 limit-setting characteristic deviation and the Siemens CPU 1212C analog-input accuracy. The calculation is conditional on a verified 0–400 bar / 0–10 V mapping: less than ±14 bar at 25 °C and less than ±16 bar across the CPU's rated temperature range. It is not a complete uncertainty budget, measured accuracy, active device configuration or calibration. The page adds no component or wire and the workstation interface is unchanged.
+
+Next project increment: A1/026, selected from verified project evidence after this milestone.
