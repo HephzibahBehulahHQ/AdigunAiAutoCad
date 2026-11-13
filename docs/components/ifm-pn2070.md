@@ -384,3 +384,10 @@
 - The PN2070-02 interface table lists IO-Link transmission type COM2 at 38,4 kBaud.
 - A1/080 records the rated communication value only. It asserts no observed or configured link speed.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Interfaces table, 01.03.2024.
+
+
+## A1/081 IO-Link revision
+
+- The PN2070-02 interface table lists IO-Link revision 1.1.
+- A1/081 records the manufacturer interface specification only. It asserts no negotiated master/device behavior.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Interfaces table, 01.03.2024.
