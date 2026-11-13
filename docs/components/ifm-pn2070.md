@@ -202,3 +202,10 @@
 - The PN2070-02 data sheet lists type of pressure as relative pressure.
 - A1/054 records that manufacturer classification only. It does not specify a project pressure reference or operating condition and does not derive an absolute-pressure conversion.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Application table, 01.03.2024.
+
+
+## A1/055 vacuum resistance
+
+- The PN2070-02 data sheet lists vacuum resistance as −1000 mbar (−0.1 MPa).
+- A1/055 records the manufacturer value only. It does not assign a project vacuum condition or assess application suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Application table, 01.03.2024.
