@@ -251,3 +251,10 @@
 - The PN2070-02 data sheet lists the programmable delay parameters dS and dr as 0...50 s.
 - A1/061 records the manufacturer range only. It does not select a switch-on or switch-off delay or define system response.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Response times table, 01.03.2024.
+
+
+## A1/062 response time
+
+- The PN2070-02 data sheet lists the response time as <1.5 ms.
+- A1/062 records the manufacturer rating only. It does not establish project or system response time.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Response times table, 01.03.2024.
