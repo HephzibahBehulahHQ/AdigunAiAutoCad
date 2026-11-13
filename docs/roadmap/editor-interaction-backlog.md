@@ -113,7 +113,7 @@ A1/031 records the PN2070-02 800 bar pressure rating and 1,700 bar minimum burst
 
 A1/032 records the ifm PN2070-02 medium range of −25 to 80 °C and its listed media (liquids and gases). It does not assign a process medium, operating temperature or compatibility assessment. No component, wire or interface change.
 
-Next project increment: A1/035, selected from verified project evidence after this milestone.
+Next project increment: A1/036, selected from verified project evidence after this milestone.
 
 
 ## Completed project increment — PN2070 electrical supply data
@@ -124,3 +124,8 @@ A1/033 records the ifm PN2070-02 operating-voltage range of 18–30 V DC (to SEL
 ## Completed project increment — PN2070 power-on delay time
 
 A1/034 records the ifm PN2070-02 manufacturer-listed power-on delay time of 0.3 s. It does not assign a startup sequence, ready signal, PLC scan setting or end-to-end response. No component, wire or interface change.
+
+
+## Completed project increment — PN2070 electrical protection characteristics
+
+A1/035 records the ifm PN2070-02 manufacturer-listed protection class III and reverse-polarity protection. It does not assess project installation, wiring faults, protective devices or functional safety. No component, wire or interface change.

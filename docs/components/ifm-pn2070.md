@@ -61,3 +61,10 @@
 - The PN2070-02 data sheet lists a power-on delay time of 0.3 s.
 - A1/034 records this device specification without assigning startup sequence, ready-signal, PLC scan, or total system response behavior.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
+
+ 
+## A1/035 electrical protection characteristics
+
+- The PN2070-02 data sheet lists protection class III and reverse-polarity protection as “yes”.
+- A1/035 records those manufacturer product specifications only. It does not assess project installation, wiring faults, protective devices or functional safety.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
