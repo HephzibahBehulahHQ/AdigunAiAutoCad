@@ -258,3 +258,10 @@
 - The PN2070-02 data sheet lists the response time as <1.5 ms.
 - A1/062 records the manufacturer rating only. It does not establish project or system response time.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Response times table, 01.03.2024.
+
+
+## A1/063 IO-Link process cycle time
+
+- The PN2070-02 data sheet lists the minimum IO-Link process cycle time as 2.3 ms for factory setting / CMPT=2.
+- A1/063 records the manufacturer profile datum only. It does not assign the device setting, master cycle or application response.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 table, 01.03.2024.
