@@ -2428,7 +2428,7 @@ test('A1/051 records the PN2070 process connection designation without selecting
   for(const required of ['G 1/4 internal thread','DIN EN ISO 1179-2','No mating fitting or seal is selected','does not establish mechanical compatibility or installation suitability','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-051'&&object.text.includes(required)),'Missing process-connection datum or limit: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
-  assert.ok(source.includes('G 1/4 internal thread (DIN EN ISO 1179-2)'));
+  assert.ok(source.includes('G 1/4 internal thread, listed as DIN EN ISO 1179-2'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
