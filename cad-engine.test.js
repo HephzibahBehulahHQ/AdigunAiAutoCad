@@ -2728,7 +2728,7 @@ test('A1/064 records PN2070 IO-Link cycle time for CMPT 3 without assigning a co
   assert.equal(project.status,'Authored opening set: A1/001–A1/064; A1/065–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-63','A1/064  ifm PN2070 IO-Link cycle time CMPT 3'],['doc-ref-004-line-55','Revision 6.1 | 2026-11-13 | A1/064']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/064 index or revision record: '+id);
-  for(const required of ['CMPT=3 minimum process cycle time: 3 ms.','does not assign this device profile or master cycle','ifm PN2070-02'])
+  for(const required of ['CMPT=3 minimum process cycle time: 3 ms.','does not assign this device profile, master cycle','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-064'&&object.text.includes(required)),'Missing cycle-time datum or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
   assert.ok(source.includes('lists the minimum IO-Link process cycle time as 3 ms for Status_B High Resolution / CMPT=3'));
