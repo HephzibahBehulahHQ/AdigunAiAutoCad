@@ -2673,3 +2673,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 8.0, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #207 merged as `043967ee22f6f5ae84bfc05004f9481a4f460711` after all 130 regression tests passed (PR workflow run `43383895270`). Main model verification run `43383956306` and Pages deployment `43383956222` succeeded. Cache-busted production JSON confirmed revision 8.0, 83 sheets through A1/083, 32 components and 335 wire objects.
 - Next: continue at A1/084 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/084
+
+- Added a text-only PN2070 reference for the integrated watchdog feature listed by the manufacturer. It assigns no interval, fault handling or project safety behavior.
+- Updated opening set revision 8.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #209 merged as `6b2a43d600fd0fd2bf0873bf82f857b52dd243eb` after all 131 regression tests passed (PR workflow run `43384536768`). Main model verification run `43384609590` and Pages deployment `43384609463` succeeded. Cache-busted production JSON confirmed revision 8.1, 84 sheets through A1/084, 32 components and 335 wire objects.
+- Next: continue at A1/085 in a source-backed increment.
