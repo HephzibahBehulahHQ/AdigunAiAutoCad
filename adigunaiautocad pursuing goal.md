@@ -2441,3 +2441,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 5.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #149 merged as `d37cc7e57d2655364ad6175c615d016505023d88` after its regression passed (PR workflow run `43369695592`). Main model verification run `43369747673` and Pages deployment `43369747622` succeeded. Cache-busted production JSON confirmed revision 5.1, 54 sheets through A1/054, the pressure type and 335 wire objects.
 - Next: continue at A1/055 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/055
+
+- Added a text-only manufacturer reference for the PN2070 vacuum resistance rating: −1000 mbar (−0.1 MPa). The drawing does not assign a project vacuum condition or assess application suitability.
+- Updated opening set revision 5.2, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #151 merged as `e8602ebc1bc5093050208c343c58b03bcfc0eb62` after its regression passed (PR workflow run `43370137675`). Main model verification run `43370182553` and Pages deployment `43370182585` succeeded. Cache-busted production JSON confirmed revision 5.2, 55 sheets through A1/055, and 335 wire objects.
+- Next: continue at A1/056 in a source-backed increment.
