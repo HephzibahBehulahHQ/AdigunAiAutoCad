@@ -237,3 +237,10 @@
 - The PN2070-02 data sheet lists the analogue-output damping parameter dAA as 0...4 s.
 - A1/059 records the available parameter range only. It does not select a device setting or assign system response.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Response times table, 01.03.2024.
+
+
+## A1/060 process-value damping
+
+- The PN2070-02 data sheet lists the process-value damping parameter dAP as 0...4 s.
+- A1/060 records the available parameter range only. It does not select a sensor setting or assign system response.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Response times table, 01.03.2024.
