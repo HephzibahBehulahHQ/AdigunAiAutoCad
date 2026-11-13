@@ -176,3 +176,5 @@ For A1/081, the ifm PN2070-02 interface table lists IO-Link revision 1.1; negoti
 For A1/082, the ifm PN2070-02 Interfaces table lists SIO mode as supported; project operation in that mode is not assigned.
 
 For A1/083, the ifm PN2070-02 Interfaces table lists IEC 61131-9 as its SDCI standard; no project compliance or implementation assessment is made.
+
+For A1/084, ifm lists an integrated watchdog for the PN2070-02; no timing, fault handling or project safety behavior is assigned.
