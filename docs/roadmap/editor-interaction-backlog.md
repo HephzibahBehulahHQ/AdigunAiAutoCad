@@ -240,3 +240,8 @@ Next project increment: A1/061, selected from verified project evidence after th
 A1/061 records the PN2070-02 programmable delay parameters dS and dr range of 0...50 s without selecting a delay or defining system response. No component, wire or interface change.
 
 Next project increment: A1/062, selected from verified project evidence after this milestone.
+
+
+A1/062 records the PN2070-02 manufacturer response-time rating of <1.5 ms. It does not establish project or system response time. No component, wire or interface change.
+
+Next project increment: A1/063, selected from verified project evidence after this milestone.
