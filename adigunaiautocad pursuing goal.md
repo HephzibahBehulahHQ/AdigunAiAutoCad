@@ -2731,3 +2731,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #221 merged as `4fa0ee9e08d03517c66da8502d6e7fa81e0ba2c3` after CI passed (PR workflow run `43406514496`). Main model verification run `43406636705` and Pages deployment `43406636713` succeeded.
 - Production verification remains unresolved: the prior cache-busted browser response returned revision 8.4 / 87 sheets despite a successful Pages deployment; shell requests failed DNS resolution. Do not claim the live site is current until it returns revision 8.7 / 90 sheets.
 - Next: continue at A1/091 and investigate the production content mismatch.
+
+
+## 2026-11-13 incremental execution record — A1/091
+
+- Added a text-only PN2070 reference for the manufacturer-listed MTTF of 129 years. It is explicitly not a project reliability calculation, service-life claim or maintenance interval.
+- Updated opening set revision 8.8, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #223 merged as `d64bb59b905b310c3bf791ee10eb61b4bbd96a60` after CI passed (PR workflow run `43407250499`). Main model verification run `43407342287` and Pages deployment `43407342184` succeeded.
+- Cache-busted browser verification returned revision 8.7 / 90 sheets (through A1/090), one release behind main revision 8.8 / 91 sheets. The earlier 8.4 / 87 response has advanced, but production is not yet current.
+- Next: continue at A1/092 and investigate the delayed custom-domain update.
