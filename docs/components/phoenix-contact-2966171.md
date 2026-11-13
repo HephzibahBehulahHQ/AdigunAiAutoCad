@@ -58,3 +58,9 @@ This milestone adds the sourced schematic component and terminal-level wiring mo
 - Phoenix Contact lists typical response time of 5 ms and typical release time of 8 ms for PLC-RSC- 24DC/21 (item 2966171).
 - A1/096 records manufacturer ratings only; they do not simulate relay actuation or establish project/system response timing.
 - Source: [Phoenix Contact manufacturer catalog PDF](https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf), input data table, catalog generated 13.11.2026.
+
+## A1/097 minimum switching voltage
+
+- Phoenix Contact lists a minimum switching voltage of 5 V at 100 mA for PLC-RSC- 24DC/21 (item 2966171).
+- A1/097 records the manufacturer contact specification only. It does not establish the project contact load, actual switching conditions, or circuit suitability.
+- Source: [Phoenix Contact manufacturer catalog PDF](https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf), output data table, catalog generated 13.11.2026.
