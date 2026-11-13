@@ -2233,3 +2233,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the drawing opening set, index, revision record, PN2070 source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
 - Local verification: `node --test cad-engine.test.js` passed 77/77; `git diff --check` passed. PR #99 passed GitHub Actions run #188 and merged as `c284242e7d0acf3d153100aa77a09ab9cdf238ce`; Pages run #97 succeeded. A cache-busted production JSON fetch confirmed Opening set 2.7, A1/001–A1/030 and the A1/030 sheet.
 - Live review found the A1/030 authoring had overwritten A1/028–A1/029 index/revision entries. PR #100 restored A1/029’s index row and A1/028’s revision record; Actions run #190 passed, merge `3557ab9fbb4dabf10d5f7ead6ac7afd973681c16`, and Pages workflow run `43349737019` completed successfully. Production review then caught A1/028 still missing from the drawing index. PR #101 restored the A1/028 row and added regression coverage for all three index rows; local tests passed 77/77, Actions run #192 passed, and merge `e7983e807ae4a11a2812d765e10f939d9e6503c3` deployed successfully through Pages workflow run `43350339634`. A cache-busted production JSON check confirmed 30 sheets and index rows A1/028, A1/029 and A1/030.
+
+
+## 2026-11-13 incremental execution record — A1/031
+
+- Added a text-only ifm PN2070 pressure-limits reference: 0–400 bar measuring range, 800 bar pressure rating and 1,700 bar minimum burst pressure. These manufacturer values do not establish a selected operating pressure, design limit or application suitability.
+- Updated the opening set to revision 2.8, added A1/031 index/revision entries, source record, README, roadmap and regression checks. No component, wire or interface change.
+- Local verification: `node --test cad-engine.test.js` passed 78/78; `git diff --check` passed. Source: ifm PN2070-02 data sheet (EN-GB, 01.03.2024), Application table.

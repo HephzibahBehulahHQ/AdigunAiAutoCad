@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.7",
-  "status": "Authored opening set: A1/001–A1/030; A1/031–A1/100 not authored.",
+  "revision": "Opening set 2.8",
+  "status": "Authored opening set: A1/001–A1/031; A1/032–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -166,6 +166,11 @@
       "id": "ref-030",
       "number": "A1/030",
       "name": "ifm PN2070 analog output parameter ranges"
+    },
+    {
+      "id": "ref-031",
+      "number": "A1/031",
+      "name": "ifm PN2070 pressure rating and minimum burst pressure"
     }
   ],
   "sheetLabels": {
@@ -193,7 +198,8 @@
     "ref-027": "CPU 1212C AI0 response and smoothing reference",
     "ref-028": "CPU 1212C AI0 rated and overflow ranges",
     "ref-029": "CPU 1212C AI0 cable length and shielding reference",
-    "ref-030": "ifm PN2070 analog output parameter ranges"
+    "ref-030": "ifm PN2070 analog output parameter ranges",
+    "ref-031": "ifm PN2070 pressure rating and minimum burst pressure"
   },
   "sheetViews": {
     "ref-007": {
@@ -335,6 +341,12 @@
       "h": 760
     },
     "ref-030": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-031": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3781,7 +3793,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 2.7",
+      "text": "Engineering document set | Revision opening set 2.8",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -7471,9 +7483,81 @@
       "y": 1958,
       "text": "Revision 2.6 | 2026-11-13 | A1/030 lists PN2070 analog output options; configured endpoints remain unspecified.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-031-title",
+      "sheetId": "ref-031",
+      "x": 50,
+      "y": 54,
+      "text": "A1/031 · ifm PN2070 pressure rating and minimum burst pressure",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-031-range",
+      "sheetId": "ref-031",
+      "x": 50,
+      "y": 145,
+      "text": "ifm PN2070-02 measuring range: 0–400 bar relative pressure.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-031-rating",
+      "sheetId": "ref-031",
+      "x": 50,
+      "y": 245,
+      "text": "Manufacturer pressure rating: 800 bar.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-031-burst",
+      "sheetId": "ref-031",
+      "x": 50,
+      "y": 345,
+      "text": "Manufacturer minimum burst pressure: 1,700 bar.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-031-scope",
+      "sheetId": "ref-031",
+      "x": 50,
+      "y": 455,
+      "text": "These are manufacturer limits, not a selected operating pressure, process design limit, or verification of application suitability.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-031-source",
+      "sheetId": "ref-031",
+      "x": 50,
+      "y": 555,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Application table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-30",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 2085,
+      "text": "A1/031  ifm PN2070 pressure rating and minimum burst pressure",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-22",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 2022,
+      "text": "Revision 2.7 | 2026-11-13 | A1/031 records PN2070 manufacturer pressure limits; no operating condition assigned.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Thirty authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031–A1/100 are not authored.",
+  "description": "Thirty-one authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
