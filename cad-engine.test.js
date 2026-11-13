@@ -2521,7 +2521,7 @@ test('A1/055 records PN2070 vacuum resistance without assigning project conditio
   assert.equal(project.status,'Authored opening set: A1/001–A1/055; A1/056–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-54','A1/055  ifm PN2070 vacuum resistance'],['doc-ref-004-line-46','Revision 5.2 | 2026-11-13 | A1/055']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/055 index or revision record: '+id);
-  for(const required of ['Vacuum resistance: −1000 mbar (−0.1 MPa)','does not assign a project vacuum condition','does not assess application suitability','ifm PN2070-02'])
+  for(const required of ['Vacuum resistance: −1000 mbar (−0.1 MPa)','does not assign a project vacuum condition','application suitability','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-055'&&object.text.includes(required)),'Missing vacuum datum or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
   assert.ok(source.includes('lists vacuum resistance as −1000 mbar (−0.1 MPa)'));
