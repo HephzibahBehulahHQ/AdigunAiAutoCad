@@ -2300,7 +2300,7 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 3.5, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
 - Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 85/85; `git diff --check` passed. Model analysis passed with 38 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #117 passed GitHub Actions run #211 and merged as `358a1e829434e3c2310b067ca35e38c1555ad11c`. Pages workflow run `43359687788` succeeded. Cache-busted production JSON confirmed revision 3.5, 38 sheets through A1/038 and the CMPT=2 ranges. No component, wire or interface change.
-- Next: continue at A1/047 in a source-backed increment.
+- Next: continue at A1/048 in a source-backed increment.
 
 
 ## 2026-11-13 incremental execution record — A1/039
@@ -2373,3 +2373,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: 93/93 tests passed; analyzer confirms 46 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #133 merged as `f14998228803dd90e6dbf98666f26c798060802c`. CAD verification run `43364545945` and Pages deployment `43364545905` succeeded. Cache-busted production JSON confirmed revision 4.3, 46 sheets through A1/046, shock/vibration values and 335 wires.
 - Next: continue at A1/047 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/047
+
+- Added a text-only ifm PN2070 wetted-parts material reference: stainless steel (630 / 1.4542 / 17-4 PH). No chemical compatibility or corrosion suitability is inferred.
+- Updated opening set revision 4.4, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Local verification: 94/94 tests passed; analyzer confirms 47 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
+- PR #135 merged as `308e2a4f27d37b18ec74ff729df76d543f0f956c`. CAD verification run `43365008838` and Pages deployment `43365008965` succeeded. Cache-busted production JSON confirmed revision 4.4, 47 sheets through A1/047, the wetted-parts material and 335 wires.
+- Next: continue at A1/048 in a source-backed increment.
