@@ -175,3 +175,8 @@ A1/047 records the PN2070-02 wetted-parts material identifier without inferring 
 
 A1/048 records the PN2070-02 product materials list without assigning specific part locations, chemical compatibility or corrosion suitability. No component, wire or interface changes.
 
+
+
+A1/049 records the PN2070-02 M12, A-coded, four-contact gold-plated connector specification. It selects no cable or mating connector and makes no physical-fit or installed-compatibility claim. No component, wire or interface change.
+
+Next project increment: A1/050, selected from verified project evidence after this milestone.
