@@ -192,3 +192,6 @@ For A1/088, ifm lists PN2070-02 long-term stability below ±0.05% of span per 6 
 
 
 For A1/089, ifm lists zero-point and span temperature coefficients of 0.2% of span per 10 K for −25 to 80 °C; no site temperature, project correction or measurement is assigned.
+
+
+For A1/090, ifm lists PN2070-02 hysteresis deviation below ±0.1% of span at turn-down 1:1; no device setting or measured project behavior is assigned.
