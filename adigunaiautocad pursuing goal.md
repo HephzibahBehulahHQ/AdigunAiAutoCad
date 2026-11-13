@@ -2300,7 +2300,7 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 3.5, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
 - Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 85/85; `git diff --check` passed. Model analysis passed with 38 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #117 passed GitHub Actions run #211 and merged as `358a1e829434e3c2310b067ca35e38c1555ad11c`. Pages workflow run `43359687788` succeeded. Cache-busted production JSON confirmed revision 3.5, 38 sheets through A1/038 and the CMPT=2 ranges. No component, wire or interface change.
-- Next: continue at A1/045 in a source-backed increment.
+- Next: continue at A1/046 in a source-backed increment.
 
 
 ## 2026-11-13 incremental execution record — A1/039
@@ -2355,3 +2355,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: 91/91 tests passed; analyzer confirms 44 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #129 merged as `411ed0d6a3cfa3ff53fbff89ea480da9db453845`. CAD verification run `43363547375` and Pages deployment `43363547417` succeeded. Cache-busted production JSON confirmed revision 4.1, 44 sheets through A1/044, restrictor datum and 335 wires.
 - Next: continue at A1/045 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/045
+
+- Added a text-only ifm PN2070 product reference to the manufacturer-listed IP 65 and IP 67 ratings. The project page makes no ingress-protection claim for the installed assembly.
+- Updated opening set revision 4.2, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Local verification: 92/92 tests passed; analyzer confirms 45 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
+- PR #131 merged as `636d9f2bff1e03e2f829c6e6d60fa258c4ad3755`. CAD verification run `43364086386` and Pages deployment `43364086372` succeeded. Cache-busted production JSON confirmed revision 4.2, 45 sheets through A1/045, listed IP ratings and 335 wires.
+- Next: continue at A1/046 in a source-backed increment.
