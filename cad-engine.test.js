@@ -1179,7 +1179,7 @@ test('seventy-sheet connected reference opening set preserves the starter and so
   const project = parsed.project;
   assert.equal(project.sheets.length, 70);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/070–A1/100 not authored'));
+  assert.ok(project.status.includes('A1/071–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
@@ -2864,7 +2864,7 @@ test('A1/070 records PN2070 CMPT 3 binary switching information width without as
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-070').number,'A1/070');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-070').name,'ifm PN2070 IO-Link binary switching information CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/070; A1/071–A1/100 not authored.');
-  for(const [id,required] of [['doc-ref-002-line-69','A1/070  ifm PN2070 IO-Link binary switching information CMPT 3'],['doc-ref-004-line-62','Revision 6.7 | 2026-11-13 | A1/070']])
+  for(const [id,required] of [['doc-ref-002-line-69','A1/070  ifm PN2070 IO-Link binary switching information CMPT 3'],['doc-ref-004-line-61','Revision 6.7 | 2026-11-13 | A1/070']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/070 index or revision record: '+id);
   for(const required of ['CMPT=3 cyclical binary switching information: 2 bits.','no state code meaning or project output configuration assigned','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-070'&&object.text.includes(required)),'Missing switching information width or scope: '+required);
