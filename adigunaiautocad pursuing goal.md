@@ -2457,3 +2457,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 5.3, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #153 merged as `f1f7c25155f0e070307a4a0e7160f5478a754ea0` after all 103 regression tests passed (PR workflow run `43371187688`). Main model verification run `43371241238` and Pages deployment `43371241252` succeeded. Cache-busted production JSON confirmed revision 5.3, 56 sheets through A1/056, 32 components and 335 wire objects.
 - Next: continue at A1/057 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/057
+
+- Added a text-only PN2070 reference for the manufacturer-listed pulsed short-circuit protection and overload protection specifications for the output. It makes no claim about project protection performance, external protection or coordination.
+- Updated opening set revision 5.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #155 merged as `b620f8a26d9b1d9339c733215641e252cc4fea20` after all 104 regression tests passed (PR workflow run `43371623928`). Main model verification run `43371681702` and Pages deployment `43371681718` succeeded. Cache-busted production JSON confirmed revision 5.4, 57 sheets through A1/057, 32 components and 335 wire objects.
+- Next: continue at A1/058 in a source-backed increment.
