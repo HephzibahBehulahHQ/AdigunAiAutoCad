@@ -2425,3 +2425,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 4.9, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #145 merged as `83b2539f0eb0b97d83fc77d484d2aa5aa33af9bf` after the corrected regression passed (PR workflow run `43368784971`). Main model verification run `43368828003` succeeded. Pages run `43368828066` first failed artifact retrieval, then succeeded on retry attempt 2. Cache-busted production JSON confirmed revision 4.9, 52 sheets through A1/052, the rotation callout and 335 wire objects.
 - Next: continue at A1/053 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/053
+
+- Added a text-only PN2070 technical-drawing callout for the programming button (callout 3). The source record assigns no button function or operating sequence.
+- Updated opening set revision 5.0, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #147 merged as `789db5110eed697e404b06587f4281de911b0102`. Its corrected regression check passed in run `43369314067`; main model verification run `43369361704` and Pages deployment `43369361758` succeeded. Cache-busted production JSON confirmed revision 5.0, 53 sheets through A1/053, the callout and 335 wire objects.
+- Next: continue at A1/054 in a source-backed increment.
