@@ -223,3 +223,10 @@
 - The PN2070-02 data sheet lists pulsed short-circuit protection and overload protection for the output.
 - A1/057 records the manufacturer output protection specifications only. It does not establish project protection performance, external circuit protection or coordination.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Outputs table, 01.03.2024.
+
+
+## A1/058 analogue-output response
+
+- The PN2070-02 data sheet lists a maximum analogue-output response time of 3 ms.
+- A1/058 records the manufacturer rating only. It does not define configured damping or system response.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Response times table, 01.03.2024.
