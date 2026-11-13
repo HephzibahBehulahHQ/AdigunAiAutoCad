@@ -98,4 +98,11 @@ Next project increment: A1/029, Siemens Table A-41 analog cable length and shiel
 
 A1/029 records Siemens System Manual V4.7 Table A-41 maximum analog input cable length of 100 m using shielded twisted pair. It does not claim this project has such a cable or that installation, routing, grounding or noise performance is validated. No component, wire or interface change.
 
-Next project increment: A1/030, selected from verified project evidence after this milestone.
+Next project increment: A1/030, ifm PN2070 analog output parameter ranges.
+
+
+## Completed project increment — PN2070 analog output parameter ranges
+
+A1/030 records ifm PN2070-02 output voltage, scale capability, minimum load resistance and the manufacturer-listed analog start/end parameter ranges. It does not assign configured endpoint pairs or a selected output span. No component, wire or interface change.
+
+Next project increment: A1/031, selected from verified project evidence after this milestone.
