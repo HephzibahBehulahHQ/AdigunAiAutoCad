@@ -160,3 +160,10 @@
 - A1/048 records the product material list only. The data sheet does not map every listed material to a specific sensor part; the wetted-parts material is separately listed on A1/047. This list alone does not establish chemical compatibility or corrosion suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
 
+
+
+## A1/049 electrical connector
+
+- The PN2070-02 data sheet specifies one M12 connector, A-coded, with four gold-plated contacts. Pin functions are documented separately on A1/021.
+- A1/049 records the sensor connector specification only. No cable or mating connector is selected, and physical fit or installed connection compatibility is not established.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical connection table, 01.03.2024.
