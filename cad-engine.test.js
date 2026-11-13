@@ -1824,7 +1824,7 @@ test('A1/026 documents idealized CPU 1212C AI0 quantization without claiming mea
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-026').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-026').number,'A1/026');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-27','A1/028  CPU 1212C AI0 rated, overshoot and overflow ranges'],['doc-ref-002-line-28','A1/029  CPU 1212C AI0 cable length'],['doc-ref-002-line-29','A1/030  ifm PN2070 analog output'],['doc-ref-004-line-19','Revision 2.4 | 2026-11-13 | A1/028'],['doc-ref-004-line-20','Revision 2.5 | 2026-11-13 | A1/029'],['doc-ref-004-line-21','Revision 2.6 | 2026-11-13 | A1/030']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),`Incorrect drawing index or revision record: ${id}`);
@@ -1851,7 +1851,7 @@ test('A1/027 records CPU 1212C AI input response without assigning smoothing or 
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-027').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-027').number,'A1/027');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-027'&&object.kind==='text').map(object=>object.text);
   for(const required of ['4.17 ms','5 ms','25 ms','95%','None (1 cycle; no averaging)','50 ms at 60 Hz','Weak smoothing (4 samples)','200 ms at 10 Hz','Medium smoothing (16 samples)','1,150 ms','Strong smoothing (32 samples)','2,300 ms','not established','remain unassigned','Tables A-42/A-43'])
@@ -1872,7 +1872,7 @@ test('A1/028 documents CPU 1212C rated, overshoot and overflow codes without ass
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-028').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-028').number,'A1/028');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-028'&&object.kind==='text').map(object=>object.text);
   for(const required of ['0–10 V','0–27648','10.001–11.759 V','27649–32511','11.760–11.852 V','32512–32767','27648 / 6C00','32511 / 7EFF','32512 / 7F00','32767 / 7FFF','35 V DC','Negative input values are not supported','does not assign overshoot or overflow values to sensor faults or alarms','No channel diagnostic','Tables A-41/A-44'])
@@ -1894,7 +1894,7 @@ test('A1/029 records CPU 1212C analog cable limit without assigning an installed
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-029').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-029').number,'A1/029');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-029'&&object.kind==='text').map(object=>object.text);
   for(const required of ['100 m','shielded twisted pair','assigns no cable length','No installed route','does not verify installation compliance','Table A-41'])
@@ -1917,7 +1917,7 @@ test('A1/030 records PN2070 output parameter ranges without assigning configured
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-030').number,'A1/030');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-030'&&object.kind==='text').map(object=>object.text);
   for(const required of ['0–10 V','1:5','2,000 Ω','0–320 bar','80–400 bar','manufacturer-listed parameter ranges','assigns no ASP2/AEP2','ifm PN2070-02'])
@@ -1938,7 +1938,7 @@ test('A1/031 PN2070 pressure limits remain manufacturer ratings rather than sele
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-031').number,'A1/031');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-30','A1/031  ifm PN2070 pressure rating'],['doc-ref-004-line-22','Revision 2.7 | 2026-11-13 | A1/031']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/031 index or revision record: '+id);
@@ -1962,7 +1962,7 @@ test('A1/032 records the PN2070 medium temperature range without assigning proce
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-032').number,'A1/032');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-31','A1/032  ifm PN2070 medium temperature'],['doc-ref-004-line-23','Revision 2.8 | 2026-11-13 | A1/032']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/032 index or revision record: '+id);
@@ -1986,7 +1986,7 @@ test('A1/033 records PN2070 electrical ratings without claiming supply adequacy'
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-033').number,'A1/033');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-32','A1/033  ifm PN2070 electrical supply data'],['doc-ref-004-line-24','Revision 3.0 | 2026-11-13 | A1/033']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/033 index or revision record: '+id);
@@ -2010,7 +2010,7 @@ test('A1/034 records the PN2070 power-on delay without assigning system response
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-034').number,'A1/034');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-33','A1/034  ifm PN2070 power-on delay time'],['doc-ref-004-line-25','Revision 3.1 | 2026-11-13 | A1/034']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/034 index or revision record: '+id);
@@ -2034,7 +2034,7 @@ test('A1/035 records PN2070 electrical protection characteristics without making
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-035').number,'A1/035');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-34','A1/035  ifm PN2070 electrical protection characteristics'],['doc-ref-004-line-26','Revision 3.2 | 2026-11-13 | A1/035']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/035 index or revision record: '+id);
@@ -2058,7 +2058,7 @@ test('A1/036 records PN2070 minimum insulation resistance without implying a pro
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-036').number,'A1/036');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-35','A1/036  ifm PN2070 minimum insulation resistance'],['doc-ref-004-line-27','Revision 3.3 | 2026-11-13 | A1/036']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/036 index or revision record: '+id);
@@ -2082,7 +2082,7 @@ test('A1/037 records PN2070 switching-output specifications without assigning a 
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-037').number,'A1/037');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-36','A1/037  ifm PN2070 switching-output ratings'],['doc-ref-004-line-28','Revision 3.4 | 2026-11-13 | A1/037']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/037 index or revision record: '+id);
@@ -2106,7 +2106,7 @@ test('A1/038 records PN2070 CMPT 2 switching-point ranges without configuring th
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-038').number,'A1/038');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-37','A1/038  ifm PN2070 switching-point ranges · CMPT 2'],['doc-ref-004-line-29','Revision 3.5 | 2026-11-13 | A1/038']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/038 index or revision record: '+id);
@@ -2130,7 +2130,7 @@ test('A1/039 records PN2070 CMPT 3 switching-point ranges without configuring th
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-039').number,'A1/039');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-38','A1/039  ifm PN2070 switching-point ranges · CMPT 3'],['doc-ref-004-line-30','Revision 3.6 | 2026-11-13 | A1/039']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/039 index or revision record: '+id);
@@ -2154,7 +2154,7 @@ test('A1/040 records the PN2070 manufacturer tightening-torque recommendation wi
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-040').number,'A1/040');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-39','A1/040  ifm PN2070 recommended tightening torque'],['doc-ref-004-line-31','Revision 3.7 | 2026-11-13 | A1/040']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/040 index or revision record: '+id);
@@ -2178,7 +2178,7 @@ test('A1/041 records PN2070 ambient and storage temperature ratings without assi
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-041').number,'A1/041');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-40','A1/041  ifm PN2070 ambient and storage temperatures'],['doc-ref-004-line-32','Revision 3.8 | 2026-11-13 | A1/041']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/041 index or revision record: '+id);
@@ -2202,7 +2202,7 @@ test('A1/042 records the PN2070 minimum pressure-cycle datum without claiming pr
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-042').number,'A1/042');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-41','A1/042  ifm PN2070 minimum pressure cycles'],['doc-ref-004-line-33','Revision 3.9 | 2026-11-13 | A1/042']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/042 index or revision record: '+id);
@@ -2226,7 +2226,7 @@ test('A1/043 records PN2070 product dimensions and weight without assigning inst
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-043').number,'A1/043');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-42','A1/043  ifm PN2070 dimensions and weight'],['doc-ref-004-line-34','Revision 4.0 | 2026-11-13 | A1/043']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/043 index or revision record: '+id);
@@ -2250,7 +2250,7 @@ test('A1/044 records the PN2070 restrictor product datum without assigning a ret
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-044').number,'A1/044');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-43','A1/044  ifm PN2070 integrated restrictor datum'],['doc-ref-004-line-35','Revision 4.1 | 2026-11-13 | A1/044']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/044 index or revision record: '+id);
@@ -2274,7 +2274,7 @@ test('A1/045 records PN2070 manufacturer IP ratings without claiming assembly pr
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-045').number,'A1/045');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-44','A1/045  ifm PN2070 listed protection ratings'],['doc-ref-004-line-36','Revision 4.2 | 2026-11-13 | A1/045']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/045 index or revision record: '+id);
@@ -2298,7 +2298,7 @@ test('A1/046 records PN2070 shock and vibration data without claiming applicatio
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-046').number,'A1/046');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-45','A1/046  ifm PN2070 shock and vibration data'],['doc-ref-004-line-37','Revision 4.3 | 2026-11-13 | A1/046']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/046 index or revision record: '+id);
@@ -2323,7 +2323,7 @@ test('A1/047 records PN2070 wetted-parts material without assigning chemical com
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-047').number,'A1/047');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-46','A1/047  ifm PN2070 wetted-parts material'],['doc-ref-004-line-38','Revision 4.4 | 2026-11-13 | A1/047']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/047 index or revision record: '+id);
@@ -2347,7 +2347,7 @@ test('A1/048 records PN2070 listed materials without assigning part locations or
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-048').number,'A1/048');
   assert.equal(project.revision,'Opening set 4.6');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/048; A1/050–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/049; A1/050–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-47','A1/048  ifm PN2070 listed materials'],['doc-ref-004-line-39','Revision 4.5 | 2026-11-13 | A1/048']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/048 index or revision record: '+id);
