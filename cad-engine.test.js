@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 32248)
-Total output lines: 1864
-
 'use strict';
 
 const test = require('node:test');
@@ -1034,7 +1031,173 @@ test('star-delta catalog additions preserve source-backed Siemens and SEW termin
   const timer = engine.component('siemens-3rp2576-2nw30');
   assert.deepEqual(timer.symbol.pins.map(pin => pin.localNumber), ['A1','A2','17','18','28']);
   assert.deepEqual(timer.electricalFunctions.starDeltaTiming, {
-    supplyPins: ['supply-a1','supply-a2'], sharedOutputCommon: 'contact-common-17', …2248 tokens truncated…supplyPage = report.sheets[7].analysis;
+    supplyPins: ['supply-a1','supply-a2'], sharedOutputCommon: 'contact-common-17', instantaneousStarOutput: 'star-output-18',
+    delayedDeltaOutput: 'delta-output-28', timeRangeSeconds: { minimum: 3, maximum: 60 }, changeoverDelayMilliseconds: 50,
+    note: 'Siemens specifies a 50 ms star-to-delta changeover delay to prevent phase-to-phase shorts. Relay switching is not simulated.'
+  });
+  const timed = engine.createInstance(timer.id, 800, 300, 'K1');
+  timed.properties.delaySeconds = 12;
+  assert.equal(engine.validateInstance(timed).valid, true);
+  timed.properties.delaySeconds = 61;
+  assert.equal(engine.validateInstance(timed).valid, false);
+
+  const motor = engine.component('sew-eurodrive-drn132m4');
+  assert.equal(motor.specifications.ratedVoltage.value, '400 V Δ / 690 V Y');
+  assert.equal(motor.specifications.ratedLineCurrentAt400V50Hz.value, 15.2);
+  assert.deepEqual(motor.symbol.pins.map(pin => pin.localNumber), ['U1','V1','W1','U2','V2','W2','PE']);
+  assert.ok(motor.sources.every(source => source.publisher === 'SEW-EURODRIVE'));
+});
+
+test('star-delta components render in the existing workstation shell with editable settings', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.ok(html.includes("case'star-delta-timer':"));
+  assert.ok(html.includes("case'motor-overload-relay':"));
+  assert.ok(html.includes('data-component-property="delaySeconds"'));
+  assert.ok(html.includes('data-component-property="overloadSettingA"'));
+  assert.ok(html.includes('.toolbar{display:flex'));
+  assert.ok(html.includes('.topbar{position:relative'));
+});
+test('SEW and Siemens star-delta example preserves separate power, control, star, delta, and interlock nets', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-starter.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  const analysis = engine.analyze(project.objects);
+  assert.deepEqual(
+    [analysis.componentCount, analysis.wireCount, analysis.componentPinCount, analysis.connectedPinCount, analysis.unconnectedPinCount, analysis.netCount, analysis.openEndpointCount, analysis.errors.length],
+    [15, 242, 80, 72, 8, 26, 0, 0]
+  );
+  const actual = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort()).sort((a,b) => a[0].localeCompare(b[0]));
+  const expected = [
+    ['Q1:1/L1','X1:1','X1:2'],
+    ['KM2:1/L1','KM3:1/L1','M1:U2'],
+    ['KM1:1/L1','Q1:2/T1'],
+    ['KM2:3/L2','KM3:3/L2','M1:V2'],
+    ['KM2:5/L3','KM3:5/L3','M1:W2'],
+    ['KM3:2/T1','KM3:4/T2','KM3:6/T3'],
+    ['M1:PE','X4:1','X4:2'],
+    ['K1:17','S0:21','X5:1','X5:2'],
+    ['KM1:13','S0:22','S1:13'],
+    ['F1:95','KM1:14','S1:14'],
+    ['Q1:3/L2','X2:1','X2:2'],
+    ['F1:96','K1:A1','KM1:A1'],
+    ['K1:A2','KM1:A2','KM2:A2','KM3:A2','X6:1','X6:2'],
+    ['K1:18','KM2:21'],
+    ['KM2:22','KM3:A1'],
+    ['K1:28','KM3:21'],
+    ['KM2:A1','KM3:22'],
+    ['KM1:3/L2','Q1:4/T2'],
+    ['Q1:5/L3','X3:1','X3:2'],
+    ['KM1:5/L3','Q1:6/T3'],
+    ['F1:1/L1','KM1:2/T1'],
+    ['F1:3/L2','KM1:4/T2'],
+    ['F1:5/L3','KM1:6/T3'],
+    ['F1:2/T1','KM2:6/T3','M1:U1'],
+    ['F1:4/T2','KM2:2/T1','M1:V1'],
+    ['F1:6/T3','KM2:4/T2','M1:W1']
+  ].map(net => net.sort()).sort((a,b) => a[0].localeCompare(b[0]));
+  assert.deepEqual(actual, expected);
+  const components = project.objects.filter(object => object.kind === 'component-instance');
+  assert.equal(components.find(object => object.ref === 'K1').properties.delaySeconds, null);
+  assert.equal(components.find(object => object.ref === 'F1').properties.overloadSettingA, null);
+  assert.equal(components.find(object => object.ref === 'Q1').properties.overloadSettingA, null);
+  assert.equal(project.zoom, 50);
+  assert.ok(project.view.h >= 1500);
+  const wires = engine.wireList(project.objects);
+  assert.equal(wires.valid, true, wires.errors.join(' '));
+  assert.equal(wires.rows.length, 242);
+  const bom = engine.billOfMaterials(project.objects);
+  assert.equal(bom.valid, true, bom.errors.join(' '));
+  assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
+    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
+    ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
+  ]);
+  const reopened = engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.deepEqual(
+    engine.analyze(reopened.project.objects).nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort()).sort((a,b) => a[0].localeCompare(b[0])),
+    expected
+  );
+});
+
+
+test('multi-sheet project analysis isolates coincident geometry and rejects ambiguous sheet membership', () => {
+  const terminal = engine.createInstance('phoenix-contact-3212144', 500, 260, 'X1');
+  const objects = [];
+  ['sheet-power', 'sheet-control'].forEach((sheetId, index) => {
+    const instance = JSON.parse(JSON.stringify(terminal));
+    instance.id = 'multi-sheet-terminal-' + index;
+    instance.sheetId = sheetId;
+    objects.push(instance);
+    objects.push({
+      kind: 'wire',
+      id: 'multi-sheet-wire-' + index,
+      sheetId,
+      x1: 465,
+      y1: 260,
+      x2: 535,
+      y2: 260
+    });
+  });
+  const project = {
+    format: engine.projectFormat,
+    version: engine.projectVersion,
+    componentSchemaVersion: engine.componentSchemaVersion,
+    netSchemaVersion: engine.netSchemaVersion,
+    activeSheet: 'sheet-power',
+    sheets: [
+      { id: 'sheet-power', number: 'A1/006', name: 'Power distribution' },
+      { id: 'sheet-control', number: 'A1/007', name: 'Control supply' }
+    ],
+    objects
+  };
+  const parsed = engine.parseProject(engine.serializeProject(project));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const report = engine.analyzeProject(parsed.project);
+  assert.equal(report.valid, true);
+  assert.deepEqual([report.sheetCount, report.wireCount, report.componentCount, report.netCount, report.openEndpointCount], [2, 2, 2, 2, 0]);
+  assert.deepEqual(report.sheets.map(sheet => sheet.analysis.nets[0].pins.map(pin => pin.ref + ':' + pin.number)), [
+    ['X1:1', 'X1:2'], ['X1:1', 'X1:2']
+  ]);
+  assert.deepEqual(report.sheets.map(sheet => sheet.analysis.nets[0].id), ['sheet-power:net-1', 'sheet-control:net-1']);
+  const missingSheet = JSON.parse(JSON.stringify(project));
+  delete missingSheet.objects[0].sheetId;
+  assert.equal(engine.validateProject(missingSheet).valid, false);
+  const unknownSheet = JSON.parse(JSON.stringify(project));
+  unknownSheet.objects[0].sheetId = 'missing-sheet';
+  assert.equal(engine.validateProject(unknownSheet).valid, false);
+  const duplicateSheet = JSON.parse(JSON.stringify(project));
+  duplicateSheet.sheets[1].id = duplicateSheet.sheets[0].id;
+  assert.equal(engine.validateProject(duplicateSheet).valid, false);
+});
+
+
+test('twenty-seven-sheet connected reference opening set preserves the starter and source-backed PLC interfaces', () => {
+  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const project = parsed.project;
+  assert.equal(project.sheets.length, 27);
+  assert.equal(project.activeSheet, 'ref-006');
+  assert.ok(project.status.includes('A1/028–A1/100 not authored'));
+  const ids = new Set(project.objects.map(object => object.id));
+  assert.equal(ids.size, project.objects.length);
+  for (const sheet of project.sheets) {
+    const pageObjects = project.objects.filter(object => object.sheetId === sheet.id);
+    assert.ok(pageObjects.length >= 2, sheet.id + ' must contain native editable content');
+    if (sheet.id !== 'ref-006') assert.ok(pageObjects.some(object => object.kind === 'text'), sheet.id + ' must contain editable text');
+  }
+  const report = engine.analyzeProject(project);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [27, 32, 335, 67, 0]);
+  assert.deepEqual([report.crossSheetConnectionCount,report.globalNetCount,report.localOpenEndpointCount],[21,43,47]);
+  assert.deepEqual(report.sheets.slice(0, 5).map(sheet => [sheet.analysis.componentCount, sheet.analysis.wireCount, sheet.analysis.netCount]), [
+    [0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
+  ]);
+  const electrical = report.sheets[5].analysis;
+  assert.deepEqual([electrical.componentCount, electrical.wireCount, electrical.netCount], [15,244,28]);
+  const sensorPage = report.sheets[6].analysis;
+  assert.deepEqual([sensorPage.componentCount, sensorPage.wireCount, sensorPage.netCount, sensorPage.openEndpointCount, sensorPage.unconnectedPinCount], [4,25,16,13,8]);
+  const supplyPage = report.sheets[7].analysis;
   assert.deepEqual([supplyPage.componentCount, supplyPage.wireCount, supplyPage.netCount, supplyPage.openEndpointCount], [6,7,5,2]);
   const distributionPage = report.sheets[8].analysis;
   assert.deepEqual([distributionPage.componentCount, distributionPage.wireCount, distributionPage.netCount, distributionPage.openEndpointCount], [2,22,2,12]);
