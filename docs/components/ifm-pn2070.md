@@ -104,3 +104,10 @@
 - A1/040 records the manufacturer recommendation only. The project does not specify an installed seal, lubrication or applied torque, and this page does not select an installation value or assess the project pressure connection.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
 
+
+## A1/041 ambient and storage temperatures
+
+- The PN2070-02 data sheet lists an ambient temperature of −25 to 80 °C and a storage temperature of −40 to 100 °C.
+- A1/041 records these product ratings only. It does not specify the installed sensor's ambient or storage conditions or assess site suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Operating conditions table, 01.03.2024.
+
