@@ -395,3 +395,8 @@ Next project increment: A1/092, selected from verified project evidence after th
 A1/092 records the EMC standards referenced in the PN2070-02 data sheet (DIN EN 61000-6-2 and DIN EN 61000-6-3) as manufacturer-listed references only. It makes no project compliance, installation or test-result claim. No component, wire or interface change.
 
 Next project increment: A1/093, selected from verified project evidence after this milestone.
+
+
+A1/093 records PN2070-02 characteristic deviation below ±0.25% (BFSL) / below ±0.5% (limit value setting), turn-down 1:1. It assigns no project measurement, setting or application accuracy. No component, wire, topology or interface change.
+
+Next project increment: A1/094, selected from verified project evidence after this milestone.
