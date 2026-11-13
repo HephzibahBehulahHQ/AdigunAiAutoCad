@@ -230,3 +230,8 @@ Next project increment: A1/059, selected from verified project evidence after th
 A1/059 records the PN2070-02 analogue-output damping parameter dAA range of 0...4 s without selecting a setting or assigning system response. No component, wire or interface change.
 
 Next project increment: A1/060, selected from verified project evidence after this milestone.
+
+
+A1/060 records the PN2070-02 process-value damping parameter dAP range of 0...4 s without selecting a sensor setting or assigning system response. No component, wire or interface change.
+
+Next project increment: A1/061, selected from verified project evidence after this milestone.
