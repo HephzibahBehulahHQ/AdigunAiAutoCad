@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.4",
-  "status": "Authored opening set: A1/001–A1/027; A1/028–A1/100 not authored.",
+  "revision": "Opening set 2.5",
+  "status": "Authored opening set: A1/001–A1/028; A1/029–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -151,6 +151,11 @@
       "id": "ref-027",
       "number": "A1/027",
       "name": "CPU 1212C AI0 response and smoothing reference"
+    },
+    {
+      "id": "ref-028",
+      "number": "A1/028",
+      "name": "CPU 1212C AI0 rated and overflow ranges"
     }
   ],
   "sheetLabels": {
@@ -175,7 +180,8 @@
     "ref-024": "PN2070 24 V load reference",
     "ref-025": "PN2070 / CPU AI0 accuracy reference",
     "ref-026": "CPU 1212C AI0 idealized resolution reference",
-    "ref-027": "CPU 1212C AI0 response and smoothing reference"
+    "ref-027": "CPU 1212C AI0 response and smoothing reference",
+    "ref-028": "CPU 1212C AI0 rated and overflow ranges"
   },
   "sheetViews": {
     "ref-007": {
@@ -299,6 +305,12 @@
       "h": 760
     },
     "ref-027": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-028": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3745,7 +3757,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 2.4",
+      "text": "Engineering document set | Revision opening set 2.5",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3754,7 +3766,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/027",
+      "text": "Authored pages: A1/001–A1/028",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3772,7 +3784,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: A1/001–A1/027 authored; A1/028–A1/100 are not authored yet.",
+      "text": "Progress: A1/001–A1/028 authored; A1/029–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3904,7 +3916,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices through A1/027",
+      "text": "Component register | modeled devices through A1/028",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3994,7 +4006,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/027 add source-backed reference sheets only.",
+      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/028 add source-backed reference sheets only.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4108,7 +4120,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/027 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/028 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4376,7 +4388,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/027; A1/017–A1/027 document I/O, overload feedback and PN2070 signal references.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/028; A1/017–A1/028 document I/O, overload feedback and PN2070 signal references.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4394,7 +4406,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, A1/026 an idealized CPU analog-resolution reference and A1/027 CPU input response data.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, A1/026 an idealized CPU analog-resolution reference, A1/027 CPU input response data, and A1/028 the CPU rated, overshoot and overflow representation.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -7174,9 +7186,117 @@
       "y": 1766,
       "text": "Revision 2.3 | 2026-11-13 | A1/027 records CPU AI0 response values by rejection frequency and smoothing; none is selected.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-title",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 54,
+      "text": "A1/028 · CPU 1212C AI0 rated, overshoot and overflow ranges",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-rated",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 125,
+      "text": "Siemens Table A-41: rated analog input is 0–10 V, represented by data-word values 0–27648.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-overshoot",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 205,
+      "text": "Overshoot range: 10.001–11.759 V, represented by values 27649–32511.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-overflow",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 285,
+      "text": "Overflow range: 11.760–11.852 V, represented by values 32512–32767.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-endpoints",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 365,
+      "text": "Table A-44 endpoints: 27648 / 6C00 = 10 V; 32511 / 7EFF = 11.759 V; 32512 / 7F00; 32767 / 7FFF = 11.852 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-limits",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 445,
+      "text": "Siemens lists 35 V DC maximum withstand voltage separately; this is not an expanded analog measuring range.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-negative",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 525,
+      "text": "Negative input values are not supported in the Siemens representation table; no negative pressure mapping is asserted.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-boundary",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 605,
+      "text": "The drawing records Siemens range labels; it does not assign overshoot or overflow values to sensor faults or alarms.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-scope",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 675,
+      "text": "No channel diagnostic, PLC alarm, sensor fault response, or out-of-range pressure conversion is simulated.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-028-source",
+      "sheetId": "ref-028",
+      "x": 50,
+      "y": 745,
+      "text": "Source: Siemens S7-1200 System Manual V4.7 (12/2024), CPU 1212C Tables A-41/A-44.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-27",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1905,
+      "text": "A1/028  CPU 1212C AI0 rated, overshoot and overflow ranges",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-19",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 1830,
+      "text": "Revision 2.4 | 2026-11-13 | A1/028 documents Siemens AI0 rated, overshoot and overflow ranges; no diagnostics assigned.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Twenty-seven authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting. A1/028–A1/100 are not authored.",
+  "description": "Twenty-eight authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics. A1/029–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
