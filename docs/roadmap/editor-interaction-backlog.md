@@ -109,4 +109,8 @@ A1/030 records ifm PN2070-02 output voltage, scale capability, minimum load resi
 
 A1/031 records the PN2070-02 800 bar pressure rating and 1,700 bar minimum burst pressure alongside its 0–400 bar measuring range. It does not assign an operating pressure, design limit or suitability determination. No component, wire or interface change.
 
-Next project increment: A1/032, selected from verified project evidence after this milestone.
+## Completed project increment — PN2070 medium temperature
+
+A1/032 records the ifm PN2070-02 medium range of −25 to 80 °C and its listed media (liquids and gases). It does not assign a process medium, operating temperature or compatibility assessment. No component, wire or interface change.
+
+Next project increment: A1/033, selected from verified project evidence after this milestone.

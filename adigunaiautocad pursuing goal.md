@@ -2240,3 +2240,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Added a text-only ifm PN2070 pressure-limits reference: 0–400 bar measuring range, 800 bar pressure rating and 1,700 bar minimum burst pressure. These manufacturer values do not establish a selected operating pressure, design limit or application suitability.
 - Updated the opening set to revision 2.8, added A1/031 index/revision entries, source record, README, roadmap and regression checks. No component, wire or interface change.
 - Local verification: `node --test cad-engine.test.js` passed 78/78; `git diff --check` passed. PR #103 run #194 exposed stale sheet-count expectations; after correction, Actions run #195 passed. Merged as `867eb6ac841aade60a6248ec905ecd3e03b0c7aa`; Pages workflow run `43351988639` completed successfully. Cache-busted production JSON confirmed Opening set 2.8, 31 sheets through A1/031, 32 components, 335 wires and 21 cross-sheet links. Source: ifm PN2070-02 data sheet (EN-GB, 01.03.2024), Application table.
+
+
+## 2026-11-13 incremental execution record — A1/032
+
+- Added a text-only ifm PN2070 medium-temperature reference: listed media are liquids and gases; the specified medium temperature range is −25 to 80 °C. Ambient rating, process medium, operating conditions and compatibility remain unassigned.
+- Updated the opening set to revision 2.9, added A1/032 index/revision entries, source record, README, roadmap and regression checks. No component, wire or interface change.
+- Local verification: `node --test cad-engine.test.js` passed 79/79; `git diff --check` passed. Source: ifm PN2070-02 data sheet (EN-GB, 01.03.2024), Application table.
