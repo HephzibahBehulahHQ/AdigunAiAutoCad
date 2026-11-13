@@ -412,3 +412,10 @@
 - The PN2070-02 electrical data table lists an integrated watchdog.
 - A1/084 records the manufacturer-listed feature only. It assigns no watchdog interval, fault handling, or project safety behavior.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
+
+
+## A1/085 output counts
+
+- The PN2070-02 data sheet lists 2 digital outputs and 1 analogue output.
+- A1/085 records the output count only. It assigns no channel-to-pin allocation or simultaneous signal usage.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Product characteristics table, 01.03.2024.

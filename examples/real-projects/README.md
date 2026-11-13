@@ -178,3 +178,5 @@ For A1/082, the ifm PN2070-02 Interfaces table lists SIO mode as supported; proj
 For A1/083, the ifm PN2070-02 Interfaces table lists IEC 61131-9 as its SDCI standard; no project compliance or implementation assessment is made.
 
 For A1/084, ifm lists an integrated watchdog for the PN2070-02; no timing, fault handling or project safety behavior is assigned.
+
+For A1/085, ifm lists 2 digital outputs and 1 analogue output for the PN2070-02; no channel mapping or simultaneous usage is assigned.

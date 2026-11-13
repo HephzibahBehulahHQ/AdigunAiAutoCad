@@ -355,3 +355,8 @@ Next project increment: A1/084, selected from verified project evidence after th
 A1/084 records the integrated watchdog listed in the PN2070-02 electrical data. It assigns no interval, fault handling or project safety behavior. No component, wire or interface change.
 
 Next project increment: A1/085, selected from verified project evidence after this milestone.
+
+
+A1/085 records the PN2070-02 manufacturer-listed output count of 2 digital and 1 analogue outputs. It assigns no channel-to-pin allocation or simultaneous signal usage. No component, wire or interface change.
+
+Next project increment: A1/086, selected from verified project evidence after this milestone.
