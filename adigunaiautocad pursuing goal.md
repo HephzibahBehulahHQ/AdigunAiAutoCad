@@ -2593,3 +2593,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.0, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #187 merged as `f87ff859c7acc9b209bfd91f3ce3e8f1eaf33653` after all 120 regression tests passed (PR workflow run `43378717210`). Main model verification run `43379341711` and Pages deployment run `43379343389` succeeded after one retry of the failed artifact-fetch step. Cache-busted production JSON confirmed revision 7.0, 73 sheets through A1/073, 32 components and 335 wire objects.
 - Next: continue at A1/074 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/074
+
+- Added a text-only PN2070 reference for the Smart Sensor - SSP 3.1 Measuring Sensor listing under Status_B High Resolution / CMPT=3. It asserts no active device configuration.
+- Updated opening set revision 7.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #189 merged as `9eaf0ab0b28c682b62b77a2d5b812b1a48654b16` after all 121 regression tests passed (PR workflow run `43379782742`). Main model verification run `43379854200` and Pages deployment `43379854289` succeeded. Cache-busted production JSON confirmed revision 7.1, 74 sheets through A1/074, 32 components and 335 wire objects.
+- Next: continue at A1/075 in a source-backed increment.
