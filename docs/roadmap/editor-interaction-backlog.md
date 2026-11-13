@@ -78,3 +78,10 @@ Next project increment: A1/026, selected from verified project evidence after th
 A1/026 records the Siemens CPU 1212C built-in analog input's published 10-bit resolution and derives an idealized code interval for a conditional 0–400 bar / 0–10 V sensor mapping. The page states the resulting 0.390625 bar ideal interval and ±0.1953125 bar rounding contribution as mathematical derivations, not guaranteed measurement performance. It distinguishes the 0–27648 PLC data-word representation from analog converter resolution and excludes noise, effective bits, smoothing configuration, sensor error and field measurements. No component, wire or interface change is made.
 
 Next project increment: A1/027, selected from verified project evidence after this milestone.
+
+
+## Completed project increment — CPU 1212C analog input response reference
+
+A1/027 records Siemens CPU 1212C built-in analog-input sample times and 0–10 V step responses at 95% for each published rejection-frequency and smoothing choice. It states the CPU input values without assigning a PLC configuration or claiming sensor-to-PLC response. Sensor dynamics, PLC scan and end-to-end behavior remain outside the model. No component, wire or interface change is made.
+
+Next project increment: A1/028, selected from verified project evidence after this milestone.

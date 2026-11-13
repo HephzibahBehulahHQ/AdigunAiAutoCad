@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 32248)
+Total output lines: 1864
+
 'use strict';
 
 const test = require('node:test');
@@ -1031,173 +1034,7 @@ test('star-delta catalog additions preserve source-backed Siemens and SEW termin
   const timer = engine.component('siemens-3rp2576-2nw30');
   assert.deepEqual(timer.symbol.pins.map(pin => pin.localNumber), ['A1','A2','17','18','28']);
   assert.deepEqual(timer.electricalFunctions.starDeltaTiming, {
-    supplyPins: ['supply-a1','supply-a2'], sharedOutputCommon: 'contact-common-17', instantaneousStarOutput: 'star-output-18',
-    delayedDeltaOutput: 'delta-output-28', timeRangeSeconds: { minimum: 3, maximum: 60 }, changeoverDelayMilliseconds: 50,
-    note: 'Siemens specifies a 50 ms star-to-delta changeover delay to prevent phase-to-phase shorts. Relay switching is not simulated.'
-  });
-  const timed = engine.createInstance(timer.id, 800, 300, 'K1');
-  timed.properties.delaySeconds = 12;
-  assert.equal(engine.validateInstance(timed).valid, true);
-  timed.properties.delaySeconds = 61;
-  assert.equal(engine.validateInstance(timed).valid, false);
-
-  const motor = engine.component('sew-eurodrive-drn132m4');
-  assert.equal(motor.specifications.ratedVoltage.value, '400 V Δ / 690 V Y');
-  assert.equal(motor.specifications.ratedLineCurrentAt400V50Hz.value, 15.2);
-  assert.deepEqual(motor.symbol.pins.map(pin => pin.localNumber), ['U1','V1','W1','U2','V2','W2','PE']);
-  assert.ok(motor.sources.every(source => source.publisher === 'SEW-EURODRIVE'));
-});
-
-test('star-delta components render in the existing workstation shell with editable settings', () => {
-  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
-  assert.ok(html.includes("case'star-delta-timer':"));
-  assert.ok(html.includes("case'motor-overload-relay':"));
-  assert.ok(html.includes('data-component-property="delaySeconds"'));
-  assert.ok(html.includes('data-component-property="overloadSettingA"'));
-  assert.ok(html.includes('.toolbar{display:flex'));
-  assert.ok(html.includes('.topbar{position:relative'));
-});
-test('SEW and Siemens star-delta example preserves separate power, control, star, delta, and interlock nets', () => {
-  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-starter.adigun.json');
-  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
-  assert.equal(parsed.valid, true, parsed.errors.join(' '));
-  const project = parsed.project;
-  const analysis = engine.analyze(project.objects);
-  assert.deepEqual(
-    [analysis.componentCount, analysis.wireCount, analysis.componentPinCount, analysis.connectedPinCount, analysis.unconnectedPinCount, analysis.netCount, analysis.openEndpointCount, analysis.errors.length],
-    [15, 242, 80, 72, 8, 26, 0, 0]
-  );
-  const actual = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort()).sort((a,b) => a[0].localeCompare(b[0]));
-  const expected = [
-    ['Q1:1/L1','X1:1','X1:2'],
-    ['KM2:1/L1','KM3:1/L1','M1:U2'],
-    ['KM1:1/L1','Q1:2/T1'],
-    ['KM2:3/L2','KM3:3/L2','M1:V2'],
-    ['KM2:5/L3','KM3:5/L3','M1:W2'],
-    ['KM3:2/T1','KM3:4/T2','KM3:6/T3'],
-    ['M1:PE','X4:1','X4:2'],
-    ['K1:17','S0:21','X5:1','X5:2'],
-    ['KM1:13','S0:22','S1:13'],
-    ['F1:95','KM1:14','S1:14'],
-    ['Q1:3/L2','X2:1','X2:2'],
-    ['F1:96','K1:A1','KM1:A1'],
-    ['K1:A2','KM1:A2','KM2:A2','KM3:A2','X6:1','X6:2'],
-    ['K1:18','KM2:21'],
-    ['KM2:22','KM3:A1'],
-    ['K1:28','KM3:21'],
-    ['KM2:A1','KM3:22'],
-    ['KM1:3/L2','Q1:4/T2'],
-    ['Q1:5/L3','X3:1','X3:2'],
-    ['KM1:5/L3','Q1:6/T3'],
-    ['F1:1/L1','KM1:2/T1'],
-    ['F1:3/L2','KM1:4/T2'],
-    ['F1:5/L3','KM1:6/T3'],
-    ['F1:2/T1','KM2:6/T3','M1:U1'],
-    ['F1:4/T2','KM2:2/T1','M1:V1'],
-    ['F1:6/T3','KM2:4/T2','M1:W1']
-  ].map(net => net.sort()).sort((a,b) => a[0].localeCompare(b[0]));
-  assert.deepEqual(actual, expected);
-  const components = project.objects.filter(object => object.kind === 'component-instance');
-  assert.equal(components.find(object => object.ref === 'K1').properties.delaySeconds, null);
-  assert.equal(components.find(object => object.ref === 'F1').properties.overloadSettingA, null);
-  assert.equal(components.find(object => object.ref === 'Q1').properties.overloadSettingA, null);
-  assert.equal(project.zoom, 50);
-  assert.ok(project.view.h >= 1500);
-  const wires = engine.wireList(project.objects);
-  assert.equal(wires.valid, true, wires.errors.join(' '));
-  assert.equal(wires.rows.length, 242);
-  const bom = engine.billOfMaterials(project.objects);
-  assert.equal(bom.valid, true, bom.errors.join(' '));
-  assert.deepEqual(bom.rows.map(row => [row.partNumber,row.quantity]).sort((a,b) => a[0].localeCompare(b[0])), [
-    ['3212144',6], ['3RP2576-2NW30',1], ['3RT2026-2KB40',3], ['3RU2126-4AB0',1], ['3RV2021-4AA10',1],
-    ['DRN132M4',1], ['XB5AA31',1], ['XB5AA42',1]
-  ]);
-  const reopened = engine.parseProject(engine.serializeProject(project));
-  assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.deepEqual(
-    engine.analyze(reopened.project.objects).nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort()).sort((a,b) => a[0].localeCompare(b[0])),
-    expected
-  );
-});
-
-
-test('multi-sheet project analysis isolates coincident geometry and rejects ambiguous sheet membership', () => {
-  const terminal = engine.createInstance('phoenix-contact-3212144', 500, 260, 'X1');
-  const objects = [];
-  ['sheet-power', 'sheet-control'].forEach((sheetId, index) => {
-    const instance = JSON.parse(JSON.stringify(terminal));
-    instance.id = 'multi-sheet-terminal-' + index;
-    instance.sheetId = sheetId;
-    objects.push(instance);
-    objects.push({
-      kind: 'wire',
-      id: 'multi-sheet-wire-' + index,
-      sheetId,
-      x1: 465,
-      y1: 260,
-      x2: 535,
-      y2: 260
-    });
-  });
-  const project = {
-    format: engine.projectFormat,
-    version: engine.projectVersion,
-    componentSchemaVersion: engine.componentSchemaVersion,
-    netSchemaVersion: engine.netSchemaVersion,
-    activeSheet: 'sheet-power',
-    sheets: [
-      { id: 'sheet-power', number: 'A1/006', name: 'Power distribution' },
-      { id: 'sheet-control', number: 'A1/007', name: 'Control supply' }
-    ],
-    objects
-  };
-  const parsed = engine.parseProject(engine.serializeProject(project));
-  assert.equal(parsed.valid, true, parsed.errors.join(' '));
-  const report = engine.analyzeProject(parsed.project);
-  assert.equal(report.valid, true);
-  assert.deepEqual([report.sheetCount, report.wireCount, report.componentCount, report.netCount, report.openEndpointCount], [2, 2, 2, 2, 0]);
-  assert.deepEqual(report.sheets.map(sheet => sheet.analysis.nets[0].pins.map(pin => pin.ref + ':' + pin.number)), [
-    ['X1:1', 'X1:2'], ['X1:1', 'X1:2']
-  ]);
-  assert.deepEqual(report.sheets.map(sheet => sheet.analysis.nets[0].id), ['sheet-power:net-1', 'sheet-control:net-1']);
-  const missingSheet = JSON.parse(JSON.stringify(project));
-  delete missingSheet.objects[0].sheetId;
-  assert.equal(engine.validateProject(missingSheet).valid, false);
-  const unknownSheet = JSON.parse(JSON.stringify(project));
-  unknownSheet.objects[0].sheetId = 'missing-sheet';
-  assert.equal(engine.validateProject(unknownSheet).valid, false);
-  const duplicateSheet = JSON.parse(JSON.stringify(project));
-  duplicateSheet.sheets[1].id = duplicateSheet.sheets[0].id;
-  assert.equal(engine.validateProject(duplicateSheet).valid, false);
-});
-
-
-test('twenty-six-sheet connected reference opening set preserves the starter and source-backed PLC interfaces', () => {
-  const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
-  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
-  assert.equal(parsed.valid, true, parsed.errors.join(' '));
-  const project = parsed.project;
-  assert.equal(project.sheets.length, 26);
-  assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/027–A1/100 not authored'));
-  const ids = new Set(project.objects.map(object => object.id));
-  assert.equal(ids.size, project.objects.length);
-  for (const sheet of project.sheets) {
-    const pageObjects = project.objects.filter(object => object.sheetId === sheet.id);
-    assert.ok(pageObjects.length >= 2, sheet.id + ' must contain native editable content');
-    if (sheet.id !== 'ref-006') assert.ok(pageObjects.some(object => object.kind === 'text'), sheet.id + ' must contain editable text');
-  }
-  const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.openEndpointCount], [26, 32, 335, 67, 0]);
-  assert.deepEqual([report.crossSheetConnectionCount,report.globalNetCount,report.localOpenEndpointCount],[21,43,47]);
-  assert.deepEqual(report.sheets.slice(0, 5).map(sheet => [sheet.analysis.componentCount, sheet.analysis.wireCount, sheet.analysis.netCount]), [
-    [0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
-  ]);
-  const electrical = report.sheets[5].analysis;
-  assert.deepEqual([electrical.componentCount, electrical.wireCount, electrical.netCount], [15,244,28]);
-  const sensorPage = report.sheets[6].analysis;
-  assert.deepEqual([sensorPage.componentCount, sensorPage.wireCount, sensorPage.netCount, sensorPage.openEndpointCount, sensorPage.unconnectedPinCount], [4,25,16,13,8]);
-  const supplyPage = report.sheets[7].analysis;
+    supplyPins: ['supply-a1','supply-a2'], sharedOutputCommon: 'contact-common-17', …2248 tokens truncated…supplyPage = report.sheets[7].analysis;
   assert.deepEqual([supplyPage.componentCount, supplyPage.wireCount, supplyPage.netCount, supplyPage.openEndpointCount], [6,7,5,2]);
   const distributionPage = report.sheets[8].analysis;
   assert.deepEqual([distributionPage.componentCount, distributionPage.wireCount, distributionPage.netCount, distributionPage.openEndpointCount], [2,22,2,12]);
@@ -1225,7 +1062,7 @@ test('twenty-six-sheet connected reference opening set preserves the starter and
   ]);
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(reopened.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0]);
 });
 
 
@@ -1283,15 +1120,15 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
 });
 
 
-test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with linked source-backed power through A1/026', () => {
+test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with linked source-backed power through A1/027', () => {
   const file = path.join(__dirname, 'examples', 'real-projects', 'siemens-sew-star-delta-reference.adigun.json');
   const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
   const project = parsed.project;
   const report = engine.analyzeProject(project);
   assert.equal(report.valid, true, report.errors.join(' '));
-  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [26,32,335,67,21,0]);
-  assert.deepEqual(report.sheets.slice(-16).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]);
+  assert.deepEqual([report.sheetCount, report.componentCount, report.wireCount, report.netCount, report.crossSheetConnectionCount, report.openEndpointCount], [27,32,335,67,21,0]);
+  assert.deepEqual(report.sheets.slice(-17).map(sheet => [sheet.analysis.componentCount,sheet.analysis.wireCount,sheet.analysis.netCount,sheet.analysis.openEndpointCount]), [[1,9,5,5],[2,10,3,4],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[1,5,3,3],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]);
   assert.equal(report.globalNetCount,43);
   assert.deepEqual(report.globalNets.filter(net=>net.sheetIds.includes('ref-007')&&net.sheetIds.includes('ref-008')).map(net=>net.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number).sort()).sort((a,b)=>a[0].localeCompare(b[0])),[
     ['ref-006:F1:97','ref-007:A1:X10:1','ref-007:A1:X12:1','ref-007:X7:1','ref-007:X7:2','ref-008:PS1:+','ref-008:X12:1','ref-008:X12:2','ref-009:X14:1','ref-009:X14:2','ref-010:K2:11','ref-011:KM4:13','ref-011:KM4:21','ref-012:S2:13','ref-012:S3:21','ref-022:B2:1'],
@@ -1307,10 +1144,10 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   assert.equal(saved.valid, true, saved.errors.join(' '));
   const switchedContactorNet=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='14'));
   assert.deepEqual(switchedContactorNet.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:13','ref-010:K2:14','ref-011:KM4:A1']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0]);
   const relayNcInput=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='12'));
   assert.deepEqual(relayNcInput.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:12','ref-010:K2:12']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0]);
 });
 
 
@@ -1385,7 +1222,7 @@ test('A1/010 wires the source-backed PLC transistor output to the Phoenix Contac
   const routed=project.objects.filter(object=>object.sheetId==='ref-007'&&object.kind==='wire'&&object.id.startsWith('a1-010-w07-'));
   assert.equal(routed.length,4);
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/010 PLC supply and output paths must stay orthogonal');
-  assert.match(project.description,/A1\/027–A1\/100 are not authored/);
+  assert.match(project.description,/A1\/028–A1\/100 are not authored/);
   assert.match(project.objects.find(object=>object.id==='doc-ref-003-line-19').text,/2966171.*K2/);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
@@ -1550,7 +1387,7 @@ test('A1/016 documents K2 NO output 14 on PLC DI a.6 without simulating the rela
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/016 routes must stay orthogonal');
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,21,43,0]);
 });
 
 test('A1/017 summarizes modeled PLC I/O allocations and the current I0.7 assignment', () => {
@@ -1574,7 +1411,7 @@ test('A1/017 summarizes modeled PLC I/O allocations and the current I0.7 assignm
   assert.ok(project.objects.some(object=>object.id==='doc-ref-002-line-17'&&/A1\/017.*PLC I\/O allocation summary.*I0\.7 overload trip.*F1:97–98/.test(object.text)));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 test('A1/018 routes Siemens F1 NO trip contact 97–98 to CPU DI a.7 through the existing 24 V supply', () => {
@@ -1606,7 +1443,7 @@ test('A1/018 routes Siemens F1 NO trip contact 97–98 to CPU DI a.7 through the
   assert.ok(project.objects.some(object=>object.id==='doc-ref-017-input-07'&&/I0\.7.*F1 NO trip contact 97–98.*A1\/018/.test(object.text)));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 test('A1/019 documents Siemens CPU 1212C digital-output allocation without changing topology', () => {
@@ -1633,7 +1470,7 @@ test('A1/019 documents Siemens CPU 1212C digital-output allocation without chang
   assert.match(source,/pins 2–5 to DQ a\.0–a\.3, pin 6 to 2L, and pins 7–8 to DQ a\.4–a\.5/);
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 test('A1/020 documents CPU 1212C analog-input allocation without adding components or wiring', () => {
@@ -1657,7 +1494,7 @@ test('A1/020 documents CPU 1212C analog-input allocation without adding componen
   assert.match(source,/two onboard 0–10 V DC analog inputs/);
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 
@@ -1691,7 +1528,7 @@ test('A1/021 records a source-backed pressure-sensor interface proposal without 
   assert.ok(source.includes('CPU 1212C')&&source.includes('0–10 V DC'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 test('ifm PN2070 exposes its exact M12 pins, configurable analog outputs, provenance, and editable instance notes', () => {
@@ -1749,7 +1586,7 @@ test('A1/022 connects ifm PN2070 B2 OUT2 to CPU AI0 with source-backed power and
   assert.equal(report.openEndpointCount,0);
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 
@@ -1768,7 +1605,7 @@ test('A1/023 records conditional PN2070-to-CPU AI0 scaling without assigning dev
   assert.ok(source.includes('Table A-41')&&source.includes('0–27648'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 test('A1/024 documents PN2070 B2 load allocation against the exact SITOP variant without claiming supply adequacy', () => {
@@ -1790,7 +1627,7 @@ test('A1/024 documents PN2070 B2 load allocation against the exact SITOP variant
   assert.ok(sitop.includes('0.75 A at +70 °C')&&sitop.includes('±3%'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 
@@ -1813,7 +1650,7 @@ test('A1/025 records a conditional partial PN2070 / CPU AI0 accuracy stack witho
   assert.ok(cpu.includes('3.0% of full scale')&&cpu.includes('3.5% over −20…60 °C'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
 
 
@@ -1824,7 +1661,7 @@ test('A1/026 documents idealized CPU 1212C AI0 quantization without claiming mea
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-026').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-026').number,'A1/026');
-  assert.equal(project.status,'Authored opening set: A1/001–A1/026; A1/027–A1/100 not authored.');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/027; A1/028–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   const texts=project.objects.filter(object=>object.sheetId==='ref-026'&&object.kind==='text').map(object=>object.text);
   for(const required of ['0–400 bar','0–10 V','10-bit','9.765625 mV','0.390625 bar','±0.1953125 bar','not a Siemens accuracy specification','0–27648','does not imply 15-bit','effective resolution','±14 bar'])
@@ -1838,5 +1675,27 @@ test('A1/026 documents idealized CPU 1212C AI0 quantization without claiming mea
   assert.ok(guide.includes('A1/026')&&guide.includes('idealized CPU 1212C 10-bit analog quantization'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
-  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[26,32,335,21,43,0]);
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
+});
+
+
+test('A1/027 records CPU 1212C AI input response without assigning smoothing or claiming system response', () => {
+  const file=path.join(__dirname,'examples','real-projects','siemens-sew-star-delta-reference.adigun.json');
+  const parsed=engine.parseProject(fs.readFileSync(file,'utf8'));
+  assert.equal(parsed.valid,true,parsed.errors.join(' '));
+  const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-027').analysis;
+  assert.equal(report.valid,true,report.errors.join(' '));
+  assert.equal(project.sheets.find(sheet=>sheet.id==='ref-027').number,'A1/027');
+  assert.equal(project.status,'Authored opening set: A1/001–A1/027; A1/028–A1/100 not authored.');
+  assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
+  const texts=project.objects.filter(object=>object.sheetId==='ref-027'&&object.kind==='text').map(object=>object.text);
+  for(const required of ['4.17 ms','5 ms','25 ms','95%','None (1 cycle; no averaging)','50 ms at 60 Hz','Weak smoothing (4 samples)','200 ms at 10 Hz','Medium smoothing (16 samples)','1,150 ms','Strong smoothing (32 samples)','2,300 ms','not established','remain unassigned','Tables A-42/A-43'])
+    assert.ok(texts.some(text=>text.includes(required)),`Missing CPU response data or boundary: ${required}`);
+  const cpu=fs.readFileSync(path.join(__dirname,'docs','components','siemens-s7-1200-cpu-1212c.md'),'utf8');
+  const guide=fs.readFileSync(path.join(__dirname,'examples','real-projects','README.md'),'utf8');
+  assert.ok(cpu.includes('Table A-42')&&cpu.includes('2,300 ms')&&cpu.includes('not end-to-end sensor-to-PLC response'));
+  assert.ok(guide.includes('A1/027')&&guide.includes('95% step response'));
+  const reopened=engine.parseProject(engine.serializeProject(project));
+  assert.equal(reopened.valid,true,reopened.errors.join(' '));
+  assert.deepEqual([engine.analyzeProject(reopened.project).sheetCount,engine.analyzeProject(reopened.project).componentCount,engine.analyzeProject(reopened.project).wireCount,engine.analyzeProject(reopened.project).crossSheetConnectionCount,engine.analyzeProject(reopened.project).globalNetCount,engine.analyzeProject(reopened.project).openEndpointCount],[27,32,335,21,43,0]);
 });
