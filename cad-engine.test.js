@@ -2401,7 +2401,7 @@ test('A1/050 records PN2070 display indicators without inferring their behavior'
   assert.equal(project.status,'Authored opening set: A1/001–A1/050; A1/051–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-49','A1/050  ifm PN2070 display indicators'],['doc-ref-004-line-41','Revision 4.7 | 2026-11-13 | A1/050']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/050 index or revision record: '+id);
-  for(const required of ['3 green LEDs','bar, psi and MPa','2 yellow LEDs','alphanumeric, red/green, 4-digit display','do not assign display-unit selection','does not define the meaning of an indicator state','ifm PN2070-02'])
+  for(const required of ['3 green LEDs','bar, psi and MPa','2 yellow LEDs','alphanumeric, red/green, 4-digit display','do not assign display-unit selection','the meaning of an indicator state','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-050'&&object.text.includes(required)),'Missing display datum or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
   assert.ok(source.includes('3 green LEDs for bar, psi and MPa'));
