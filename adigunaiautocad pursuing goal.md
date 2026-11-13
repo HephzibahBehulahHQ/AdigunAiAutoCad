@@ -2740,3 +2740,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #223 merged as `d64bb59b905b310c3bf791ee10eb61b4bbd96a60` after CI passed (PR workflow run `43407250499`). Main model verification run `43407342287` and Pages deployment `43407342184` succeeded.
 - Cache-busted browser verification returned revision 8.7 / 90 sheets (through A1/090), one release behind main revision 8.8 / 91 sheets. The earlier 8.4 / 87 response has advanced, but production is not yet current.
 - Next: continue at A1/092 and investigate the delayed custom-domain update.
+
+
+## 2026-11-13 incremental execution record — A1/092
+
+- Added a text-only PN2070 reference for the manufacturer-listed EMC references DIN EN 61000-6-2 and DIN EN 61000-6-3. No project compliance or test-result claim is made.
+- Updated opening set revision 8.9, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #225 merged as `e752f4ce02980bc1d097359f077877c712534cd0` after CI passed (PR workflow run `43407957875`). Main model verification run `43408038107` and Pages deployment `43408038437` succeeded.
+- Cache-busted production JSON verified revision 8.9, 92 sheets through A1/092, with the new source and scope text. This also confirms the prior custom-domain lag has cleared.
+- Next: continue at A1/093 in a source-backed increment.
