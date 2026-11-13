@@ -314,3 +314,10 @@
 - The PN2070-02 data sheet lists the CMPT=3 cyclical binary switching information field as 2 bits.
 - A1/070 records the manufacturer field width only. It does not assign state-code meanings or project output configuration.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Status_B High Resolution / CMPT=3 process-data table, 01.03.2024.
+
+
+## A1/071 IO-Link DeviceID, CMPT=3
+
+- The PN2070-02 data sheet lists DeviceID 638 for Status_B High Resolution / CMPT=3.
+- A1/071 records the manufacturer association only. It is not evidence that this specific device is configured to use CMPT=3.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Supported DeviceIDs table, 01.03.2024.
