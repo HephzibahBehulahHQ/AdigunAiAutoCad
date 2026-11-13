@@ -2433,3 +2433,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 5.0, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #147 merged as `789db5110eed697e404b06587f4281de911b0102`. Its corrected regression check passed in run `43369314067`; main model verification run `43369361704` and Pages deployment `43369361758` succeeded. Cache-busted production JSON confirmed revision 5.0, 53 sheets through A1/053, the callout and 335 wire objects.
 - Next: continue at A1/054 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/054
+
+- Added a text-only ifm PN2070 pressure-type reference: the data sheet lists relative pressure. The project does not assign a pressure reference or operating condition and derives no absolute-pressure conversion.
+- Updated opening set revision 5.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #149 merged as `d37cc7e57d2655364ad6175c615d016505023d88` after its regression passed (PR workflow run `43369695592`). Main model verification run `43369747673` and Pages deployment `43369747622` succeeded. Cache-busted production JSON confirmed revision 5.1, 54 sheets through A1/054, the pressure type and 335 wire objects.
+- Next: continue at A1/055 in a source-backed increment.
