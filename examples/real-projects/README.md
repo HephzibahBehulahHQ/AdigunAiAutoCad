@@ -183,3 +183,6 @@ For A1/085, ifm lists 2 digital outputs and 1 analogue output for the PN2070-02;
 
 
 For A1/086, ifm lists PN2070-02 switch point accuracy below ±0.4% of the span at turn-down 1:1; no threshold, span selection or project accuracy is assigned.
+
+
+For A1/087, ifm lists PN2070-02 repeatability below ±0.1% of span for temperature fluctuations below 10 K at turn-down 1:1; no project measurement or operating temperature condition is assigned.
