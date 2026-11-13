@@ -425,3 +425,8 @@ Next project increment: A1/098, selected from verified project evidence after th
 A1/098 records the Phoenix Contact PLC-RSC- 24DC/21 mechanical service-life rating of 2 × 10⁷ cycles. It does not claim electrical life, expected project operating life, or project reliability. No component, wire, topology or interface change.
 
 Next project increment: A1/099, selected from verified project evidence after this milestone.
+
+
+A1/099 records Phoenix Contact PLC-RSC- 24DC/21 maximum switching voltage of 250 V AC/DC and limiting continuous current of 6 A, with the manufacturer’s derating caveat. No project contact operating condition is selected or validated. No component, wire, topology or interface change.
+
+Next project increment: A1/100, selected from verified project evidence after this milestone.
