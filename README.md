@@ -4,4 +4,4 @@ This is adigunAiAutoCad Project
 
 ## Verified reference project increment
 
-The opening set now includes a source-backed Siemens/SEW star-delta motor starter on A1/006 and an IFM IFS204 / Siemens S7-1200 sensor input example on A1/007. The authored set contains 19 component instances, 252 routed wire segments and 31 sheet-local nets, with no unresolved open endpoints. These are independent electrical examples: no unlabeled control net has been presented as a 24 V or 0 V inter-sheet connection. A1/008–A1/100 remain unauthored. See `examples/real-projects/siemens-sew-star-delta-reference.adigun.json`.
+The opening set contains 93 authored sheets through A1/093, including the source-backed Siemens/SEW starter, IFM sensor and PLC examples, and PN2070 manufacturer reference records. The authored sheet adds no components or wires; the project retains 32 component instances, 335 routed wire segments, 67 sheet-local nets and 21 explicit cross-sheet connections with no unresolved open endpoints. A1/094–A1/100 remain unauthored. See `examples/real-projects/siemens-sew-star-delta-reference.adigun.json`.
