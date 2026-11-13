@@ -18,6 +18,11 @@
 - This is an authored schematic connection, not evidence of a configured or commissioned device. The OUT2 factory-current setting must be changed to voltage and verified at the sensor before use. The process point is unspecified. A1/023 documents a conditional pressure-scaling relation only; no ASP2/AEP2 values, active conversion, calibration, alarms or PLC logic are assigned.
 - Sensor pin identities come from the manufacturer's connection diagram. Project sheet coordinates are drawing locations, not device geometry. Physical installation, pressure medium, range selection, pressure rating, protection, total supply load and application suitability remain unassessed.
 
+## A1/025 accuracy reference
+
+- The PN2070-02 data sheet specifies characteristic deviation below ±0.25% of span BFSL / below ±0.5% at limit setting, for turn-down 1:1. A1/025 uses only the latter published contribution and only for a conditional 0–400 bar span; it is not a full sensor uncertainty statement.
+- The sheet pairs that contribution with Siemens CPU input accuracy for an illustrative partial arithmetic sum. Verify voltage mode and the active ASP2/AEP2 values; no configured endpoints or calibration are claimed.
+
 ## A1/024 load reference
 
 - The PN2070-02 data sheet lists current consumption below 35 mA and an 18–30 V DC operating range. A1/024 uses the listed upper current bound for a B2 branch comparison; it is not a measured installed current.
