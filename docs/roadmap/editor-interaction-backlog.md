@@ -113,4 +113,9 @@ A1/031 records the PN2070-02 800 bar pressure rating and 1,700 bar minimum burst
 
 A1/032 records the ifm PN2070-02 medium range of −25 to 80 °C and its listed media (liquids and gases). It does not assign a process medium, operating temperature or compatibility assessment. No component, wire or interface change.
 
-Next project increment: A1/033, selected from verified project evidence after this milestone.
+Next project increment: A1/034, selected from verified project evidence after this milestone.
+
+
+## Completed project increment — PN2070 electrical supply data
+
+A1/033 records the ifm PN2070-02 operating-voltage range of 18–30 V DC (to SELV/PELV) and current consumption below 35 mA. It does not verify installed supply or branch conditions, total project load current or PSU headroom. No component, wire or interface change.
