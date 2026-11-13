@@ -111,3 +111,10 @@
 - A1/041 records these product ratings only. It does not specify the installed sensor's ambient or storage conditions or assess site suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Operating conditions table, 01.03.2024.
 
+
+## A1/042 minimum pressure cycles
+
+- The PN2070-02 data sheet lists minimum pressure cycles as 100 million.
+- A1/042 records the manufacturer-listed product datum only. The project does not define a pressure-cycle profile or load history, and this value is not a project service-life, maintenance-interval or installed-system endurance claim.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
+
