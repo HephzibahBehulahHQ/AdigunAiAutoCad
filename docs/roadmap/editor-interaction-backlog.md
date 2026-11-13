@@ -210,3 +210,8 @@ Next project increment: A1/055, selected from verified project evidence after th
 A1/055 records the PN2070-02 vacuum-resistance value of −1000 mbar (−0.1 MPa). It assigns no project vacuum condition or application suitability. No component, wire or interface change.
 
 Next project increment: A1/056, selected from verified project evidence after this milestone.
+
+
+A1/056 records the PN2070-02 PNP/NPN switching output designs and parameterisable normally open/normally closed output function. It selects no project polarity or output function. No component, wire or interface change.
+
+Next project increment: A1/057, selected from verified project evidence after this milestone.
