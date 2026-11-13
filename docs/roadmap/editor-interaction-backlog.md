@@ -375,3 +375,8 @@ Next project increment: A1/088, selected from verified project evidence after th
 A1/088 records the PN2070-02 long-term stability rating below ±0.05% of span per 6 months, turn-down 1:1. It assigns no measured project drift, service life or maintenance interval. No component, wire or interface change.
 
 Next project increment: A1/089, selected from verified project evidence after this milestone.
+
+
+A1/089 records the PN2070-02 zero-point and span temperature coefficients (each 0.2% of span per 10 K) for the listed −25 to 80 °C range. It assigns no site temperature, correction or project measurement. No component, wire or interface change.
+
+Next project increment: A1/090, selected from verified project evidence after this milestone.
