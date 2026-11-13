@@ -113,7 +113,7 @@ A1/031 records the PN2070-02 800 bar pressure rating and 1,700 bar minimum burst
 
 A1/032 records the ifm PN2070-02 medium range of −25 to 80 °C and its listed media (liquids and gases). It does not assign a process medium, operating temperature or compatibility assessment. No component, wire or interface change.
 
-Next project increment: A1/038, selected from verified project evidence after this milestone.
+Next project increment: A1/039, selected from verified project evidence after this milestone.
 
 
 ## Completed project increment — PN2070 electrical supply data
@@ -139,3 +139,8 @@ A1/036 records the manufacturer-listed minimum insulation resistance of 100 MΩ 
 ## Completed project increment — PN2070 switching-output ratings
 
 A1/037 records the ifm PN2070-02 listed switching-output current rating, voltage drop, switching frequency and protection entries. It assigns no channel, electrical mode, configured function or load and makes no suitability or protection-coordination claim. No component, wire or interface change.
+
+
+## Completed project increment — PN2070 CMPT 2 switching-point ranges
+
+A1/038 records the data-sheet CMPT=2 SP/rP parameter ranges, minimum difference and setting increment. It does not configure CMPT, thresholds, process pressure, output behavior or safety settings. No component, wire or interface change.
