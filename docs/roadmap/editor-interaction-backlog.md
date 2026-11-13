@@ -335,3 +335,8 @@ Next project increment: A1/080, selected from verified project evidence after th
 A1/080 records the PN2070-02 IO-Link transmission type COM2 at the manufacturer's stated 38,4 kBaud. It claims no observed or configured link speed. No component, wire or interface change.
 
 Next project increment: A1/081, selected from verified project evidence after this milestone.
+
+
+A1/081 records the PN2070-02 IO-Link revision 1.1 interface listing without asserting negotiated master/device behavior. No component, wire or interface change.
+
+Next project increment: A1/082, selected from verified project evidence after this milestone.
