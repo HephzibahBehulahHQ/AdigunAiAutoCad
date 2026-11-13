@@ -220,3 +220,8 @@ Next project increment: A1/057, selected from verified project evidence after th
 A1/057 records the PN2070-02 pulsed short-circuit and overload protection specifications for the output. It establishes no project protection performance, external circuit protection or coordination. No component, wire or interface change.
 
 Next project increment: A1/058, selected from verified project evidence after this milestone.
+
+
+A1/058 records the PN2070-02 maximum analogue-output response time of 3 ms. It does not define configured damping or system response. No component, wire or interface change.
+
+Next project increment: A1/059, selected from verified project evidence after this milestone.
