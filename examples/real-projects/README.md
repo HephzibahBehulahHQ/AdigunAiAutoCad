@@ -166,3 +166,5 @@ For A1/076, the ifm PN2070-02 IO-Link table lists an acyclical application-speci
 For A1/077, the ifm PN2070-02 IO-Link table lists an acyclical application-specific tag function for Status_B High Resolution / CMPT=3; no configured tag value or active profile is asserted.
 
 For A1/078, ifm lists PN2070 IO-Link master port type A, or type B when pin 2 is not connected; the project wiring and selected master port are not assigned.
+
+For A1/079, the ifm PN2070-02 Factory setting / CMPT=2 profile lists Device identification, Process data variable, and Device diagnosis; actual configured values or diagnosis are not asserted.
