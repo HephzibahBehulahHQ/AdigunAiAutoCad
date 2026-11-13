@@ -293,3 +293,10 @@
 - The PN2070-02 data sheet lists the CMPT=2 cyclical pressure field as 14 bits.
 - A1/067 records the manufacturer process-data width only. It does not assign a profile or decoded payload.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 process-data table, 01.03.2024.
+
+
+## A1/068 IO-Link pressure field width, CMPT=3
+
+- The PN2070-02 data sheet lists the CMPT=3 cyclical pressure field as 16 bits.
+- A1/068 records the manufacturer process-data width only. It does not assign a profile or decoded payload.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Status_B High Resolution / CMPT=3 process-data table, 01.03.2024.
