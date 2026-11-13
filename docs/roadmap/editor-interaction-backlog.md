@@ -180,3 +180,8 @@ A1/048 records the PN2070-02 product materials list without assigning specific p
 A1/049 records the PN2070-02 M12, A-coded, four-contact gold-plated connector specification. It selects no cable or mating connector and makes no physical-fit or installed-compatibility claim. No component, wire or interface change.
 
 Next project increment: A1/050, selected from verified project evidence after this milestone.
+
+
+A1/050 records the PN2070-02 display-unit LEDs, switching-status LEDs and 4-digit red/green value display. It assigns no unit selection, indicator-state meaning, thresholds or remote behavior. No component, wire or interface change.
+
+Next project increment: A1/051, selected from verified project evidence after this milestone.
