@@ -2195,3 +2195,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - A1/021 added a source-backed ifm PN2070 interface proposal; the candidate OUT2-to-AI0 route remains unwired and AI0 remains unassigned.
 - A1/022 catalog tranche adds the PN2070 definition with four manufacturer pins, sourced output defaults, editable process/signal notes, and a dedicated symbol in the existing workstation shell. No project instance, circuit, or interface-layout change is included.
 - Verification before PR: 68 local regression tests and whitespace checks pass. Next: publish/merge/deploy after green CI; then author the physical A1/022 circuit only after the 2M and 0 V references are confirmed.
+
+
+## 2026-11-13 incremental execution record — A1/023–A1/026
+
+- A1/023 recorded the Siemens CPU 1212C AI0 raw range and conditional scaling relation; PR #89 merged to main. A1/024 compared the PN2070 branch load with the exact SITOP ratings without claiming supply adequacy; PR #90 merged. A1/025 recorded a conditional partial PN2070 / CPU accuracy stack; PR #91 merged and the 25-sheet deployed project was verified.
+- Added A1/026 as a text-only CPU 1212C AI0 resolution reference. It derives 9.765625 mV and 0.390625 bar ideal code intervals, and a ±0.1953125 bar ideal rounding contribution for a conditional linear 0–400 bar / 0–10 V span. These are mathematical idealizations, not guaranteed effective resolution or measured performance. No component, wire or workstation interface change.
+- Updated the project cover/status, drawing index, revision record, component reference, README, roadmap and this execution log. The project now has 26 sheets, 32 component instances, 335 wire segments, 67 sheet-local nets, 43 project-wide nets, 21 explicit cross-sheet connections, and zero unlinked endpoints.
+- Local verification: 73/73 CAD tests pass; `git diff --check` passes. Next: publish the focused A1/026 PR, merge only after green CI, verify the Pages deployment, then continue at A1/027.

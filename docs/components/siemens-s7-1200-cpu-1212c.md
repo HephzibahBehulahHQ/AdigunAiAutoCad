@@ -14,6 +14,11 @@
 - Siemens System Manual V4.7 Table A-41 lists 3.0% of full scale at 25 °C and 3.5% over −20…60 °C for the built-in analog inputs. With a conditional 0–400 bar / 0–10 V mapping, those input contributions correspond to ±12 / ±14 bar.
 - A1/025 arithmetically adds the PN2070 published limit-setting characteristic deviation for a partial comparison only. It is not a complete uncertainty budget, commissioning result or configured PLC implementation.
 
+## A1/026 idealized resolution reference
+
+- Table A-41 specifies 10-bit resolution for the built-in 0–10 V analog inputs. For a conditional linear 0–400 bar / 0–10 V mapping, an ideal uniform quantizer would have a 9.765625 mV input interval, equivalent to 0.390625 bar per code interval and ±0.1953125 bar ideal rounding quantization alone. This is a mathematical derivation from the stated bit depth and range, not a Siemens accuracy specification or guaranteed effective resolution.
+- The CPU's 0–27648 full-scale data-word representation is not a claim of 15-bit analog resolution. Noise, effective number of bits, smoothing configuration, sensor error and field measurements are outside this calculation. A1/026 adds no CPU instance or wiring and does not implement PLC scaling.
+
 ## CAD representation
 
 - The catalog model preserves the CPU's 25 manufacturer-designated X10/X11/X12 terminals. Table A-41 lists 10-bit resolution and 3.0% / 3.5% full-scale accuracy for the onboard analog inputs; A1/023 does not assign an uncertainty budget. Pin coordinates are schematic connection locations, not a physical PLC footprint.
