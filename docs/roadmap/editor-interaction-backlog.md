@@ -265,3 +265,8 @@ Next project increment: A1/066, selected from verified project evidence after th
 A1/066 records the PN2070-02 IO-Link pressure resolution of 0.2 bar for Status_B High Resolution / CMPT=3. It assigns no device mode and makes no precision claim. No component, wire or interface change.
 
 Next project increment: A1/067, selected from verified project evidence after this milestone.
+
+
+A1/067 records the PN2070-02 CMPT=2 cyclical pressure field width of 14 bits. It assigns no profile or decoded payload. No component, wire or interface change.
+
+Next project increment: A1/068, selected from verified project evidence after this milestone.
