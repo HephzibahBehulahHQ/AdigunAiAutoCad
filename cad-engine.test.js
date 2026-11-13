@@ -1937,7 +1937,7 @@ test('A1/031 PN2070 pressure limits remain manufacturer ratings rather than sele
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-031').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-031').number,'A1/031');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-30','A1/031  ifm PN2070 pressure rating'],['doc-ref-004-line-22','Revision 2.7 | 2026-11-13 | A1/031']])
@@ -1961,7 +1961,7 @@ test('A1/032 records the PN2070 medium temperature range without assigning proce
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-032').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-032').number,'A1/032');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-31','A1/032  ifm PN2070 medium temperature'],['doc-ref-004-line-23','Revision 2.8 | 2026-11-13 | A1/032']])
@@ -1985,7 +1985,7 @@ test('A1/033 records PN2070 electrical ratings without claiming supply adequacy'
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-033').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-033').number,'A1/033');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-32','A1/033  ifm PN2070 electrical supply data'],['doc-ref-004-line-24','Revision 3.0 | 2026-11-13 | A1/033']])
@@ -2009,7 +2009,7 @@ test('A1/034 records the PN2070 power-on delay without assigning system response
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-034').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-034').number,'A1/034');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-33','A1/034  ifm PN2070 power-on delay time'],['doc-ref-004-line-25','Revision 3.1 | 2026-11-13 | A1/034']])
@@ -2033,7 +2033,7 @@ test('A1/035 records PN2070 electrical protection characteristics without making
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-035').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-035').number,'A1/035');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-34','A1/035  ifm PN2070 electrical protection characteristics'],['doc-ref-004-line-26','Revision 3.2 | 2026-11-13 | A1/035']])
@@ -2057,7 +2057,7 @@ test('A1/036 records PN2070 minimum insulation resistance without implying a pro
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-036').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-036').number,'A1/036');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-35','A1/036  ifm PN2070 minimum insulation resistance'],['doc-ref-004-line-27','Revision 3.3 | 2026-11-13 | A1/036']])
@@ -2081,7 +2081,7 @@ test('A1/037 records PN2070 switching-output specifications without assigning a 
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-037').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-037').number,'A1/037');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-36','A1/037  ifm PN2070 switching-output ratings'],['doc-ref-004-line-28','Revision 3.4 | 2026-11-13 | A1/037']])
@@ -2105,7 +2105,7 @@ test('A1/038 records PN2070 CMPT 2 switching-point ranges without configuring th
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-038').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-038').number,'A1/038');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-37','A1/038  ifm PN2070 switching-point ranges · CMPT 2'],['doc-ref-004-line-29','Revision 3.5 | 2026-11-13 | A1/038']])
@@ -2129,7 +2129,7 @@ test('A1/039 records PN2070 CMPT 3 switching-point ranges without configuring th
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-039').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-039').number,'A1/039');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-38','A1/039  ifm PN2070 switching-point ranges · CMPT 3'],['doc-ref-004-line-30','Revision 3.6 | 2026-11-13 | A1/039']])
@@ -2153,7 +2153,7 @@ test('A1/040 records the PN2070 manufacturer tightening-torque recommendation wi
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-040').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-040').number,'A1/040');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-39','A1/040  ifm PN2070 recommended tightening torque'],['doc-ref-004-line-31','Revision 3.7 | 2026-11-13 | A1/040']])
@@ -2177,7 +2177,7 @@ test('A1/041 records PN2070 ambient and storage temperature ratings without assi
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-041').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-041').number,'A1/041');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-40','A1/041  ifm PN2070 ambient and storage temperatures'],['doc-ref-004-line-32','Revision 3.8 | 2026-11-13 | A1/041']])
@@ -2201,7 +2201,7 @@ test('A1/042 records the PN2070 minimum pressure-cycle datum without claiming pr
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-042').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-042').number,'A1/042');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-41','A1/042  ifm PN2070 minimum pressure cycles'],['doc-ref-004-line-33','Revision 3.9 | 2026-11-13 | A1/042']])
@@ -2225,7 +2225,7 @@ test('A1/043 records PN2070 product dimensions and weight without assigning inst
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-043').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-043').number,'A1/043');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-42','A1/043  ifm PN2070 dimensions and weight'],['doc-ref-004-line-34','Revision 4.0 | 2026-11-13 | A1/043']])
@@ -2249,7 +2249,7 @@ test('A1/044 records the PN2070 restrictor product datum without assigning a ret
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-044').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-044').number,'A1/044');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-43','A1/044  ifm PN2070 integrated restrictor datum'],['doc-ref-004-line-35','Revision 4.1 | 2026-11-13 | A1/044']])
@@ -2273,7 +2273,7 @@ test('A1/045 records PN2070 manufacturer IP ratings without claiming assembly pr
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-045').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-045').number,'A1/045');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-44','A1/045  ifm PN2070 listed protection ratings'],['doc-ref-004-line-36','Revision 4.2 | 2026-11-13 | A1/045']])
@@ -2297,7 +2297,7 @@ test('A1/046 records PN2070 shock and vibration data without claiming applicatio
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-046').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-046').number,'A1/046');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-45','A1/046  ifm PN2070 shock and vibration data'],['doc-ref-004-line-37','Revision 4.3 | 2026-11-13 | A1/046']])
@@ -2322,7 +2322,7 @@ test('A1/047 records PN2070 wetted-parts material without assigning chemical com
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-047').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-047').number,'A1/047');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-46','A1/047  ifm PN2070 wetted-parts material'],['doc-ref-004-line-38','Revision 4.4 | 2026-11-13 | A1/047']])
@@ -2346,7 +2346,7 @@ test('A1/048 records PN2070 listed materials without assigning part locations or
   const project=parsed.project,report=engine.analyzeProject(project),page=report.sheets.find(sheet=>sheet.id==='ref-048').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-048').number,'A1/048');
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
   for(const [id,required] of [['doc-ref-002-line-47','A1/048  ifm PN2070 listed materials'],['doc-ref-004-line-39','Revision 4.5 | 2026-11-13 | A1/048']])
@@ -2371,7 +2371,7 @@ test('A1/049 records PN2070 M12 connector details without selecting cable hardwa
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-049').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-049').number,'A1/049');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-049').name,'ifm PN2070 M12 connector details');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2395,7 +2395,7 @@ test('A1/050 records PN2070 display indicators without inferring their behavior'
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-050').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-050').number,'A1/050');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-050').name,'ifm PN2070 display indicators');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2419,7 +2419,7 @@ test('A1/051 records the PN2070 process connection designation without selecting
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-051').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-051').number,'A1/051');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-051').name,'ifm PN2070 process connection designation');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2443,7 +2443,7 @@ test('A1/052 records PN2070 upper-housing rotation without assigning installatio
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-052').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-052').number,'A1/052');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-052').name,'ifm PN2070 upper-housing rotation');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2467,7 +2467,7 @@ test('A1/053 records the PN2070 programming-button callout without inferring but
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-053').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-053').number,'A1/053');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-053').name,'ifm PN2070 programming-button callout');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2491,7 +2491,7 @@ test('A1/054 records the PN2070 relative-pressure classification without derivin
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-054').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-054').number,'A1/054');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-054').name,'ifm PN2070 pressure type');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2515,7 +2515,7 @@ test('A1/055 records PN2070 vacuum resistance without assigning project conditio
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-055').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-055').number,'A1/055');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-055').name,'ifm PN2070 vacuum resistance');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2538,7 +2538,7 @@ test('A1/056 records PN2070 switching output options without selecting a configu
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-056').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-056').number,'A1/056');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-056').name,'ifm PN2070 switching output options');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2561,7 +2561,7 @@ test('A1/057 records PN2070 output protection specifications without claiming pr
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-057').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-057').number,'A1/057');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-057').name,'ifm PN2070 output protection');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2584,7 +2584,7 @@ test('A1/058 records PN2070 analogue-output response rating without assigning sy
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-058').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-058').number,'A1/058');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-058').name,'ifm PN2070 analogue-output response');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2607,7 +2607,7 @@ test('A1/059 records PN2070 analogue-output damping range without selecting a se
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-059').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-059').number,'A1/059');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-059').name,'ifm PN2070 analogue-output damping');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2630,7 +2630,7 @@ test('A1/060 records PN2070 process-value damping range without selecting a sett
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-060').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-060').number,'A1/060');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-060').name,'ifm PN2070 process-value damping');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2653,7 +2653,7 @@ test('A1/061 records PN2070 programmable delay range without selecting a delay',
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-061').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-061').number,'A1/061');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-061').name,'ifm PN2070 programmable output delay');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2676,7 +2676,7 @@ test('A1/062 records PN2070 response-time rating without assigning system behavi
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-062').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-062').number,'A1/062');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-062').name,'ifm PN2070 response time');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2699,7 +2699,7 @@ test('A1/063 records PN2070 IO-Link process cycle time for CMPT 2 without assign
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-063').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-063').number,'A1/063');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-063').name,'ifm PN2070 IO-Link cycle time');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2722,7 +2722,7 @@ test('A1/064 records PN2070 IO-Link cycle time for CMPT 3 without assigning a co
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-064').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-064').number,'A1/064');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-064').name,'ifm PN2070 IO-Link cycle time CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2745,7 +2745,7 @@ test('A1/065 records PN2070 IO-Link pressure resolution for CMPT 2 without assig
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-065').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-065').number,'A1/065');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-065').name,'ifm PN2070 IO-Link pressure resolution CMPT 2');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2768,7 +2768,7 @@ test('A1/066 records PN2070 IO-Link pressure resolution for CMPT 3 without assig
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-066').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-066').number,'A1/066');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-066').name,'ifm PN2070 IO-Link pressure resolution CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2791,7 +2791,7 @@ test('A1/067 records PN2070 CMPT 2 IO-Link pressure field width without assignin
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-067').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-067').number,'A1/067');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-067').name,'ifm PN2070 IO-Link pressure field CMPT 2');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2814,7 +2814,7 @@ test('A1/068 records PN2070 CMPT 3 IO-Link pressure field width without assignin
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-068').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-068').number,'A1/068');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-068').name,'ifm PN2070 IO-Link pressure field CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2837,7 +2837,7 @@ test('A1/069 records PN2070 CMPT 3 device status field width without inventing d
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-069').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-069').number,'A1/069');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-069').name,'ifm PN2070 IO-Link device status field CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2860,7 +2860,7 @@ test('A1/070 records PN2070 CMPT 3 binary switching information width without as
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-070').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-070').number,'A1/070');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-070').name,'ifm PN2070 IO-Link binary switching information CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2883,7 +2883,7 @@ test('A1/071 records PN2070 CMPT 3 IO-Link DeviceID without inferring device con
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-071').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-071').number,'A1/071');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-071').name,'ifm PN2070 IO-Link DeviceID CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2906,7 +2906,7 @@ test('A1/072 records PN2070 CMPT 2 IO-Link DeviceID without inferring device con
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-072').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-072').number,'A1/072');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-072').name,'ifm PN2070 IO-Link DeviceID CMPT 2');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2929,7 +2929,7 @@ test('A1/073 records PN2070 factory-setting SSP 0 profile listing without inferr
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-073').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-073').number,'A1/073');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-073').name,'ifm PN2070 IO-Link SSP 0 profile CMPT 2');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2952,7 +2952,7 @@ test('A1/074 records PN2070 CMPT 3 SSP 3.1 profile listing without inferring dev
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-074').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-074').number,'A1/074');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-074').name,'ifm PN2070 IO-Link SSP 3.1 profile CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2975,7 +2975,7 @@ test('A1/075 records PN2070 CMPT 3 Common I&D profile listing without inferring 
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-075').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-075').number,'A1/075');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-075').name,'ifm PN2070 IO-Link Common I&D profile CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -2998,7 +2998,7 @@ test('A1/076 records PN2070 factory-setting acyclical application tag function w
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-076').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-076').number,'A1/076');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-076').name,'ifm PN2070 IO-Link application-specific tag CMPT 2');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3021,7 +3021,7 @@ test('A1/077 records PN2070 CMPT 3 acyclical application tag function without in
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-077').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-077').number,'A1/077');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-077').name,'ifm PN2070 IO-Link application-specific tag CMPT 3');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3044,7 +3044,7 @@ test('A1/078 records PN2070 IO-Link master-port note without assigning project w
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-078').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-078').number,'A1/078');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-078').name,'ifm PN2070 IO-Link master port note');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3067,7 +3067,7 @@ test('A1/079 records PN2070 factory-setting IO-Link function listing without cla
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-079').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-079').number,'A1/079');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-079').name,'ifm PN2070 IO-Link function listing CMPT 2');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3090,7 +3090,7 @@ test('A1/080 records PN2070 IO-Link transmission type and nominal data rate',()=
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-080').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-080').number,'A1/080');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-080').name,'ifm PN2070 IO-Link COM2 transmission rate');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3113,7 +3113,7 @@ test('A1/081 records PN2070 IO-Link revision without claiming negotiated behavio
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-081').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-081').number,'A1/081');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-081').name,'ifm PN2070 IO-Link revision');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3136,7 +3136,7 @@ test('A1/082 records PN2070 SIO mode capability without assigning project operat
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-082').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-082').number,'A1/082');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-082').name,'ifm PN2070 SIO mode capability');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3159,7 +3159,7 @@ test('A1/083 records PN2070 SDCI standard reference without claiming compliance'
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-083').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-083').number,'A1/083');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-083').name,'ifm PN2070 SDCI standard reference');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3182,7 +3182,7 @@ test('A1/084 records PN2070 integrated watchdog feature without inventing behavi
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-084').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-084').number,'A1/084');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-084').name,'ifm PN2070 integrated watchdog feature');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3205,7 +3205,7 @@ test('A1/085 records PN2070 digital and analogue output counts without assigning
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-085').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-085').number,'A1/085');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-085').name,'ifm PN2070 output counts');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3229,7 +3229,7 @@ test('A1/086 records PN2070 switch-point accuracy without claiming project accur
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-086').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-086').number,'A1/086');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-086').name,'ifm PN2070 switch-point accuracy');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3253,7 +3253,7 @@ test('A1/087 records PN2070 repeatability rating with its published condition',(
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-087').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-087').number,'A1/087');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-087').name,'ifm PN2070 repeatability rating');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3277,7 +3277,7 @@ test('A1/088 records PN2070 long-term stability without inferring project drift'
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-088').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-088').number,'A1/088');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-088').name,'ifm PN2070 long-term stability');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3301,7 +3301,7 @@ test('A1/089 records PN2070 zero-point and span temperature coefficients',()=>{
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-089').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-089').number,'A1/089');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-089').name,'ifm PN2070 temperature coefficients');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3325,7 +3325,7 @@ test('A1/090 records PN2070 hysteresis deviation without assigning project behav
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-090').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-090').number,'A1/090');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-090').name,'ifm PN2070 hysteresis deviation');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3349,7 +3349,7 @@ test('A1/091 records PN2070 manufacturer MTTF without claiming project lifetime'
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-091').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-091').number,'A1/091');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-091').name,'ifm PN2070 mean time to failure');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
@@ -3373,7 +3373,7 @@ test('A1/092 records PN2070 EMC standard references without claiming compliance'
   const project=parsed.project,report=engine.analyzeProject(parsed.project),page=report.sheets.find(sheet=>sheet.id==='ref-092').analysis;
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
-  assert.equal(project.revision,'Opening set 8.9');
+  assert.equal(project.revision,'Opening set 9.0');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-092').number,'A1/092');
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-092').name,'ifm PN2070 EMC references');
   assert.equal(project.status,'Authored opening set: A1/001–A1/092; A1/093–A1/100 not authored.');
