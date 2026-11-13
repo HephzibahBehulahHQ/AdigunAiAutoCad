@@ -185,3 +185,8 @@ Next project increment: A1/050, selected from verified project evidence after th
 A1/050 records the PN2070-02 display-unit LEDs, switching-status LEDs and 4-digit red/green value display. It assigns no unit selection, indicator-state meaning, thresholds or remote behavior. No component, wire or interface change.
 
 Next project increment: A1/051, selected from verified project evidence after this milestone.
+
+
+A1/051 records the PN2070-02 G 1/4 internal-thread process connection designation and listed DIN EN ISO 1179-2 reference. No mating fitting or seal is selected, and no mechanical or installation suitability is inferred. No component, wire or interface change.
+
+Next project increment: A1/052, selected from verified project evidence after this milestone.
