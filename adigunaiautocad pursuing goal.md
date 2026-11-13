@@ -2298,4 +2298,6 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 
 - Added a text-only ifm PN2070 CMPT=2 switching-point reference: SP 2.5–400 bar, rP 1–398.5 bar, minimum difference 2 bar, and 0.5 bar steps. No CMPT mode, threshold or process pressure is configured.
 - Updated opening set revision 3.5, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
-- Next: complete verification, merge after green CI, deploy and verify production, then continue at A1/039.
+- Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 85/85; `git diff --check` passed. Model analysis passed with 38 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
+- PR #117 passed GitHub Actions run #211 and merged as `358a1e829434e3c2310b067ca35e38c1555ad11c`. Pages workflow run `43359687788` succeeded. Cache-busted production JSON confirmed revision 3.5, 38 sheets through A1/038 and the CMPT=2 ranges. No component, wire or interface change.
+- Next: continue at A1/039 in a source-backed increment.
