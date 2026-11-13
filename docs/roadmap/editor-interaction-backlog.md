@@ -215,3 +215,8 @@ Next project increment: A1/056, selected from verified project evidence after th
 A1/056 records the PN2070-02 PNP/NPN switching output designs and parameterisable normally open/normally closed output function. It selects no project polarity or output function. No component, wire or interface change.
 
 Next project increment: A1/057, selected from verified project evidence after this milestone.
+
+
+A1/057 records the PN2070-02 pulsed short-circuit and overload protection specifications for the output. It establishes no project protection performance, external circuit protection or coordination. No component, wire or interface change.
+
+Next project increment: A1/058, selected from verified project evidence after this milestone.
