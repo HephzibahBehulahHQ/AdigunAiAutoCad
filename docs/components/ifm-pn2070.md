@@ -433,3 +433,10 @@
 - The PN2070-02 data sheet lists repeatability below ±0.1% of the span with temperature fluctuations below 10 K and turn-down 1:1.
 - A1/087 records the manufacturer specification only. It does not report project measurements or assign an operating temperature condition.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
+
+
+## A1/088 long-term stability
+
+- The PN2070-02 data sheet lists long-term stability below ±0.05% of the span per 6 months, with turn-down 1:1.
+- A1/088 records this manufacturer rating only. It does not represent a project measurement, service life, or maintenance interval.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
