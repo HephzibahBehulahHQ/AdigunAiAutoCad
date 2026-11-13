@@ -2625,3 +2625,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #195 merged as `cd79bbeefcdb4ec9d43e3fde6508c918654c50fa` after all 124 regression tests passed (PR workflow run `43381042352`). Main model verification run `43381101627` and Pages deployment `43381101587` succeeded. Cache-busted production JSON confirmed revision 7.4, 77 sheets through A1/077, 32 components and 335 wire objects.
 - Next: continue at A1/078 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/078
+
+- Added a text-only PN2070 reference for the manufacturer IO-Link master-port note: type A, or type B when pin 2 is not connected. It assigns no installed pin 2 wiring or master-port selection.
+- Updated opening set revision 7.5, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #197 merged as `887db2298760138de4f71b2c5b9c2fd7441d487c` after all 125 regression tests passed (PR workflow run `43381514907`). Main model verification run `43381581312` succeeded. Pages deployment `43381581436` succeeded after retrying the failed artifact-metadata fetch. Cache-busted production JSON confirmed revision 7.5, 78 sheets through A1/078, 32 components and 335 wire objects.
+- Next: continue at A1/079 in a source-backed increment.
