@@ -405,3 +405,8 @@ Next project increment: A1/094, selected from verified project evidence after th
 A1/094 records the UL approval number listed in the PN2070-02 data sheet as a manufacturer listing only. It makes no project approval, certification or assessment claim. No component, wire, topology or interface change.
 
 Next project increment: A1/095, selected from verified project evidence after this milestone.
+
+
+A1/095 preserves the PN2070-02 DNV GL accuracy/deviation note verbatim. Its extracted row does not clearly map the two limits to separate metrics, so no metric assignment or certification claim is made. No component, wire, topology or interface change.
+
+Next project increment: A1/096, selected from verified project evidence after this milestone.

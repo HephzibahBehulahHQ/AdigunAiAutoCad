@@ -482,3 +482,10 @@
 - The PN2070-02 data sheet lists UL approval no. J014 in its Tests / approvals table.
 - A1/094 records the manufacturer listing only. It does not claim this project has UL approval or certification, or that a project assessment has been completed.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
+
+
+## A1/095 DNV GL accuracy note
+
+- The PN2070-02 data sheet prints: “switch point accuracy, linearity error under DNV GL: < ±1%: < ±1%”.
+- A1/095 preserves this manufacturer note verbatim. The extracted row does not clearly map the two limits to separate metrics; no project test, DNV GL approval, or certification claim is made.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Notes on accuracy / deviation table, 01.03.2024.
