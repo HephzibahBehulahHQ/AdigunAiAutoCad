@@ -205,3 +205,8 @@ Next project increment: A1/054, selected from verified project evidence after th
 A1/054 records the PN2070-02 relative-pressure classification. It does not specify the project pressure reference or derive an absolute-pressure conversion. No component, wire or interface change.
 
 Next project increment: A1/055, selected from verified project evidence after this milestone.
+
+
+A1/055 records the PN2070-02 vacuum-resistance value of −1000 mbar (−0.1 MPa). It assigns no project vacuum condition or application suitability. No component, wire or interface change.
+
+Next project increment: A1/056, selected from verified project evidence after this milestone.
