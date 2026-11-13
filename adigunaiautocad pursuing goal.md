@@ -2681,3 +2681,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 8.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #209 merged as `6b2a43d600fd0fd2bf0873bf82f857b52dd243eb` after all 131 regression tests passed (PR workflow run `43384536768`). Main model verification run `43384609590` and Pages deployment `43384609463` succeeded. Cache-busted production JSON confirmed revision 8.1, 84 sheets through A1/084, 32 components and 335 wire objects.
 - Next: continue at A1/085 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/085
+
+- Added a text-only PN2070 reference for the manufacturer-listed 2 digital outputs and 1 analogue output. It assigns no channel-to-pin allocation or simultaneous signal usage.
+- Updated opening set revision 8.2, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #211 merged as `7524b824cb6140734fc8465286705a2e54110519` after all 132 regression tests passed (PR workflow run `43385495664`). Main model verification run `43385584719` and Pages deployment `43385584629` succeeded. Cache-busted production JSON confirmed revision 8.2, 85 sheets through A1/085, and the new source and scope text.
+- Next: continue at A1/086 in a source-backed increment.
