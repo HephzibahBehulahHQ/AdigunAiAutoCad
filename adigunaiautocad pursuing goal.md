@@ -2665,3 +2665,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.9, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #205 merged as `702016098ce575c2aa9bedcd860eb174f5c8e6ac` after all 129 regression tests passed (PR workflow run `43383314538`). Main model verification run `43383412211` and Pages deployment `43383411856` succeeded. Cache-busted production JSON confirmed revision 7.9, 82 sheets through A1/082, 32 components and 335 wire objects.
 - Next: continue at A1/083 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/083
+
+- Added a text-only PN2070 reference for IEC 61131-9 as the listed SDCI standard. It makes no compliance or project implementation claim.
+- Updated opening set revision 8.0, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #207 merged as `043967ee22f6f5ae84bfc05004f9481a4f460711` after all 130 regression tests passed (PR workflow run `43383895270`). Main model verification run `43383956306` and Pages deployment `43383956222` succeeded. Cache-busted production JSON confirmed revision 8.0, 83 sheets through A1/083, 32 components and 335 wire objects.
+- Next: continue at A1/084 in a source-backed increment.
