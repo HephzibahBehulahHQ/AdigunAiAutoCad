@@ -1307,10 +1307,10 @@ test('A1/007 preserves the source-backed IFM sensor and Siemens PLC example with
   assert.equal(saved.valid, true, saved.errors.join(' '));
   const switchedContactorNet=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='14'));
   assert.deepEqual(switchedContactorNet.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:13','ref-010:K2:14','ref-011:KM4:A1']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
   const relayNcInput=report.globalNets.find(net=>net.pins.some(pin=>pin.sheetId==='ref-010'&&pin.ref==='K2'&&pin.number==='12'));
   assert.deepEqual(relayNcInput.pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),['ref-007:A1:X10:12','ref-010:K2:12']);
-  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+  assert.deepEqual(engine.analyzeProject(saved.project).sheets.map(sheet => sheet.analysis.netCount), [0,0,0,0,0,28,16,5,2,5,5,3,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 });
 
 
