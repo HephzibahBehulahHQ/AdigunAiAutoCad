@@ -172,3 +172,5 @@ For A1/079, the ifm PN2070-02 Factory setting / CMPT=2 profile lists Device iden
 For A1/080, the ifm PN2070-02 interface table lists IO-Link transmission type COM2 at 38,4 kBaud; no observed or configured link speed is asserted.
 
 For A1/081, the ifm PN2070-02 interface table lists IO-Link revision 1.1; negotiated master/device behavior is not asserted.
+
+For A1/082, the ifm PN2070-02 Interfaces table lists SIO mode as supported; project operation in that mode is not assigned.

@@ -340,3 +340,8 @@ Next project increment: A1/081, selected from verified project evidence after th
 A1/081 records the PN2070-02 IO-Link revision 1.1 interface listing without asserting negotiated master/device behavior. No component, wire or interface change.
 
 Next project increment: A1/082, selected from verified project evidence after this milestone.
+
+
+A1/082 records the PN2070-02 SIO mode capability as supported by the manufacturer. It selects no project operating mode. No component, wire or interface change.
+
+Next project increment: A1/083, selected from verified project evidence after this milestone.
