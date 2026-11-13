@@ -154,3 +154,5 @@ For A1/070, the PN2070-02 CMPT=3 cyclical binary switching information field is 
 For A1/071, ifm lists DeviceID 638 for Status_B High Resolution / CMPT=3; this manufacturer association does not establish the installed device configuration.
 
 For A1/072, ifm lists DeviceID 459 for Factory setting / CMPT=2; this manufacturer association does not establish the installed device configuration.
+
+For A1/073, the ifm PN2070-02 profile table lists Smart Sensor - SSP 0 Generic Profiled Sensor under Factory setting / CMPT=2; this does not assert an active device configuration.
