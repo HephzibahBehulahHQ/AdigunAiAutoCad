@@ -160,3 +160,5 @@ For A1/073, the ifm PN2070-02 profile table lists Smart Sensor - SSP 0 Generic P
 For A1/074, the ifm PN2070-02 profile table lists Smart Sensor - SSP 3.1 Measuring Sensor under Status_B High Resolution / CMPT=3; this does not assert an active device configuration.
 
 For A1/075, the ifm PN2070-02 profile table lists Common - I&D Identification and Diagnosis under Status_B High Resolution / CMPT=3; this does not imply actual diagnosis data or master configuration.
+
+For A1/076, the ifm PN2070-02 IO-Link table lists an acyclical application-specific tag function for Factory setting / CMPT=2; no configured tag value or active profile is asserted.
