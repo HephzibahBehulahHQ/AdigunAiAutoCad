@@ -52,3 +52,9 @@ The inspector keeps source ratings read-only. Reference, terminal-strip assignme
 ## Limitations
 
 This milestone adds the sourced schematic component and terminal-level wiring model. Relay actuation simulation, manufacturer 3D/physical footprint, panel clearance validation and application suitability checks remain unavailable and must not be implied by the UI.
+
+## A1/096 typical response and release times
+
+- Phoenix Contact lists typical response time of 5 ms and typical release time of 8 ms for PLC-RSC- 24DC/21 (item 2966171).
+- A1/096 records manufacturer ratings only; they do not simulate relay actuation or establish project/system response timing.
+- Source: [Phoenix Contact manufacturer catalog PDF](https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf), input data table, catalog generated 13.11.2026.
