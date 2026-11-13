@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 3.1",
-  "status": "Authored opening set: A1/001–A1/034; A1/035–A1/100 not authored.",
+  "revision": "Opening set 3.2",
+  "status": "Authored opening set: A1/001–A1/035; A1/036–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -186,6 +186,11 @@
       "id": "ref-034",
       "number": "A1/034",
       "name": "ifm PN2070 power-on delay time"
+    },
+    {
+      "id": "ref-035",
+      "number": "A1/035",
+      "name": "ifm PN2070 electrical protection characteristics"
     }
   ],
   "sheetLabels": {
@@ -7784,9 +7789,81 @@
       "y": 2226,
       "text": "Revision 3.1 | 2026-11-13 | A1/034 records the 0.3 s sensor power-on delay; system response is not assigned.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-035-title",
+      "sheetId": "ref-035",
+      "x": 50,
+      "y": 54,
+      "text": "A1/035 · ifm PN2070 electrical protection characteristics",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-035-class",
+      "sheetId": "ref-035",
+      "x": 50,
+      "y": 145,
+      "text": "ifm lists protection class III for the PN2070-02.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-035-polarity",
+      "sheetId": "ref-035",
+      "x": 50,
+      "y": 245,
+      "text": "The data sheet lists reverse-polarity protection: yes.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-035-scope",
+      "sheetId": "ref-035",
+      "x": 50,
+      "y": 355,
+      "text": "These are manufacturer product specifications; they do not certify project installation or safety performance.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-035-condition",
+      "sheetId": "ref-035",
+      "x": 50,
+      "y": 455,
+      "text": "No wiring fault, protective device, installation condition or functional-safety behavior is assessed by this reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-035-source",
+      "sheetId": "ref-035",
+      "x": 50,
+      "y": 555,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Electrical data table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-34",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 2355,
+      "text": "A1/035  ifm PN2070 electrical protection characteristics",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-26",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 2296,
+      "text": "Revision 3.2 | 2026-11-13 | A1/035 records product protection data; no installation or safety claim.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Thirty-four authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035–A1/100 are not authored.",
+  "description": "Thirty-five authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
