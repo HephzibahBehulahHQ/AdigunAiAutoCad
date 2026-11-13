@@ -2409,3 +2409,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - GitHub PR check run `43367726039` initially caught scope-wording mismatches in the new test; corrected them and reran successfully as `43367726039` on the passing head `0fc66fe2ea1f89b54d9c9b13c16bc611ae37aa5c`. PR #141 merged as `fa60c6e978c2cd353ceb97309d505b959e0b7ad6`.
 - Main model verification run `43367799356` and Pages deployment `43367799433` succeeded. Cache-busted production JSON confirmed revision 4.7, 50 sheets through A1/050, the display data and 335 wire objects.
 - Next: continue at A1/051 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/051
+
+- Added a text-only ifm PN2070 process connection record: threaded G 1/4 internal thread, listed as DIN EN ISO 1179-2. No mating fitting or seal is selected; mechanical compatibility or installation suitability is not inferred.
+- Updated opening set revision 4.8, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #143 merged as `30213a4dd35ae48f2cac35060dcbc912eb1823eb` after the corrected regression passed (PR workflow run `43368201616`). Main model verification run `43368244789` and Pages deployment `43368244750` succeeded. Cache-busted production JSON confirmed revision 4.8, 51 sheets through A1/051, the connection designation and 335 wire objects.
+- Next: continue at A1/052 in a source-backed increment.
