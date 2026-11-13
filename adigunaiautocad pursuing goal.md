@@ -2794,3 +2794,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #235 merged as `5ed1f0ac232dc8af7572d949bb43e1a7ab7cf8d9`; PR CI passed (workflow run `43412774877`). Main model verification `43412855359` and Pages deployment `43412855300` succeeded.
 - Cache-busted production JSON verified revision 9.4, 97 sheets through A1/097 and the listed contact rating with its scope text. Project totals remain 32 components and 335 wires.
 - Next: continue at A1/098 with another verified, source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/098
+
+- Added a text-only Phoenix Contact PLC-RSC- 24DC/21 reference for the manufacturer mechanical service-life rating of 2 × 10⁷ cycles. It is explicitly not electrical life, expected project operating life, or a project reliability calculation.
+- Updated opening set revision 9.5, index, revision record, source record, README, roadmap and regression coverage. No components, wires, topology or interface geometry changed.
+- PR #237 merged as `ccb619937d2114e3a7ea2a7b2f87e1f832f6d52d`; PR CI passed (workflow run `43413253368`). Main model verification `43413324986` and Pages deployment `43413325201` succeeded.
+- Cache-busted production JSON verified revision 9.5, 98 sheets through A1/098, the mechanical-life rating and its limitation. Project totals remain 32 components and 335 wires.
+- Next: continue at A1/099.
