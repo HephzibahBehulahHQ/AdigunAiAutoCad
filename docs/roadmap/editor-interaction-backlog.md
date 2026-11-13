@@ -190,3 +190,8 @@ Next project increment: A1/051, selected from verified project evidence after th
 A1/051 records the PN2070-02 G 1/4 internal-thread process connection designation and listed DIN EN ISO 1179-2 reference. No mating fitting or seal is selected, and no mechanical or installation suitability is inferred. No component, wire or interface change.
 
 Next project increment: A1/052, selected from verified project evidence after this milestone.
+
+
+A1/052 records the PN2070-02 upper-housing 345° rotation callout. It assigns no installed rotation angle, mounting clearance or installation suitability. No component, wire or interface change.
+
+Next project increment: A1/053, selected from verified project evidence after this milestone.
