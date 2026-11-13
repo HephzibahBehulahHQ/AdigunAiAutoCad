@@ -235,3 +235,8 @@ Next project increment: A1/060, selected from verified project evidence after th
 A1/060 records the PN2070-02 process-value damping parameter dAP range of 0...4 s without selecting a sensor setting or assigning system response. No component, wire or interface change.
 
 Next project increment: A1/061, selected from verified project evidence after this milestone.
+
+
+A1/061 records the PN2070-02 programmable delay parameters dS and dr range of 0...50 s without selecting a delay or defining system response. No component, wire or interface change.
+
+Next project increment: A1/062, selected from verified project evidence after this milestone.
