@@ -2785,3 +2785,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #233 merged as `15dc5be846fb5160fe1c9e122b86c94a80ccfa72`; PR CI passed (workflow run `43412271276`). Main model verification `43412359523` and Pages deployment `43412359610` succeeded.
 - Cache-busted production JSON verified revision 9.3, 96 sheets through A1/096, the response/release ratings and scope text. Project totals remain 32 components and 335 wires.
 - Next: continue at A1/097 with another source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/097
+
+- Added a text-only Phoenix Contact PLC-RSC- 24DC/21 reference for the manufacturer-listed minimum switching voltage of 5 V at 100 mA. No project contact load or circuit suitability is assigned.
+- Updated opening set revision 9.4, index, revision record, source record, README, roadmap and regression coverage. No components, wires, topology or interface geometry changed.
+- PR #235 merged as `5ed1f0ac232dc8af7572d949bb43e1a7ab7cf8d9`; PR CI passed (workflow run `43412774877`). Main model verification `43412855359` and Pages deployment `43412855300` succeeded.
+- Cache-busted production JSON verified revision 9.4, 97 sheets through A1/097 and the listed contact rating with its scope text. Project totals remain 32 components and 335 wires.
+- Next: continue at A1/098 with another verified, source-backed increment.
