@@ -2382,3 +2382,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: 94/94 tests passed; analyzer confirms 47 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #135 merged as `308e2a4f27d37b18ec74ff729df76d543f0f956c`. CAD verification run `43365008838` and Pages deployment `43365008965` succeeded. Cache-busted production JSON confirmed revision 4.4, 47 sheets through A1/047, the wetted-parts material and 335 wires.
 - Next: continue at A1/048 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/048
+
+- Added a text-only PN2070 overall material-list reference: stainless steel 630 / 1.4542 / 17-4 PH, stainless steel 316L / 1.4404, PBT+PC-GF30, PBT-GF20 and PC. The list does not assign material locations or establish chemical compatibility or corrosion suitability.
+- Updated opening set revision 4.5, drawing index, source record, README, roadmap and regression coverage. No component, wire or interface change.
+- Local verification: 95/95 tests passed; analyzer confirms 48 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
+- PR #137 merged as `d139d63be1a673b015410f173b5b777b8bb64597`. CAD verification run `43365715312` and Pages deployment `43365715303` succeeded. Cache-busted production JSON confirmed revision 4.5, 48 sheets through A1/048, the material-list scope and 335 wires.
+- Next: continue at A1/049 in a source-backed increment.
