@@ -2713,3 +2713,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 8.5, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #217 merged as `85ae851c4815379c8180aebaa65fe3c3d4791e18` after CI passed (PR workflow run `43404755185`). Main model verification run `43404848688` and Pages deployment `43404848684` succeeded. The live JSON check is pending: the production hostname failed DNS resolution from this environment after deployment.
 - Next: continue at A1/089 and retry live verification when DNS resolves.
+
+
+## 2026-11-13 incremental execution record — A1/089
+
+- Added a text-only PN2070 reference for the zero-point and span temperature coefficients, each 0.2% of span per 10 K across the listed −25 to 80 °C range. No site temperature, project correction or measurement is assigned.
+- Updated opening set revision 8.6, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #219 merged as `5b727e5a2c60e9dc768b5c207b18e09879c88974` after CI passed (PR workflow run `43405474948`). Main model verification run `43405552133` and Pages deployment `43405552241` succeeded; the run artifact is tied to that main SHA.
+- Production verification is not passing: the cache-busted live JSON returned revision 8.4 with 87 sheets, rather than revision 8.6 with 89. Direct shell requests failed hostname resolution. Investigate the stale live response before claiming production current; the A1/088 live check remains unresolved as well.
+- Next: continue at A1/090 and retry production verification while investigating the stale custom-domain content.
