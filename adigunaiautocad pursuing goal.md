@@ -2256,3 +2256,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 80/80; `git diff --check` passed. Model analysis passed with 33 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #107 passed GitHub Actions run #201 and merged as `509e6c41cf304e445f6afda917e5674c2aaba6ab`. Pages workflow run `43355704298` succeeded. Cache-busted production JSON confirmed revision 3.0, 33 sheets through A1/033 and the A1/033 electrical ratings content. No component, wire or interface change.
 - Next: continue at A1/034 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/034
+
+- Added a text-only ifm PN2070 power-on delay reference: 0.3 s from the PN2070-02 data sheet. It does not assign startup sequence, ready signaling, PLC scan setting or total system response.
+- Updated opening set revision 3.1, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Next: complete verification, merge after green CI, deploy and verify production, then continue at A1/035.
