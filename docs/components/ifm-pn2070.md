@@ -195,3 +195,10 @@
 - The PN2070-02 technical drawing labels a programming button as callout 3.
 - A1/053 records the drawing callout only. The data-sheet callout does not document the button’s function or assign an operating sequence.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), technical drawing callout, 01.03.2024.
+
+
+## A1/054 pressure type
+
+- The PN2070-02 data sheet lists type of pressure as relative pressure.
+- A1/054 records that manufacturer classification only. It does not specify a project pressure reference or operating condition and does not derive an absolute-pressure conversion.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Application table, 01.03.2024.
