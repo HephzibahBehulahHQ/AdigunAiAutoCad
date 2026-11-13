@@ -2481,3 +2481,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 5.6, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #159 merged as `1303ee067951479c62c7d4fc4b404167159c2238` after all 106 regression tests passed (PR workflow run `43372370995`). Main model verification run `43372431792` and Pages deployment `43372431738` succeeded. Cache-busted production JSON confirmed revision 5.6, 59 sheets through A1/059, 32 components and 335 wire objects.
 - Next: continue at A1/060 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/060
+
+- Added a text-only PN2070 reference for the manufacturer process-value damping parameter dAP range of 0...4 s. No sensor setting or system response is assigned.
+- Updated opening set revision 5.7, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #161 merged as `2320e12434730df8f7acd0d5462ef0dbc7a4f88f` after all 107 regression tests passed (PR workflow run `43372732515`). Main model verification run `43372780074` and Pages deployment `43372780063` succeeded. Cache-busted production JSON confirmed revision 5.7, 60 sheets through A1/060, 32 components and 335 wire objects.
+- Next: continue at A1/061 in a source-backed increment.
