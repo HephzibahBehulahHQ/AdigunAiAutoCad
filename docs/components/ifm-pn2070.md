@@ -426,3 +426,10 @@
 - The PN2070-02 data sheet lists switch point accuracy below ±0.4% of the span with turn-down 1:1.
 - A1/086 records this manufacturer specification only. No switching threshold, selected measuring span or project accuracy is assigned.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
+
+
+## A1/087 repeatability
+
+- The PN2070-02 data sheet lists repeatability below ±0.1% of the span with temperature fluctuations below 10 K and turn-down 1:1.
+- A1/087 records the manufacturer specification only. It does not report project measurements or assign an operating temperature condition.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
