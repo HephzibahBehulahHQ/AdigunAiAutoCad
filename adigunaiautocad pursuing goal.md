@@ -2289,4 +2289,6 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 
 - Added a text-only ifm PN2070 switching-output reference: the data sheet lists a 250 mA permanent current rating, 2 V maximum voltage drop, frequency below 500 Hz, pulsed short-circuit protection and overload protection. No output channel, mode, configured behavior or load is assigned.
 - Updated opening set revision 3.4, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
-- Next: complete verification, merge after green CI, deploy and verify production, then continue at A1/038.
+- Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 84/84; `git diff --check` passed. Model analysis passed with 37 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
+- PR #115 passed GitHub Actions run #209 and merged as `6118aefaf17220f15e1da223be0f47ff07c3fc55`. Pages workflow run `43358920347` succeeded. Cache-busted production JSON confirmed revision 3.4, 37 sheets through A1/037, and the switching-output ratings. No component, wire or interface change.
+- Next: continue at A1/038 in a source-backed increment.
