@@ -57,3 +57,10 @@ Added source-backed Siemens 3RT2026-2KB40 contactor, 3RU2126-4AB0 overload relay
 Added an editable source-backed Siemens/SEW star-delta starter project with a dedicated regression asserting all 26 exact pin nets, all 242 orthogonal wire segments, BOM quantities, save/reopen stability, and the eight intentionally unwired auxiliary terminals. Q1/F1 current settings and timer delay remain unselected. The static net model does not simulate contactor, overload, timer, or motor states. The project view includes the full drawing extents; workstation geometry and panels were not changed.
 
 A1/022 connects the verified ifm PN2070 B2 instance to CPU AI0, X14 +24 V DC and X15 / CPU 2M common. A1/023 documents the conditional raw-value-to-pressure relation from Siemens' CPU 1212C AI0 range and ifm's configurable output endpoints. The existing workspace shell is unchanged; endpoints, process point, calibration and executable PLC scaling remain unassigned.
+
+
+## Completed project increment — PN2070 branch load reference
+
+A1/024 compares the ifm PN2070-02 B2 maximum listed current with Siemens SITOP PSU100C 6EP1332-5BA00 output ratings. The drawing records the 24 V ±3% output range and PN2070 input range, and labels the 2.5 A (+50 °C) and 0.75 A (+70 °C) comparison. Regression coverage preserves the 24-sheet project metrics, verifies save/reopen, source records and the stated limits. This is a B2-only allocation reference; total cabinet loading, voltage drop, protection, conductor sizing and supply adequacy remain unassessed. The workspace interface and electrical topology are unchanged.
+
+Next project increment: A1/025, selected from verified project evidence after this milestone.

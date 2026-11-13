@@ -9,6 +9,9 @@
 - Section 2.2 identifies line input terminals L, N and PE, plus DC output terminals + and −. Siemens specifies one screw connection each for L, N, PE and +, and two screw connections for −.
 - The manual records primary/secondary galvanic isolation, an IP20 rating and rail mounting to EN 60715 35 × 7.5/15 mm.
 
+- Siemens rates this exact variant at 2.5 A through +50 °C and specifies derating to 0.75 A at +70 °C; static output tolerance is ±3%. See the linked operating instructions, section 3.2 / technical data.
+- A1/024 compares only the PN2070 B2 branch with these ratings. It does not account for other loads, actual ambient conditions or wiring drop and does not establish PSU suitability.
+
 ## CAD representation
 
 - The source-backed symbol exposes L, N, PE, + and − as connectable schematic endpoints. Its single − endpoint represents the two physical − screw connections as one shared functional return. Individual screw positions are not drawn because the source model does not provide their schematic coordinates here.

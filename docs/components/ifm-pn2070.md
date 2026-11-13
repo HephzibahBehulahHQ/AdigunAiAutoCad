@@ -18,7 +18,12 @@
 - This is an authored schematic connection, not evidence of a configured or commissioned device. The OUT2 factory-current setting must be changed to voltage and verified at the sensor before use. The process point is unspecified. A1/023 documents a conditional pressure-scaling relation only; no ASP2/AEP2 values, active conversion, calibration, alarms or PLC logic are assigned.
 - Sensor pin identities come from the manufacturer's connection diagram. Project sheet coordinates are drawing locations, not device geometry. Physical installation, pressure medium, range selection, pressure rating, protection, total supply load and application suitability remain unassessed.
 
+## A1/024 load reference
+
+- The PN2070-02 data sheet lists current consumption below 35 mA and an 18–30 V DC operating range. A1/024 uses the listed upper current bound for a B2 branch comparison; it is not a measured installed current.
+- The data sheet is linked above. A1/024 compares this one sensor branch with the exact 6EP1332-5BA00 ratings and does not assess the complete cabinet load or establish supply adequacy.
+
 ## CAD catalog representation
 
 - The source-backed `ifm-pn2070` catalog definition preserves all four M12 terminal identities and keeps OUT1 distinct from analog-capable OUT2. It has a dedicated pressure-sensor glyph in the existing workstation renderer.
-- Instance notes for the process point and signal configuration are editable; manufacturer ratings and source evidence remain read-only. The 23-sheet reference project contains B2 on A1/022 and a conditional AI0 scaling reference on A1/023. Its process-point property is intentionally blank because no process point was supplied.
+- Instance notes for the process point and signal configuration are editable; manufacturer ratings and source evidence remain read-only. The 24-sheet reference project contains B2 on A1/022, conditional AI0 scaling on A1/023 and the limited branch-current comparison on A1/024. Its process-point property is intentionally blank because no process point was supplied.
