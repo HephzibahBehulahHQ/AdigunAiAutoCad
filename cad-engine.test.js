@@ -2404,7 +2404,7 @@ test('A1/050 records PN2070 display indicators without inferring their behavior'
   for(const required of ['3 green LEDs','bar, psi and MPa','2 yellow LEDs','alphanumeric, red/green, 4-digit display','do not assign display-unit selection','the meaning of an indicator state','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-050'&&object.text.includes(required)),'Missing display datum or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
-  assert.ok(source.includes('3 green LEDs for bar, psi and MPa'));
+  assert.ok(source.includes('three green LEDs for display units bar, psi and MPa'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
