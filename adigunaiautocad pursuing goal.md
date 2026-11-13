@@ -2218,3 +2218,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the project opening set, index, revision, CPU record, README, roadmap and regression coverage. No component, wire or workstation interface change.
 - Local verification: 75/75 CAD tests pass; project analysis reports 28 sheets, 32 components, 335 wire segments, 67 local nets, 43 project-wide nets, 21 cross-sheet connections and zero unlinked endpoints.
 - PR #95 passed GitHub Actions run #184 (`cad-engine`); the Pages workflow run #93 deployed merge `00140e78326d596b0a2a4fbaae6a049dae8e7e2f`. A fresh custom-domain JSON fetch confirmed Opening set 2.5, A1/001–A1/028, and the A1/028 CPU range sheet. Next: continue at A1/029.
+
+
+## 2026-11-13 incremental execution record — A1/029
+
+- Added a text-only Siemens CPU 1212C AI0 cable-limit reference: System Manual V4.7 Table A-41 specifies up to 100 m using shielded twisted pair. The project does not assign installed cable length, construction, route, grounding, electromagnetic environment or measured signal quality.
+- Updated the drawing opening set, index, revision record, CPU source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Local test and deployment verification pending.
