@@ -167,3 +167,10 @@
 - The PN2070-02 data sheet specifies one M12 connector, A-coded, with four gold-plated contacts. Pin functions are documented separately on A1/021.
 - A1/049 records the sensor connector specification only. No cable or mating connector is selected, and physical fit or installed connection compatibility is not established.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical connection table, 01.03.2024.
+
+
+## A1/050 display indicators
+
+- The PN2070-02 data sheet lists three green LEDs for display units bar, psi and MPa; two yellow switching-status LEDs; and a 4-digit alphanumeric measured-value display in red/green.
+- A1/050 records the display hardware description only. It does not assign a display-unit selection, indicator-state meaning, switching threshold or relationship between display indications and remote PLC signals.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Displays / operating elements table, 01.03.2024.
