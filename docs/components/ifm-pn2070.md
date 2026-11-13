@@ -349,3 +349,10 @@
 - The PN2070-02 profile table lists Common - I&D Identification and Diagnosis under Status_B High Resolution / CMPT=3.
 - A1/075 records the manufacturer profile listing only. It asserts no actual diagnosis, event code, or master configuration.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Status_B High Resolution / CMPT=3 profile table, 01.03.2024.
+
+
+## A1/076 IO-Link application-specific tag, factory setting / CMPT=2
+
+- The PN2070-02 IO-Link table lists the acyclical application-specific tag function for Factory setting / CMPT=2.
+- A1/076 records the manufacturer function listing only. It asserts no configured tag value or active device profile.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 IO-Link functions table, 01.03.2024.
