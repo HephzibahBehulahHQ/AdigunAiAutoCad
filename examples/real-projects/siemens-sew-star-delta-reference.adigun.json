@@ -11408,7 +11408,7 @@
       "sheetId": "ref-089",
       "x": 50,
       "y": 145,
-      "text": "Temperature coefficients: zero point 0.2% and span 0.2% of the span per 10 K (−25...80 °C).",
+      "text": "Zero-point coefficient: 0.2% of span/10 K; span coefficient: 0.2% of span/10 K (−25 to 80 °C).",
       "stroke": "#13263b"
     },
     {
