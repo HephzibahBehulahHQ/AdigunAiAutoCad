@@ -2391,3 +2391,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: 95/95 tests passed; analyzer confirms 48 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #137 merged as `d139d63be1a673b015410f173b5b777b8bb64597`. CAD verification run `43365715312` and Pages deployment `43365715303` succeeded. Cache-busted production JSON confirmed revision 4.5, 48 sheets through A1/048, the material-list scope and 335 wires.
 - Next: continue at A1/049 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/049
+
+- Added a text-only ifm PN2070 connector specification: 1 × M12, A-coded, four gold-plated contacts. Pin functions remain referenced on A1/021; no cable, mating connector, physical fit or installed compatibility is selected. Source: ifm PN2070-02 data sheet (EN-GB), Electrical connection table, 01.03.2024.
+- Updated opening set revision 4.6, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- Local verification: A1/049 test and the current local CAD suite passed; `git diff --check` passed. GitHub Actions run `43367047011` initially exposed stale authored-range assertions; corrected all 23 and reran successfully.
+- PR #139 merged as `ea6ea466e93dba901854a85782a5543996085836`. Main model verification run `43367092816` and Pages deployment `43367092757` succeeded. Cache-busted production JSON confirmed revision 4.6, 49 sheets through A1/049, the connector entry and 335 wire objects.
+- Next: continue at A1/050 in a source-backed increment.
