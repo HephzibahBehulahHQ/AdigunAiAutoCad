@@ -132,3 +132,10 @@
 - A1/044 records this product datum only. It does not represent a restrictor installation or retrofit, assess suitability, or claim hydraulic performance for this application.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
 
+
+## A1/045 protection ratings
+
+- The PN2070-02 data sheet lists protection ratings IP 65 and IP 67.
+- A1/045 records the manufacturer product data only. It does not verify the installed connector, seals, cable or enclosure and does not claim an ingress-protection rating for the assembled project.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Operating conditions table, 01.03.2024.
+
