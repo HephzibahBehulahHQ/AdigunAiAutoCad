@@ -97,3 +97,10 @@
 - A1/039 records the listed parameter ranges without asserting that CMPT=3 or any threshold is configured in the project. They are not selected process limits or safety settings.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Measuring/setting range table, 01.03.2024.
 
+
+## A1/040 recommended tightening torque
+
+- The PN2070-02 data sheet lists a G 1/4 internal-thread process connection (DIN EN ISO 1179-2) and a recommended tightening torque of 25 to 35 N·m. It states that the recommendation depends on lubrication, the seal and the pressure load.
+- A1/040 records the manufacturer recommendation only. The project does not specify an installed seal, lubrication or applied torque, and this page does not select an installation value or assess the project pressure connection.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
+
