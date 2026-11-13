@@ -2705,3 +2705,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 8.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #215 merged as `bb649317c829804fe1ae69443a02a94d1eed4fcd` after all regression tests passed (PR workflow run `43387444479`). Main model verification run `43404017529` and Pages deployment `43404017472` succeeded. Cache-busted production JSON confirmed revision 8.4, 87 sheets through A1/087, and the new source and scope text.
 - Next: continue at A1/088 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/088
+
+- Added a text-only PN2070 reference for the long-term stability rating below ±0.05% of span per 6 months at turn-down 1:1. It makes no project drift, service-life or maintenance-interval claim.
+- Updated opening set revision 8.5, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #217 merged as `85ae851c4815379c8180aebaa65fe3c3d4791e18` after CI passed (PR workflow run `43404755185`). Main model verification run `43404848688` and Pages deployment `43404848684` succeeded. The live JSON check is pending: the production hostname failed DNS resolution from this environment after deployment.
+- Next: continue at A1/089 and retry live verification when DNS resolves.
