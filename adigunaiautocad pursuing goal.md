@@ -2521,3 +2521,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 6.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #169 merged as `b17deb78a16ad0b4e6b86fea7d6d9d291b28e8ca` after all 111 regression tests passed (PR workflow run `43374432351`). Main model verification run `43374472649` and Pages deployment `43374472742` succeeded. Cache-busted production JSON confirmed revision 6.1, 64 sheets through A1/064, 32 components and 335 wire objects.
 - Next: continue at A1/065 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/065
+
+- Added a text-only PN2070 reference for the 0.1 bar IO-Link pressure resolution under factory setting / CMPT=2. It does not assign a device mode or make a precision claim.
+- Updated opening set revision 6.2, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #171 merged as `29a12499910cbab5ee6e86b0b310c699b803ab23` after all 112 regression tests passed (PR workflow run `43374791906`). Main model verification run `43374844624` and Pages deployment `43374844626` succeeded. Cache-busted production JSON confirmed revision 6.2, 65 sheets through A1/065, 32 components and 335 wire objects.
+- Next: continue at A1/066 in a source-backed increment.
