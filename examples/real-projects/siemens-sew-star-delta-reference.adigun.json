@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.3",
-  "status": "Authored opening set: A1/001–A1/026; A1/027–A1/100 not authored.",
+  "revision": "Opening set 2.4",
+  "status": "Authored opening set: A1/001–A1/027; A1/028–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -146,6 +146,11 @@
       "id": "ref-026",
       "number": "A1/026",
       "name": "CPU 1212C AI0 idealized resolution reference"
+    },
+    {
+      "id": "ref-027",
+      "number": "A1/027",
+      "name": "CPU 1212C AI0 response and smoothing reference"
     }
   ],
   "sheetLabels": {
@@ -169,7 +174,8 @@
     "ref-023": "PN2070 → AI0 scaling reference",
     "ref-024": "PN2070 24 V load reference",
     "ref-025": "PN2070 / CPU AI0 accuracy reference",
-    "ref-026": "CPU 1212C AI0 idealized resolution reference"
+    "ref-026": "CPU 1212C AI0 idealized resolution reference",
+    "ref-027": "CPU 1212C AI0 response and smoothing reference"
   },
   "sheetViews": {
     "ref-007": {
@@ -287,6 +293,12 @@
       "h": 760
     },
     "ref-026": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-027": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3733,7 +3745,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 2.3",
+      "text": "Engineering document set | Revision opening set 2.4",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3742,7 +3754,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/026",
+      "text": "Authored pages: A1/001–A1/027",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3760,7 +3772,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: A1/001–A1/026 authored; A1/027–A1/100 are not authored yet.",
+      "text": "Progress: A1/001–A1/027 authored; A1/028–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3892,7 +3904,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices through A1/026",
+      "text": "Component register | modeled devices through A1/027",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -3982,7 +3994,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/026 add source-backed reference sheets only.",
+      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/027 add source-backed reference sheets only.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4096,7 +4108,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/026 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/027 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4364,7 +4376,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/026; A1/017–A1/026 document I/O, overload feedback and PN2070 signal references.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/027; A1/017–A1/027 document I/O, overload feedback and PN2070 signal references.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4382,7 +4394,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, and A1/026 an idealized CPU analog-resolution reference.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, A1/026 an idealized CPU analog-resolution reference and A1/027 CPU input response data.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -7021,6 +7033,96 @@
     },
     {
       "kind": "text",
+      "id": "doc-ref-027-title",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 54,
+      "text": "A1/027 · CPU 1212C AI0 response and smoothing reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-source-condition",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 125,
+      "text": "Siemens Table A-42 gives built-in CPU analog-input 0–10 V step response measured at 95%; no smoothing setting is selected here.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-sample-time",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 205,
+      "text": "Sample time by rejection frequency: 60 Hz → 4.17 ms; 50 Hz → 5 ms; 10 Hz → 25 ms (Table A-43).",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-none",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 285,
+      "text": "95% step response · None (1 cycle; no averaging): 50 ms at 60 Hz; 50 ms at 50 Hz; 100 ms at 10 Hz rejection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-weak",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 365,
+      "text": "Weak smoothing (4 samples): 60 ms at 60 Hz; 70 ms at 50 Hz; 200 ms at 10 Hz rejection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-medium",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 445,
+      "text": "Medium smoothing (16 samples): 200 ms at 60 Hz; 240 ms at 50 Hz; 1,150 ms at 10 Hz rejection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-strong",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 525,
+      "text": "Strong smoothing (32 samples): 400 ms at 60 Hz; 480 ms at 50 Hz; 2,300 ms at 10 Hz rejection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-scope",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 605,
+      "text": "These are CPU input figures; sensor response, PLC scan, configured rejection and end-to-end system response are not established.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-setting",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 675,
+      "text": "The project's rejection frequency and smoothing selection remain unassigned; no timing or filtering behavior is simulated.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-027-source",
+      "sheetId": "ref-027",
+      "x": 50,
+      "y": 745,
+      "text": "Source: Siemens S7-1200 System Manual V4.7 (12/2024), CPU 1212C Tables A-42/A-43.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
       "id": "doc-ref-002-line-24",
       "sheetId": "ref-002",
       "x": 120,
@@ -7035,6 +7137,15 @@
       "x": 120,
       "y": 1795,
       "text": "A1/026  CPU 1212C AI0 idealized resolution reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-26",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 1850,
+      "text": "A1/027  CPU 1212C AI0 response and smoothing reference",
       "stroke": "#13263b"
     },
     {
@@ -7054,9 +7165,18 @@
       "y": 1702,
       "text": "Revision 2.2 | 2026-11-13 | A1/026 records idealized 10-bit AI0 quantization; not measured or guaranteed performance.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-18",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 1766,
+      "text": "Revision 2.3 | 2026-11-13 | A1/027 records CPU AI0 response values by rejection frequency and smoothing; none is selected.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Twenty-six authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only. A1/027–A1/100 are not authored.",
+  "description": "Twenty-seven authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting. A1/028–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",

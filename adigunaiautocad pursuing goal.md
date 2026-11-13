@@ -2202,4 +2202,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - A1/023 recorded the Siemens CPU 1212C AI0 raw range and conditional scaling relation; PR #89 merged to main. A1/024 compared the PN2070 branch load with the exact SITOP ratings without claiming supply adequacy; PR #90 merged. A1/025 recorded a conditional partial PN2070 / CPU accuracy stack; PR #91 merged and the 25-sheet deployed project was verified.
 - Added A1/026 as a text-only CPU 1212C AI0 resolution reference. It derives 9.765625 mV and 0.390625 bar ideal code intervals, and a ±0.1953125 bar ideal rounding contribution for a conditional linear 0–400 bar / 0–10 V span. These are mathematical idealizations, not guaranteed effective resolution or measured performance. No component, wire or workstation interface change.
 - Updated the project cover/status, drawing index, revision record, component reference, README, roadmap and this execution log. The project now has 26 sheets, 32 component instances, 335 wire segments, 67 sheet-local nets, 43 project-wide nets, 21 explicit cross-sheet connections, and zero unlinked endpoints.
-- Local verification: 73/73 CAD tests pass; `git diff --check` passes. Next: publish the focused A1/026 PR, merge only after green CI, verify the Pages deployment, then continue at A1/027.
+- PR #92 passed GitHub Actions run #179 and merged as `a693b438f758a724ab0fbea5f1cb55a317595983`. The live Pages project JSON confirmed 26 sheets. Next: continue at A1/027.
+
+
+## 2026-11-13 incremental execution record — A1/027
+
+- Added a text-only CPU 1212C input response reference from Siemens System Manual V4.7 Tables A-42/A-43: sample time and 95% step response by rejection frequency and smoothing selection. The drawing does not select a PLC setting or claim sensor-to-PLC response.
+- No component, wire or workstation interface change. Updated the project cover/status, drawing index, revision record, CPU source record, README, roadmap and this execution log.
+- Next: run the CAD regression suite and whitespace checks, then publish a focused PR; merge after CI passes, verify production and continue at A1/028.

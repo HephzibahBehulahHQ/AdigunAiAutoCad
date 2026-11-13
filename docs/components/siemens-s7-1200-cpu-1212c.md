@@ -19,6 +19,11 @@
 - Table A-41 specifies 10-bit resolution for the built-in 0–10 V analog inputs. For a conditional linear 0–400 bar / 0–10 V mapping, an ideal uniform quantizer would have a 9.765625 mV input interval, equivalent to 0.390625 bar per code interval and ±0.1953125 bar ideal rounding quantization alone. This is a mathematical derivation from the stated bit depth and range, not a Siemens accuracy specification or guaranteed effective resolution.
 - The CPU's 0–27648 full-scale data-word representation is not a claim of 15-bit analog resolution. Noise, effective number of bits, smoothing configuration, sensor error and field measurements are outside this calculation. A1/026 adds no CPU instance or wiring and does not implement PLC scaling.
 
+## A1/027 input response reference
+
+- Siemens System Manual V4.7 Tables A-42/A-43 report CPU 1212C built-in analog-input sample times of 4.17 ms at 60 Hz rejection, 5 ms at 50 Hz, and 25 ms at 10 Hz. Table A-42 gives 0–10 V step response measured at 95%: for no averaging, 50/50/100 ms; weak smoothing (4 samples), 60/70/200 ms; medium (16 samples), 200/240/1,150 ms; and strong (32 samples), 400/480/2,300 ms, in 60/50/10 Hz order.
+- These are CPU input specifications, not end-to-end sensor-to-PLC response measurements. Rejection frequency, smoothing configuration, sensor response and PLC scan are not assigned by this project. A1/027 adds no instance, wire or configured behavior.
+
 ## CAD representation
 
 - The catalog model preserves the CPU's 25 manufacturer-designated X10/X11/X12 terminals. Table A-41 lists 10-bit resolution and 3.0% / 3.5% full-scale accuracy for the onboard analog inputs; A1/023 does not assign an uncertainty budget. Pin coordinates are schematic connection locations, not a physical PLC footprint.
