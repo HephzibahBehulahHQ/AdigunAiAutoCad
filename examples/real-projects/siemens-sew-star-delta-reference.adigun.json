@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 9.0",
-  "status": "Authored opening set: A1/001–A1/093; A1/094–A1/100 not authored.",
+  "revision": "Opening set 9.1",
+  "status": "Authored opening set: A1/001–A1/094; A1/095–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -481,6 +481,11 @@
       "id": "ref-093",
       "number": "A1/093",
       "name": "ifm PN2070 characteristic deviation"
+    },
+    {
+      "id": "ref-094",
+      "number": "A1/094",
+      "name": "ifm PN2070 UL approval reference"
     }
   ],
   "sheetLabels": {
@@ -511,7 +516,8 @@
     "ref-030": "ifm PN2070 analog output parameter ranges",
     "ref-031": "ifm PN2070 pressure rating and minimum burst pressure",
     "ref-032": "ifm PN2070 medium temperature range",
-    "ref-093": "ifm PN2070 characteristic deviation"
+    "ref-093": "ifm PN2070 characteristic deviation",
+    "ref-094": "ifm PN2070 UL approval reference"
   },
   "sheetViews": {
     "ref-007": {
@@ -809,6 +815,12 @@
       "h": 760
     },
     "ref-093": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-094": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -11689,9 +11701,63 @@
       "y": 6096,
       "text": "Revision 9.0 | 2026-11-13 | A1/093 records characteristic deviation.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-094-title",
+      "sheetId": "ref-094",
+      "x": 50,
+      "y": 54,
+      "text": "A1/094 · ifm PN2070 UL approval reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-094-value",
+      "sheetId": "ref-094",
+      "x": 50,
+      "y": 145,
+      "text": "Data sheet listing: UL approval no. J014.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-094-limit",
+      "sheetId": "ref-094",
+      "x": 50,
+      "y": 245,
+      "text": "Manufacturer listing only; this project makes no UL approval, certification, or completed assessment claim.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-094-source",
+      "sheetId": "ref-094",
+      "x": 50,
+      "y": 345,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Tests / approvals table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-93",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 6215,
+      "text": "A1/094  ifm PN2070 UL approval reference",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-85",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 6156,
+      "text": "Revision 9.1 | 2026-11-13 | A1/094 records UL approval reference.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Ninety-three authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039 records the CMPT=3 parameter ranges without configuring thresholds. A1/040 records the manufacturer-recommended PN2070 tightening torque and its dependencies without selecting an installation value. A1/041 records manufacturer ambient and storage temperature ratings without assigning project conditions. A1/042 records the manufacturer-listed minimum pressure cycles without inferring project service life. A1/043 records PN2070 product dimensions and weight without assigning installation geometry. A1/044 records its integrated-restrictor datum without assigning a retrofit. A1/045 records manufacturer IP ratings without claiming assembly protection. A1/046 records the manufacturer-listed shock and vibration data without assigning application suitability. A1/047 records the listed wetted-parts material without assigning chemical compatibility. A1/048 records the manufacturer materials list without assigning part locations or compatibility. A1/049 records the PN2070 electrical connector specification without assigning a cable or mating connector. A1/050 records the PN2070 display hardware description without assigning display behavior. A1/051 records the PN2070 G 1/4 internal-thread process connection designation without selecting mating hardware. A1/052 records the PN2070 upper-housing rotation callout without assigning installation geometry. A1/053 records the PN2070 programming-button callout without assigning button operation. A1/054 records the PN2070 relative-pressure classification without deriving a project pressure reference. A1/055 records the PN2070 vacuum-resistance value without assigning project conditions. A1/056 records manufacturer PNP/NPN switching outputs and parameterisable NO/NC function without selecting project settings. A1/057 records pulsed short-circuit and overload protection specifications without claiming project protection performance. A1/058 records the PN2070-02 maximum analogue-output response time of 3 ms without defining configured damping or system response. A1/059 records the analogue-output damping parameter dAA range of 0...4 s without selecting a device setting. A1/060 records the process-value damping parameter dAP range of 0...4 s without selecting a sensor setting. A1/061 records the programmable delay parameters dS and dr range of 0...50 s without selecting a delay. A1/062 records the PN2070-02 response-time rating of <1.5 ms without assigning project or system response time. A1/063 records the minimum IO-Link process cycle time of 2.3 ms for factory setting / CMPT=2 without assigning a device configuration. A1/064 records the minimum IO-Link process cycle time of 3 ms for Status_B High Resolution / CMPT=3 without assigning this device profile. A1/065 records IO-Link pressure resolution of 0.1 bar for factory setting / CMPT=2 without assigning the device mode. A1/066 records IO-Link pressure resolution of 0.2 bar for Status_B High Resolution / CMPT=3 without assigning the device mode. A1/067 records the CMPT=2 cyclical pressure field width of 14 bits without assigning a profile or decoded payload. A1/068 records the CMPT=3 cyclical pressure field width of 16 bits without assigning a profile or decoded payload. A1/069 records the CMPT=3 cyclical device status field width of 4 bits without defining status codes or diagnostic meaning. A1/094–A1/100 are not authored. A1/070 records the CMPT=3 binary switching information field width of 2 bits without assigning state-code meanings or project output configuration. A1/071 records the manufacturer-listed DeviceID 638 association for Status_B High Resolution / CMPT=3 without asserting the installed device configuration. A1/072 records the manufacturer-listed DeviceID 459 association for Factory setting / CMPT=2 without asserting the installed device configuration. A1/073 records the manufacturer profile listing Smart Sensor - SSP 0 Generic Profiled Sensor under Factory setting / CMPT=2 without asserting active device configuration. A1/074 records the manufacturer profile listing Smart Sensor - SSP 3.1 Measuring Sensor under Status_B High Resolution / CMPT=3 without asserting active device configuration. A1/075 records the manufacturer Common - I&D Identification and Diagnosis profile listing for Status_B High Resolution / CMPT=3 without asserting actual diagnosis or master configuration. A1/076 records the manufacturer-listed acyclical application-specific tag function for Factory setting / CMPT=2 without asserting a configured tag value or active device profile. A1/077 records the manufacturer-listed acyclical application-specific tag function for Status_B High Resolution / CMPT=3 without asserting a configured tag value or active device profile. A1/078 records the manufacturer IO-Link master-port type note without assigning installed pin 2 wiring or master-port selection. A1/079 records the manufacturer-listed Device identification, Process data variable, and Device diagnosis profile functions for Factory setting / CMPT=2 without asserting actual configured values or diagnosis. A1/080 records the manufacturer-listed IO-Link transmission type COM2 at 38,4 kBaud without asserting observed link behavior. A1/081 records the manufacturer-listed IO-Link revision 1.1 without asserting negotiated master/device behavior. A1/082 records the manufacturer-listed SIO mode capability without selecting project operation in that mode. A1/083 records IEC 61131-9 as the PN2070-02 SDCI standard reference without making compliance or project implementation claims. A1/084 records the manufacturer-listed integrated watchdog without assigning a timing interval, fault handling, or project safety behavior. A1/085 records the manufacturer-listed 2 digital and 1 analogue outputs without assigning channel mapping or simultaneous usage. A1/086 records the manufacturer switch-point accuracy specification without claiming project accuracy. A1/087 records the manufacturer PN2070-02 repeatability rating with its published condition without claiming project repeatability. A1/088 records the manufacturer PN2070-02 long-term stability rating without inferring project drift, service life or maintenance interval. A1/089 records the listed PN2070-02 zero-point and span temperature coefficients without assigning project conditions or correction. A1/090 records the PN2070-02 hysteresis deviation specification without assigning project behavior. A1/091 records the manufacturer MTTF product datum without claiming project reliability or service life. A1/092 records the manufacturer-listed PN2070-02 EMC standards references without making compliance claims. A1/093 records the PN2070-02 characteristic-deviation specification and its listed turn-down condition without assigning a setting or project accuracy.",
+  "description": "Ninety-four authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039 records the CMPT=3 parameter ranges without configuring thresholds. A1/040 records the manufacturer-recommended PN2070 tightening torque and its dependencies without selecting an installation value. A1/041 records manufacturer ambient and storage temperature ratings without assigning project conditions. A1/042 records the manufacturer-listed minimum pressure cycles without inferring project service life. A1/043 records PN2070 product dimensions and weight without assigning installation geometry. A1/044 records its integrated-restrictor datum without assigning a retrofit. A1/045 records manufacturer IP ratings without claiming assembly protection. A1/046 records the manufacturer-listed shock and vibration data without assigning application suitability. A1/047 records the listed wetted-parts material without assigning chemical compatibility. A1/048 records the manufacturer materials list without assigning part locations or compatibility. A1/049 records the PN2070 electrical connector specification without assigning a cable or mating connector. A1/050 records the PN2070 display hardware description without assigning display behavior. A1/051 records the PN2070 G 1/4 internal-thread process connection designation without selecting mating hardware. A1/052 records the PN2070 upper-housing rotation callout without assigning installation geometry. A1/053 records the PN2070 programming-button callout without assigning button operation. A1/054 records the PN2070 relative-pressure classification without deriving a project pressure reference. A1/055 records the PN2070 vacuum-resistance value without assigning project conditions. A1/056 records manufacturer PNP/NPN switching outputs and parameterisable NO/NC function without selecting project settings. A1/057 records pulsed short-circuit and overload protection specifications without claiming project protection performance. A1/058 records the PN2070-02 maximum analogue-output response time of 3 ms without defining configured damping or system response. A1/059 records the analogue-output damping parameter dAA range of 0...4 s without selecting a device setting. A1/060 records the process-value damping parameter dAP range of 0...4 s without selecting a sensor setting. A1/061 records the programmable delay parameters dS and dr range of 0...50 s without selecting a delay. A1/062 records the PN2070-02 response-time rating of <1.5 ms without assigning project or system response time. A1/063 records the minimum IO-Link process cycle time of 2.3 ms for factory setting / CMPT=2 without assigning a device configuration. A1/064 records the minimum IO-Link process cycle time of 3 ms for Status_B High Resolution / CMPT=3 without assigning this device profile. A1/065 records IO-Link pressure resolution of 0.1 bar for factory setting / CMPT=2 without assigning the device mode. A1/066 records IO-Link pressure resolution of 0.2 bar for Status_B High Resolution / CMPT=3 without assigning the device mode. A1/067 records the CMPT=2 cyclical pressure field width of 14 bits without assigning a profile or decoded payload. A1/068 records the CMPT=3 cyclical pressure field width of 16 bits without assigning a profile or decoded payload. A1/069 records the CMPT=3 cyclical device status field width of 4 bits without defining status codes or diagnostic meaning. A1/095–A1/100 are not authored. A1/070 records the CMPT=3 binary switching information field width of 2 bits without assigning state-code meanings or project output configuration. A1/071 records the manufacturer-listed DeviceID 638 association for Status_B High Resolution / CMPT=3 without asserting the installed device configuration. A1/072 records the manufacturer-listed DeviceID 459 association for Factory setting / CMPT=2 without asserting the installed device configuration. A1/073 records the manufacturer profile listing Smart Sensor - SSP 0 Generic Profiled Sensor under Factory setting / CMPT=2 without asserting active device configuration. A1/074 records the manufacturer profile listing Smart Sensor - SSP 3.1 Measuring Sensor under Status_B High Resolution / CMPT=3 without asserting active device configuration. A1/075 records the manufacturer Common - I&D Identification and Diagnosis profile listing for Status_B High Resolution / CMPT=3 without asserting actual diagnosis or master configuration. A1/076 records the manufacturer-listed acyclical application-specific tag function for Factory setting / CMPT=2 without asserting a configured tag value or active device profile. A1/077 records the manufacturer-listed acyclical application-specific tag function for Status_B High Resolution / CMPT=3 without asserting a configured tag value or active device profile. A1/078 records the manufacturer IO-Link master-port type note without assigning installed pin 2 wiring or master-port selection. A1/079 records the manufacturer-listed Device identification, Process data variable, and Device diagnosis profile functions for Factory setting / CMPT=2 without asserting actual configured values or diagnosis. A1/080 records the manufacturer-listed IO-Link transmission type COM2 at 38,4 kBaud without asserting observed link behavior. A1/081 records the manufacturer-listed IO-Link revision 1.1 without asserting negotiated master/device behavior. A1/082 records the manufacturer-listed SIO mode capability without selecting project operation in that mode. A1/083 records IEC 61131-9 as the PN2070-02 SDCI standard reference without making compliance or project implementation claims. A1/084 records the manufacturer-listed integrated watchdog without assigning a timing interval, fault handling, or project safety behavior. A1/085 records the manufacturer-listed 2 digital and 1 analogue outputs without assigning channel mapping or simultaneous usage. A1/086 records the manufacturer switch-point accuracy specification without claiming project accuracy. A1/087 records the manufacturer PN2070-02 repeatability rating with its published condition without claiming project repeatability. A1/088 records the manufacturer PN2070-02 long-term stability rating without inferring project drift, service life or maintenance interval. A1/089 records the listed PN2070-02 zero-point and span temperature coefficients without assigning project conditions or correction. A1/090 records the PN2070-02 hysteresis deviation specification without assigning project behavior. A1/091 records the manufacturer MTTF product datum without claiming project reliability or service life. A1/092 records the manufacturer-listed PN2070-02 EMC standards references without making compliance claims. A1/093 records the PN2070-02 characteristic-deviation specification and its listed turn-down condition without assigning a setting or project accuracy. A1/094 records the UL approval number listed in the PN2070-02 data sheet, without claiming project certification or assessment.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",

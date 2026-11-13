@@ -400,3 +400,8 @@ Next project increment: A1/093, selected from verified project evidence after th
 A1/093 records PN2070-02 characteristic deviation below ±0.25% (BFSL) / below ±0.5% (limit value setting), turn-down 1:1. It assigns no project measurement, setting or application accuracy. No component, wire, topology or interface change.
 
 Next project increment: A1/094, selected from verified project evidence after this milestone.
+
+
+A1/094 records the UL approval number listed in the PN2070-02 data sheet as a manufacturer listing only. It makes no project approval, certification or assessment claim. No component, wire, topology or interface change.
+
+Next project increment: A1/095, selected from verified project evidence after this milestone.

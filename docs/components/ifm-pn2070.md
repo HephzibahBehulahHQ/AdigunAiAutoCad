@@ -475,3 +475,10 @@
 - The PN2070-02 data sheet lists characteristic deviation below ±0.25% (BFSL) / below ±0.5% (limit value setting), with turn-down 1:1. BFSL is defined there as Best Fit Straight Line.
 - A1/093 records this manufacturer specification and its stated condition only. It does not report a project measurement, select a setting, or claim application accuracy.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
+
+
+## A1/094 UL approval reference
+
+- The PN2070-02 data sheet lists UL approval no. J014 in its Tests / approvals table.
+- A1/094 records the manufacturer listing only. It does not claim this project has UL approval or certification, or that a project assessment has been completed.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
