@@ -150,3 +150,5 @@ For A1/008, the PT 16 N-PE endpoints labeled 1 and 2 are model-local indexes; Ph
 
 
 For A1/070, the PN2070-02 CMPT=3 cyclical binary switching information field is 2 bits; this records field width only and assigns no state-code meanings or project output configuration.
+
+For A1/071, ifm lists DeviceID 638 for Status_B High Resolution / CMPT=3; this manufacturer association does not establish the installed device configuration.
