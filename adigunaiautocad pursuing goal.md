@@ -2722,3 +2722,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #219 merged as `5b727e5a2c60e9dc768b5c207b18e09879c88974` after CI passed (PR workflow run `43405474948`). Main model verification run `43405552133` and Pages deployment `43405552241` succeeded; the run artifact is tied to that main SHA.
 - Production verification is not passing: the cache-busted live JSON returned revision 8.4 with 87 sheets, rather than revision 8.6 with 89. Direct shell requests failed hostname resolution. Investigate the stale live response before claiming production current; the A1/088 live check remains unresolved as well.
 - Next: continue at A1/090 and retry production verification while investigating the stale custom-domain content.
+
+
+## 2026-11-13 incremental execution record — A1/090
+
+- Added a text-only PN2070 reference for hysteresis deviation below ±0.1% of span at turn-down 1:1. It assigns no hysteresis setting or measured project behavior.
+- Updated opening set revision 8.7, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #221 merged as `4fa0ee9e08d03517c66da8502d6e7fa81e0ba2c3` after CI passed (PR workflow run `43406514496`). Main model verification run `43406636705` and Pages deployment `43406636713` succeeded.
+- Production verification remains unresolved: the prior cache-busted browser response returned revision 8.4 / 87 sheets despite a successful Pages deployment; shell requests failed DNS resolution. Do not claim the live site is current until it returns revision 8.7 / 90 sheets.
+- Next: continue at A1/091 and investigate the production content mismatch.
