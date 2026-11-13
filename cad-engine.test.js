@@ -2449,7 +2449,7 @@ test('A1/052 records PN2070 upper-housing rotation without assigning installatio
   assert.equal(project.status,'Authored opening set: A1/001–A1/052; A1/053–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-51','A1/052  ifm PN2070 upper-housing rotation'],['doc-ref-004-line-43','Revision 4.9 | 2026-11-13 | A1/052']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/052 index or revision record: '+id);
-  for(const required of ['upper housing portion rotation: up to 345°','does not specify the installed rotation angle','mounting clearance or installation suitability','ifm PN2070-02'])
+  for(const required of ['upper housing portion can be rotated 345°','does not specify the installed rotation angle','mounting clearance or installation suitability','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-052'&&object.text.includes(required)),'Missing rotation datum or limit: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
   assert.ok(source.includes('upper housing portion rotation: up to 345°'));
