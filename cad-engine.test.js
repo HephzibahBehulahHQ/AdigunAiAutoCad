@@ -1179,7 +1179,7 @@ test('eighty-eight-sheet connected reference opening set preserves the starter a
   const project = parsed.project;
   assert.equal(project.sheets.length, 88);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/088–A1/100 not authored'));
+  assert.ok(project.status.includes('A1/089–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
@@ -1385,7 +1385,7 @@ test('A1/010 wires the source-backed PLC transistor output to the Phoenix Contac
   const routed=project.objects.filter(object=>object.sheetId==='ref-007'&&object.kind==='wire'&&object.id.startsWith('a1-010-w07-'));
   assert.equal(routed.length,4);
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/010 PLC supply and output paths must stay orthogonal');
-  assert.match(project.description,/A1\/088–A1\/100 are not authored/);
+  assert.match(project.description,/A1\/089–A1\/100 are not authored/);
   assert.match(project.objects.find(object=>object.id==='doc-ref-003-line-19').text,/2966171.*K2/);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
