@@ -189,3 +189,6 @@ For A1/087, ifm lists PN2070-02 repeatability below ±0.1% of span for temperatu
 
 
 For A1/088, ifm lists PN2070-02 long-term stability below ±0.05% of span per 6 months at turn-down 1:1; no project drift measurement, service life or maintenance interval is claimed.
+
+
+For A1/089, ifm lists zero-point and span temperature coefficients of 0.2% of span per 10 K for −25 to 80 °C; no site temperature, project correction or measurement is assigned.

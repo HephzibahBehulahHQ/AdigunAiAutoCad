@@ -440,3 +440,10 @@
 - The PN2070-02 data sheet lists long-term stability below ±0.05% of the span per 6 months, with turn-down 1:1.
 - A1/088 records this manufacturer rating only. It does not represent a project measurement, service life, or maintenance interval.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
+
+
+## A1/089 temperature coefficients
+
+- The PN2070-02 data sheet lists the zero-point temperature coefficient as 0.2% of the span per 10 K and the span temperature coefficient as 0.2% of the span per 10 K, for −25 to 80 °C.
+- A1/089 records both manufacturer coefficients and their listed range only. No site temperature, project correction or measurement is assigned.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
