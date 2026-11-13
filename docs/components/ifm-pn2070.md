@@ -174,3 +174,10 @@
 - The PN2070-02 data sheet lists three green LEDs for display units bar, psi and MPa; two yellow switching-status LEDs; and a 4-digit alphanumeric measured-value display in red/green.
 - A1/050 records the display hardware description only. It does not assign a display-unit selection, indicator-state meaning, switching threshold or relationship between display indications and remote PLC signals.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Displays / operating elements table, 01.03.2024.
+
+
+## A1/051 process connection designation
+
+- The PN2070-02 data sheet specifies a threaded process connection with G 1/4 internal thread, listed as DIN EN ISO 1179-2.
+- A1/051 records the manufacturer designation only. No mating fitting or seal is selected, and the record does not establish mechanical compatibility, pressure-interface suitability or installation suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Product characteristics table, 01.03.2024.
