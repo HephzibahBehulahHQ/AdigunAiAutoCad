@@ -2812,3 +2812,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #239 merged as `5ea77cc707692294ea171e3cdf72df6e2e887491`; PR CI passed (workflow run `43413779385`). Main model verification `43413855535` and Pages deployment `43413855733` succeeded.
 - Cache-busted production JSON verified revision 9.6, 99 sheets through A1/099, source limits and derating caveat. Project totals remain 32 components and 335 wires.
 - Next: complete A1/100 with a final source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/100
+
+- Completed the 100-sheet authored opening set with a text-only Phoenix Contact PLC-RSC- 24DC/21 insulation reference: 250 V rated insulation, 6 kV impulse withstand, overvoltage category III, and pollution degree 3. These are manufacturer ratings, not project installation verification.
+- Updated opening set revision 9.7, index, revision record, source record, README, roadmap and regression coverage. No components, wires, topology or interface geometry changed.
+- PR #241 merged as `a52577674a12546339fdac53c27ab5857944ee91`; PR CI passed (workflow run `43414459145`). Main model verification `43414540211` and Pages deployment `43414540000` succeeded.
+- Cache-busted production JSON verified revision 9.7, all 100 authored sheets through A1/100, the source ratings and their limitation. Project totals remain 32 components and 335 wires.
+- Next: audit the release record, PRs, CI/deployment results, production data, and interface-preservation scope against the goal.
