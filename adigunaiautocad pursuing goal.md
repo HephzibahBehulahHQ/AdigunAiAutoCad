@@ -2225,3 +2225,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Added a text-only Siemens CPU 1212C AI0 cable-limit reference: System Manual V4.7 Table A-41 specifies up to 100 m using shielded twisted pair. The project does not assign installed cable length, construction, route, grounding, electromagnetic environment or measured signal quality.
 - Updated the drawing opening set, index, revision record, CPU source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
 - Local verification: `node --test cad-engine.test.js` passed 76/76; `git diff --check` passed. PR #97 passed GitHub Actions run #186 and merged as `421fd94a687b8ad8423f270d96626d43e1ff0a4c`. Pages deployment run #95 succeeded; a cache-busted production JSON fetch confirmed Opening set 2.6, A1/001–A1/029 and the A1/029 cable reference.
+
+
+## 2026-11-13 incremental execution record — A1/030
+
+- Added a text-only ifm PN2070 analog output parameter reference from data sheet PN2070-02: 0–10 V output scalable 1:5, 2,000 Ω minimum load resistance, analog start point parameter range 0–320 bar and analog end point parameter range 80–400 bar. No configured endpoints or output span are assigned.
+- Updated the drawing opening set, index, revision record, PN2070 source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Local test, PR and deployment verification pending.

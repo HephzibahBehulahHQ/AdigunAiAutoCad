@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 2.6",
-  "status": "Authored opening set: A1/001–A1/029; A1/030–A1/100 not authored.",
+  "revision": "Opening set 2.7",
+  "status": "Authored opening set: A1/001–A1/030; A1/031–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -161,6 +161,11 @@
       "id": "ref-029",
       "number": "A1/029",
       "name": "CPU 1212C AI0 cable length and shielding reference"
+    },
+    {
+      "id": "ref-030",
+      "number": "A1/030",
+      "name": "ifm PN2070 analog output parameter ranges"
     }
   ],
   "sheetLabels": {
@@ -187,7 +192,8 @@
     "ref-026": "CPU 1212C AI0 idealized resolution reference",
     "ref-027": "CPU 1212C AI0 response and smoothing reference",
     "ref-028": "CPU 1212C AI0 rated and overflow ranges",
-    "ref-029": "CPU 1212C AI0 cable length and shielding reference"
+    "ref-029": "CPU 1212C AI0 cable length and shielding reference",
+    "ref-030": "ifm PN2070 analog output parameter ranges"
   },
   "sheetViews": {
     "ref-007": {
@@ -323,6 +329,12 @@
       "h": 760
     },
     "ref-029": {
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 760
+    },
+    "ref-030": {
       "x": 0,
       "y": 0,
       "w": 1200,
@@ -3769,7 +3781,7 @@
       "id": "doc-ref-001-line-02",
       "x": 120,
       "y": 314,
-      "text": "Engineering document set | Revision opening set 2.6",
+      "text": "Engineering document set | Revision opening set 2.7",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3778,7 +3790,7 @@
       "id": "doc-ref-001-line-03",
       "x": 120,
       "y": 378,
-      "text": "Authored pages: A1/001–A1/029",
+      "text": "Authored pages: A1/001–A1/030",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3796,7 +3808,7 @@
       "id": "doc-ref-001-line-05",
       "x": 120,
       "y": 506,
-      "text": "Progress: A1/001–A1/029 authored; A1/030–A1/100 are not authored yet.",
+      "text": "Progress: A1/001–A1/030 authored; A1/031–A1/100 are not authored yet.",
       "stroke": "#13263b",
       "sheetId": "ref-001"
     },
@@ -3928,7 +3940,7 @@
       "id": "doc-ref-003-title",
       "x": 110,
       "y": 150,
-      "text": "Component register | modeled devices through A1/029",
+      "text": "Component register | modeled devices through A1/030",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4018,7 +4030,7 @@
       "id": "doc-ref-003-line-10",
       "x": 120,
       "y": 826,
-      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/029 add source-backed reference sheets only.",
+      "text": "Component quantities match modeled devices through A1/022; A1/023–A1/030 add source-backed reference sheets only.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4132,7 +4144,7 @@
       "id": "doc-ref-005-line-01",
       "x": 120,
       "y": 250,
-      "text": "This reference drawing set is incomplete: only A1/001–A1/029 are authored.",
+      "text": "This reference drawing set is incomplete: only A1/001–A1/030 are authored.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -4400,7 +4412,7 @@
       "id": "doc-ref-003-line-11",
       "x": 120,
       "y": 954,
-      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/029; A1/017–A1/029 document I/O, overload feedback and PN2070 signal references.",
+      "text": "A1/007: CPU 1212C, IFM sensor and PLC interfaces through A1/030; A1/017–A1/030 document I/O, overload feedback and PN2070 signal references.",
       "stroke": "#13263b",
       "sheetId": "ref-003"
     },
@@ -4418,7 +4430,7 @@
       "id": "doc-ref-005-line-09",
       "x": 120,
       "y": 954,
-      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, A1/026 an idealized CPU analog-resolution reference, A1/027 CPU input response data, and A1/028 the CPU rated, overshoot and overflow representation, and A1/029 its published analog cable limit.",
+      "text": "A1/007–A1/018 contain explicitly linked PLC power, sensor, operator, actuator and status circuits; A1/017–A1/020 document PLC I/O allocations, A1/021–A1/022 the PN2070 interface, A1/023 conditional scaling, A1/024 the B2 current comparison, A1/025 a conditional partial accuracy stack, A1/026 an idealized CPU analog-resolution reference, A1/027 CPU input response data, and A1/028 the CPU rated, overshoot and overflow representation, and A1/029 its published analog cable limit, and A1/030 PN2070 output parameter ranges.",
       "stroke": "#13263b",
       "sheetId": "ref-005"
     },
@@ -7295,7 +7307,7 @@
       "sheetId": "ref-002",
       "x": 120,
       "y": 1905,
-      "text": "A1/029  CPU 1212C AI0 cable length and shielding reference",
+      "text": "A1/030  ifm PN2070 analog output parameter ranges",
       "stroke": "#13263b"
     },
     {
@@ -7304,7 +7316,7 @@
       "sheetId": "ref-004",
       "x": 120,
       "y": 1830,
-      "text": "Revision 2.5 | 2026-11-13 | A1/029 records the Siemens CPU analog input cable limit; installed cable is unspecified.",
+      "text": "Revision 2.6 | 2026-11-13 | A1/030 documents PN2070 analog start/end parameter ranges; no values are configured.",
       "stroke": "#13263b"
     },
     {
@@ -7367,7 +7379,7 @@
       "sheetId": "ref-002",
       "x": 120,
       "y": 1965,
-      "text": "A1/029  CPU 1212C AI0 cable length and shielding reference",
+      "text": "A1/030  ifm PN2070 analog output parameter ranges",
       "stroke": "#13263b"
     },
     {
@@ -7378,9 +7390,90 @@
       "y": 1894,
       "text": "Revision 2.5 | 2026-11-13 | A1/029 records CPU analog cable limit; installed cable is unspecified.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-title",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 54,
+      "text": "A1/030 · ifm PN2070 analog output parameter ranges",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-output",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 145,
+      "text": "ifm PN2070-02 lists a 0–10 V analog output, scalable 1:5; minimum load resistance is 2,000 Ω.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-start",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 245,
+      "text": "Listed analog start point parameter range: 0–320 bar.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-end",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 345,
+      "text": "Listed analog end point parameter range: 80–400 bar.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-scope",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 455,
+      "text": "These are manufacturer-listed parameter ranges, not configured endpoint values or a confirmed output span.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-limits",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 555,
+      "text": "The project assigns no ASP2/AEP2 settings, pressure conversion, calibration or PLC scaling behavior.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-030-source",
+      "sheetId": "ref-030",
+      "x": 50,
+      "y": 655,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, output and measuring/setting range tables.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-29",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 2025,
+      "text": "A1/030  ifm PN2070 analog output parameter ranges",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-21",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 1958,
+      "text": "Revision 2.6 | 2026-11-13 | A1/030 lists PN2070 analog output options; configured endpoints remain unspecified.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Twenty-nine authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030–A1/100 are not authored.",
+  "description": "Thirty authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
