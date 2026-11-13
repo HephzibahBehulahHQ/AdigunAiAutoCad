@@ -325,3 +325,8 @@ Next project increment: A1/078, selected from verified project evidence after th
 A1/078 records the PN2070-02 IO-Link master-port note: type A, or type B when pin 2 is not connected. It assigns neither installed pin 2 wiring nor master-port selection. No component, wire or interface change.
 
 Next project increment: A1/079, selected from verified project evidence after this milestone.
+
+
+A1/079 records the PN2070-02 Factory setting / CMPT=2 profile functions Device identification, Process data variable, and Device diagnosis. It does not assert actual configured values or diagnosis. No component, wire or interface change.
+
+Next project increment: A1/080, selected from verified project evidence after this milestone.

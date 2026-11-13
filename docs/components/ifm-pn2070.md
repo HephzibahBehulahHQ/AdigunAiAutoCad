@@ -370,3 +370,10 @@
 - The PN2070-02 data sheet lists master port type A, or B when pin 2 is not connected.
 - A1/078 records the manufacturer note only. It assigns neither pin 2 project wiring nor an actual master-port selection.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), IO-Link port note, 01.03.2024.
+
+
+## A1/079 IO-Link functions, factory setting / CMPT=2
+
+- The PN2070-02 profile table lists Device identification, Process data variable, and Device diagnosis for Factory setting / CMPT=2.
+- A1/079 records the profile feature list only. It asserts no actual device data or diagnosis.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 profile functions, 01.03.2024.
