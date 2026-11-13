@@ -7316,7 +7316,7 @@
       "sheetId": "ref-004",
       "x": 120,
       "y": 1830,
-      "text": "Revision 2.6 | 2026-11-13 | A1/030 documents PN2070 analog start/end parameter ranges; no values are configured.",
+      "text": "Revision 2.4 | 2026-11-13 | A1/028 documents Siemens AI0 rated, overshoot and overflow ranges; no diagnostics assigned.",
       "stroke": "#13263b"
     },
     {
@@ -7379,7 +7379,7 @@
       "sheetId": "ref-002",
       "x": 120,
       "y": 1965,
-      "text": "A1/030  ifm PN2070 analog output parameter ranges",
+      "text": "A1/029  CPU 1212C AI0 cable length and shielding reference",
       "stroke": "#13263b"
     },
     {

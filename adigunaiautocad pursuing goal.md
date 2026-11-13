@@ -2231,4 +2231,5 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 
 - Added a text-only ifm PN2070 analog output parameter reference from data sheet PN2070-02: 0–10 V output scalable 1:5, 2,000 Ω minimum load resistance, analog start point parameter range 0–320 bar and analog end point parameter range 80–400 bar. No configured endpoints or output span are assigned.
 - Updated the drawing opening set, index, revision record, PN2070 source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
-- Local test, PR and deployment verification pending.
+- Local verification: `node --test cad-engine.test.js` passed 77/77; `git diff --check` passed. PR #99 passed GitHub Actions run #188 and merged as `c284242e7d0acf3d153100aa77a09ab9cdf238ce`; Pages run #97 succeeded. A cache-busted production JSON fetch confirmed Opening set 2.7, A1/001–A1/030 and the A1/030 sheet.
+- The live review caught two overwritten A1/028–A1/029 index/revision entries during A1/030 authoring. This follow-up restores those records and adds exact regression checks before redeployment.
