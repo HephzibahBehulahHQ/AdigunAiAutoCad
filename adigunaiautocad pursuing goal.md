@@ -2697,3 +2697,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 8.3, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #213 merged as `6ffba976445eabec01c5b6b1d0210be2eb09d72f` after all regression tests passed (PR workflow run `43386735483`). Main model verification run `43386810449` and Pages deployment `43386810614` succeeded. Cache-busted production JSON confirmed revision 8.3, 86 sheets through A1/086, and the new source and scope text.
 - Next: continue at A1/087 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/087
+
+- Added a text-only PN2070 reference for the repeatability rating below ±0.1% of span, with temperature fluctuations below 10 K and turn-down 1:1. It makes no project measurement or operating-temperature claim.
+- Updated opening set revision 8.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #215 merged as `bb649317c829804fe1ae69443a02a94d1eed4fcd` after all regression tests passed (PR workflow run `43387444479`). Main model verification run `43404017529` and Pages deployment `43404017472` succeeded. Cache-busted production JSON confirmed revision 8.4, 87 sheets through A1/087, and the new source and scope text.
+- Next: continue at A1/088 in a source-backed increment.
