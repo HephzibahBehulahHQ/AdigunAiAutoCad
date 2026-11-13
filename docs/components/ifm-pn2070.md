@@ -419,3 +419,10 @@
 - The PN2070-02 data sheet lists 2 digital outputs and 1 analogue output.
 - A1/085 records the output count only. It assigns no channel-to-pin allocation or simultaneous signal usage.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Product characteristics table, 01.03.2024.
+
+
+## A1/086 switch-point accuracy
+
+- The PN2070-02 data sheet lists switch point accuracy below ±0.4% of the span with turn-down 1:1.
+- A1/086 records this manufacturer specification only. No switching threshold, selected measuring span or project accuracy is assigned.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
