@@ -11157,7 +11157,7 @@
       "sheetId": "ref-085",
       "x": 50,
       "y": 245,
-      "text": "Manufacturer count only; no channel-to-pin allocation or simultaneous signal usage is assigned.",
+      "text": "Output count only; no channel-to-pin allocation or simultaneous signal usage is assigned.",
       "stroke": "#13263b"
     },
     {
