@@ -365,3 +365,8 @@ Next project increment: A1/086, selected from verified project evidence after th
 A1/086 records the PN2070-02 switch point accuracy specification (< ±0.4% of the span, turn-down 1:1). It selects no switching threshold, measuring span or project accuracy. No component, wire or interface change.
 
 Next project increment: A1/087, selected from verified project evidence after this milestone.
+
+
+A1/087 records the PN2070-02 repeatability rating below ±0.1% of span with temperature fluctuations below 10 K and turn-down 1:1. It assigns no measured project repeatability or operating temperature condition. No component, wire or interface change.
+
+Next project increment: A1/088, selected from verified project evidence after this milestone.
