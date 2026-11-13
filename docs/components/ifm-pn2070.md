@@ -68,3 +68,10 @@
 - The PN2070-02 data sheet lists protection class III and reverse-polarity protection as “yes”.
 - A1/035 records those manufacturer product specifications only. It does not assess project installation, wiring faults, protective devices or functional safety.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
+
+ 
+## A1/036 minimum insulation resistance
+
+- The PN2070-02 data sheet lists minimum insulation resistance as 100 MΩ with “500 V DC” in the table.
+- A1/036 records the listed manufacturer value and condition only. No project insulation measurement or installation test is represented; the table notation is not a test instruction for the installed circuit or assembled product.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
