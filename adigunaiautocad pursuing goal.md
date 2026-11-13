@@ -2209,4 +2209,4 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 
 - Added a text-only CPU 1212C input response reference from Siemens System Manual V4.7 Tables A-42/A-43: sample time and 95% step response by rejection frequency and smoothing selection. The drawing does not select a PLC setting or claim sensor-to-PLC response.
 - No component, wire or workstation interface change. Updated the project cover/status, drawing index, revision record, CPU source record, README, roadmap and this execution log.
-- Next: run the CAD regression suite and whitespace checks, then publish a focused PR; merge after CI passes, verify production and continue at A1/028.
+- PR #93 passed GitHub Actions run #182 (`cad-engine`) and merged as `0b6e59af5205596b1d07c1565ecdecea444498a3`. The live Pages project JSON confirmed Opening set 2.4 and A1/001–A1/027, including the A1/027 response reference. Next: continue at A1/028.
