@@ -181,3 +181,10 @@
 - The PN2070-02 data sheet specifies a threaded process connection with G 1/4 internal thread, listed as DIN EN ISO 1179-2.
 - A1/051 records the manufacturer designation only. No mating fitting or seal is selected, and the record does not establish mechanical compatibility, pressure-interface suitability or installation suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Product characteristics table, 01.03.2024.
+
+
+## A1/052 upper-housing rotation
+
+- The PN2070-02 technical drawing callout states that the upper housing portion can be rotated 345°.
+- A1/052 records the manufacturer callout only. It does not specify an installed rotation angle or establish mounting clearance or installation suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), technical drawing callout, 01.03.2024.
