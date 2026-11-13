@@ -2283,3 +2283,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 83/83; `git diff --check` passed. Model analysis passed with 36 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #113 passed GitHub Actions run #207 and merged as `212f3de37b10e22bee94749fe64baee618840569`. Pages workflow run `43358259026` succeeded. Cache-busted production JSON confirmed revision 3.3, 36 sheets through A1/036 and the 100 MΩ / 500 V DC reference with its project-test limitation. No component, wire or interface change.
 - Next: continue at A1/037 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/037
+
+- Added a text-only ifm PN2070 switching-output reference: the data sheet lists a 250 mA permanent current rating, 2 V maximum voltage drop, frequency below 500 Hz, pulsed short-circuit protection and overload protection. No output channel, mode, configured behavior or load is assigned.
+- Updated opening set revision 3.4, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Next: complete verification, merge after green CI, deploy and verify production, then continue at A1/038.
