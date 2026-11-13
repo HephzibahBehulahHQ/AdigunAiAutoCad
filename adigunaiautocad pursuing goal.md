@@ -2641,3 +2641,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.6, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #199 merged as `6de9c9efdf06e57487437417f85d6fadb0a7c282` after all 126 regression tests passed (PR workflow run `43382053719`). Main model verification run `43382128619` and Pages deployment `43382128487` succeeded. Cache-busted production JSON confirmed revision 7.6, 79 sheets through A1/079, 32 components and 335 wire objects.
 - Next: continue at A1/080 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/080
+
+- Added a text-only PN2070 reference for the manufacturer-listed IO-Link transmission type COM2 at 38,4 kBaud. It asserts no observed or configured link speed.
+- Updated opening set revision 7.7, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #201 merged as `8d8db871124dc743aca2004a1f1012fcb1670d68` after all 127 regression tests passed (PR workflow run `43382453097`). Main model verification run `43382514117` and Pages deployment `43382514123` succeeded. Cache-busted production JSON confirmed revision 7.7, 80 sheets through A1/080, 32 components and 335 wire objects.
+- Next: continue at A1/081 in a source-backed increment.
