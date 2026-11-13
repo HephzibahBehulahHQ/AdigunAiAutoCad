@@ -1826,6 +1826,8 @@ test('A1/026 documents idealized CPU 1212C AI0 quantization without claiming mea
   assert.equal(project.sheets.find(sheet=>sheet.id==='ref-026').number,'A1/026');
   assert.equal(project.status,'Authored opening set: A1/001–A1/030; A1/031–A1/100 not authored.');
   assert.deepEqual([page.componentCount,page.wireCount,page.netCount,page.geometryErrorCount],[0,0,0,0]);
+  for(const [id,required] of [['doc-ref-002-line-28','A1/029  CPU 1212C AI0 cable length'],['doc-ref-002-line-29','A1/030  ifm PN2070 analog output'],['doc-ref-004-line-19','Revision 2.4 | 2026-11-13 | A1/028'],['doc-ref-004-line-20','Revision 2.5 | 2026-11-13 | A1/029'],['doc-ref-004-line-21','Revision 2.6 | 2026-11-13 | A1/030']])
+    assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),`Incorrect drawing index or revision record: ${id}`);
   const texts=project.objects.filter(object=>object.sheetId==='ref-026'&&object.kind==='text').map(object=>object.text);
   for(const required of ['0–400 bar','0–10 V','10-bit','9.765625 mV','0.390625 bar','±0.1953125 bar','not a Siemens accuracy specification','0–27648','does not imply 15-bit','effective resolution','±14 bar'])
     assert.ok(texts.some(text=>text.includes(required)),`Missing resolution assumption or limitation: ${required}`);
