@@ -328,3 +328,10 @@
 - The PN2070-02 data sheet lists DeviceID 459 for Factory setting / CMPT=2.
 - A1/072 records the manufacturer association only. It is not evidence that this specific device is configured to use CMPT=2.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Supported DeviceIDs table, 01.03.2024.
+
+
+## A1/073 IO-Link profile listing, factory setting / CMPT=2
+
+- The PN2070-02 profile table lists Smart Sensor - SSP 0 Generic Profiled Sensor under Factory setting / CMPT=2.
+- A1/073 records the manufacturer profile listing only. It asserts no master port, IODD, or active device configuration.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 profile table, 01.03.2024.
