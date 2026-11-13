@@ -195,3 +195,8 @@ Next project increment: A1/052, selected from verified project evidence after th
 A1/052 records the PN2070-02 upper-housing 345° rotation callout. It assigns no installed rotation angle, mounting clearance or installation suitability. No component, wire or interface change.
 
 Next project increment: A1/053, selected from verified project evidence after this milestone.
+
+
+A1/053 records the PN2070-02 programming-button callout from the technical drawing. It does not document the button function or assign an operating sequence. No component, wire or interface change.
+
+Next project increment: A1/054, selected from verified project evidence after this milestone.
