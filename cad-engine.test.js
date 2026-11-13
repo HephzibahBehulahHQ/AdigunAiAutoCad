@@ -2685,7 +2685,7 @@ test('A1/062 records PN2070 response-time rating without assigning system behavi
   for(const required of ['Response time: <1.5 ms.','does not establish project or system response time','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-062'&&object.text.includes(required)),'Missing response rating or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
-  assert.ok(source.includes('lists the PN2070 response time as <1.5 ms'));
+  assert.ok(source.includes('lists the response time as <1.5 ms'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
