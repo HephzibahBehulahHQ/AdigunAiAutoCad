@@ -2265,3 +2265,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 81/81; `git diff --check` passed. Model analysis passed with 34 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #109 passed GitHub Actions run #203 and merged as `0331d624abd4eb0b54779143d3cc3070e64e7815`. Pages workflow run `43356548568` succeeded. Cache-busted production JSON confirmed revision 3.1, 34 sheets through A1/034 and the 0.3 s power-on delay content. No component, wire or interface change.
 - Next: continue at A1/035 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/035
+
+- Added a text-only ifm PN2070 electrical protection reference: the data sheet lists protection class III and reverse-polarity protection. No installation, wiring fault, protective device or functional-safety result is assigned.
+- Updated opening set revision 3.2, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Next: complete verification, merge after green CI, deploy and verify production, then continue at A1/036.
