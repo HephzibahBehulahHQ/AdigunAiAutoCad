@@ -2749,3 +2749,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #225 merged as `e752f4ce02980bc1d097359f077877c712534cd0` after CI passed (PR workflow run `43407957875`). Main model verification run `43408038107` and Pages deployment `43408038437` succeeded.
 - Cache-busted production JSON verified revision 8.9, 92 sheets through A1/092, with the new source and scope text. This also confirms the prior custom-domain lag has cleared.
 - Next: continue at A1/093 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/093
+
+- Added a text-only PN2070 reference for characteristic deviation below ±0.25% (BFSL) / below ±0.5% (limit value setting), at turn-down 1:1. The record does not claim project measurement or application accuracy.
+- Updated opening set revision 9.0, drawing index, revision record, manufacturer source record, README, roadmap and regression coverage. No components, wires, topology or interface geometry changed.
+- PR #227 merged as `1db5300b59a13fc90685d516db983351eae42ee9`; latest PR CI passed (workflow run `43409773013`). Main model verification run `43409850088` and Pages deployment `43409850255` succeeded.
+- Cache-busted production JSON verified revision 9.0, 93 sheets through A1/093, the manufacturer datum and its limitations; the existing project totals remain 32 components and 335 wires.
+- Next: continue at A1/094 with another verified, source-backed increment.
