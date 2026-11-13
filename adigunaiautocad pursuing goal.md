@@ -2689,3 +2689,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 8.2, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #211 merged as `7524b824cb6140734fc8465286705a2e54110519` after all 132 regression tests passed (PR workflow run `43385495664`). Main model verification run `43385584719` and Pages deployment `43385584629` succeeded. Cache-busted production JSON confirmed revision 8.2, 85 sheets through A1/085, and the new source and scope text.
 - Next: continue at A1/086 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/086
+
+- Added a text-only PN2070 reference for the switch-point accuracy specification below ±0.4% of span at turn-down 1:1. It assigns no threshold, measuring span or project accuracy.
+- Updated opening set revision 8.3, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #213 merged as `6ffba976445eabec01c5b6b1d0210be2eb09d72f` after all regression tests passed (PR workflow run `43386735483`). Main model verification run `43386810449` and Pages deployment `43386810614` succeeded. Cache-busted production JSON confirmed revision 8.3, 86 sheets through A1/086, and the new source and scope text.
+- Next: continue at A1/087 in a source-backed increment.
