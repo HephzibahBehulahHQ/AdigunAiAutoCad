@@ -2569,3 +2569,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 6.7, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #181 merged as `8e7cc351b1b360bc1e79f957b6c15a6c063ececf` after all 117 regression tests passed (PR workflow run `43377274718`). Main model verification run `43377356318` and Pages deployment `43377356295` succeeded. Cache-busted production JSON confirmed revision 6.7, 70 sheets through A1/070, 32 components and 335 wire objects.
 - Next: continue at A1/071 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/071
+
+- Added a text-only PN2070 reference for the manufacturer-listed DeviceID 638 association with Status_B High Resolution / CMPT=3. This does not establish the installed device configuration.
+- Updated opening set revision 6.8, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #183 merged as `35611248cadb095483a51743f58800fe271b5dc4` after all 118 regression tests passed (PR workflow run `43377902848`). Main model verification run `43377977274` and Pages deployment `43377977693` succeeded. Cache-busted production JSON confirmed revision 6.8, 71 sheets through A1/071, 32 components and 335 wire objects.
+- Next: continue at A1/072 in a source-backed increment.
