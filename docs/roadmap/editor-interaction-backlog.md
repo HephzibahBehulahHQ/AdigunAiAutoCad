@@ -410,3 +410,8 @@ Next project increment: A1/095, selected from verified project evidence after th
 A1/095 preserves the PN2070-02 DNV GL accuracy/deviation note verbatim. Its extracted row does not clearly map the two limits to separate metrics, so no metric assignment or certification claim is made. No component, wire, topology or interface change.
 
 Next project increment: A1/096, selected from verified project evidence after this milestone.
+
+
+A1/096 records the Phoenix Contact PLC-RSC- 24DC/21 typical response time of 5 ms and typical release time of 8 ms as manufacturer ratings only. It does not establish project/system timing or simulate relay actuation. No component, wire, topology or interface change.
+
+Next project increment: A1/097, selected from verified project evidence after this milestone.
