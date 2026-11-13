@@ -2758,3 +2758,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #227 merged as `1db5300b59a13fc90685d516db983351eae42ee9`; latest PR CI passed (workflow run `43409773013`). Main model verification run `43409850088` and Pages deployment `43409850255` succeeded.
 - Cache-busted production JSON verified revision 9.0, 93 sheets through A1/093, the manufacturer datum and its limitations; the existing project totals remain 32 components and 335 wires.
 - Next: continue at A1/094 with another verified, source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/094
+
+- Added a text-only PN2070 reference for the manufacturer-listed UL approval number J014, without claiming project certification, approval or completed assessment.
+- Updated opening set revision 9.1, index, revision record, source record, README, roadmap and regression coverage. No components, wires, topology or interface geometry changed.
+- PR #229 merged as `154e89265ea22f4ba79c154fda5783f1f149c7fc` after CI passed (PR workflow run `43410623097`). Main model verification run `43410698254` and Pages deployment `43410698411` succeeded.
+- Cache-busted production JSON verified revision 9.1, 94 sheets through A1/094, the UL reference and its limitation. Project totals remain 32 components and 335 wires.
+- Next: continue at A1/095 with another source-backed increment.
