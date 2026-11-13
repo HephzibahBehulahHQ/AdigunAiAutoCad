@@ -2247,3 +2247,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Added a text-only ifm PN2070 medium-temperature reference: listed media are liquids and gases; the specified medium temperature range is −25 to 80 °C. Ambient rating, process medium, operating conditions and compatibility remain unassigned.
 - Updated the opening set to revision 2.9, added A1/032 index/revision entries, source record, README, roadmap and regression checks. No component, wire or interface change.
 - Local verification: `node --test cad-engine.test.js` passed 79/79; `git diff --check` passed. GitHub Actions run 196 first caught one stale A1/016 sheet-count assertion; corrected it and rerun 43353403980 passed. PR #105 merged as `4153ad5034a76645e591ddcc44f02a086f09bca3`; Pages deployment run `43353465072` succeeded. Cache-busted production JSON confirmed revision 2.9, 32 sheets through A1/032, status through A1/032, and 21 cross-sheet connections. No component, wire or interface change. Source: ifm PN2070-02 data sheet (EN-GB, 01.03.2024), Application table.
+
+
+## 2026-11-13 incremental execution record — A1/033
+
+- Added a text-only ifm PN2070 electrical-data reference from the PN2070-02 data sheet: operating voltage 18–30 V DC (to SELV/PELV) and current consumption below 35 mA. No installed supply, branch condition, total project load or PSU headroom is validated.
+- Updated opening set revision 3.0, drawing index, component source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Next: complete local and CI verification, merge the focused increment after required checks pass, deploy and verify production, then continue at A1/034.
