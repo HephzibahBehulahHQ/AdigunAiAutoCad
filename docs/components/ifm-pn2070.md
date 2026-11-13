@@ -402,6 +402,6 @@
 
 ## A1/083 SDCI standard reference
 
-- The PN2070-02 Interfaces table lists IEC 61131-9 as its SDCI standard.
+- The PN2070-02 Interfaces table lists SDCI standard IEC 61131-9.
 - A1/083 records the manufacturer's reference only. It asserts no compliance assessment or project implementation claim.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Interfaces table, 01.03.2024.
