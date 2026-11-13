@@ -2300,7 +2300,7 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 3.5, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
 - Local verification: `node --test --test-reporter=spec cad-engine.test.js` passed 85/85; `git diff --check` passed. Model analysis passed with 38 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #117 passed GitHub Actions run #211 and merged as `358a1e829434e3c2310b067ca35e38c1555ad11c`. Pages workflow run `43359687788` succeeded. Cache-busted production JSON confirmed revision 3.5, 38 sheets through A1/038 and the CMPT=2 ranges. No component, wire or interface change.
-- Next: continue at A1/042 in a source-backed increment.
+- Next: continue at A1/043 in a source-backed increment.
 
 
 ## 2026-11-13 incremental execution record — A1/039
@@ -2328,3 +2328,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: 88/88 tests passed; analyzer confirms 41 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
 - PR #123 merged as `65b4070a212806d14fc988c893d4e061af2812da`. CAD verification run `43361881315` and Pages deployment `43361881365` succeeded. Cache-busted production JSON confirmed revision 3.8, 41 sheets through A1/041, both temperature ratings and 335 wires.
 - Next: continue at A1/042 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/042
+
+- Added a text-only ifm PN2070 mechanical-data reference: the manufacturer lists minimum pressure cycles as 100 million. The project page does not infer service life, maintenance interval or installed-system endurance.
+- Updated opening set revision 3.9, drawing index, source record, README, roadmap and regression coverage. No component, wire or workstation interface change.
+- Local verification: 89/89 tests passed; analyzer confirms 42 sheets, 32 components, 335 wires, 67 sheet-local nets, 43 project-wide nets, 21 cross-sheet links and zero open endpoints.
+- PR #125 merged as `8a8f21c4d71b759717919a60eb53ef3dc7b1dec5`. CAD verification run `43362352948` and Pages deployment `43362352932` succeeded. Cache-busted production JSON confirmed revision 3.9, 42 sheets through A1/042, the listed pressure-cycle datum and 335 wires.
+- Next: continue at A1/043 in a source-backed increment.
