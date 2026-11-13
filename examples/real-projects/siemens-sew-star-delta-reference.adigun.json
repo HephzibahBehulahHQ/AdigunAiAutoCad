@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 3.4",
-  "status": "Authored opening set: A1/001–A1/037; A1/038–A1/100 not authored.",
+  "revision": "Opening set 3.5",
+  "status": "Authored opening set: A1/001–A1/038; A1/039–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -201,6 +201,11 @@
       "id": "ref-037",
       "number": "A1/037",
       "name": "ifm PN2070 switching-output ratings"
+    },
+    {
+      "id": "ref-038",
+      "number": "A1/038",
+      "name": "ifm PN2070 switching-point ranges · CMPT 2"
     }
   ],
   "sheetLabels": {
@@ -8015,9 +8020,90 @@
       "y": 2436,
       "text": "Revision 3.4 | 2026-11-13 | A1/037 records switching-output data; no channel or load assigned.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-title",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 54,
+      "text": "A1/038 · ifm PN2070 switching-point ranges · CMPT 2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-mode",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 145,
+      "text": "The data sheet lists this under “Factory setting / CMPT = 2”.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-points",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 245,
+      "text": "Set point SP range: 2.5–400 bar; reset point rP range: 1–398.5 bar.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-resolution",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 345,
+      "text": "Minimum SP/rP difference: 2 bar; setting step: 0.5 bar.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-scope",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 445,
+      "text": "These are manufacturer parameter ranges; no threshold, process pressure, output assignment or CMPT mode is configured.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-limit",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 545,
+      "text": "This page does not establish operating limits or safety settings.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-038-source",
+      "sheetId": "ref-038",
+      "x": 50,
+      "y": 645,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Measuring/setting range table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-37",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 2565,
+      "text": "A1/038  ifm PN2070 switching-point ranges · CMPT 2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-29",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 2506,
+      "text": "Revision 3.5 | 2026-11-13 | A1/038 records CMPT=2 switching-point ranges; no threshold assigned.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Thirty-seven authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038–A1/100 are not authored.",
+  "description": "Thirty-eight authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
