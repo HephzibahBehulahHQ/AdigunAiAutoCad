@@ -390,3 +390,8 @@ Next project increment: A1/091, selected from verified project evidence after th
 A1/091 records the PN2070-02 manufacturer-listed MTTF of 129 years as a product datum only. It is not a project reliability calculation, service-life claim or maintenance interval. No component, wire or interface change.
 
 Next project increment: A1/092, selected from verified project evidence after this milestone.
+
+
+A1/092 records the EMC standards referenced in the PN2070-02 data sheet (DIN EN 61000-6-2 and DIN EN 61000-6-3) as manufacturer-listed references only. It makes no project compliance, installation or test-result claim. No component, wire or interface change.
+
+Next project increment: A1/093, selected from verified project evidence after this milestone.
