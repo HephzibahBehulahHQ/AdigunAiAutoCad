@@ -454,3 +454,10 @@
 - The PN2070-02 data sheet lists hysteresis deviation below ±0.1% of the span with turn-down 1:1.
 - A1/090 records this manufacturer specification only. No hysteresis setting or measured project behavior is assigned.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
+
+
+## A1/091 mean time to failure
+
+- The PN2070-02 data sheet lists manufacturer mean time to failure (MTTF) as 129 years.
+- A1/091 records this product datum only. It is not a project reliability calculation, expected service life, or maintenance interval.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
