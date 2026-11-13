@@ -2649,3 +2649,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.7, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #201 merged as `8d8db871124dc743aca2004a1f1012fcb1670d68` after all 127 regression tests passed (PR workflow run `43382453097`). Main model verification run `43382514117` and Pages deployment `43382514123` succeeded. Cache-busted production JSON confirmed revision 7.7, 80 sheets through A1/080, 32 components and 335 wire objects.
 - Next: continue at A1/081 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/081
+
+- Added a text-only PN2070 reference for the manufacturer-listed IO-Link revision 1.1. It asserts no negotiated master/device behavior.
+- Updated opening set revision 7.8, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #203 merged as `96da10f239fc9e50480ca9a5a586a1ac12433c7c` after all 128 regression tests passed (PR workflow run `43382879990`). Main model verification run `43382970813` and Pages deployment `43382970853` succeeded. Cache-busted production JSON confirmed revision 7.8, 81 sheets through A1/081, 32 components and 335 wire objects.
+- Next: continue at A1/082 in a source-backed increment.
