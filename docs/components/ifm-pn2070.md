@@ -139,3 +139,10 @@
 - A1/045 records the manufacturer product data only. It does not verify the installed connector, seals, cable or enclosure and does not claim an ingress-protection rating for the assembled project.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Operating conditions table, 01.03.2024.
 
+
+## A1/046 shock and vibration data
+
+- The PN2070-02 data sheet lists shock resistance DIN EN 60068-2-27 at 50 g (11 ms) and vibration resistance DIN EN 60068-2-6 at 20 g (10 to 2000 Hz).
+- A1/046 records these manufacturer-listed values only. It does not assess installed machine vibration or shock or assign mounting conditions or application suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
+
