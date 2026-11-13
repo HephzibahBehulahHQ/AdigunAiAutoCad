@@ -2216,4 +2216,5 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 
 - Added a text-only CPU 1212C AI0 range reference from Siemens System Manual V4.7 Tables A-41/A-44: rated, overshoot and overflow voltage/data-word bands, with the separate 35 V DC withstand rating called out. It assigns no sensor fault, channel diagnostic, alarm or pressure-conversion behavior.
 - Updated the project opening set, index, revision, CPU record, README, roadmap and regression coverage. No component, wire or workstation interface change.
-- Local verification: 75/75 CAD tests pass; project analysis reports 28 sheets, 32 components, 335 wire segments, 67 local nets, 43 project-wide nets, 21 cross-sheet connections and zero unlinked endpoints. Next: publish a focused PR, merge after CI passes, verify production and continue at A1/029.
+- Local verification: 75/75 CAD tests pass; project analysis reports 28 sheets, 32 components, 335 wire segments, 67 local nets, 43 project-wide nets, 21 cross-sheet connections and zero unlinked endpoints.
+- PR #95 passed GitHub Actions run #184 (`cad-engine`); the Pages workflow run #93 deployed merge `00140e78326d596b0a2a4fbaae6a049dae8e7e2f`. A fresh custom-domain JSON fetch confirmed Opening set 2.5, A1/001–A1/028, and the A1/028 CPU range sheet. Next: continue at A1/029.
