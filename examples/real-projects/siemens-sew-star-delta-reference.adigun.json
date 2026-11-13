@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Star-delta starter · Siemens SIRIUS / SEW DRN132M4 — 100-sheet reference project",
-  "revision": "Opening set 4.1",
-  "status": "Authored opening set: A1/001–A1/044; A1/045–A1/100 not authored.",
+  "revision": "Opening set 4.2",
+  "status": "Authored opening set: A1/001–A1/045; A1/046–A1/100 not authored.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -236,6 +236,11 @@
       "id": "ref-044",
       "number": "A1/044",
       "name": "ifm PN2070 integrated restrictor datum"
+    },
+    {
+      "id": "ref-045",
+      "number": "A1/045",
+      "name": "ifm PN2070 listed protection ratings"
     }
   ],
   "sheetLabels": {
@@ -8554,9 +8559,72 @@
       "y": 2926,
       "text": "Revision 4.1 | 2026-11-13 | A1/044 records the restrictor product datum; no retrofit or performance assigned.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-045-title",
+      "sheetId": "ref-045",
+      "x": 50,
+      "y": 54,
+      "text": "A1/045 · ifm PN2070 listed protection ratings",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-045-rating",
+      "sheetId": "ref-045",
+      "x": 50,
+      "y": 145,
+      "text": "The manufacturer data sheet lists protection ratings IP 65 and IP 67.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-045-scope",
+      "sheetId": "ref-045",
+      "x": 50,
+      "y": 245,
+      "text": "This is product data only; the project does not verify the installed connector, seals, cable or enclosure.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-045-limit",
+      "sheetId": "ref-045",
+      "x": 50,
+      "y": 345,
+      "text": "No ingress-protection rating is claimed for the assembled project or its installation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-045-source",
+      "sheetId": "ref-045",
+      "x": 50,
+      "y": 445,
+      "text": "Source: ifm PN2070-02 data sheet, EN-GB, 01.03.2024, Operating conditions table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-002-line-44",
+      "sheetId": "ref-002",
+      "x": 120,
+      "y": 3055,
+      "text": "A1/045  ifm PN2070 listed protection ratings",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "doc-ref-004-line-36",
+      "sheetId": "ref-004",
+      "x": 120,
+      "y": 2996,
+      "text": "Revision 4.2 | 2026-11-13 | A1/045 records IP ratings as product data only; no assembly rating claimed.",
+      "stroke": "#13263b"
     }
   ],
-  "description": "Forty-four authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039 records the CMPT=3 parameter ranges without configuring thresholds. A1/040 records the manufacturer-recommended PN2070 tightening torque and its dependencies without selecting an installation value. A1/041 records manufacturer ambient and storage temperature ratings without assigning project conditions. A1/042 records the manufacturer-listed minimum pressure cycles without inferring project service life. A1/043 records PN2070 product dimensions and weight without assigning installation geometry. A1/044 records its integrated-restrictor datum without assigning a retrofit. A1/045–A1/100 are not authored.",
+  "description": "Forty-five authored sheets: editable project records A1/001–A1/005; Siemens/SEW star-delta starter A1/006; IFM sensor / Siemens PLC input A1/007; SITOP supply A1/008; 24 V distribution A1/009; PLC relay interface A1/010; Schneider contactor coil and feedback A1/011; operator inputs A1/012; PLC I/O schedules A1/013–A1/016; PLC allocation summary A1/017; Siemens F1 NO trip signal to I0.7 A1/018; digital-output schedule A1/019; Siemens CPU 1212C analog-input allocation A1/020; ifm PN2070 interface proposal A1/021; A1/022 connects B2 OUT2 to CPU AI0 with shared 24 V DC; A1/023 records conditional analog scaling; A1/024 compares the B2 current allocation with SITOP ratings; A1/025 conditionally stacks published PN2070 and CPU analog accuracy contributions; A1/026 records idealized CPU analog-input quantization only; A1/027 records the CPU input's source-published response and smoothing options without selecting a setting; A1/028 records the rated, overshoot and overflow data-word bands without assigning diagnostics; A1/029 records the manufacturer cable-length limit without assigning installed cable details. A1/030 records ifm PN2070 analog output parameter ranges without assigning configured endpoints. A1/031 records manufacturer pressure rating and minimum burst pressure without assigning operating conditions. A1/032 records the PN2070 medium temperature range without assigning process conditions. A1/033 records the PN2070 electrical voltage/current ratings without claiming supply adequacy. A1/034 records the PN2070 power-on delay specification without assigning system response behavior. A1/035 records the manufacturer-listed PN2070 protection class and reverse-polarity protection without assigning installation or safety performance. A1/036 records the PN2070 minimum insulation resistance and the data-sheet reference voltage without claiming project test results. A1/037 records listed PN2070 switching-output data without assigning output channel, mode or load behavior. A1/038 records manufacturer PN2070 switching-point ranges in the data-sheet CMPT=2 section without configuring thresholds. A1/039 records the CMPT=3 parameter ranges without configuring thresholds. A1/040 records the manufacturer-recommended PN2070 tightening torque and its dependencies without selecting an installation value. A1/041 records manufacturer ambient and storage temperature ratings without assigning project conditions. A1/042 records the manufacturer-listed minimum pressure cycles without inferring project service life. A1/043 records PN2070 product dimensions and weight without assigning installation geometry. A1/044 records its integrated-restrictor datum without assigning a retrofit. A1/045 records manufacturer IP ratings without claiming assembly protection. A1/046–A1/100 are not authored.",
   "crossSheetConnections": [
     {
       "id": "a1-009-24v-positive",
