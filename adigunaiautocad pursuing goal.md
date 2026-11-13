@@ -2465,3 +2465,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 5.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #155 merged as `b620f8a26d9b1d9339c733215641e252cc4fea20` after all 104 regression tests passed (PR workflow run `43371623928`). Main model verification run `43371681702` and Pages deployment `43371681718` succeeded. Cache-busted production JSON confirmed revision 5.4, 57 sheets through A1/057, 32 components and 335 wire objects.
 - Next: continue at A1/058 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/058
+
+- Added a text-only PN2070 reference for the manufacturer maximum analogue-output response time of 3 ms. The record does not define configured damping or system response.
+- Updated opening set revision 5.5, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #157 merged as `d87bf196b331fd4ceac1ab6a3b26374b1331748c` after all 105 regression tests passed (PR workflow run `43372001827`). Main model verification run `43372046484` and Pages deployment `43372046324` succeeded. Cache-busted production JSON confirmed revision 5.5, 58 sheets through A1/058, 32 components and 335 wire objects.
+- Next: continue at A1/059 in a source-backed increment.
