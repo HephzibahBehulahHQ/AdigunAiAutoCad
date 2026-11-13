@@ -55,37 +55,45 @@
 - A1/033 records these manufacturer ratings without validating the installed supply or branch conditions. It does not establish total project load current or PSU headroom.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
 
- 
+
 ## A1/034 power-on delay time
 
 - The PN2070-02 data sheet lists a power-on delay time of 0.3 s.
 - A1/034 records this device specification without assigning startup sequence, ready-signal, PLC scan, or total system response behavior.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
 
- 
+
 ## A1/035 electrical protection characteristics
 
 - The PN2070-02 data sheet lists protection class III and reverse-polarity protection as “yes”.
 - A1/035 records those manufacturer product specifications only. It does not assess project installation, wiring faults, protective devices or functional safety.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
 
- 
+
 ## A1/036 minimum insulation resistance
 
 - The PN2070-02 data sheet lists minimum insulation resistance as 100 MΩ with “500 V DC” in the table.
 - A1/036 records the listed manufacturer value and condition only. No project insulation measurement or installation test is represented; the table notation is not a test instruction for the installed circuit or assembled product.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Electrical data table, 01.03.2024.
 
- 
+
 ## A1/037 switching-output ratings
 
 - The PN2070-02 data sheet lists a permanent switching-output current rating of 250 mA, maximum switching-output voltage drop of 2 V, and switching frequency below 500 Hz. It also lists pulsed short-circuit protection and overload protection.
 - A1/037 records product data only. It assigns no output channel, PNP/NPN mode, configured function or load, and does not assess load suitability or protection coordination.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Outputs table, 01.03.2024.
 
- 
+
 ## A1/038 switching-point ranges (CMPT 2)
 
 - In the data-sheet section labelled “Factory setting / CMPT = 2”, the PN2070-02 lists SP from 2.5 to 400 bar, rP from 1 to 398.5 bar, a minimum SP/rP difference of 2 bar, and 0.5 bar steps.
 - A1/038 records the listed parameter ranges without asserting that CMPT=2 or any threshold is configured in the project. They are not selected process limits or safety settings.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Measuring/setting range table, 01.03.2024.
+
+
+## A1/039 switching-point ranges (CMPT 3 high resolution)
+
+- In the data-sheet section labelled “Status_B High Resolution / CMPT = 3”, the PN2070-02 lists SP from 2.5 to 400 bar, rP from 0.9 to 398.4 bar, a minimum SP/rP difference of 1.7 bar, and 0.1 bar steps.
+- A1/039 records the listed parameter ranges without asserting that CMPT=3 or any threshold is configured in the project. They are not selected process limits or safety settings.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Measuring/setting range table, 01.03.2024.
+
