@@ -2513,3 +2513,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 6.0, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #167 merged as `d713a3285ac7148f1c90d22a82b620a04876d0e4` after all 110 regression tests passed (PR workflow run `43373963155`). Main model verification run `43374021864` and Pages deployment `43374021785` succeeded. Cache-busted production JSON confirmed revision 6.0, 63 sheets through A1/063, 32 components and 335 wire objects.
 - Next: continue at A1/064 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/064
+
+- Added a text-only PN2070 reference for the 3 ms minimum IO-Link process cycle time under Status_B High Resolution / CMPT=3. It assigns no device profile, master cycle or application response.
+- Updated opening set revision 6.1, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #169 merged as `b17deb78a16ad0b4e6b86fea7d6d9d291b28e8ca` after all 111 regression tests passed (PR workflow run `43374432351`). Main model verification run `43374472649` and Pages deployment `43374472742` succeeded. Cache-busted production JSON confirmed revision 6.1, 64 sheets through A1/064, 32 components and 335 wire objects.
+- Next: continue at A1/065 in a source-backed increment.
