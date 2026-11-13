@@ -330,3 +330,8 @@ Next project increment: A1/079, selected from verified project evidence after th
 A1/079 records the PN2070-02 Factory setting / CMPT=2 profile functions Device identification, Process data variable, and Device diagnosis. It does not assert actual configured values or diagnosis. No component, wire or interface change.
 
 Next project increment: A1/080, selected from verified project evidence after this milestone.
+
+
+A1/080 records the PN2070-02 IO-Link transmission type COM2 at the manufacturer's stated 38,4 kBaud. It claims no observed or configured link speed. No component, wire or interface change.
+
+Next project increment: A1/081, selected from verified project evidence after this milestone.
