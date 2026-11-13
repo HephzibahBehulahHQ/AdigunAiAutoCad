@@ -391,3 +391,10 @@
 - The PN2070-02 interface table lists IO-Link revision 1.1.
 - A1/081 records the manufacturer interface specification only. It asserts no negotiated master/device behavior.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Interfaces table, 01.03.2024.
+
+
+## A1/082 SIO mode capability
+
+- The PN2070-02 Interfaces table lists SIO mode as supported.
+- A1/082 records the manufacturer capability only. It selects no project operating mode.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Interfaces table, 01.03.2024.
