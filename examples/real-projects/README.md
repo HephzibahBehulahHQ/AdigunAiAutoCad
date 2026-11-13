@@ -174,3 +174,5 @@ For A1/080, the ifm PN2070-02 interface table lists IO-Link transmission type CO
 For A1/081, the ifm PN2070-02 interface table lists IO-Link revision 1.1; negotiated master/device behavior is not asserted.
 
 For A1/082, the ifm PN2070-02 Interfaces table lists SIO mode as supported; project operation in that mode is not assigned.
+
+For A1/083, the ifm PN2070-02 Interfaces table lists IEC 61131-9 as its SDCI standard; no project compliance or implementation assessment is made.
