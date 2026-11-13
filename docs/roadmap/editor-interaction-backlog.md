@@ -420,3 +420,8 @@ Next project increment: A1/097, selected from verified project evidence after th
 A1/097 records the Phoenix Contact PLC-RSC- 24DC/21 minimum switching voltage of 5 V at 100 mA as a manufacturer specification only. It assigns no project contact load or circuit suitability. No component, wire, topology or interface change.
 
 Next project increment: A1/098, selected from verified project evidence after this milestone.
+
+
+A1/098 records the Phoenix Contact PLC-RSC- 24DC/21 mechanical service-life rating of 2 × 10⁷ cycles. It does not claim electrical life, expected project operating life, or project reliability. No component, wire, topology or interface change.
+
+Next project increment: A1/099, selected from verified project evidence after this milestone.
