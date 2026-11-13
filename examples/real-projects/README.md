@@ -158,3 +158,5 @@ For A1/072, ifm lists DeviceID 459 for Factory setting / CMPT=2; this manufactur
 For A1/073, the ifm PN2070-02 profile table lists Smart Sensor - SSP 0 Generic Profiled Sensor under Factory setting / CMPT=2; this does not assert an active device configuration.
 
 For A1/074, the ifm PN2070-02 profile table lists Smart Sensor - SSP 3.1 Measuring Sensor under Status_B High Resolution / CMPT=3; this does not assert an active device configuration.
+
+For A1/075, the ifm PN2070-02 profile table lists Common - I&D Identification and Diagnosis under Status_B High Resolution / CMPT=3; this does not imply actual diagnosis data or master configuration.

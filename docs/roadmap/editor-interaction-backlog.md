@@ -305,3 +305,8 @@ Next project increment: A1/074, selected from verified project evidence after th
 A1/074 records the PN2070-02 Smart Sensor - SSP 3.1 Measuring Sensor listing under Status_B High Resolution / CMPT=3. It makes no claim about master port, IODD or active device configuration. No component, wire or interface change.
 
 Next project increment: A1/075, selected from verified project evidence after this milestone.
+
+
+A1/075 records the PN2070-02 Common - I&D Identification and Diagnosis listing under Status_B High Resolution / CMPT=3. It does not assert actual diagnosis, event codes or master configuration. No component, wire or interface change.
+
+Next project increment: A1/076, selected from verified project evidence after this milestone.
