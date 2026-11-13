@@ -188,3 +188,10 @@
 - The PN2070-02 technical drawing callout states that the upper housing portion can be rotated 345°.
 - A1/052 records the manufacturer callout only. It does not specify an installed rotation angle or establish mounting clearance or installation suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), technical drawing callout, 01.03.2024.
+
+
+## A1/053 programming-button callout
+
+- The PN2070-02 technical drawing labels a programming button as callout 3.
+- A1/053 records the drawing callout only. The data-sheet callout does not document the button’s function or assign an operating sequence.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), technical drawing callout, 01.03.2024.
