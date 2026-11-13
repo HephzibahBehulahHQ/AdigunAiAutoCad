@@ -2473,10 +2473,10 @@ test('A1/053 records the PN2070 programming-button callout without inferring but
   assert.equal(project.status,'Authored opening set: A1/001–A1/053; A1/054–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-52','A1/053  ifm PN2070 programming-button callout'],['doc-ref-004-line-44','Revision 5.0 | 2026-11-13 | A1/053']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/053 index or revision record: '+id);
-  for(const required of ['programming button appears as callout 3 in the technical drawing','does not document its function','does not assign an operating sequence','ifm PN2070-02'])
+  for(const required of ['labels a programming button as callout 3','does not document its function','does not assign an operating sequence','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-053'&&object.text.includes(required)),'Missing button callout or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
-  assert.ok(source.includes('programming button appears as callout 3 in the technical drawing'));
+  assert.ok(source.includes('labels a programming button as callout 3'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
