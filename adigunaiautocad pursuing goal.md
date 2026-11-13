@@ -2617,3 +2617,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.3, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #193 merged as `961a539c99991f0395c6f687945cc2b48ed30181` after all 123 regression tests passed (PR workflow run `43380650396`). Main model verification run `43380711203` and Pages deployment `43380711211` succeeded. Cache-busted production JSON confirmed revision 7.3, 76 sheets through A1/076, 32 components and 335 wire objects.
 - Next: continue at A1/077 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/077
+
+- Added a text-only PN2070 reference for the acyclical application-specific tag function listed for Status_B High Resolution / CMPT=3. It asserts no configured tag value or active profile.
+- Updated opening set revision 7.4, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #195 merged as `cd79bbeefcdb4ec9d43e3fde6508c918654c50fa` after all 124 regression tests passed (PR workflow run `43381042352`). Main model verification run `43381101627` and Pages deployment `43381101587` succeeded. Cache-busted production JSON confirmed revision 7.4, 77 sheets through A1/077, 32 components and 335 wire objects.
+- Next: continue at A1/078 in a source-backed increment.
