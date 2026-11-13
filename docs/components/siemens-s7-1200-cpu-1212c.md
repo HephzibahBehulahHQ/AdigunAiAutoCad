@@ -35,3 +35,8 @@
 - The catalog model preserves the CPU's 25 manufacturer-designated X10/X11/X12 terminals. Table A-41 lists 10-bit resolution and 3.0% / 3.5% full-scale accuracy for the onboard analog inputs; A1/023 does not assign an uncertainty budget. Pin coordinates are schematic connection locations, not a physical PLC footprint.
 - A1/019 is an allocation schedule and adds no components or wires. Output logic, switching, load suitability, and a configured PLC address table are not modeled.
 - Verify the selected hardware, wiring method and application against current Siemens documentation and qualified engineering review.
+
+## A1/029 analog input cable limit
+
+- Siemens System Manual V4.7 Table A-41 lists a maximum cable length of 100 m using shielded twisted pair for the CPU analog inputs. This is the manufacturer limit, not evidence of an installed or modeled cable.
+- A1/029 assigns no project cable length, construction, route, grounding method or electromagnetic environment. Compliance and signal quality require installation-specific verification.
