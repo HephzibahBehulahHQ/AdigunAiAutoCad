@@ -1179,7 +1179,7 @@ test('eighty-seven-sheet connected reference opening set preserves the starter a
   const project = parsed.project;
   assert.equal(project.sheets.length, 87);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/087–A1/100 not authored'));
+  assert.ok(project.status.includes('A1/088–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
