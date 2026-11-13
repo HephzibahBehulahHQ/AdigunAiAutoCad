@@ -84,4 +84,11 @@ Next project increment: A1/027, selected from verified project evidence after th
 
 A1/027 records Siemens CPU 1212C built-in analog-input sample times and 0–10 V step responses at 95% for each published rejection-frequency and smoothing choice. It states the CPU input values without assigning a PLC configuration or claiming sensor-to-PLC response. Sensor dynamics, PLC scan and end-to-end behavior remain outside the model. No component, wire or interface change is made.
 
-Next project increment: A1/028, selected from verified project evidence after this milestone.
+Next project increment: A1/029, selected from verified project evidence after this milestone.
+
+
+## Completed project increment — CPU 1212C analog input range representation
+
+A1/028 records Siemens CPU 1212C built-in AI rated, overshoot and overflow voltage/data-word bands from System Manual V4.7 Tables A-41/A-44. It distinguishes the separate 35 V DC maximum withstand specification from the 0–10 V rated measuring range and does not assign sensor-fault, channel diagnostic, alarm or pressure conversion behavior. The increment adds no components, wires or workstation interface changes.
+
+Next project increment: A1/029, selected from verified project evidence after this milestone.
