@@ -209,3 +209,10 @@
 - The PN2070-02 data sheet lists vacuum resistance as −1000 mbar (−0.1 MPa).
 - A1/055 records the manufacturer value only. It does not assign a project vacuum condition or assess application suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Application table, 01.03.2024.
+
+
+## A1/056 switching output options
+
+- The PN2070-02 data sheet lists PNP/NPN switching outputs and a parameterisable normally open/normally closed output function.
+- A1/056 records the available output options only. It does not select a project polarity or output function.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Outputs table, 01.03.2024.
