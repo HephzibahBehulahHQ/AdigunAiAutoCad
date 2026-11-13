@@ -2417,3 +2417,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 4.8, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #143 merged as `30213a4dd35ae48f2cac35060dcbc912eb1823eb` after the corrected regression passed (PR workflow run `43368201616`). Main model verification run `43368244789` and Pages deployment `43368244750` succeeded. Cache-busted production JSON confirmed revision 4.8, 51 sheets through A1/051, the connection designation and 335 wire objects.
 - Next: continue at A1/052 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/052
+
+- Added a text-only ifm PN2070 technical-drawing callout: the upper housing portion can be rotated 345°. The project does not assign an installed angle, mounting clearance or installation suitability.
+- Updated opening set revision 4.9, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #145 merged as `83b2539f0eb0b97d83fc77d484d2aa5aa33af9bf` after the corrected regression passed (PR workflow run `43368784971`). Main model verification run `43368828003` succeeded. Pages run `43368828066` first failed artifact retrieval, then succeeded on retry attempt 2. Cache-busted production JSON confirmed revision 4.9, 52 sheets through A1/052, the rotation callout and 335 wire objects.
+- Next: continue at A1/053 in a source-backed increment.
