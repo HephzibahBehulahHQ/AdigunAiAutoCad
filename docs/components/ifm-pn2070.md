@@ -447,3 +447,10 @@
 - The PN2070-02 data sheet lists the zero-point temperature coefficient as 0.2% of the span per 10 K and the span temperature coefficient as 0.2% of the span per 10 K, for −25 to 80 °C.
 - A1/089 records both manufacturer coefficients and their listed range only. No site temperature, project correction or measurement is assigned.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
+
+
+## A1/090 hysteresis deviation
+
+- The PN2070-02 data sheet lists hysteresis deviation below ±0.1% of the span with turn-down 1:1.
+- A1/090 records this manufacturer specification only. No hysteresis setting or measured project behavior is assigned.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Accuracy / deviations table, 01.03.2024.
