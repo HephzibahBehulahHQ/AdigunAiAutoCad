@@ -1179,7 +1179,7 @@ test('ninety-one-sheet connected reference opening set preserves the starter and
   const project = parsed.project;
   assert.equal(project.sheets.length, 91);
   assert.equal(project.activeSheet, 'ref-006');
-  assert.ok(project.status.includes('A1/091–A1/100 not authored'));
+  assert.ok(project.status.includes('A1/092–A1/100 not authored'));
   const ids = new Set(project.objects.map(object => object.id));
   assert.equal(ids.size, project.objects.length);
   for (const sheet of project.sheets) {
@@ -1385,7 +1385,7 @@ test('A1/010 wires the source-backed PLC transistor output to the Phoenix Contac
   const routed=project.objects.filter(object=>object.sheetId==='ref-007'&&object.kind==='wire'&&object.id.startsWith('a1-010-w07-'));
   assert.equal(routed.length,4);
   assert.ok(routed.every(wire=>wire.x1===wire.x2||wire.y1===wire.y2),'A1/010 PLC supply and output paths must stay orthogonal');
-  assert.match(project.description,/A1\/091–A1\/100 are not authored/);
+  assert.match(project.description,/A1\/092–A1\/100 are not authored/);
   assert.match(project.objects.find(object=>object.id==='doc-ref-003-line-19').text,/2966171.*K2/);
   const roundTrip=engine.parseProject(engine.serializeProject(project));
   assert.equal(roundTrip.valid,true,roundTrip.errors.join(' '));
@@ -3358,7 +3358,7 @@ test('A1/091 records PN2070 manufacturer MTTF without claiming project lifetime'
   for(const required of ['Manufacturer-listed MTTF: 129 years.','Product datum only; no project reliability, expected service life, or maintenance interval is claimed','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-091'&&object.text.includes(required)),'Missing MTTF value or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
-  assert.ok(source.includes('manufacturer-listed mean time to failure (MTTF) of 129 years'));
+  assert.ok(source.includes('lists manufacturer mean time to failure (MTTF) as 129 years'));
   const reopened=engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid,true,reopened.errors.join(' '));
   const roundTrip=engine.analyzeProject(reopened.project);
