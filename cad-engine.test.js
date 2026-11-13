@@ -3307,7 +3307,7 @@ test('A1/089 records PN2070 zero-point and span temperature coefficients',()=>{
   assert.equal(project.status,'Authored opening set: A1/001–A1/089; A1/090–A1/100 not authored.');
   for(const [id,required] of [['doc-ref-002-line-88','A1/089  ifm PN2070 temperature coefficients'],['doc-ref-004-line-80','Revision 8.6 | 2026-11-13 | A1/089']])
     assert.ok(project.objects.find(object=>object.id===id)?.text.includes(required),'Missing A1/089 index or revision record: '+id);
-  for(const required of ['Temperature coefficients: zero point 0.2% and span 0.2% of the span per 10 K (−25...80 °C).','Manufacturer coefficients only; no site temperature, project correction, or measurement is assigned','ifm PN2070-02'])
+  for(const required of ['Zero-point coefficient: 0.2% of span/10 K; span coefficient: 0.2% of span/10 K (−25 to 80 °C).','Manufacturer coefficients only; no site temperature, project correction, or measurement is assigned','ifm PN2070-02'])
     assert.ok(project.objects.some(object=>object.sheetId==='ref-089'&&object.text.includes(required)),'Missing temperature coefficients or scope: '+required);
   const source=fs.readFileSync(path.join(__dirname,'docs','components','ifm-pn2070.md'),'utf8');
   assert.ok(source.includes('zero-point temperature coefficient as 0.2% of the span per 10 K'));
