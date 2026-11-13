@@ -461,3 +461,10 @@
 - The PN2070-02 data sheet lists manufacturer mean time to failure (MTTF) as 129 years.
 - A1/091 records this product datum only. It is not a project reliability calculation, expected service life, or maintenance interval.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
+
+
+## A1/092 EMC references
+
+- The PN2070-02 data sheet's EMC row references DIN EN 61000-6-2 and DIN EN 61000-6-3.
+- A1/092 records these manufacturer-listed references only. It makes no project compliance, installation, or test-result claim.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Tests / approvals table, 01.03.2024.
