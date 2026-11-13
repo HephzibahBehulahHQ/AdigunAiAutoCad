@@ -279,3 +279,10 @@
 - The PN2070-02 data sheet lists IO-Link pressure resolution as 0.1 bar for factory setting / CMPT=2.
 - A1/065 records the manufacturer profile datum only. It does not assign the device mode or make a precision claim.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Factory setting / CMPT=2 table, 01.03.2024.
+
+
+## A1/066 IO-Link pressure resolution, CMPT=3
+
+- The PN2070-02 data sheet lists IO-Link pressure resolution as 0.2 bar for Status_B High Resolution / CMPT=3.
+- A1/066 records the manufacturer profile datum only. It does not assign the device mode or make a precision claim.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Status_B High Resolution / CMPT=3 table, 01.03.2024.
