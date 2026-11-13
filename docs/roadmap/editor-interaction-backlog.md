@@ -285,3 +285,8 @@ Next project increment: A1/070, selected from verified project evidence after th
 A1/070 records the PN2070-02 CMPT=3 cyclical binary switching information field width of 2 bits. It assigns no state-code meanings or project output configuration. No component, wire or interface change.
 
 Next project increment: A1/071, selected from verified project evidence after this milestone.
+
+
+A1/071 records the PN2070-02 manufacturer's DeviceID 638 association with Status_B High Resolution / CMPT=3. This does not establish the installed device configuration. No component, wire or interface change.
+
+Next project increment: A1/072, selected from verified project evidence after this milestone.
