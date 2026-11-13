@@ -270,3 +270,8 @@ Next project increment: A1/067, selected from verified project evidence after th
 A1/067 records the PN2070-02 CMPT=2 cyclical pressure field width of 14 bits. It assigns no profile or decoded payload. No component, wire or interface change.
 
 Next project increment: A1/068, selected from verified project evidence after this milestone.
+
+
+A1/068 records the PN2070-02 CMPT=3 cyclical pressure field width of 16 bits. It assigns no profile or decoded payload. No component, wire or interface change.
+
+Next project increment: A1/069, selected from verified project evidence after this milestone.
