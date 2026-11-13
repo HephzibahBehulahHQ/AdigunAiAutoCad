@@ -350,3 +350,8 @@ Next project increment: A1/083, selected from verified project evidence after th
 A1/083 records IEC 61131-9 as the SDCI standard listed in the PN2070-02 Interfaces table. It makes no compliance assessment or project implementation claim. No component, wire or interface change.
 
 Next project increment: A1/084, selected from verified project evidence after this milestone.
+
+
+A1/084 records the integrated watchdog listed in the PN2070-02 electrical data. It assigns no interval, fault handling or project safety behavior. No component, wire or interface change.
+
+Next project increment: A1/085, selected from verified project evidence after this milestone.
