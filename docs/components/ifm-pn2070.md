@@ -125,3 +125,10 @@
 - A1/043 records those product mechanical data only. They do not define the electrical schematic's scale, installation clearances or total assembly mass.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
 
+
+## A1/044 integrated restrictor element
+
+- The PN2070-02 data sheet lists no integrated restrictor element and states that one can be retrofitted.
+- A1/044 records this product datum only. It does not represent a restrictor installation or retrofit, assess suitability, or claim hydraulic performance for this application.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
+
