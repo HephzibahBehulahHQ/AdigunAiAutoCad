@@ -153,3 +153,10 @@
 - A1/047 records the manufacturer-listed identifier only. No process medium or chemical exposure is specified, and this entry does not establish chemical compatibility or corrosion suitability.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
 
+
+## A1/048 listed materials
+
+- The PN2070-02 data sheet lists materials as stainless steel (630 / 1.4542 / 17-4 PH), stainless steel (316L / 1.4404), PBT+PC-GF30, PBT-GF20 and PC.
+- A1/048 records the product material list only. The data sheet does not map every listed material to a specific sensor part; the wetted-parts material is separately listed on A1/047. This list alone does not establish chemical compatibility or corrosion suitability.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Mechanical data table, 01.03.2024.
+
