@@ -320,3 +320,8 @@ Next project increment: A1/077, selected from verified project evidence after th
 A1/077 records the PN2070-02 acyclical application-specific tag function under Status_B High Resolution / CMPT=3. It assigns no configured tag value or active device profile. No component, wire or interface change.
 
 Next project increment: A1/078, selected from verified project evidence after this milestone.
+
+
+A1/078 records the PN2070-02 IO-Link master-port note: type A, or type B when pin 2 is not connected. It assigns neither installed pin 2 wiring nor master-port selection. No component, wire or interface change.
+
+Next project increment: A1/079, selected from verified project evidence after this milestone.
