@@ -2657,3 +2657,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated opening set revision 7.8, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
 - PR #203 merged as `96da10f239fc9e50480ca9a5a586a1ac12433c7c` after all 128 regression tests passed (PR workflow run `43382879990`). Main model verification run `43382970813` and Pages deployment `43382970853` succeeded. Cache-busted production JSON confirmed revision 7.8, 81 sheets through A1/081, 32 components and 335 wire objects.
 - Next: continue at A1/082 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/082
+
+- Added a text-only PN2070 reference for the SIO mode capability listed by the manufacturer. It selects no project operating mode.
+- Updated opening set revision 7.9, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- PR #205 merged as `702016098ce575c2aa9bedcd860eb174f5c8e6ac` after all 129 regression tests passed (PR workflow run `43383314538`). Main model verification run `43383412211` and Pages deployment `43383411856` succeeded. Cache-busted production JSON confirmed revision 7.9, 82 sheets through A1/082, 32 components and 335 wire objects.
+- Next: continue at A1/083 in a source-backed increment.
