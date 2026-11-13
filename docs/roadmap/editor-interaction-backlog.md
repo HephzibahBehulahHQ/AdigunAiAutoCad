@@ -295,3 +295,8 @@ Next project increment: A1/072, selected from verified project evidence after th
 A1/072 records the PN2070-02 manufacturer's DeviceID 459 association with Factory setting / CMPT=2. This does not establish the installed device configuration. No component, wire or interface change.
 
 Next project increment: A1/073, selected from verified project evidence after this milestone.
+
+
+A1/073 records the PN2070-02 Smart Sensor - SSP 0 Generic Profiled Sensor listing under Factory setting / CMPT=2. It makes no claim about master port, IODD or active device configuration. No component, wire or interface change.
+
+Next project increment: A1/074, selected from verified project evidence after this milestone.
