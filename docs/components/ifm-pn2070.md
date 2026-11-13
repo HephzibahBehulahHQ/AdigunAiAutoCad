@@ -321,3 +321,10 @@
 - The PN2070-02 data sheet lists DeviceID 638 for Status_B High Resolution / CMPT=3.
 - A1/071 records the manufacturer association only. It is not evidence that this specific device is configured to use CMPT=3.
 - Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Supported DeviceIDs table, 01.03.2024.
+
+
+## A1/072 IO-Link DeviceID, factory setting / CMPT=2
+
+- The PN2070-02 data sheet lists DeviceID 459 for Factory setting / CMPT=2.
+- A1/072 records the manufacturer association only. It is not evidence that this specific device is configured to use CMPT=2.
+- Source: [ifm PN2070-02 data sheet (EN-GB)](https://media.ifm.com/dam/d61b3c6f-dc2b-4fe0-af49-278f0521b2d6/Original/PN2070-02_EN-GB.pdf), Supported DeviceIDs table, 01.03.2024.
