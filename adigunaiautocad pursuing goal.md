@@ -2400,3 +2400,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Local verification: A1/049 test and the current local CAD suite passed; `git diff --check` passed. GitHub Actions run `43367047011` initially exposed stale authored-range assertions; corrected all 23 and reran successfully.
 - PR #139 merged as `ea6ea466e93dba901854a85782a5543996085836`. Main model verification run `43367092816` and Pages deployment `43367092757` succeeded. Cache-busted production JSON confirmed revision 4.6, 49 sheets through A1/049, the connector entry and 335 wire objects.
 - Next: continue at A1/050 in a source-backed increment.
+
+
+## 2026-11-13 incremental execution record — A1/050
+
+- Added a text-only ifm PN2070 display reference: three green unit LEDs (bar, psi, MPa), two yellow switching-status LEDs and a 4-digit alphanumeric red/green value display. No unit selection, indicator-state meaning, threshold or remote PLC behavior is inferred.
+- Updated opening set revision 4.7, drawing index, revision record, source record, README, roadmap and regression coverage. No component, wire, topology or interface changes.
+- GitHub PR check run `43367726039` initially caught scope-wording mismatches in the new test; corrected them and reran successfully as `43367726039` on the passing head `0fc66fe2ea1f89b54d9c9b13c16bc611ae37aa5c`. PR #141 merged as `fa60c6e978c2cd353ceb97309d505b959e0b7ad6`.
+- Main model verification run `43367799356` and Pages deployment `43367799433` succeeded. Cache-busted production JSON confirmed revision 4.7, 50 sheets through A1/050, the display data and 335 wire objects.
+- Next: continue at A1/051 in a source-backed increment.
