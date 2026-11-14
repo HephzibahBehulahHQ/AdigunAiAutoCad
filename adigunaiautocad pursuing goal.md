@@ -2938,3 +2938,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #267 merged as `0db46f113f8d2bcddf6412945a6eb8bf3b3e1b67`. PR verification `43592946217`, main verification `43592986037`, and Pages deployment `43592986005` passed.
 - A cache-busted production read confirmed revision A2/012, 12/12 authored sheets, all seven M1 rows, the physical-layout caveat, and the passing report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: add A2/013 as an S0/S1 contact-terminal reference, using component-defined terminal identities and engine net analysis, and state that contact state is not simulated.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/013
+
+- Added A2/013 with four S0/S1 contact terminals, component-defined normal states, and current engine-derived net memberships. All rows are regression-checked against source-backed component definitions and wire analysis; the page states that button actuation and contact continuity are not simulated.
+- Updated project status, revision history, index, README, and generated report for 13 authored sheets and A2/014–A2/100 unauthored. Production measures 253 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #269 merged as `e69dc500a294a529a6ecbff8e120ec28d08d0f23`. PR verification `43593793873`, main verification `43593821594`, and Pages deployment `43593821585` passed.
+- Cache-busted production reads confirmed revision A2/013, 13/13 populated sheets, four control-terminal rows and four normal-state labels, and a passing report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: document X1–X6 feed-through terminal pins and external-boundary wiring only from component definitions and the current net graph; distinguish intentionally unwired field-side pins from model errors.
