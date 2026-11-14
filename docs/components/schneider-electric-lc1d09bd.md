@@ -154,3 +154,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists conventional free-air thermal current Ith of 25 A for the power circuit and 10 A for the signalling circuit, both at ambient temperature up to 60 °C.
 - These are distinct from operational-current ratings and do not select project conductors or protection.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Power dissipation per pole
+
+- The data sheet lists 0.2 W per pole in utilization category AC-3 and 1.56 W per pole in utilization category AC-1.
+- These are category-specific component values; they do not determine project losses, enclosure heat rise, or thermal design.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
