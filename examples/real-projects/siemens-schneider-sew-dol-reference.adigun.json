@@ -6028,7 +6028,7 @@
       "id": "dol-ref-006-line-39",
       "x": 120,
       "y": 1510,
-      "text": "A2/044 | KM1 associated fuse ratings | power type 2 / type 1; signalling circuit. A2/045 | KM1 AC-1 rated operational current | 25 A at ≤440 V AC, ambient ≤60 °C. A2/046–A2/100 not authored.",
+      "text": "A2/044 | associated fuses; A2/045 | AC-1 25 A (≤440 V, ≤60 °C); A2/046–A2/100 not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },

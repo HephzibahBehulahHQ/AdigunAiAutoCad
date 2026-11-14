@@ -3663,8 +3663,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/041 | KM1 signalling-circuit rated making capacity'));
   assert.ok(indexText.includes('A2/042 | KM1 signalling-circuit frequency reference'));
   assert.ok(indexText.includes('A2/043 | KM1 rated short-time withstand current'));
-  assert.ok(indexText.includes('A2/044 | KM1 associated fuse ratings'));
+  assert.ok(indexText.includes('A2/044 | associated fuses'));
+  assert.ok(indexText.includes('A2/045 | AC-1 25 A (≤440 V, ≤60 °C)'));
   assert.ok(indexText.includes('A2/046–A2/100 not authored'));
+  assert.ok(dolProject.objects.find(object => object.id === 'dol-ref-006-line-39').text.length <= 110, 'A2/006 final index row must remain concise');
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
