@@ -3683,7 +3683,7 @@ test('the project-library manifest and generated validation report match the cur
   const motorInstance = dolProject.objects.find(object => object.kind === 'component-instance' && object.ref === 'M1');
   const motorPinNets = new Map();
   const motorAnalysis = engine.analyzeProject(dolProject).sheets.find(sheet => sheet.id === 'dol-reference-001').analysis;
-  for (const net of motorAnalysis.nets) for (const pin of net.pins) motorPinNets.set(pin.instanceId + ':' + pin.pinId, net.id + ' | ' + net.wireIds.length + ' route segments');
+  for (const net of motorAnalysis.nets) for (const pin of net.pins) motorPinNets.set(pin.instanceId + ':' + pin.pinId, net.id + ' | ' + net.wireIds.length + (net.wireIds.length === 1 ? ' route segment' : ' route segments'));
   const expectedMotorRows = engine.worldPins(motorInstance).map(pin => 'M1 | ' + pin.number + ' | ' + pin.name + ' | ' + (motorPinNets.get(motorInstance.id + ':' + pin.id) || 'Not wired in this static drawing'));
   assert.equal(expectedMotorRows.length, 7);
   for (const row of expectedMotorRows) assert.ok(motorReferenceText.includes(row), 'A2/012 must match motor pin and net analysis: ' + row);
