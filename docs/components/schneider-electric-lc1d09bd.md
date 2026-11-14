@@ -118,3 +118,11 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists pollution degree 3 and protective treatment TH conforming to IEC 60068-2-30.
 - These are manufacturer-listed component characteristics; they do not establish the pollution conditions, enclosure, condensation exposure, or suitability of this project installation.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Vibration and shock ratings
+
+- The data sheet lists vibration resistance of 2 Gn with the contactor open and 4 Gn with it closed, over 5–300 Hz.
+- It lists shock resistance of 10 Gn for 11 ms with the contactor open and 15 Gn for 11 ms with it closed.
+- These are manufacturer component ratings with specified test conditions; project exposure and installation suitability are not established.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
