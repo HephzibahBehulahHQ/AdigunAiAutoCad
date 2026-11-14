@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/009",
-  "status": "Nine authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedule part 1 A2/008, and wire schedule part 2 A2/009. The remaining 91 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/010",
+  "status": "Ten authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, and manufacturer source register A2/010. The remaining 90 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -61,6 +61,11 @@
       "id": "dol-reference-009",
       "number": "A2/009",
       "name": "Wire schedule, part 2"
+    },
+    {
+      "id": "dol-reference-010",
+      "number": "A2/010",
+      "name": "Manufacturer source register"
     }
   ],
   "sheetLabels": {},
@@ -754,7 +759,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/009, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/010, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -763,7 +768,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 9 complete editable sheets; A2/010–A2/100 are not authored.",
+      "text": "Progress: 10 complete editable sheets; A2/011–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1507,7 +1512,7 @@
       "id": "dol-ref-006-line-11",
       "x": 120,
       "y": 810,
-      "text": "Current index: eight completed content pages plus this index sheet.",
+      "text": "A2/010 | Manufacturer source register | six source records linked to the current BOM.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1516,7 +1521,7 @@
       "id": "dol-ref-006-line-12",
       "x": 120,
       "y": 876,
-      "text": "A2/010–A2/100 are not authored or listed as completed pages.",
+      "text": "Current index: nine completed content pages plus this index sheet.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1525,7 +1530,7 @@
       "id": "dol-ref-006-line-13",
       "x": 120,
       "y": 942,
-      "text": "Static reference only; the drawing is not construction-ready.",
+      "text": "A2/011–A2/100 are not authored or listed as completed pages.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1782,7 +1787,7 @@
       "y": 1086,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 9 complete authored sheets; A2/010–A2/100 are not authored."
+      "text": "A2/010 | Added source register directly from the six BOM records with exact manufacturer URLs."
     },
     {
       "kind": "text",
@@ -1791,7 +1796,7 @@
       "y": 1164,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open wire endpoints, 0 geometry errors."
+      "text": "Current state: 10 complete authored sheets; A2/011–A2/100 are not authored."
     },
     {
       "kind": "text",
@@ -1800,7 +1805,7 @@
       "y": 1242,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated."
+      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open wire endpoints, 0 geometry errors."
     },
     {
       "kind": "text",
@@ -1809,7 +1814,7 @@
       "y": 1008,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "See the current project JSON and validation report for editable model and measured counts."
+      "text": "Static reference only; the drawing is not construction-ready."
     },
     {
       "kind": "rect",
@@ -2038,6 +2043,180 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
       "text": "Rows are derived from the current static model and do not state conductor sizing or electrical suitability."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-15",
+      "x": 120,
+      "y": 1320,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-15",
+      "x": 120,
+      "y": 1074,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "See the current project JSON and validation report for editable model and measured counts."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-010-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-010"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "MANUFACTURER SOURCE REGISTER · DOL BILL OF MATERIALS"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Phoenix Contact | 3212144 | References X1, X2, X3, X4, X5, X6 | PT 16 N OG · Feed-through terminal block · Item 3212144 | retrieved 2026-11-12"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Source URL: https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-05",
+      "x": 120,
+      "y": 399,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Schneider Electric | LC1D09BD | References KM1 | LC1D09BD · TeSys D contactor · Product data sheet | retrieved 2026-11-12"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-06",
+      "x": 120,
+      "y": 453,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Source URL: https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-07",
+      "x": 120,
+      "y": 575,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Schneider Electric | XB5AA31 | References S1 | XB5AA31 · product data sheet | retrieved 2026-11-12"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-08",
+      "x": 120,
+      "y": 629,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Source URL: https://iportal.se.com/Contents/docs/SQD-XB5AA31_DATA%20SHEET.PDF"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-09",
+      "x": 120,
+      "y": 751,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Schneider Electric | XB5AA42 | References S0 | XB5AA42 · product data sheet | retrieved 2026-11-12"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-10",
+      "x": 120,
+      "y": 805,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Source URL: https://www.se.com/id/id/product/XB5AA42/red-flush-complete-pushbutton-%C3%B822-spring-return-1nc-unmarked/"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-11",
+      "x": 120,
+      "y": 927,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "SEW-EURODRIVE | DRN63MS4 | References M1 | DRN.. AC motors · motor data table, 400 V, 50 Hz, 4-pole | retrieved 2026-11-12"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-12",
+      "x": 120,
+      "y": 981,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Source URL: https://download.sew-eurodrive.com/download/pdf/30590116.pdf"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-13",
+      "x": 120,
+      "y": 1103,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Siemens | 3RV2011-0FA10 | References Q1 | 3RV2011-0FA10 · product data sheet | retrieved 2026-11-12"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-14",
+      "x": 120,
+      "y": 1157,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Source URL: https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-15",
+      "x": 120,
+      "y": 1303,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Six source records are copied from the current engine-derived BOM metadata."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-010-line-16",
+      "x": 120,
+      "y": 1357,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-010",
+      "text": "Provenance supports traceability; it is not evidence of current application suitability or approval."
     }
   ]
 }
