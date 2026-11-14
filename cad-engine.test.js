@@ -3603,15 +3603,15 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 16);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 16);
-  assert.equal(dolOpening.metrics.contentObjectCount, 301);
+  assert.equal(dolOpening.metrics.sheetCount, 17);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 17);
+  assert.equal(dolOpening.metrics.contentObjectCount, 314);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
   const dolProject = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-reference.adigun.json'), 'utf8'));
   const revisionText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-004').map(object => object.text).join(' ');
-  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016']) assert.ok(revisionText.includes(revision));
+  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017']) assert.ok(revisionText.includes(revision));
   const designBasisText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-005').map(object => object.text).join(' ');
   for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'Starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
   const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
@@ -3626,7 +3626,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/014 | X1–X6 terminal boundary reference'));
   assert.ok(indexText.includes('A2/015 | Static control-path net reference'));
   assert.ok(indexText.includes('A2/016 | Three-phase power-path net reference'));
-  assert.ok(indexText.includes('A2/017–A2/100 are not authored'));
+  assert.ok(indexText.includes('A2/017 | Application input omissions register'));
+  assert.ok(indexText.includes('A2/018–A2/100 are not authored'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3649,6 +3650,33 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
+  assert.equal(dolProject.revision, 'A2/017');
+  assert.equal(dolProject.sheets.length, 17);
+  const inputRegisterText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-017').map(object => object.text);
+  const expectedInputRows = [
+      "Q1 | overloadSettingA = null; published 0.35–0.5 A range; no trip point is selected.",
+      "AC supply | X1–X3 mark 400 V AC boundaries; source impedance and available short-circuit current are not modeled.",
+      "Control supply | X5/X6 mark external +24 V / 0 V DC boundaries; source capacity and branch protection are not modeled.",
+      "Field conductors | 38 wire records use drawing-path geometry; conductor type, size, and field installation are not represented.",
+      "PE installation | A2/016 net-11 maps M1:PE to X4:1/X4:2; conductor sizing and installation-test evidence are not recorded.",
+      "Motor application | M1 is rated 0.12 kW / 0.405 A; the driven load and operating duty are unspecified.",
+      "Site conditions | ambient, enclosure, and derating inputs are not recorded."
+  ];
+  for (const row of expectedInputRows) assert.ok(inputRegisterText.includes(row), 'A2/017 must retain the project-data gap: ' + row);
+  assert.ok(inputRegisterText.some(row => row.includes('assigns no values or compliance conclusions')));
+  assert.ok(inputRegisterText.some(row => row.includes('engineering review remains necessary')));
+  const q1Setting = dolProject.objects.find(object => object.kind === 'component-instance' && object.ref === 'Q1').properties.overloadSettingA;
+  assert.equal(q1Setting, null, 'A2/017 Q1 entry must reflect the unset model property');
+  const boundaryMarkings = dolProject.objects.filter(object => object.kind === 'component-instance' && ['X1', 'X2', 'X3', 'X5', 'X6'].includes(object.ref)).map(object => object.properties.marking);
+  for (const marking of ['L1 · 400 V AC', 'L2 · 400 V AC', 'L3 · 400 V AC', '+24 V DC', '0 V DC']) assert.ok(boundaryMarkings.includes(marking));
+  assert.equal(wireReport.rows.length, 38);
+  const modeledWires = dolProject.objects.filter(object => object.kind === 'wire');
+  assert.ok(modeledWires.every(wire => !['conductorMaterial', 'conductorCrossSectionMm2', 'installationMethod'].some(field => Object.hasOwn(wire, field))));
+  const peNet = powerAnalysis.nets.find(net => net.id === 'dol-reference-001:net-11');
+  assert.ok(peNet.pins.some(pin => pin.ref === 'M1' && pin.number === 'PE'));
+  assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '1'));
+  assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
+
   const controlPathText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-015').map(object => object.text);
   const controlAnalysis = engine.analyzeProject(dolProject).sheets.find(sheet => sheet.id === 'dol-reference-001').analysis;
   const controlLabels = new Map([['dol-reference-001:net-12', 'X5 control boundary to S0 NC input'], ['dol-reference-001:net-13', 'S0 NC output to parallel S1/KM1 auxiliary NO inputs'], ['dol-reference-001:net-14', 'Parallel NO outputs to KM1 coil A1'], ['dol-reference-001:net-15', 'KM1 coil A2 return to X6 boundary']]);
