@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/017",
-  "status": "Seventeen authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, and application-input omissions register A2/017. The remaining 83 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/018",
+  "status": "Eighteen authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, and KM1 coil demand reference A2/018. The remaining 82 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -101,6 +101,11 @@
       "id": "dol-reference-017",
       "number": "A2/017",
       "name": "Application input omissions register"
+    },
+    {
+      "id": "dol-reference-018",
+      "number": "A2/018",
+      "name": "KM1 coil demand reference"
     }
   ],
   "sheetLabels": {},
@@ -794,7 +799,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/017, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/018, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -803,7 +808,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 17 complete editable sheets; A2/018–A2/100 are not authored.",
+      "text": "Progress: 18 complete editable sheets; A2/019–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -2641,10 +2646,10 @@
       "kind": "text",
       "id": "dol-ref-006-line-18",
       "x": 120,
-      "y": 1194,
+      "y": 1251,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Current index: sixteen completed content pages plus this index sheet."
+      "text": "Current index: seventeen completed content pages plus this index sheet."
     },
     {
       "kind": "rect",
@@ -2734,19 +2739,19 @@
       "kind": "text",
       "id": "dol-ref-004-line-19a",
       "x": 120,
-      "y": 1292,
+      "y": 1350,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 17 complete authored sheets; A2/018–A2/100 are not authored."
+      "text": "Current state: 18 complete authored sheets; A2/019–A2/100 are not authored."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 1251,
+      "y": 1308,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/018–A2/100 are not authored or listed as completed pages."
+      "text": "A2/019–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -2917,7 +2922,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-20",
       "x": 120,
-      "y": 1350,
+      "y": 1408,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "Current validation: 11 components, 38 wires, 15 nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
@@ -2926,7 +2931,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-20",
       "x": 120,
-      "y": 1317,
+      "y": 1365,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "Static reference only; the drawing is not construction-ready."
@@ -3028,7 +3033,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-21",
       "x": 120,
-      "y": 1408,
+      "y": 1466,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "Static reference only; switching, motor behavior, protection, and installation suitability are not simulated."
@@ -3037,7 +3042,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-21",
       "x": 120,
-      "y": 1383,
+      "y": 1422,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "See the current project JSON and validation report for editable model and measured counts."
@@ -3326,6 +3331,135 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/017 | Application input omissions register | explicit unknowns; no values assumed."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-018-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-018"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "KM1 24 V DC COIL DEMAND · SOURCE REFERENCE"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "KM1 | Schneider Electric LC1D09BD | 24 V DC coil terminals A1/A2."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "Source FA33405 | LC1D09–D38 low-consumption coil average: 2.4 W at 20 °C and nominal Uc."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "At KM1 nominal Uc = 24 V DC | 2.4 W ÷ 24 V = 0.10 A (100 mA) average per coil."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "This is one coil’s average nominal input; it is not total control-circuit demand or a supply-adequacy result."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-07",
+      "x": 120,
+      "y": 439,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "Other loads, branch protection, wiring drop, coil transients, and contactor operation are not assessed here."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-08",
+      "x": 120,
+      "y": 493,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "The 24 V control source remains an external boundary; source capacity is not modeled."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-09",
+      "x": 120,
+      "y": 547,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "Source: Schneider Electric FAQ FA33405, modified 2025-04-09."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-10",
+      "x": 120,
+      "y": 601,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "https://www.se.com/es/es/faqs/FA33405/"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-018-line-11",
+      "x": 120,
+      "y": 655,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-018",
+      "text": "No coil-state or contactor-actuation behavior is simulated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-20",
+      "x": 120,
+      "y": 1292,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "A2/018 | Added source-backed KM1 average coil consumption and 24 V current reference."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-19",
+      "x": 120,
+      "y": 1194,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "A2/018 | KM1 coil demand reference | manufacturer average and derived nominal current."
     }
   ]
 }
