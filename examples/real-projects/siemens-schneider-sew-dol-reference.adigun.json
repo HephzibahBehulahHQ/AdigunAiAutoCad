@@ -3571,7 +3571,7 @@
       "y": 385,
       "stroke": "#13263b",
       "sheetId": "dol-reference-018",
-      "text": "This is one coil’s average nominal input; it is not total control-circuit demand or a supply-adequacy result."
+      "text": "The 0.10 A value is arithmetic from FAQ FA33405's 2.4 W average at 24 V; it is not a project measurement."
     },
     {
       "kind": "text",
@@ -3580,7 +3580,7 @@
       "y": 439,
       "stroke": "#13263b",
       "sheetId": "dol-reference-018",
-      "text": "Other loads, branch protection, wiring drop, coil transients, and contactor operation are not assessed here."
+      "text": "The FAQ's 2.4 W average differs from the LC1D09BD datasheet's 5.4 W inrush and hold-in power; the sources do not reconcile the terms."
     },
     {
       "kind": "text",
@@ -3589,7 +3589,7 @@
       "y": 493,
       "stroke": "#13263b",
       "sheetId": "dol-reference-018",
-      "text": "The 24 V control source remains an external boundary; source capacity is not modeled."
+      "text": "These data do not establish total control-circuit demand or 24 V source adequacy; exact coil consumption is unresolved here."
     },
     {
       "kind": "text",
@@ -6667,7 +6667,7 @@
       "sheetId": "dol-reference-051",
       "id": "dol-ref-051-line-07",
       "y": 463,
-      "text": "FA33405 separately lists 2.4 W average for the LC1D09–D38 low-consumption coil; that separate source/rating is not combined or treated as interchangeable here."
+      "text": "FAQ FA33405 reports 2.4 W average for LC1D09–D38 low-consumption 24 V DC coils and references LC1D09BD; its figure differs from these BD datasheet values."
     },
     {
       "kind": "text",
@@ -6676,7 +6676,7 @@
       "sheetId": "dol-reference-051",
       "id": "dol-ref-051-line-08",
       "y": 521,
-      "text": "Source: Schneider Electric LC1D09BD product data sheet, https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+      "text": "The sources do not reconcile the figures; do not combine or substitute them. Verify the exact coil variant and measurement terms."
     },
     {
       "kind": "rect",
@@ -6916,6 +6916,15 @@
       "sheetId": "dol-reference-053",
       "id": "dol-ref-053-line-08",
       "y": 521,
+      "text": "Source: Schneider Electric LC1D09BD product data sheet, https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-051",
+      "id": "dol-ref-051-line-09",
+      "y": 579,
       "text": "Source: Schneider Electric LC1D09BD product data sheet, https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
     }
   ]
