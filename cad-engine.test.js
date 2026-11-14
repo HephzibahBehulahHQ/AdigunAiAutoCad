@@ -3741,7 +3741,7 @@ test('the project-library manifest and generated validation report match the cur
   ];
   for (const row of expectedDimensionRows) assert.ok(dimensionsReferenceText.includes(row), 'A2/021 must match Schneider data and preserve physical-layout limits: ' + row);
   assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-021' && sheet.number === 'A2/021'));
-  const terminalReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-022').map(object => object.text);
+  const km1TorqueReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-022').map(object => object.text);
   const expectedTerminalRows = [
     "KM1 | Schneider Electric LC1D09BD.",
     "Power screw-clamp terminal tightening torque: 1.7 N·m.",
@@ -3751,7 +3751,7 @@ test('the project-library manifest and generated validation report match the cur
     "Cable selection, preparation, and field torque verification are not represented by this static drawing.",
     "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
   ];
-  for (const row of expectedTerminalRows) assert.ok(terminalReferenceText.includes(row), 'A2/022 must preserve source-backed terminal data and limits: ' + row);
+  for (const row of expectedTerminalRows) assert.ok(km1TorqueReferenceText.includes(row), 'A2/022 must preserve source-backed terminal data and limits: ' + row);
   assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-022' && sheet.number === 'A2/022'));
 
 
