@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/026",
-  "status": "Twenty-six authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, and KM1 rated insulation voltage reference A2/026. The remaining 74 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/027",
+  "status": "Twenty-seven authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, and KM1 rated impulse withstand voltage reference A2/027. The remaining 73 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -146,6 +146,11 @@
       "id": "dol-reference-026",
       "number": "A2/026",
       "name": "KM1 rated insulation voltage reference"
+    },
+    {
+      "id": "dol-reference-027",
+      "number": "A2/027",
+      "name": "KM1 rated impulse withstand voltage reference"
     }
   ],
   "sheetLabels": {},
@@ -839,7 +844,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/026, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/027, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -848,7 +853,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 26 complete editable sheets; A2/027–A2/100 are not authored.",
+      "text": "Progress: 27 complete editable sheets; A2/028–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -2782,7 +2787,7 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 26 complete authored sheets; A2/027–A2/100 are not authored."
+      "text": "Current state: 27 complete authored sheets; A2/028–A2/100 are not authored."
     },
     {
       "kind": "text",
@@ -2974,7 +2979,7 @@
       "y": 1418,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/027–A2/100 are not authored or listed as completed pages."
+      "text": "A2/027 | KM1 rated impulse withstand voltage reference | 6 kV catalog value under IEC 60947."
     },
     {
       "kind": "rect",
@@ -3085,7 +3090,7 @@
       "y": 1471,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Static reference only; see the project JSON and validation report for counts. The drawing is not construction-ready."
+      "text": "A2/028–A2/100 are not authored. Static reference only; see project JSON and validation report; not construction-ready."
     },
     {
       "kind": "rect",
@@ -3730,7 +3735,7 @@
       "y": 1342,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/020 | AC-3 rating; A2/021 | dimensions; A2/022 | torque; A2/023 | conductor options; A2/024 | coil limits; A2/025 | durability; A2/026 | rated insulation. Project coordination remains unverified."
+      "text": "A2/020 | AC-3 rating; A2/021 | dimensions; A2/022 | torque; A2/023 | conductor options; A2/024 | coil limits; A2/025 | durability; A2/026 | rated insulation; A2/027 | rated impulse withstand voltage. Project coordination remains unverified."
     },
     {
       "kind": "text",
@@ -4388,6 +4393,81 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-026",
       "text": "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-027-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-02",
+      "x": 120,
+      "y": 169,
+      "text": "KM1 RATED IMPULSE WITHSTAND VOLTAGE · SOURCE REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-03",
+      "x": 120,
+      "y": 223,
+      "text": "KM1 | Schneider Electric LC1D09BD.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-04",
+      "x": 120,
+      "y": 277,
+      "text": "Manufacturer rated impulse withstand voltage Uimp: 6 kV, conforming to IEC 60947.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-05",
+      "x": 120,
+      "y": 331,
+      "text": "This is a component catalog rating; it is not an installation transient limit or a project insulation-coordination result.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-06",
+      "x": 120,
+      "y": 385,
+      "text": "Surge protection, transient exposure, assembly coordination, and installation conditions are not assessed.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-027-line-07",
+      "x": 120,
+      "y": 439,
+      "text": "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-027"
     }
   ]
 }
