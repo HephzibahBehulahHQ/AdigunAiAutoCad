@@ -68,3 +68,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The CSA and UL certification entries list 600 V for both power and signalling circuits.
 - These are product ratings. They do not establish project insulation coordination, assembly suitability, wiring insulation, clearances, or installation conditions.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Operating rate
+
+- The data sheet lists an operating rate of 3,600 cycles/hour at ambient temperature up to 60 °C.
+- This is a manufacturer component rating; it does not establish the project's switching duty, sequence, or system response.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
