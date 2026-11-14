@@ -24,12 +24,16 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
         "sheetCount": 1,
+        "authoredSheetCount": 1,
+        "contentObjectCount": 21,
+        "emptyContentSheetIds": [],
         "componentCount": 5,
         "wireCount": 13,
         "netCount": 4,
@@ -52,12 +56,16 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
         "sheetCount": 1,
+        "authoredSheetCount": 1,
+        "contentObjectCount": 14,
+        "emptyContentSheetIds": [],
         "componentCount": 4,
         "wireCount": 10,
         "netCount": 5,
@@ -80,12 +88,16 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
         "sheetCount": 1,
+        "authoredSheetCount": 1,
+        "contentObjectCount": 51,
+        "emptyContentSheetIds": [],
         "componentCount": 15,
         "wireCount": 33,
         "netCount": 17,
@@ -108,12 +120,16 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
         "sheetCount": 1,
+        "authoredSheetCount": 1,
+        "contentObjectCount": 49,
+        "emptyContentSheetIds": [],
         "componentCount": 11,
         "wireCount": 38,
         "netCount": 15,
@@ -136,12 +152,16 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
         "sheetCount": 1,
+        "authoredSheetCount": 1,
+        "contentObjectCount": 257,
+        "emptyContentSheetIds": [],
         "componentCount": 15,
         "wireCount": 242,
         "netCount": 26,
@@ -164,12 +184,16 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
         "sheetCount": 100,
+        "authoredSheetCount": 100,
+        "contentObjectCount": 1096,
+        "emptyContentSheetIds": [],
         "componentCount": 32,
         "wireCount": 335,
         "netCount": 67,
@@ -188,16 +212,20 @@
       "topologyId": "direct-on-line-motor-feeder",
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
-      "revision": "A2/001",
+      "revision": "A2/002",
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
-        "sheetCount": 1,
+        "sheetCount": 2,
+        "authoredSheetCount": 2,
+        "contentObjectCount": 60,
+        "emptyContentSheetIds": [],
         "componentCount": 11,
         "wireCount": 38,
         "netCount": 15,
