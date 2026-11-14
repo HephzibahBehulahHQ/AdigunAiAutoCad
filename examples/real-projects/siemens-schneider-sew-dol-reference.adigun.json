@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/012",
-  "status": "Twelve authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, manufacturer source register A2/010, Q1/KM1 terminal reference A2/011, and M1 terminal/net reference A2/012. The remaining 88 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/013",
+  "status": "Thirteen authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, Q1/KM1 reference A2/011, M1 reference A2/012, and S0/S1 control-contact reference A2/013. The remaining 87 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -76,6 +76,11 @@
       "id": "dol-reference-012",
       "number": "A2/012",
       "name": "M1 terminal and net reference"
+    },
+    {
+      "id": "dol-reference-013",
+      "number": "A2/013",
+      "name": "S0 and S1 control-contact reference"
     }
   ],
   "sheetLabels": {},
@@ -769,7 +774,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/012, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/013, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -778,7 +783,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 12 complete editable sheets; A2/013–A2/100 are not authored.",
+      "text": "Progress: 13 complete editable sheets; A2/014–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1027,7 +1032,7 @@
       "id": "dol-ref-004-line-04",
       "x": 120,
       "y": 384,
-      "text": "A2/002 | Added project status, scope, device and limitation record; schematic topology unchanged.",
+      "text": "A2/002 | Added scope, external boundaries, and static-model limitations.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1036,7 +1041,7 @@
       "id": "dol-ref-004-line-05",
       "x": 120,
       "y": 462,
-      "text": "A2/003 | Added six-row component register derived from the engine BOM; line-by-line equality is tested.",
+      "text": "A2/003 | Added the six-row component register derived from the engine BOM.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1045,7 +1050,7 @@
       "id": "dol-ref-004-line-06",
       "x": 120,
       "y": 540,
-      "text": "A2/004 | Added this revision record; no component, wire, or topology changes.",
+      "text": "A2/004 | Added this revision history; the electrical topology was unchanged.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1053,8 +1058,8 @@
       "kind": "text",
       "id": "dol-ref-004-line-07",
       "x": 120,
-      "y": 696,
-      "text": "A2/005 | Added manufacturer-backed rating comparison and documented its limits; no setting selected.",
+      "y": 618,
+      "text": "A2/005 | Added source-backed motor and breaker rating comparison; no setting selected.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1062,8 +1067,8 @@
       "kind": "text",
       "id": "dol-ref-004-line-08",
       "x": 120,
-      "y": 774,
-      "text": "A2/006 | Added drawing index listing only authored pages.",
+      "y": 696,
+      "text": "A2/006 | Added index listing authored pages only.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1071,8 +1076,8 @@
       "kind": "text",
       "id": "dol-ref-004-line-09",
       "x": 120,
-      "y": 852,
-      "text": "A2/007 | Added 15 engine-derived pin/net groups with exact pin references.",
+      "y": 774,
+      "text": "A2/007 | Added 15 engine-derived net groups and pin references.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1776,46 +1781,46 @@
       "kind": "text",
       "id": "dol-ref-004-line-10",
       "x": 120,
-      "y": 930,
+      "y": 852,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/008 | Added wire schedule part 1 for W001–W019 of 38 engine-derived route segments."
+      "text": "A2/008 | Added engine-derived wire rows W001–W019."
     },
     {
       "kind": "text",
       "id": "dol-ref-004-line-11",
       "x": 120,
-      "y": 1008,
+      "y": 930,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/009 | Added wire schedule part 2 for W020–W038; rows match the engine wire list."
+      "text": "A2/009 | Added engine-derived wire rows W020–W038."
     },
     {
       "kind": "text",
       "id": "dol-ref-004-line-12",
       "x": 120,
-      "y": 1086,
+      "y": 1008,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/010 | Added source register directly from the six BOM records with exact manufacturer URLs."
+      "text": "A2/010 | Added the six BOM source records and manufacturer URLs."
     },
     {
       "kind": "text",
       "id": "dol-ref-004-line-13",
       "x": 120,
-      "y": 1164,
+      "y": 1086,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/011 | Added Q1/KM1 pin identities and mapped connected pins to A2/001 engine nets."
+      "text": "A2/011 | Added Q1/KM1 terminal and net reference."
     },
     {
       "kind": "text",
       "id": "dol-ref-004-line-14",
       "x": 120,
-      "y": 1242,
+      "y": 1164,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 12 complete authored sheets; A2/013–A2/100 are not authored."
+      "text": "A2/012 | Added M1 terminal and net reference; no physical layout claim."
     },
     {
       "kind": "text",
@@ -1824,7 +1829,7 @@
       "y": 1008,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Current index: eleven completed content pages plus this index sheet."
+      "text": "A2/013 | S0/S1 control-contact reference | four source-backed terminals mapped to current nets."
     },
     {
       "kind": "rect",
@@ -2058,10 +2063,10 @@
       "kind": "text",
       "id": "dol-ref-004-line-15",
       "x": 120,
-      "y": 1320,
+      "y": 1242,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open wire endpoints, 0 geometry errors."
+      "text": "A2/013 | Added S0/S1 terminal, source-backed normal-state, and net reference."
     },
     {
       "kind": "text",
@@ -2070,7 +2075,7 @@
       "y": 1074,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/013–A2/100 are not authored or listed as completed pages."
+      "text": "Current index: twelve completed content pages plus this index sheet."
     },
     {
       "kind": "rect",
@@ -2232,10 +2237,10 @@
       "kind": "text",
       "id": "dol-ref-004-line-16",
       "x": 120,
-      "y": 1398,
+      "y": 1320,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated."
+      "text": "Current state: 13 complete authored sheets; A2/014–A2/100 are not authored."
     },
     {
       "kind": "text",
@@ -2244,7 +2249,7 @@
       "y": 1140,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Static reference only; the drawing is not construction-ready."
+      "text": "A2/014–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -2469,10 +2474,10 @@
       "kind": "text",
       "id": "dol-ref-004-line-17",
       "x": 120,
-      "y": 1476,
+      "y": 1398,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/012 | Added the source-backed M1 terminal/net reference; schematic coordinates are not a physical layout."
+      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
     },
     {
       "kind": "text",
@@ -2481,7 +2486,7 @@
       "y": 1206,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "See the current project JSON and validation report for editable model and measured counts."
+      "text": "Static reference only; the drawing is not construction-ready."
     },
     {
       "kind": "rect",
@@ -2602,6 +2607,108 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
       "text": "Schematic coordinates do not depict physical motor-terminal positions; motor behavior is not simulated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-18",
+      "x": 120,
+      "y": 1476,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "Static reference only; actuation, trips, coordination, safety, and suitability are not evaluated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-18",
+      "x": 120,
+      "y": 1272,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "See the current project JSON and validation report for editable model and measured counts."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-013-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-013"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "S0 / S1 CONTACT TERMINAL REFERENCE · 4 PINS"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "S0 | 21 | Push-button contact terminal 21 | normal state: closed | dol-reference-001:net-12 | 3 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "S0 | 22 | Push-button contact terminal 22 | normal state: closed | dol-reference-001:net-13 | 7 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "S1 | 13 | Push-button contact terminal 13 | normal state: open | dol-reference-001:net-13 | 7 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "S1 | 14 | Push-button contact terminal 14 | normal state: open | dol-reference-001:net-14 | 8 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-07",
+      "x": 120,
+      "y": 1249,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "S0 and S1 part sources and exact manufacturer URLs are listed on A2/010."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-013-line-08",
+      "x": 120,
+      "y": 1303,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-013",
+      "text": "Normal contact states are sourced model data; button actuation and continuity are not simulated."
     }
   ]
 }
