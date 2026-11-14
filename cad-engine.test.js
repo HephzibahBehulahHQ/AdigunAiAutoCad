@@ -3604,9 +3604,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 63);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 63);
-  assert.equal(dolOpening.metrics.contentObjectCount, 735);
+  assert.equal(dolOpening.metrics.sheetCount, 64);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 64);
+  assert.equal(dolOpening.metrics.contentObjectCount, 743);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3624,7 +3624,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(new Set(indexObjects.map(object => object.y)).size, indexObjects.length, 'A2/006 index rows must not overlap');
   const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
   for (const page of ['A2/001 | DOL motor feeder schematic', 'A2/002 | Project status and scope', 'A2/003 | Component register', 'A2/004 | Revision record', 'A2/005 | Design basis and rating comparison']) assert.ok(indexText.includes(page));
-  assert.ok(indexText.includes('A2/004 | Revision record | history through A2/063'));
+  assert.ok(indexText.includes('A2/004 | Revision record | history through A2/064'));
   assert.ok(indexText.includes('A2/007 | Pin/net connection schedule'));
   assert.ok(indexText.includes('A2/008 | Wire schedule, part 1'));
   assert.ok(indexText.includes('A2/009 | Wire schedule, part 2'));
@@ -3674,8 +3674,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/052 Type 1'));
   assert.ok(dolProject.objects.find(object => object.id === 'dol-ref-006-line-39').text.length <= 110, 'A2/006 final index row must remain concise');
   const scopeProgress = dolProject.objects.filter(object => object.sheetId === 'dol-reference-002').map(object => object.text).join(' ');
-  assert.ok(scopeProgress.includes('63 complete editable sheets; A2/064–A2/100 are not authored.'));
-  assert.ok(scopeProgress.includes('63 complete authored sheets; A2/064–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('64 complete editable sheets; A2/065–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('64 complete authored sheets; A2/065–A2/100 are not authored.'));
   const q1InstallationAltitudeSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-061');
   assert.equal(q1InstallationAltitudeSheet.number, 'A2/061');
   const q1InstallationAltitudeText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-061').map(object => object.text).join(' ');
@@ -3691,6 +3691,11 @@ test('the project-library manifest and generated validation report match the cur
   const q1OperatingFrequencyText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-063').map(object => object.text).join(' ');
   for (const fact of ['rated operating frequency 50…60 Hz', 'project supply frequency is not assigned', 'does not establish motor compatibility, operating duty, or application suitability', '3RV2011-0FA10', 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10']) assert.ok(q1OperatingFrequencyText.includes(fact), 'A2/063 must retain the source-backed Q1 frequency and scope: ' + fact);
   assert.equal(dolProject.objects.filter(object => object.sheetId === 'dol-reference-063').length, 9);
+  const q1BreakingCapacitySheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-064');
+  assert.equal(q1BreakingCapacitySheet.number, 'A2/064');
+  const q1BreakingCapacityText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-064').map(object => object.text).join(' ');
+  for (const fact of ['Ultimate short-circuit breaking capacity (Icu): 100 kA at 400 V AC', 'not the project\'s prospective fault current', 'does not establish assembly short-circuit rating or protective-device coordination', '3RV2011-0FA10', 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10']) assert.ok(q1BreakingCapacityText.includes(fact), 'A2/064 must retain the source-backed Q1 capacity and scope: ' + fact);
+  assert.equal(dolProject.objects.filter(object => object.sheetId === 'dol-reference-064').length, 9);
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3713,8 +3718,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/063');
-  assert.equal(dolProject.sheets.length, 63);
+  assert.equal(dolProject.revision, 'A2/064');
+  assert.equal(dolProject.sheets.length, 64);
   const coilTimeConstantSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-050');
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
@@ -3871,10 +3876,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/063');
-  assert.equal(dolProject.sheets.length, 63);
-  assert.match(dolProject.status, /^Sixty-three authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 37 sheets are not authored.'));
+  assert.equal(dolProject.revision, 'A2/064');
+  assert.equal(dolProject.sheets.length, 64);
+  assert.match(dolProject.status, /^Sixty-four authored sheets:/);
+  assert.ok(dolProject.status.includes('The remaining 36 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
@@ -4155,8 +4160,8 @@ test('A2/060 records Siemens Q1 operating humidity without assigning project con
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-060');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-060').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/063');
-  assert.equal(project.sheets.length,63);
+  assert.equal(project.revision,'A2/064');
+  assert.equal(project.sheets.length,64);
   assert.equal(sheet.number,'A2/060');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 operating-humidity reference');
   assert.ok(text.includes('relative humidity during operation 10…95%'));
