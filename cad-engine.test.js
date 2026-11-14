@@ -4024,4 +4024,3 @@ test('the project-library manifest and generated validation report match the cur
   );
   assert.deepEqual(savedReport, report);
 });
-

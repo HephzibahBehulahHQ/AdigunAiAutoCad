@@ -215,4 +215,3 @@ Open `siemens-schneider-sew-dol-reference.adigun.json` from the workstation's **
 ## DOL reference project status
 
 The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 40 authored sheets through A2/040. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
-
