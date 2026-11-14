@@ -59,3 +59,11 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists electrical durability of 2 Mcycles at 9 A AC-3 and Ue ≤440 V AC.
 - This is a manufacturer catalog condition, not a project switching-duty or service-life estimate. Operating cycles, load profile, environment, maintenance, and contact wear are not modeled.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Rated insulation voltage
+
+- The data sheet lists rated insulation voltage Ui as 690 V for the power circuit under IEC 60947-4-1 and 690 V for the signalling circuit under IEC 60947-1.
+- The CSA and UL certification entries list 600 V for both power and signalling circuits.
+- These are product ratings. They do not establish project insulation coordination, assembly suitability, wiring insulation, clearances, or installation conditions.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
