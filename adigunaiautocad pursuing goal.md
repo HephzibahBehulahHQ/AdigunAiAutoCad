@@ -3036,3 +3036,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the LC1D09BD component specification, source note, project status/revision/index, README, regression tests, and generated validation report for 25 authored sheets and A2/026–A2/100 unauthored. The content-object count is expected to rise from 398 to 406; the existing 11 components, 38 wires, 15 nets, six BOM rows, and zero open endpoints remain unchanged.
 - Source: Schneider Electric LC1D09BD data sheet, electrical durability row.
 - Next: inspect the remaining DOL source facts for the next distinct increment; direct production runtime confirmation remains pending the observed custom-domain DNS condition.
+
+
+## 2026-11-14 incremental execution record — DOL KM1 rated insulation voltage A2/026
+
+- Added A2/026 with Schneider Electric LC1D09BD rated insulation voltage: 690 V for the power circuit under IEC 60947-4-1 and 690 V for the signalling circuit under IEC 60947-1; the data sheet lists 600 V for both circuit groups under CSA and UL certification entries. Project insulation coordination and assembly suitability remain unverified.
+- Updated the component definition, project revision/status/index, source note, README, regression tests and validation report for 26 authored sheets and A2/027–A2/100 unauthored. The electrical topology remains unchanged.
+- Source: Schneider Electric LC1D09BD data sheet, rated insulation voltage rows.
+- Next: inspect the remaining source-backed DOL facts for the next distinct increment; production runtime is now directly reachable at the custom domain.
