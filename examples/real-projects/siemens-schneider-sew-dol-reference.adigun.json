@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/006",
-  "status": "Six authored sheets: DOL schematic A2/001, project status/scope A2/002, component register A2/003, revision record A2/004, design-basis comparison A2/005, and drawing index A2/006. The remaining 94 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/007",
+  "status": "Seven authored sheets: DOL schematic A2/001, project status/scope A2/002, component register A2/003, revision record A2/004, sourced design basis A2/005, drawing index A2/006, and pin/net schedule A2/007. The remaining 93 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -46,6 +46,11 @@
       "id": "dol-reference-006",
       "number": "A2/006",
       "name": "Drawing index"
+    },
+    {
+      "id": "dol-reference-007",
+      "number": "A2/007",
+      "name": "Pin and net connection schedule"
     }
   ],
   "sheetLabels": {},
@@ -1303,6 +1308,198 @@
       "text": "See the project JSON and validation report for editable model and measured counts.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-007-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-01",
+      "x": 120,
+      "y": 145,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-02",
+      "x": 120,
+      "y": 203,
+      "text": "PIN / NET SCHEDULE · DERIVED FROM ENGINE ANALYSIS",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-03",
+      "x": 120,
+      "y": 261,
+      "text": "dol-reference-001:net-1 | Q1:1/L1; X1:1; X1:2 | Wire segments: 2",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-04",
+      "x": 120,
+      "y": 319,
+      "text": "dol-reference-001:net-2 | Q1:3/L2; X2:1; X2:2 | Wire segments: 2",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-05",
+      "x": 120,
+      "y": 377,
+      "text": "dol-reference-001:net-3 | Q1:5/L3; X3:1; X3:2 | Wire segments: 2",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-06",
+      "x": 120,
+      "y": 435,
+      "text": "dol-reference-001:net-4 | KM1:1/L1; Q1:2/T1 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-07",
+      "x": 120,
+      "y": 493,
+      "text": "dol-reference-001:net-5 | KM1:3/L2; Q1:4/T2 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-08",
+      "x": 120,
+      "y": 551,
+      "text": "dol-reference-001:net-6 | KM1:5/L3; Q1:6/T3 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-09",
+      "x": 120,
+      "y": 609,
+      "text": "dol-reference-001:net-7 | KM1:2/T1; M1:U1 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-10",
+      "x": 120,
+      "y": 667,
+      "text": "dol-reference-001:net-8 | KM1:4/T2; M1:V1 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-11",
+      "x": 120,
+      "y": 725,
+      "text": "dol-reference-001:net-9 | KM1:6/T3; M1:W1 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-12",
+      "x": 120,
+      "y": 783,
+      "text": "dol-reference-001:net-10 | M1:U2; M1:V2; M1:W2 | Wire segments: 4",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-13",
+      "x": 120,
+      "y": 841,
+      "text": "dol-reference-001:net-11 | M1:PE; X4:1; X4:2 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-14",
+      "x": 120,
+      "y": 899,
+      "text": "dol-reference-001:net-12 | S0:21; X5:1; X5:2 | Wire segments: 3",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-15",
+      "x": 120,
+      "y": 957,
+      "text": "dol-reference-001:net-13 | KM1:13; S0:22; S1:13 | Wire segments: 7",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-16",
+      "x": 120,
+      "y": 1015,
+      "text": "dol-reference-001:net-14 | KM1:14; KM1:A1; S1:14 | Wire segments: 8",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-17",
+      "x": 120,
+      "y": 1073,
+      "text": "dol-reference-001:net-15 | KM1:A2; X6:1; X6:2 | Wire segments: 3",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-18",
+      "x": 120,
+      "y": 1131,
+      "text": "Derived analysis: 15 sheet-local nets, 38 routed wire segments, and 39 connected terminal-pin records.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-19",
+      "x": 120,
+      "y": 1189,
+      "text": "Static connectivity only; current, voltage drop, protection behavior, and motor performance are not simulated.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-line-20",
+      "x": 120,
+      "y": 1247,
+      "text": "Component terminal identities and manufacturer provenance remain in the source-backed component definitions.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
     }
   ]
 }
