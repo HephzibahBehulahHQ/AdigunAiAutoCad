@@ -3598,10 +3598,15 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(report.status, 'passed', JSON.stringify(report.projects.filter(project => project.status !== 'passed')));
   assert.ok(report.summary.projectArtifactCount >= 6);
   assert.equal(report.summary.validatedArtifactCount, report.summary.projectArtifactCount);
+  assert.ok(report.projects.every(project => project.metrics.authoredSheetCount === project.metrics.sheetCount
+    && project.metrics.emptyContentSheetIds.length === 0));
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 1);
+  assert.equal(dolOpening.metrics.sheetCount, 2);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 2);
+  assert.equal(dolOpening.metrics.contentObjectCount, 60);
+  assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
   assert.equal(
