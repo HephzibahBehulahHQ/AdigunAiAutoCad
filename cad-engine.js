@@ -194,6 +194,14 @@
       coilOperationalRangeAt60C: { minimum: 0.7, maximum: 1.25, unit: '× Uc' },
       coilDropOutRangeAt60C: { minimum: 0.1, maximum: 0.25, unit: '× Uc' },
       electricalDurabilityAc3: { value: 2, unit: 'Mcycles', conditions: '9 A AC-3 at Ue ≤440 V AC' },
+      ratedInsulationVoltage: {
+        iecPowerCircuit: { value: 690, unit: 'V', standard: 'IEC 60947-4-1' },
+        iecSignallingCircuit: { value: 690, unit: 'V', standard: 'IEC 60947-1' },
+        csaPowerCircuit: { value: 600, unit: 'V' },
+        ulPowerCircuit: { value: 600, unit: 'V' },
+        csaSignallingCircuit: { value: 600, unit: 'V' },
+        ulSignallingCircuit: { value: 600, unit: 'V' }
+      },
       auxiliaryContactComposition: { value: '1 mechanically-linked NO + 1 mechanically-linked NC' },
       coilSuppressor: { value: 'Built-in bidirectional peak-limiting diode' },
       standards: { value: ['IEC 60947-4-1', 'IEC 60947-5-1', 'UL 508'] },
