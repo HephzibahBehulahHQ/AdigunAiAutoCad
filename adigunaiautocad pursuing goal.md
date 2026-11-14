@@ -2920,3 +2920,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #263 merged as `83ecf06b03d75f85f731786025e901cdf51ee2cc`. PR verification `43591985766` and main verification `43592027214` passed. The first Pages deployment attempt `43592027212` failed because the deploy action could not find its uploaded artifact; retrying the failed deploy job succeeded.
 - Cache-busted production checks confirmed revision A2/010, all ten sheets populated, six provenance rows and six source URLs, the correct index entry, and the passing seven-artifact report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: add an A2/011 terminal/function reference only where component definitions and the current engine's pin/net analysis establish each identity and connection; label any static-model limitations explicitly.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/011
+
+- Added A2/011 with 18 Q1/KM1 terminal rows from source-backed component definitions. Each connected pin maps to the current A2/001 net and segment count; KM1 auxiliary NC pins 21 and 22 are explicitly identified as unwired in this static drawing. Regression coverage checks every row against engine pin and net analysis.
+- The project status, revision record, index, README, and generated report now consistently record 11 populated sheets and A2/012–A2/100 as not authored. Production measures 229 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #265 merged as `935c892b7dbfd4d649ebfb6adbb914c719fb1d1c`. PR verification `43592529047`, main verification `43592569873`, and Pages deployment `43592570149` passed.
+- Cache-busted production checks confirmed revision A2/011, 11/11 authored sheets, all 18 terminal rows, both unwired NC pins, and the passing seven-artifact report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: add A2/012 as a source-backed M1 terminal/net reference from SEW component definitions and the engine's net graph; state clearly that schematic pin coordinates do not represent physical motor-terminal positions.
