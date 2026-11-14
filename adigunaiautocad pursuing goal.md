@@ -2988,6 +2988,10 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Cache-busted production reads confirmed the A2/019 sheet, exact conditional path text, and passing report. Workstation interface and existing circuit geometry are unchanged.
 - Next: inspect the current source-backed DOL model for a distinct A2/020 increment; keep every engineering statement tied to model or manufacturer evidence.
 
+## 2026-11-14 incremental execution record — DOL KM1 AC-3 catalog reference A2/020
 
-
-
+- Added A2/020 with Schneider Electric's published LC1D09BD rating of 9 A AC-3 at Ue ≤440 V AC and ambient ≤60 °C. The sheet links the manufacturer data sheet and states that catalog ratings do not establish project suitability or coordination; switching and protection behavior are not simulated.
+- Updated the project status, revision history, index, README, regression assertions, and generated validation report for 20 authored sheets and A2/021–A2/100 unauthored. Production report measures 352 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #284 merged as `fea228a59f919f2fd47a658d1349ede6eab89c63`. Final PR verification run `43600167690` and Pages deployment run `43600236574` passed.
+- Production reads confirmed A2/020, 20 authored sheets, the 9 A AC-3 rating and stated conditions, plus a passing validation report with the metrics above. The distinct 100-sheet topology gate remains 1/5. No interface or existing circuit geometry changed.
+- Next: inspect the current source-backed DOL model for a distinct A2/021 increment; keep catalog facts separate from application-specific suitability claims.
