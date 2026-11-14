@@ -3699,10 +3699,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/026');
-  assert.equal(dolProject.sheets.length, 26);
-  assert.match(dolProject.status, /^Twenty-six authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 74 sheets are not authored.'));
+  assert.equal(dolProject.revision, 'A2/027');
+  assert.equal(dolProject.sheets.length, 27);
+  assert.match(dolProject.status, /^Twenty-seven authored sheets:/);
+  assert.ok(dolProject.status.includes('The remaining 73 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
@@ -3717,6 +3717,7 @@ test('the project-library manifest and generated validation report match the cur
     csaPowerCircuit: { value: 600, unit: 'V' }, ulPowerCircuit: { value: 600, unit: 'V' },
     csaSignallingCircuit: { value: 600, unit: 'V' }, ulSignallingCircuit: { value: 600, unit: 'V' }
   });
+  assert.deepEqual(lc1d09.specifications.ratedImpulseWithstandVoltage, { value: 6, unit: 'kV', standard: 'IEC 60947' });
   assert.ok(lc1d09.sources.some(source => source.url === 'https://www.se.com/es/es/faqs/FA33405/' && source.modifiedAt === '2025-04-09'));
   assert.equal((lc1d09.specifications.averageCoilConsumptionAtNominalUc.value / lc1d09.electricalFunctions.contactor.coil.nominalVoltage.value).toFixed(2), '0.10');
   const contactorDoc = fs.readFileSync(path.join(__dirname, 'docs', 'components', 'schneider-electric-lc1d09bd.md'), 'utf8');
