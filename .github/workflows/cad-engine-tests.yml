@@ -7,6 +7,11 @@ on:
       - "cad-engine.test.js"
       - ".github/workflows/cad-engine-tests.yml"
       - "index.html"
+      - "cad-engine.test.js"
+      - "examples/real-projects/**"
+      - "docs/components/**"
+      - "docs/reports/project-library-validation.json"
+      - "scripts/project-library-validation.js"
   push:
     branches: [main]
     paths:
