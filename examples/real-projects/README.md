@@ -214,7 +214,7 @@ Open `siemens-schneider-sew-dol-reference.adigun.json` from the workstation's **
 
 ## DOL reference project status
 
-The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 77 authored sheets through A2/077. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
+The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 78 authored sheets through A2/078. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
 
 
 A2/045 records Schneider Electric LC1D09BD rated operational current as 25 A AC-1 at ≤440 V AC and ambient ≤60 °C, separately from the 9 A AC-3 rating. These are utilization-category component ratings, not project load, cable or protection selections.
@@ -281,3 +281,6 @@ A2/076 records Siemens’ 25 g / 11 ms shock-resistance listing for Q1 3RV2011-0
 
 
 A2/077 records Siemens’ Q1 ambient temperature ranges of −20 to +60 °C during operation and −50 to +80 °C during storage and transport. These component data-sheet conditions do not qualify the project environment or establish installed performance.
+
+
+A2/078 records Siemens’ 280 g net-weight value for Q1 3RV2011-0FA10. This component value is not an assembly mass calculation; accessories and other installed equipment are outside the listing.
