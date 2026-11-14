@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/018",
-  "status": "Eighteen authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, and KM1 coil demand reference A2/018. The remaining 82 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/019",
+  "status": "Nineteen authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, and DOL seal-in path reference A2/019. The remaining 81 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -106,6 +106,11 @@
       "id": "dol-reference-018",
       "number": "A2/018",
       "name": "KM1 coil demand reference"
+    },
+    {
+      "id": "dol-reference-019",
+      "number": "A2/019",
+      "name": "DOL seal-in path reference"
     }
   ],
   "sheetLabels": {},
@@ -799,7 +804,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/018, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/019, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -808,7 +813,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 18 complete editable sheets; A2/019–A2/100 are not authored.",
+      "text": "Progress: 19 complete editable sheets; A2/020–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -2508,7 +2513,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-17",
       "x": 120,
-      "y": 1080,
+      "y": 1023,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/016 | Three-phase power-path net reference | 11 engine-derived groups, star point, and PE."
@@ -2637,7 +2642,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-18",
       "x": 120,
-      "y": 1176,
+      "y": 1158,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/016 | Added 11-net three-phase power path, star point, and PE reference."
@@ -2646,10 +2651,10 @@
       "kind": "text",
       "id": "dol-ref-006-line-18",
       "x": 120,
-      "y": 1251,
+      "y": 1308,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Current index: seventeen completed content pages plus this index sheet."
+      "text": "Current index: eighteen completed content pages plus this index sheet."
     },
     {
       "kind": "rect",
@@ -2739,19 +2744,19 @@
       "kind": "text",
       "id": "dol-ref-004-line-19a",
       "x": 120,
-      "y": 1350,
+      "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 18 complete authored sheets; A2/019–A2/100 are not authored."
+      "text": "Current state: 19 complete authored sheets; A2/020–A2/100 are not authored."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 1308,
+      "y": 1365,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/019–A2/100 are not authored or listed as completed pages."
+      "text": "A2/020–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -2922,7 +2927,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-20",
       "x": 120,
-      "y": 1408,
+      "y": 1422,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "Current validation: 11 components, 38 wires, 15 nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
@@ -2931,7 +2936,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-20",
       "x": 120,
-      "y": 1365,
+      "y": 1418,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "Static reference only; the drawing is not construction-ready."
@@ -3033,7 +3038,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-21",
       "x": 120,
-      "y": 1466,
+      "y": 1474,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "Static reference only; switching, motor behavior, protection, and installation suitability are not simulated."
@@ -3042,7 +3047,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-21",
       "x": 120,
-      "y": 1422,
+      "y": 1471,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "See the current project JSON and validation report for editable model and measured counts."
@@ -3318,7 +3323,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-19",
       "x": 120,
-      "y": 1234,
+      "y": 1210,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/017 | Added application-input omissions register; no design values assumed."
@@ -3327,7 +3332,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18a",
       "x": 120,
-      "y": 1137,
+      "y": 1080,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/017 | Application input omissions register | explicit unknowns; no values assumed."
@@ -3447,7 +3452,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-20",
       "x": 120,
-      "y": 1292,
+      "y": 1262,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/018 | Added source-backed KM1 average coil consumption and 24 V current reference."
@@ -3456,10 +3461,139 @@
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 1194,
+      "y": 1137,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/018 | KM1 coil demand reference | manufacturer average and derived nominal current."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-019-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-019"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "DOL SEAL-IN PATH · STATIC LOGIC REFERENCE"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "STOP: S0 21–22 | NC series contact | net-12 → net-13."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "START: S1 13–14 | NO branch | net-13 → net-14."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Seal-in branch: KM1 auxiliary 13–14 | NO | parallel to START across net-13 and net-14."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Coil route: KM1:A1 is on net-14; KM1:A2 returns on net-15 to X6 0 V DC."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-07",
+      "x": 120,
+      "y": 439,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Contact-path condition: closed(S0:21–22) ∧ [closed(S1:13–14) ∨ closed(KM1 aux:13–14)] connects net-12 to KM1:A1."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-08",
+      "x": 120,
+      "y": 493,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Normal contacts: S0 21–22 closed; S1 13–14 and KM1 auxiliary 13–14 open."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-09",
+      "x": 120,
+      "y": 547,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Terminal roles follow source-backed component definitions; net IDs and pins are checked against A2/001 analysis."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-10",
+      "x": 120,
+      "y": 601,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "No supply, button action, contact transition, coil actuation, or safety function is simulated or validated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-019-line-11",
+      "x": 120,
+      "y": 655,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-019",
+      "text": "Static wiring reference only; no safety rating or application-suitability claim."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-22",
+      "x": 120,
+      "y": 1314,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "A2/019 | Added conditional STOP/START/auxiliary seal-in path from exact contact pins and engine nets."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-22",
+      "x": 120,
+      "y": 1194,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "A2/019 | DOL seal-in path | conditional logic from source-backed contacts and analyzed nets."
     }
   ]
 }
