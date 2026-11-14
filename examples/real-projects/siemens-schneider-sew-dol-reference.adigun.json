@@ -6303,7 +6303,7 @@
       "sheetId": "dol-reference-047",
       "id": "dol-ref-047-line-05",
       "y": 347,
-      "text": "B10d: 2,000,000 cycles for contactor with mechanical load; conforming to EN/ISO 13849-1."
+      "text": "B10d: 20,000,000 cycles for contactor with mechanical load; conforming to EN/ISO 13849-1."
     },
     {
       "kind": "text",
