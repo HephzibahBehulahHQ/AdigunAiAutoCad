@@ -7,7 +7,10 @@ on:
       - "cad-engine.test.js"
       - ".github/workflows/cad-engine-tests.yml"
       - "index.html"
-      - "cad-engine.test.js"
+      - "examples/real-projects/**"
+      - "docs/components/**"
+      - "docs/reports/project-library-validation.json"
+      - "scripts/project-library-validation.js"
       - "examples/real-projects/**"
       - "docs/components/**"
       - "docs/reports/project-library-validation.json"
@@ -19,6 +22,10 @@ on:
       - "cad-engine.test.js"
       - ".github/workflows/cad-engine-tests.yml"
       - "index.html"
+      - "examples/real-projects/**"
+      - "docs/components/**"
+      - "docs/reports/project-library-validation.json"
+      - "scripts/project-library-validation.js"
 
 permissions:
   contents: read
@@ -35,3 +42,5 @@ jobs:
           node-version: 24
       - name: Test source-backed component model and connectivity
         run: node --test cad-engine.test.js
+      - name: Check generated project-library validation report
+        run: node scripts/project-library-validation.js --check
