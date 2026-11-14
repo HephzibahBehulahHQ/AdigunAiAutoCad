@@ -3637,7 +3637,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/023 | terminal conductor options'));
   assert.ok(indexText.includes('A2/024 | coil voltage limits'));
   assert.ok(indexText.includes('A2/025 | AC-3 electrical durability'));
-  assert.ok(indexText.includes('A2/026 | rated insulation voltage'));
+  assert.ok(indexText.includes('A2/026 | KM1 rated insulation voltage'));
   assert.ok(indexText.includes('A2/027–A2/100 are not authored'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
