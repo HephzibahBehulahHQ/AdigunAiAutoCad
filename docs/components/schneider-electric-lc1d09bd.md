@@ -126,3 +126,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - It lists shock resistance of 10 Gn for 11 ms with the contactor open and 15 Gn for 11 ms with it closed.
 - These are manufacturer component ratings with specified test conditions; project exposure and installation suitability are not established.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Mechanical durability
+
+- The data sheet lists mechanical durability of 30 Mcycles.
+- This is a component catalog rating, not a project service-life or operating-cycle estimate. Project duty, load profile, environment, maintenance, and contact wear are not modeled.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
