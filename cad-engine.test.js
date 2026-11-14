@@ -3722,6 +3722,12 @@ test('the project-library manifest and generated validation report match the cur
   ];
   for (const row of expectedAc3Rows) assert.ok(ac3ReferenceText.includes(row), 'A2/020 must preserve source-backed AC-3 conditions and limitations: ' + row);
   assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-020' && sheet.number === 'A2/020'));
+  assert.ok(dolProject.status.includes("DOL seal-in path reference A2/019"));
+  const history020 = dolProject.objects.find(object => object.id === 'dol-ref-004-line-23');
+  const index020 = dolProject.objects.find(object => object.id === 'dol-ref-006-line-23');
+  assert.equal(history020.text.startsWith('A2/020 |'), true);
+  assert.equal(index020.text.startsWith('A2/020 |'), true);
+
 
   const sealInText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-019').map(object => object.text);
   const expectedSealInRows = [
