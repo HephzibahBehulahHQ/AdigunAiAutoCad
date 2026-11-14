@@ -49,6 +49,14 @@
       "path": "examples/real-projects/siemens-sew-star-delta-reference.adigun.json",
       "role": "multi-sheet-reference-package",
       "extendsProjectId": "star-delta-starter"
+    },
+    {
+      "id": "dol-reference-opening",
+      "title": "DOL motor feeder 100-sheet reference project opening",
+      "topologyId": "direct-on-line-motor-feeder",
+      "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
+      "role": "multi-sheet-reference-package",
+      "extendsProjectId": "dol-motor-feeder"
     }
   ]
 }

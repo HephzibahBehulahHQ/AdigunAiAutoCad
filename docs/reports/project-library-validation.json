@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 6,
-    "validatedArtifactCount": 6,
+    "projectArtifactCount": 7,
+    "validatedArtifactCount": 7,
     "distinctTopologyCount": 5,
     "distinct100SheetTopologyCount": 1,
     "firstScaleGate": {
@@ -179,6 +179,34 @@
         "geometryErrorCount": 0,
         "bomRowCount": 15,
         "wireListRowCount": 335
+      },
+      "errors": []
+    },
+    {
+      "id": "dol-reference-opening",
+      "title": "DOL motor feeder 100-sheet reference project opening",
+      "topologyId": "direct-on-line-motor-feeder",
+      "role": "multi-sheet-reference-package",
+      "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
+      "revision": "A2/001",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "componentCount": 11,
+        "wireCount": 38,
+        "netCount": 15,
+        "globalNetCount": 15,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 6,
+        "wireListRowCount": 38
       },
       "errors": []
     }
