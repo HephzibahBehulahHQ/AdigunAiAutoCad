@@ -75,3 +75,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists an operating rate of 3,600 cycles/hour at ambient temperature up to 60 °C.
 - This is a manufacturer component rating; it does not establish the project's switching duty, sequence, or system response.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Signalling-circuit minimum switching values
+
+- The data sheet lists a minimum switching current of 5 mA and a minimum switching voltage of 17 V for the signalling circuit.
+- These are manufacturer component limits for the auxiliary signalling circuit. They do not establish compatibility with a connected PLC input, switching reliability in the installation, or project behavior.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
