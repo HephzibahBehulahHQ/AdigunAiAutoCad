@@ -3613,7 +3613,7 @@ test('the project-library manifest and generated validation report match the cur
   const revisionText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-004').map(object => object.text).join(' ');
   for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004']) assert.ok(revisionText.includes(revision));
   const designBasisText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-005').map(object => object.text).join(' ');
-  for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
+  for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'Starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
   const dolBom = engine.billOfMaterials(dolProject.objects);
   const registerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-003').map(object => object.text);
   assert.equal(dolBom.valid, true);
