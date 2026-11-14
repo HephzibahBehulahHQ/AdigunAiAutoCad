@@ -3709,6 +3709,20 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(km1ForCoil.properties.comment.includes('24 V DC coil'));
 
 
+  const ac3ReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-020').map(object => object.text);
+  const expectedAc3Rows = [
+    "KM1 | Schneider Electric TeSys D LC1D09BD | three-pole contactor.",
+    "Manufacturer rating: 9 A AC-3 at Ue ≤440 V AC and ambient ≤60 °C.",
+    "These are the manufacturer’s stated conditions for this catalog rating.",
+    "Catalog rating only; it does not establish application suitability or coordination.",
+    "Source: Schneider Electric LC1D09BD product data sheet.",
+    "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+    "Motor duty, starting, protection, coordination, fault level, and site conditions are not assessed.",
+    "Contactor switching and protection behavior are not simulated."
+  ];
+  for (const row of expectedAc3Rows) assert.ok(ac3ReferenceText.includes(row), 'A2/020 must preserve source-backed AC-3 conditions and limitations: ' + row);
+  assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-020' && sheet.number === 'A2/020'));
+
   const sealInText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-019').map(object => object.text);
   const expectedSealInRows = [
       "STOP: S0 21–22 | NC series contact | net-12 → net-13.",
