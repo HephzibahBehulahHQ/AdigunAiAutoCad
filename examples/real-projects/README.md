@@ -214,7 +214,7 @@ Open `siemens-schneider-sew-dol-reference.adigun.json` from the workstation's **
 
 ## DOL reference project status
 
-The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 71 authored sheets through A2/071. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
+The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 72 authored sheets through A2/072. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
 
 
 A2/045 records Schneider Electric LC1D09BD rated operational current as 25 A AC-1 at ≤440 V AC and ambient ≤60 °C, separately from the 9 A AC-3 rating. These are utilization-category component ratings, not project load, cable or protection selections.
@@ -268,3 +268,5 @@ A2/069 records Siemens’ rated operational current of 0.5 A in AC-3 and AC-3e a
 A2/070 records Siemens’ listed phase-failure-detection product function for Q1 3RV2011-0FA10. This catalog feature does not verify project detection, trip response, motor protection, or control behavior.
 
 A2/071 records Siemens’ listed Q1 dimensions of 97 mm high, 45 mm wide, and 97 mm deep, with screw fastening or snap-on mounting on a 35 mm DIN rail. These component data do not define enclosure layout, clearance, or installation.
+
+A2/072 records that Siemens lists ground-fault detection as No for Q1 3RV2011-0FA10. This component limitation does not characterize other project devices or establish the project's ground-fault protection.
