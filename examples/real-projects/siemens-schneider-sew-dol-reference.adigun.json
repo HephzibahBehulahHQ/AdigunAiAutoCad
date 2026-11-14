@@ -2330,7 +2330,7 @@
       "y": 385,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "Q1 | 2/T1 | Phase T1 load terminal | dol-reference-001:net-4 | 1 segments"
+      "text": "Q1 | 2/T1 | Phase T1 load terminal | dol-reference-001:net-4 | 1 segment"
     },
     {
       "kind": "text",
@@ -2339,7 +2339,7 @@
       "y": 439,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "Q1 | 4/T2 | Phase T2 load terminal | dol-reference-001:net-5 | 1 segments"
+      "text": "Q1 | 4/T2 | Phase T2 load terminal | dol-reference-001:net-5 | 1 segment"
     },
     {
       "kind": "text",
@@ -2348,7 +2348,7 @@
       "y": 493,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "Q1 | 6/T3 | Phase T3 load terminal | dol-reference-001:net-6 | 1 segments"
+      "text": "Q1 | 6/T3 | Phase T3 load terminal | dol-reference-001:net-6 | 1 segment"
     },
     {
       "kind": "text",
@@ -2375,7 +2375,7 @@
       "y": 655,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 1/L1 | Main pole 1 line terminal | dol-reference-001:net-4 | 1 segments"
+      "text": "KM1 | 1/L1 | Main pole 1 line terminal | dol-reference-001:net-4 | 1 segment"
     },
     {
       "kind": "text",
@@ -2384,7 +2384,7 @@
       "y": 709,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 2/T1 | Main pole 1 load terminal | dol-reference-001:net-7 | 1 segments"
+      "text": "KM1 | 2/T1 | Main pole 1 load terminal | dol-reference-001:net-7 | 1 segment"
     },
     {
       "kind": "text",
@@ -2393,7 +2393,7 @@
       "y": 763,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 3/L2 | Main pole 2 line terminal | dol-reference-001:net-5 | 1 segments"
+      "text": "KM1 | 3/L2 | Main pole 2 line terminal | dol-reference-001:net-5 | 1 segment"
     },
     {
       "kind": "text",
@@ -2402,7 +2402,7 @@
       "y": 817,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 4/T2 | Main pole 2 load terminal | dol-reference-001:net-8 | 1 segments"
+      "text": "KM1 | 4/T2 | Main pole 2 load terminal | dol-reference-001:net-8 | 1 segment"
     },
     {
       "kind": "text",
@@ -2411,7 +2411,7 @@
       "y": 871,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 5/L3 | Main pole 3 line terminal | dol-reference-001:net-6 | 1 segments"
+      "text": "KM1 | 5/L3 | Main pole 3 line terminal | dol-reference-001:net-6 | 1 segment"
     },
     {
       "kind": "text",
@@ -2420,7 +2420,7 @@
       "y": 925,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 6/T3 | Main pole 3 load terminal | dol-reference-001:net-9 | 1 segments"
+      "text": "KM1 | 6/T3 | Main pole 3 load terminal | dol-reference-001:net-9 | 1 segment"
     },
     {
       "kind": "text",
@@ -2540,7 +2540,7 @@
       "y": 223,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | U1 | Winding U line end | dol-reference-001:net-7 | 1 route segments"
+      "text": "M1 | U1 | Winding U line end | dol-reference-001:net-7 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2549,7 +2549,7 @@
       "y": 277,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | V1 | Winding V line end | dol-reference-001:net-8 | 1 route segments"
+      "text": "M1 | V1 | Winding V line end | dol-reference-001:net-8 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2558,7 +2558,7 @@
       "y": 331,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | W1 | Winding W line end | dol-reference-001:net-9 | 1 route segments"
+      "text": "M1 | W1 | Winding W line end | dol-reference-001:net-9 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2594,7 +2594,7 @@
       "y": 547,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | PE | Protective earth connection | dol-reference-001:net-11 | 1 route segments"
+      "text": "M1 | PE | Protective earth connection | dol-reference-001:net-11 | 1 route segment"
     },
     {
       "kind": "text",
