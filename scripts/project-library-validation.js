@@ -33,6 +33,34 @@ function readManifest() {
   return manifest;
 }
 
+function summarizeSheetContent(project) {
+  const sheets = Array.isArray(project.sheets) && project.sheets.length
+    ? project.sheets
+    : [{ id: project.activeSheet || 'main' }];
+  const objects = Array.isArray(project.objects) ? project.objects : [];
+  const perSheet = sheets.map(sheet => {
+    const pageObjects = objects.filter(object => object
+      && (object.sheetId === sheet.id || (!object.sheetId && sheets.length === 1)));
+    const contentObjects = pageObjects.filter(object => {
+      if (object.kind === 'component-instance' || object.kind === 'wire') return true;
+      return object.kind === 'text'
+        && typeof object.text === 'string'
+        && object.text.trim().length > 0
+        && !/\\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\\b/i.test(object.text);
+    });
+    return {
+      id: sheet.id,
+      objectCount: pageObjects.length,
+      contentObjectCount: contentObjects.length
+    };
+  });
+  return {
+    authoredSheetCount: perSheet.filter(sheet => sheet.contentObjectCount > 0).length,
+    contentObjectCount: perSheet.reduce((sum, sheet) => sum + sheet.contentObjectCount, 0),
+    emptyContentSheetIds: perSheet.filter(sheet => sheet.contentObjectCount === 0).map(sheet => sheet.id)
+  };
+}
+
 function buildReport() {
   const manifest = readManifest();
   const projects = manifest.projects.map(entry => {
@@ -42,8 +70,10 @@ function buildReport() {
     const analysis = engine.analyzeProject(project);
     const bom = engine.billOfMaterials(project.objects);
     const wireList = engine.wireList(project.objects);
+    const sheetContent = summarizeSheetContent(project);
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
+      allSheetsHaveEditableContent: sheetContent.emptyContentSheetIds.length === 0,
       sourceBackedBom: bom.valid,
       connectedWireList: wireList.valid,
       zeroGeometryErrors: analysis.geometryErrorCount === 0
@@ -66,6 +96,9 @@ function buildReport() {
       checks,
       metrics: {
         sheetCount: analysis.sheetCount,
+        authoredSheetCount: sheetContent.authoredSheetCount,
+        contentObjectCount: sheetContent.contentObjectCount,
+        emptyContentSheetIds: sheetContent.emptyContentSheetIds,
         componentCount: analysis.componentCount,
         wireCount: analysis.wireCount,
         netCount: analysis.netCount,
@@ -82,7 +115,8 @@ function buildReport() {
 
   const validProjects = projects.filter(project => project.status === 'passed');
   const scaleQualifiedTopologies = new Set(validProjects
-    .filter(project => project.metrics.sheetCount >= manifest.scaleTarget.minimumSheetsPerProject)
+    .filter(project => project.metrics.sheetCount >= manifest.scaleTarget.minimumSheetsPerProject
+      && project.metrics.authoredSheetCount === project.metrics.sheetCount)
     .map(project => project.topologyId));
   const distinctTopologies = new Set(projects.map(project => project.topologyId));
   const completedScaleProjects = scaleQualifiedTopologies.size;
