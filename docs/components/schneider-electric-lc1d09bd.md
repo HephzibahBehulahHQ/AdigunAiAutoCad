@@ -104,3 +104,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - It separately lists permissible ambient air around the device at Uc as -40 to +70 °C; this is a distinct data-sheet condition and not the operating range.
 - These component ratings do not establish project site conditions or application suitability.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Operating altitude
+
+- The data sheet lists an operating altitude of 3,000 m without derating in temperature.
+- This is a component catalog statement; project site altitude and application suitability are not established.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).

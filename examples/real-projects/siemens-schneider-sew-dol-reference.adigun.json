@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/032",
-  "status": "Thirty-two authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, and KM1 front-face IP20 reference A2/031, and KM1 ambient-temperature reference A2/032. The remaining 68 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/033",
+  "status": "Thirty-three authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, and KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, and KM1 operating-altitude reference A2/033. The remaining 67 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -176,6 +176,11 @@
       "id": "dol-reference-032",
       "number": "A2/032",
       "name": "KM1 ambient-temperature reference"
+    },
+    {
+      "id": "dol-reference-033",
+      "number": "A2/033",
+      "name": "KM1 operating-altitude reference"
     }
   ],
   "sheetLabels": {},
@@ -869,7 +874,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/032, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/033, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -878,7 +883,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 32 complete editable sheets; A2/033–A2/100 are not authored.",
+      "text": "Progress: 33 complete editable sheets; A2/034–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -2716,7 +2721,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18",
       "x": 120,
-      "y": 1266,
+      "y": 1241,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/026 | KM1 rated insulation voltage reference | IEC and CSA/UL catalog values."
@@ -2812,13 +2817,13 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 32 complete authored sheets; A2/033–A2/100 are not authored."
+      "text": "Current state: 33 complete authored sheets; A2/034–A2/100 are not authored."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 1149,
+      "y": 1133,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/018 | KM1 coil demand reference | manufacturer average and derived nominal current."
@@ -3001,7 +3006,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-20",
       "x": 120,
-      "y": 1305,
+      "y": 1277,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/027 | KM1 rated impulse withstand voltage reference | 6 kV catalog value under IEC 60947."
@@ -3112,7 +3117,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-21",
       "x": 120,
-      "y": 1344,
+      "y": 1313,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/028 | KM1 operating-rate reference | 3,600 cycles/hour at ambient ≤60 °C."
@@ -3397,7 +3402,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18a",
       "x": 120,
-      "y": 1110,
+      "y": 1097,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/017 | Application input omissions register | explicit unknowns; no values assumed."
@@ -3646,7 +3651,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-22",
       "x": 120,
-      "y": 1188,
+      "y": 1169,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/019 | DOL seal-in path | conditional logic from source-backed contacts and analyzed nets."
@@ -3766,7 +3771,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-23",
       "x": 120,
-      "y": 1227,
+      "y": 1205,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/020 | AC-3 catalog rating · A2/021 | dimensions/mounting reference · A2/022 | terminal torque/tool reference · A2/023 | terminal conductor options · A2/024 | coil voltage limits. · A2/025 | AC-3 electrical durability reference."
@@ -4648,7 +4653,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-24",
       "x": 120,
-      "y": 1383,
+      "y": 1349,
       "text": "A2/029 | KM1 signalling-circuit minimum switching reference | 5 mA / 17 V.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -4732,7 +4737,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-25",
       "x": 120,
-      "y": 1422,
+      "y": 1385,
       "text": "A2/030 | KM1 auxiliary-contact non-overlap-time reference | 1.5 ms both directions.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -4816,7 +4821,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-26",
       "x": 120,
-      "y": 1461,
+      "y": 1421,
       "text": "A2/031 | KM1 front-face IP20 reference | IEC 60529.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -4826,7 +4831,7 @@
       "id": "dol-ref-004-line-24",
       "x": 120,
       "y": 1370,
-      "text": "A2/026 | rated insulation; A2/027 | impulse; A2/028 | operating rate; A2/029 | signal minimum; A2/030 | non-overlap; A2/031 | front-face IP20; A2/032 | ambient temperatures.",
+      "text": "A2/026 | rated insulation; A2/027 | impulse; A2/028 | operating rate; A2/029 | signal minimum; A2/030 | non-overlap; A2/031 | front-face IP20; A2/032 | ambient; A2/033 | operating altitude.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -4918,8 +4923,92 @@
       "kind": "text",
       "id": "dol-ref-006-line-27",
       "x": 120,
-      "y": 1500,
-      "text": "A2/032 | KM1 ambient-temperature reference | operating, storage, and separate at-Uc values; A2/033–A2/100 are not authored.",
+      "y": 1457,
+      "text": "A2/032 | KM1 ambient-temperature reference | operation, storage, and at-Uc values.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-033-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-02",
+      "x": 120,
+      "y": 169,
+      "text": "KM1 OPERATING ALTITUDE · SOURCE REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-03",
+      "x": 120,
+      "y": 223,
+      "text": "KM1 | Schneider Electric TeSys D LC1D09BD contactor.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-04",
+      "x": 120,
+      "y": 277,
+      "text": "Manufacturer-listed operating altitude: up to 3,000 m without derating in temperature.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-05",
+      "x": 120,
+      "y": 331,
+      "text": "This is a component catalog statement; it does not establish the project site altitude or application suitability.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-06",
+      "x": 120,
+      "y": 385,
+      "text": "Project altitude, temperature, enclosure, and installation conditions remain unspecified.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-033-line-07",
+      "x": 120,
+      "y": 439,
+      "text": "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-033"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-28",
+      "x": 120,
+      "y": 1493,
+      "text": "A2/033 | KM1 operating-altitude reference | 3,000 m without temperature derating; A2/034–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     }
