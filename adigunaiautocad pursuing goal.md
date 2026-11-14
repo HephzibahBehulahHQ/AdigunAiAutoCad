@@ -2973,5 +2973,13 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated project status, revision history, index, report, and README for 17 authored sheets and A2/018–A2/100 unauthored. Final generated-report metrics: 314 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
 - PR #277 merged as `84959e63dd494df1b820da097615332367183cea`. Final PR verification `43596596242`, main verification `43596652768`, and Pages deployment `43596652767` passed. CI caught and the branch corrected the content-object count before the final passing run.
 - A cache-busted production read confirmed revision A2/017, 17/17 authored sheets, the register page, and the passing validation report. No interface or existing schematic geometry changed.
-- Next: inspect the current source-backed project model for a distinct, non-duplicative A2/018 increment; do not add speculative application data.
+## 2026-11-14 incremental execution record — DOL KM1 coil-demand reference A2/018
+
+- Added source-backed LC1D09BD average coil consumption (2.4 W at 20 °C and nominal Uc; 100 mA at 24 V DC) to the CAD component definition and A2/018. Regression coverage ties the value to Schneider FAQ FA33405 and checks the 2.4 W / 24 V calculation. The page limits this to one coil and makes no total-supply or operation claim.
+- Updated project status, revision history, index, README and generated report for 18 authored sheets and A2/019–A2/100 unauthored. Production report: 327 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #280 merged as `d344818470f8b68e56c6e614486b70e3972b8974`. Final PR verification `43598041912`, main verification `43598099865`, and Pages deployment `43598099743` passed. CI caught and the branch corrected stale revision and sheet-count assertions before the final passing run.
+- Cache-busted production reads confirmed A2/018, the 24 V / 100 mA calculation and source URL, and the passing report. The workstation interface and existing circuit wiring are unchanged.
+- Reconciled stale A1 tracking to the current report: A1 is 100/100 authored, while the five-topology 100-sheet gate remains 1/5. PR #279 and its main verification and Pages deployment passed; production README and roadmap reads confirmed the corrected A1/100 state and A2/018 next target.
+- Next: inspect the current source-backed DOL model for a distinct A2/019 increment; continue to document omissions and manufacturer facts without inventing project-specific values.
+
 
