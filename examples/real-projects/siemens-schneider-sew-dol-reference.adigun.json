@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/022",
-  "status": "Twenty-two authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, and KM1 terminal torque reference A2/022. The remaining 78 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/023",
+  "status": "Twenty-three authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, and KM1 terminal conductor-options reference A2/023. The remaining 77 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -126,6 +126,11 @@
       "id": "dol-reference-022",
       "number": "A2/022",
       "name": "KM1 terminal torque reference"
+    },
+    {
+      "id": "dol-reference-023",
+      "number": "A2/023",
+      "name": "KM1 terminal conductor options"
     }
   ],
   "sheetLabels": {},
@@ -819,7 +824,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/022, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/023, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -828,7 +833,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 22 complete editable sheets; A2/023–A2/100 are not authored.",
+      "text": "Progress: 23 complete editable sheets; A2/024–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -2669,7 +2674,7 @@
       "y": 1365,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Current index: twenty-one completed content pages plus this index sheet."
+      "text": "Current index: twenty-two completed content pages plus this index sheet."
     },
     {
       "kind": "rect",
@@ -2762,7 +2767,7 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 22 complete authored sheets; A2/023–A2/100 are not authored."
+      "text": "Current state: 23 complete authored sheets; A2/024–A2/100 are not authored."
     },
     {
       "kind": "text",
@@ -2954,7 +2959,7 @@
       "y": 1418,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/023–A2/100 are not authored or listed as completed pages."
+      "text": "A2/024–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -3710,7 +3715,7 @@
       "y": 1342,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/020 | AC-3 catalog rating. A2/021 | dimensions/mounting. A2/022 | terminal torque/tool reference. Project suitability, physical layout, and installed torque remain unverified."
+      "text": "A2/020 | AC-3 catalog rating. A2/021 | dimensions/mounting. A2/022 | terminal torque/tools. A2/023 | terminal conductor options. Project selections remain unassigned."
     },
     {
       "kind": "text",
@@ -3719,7 +3724,7 @@
       "y": 1308,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/020 | AC-3 catalog rating · A2/021 | dimensions/mounting reference · A2/022 | terminal torque/tool reference."
+      "text": "A2/020 | AC-3 catalog rating · A2/021 | dimensions/mounting reference · A2/022 | terminal torque/tool reference · A2/023 | terminal conductor options."
     },
     {
       "kind": "rect",
@@ -3915,6 +3920,198 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-022",
       "text": "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-023-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-023"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "KM1 TERMINAL CONDUCTOR OPTIONS · SOURCE REFERENCE"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "KM1 | Schneider Electric LC1D09BD."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER CIRCUIT · SCREW-CLAMP TERMINALS"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER | 1 cable | flexible with cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER | 1 cable | flexible without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-07",
+      "x": 120,
+      "y": 439,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER | 2 cables | flexible without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-08",
+      "x": 120,
+      "y": 493,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER | 2 cables | flexible with cable end | 1–2.5 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-09",
+      "x": 120,
+      "y": 547,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER | 1 cable | solid without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-10",
+      "x": 120,
+      "y": 601,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "POWER | 2 cables | solid without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-11",
+      "x": 120,
+      "y": 655,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL CIRCUIT · SCREW-CLAMP TERMINALS"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-12",
+      "x": 120,
+      "y": 709,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL | 2 cables | flexible with cable end | 1–2.5 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-13",
+      "x": 120,
+      "y": 763,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL | 1 cable | flexible without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-14",
+      "x": 120,
+      "y": 817,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL | 2 cables | flexible without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-15",
+      "x": 120,
+      "y": 871,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL | 1 cable | flexible with cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-16",
+      "x": 120,
+      "y": 925,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL | 1 cable | solid without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-17",
+      "x": 120,
+      "y": 979,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "CONTROL | 2 cables | solid without cable end | 1–4 mm²."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-18",
+      "x": 120,
+      "y": 1033,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "These are manufacturer terminal limits, not project conductor selections."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-19",
+      "x": 120,
+      "y": 1087,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "The project does not assign cable types, preparation, or cross-sections."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-023-line-20",
+      "x": 120,
+      "y": 1141,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-023",
+      "text": "Source: Schneider Electric LC1D09BD data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
     }
   ]
 }

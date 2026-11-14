@@ -23,3 +23,25 @@
 
 - Schneider Electric [FAQ FA33405](https://www.se.com/es/es/faqs/FA33405/), modified 2025-04-09, lists average coil consumption of 2.4 W at 20 °C and nominal control voltage for the low-consumption LC1D09–LC1D38 contactors. For LC1D09BD at 24 V DC, 2.4 W / 24 V = 0.10 A (100 mA).
 - This is a source-backed nominal reference value. It does not model pickup/transient behavior or establish supply, relay, protection, wiring, or application suitability.
+
+
+## Manufacturer terminal conductor options
+
+The official data sheet lists these screw-clamp combinations. Cable count, stiffness, cable-end condition and cross-section are product connection limits; they do not select conductors for this project.
+
+| Circuit | Cables | Stiffness | Cable end | Cross-section |
+| --- | ---: | --- | --- | ---: |
+| power | 1 | flexible | with cable end | 1–4 mm² |
+| power | 1 | flexible | without cable end | 1–4 mm² |
+| power | 2 | flexible | without cable end | 1–4 mm² |
+| power | 2 | flexible | with cable end | 1–2.5 mm² |
+| power | 1 | solid | without cable end | 1–4 mm² |
+| power | 2 | solid | without cable end | 1–4 mm² |
+| control | 2 | flexible | with cable end | 1–2.5 mm² |
+| control | 1 | flexible | without cable end | 1–4 mm² |
+| control | 2 | flexible | without cable end | 1–4 mm² |
+| control | 1 | flexible | with cable end | 1–4 mm² |
+| control | 1 | solid | without cable end | 1–4 mm² |
+| control | 2 | solid | without cable end | 1–4 mm² |
+
+Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF). Actual conductor selection, preparation and installation remain application-specific and are not modeled.
