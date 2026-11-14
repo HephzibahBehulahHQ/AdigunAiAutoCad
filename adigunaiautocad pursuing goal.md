@@ -3028,3 +3028,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #292 merged as `d861797dd08974d9f71c5555c2659e1114ba8925`. PR verification `43603944445`, post-merge verification `43603977000`, and Pages deployment `43603977036` passed. The Pages deployment job completed successfully for the merge SHA.
 - Direct production runtime confirmation remains pending because the custom domain has failed DNS resolution in this environment on the previous checks. No interface files or existing circuit wiring changed. The distinct 100-sheet topology gate remains 1/5.
 - Next: inspect the documented topology backlog for the next source-backed increment; retry production runtime verification only when the DNS condition changes.
+
+
+## 2026-11-14 incremental execution record — DOL KM1 AC-3 electrical durability A2/025
+
+- Added A2/025 with Schneider Electric's published 2 Mcycles electrical-durability condition at 9 A AC-3 and Ue ≤440 V AC. The page identifies this as catalog data and does not claim a project switching duty, lifetime estimate, or contact wear simulation.
+- Updated the LC1D09BD component specification, source note, project status/revision/index, README, regression tests, and generated validation report for 25 authored sheets and A2/026–A2/100 unauthored. The content-object count is expected to rise from 398 to 406; the existing 11 components, 38 wires, 15 nets, six BOM rows, and zero open endpoints remain unchanged.
+- Source: Schneider Electric LC1D09BD data sheet, electrical durability row.
+- Next: inspect the remaining DOL source facts for the next distinct increment; direct production runtime confirmation remains pending the observed custom-domain DNS condition.
