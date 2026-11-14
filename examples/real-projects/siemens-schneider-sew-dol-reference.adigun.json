@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/001",
-  "status": "Opening increment: one complete source-backed DOL motor-feeder schematic is authored. The remaining 99 sheets are not yet authored. Educational reference only; not construction-ready.",
+  "revision": "A2/002",
+  "status": "Two authored sheets: source-backed DOL schematic A2/001 and project status/scope A2/002. The remaining 98 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -21,6 +21,11 @@
       "id": "dol-reference-001",
       "number": "A2/001",
       "name": "DOL motor feeder schematic"
+    },
+    {
+      "id": "dol-reference-002",
+      "number": "A2/002",
+      "name": "Project status and scope"
     }
   ],
   "sheetLabels": {},
@@ -669,6 +674,117 @@
       "y2": 750,
       "stroke": "#1d4ed8",
       "strokeWidth": 1.5
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-002-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-01",
+      "x": 120,
+      "y": 150,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-02",
+      "x": 120,
+      "y": 214,
+      "text": "PROJECT STATUS: DOL motor feeder reference — Siemens / Schneider Electric / SEW-EURODRIVE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-03",
+      "x": 120,
+      "y": 278,
+      "text": "Engineering document set | Opening revision A2/002",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-04",
+      "x": 120,
+      "y": 342,
+      "text": "Authored pages: A2/001–A2/002",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-05",
+      "x": 120,
+      "y": 406,
+      "text": "Progress: 2 complete editable sheets; A2/003–A2/100 are not authored.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-06",
+      "x": 120,
+      "y": 470,
+      "text": "Scope: three-phase DOL feeder with stop/start controls, contactor seal-in, and motor connections.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-07",
+      "x": 120,
+      "y": 534,
+      "text": "Devices: Siemens 3RV2011-0FA10; Schneider LC1D09BD, XB5AA42 and XB5AA31; SEW DRN63MS4; Phoenix Contact terminals.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-08",
+      "x": 120,
+      "y": 598,
+      "text": "External supply boundaries are shown at X1–X6; power sources and site conditions are not assigned.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-09",
+      "x": 120,
+      "y": 662,
+      "text": "The breaker setting is unset. Ratings overlap does not select a setting or establish coordination.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-10",
+      "x": 120,
+      "y": 726,
+      "text": "Static reference only: switching, trips, short-circuit protection, coordination, and safety are not simulated.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-002-line-11",
+      "x": 120,
+      "y": 790,
+      "text": "Qualified engineering review is required before adapting this reference or using it for installation.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-002"
     }
   ]
 }
