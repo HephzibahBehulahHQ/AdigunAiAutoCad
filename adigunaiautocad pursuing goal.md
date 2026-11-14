@@ -2830,3 +2830,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #243 merged as `c9d75a7c12d9e0f762d71b7b3fd2cbc4ba88033f`. PR verification run `43587069869` passed. Main verification `43587128395` and GitHub Pages deployment `43587128390` passed.
 - Cache-busted production reads confirmed the deployed six-entry manifest and six passing reports at the merged main revision. No interface or drawing geometry changed.
 - Next: begin the second distinct 100-sheet project from the existing source-backed DOL motor-feeder topology, adding complete authored pages in small verified increments; count only pages with real editable content.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/001
+
+- Started a second 100-sheet reference project from the source-backed DOL motor-feeder topology with one complete, editable A2/001 schematic. It reuses 11 verified component instances and 38 routed wire segments; the remaining 99 sheets are explicitly not authored or counted.
+- The CAD engine validates 15 nets, six BOM rows, 38 wire-list rows, zero open wire endpoints, and zero geometry errors. The library manifest/report now covers seven artifacts and five distinct topologies; only one distinct topology currently has 100 authored sheets (1/5 toward the first scale gate).
+- PR #245 merged as `85eb7fe6df41cacdecf39de49ab1df928daf37e7`. PR CI `43587626171`, main verification `43587664749`, and Pages deployment `43587664750` passed.
+- Cache-busted production reads confirmed the A2/001 project, its passing report, and the updated seven-entry manifest. No interface or drawing geometry changed.
+- Next: author A2/002 as a complete source-backed project-status and scope sheet; keep the project at its actual authored page count and continue in small validated releases.
