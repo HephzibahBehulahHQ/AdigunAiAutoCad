@@ -89,3 +89,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists a non-overlap time of 1.5 ms on energisation and 1.5 ms on de-energisation between the NC and NO auxiliary contacts.
 - This is a component specification; project switching, connected-load behavior, and system response timing are not established or simulated.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Front-face degree of protection
+
+- The data sheet lists IP20 for the contactor front face, conforming to IEC 60529.
+- This front-face component rating does not define the project's enclosure, complete-assembly protection, or installation conditions.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
