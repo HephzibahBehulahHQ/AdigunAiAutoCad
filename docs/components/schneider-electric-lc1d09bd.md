@@ -45,3 +45,10 @@ The official data sheet lists these screw-clamp combinations. Cable count, stiff
 | control | 2 | solid | without cable end | 1–4 mm² |
 
 Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF). Actual conductor selection, preparation and installation remain application-specific and are not modeled.
+
+
+## Coil control-voltage limits
+
+- At 60 °C DC, the manufacturer data sheet lists a 0.7–1.25 × Uc operational range and a 0.1–0.25 × Uc drop-out range.
+- These are product-component limits; actual coil-terminal voltage, supply behavior and contactor switching are not represented by the static project.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).

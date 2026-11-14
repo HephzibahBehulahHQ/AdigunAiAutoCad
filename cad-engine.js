@@ -192,6 +192,7 @@
       averageCoilConsumptionAtNominalUc: { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' },
       averageCoilCurrentAt24V: { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' },
       coilOperationalRangeAt60C: { minimum: 0.7, maximum: 1.25, unit: '× Uc' },
+      coilDropOutRangeAt60C: { minimum: 0.1, maximum: 0.25, unit: '× Uc' },
       auxiliaryContactComposition: { value: '1 mechanically-linked NO + 1 mechanically-linked NC' },
       coilSuppressor: { value: 'Built-in bidirectional peak-limiting diode' },
       standards: { value: ['IEC 60947-4-1', 'IEC 60947-5-1', 'UL 508'] },
