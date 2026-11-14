@@ -3604,9 +3604,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 52);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 52);
-  assert.equal(dolOpening.metrics.contentObjectCount, 637);
+  assert.equal(dolOpening.metrics.sheetCount, 53);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 53);
+  assert.equal(dolOpening.metrics.contentObjectCount, 645);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3624,7 +3624,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(new Set(indexObjects.map(object => object.y)).size, indexObjects.length, 'A2/006 index rows must not overlap');
   const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
   for (const page of ['A2/001 | DOL motor feeder schematic', 'A2/002 | Project status and scope', 'A2/003 | Component register', 'A2/004 | Revision record', 'A2/005 | Design basis and rating comparison']) assert.ok(indexText.includes(page));
-  assert.ok(indexText.includes('A2/004 | Revision record | history through A2/052'));
+  assert.ok(indexText.includes('A2/004 | Revision record | history through A2/053'));
   assert.ok(indexText.includes('A2/007 | Pin/net connection schedule'));
   assert.ok(indexText.includes('A2/008 | Wire schedule, part 1'));
   assert.ok(indexText.includes('A2/009 | Wire schedule, part 2'));
@@ -3674,8 +3674,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/052 Type 1'));
   assert.ok(dolProject.objects.find(object => object.id === 'dol-ref-006-line-39').text.length <= 110, 'A2/006 final index row must remain concise');
   const scopeProgress = dolProject.objects.filter(object => object.sheetId === 'dol-reference-002').map(object => object.text).join(' ');
-  assert.ok(scopeProgress.includes('52 complete editable sheets; A2/053–A2/100 are not authored.'));
-  assert.ok(scopeProgress.includes('52 complete authored sheets; A2/053–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('53 complete editable sheets; A2/054–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('53 complete authored sheets; A2/054–A2/100 are not authored.'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3698,12 +3698,16 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/052');
-  assert.equal(dolProject.sheets.length, 52);
+  assert.equal(dolProject.revision, 'A2/053');
+  assert.equal(dolProject.sheets.length, 53);
   const coilTimeConstantSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-050');
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
   for (const fact of ['28 ms', 'bidirectional peak-limiting diode suppressor', 'does not measure project coil transition', 'system response', 'SQD-LC1D09BD.PDF']) assert.ok(coilTimeConstantText.includes(fact));
+  const ac4Sheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-053');
+  assert.equal(ac4Sheet.number, 'A2/053');
+  const ac4Text = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-053').map(object => object.text).join(' ');
+  for (const fact of ['AC-4 motor power: 2.2 kW at 400 V AC, 50/60 Hz', 'AC-3 rating is 4 kW at 380–400 V AC', 'not interchangeable', 'project motor selection', 'SQD-LC1D09BD.PDF']) assert.ok(ac4Text.includes(fact));
   const coordinationSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-052');
   assert.equal(coordinationSheet.number, 'A2/052');
   const coordinationText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-052').map(object => object.text).join(' ');
@@ -3840,10 +3844,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/052');
-  assert.equal(dolProject.sheets.length, 52);
-  assert.match(dolProject.status, /^Fifty-two authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 48 sheets are not authored.'));
+  assert.equal(dolProject.revision, 'A2/053');
+  assert.equal(dolProject.sheets.length, 53);
+  assert.match(dolProject.status, /^Fifty-three authored sheets:/);
+  assert.ok(dolProject.status.includes('The remaining 47 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
