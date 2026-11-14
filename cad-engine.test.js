@@ -3588,3 +3588,20 @@ test('A1/100 records Phoenix Contact insulation ratings without claiming project
   const roundTrip=engine.analyzeProject(reopened.project);
   assert.deepEqual([roundTrip.sheetCount,roundTrip.componentCount,roundTrip.wireCount,roundTrip.crossSheetConnectionCount,roundTrip.globalNetCount,roundTrip.openEndpointCount],[100,32,335,21,43,0]);
 });
+
+
+test('the project-library manifest and generated validation report match the current engineering models', () => {
+  const library = require('./scripts/project-library-validation.js');
+  const report = library.buildReport();
+  const savedReport = JSON.parse(fs.readFileSync(library.reportPath, 'utf8'));
+
+  assert.equal(report.status, 'passed', JSON.stringify(report.projects.filter(project => project.status !== 'passed')));
+  assert.ok(report.summary.projectArtifactCount >= 6);
+  assert.equal(report.summary.validatedArtifactCount, report.summary.projectArtifactCount);
+  assert.ok(report.summary.distinctTopologyCount >= 5);
+  assert.equal(
+    report.summary.firstScaleGate.complete,
+    report.summary.firstScaleGate.completedDistinct100SheetProjects >= report.summary.firstScaleGate.requiredDistinct100SheetProjects
+  );
+  assert.deepEqual(savedReport, report);
+});
