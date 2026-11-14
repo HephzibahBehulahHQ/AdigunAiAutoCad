@@ -52,3 +52,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - At 60 °C DC, the manufacturer data sheet lists a 0.7–1.25 × Uc operational range and a 0.1–0.25 × Uc drop-out range.
 - These are product-component limits; actual coil-terminal voltage, supply behavior and contactor switching are not represented by the static project.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## AC-3 electrical durability
+
+- The data sheet lists electrical durability of 2 Mcycles at 9 A AC-3 and Ue ≤440 V AC.
+- This is a manufacturer catalog condition, not a project switching-duty or service-life estimate. Operating cycles, load profile, environment, maintenance, and contact wear are not modeled.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
