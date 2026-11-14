@@ -2866,3 +2866,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #251 merged as `ed4461f0a3967c31a270ee1749014306f9a51b62`. An initial CI run (`43589007399`) exposed a declaration-order bug in the new test; the test was corrected before merge and rerun `43589088007` passed. Main verification `43589114580` and Pages deployment `43589114551` passed.
 - Cache-busted production reads confirmed revision A2/004, four authored sheets, 84 meaningful content objects, no empty sheets, and a passing project-library report. No interface or schematic geometry changed.
 - Next: author A2/005 as a sourced design-basis and assumptions page, separating published breaker/motor rating overlap from an actual protection setting or suitability claim.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/005
+
+- Added an editable design-basis page with Siemens 3RV2011-0FA10 and SEW DRN63MS4 manufacturer ratings. It records the 0.405 A motor-current / 0.35–0.5 A breaker-range overlap as a published-rating comparison only; it selects no setting and makes no suitability or coordination claim.
+- The DOL reference now has five authored sheets with 99 meaningful editable content objects. The model remains at 11 components, 38 wires, 15 nets, six BOM rows, zero open endpoints, and zero geometry errors. A2/006–A2/100 are not authored.
+- PR #253 merged as `69e8df88fad84ba66606274eb42bfedf5122cdc1`. CI initially found a capitalization mismatch in the test assertion; the corrected rerun `43589501279` passed. Main verification `43589678317` and Pages deployment `43589678321` passed.
+- Cache-busted production reads confirmed A2/005, five authored/content-validated sheets, and a passing seven-artifact report. The first scale gate remains one distinct 100-sheet topology of five. No interface or schematic geometry changed.
+- Next: author A2/006 as a drawing index that lists only the five existing pages with their actual content and validation scope.
