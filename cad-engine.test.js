@@ -4108,5 +4108,5 @@ test('A2/057 records Siemens Q1 typical endurance without estimating project lif
   assert.match(text,/auxiliary contacts.*100,000 operating cycles/i);
   assert.match(text,/electrical endurance.*100,000 operating cycles/i);
   assert.match(text,/typical values do not predict project service life or switching duty/i);
-  assert.match(text,/support\.industry\.siemens\.com\/teddatasheet/);
+  assert.match(text,/support\\.industry\\.siemens\\.com\\/teddatasheet/);
 });
