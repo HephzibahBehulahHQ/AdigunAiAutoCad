@@ -3690,7 +3690,7 @@ test('the project-library manifest and generated validation report match the cur
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
-  assert.equal(lc1d09.specifications.terminalConnection.value, 'Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Phillips No. 2 screwdriver');
+  assert.equal(lc1d09.specifications.terminalConnection.value, 'Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Philips No. 2 screwdriver');
   assert.ok(lc1d09.sources.some(source => source.url === 'https://www.se.com/es/es/faqs/FA33405/' && source.modifiedAt === '2025-04-09'));
   assert.equal((lc1d09.specifications.averageCoilConsumptionAtNominalUc.value / lc1d09.electricalFunctions.contactor.coil.nominalVoltage.value).toFixed(2), '0.10');
   const contactorDoc = fs.readFileSync(path.join(__dirname, 'docs', 'components', 'schneider-electric-lc1d09bd.md'), 'utf8');
@@ -3746,7 +3746,7 @@ test('the project-library manifest and generated validation report match the cur
     "KM1 | Schneider Electric LC1D09BD.",
     "Power screw-clamp terminal tightening torque: 1.7 N·m.",
     "Control screw-clamp terminal tightening torque: 1.7 N·m.",
-    "Manufacturer screwdriver options: flat Ø6 mm or Phillips No. 2.",
+    "Manufacturer screwdriver options: flat Ø6 mm or Philips No. 2.",
     "Source data is catalog guidance; this project contains no installed termination or inspection record.",
     "Cable selection, preparation, and field torque verification are not represented by this static drawing.",
     "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
