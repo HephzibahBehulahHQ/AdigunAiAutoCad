@@ -3603,12 +3603,20 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 2);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 2);
-  assert.equal(dolOpening.metrics.contentObjectCount, 60);
+  assert.equal(dolOpening.metrics.sheetCount, 3);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 3);
+  assert.equal(dolOpening.metrics.contentObjectCount, 75);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
+  const dolProject = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-reference.adigun.json'), 'utf8'));
+  const dolBom = engine.billOfMaterials(dolProject.objects);
+  const registerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-003').map(object => object.text);
+  assert.equal(dolBom.valid, true);
+  for (const row of dolBom.rows) {
+    const expectedRow = `${row.manufacturer} | ${row.partNumber} | ${row.description} | Qty ${row.quantity} | ${row.references.join(', ')}`;
+    assert.ok(registerText.includes(expectedRow), 'A2/003 must match the generated BOM line: ' + expectedRow);
+  }
   assert.equal(
     report.summary.firstScaleGate.complete,
     report.summary.firstScaleGate.completedDistinct100SheetProjects >= report.summary.firstScaleGate.requiredDistinct100SheetProjects
