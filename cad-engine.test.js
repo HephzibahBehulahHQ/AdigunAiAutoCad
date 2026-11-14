@@ -3604,9 +3604,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 50);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 50);
-  assert.equal(dolOpening.metrics.contentObjectCount, 613);
+  assert.equal(dolOpening.metrics.sheetCount, 51);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 51);
+  assert.equal(dolOpening.metrics.contentObjectCount, 621);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3624,7 +3624,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(new Set(indexObjects.map(object => object.y)).size, indexObjects.length, 'A2/006 index rows must not overlap');
   const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
   for (const page of ['A2/001 | DOL motor feeder schematic', 'A2/002 | Project status and scope', 'A2/003 | Component register', 'A2/004 | Revision record', 'A2/005 | Design basis and rating comparison']) assert.ok(indexText.includes(page));
-  assert.ok(indexText.includes('A2/004 | Revision record | history through A2/050'));
+  assert.ok(indexText.includes('A2/004 | Revision record | history through A2/051'));
   assert.ok(indexText.includes('A2/007 | Pin/net connection schedule'));
   assert.ok(indexText.includes('A2/008 | Wire schedule, part 1'));
   assert.ok(indexText.includes('A2/009 | Wire schedule, part 2'));
@@ -3671,11 +3671,11 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/045 AC-1'));
   assert.ok(indexText.includes('A2/046 dur.'));
   assert.ok(indexText.includes('A2/050 coil'));
-  assert.ok(indexText.includes('A2/051–A2/100 not authored'));
+  assert.ok(indexText.includes('A2/052–/100 not authored'));
   assert.ok(dolProject.objects.find(object => object.id === 'dol-ref-006-line-39').text.length <= 110, 'A2/006 final index row must remain concise');
   const scopeProgress = dolProject.objects.filter(object => object.sheetId === 'dol-reference-002').map(object => object.text).join(' ');
-  assert.ok(scopeProgress.includes('50 complete editable sheets; A2/051–A2/100 are not authored.'));
-  assert.ok(scopeProgress.includes('50 complete authored sheets; A2/051–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('51 complete editable sheets; A2/052–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('51 complete authored sheets; A2/052–A2/100 are not authored.'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3698,12 +3698,16 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/050');
-  assert.equal(dolProject.sheets.length, 50)
+  assert.equal(dolProject.revision, 'A2/051');
+  assert.equal(dolProject.sheets.length, 51);
   const coilTimeConstantSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-050');
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
   for (const fact of ['28 ms', 'bidirectional peak-limiting diode suppressor', 'does not measure project coil transition', 'system response', 'SQD-LC1D09BD.PDF']) assert.ok(coilTimeConstantText.includes(fact));
+  const coilPowerSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-051');
+  assert.equal(coilPowerSheet.number, 'A2/051');
+  const coilPowerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-051').map(object => object.text).join(' ');
+  for (const fact of ['5.4 W at 20 °C', 'inrush power', 'hold-in power', 'LC1D09–D38', '2.4 W average', 'not combined', 'supply adequacy', 'SQD-LC1D09BD.PDF']) assert.ok(coilPowerText.includes(fact));
   const impulseSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-027');
   assert.equal(impulseSheet.number, 'A2/027');
   const impulseText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-027').map(object => object.text).join(' ');
@@ -3823,10 +3827,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/050');
-  assert.equal(dolProject.sheets.length, 50)
-  assert.match(dolProject.status, /^Fifty authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 50 sheets are not authored.'));
+  assert.equal(dolProject.revision, 'A2/051');
+  assert.equal(dolProject.sheets.length, 51);
+  assert.match(dolProject.status, /^Fifty-one authored sheets:/);
+  assert.ok(dolProject.status.includes('The remaining 49 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
