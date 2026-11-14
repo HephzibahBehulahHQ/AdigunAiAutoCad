@@ -3044,3 +3044,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - Updated the component definition, project revision/status/index, source note, README, regression tests and validation report for 26 authored sheets and A2/027–A2/100 unauthored. The electrical topology remains unchanged.
 - Source: Schneider Electric LC1D09BD data sheet, rated insulation voltage rows.
 - Next: inspect the remaining source-backed DOL facts for the next distinct increment; production runtime is now directly reachable at the custom domain.
+
+
+## 2026-11-14 incremental execution record — DOL KM1 rated impulse withstand voltage A2/027
+
+- Added A2/027 for Schneider Electric LC1D09BD rated impulse withstand voltage Uimp: 6 kV conforming to IEC 60947. The catalog value is separated from installation transient limits, surge protection, and project insulation coordination.
+- Added the rating to the component definition and source note. Updated project revision/status/index and validation expectations to 27 authored sheets; the 11 components, 38 wires, 15 nets, and zero open endpoints remain unchanged. The interface is unchanged.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+- Next: continue with another distinct, directly sourced component fact and release in a small verified increment.
