@@ -2911,3 +2911,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #261 merged as `517a985345e99f96423250e47e19a7f93f089522`. PR verification `43591566247`, main verification `43591598108`, and Pages deployment `43591598109` passed.
 - Cache-busted production checks confirmed revision A2/009, 9/9 authored sheets, the correct index entry, and the passing seven-artifact report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: author A2/010 as a source-provenance register derived from the BOM/component source records, with each displayed part and source reference traceable to the current project model.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/010
+
+- Added A2/010 as a manufacturer source register containing all six current BOM records: exact part number, reference designator, source title, retrieval date, and manufacturer URL. Regression coverage checks all six rows and all six URLs against CAD-engine BOM metadata.
+- Updated the project status, revision history, index, README, and generated report. Production measures 10/10 authored sheets, 204 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #263 merged as `83ecf06b03d75f85f731786025e901cdf51ee2cc`. PR verification `43591985766` and main verification `43592027214` passed. The first Pages deployment attempt `43592027212` failed because the deploy action could not find its uploaded artifact; retrying the failed deploy job succeeded.
+- Cache-busted production checks confirmed revision A2/010, all ten sheets populated, six provenance rows and six source URLs, the correct index entry, and the passing seven-artifact report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: add an A2/011 terminal/function reference only where component definitions and the current engine's pin/net analysis establish each identity and connection; label any static-model limitations explicitly.
