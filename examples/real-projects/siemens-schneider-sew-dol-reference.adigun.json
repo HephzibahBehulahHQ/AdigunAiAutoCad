@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/055",
-  "status": "Fifty-five authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, KM1 vibration-and-shock reference A2/035, KM1 mechanical-durability reference A2/036, KM1 rated-breaking-capacity reference A2/037, KM1 rated-making-capacity reference A2/038, KM1 conventional free-air thermal-current reference A2/039, KM1 power-dissipation reference A2/040, KM1 signalling-circuit rated-making-capacity reference A2/041, signalling-circuit frequency reference A2/042, KM1 rated short-time withstand current reference A2/043, and KM1 associated fuse ratings reference A2/044, and KM1 AC-1 rated operational current reference A2/045, and KM1 AC-1 electrical durability reference A2/046, and KM1 manufacturer-listed B10d reference A2/047, and KM1 mirror-contact designation reference A2/048, and KM1 opening/closing time reference A2/049, and KM1 coil time-constant reference A2/050, and KM1 coil inrush/hold-in power reference A2/051, and KM1 AC-3 motor power ratings reference A2/054, and M1 SEW motor nameplate data A2/055. The remaining 45 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/056",
+  "status": "Fifty-six authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, KM1 vibration-and-shock reference A2/035, KM1 mechanical-durability reference A2/036, KM1 rated-breaking-capacity reference A2/037, KM1 rated-making-capacity reference A2/038, KM1 conventional free-air thermal-current reference A2/039, KM1 power-dissipation reference A2/040, KM1 signalling-circuit rated-making-capacity reference A2/041, signalling-circuit frequency reference A2/042, KM1 rated short-time withstand current reference A2/043, and KM1 associated fuse ratings reference A2/044, and KM1 AC-1 rated operational current reference A2/045, and KM1 AC-1 electrical durability reference A2/046, and KM1 manufacturer-listed B10d reference A2/047, and KM1 mirror-contact designation reference A2/048, and KM1 opening/closing time reference A2/049, and KM1 coil time-constant reference A2/050, and KM1 coil inrush/hold-in power reference A2/051, and KM1 AC-3 motor power ratings reference A2/054, and M1 SEW motor nameplate data A2/055, and Q1 Siemens 3RV2011-0FA10 release reference A2/056. The remaining 44 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -291,6 +291,11 @@
       "id": "dol-reference-055",
       "number": "A2/055",
       "name": "M1 SEW motor nameplate data"
+    },
+    {
+      "id": "dol-reference-056",
+      "number": "A2/056",
+      "name": "Q1 Siemens 3RV2011-0FA10 release reference"
     }
   ],
   "sheetLabels": {},
@@ -984,7 +989,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/055, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/056, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -993,7 +998,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 55 complete editable sheets; A2/056–A2/100 are not authored.",
+      "text": "Progress: 56 complete editable sheets; A2/057–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1002,7 +1007,7 @@
       "id": "dol-ref-002-line-06",
       "x": 120,
       "y": 470,
-      "text": "Current state: 55 complete authored sheets; A2/056–A2/100 are not authored.",
+      "text": "Current state: 56 complete authored sheets; A2/057–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1692,7 +1697,7 @@
       "id": "dol-ref-006-line-06",
       "x": 120,
       "y": 384,
-      "text": "A2/004 | Revision record | history through A2/055.",
+      "text": "A2/004 | Revision record | history through A2/056.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -5808,7 +5813,7 @@
       "id": "dol-ref-006-line-37",
       "x": 120,
       "y": 1450,
-      "text": "A2/042 | KM1 signalling-circuit frequency reference | 25–400 Hz",
+      "text": "A2/042 | KM1 signalling-circuit frequency reference | 25–400 Hz; A2/053 AC-4; A2/054 AC-3 kW.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -5817,7 +5822,7 @@
       "id": "dol-ref-006-line-38",
       "x": 120,
       "y": 1480,
-      "text": "A2/043 | KM1 rated short-time withstand current; A2/044 fuse; A2/045 AC-1; A2/053 AC-4; A2/054 AC-3 kW.",
+      "text": "A2/043 | KM1 rated short-time withstand current; A2/044 fuse; A2/045 AC-1; A2/055 motor.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -6078,7 +6083,7 @@
       "id": "dol-ref-006-line-39",
       "x": 120,
       "y": 1510,
-      "text": "A2/046 dur.; A2/047 B10d; A2/048 mirror; A2/049 times; A2/050 coil; A2/051 5.4W; A2/052 Type 1; A2/055 motor.",
+      "text": "A2/046 dur.; A2/047 B10d; A2/048 mirror; A2/049 times; A2/050 coil; A2/051 5.4W; A2/052 Type 1; A2/056 Q1.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -6266,7 +6271,7 @@
       "y": 1450,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/055 records the SEW DRN63MS4 motor table values; motor performance and application suitability remain unvalidated. No application or topology change."
+      "text": "A2/056 records Q1 release ratings while preserving the unset overload setting; no project coordination is established. No application or topology change."
     },
     {
       "kind": "rect",
@@ -7131,6 +7136,90 @@
       "id": "dol-ref-055-line-08",
       "y": 521,
       "text": "Source: SEW-EURODRIVE DRN63MS4 motor data table, https://download.sew-eurodrive.com/download/pdf/30590116.pdf"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-056-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-056"
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-01",
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-02",
+      "y": 173,
+      "text": "Q1 SIEMENS SIRIUS 3RV2011-0FA10 · RELEASE REFERENCE"
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-03",
+      "y": 231,
+      "text": "Q1 | Siemens motor-protection circuit breaker | size S00 | class 10."
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-04",
+      "y": 289,
+      "text": "Manufacturer-listed A-release adjustment: 0.35–0.5 A."
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-05",
+      "y": 347,
+      "text": "Manufacturer-listed N-release: 6.5 A."
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-06",
+      "y": 405,
+      "text": "The Q1 overload setting remains null and is not selected by these catalog values."
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-07",
+      "y": 463,
+      "text": "This reference does not establish project fault current, breaker coordination, or application suitability."
+    },
+    {
+      "kind": "text",
+      "x": 120,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-056",
+      "id": "dol-ref-056-line-08",
+      "y": 521,
+      "text": "Source: Siemens 3RV2011-0FA10 data sheet, https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10"
     }
   ]
 }
