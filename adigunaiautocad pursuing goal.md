@@ -2848,3 +2848,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #247 merged as `947bab1d45ebccaeecd3f1991cd2f300dec31841`. PR CI `43588231656`, main verification `43588274273`, and Pages deployment `43588274550` passed.
 - Cache-busted production reads confirmed DOL revision A2/002, two authored sheets, 60 meaningful content objects, no empty sheets, and a passing seven-artifact report. No interface or schematic geometry changed.
 - Next: add A2/003 as a component register derived from the source-backed BOM, with exact manufacturer/model and source references; keep the report and authored-page counts synchronized.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/003
+
+- Added an editable source-backed component register with six unique BOM lines. Each line is checked against the engine-generated BOM for manufacturer, exact part number, description, quantity and references; the source metadata retains manufacturer URLs and document revisions.
+- The DOL reference now has three authored pages and 75 meaningful editable content objects. The model retains 11 components, 38 wires, 15 nets, six BOM rows, zero open endpoints and zero geometry errors. The remaining 97 sheets are not authored.
+- PR #249 merged as `87a76b607e84a6da1f862754b201aebd7effdbd3`. PR CI `43588670266`, main verification `43588712948`, and Pages deployment `43588712945` passed.
+- Cache-busted production reads confirmed A2/003, six displayed BOM lines, and a passing seven-artifact report with no empty sheets. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: add A2/004 as a revision record of the three actual authored increments and their verified model counts.
