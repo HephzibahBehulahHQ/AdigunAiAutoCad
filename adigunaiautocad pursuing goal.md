@@ -2875,3 +2875,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #253 merged as `69e8df88fad84ba66606274eb42bfedf5122cdc1`. CI initially found a capitalization mismatch in the test assertion; the corrected rerun `43589501279` passed. Main verification `43589678317` and Pages deployment `43589678321` passed.
 - Cache-busted production reads confirmed A2/005, five authored/content-validated sheets, and a passing seven-artifact report. The first scale gate remains one distinct 100-sheet topology of five. No interface or schematic geometry changed.
 - Next: author A2/006 as a drawing index that lists only the five existing pages with their actual content and validation scope.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/006
+
+- Added an editable drawing index for only the five content pages already authored. A2/007–A2/100 are explicitly unauthored and are not listed as completed pages.
+- The project-library report validates six of six DOL sheets as containing meaningful editable content: 110 content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero open endpoints, and zero geometry errors.
+- PR #255 merged as `ffeaec23ad77ee9d0d233ab9f5b93e4e776e4583`. PR CI `43589911270`, main verification `43589963572`, and Pages deployment `43589963616` passed.
+- Cache-busted production reads confirmed revision A2/006 and the current passing seven-artifact report. The 100-sheet distinct-topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: author A2/007 as a pin/net connection schedule derived directly from the current CAD engine analysis and verify each row against the model.
