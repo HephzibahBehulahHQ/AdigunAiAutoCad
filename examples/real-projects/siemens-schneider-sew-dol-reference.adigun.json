@@ -3468,15 +3468,6 @@
       "text": "A2/018 | Added source-backed KM1 average coil consumption and 24 V current reference."
     },
     {
-      "kind": "text",
-      "id": "dol-ref-006-line-19",
-      "x": 120,
-      "y": 1137,
-      "stroke": "#13263b",
-      "sheetId": "dol-reference-006",
-      "text": "A2/021–A2/100 are not authored or listed as completed pages."
-    },
-    {
       "kind": "rect",
       "id": "dol-ref-019-frame",
       "x": 70,
