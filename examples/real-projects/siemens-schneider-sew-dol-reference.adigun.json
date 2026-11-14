@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/040",
-  "status": "Forty authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, and KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, KM1 vibration-and-shock reference A2/035, KM1 mechanical-durability reference A2/036, KM1 rated-breaking-capacity reference A2/037, KM1 rated-making-capacity reference A2/038, KM1 conventional free-air thermal-current reference A2/039, and KM1 power-dissipation reference A2/040. The remaining 60 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/041",
+  "status": "Forty-one authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, and KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, KM1 vibration-and-shock reference A2/035, KM1 mechanical-durability reference A2/036, KM1 rated-breaking-capacity reference A2/037, KM1 rated-making-capacity reference A2/038, KM1 conventional free-air thermal-current reference A2/039, KM1 power-dissipation reference A2/040, and KM1 signalling-circuit rated-making-capacity reference A2/041. The remaining 59 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -216,6 +216,11 @@
       "id": "dol-reference-040",
       "number": "A2/040",
       "name": "KM1 power dissipation reference"
+    },
+    {
+      "id": "dol-reference-041",
+      "number": "A2/041",
+      "name": "KM1 signalling-circuit rated making capacity reference"
     }
   ],
   "sheetLabels": {},
@@ -909,7 +914,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/040, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/041, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -918,7 +923,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 40 complete editable sheets; A2/041–A2/100 are not authored.",
+      "text": "Progress: 41 complete editable sheets; A2/042–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -927,7 +932,7 @@
       "id": "dol-ref-002-line-06",
       "x": 120,
       "y": 470,
-      "text": "Current state: 40 complete authored sheets; A2/041–A2/100 are not authored.",
+      "text": "Current state: 41 complete authored sheets; A2/042–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1598,7 +1603,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-04",
       "x": 120,
-      "y": 317,
+      "y": 316,
       "text": "A2/002 | Project status and scope | boundaries and model limitations.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1607,7 +1612,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-05",
       "x": 120,
-      "y": 352,
+      "y": 350,
       "text": "A2/003 | Component register | six unique lines from the engine-derived BOM.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1616,8 +1621,8 @@
       "kind": "text",
       "id": "dol-ref-006-line-06",
       "x": 120,
-      "y": 387,
-      "text": "A2/004 | Revision record | history through A2/040.",
+      "y": 384,
+      "text": "A2/004 | Revision record | history through A2/041.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1625,7 +1630,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-07",
       "x": 120,
-      "y": 422,
+      "y": 418,
       "text": "A2/005 | Design basis and rating comparison | sourced data; no breaker setting selected.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1634,7 +1639,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-08",
       "x": 120,
-      "y": 457,
+      "y": 452,
       "text": "A2/007 | Pin/net connection schedule | 15 engine-derived net groups and exact pin references.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1643,7 +1648,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-09",
       "x": 120,
-      "y": 492,
+      "y": 486,
       "text": "A2/008 | Wire schedule, part 1 | engine-derived W001–W019 of 38 route segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1652,7 +1657,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-10",
       "x": 120,
-      "y": 527,
+      "y": 520,
       "text": "A2/009 | Wire schedule, part 2 | engine-derived W020–W038 of 38 route segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1661,7 +1666,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-11",
       "x": 120,
-      "y": 562,
+      "y": 554,
       "text": "A2/010 | Manufacturer source register | six current BOM sources and exact URLs.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1670,7 +1675,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-12",
       "x": 120,
-      "y": 597,
+      "y": 588,
       "text": "A2/011 | Q1/KM1 terminal reference | 18 component-defined pins mapped to engine nets.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1679,7 +1684,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-13",
       "x": 120,
-      "y": 632,
+      "y": 622,
       "text": "A2/012 | M1 terminal/net reference | seven component-defined motor pins mapped to engine nets.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1961,7 +1966,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-14",
       "x": 120,
-      "y": 667,
+      "y": 656,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/013 | S0/S1 control-contact reference | four source-backed terminals and normal states."
@@ -2207,7 +2212,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-15",
       "x": 120,
-      "y": 702,
+      "y": 690,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/014 | X1–X6 terminal boundary reference | 12 pins mapped to nets and direct route presence."
@@ -2381,7 +2386,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-16",
       "x": 120,
-      "y": 737,
+      "y": 724,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/015 | Static control-path net reference | four engine-derived control net groups."
@@ -2618,7 +2623,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-17",
       "x": 120,
-      "y": 772,
+      "y": 758,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/016 | Three-phase power-path net reference | 11 engine-derived groups, star point, and PE."
@@ -2756,7 +2761,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18",
       "x": 120,
-      "y": 947,
+      "y": 928,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/026 | KM1 rated insulation voltage reference | IEC and CSA/UL catalog values."
@@ -2852,13 +2857,13 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 40 complete authored sheets; A2/041–A2/100 are not authored."
+      "text": "Current state: 41 complete authored sheets; A2/042–A2/100 are not authored."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 842,
+      "y": 826,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/018 | KM1 coil demand reference | manufacturer average and derived nominal current."
@@ -3041,7 +3046,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-20",
       "x": 120,
-      "y": 982,
+      "y": 962,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/027 | KM1 rated impulse withstand voltage reference | 6 kV catalog value under IEC 60947."
@@ -3152,7 +3157,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-21",
       "x": 120,
-      "y": 1017,
+      "y": 996,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/028 | KM1 operating-rate reference | 3,600 cycles/hour at ambient ≤60 °C."
@@ -3437,7 +3442,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18a",
       "x": 120,
-      "y": 807,
+      "y": 792,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/017 | Application input omissions register | explicit unknowns; no values assumed."
@@ -3686,7 +3691,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-22",
       "x": 120,
-      "y": 877,
+      "y": 860,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/019 | DOL seal-in path | conditional logic from source-backed contacts and analyzed nets."
@@ -3806,7 +3811,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-23",
       "x": 120,
-      "y": 912,
+      "y": 894,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/020 | AC-3 catalog rating · A2/021 | dimensions/mounting reference · A2/022 | terminal torque/tool reference · A2/023 | terminal conductor options · A2/024 | coil voltage limits. · A2/025 | AC-3 electrical durability reference."
@@ -4688,7 +4693,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-24",
       "x": 120,
-      "y": 1052,
+      "y": 1030,
       "text": "A2/029 | KM1 signalling-circuit minimum switching reference | 5 mA / 17 V.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -4772,7 +4777,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-25",
       "x": 120,
-      "y": 1087,
+      "y": 1064,
       "text": "A2/030 | KM1 auxiliary-contact non-overlap-time reference | 1.5 ms both directions.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -4856,7 +4861,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-26",
       "x": 120,
-      "y": 1122,
+      "y": 1098,
       "text": "A2/031 | KM1 front-face IP20 reference | IEC 60529.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -4866,7 +4871,7 @@
       "id": "dol-ref-004-line-24",
       "x": 120,
       "y": 1370,
-      "text": "A2/026 | rated insulation; A2/027 | impulse; A2/028 | operating rate; A2/029 | signal minimum; A2/030 | non-overlap; A2/031–A2/040 | environmental, mechanical, contact capacity, thermal current and dissipation references.",
+      "text": "A2/026 | insulation; A2/027 | impulse; A2/028 | operating rate; A2/029 | signal minimum; A2/030 | non-overlap; A2/031–A2/041 | environmental, mechanical, contact-capacity and thermal references; A2/041 | signalling-circuit making capacity.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -4958,7 +4963,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-27",
       "x": 120,
-      "y": 1157,
+      "y": 1132,
       "text": "A2/032 | KM1 ambient-temperature reference | operation, storage, and at-Uc values.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5042,7 +5047,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-28",
       "x": 120,
-      "y": 1192,
+      "y": 1166,
       "text": "A2/033 | KM1 operating-altitude reference | 3,000 m without temperature derating.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5126,7 +5131,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-29",
       "x": 120,
-      "y": 1227,
+      "y": 1200,
       "text": "A2/034 | KM1 environmental classification reference | pollution degree 3; TH treatment.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5210,7 +5215,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-30",
       "x": 120,
-      "y": 1262,
+      "y": 1234,
       "text": "A2/035 | KM1 vibration and shock ratings reference | open/closed values with published test conditions.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5294,7 +5299,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-31",
       "x": 120,
-      "y": 1297,
+      "y": 1268,
       "text": "A2/036 | KM1 mechanical durability reference | 30 Mcycles; not a project service-life estimate.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5378,7 +5383,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-32",
       "x": 120,
-      "y": 1332,
+      "y": 1302,
       "text": "A2/037 | KM1 rated breaking capacity reference | 250 A at 440 V, power circuit; not a project fault-current or coordination result.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5462,7 +5467,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-33",
       "x": 120,
-      "y": 1367,
+      "y": 1336,
       "text": "A2/038 | KM1 rated making capacity reference | 250 A at 440 V, power circuit; distinct from breaking capacity.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5546,7 +5551,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-34",
       "x": 120,
-      "y": 1402,
+      "y": 1370,
       "text": "A2/039 | KM1 conventional free-air thermal current reference | 25 A power; 10 A signalling; at ambient ≤60 °C.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -5630,8 +5635,101 @@
       "kind": "text",
       "id": "dol-ref-006-line-35",
       "x": 120,
-      "y": 1437,
-      "text": "A2/040 | KM1 power dissipation reference | 0.2 W/pole AC-3; 1.56 W/pole AC-1; not project loss or enclosure thermal design; A2/041–A2/100 are not authored.",
+      "y": 1404,
+      "text": "A2/040 | KM1 power dissipation reference | 0.2 W/pole AC-3; 1.56 W/pole AC-1.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-041-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-02",
+      "x": 120,
+      "y": 169,
+      "text": "KM1 SIGNALLING-CIRCUIT RATED MAKING CAPACITY · SOURCE REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-03",
+      "x": 120,
+      "y": 223,
+      "text": "KM1 | Schneider Electric TeSys D LC1D09BD contactor.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-04",
+      "x": 120,
+      "y": 277,
+      "text": "Manufacturer-listed Irms rated making capacity for the signalling circuit: 140 A AC.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-05",
+      "x": 120,
+      "y": 331,
+      "text": "Manufacturer-listed Irms rated making capacity for the signalling circuit: 250 A DC.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-06",
+      "x": 120,
+      "y": 385,
+      "text": "Both signalling-circuit values conform to IEC 60947-5-1; they are separate from the power-circuit value on A2/038.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-07",
+      "x": 120,
+      "y": 439,
+      "text": "These component ratings do not establish connected-load suitability, project switching duty, or field-circuit coordination.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-041-line-08",
+      "x": 120,
+      "y": 493,
+      "text": "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-041"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-36",
+      "x": 120,
+      "y": 1438,
+      "text": "A2/041 | KM1 signalling-circuit rated making capacity | 140 A AC / 250 A DC per IEC 60947-5-1; distinct from the power-circuit rating; A2/042–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     }
