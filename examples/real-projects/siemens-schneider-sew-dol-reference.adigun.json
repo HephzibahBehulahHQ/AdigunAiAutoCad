@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/015",
-  "status": "Fifteen authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, Q1/KM1 A2/011, M1 A2/012, S0/S1 A2/013, X1–X6 A2/014, and static 24 V DC control-path net reference A2/015. The remaining 85 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/016",
+  "status": "Sixteen authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, and three-phase power path A2/016. The remaining 84 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -91,6 +91,11 @@
       "id": "dol-reference-015",
       "number": "A2/015",
       "name": "Static control-path net reference"
+    },
+    {
+      "id": "dol-reference-016",
+      "number": "A2/016",
+      "name": "Three-phase power path net reference"
     }
   ],
   "sheetLabels": {},
@@ -784,7 +789,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/015, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/016, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -793,7 +798,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 15 complete editable sheets; A2/016–A2/100 are not authored.",
+      "text": "Progress: 16 complete editable sheets; A2/017–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1041,7 +1046,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-04",
       "x": 120,
-      "y": 368,
+      "y": 364,
       "text": "A2/002 | Added scope, external boundaries, and static-model limitations.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
@@ -1050,7 +1055,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-05",
       "x": 120,
-      "y": 430,
+      "y": 422,
       "text": "A2/003 | Added the six-row component register derived from the engine BOM.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
@@ -1059,7 +1064,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-06",
       "x": 120,
-      "y": 492,
+      "y": 480,
       "text": "A2/004 | Added this revision history; electrical topology unchanged.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
@@ -1068,7 +1073,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-07",
       "x": 120,
-      "y": 554,
+      "y": 538,
       "text": "A2/005 | Added manufacturer-backed motor/breaker rating comparison; no setting selected.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
@@ -1077,7 +1082,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-08",
       "x": 120,
-      "y": 616,
+      "y": 596,
       "text": "A2/006 | Added drawing index listing authored pages only.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
@@ -1086,7 +1091,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-09",
       "x": 120,
-      "y": 678,
+      "y": 654,
       "text": "A2/007 | Added 15 engine-derived net groups and pin references.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
@@ -1473,7 +1478,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-04",
       "x": 120,
-      "y": 342,
+      "y": 339,
       "text": "A2/002 | Project status and scope | boundaries and model limitations.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1482,7 +1487,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-05",
       "x": 120,
-      "y": 402,
+      "y": 396,
       "text": "A2/003 | Component register | six unique lines from the engine-derived BOM.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1491,8 +1496,8 @@
       "kind": "text",
       "id": "dol-ref-006-line-06",
       "x": 120,
-      "y": 462,
-      "text": "A2/004 | Revision record | history through A2/015.",
+      "y": 453,
+      "text": "A2/004 | Revision record | history through A2/016.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1500,7 +1505,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-07",
       "x": 120,
-      "y": 522,
+      "y": 510,
       "text": "A2/005 | Design basis and rating comparison | sourced data; no breaker setting selected.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1509,7 +1514,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-08",
       "x": 120,
-      "y": 582,
+      "y": 567,
       "text": "A2/007 | Pin/net connection schedule | 15 engine-derived net groups and exact pin references.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1518,7 +1523,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-09",
       "x": 120,
-      "y": 642,
+      "y": 624,
       "text": "A2/008 | Wire schedule, part 1 | engine-derived W001–W019 of 38 route segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1527,7 +1532,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-10",
       "x": 120,
-      "y": 702,
+      "y": 681,
       "text": "A2/009 | Wire schedule, part 2 | engine-derived W020–W038 of 38 route segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1536,7 +1541,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-11",
       "x": 120,
-      "y": 762,
+      "y": 738,
       "text": "A2/010 | Manufacturer source register | six current BOM sources and exact URLs.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1545,7 +1550,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-12",
       "x": 120,
-      "y": 822,
+      "y": 795,
       "text": "A2/011 | Q1/KM1 terminal reference | 18 component-defined pins mapped to engine nets.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1554,7 +1559,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-13",
       "x": 120,
-      "y": 882,
+      "y": 852,
       "text": "A2/012 | M1 terminal/net reference | seven component-defined motor pins mapped to engine nets.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
@@ -1791,7 +1796,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-10",
       "x": 120,
-      "y": 740,
+      "y": 712,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/008 | Added engine-derived wire rows W001–W019."
@@ -1800,7 +1805,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-11",
       "x": 120,
-      "y": 802,
+      "y": 770,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/009 | Added engine-derived wire rows W020–W038."
@@ -1809,7 +1814,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-12",
       "x": 120,
-      "y": 864,
+      "y": 828,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/010 | Added six BOM source records and manufacturer URLs."
@@ -1818,7 +1823,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-13",
       "x": 120,
-      "y": 926,
+      "y": 886,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/011 | Added Q1/KM1 terminal and net reference."
@@ -1827,7 +1832,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-14",
       "x": 120,
-      "y": 988,
+      "y": 944,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/012 | Added M1 terminal and net reference; no physical layout claim."
@@ -1836,7 +1841,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-14",
       "x": 120,
-      "y": 942,
+      "y": 909,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/013 | S0/S1 control-contact reference | four source-backed terminals and normal states."
@@ -2073,7 +2078,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-15",
       "x": 120,
-      "y": 1050,
+      "y": 1002,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/013 | Added S0/S1 terminal, normal-state, and net reference."
@@ -2082,7 +2087,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-15",
       "x": 120,
-      "y": 1002,
+      "y": 966,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/014 | X1–X6 terminal boundary reference | 12 pins mapped to nets and direct route presence."
@@ -2247,7 +2252,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-16",
       "x": 120,
-      "y": 1112,
+      "y": 1060,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/014 | Added X1–X6 feed-through pins and field-side boundary reference."
@@ -2256,7 +2261,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-16",
       "x": 120,
-      "y": 1062,
+      "y": 1023,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/015 | Static control-path net reference | four engine-derived control net groups."
@@ -2325,7 +2330,7 @@
       "y": 385,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "Q1 | 2/T1 | Phase T1 load terminal | dol-reference-001:net-4 | 1 segments"
+      "text": "Q1 | 2/T1 | Phase T1 load terminal | dol-reference-001:net-4 | 1 segment"
     },
     {
       "kind": "text",
@@ -2334,7 +2339,7 @@
       "y": 439,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "Q1 | 4/T2 | Phase T2 load terminal | dol-reference-001:net-5 | 1 segments"
+      "text": "Q1 | 4/T2 | Phase T2 load terminal | dol-reference-001:net-5 | 1 segment"
     },
     {
       "kind": "text",
@@ -2343,7 +2348,7 @@
       "y": 493,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "Q1 | 6/T3 | Phase T3 load terminal | dol-reference-001:net-6 | 1 segments"
+      "text": "Q1 | 6/T3 | Phase T3 load terminal | dol-reference-001:net-6 | 1 segment"
     },
     {
       "kind": "text",
@@ -2370,7 +2375,7 @@
       "y": 655,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 1/L1 | Main pole 1 line terminal | dol-reference-001:net-4 | 1 segments"
+      "text": "KM1 | 1/L1 | Main pole 1 line terminal | dol-reference-001:net-4 | 1 segment"
     },
     {
       "kind": "text",
@@ -2379,7 +2384,7 @@
       "y": 709,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 2/T1 | Main pole 1 load terminal | dol-reference-001:net-7 | 1 segments"
+      "text": "KM1 | 2/T1 | Main pole 1 load terminal | dol-reference-001:net-7 | 1 segment"
     },
     {
       "kind": "text",
@@ -2388,7 +2393,7 @@
       "y": 763,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 3/L2 | Main pole 2 line terminal | dol-reference-001:net-5 | 1 segments"
+      "text": "KM1 | 3/L2 | Main pole 2 line terminal | dol-reference-001:net-5 | 1 segment"
     },
     {
       "kind": "text",
@@ -2397,7 +2402,7 @@
       "y": 817,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 4/T2 | Main pole 2 load terminal | dol-reference-001:net-8 | 1 segments"
+      "text": "KM1 | 4/T2 | Main pole 2 load terminal | dol-reference-001:net-8 | 1 segment"
     },
     {
       "kind": "text",
@@ -2406,7 +2411,7 @@
       "y": 871,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 5/L3 | Main pole 3 line terminal | dol-reference-001:net-6 | 1 segments"
+      "text": "KM1 | 5/L3 | Main pole 3 line terminal | dol-reference-001:net-6 | 1 segment"
     },
     {
       "kind": "text",
@@ -2415,7 +2420,7 @@
       "y": 925,
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
-      "text": "KM1 | 6/T3 | Main pole 3 load terminal | dol-reference-001:net-9 | 1 segments"
+      "text": "KM1 | 6/T3 | Main pole 3 load terminal | dol-reference-001:net-9 | 1 segment"
     },
     {
       "kind": "text",
@@ -2484,7 +2489,7 @@
       "kind": "text",
       "id": "dol-ref-004-line-17",
       "x": 120,
-      "y": 1174,
+      "y": 1118,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
       "text": "A2/015 | Added static control-path net map from source-backed terminal roles."
@@ -2493,10 +2498,10 @@
       "kind": "text",
       "id": "dol-ref-006-line-17",
       "x": 120,
-      "y": 1128,
+      "y": 1080,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Current index: fourteen completed content pages plus this index sheet."
+      "text": "A2/016 | Three-phase power-path net reference | 11 engine-derived groups, star point, and PE."
     },
     {
       "kind": "rect",
@@ -2535,7 +2540,7 @@
       "y": 223,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | U1 | Winding U line end | dol-reference-001:net-7 | 1 route segments"
+      "text": "M1 | U1 | Winding U line end | dol-reference-001:net-7 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2544,7 +2549,7 @@
       "y": 277,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | V1 | Winding V line end | dol-reference-001:net-8 | 1 route segments"
+      "text": "M1 | V1 | Winding V line end | dol-reference-001:net-8 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2553,7 +2558,7 @@
       "y": 331,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | W1 | Winding W line end | dol-reference-001:net-9 | 1 route segments"
+      "text": "M1 | W1 | Winding W line end | dol-reference-001:net-9 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2589,7 +2594,7 @@
       "y": 547,
       "stroke": "#13263b",
       "sheetId": "dol-reference-012",
-      "text": "M1 | PE | Protective earth connection | dol-reference-001:net-11 | 1 route segments"
+      "text": "M1 | PE | Protective earth connection | dol-reference-001:net-11 | 1 route segment"
     },
     {
       "kind": "text",
@@ -2622,19 +2627,19 @@
       "kind": "text",
       "id": "dol-ref-004-line-18",
       "x": 120,
-      "y": 1242,
+      "y": 1176,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 15 complete authored sheets; A2/016–A2/100 are not authored."
+      "text": "A2/016 | Added 11-net three-phase power path, star point, and PE reference."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-18",
       "x": 120,
-      "y": 1194,
+      "y": 1137,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/016–A2/100 are not authored or listed as completed pages."
+      "text": "Current index: fifteen completed content pages plus this index sheet."
     },
     {
       "kind": "rect",
@@ -2724,19 +2729,19 @@
       "kind": "text",
       "id": "dol-ref-004-line-19",
       "x": 120,
-      "y": 1320,
+      "y": 1242,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current validation: 11 components, 38 wires, 15 nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
+      "text": "Current state: 16 complete authored sheets; A2/017–A2/100 are not authored."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 1260,
+      "y": 1203,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Static reference only; the drawing is not construction-ready."
+      "text": "A2/017–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -2907,19 +2912,19 @@
       "kind": "text",
       "id": "dol-ref-004-line-20",
       "x": 120,
-      "y": 1398,
+      "y": 1320,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Static reference only; contact actuation, coil operation, trips, and supply behavior are not simulated."
+      "text": "Current validation: 11 components, 38 wires, 15 nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
     },
     {
       "kind": "text",
       "id": "dol-ref-006-line-20",
       "x": 120,
-      "y": 1326,
+      "y": 1269,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "See the current project JSON and validation report for editable model and measured counts."
+      "text": "Static reference only; the drawing is not construction-ready."
     },
     {
       "kind": "rect",
@@ -3013,6 +3018,180 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-015",
       "text": "No control supply, button/contactor actuation, coil operation, or dynamic behavior is simulated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-21",
+      "x": 120,
+      "y": 1398,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "Static reference only; switching, motor behavior, protection, and installation suitability are not simulated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-21",
+      "x": 120,
+      "y": 1335,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "See the current project JSON and validation report for editable model and measured counts."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-016-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-016"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "THREE-PHASE POWER PATH · STATIC NET REFERENCE"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "L1 boundary to Q1 line terminal | dol-reference-001:net-1 | pins Q1:1/L1; X1:1; X1:2 | wires W001, W002 | 2 segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "L2 boundary to Q1 line terminal | dol-reference-001:net-2 | pins Q1:3/L2; X2:1; X2:2 | wires W003, W004 | 2 segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "L3 boundary to Q1 line terminal | dol-reference-001:net-3 | pins Q1:5/L3; X3:1; X3:2 | wires W005, W006 | 2 segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "Q1 T1 to KM1 L1 | dol-reference-001:net-4 | pins KM1:1/L1; Q1:2/T1 | wires W007 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-07",
+      "x": 120,
+      "y": 439,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "Q1 T2 to KM1 L2 | dol-reference-001:net-5 | pins KM1:3/L2; Q1:4/T2 | wires W008 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-08",
+      "x": 120,
+      "y": 493,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "Q1 T3 to KM1 L3 | dol-reference-001:net-6 | pins KM1:5/L3; Q1:6/T3 | wires W009 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-09",
+      "x": 120,
+      "y": 547,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "KM1 T1 to M1 U1 | dol-reference-001:net-7 | pins KM1:2/T1; M1:U1 | wires W010 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-10",
+      "x": 120,
+      "y": 601,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "KM1 T2 to M1 V1 | dol-reference-001:net-8 | pins KM1:4/T2; M1:V1 | wires W011 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-11",
+      "x": 120,
+      "y": 655,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "KM1 T3 to M1 W1 | dol-reference-001:net-9 | pins KM1:6/T3; M1:W1 | wires W012 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-12",
+      "x": 120,
+      "y": 709,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "M1 U2/V2/W2 star point | dol-reference-001:net-10 | pins M1:U2; M1:V2; M1:W2 | wires W013, W014, W015, W016 | 4 segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-13",
+      "x": 120,
+      "y": 763,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "M1 protective earth to X4 boundary | dol-reference-001:net-11 | pins M1:PE; X4:1; X4:2 | wires W017 | 1 segment"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-14",
+      "x": 120,
+      "y": 1249,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "Q1, KM1, M1, and terminal source records are identified on A2/010–A2/012."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-15",
+      "x": 120,
+      "y": 1303,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "Pin groups and wire IDs match the current engine analysis of A2/001."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-016-line-16",
+      "x": 120,
+      "y": 1357,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-016",
+      "text": "No switching, motor, protection, PE-adequacy, or installation behavior is simulated."
     }
   ]
 }
