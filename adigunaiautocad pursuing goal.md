@@ -2956,3 +2956,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #271 merged as `3aa0ffeb78d54a3ca68835cebf10bc35d26d108a`. PR verification `43594218327`, main verification `43594256612`, and Pages deployment `43594256538` passed.
 - Cache-busted production reads confirmed revision A2/014, 14/14 authored sheets, 12 terminal rows, six field-side pins, and the passing seven-artifact report. No external supply or field wiring was added; no interface or schematic geometry changed.
 - Next: add A2/015 as a static control-path reference derived from the actual net graph, with contact-state and no-simulation limits explicit.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/015
+
+- Added A2/015 as a four-group control-path net map: X5/S0 input, S0 output to parallel S1/KM1 auxiliary inputs, the parallel outputs to KM1 coil A1, and coil A2/X6 return. Exact pins, wire IDs, and segment counts come from CAD-engine net analysis. The page states that no source, switching, coil operation, or dynamic behavior is simulated.
+- Updated project status, revision history, index, README, and report for 15 populated sheets and A2/016–A2/100 unauthored. Production measures 283 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #273 merged as `1ec41e081b3ce28fc6ac7a019e420da86893f3e9`. PR verification `43594640618`, main verification `43594681546`, and Pages deployment `43594681494` passed.
+- Cache-busted production reads confirmed revision A2/015, all four control groups, the no-simulation statement, and the passing seven-artifact report. No interface or schematic geometry changed.
+- Next: add A2/016 as an engine-derived three-phase power-path map from X1–X3 through Q1/KM1 to M1, including the star-point and PE nets, without implying simulated operation or installation suitability.
