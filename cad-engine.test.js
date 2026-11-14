@@ -3606,7 +3606,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(dolOpening);
   assert.equal(dolOpening.metrics.sheetCount, 61);
   assert.equal(dolOpening.metrics.authoredSheetCount, 61);
-  assert.equal(dolOpening.metrics.contentObjectCount, 719);
+  assert.equal(dolOpening.metrics.contentObjectCount, 718);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -4145,8 +4145,8 @@ test('A2/060 records Siemens Q1 operating humidity without assigning project con
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-060');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-060').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/060');
-  assert.equal(project.sheets.length,60);
+  assert.equal(project.revision,'A2/061');
+  assert.equal(project.sheets.length,61);
   assert.equal(sheet.number,'A2/060');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 operating-humidity reference');
   assert.ok(text.includes('relative humidity during operation 10…95%'));
