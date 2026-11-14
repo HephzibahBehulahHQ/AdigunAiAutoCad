@@ -8,6 +8,7 @@
 - Official product page: <https://www.se.com/us/en/product/LC1D09BD/iec-contactor-tesys-deca-nonreversing-9a-5hp-at-480vac-up-to-100ka-sccr-3-phase-3-no-24vdc-coil-open-style/>
 - The data sheet wiring diagram identifies coil terminals A1/A2, main terminals 1/L1, 3/L2, 5/L3 and 2/T1, 4/T2, 6/T3, plus auxiliary 13/14 (NO) and 21/22 (NC).
 - The manufacturer lists a 24 V DC coil with built-in bidirectional peak-limiting diode suppressor, three NO main poles, 1 mechanically linked NO + 1 mechanically linked NC auxiliary contact, 9 A AC-3 at up to 440 V AC, 45 × 77 × 95 mm body dimensions, and mounting on rail or plate.
+- The manufacturer data sheet specifies 1.7 N·m tightening torque for power and control screw-clamp terminals, using a flat Ø6 mm or Philips No. 2 screwdriver. This is catalog data, not an installed termination or torque-inspection record.
 - The published data sheet identifies IEC 60947-4-1, IEC 60947-5-1 and UL 508 standards. Those product references are not a certification or suitability determination for a particular project.
 
 ## CAD representation
