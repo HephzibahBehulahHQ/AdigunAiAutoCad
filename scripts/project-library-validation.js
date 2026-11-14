@@ -46,7 +46,7 @@ function summarizeSheetContent(project) {
       return object.kind === 'text'
         && typeof object.text === 'string'
         && object.text.trim().length > 0
-        && !/\\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\\b/i.test(object.text);
+        && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text);
     });
     return {
       id: sheet.id,
