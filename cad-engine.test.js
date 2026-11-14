@@ -3674,7 +3674,7 @@ test('the project-library manifest and generated validation report match the cur
   const pushButtonInstances = dolProject.objects.filter(object => object.kind === 'component-instance' && ['S0', 'S1'].includes(object.ref));
   const contactNets = new Map();
   const contactAnalysis = engine.analyzeProject(dolProject).sheets.find(sheet => sheet.id === 'dol-reference-001').analysis;
-  for (const net of contactAnalysis.nets) for (const pin of net.pins) contactNets.set(pin.instanceId + ':' + pin.pinId, net.id + ' | ' + net.wireIds.length + ' route segments');
+  for (const net of contactAnalysis.nets) for (const pin of net.pins) contactNets.set(pin.instanceId + ':' + pin.pinId, net.id + ' | ' + net.wireIds.length + (net.wireIds.length === 1 ? ' route segment' : ' route segments'));
   const expectedContactRows = pushButtonInstances.flatMap(instance => { const contact = engine.component(instance.componentId).electricalFunctions.pushButton; return engine.worldPins(instance).map(pin => instance.ref + ' | ' + pin.number + ' | ' + pin.name + ' | normal state: ' + contact.normalContactState + ' | ' + (contactNets.get(instance.id + ':' + pin.id) || 'Not wired in this static drawing')); });
   assert.equal(expectedContactRows.length, 4);
   for (const row of expectedContactRows) assert.ok(contactReferenceText.includes(row), 'A2/013 must match component contact and net data: ' + row);
