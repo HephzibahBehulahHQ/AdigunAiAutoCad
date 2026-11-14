@@ -96,3 +96,11 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists IP20 for the contactor front face, conforming to IEC 60529.
 - This front-face component rating does not define the project's enclosure, complete-assembly protection, or installation conditions.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Ambient temperature ratings
+
+- The data sheet lists ambient air temperature for operation as -5 to +60 °C and ambient air temperature for storage as -60 to +80 °C.
+- It separately lists permissible ambient air around the device at Uc as -40 to +70 °C; this is a distinct data-sheet condition and not the operating range.
+- These component ratings do not establish project site conditions or application suitability.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
