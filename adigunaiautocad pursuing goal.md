@@ -2893,3 +2893,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #257 merged as `d5477af090cd0a249dbff4f65501467395368192`. PR CI `43590191139`, main verification `43590231784`, and Pages deployment `43590231840` passed.
 - Cache-busted production reads confirmed A2/007 and a passing seven-artifact report with all seven authored DOL sheets populated. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: add A2/008 as the first part of a wire schedule derived from all 38 engine-generated wire-list rows, and update A2/006 to list A2/007 accurately.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/008
+
+- Added A2/008 as a populated wire schedule for W001–W019 of the 38 engine-derived route segments, with net IDs, Manhattan route lengths, endpoint pin contacts, and complete net pin references. The page explicitly documents route-segment endpoints and does not claim conductor sizing or electrical suitability.
+- Updated A2/006 to list A2/007 and A2/008 and accurately state that A2/009–A2/100 are not yet authored. The DOL reference now has eight populated sheets and 156 meaningful content objects; its source-backed model remains 11 components, 38 wires, 15 nets, 6 BOM rows, zero open endpoints, and zero geometry errors.
+- PR #259 merged as `4ef71c1969f4440b60ec2c7a550bedc3383ca5fc`. Main verification `43590712839` and Pages deployment `43590712841` passed.
+- Cache-busted production validation confirmed revision A2/008, 8/8 authored sheets, zero empty sheets, and a passing seven-artifact report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: author A2/009 as the continuation of the engine-derived wire schedule (W020–W038), update the index, and test every displayed row against the CAD engine.
