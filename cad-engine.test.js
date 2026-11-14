@@ -3603,9 +3603,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 5);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 5);
-  assert.equal(dolOpening.metrics.contentObjectCount, 99);
+  assert.equal(dolOpening.metrics.sheetCount, 6);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 6);
+  assert.equal(dolOpening.metrics.contentObjectCount, 110);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3614,6 +3614,9 @@ test('the project-library manifest and generated validation report match the cur
   for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004']) assert.ok(revisionText.includes(revision));
   const designBasisText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-005').map(object => object.text).join(' ');
   for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'Starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
+  const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
+  for (const page of ['A2/001 | DOL motor feeder schematic', 'A2/002 | Project status and scope', 'A2/003 | Component register', 'A2/004 | Revision record', 'A2/005 | Design basis and rating comparison']) assert.ok(indexText.includes(page));
+  assert.ok(indexText.includes('A2/007–A2/100 are not authored'));
   const dolBom = engine.billOfMaterials(dolProject.objects);
   const registerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-003').map(object => object.text);
   assert.equal(dolBom.valid, true);
