@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/003",
-  "status": "Three authored sheets: DOL schematic A2/001, project status/scope A2/002, and source-backed component register A2/003. The remaining 97 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/004",
+  "status": "Four authored sheets: DOL schematic A2/001, project status/scope A2/002, source-backed component register A2/003, and revision record A2/004. The remaining 96 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -31,6 +31,11 @@
       "id": "dol-reference-003",
       "number": "A2/003",
       "name": "Source-backed component register"
+    },
+    {
+      "id": "dol-reference-004",
+      "number": "A2/004",
+      "name": "Revision record"
     }
   ],
   "sheetLabels": {},
@@ -937,6 +942,99 @@
       "text": "Device presence and catalog ratings do not establish project suitability, protection coordination, or construction approval.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-004-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-01",
+      "x": 120,
+      "y": 150,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-02",
+      "x": 120,
+      "y": 228,
+      "text": "REVISION HISTORY · DOL MOTOR FEEDER REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-03",
+      "x": 120,
+      "y": 306,
+      "text": "A2/001 | Initial source-backed DOL schematic; 11 components, 38 wires, 15 derived nets.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-04",
+      "x": 120,
+      "y": 384,
+      "text": "A2/002 | Added project status, scope, device and limitation record; schematic topology unchanged.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-05",
+      "x": 120,
+      "y": 462,
+      "text": "A2/003 | Added six-row component register derived from the engine BOM; line-by-line equality is tested.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-06",
+      "x": 120,
+      "y": 540,
+      "text": "A2/004 | Added this revision record; no component, wire, or topology changes.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-07",
+      "x": 120,
+      "y": 618,
+      "text": "Current state: 4 complete authored sheets; A2/005–A2/100 are not authored.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-08",
+      "x": 120,
+      "y": 696,
+      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open wire endpoints, 0 geometry errors.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-09",
+      "x": 120,
+      "y": 774,
+      "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004"
     }
   ]
 }
