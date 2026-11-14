@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/004",
-  "status": "Four authored sheets: DOL schematic A2/001, project status/scope A2/002, source-backed component register A2/003, and revision record A2/004. The remaining 96 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/005",
+  "status": "Five authored sheets: DOL schematic A2/001, project status/scope A2/002, component register A2/003, revision record A2/004, and source-backed design-basis comparison A2/005. The remaining 95 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -36,6 +36,11 @@
       "id": "dol-reference-004",
       "number": "A2/004",
       "name": "Revision record"
+    },
+    {
+      "id": "dol-reference-005",
+      "number": "A2/005",
+      "name": "Design basis and rating comparison"
     }
   ],
   "sheetLabels": {},
@@ -1035,6 +1040,153 @@
       "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-005-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-01",
+      "x": 120,
+      "y": 150,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-02",
+      "x": 120,
+      "y": 214,
+      "text": "DESIGN BASIS · PUBLISHED MOTOR AND BREAKER RATINGS",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-03",
+      "x": 120,
+      "y": 278,
+      "text": "M1 | SEW-EURODRIVE DRN63MS4 | 400 V / 50 Hz / 4-pole | rated power 0.12 kW | rated current 0.405 A.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-04",
+      "x": 120,
+      "y": 342,
+      "text": "Q1 | Siemens SIRIUS 3RV2011-0FA10 | Class 10 | adjustable A-release 0.35–0.5 A | N-release 6.5 A.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-05",
+      "x": 120,
+      "y": 406,
+      "text": "The published 0.405 A motor current lies within the breaker’s published 0.35–0.5 A adjustment interval.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-06",
+      "x": 120,
+      "y": 470,
+      "text": "This is a catalog-rating comparison only; it does not choose or enter a Q1 setting.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-07",
+      "x": 120,
+      "y": 534,
+      "text": "It does not establish protection suitability, coordination, short-circuit performance, or construction approval.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-08",
+      "x": 120,
+      "y": 598,
+      "text": "Starting current, motor duty, load conditions, conductor sizing, ambient derating, and site fault level are not assessed.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-09",
+      "x": 120,
+      "y": 662,
+      "text": "Breaker trips, contact switching, and motor behavior are not simulated.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-10",
+      "x": 120,
+      "y": 726,
+      "text": "SEW-EURODRIVE source: document 30590116/EN, 03/2023; DRN63MS4 motor data table.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-11",
+      "x": 120,
+      "y": 790,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-12",
+      "x": 120,
+      "y": 854,
+      "text": "Siemens source: SIRIUS data sheet for exact part 3RV2011-0FA10.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-13",
+      "x": 120,
+      "y": 918,
+      "text": "https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-14",
+      "x": 120,
+      "y": 982,
+      "text": "Manufacturer ratings and source revisions remain recorded in the component definitions and BOM provenance.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-005-line-15",
+      "x": 120,
+      "y": 1046,
+      "text": "Educational reference only. Qualified application-specific engineering review is required before use.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-005"
     }
   ]
 }
