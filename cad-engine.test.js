@@ -3868,7 +3868,7 @@ test('the project-library manifest and generated validation report match the cur
 
   assert.equal(dolProject.revision, 'A2/062');
   assert.equal(dolProject.sheets.length, 62);
-  assert.match(dolProject.status, /^Sixty-one authored sheets:/);
+  assert.match(dolProject.status, /^Sixty-two authored sheets:/);
   assert.ok(dolProject.status.includes('The remaining 39 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
@@ -4150,8 +4150,8 @@ test('A2/060 records Siemens Q1 operating humidity without assigning project con
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-060');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-060').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/061');
-  assert.equal(project.sheets.length,61);
+  assert.equal(project.revision,'A2/062');
+  assert.equal(project.sheets.length,62);
   assert.equal(sheet.number,'A2/060');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 operating-humidity reference');
   assert.ok(text.includes('relative humidity during operation 10…95%'));
