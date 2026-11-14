@@ -3680,8 +3680,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/018');
-  assert.equal(dolProject.sheets.length, 18);
+  assert.equal(dolProject.revision, 'A2/019');
+  assert.equal(dolProject.sheets.length, 19);
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
