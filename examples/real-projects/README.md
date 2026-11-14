@@ -214,7 +214,7 @@ Open `siemens-schneider-sew-dol-reference.adigun.json` from the workstation's **
 
 ## DOL reference project status
 
-The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 66 authored sheets through A2/066. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
+The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 67 authored sheets through A2/067. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
 
 
 A2/045 records Schneider Electric LC1D09BD rated operational current as 25 A AC-1 at ≤440 V AC and ambient ≤60 °C, separately from the 9 A AC-3 rating. These are utilization-category component ratings, not project load, cable or protection selections.
@@ -258,3 +258,5 @@ A2/064 records Siemens’ ultimate short-circuit breaking capacity (Icu) of 100 
 A2/065 records Siemens’ operating short-circuit current breaking capacity (Ics) of 100 kA at 400 V AC for Q1 3RV2011-0FA10. This rated service capacity is separate from Icu and does not state the project fault level, assembly short-circuit rating, or protective-device coordination.
 
 A2/066 records Siemens’ listed response value of the 3RV2011-0FA10 instantaneous short-circuit trip unit, 6.5 A. No project current, trip curve, timing, tolerance, coordination, or application suitability is inferred.
+
+A2/067 records Siemens’ 3RV2011-0FA10 AC-3 motor-power ratings of 0.1 kW at 230 V, 0.12 kW at 400 V, 0.1 kW at 500 V, and 0.2 kW at 690 V AC. The 400 V figure is a catalog comparison with M1; it does not by itself establish motor compatibility or application suitability.
