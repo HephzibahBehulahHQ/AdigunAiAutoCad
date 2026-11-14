@@ -2857,3 +2857,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #249 merged as `87a76b607e84a6da1f862754b201aebd7effdbd3`. PR CI `43588670266`, main verification `43588712948`, and Pages deployment `43588712945` passed.
 - Cache-busted production reads confirmed A2/003, six displayed BOM lines, and a passing seven-artifact report with no empty sheets. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: add A2/004 as a revision record of the three actual authored increments and their verified model counts.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/004
+
+- Added an editable revision-history page for the actual A2/001 schematic, A2/002 scope record, and A2/003 BOM-derived component register. The page records four authored sheets; the remaining 96 are not authored.
+- Project validation remains 11 components, 38 wires, 15 nets, six BOM rows, zero open wire endpoints, zero geometry errors, and four of four sheets with meaningful editable content.
+- PR #251 merged as `ed4461f0a3967c31a270ee1749014306f9a51b62`. An initial CI run (`43589007399`) exposed a declaration-order bug in the new test; the test was corrected before merge and rerun `43589088007` passed. Main verification `43589114580` and Pages deployment `43589114551` passed.
+- Cache-busted production reads confirmed revision A2/004, four authored sheets, 84 meaningful content objects, no empty sheets, and a passing project-library report. No interface or schematic geometry changed.
+- Next: author A2/005 as a sourced design-basis and assumptions page, separating published breaker/motor rating overlap from an actual protection setting or suitability claim.
