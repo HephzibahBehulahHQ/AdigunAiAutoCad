@@ -3603,15 +3603,15 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 24);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 24);
-  assert.equal(dolOpening.metrics.contentObjectCount, 398);
+  assert.equal(dolOpening.metrics.sheetCount, 25);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 25);
+  assert.equal(dolOpening.metrics.contentObjectCount, 406);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
   const dolProject = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-reference.adigun.json'), 'utf8'));
   const revisionText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-004').map(object => object.text).join(' ');
-  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017', 'A2/018', 'A2/019', 'A2/020', 'A2/021', 'A2/022', 'A2/023', 'A2/024']) assert.ok(revisionText.includes(revision));
+  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017', 'A2/018', 'A2/019', 'A2/020', 'A2/021', 'A2/022', 'A2/023', 'A2/024', 'A2/025']) assert.ok(revisionText.includes(revision));
   const designBasisText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-005').map(object => object.text).join(' ');
   for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'Starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
   const indexObjects = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006');
@@ -3636,7 +3636,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/022 | terminal torque/tool reference'));
   assert.ok(indexText.includes('A2/023 | terminal conductor options'));
   assert.ok(indexText.includes('A2/024 | coil voltage limits'));
-  assert.ok(indexText.includes('A2/025–A2/100 are not authored'));
+  assert.ok(indexText.includes('A2/025 | AC-3 electrical durability'));
+  assert.ok(indexText.includes('A2/026–A2/100 are not authored'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3659,8 +3660,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/024');
-  assert.equal(dolProject.sheets.length, 24);
+  assert.equal(dolProject.revision, 'A2/025');
+  assert.equal(dolProject.sheets.length, 25);
   const inputRegisterText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-017').map(object => object.text);
   const expectedInputRows = [
       "Q1 | overloadSettingA = null; published 0.35–0.5 A range; no trip point is selected.",
@@ -3687,8 +3688,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/024');
-  assert.equal(dolProject.sheets.length, 24);
+  assert.equal(dolProject.revision, 'A2/025');
+  assert.equal(dolProject.sheets.length, 25);
+  assert.match(dolProject.status, /^Twenty-five authored sheets:/);
+  assert.ok(dolProject.status.includes('The remaining 75 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
@@ -3696,6 +3699,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.deepEqual(lc1d09.specifications.terminalConductorOptions, [{"circuit":"power","cableCount":1,"cableStiffness":"flexible","cableEnd":"with cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"power","cableCount":1,"cableStiffness":"flexible","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"power","cableCount":2,"cableStiffness":"flexible","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"power","cableCount":2,"cableStiffness":"flexible","cableEnd":"with cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":2.5},{"circuit":"power","cableCount":1,"cableStiffness":"solid","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"power","cableCount":2,"cableStiffness":"solid","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"control","cableCount":2,"cableStiffness":"flexible","cableEnd":"with cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":2.5},{"circuit":"control","cableCount":1,"cableStiffness":"flexible","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"control","cableCount":2,"cableStiffness":"flexible","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"control","cableCount":1,"cableStiffness":"flexible","cableEnd":"with cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"control","cableCount":1,"cableStiffness":"solid","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4},{"circuit":"control","cableCount":2,"cableStiffness":"solid","cableEnd":"without cable end","minimumCrossSectionMm2":1,"maximumCrossSectionMm2":4}]);
   assert.deepEqual(lc1d09.specifications.coilOperationalRangeAt60C, { minimum: 0.7, maximum: 1.25, unit: '× Uc' });
   assert.deepEqual(lc1d09.specifications.coilDropOutRangeAt60C, { minimum: 0.1, maximum: 0.25, unit: '× Uc' });
+  assert.deepEqual(lc1d09.specifications.electricalDurabilityAc3, { value: 2, unit: 'Mcycles', conditions: '9 A AC-3 at Ue ≤440 V AC' });
   assert.ok(lc1d09.sources.some(source => source.url === 'https://www.se.com/es/es/faqs/FA33405/' && source.modifiedAt === '2025-04-09'));
   assert.equal((lc1d09.specifications.averageCoilConsumptionAtNominalUc.value / lc1d09.electricalFunctions.contactor.coil.nominalVoltage.value).toFixed(2), '0.10');
   const contactorDoc = fs.readFileSync(path.join(__dirname, 'docs', 'components', 'schneider-electric-lc1d09bd.md'), 'utf8');
@@ -3776,6 +3780,17 @@ test('the project-library manifest and generated validation report match the cur
   ];
   for (const row of km1CoilVoltageRows) assert.ok(km1CoilLimitsText.includes(row), 'A2/024 must preserve manufacturer coil-voltage conditions and limits: ' + row);
   assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-024' && sheet.number === 'A2/024'));
+
+  const km1DurabilityText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-025').map(object => object.text);
+  const expectedKm1DurabilityRows = [
+    "KM1 | Schneider Electric LC1D09BD | 9 A AC-3 at Ue ≤440 V AC.",
+    "Electrical durability: 2 Mcycles at 9 A AC-3 and Ue ≤440 V AC.",
+    "This catalog condition does not establish this project's switching duty or service life.",
+    "Operating cycles, load profile, environment, maintenance, and contact wear are not assessed or simulated.",
+    "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+  ];
+  for (const row of expectedKm1DurabilityRows) assert.ok(km1DurabilityText.includes(row), 'A2/025 must preserve the catalog durability condition and scope: ' + row);
+  assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-025' && sheet.number === 'A2/025'));
 
 
 
