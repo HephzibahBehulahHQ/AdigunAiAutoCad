@@ -47,7 +47,7 @@
       "title": "IFM IFS204 sensor to Siemens S7-1200 input",
       "topologyId": "sensor-to-plc-input",
       "role": "standalone-example",
-      "path": "examples/real-projects/ifm-ifs204-siemens-s7-1200-sensor-input.adig.json",
+      "path": "examples/real-projects/ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json",
       "revision": "1.0",
       "status": "passed",
       "checks": {
