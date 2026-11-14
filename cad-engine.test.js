@@ -3704,6 +3704,12 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
   for (const fact of ['28 ms', 'bidirectional peak-limiting diode suppressor', 'does not measure project coil transition', 'system response', 'SQD-LC1D09BD.PDF']) assert.ok(coilTimeConstantText.includes(fact));
+  const b10dSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-047');
+  assert.equal(b10dSheet.number, 'A2/047');
+  const b10dText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-047').map(object => object.text).join(' ');
+  assert.ok(b10dText.includes('B10d: 1,369,863 cycles for contactor with nominal load'));
+  assert.ok(b10dText.includes('B10d: 20,000,000 cycles for contactor with mechanical load'));
+  assert.ok(!b10dText.includes('2,000,000 cycles for contactor with mechanical load'));
   const coilPowerSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-051');
   assert.equal(coilPowerSheet.number, 'A2/051');
   const coilPowerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-051').map(object => object.text).join(' ');

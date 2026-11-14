@@ -223,7 +223,7 @@ A2/045 records Schneider Electric LC1D09BD rated operational current as 25 A AC-
 A2/046 records the Schneider Electric LC1D09BD AC-1 electrical durability condition: 0.6 Mcycles at 25 A and Ue ≤440 V AC. The 2 Mcycles AC-3 condition is separate and refers to 9 A at Ue ≤440 V AC. Neither catalog value predicts service life in this project.
 
 
-A2/047 records Schneider Electric LC1D09BD B10d values separately: 1,369,863 cycles with nominal load and 2,000,000 cycles with mechanical load, each as listed conforming to EN/ISO 13849-1. These manufacturer data alone do not establish a safety performance level or validate a project safety function.
+A2/047 records Schneider Electric LC1D09BD B10d values separately: 1,369,863 cycles with nominal load and 20,000,000 cycles with mechanical load, each as listed conforming to EN/ISO 13849-1. These manufacturer data alone do not establish a safety performance level or validate a project safety function.
 
 
 A2/048 records the manufacturer-listed 1 NC mirror contact conforming to IEC 60947-4-1 and the separately listed 1 NO + 1 NC mechanically linked contacts conforming to IEC 60947-5-1. This catalog designation does not assign a project safety-circuit function or validate safety architecture.
