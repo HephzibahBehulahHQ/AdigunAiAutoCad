@@ -3676,10 +3676,10 @@ test('the project-library manifest and generated validation report match the cur
   const scopeProgress = dolProject.objects.filter(object => object.sheetId === 'dol-reference-002').map(object => object.text).join(' ');
   assert.ok(scopeProgress.includes('61 complete editable sheets; A2/062–A2/100 are not authored.'));
   assert.ok(scopeProgress.includes('61 complete authored sheets; A2/062–A2/100 are not authored.'));
-  const altitudeSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-061');
-  assert.equal(altitudeSheet.number, 'A2/061');
-  const altitudeText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-061').map(object => object.text).join(' ');
-  for (const fact of ['maximum installation altitude 2 000 m above sea level', 'does not identify the project installation altitude', 'No site elevation, derating, or application suitability is established', '3RV2011-0FA10', 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10']) assert.ok(altitudeText.includes(fact), 'A2/061 must retain the source-backed Q1 limit and scope: ' + fact);
+  const q1InstallationAltitudeSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-061');
+  assert.equal(q1InstallationAltitudeSheet.number, 'A2/061');
+  const q1InstallationAltitudeText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-061').map(object => object.text).join(' ');
+  for (const fact of ['maximum installation altitude 2 000 m above sea level', 'does not identify the project installation altitude', 'No site elevation, derating, or application suitability is established', '3RV2011-0FA10', 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10']) assert.ok(q1InstallationAltitudeText.includes(fact), 'A2/061 must retain the source-backed Q1 limit and scope: ' + fact);
   assert.equal(dolProject.objects.filter(object => object.sheetId === 'dol-reference-061').length, 9);
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
