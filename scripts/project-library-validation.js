@@ -150,6 +150,11 @@ function run() {
   } else if (process.argv.includes('--check')) {
     if (!fs.existsSync(reportPath) || fs.readFileSync(reportPath, 'utf8') !== rendered) {
       console.error('Project-library report is missing or stale. Run node scripts/project-library-validation.js --write.');
+      const saved = fs.existsSync(reportPath) ? fs.readFileSync(reportPath, 'utf8') : '';
+      let offset = 0;
+      while (offset < rendered.length && rendered[offset] === saved[offset]) offset += 1;
+      const line = rendered.slice(0, offset).split('\n').length;
+      console.error(`First difference at line ${line}; expected ${JSON.stringify(rendered.slice(offset, offset + 120))}, saved ${JSON.stringify(saved.slice(offset, offset + 120))}.`);
       process.exitCode = 1;
     }
   } else {
@@ -161,3 +166,4 @@ function run() {
 if (require.main === module) run();
 
 module.exports = { buildReport, manifestPath, reportPath };
+
