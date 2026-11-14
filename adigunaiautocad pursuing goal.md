@@ -2995,3 +2995,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #284 merged as `fea228a59f919f2fd47a658d1349ede6eab89c63`. Final PR verification run `43600167690` and Pages deployment run `43600236574` passed.
 - Production reads confirmed A2/020, 20 authored sheets, the 9 A AC-3 rating and stated conditions, plus a passing validation report with the metrics above. The distinct 100-sheet topology gate remains 1/5. No interface or existing circuit geometry changed.
 - Next: inspect the current source-backed DOL model for a distinct A2/021 increment; keep catalog facts separate from application-specific suitability claims.
+
+## 2026-11-14 incremental execution record — DOL KM1 dimensions and mounting A2/021
+
+- Added A2/021 with Schneider Electric's LC1D09BD catalog envelope (45 × 77 × 95 mm), the manufacturer's 93/95 mm depth conditions, and rail/plate mounting support. The sheet preserves the minimum-electrical-clearance note without assigning a project clearance and states that schematic coordinates do not establish physical fit or panel layout.
+- Corrected the drawing index by removing one stale overlapping label and added a regression assertion that A2/006 rows do not overlap. The project now has 21 authored sheets and A2/022–A2/100 unauthored; the report measures 361 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #286 merged as `13707c226ca495f77b4aa65ed8c8bdec7aa85174`. Final PR verification `43600924193`, main verification `43600978910`, and Pages deployment `43600978917` passed.
+- Cache-busted production reads confirmed A2/021, its dimensional and mounting rows, 21 authored sheets, the passing report, and non-overlapping A2/006 rows. The distinct 100-sheet topology gate remains 1/5. No interface or existing circuit geometry changed.
+- Next: inspect the source-backed model for a distinct A2/022 reference; avoid repeating catalog dimensions or implying application suitability.
