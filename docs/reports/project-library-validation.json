@@ -212,7 +212,7 @@
       "topologyId": "direct-on-line-motor-feeder",
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
-      "revision": "A2/035",
+      "revision": "A2/036",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -222,9 +222,9 @@
         "zeroGeometryErrors": true
       },
       "metrics": {
-        "sheetCount": 35,
-        "authoredSheetCount": 35,
-        "contentObjectCount": 487,
+        "sheetCount": 36,
+        "authoredSheetCount": 36,
+        "contentObjectCount": 495,
         "emptyContentSheetIds": [],
         "componentCount": 11,
         "wireCount": 38,

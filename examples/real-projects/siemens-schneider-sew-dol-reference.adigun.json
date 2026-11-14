@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/035",
-  "status": "Thirty-five authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, and KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, and KM1 vibration-and-shock reference A2/035. The remaining 65 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/036",
+  "status": "Thirty-six authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, and KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, KM1 vibration-and-shock reference A2/035, and KM1 mechanical-durability reference A2/036. The remaining 64 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -191,6 +191,11 @@
       "id": "dol-reference-035",
       "number": "A2/035",
       "name": "KM1 vibration and shock ratings reference"
+    },
+    {
+      "id": "dol-reference-036",
+      "number": "A2/036",
+      "name": "KM1 mechanical durability reference"
     }
   ],
   "sheetLabels": {},
@@ -884,7 +889,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/035, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/036, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -893,7 +898,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 35 complete editable sheets; A2/036–A2/100 are not authored.",
+      "text": "Progress: 36 complete editable sheets; A2/037–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -902,7 +907,7 @@
       "id": "dol-ref-002-line-06",
       "x": 120,
       "y": 470,
-      "text": "Current state: 35 complete authored sheets; A2/036–A2/100 are not authored.",
+      "text": "Current state: 36 complete authored sheets; A2/037–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1592,7 +1597,7 @@
       "id": "dol-ref-006-line-06",
       "x": 120,
       "y": 402,
-      "text": "A2/004 | Revision record | history through A2/035.",
+      "text": "A2/004 | Revision record | history through A2/036.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -2827,7 +2832,7 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 35 complete authored sheets; A2/036–A2/100 are not authored."
+      "text": "Current state: 36 complete authored sheets; A2/037–A2/100 are not authored."
     },
     {
       "kind": "text",
@@ -4841,7 +4846,7 @@
       "id": "dol-ref-004-line-24",
       "x": 120,
       "y": 1370,
-      "text": "A2/026 | rated insulation; A2/027 | impulse; A2/028 | operating rate; A2/029 | signal minimum; A2/030 | non-overlap; A2/031–A2/035 | IP20, ambient, altitude, environmental classification, vibration and shock.",
+      "text": "A2/026 | rated insulation; A2/027 | impulse; A2/028 | operating rate; A2/029 | signal minimum; A2/030 | non-overlap; A2/031–A2/036 | IP20, ambient, altitude, environmental classification, vibration, shock and mechanical durability.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -5186,7 +5191,91 @@
       "id": "dol-ref-006-line-30",
       "x": 120,
       "y": 1402,
-      "text": "A2/035 | KM1 vibration and shock ratings reference | open/closed values with published test conditions; A2/036–A2/100 are not authored.",
+      "text": "A2/035 | KM1 vibration and shock ratings reference | open/closed values with published test conditions.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-036-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-02",
+      "x": 120,
+      "y": 169,
+      "text": "KM1 MECHANICAL DURABILITY · SOURCE REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-03",
+      "x": 120,
+      "y": 223,
+      "text": "KM1 | Schneider Electric TeSys D LC1D09BD contactor.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-04",
+      "x": 120,
+      "y": 277,
+      "text": "Manufacturer-listed mechanical durability: 30 Mcycles.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-05",
+      "x": 120,
+      "y": 331,
+      "text": "This is a component catalog rating, not an estimate of project service life or operating cycles.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-06",
+      "x": 120,
+      "y": 385,
+      "text": "Project duty, load profile, environment, maintenance, and contact wear are not modeled.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-036-line-07",
+      "x": 120,
+      "y": 439,
+      "text": "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-036"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-31",
+      "x": 120,
+      "y": 1442,
+      "text": "A2/036 | KM1 mechanical durability reference | 30 Mcycles; not a project service-life estimate; A2/037–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     }
