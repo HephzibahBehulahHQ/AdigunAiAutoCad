@@ -2821,3 +2821,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #241 merged as `a52577674a12546339fdac53c27ab5857944ee91`; PR CI passed (workflow run `43414459145`). Main model verification `43414540211` and Pages deployment `43414540000` succeeded.
 - Cache-busted production JSON verified revision 9.7, all 100 authored sheets through A1/100, the source ratings and their limitation. Project totals remain 32 components and 335 wires.
 - Next: audit the release record, PRs, CI/deployment results, production data, and interface-preservation scope against the goal.
+
+
+## 2026-11-14 incremental execution record — project library baseline
+
+- Added `examples/real-projects/library.json` for six verified project artifacts representing five distinct electrical topologies, and a deterministic per-project report generator and committed report.
+- The report checks the engine project schema, derived connectivity, source-backed BOM, wire list, and geometry. All six artifacts pass. The one 100-sheet star-delta package is the only distinct topology currently meeting the 100-sheet requirement; the first gate of five distinct 100-sheet projects remains incomplete at 1/5.
+- PR #243 merged as `c9d75a7c12d9e0f762d71b7b3fd2cbc4ba88033f`. PR verification run `43587069869` passed. Main verification `43587128395` and GitHub Pages deployment `43587128390` passed.
+- Cache-busted production reads confirmed the deployed six-entry manifest and six passing reports at the merged main revision. No interface or drawing geometry changed.
+- Next: begin the second distinct 100-sheet project from the existing source-backed DOL motor-feeder topology, adding complete authored pages in small verified increments; count only pages with real editable content.
