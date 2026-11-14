@@ -133,3 +133,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists mechanical durability of 30 Mcycles.
 - This is a component catalog rating, not a project service-life or operating-cycle estimate. Project duty, load profile, environment, maintenance, and contact wear are not modeled.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Rated breaking capacity
+
+- The data sheet lists rated breaking capacity of 250 A at 440 V for the power circuit, conforming to IEC 60947.
+- This component rating does not establish project prospective fault current, protective-device coordination, or assembly short-circuit rating. Project protection selection and coordination are not assessed.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
