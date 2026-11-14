@@ -147,3 +147,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists Irms rated making capacity of 250 A at 440 V for the power circuit, conforming to IEC 60947.
 - This is a distinct catalog characteristic from rated breaking capacity. It does not establish project fault conditions, switching duty, protective-device coordination, or assembly short-circuit rating.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Conventional free-air thermal current
+
+- The data sheet lists conventional free-air thermal current Ith of 25 A for the power circuit and 10 A for the signalling circuit, both at ambient temperature up to 60 °C.
+- These are distinct from operational-current ratings and do not select project conductors or protection.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
