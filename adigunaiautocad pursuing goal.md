@@ -2929,3 +2929,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #265 merged as `935c892b7dbfd4d649ebfb6adbb914c719fb1d1c`. PR verification `43592529047`, main verification `43592569873`, and Pages deployment `43592570149` passed.
 - Cache-busted production checks confirmed revision A2/011, 11/11 authored sheets, all 18 terminal rows, both unwired NC pins, and the passing seven-artifact report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: add A2/012 as a source-backed M1 terminal/net reference from SEW component definitions and the engine's net graph; state clearly that schematic pin coordinates do not represent physical motor-terminal positions.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/012
+
+- Added A2/012 with all seven M1 terminal identities and their current engine-derived net IDs and route-segment counts. Regression coverage checks each row against the source-backed component pin definitions and analyzed wiring. The page states that schematic coordinates are not physical terminal positions and that motor behavior is not simulated.
+- Updated project status, revision history, drawing index, README, and report for 12 populated sheets; A2/013–A2/100 remain unauthored. Production measures 243 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #267 merged as `0db46f113f8d2bcddf6412945a6eb8bf3b3e1b67`. PR verification `43592946217`, main verification `43592986037`, and Pages deployment `43592986005` passed.
+- A cache-busted production read confirmed revision A2/012, 12/12 authored sheets, all seven M1 rows, the physical-layout caveat, and the passing report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: add A2/013 as an S0/S1 contact-terminal reference, using component-defined terminal identities and engine net analysis, and state that contact state is not simulated.
