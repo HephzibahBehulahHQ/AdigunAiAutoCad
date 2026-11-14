@@ -140,3 +140,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists rated breaking capacity of 250 A at 440 V for the power circuit, conforming to IEC 60947.
 - This component rating does not establish project prospective fault current, protective-device coordination, or assembly short-circuit rating. Project protection selection and coordination are not assessed.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Rated making capacity
+
+- The data sheet lists Irms rated making capacity of 250 A at 440 V for the power circuit, conforming to IEC 60947.
+- This is a distinct catalog characteristic from rated breaking capacity. It does not establish project fault conditions, switching duty, protective-device coordination, or assembly short-circuit rating.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
