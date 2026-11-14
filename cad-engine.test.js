@@ -3603,15 +3603,15 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 21);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 21);
-  assert.equal(dolOpening.metrics.contentObjectCount, 361);
+  assert.equal(dolOpening.metrics.sheetCount, 22);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 22);
+  assert.equal(dolOpening.metrics.contentObjectCount, 370);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
   const dolProject = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-reference.adigun.json'), 'utf8'));
   const revisionText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-004').map(object => object.text).join(' ');
-  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017', 'A2/018', 'A2/019', 'A2/020', 'A2/021']) assert.ok(revisionText.includes(revision));
+  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017', 'A2/018', 'A2/019', 'A2/020', 'A2/021', 'A2/022']) assert.ok(revisionText.includes(revision));
   const designBasisText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-005').map(object => object.text).join(' ');
   for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'Starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
   const indexObjects = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006');
@@ -3633,7 +3633,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/019 | DOL seal-in path'));
   assert.ok(indexText.includes('A2/020 | AC-3 catalog rating'));
   assert.ok(indexText.includes('A2/021 | dimensions/mounting reference'));
-  assert.ok(indexText.includes('A2/022–A2/100 are not authored'));
+  assert.ok(indexText.includes('A2/022 | terminal torque/tool reference'));
+  assert.ok(indexText.includes('A2/023–A2/100 are not authored'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3656,8 +3657,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/021');
-  assert.equal(dolProject.sheets.length, 21);
+  assert.equal(dolProject.revision, 'A2/022');
+  assert.equal(dolProject.sheets.length, 22);
   const inputRegisterText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-017').map(object => object.text);
   const expectedInputRows = [
       "Q1 | overloadSettingA = null; published 0.35–0.5 A range; no trip point is selected.",
@@ -3689,6 +3690,7 @@ test('the project-library manifest and generated validation report match the cur
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
+  assert.equal(lc1d09.specifications.terminalConnection.value, 'Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Phillips No. 2 screwdriver');
   assert.ok(lc1d09.sources.some(source => source.url === 'https://www.se.com/es/es/faqs/FA33405/' && source.modifiedAt === '2025-04-09'));
   assert.equal((lc1d09.specifications.averageCoilConsumptionAtNominalUc.value / lc1d09.electricalFunctions.contactor.coil.nominalVoltage.value).toFixed(2), '0.10');
   const contactorDoc = fs.readFileSync(path.join(__dirname, 'docs', 'components', 'schneider-electric-lc1d09bd.md'), 'utf8');
@@ -3739,6 +3741,19 @@ test('the project-library manifest and generated validation report match the cur
   ];
   for (const row of expectedDimensionRows) assert.ok(dimensionsReferenceText.includes(row), 'A2/021 must match Schneider data and preserve physical-layout limits: ' + row);
   assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-021' && sheet.number === 'A2/021'));
+  const terminalReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-022').map(object => object.text);
+  const expectedTerminalRows = [
+    "KM1 | Schneider Electric LC1D09BD.",
+    "Power screw-clamp terminal tightening torque: 1.7 N·m.",
+    "Control screw-clamp terminal tightening torque: 1.7 N·m.",
+    "Manufacturer screwdriver options: flat Ø6 mm or Phillips No. 2.",
+    "Source data is catalog guidance; this project contains no installed termination or inspection record.",
+    "Cable selection, preparation, and field torque verification are not represented by this static drawing.",
+    "Source: Schneider Electric LC1D09BD product data sheet https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF"
+  ];
+  for (const row of expectedTerminalRows) assert.ok(terminalReferenceText.includes(row), 'A2/022 must preserve source-backed terminal data and limits: ' + row);
+  assert.ok(dolProject.sheets.some(sheet => sheet.id === 'dol-reference-022' && sheet.number === 'A2/022'));
+
 
   const history020 = dolProject.objects.find(object => object.id === 'dol-ref-004-line-23');
   const index020 = dolProject.objects.find(object => object.id === 'dol-ref-006-line-23');
