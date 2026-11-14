@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/005",
-  "status": "Five authored sheets: DOL schematic A2/001, project status/scope A2/002, component register A2/003, revision record A2/004, and source-backed design-basis comparison A2/005. The remaining 95 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/006",
+  "status": "Six authored sheets: DOL schematic A2/001, project status/scope A2/002, component register A2/003, revision record A2/004, design-basis comparison A2/005, and drawing index A2/006. The remaining 94 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -41,6 +41,11 @@
       "id": "dol-reference-005",
       "number": "A2/005",
       "name": "Design basis and rating comparison"
+    },
+    {
+      "id": "dol-reference-006",
+      "number": "A2/006",
+      "name": "Drawing index"
     }
   ],
   "sheetLabels": {},
@@ -1187,6 +1192,117 @@
       "text": "Educational reference only. Qualified application-specific engineering review is required before use.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-005"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-006-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-01",
+      "x": 120,
+      "y": 150,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-02",
+      "x": 120,
+      "y": 222,
+      "text": "DRAWING INDEX · DOL MOTOR FEEDER REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-03",
+      "x": 120,
+      "y": 294,
+      "text": "A2/001 | DOL motor feeder schematic | 11 components · 38 wires · 15 nets.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-04",
+      "x": 120,
+      "y": 366,
+      "text": "A2/002 | Project status and scope | boundaries and model limitations.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-05",
+      "x": 120,
+      "y": 438,
+      "text": "A2/003 | Component register | six unique lines from the engine-derived BOM.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-06",
+      "x": 120,
+      "y": 510,
+      "text": "A2/004 | Revision record | history of the four prior authored increments.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-07",
+      "x": 120,
+      "y": 582,
+      "text": "A2/005 | Design basis and rating comparison | sourced data; no breaker setting selected.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-08",
+      "x": 120,
+      "y": 654,
+      "text": "Current index contains five completed content pages plus this index page.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-09",
+      "x": 120,
+      "y": 726,
+      "text": "A2/007–A2/100 are not authored and do not appear as completed index entries.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-10",
+      "x": 120,
+      "y": 798,
+      "text": "This is a static educational reference; the project is not construction-ready.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-11",
+      "x": 120,
+      "y": 870,
+      "text": "See the project JSON and validation report for editable model and measured counts.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006"
     }
   ]
 }
