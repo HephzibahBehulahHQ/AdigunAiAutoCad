@@ -214,7 +214,7 @@ Open `siemens-schneider-sew-dol-reference.adigun.json` from the workstation's **
 
 ## DOL reference project status
 
-The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 86 authored sheets through A2/086. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
+The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 87 authored sheets through A2/087. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
 
 
 A2/045 records Schneider Electric LC1D09BD rated operational current as 25 A AC-1 at ≤440 V AC and ambient ≤60 °C, separately from the 9 A AC-3 rating. These are utilization-category component ratings, not project load, cable or protection selections.
@@ -308,3 +308,6 @@ A2/085 records SEW-EURODRIVE’s starting-current ratio I_A/I_N of 3.6 for the 4
 
 
 A2/086 records the SEW 400 V, 50 Hz, four-pole DRN63MS4 catalog torque ratios M_A/M_N = 2.7, M_H/M_N = 2.6, and M_K/M_N = 2.7. These ratios do not establish project torque output or motor-load matching.
+
+
+A2/087 derives a 1.458 A catalog starting-current reference from SEW’s I_N = 0.405 A and I_A/I_N = 3.6 for the 400 V, 50 Hz DRN63MS4 table. The result is not a measured project current.
