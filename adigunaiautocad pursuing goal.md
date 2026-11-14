@@ -3003,3 +3003,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #286 merged as `13707c226ca495f77b4aa65ed8c8bdec7aa85174`. Final PR verification `43600924193`, main verification `43600978910`, and Pages deployment `43600978917` passed.
 - Cache-busted production reads confirmed A2/021, its dimensional and mounting rows, 21 authored sheets, the passing report, and non-overlapping A2/006 rows. The distinct 100-sheet topology gate remains 1/5. No interface or existing circuit geometry changed.
 - Next: inspect the source-backed model for a distinct A2/022 reference; avoid repeating catalog dimensions or implying application suitability.
+
+## 2026-11-14 incremental execution record — DOL KM1 terminal torque A2/022
+
+- Added A2/022 and enriched the LC1D09BD component definition with Schneider's data-sheet torque of 1.7 N·m for power and control screw-clamp terminals, plus the listed flat Ø6 mm or Philips No. 2 screwdriver options. The page states that the project has no installed termination, cable-preparation, or field torque-inspection record.
+- Updated project status, revision history, index, README, component source note, regression assertions, and generated report for 22 authored sheets and A2/023–A2/100 unauthored. Main and CI report 370 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #288 merged as `c9da440ffae9d1d4ed30c889b1ccb447cce27064`. Final PR runs `43602225243` and `43602214430`, main verification `43602280137`, and Pages deployment `43602280155` passed. The Pages run produced artifact `github-pages-43602280155-1` for this exact main SHA.
+- The deployment job reports `https://adigunaiautocad.hephzibahbehulah.com/`, but direct runtime confirmation remains pending: the custom domain and GitHub Pages hostname both returned DNS resolution errors from this environment. Do not claim the live page content is confirmed until a production read succeeds. No interface or circuit wiring changed.
+- Next: verify production reachability and A2/022 from the live site, then inspect for a distinct source-backed A2/023 increment. The distinct 100-sheet topology gate remains 1/5.
