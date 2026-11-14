@@ -2947,3 +2947,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #269 merged as `e69dc500a294a529a6ecbff8e120ec28d08d0f23`. PR verification `43593793873`, main verification `43593821594`, and Pages deployment `43593821585` passed.
 - Cache-busted production reads confirmed revision A2/013, 13/13 populated sheets, four control-terminal rows and four normal-state labels, and a passing report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: document X1–X6 feed-through terminal pins and external-boundary wiring only from component definitions and the current net graph; distinguish intentionally unwired field-side pins from model errors.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/014
+
+- Added A2/014 with all 12 pins from the six Phoenix Contact external-boundary terminal instances. Each field-side pin is identified by the absence of a direct authored wire; both pins of each terminal are confirmed in the same analyzed feed-through net. Regression coverage checks every row against component comments, pin definitions, direct wire endpoints, and the CAD-engine net graph.
+- Updated status, revision history, index, README, and report for 14 populated sheets and A2/015–A2/100 unauthored. Production measures 272 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #271 merged as `3aa0ffeb78d54a3ca68835cebf10bc35d26d108a`. PR verification `43594218327`, main verification `43594256612`, and Pages deployment `43594256538` passed.
+- Cache-busted production reads confirmed revision A2/014, 14/14 authored sheets, 12 terminal rows, six field-side pins, and the passing seven-artifact report. No external supply or field wiring was added; no interface or schematic geometry changed.
+- Next: add A2/015 as a static control-path reference derived from the actual net graph, with contact-state and no-simulation limits explicit.
