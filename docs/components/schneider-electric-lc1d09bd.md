@@ -111,3 +111,10 @@ Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents
 - The data sheet lists an operating altitude of 3,000 m without derating in temperature.
 - This is a component catalog statement; project site altitude and application suitability are not established.
 - Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
+
+
+## Environmental classification
+
+- The data sheet lists pollution degree 3 and protective treatment TH conforming to IEC 60068-2-30.
+- These are manufacturer-listed component characteristics; they do not establish the pollution conditions, enclosure, condensation exposure, or suitability of this project installation.
+- Source: [Schneider Electric LC1D09BD data sheet](https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF).
