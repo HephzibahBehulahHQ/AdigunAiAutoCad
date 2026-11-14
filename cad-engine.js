@@ -195,7 +195,7 @@
       auxiliaryContactComposition: { value: '1 mechanically-linked NO + 1 mechanically-linked NC' },
       coilSuppressor: { value: 'Built-in bidirectional peak-limiting diode' },
       standards: { value: ['IEC 60947-4-1', 'IEC 60947-5-1', 'UL 508'] },
-      terminalConnection: { value: 'Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Phillips No. 2 screwdriver' },
+      terminalConnection: { value: 'Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Philips No. 2 screwdriver' },
       dimensions: { width: { value: 45, unit: 'mm' }, height: { value: 77, unit: 'mm' }, depth: { value: 95, unit: 'mm' } },
       mountingSupport: { value: ['Rail', 'Plate'] }
     },
