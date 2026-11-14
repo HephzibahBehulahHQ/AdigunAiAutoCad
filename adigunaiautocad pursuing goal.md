@@ -2884,3 +2884,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #255 merged as `ffeaec23ad77ee9d0d233ab9f5b93e4e776e4583`. PR CI `43589911270`, main verification `43589963572`, and Pages deployment `43589963616` passed.
 - Cache-busted production reads confirmed revision A2/006 and the current passing seven-artifact report. The 100-sheet distinct-topology gate remains 1/5. No interface or schematic geometry changed.
 - Next: author A2/007 as a pin/net connection schedule derived directly from the current CAD engine analysis and verify each row against the model.
+
+
+## 2026-11-14 incremental execution record — DOL reference A2/007
+
+- Added an editable pin/net schedule for the current 15 sheet-local connectivity groups. Regression coverage compares every displayed group, pin identity, and segment count directly with the CAD engine's analysis.
+- The DOL reference now has seven authored sheets and 130 meaningful content objects. Its electrical model remains 11 components, 38 wires, 15 nets, six BOM rows, zero open endpoints, and zero geometry errors; A2/008–A2/100 are not authored.
+- PR #257 merged as `d5477af090cd0a249dbff4f65501467395368192`. PR CI `43590191139`, main verification `43590231784`, and Pages deployment `43590231840` passed.
+- Cache-busted production reads confirmed A2/007 and a passing seven-artifact report with all seven authored DOL sheets populated. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
+- Next: add A2/008 as the first part of a wire schedule derived from all 38 engine-generated wire-list rows, and update A2/006 to list A2/007 accurately.
