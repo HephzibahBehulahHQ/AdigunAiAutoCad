@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/011",
-  "status": "Eleven authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, manufacturer source register A2/010, and Q1/KM1 terminal reference A2/011. The remaining 89 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/012",
+  "status": "Twelve authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, manufacturer source register A2/010, Q1/KM1 terminal reference A2/011, and M1 terminal/net reference A2/012. The remaining 88 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -71,6 +71,11 @@
       "id": "dol-reference-011",
       "number": "A2/011",
       "name": "Q1 and KM1 terminal reference"
+    },
+    {
+      "id": "dol-reference-012",
+      "number": "A2/012",
+      "name": "M1 terminal and net reference"
     }
   ],
   "sheetLabels": {},
@@ -764,7 +769,7 @@
       "id": "dol-ref-002-line-04",
       "x": 120,
       "y": 306,
-      "text": "Authored pages: A2/001–A2/011, including the drawing index.",
+      "text": "Authored pages: A2/001–A2/012, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -773,7 +778,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 11 complete editable sheets; A2/012–A2/100 are not authored.",
+      "text": "Progress: 12 complete editable sheets; A2/013–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1535,7 +1540,7 @@
       "id": "dol-ref-006-line-13",
       "x": 120,
       "y": 942,
-      "text": "Current index: ten completed content pages plus this index sheet.",
+      "text": "A2/012 | M1 terminal/net reference | seven component-defined motor pins mapped to authored nets.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1810,7 +1815,7 @@
       "y": 1242,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 11 complete authored sheets; A2/012–A2/100 are not authored."
+      "text": "Current state: 12 complete authored sheets; A2/013–A2/100 are not authored."
     },
     {
       "kind": "text",
@@ -1819,7 +1824,7 @@
       "y": 1008,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/012–A2/100 are not authored or listed as completed pages."
+      "text": "Current index: eleven completed content pages plus this index sheet."
     },
     {
       "kind": "rect",
@@ -2065,7 +2070,7 @@
       "y": 1074,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Static reference only; the drawing is not construction-ready."
+      "text": "A2/013–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -2239,7 +2244,7 @@
       "y": 1140,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "See the current project JSON and validation report for editable model and measured counts."
+      "text": "Static reference only; the drawing is not construction-ready."
     },
     {
       "kind": "rect",
@@ -2459,6 +2464,144 @@
       "stroke": "#13263b",
       "sheetId": "dol-reference-011",
       "text": "“Not wired” means no authored wire reaches that pin; switching and contact state are not simulated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-17",
+      "x": 120,
+      "y": 1476,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "A2/012 | Added the source-backed M1 terminal/net reference; schematic coordinates are not a physical layout."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-17",
+      "x": 120,
+      "y": 1206,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "See the current project JSON and validation report for editable model and measured counts."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-012-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-012"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 TERMINAL AND NET REFERENCE · 7 PINS"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | U1 | Winding U line end | dol-reference-001:net-7 | 1 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | V1 | Winding V line end | dol-reference-001:net-8 | 1 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | W1 | Winding W line end | dol-reference-001:net-9 | 1 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | U2 | Winding U star end | dol-reference-001:net-10 | 4 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-07",
+      "x": 120,
+      "y": 439,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | V2 | Winding V star end | dol-reference-001:net-10 | 4 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-08",
+      "x": 120,
+      "y": 493,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | W2 | Winding W star end | dol-reference-001:net-10 | 4 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-09",
+      "x": 120,
+      "y": 547,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "M1 | PE | Protective earth connection | dol-reference-001:net-11 | 1 route segments"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-10",
+      "x": 120,
+      "y": 1249,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "SEW source records and the 400 V star configuration are identified on A2/010."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-11",
+      "x": 120,
+      "y": 1303,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "Pin-to-net membership reflects A2/001 authored routes; the star point has four route segments."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-012-line-12",
+      "x": 120,
+      "y": 1357,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-012",
+      "text": "Schematic coordinates do not depict physical motor-terminal positions; motor behavior is not simulated."
     }
   ]
 }
