@@ -455,3 +455,6 @@ A2/048 records the Schneider Electric LC1D09BD mirror-contact designation and th
 
 
 A2/049 records the Schneider Electric LC1D09BD catalog opening and closing time values. A2/050 records its 28 ms coil time constant and built-in bidirectional peak-limiting diode suppressor. A2/051 records 5.4 W inrush and hold-in ratings at 20 °C and documents the unreconciled 2.4 W average in FAQ FA33405, which also references LC1D09BD. A2/052 lists manufacturer-proposed Type 1 starter combinations; no breaker is selected for this project. A2/053 records the separate AC-4 motor power rating, not project motor suitability. A2/054 records the AC-3 motor power bands by voltage; no project motor rating is selected. A2/055 records source-backed SEW DRN63MS4 motor data without claiming performance or application validation. A2/056 records the Siemens Q1 release ratings with its overload setting still unset. These values do not establish actual project switching response, fault conditions, or supply adequacy; the schematic topology and application interface remain unchanged.
+
+
+A2/057 records Siemens 3RV2011-0FA10 typical mechanical endurance for main and auxiliary contacts and typical electrical endurance, each 100,000 operating cycles. These component typicals do not estimate project service life or switching duty; no topology or interface change.
