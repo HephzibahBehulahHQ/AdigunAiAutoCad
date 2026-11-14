@@ -2967,4 +2967,11 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - A2/016 is merged and deployed: the three-phase power-path map lists 11 engine-derived nets across L1–L3, Q1, KM1, M1, star point, and PE. It explicitly does not imply switching, motor, protection, PE-adequacy, or installation simulation.
 - Production confirms revision A2/016, 16/16 authored sheets, 301 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, zero geometry errors, and a passing seven-artifact validation report. The distinct 100-sheet topology gate remains 1/5. No interface or schematic geometry changed.
 - PR #275 merged as `741545c2738778ca513973eb6ea226bd8fd2a5d8`. PR verification `43595276410`, main verification `43595320178`, and Pages deployment `43595320174` passed. CI also caught and the branch corrected singular/plural segment labels on A2/011–A2/012 before the final passing run.
-- Next: inspect the current project backlog and source-backed project model for a distinct, non-duplicative A2/017 increment; add only engineering content with traceable source or engine evidence, regression coverage, explicit limitations, and an authored-content check.
+## 2026-11-14 incremental execution record — DOL application-input register A2/017
+
+- Added A2/017 as an explicit register of data absent from this reference model: the unset Q1 trip setting, unmodeled source and field-conductor data, missing application/site inputs, and the existing PE net. It assigns no design values or compliance conclusions.
+- Updated project status, revision history, index, report, and README for 17 authored sheets and A2/018–A2/100 unauthored. Final generated-report metrics: 314 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #277 merged as `84959e63dd494df1b820da097615332367183cea`. Final PR verification `43596596242`, main verification `43596652768`, and Pages deployment `43596652767` passed. CI caught and the branch corrected the content-object count before the final passing run.
+- A cache-busted production read confirmed revision A2/017, 17/17 authored sheets, the register page, and the passing validation report. No interface or existing schematic geometry changed.
+- Next: inspect the current source-backed project model for a distinct, non-duplicative A2/018 increment; do not add speculative application data.
+
