@@ -3603,9 +3603,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 6);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 6);
-  assert.equal(dolOpening.metrics.contentObjectCount, 110);
+  assert.equal(dolOpening.metrics.sheetCount, 7);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 7);
+  assert.equal(dolOpening.metrics.contentObjectCount, 130);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3617,6 +3617,11 @@ test('the project-library manifest and generated validation report match the cur
   const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
   for (const page of ['A2/001 | DOL motor feeder schematic', 'A2/002 | Project status and scope', 'A2/003 | Component register', 'A2/004 | Revision record', 'A2/005 | Design basis and rating comparison']) assert.ok(indexText.includes(page));
   assert.ok(indexText.includes('A2/007–A2/100 are not authored'));
+  const topologyReport = engine.analyzeProject(dolProject);
+  const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
+  const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
+  assert.equal(expectedNetRows.length, 15);
+  for (const row of expectedNetRows) assert.ok(scheduleText.includes(row), 'A2/007 must match engine net analysis: ' + row);
   const dolBom = engine.billOfMaterials(dolProject.objects);
   const registerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-003').map(object => object.text);
   assert.equal(dolBom.valid, true);
