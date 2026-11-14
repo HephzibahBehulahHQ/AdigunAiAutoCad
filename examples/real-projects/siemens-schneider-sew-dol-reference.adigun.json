@@ -2110,7 +2110,7 @@
       "y": 966,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Current index: nineteen completed content pages plus this index sheet."
+      "text": "A2/014 | X1–X6 terminal boundary reference | 12 pins mapped to nets and direct route presence."
     },
     {
       "kind": "rect",
@@ -2284,7 +2284,7 @@
       "y": 1023,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/021–A2/100 are not authored or listed as completed pages."
+      "text": "A2/015 | Static control-path net reference | four engine-derived control net groups."
     },
     {
       "kind": "rect",
@@ -2518,7 +2518,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-17",
       "x": 120,
-      "y": 1023,
+      "y": 1080,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/016 | Three-phase power-path net reference | 11 engine-derived groups, star point, and PE."
@@ -2656,7 +2656,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18",
       "x": 120,
-      "y": 1308,
+      "y": 1365,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "Current index: nineteen completed content pages plus this index sheet."
@@ -2758,10 +2758,10 @@
       "kind": "text",
       "id": "dol-ref-006-line-19",
       "x": 120,
-      "y": 1365,
+      "y": 1194,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/021–A2/100 are not authored or listed as completed pages."
+      "text": "A2/018 | KM1 coil demand reference | manufacturer average and derived nominal current."
     },
     {
       "kind": "rect",
@@ -2944,7 +2944,7 @@
       "y": 1418,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "Static reference only; the drawing is not construction-ready."
+      "text": "A2/021–A2/100 are not authored or listed as completed pages."
     },
     {
       "kind": "rect",
@@ -3055,7 +3055,7 @@
       "y": 1471,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "See the current project JSON and validation report for editable model and measured counts."
+      "text": "Static reference only; see the project JSON and validation report for counts. The drawing is not construction-ready."
     },
     {
       "kind": "rect",
@@ -3337,7 +3337,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-18a",
       "x": 120,
-      "y": 1080,
+      "y": 1137,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/017 | Application input omissions register | explicit unknowns; no values assumed."
@@ -3595,7 +3595,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-22",
       "x": 120,
-      "y": 1194,
+      "y": 1251,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/019 | DOL seal-in path | conditional logic from source-backed contacts and analyzed nets."
@@ -3715,7 +3715,7 @@
       "kind": "text",
       "id": "dol-ref-006-line-23",
       "x": 120,
-      "y": 1251,
+      "y": 1308,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
       "text": "A2/020 | KM1 AC-3 catalog rating | manufacturer conditions; no suitability determination."
