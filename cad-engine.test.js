@@ -3603,15 +3603,15 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 17);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 17);
-  assert.equal(dolOpening.metrics.contentObjectCount, 314);
+  assert.equal(dolOpening.metrics.sheetCount, 18);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 18);
+  assert.equal(dolOpening.metrics.contentObjectCount, 327);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
   const dolProject = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-reference.adigun.json'), 'utf8'));
   const revisionText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-004').map(object => object.text).join(' ');
-  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017']) assert.ok(revisionText.includes(revision));
+  for (const revision of ['A2/001', 'A2/002', 'A2/003', 'A2/004', 'A2/005', 'A2/006', 'A2/007', 'A2/008', 'A2/009', 'A2/010', 'A2/011', 'A2/012', 'A2/013', 'A2/014', 'A2/015', 'A2/016', 'A2/017', 'A2/018']) assert.ok(revisionText.includes(revision));
   const designBasisText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-005').map(object => object.text).join(' ');
   for (const fact of ['0.405 A', '0.35–0.5 A', 'rating comparison only', 'does not choose or enter a Q1 setting', 'Starting current', 'not simulated', 'download.sew-eurodrive.com', 'support.industry.siemens.com']) assert.ok(designBasisText.includes(fact));
   const indexText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-006').map(object => object.text).join(' ');
@@ -3627,7 +3627,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/015 | Static control-path net reference'));
   assert.ok(indexText.includes('A2/016 | Three-phase power-path net reference'));
   assert.ok(indexText.includes('A2/017 | Application input omissions register'));
-  assert.ok(indexText.includes('A2/018–A2/100 are not authored'));
+  assert.ok(indexText.includes('A2/018 | KM1 coil demand reference'));
+  assert.ok(indexText.includes('A2/019–A2/100 are not authored'));
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
@@ -3676,6 +3677,35 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'M1' && pin.number === 'PE'));
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '1'));
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
+
+
+  assert.equal(dolProject.revision, 'A2/018');
+  assert.equal(dolProject.sheets.length, 18);
+  const lc1d09 = engine.component('schneider-electric-lc1d09bd');
+  assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
+  assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
+  assert.ok(lc1d09.sources.some(source => source.url === 'https://www.se.com/es/es/faqs/FA33405/' && source.modifiedAt === '2025-04-09'));
+  assert.equal((lc1d09.specifications.averageCoilConsumptionAtNominalUc.value / lc1d09.electricalFunctions.contactor.coil.nominalVoltage.value).toFixed(2), '0.10');
+  const contactorDoc = fs.readFileSync(path.join(__dirname, 'docs', 'components', 'schneider-electric-lc1d09bd.md'), 'utf8');
+  assert.ok(contactorDoc.includes('FAQ FA33405'));
+  assert.ok(contactorDoc.includes('average coil consumption of 2.4 W at 20 °C'));
+  assert.ok(contactorDoc.includes('100 mA'));
+  const coilReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-018').map(object => object.text);
+  const expectedCoilRows = [
+      "KM1 | Schneider Electric LC1D09BD | 24 V DC coil terminals A1/A2.",
+      "Source FA33405 | LC1D09–D38 low-consumption coil average: 2.4 W at 20 °C and nominal Uc.",
+      "At KM1 nominal Uc = 24 V DC | 2.4 W ÷ 24 V = 0.10 A (100 mA) average per coil.",
+      "This is one coil’s average nominal input; it is not total control-circuit demand or a supply-adequacy result.",
+      "Other loads, branch protection, wiring drop, coil transients, and contactor operation are not assessed here.",
+      "The 24 V control source remains an external boundary; source capacity is not modeled.",
+      "Source: Schneider Electric FAQ FA33405, modified 2025-04-09.",
+      "https://www.se.com/es/es/faqs/FA33405/",
+      "No coil-state or contactor-actuation behavior is simulated."
+  ];
+  for (const row of expectedCoilRows) assert.ok(coilReferenceText.includes(row), 'A2/018 must match source-backed coil data and limitations: ' + row);
+  const km1ForCoil = dolProject.objects.find(object => object.kind === 'component-instance' && object.ref === 'KM1');
+  assert.equal(km1ForCoil.componentId, lc1d09.id);
+  assert.ok(km1ForCoil.properties.comment.includes('24 V DC coil'));
 
   const controlPathText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-015').map(object => object.text);
   const controlAnalysis = engine.analyzeProject(dolProject).sheets.find(sheet => sheet.id === 'dol-reference-001').analysis;
