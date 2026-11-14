@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "library": "Adigun AI AutoCAD source-backed electrical project library",
+  "scaleTarget": {
+    "minimumSheetsPerProject": 100,
+    "firstGateDistinctProjects": 5,
+    "fullLibraryProjects": 50
+  },
+  "projects": [
+    {
+      "id": "relay-contactor-24v",
+      "title": "24 V DC relay-operated contactor coil",
+      "topologyId": "relay-contactor-control",
+      "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
+      "role": "standalone-example"
+    },
+    {
+      "id": "ifm-sensor-plc-input",
+      "title": "IFM IFS204 sensor to Siemens S7-1200 input",
+      "topologyId": "sensor-to-plc-input",
+      "path": "examples/real-projects/ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json",
+      "role": "standalone-example"
+    },
+    {
+      "id": "siemens-3rm12-reversing",
+      "title": "Siemens 3RM12 reversing starter",
+      "topologyId": "reversing-starter",
+      "path": "examples/real-projects/siemens-3rm12-reversing-starter.adigun.json",
+      "role": "standalone-example"
+    },
+    {
+      "id": "dol-motor-feeder",
+      "title": "DOL motor feeder",
+      "topologyId": "direct-on-line-motor-feeder",
+      "path": "examples/real-projects/siemens-schneider-sew-dol-starter.adigun.json",
+      "role": "standalone-example"
+    },
+    {
+      "id": "star-delta-starter",
+      "title": "Siemens/SEW star-delta starter",
+      "topologyId": "star-delta-starter",
+      "path": "examples/real-projects/siemens-sew-star-delta-starter.adigun.json",
+      "role": "standalone-example"
+    },
+    {
+      "id": "star-delta-100-sheet",
+      "title": "Star-delta 100-sheet reference package",
+      "topologyId": "star-delta-starter",
+      "path": "examples/real-projects/siemens-sew-star-delta-reference.adigun.json",
+      "role": "multi-sheet-reference-package",
+      "extendsProjectId": "star-delta-starter"
+    }
+  ]
+}

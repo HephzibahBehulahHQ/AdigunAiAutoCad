@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "summary": {
+    "projectArtifactCount": 6,
+    "validatedArtifactCount": 6,
+    "distinctTopologyCount": 5,
+    "distinct100SheetTopologyCount": 1,
+    "firstScaleGate": {
+      "requiredDistinct100SheetProjects": 5,
+      "completedDistinct100SheetProjects": 1,
+      "complete": false
+    },
+    "fullLibraryTarget": 50
+  },
+  "projects": [
+    {
+      "id": "relay-contactor-24v",
+      "title": "24 V DC relay-operated contactor coil",
+      "topologyId": "relay-contactor-control",
+      "role": "standalone-example",
+      "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "componentCount": 5,
+        "wireCount": 13,
+        "netCount": 4,
+        "globalNetCount": 4,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 3,
+        "wireListRowCount": 13
+      },
+      "errors": []
+    },
+    {
+      "id": "ifm-sensor-plc-input",
+      "title": "IFM IFS204 sensor to Siemens S7-1200 input",
+      "topologyId": "sensor-to-plc-input",
+      "role": "standalone-example",
+      "path": "examples/real-projects/ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "componentCount": 4,
+        "wireCount": 10,
+        "netCount": 5,
+        "globalNetCount": 5,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 3,
+        "wireListRowCount": 10
+      },
+      "errors": []
+    },
+    {
+      "id": "siemens-3rm12-reversing",
+      "title": "Siemens 3RM12 reversing starter",
+      "topologyId": "reversing-starter",
+      "role": "standalone-example",
+      "path": "examples/real-projects/siemens-3rm12-reversing-starter.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "componentCount": 15,
+        "wireCount": 33,
+        "netCount": 17,
+        "globalNetCount": 17,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 3,
+        "wireListRowCount": 33
+      },
+      "errors": []
+    },
+    {
+      "id": "dol-motor-feeder",
+      "title": "DOL motor feeder",
+      "topologyId": "direct-on-line-motor-feeder",
+      "role": "standalone-example",
+      "path": "examples/real-projects/siemens-schneider-sew-dol-starter.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "componentCount": 11,
+        "wireCount": 38,
+        "netCount": 15,
+        "globalNetCount": 15,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 6,
+        "wireListRowCount": 38
+      },
+      "errors": []
+    },
+    {
+      "id": "star-delta-starter",
+      "title": "Siemens/SEW star-delta starter",
+      "topologyId": "star-delta-starter",
+      "role": "standalone-example",
+      "path": "examples/real-projects/siemens-sew-star-delta-starter.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "componentCount": 15,
+        "wireCount": 242,
+        "netCount": 26,
+        "globalNetCount": 26,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 8,
+        "wireListRowCount": 242
+      },
+      "errors": []
+    },
+    {
+      "id": "star-delta-100-sheet",
+      "title": "Star-delta 100-sheet reference package",
+      "topologyId": "star-delta-starter",
+      "role": "multi-sheet-reference-package",
+      "path": "examples/real-projects/siemens-sew-star-delta-reference.adigun.json",
+      "revision": "Opening set 9.7",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "zeroGeometryErrors": true
+      },
+      "metrics": {
+        "sheetCount": 100,
+        "componentCount": 32,
+        "wireCount": 335,
+        "netCount": 67,
+        "globalNetCount": 43,
+        "crossSheetConnectionCount": 21,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 15,
+        "wireListRowCount": 335
+      },
+      "errors": []
+    }
+  ]
+}
