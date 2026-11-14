@@ -3665,6 +3665,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/043 | KM1 rated short-time withstand current'));
   assert.ok(indexText.includes('A2/044 fuse'));
   assert.ok(indexText.includes('A2/048 mirror'));
+  assert.ok(indexText.includes('A2/049 times'));
   assert.ok(indexText.includes('A2/050 coil'));
   assert.ok(indexText.includes('A2/047 B10d'));
   assert.ok(indexText.includes('A2/045 AC-1'));
