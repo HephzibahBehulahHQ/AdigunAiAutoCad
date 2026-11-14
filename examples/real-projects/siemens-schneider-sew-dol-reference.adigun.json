@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/002",
-  "status": "Two authored sheets: source-backed DOL schematic A2/001 and project status/scope A2/002. The remaining 98 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/003",
+  "status": "Three authored sheets: DOL schematic A2/001, project status/scope A2/002, and source-backed component register A2/003. The remaining 97 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -26,6 +26,11 @@
       "id": "dol-reference-002",
       "number": "A2/002",
       "name": "Project status and scope"
+    },
+    {
+      "id": "dol-reference-003",
+      "number": "A2/003",
+      "name": "Source-backed component register"
     }
   ],
   "sheetLabels": {},
@@ -785,6 +790,153 @@
       "text": "Qualified engineering review is required before adapting this reference or using it for installation.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-003-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-01",
+      "x": 120,
+      "y": 150,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-02",
+      "x": 120,
+      "y": 220,
+      "text": "COMPONENT REGISTER · DERIVED FROM THE CURRENT BOM",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-03",
+      "x": 120,
+      "y": 290,
+      "text": "Phoenix Contact | 3212144 | Feed-through terminal block | Qty 6 | X1, X2, X3, X4, X5, X6",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-04",
+      "x": 120,
+      "y": 360,
+      "text": "Schneider Electric | LC1D09BD | 3-pole contactor with 24 V DC coil | Qty 1 | KM1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-05",
+      "x": 120,
+      "y": 430,
+      "text": "Schneider Electric | XB5AA31 | Green spring-return push-button, 1 NO | Qty 1 | S1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-06",
+      "x": 120,
+      "y": 500,
+      "text": "Schneider Electric | XB5AA42 | Red spring-return push-button, 1 NC | Qty 1 | S0",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-07",
+      "x": 120,
+      "y": 570,
+      "text": "SEW-EURODRIVE | DRN63MS4 | Three-phase AC induction motor | Qty 1 | M1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-08",
+      "x": 120,
+      "y": 640,
+      "text": "Siemens | 3RV2011-0FA10 | Low-range motor-protection circuit breaker | Qty 1 | Q1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-09",
+      "x": 120,
+      "y": 710,
+      "text": "BOM total: 11 component instances across six unique catalog line items.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-10",
+      "x": 120,
+      "y": 780,
+      "text": "Catalog name: Phoenix Contact PT 16 N OG, item 3212144.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-11",
+      "x": 120,
+      "y": 850,
+      "text": "Schneider Electric LC1D09BD and XB5AA31 — manufacturer data sheets; XB5AA42 — manufacturer product data.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-12",
+      "x": 120,
+      "y": 920,
+      "text": "SEW-EURODRIVE DRN63MS4 — catalog/document 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-13",
+      "x": 120,
+      "y": 990,
+      "text": "Siemens 3RV2011-0FA10 — manufacturer product data sheet.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-14",
+      "x": 120,
+      "y": 1060,
+      "text": "Exact source URLs, source revisions, and retrieval metadata remain in the derived BOM and component definitions.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-003-line-15",
+      "x": 120,
+      "y": 1130,
+      "text": "Device presence and catalog ratings do not establish project suitability, protection coordination, or construction approval.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-003"
     }
   ]
 }
