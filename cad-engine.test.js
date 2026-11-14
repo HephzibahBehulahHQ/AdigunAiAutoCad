@@ -3664,8 +3664,15 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/026');
-  assert.equal(dolProject.sheets.length, 26);
+  assert.equal(dolProject.revision, 'A2/027');
+  assert.equal(dolProject.sheets.length, 27);
+  const impulseSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-027');
+  assert.equal(impulseSheet.number, 'A2/027');
+  const impulseText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-027').map(object => object.text).join(' ');
+  assert.ok(impulseText.includes('Uimp: 6 kV'));
+  assert.ok(impulseText.includes('not an installation transient limit'));
+  assert.ok(impulseText.includes('Surge protection, transient exposure'));
+  assert.ok(impulseText.includes('SQD-LC1D09BD.PDF'));
   const inputRegisterText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-017').map(object => object.text);
   const expectedInputRows = [
       "Q1 | overloadSettingA = null; published 0.35–0.5 A range; no trip point is selected.",
