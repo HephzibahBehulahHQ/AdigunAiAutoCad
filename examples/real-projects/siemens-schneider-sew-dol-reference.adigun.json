@@ -4262,7 +4262,7 @@
       "y": 331,
       "stroke": "#13263b",
       "sheetId": "dol-reference-025",
-      "text": "These are manufacturer catalog conditions, not project switching-duty selections."
+      "text": "This catalog condition does not establish this project's switching duty or service life."
     },
     {
       "kind": "text",
@@ -4271,7 +4271,7 @@
       "y": 385,
       "stroke": "#13263b",
       "sheetId": "dol-reference-025",
-      "text": "The catalog cycle value is not a project service-life estimate."
+      "text": "A published cycle count is not a guaranteed or predicted service life for this project."
     },
     {
       "kind": "text",
