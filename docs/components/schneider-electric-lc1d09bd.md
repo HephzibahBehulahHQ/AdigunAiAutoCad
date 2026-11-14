@@ -22,8 +22,8 @@
 
 ## Coil consumption source
 
-- Schneider Electric [FAQ FA33405](https://www.se.com/es/es/faqs/FA33405/), modified 2025-04-09, lists average coil consumption of 2.4 W at 20 °C and nominal control voltage for the low-consumption LC1D09–LC1D38 contactors. For LC1D09BD at 24 V DC, 2.4 W / 24 V = 0.10 A (100 mA).
-- This is a source-backed nominal reference value. It does not model pickup/transient behavior or establish supply, relay, protection, wiring, or application suitability.
+- Schneider Electric [FAQ FA33405](https://www.se.com/es/es/faqs/FA33405/), modified 2025-04-09, reports average coil consumption of 2.4 W at 20 °C and nominal voltage for LC1D09–LC1D38 low-consumption 24 V DC coils and includes LC1D09BD as an example. Its 0.10 A (100 mA) value at 24 V is arithmetic from that FAQ.
+- The LC1D09BD product data sheet separately lists 5.4 W inrush and hold-in power at 20 °C. The published FAQ average and product-sheet figures differ, and the sources do not reconcile their terms. Do not combine or substitute these values; verify the exact coil reference and measurement definitions before sizing a supply. This does not establish application suitability.
 
 
 ## Manufacturer terminal conductor options

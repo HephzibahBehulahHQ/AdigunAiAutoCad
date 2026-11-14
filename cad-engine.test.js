@@ -3606,7 +3606,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(dolOpening);
   assert.equal(dolOpening.metrics.sheetCount, 53);
   assert.equal(dolOpening.metrics.authoredSheetCount, 53);
-  assert.equal(dolOpening.metrics.contentObjectCount, 645);
+  assert.equal(dolOpening.metrics.contentObjectCount, 646);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3724,7 +3724,7 @@ test('the project-library manifest and generated validation report match the cur
   const coilPowerSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-051');
   assert.equal(coilPowerSheet.number, 'A2/051');
   const coilPowerText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-051').map(object => object.text).join(' ');
-  for (const fact of ['5.4 W at 20 °C', 'inrush power', 'hold-in power', 'LC1D09–D38', '2.4 W average', 'not combined', 'supply adequacy', 'SQD-LC1D09BD.PDF']) assert.ok(coilPowerText.includes(fact));
+  for (const fact of ['5.4 W at 20 °C', 'inrush power', 'hold-in power', 'LC1D09–D38', '2.4 W average', 'sources do not reconcile', 'do not combine or substitute', 'supply adequacy', 'SQD-LC1D09BD.PDF']) assert.ok(coilPowerText.includes(fact));
   const impulseSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-027');
   assert.equal(impulseSheet.number, 'A2/027');
   const impulseText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-027').map(object => object.text).join(' ');
@@ -3870,14 +3870,17 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(contactorDoc.includes('FAQ FA33405'));
   assert.ok(contactorDoc.includes('average coil consumption of 2.4 W at 20 °C'));
   assert.ok(contactorDoc.includes('100 mA'));
+  assert.ok(contactorDoc.includes('5.4 W inrush and hold-in power'));
+  assert.ok(contactorDoc.includes('sources do not reconcile'));
+  assert.ok(contactorDoc.includes('LC1D09BD as an example'));
   const coilReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-018').map(object => object.text);
   const expectedCoilRows = [
       "KM1 | Schneider Electric LC1D09BD | 24 V DC coil terminals A1/A2.",
       "Source FA33405 | LC1D09–D38 low-consumption coil average: 2.4 W at 20 °C and nominal Uc.",
       "At KM1 nominal Uc = 24 V DC | 2.4 W ÷ 24 V = 0.10 A (100 mA) average per coil.",
-      "This is one coil’s average nominal input; it is not total control-circuit demand or a supply-adequacy result.",
-      "Other loads, branch protection, wiring drop, coil transients, and contactor operation are not assessed here.",
-      "The 24 V control source remains an external boundary; source capacity is not modeled.",
+      "The 0.10 A value is arithmetic from FAQ FA33405's 2.4 W average at 24 V; it is not a project measurement.",
+      "The FAQ's 2.4 W average differs from the LC1D09BD datasheet's 5.4 W inrush and hold-in power; the sources do not reconcile the terms.",
+      "These data do not establish total control-circuit demand or 24 V source adequacy; exact coil consumption is unresolved here.",
       "Source: Schneider Electric FAQ FA33405, modified 2025-04-09.",
       "https://www.se.com/es/es/faqs/FA33405/",
       "No coil-state or contactor-actuation behavior is simulated."
