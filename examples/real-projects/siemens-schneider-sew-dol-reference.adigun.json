@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 100-sheet reference project",
-  "revision": "A2/008",
-  "status": "Eight authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, and wire schedule part 1 A2/008. The remaining 92 sheets are not authored. Educational reference only; not construction-ready.",
+  "revision": "A2/009",
+  "status": "Nine authored sheets: source-backed schematic A2/001, status/scope A2/002, BOM register A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedule part 1 A2/008, and wire schedule part 2 A2/009. The remaining 91 sheets are not authored. Educational reference only; not construction-ready.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -56,6 +56,11 @@
       "id": "dol-reference-008",
       "number": "A2/008",
       "name": "Wire schedule, part 1"
+    },
+    {
+      "id": "dol-reference-009",
+      "number": "A2/009",
+      "name": "Wire schedule, part 2"
     }
   ],
   "sheetLabels": {},
@@ -748,8 +753,8 @@
       "kind": "text",
       "id": "dol-ref-002-line-04",
       "x": 120,
-      "y": 342,
-      "text": "Authored pages: A2/001–A2/002",
+      "y": 306,
+      "text": "Authored pages: A2/001–A2/009, including the drawing index.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -757,8 +762,8 @@
       "kind": "text",
       "id": "dol-ref-002-line-05",
       "x": 120,
-      "y": 406,
-      "text": "Progress: 2 complete editable sheets; A2/003–A2/100 are not authored.",
+      "y": 384,
+      "text": "Progress: 9 complete editable sheets; A2/010–A2/100 are not authored.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -1033,8 +1038,8 @@
       "kind": "text",
       "id": "dol-ref-004-line-07",
       "x": 120,
-      "y": 618,
-      "text": "Current state: 4 complete authored sheets; A2/005–A2/100 are not authored.",
+      "y": 696,
+      "text": "A2/005 | Added manufacturer-backed rating comparison and documented its limits; no setting selected.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1042,8 +1047,8 @@
       "kind": "text",
       "id": "dol-ref-004-line-08",
       "x": 120,
-      "y": 696,
-      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open wire endpoints, 0 geometry errors.",
+      "y": 774,
+      "text": "A2/006 | Added drawing index listing only authored pages.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1051,8 +1056,8 @@
       "kind": "text",
       "id": "dol-ref-004-line-09",
       "x": 120,
-      "y": 774,
-      "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated.",
+      "y": 852,
+      "text": "A2/007 | Added 15 engine-derived pin/net groups with exact pin references.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-004"
     },
@@ -1456,8 +1461,8 @@
       "kind": "text",
       "id": "dol-ref-006-line-06",
       "x": 120,
-      "y": 480,
-      "text": "A2/004 | Revision record | history of the four prior authored increments.",
+      "y": 414,
+      "text": "A2/004 | Revision record | history through A2/009.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1493,7 +1498,7 @@
       "id": "dol-ref-006-line-10",
       "x": 120,
       "y": 744,
-      "text": "Current index: seven completed content pages plus this index sheet.",
+      "text": "A2/009 | Wire schedule, part 2 | engine-derived rows W020–W038 of 38 routed segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1502,7 +1507,7 @@
       "id": "dol-ref-006-line-11",
       "x": 120,
       "y": 810,
-      "text": "A2/009–A2/100 are not authored or listed as completed pages.",
+      "text": "Current index: eight completed content pages plus this index sheet.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1511,7 +1516,7 @@
       "id": "dol-ref-006-line-12",
       "x": 120,
       "y": 876,
-      "text": "Static reference only; the drawing is not construction-ready.",
+      "text": "A2/010–A2/100 are not authored or listed as completed pages.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1520,7 +1525,7 @@
       "id": "dol-ref-006-line-13",
       "x": 120,
       "y": 942,
-      "text": "See the current project JSON and validation report for editable model and measured counts.",
+      "text": "Static reference only; the drawing is not construction-ready.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -1751,6 +1756,288 @@
       "text": "Rows are derived from the current static model and do not state conductor sizing or electrical suitability.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-10",
+      "x": 120,
+      "y": 930,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "A2/008 | Added wire schedule part 1 for W001–W019 of 38 engine-derived route segments."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-11",
+      "x": 120,
+      "y": 1008,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "A2/009 | Added wire schedule part 2 for W020–W038; rows match the engine wire list."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-12",
+      "x": 120,
+      "y": 1086,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "Current state: 9 complete authored sheets; A2/010–A2/100 are not authored."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-13",
+      "x": 120,
+      "y": 1164,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "Current validation: 11 components, 38 wire segments, 15 nets, 6 BOM rows, 0 open wire endpoints, 0 geometry errors."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-004-line-14",
+      "x": 120,
+      "y": 1242,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-004",
+      "text": "Static reference only. Actuation, trip behavior, protection coordination, safety, and application suitability are not evaluated."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-006-line-14",
+      "x": 120,
+      "y": 1008,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-006",
+      "text": "See the current project JSON and validation report for editable model and measured counts."
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-009-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-009"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-01",
+      "x": 120,
+      "y": 115,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "Adigun AI AutoCAD | HB Elektroniker"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-02",
+      "x": 120,
+      "y": 169,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "WIRE SCHEDULE · PART 2 · W020–W038 OF 38"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-03",
+      "x": 120,
+      "y": 223,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W020 | net-12 | 50 mm | Pin contacts — -> S0:21 | Net pins S0:21; X5:1; X5:2"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-04",
+      "x": 120,
+      "y": 277,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W021 | net-13 | 340 mm | Pin contacts S0:22 -> — | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-05",
+      "x": 120,
+      "y": 331,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W022 | net-13 | 45 mm | Pin contacts KM1:13 -> — | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-06",
+      "x": 120,
+      "y": 385,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W023 | net-13 | 70 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-07",
+      "x": 120,
+      "y": 439,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W024 | net-13 | 240 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-08",
+      "x": 120,
+      "y": 493,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W025 | net-13 | 135 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-09",
+      "x": 120,
+      "y": 547,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W026 | net-13 | 90 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-10",
+      "x": 120,
+      "y": 601,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W027 | net-13 | 140 mm | Pin contacts — -> S1:13 | Net pins KM1:13; S0:22; S1:13"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-11",
+      "x": 120,
+      "y": 655,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W028 | net-14 | 225 mm | Pin contacts KM1:14 -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-12",
+      "x": 120,
+      "y": 709,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W029 | net-14 | 90 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-13",
+      "x": 120,
+      "y": 763,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W030 | net-14 | 360 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-14",
+      "x": 120,
+      "y": 817,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W031 | net-14 | 280 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-15",
+      "x": 120,
+      "y": 871,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W032 | net-14 | 45 mm | Pin contacts — -> S1:14 | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-16",
+      "x": 120,
+      "y": 925,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W033 | net-14 | 10 mm | Pin contacts KM1:A1 -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-17",
+      "x": 120,
+      "y": 979,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W034 | net-14 | 305 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-18",
+      "x": 120,
+      "y": 1033,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W035 | net-14 | 320 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-19",
+      "x": 120,
+      "y": 1087,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W036 | net-15 | 30 mm | Pin contacts KM1:A2 -> — | Net pins KM1:A2; X6:1; X6:2"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-20",
+      "x": 120,
+      "y": 1141,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W037 | net-15 | 325 mm | Pin contacts — -> — | Net pins KM1:A2; X6:1; X6:2"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-21",
+      "x": 120,
+      "y": 1195,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W038 | net-15 | 815 mm | Pin contacts — -> X6:1 | Net pins KM1:A2; X6:1; X6:2"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-22",
+      "x": 120,
+      "y": 1249,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "A dash means the route segment endpoint is not directly on a component pin; project analysis reports zero unlinked open endpoints."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-23",
+      "x": 120,
+      "y": 1303,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "Segment lengths are engine-derived Manhattan route lengths in millimetres."
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-line-24",
+      "x": 120,
+      "y": 1357,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "Rows are derived from the current static model and do not state conductor sizing or electrical suitability."
     }
   ]
 }
