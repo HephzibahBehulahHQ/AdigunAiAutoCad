@@ -189,6 +189,8 @@
       ac3RatedOperationalVoltage: { value: 440, unit: 'V AC maximum for 9 A AC-3 rating' },
       ratedOperationalVoltage: { value: 690, unit: 'V AC maximum' },
       nominalCoilVoltage: { value: 24, unit: 'V DC' },
+      averageCoilConsumptionAtNominalUc: { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' },
+      averageCoilCurrentAt24V: { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' },
       coilOperationalRangeAt60C: { minimum: 0.7, maximum: 1.25, unit: '× Uc' },
       auxiliaryContactComposition: { value: '1 mechanically-linked NO + 1 mechanically-linked NC' },
       coilSuppressor: { value: 'Built-in bidirectional peak-limiting diode' },
@@ -211,6 +213,13 @@
       documentRevision: 'Manufacturer product data sheet; wiring diagram page 6; source document dated September 8, 2017.',
       revisionNote: 'Manufacturer sheet supplies coil, main and auxiliary terminal identities, contact composition, ratings and dimensions. Verify the exact product and application limits against the current manufacturer documentation before engineering use.',
       retrievedAt: '2026-11-12'
+    }, {
+      publisher: 'Schneider Electric',
+      title: 'FAQ FA33405 · Low-consumption LC1D09–D38 coil current at 24 V DC',
+      url: 'https://www.se.com/es/es/faqs/FA33405/',
+      modifiedAt: '2025-04-09',
+      retrievedAt: '2026-11-14',
+      note: 'Average consumption is 2.4 W at 20 °C and nominal Uc; the FAQ states 100 mA at 24 V DC.'
     }]
   });
   const createHarmonyPushButtonDefinition = function (partNumber, color, contactType, terminalA, terminalB, positiveOpening) {
