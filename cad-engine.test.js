@@ -3604,9 +3604,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 73);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 73);
-  assert.equal(dolOpening.metrics.contentObjectCount, 814);
+  assert.equal(dolOpening.metrics.sheetCount, 74);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 74);
+  assert.equal(dolOpening.metrics.contentObjectCount, 821);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3682,8 +3682,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/052 Type 1'));
   assert.ok(dolProject.objects.find(object => object.id === 'dol-ref-006-line-39').text.length <= 110, 'A2/006 final index row must remain concise');
   const scopeProgress = dolProject.objects.filter(object => object.sheetId === 'dol-reference-002').map(object => object.text).join(' ');
-  assert.ok(scopeProgress.includes('73 complete editable sheets; A2/074–A2/100 are not authored.'));
-  assert.ok(scopeProgress.includes('73 complete authored sheets; A2/074–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('74 complete editable sheets; A2/075–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('74 complete authored sheets; A2/075–A2/100 are not authored.'));
   const q1InstallationAltitudeSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-061');
   assert.equal(q1InstallationAltitudeSheet.number, 'A2/061');
   const q1InstallationAltitudeText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-061').map(object => object.text).join(' ');
@@ -3766,8 +3766,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/073');
-  assert.equal(dolProject.sheets.length, 73);
+  assert.equal(dolProject.revision, 'A2/074');
+  assert.equal(dolProject.sheets.length, 74);
   const coilTimeConstantSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-050');
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
@@ -3924,10 +3924,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/073');
-  assert.equal(dolProject.sheets.length, 73);
-  assert.match(dolProject.status, /^Seventy-three authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 27 sheets are not authored.'));
+  assert.equal(dolProject.revision, 'A2/074');
+  assert.equal(dolProject.sheets.length, 74);
+  assert.match(dolProject.status, /^Seventy-four authored sheets:/);
+  assert.ok(dolProject.status.includes('The remaining 26 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
@@ -4208,8 +4208,8 @@ test('A2/060 records Siemens Q1 operating humidity without assigning project con
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-060');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-060').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/073');
-  assert.equal(project.sheets.length,73);
+  assert.equal(project.revision,'A2/074');
+  assert.equal(project.sheets.length,74);
   assert.equal(sheet.number,'A2/060');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 operating-humidity reference');
   assert.ok(text.includes('relative humidity during operation 10…95%'));
@@ -4221,8 +4221,8 @@ test('A2/070 records Siemens Q1 phase-failure detection as a product function on
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-070');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-070').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/073');
-  assert.equal(project.sheets.length,73);
+  assert.equal(project.revision,'A2/074');
+  assert.equal(project.sheets.length,74);
   assert.equal(sheet.number,'A2/070');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 phase-failure-detection function reference');
   assert.ok(text.includes('phase failure detection'));
@@ -4235,8 +4235,8 @@ test('A2/071 records Siemens Q1 dimensions and mounting data without assigning p
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-071');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-071').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/073');
-  assert.equal(project.sheets.length,73);
+  assert.equal(project.revision,'A2/074');
+  assert.equal(project.sheets.length,74);
   assert.equal(sheet.number,'A2/071');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 dimensional and mounting reference');
   assert.ok(text.includes('97 mm high × 45 mm wide × 97 mm deep'));
@@ -4249,8 +4249,8 @@ test('A2/072 records Siemens Q1 ground-fault detection as unavailable on this co
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-072');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-072').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/073');
-  assert.equal(project.sheets.length,73);
+  assert.equal(project.revision,'A2/074');
+  assert.equal(project.sheets.length,74);
   assert.equal(sheet.number,'A2/072');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 ground-fault-detection function reference');
   assert.ok(text.includes('“ground fault detection” as No'));
@@ -4263,12 +4263,26 @@ test('A2/073 records Siemens Q1 insulation voltage without assigning project coo
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-073');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-073').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/073');
-  assert.equal(project.sheets.length,73);
+  assert.equal(project.revision,'A2/074');
+  assert.equal(project.sheets.length,74);
   assert.equal(sheet.number,'A2/073');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 insulation-voltage reference');
   assert.ok(text.includes('degree of pollution 3 at AC rated value: 690 V'));
   assert.ok(text.includes('project pollution degree, overvoltage category, and insulation coordination are not specified or modeled'));
   assert.ok(text.includes('does not establish assembly insulation coordination or installation suitability'));
+  assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
+});
+
+test('A2/074 records Siemens Q1 front-face IP20 without rating the project enclosure',()=>{
+  const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
+  const sheet=project.sheets.find(item=>item.id==='dol-reference-074');
+  const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-074').map(object=>object.text).join(' ');
+  assert.equal(project.revision,'A2/074');
+  assert.equal(project.sheets.length,74);
+  assert.equal(sheet.number,'A2/074');
+  assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 front-face protection-class reference');
+  assert.ok(text.includes('protection class on the front according to IEC 60529 as IP20'));
+  assert.ok(text.includes('does not rate a project enclosure, assembly, or terminal access'));
+  assert.ok(text.includes('Project enclosure, installation, and touch-protection conditions are not specified or modeled'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
 });
