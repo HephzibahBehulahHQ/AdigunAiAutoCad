@@ -206,3 +206,8 @@ For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000
 ## Project library validation
 
 `library.json` is the machine-readable index of the source-backed examples and their distinct electrical topologies. To regenerate the per-project model report, run `node scripts/project-library-validation.js --write`; to verify that the committed report still matches the manifest, CAD engine, component catalog, and project files, run `node scripts/project-library-validation.js --check`. The committed report records measured sheet, component, wire, net, BOM, and connectivity counts. It currently validates five distinct topologies, while the first gate of five distinct 100-sheet projects remains incomplete; only the star-delta reference package currently meets the 100-sheet threshold.
+
+
+# DOL motor feeder — second 100-sheet reference project opening (A2/001)
+
+Open `siemens-schneider-sew-dol-reference.adigun.json` from the workstation's **Open project file** command. This project begins its own 100-sheet reference set with one complete authored schematic sheet. The other 99 sheets are not yet authored and are not represented as blank placeholders. The page reuses the source-backed Siemens/Schneider/SEW DOL topology documented above: 11 real component instances, 38 orthogonal wire segments, 15 derived nets, six BOM rows, no open wire endpoints, and no geometry errors. Its report, source records and limitations are generated and checked through `library.json` and `scripts/project-library-validation.js`. This is an educational static wiring reference, not a construction-ready design; the model does not simulate switching, protection or safety behavior.
