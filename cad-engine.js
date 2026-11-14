@@ -202,6 +202,7 @@
         csaSignallingCircuit: { value: 600, unit: 'V' },
         ulSignallingCircuit: { value: 600, unit: 'V' }
       },
+      ratedImpulseWithstandVoltage: { value: 6, unit: 'kV', standard: 'IEC 60947' },
       auxiliaryContactComposition: { value: '1 mechanically-linked NO + 1 mechanically-linked NC' },
       coilSuppressor: { value: 'Built-in bidirectional peak-limiting diode' },
       standards: { value: ['IEC 60947-4-1', 'IEC 60947-5-1', 'UL 508'] },
