@@ -3019,3 +3019,12 @@ The user supplied the 360-item engineering-canvas interaction catalog as the fun
 - PR #290 merged as `665778d99e96ea04336a5d67fb98cf2925164343`. Final PR verification `43603263891`, main verification `43603324819`, and Pages deployment `43603324800` passed.
 - The repository CNAME matches the custom domain and the Pages job passed, but the live custom-domain request still fails DNS resolution from this environment. The main source and report are verified; direct runtime confirmation is still pending. No interface or circuit wiring changed.
 - Next: continue with a distinct source-backed A2/024 increment while rechecking production reachability when the environment’s DNS state changes. The distinct 100-sheet topology gate remains 1/5.
+
+
+## 2026-11-14 incremental execution record — DOL KM1 coil voltage limits A2/024
+
+- Added A2/024 with Schneider Electric's LC1D09BD 60 °C DC coil operating range (0.7–1.25 × Uc) and drop-out range (0.1–0.25 × Uc). The page identifies them as manufacturer component limits and explicitly states that project coil-terminal voltage and contactor behavior are not measured or simulated.
+- Updated the source-backed component definition, DOL drawing index and revision record, component reference, regression assertions, README, and generated validation report for 24 authored sheets and A2/025–A2/100 unauthored. The report records 398 meaningful content objects, 11 components, 38 wires, 15 nets, six BOM rows, zero empty sheets, zero open endpoints, and zero geometry errors.
+- PR #292 merged as `d861797dd08974d9f71c5555c2659e1114ba8925`. PR verification `43603944445`, post-merge verification `43603977000`, and Pages deployment `43603977036` passed. The Pages deployment job completed successfully for the merge SHA.
+- Direct production runtime confirmation remains pending because the custom domain has failed DNS resolution in this environment on the previous checks. No interface files or existing circuit wiring changed. The distinct 100-sheet topology gate remains 1/5.
+- Next: inspect the documented topology backlog for the next source-backed increment; retry production runtime verification only when the DNS condition changes.
