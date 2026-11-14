@@ -3692,7 +3692,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(dolProject.revision, 'A2/026');
   assert.equal(dolProject.sheets.length, 26);
   assert.match(dolProject.status, /^Twenty-six authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 75 sheets are not authored.'));
+  assert.ok(dolProject.status.includes('The remaining 74 sheets are not authored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
