@@ -11,10 +11,6 @@ on:
       - "docs/components/**"
       - "docs/reports/project-library-validation.json"
       - "scripts/project-library-validation.js"
-      - "examples/real-projects/**"
-      - "docs/components/**"
-      - "docs/reports/project-library-validation.json"
-      - "scripts/project-library-validation.js"
   push:
     branches: [main]
     paths:
