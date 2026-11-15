@@ -177,10 +177,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const exampleCanvas = await examplePage.locator('#drawing').boundingBox();
     assert.ok(exampleCanvas && exampleCanvas.width > 100 && exampleCanvas.height > 100);
     const objectCountBeforeWire = await examplePage.locator('#userDrawings [data-object]').count();
-    await examplePage.getByRole('button', { name: 'Draw wire' }).click();
-    await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.78, exampleCanvas.y + exampleCanvas.height * 0.78);
+    const wireTool = examplePage.getByRole('button', { name: 'Draw wire' });
+    await wireTool.click();
+    assert.equal(await wireTool.getAttribute('aria-pressed'), 'true', 'wire tool is active before drawing');
+    await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.30, exampleCanvas.y + exampleCanvas.height * 0.30);
     await examplePage.mouse.down();
-    await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.83, exampleCanvas.y + exampleCanvas.height * 0.83, { steps: 3 });
+    await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.40, exampleCanvas.y + exampleCanvas.height * 0.40, { steps: 3 });
     await examplePage.mouse.up();
     await examplePage.waitForFunction(count => document.querySelectorAll('#userDrawings [data-object]').length > count, objectCountBeforeWire);
     await examplePage.keyboard.press('Control+Shift+S');
