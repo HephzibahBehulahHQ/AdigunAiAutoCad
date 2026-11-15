@@ -14,6 +14,7 @@ test('workspace boot always starts with no active project, drawing tab, or autom
   assert.match(inline, /state\.projectModel=null;state\.projectName='';state\.sheet=null;/);
   assert.match(inline, /projectTree'\)\.replaceChildren\(emptyProject\)/);
   assert.match(inline, /sheetTabs \.document-tab\[data-sheet\].*?tab\.remove\(\)/);
+  assert.match(inline, /\$\$\('#sheetTabs \.document-tab\[data-sheet\]'\)\.forEach/);
   assert.match(inline, /\$\('#newSheet'\)\.hidden=true/);
   assert.match(inline, /window\.addEventListener\('beforeunload'/);
   assert.doesNotMatch(inline.slice(inline.lastIndexOf('state.projectModel=null;')), /copyExampleProject\(/);
