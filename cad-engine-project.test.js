@@ -160,7 +160,7 @@ test('every published catalog example opens as an independent sectioned native c
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
   const cases = [
-    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 14, A3: 4, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-024': 'A4' } },
+    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 14, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4' } },
     { file: 'siemens-sew-star-delta-reference.adigun.json', counts: { A1: 5, A2: 19, A3: 4, A4: 72 }, sections: { 'ref-001': 'A1', 'ref-006': 'A2', 'ref-040': 'A3', 'ref-025': 'A4' } }
   ];
   for (const [index, item] of cases.entries()) {
@@ -175,6 +175,27 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
       assert.equal(copy.projectModel.sheets.find(sheet => sheet.id === sheetId)?.sectionId, sectionId, item.file + ' ' + sheetId);
     }
     assert.equal(copy.projectModel.sheets.length, parsed.project.sheets.length);
+    if (item.file.startsWith('siemens-schneider-sew-dol-reference')) {
+      const layoutSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-panel-layout');
+      assert.equal(layoutSheet.projectSectionId, 'A3');
+      const layoutObjects = parsed.project.objects.filter(object => object.sheetId === layoutSheet.id);
+      assert.ok(layoutObjects.some(object => object.id === 'dol-layout-enclosure' && object.kind === 'rect' && object.projectAssumption === true));
+      assert.ok(layoutObjects.some(object => object.deviceTag === 'Q1' && object.manufacturerPartNumber === '3RV2011-0FA10'));
+      assert.ok(layoutObjects.some(object => object.deviceTag === 'KM1' && object.manufacturerPartNumber === 'LC1D09BD'));
+      assert.equal(layoutObjects.filter(object => object.kind === 'rect' && object.deviceTag && object.deviceTag.startsWith('X')).length, 6);
+      assert.ok(layoutObjects.every(object => !object.locked));
+      assert.match(layoutObjects.find(object => object.id === 'dol-layout-note-limitations').text, /not.*construction-ready/i);
+      const sourceLayoutSnapshot = layoutObjects.find(object => object.id === 'dol-layout-q1-footprint');
+      const editableCopyFootprint = copy.objects.find(object => object.id === sourceLayoutSnapshot.id);
+      editableCopyFootprint.x += 14;
+      editableCopyFootprint.stroke = '#dc2626';
+      const reopened = engine.parseProject(engine.serializeProject(copy));
+      assert.equal(reopened.valid, true, reopened.errors.join(' '));
+      const reopenedFootprint = reopened.project.objects.find(object => object.id === editableCopyFootprint.id);
+      assert.equal(reopenedFootprint.x, sourceLayoutSnapshot.x + 14);
+      assert.equal(reopenedFootprint.stroke, '#dc2626');
+      assert.equal(sourceLayoutSnapshot.x, 245, 'editing a copied layout must leave the library template unchanged');
+    }
     assert.equal(engine.analyzeProject(copy).componentCount, engine.analyzeProject(parsed.project).componentCount);
     assert.equal(engine.analyzeProject(copy).wireCount, engine.analyzeProject(parsed.project).wireCount);
     assert.equal(engine.parseProject(engine.serializeProject(copy)).valid, true);
