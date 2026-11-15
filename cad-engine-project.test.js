@@ -182,9 +182,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('#projectTree [data-sheet="ref-007"]').click();
     const offPageConnector = examplePage.locator('#userDrawings .cross-sheet-connector').first();
     await offPageConnector.waitFor();
-    await offPageConnector.locator('path').first().click();
+    const connectorHitArea = offPageConnector.locator('path').first();
+    const mousePoint = await connectorHitArea.evaluate(path => {
+      const bounds = path.getBBox();
+      const point = new DOMPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2).matrixTransform(path.getScreenCTM());
+      const hit = document.elementFromPoint(point.x, point.y);
+      return { x: point.x, y: point.y, hitTag: hit?.tagName, hitClass: hit?.getAttribute('class'), hitConnector: Boolean(hit?.closest('.cross-sheet-connector')), pointerEvents: getComputedStyle(path).pointerEvents };
+    });
+    await examplePage.mouse.click(mousePoint.x, mousePoint.y);
     await examplePage.locator('#sheetTabs .document-tab[data-sheet="ref-009"][aria-selected="true"]').waitFor({ timeout: 5000 }).catch(async () => {
-      const diagnostics = await examplePage.evaluate(() => JSON.stringify({ activeTabs: [...document.querySelectorAll('#sheetTabs .document-tab[aria-selected="true"]')].map(tab => tab.dataset.sheet), connectors: [...document.querySelectorAll('#userDrawings .cross-sheet-connector')].map(node => node.getAttribute('aria-label')) }));
+      const diagnostics = await examplePage.evaluate(point => JSON.stringify({ ...point, activeTabs: [...document.querySelectorAll('#sheetTabs .document-tab[aria-selected="true"]')].map(tab => tab.dataset.sheet), connectors: [...document.querySelectorAll('#userDrawings .cross-sheet-connector')].map(node => node.getAttribute('aria-label')) }), mousePoint);
       throw new Error('Mouse activation did not open the connector target: ' + diagnostics);
     });
     let selectedTarget = examplePage.locator('#userDrawings [data-object].selected-object').first();
