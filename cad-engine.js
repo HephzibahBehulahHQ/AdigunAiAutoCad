@@ -6,6 +6,13 @@
   const PROJECT_FORMAT = 'adigun-ai-autocad-workspace';
   const PROJECT_VERSION = 2;
   const EPSILON = 1e-7;
+  const DEFAULT_PROJECT_SECTIONS = deepFreeze([
+    { id: 'A1', name: 'General information', purpose: 'Overview, title page, devices, symbols, abbreviations, and design basis.', order: 1, collapsed: false },
+    { id: 'A2', name: 'Electrical design', purpose: 'Connected schematics, power and control circuits, terminals, cables, protection, and earthing.', order: 2, collapsed: false },
+    { id: 'A3', name: 'Panel layout and installation', purpose: 'Physical arrangement, mounting, cable routing, and installation details.', order: 3, collapsed: false },
+    { id: 'A4', name: 'Final documentation', purpose: 'Material lists, connection reports, inspections, commissioning, and handover.', order: 4, collapsed: false }
+  ]);
+  const PAPER_SIZES_MM = deepFreeze({ A4: [297, 210], A3: [420, 297], A2: [594, 420], A1: [841, 594], A0: [1189, 841] });
 
   function deepFreeze(value) {
     if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
@@ -14,6 +21,177 @@
   }
   function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
+
+  function createProjectModel(projectId, projectName) {
+    if (typeof projectId !== 'string' || !projectId.trim()) throw new Error('Project needs a stable internal ID.');
+    const name = String(projectName || '').trim().slice(0, 80);
+    if (!name) throw new Error('Project needs a name.');
+    return {
+      id: projectId,
+      name: name,
+      metadata: { title: name, jobNumber: '', manager: '', customer: '', site: '', drawnBy: '', designer: '', checkedBy: '', approvedBy: '', drawingDate: '', notes: '', issueStatus: '' },
+      sections: clone(DEFAULT_PROJECT_SECTIONS),
+      sheets: [],
+      activeSheetId: null,
+      openTabs: [],
+      crossSheetConnections: [],
+      diagnostics: []
+    };
+  }
+
+  function addProjectSection(project, name, purpose) {
+    if (!project || !Array.isArray(project.sections) || !Array.isArray(project.sheets)) throw new Error('Project sections are unavailable.');
+    const sectionNumber = project.sections.reduce(function (highest, section) {
+      const match = /^A(\d+)$/.exec(section && section.id || '');
+      return match ? Math.max(highest, Number(match[1])) : highest;
+    }, 0) + 1;
+    const section = {
+      id: 'A' + sectionNumber,
+      name: String(name || '').trim().slice(0, 80) || 'New section',
+      purpose: String(purpose || '').trim().slice(0, 240),
+      order: project.sections.length + 1,
+      collapsed: false
+    };
+    project.sections.push(section);
+    return section;
+  }
+
+  function renameProjectSection(project, sectionId, name) {
+    if (!project || !Array.isArray(project.sections)) throw new Error('Project sections are unavailable.');
+    const section = project.sections.find(function (item) { return item.id === sectionId; });
+    const value = String(name || '').trim().slice(0, 80);
+    if (!section || !value) throw new Error('Choose a section and enter a name.');
+    section.name = value;
+    return section;
+  }
+
+  function renumberProjectSheets(project) {
+    if (!project || !Array.isArray(project.sections) || !Array.isArray(project.sheets)) throw new Error('Project sheet structure is unavailable.');
+    const sections = new Map(project.sections.map(function (section, index) { return [section.id, section.order || index + 1]; }));
+    project.sheets.sort(function (left, right) {
+      return (sections.get(left.sectionId) || Number.MAX_SAFE_INTEGER) - (sections.get(right.sectionId) || Number.MAX_SAFE_INTEGER)
+        || (left.sectionOrder || 0) - (right.sectionOrder || 0);
+    });
+    project.sheets.forEach(function (sheet, index) {
+      sheet.order = index + 1;
+      sheet.number = sheet.sectionId + '/' + String(index + 1).padStart(4, '0');
+    });
+    return project.sheets;
+  }
+
+  function addProjectSheet(project, sectionId, name, sheetId) {
+    if (!project || typeof project.id !== 'string' || !Array.isArray(project.sections) || !Array.isArray(project.sheets)) throw new Error('Project sheet structure is unavailable.');
+    if (!project.sections.some(function (section) { return section.id === sectionId; })) throw new Error('Choose a section in this project.');
+    if (typeof sheetId !== 'string' || !sheetId.trim() || project.sheets.some(function (sheet) { return sheet.id === sheetId; })) throw new Error('Sheet needs a unique stable internal ID.');
+    const sectionOrder = project.sheets.filter(function (sheet) { return sheet.sectionId === sectionId; }).reduce(function (highest, sheet) { return Math.max(highest, sheet.sectionOrder || 0); }, 0) + 1;
+    const sheet = {
+      id: sheetId,
+      projectId: project.id,
+      sectionId: sectionId,
+      sectionOrder: sectionOrder,
+      order: 0,
+      number: '',
+      name: String(name || '').trim().slice(0, 80) || 'New sheet',
+      customName: Boolean(String(name || '').trim()),
+      revision: '',
+      revisionDate: '',
+      contentType: 'drawing',
+      scope: '',
+      description: '',
+      drawnBy: '',
+      checkedBy: '',
+      approvedBy: '',
+      scale: '1:1',
+      paperSize: 'A3',
+      orientation: 'landscape',
+      paperWidthMm: 420,
+      paperHeightMm: 297,
+      issueStatus: '',
+      notes: '',
+      devices: [],
+      terminals: [],
+      connections: [],
+      crossReferences: []
+    };
+    project.sheets.push(sheet);
+    renumberProjectSheets(project);
+    return sheet;
+  }
+
+  function setProjectSheetPaperFormat(sheet, paperSize, orientation) {
+    if (!sheet || !Object.prototype.hasOwnProperty.call(PAPER_SIZES_MM, paperSize)) throw new Error('Choose a supported ISO paper size.');
+    if (orientation !== 'landscape' && orientation !== 'portrait') throw new Error('Choose landscape or portrait orientation.');
+    let width = PAPER_SIZES_MM[paperSize][0], height = PAPER_SIZES_MM[paperSize][1];
+    if (orientation === 'portrait' && width > height || orientation === 'landscape' && height > width) {
+      const swap = width; width = height; height = swap;
+    }
+    sheet.paperSize = paperSize;
+    sheet.orientation = orientation;
+    sheet.paperWidthMm = width;
+    sheet.paperHeightMm = height;
+    return { width: width, height: height };
+  }
+
+  function renameProjectSheet(project, sheetId, name) {
+    if (!project || !Array.isArray(project.sheets)) throw new Error('Project sheets are unavailable.');
+    const sheet = project.sheets.find(function (item) { return item.id === sheetId; });
+    const value = String(name || '').trim().slice(0, 80);
+    if (!sheet || !value) throw new Error('Choose a sheet and enter a name.');
+    sheet.name = value;
+    sheet.customName = true;
+    return sheet;
+  }
+
+  function moveProjectSheet(project, sheetId, sectionId, sectionPosition) {
+    if (!project || !Array.isArray(project.sections) || !Array.isArray(project.sheets)) throw new Error('Project sheet structure is unavailable.');
+    if (!project.sections.some(function (section) { return section.id === sectionId; })) throw new Error('Choose a section in this project.');
+    const sourceIndex = project.sheets.findIndex(function (sheet) { return sheet.id === sheetId; });
+    if (sourceIndex < 0) throw new Error('The selected sheet no longer exists.');
+    const moved = project.sheets.splice(sourceIndex, 1)[0];
+    const previousSectionId = moved.sectionId;
+    const targetSheets = project.sheets.filter(function (sheet) { return sheet.sectionId === sectionId; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
+    const targetIndex = Math.max(0, Math.min(targetSheets.length, Number.isInteger(sectionPosition) ? sectionPosition : targetSheets.length));
+    moved.sectionId = sectionId;
+    targetSheets.splice(targetIndex, 0, moved);
+    targetSheets.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
+    const oldSectionSheets = project.sheets.filter(function (sheet) { return sheet.sectionId === previousSectionId && sheet.sectionId !== sectionId; });
+    oldSectionSheets.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
+    const allSections = new Set(project.sections.map(function (section) { return section.id; }));
+    allSections.forEach(function (id) {
+      const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === id; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
+      siblings.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
+    });
+    project.sheets.push(moved);
+    renumberProjectSheets(project);
+    return moved;
+  }
+
+  function deleteProjectSheet(project, sheetId) {
+    if (!project || !Array.isArray(project.sheets)) throw new Error('Project sheets are unavailable.');
+    const index = project.sheets.findIndex(function (sheet) { return sheet.id === sheetId; });
+    if (index < 0) throw new Error('The selected sheet no longer exists.');
+    const removed = project.sheets.splice(index, 1)[0];
+    const linked = (Array.isArray(project.crossSheetConnections) ? project.crossSheetConnections : []).filter(function (connection) {
+      return Array.isArray(connection.endpoints) && connection.endpoints.some(function (endpoint) {
+        return endpoint.sheetId === sheetId || endpoint.connector && endpoint.connector.targetSheetId === sheetId;
+      });
+    });
+    if (!Array.isArray(project.diagnostics)) project.diagnostics = [];
+    linked.forEach(function (connection) {
+      project.diagnostics.push({
+        type: 'unresolved-cross-sheet-reference',
+        sheetId: sheetId,
+        connectionId: connection.id,
+        message: 'Connection ' + connection.id + ' references deleted sheet ' + removed.number + ' (' + removed.name + ').'
+      });
+    });
+    if (Array.isArray(project.openTabs)) project.openTabs = project.openTabs.filter(function (id) { return id !== sheetId; });
+    if (project.activeSheetId === sheetId) project.activeSheetId = null;
+    const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === removed.sectionId; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
+    siblings.forEach(function (sheet, siblingIndex) { sheet.sectionOrder = siblingIndex + 1; });
+    renumberProjectSheets(project);
+    return removed;
+  }
 
   const terminalDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
@@ -1458,6 +1636,16 @@
     component: component,
     catalog: catalog,
     createInstance: createInstance,
+    createProjectModel: createProjectModel,
+    defaultProjectSections: function () { return clone(DEFAULT_PROJECT_SECTIONS); },
+    addProjectSection: addProjectSection,
+    renameProjectSection: renameProjectSection,
+    addProjectSheet: addProjectSheet,
+    setProjectSheetPaperFormat: setProjectSheetPaperFormat,
+    renameProjectSheet: renameProjectSheet,
+    moveProjectSheet: moveProjectSheet,
+    deleteProjectSheet: deleteProjectSheet,
+    renumberProjectSheets: renumberProjectSheets,
     moveInstance: moveInstance,
     reorderObject: reorderObject,
     resizeGraphicObject: resizeGraphicObject,
