@@ -30,7 +30,7 @@ test('Save As uses a local project file picker and subsequent Save writes to tha
   assert.match(inline, /projectSaveHandle=null;const payload=parsed\.project/);
 });
 
-test('new project has empty A1–A4 sections and supports uncapped continuous numbering and paper formats', () => {
+test('canvas audit reflects the current local Save As and reopen limits', () => {\n  const audit = fs.readFileSync(path.join(__dirname, 'docs/specs/canvas-behavior-implementation-audit.md'), 'utf8');\n  assert.match(audit, /Save As uses the browser file picker when available/);\n  assert.match(audit, /Save writes to the selected file handle during the current page session/);\n  assert.match(audit, /not durable browser-local autosave/);\n  assert.match(audit, /actual Save As, edit, close, and reopen workflow still needs end-to-end UI verification/);\n});\n\ntest('new project has empty A1–A4 sections and supports uncapped continuous numbering and paper formats', () => {
   const project = engine.createProjectModel('project-test-1', 'Motor control reference');
   assert.equal(project.name, 'Motor control reference');
   assert.equal(project.sheets.length, 0);
