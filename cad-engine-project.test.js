@@ -457,7 +457,7 @@ test('every published catalog example opens as an independent sectioned native c
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
   const cases = [
-    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 14, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4' } },
+    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 15, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4', 'dol-reference-095': 'A2' } },
     { file: 'siemens-sew-star-delta-reference.adigun.json', counts: { A1: 5, A2: 19, A3: 4, A4: 72 }, sections: { 'ref-001': 'A1', 'ref-006': 'A2', 'ref-040': 'A3', 'ref-025': 'A4' } }
   ];
   for (const [index, item] of cases.entries()) {
@@ -473,6 +473,18 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
     }
     assert.equal(copy.projectModel.sheets.length, parsed.project.sheets.length);
     if (item.file.startsWith('siemens-schneider-sew-dol-reference')) {
+      const thermalSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-095');
+      assert.equal(thermalSheet.number, 'A2/095');
+      assert.equal(thermalSheet.projectSectionId, 'A2');
+      const copiedThermalSheet = copy.projectModel.sheets.find(sheet => sheet.id === 'dol-reference-095');
+      assert.equal(copiedThermalSheet.sectionId, 'A2');
+      assert.equal(copiedThermalSheet.number, 'A2/0015', 'source A2/095 maps to the next section-local A2 sheet number in an editable copy');
+      assert.ok(copy.projectModel.sheets.every(sheet => sheet.number.startsWith(sheet.sectionId + '/')), 'editable copies assign sheet numbers within their A1–A4 sections');
+      const thermalText = parsed.project.objects.filter(object => object.sheetId === thermalSheet.id && object.kind === 'text').map(object => object.text).join(' ');
+      assert.match(thermalText, /thermal class 130 \(B\)/i);
+      assert.match(thermalText, /155 \(F\).*180 \(H\).*available on request/i);
+      assert.match(thermalText, /does not identify the thermal class ordered/i);
+      assert.match(thermalText, /30590116\/EN.*section 5\.7.*p\. 199/);
       const layoutSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-panel-layout');
       assert.equal(layoutSheet.projectSectionId, 'A3');
       const layoutObjects = parsed.project.objects.filter(object => object.sheetId === layoutSheet.id);
