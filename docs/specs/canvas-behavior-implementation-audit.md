@@ -32,7 +32,7 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 2. Implement drawing-scale behavior and ensure the title-block footprint stays clear through zoom, pan, print and SVG export.
 3. Verify reciprocal cross-sheet continuity, identifiers, diagnostics and supported save/reopen/export across A2 and every section, including A5.
 4. Author a source-backed, at-least-30-sheet native A1–A4 example from the repo's engineering topics. Every example must open as an independent editable project copy; verify component edits, values, colors, connections, save-as, close and reopen.
-5. A2/095 is the next verified increment; continue with A2/096 after confirming section assignment, project-order numbering, model validation and copy save/reopen. Preserve source-backed data and verify deployment in reviewable slices.
+5. After A2/095 merges, continue with A2/096 after confirming section assignment, project-order numbering, model validation and copy save/reopen. Preserve source-backed data and verify deployment in reviewable slices.
 6. Run the owner's complete UI acceptance workflow before claiming end-to-end compliance. Report specified, implemented, tested and deployed states separately.
 
 The three linked EplanAI documents are read-only behavior references. AdigunAiAutoCad uses its own code, data, interface geometry and branding.
