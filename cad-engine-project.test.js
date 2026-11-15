@@ -215,7 +215,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const editedTimer = exampleSaved.objects.find(object => object.id === timerId);
     const savedWires = exampleSaved.objects.filter(object => object.kind === 'wire');
     const addedWire = savedWires.find(wire => !sourceWireIds.has(wire.id));
-    assert.equal(exampleSaved.projectModel.name, 'Copy of '+sourceProject.project);
+    assert.equal(exampleSaved.projectModel.name, ('Copy of '+sourceProject.project).slice(0,80));
     assert.equal(editedComponent.properties.overloadSettingA, 12.5);
     assert.equal(editedComponent.properties.position, 'F2');
     assert.equal(editedComponent.stroke, '#ed3f38');
