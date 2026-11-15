@@ -457,7 +457,7 @@ test('every published catalog example opens as an independent sectioned native c
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
   const cases = [
-    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 15, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4', 'dol-reference-095': 'A2' } },
+    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 16, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4', 'dol-reference-095': 'A2', 'dol-reference-096': 'A2' } },
     { file: 'siemens-sew-star-delta-reference.adigun.json', counts: { A1: 5, A2: 19, A3: 4, A4: 72 }, sections: { 'ref-001': 'A1', 'ref-006': 'A2', 'ref-040': 'A3', 'ref-025': 'A4' } }
   ];
   for (const [index, item] of cases.entries()) {
@@ -485,6 +485,19 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
       assert.match(thermalText, /155 \(F\).*180 \(H\).*available on request/i);
       assert.match(thermalText, /does not identify the thermal class ordered/i);
       assert.match(thermalText, /30590116\/EN.*section 5\.7.*p\. 199/);
+      const sensorOptionSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-096');
+      assert.equal(sensorOptionSheet.number, 'A2/096');
+      assert.equal(sensorOptionSheet.projectSectionId, 'A2');
+      const copiedSensorOptionSheet = copy.projectModel.sheets.find(sheet => sheet.id === 'dol-reference-096');
+      assert.equal(copiedSensorOptionSheet.sectionId, 'A2');
+      assert.equal(copiedSensorOptionSheet.number, 'A2/0022', 'source A2/096 follows A2/095 in A2 project-order numbering');
+      const sensorOptionText = parsed.project.objects.filter(object => object.sheetId === sensorOptionSheet.id && object.kind === 'text').map(object => object.text).join(' ');
+      assert.match(sensorOptionText, /\/TF.*PTC thermistor.*56–315/i);
+      assert.match(sensorOptionText, /\/TH.*bimetallic switch.*56–315/i);
+      assert.match(sensorOptionText, /\/PK.*Pt1000.*63–315/i);
+      assert.match(sensorOptionText, /\/PT.*Pt100 sensor.*63–315/i);
+      assert.match(sensorOptionText, /does not identify an option fitted to this M1/i);
+      assert.match(sensorOptionText, /30590116\/EN.*section 3\.2\.2.*p\. 66/);
       const layoutSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-panel-layout');
       assert.equal(layoutSheet.projectSectionId, 'A3');
       const layoutObjects = parsed.project.objects.filter(object => object.sheetId === layoutSheet.id);
