@@ -22,6 +22,30 @@
   function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
 
+  function fitDrawingToPage(bounds, pageWidth, pageHeight, margin, titleBlockHeight) {
+    if (!bounds || ![bounds.left, bounds.top, bounds.right, bounds.bottom, pageWidth, pageHeight].every(finite) || bounds.right <= bounds.left || bounds.bottom <= bounds.top || pageWidth <= 0 || pageHeight <= 0) {
+      throw new Error('Drawing bounds and page dimensions must be positive finite values.');
+    }
+    const inset = finite(margin) && margin >= 0 ? margin : 10;
+    const titleHeight = finite(titleBlockHeight) && titleBlockHeight >= 0 ? titleBlockHeight : 60;
+    const availableWidth = pageWidth - inset * 2;
+    const availableHeight = pageHeight - inset * 2 - titleHeight;
+    if (availableWidth <= 0 || availableHeight <= 0) throw new Error('The title block leaves no drawable sheet area.');
+    const scale = Math.min(availableWidth / (bounds.right - bounds.left), availableHeight / (bounds.bottom - bounds.top));
+    return {
+      scale: scale,
+      x: inset + (availableWidth - (bounds.right - bounds.left) * scale) / 2 - bounds.left * scale,
+      y: inset + (availableHeight - (bounds.bottom - bounds.top) * scale) / 2 - bounds.top * scale
+    };
+  }
+
+  function invertDrawingTransform(point, transform) {
+    if (!point || ![point.x, point.y].every(finite) || !transform || ![transform.scale, transform.x, transform.y].every(finite) || transform.scale <= 0) {
+      throw new Error('Drawing point and transform must contain finite coordinates and a positive scale.');
+    }
+    return { x: (point.x - transform.x) / transform.scale, y: (point.y - transform.y) / transform.scale };
+  }
+
   function createProjectModel(projectId, projectName) {
     if (typeof projectId !== 'string' || !projectId.trim()) throw new Error('Project needs a stable internal ID.');
     const name = String(projectName || '').trim().slice(0, 80);
@@ -52,10 +76,40 @@
     if (!model) {
       copy.id = projectId;
       copy.project = name;
-      copy.projectModel = null;
+      model = createProjectModel(projectId, name);
+      const activeSheetId = copy.sheets.some(function (sheet) { return sheet.id === copy.activeSheet; }) ? copy.activeSheet : (copy.sheets[0]?.id || null);
+      const previousNumbers = new Map();
+      copy.sheets.forEach(function (sourceSheet) {
+        previousNumbers.set(sourceSheet.id, sourceSheet.number);
+        const legacySection = /^A([1-4])\//.exec(String(sourceSheet.number || ''));
+        const sectionId = sourceSheet.sectionId || sourceSheet.projectSectionId || (copy.sheets.length === 1 ? 'A2' : (legacySection ? 'A' + legacySection[1] : 'A2'));
+        const sheet = addProjectSheet(model, sectionId, sourceSheet.name, sourceSheet.id);
+        Object.assign(sheet, sourceSheet, { id: sourceSheet.id, projectId: projectId, sectionId: sectionId, drawingFitToPage: true });
+      });
+      renumberProjectSheets(model);
+      copy.sheetViews = clone(copy.sheetViews || {});
+      model.sheets.forEach(function (sheet) {
+        copy.sheetViews[sheet.id] = { x: 0, y: 0, w: sheet.paperWidthMm || 420, h: sheet.paperHeightMm || 297 };
+      });
+      copy.view = { x: 0, y: 0, w: 420, h: 297 };
+      copy.zoom = 100;
+      const numberChanges = Array.from(previousNumbers.entries()).map(function (entry) {
+        const sheet = model.sheets.find(function (item) { return item.id === entry[0]; });
+        return [entry[1], sheet && sheet.number];
+      }).filter(function (entry) { return entry[0] && entry[1] && entry[0] !== entry[1]; }).sort(function (a, b) { return b[0].length - a[0].length; });
+      model.activeSheetId = activeSheetId;
+      model.openTabs = activeSheetId ? [activeSheetId] : [];
+      model.crossSheetConnections = clone(copy.crossSheetConnections || []);
+      model.metadata.notes = [model.metadata.notes, 'Editable copy of AdigunAiAutoCad example: ' + String(source.project || 'Source-backed project') + '. Legacy drawing coordinates remain editable and are fitted to the paper at display time; manufacturer records remain separate from instance settings.'].filter(Boolean).join('\n');
+      copy.projectModel = model;
+      copy.sheets = model.sheets;
+      copy.activeSheet = activeSheetId;
+      copy.crossSheetConnections = model.crossSheetConnections;
       copy.objects = clone(copy.objects || []);
-      copy.sheets = clone(copy.sheets || []);
-      copy.crossSheetConnections = clone(copy.crossSheetConnections || []);
+      copy.objects.forEach(function (object) {
+        if (!object || typeof object.text !== 'string') return;
+        numberChanges.forEach(function (entry) { object.text = object.text.split(entry[0]).join(entry[1]); });
+      });
       copy.sheetLabels = clone(copy.sheetLabels || {});
       copy.sheetViews = clone(copy.sheetViews || {});
       return copy;
@@ -1684,6 +1738,8 @@
     createInstance: createInstance,
     createProjectModel: createProjectModel,
     copyExampleProject: copyExampleProject,
+    fitDrawingToPage: fitDrawingToPage,
+    invertDrawingTransform: invertDrawingTransform,
     defaultProjectSections: function () { return clone(DEFAULT_PROJECT_SECTIONS); },
     addProjectSection: addProjectSection,
     renameProjectSection: renameProjectSection,

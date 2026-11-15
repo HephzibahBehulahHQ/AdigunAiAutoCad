@@ -113,6 +113,39 @@ test('project metadata, open views, sheets, links, and independent example copie
   assert.equal(engine.parseProject(engine.serializeProject(nativeCopy)).valid, true);
 });
 
+
+test('legacy drawing content fits the page while edits map back to native coordinates', () => {
+  const transform = engine.fitDrawingToPage({ left: 100, top: 50, right: 1100, bottom: 650 }, 420, 297, 10, 60);
+  assert.ok(transform.scale > 0);
+  assert.ok(transform.x + transform.scale * 100 >= 10 - 1e-9);
+  assert.ok(transform.y + transform.scale * 50 >= 10 - 1e-9);
+  assert.ok(transform.y + transform.scale * 650 <= 227 + 1e-9);
+  const sourcePoint = { x: 480, y: 255 };
+  const pagePoint = { x: transform.x + sourcePoint.x * transform.scale, y: transform.y + sourcePoint.y * transform.scale };
+  const restored = engine.invertDrawingTransform(pagePoint, transform);
+  assert.ok(Math.abs(restored.x - sourcePoint.x) < 1e-9);
+  assert.ok(Math.abs(restored.y - sourcePoint.y) < 1e-9);
+});
+
+test('every published catalog example opens as an independent sectioned native copy', () => {
+  const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples/real-projects/library.json'), 'utf8'));
+  assert.equal(catalog.projects.length, 7);
+  for (const entry of catalog.projects) {
+    const file = path.join(__dirname, entry.path);
+    const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+    assert.equal(parsed.valid, true, entry.title + ': ' + parsed.errors.join(' '));
+    const sourceSnapshot = JSON.stringify(parsed.project);
+    const copy = engine.copyExampleProject(parsed.project, 'catalog-copy-' + entry.id, 'Editable ' + entry.title);
+    assert.deepEqual(copy.projectModel.sections.map(section => section.id), ['A1', 'A2', 'A3', 'A4']);
+    assert.equal(copy.projectModel.sheets.length, parsed.project.sheets.length);
+    assert.ok(copy.projectModel.sheets.every(sheet => sheet.drawingFitToPage));
+    assert.equal(copy.projectModel.sheets[0].id, parsed.project.sheets[0].id);
+    assert.notEqual(copy.objects, parsed.project.objects);
+    assert.equal(JSON.stringify(parsed.project), sourceSnapshot);
+    assert.equal(engine.parseProject(engine.serializeProject(copy)).valid, true);
+  }
+});
+
 test('source-backed examples open as isolated native projects and retain editable engineering data through save and reopen', () => {
   const file = path.join(__dirname, 'examples/real-projects/siemens-sew-star-delta-reference.adigun.json');
   const sourceResult = engine.parseProject(fs.readFileSync(file, 'utf8'));
@@ -122,7 +155,11 @@ test('source-backed examples open as isolated native projects and retain editabl
   const firstCopy = engine.copyExampleProject(source, 'example-copy-one', 'Editable star-delta design');
   const secondCopy = engine.copyExampleProject(source, 'example-copy-two', 'Independent star-delta design');
 
-  assert.equal(firstCopy.projectModel, null);
+  assert.ok(firstCopy.projectModel);
+  assert.deepEqual(firstCopy.projectModel.sections.map(section => section.id), ['A1', 'A2', 'A3', 'A4']);
+  assert.equal(firstCopy.projectModel.sheets[0].id, 'ref-001');
+  assert.equal(firstCopy.projectModel.sheets[0].drawingFitToPage, true);
+  assert.deepEqual(firstCopy.sheetViews['ref-006'], { x: 0, y: 0, w: 420, h: 297 });
   assert.equal(firstCopy.id, 'example-copy-one');
   assert.equal(firstCopy.project, 'Editable star-delta design');
   assert.notEqual(firstCopy.id, secondCopy.id);
@@ -159,7 +196,7 @@ test('source-backed examples open as isolated native projects and retain editabl
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   const restored = reopened.project;
   assert.equal(restored.project, 'Editable star-delta design');
-  assert.equal(restored.projectModel, null);
+  assert.ok(restored.projectModel);
   assert.equal(restored.sheets.length, 100);
   assert.equal(restored.objects.find(object => object.id === q1.id).ref, 'Q1_EDIT');
   assert.equal(restored.objects.find(object => object.id === q1.id).properties.overloadSettingA, 12);
@@ -179,6 +216,10 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(html, /\.tree-row \.detail\{margin-left:auto\}/);
   const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
   assert.match(inline, /function beginInlineSheetRename\(id\)/);
+  assert.match(inline, /function applyProjectDrawingTransform\(forceFit\)/);
+  assert.match(inline, /fitDrawingToPage\(bounds,page\.width,page\.height,10,60\)/);
+  assert.match(inline, /invertDrawingTransform\(\{x:point\.x,y:point\.y\},transform\)/);
+  assert.match(inline, /const anchor=svgViewPoint\(e\)/);
   assert.match(inline, /addEventListener\('dblclick'/);
   assert.match(inline, /data-sheet-name/);
   assert.match(inline, /data-section-row/);
