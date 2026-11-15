@@ -338,3 +338,9 @@ A2/093 records SEW catalog efficiency at 50%, 75% and 100% load for the DRN63MS4
 
 
 A2/094 records SEW motor nameplate conditions of up to 40 °C ambient and 1000 m installation altitude. Actual site conditions and any required derating remain unassessed.
+
+## Native section organization when examples are opened as copies
+
+The 94-sheet DOL reference opens as a single editable project copy with 6 overview sheets in A1, 14 circuit and connection sheets in A2, 4 manufacturer mounting/dimension sheets in A3, and 70 product data and engineering reference sheets in A4. The 100-sheet star-delta reference opens with 5 overview sheets in A1, 19 circuit and connection sheets in A2, 4 physical dimension/mounting references in A3, and 72 product data and report sheets in A4. Copy creation preserves every source sheet and drawing object, derives the target section from each source sheet's \`projectSectionId\`, and remaps internal sheet references to the new section numbers.
+
+The A3 pages are source-backed component installation references; neither package claims a fully dimensioned enclosure assembly or a construction-ready panel arrangement. The section remains editable so the engineer can add a project-specific physical layout after enclosure, thermal, clearance, wiring, and site requirements are established.

@@ -151,10 +151,34 @@ test('every published catalog example opens as an independent sectioned native c
     assert.deepEqual(copy.projectModel.sections.map(section => section.id), ['A1', 'A2', 'A3', 'A4']);
     assert.equal(copy.projectModel.sheets.length, parsed.project.sheets.length);
     assert.ok(copy.projectModel.sheets.every(sheet => sheet.drawingFitToPage));
-    assert.equal(copy.projectModel.sheets[0].id, parsed.project.sheets[0].id);
+    assert.ok(copy.projectModel.sheets.some(sheet => sheet.id === parsed.project.sheets[0].id));
     assert.notEqual(copy.objects, parsed.project.objects);
     assert.equal(JSON.stringify(parsed.project), sourceSnapshot);
     assert.equal(engine.parseProject(engine.serializeProject(copy)).valid, true);
+  }
+});
+
+test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
+  const cases = [
+    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 14, A3: 4, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-024': 'A4' } },
+    { file: 'siemens-sew-star-delta-reference.adigun.json', counts: { A1: 5, A2: 19, A3: 4, A4: 72 }, sections: { 'ref-001': 'A1', 'ref-006': 'A2', 'ref-040': 'A3', 'ref-025': 'A4' } }
+  ];
+  for (const [index, item] of cases.entries()) {
+    const file = path.join(__dirname, 'examples/real-projects', item.file);
+    const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+    assert.equal(parsed.valid, true, item.file + ': ' + parsed.errors.join(' '));
+    const snapshot = JSON.stringify(parsed.project);
+    const copy = engine.copyExampleProject(parsed.project, 'sectioned-reference-' + index, 'Editable sectioned reference');
+    const counts = Object.fromEntries(['A1', 'A2', 'A3', 'A4'].map(section => [section, copy.projectModel.sheets.filter(sheet => sheet.sectionId === section).length]));
+    assert.deepEqual(counts, item.counts, item.file);
+    for (const [sheetId, sectionId] of Object.entries(item.sections)) {
+      assert.equal(copy.projectModel.sheets.find(sheet => sheet.id === sheetId)?.sectionId, sectionId, item.file + ' ' + sheetId);
+    }
+    assert.equal(copy.projectModel.sheets.length, parsed.project.sheets.length);
+    assert.equal(engine.analyzeProject(copy).componentCount, engine.analyzeProject(parsed.project).componentCount);
+    assert.equal(engine.analyzeProject(copy).wireCount, engine.analyzeProject(parsed.project).wireCount);
+    assert.equal(engine.parseProject(engine.serializeProject(copy)).valid, true);
+    assert.equal(JSON.stringify(parsed.project), snapshot, 'copying must leave the source library example unchanged');
   }
 });
 
