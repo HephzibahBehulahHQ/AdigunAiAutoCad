@@ -1305,7 +1305,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 96 authored sheets; four additional project sheets remain to the 100-sheet target. A3/001 adds a preliminary editable panel layout.",
+      "text": "Progress: 97 authored sheets; three additional project sheets remain to the 100-sheet target. A3/001 adds a preliminary editable panel layout.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -3239,7 +3239,7 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 96 authored sheets; four additional sheets remain to the 100-sheet target."
+      "text": "Current state: 97 authored sheets; three additional sheets remain to the 100-sheet target."
     },
     {
       "kind": "text",
@@ -7619,7 +7619,7 @@
       "y": 1568,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/070 Q1 phase failure; A2/071 Q1 dimensions; A2/072 Q1 ground-fault function; A2/073 Q1 insulation voltage; A2/074 Q1 front-face IP; A2/075 Q1 terminal IP; A2/076 Q1 shock resistance. A2/077 Q1 ambient temperature. A2/078 Q1 net weight. A2/079 Q1 global warming potential. A2/080 Q1 manufacturing GWP. A2/081 Q1 sales-stage GWP. A2/082 Q1 operation-stage GWP. A2/083 Q1 end-of-life GWP. A2/084 Q1 power loss. A2/085 M1 starting-current ratio. A2/086 M1 torque ratios. A2/087 M1 derived starting current. A2/088 M1 derived torques. A2/089 M1 mass and inertia. A2/090 M1 rotor energy. A2/091 M1 rated output check; A2/092 M1 230/400 V star connection; A2/093 M1 load-point efficiency; A2/094 M1 nameplate conditions. A2/095 M1 thermal-class options."
+      "text": "A2/070 Q1 phase failure; A2/071 Q1 dimensions; A2/072 Q1 ground-fault function; A2/073 Q1 insulation voltage; A2/074 Q1 front-face IP; A2/075 Q1 terminal IP; A2/076 Q1 shock resistance. A2/077 Q1 ambient temperature. A2/078 Q1 net weight. A2/079 Q1 global warming potential. A2/080 Q1 manufacturing GWP. A2/081 Q1 sales-stage GWP. A2/082 Q1 operation-stage GWP. A2/083 Q1 end-of-life GWP. A2/084 Q1 power loss. A2/085 M1 starting-current ratio. A2/086 M1 torque ratios. A2/087 M1 derived starting current. A2/088 M1 derived torques. A2/089 M1 mass and inertia. A2/090 M1 rotor energy. A2/091 M1 rated output check; A2/092 M1 230/400 V star connection; A2/093 M1 load-point efficiency; A2/094 M1 nameplate conditions. A2/095 M1 thermal-class options.; A2/096 M1 temperature-sensor options."
     },
     {
       "kind": "text",
@@ -8084,7 +8084,7 @@
       "y": 1510,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/061 | Q1 altitude; A2/062 | Q1 voltage; A2/063 | Q1 frequency; A2/064 | Q1 Icu; A2/065 | Q1 Ics; A2/066 | instantaneous trip response; A2/067 | Q1 AC-3 power; A2/068 | Q1 operating frequency; A2/069 | Q1 current; A2/070 | Q1 phase failure detection; A2/071 | Q1 dimensions and mounting; A2/072 | Q1 ground-fault detection; A2/073 | Q1 insulation voltage; A2/074 | Q1 front-face IP; A2/075 | Q1 terminal IP; A2/076 | Q1 shock resistance. A2/077 | Q1 ambient temperature. A2/078 | Q1 net weight. A2/079 | Q1 global warming potential. A2/080 | Q1 manufacturing GWP. A2/081 | Q1 sales-stage GWP. A2/082 | Q1 operation-stage GWP. A2/083 | Q1 end-of-life GWP. A2/084 | Q1 power loss. A2/085 | M1 starting-current ratio. A2/086 | M1 torque ratios. A2/087 | M1 derived starting current. A2/088 | M1 derived torques. A2/089 | M1 mass and inertia. A2/090 | M1 rotor-energy derivation. A2/091 | M1 output arithmetic cross-check; A2/092 | M1 winding voltage and connection; A2/093 | M1 load-point efficiency; A2/094 | rated ambient and altitude basis. A2/095 | M1 thermal-class options."
+      "text": "A2/061 | Q1 altitude; A2/062 | Q1 voltage; A2/063 | Q1 frequency; A2/064 | Q1 Icu; A2/065 | Q1 Ics; A2/066 | instantaneous trip response; A2/067 | Q1 AC-3 power; A2/068 | Q1 operating frequency; A2/069 | Q1 current; A2/070 | Q1 phase failure detection; A2/071 | Q1 dimensions and mounting; A2/072 | Q1 ground-fault detection; A2/073 | Q1 insulation voltage; A2/074 | Q1 front-face IP; A2/075 | Q1 terminal IP; A2/076 | Q1 shock resistance. A2/077 | Q1 ambient temperature. A2/078 | Q1 net weight. A2/079 | Q1 global warming potential. A2/080 | Q1 manufacturing GWP. A2/081 | Q1 sales-stage GWP. A2/082 | Q1 operation-stage GWP. A2/083 | Q1 end-of-life GWP. A2/084 | Q1 power loss. A2/085 | M1 starting-current ratio. A2/086 | M1 torque ratios. A2/087 | M1 derived starting current. A2/088 | M1 derived torques. A2/089 | M1 mass and inertia. A2/090 | M1 rotor-energy derivation. A2/091 | M1 output arithmetic cross-check; A2/092 | M1 winding voltage and connection; A2/093 | M1 load-point efficiency; A2/094 | rated ambient and altitude basis. A2/095 | M1 thermal-class options. A2/096 | M1 temperature-sensor options."
     },
     {
       "kind": "rect",
