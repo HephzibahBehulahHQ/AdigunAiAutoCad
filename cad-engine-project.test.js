@@ -166,15 +166,23 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('[data-component-property="position"][data-component-object="' + componentId + '"]').fill('F2');
     await examplePage.locator('[data-action="palette"]').click();
     await examplePage.locator('#paletteSwatches [data-color="#ed3f38"]').click();
+    const timerId = 'cmp-26019294-f36c-4d00-80ea-be2fe68ef09d';
+    await examplePage.locator('#userDrawings [data-object="' + timerId + '"]').dispatchEvent('click', { bubbles: true });
+    await examplePage.locator('[aria-label="Properties"]').click();
+    await examplePage.locator('[data-component-property="delaySeconds"][data-component-object="' + timerId + '"]').fill('10');
+    await examplePage.locator('[data-component-property="position"][data-component-object="' + timerId + '"]').fill('KT1');
     await examplePage.keyboard.press('Control+Shift+S');
     await examplePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const exampleSavedText = await examplePage.evaluate(() => window.__savedProjectWrites[0]);
     const exampleSaved = JSON.parse(exampleSavedText);
     const editedComponent = exampleSaved.objects.find(object => object.id === componentId);
+    const editedTimer = exampleSaved.objects.find(object => object.id === timerId);
     assert.equal(exampleSaved.projectModel.name, 'Editable star-delta browser copy');
     assert.equal(editedComponent.properties.overloadSettingA, 12.5);
     assert.equal(editedComponent.properties.position, 'F2');
     assert.equal(editedComponent.stroke, '#ed3f38');
+    assert.equal(editedTimer.properties.delaySeconds, 10);
+    assert.equal(editedTimer.properties.position, 'KT1');
     assert.ok(exampleSaved.crossSheetConnections.length > 0, 'example electrical relationships remain in the saved copy');
     assert.equal(await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text())), originalExample, 'editing the copy must not change its source example');
     await examplePage.close({ runBeforeUnload: false });
@@ -192,6 +200,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await reopenedExample.locator('[data-component-property="overloadSettingA"][data-component-object="' + componentId + '"]').inputValue(), '12.5');
     assert.equal(await reopenedExample.locator('[data-component-property="position"][data-component-object="' + componentId + '"]').inputValue(), 'F2');
     assert.equal(await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"]').getAttribute('stroke'), '#ed3f38', 'component color survives reopen');
+    await reopenedExample.locator('#userDrawings [data-object="' + timerId + '"]').dispatchEvent('click', { bubbles: true });
+    await reopenedExample.locator('[aria-label="Properties"]').click();
+    assert.equal(await reopenedExample.locator('[data-component-property="delaySeconds"][data-component-object="' + timerId + '"]').inputValue(), '10');
+    assert.equal(await reopenedExample.locator('[data-component-property="position"][data-component-object="' + timerId + '"]').inputValue(), 'KT1');
     await reopenedExample.close({ runBeforeUnload: false });
   } finally {
     if (browser) await browser.close();
