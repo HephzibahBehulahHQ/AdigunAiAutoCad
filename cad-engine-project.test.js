@@ -554,7 +554,7 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(inline, /exportSheet\.paperWidthMm/);
   assert.match(inline, /function closeSheetTab\(id\)/);
   assert.match(inline, /unresolved connection diagnostic/);
-  assert.match(inline, /function renderEditableExampleProjects\(\)/);
+  assert.match(inline, /async function renderEditableExampleProjects\(query\)/);
   assert.match(inline, /copyExampleProject\(parsed\.project/);
   assert.match(inline, /state\.projectName\|\|'Untitled electrical project'/);
   assert.match(inline, /state\.projectName\|\|'Adigun-AutoCAD-project'/);
