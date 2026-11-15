@@ -203,6 +203,35 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
   }
 });
 
+test('star-delta example opens with a sourced editable A3 layout alongside its A2 wiring sheet', () => {
+  const file = path.join(__dirname, 'examples/real-projects/siemens-sew-star-delta-starter.adigun.json');
+  const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(parsed.valid, true, parsed.errors.join(' '));
+  const source = parsed.project;
+  const sourceSnapshot = JSON.stringify(source);
+  const copy = engine.copyExampleProject(source, 'star-delta-layout-copy', 'Editable star-delta starter');
+  assert.deepEqual(copy.projectModel.sheets.map(sheet => [sheet.id, sheet.sectionId]), [['star-delta', 'A2'], ['star-delta-panel-layout', 'A3']]);
+  assert.deepEqual(copy.projectModel.openTabs, ['star-delta']);
+  const layout = copy.objects.filter(object => object.sheetId === 'star-delta-panel-layout');
+  assert.equal(layout.length, 51);
+  assert.equal(layout.filter(object => object.kind === 'rect' && object.deviceTag && /^X[1-6]$/.test(object.deviceTag)).length, 6);
+  assert.equal(layout.filter(object => object.kind === 'rect' && ['Q1', 'KM1', 'KM2', 'KM3', 'F1', 'K1'].includes(object.deviceTag)).length, 6);
+  assert.ok(layout.every(object => !object.locked));
+  assert.match(layout.find(object => object.id === 'star-delta-layout-clearances').text, /not construction-ready/i);
+  const before = engine.analyzeProject(copy);
+  const footprint = copy.objects.find(object => object.id === 'star-delta-layout-q1-footprint');
+  footprint.x += 10;
+  footprint.stroke = '#dc2626';
+  const reopened = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  const saved = reopened.project.objects.find(object => object.id === footprint.id);
+  assert.equal(saved.x, 160);
+  assert.equal(saved.stroke, '#dc2626');
+  const after = engine.analyzeProject(reopened.project);
+  assert.deepEqual([after.componentCount, after.wireCount, after.netCount], [before.componentCount, before.wireCount, before.netCount]);
+  assert.equal(JSON.stringify(source), sourceSnapshot, 'editing the project copy must not change the library source');
+});
+
 test('source-backed examples open as isolated native projects and retain editable engineering data through save and reopen', () => {
   const file = path.join(__dirname, 'examples/real-projects/siemens-sew-star-delta-reference.adigun.json');
   const sourceResult = engine.parseProject(fs.readFileSync(file, 'utf8'));

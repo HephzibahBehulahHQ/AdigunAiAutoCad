@@ -104,6 +104,8 @@ The catalog includes Siemens SIRIUS 3RT2026-2KB40 contactor, 3RU2126-4AB0 therma
 
 `siemens-sew-star-delta-starter.adigun.json` is a saved, editable static project built from Siemens SIRIUS 3RV2021-4AA10, 3RT2026-2KB40 (three contactors), 3RU2126-4AB0, 3RP2576-2NW30, Schneider XB5 stop/start operators, Phoenix Contact 3212144 feed-through terminals, and the SEW-EURODRIVE DRN132M4 (7.5 kW, 15.2 A at 400 V / 50 Hz). Its 26 explicitly tested nets cover the three-phase feeder, six motor winding ends, PE, stop/start seal-in, overload trip contact and timer star/delta outputs with cross-interlocks. The Q1/F1 overload settings and K1 time are intentionally unset; protection coordination, suitability and switching behavior are not simulated. See the manufacturer source links above and verify application engineering before using a drawing for installation.
 
+The project opens with its electrical circuit in A2 and a separate editable A3/001 panel-front layout. Component front dimensions and Q1's 400 V clearance requirements come from the linked Siemens data sheets; the 500 × 400 mm backplate, rail positions, terminal arrangement and component placement are explicitly preliminary project assumptions. S0/S1 door locations remain unassigned and M1 remains external. The layout is diagrammatic, does not duplicate electrical BOM entries and is not construction-ready.
+
 
 # 100-sheet star-delta reference project opening set
 
