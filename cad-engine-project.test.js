@@ -20,6 +20,16 @@ test('workspace boot always starts with no active project, drawing tab, or autom
   assert.doesNotMatch(inline.slice(inline.lastIndexOf('state.projectModel=null;')), /copyExampleProject\(/);
 });
 
+test('Save As uses a local project file picker and subsequent Save writes to that chosen file', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
+  assert.match(inline, /\['Save project as…','save-as','Ctrl Shift S'\]/);
+  assert.match(inline, /window\.showSaveFilePicker/);
+  assert.match(inline, /projectSaveHandle\.createWritable\(\)/);
+  assert.match(inline, /if\(e\.ctrlKey&&e\.shiftKey&&e\.key\.toLowerCase\(\)==='s'\)\{e\.preventDefault\(\);saveProjectAs\(\);return;\}/);
+  assert.match(inline, /projectSaveHandle=null;const payload=parsed\.project/);
+});
+
 test('new project has empty A1–A4 sections and supports uncapped continuous numbering and paper formats', () => {
   const project = engine.createProjectModel('project-test-1', 'Motor control reference');
   assert.equal(project.name, 'Motor control reference');
