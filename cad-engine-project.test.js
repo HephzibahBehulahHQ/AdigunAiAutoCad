@@ -182,7 +182,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('#projectTree [data-sheet="ref-007"]').click();
     const offPageConnector = examplePage.locator('#userDrawings .cross-sheet-connector').first();
     await offPageConnector.waitFor();
-    await offPageConnector.locator('path').last().click();
+    await offPageConnector.locator('path').first().click();
     await examplePage.locator('#sheetTabs .document-tab[data-sheet="ref-009"][aria-selected="true"]').waitFor({ timeout: 5000 }).catch(async () => {
       const diagnostics = await examplePage.evaluate(() => JSON.stringify({ activeTabs: [...document.querySelectorAll('#sheetTabs .document-tab[aria-selected="true"]')].map(tab => tab.dataset.sheet), connectors: [...document.querySelectorAll('#userDrawings .cross-sheet-connector')].map(node => node.getAttribute('aria-label')) }));
       throw new Error('Mouse activation did not open the connector target: ' + diagnostics);
