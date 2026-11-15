@@ -389,7 +389,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       group.addEventListener('click',function(event){event.stopPropagation();openCrossSheetConnector(connector);});
       group.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();openCrossSheetConnector(connector);}});
       const hitArea=document.createElementNS('http://www.w3.org/2000/svg','path');
-      hitArea.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));hitArea.setAttribute('fill','none');hitArea.setAttribute('stroke','transparent');hitArea.setAttribute('stroke-width','14');group.append(hitArea);
+      hitArea.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));hitArea.setAttribute('fill','none');hitArea.setAttribute('stroke','transparent');hitArea.setAttribute('stroke-width','14');hitArea.setAttribute('pointer-events','stroke');group.append(hitArea);
       const path=document.createElementNS('http://www.w3.org/2000/svg','path');
       path.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));path.setAttribute('fill','none');path.setAttribute('stroke','#164eac');path.setAttribute('stroke-width','2');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');path.style.pointerEvents='none';group.append(path);
       const anchor=sign<0?'end':'start',labelX=end+sign*7;
