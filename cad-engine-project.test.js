@@ -106,6 +106,71 @@ test('project metadata, open views, sheets, links, and independent example copie
   assert.deepEqual(first.project.crossSheetConnections, payload.crossSheetConnections);
   first.project.projectModel.metadata.manager = 'Changed copy';
   assert.equal(second.project.projectModel.metadata.manager, 'Project manager');
+  const nativeCopy = engine.copyExampleProject(first.project, 'project-roundtrip-copy', 'Named native copy');
+  assert.equal(nativeCopy.projectModel.id, 'project-roundtrip-copy');
+  assert.equal(nativeCopy.projectModel.name, 'Named native copy');
+  assert.ok(nativeCopy.projectModel.sheets.every(sheet => sheet.projectId === 'project-roundtrip-copy'));
+  assert.equal(engine.parseProject(engine.serializeProject(nativeCopy)).valid, true);
+});
+
+test('source-backed examples open as isolated native projects and retain editable engineering data through save and reopen', () => {
+  const file = path.join(__dirname, 'examples/real-projects/siemens-sew-star-delta-reference.adigun.json');
+  const sourceResult = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(sourceResult.valid, true, sourceResult.errors.join(' '));
+  const source = sourceResult.project;
+  const sourceSnapshot = JSON.stringify(source);
+  const firstCopy = engine.copyExampleProject(source, 'example-copy-one', 'Editable star-delta design');
+  const secondCopy = engine.copyExampleProject(source, 'example-copy-two', 'Independent star-delta design');
+
+  assert.equal(firstCopy.projectModel, null);
+  assert.equal(firstCopy.id, 'example-copy-one');
+  assert.equal(firstCopy.project, 'Editable star-delta design');
+  assert.notEqual(firstCopy.id, secondCopy.id);
+  assert.equal(firstCopy.sheets.length, 100);
+  assert.notEqual(firstCopy.sheets, secondCopy.sheets);
+  assert.notEqual(firstCopy.objects, secondCopy.objects);
+  assert.equal(firstCopy.objects.filter(object => object.kind === 'component-instance').length, 32);
+  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 335);
+  assert.ok(firstCopy.crossSheetConnections.length > 0);
+
+  const q1 = firstCopy.objects.find(object => object.kind === 'component-instance' && object.ref === 'Q1');
+  assert.ok(q1);
+  q1.ref = 'Q1_EDIT';
+  q1.properties.overloadSettingA = 12;
+  q1.stroke = '#22d3ee';
+  const motor = firstCopy.objects.find(object => object.kind === 'component-instance' && object.ref === 'M1');
+  motor.properties.marking = 'Owner instance note';
+  const changedWire = firstCopy.objects.find(object => object.kind === 'wire' && object.sheetId === 'ref-009');
+  assert.ok(changedWire);
+  const wireStart = { x: changedWire.x1, y: changedWire.y1 };
+  changedWire.x2 += 2.5;
+  const link = firstCopy.crossSheetConnections.find(connection => connection.endpoints.some(endpoint => endpoint.wireId === changedWire.id));
+  assert.ok(link);
+  const endpoint = link.endpoints.find(item => item.wireId === changedWire.id);
+  if (endpoint.point.x === wireStart.x && endpoint.point.y === wireStart.y) endpoint.point.x = changedWire.x1;
+  else endpoint.point.x = changedWire.x2;
+  const addedLabel = { id: 'owner-copy-label', kind: 'text', sheetId: 'ref-009', x: 300, y: 700, text: 'Owner field connection', stroke: '#be123c' };
+  firstCopy.objects.push(addedLabel);
+  const topologyAfterEdit = engine.analyzeProject(firstCopy);
+  assert.equal(topologyAfterEdit.valid, true, topologyAfterEdit.errors.join(' '));
+
+  const saved = engine.serializeProject(firstCopy);
+  const reopened = engine.parseProject(saved);
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  const restored = reopened.project;
+  assert.equal(restored.project, 'Editable star-delta design');
+  assert.equal(restored.projectModel, null);
+  assert.equal(restored.sheets.length, 100);
+  assert.equal(restored.objects.find(object => object.id === q1.id).ref, 'Q1_EDIT');
+  assert.equal(restored.objects.find(object => object.id === q1.id).properties.overloadSettingA, 12);
+  assert.equal(restored.objects.find(object => object.id === q1.id).stroke, '#22d3ee');
+  assert.equal(restored.objects.find(object => object.ref === 'M1').properties.marking, 'Owner instance note');
+  assert.equal(restored.objects.find(object => object.id === changedWire.id).x2, changedWire.x2);
+  assert.deepEqual(restored.crossSheetConnections, firstCopy.crossSheetConnections);
+  assert.equal(restored.objects.find(object => object.id === addedLabel.id).text, addedLabel.text);
+  assert.equal(engine.analyzeProject(restored).valid, true);
+  assert.notEqual(secondCopy.objects.find(object => object.ref === 'Q1').properties.overloadSettingA, 12);
+  assert.equal(JSON.stringify(source), sourceSnapshot);
 });
 
 test('sectioned project interface wires inline rename, section drag, title block, print/export, and separate close behavior', () => {
@@ -123,6 +188,12 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(inline, /exportSheet\.paperWidthMm/);
   assert.match(inline, /function closeSheetTab\(id\)/);
   assert.match(inline, /unresolved connection diagnostic/);
+  assert.match(inline, /function renderEditableExampleProjects\(\)/);
+  assert.match(inline, /copyExampleProject\(parsed\.project/);
+  assert.match(inline, /state\.projectName\|\|'Untitled electrical project'/);
+  assert.match(inline, /state\.projectName\|\|'Adigun-AutoCAD-project'/);
+  assert.match(inline, /examples\/real-projects\/library\.json/);
+  assert.match(html, /Open as copy/);
   assert.match(html, />Hephzibah Behulah<\/text>/);
   assert.match(html, />AdigunAiAutoCad<\/text>/);
 });

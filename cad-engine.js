@@ -39,6 +39,52 @@
     };
   }
 
+  function copyExampleProject(source, projectId, projectName) {
+    const validation = validateProject(source);
+    if (!validation.valid) throw new Error('Example project cannot be copied: ' + validation.errors.join(' '));
+    if (typeof projectId !== 'string' || !projectId.trim()) throw new Error('Editable copy needs a unique project ID.');
+    const name = String(projectName || '').trim().slice(0, 80);
+    if (!name) throw new Error('Editable copy needs a project name.');
+    const copy = clone(source);
+    let model = copy.projectModel && Array.isArray(copy.projectModel.sections) && Array.isArray(copy.projectModel.sheets)
+      ? copy.projectModel
+      : null;
+    if (!model) {
+      copy.id = projectId;
+      copy.project = name;
+      copy.projectModel = null;
+      copy.objects = clone(copy.objects || []);
+      copy.sheets = clone(copy.sheets || []);
+      copy.crossSheetConnections = clone(copy.crossSheetConnections || []);
+      copy.sheetLabels = clone(copy.sheetLabels || {});
+      copy.sheetViews = clone(copy.sheetViews || {});
+      return copy;
+    }
+    if (model) {
+      model.id = projectId;
+      model.name = name;
+      model.sheets.forEach(function (sheet) { sheet.projectId = projectId; });
+      model.metadata = Object.assign(createProjectModel(projectId, name).metadata, model.metadata || {});
+      model.metadata.title = name;
+    }
+    model.crossSheetConnections = clone(copy.crossSheetConnections || model.crossSheetConnections || []);
+    model.openTabs = Array.isArray(model.openTabs) ? model.openTabs.filter(function (id) { return model.sheets.some(function (sheet) { return sheet.id === id; }); }) : [];
+    model.activeSheetId = model.sheets.some(function (sheet) { return sheet.id === model.activeSheetId; })
+      ? model.activeSheetId
+      : (model.openTabs[0] || model.sheets[0]?.id || null);
+    if (model.activeSheetId && !model.openTabs.includes(model.activeSheetId)) model.openTabs.push(model.activeSheetId);
+    model.metadata.notes = [model.metadata.notes, 'Editable copy of AdigunAiAutoCad example: ' + String(source.project || source.projectModel?.name || 'Source-backed project') + '. Instance settings remain separate from source-backed manufacturer records.'].filter(Boolean).join('\n');
+    copy.projectModel = model;
+    copy.project = name;
+    copy.sheets = model.sheets;
+    copy.activeSheet = model.activeSheetId;
+    copy.crossSheetConnections = model.crossSheetConnections;
+    copy.objects = clone(copy.objects || []);
+    copy.sheetLabels = clone(copy.sheetLabels || {});
+    copy.sheetViews = clone(copy.sheetViews || {});
+    return copy;
+  }
+
   function addProjectSection(project, name, purpose) {
     if (!project || !Array.isArray(project.sections) || !Array.isArray(project.sheets)) throw new Error('Project sections are unavailable.');
     const sectionNumber = project.sections.reduce(function (highest, section) {
@@ -1637,6 +1683,7 @@
     catalog: catalog,
     createInstance: createInstance,
     createProjectModel: createProjectModel,
+    copyExampleProject: copyExampleProject,
     defaultProjectSections: function () { return clone(DEFAULT_PROJECT_SECTIONS); },
     addProjectSection: addProjectSection,
     renameProjectSection: renameProjectSection,
