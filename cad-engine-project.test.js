@@ -478,7 +478,7 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
       assert.equal(thermalSheet.projectSectionId, 'A2');
       const copiedThermalSheet = copy.projectModel.sheets.find(sheet => sheet.id === 'dol-reference-095');
       assert.equal(copiedThermalSheet.sectionId, 'A2');
-      assert.equal(copiedThermalSheet.number, 'A2/0015', 'source A2/095 maps to the next section-local A2 sheet number in an editable copy');
+      assert.equal(copiedThermalSheet.number, 'A2/0021', 'source A2/095 keeps the A2 prefix at its project-order position in an editable copy');
       assert.ok(copy.projectModel.sheets.every(sheet => sheet.number.startsWith(sheet.sectionId + '/')), 'editable copies assign sheet numbers within their A1–A4 sections');
       const thermalText = parsed.project.objects.filter(object => object.sheetId === thermalSheet.id && object.kind === 'text').map(object => object.text).join(' ');
       assert.match(thermalText, /thermal class 130 \(B\)/i);
