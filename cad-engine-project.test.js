@@ -179,6 +179,18 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const componentId = 'cmp-6d8a901d-98ae-4054-88e1-06afaea9ffb0';
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').waitFor();
     assert.equal(await examplePage.locator('#projectTree [data-section-row]').count(), 4, 'example copy keeps the A1–A4 section structure');
+    await examplePage.locator('#projectTree [data-sheet="ref-007"]').click();
+    const offPageConnector = examplePage.locator('#userDrawings .cross-sheet-connector').first();
+    await offPageConnector.waitFor();
+    await offPageConnector.focus();
+    await examplePage.keyboard.press('Enter');
+    await examplePage.locator('#sheetTabs .document-tab[data-sheet="ref-009"][aria-selected="true"]').waitFor({ timeout: 5000 }).catch(async () => {
+      const diagnostics = await examplePage.evaluate(() => JSON.stringify({ activeTabs: [...document.querySelectorAll('#sheetTabs .document-tab[aria-selected="true"]')].map(tab => tab.dataset.sheet), connectors: [...document.querySelectorAll('#userDrawings .cross-sheet-connector')].map(node => node.getAttribute('aria-label')) }));
+      throw new Error('Off-page connector did not open its target A2 sheet: ' + diagnostics);
+    });
+    const selectedTarget = examplePage.locator('#userDrawings [data-object].selected-object').first();
+    await selectedTarget.waitFor({ timeout: 5000 });
+    assert.equal(await selectedTarget.getAttribute('data-object'), 'distribution-x14', 'off-page connector selects its target component');
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').click();
     const component = examplePage.locator('#userDrawings [data-object="' + componentId + '"]');
     await component.waitFor();
