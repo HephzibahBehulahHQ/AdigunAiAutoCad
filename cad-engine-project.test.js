@@ -82,10 +82,14 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const address = 'http://127.0.0.1:' + server.address().port + '/';
     const page = await context.newPage();
     await page.goto(address);
-    assert.match(await page.locator('#projectTree').innerText(), /No project open/);
+    assert.equal(await page.locator('#projectTree').isVisible(), false, 'the clean workspace shows the project catalogue view');
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0);
+    await page.locator('#editableExampleProjects [data-example-project]').first().waitFor();
+    assert.ok(await page.locator('#editableExampleProjects [data-example-project]').count() > 0, 'Project Explorer lists editable examples at startup');
 
     await page.getByRole('button', { name: 'New project' }).click();
+    assert.equal(await page.locator('#newProjectDialog #editableExampleProjects').count(), 0, 'New Project does not show example projects');
+    assert.match(await page.locator('#blankProjectTemplate').innerText(), /A1[\s\S]*A2[\s\S]*A3[\s\S]*A4/);
     await page.locator('#newProjectName').fill('Browser local save test');
     await page.locator('#createProject').click();
     for (const section of ['A1', 'A2', 'A3', 'A4']) {
@@ -152,10 +156,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const examplePage = await context.newPage();
     await examplePage.goto(address);
     const originalExample = await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text()));
-    await examplePage.getByRole('button', { name: 'New project' }).click();
-    await examplePage.locator('#newProjectName').fill('Editable star-delta browser copy');
-    await examplePage.locator('#editableExampleProjects [role="listitem"]').first().waitFor({ timeout: 5000 }).catch(async () => {
-      throw new Error('Example catalog did not load: ' + await examplePage.locator('#editableExampleProjects').innerText());
+    await examplePage.locator('#editableExampleProjects [data-example-project]').first().waitFor({ timeout: 5000 }).catch(async () => {
+      throw new Error('Project Explorer example catalog did not load: ' + await examplePage.locator('#editableExampleProjects').innerText());
     });
     await examplePage.getByRole('listitem', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();
     const componentId = 'cmp-6d8a901d-98ae-4054-88e1-06afaea9ffb0';
@@ -213,7 +215,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const editedTimer = exampleSaved.objects.find(object => object.id === timerId);
     const savedWires = exampleSaved.objects.filter(object => object.kind === 'wire');
     const addedWire = savedWires.find(wire => !sourceWireIds.has(wire.id));
-    assert.equal(exampleSaved.projectModel.name, 'Editable star-delta browser copy');
+    assert.equal(exampleSaved.projectModel.name, ('Copy of '+sourceProject.project).slice(0,80));
     assert.equal(editedComponent.properties.overloadSettingA, 12.5);
     assert.equal(editedComponent.properties.position, 'F2');
     assert.equal(editedComponent.stroke, '#ed3f38');
@@ -552,12 +554,17 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(inline, /exportSheet\.paperWidthMm/);
   assert.match(inline, /function closeSheetTab\(id\)/);
   assert.match(inline, /unresolved connection diagnostic/);
-  assert.match(inline, /function renderEditableExampleProjects\(\)/);
+  assert.match(inline, /async function renderEditableExampleProjects\(query\)/);
   assert.match(inline, /copyExampleProject\(parsed\.project/);
   assert.match(inline, /state\.projectName\|\|'Untitled electrical project'/);
   assert.match(inline, /state\.projectName\|\|'Adigun-AutoCAD-project'/);
   assert.match(inline, /examples\/real-projects\/library\.json/);
-  assert.match(html, /Open as copy/);
+  assert.match(inline, /data-example-project/);
+  assert.match(inline, /setProjectExplorerView\('list'\)/);
+  assert.match(html, /id="editableExampleProjects"/);
+  assert.match(html, /id="blankProjectTemplate"/);
+  const newProjectDialog = html.slice(html.indexOf('<dialog id="newProjectDialog"'), html.indexOf('</dialog>', html.indexOf('<dialog id="newProjectDialog"')));
+  assert.doesNotMatch(newProjectDialog, /editableExampleProjects|source-backed editable examples/i);
   assert.match(html, />Hephzibah Behulah<\/text>/);
   assert.match(html, />AdigunAiAutoCad<\/text>/);
 });
