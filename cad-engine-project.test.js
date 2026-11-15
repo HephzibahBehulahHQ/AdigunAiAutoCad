@@ -132,7 +132,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
           return { key: node.dataset.titleBlockRow, x: bounds.x, y: bounds.y, right: bounds.x + bounds.width, bottom: bounds.y + bounds.height };
         }));
         assert.equal(rowBounds.length, 9, size + ' ' + direction + ' retains all title-block rows');
-        assert.ok(rowBounds.every(row => row.x >= frameBounds.x && row.right <= frameBounds.x + frameBounds.width && row.y >= frameBounds.y && row.bottom <= frameBounds.y + frameBounds.height), size + ' ' + direction + ' keeps every title-block field inside the frame: ' + JSON.stringify(rowBounds));
+        assert.ok(rowBounds.every(row => row.x >= frameBounds.x && row.right <= frameBounds.x + frameBounds.width && row.y >= frameBounds.y && row.bottom <= frameBounds.y + frameBounds.height), size + ' ' + direction + ' keeps every title-block field inside the frame: ' + JSON.stringify({ frameBounds, rowBounds }));
       }
     }
 
