@@ -179,6 +179,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const componentId = 'cmp-6d8a901d-98ae-4054-88e1-06afaea9ffb0';
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').waitFor();
     assert.equal(await examplePage.locator('#projectTree [data-section-row]').count(), 4, 'example copy keeps the A1–A4 section structure');
+    await examplePage.locator('#projectTree [data-sheet="ref-007"]').click();
+    const offPageConnector = examplePage.locator('#userDrawings .cross-sheet-connector').first();
+    await offPageConnector.waitFor();
+    await offPageConnector.click();
+    await examplePage.locator('#userDrawings [data-object="distribution-x14"].selected-object').waitFor();
+    assert.equal(await examplePage.locator('#sheetTabs .document-tab[data-sheet="ref-009"]').getAttribute('aria-selected'), 'true', 'off-page connector opens its target A2 sheet');
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').click();
     const component = examplePage.locator('#userDrawings [data-object="' + componentId + '"]');
     await component.waitFor();
