@@ -20,502 +20,602 @@
     {
       "id": "ref-001",
       "number": "A1/001",
-      "name": "Cover"
+      "name": "Cover",
+      "projectSectionId": "A1"
     },
     {
       "id": "ref-002",
       "number": "A1/002",
-      "name": "Drawing index"
+      "name": "Drawing index",
+      "projectSectionId": "A1"
     },
     {
       "id": "ref-003",
       "number": "A1/003",
-      "name": "Component register"
+      "name": "Component register",
+      "projectSectionId": "A1"
     },
     {
       "id": "ref-004",
       "number": "A1/004",
-      "name": "Revision record"
+      "name": "Revision record",
+      "projectSectionId": "A1"
     },
     {
       "id": "ref-005",
       "number": "A1/005",
-      "name": "Design assumptions"
+      "name": "Design assumptions",
+      "projectSectionId": "A1"
     },
     {
       "id": "ref-006",
       "number": "A1/006",
-      "name": "Star-delta motor starter"
+      "name": "Star-delta motor starter",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-007",
       "number": "A1/007",
-      "name": "IFM IFS204 sensor input to Siemens PLC"
+      "name": "IFM IFS204 sensor input to Siemens PLC",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-008",
       "number": "A1/008",
-      "name": "Siemens SITOP PSU100C supply"
+      "name": "Siemens SITOP PSU100C supply",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-009",
       "number": "A1/009",
-      "name": "24 V DC distribution connections"
+      "name": "24 V DC distribution connections",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-010",
       "number": "A1/010",
-      "name": "PLC output relay interface"
+      "name": "PLC output relay interface",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-011",
       "number": "A1/011",
-      "name": "24 V DC contactor coil relay output"
+      "name": "24 V DC contactor coil relay output",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-012",
       "number": "A1/012",
-      "name": "PLC operator input wiring"
+      "name": "PLC operator input wiring",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-013",
       "number": "A1/013",
-      "name": "PLC I/O assignment schedule"
+      "name": "PLC I/O assignment schedule",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-014",
       "number": "A1/014",
-      "name": "PLC I/O schedule · KM4 NC feedback"
+      "name": "PLC I/O schedule · KM4 NC feedback",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-015",
       "number": "A1/015",
-      "name": "PLC I/O schedule · K2 NC feedback"
+      "name": "PLC I/O schedule · K2 NC feedback",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-016",
       "number": "A1/016",
-      "name": "PLC I/O schedule · K2 NO feedback"
+      "name": "PLC I/O schedule · K2 NO feedback",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-017",
       "number": "A1/017",
-      "name": "PLC I/O allocation summary"
+      "name": "PLC I/O allocation summary",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-018",
       "number": "A1/018",
-      "name": "PLC overload trip feedback · F1 NO 97–98"
+      "name": "PLC overload trip feedback · F1 NO 97–98",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-019",
       "number": "A1/019",
-      "name": "PLC digital-output allocation · CPU 1212C"
+      "name": "PLC digital-output allocation · CPU 1212C",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-020",
       "number": "A1/020",
-      "name": "PLC analog-input allocation · CPU 1212C"
+      "name": "PLC analog-input allocation · CPU 1212C",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-021",
       "number": "A1/021",
-      "name": "ifm PN2070 pressure-sensor interface proposal"
+      "name": "ifm PN2070 pressure-sensor interface proposal",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-022",
       "number": "A1/022",
-      "name": "ifm PN2070 pressure-sensor connection"
+      "name": "ifm PN2070 pressure-sensor connection",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-023",
       "number": "A1/023",
-      "name": "PN2070 to CPU AI0 analog scaling reference"
+      "name": "PN2070 to CPU AI0 analog scaling reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-024",
       "number": "A1/024",
-      "name": "PN2070 24 V DC load allocation reference"
+      "name": "PN2070 24 V DC load allocation reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "ref-025",
       "number": "A1/025",
-      "name": "PN2070 / CPU AI0 accuracy reference"
+      "name": "PN2070 / CPU AI0 accuracy reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-026",
       "number": "A1/026",
-      "name": "CPU 1212C AI0 idealized resolution reference"
+      "name": "CPU 1212C AI0 idealized resolution reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-027",
       "number": "A1/027",
-      "name": "CPU 1212C AI0 response and smoothing reference"
+      "name": "CPU 1212C AI0 response and smoothing reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-028",
       "number": "A1/028",
-      "name": "CPU 1212C AI0 rated and overflow ranges"
+      "name": "CPU 1212C AI0 rated and overflow ranges",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-029",
       "number": "A1/029",
-      "name": "CPU 1212C AI0 cable length and shielding reference"
+      "name": "CPU 1212C AI0 cable length and shielding reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-030",
       "number": "A1/030",
-      "name": "ifm PN2070 analog output parameter ranges"
+      "name": "ifm PN2070 analog output parameter ranges",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-031",
       "number": "A1/031",
-      "name": "ifm PN2070 pressure rating and minimum burst pressure"
+      "name": "ifm PN2070 pressure rating and minimum burst pressure",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-032",
       "number": "A1/032",
-      "name": "ifm PN2070 medium temperature range"
+      "name": "ifm PN2070 medium temperature range",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-033",
       "number": "A1/033",
-      "name": "ifm PN2070 electrical supply data"
+      "name": "ifm PN2070 electrical supply data",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-034",
       "number": "A1/034",
-      "name": "ifm PN2070 power-on delay time"
+      "name": "ifm PN2070 power-on delay time",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-035",
       "number": "A1/035",
-      "name": "ifm PN2070 electrical protection characteristics"
+      "name": "ifm PN2070 electrical protection characteristics",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-036",
       "number": "A1/036",
-      "name": "ifm PN2070 minimum insulation resistance reference"
+      "name": "ifm PN2070 minimum insulation resistance reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-037",
       "number": "A1/037",
-      "name": "ifm PN2070 switching-output ratings"
+      "name": "ifm PN2070 switching-output ratings",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-038",
       "number": "A1/038",
-      "name": "ifm PN2070 switching-point ranges · CMPT 2"
+      "name": "ifm PN2070 switching-point ranges · CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-039",
       "number": "A1/039",
-      "name": "ifm PN2070 switching-point ranges · CMPT 3"
+      "name": "ifm PN2070 switching-point ranges · CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-040",
       "number": "A1/040",
-      "name": "ifm PN2070 recommended tightening torque"
+      "name": "ifm PN2070 recommended tightening torque",
+      "projectSectionId": "A3"
     },
     {
       "id": "ref-041",
       "number": "A1/041",
-      "name": "ifm PN2070 ambient and storage temperatures"
+      "name": "ifm PN2070 ambient and storage temperatures",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-042",
       "number": "A1/042",
-      "name": "ifm PN2070 minimum pressure cycles"
+      "name": "ifm PN2070 minimum pressure cycles",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-043",
       "number": "A1/043",
-      "name": "ifm PN2070 dimensions and weight"
+      "name": "ifm PN2070 dimensions and weight",
+      "projectSectionId": "A3"
     },
     {
       "id": "ref-044",
       "number": "A1/044",
-      "name": "ifm PN2070 integrated restrictor datum"
+      "name": "ifm PN2070 integrated restrictor datum",
+      "projectSectionId": "A3"
     },
     {
       "id": "ref-045",
       "number": "A1/045",
-      "name": "ifm PN2070 listed protection ratings"
+      "name": "ifm PN2070 listed protection ratings",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-046",
       "number": "A1/046",
-      "name": "ifm PN2070 shock and vibration data"
+      "name": "ifm PN2070 shock and vibration data",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-047",
       "number": "A1/047",
-      "name": "ifm PN2070 wetted-parts material"
+      "name": "ifm PN2070 wetted-parts material",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-048",
       "number": "A1/048",
-      "name": "ifm PN2070 listed materials"
+      "name": "ifm PN2070 listed materials",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-049",
       "number": "A1/049",
-      "name": "ifm PN2070 M12 connector details"
+      "name": "ifm PN2070 M12 connector details",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-050",
       "number": "A1/050",
-      "name": "ifm PN2070 display indicators"
+      "name": "ifm PN2070 display indicators",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-051",
       "number": "A1/051",
-      "name": "ifm PN2070 process connection designation"
+      "name": "ifm PN2070 process connection designation",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-052",
       "number": "A1/052",
-      "name": "ifm PN2070 upper-housing rotation"
+      "name": "ifm PN2070 upper-housing rotation",
+      "projectSectionId": "A3"
     },
     {
       "id": "ref-053",
       "number": "A1/053",
-      "name": "ifm PN2070 programming-button callout"
+      "name": "ifm PN2070 programming-button callout",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-054",
       "number": "A1/054",
-      "name": "ifm PN2070 pressure type"
+      "name": "ifm PN2070 pressure type",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-055",
       "number": "A1/055",
-      "name": "ifm PN2070 vacuum resistance"
+      "name": "ifm PN2070 vacuum resistance",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-056",
       "number": "A1/056",
-      "name": "ifm PN2070 switching output options"
+      "name": "ifm PN2070 switching output options",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-057",
       "number": "A1/057",
-      "name": "ifm PN2070 output protection"
+      "name": "ifm PN2070 output protection",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-058",
       "number": "A1/058",
-      "name": "ifm PN2070 analogue-output response"
+      "name": "ifm PN2070 analogue-output response",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-059",
       "number": "A1/059",
-      "name": "ifm PN2070 analogue-output damping"
+      "name": "ifm PN2070 analogue-output damping",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-060",
       "number": "A1/060",
-      "name": "ifm PN2070 process-value damping"
+      "name": "ifm PN2070 process-value damping",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-061",
       "number": "A1/061",
-      "name": "ifm PN2070 programmable output delay"
+      "name": "ifm PN2070 programmable output delay",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-062",
       "number": "A1/062",
-      "name": "ifm PN2070 response time"
+      "name": "ifm PN2070 response time",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-063",
       "number": "A1/063",
-      "name": "ifm PN2070 IO-Link cycle time"
+      "name": "ifm PN2070 IO-Link cycle time",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-064",
       "number": "A1/064",
-      "name": "ifm PN2070 IO-Link cycle time CMPT 3"
+      "name": "ifm PN2070 IO-Link cycle time CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-065",
       "number": "A1/065",
-      "name": "ifm PN2070 IO-Link pressure resolution CMPT 2"
+      "name": "ifm PN2070 IO-Link pressure resolution CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-066",
       "number": "A1/066",
-      "name": "ifm PN2070 IO-Link pressure resolution CMPT 3"
+      "name": "ifm PN2070 IO-Link pressure resolution CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-067",
       "number": "A1/067",
-      "name": "ifm PN2070 IO-Link pressure field CMPT 2"
+      "name": "ifm PN2070 IO-Link pressure field CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-068",
       "number": "A1/068",
-      "name": "ifm PN2070 IO-Link pressure field CMPT 3"
+      "name": "ifm PN2070 IO-Link pressure field CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-069",
       "number": "A1/069",
-      "name": "ifm PN2070 IO-Link device status field CMPT 3"
+      "name": "ifm PN2070 IO-Link device status field CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-070",
       "number": "A1/070",
-      "name": "ifm PN2070 IO-Link binary switching information CMPT 3"
+      "name": "ifm PN2070 IO-Link binary switching information CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-071",
       "number": "A1/071",
-      "name": "ifm PN2070 IO-Link DeviceID CMPT 3"
+      "name": "ifm PN2070 IO-Link DeviceID CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-072",
       "number": "A1/072",
-      "name": "ifm PN2070 IO-Link DeviceID CMPT 2"
+      "name": "ifm PN2070 IO-Link DeviceID CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-073",
       "number": "A1/073",
-      "name": "ifm PN2070 IO-Link SSP 0 profile CMPT 2"
+      "name": "ifm PN2070 IO-Link SSP 0 profile CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-074",
       "number": "A1/074",
-      "name": "ifm PN2070 IO-Link SSP 3.1 profile CMPT 3"
+      "name": "ifm PN2070 IO-Link SSP 3.1 profile CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-075",
       "number": "A1/075",
-      "name": "ifm PN2070 IO-Link Common I&D profile CMPT 3"
+      "name": "ifm PN2070 IO-Link Common I&D profile CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-076",
       "number": "A1/076",
-      "name": "ifm PN2070 IO-Link application-specific tag CMPT 2"
+      "name": "ifm PN2070 IO-Link application-specific tag CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-077",
       "number": "A1/077",
-      "name": "ifm PN2070 IO-Link application-specific tag CMPT 3"
+      "name": "ifm PN2070 IO-Link application-specific tag CMPT 3",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-078",
       "number": "A1/078",
-      "name": "ifm PN2070 IO-Link master port note"
+      "name": "ifm PN2070 IO-Link master port note",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-079",
       "number": "A1/079",
-      "name": "ifm PN2070 IO-Link function listing CMPT 2"
+      "name": "ifm PN2070 IO-Link function listing CMPT 2",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-080",
       "number": "A1/080",
-      "name": "ifm PN2070 IO-Link COM2 transmission rate"
+      "name": "ifm PN2070 IO-Link COM2 transmission rate",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-081",
       "number": "A1/081",
-      "name": "ifm PN2070 IO-Link revision"
+      "name": "ifm PN2070 IO-Link revision",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-082",
       "number": "A1/082",
-      "name": "ifm PN2070 SIO mode capability"
+      "name": "ifm PN2070 SIO mode capability",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-083",
       "number": "A1/083",
-      "name": "ifm PN2070 SDCI standard reference"
+      "name": "ifm PN2070 SDCI standard reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-084",
       "number": "A1/084",
-      "name": "ifm PN2070 integrated watchdog feature"
+      "name": "ifm PN2070 integrated watchdog feature",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-085",
       "number": "A1/085",
-      "name": "ifm PN2070 output counts"
+      "name": "ifm PN2070 output counts",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-086",
       "number": "A1/086",
-      "name": "ifm PN2070 switch-point accuracy"
+      "name": "ifm PN2070 switch-point accuracy",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-087",
       "number": "A1/087",
-      "name": "ifm PN2070 repeatability rating"
+      "name": "ifm PN2070 repeatability rating",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-088",
       "number": "A1/088",
-      "name": "ifm PN2070 long-term stability"
+      "name": "ifm PN2070 long-term stability",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-089",
       "number": "A1/089",
-      "name": "ifm PN2070 temperature coefficients"
+      "name": "ifm PN2070 temperature coefficients",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-090",
       "number": "A1/090",
-      "name": "ifm PN2070 hysteresis deviation"
+      "name": "ifm PN2070 hysteresis deviation",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-091",
       "number": "A1/091",
-      "name": "ifm PN2070 mean time to failure"
+      "name": "ifm PN2070 mean time to failure",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-092",
       "number": "A1/092",
-      "name": "ifm PN2070 EMC references"
+      "name": "ifm PN2070 EMC references",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-093",
       "number": "A1/093",
-      "name": "ifm PN2070 characteristic deviation"
+      "name": "ifm PN2070 characteristic deviation",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-094",
       "number": "A1/094",
-      "name": "ifm PN2070 UL approval reference"
+      "name": "ifm PN2070 UL approval reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-095",
       "number": "A1/095",
-      "name": "ifm PN2070 DNV GL accuracy note"
+      "name": "ifm PN2070 DNV GL accuracy note",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-096",
       "number": "A1/096",
-      "name": "Phoenix Contact relay response and release times"
+      "name": "Phoenix Contact relay response and release times",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-097",
       "number": "A1/097",
-      "name": "Phoenix Contact relay minimum switching rating"
+      "name": "Phoenix Contact relay minimum switching rating",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-098",
       "number": "A1/098",
-      "name": "Phoenix Contact relay mechanical service life"
+      "name": "Phoenix Contact relay mechanical service life",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-099",
       "number": "A1/099",
-      "name": "Phoenix Contact relay contact switching limits"
+      "name": "Phoenix Contact relay contact switching limits",
+      "projectSectionId": "A4"
     },
     {
       "id": "ref-100",
       "number": "A1/100",
-      "name": "Phoenix Contact relay insulation ratings"
+      "name": "Phoenix Contact relay insulation ratings",
+      "projectSectionId": "A4"
     }
   ],
   "sheetLabels": {
