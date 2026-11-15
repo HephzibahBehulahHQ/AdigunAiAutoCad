@@ -82,7 +82,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const address = 'http://127.0.0.1:' + server.address().port + '/';
     const page = await context.newPage();
     await page.goto(address);
-    assert.match(await page.locator('#projectTree').innerText(), /No project open/);
+    assert.equal(await page.locator('#projectTree').isVisible(), false, 'the clean workspace shows the project catalogue view');
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0);
     await page.locator('#editableExampleProjects [data-example-project]').first().waitFor();
     assert.ok(await page.locator('#editableExampleProjects [data-example-project]').count() > 0, 'Project Explorer lists editable examples at startup');
