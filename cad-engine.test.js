@@ -3606,7 +3606,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(dolOpening);
   assert.equal(dolOpening.metrics.sheetCount, 97);
   assert.equal(dolOpening.metrics.authoredSheetCount, 97);
-  assert.equal(dolOpening.metrics.contentObjectCount, 1028);
+  assert.equal(dolOpening.metrics.contentObjectCount, 1027);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
