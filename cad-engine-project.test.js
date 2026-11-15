@@ -3,6 +3,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const http = require('node:http');
 const path = require('node:path');
 require('./cad-engine.js');
 
@@ -35,7 +36,111 @@ test('canvas audit reflects the current local Save As and reopen limits', () => 
   assert.match(audit, /Save As uses the browser file picker when available/);
   assert.match(audit, /Save writes to the selected file handle during the current page session/);
   assert.match(audit, /not durable browser-local autosave/);
-  assert.match(audit, /actual Save As, edit, close, and reopen workflow still needs end-to-end UI verification/);
+  assert.match(audit, /CI Chromium test verifies clean project creation, section sheet selection, canvas editing, Save As, repeat Save, and JSON close\/reopen/);
+  assert.match(audit, /file picker is mocked/);
+});
+
+test('browser workflow creates, edits, saves, closes, and reopens a native project', {
+  skip: process.env.CAD_BROWSER_WORKFLOW !== '1' ? 'Enable the pinned Chromium workflow in CI.' : false
+}, async () => {
+  const { chromium } = require('playwright');
+  const root = path.resolve(__dirname);
+  const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml' };
+  const server = http.createServer((request, response) => {
+    let pathname;
+    try { pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname); }
+    catch { response.writeHead(400).end(); return; }
+    const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
+    const file = path.resolve(root, relative);
+    if (!file.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }
+    fs.readFile(file, (error, data) => {
+      if (error) { response.writeHead(404).end(); return; }
+      response.writeHead(200, { 'Content-Type': mime[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
+      response.end(data);
+    });
+  });
+  let browser;
+  try {
+    await new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+    browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+    const context = await browser.newContext();
+    await context.addInitScript(() => {
+      window.__savedProjectWrites = [];
+      Object.defineProperty(window, 'showSaveFilePicker', {
+        configurable: true,
+        value: async options => ({
+          name: options.suggestedName,
+          createWritable: async () => ({
+            write: async value => { window.__savedProjectWrites.push(typeof value === 'string' ? value : await value.text()); },
+            close: async () => {}
+          })
+        })
+      });
+    });
+    const address = 'http://127.0.0.1:' + server.address().port + '/';
+    const page = await context.newPage();
+    await page.goto(address);
+    assert.match(await page.locator('#projectTree').innerText(), /No project open/);
+    assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0);
+
+    await page.getByRole('button', { name: 'New project' }).click();
+    await page.locator('#newProjectName').fill('Browser local save test');
+    await page.locator('#createProject').click();
+    for (const section of ['A1', 'A2', 'A3', 'A4']) {
+      assert.equal(await page.locator('#projectTree b').filter({ hasText: new RegExp('^' + section + '$') }).count(), 1);
+    }
+    assert.equal(await page.locator('#projectTree [data-sheet]').count(), 0);
+
+    await page.getByRole('button', { name: 'Add sheet to A2' }).click();
+    const sheetRow = page.locator('#projectTree [data-sheet]').first();
+    await sheetRow.waitFor();
+    const sheetId = await sheetRow.getAttribute('data-sheet');
+    assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0, 'adding a sheet must not open it');
+    await sheetRow.click();
+    assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 1, 'selecting a sheet opens its canvas tab');
+
+    await page.locator('[aria-label="Draw rectangle"]').click();
+    const canvas = await page.locator('#drawing').boundingBox();
+    assert.ok(canvas && canvas.width > 100 && canvas.height > 100);
+    await page.mouse.move(canvas.x + canvas.width * 0.30, canvas.y + canvas.height * 0.30);
+    await page.mouse.down();
+    await page.mouse.move(canvas.x + canvas.width * 0.40, canvas.y + canvas.height * 0.40, { steps: 3 });
+    await page.mouse.up();
+    assert.ok(await page.locator('#userDrawings > *').count() > 0, 'canvas edit should create native vector geometry');
+
+    await page.locator('[aria-label="Properties"]').click();
+    const description = page.getByLabel('Description', { exact: true });
+    await description.fill('Saved through local file picker');
+    await page.keyboard.press('Control+Shift+S');
+    await page.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    await description.fill('Updated with repeat Save');
+    await page.keyboard.press('Control+S');
+    await page.waitForFunction(() => window.__savedProjectWrites.length === 2);
+    const savedText = await page.evaluate(() => window.__savedProjectWrites[1]);
+    const saved = JSON.parse(savedText);
+    assert.equal(saved.projectModel.name, 'Browser local save test');
+    assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).description, 'Updated with repeat Save');
+    assert.ok(saved.objects.length > 0);
+    await page.close();
+
+    const reopenedPage = await context.newPage();
+    await reopenedPage.goto(address);
+    assert.match(await reopenedPage.locator('#projectTree').innerText(), /No project open/);
+    await reopenedPage.locator('#openFile').setInputFiles({
+      name: 'Browser-local-save-test.adigun.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(savedText)
+    });
+    await reopenedPage.locator('#projectTree [data-sheet]').first().waitFor();
+    assert.equal(await reopenedPage.locator('#sheetTabs .document-tab[data-sheet]').count(), 1);
+    await reopenedPage.locator('[aria-label="Properties"]').click();
+    assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
+    assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
+    await reopenedPage.close({ runBeforeUnload: false });
+  } finally {
+    if (browser) await browser.close();
+    await new Promise(resolve => server.close(resolve));
+  }
 });
 
 test('new project has empty A1–A4 sections and supports uncapped continuous numbering and paper formats', () => {
