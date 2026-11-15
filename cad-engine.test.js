@@ -286,7 +286,7 @@ test('Schneider XB5 start and stop push-buttons keep manufacturer terminal ident
   assert.match(stop.sources[0].url, /XB5AA42/);
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   assert.ok(html.includes("case'pushbutton':"));
-  assert.ok(html.includes("item.electricalFunctions.pushButton.normalContactState==='open'"));
+  assert.ok(html.includes("window.AdigunCADEngine.component(item.id)?.electricalFunctions?.pushButton?.normalContactState==='open'"));
   assert.ok(html.includes("def.family==='pushbutton'"));
 
   const instances = [
