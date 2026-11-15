@@ -3604,9 +3604,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 95);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 95);
-  assert.equal(dolOpening.metrics.contentObjectCount, 1007);
+  assert.equal(dolOpening.metrics.sheetCount, 96);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 96);
+  assert.equal(dolOpening.metrics.contentObjectCount, 1016);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
