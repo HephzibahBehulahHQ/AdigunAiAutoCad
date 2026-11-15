@@ -591,6 +591,12 @@
       "scale": "Diagrammatic — manufacturer dimensions labeled",
       "description": "Preliminary editable front-view arrangement; dimensions are source facts or explicitly marked project assumptions.",
       "notes": "Educational example only; not construction-ready."
+    },
+    {
+      "id": "dol-reference-095",
+      "number": "A2/095",
+      "name": "M1 motor thermal-class options",
+      "projectSectionId": "A2"
     }
   ],
   "sheetLabels": {},
@@ -11271,6 +11277,99 @@
       "text": "X terminals: Phoenix Contact item 3212144 · 12.2 × 75.4 × 52.6 mm on NS 35/7.5",
       "stroke": "#334155",
       "sourceUrl": "https://www.phoenixcontact.com/en-sg/products/feed-through-terminal-block-pt-16-n-og-3212144"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-095-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 SEW-EURODRIVE DRN63MS4 · THERMAL-CLASS OPTIONS",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "SEW describes thermal class 130 (B) as the standard design for its asynchronous motors.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Higher thermal classes 155 (F) and 180 (H) are available on request.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "The catalog lists maximum winding temperatures of 130 °C, 155 °C, and 180 °C for classes 130 (B), 155 (F), and 180 (H), respectively.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Thermal class describes winding temperature limits under the IEC 60034-1 classification; it is not an ambient-temperature or measured-motor-temperature value.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "The catalog statement does not identify the thermal class ordered for this project's M1 motor instance.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Verify the installed motor variant and nameplate before assigning an instance value; no M1 thermal class is selected here.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-095-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023, section 5.7, p. 199, https://download.sew-eurodrive.com/download/pdf/30590116.pdf (accessed 2026-11-15).",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-095"
     }
   ]
 }
