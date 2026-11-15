@@ -386,7 +386,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       const sign=connector.direction==='left'?-1:1,x=connector.point.x,y=connector.point.y,end=x+sign*18;
       const group=document.createElementNS('http://www.w3.org/2000/svg','g');
       group.setAttribute('class','cross-sheet-connector');group.dataset.layer='connections';group.setAttribute('role','link');group.setAttribute('tabindex','0');group.setAttribute('aria-label','Open '+connector.targetSheetNumber+' · '+connector.targetRef+' · '+connector.name);group.style.cursor='pointer';if(state.layerVisibility.connections===false)group.style.display='none';
-      group.addEventListener('click',function(event){event.stopPropagation();openCrossSheetConnector(connector);});
+      group.addEventListener('pointerdown',function(event){if(event.button!==0)return;event.preventDefault();event.stopPropagation();openCrossSheetConnector(connector);});
+      group.addEventListener('click',function(event){if(event.detail!==0)return;event.stopPropagation();openCrossSheetConnector(connector);});
       group.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();openCrossSheetConnector(connector);}});
       const hitArea=document.createElementNS('http://www.w3.org/2000/svg','path');
       hitArea.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));hitArea.setAttribute('fill','none');hitArea.setAttribute('stroke','transparent');hitArea.setAttribute('stroke-width','14');hitArea.setAttribute('pointer-events','stroke');group.append(hitArea);
