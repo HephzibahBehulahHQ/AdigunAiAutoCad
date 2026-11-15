@@ -145,16 +145,24 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const originalExample = await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text()));
     await examplePage.getByRole('button', { name: 'New project' }).click();
     await examplePage.locator('#newProjectName').fill('Editable star-delta browser copy');
-    await examplePage.getByRole('button', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();
+    await examplePage.locator('#editableExampleProjects [role="listitem"]').first().waitFor({ timeout: 5000 }).catch(async () => {
+      throw new Error('Example catalog did not load: ' + await examplePage.locator('#editableExampleProjects').innerText());
+    });
+    await examplePage.getByRole('listitem', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();
     const componentId = 'cmp-6d8a901d-98ae-4054-88e1-06afaea9ffb0';
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').waitFor();
     assert.equal(await examplePage.locator('#projectTree [data-section-row]').count(), 4, 'example copy keeps the A1–A4 section structure');
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').click();
     const component = examplePage.locator('#userDrawings [data-object="' + componentId + '"]');
     await component.waitFor();
-    await component.click({ force: true });
+    await component.dispatchEvent('click', { bubbles: true });
+    await examplePage.locator('[aria-label="Properties"]').click();
     const overload = examplePage.locator('[data-component-property="overloadSettingA"][data-component-object="' + componentId + '"]');
-    await overload.fill('4');
+    await overload.waitFor({ timeout: 5000 }).catch(async () => {
+      const stateDump = await examplePage.evaluate(id => JSON.stringify({ tools: [...document.querySelectorAll('[data-tool]')].map(button => [button.dataset.tool, button.getAttribute('aria-pressed')]), element: document.querySelector('#userDrawings [data-object="' + id + '"]')?.outerHTML.slice(0, 250) }), componentId);
+      throw new Error('Component editor did not render: ' + await examplePage.locator('#inspectorContent').innerText() + ' State: ' + stateDump);
+    });
+    await overload.fill('12.5');
     await examplePage.locator('[data-component-property="position"][data-component-object="' + componentId + '"]').fill('F2');
     await examplePage.locator('[data-action="palette"]').click();
     await examplePage.locator('#paletteSwatches [data-color="#ed3f38"]').click();
@@ -164,7 +172,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const exampleSaved = JSON.parse(exampleSavedText);
     const editedComponent = exampleSaved.objects.find(object => object.id === componentId);
     assert.equal(exampleSaved.projectModel.name, 'Editable star-delta browser copy');
-    assert.equal(editedComponent.properties.overloadSettingA, 4);
+    assert.equal(editedComponent.properties.overloadSettingA, 12.5);
     assert.equal(editedComponent.properties.position, 'F2');
     assert.equal(editedComponent.stroke, '#ed3f38');
     assert.ok(exampleSaved.crossSheetConnections.length > 0, 'example electrical relationships remain in the saved copy');
@@ -179,10 +187,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       buffer: Buffer.from(exampleSavedText)
     });
     await reopenedExample.locator('#projectTree [data-sheet="ref-006"]').waitFor();
-    await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"]').click({ force: true });
-    assert.equal(await reopenedExample.locator('[data-component-property="overloadSettingA"][data-component-object="' + componentId + '"]').inputValue(), '4');
+    await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"]').dispatchEvent('click', { bubbles: true });
+    await reopenedExample.locator('[aria-label="Properties"]').click();
+    assert.equal(await reopenedExample.locator('[data-component-property="overloadSettingA"][data-component-object="' + componentId + '"]').inputValue(), '12.5');
     assert.equal(await reopenedExample.locator('[data-component-property="position"][data-component-object="' + componentId + '"]').inputValue(), 'F2');
-    assert.ok(await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"] [stroke="#ed3f38"]').count() > 0, 'component color survives reopen');
+    assert.equal(await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"]').getAttribute('stroke'), '#ed3f38', 'component color survives reopen');
     await reopenedExample.close({ runBeforeUnload: false });
   } finally {
     if (browser) await browser.close();
