@@ -36,7 +36,8 @@ test('canvas audit reflects the current local Save As and reopen limits', () => 
   assert.match(audit, /Save As uses the browser file picker when available/);
   assert.match(audit, /Save writes to the selected file handle during the current page session/);
   assert.match(audit, /not durable browser-local autosave/);
-  assert.match(audit, /CI Chromium test verifies clean project creation, section sheet selection, canvas editing, Save As, repeat Save, and JSON close\\/reopen/);\n  assert.match(audit, /file picker is mocked/);
+  assert.match(audit, /CI Chromium test verifies clean project creation, section sheet selection, canvas editing, Save As, repeat Save, and JSON close\/reopen/);
+  assert.match(audit, /file picker is mocked/);
 });
 
 test('browser workflow creates, edits, saves, closes, and reopens a native project', {
