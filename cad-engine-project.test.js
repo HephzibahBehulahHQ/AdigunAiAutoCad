@@ -38,7 +38,7 @@ test('canvas audit reflects the current local Save As and reopen limits', () => 
   assert.match(audit, /not durable browser-local autosave/);
   assert.match(audit, /CI Chromium verifies clean project creation, section sheet selection, canvas editing, and Save As\/reopen/);
   assert.match(audit, /opens a 100-sheet example as an A1–A4 native copy/);
-  assert.match(audit, /source isolation and cross-sheet connections/);
+  assert.match(audit, /source isolation and resolvable cross-sheet wire endpoints/);
   assert.match(audit, /native file picker is mocked/);
 });
 
@@ -171,19 +171,53 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('[aria-label="Properties"]').click();
     await examplePage.locator('[data-component-property="delaySeconds"][data-component-object="' + timerId + '"]').fill('10');
     await examplePage.locator('[data-component-property="position"][data-component-object="' + timerId + '"]').fill('KT1');
+    const sourceProject = JSON.parse(originalExample);
+    const sourceWireIds = new Set(sourceProject.objects.filter(object => object.kind === 'wire').map(object => object.id));
+    const sourceWireCount = sourceWireIds.size;
+    const exampleCanvas = await examplePage.locator('#drawing').boundingBox();
+    assert.ok(exampleCanvas && exampleCanvas.width > 100 && exampleCanvas.height > 100);
+    const objectCountBeforeWire = await examplePage.locator('#userDrawings [data-object]').count();
+    const browserErrors = [];
+    examplePage.on('pageerror', error => browserErrors.push(error.stack || error.message));
+    await examplePage.evaluate(() => {
+      window.__wirePointerEvents = [];
+      for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel']) {
+        document.querySelector('#drawing').addEventListener(type, event => window.__wirePointerEvents.push({ type, x: event.clientX, y: event.clientY, button: event.button, target: event.target.tagName, targetClass: event.target.getAttribute('class') }), true);
+      }
+    });
+    const wireTool = examplePage.getByRole('button', { name: 'Draw wire' });
+    await wireTool.click();
+    assert.equal(await wireTool.getAttribute('aria-pressed'), 'true', 'wire tool is active before drawing');
+    await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.30, exampleCanvas.y + exampleCanvas.height * 0.30);
+    await examplePage.mouse.down();
+    await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.40, exampleCanvas.y + exampleCanvas.height * 0.40, { steps: 3 });
+    await examplePage.mouse.up();
+    await examplePage.waitForFunction(count => document.querySelectorAll('#userDrawings [data-object]').length > count, objectCountBeforeWire, { timeout: 5000 }).catch(async () => {
+      const diagnostics = await examplePage.evaluate(() => JSON.stringify({ events: window.__wirePointerEvents, drawing: document.querySelector('#drawing').getBoundingClientRect().toJSON(), objects: document.querySelectorAll('#userDrawings [data-object]').length, toolPressed: document.querySelector('[data-draw="wire"]').getAttribute('aria-pressed') }));
+      throw new Error('Wire drawing did not add a native object: ' + diagnostics + ' Browser errors: ' + JSON.stringify(browserErrors));
+    });
     await examplePage.keyboard.press('Control+Shift+S');
     await examplePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const exampleSavedText = await examplePage.evaluate(() => window.__savedProjectWrites[0]);
     const exampleSaved = JSON.parse(exampleSavedText);
     const editedComponent = exampleSaved.objects.find(object => object.id === componentId);
     const editedTimer = exampleSaved.objects.find(object => object.id === timerId);
+    const savedWires = exampleSaved.objects.filter(object => object.kind === 'wire');
+    const addedWire = savedWires.find(wire => !sourceWireIds.has(wire.id));
     assert.equal(exampleSaved.projectModel.name, 'Editable star-delta browser copy');
     assert.equal(editedComponent.properties.overloadSettingA, 12.5);
     assert.equal(editedComponent.properties.position, 'F2');
     assert.equal(editedComponent.stroke, '#ed3f38');
     assert.equal(editedTimer.properties.delaySeconds, 10);
     assert.equal(editedTimer.properties.position, 'KT1');
+    assert.equal(savedWires.length, sourceWireCount + 1, 'new editable wire is included in the native project');
+    assert.ok(addedWire && addedWire.sheetId === 'ref-006', 'new wire belongs to the selected A2 sheet');
     assert.ok(exampleSaved.crossSheetConnections.length > 0, 'example electrical relationships remain in the saved copy');
+    for (const link of exampleSaved.crossSheetConnections) {
+      for (const endpoint of link.endpoints) {
+        assert.ok(savedWires.some(wire => wire.id === endpoint.wireId && wire.sheetId === endpoint.sheetId), 'cross-sheet endpoints still resolve to their wires');
+      }
+    }
     assert.equal(await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text())), originalExample, 'editing the copy must not change its source example');
     await examplePage.close({ runBeforeUnload: false });
 
@@ -204,6 +238,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await reopenedExample.locator('[aria-label="Properties"]').click();
     assert.equal(await reopenedExample.locator('[data-component-property="delaySeconds"][data-component-object="' + timerId + '"]').inputValue(), '10');
     assert.equal(await reopenedExample.locator('[data-component-property="position"][data-component-object="' + timerId + '"]').inputValue(), 'KT1');
+    assert.ok(await reopenedExample.locator('#userDrawings [data-object="' + addedWire.id + '"]').count() > 0, 'added wire geometry survives reopen');
     await reopenedExample.close({ runBeforeUnload: false });
   } finally {
     if (browser) await browser.close();
