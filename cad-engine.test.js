@@ -3604,9 +3604,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
-  assert.equal(dolOpening.metrics.sheetCount, 94);
-  assert.equal(dolOpening.metrics.authoredSheetCount, 94);
-  assert.equal(dolOpening.metrics.contentObjectCount, 981);
+  assert.equal(dolOpening.metrics.sheetCount, 95);
+  assert.equal(dolOpening.metrics.authoredSheetCount, 95);
+  assert.equal(dolOpening.metrics.contentObjectCount, 1007);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 38);
@@ -3682,7 +3682,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(indexText.includes('A2/052 Type 1'));
   assert.ok(dolProject.objects.find(object => object.id === 'dol-ref-006-line-39').text.length <= 110, 'A2/006 final index row must remain concise');
   const scopeProgress = dolProject.objects.filter(object => object.sheetId === 'dol-reference-002').map(object => object.text).join(' ');
-  assert.ok(scopeProgress.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(scopeProgress.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(scopeProgress.includes('91 complete authored sheets; A2/092–A2/100 are not authored.'));
   const q1InstallationAltitudeSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-061');
   assert.equal(q1InstallationAltitudeSheet.number, 'A2/061');
@@ -3767,7 +3767,7 @@ test('the project-library manifest and generated validation report match the cur
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
   assert.equal(dolProject.revision, 'A2/094');
-  assert.equal(dolProject.sheets.length, 94);
+  assert.equal(dolProject.sheets.length, 95);
   const coilTimeConstantSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-050');
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
@@ -3925,9 +3925,9 @@ test('the project-library manifest and generated validation report match the cur
 
 
   assert.equal(dolProject.revision, 'A2/094');
-  assert.equal(dolProject.sheets.length, 94);
-  assert.match(dolProject.status, /^Ninety-four authored sheets:/);
-  assert.ok(dolProject.status.includes('The remaining 6 sheets are not authored.'));
+  assert.equal(dolProject.sheets.length, 95);
+  assert.match(dolProject.status, /^Ninety-five authored sheets:/);
+  assert.ok(dolProject.status.includes('Five additional sheets remain unauthored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
   assert.deepEqual(lc1d09.specifications.averageCoilConsumptionAtNominalUc, { value: 2.4, unit: 'W', conditions: 'Average at 20 °C and nominal control voltage (Uc)' });
   assert.deepEqual(lc1d09.specifications.averageCoilCurrentAt24V, { value: 100, unit: 'mA', conditions: 'Schneider Electric FAQ states 100 mA at 24 V DC' });
@@ -4209,7 +4209,7 @@ test('A2/060 records Siemens Q1 operating humidity without assigning project con
   const sheet=project.sheets.find(item=>item.id==='dol-reference-060');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-060').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/060');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 operating-humidity reference');
   assert.ok(text.includes('relative humidity during operation 10…95%'));
@@ -4222,7 +4222,7 @@ test('A2/070 records Siemens Q1 phase-failure detection as a product function on
   const sheet=project.sheets.find(item=>item.id==='dol-reference-070');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-070').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/070');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 phase-failure-detection function reference');
   assert.ok(text.includes('phase failure detection'));
@@ -4236,7 +4236,7 @@ test('A2/071 records Siemens Q1 dimensions and mounting data without assigning p
   const sheet=project.sheets.find(item=>item.id==='dol-reference-071');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-071').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/071');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 dimensional and mounting reference');
   assert.ok(text.includes('97 mm high × 45 mm wide × 97 mm deep'));
@@ -4250,7 +4250,7 @@ test('A2/072 records Siemens Q1 ground-fault detection as unavailable on this co
   const sheet=project.sheets.find(item=>item.id==='dol-reference-072');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-072').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/072');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 ground-fault-detection function reference');
   assert.ok(text.includes('“ground fault detection” as No'));
@@ -4264,7 +4264,7 @@ test('A2/073 records Siemens Q1 insulation voltage without assigning project coo
   const sheet=project.sheets.find(item=>item.id==='dol-reference-073');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-073').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/073');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 insulation-voltage reference');
   assert.ok(text.includes('degree of pollution 3 at AC rated value: 690 V'));
@@ -4278,7 +4278,7 @@ test('A2/074 records Siemens Q1 front-face IP20 without rating the project enclo
   const sheet=project.sheets.find(item=>item.id==='dol-reference-074');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-074').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/074');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 front-face protection-class reference');
   assert.ok(text.includes('protection class on the front according to IEC 60529 as IP20'));
@@ -4292,7 +4292,7 @@ test('A2/075 records Siemens Q1 terminal IP20 separately from the front-face rat
   const sheet=project.sheets.find(item=>item.id==='dol-reference-075');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-075').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/075');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 terminal protection-class reference');
   assert.ok(text.includes('protection class IP of the terminal as IP20'));
@@ -4306,7 +4306,7 @@ test('A2/076 records Siemens Q1 shock resistance without implying a project test
   const sheet=project.sheets.find(item=>item.id==='dol-reference-076');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-076').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/076');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 shock-resistance reference');
   assert.ok(text.includes('IEC 60068-2-27 as 25 g / 11 ms'));
@@ -4321,7 +4321,7 @@ test('A2/077 records Siemens Q1 ambient temperatures without implying project qu
   const sheet=project.sheets.find(item=>item.id==='dol-reference-077');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-077').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/077');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 ambient-temperature reference');
   assert.ok(text.includes('during operation of −20 to +60 °C'));
@@ -4329,7 +4329,7 @@ test('A2/077 records Siemens Q1 ambient temperatures without implying project qu
   assert.ok(text.includes('not project environmental qualification'));
   assert.ok(text.includes('Project ambient range, enclosure conditions, and any required derating are not specified or modeled'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/077 | Q1 ambient temperature'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/077 Q1 ambient temperature'));
 });
@@ -4339,14 +4339,14 @@ test('A2/078 records Siemens Q1 component net weight without implying assembly m
   const sheet=project.sheets.find(item=>item.id==='dol-reference-078');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-078').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/078');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 component net-weight reference');
   assert.ok(text.includes('net weight of 280 g'));
   assert.ok(text.includes('does not include a project assembly mass calculation'));
   assert.ok(text.includes('does not assign an installed mass or verify a weight limit'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/078 | Q1 net weight'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/078 Q1 net weight'));
 });
@@ -4356,7 +4356,7 @@ test('A2/079 records Siemens Q1 global warming potential as component data',()=>
   const sheet=project.sheets.find(item=>item.id==='dol-reference-079');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-079').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/079');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 global-warming-potential reference');
   assert.ok(text.includes('74.698 kg CO₂ equivalent'));
@@ -4364,7 +4364,7 @@ test('A2/079 records Siemens Q1 global warming potential as component data',()=>
   assert.ok(text.includes('not the environmental footprint of this project or its assembled equipment'));
   assert.ok(text.includes('does not calculate lifecycle impacts or aggregate product environmental data'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/079 | Q1 global warming potential'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/079 Q1 global warming potential'));
 });
@@ -4374,14 +4374,14 @@ test('A2/080 records Siemens Q1 manufacturing GWP as EPD component data',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-080');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-080').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/080');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 manufacturing GWP reference');
   assert.ok(text.includes('1.98 kg CO₂ equivalent'));
   assert.ok(text.includes('not measured project emissions'));
   assert.ok(text.includes('not an assembly footprint'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/080 | Q1 manufacturing GWP'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/080 Q1 manufacturing GWP'));
 });
@@ -4391,7 +4391,7 @@ test('A2/081 records Siemens Q1 sales-stage GWP as EPD component data',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-081');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-081').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/081');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 sales-stage GWP reference');
   assert.ok(text.includes('0.134 kg CO₂ equivalent'));
@@ -4399,7 +4399,7 @@ test('A2/081 records Siemens Q1 sales-stage GWP as EPD component data',()=>{
   assert.ok(text.includes('not measured project emissions'));
   assert.ok(text.includes('not an assembly footprint'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/081 | Q1 sales-stage GWP'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/081 Q1 sales-stage GWP'));
 });
@@ -4409,7 +4409,7 @@ test('A2/082 records Siemens Q1 operation-stage GWP as component EPD data',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-082');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-082').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/082');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 operation-stage GWP reference');
   assert.ok(text.includes('72.7 kg CO₂ equivalent'));
@@ -4417,7 +4417,7 @@ test('A2/082 records Siemens Q1 operation-stage GWP as component EPD data',()=>{
   assert.ok(text.includes('not measured project emissions'));
   assert.ok(text.includes('does not represent this project’s energy use, duty cycle, service life, or assembly footprint'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/082 | Q1 operation-stage GWP'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/082 Q1 operation-stage GWP'));
 });
@@ -4427,7 +4427,7 @@ test('A2/083 records Siemens Q1 end-of-life GWP as EPD data',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-083');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-083').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/083');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 end-of-life GWP reference');
   assert.ok(text.includes('−0.116 kg CO₂ equivalent'));
@@ -4435,7 +4435,7 @@ test('A2/083 records Siemens Q1 end-of-life GWP as EPD data',()=>{
   assert.ok(text.includes('not a measured project removal or emissions credit'));
   assert.ok(text.includes('does not establish end-of-life handling, recycling, or environmental performance for the assembled equipment'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/083 | Q1 end-of-life GWP'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/083 Q1 end-of-life GWP'));
 });
@@ -4445,7 +4445,7 @@ test('A2/084 records Siemens Q1 power-loss values without implying a thermal ass
   const sheet=project.sheets.find(item=>item.id==='dol-reference-084');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-084').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/084');
   assert.equal(sheet.name,'Q1 Siemens 3RV2011-0FA10 power-loss reference');
   assert.ok(text.includes('5.5 W power loss at AC in the hot operating state'));
@@ -4453,7 +4453,7 @@ test('A2/084 records Siemens Q1 power-loss values without implying a thermal ass
   assert.ok(text.includes('not a measured project loss or thermal result'));
   assert.ok(text.includes('enclosure temperature rise, ventilation, and thermal assessment are not specified or modeled'));
   assert.ok(text.includes('https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RV2011-0FA10'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/084 | Q1 power loss'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/084 Q1 power loss'));
 });
@@ -4463,7 +4463,7 @@ test('A2/085 records SEW M1 starting-current ratio without implying installed cu
   const sheet=project.sheets.find(item=>item.id==='dol-reference-085');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-085').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/085');
   assert.equal(sheet.name,'M1 SEW DRN63MS4 starting-current-ratio reference');
   assert.ok(text.includes('400 V, 50 Hz, four-pole motor table'));
@@ -4471,7 +4471,7 @@ test('A2/085 records SEW M1 starting-current ratio without implying installed cu
   assert.ok(text.includes('not a measured starting current for the installed motor'));
   assert.ok(text.includes('No project starting current, acceleration response, or protection coordination is calculated'));
   assert.ok(text.includes('https://download.sew-eurodrive.com/download/pdf/30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/085 | M1 starting-current ratio'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/085 M1 starting-current ratio'));
 });
@@ -4481,14 +4481,14 @@ test('A2/086 records SEW M1 normalized torque ratios with project scope limits',
   const sheet=project.sheets.find(item=>item.id==='dol-reference-086');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-086').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/086');
   assert.equal(sheet.name,'M1 SEW DRN63MS4 torque-ratio reference');
   assert.ok(text.includes('400 V, 50 Hz, four-pole, duty type S1'));
   assert.ok(text.includes('M_A/M_N = 2.7, M_H/M_N = 2.6, and M_K/M_N = 2.7'));
   assert.ok(text.includes('not project torque outputs or verified motor-load matching'));
   assert.ok(text.includes('https://download.sew-eurodrive.com/download/pdf/30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/086 | M1 torque ratios'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/086 M1 torque ratios'));
 });
@@ -4498,14 +4498,14 @@ test('A2/087 derives a catalog starting-current reference with traceable inputs'
   const sheet=project.sheets.find(item=>item.id==='dol-reference-087');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-087').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/087');
   assert.equal(sheet.name,'M1 catalog-derived starting-current reference');
   assert.ok(text.includes('I_N = 0.405 A and starting-current ratio I_A/I_N = 3.6'));
   assert.ok(text.includes('0.405 A × 3.6 = 1.458 A'));
   assert.ok(text.includes('not a measured or verified current in the project installation'));
   assert.ok(text.includes('30590116.pdf')&&text.includes('23510455.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/087 | M1 derived starting current'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/087 M1 derived starting current'));
 });
@@ -4515,7 +4515,7 @@ test('A2/088 derives M1 torque values from SEW catalog values',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-088');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-088').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/088');
   assert.equal(sheet.name,'M1 catalog-derived torque reference');
   assert.ok(text.includes('M_N = 0.83 Nm'));
@@ -4524,7 +4524,7 @@ test('A2/088 derives M1 torque values from SEW catalog values',()=>{
   assert.ok(text.includes('M_K = 0.83 × 2.7 = 2.241 Nm'));
   assert.ok(text.includes('not measured project torque or verified load-matching results'));
   assert.ok(text.includes('30590116.pdf')&&text.includes('23510455.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/088 | M1 derived torques'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/088 M1 derived torques'));
 });
@@ -4534,7 +4534,7 @@ test('A2/089 records SEW M1 mass and motor inertia for matching catalog conditio
   const sheet=project.sheets.find(item=>item.id==='dol-reference-089');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-089').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/089');
   assert.equal(sheet.name,'M1 SEW DRN63MS4 mass and inertia reference');
   assert.ok(text.includes('400 V, 50 Hz, four-pole, duty type S1'));
@@ -4543,7 +4543,7 @@ test('A2/089 records SEW M1 mass and motor inertia for matching catalog conditio
   assert.ok(text.includes('do not include the driven load, coupling, or other installed parts'));
   assert.ok(text.includes('Total shaft inertia, acceleration time, and dynamic project behavior are not calculated'));
   assert.ok(text.includes('https://download.sew-eurodrive.com/download/pdf/30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/089 | M1 mass and inertia'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/089 M1 mass and inertia'));
 });
@@ -4553,7 +4553,7 @@ test('A2/090 derives M1 rotor kinetic energy at SEW catalog rated speed',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-090');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-090').map(object=>object.text).join(' ');
   assert.equal(project.revision, 'A2/094');
-  assert.equal(project.sheets.length, 94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/090');
   assert.equal(sheet.name,'M1 catalog-derived rotor kinetic-energy reference');
   assert.ok(text.includes('n_N = 1380 rpm'));
@@ -4562,7 +4562,7 @@ test('A2/090 derives M1 rotor kinetic energy at SEW catalog rated speed',()=>{
   assert.ok(text.includes('E = ½Jω² ≈ 3.08 J'));
   assert.ok(text.includes('excludes the driven load'));
   assert.ok(text.includes('https://download.sew-eurodrive.com/download/pdf/30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/090 | M1 rotor-energy derivation'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/090 M1 rotor energy'));
 });
@@ -4572,7 +4572,7 @@ test('A2/091 cross-checks SEW M1 rated output from catalog torque and speed',()=
   const sheet=project.sheets.find(item=>item.id==='dol-reference-091');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-091').map(object=>object.text).join(' ');
   assert.equal(project.revision,'A2/094');
-  assert.equal(project.sheets.length,94);
+  assert.equal(project.sheets.length,95);
   assert.equal(sheet.number,'A2/091');
   assert.equal(sheet.name,'M1 rated-output arithmetic cross-check');
   assert.ok(text.includes('M_N = 0.83 Nm')&&text.includes('n_N = 1380 rpm')&&text.includes('P_N = 0.12 kW'));
@@ -4580,7 +4580,7 @@ test('A2/091 cross-checks SEW M1 rated output from catalog torque and speed',()=
   assert.ok(text.includes('within rounding'));
   assert.ok(text.includes('not an independent motor test or project delivered-power measurement'));
   assert.ok(text.includes('https://download.sew-eurodrive.com/download/pdf/30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/091 | M1 output arithmetic cross-check'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-006-line-40')?.text.includes('A2/091 M1 rated output check'));
 });
@@ -4590,7 +4590,7 @@ test('A2/092 records the SEW M1 230/400 V winding rating and 400 V star connecti
   const sheet=project.sheets.find(item=>item.id==='dol-reference-092');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-092').map(object=>object.text).join(' ');
   assert.equal(project.revision,'A2/094');
-  assert.equal(project.sheets.length,94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/092');
   assert.equal(sheet.name,'M1 230/400 V winding-voltage and star-connection reference');
   assert.ok(text.includes('230 V Δ / 400 V Y, 50 Hz'));
@@ -4599,7 +4599,7 @@ test('A2/092 records the SEW M1 230/400 V winding rating and 400 V star connecti
   assert.ok(text.includes('actual nameplate, supply, terminal links, and installation are unverified'));
   assert.ok(text.includes('No internal winding links, six-terminal arrangement, or external wiring change is modeled'));
   assert.ok(text.includes('30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/092 | M1 winding voltage and connection'));
 });
 
@@ -4608,7 +4608,7 @@ test('A2/093 records SEW M1 catalog efficiency at 50%, 75%, and 100% load',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-093');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-093').map(object=>object.text).join(' ');
   assert.equal(project.revision,'A2/094');
-  assert.equal(project.sheets.length,94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/093');
   assert.equal(sheet.name,'M1 SEW catalog efficiency at three load points');
   assert.ok(text.includes('58.3% at 50% load, 63.9% at 75% load, and 64.8% at 100% load'));
@@ -4616,7 +4616,7 @@ test('A2/093 records SEW M1 catalog efficiency at 50%, 75%, and 100% load',()=>{
   assert.ok(text.includes('not measured project efficiencies'));
   assert.ok(text.includes('no interpolation, operating profile, energy use, or annual savings is calculated'));
   assert.ok(text.includes('30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/093 | M1 load-point efficiency'));
 });
 
@@ -4625,7 +4625,7 @@ test('A2/094 records SEW rated ambient and installation-altitude basis',()=>{
   const sheet=project.sheets.find(item=>item.id==='dol-reference-094');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-094').map(object=>object.text).join(' ');
   assert.equal(project.revision,'A2/094');
-  assert.equal(project.sheets.length,94);
+  assert.equal(project.sheets.length, 95);
   assert.equal(sheet.number,'A2/094');
   assert.equal(sheet.name,'M1 rated ambient-temperature and installation-altitude basis');
   assert.ok(text.includes('ambient temperature up to 40 °C and installation altitude up to 1000 m'));
@@ -4633,6 +4633,6 @@ test('A2/094 records SEW rated ambient and installation-altitude basis',()=>{
   assert.ok(text.includes('P_N,red = P_N × f_T × f_H'));
   assert.ok(text.includes('no project factor, derated motor output, or suitability is calculated'));
   assert.ok(text.includes('30590116.pdf'));
-  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('94 complete editable sheets; A2/095–A2/100 are not authored.'));
+  assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('95 authored sheets; A2/095–A2/100 remain unauthored.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/094 | rated ambient and altitude basis'));
 });
