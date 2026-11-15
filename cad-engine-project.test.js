@@ -182,7 +182,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('#projectTree [data-sheet="ref-007"]').click();
     const offPageConnector = examplePage.locator('#userDrawings .cross-sheet-connector').first();
     await offPageConnector.waitFor();
-    await offPageConnector.click();
+    await offPageConnector.locator('path').first().click();
     await examplePage.locator('#userDrawings [data-object="distribution-x14"].selected-object').waitFor();
     assert.equal(await examplePage.locator('#sheetTabs .document-tab[data-sheet="ref-009"]').getAttribute('aria-selected'), 'true', 'off-page connector opens its target A2 sheet');
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').click();
