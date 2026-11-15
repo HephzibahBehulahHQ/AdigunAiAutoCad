@@ -100,6 +100,15 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0, 'adding a sheet must not open it');
     await sheetRow.click();
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 1, 'selecting a sheet opens its canvas tab');
+    const titleBlock = page.locator('#projectTitleBlockDynamic [data-title-block="frame"]');
+    await titleBlock.waitFor();
+    const titleBlockRows = await page.locator('#projectTitleBlockDynamic [data-title-block-row]').evaluateAll(nodes => nodes.map(node => node.dataset.titleBlockRow));
+    assert.deepEqual(titleBlockRows, ['branding', 'project', 'job-manager', 'customer-site', 'sheet', 'drawing', 'approvals', 'date-status', 'notes']);
+    assert.match(await page.locator('#projectTitleBlockDynamic [data-title-block-row="branding"]').textContent(), /Hephzibah Behulah · AdigunAiAutoCad/);
+    assert.match(await page.locator('#projectTitleBlockDynamic [data-title-block-row="project"]').textContent(), /Browser local save test/);
+    const titleBlockBounds = await titleBlock.evaluate(node => ({ x: Number(node.getAttribute('x')), width: Number(node.getAttribute('width')), sheetWidth: Number(node.ownerSVGElement.getAttribute('width')) }));
+    assert.ok(titleBlockBounds.x > titleBlockBounds.sheetWidth * 0.5, 'title block stays in the lower-right portion of the drawing sheet');
+    assert.ok(titleBlockBounds.width < titleBlockBounds.sheetWidth * 0.45, 'title block keeps a compact sheet footprint');
 
     await page.locator('[aria-label="Draw rectangle"]').click();
     const canvas = await page.locator('#drawing').boundingBox();
