@@ -176,7 +176,7 @@ test('source-backed examples open as isolated native projects and retain editabl
 test('sectioned project interface wires inline rename, section drag, title block, print/export, and separate close behavior', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   assert.match(html, /\.tree-row>span:not\(\.caret\):not\(\.folder\):not\(\.file\),\.tree-row>b\{min-width:0;overflow:hidden;text-overflow:ellipsis\}/);
-  assert.match(html, /\.tree-row \.detail\\{margin-left:auto\\}/);
+  assert.match(html, /\.tree-row \.detail\{margin-left:auto\}/);
   const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
   assert.match(inline, /function beginInlineSheetRename\(id\)/);
   assert.match(inline, /addEventListener\('dblclick'/);
