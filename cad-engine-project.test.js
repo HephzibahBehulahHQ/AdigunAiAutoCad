@@ -178,7 +178,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.ok(exampleCanvas && exampleCanvas.width > 100 && exampleCanvas.height > 100);
     const objectCountBeforeWire = await examplePage.locator('#userDrawings [data-object]').count();
     const browserErrors = [];
-    examplePage.on('pageerror', error => browserErrors.push(error.message));
+    examplePage.on('pageerror', error => browserErrors.push(error.stack || error.message));
     await examplePage.evaluate(() => {
       window.__wirePointerEvents = [];
       for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel']) {
