@@ -20,472 +20,566 @@
     {
       "id": "dol-reference-001",
       "number": "A2/001",
-      "name": "DOL motor feeder schematic"
+      "name": "DOL motor feeder schematic",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-002",
       "number": "A2/002",
-      "name": "Project status and scope"
+      "name": "Project status and scope",
+      "projectSectionId": "A1"
     },
     {
       "id": "dol-reference-003",
       "number": "A2/003",
-      "name": "Source-backed component register"
+      "name": "Source-backed component register",
+      "projectSectionId": "A1"
     },
     {
       "id": "dol-reference-004",
       "number": "A2/004",
-      "name": "Revision record"
+      "name": "Revision record",
+      "projectSectionId": "A1"
     },
     {
       "id": "dol-reference-005",
       "number": "A2/005",
-      "name": "Design basis and rating comparison"
+      "name": "Design basis and rating comparison",
+      "projectSectionId": "A1"
     },
     {
       "id": "dol-reference-006",
       "number": "A2/006",
-      "name": "Drawing index"
+      "name": "Drawing index",
+      "projectSectionId": "A1"
     },
     {
       "id": "dol-reference-007",
       "number": "A2/007",
-      "name": "Pin and net connection schedule"
+      "name": "Pin and net connection schedule",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-008",
       "number": "A2/008",
-      "name": "Wire schedule, part 1"
+      "name": "Wire schedule, part 1",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-009",
       "number": "A2/009",
-      "name": "Wire schedule, part 2"
+      "name": "Wire schedule, part 2",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-010",
       "number": "A2/010",
-      "name": "Manufacturer source register"
+      "name": "Manufacturer source register",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-011",
       "number": "A2/011",
-      "name": "Q1 and KM1 terminal reference"
+      "name": "Q1 and KM1 terminal reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-012",
       "number": "A2/012",
-      "name": "M1 terminal and net reference"
+      "name": "M1 terminal and net reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-013",
       "number": "A2/013",
-      "name": "S0 and S1 control-contact reference"
+      "name": "S0 and S1 control-contact reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-014",
       "number": "A2/014",
-      "name": "X1–X6 terminal boundary reference"
+      "name": "X1–X6 terminal boundary reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-015",
       "number": "A2/015",
-      "name": "Static control-path net reference"
+      "name": "Static control-path net reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-016",
       "number": "A2/016",
-      "name": "Three-phase power path net reference"
+      "name": "Three-phase power path net reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-017",
       "number": "A2/017",
-      "name": "Application input omissions register"
+      "name": "Application input omissions register",
+      "projectSectionId": "A1"
     },
     {
       "id": "dol-reference-018",
       "number": "A2/018",
-      "name": "KM1 coil demand reference"
+      "name": "KM1 coil demand reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-019",
       "number": "A2/019",
-      "name": "DOL seal-in path reference"
+      "name": "DOL seal-in path reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-020",
       "number": "A2/020",
-      "name": "KM1 AC-3 catalog rating reference"
+      "name": "KM1 AC-3 catalog rating reference",
+      "projectSectionId": "A2"
     },
     {
       "id": "dol-reference-021",
       "number": "A2/021",
-      "name": "KM1 dimensions and mounting reference"
+      "name": "KM1 dimensions and mounting reference",
+      "projectSectionId": "A3"
     },
     {
       "id": "dol-reference-022",
       "number": "A2/022",
-      "name": "KM1 terminal torque reference"
+      "name": "KM1 terminal torque reference",
+      "projectSectionId": "A3"
     },
     {
       "id": "dol-reference-023",
       "number": "A2/023",
-      "name": "KM1 terminal conductor options"
+      "name": "KM1 terminal conductor options",
+      "projectSectionId": "A3"
     },
     {
       "id": "dol-reference-024",
       "number": "A2/024",
-      "name": "KM1 coil voltage limits reference"
+      "name": "KM1 coil voltage limits reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-025",
       "number": "A2/025",
-      "name": "KM1 AC-3 electrical durability reference"
+      "name": "KM1 AC-3 electrical durability reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-026",
       "number": "A2/026",
-      "name": "KM1 rated insulation voltage reference"
+      "name": "KM1 rated insulation voltage reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-027",
       "number": "A2/027",
-      "name": "KM1 rated impulse withstand voltage reference"
+      "name": "KM1 rated impulse withstand voltage reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-028",
       "number": "A2/028",
-      "name": "KM1 operating rate reference"
+      "name": "KM1 operating rate reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-029",
       "number": "A2/029",
-      "name": "KM1 signalling-circuit minimum switching reference"
+      "name": "KM1 signalling-circuit minimum switching reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-030",
       "number": "A2/030",
-      "name": "KM1 auxiliary-contact non-overlap-time reference"
+      "name": "KM1 auxiliary-contact non-overlap-time reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-031",
       "number": "A2/031",
-      "name": "KM1 front-face IP20 reference"
+      "name": "KM1 front-face IP20 reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-032",
       "number": "A2/032",
-      "name": "KM1 ambient-temperature reference"
+      "name": "KM1 ambient-temperature reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-033",
       "number": "A2/033",
-      "name": "KM1 operating-altitude reference"
+      "name": "KM1 operating-altitude reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-034",
       "number": "A2/034",
-      "name": "KM1 environmental classification reference"
+      "name": "KM1 environmental classification reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-035",
       "number": "A2/035",
-      "name": "KM1 vibration and shock ratings reference"
+      "name": "KM1 vibration and shock ratings reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-036",
       "number": "A2/036",
-      "name": "KM1 mechanical durability reference"
+      "name": "KM1 mechanical durability reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-037",
       "number": "A2/037",
-      "name": "KM1 rated breaking capacity reference"
+      "name": "KM1 rated breaking capacity reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-038",
       "number": "A2/038",
-      "name": "KM1 rated making capacity reference"
+      "name": "KM1 rated making capacity reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-039",
       "number": "A2/039",
-      "name": "KM1 conventional thermal current reference"
+      "name": "KM1 conventional thermal current reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-040",
       "number": "A2/040",
-      "name": "KM1 power dissipation reference"
+      "name": "KM1 power dissipation reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-041",
       "number": "A2/041",
-      "name": "KM1 signalling-circuit rated making capacity reference"
+      "name": "KM1 signalling-circuit rated making capacity reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-042",
       "number": "A2/042",
-      "name": "KM1 signalling-circuit frequency reference"
+      "name": "KM1 signalling-circuit frequency reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-043",
       "number": "A2/043",
-      "name": "KM1 rated short-time withstand current reference"
+      "name": "KM1 rated short-time withstand current reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-044",
       "number": "A2/044",
-      "name": "KM1 associated fuse ratings reference"
+      "name": "KM1 associated fuse ratings reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-045",
       "number": "A2/045",
-      "name": "KM1 AC-1 rated operational current reference"
+      "name": "KM1 AC-1 rated operational current reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-046",
       "number": "A2/046",
-      "name": "KM1 AC-1 electrical durability reference"
+      "name": "KM1 AC-1 electrical durability reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-047",
       "number": "A2/047",
-      "name": "KM1 manufacturer-listed B10d reference"
+      "name": "KM1 manufacturer-listed B10d reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-048",
       "number": "A2/048",
-      "name": "KM1 manufacturer-listed mirror-contact reference"
+      "name": "KM1 manufacturer-listed mirror-contact reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-049",
       "number": "A2/049",
-      "name": "KM1 opening and closing time reference"
+      "name": "KM1 opening and closing time reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-050",
       "number": "A2/050",
-      "name": "KM1 coil time constant and suppressor reference"
+      "name": "KM1 coil time constant and suppressor reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-051",
       "number": "A2/051",
-      "name": "KM1 coil inrush and hold-in power reference"
+      "name": "KM1 coil inrush and hold-in power reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-052",
       "number": "A2/052",
-      "name": "KM1 Type 1 starter proposal matrix"
+      "name": "KM1 Type 1 starter proposal matrix",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-053",
       "number": "A2/053",
-      "name": "KM1 AC-4 motor power reference"
+      "name": "KM1 AC-4 motor power reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-054",
       "number": "A2/054",
-      "name": "KM1 AC-3 motor power ratings by voltage"
+      "name": "KM1 AC-3 motor power ratings by voltage",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-055",
       "number": "A2/055",
-      "name": "M1 SEW motor nameplate data"
+      "name": "M1 SEW motor nameplate data",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-056",
       "number": "A2/056",
-      "name": "Q1 Siemens 3RV2011-0FA10 release reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 release reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-057",
       "number": "A2/057",
-      "name": "Q1 Siemens 3RV2011-0FA10 typical endurance reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 typical endurance reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-058",
       "number": "A2/058",
-      "name": "Q1 Siemens 3RV2011-0FA10 surge-voltage resistance reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 surge-voltage resistance reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-059",
       "number": "A2/059",
-      "name": "Q1 Siemens 3RV2011-0FA10 ambient-condition reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 ambient-condition reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-060",
       "number": "A2/060",
-      "name": "Q1 Siemens 3RV2011-0FA10 operating-humidity reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 operating-humidity reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-061",
       "number": "A2/061",
-      "name": "Q1 Siemens 3RV2011-0FA10 installation-altitude reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 installation-altitude reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-062",
       "number": "A2/062",
-      "name": "Q1 Siemens 3RV2011-0FA10 rated operating-voltage reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 rated operating-voltage reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-063",
       "number": "A2/063",
-      "name": "Q1 Siemens 3RV2011-0FA10 rated operating-frequency reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 rated operating-frequency reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-064",
       "number": "A2/064",
-      "name": "Q1 Siemens 3RV2011-0FA10 short-circuit breaking-capacity reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 short-circuit breaking-capacity reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-065",
       "number": "A2/065",
-      "name": "Q1 Siemens 3RV2011-0FA10 operating short-circuit current breaking-capacity reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 operating short-circuit current breaking-capacity reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-066",
       "number": "A2/066",
-      "name": "Q1 Siemens 3RV2011-0FA10 instantaneous short-circuit trip response reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 instantaneous short-circuit trip response reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-067",
       "number": "A2/067",
-      "name": "Q1 Siemens 3RV2011-0FA10 AC-3 motor-power rating reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 AC-3 motor-power rating reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-068",
       "number": "A2/068",
-      "name": "Q1 Siemens 3RV2011-0FA10 AC-3 operating-frequency reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 AC-3 operating-frequency reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-069",
       "number": "A2/069",
-      "name": "Q1 Siemens 3RV2011-0FA10 AC-3 operational-current reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 AC-3 operational-current reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-070",
       "number": "A2/070",
-      "name": "Q1 Siemens 3RV2011-0FA10 phase-failure-detection function reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 phase-failure-detection function reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-071",
       "number": "A2/071",
-      "name": "Q1 Siemens 3RV2011-0FA10 dimensional and mounting reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 dimensional and mounting reference",
+      "projectSectionId": "A3"
     },
     {
       "id": "dol-reference-072",
       "number": "A2/072",
-      "name": "Q1 Siemens 3RV2011-0FA10 ground-fault-detection function reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 ground-fault-detection function reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-073",
       "number": "A2/073",
-      "name": "Q1 Siemens 3RV2011-0FA10 insulation-voltage reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 insulation-voltage reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-074",
       "number": "A2/074",
-      "name": "Q1 Siemens 3RV2011-0FA10 front-face protection-class reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 front-face protection-class reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-075",
       "number": "A2/075",
-      "name": "Q1 Siemens 3RV2011-0FA10 terminal protection-class reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 terminal protection-class reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-076",
       "number": "A2/076",
-      "name": "Q1 Siemens 3RV2011-0FA10 shock-resistance reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 shock-resistance reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-077",
       "number": "A2/077",
-      "name": "Q1 Siemens 3RV2011-0FA10 ambient-temperature reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 ambient-temperature reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-078",
       "number": "A2/078",
-      "name": "Q1 Siemens 3RV2011-0FA10 component net-weight reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 component net-weight reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-079",
       "number": "A2/079",
-      "name": "Q1 Siemens 3RV2011-0FA10 global-warming-potential reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 global-warming-potential reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-080",
       "number": "A2/080",
-      "name": "Q1 Siemens 3RV2011-0FA10 manufacturing GWP reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 manufacturing GWP reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-081",
       "number": "A2/081",
-      "name": "Q1 Siemens 3RV2011-0FA10 sales-stage GWP reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 sales-stage GWP reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-082",
       "number": "A2/082",
-      "name": "Q1 Siemens 3RV2011-0FA10 operation-stage GWP reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 operation-stage GWP reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-083",
       "number": "A2/083",
-      "name": "Q1 Siemens 3RV2011-0FA10 end-of-life GWP reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 end-of-life GWP reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-084",
       "number": "A2/084",
-      "name": "Q1 Siemens 3RV2011-0FA10 power-loss reference"
+      "name": "Q1 Siemens 3RV2011-0FA10 power-loss reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-085",
       "number": "A2/085",
-      "name": "M1 SEW DRN63MS4 starting-current-ratio reference"
+      "name": "M1 SEW DRN63MS4 starting-current-ratio reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-086",
       "number": "A2/086",
-      "name": "M1 SEW DRN63MS4 torque-ratio reference"
+      "name": "M1 SEW DRN63MS4 torque-ratio reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-087",
       "number": "A2/087",
-      "name": "M1 catalog-derived starting-current reference"
+      "name": "M1 catalog-derived starting-current reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-088",
       "number": "A2/088",
-      "name": "M1 catalog-derived torque reference"
+      "name": "M1 catalog-derived torque reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-089",
       "number": "A2/089",
-      "name": "M1 SEW DRN63MS4 mass and inertia reference"
+      "name": "M1 SEW DRN63MS4 mass and inertia reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-090",
       "number": "A2/090",
-      "name": "M1 catalog-derived rotor kinetic-energy reference"
+      "name": "M1 catalog-derived rotor kinetic-energy reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-091",
       "number": "A2/091",
-      "name": "M1 rated-output arithmetic cross-check"
+      "name": "M1 rated-output arithmetic cross-check",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-092",
       "number": "A2/092",
-      "name": "M1 230/400 V winding-voltage and star-connection reference"
+      "name": "M1 230/400 V winding-voltage and star-connection reference",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-093",
       "number": "A2/093",
-      "name": "M1 SEW catalog efficiency at three load points"
+      "name": "M1 SEW catalog efficiency at three load points",
+      "projectSectionId": "A4"
     },
     {
       "id": "dol-reference-094",
       "number": "A2/094",
-      "name": "M1 rated ambient-temperature and installation-altitude basis"
+      "name": "M1 rated ambient-temperature and installation-altitude basis",
+      "projectSectionId": "A4"
     }
   ],
   "sheetLabels": {},
