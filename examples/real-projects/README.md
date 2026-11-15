@@ -1,3 +1,9 @@
+# Open an example as your own editable project
+
+Choose **New project**, keep or change the project name, and select a source-backed example under **Source-backed editable examples**. AdigunAiAutoCad opens an independent copy in the example's native project format; it preserves that example's sheet structure and editor objects instead of flattening the drawing. Editing the copy does not change the catalog file. Components and wires retain their identities, instance settings, geometry, colors, and connections. Manufacturer records stay separate from project-specific values.
+
+Use **Save project locally** to download the `.adigun.json` project under its project name. Use **Open project file** to reopen that saved file and continue editing. SVG imports are read-only artwork and are not editable example projects.
+
 # 24 V DC relay-operated contactor coil
 
 Open `24v-relay-contactor-control.adigun.json` from the workstation's **Open project file** command.

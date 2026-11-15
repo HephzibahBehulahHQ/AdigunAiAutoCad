@@ -5,7 +5,7 @@ Product: AdigunAiAutoCad
 
 ## Result
 
-The current working slice implements the empty sectioned-project scaffold and several document-management behaviors. The application and existing example library do **not** yet comply with all of the owner's canvas and native-example requirements. The requirement document is saved separately; writing it is not evidence of implementation.
+The merged foundation implements the empty sectioned-project scaffold and several document-management behaviors. This increment adds an in-app path for opening example files as independent editable native copies. The application and example library do **not** yet comply with all of the owner's canvas and native-example requirements. The requirement document is saved separately; writing it is not evidence of implementation.
 
 ## Verified current behavior and gaps
 
@@ -15,6 +15,7 @@ The current working slice implements the empty sectioned-project scaffold and se
 - `index.html` creates a named, empty project with A1–A4 in the existing editor shell. Sections collapse/expand and have sidebar add controls. Adding a sheet does not activate the canvas; selecting opens it; closing a canvas tab leaves the document. Project sheets support inline rename and drag/drop reorder or section moves.
 - The inspector edits shared project metadata and per-sheet title-block values. A-series size/orientation update sheet coordinates and frame geometry; print and SVG export use full sheet dimensions. The title block uses the required fixed identities. Project JSON carries the project model, title fields, active sheet, open views and cross-sheet connections; exported filenames use the project title.
 - Regression coverage exercises model rename/move/delete, stable link IDs and diagnostics, JSON round-trip/independent copies, paper dimensions, and source-level UI contract checks. Inline-script syntax, `cad-engine.test.js`, project-library validation, and `git diff --check` pass. Live browser workflow is not verified because headless Chrome exits before DevTools startup.
+- The New Project dialog lists source-backed catalog examples and opens each as a named copy through the same native JSON loader. Legacy examples retain their existing sheet structure and native JSON format during copying; the source file is not mutated. Model tests verify all seven current catalog entries survive copy, save and reopen; one 100-sheet reference is exercised with edited instance settings, color, wire geometry, labels and cross-sheet connections. The product UI workflow (including local download/close/reopen) is still not verified.
 
 ### Remaining gaps
 
