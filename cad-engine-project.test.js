@@ -36,8 +36,10 @@ test('canvas audit reflects the current local Save As and reopen limits', () => 
   assert.match(audit, /Save As uses the browser file picker when available/);
   assert.match(audit, /Save writes to the selected file handle during the current page session/);
   assert.match(audit, /not durable browser-local autosave/);
-  assert.match(audit, /CI Chromium test verifies clean project creation, section sheet selection, canvas editing, Save As, repeat Save, and JSON close\/reopen/);
-  assert.match(audit, /file picker is mocked/);
+  assert.match(audit, /CI Chromium verifies clean project creation, section sheet selection, canvas editing, and Save As\/reopen/);
+  assert.match(audit, /opens a 100-sheet example as an A1–A4 native copy/);
+  assert.match(audit, /source isolation and cross-sheet connections/);
+  assert.match(audit, /native file picker is mocked/);
 });
 
 test('browser workflow creates, edits, saves, closes, and reopens a native project', {
@@ -137,6 +139,51 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
     await reopenedPage.close({ runBeforeUnload: false });
+
+    const examplePage = await context.newPage();
+    await examplePage.goto(address);
+    const originalExample = await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text()));
+    await examplePage.getByRole('button', { name: 'New project' }).click();
+    await examplePage.locator('#newProjectName').fill('Editable star-delta browser copy');
+    await examplePage.getByRole('button', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();
+    const componentId = 'cmp-6d8a901d-98ae-4054-88e1-06afaea9ffb0';
+    await examplePage.locator('#projectTree [data-sheet="ref-006"]').waitFor();
+    assert.equal(await examplePage.locator('#projectTree [data-section-row]').count(), 4, 'example copy keeps the A1–A4 section structure');
+    await examplePage.locator('#projectTree [data-sheet="ref-006"]').click();
+    const component = examplePage.locator('#userDrawings [data-object="' + componentId + '"]');
+    await component.waitFor();
+    await component.click({ force: true });
+    const overload = examplePage.locator('[data-component-property="overloadSettingA"][data-component-object="' + componentId + '"]');
+    await overload.fill('4');
+    await examplePage.locator('[data-component-property="position"][data-component-object="' + componentId + '"]').fill('F2');
+    await examplePage.locator('[data-action="palette"]').click();
+    await examplePage.locator('#paletteSwatches [data-color="#ed3f38"]').click();
+    await examplePage.keyboard.press('Control+Shift+S');
+    await examplePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const exampleSavedText = await examplePage.evaluate(() => window.__savedProjectWrites[0]);
+    const exampleSaved = JSON.parse(exampleSavedText);
+    const editedComponent = exampleSaved.objects.find(object => object.id === componentId);
+    assert.equal(exampleSaved.projectModel.name, 'Editable star-delta browser copy');
+    assert.equal(editedComponent.properties.overloadSettingA, 4);
+    assert.equal(editedComponent.properties.position, 'F2');
+    assert.equal(editedComponent.stroke, '#ed3f38');
+    assert.ok(exampleSaved.crossSheetConnections.length > 0, 'example electrical relationships remain in the saved copy');
+    assert.equal(await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text())), originalExample, 'editing the copy must not change its source example');
+    await examplePage.close({ runBeforeUnload: false });
+
+    const reopenedExample = await context.newPage();
+    await reopenedExample.goto(address);
+    await reopenedExample.locator('#openFile').setInputFiles({
+      name: 'Editable-star-delta-browser-copy.adigun.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(exampleSavedText)
+    });
+    await reopenedExample.locator('#projectTree [data-sheet="ref-006"]').waitFor();
+    await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"]').click({ force: true });
+    assert.equal(await reopenedExample.locator('[data-component-property="overloadSettingA"][data-component-object="' + componentId + '"]').inputValue(), '4');
+    assert.equal(await reopenedExample.locator('[data-component-property="position"][data-component-object="' + componentId + '"]').inputValue(), 'F2');
+    assert.ok(await reopenedExample.locator('#userDrawings [data-object="' + componentId + '"] [stroke="#ed3f38"]').count() > 0, 'component color survives reopen');
+    await reopenedExample.close({ runBeforeUnload: false });
   } finally {
     if (browser) await browser.close();
     await new Promise(resolve => server.close(resolve));
