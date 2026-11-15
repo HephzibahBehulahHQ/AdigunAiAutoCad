@@ -177,6 +177,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const exampleCanvas = await examplePage.locator('#drawing').boundingBox();
     assert.ok(exampleCanvas && exampleCanvas.width > 100 && exampleCanvas.height > 100);
     const objectCountBeforeWire = await examplePage.locator('#userDrawings [data-object]').count();
+    await examplePage.evaluate(() => {
+      window.__wirePointerEvents = [];
+      for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel']) {
+        document.querySelector('#drawing').addEventListener(type, event => window.__wirePointerEvents.push({ type, x: event.clientX, y: event.clientY, button: event.button }), true);
+      }
+    });
     const wireTool = examplePage.getByRole('button', { name: 'Draw wire' });
     await wireTool.click();
     assert.equal(await wireTool.getAttribute('aria-pressed'), 'true', 'wire tool is active before drawing');
@@ -184,7 +190,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.mouse.down();
     await examplePage.mouse.move(exampleCanvas.x + exampleCanvas.width * 0.40, exampleCanvas.y + exampleCanvas.height * 0.40, { steps: 3 });
     await examplePage.mouse.up();
-    await examplePage.waitForFunction(count => document.querySelectorAll('#userDrawings [data-object]').length > count, objectCountBeforeWire);
+    await examplePage.waitForFunction(count => document.querySelectorAll('#userDrawings [data-object]').length > count, objectCountBeforeWire, { timeout: 5000 }).catch(async () => {
+      const diagnostics = await examplePage.evaluate(() => JSON.stringify({ events: window.__wirePointerEvents, drawing: document.querySelector('#drawing').getBoundingClientRect().toJSON(), objects: document.querySelectorAll('#userDrawings [data-object]').length, toolPressed: document.querySelector('[data-draw="wire"]').getAttribute('aria-pressed') }));
+      throw new Error('Wire drawing did not add a native object: ' + diagnostics);
+    });
     await examplePage.keyboard.press('Control+Shift+S');
     await examplePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const exampleSavedText = await examplePage.evaluate(() => window.__savedProjectWrites[0]);
