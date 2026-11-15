@@ -3766,8 +3766,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(expectedPowerRows.length, 11);
   for (const row of expectedPowerRows) assert.ok(powerPathText.includes(row), 'A2/016 must match engine power-net analysis: ' + row);
   assert.ok(powerPathText.some(row => row.includes('No switching, motor, protection, PE-adequacy, or installation behavior is simulated')));
-  assert.equal(dolProject.revision, 'A2/094');
-  assert.equal(dolProject.sheets.length, 95);
+  assert.equal(dolProject.revision, 'A2/095');
+  assert.equal(dolProject.sheets.length, 96);
   const coilTimeConstantSheet = dolProject.sheets.find(sheet => sheet.id === 'dol-reference-050');
   assert.equal(coilTimeConstantSheet.number, 'A2/050');
   const coilTimeConstantText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-050').map(object => object.text).join(' ');
@@ -3924,8 +3924,8 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
-  assert.equal(dolProject.revision, 'A2/094');
-  assert.equal(dolProject.sheets.length, 95);
+  assert.equal(dolProject.revision, 'A2/095');
+  assert.equal(dolProject.sheets.length, 96);
   assert.match(dolProject.status, /^Ninety-five authored sheets:/);
   assert.ok(dolProject.status.includes('Five additional sheets remain unauthored.'));
   const lc1d09 = engine.component('schneider-electric-lc1d09bd');
@@ -4571,8 +4571,8 @@ test('A2/091 cross-checks SEW M1 rated output from catalog torque and speed',()=
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-091');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-091').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/094');
-  assert.equal(project.sheets.length,95);
+  assert.equal(project.revision,'A2/095');
+  assert.equal(project.sheets.length,96);
   assert.equal(sheet.number,'A2/091');
   assert.equal(sheet.name,'M1 rated-output arithmetic cross-check');
   assert.ok(text.includes('M_N = 0.83 Nm')&&text.includes('n_N = 1380 rpm')&&text.includes('P_N = 0.12 kW'));
@@ -4589,7 +4589,7 @@ test('A2/092 records the SEW M1 230/400 V winding rating and 400 V star connecti
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-092');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-092').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/094');
+  assert.equal(project.revision,'A2/095');
   assert.equal(project.sheets.length, 96);
   assert.equal(sheet.number,'A2/092');
   assert.equal(sheet.name,'M1 230/400 V winding-voltage and star-connection reference');
@@ -4607,7 +4607,7 @@ test('A2/093 records SEW M1 catalog efficiency at 50%, 75%, and 100% load',()=>{
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-093');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-093').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/094');
+  assert.equal(project.revision,'A2/095');
   assert.equal(project.sheets.length, 96);
   assert.equal(sheet.number,'A2/093');
   assert.equal(sheet.name,'M1 SEW catalog efficiency at three load points');
@@ -4624,7 +4624,7 @@ test('A2/094 records SEW rated ambient and installation-altitude basis',()=>{
   const project=JSON.parse(fs.readFileSync(path.join(__dirname,'examples','real-projects','siemens-schneider-sew-dol-reference.adigun.json'),'utf8'));
   const sheet=project.sheets.find(item=>item.id==='dol-reference-094');
   const text=project.objects.filter(object=>object.kind==='text'&&object.sheetId==='dol-reference-094').map(object=>object.text).join(' ');
-  assert.equal(project.revision,'A2/094');
+  assert.equal(project.revision,'A2/095');
   assert.equal(project.sheets.length, 96);
   assert.equal(sheet.number,'A2/094');
   assert.equal(sheet.name,'M1 rated ambient-temperature and installation-altitude basis');
