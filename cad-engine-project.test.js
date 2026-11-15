@@ -159,6 +159,22 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('#editableExampleProjects [data-example-project]').first().waitFor({ timeout: 5000 }).catch(async () => {
       throw new Error('Project Explorer example catalog did not load: ' + await examplePage.locator('#editableExampleProjects').innerText());
     });
+    const catalogProjects = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples/real-projects/library.json'), 'utf8')).projects;
+    const catalogRows = await examplePage.locator('#editableExampleProjects [data-example-project]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.exampleProject, number: node.querySelector('b')?.textContent })));
+    assert.deepEqual(catalogRows.map(row => row.id), catalogProjects.map(project => project.id), 'Project Explorer lists every catalog example in order');
+    assert.deepEqual(catalogRows.map(row => row.number), catalogProjects.map((project, index) => String(index + 1).padStart(2, '0')));
+    for (const entry of catalogProjects) {
+      const copyPage = await context.newPage();
+      await copyPage.goto(address);
+      await copyPage.locator('[data-example-project="' + entry.id + '"]').click();
+      await copyPage.locator('#projectTree [data-section-row]').first().waitFor({ timeout: 5000 });
+      assert.equal(await copyPage.locator('#projectTree [data-section-row]').count(), 4, entry.title + ' opens with the A1–A4 project sections');
+      const firstSheet = copyPage.locator('#projectTree [data-sheet]').first();
+      await firstSheet.waitFor({ timeout: 5000 });
+      await firstSheet.click();
+      await copyPage.locator('#sheetTabs .document-tab[data-sheet]').first().waitFor({ timeout: 5000 });
+      await copyPage.close({ runBeforeUnload: false });
+    }
     await examplePage.getByRole('listitem', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();
     const componentId = 'cmp-6d8a901d-98ae-4054-88e1-06afaea9ffb0';
     await examplePage.locator('#projectTree [data-sheet="ref-006"]').waitFor();
