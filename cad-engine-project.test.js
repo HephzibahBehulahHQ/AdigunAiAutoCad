@@ -177,10 +177,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const exampleCanvas = await examplePage.locator('#drawing').boundingBox();
     assert.ok(exampleCanvas && exampleCanvas.width > 100 && exampleCanvas.height > 100);
     const objectCountBeforeWire = await examplePage.locator('#userDrawings [data-object]').count();
+    const browserErrors = [];
+    examplePage.on('pageerror', error => browserErrors.push(error.message));
     await examplePage.evaluate(() => {
       window.__wirePointerEvents = [];
       for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel']) {
-        document.querySelector('#drawing').addEventListener(type, event => window.__wirePointerEvents.push({ type, x: event.clientX, y: event.clientY, button: event.button }), true);
+        document.querySelector('#drawing').addEventListener(type, event => window.__wirePointerEvents.push({ type, x: event.clientX, y: event.clientY, button: event.button, target: event.target.tagName, targetClass: event.target.getAttribute('class') }), true);
       }
     });
     const wireTool = examplePage.getByRole('button', { name: 'Draw wire' });
@@ -192,7 +194,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.mouse.up();
     await examplePage.waitForFunction(count => document.querySelectorAll('#userDrawings [data-object]').length > count, objectCountBeforeWire, { timeout: 5000 }).catch(async () => {
       const diagnostics = await examplePage.evaluate(() => JSON.stringify({ events: window.__wirePointerEvents, drawing: document.querySelector('#drawing').getBoundingClientRect().toJSON(), objects: document.querySelectorAll('#userDrawings [data-object]').length, toolPressed: document.querySelector('[data-draw="wire"]').getAttribute('aria-pressed') }));
-      throw new Error('Wire drawing did not add a native object: ' + diagnostics);
+      throw new Error('Wire drawing did not add a native object: ' + diagnostics + ' Browser errors: ' + JSON.stringify(browserErrors));
     });
     await examplePage.keyboard.press('Control+Shift+S');
     await examplePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
