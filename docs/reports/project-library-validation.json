@@ -222,9 +222,9 @@
         "zeroGeometryErrors": true
       },
       "metrics": {
-        "sheetCount": 94,
-        "authoredSheetCount": 94,
-        "contentObjectCount": 981,
+        "sheetCount": 95,
+        "authoredSheetCount": 95,
+        "contentObjectCount": 1007,
         "emptyContentSheetIds": [],
         "componentCount": 11,
         "wireCount": 38,
