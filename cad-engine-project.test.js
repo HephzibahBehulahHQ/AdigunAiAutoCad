@@ -8,7 +8,18 @@ require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
 
-test('workspace boot always starts with no active project, drawing tab, or automatic example', () => {\n  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');\n  const inline = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)].find(match => !/\\bsrc\\s*=/.test(match[1]))[2];\n  assert.match(inline, /state\\.projectModel=null;state\\.projectName='';state\\.sheet=null;/);\n  assert.match(inline, /projectTree'\\)\\.replaceChildren\\(emptyProject\\)/);\n  assert.match(inline, /sheetTabs \\.document-tab\\[data-sheet\\].*?tab\\.remove\\(\\)/);\n  assert.match(inline, /\\$\\('#newSheet'\\)\\.hidden=true/);\n  assert.match(inline, /window\\.addEventListener\\('beforeunload'/);\n  assert.doesNotMatch(inline.slice(inline.lastIndexOf('state.projectModel=null;')), /copyExampleProject\\(/);\n});\n\ntest('new project has empty A1–A4 sections and supports uncapped continuous numbering and paper formats', () => {
+test('workspace boot always starts with no active project, drawing tab, or automatic example', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
+  assert.match(inline, /state\.projectModel=null;state\.projectName='';state\.sheet=null;/);
+  assert.match(inline, /projectTree'\)\.replaceChildren\(emptyProject\)/);
+  assert.match(inline, /sheetTabs \.document-tab\[data-sheet\].*?tab\.remove\(\)/);
+  assert.match(inline, /\$\('#newSheet'\)\.hidden=true/);
+  assert.match(inline, /window\.addEventListener\('beforeunload'/);
+  assert.doesNotMatch(inline.slice(inline.lastIndexOf('state.projectModel=null;')), /copyExampleProject\(/);
+});
+
+test('new project has empty A1–A4 sections and supports uncapped continuous numbering and paper formats', () => {
   const project = engine.createProjectModel('project-test-1', 'Motor control reference');
   assert.equal(project.name, 'Motor control reference');
   assert.equal(project.sheets.length, 0);
