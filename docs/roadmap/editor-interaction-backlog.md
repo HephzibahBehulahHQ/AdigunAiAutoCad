@@ -557,3 +557,7 @@ A2/093 records the SEW DRN63MS4 catalog efficiencies of 58.3%, 63.9% and 64.8% a
 
 
 A2/094 records SEW nameplate rating conditions of up to 40 °C ambient and 1000 m altitude, plus the catalog derating relation for higher conditions. Actual site conditions are unspecified; no derating or application suitability is calculated. No interface or wiring change.
+
+A2/095 records SEW motor thermal-class options while leaving the installed M1 class unverified.
+
+A2/096 records SEW motor temperature-sensor type-code options /TF, /TH, /PK, and /PT with their catalog size ranges. The installed M1 option remains unverified; continue with A2/097.
