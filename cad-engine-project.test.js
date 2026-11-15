@@ -113,6 +113,28 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const titleBlockBounds = await titleBlock.evaluate(node => ({ x: Number(node.getAttribute('x')), width: Number(node.getAttribute('width')), sheetWidth: Number(node.ownerSVGElement.querySelector('#sheetBackground').getAttribute('width')) }));
     assert.ok(titleBlockBounds.x > titleBlockBounds.sheetWidth * 0.5, 'title block stays in the lower-right portion of the drawing sheet: ' + JSON.stringify(titleBlockBounds));
     assert.ok(titleBlockBounds.width < titleBlockBounds.sheetWidth * 0.45, 'title block keeps a compact sheet footprint: ' + JSON.stringify(titleBlockBounds));
+    const paperSize = page.getByLabel('Paper size', { exact: true });
+    const orientation = page.getByLabel('Orientation', { exact: true });
+    for (const size of ['A4', 'A3', 'A2', 'A1', 'A0']) {
+      for (const direction of ['landscape', 'portrait']) {
+        await paperSize.selectOption(size);
+        await orientation.selectOption(direction);
+        const frameBounds = await titleBlock.evaluate(node => {
+          const bounds = node.getBBox();
+          const sheet = node.ownerSVGElement.querySelector('#sheetBackground');
+          return { x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height, sheetWidth: Number(sheet.getAttribute('width')), sheetHeight: Number(sheet.getAttribute('height')) };
+        });
+        assert.ok(frameBounds.x + frameBounds.width <= frameBounds.sheetWidth - 9, size + ' ' + direction + ' title block stays inside the right sheet margin: ' + JSON.stringify(frameBounds));
+        assert.ok(frameBounds.y + frameBounds.height <= frameBounds.sheetHeight - 9, size + ' ' + direction + ' title block stays inside the bottom sheet margin: ' + JSON.stringify(frameBounds));
+        const rowBounds = await page.locator('#projectTitleBlockDynamic [data-title-block-row]').evaluateAll(nodes => nodes.map(node => {
+          const bounds = node.getBBox();
+          return { key: node.dataset.titleBlockRow, x: bounds.x, y: bounds.y, right: bounds.x + bounds.width, bottom: bounds.y + bounds.height };
+        }));
+        assert.equal(rowBounds.length, 9, size + ' ' + direction + ' retains all title-block rows');
+        assert.ok(rowBounds.every(row => row.x >= frameBounds.x && row.right <= frameBounds.x + frameBounds.width && row.y >= frameBounds.y && row.bottom <= frameBounds.y + frameBounds.height), size + ' ' + direction + ' keeps every title-block field inside the frame: ' + JSON.stringify(rowBounds));
+      }
+    }
+
 
     await page.locator('[aria-label="Draw rectangle"]').click();
     const canvas = await page.locator('#drawing').boundingBox();
