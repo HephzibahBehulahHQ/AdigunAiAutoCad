@@ -12,6 +12,23 @@ const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
 
+test('catalog placement allocates a unique tag from existing components on every sheet', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const start = html.indexOf('  function nextComponentReference(');
+  const end = html.indexOf('  function updatePlacementPreview(', start);
+  assert.ok(start >= 0 && end > start);
+  const objects = [
+    { kind: 'component-instance', ref: 'x1', sheetId: 'power', componentId: 'phoenix-contact-3210567' },
+    { kind: 'component-instance', ref: 'X3', sheetId: 'power', componentId: 'phoenix-contact-3209510' }
+  ];
+  const next = vm.runInNewContext(html.slice(start, end) + '\nnextComponentReference', {
+    collectProjectObjects: () => objects
+  });
+  assert.equal(next('X'), 'X2');
+  objects.push({ kind: 'component-instance', ref: 'X2', sheetId: 'control' });
+  assert.equal(next('X'), 'X4');
+});
+
 test('moving an off-page wire remaps endpoints only on that exact sheet and wire', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const start = html.indexOf('  function remapOffPageWireEndpoints(');
