@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.6",
+  "revision": "2.7",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -125,6 +125,12 @@
       "id": "spare-analog-interface",
       "number": "A2/019",
       "name": "XT9 spare analog voltage input interface",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "annunciator-interface",
+      "number": "A2/020",
+      "name": "XT10 isolated annunciator request",
       "projectSectionId": "A2"
     }
   ],
@@ -3019,6 +3025,270 @@
       "y": 500,
       "text": "Use an appropriate voltage signal referenced to 2M. A current-loop source is outside this circuit.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "annunciator-interface-k3",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K3",
+      "x": 435,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "marking": "Annunciator request"
+      },
+      "sheetId": "annunciator-interface"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "annunciator-interface-x24",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X24",
+      "x": 760,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT10",
+        "position": "1",
+        "marking": "Dry contact common",
+        "comment": "External annunciator circuit unassigned."
+      },
+      "sheetId": "annunciator-interface"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "annunciator-interface-x25",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X25",
+      "x": 760,
+      "y": 412,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT10",
+        "position": "2",
+        "marking": "Dry normally open request",
+        "comment": "External annunciator circuit unassigned."
+      },
+      "sheetId": "annunciator-interface"
+    },
+    {
+      "id": "annunciator-interface-q2-pin",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 476,
+      "x1": 710,
+      "y1": 476,
+      "x2": 715,
+      "y2": 476,
+      "potential": "Q0.2 annunciator request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x12-5"
+        }
+      }
+    },
+    {
+      "id": "annunciator-interface-q2-drop",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 715,
+      "y": 476,
+      "x1": 715,
+      "y1": 476,
+      "x2": 715,
+      "y2": 605,
+      "potential": "Q0.2 annunciator request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "annunciator-interface-q2-send",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 715,
+      "y": 605,
+      "x1": 715,
+      "y1": 605,
+      "x2": 870,
+      "y2": 605,
+      "potential": "Q0.2 annunciator request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "annunciator-interface-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 675,
+      "y": 320,
+      "x1": 675,
+      "y1": 320,
+      "x2": 675,
+      "y2": 582,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "annunciator-interface-coil",
+      "kind": "wire",
+      "sheetId": "annunciator-interface",
+      "x": 195,
+      "y": 365,
+      "x1": 195,
+      "y1": 365,
+      "x2": 365,
+      "y2": 365,
+      "potential": "Q0.2 annunciator request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "annunciator-interface-k3",
+          "pinId": "coil-a1"
+        }
+      }
+    },
+    {
+      "id": "annunciator-interface-coil-return",
+      "kind": "wire",
+      "sheetId": "annunciator-interface",
+      "x": 195,
+      "y": 325,
+      "x1": 195,
+      "y1": 325,
+      "x2": 365,
+      "y2": 325,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "annunciator-interface-k3",
+          "pinId": "coil-a2"
+        }
+      }
+    },
+    {
+      "id": "annunciator-interface-common",
+      "kind": "wire",
+      "sheetId": "annunciator-interface",
+      "x": 505,
+      "y": 345,
+      "x1": 505,
+      "y1": 345,
+      "x2": 725,
+      "y2": 345,
+      "potential": "K3 dry common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "annunciator-interface-k3",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "annunciator-interface-x24",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "annunciator-interface-request-contact",
+      "kind": "wire",
+      "sheetId": "annunciator-interface",
+      "x": 505,
+      "y": 370,
+      "x1": 505,
+      "y1": 370,
+      "x2": 620,
+      "y2": 370,
+      "potential": "K3 dry request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "annunciator-interface-k3",
+          "pinId": "contact-14"
+        }
+      }
+    },
+    {
+      "id": "annunciator-interface-request-drop",
+      "kind": "wire",
+      "sheetId": "annunciator-interface",
+      "x": 620,
+      "y": 370,
+      "x1": 620,
+      "y1": 370,
+      "x2": 620,
+      "y2": 412,
+      "potential": "K3 dry request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "annunciator-interface-request-terminal",
+      "kind": "wire",
+      "sheetId": "annunciator-interface",
+      "x": 620,
+      "y": 412,
+      "x1": 620,
+      "y1": 412,
+      "x2": 725,
+      "y2": 412,
+      "potential": "K3 dry request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "annunciator-interface-x25",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "annunciator-interface-title",
+      "kind": "text",
+      "sheetId": "annunciator-interface",
+      "x": 110,
+      "y": 108,
+      "text": "XT10 · ISOLATED ANNUNCIATOR REQUEST",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "annunciator-interface-coil-note",
+      "kind": "text",
+      "sheetId": "annunciator-interface",
+      "x": 110,
+      "y": 198,
+      "text": "A1 Q0.2 commands K3. The coil returns to PS1 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "annunciator-interface-contact-note",
+      "kind": "text",
+      "sheetId": "annunciator-interface",
+      "x": 110,
+      "y": 465,
+      "text": "XT10:1 is K3 common. XT10:2 is the normally open request contact.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "annunciator-interface-scope",
+      "kind": "text",
+      "sheetId": "annunciator-interface",
+      "x": 110,
+      "y": 515,
+      "text": "External annunciator power, load and cable are unassigned. Switching logic is outside this drawing.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -4516,6 +4786,70 @@
             "direction": "right",
             "targetSheetId": "plc-inputs",
             "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "annunciator-interface-command",
+      "name": "Q0.2 annunciator request",
+      "endpoints": [
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "annunciator-interface-q2-send",
+          "point": {
+            "x": 870,
+            "y": 605
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "annunciator-interface",
+            "targetRef": "K3"
+          }
+        },
+        {
+          "sheetId": "annunciator-interface",
+          "wireId": "annunciator-interface-coil",
+          "point": {
+            "x": 195,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "annunciator-interface-return",
+      "name": "K3 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "annunciator-interface-return-send",
+          "point": {
+            "x": 675,
+            "y": 582
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "annunciator-interface",
+            "targetRef": "K3"
+          }
+        },
+        {
+          "sheetId": "annunciator-interface",
+          "wireId": "annunciator-interface-coil-return",
+          "point": {
+            "x": 195,
+            "y": 325
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
           }
         }
       ]

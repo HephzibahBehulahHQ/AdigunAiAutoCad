@@ -4,6 +4,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const http = require('node:http');
+const { execFileSync } = require('node:child_process');
 const path = require('node:path');
 require('./cad-engine.js');
 
@@ -687,11 +688,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const catalogRows = await examplePage.locator('#editableExampleProjects [data-example-project]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.exampleProject, number: node.querySelector('b')?.textContent })));
     assert.deepEqual(catalogRows.map(row => row.id), catalogProjects.map(project => project.id), 'Project Explorer lists every catalog example in order');
     assert.deepEqual(catalogRows.map(row => row.number), catalogProjects.map((project, index) => String(index + 1).padStart(2, '0')));
-    await examplePage.locator('#projectSearch').fill('DC distribution IEC-style 19 sheets below project sheet targets');
+    await examplePage.locator('#projectSearch').fill('DC distribution IEC-style 20 sheets below project sheet targets');
     const distributionRow = examplePage.locator('#editableExampleProjects [data-example-project="sitop-24v-dc-distribution"]');
     await distributionRow.waitFor();
     assert.equal(await examplePage.locator('#editableExampleProjects [data-example-project]').count(), 1);
-    assert.match(await distributionRow.getAttribute('aria-description'), /19 electrically connected sheets.*32 components.*114 wire segments.*Model checks passed.*Below project sheet targets/);
+    assert.match(await distributionRow.getAttribute('aria-description'), /20 electrically connected sheets.*35 components.*124 wire segments.*Model checks passed.*Below project sheet targets/);
     assert.match(await distributionRow.locator('small').textContent(), /Below project sheet targets/);
     assert.equal(await distributionRow.locator('canvas').evaluate(canvas => {
       const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
@@ -1072,6 +1073,10 @@ test('every published catalog example opens as an independent sectioned native c
   }
 });
 
+test('SITOP annunciator source reproduces the published sheet', () => {
+  execFileSync(process.execPath, [path.join(__dirname, 'scripts/author-sitop-annunciator.js')]);
+});
+
 test('SITOP distribution keeps both terminal branches on separate supply and return nets', () => {
   const file = path.join(__dirname, 'examples/real-projects/sitop-24v-dc-distribution.adigun.json');
   const source = engine.parseProject(fs.readFileSync(file, 'utf8'));
@@ -1079,14 +1084,14 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [19, 47, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [20, 49, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
     ['X8:1', 'X8:2', 'PS1:N'],
     ['X21:1', 'X21:2', 'X9:1', 'X9:2', 'PS1:PE'],
     ['B1:1', 'B2:1', 'KM1:13', 'KM1:21', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'X5:1', 'X5:2', 'X13:1', 'X13:2', 'X19:1', 'X19:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+'],
-    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'A1:X12:2', 'K1:A2', 'K2:A2', 'PS1:-', 'X23:1', 'X23:2'],
+    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'A1:X12:2', 'K1:A2', 'K2:A2', 'K3:A2', 'PS1:-', 'X23:1', 'X23:2'],
     ['B1:4', 'X15:1', 'X15:2', 'A1:X10:7'],
     ['B2:2', 'X11:1', 'X11:2', 'A1:X11:2'],
     ['X22:1', 'X22:2', 'A1:X11:3'],
@@ -1099,6 +1104,9 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['X6:1', 'X6:2', 'KM1:22', 'A1:X10:11'],
     ['K1:12', 'X10:1', 'X10:2', 'A1:X10:12'],
     ['A1:X12:4', 'K2:A1'],
+    ['A1:X12:5', 'K3:A1'],
+    ['K3:11', 'X24:1', 'X24:2'],
+    ['K3:14', 'X25:1', 'X25:2'],
     ['K2:11', 'X16:1', 'X16:2'],
     ['K2:12', 'X17:1', 'X17:2'],
     ['K2:14', 'X18:1', 'X18:2'],
@@ -1108,7 +1116,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   assert.equal(io.valid, true);
   assert.equal(io.rows.length, 16);
   assert.deepEqual(io.rows.filter(row => row.netId).map(row => row.terminal),
-    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X11:3', 'X12:3', 'X12:4']);
+    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X11:3', 'X12:3', 'X12:4', 'X12:5']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
   const cables = engine.cableScheduleCsv(reopened.project);
   assert.equal(cables.trim().split('\r\n').length, 8);
