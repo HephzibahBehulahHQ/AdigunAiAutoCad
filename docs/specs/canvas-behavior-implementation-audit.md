@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- Moving or rotating a linked wire updates only its matching off-page endpoint. Undo and redo restore both the wire and its reference point. A local Chrome check verified coordinate edits, rotation, undo/redo, native save, and project connectivity analysis.
+
 - Component reference changes from Properties and the context menu use the same operation. Undo and redo restore objects together with their connector targets. Local Chrome verified that renaming a linked component, undoing, redoing, and rotating the component each produced a valid save with its attached wire. The existing menu and toolbar markup stayed unchanged.
 
 - The existing Properties inspector edits object layer, stroke color, and applicable line weight and type. Changes are undoable, and layer visibility is saved with the native project. Local Chrome verified component style changes, undo/redo, and reopen with the reassigned layer hidden. The menu and toolbar markup stayed unchanged.
