@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.5",
+  "revision": "1.6",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -65,6 +65,12 @@
       "id": "stop-request",
       "number": "A2/009",
       "name": "Operator stop request input",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "auxiliary-marshalling",
+      "number": "A2/010",
+      "name": "KM1 NC feedback terminal marshalling",
       "projectSectionId": "A2"
     }
   ],
@@ -1137,7 +1143,7 @@
       "kind": "text",
       "x": 110,
       "y": 610,
-      "text": "Main poles and the NC auxiliary pair are unused. The model represents wiring and static contact symbols.",
+      "text": "KM1 NC 21–22 routes to I0.4 through XT2 on A2/010. Main poles remain unused.",
       "stroke": "#13263b"
     },
     {
@@ -1369,7 +1375,203 @@
       "sheetId": "plc-inputs",
       "x": 110,
       "y": 890,
-      "text": "I0.2 receives S1 Start request; I0.3 receives S2 Stop request. PLC logic is outside scope.",
+      "text": "I0.2 receives Start, I0.3 receives Stop, and I0.4 reads KM1 NC feedback through XT2.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x5",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X5",
+      "x": 510,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "1",
+        "marking": "KM1 NC contact feed",
+        "comment": ""
+      },
+      "sheetId": "auxiliary-marshalling"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x6",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X6",
+      "x": 510,
+      "y": 370,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "2",
+        "marking": "KM1 NC feedback to I0.4",
+        "comment": ""
+      },
+      "sheetId": "auxiliary-marshalling"
+    },
+    {
+      "id": "nc-feed-source",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 365,
+      "y": 240,
+      "x1": 365,
+      "y1": 240,
+      "x2": 365,
+      "y2": 112,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x5-feed",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 180,
+      "y": 250,
+      "x1": 180,
+      "y1": 250,
+      "x2": 475,
+      "y2": 250,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x5-aux-nc-send",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 545,
+      "y": 250,
+      "x1": 545,
+      "y1": 250,
+      "x2": 740,
+      "y2": 250,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-feed",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 665,
+      "y": 270,
+      "x1": 665,
+      "y1": 270,
+      "x2": 850,
+      "y2": 270,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-send",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 665,
+      "y": 380,
+      "x1": 665,
+      "y1": 380,
+      "x2": 850,
+      "y2": 380,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x6-feedback-receive",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 180,
+      "y": 370,
+      "x1": 180,
+      "y1": 370,
+      "x2": 475,
+      "y2": 370,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x6-feedback-send",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 545,
+      "y": 370,
+      "x1": 545,
+      "y1": 370,
+      "x2": 740,
+      "y2": 370,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-di4-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 548,
+      "x1": 310,
+      "y1": 548,
+      "x2": 425,
+      "y2": 474,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-di4",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 425,
+      "y": 474,
+      "x1": 425,
+      "y1": 474,
+      "x2": 450,
+      "y2": 474,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "auxiliary-marshalling-title",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 108,
+      "text": "XT2 · KM1 NORMALLY CLOSED FEEDBACK",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "auxiliary-marshalling-feed",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 455,
+      "text": "X5 passes +24 V from XT1 to KM1:21 on A2/007.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "auxiliary-marshalling-return",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 500,
+      "text": "X6 passes KM1:22 to A1 X10:11 / DI a.4 / I0.4 on A2/005.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "auxiliary-marshalling-scope",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 545,
+      "text": "I0.1 is the separate NO feedback channel. The two inputs can be compared in PLC logic outside this example.",
       "stroke": "#13263b"
     }
   ],
@@ -2070,6 +2272,133 @@
             "direction": "left",
             "targetSheetId": "stop-request",
             "targetRef": "S2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xt2-feed",
+      "name": "XT2 +24 V",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "nc-feed-source",
+          "point": {
+            "x": 365,
+            "y": 112
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X5"
+          }
+        },
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x5-feed",
+          "point": {
+            "x": 180,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-nc-feed-link",
+      "name": "KM1 NC contact supply",
+      "endpoints": [
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x5-aux-nc-send",
+          "point": {
+            "x": 740,
+            "y": 250
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-nc-feed",
+          "point": {
+            "x": 850,
+            "y": 270
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-nc-return-link",
+      "name": "KM1 NC feedback",
+      "endpoints": [
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-nc-send",
+          "point": {
+            "x": 850,
+            "y": 380
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X6"
+          }
+        },
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x6-feedback-receive",
+          "point": {
+            "x": 180,
+            "y": 370
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-nc-di4-link",
+      "name": "KM1 NC feedback",
+      "endpoints": [
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x6-feedback-send",
+          "point": {
+            "x": 740,
+            "y": 370
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "km1-nc-di4-route",
+          "point": {
+            "x": 310,
+            "y": 548
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X6"
           }
         }
       ]

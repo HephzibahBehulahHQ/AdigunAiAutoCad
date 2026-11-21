@@ -330,7 +330,7 @@
       "topologyId": "dc-two-branch-terminal-distribution",
       "role": "standalone-example",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
-      "revision": "1.5",
+      "revision": "1.6",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -342,28 +342,28 @@
         "terminalList": true,
         "zeroGeometryErrors": true
       },
-      "topologySha256": "fd43fc5f8d84ec4003c74a9758883706e75417d688f3535ca8e4270551e58dd7",
+      "topologySha256": "7f3c19f933deaa97b6bf510209b5de45baaf31c440e060a0b3b06da3a5a381f2",
       "csvSha256": {
-        "bom": "906d8a31a8d441dbc7be251f5fd64759fa4bc6318df0c2e174fe0bdb49232354",
-        "wires": "d7239e95ddfcf2d30558c87c444cdaf20e3f94c3b8a2599c9b8489067f272b1c",
-        "terminals": "7f8bd4b9f433987594c8b3dea66566f9f06477fe17eb57ac336c1fc3e6c5342e"
+        "bom": "3562629770b37d3c158960027f0c78c89f3ef89284bcc1dd6d4cf2d6b3e70cdb",
+        "wires": "07c6c75de957d587cd89bd8057daae04bde9d70cfd20f80ab7caba0bc1805c09",
+        "terminals": "92db37fb0090743c03014b2cc101d5636336e8308fa186fedc25ae5731ad2c95"
       },
       "metrics": {
-        "sheetCount": 9,
-        "authoredSheetCount": 9,
-        "connectedSheetCount": 9,
-        "contentObjectCount": 102,
+        "sheetCount": 10,
+        "authoredSheetCount": 10,
+        "connectedSheetCount": 10,
+        "contentObjectCount": 117,
         "emptyContentSheetIds": [],
-        "componentCount": 12,
-        "wireCount": 58,
-        "netCount": 31,
-        "globalNetCount": 9,
-        "crossSheetConnectionCount": 22,
+        "componentCount": 14,
+        "wireCount": 67,
+        "netCount": 36,
+        "globalNetCount": 10,
+        "crossSheetConnectionCount": 26,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 9,
-        "wireListRowCount": 58,
-        "terminalListRowCount": 8
+        "wireListRowCount": 67,
+        "terminalListRowCount": 12
       },
       "errors": []
     }
