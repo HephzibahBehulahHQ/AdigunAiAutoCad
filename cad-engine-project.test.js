@@ -155,6 +155,22 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await page.mouse.up();
     assert.ok(await page.locator('#userDrawings > *').count() > 0, 'canvas edit should create native vector geometry');
 
+    const nativeObjectCount = await page.locator('#userDrawings > *').count();
+    await page.locator('#openFile').setInputFiles({
+      name: 'read-only.svg',
+      mimeType: 'image/svg+xml',
+      buffer: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 100 60"><rect id="preview-only" width="100" height="60"/></svg>')
+    });
+    const preview = page.getByRole('dialog', { name: 'SVG preview' });
+    const previewImage = preview.getByRole('img', { name: 'read-only.svg' });
+    await previewImage.waitFor();
+    assert.equal(await previewImage.evaluate(image => image.naturalWidth), 100);
+    assert.equal(await page.locator('#preview-only').count(), 0);
+    await preview.getByRole('button', { name: 'Close SVG preview' }).click();
+    await preview.waitFor({ state: 'hidden' });
+    assert.equal(await page.locator('#userDrawings > *').count(), nativeObjectCount);
+    assert.equal(await page.locator('#sheetTabs .document-tab[aria-selected="true"]').getAttribute('data-sheet'), sheetId);
+
     await page.locator('[aria-label="Properties"]').click();
     const scale = page.getByLabel('Scale', { exact: true });
     await scale.fill('1:2');

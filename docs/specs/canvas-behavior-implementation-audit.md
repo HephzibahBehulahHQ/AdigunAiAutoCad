@@ -19,6 +19,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Remaining gaps
 
+- SVG files open as read-only image previews. Local headless Chrome verified that preview and close preserve the native drawing, active sheet, and project save path. Importing SVG elements as editable CAD objects remains open.
+
 - The editor retains legacy flat `state.sheets` alongside the new model. Legacy projects keep their old prompt-based rename/reorder flow. Section names themselves are not yet editable inline; document operations in the new model are.
 - Deleting a native sheet moves each affected connection record into its unresolved-reference diagnostic. Surviving connections stay active, and the Project Explorer lists the unresolved references after save and reopen. The existing project analyzer detects missing electrical endpoints; complete rendered FROM/TO reciprocal references and affected-link reporting in the actual UI still need end-to-end verification.
 - `cad-engine.js` has project-wide cross-sheet connection analysis and connector helpers. This is useful existing engineering functionality, but it does not prove the full workflow for A5/A6, UI continuation labels, reciprocal references after renumbering, or save/reopen.
