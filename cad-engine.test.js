@@ -8,6 +8,17 @@ const vm = require('node:vm');
 require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
+
+test('viewport expansion and cursor zoom keep one uniform coordinate scale', () => {
+  const camera = { x: -110, y: -40, w: 420, h: 297 };
+  const viewport = engine.viewportViewBox(camera, 1200, 500);
+  assert.deepEqual(viewport, { x: -256.4, y: -40, w: 712.8, h: 297 });
+  const cursor = { x: -125, y: 20 };
+  const zoomed = engine.viewportViewBox(engine.zoomViewAt(camera, cursor, 0.5), 1200, 500);
+  assert.ok(Math.abs((cursor.x - zoomed.x) / zoomed.w - (cursor.x - viewport.x) / viewport.w) < 1e-12);
+  assert.ok(Math.abs((cursor.y - zoomed.y) / zoomed.h - (cursor.y - viewport.y) / viewport.h) < 1e-12);
+  assert.deepEqual(camera, { x: -110, y: -40, w: 420, h: 297 });
+});
 const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';

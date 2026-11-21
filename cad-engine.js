@@ -20,6 +20,18 @@
     return Object.freeze(value);
   }
   function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
+  function viewportViewBox(view, width, height) {
+    if (!(width > 0 && height > 0)) return { ...view };
+    const aspect = width / height;
+    const w = Math.max(view.w, view.h * aspect);
+    const h = Math.max(view.h, view.w / aspect);
+    return { x: view.x + (view.w - w) / 2, y: view.y + (view.h - h) / 2, w, h };
+  }
+
+  function zoomViewAt(view, point, scale) {
+    return { x: point.x + (view.x - point.x) * scale, y: point.y + (view.y - point.y) * scale,
+      w: view.w * scale, h: view.h * scale };
+  }
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
 
   function fitDrawingToPage(bounds, pageWidth, pageHeight, margin, titleBlockHeight) {
@@ -2270,6 +2282,8 @@
     copyExampleProject: copyExampleProject,
     fitDrawingToPage: fitDrawingToPage,
     invertDrawingTransform: invertDrawingTransform,
+    viewportViewBox: viewportViewBox,
+    zoomViewAt: zoomViewAt,
     defaultProjectSections: function () { return clone(DEFAULT_PROJECT_SECTIONS); },
     addProjectSection: addProjectSection,
     renameProjectSection: renameProjectSection,
