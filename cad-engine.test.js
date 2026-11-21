@@ -12,6 +12,22 @@ const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
 
+test('moving an off-page wire remaps endpoints only on that exact sheet and wire', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const start = html.indexOf('  function remapOffPageWireEndpoints(');
+  const end = html.indexOf('  function remapConnectedWireEnds(', start);
+  assert.ok(start >= 0 && end > start);
+  const endpoints = [
+    { sheetId: 'a', wireId: 'w', point: { x: 10, y: 20 } },
+    { sheetId: 'b', wireId: 'w', point: { x: 10, y: 20 } },
+    { sheetId: 'a', wireId: 'other', point: { x: 10, y: 20 } }
+  ];
+  const state = { sheet: 'a', crossSheetConnections: [{ endpoints }] };
+  const remap = vm.runInNewContext(html.slice(start, end) + '\nremapOffPageWireEndpoints', { state });
+  remap({ id: 'w', x1: 50, y1: 25, x2: 70, y2: 25 }, { x1: 0, y1: 20, x2: 10, y2: 20 });
+  assert.deepEqual(endpoints.map(endpoint => [endpoint.point.x, endpoint.point.y]), [[70, 25], [10, 20], [10, 20]]);
+});
+
 test('project electrical checks locate duplicate tags and pins without attached wires across sheets', () => {
   const first = { ...engine.createInstance(componentId, 50, 50, 'X1'), id: 'first-terminal', sheetId: 'first' };
   const second = { ...engine.createInstance(componentId, 60, 50, 'x1'), id: 'second-terminal', sheetId: 'second' };
@@ -81,7 +97,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /addEventListener\('dblclick',e=>handleObjectDoubleClick/);
   assert.match(inlineScripts[0][2], /function drawingLayerForObject\(obj\)/);
   assert.match(inlineScripts[0][2], /function selectObjectsOnSameLayer\(id\)/);
-  assert.match(inlineScripts[0][2], /state\.layerVisibility\[el\.dataset\.layer\]===false/);
+  assert.match(inlineScripts[0][2], /if\(!drawingObjectVisible\(obj\)\)el\.style\.display='none'/);
   assert.match(inlineScripts[0][2], /data-object-command="select-type"|select-type/);
   assert.match(inlineScripts[0][2], /function selectConnectedComponents\(id\)/);
   assert.match(inlineScripts[0][2], /AdigunCADEngine\.worldPins\(target\)/);
@@ -680,6 +696,7 @@ test('drawing layer visibility categories and same-layer selection use object da
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'wire'})", context), 'connections');
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'component-instance'})", context), 'devices');
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'text'})", context), 'annotations');
+  assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'component-instance',layer:'annotations'})", context), 'annotations');
   vm.runInNewContext("selectObjectsOnSameLayer('component-a')", context);
   assert.deepEqual(selected, ['component-a', 'component-b']);
 });
