@@ -81,7 +81,7 @@ test('the shipped workspace inline script parses before UI handlers initialize',
   assert.match(inlineScripts[0][2], /addEventListener\('dblclick',e=>handleObjectDoubleClick/);
   assert.match(inlineScripts[0][2], /function drawingLayerForObject\(obj\)/);
   assert.match(inlineScripts[0][2], /function selectObjectsOnSameLayer\(id\)/);
-  assert.match(inlineScripts[0][2], /state\.layerVisibility\[el\.dataset\.layer\]===false/);
+  assert.match(inlineScripts[0][2], /if\(!drawingObjectVisible\(obj\)\)el\.style\.display='none'/);
   assert.match(inlineScripts[0][2], /data-object-command="select-type"|select-type/);
   assert.match(inlineScripts[0][2], /function selectConnectedComponents\(id\)/);
   assert.match(inlineScripts[0][2], /AdigunCADEngine\.worldPins\(target\)/);
@@ -680,6 +680,7 @@ test('drawing layer visibility categories and same-layer selection use object da
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'wire'})", context), 'connections');
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'component-instance'})", context), 'devices');
   assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'text'})", context), 'annotations');
+  assert.equal(vm.runInNewContext("drawingLayerForObject({kind:'component-instance',layer:'annotations'})", context), 'annotations');
   vm.runInNewContext("selectObjectsOnSameLayer('component-a')", context);
   assert.deepEqual(selected, ['component-a', 'component-b']);
 });

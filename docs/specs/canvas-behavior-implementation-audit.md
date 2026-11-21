@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- The existing Properties inspector edits object layer, stroke color, and applicable line weight and type. Changes are undoable, and layer visibility is saved with the native project. Local Chrome verified component style changes, undo/redo, and reopen with the reassigned layer hidden. The menu and toolbar markup stayed unchanged.
+
 - Electrical checks shows project-wide connectivity counts and navigable findings for unresolved wire endpoints, duplicate device tags, pins without directly attached wires, drawing geometry errors, and unresolved references from sheet deletion. Download electrical check report exports JSON with the sheet index, counts, findings and any analysis errors. Local Chrome verified download and the surviving location of a deleted-sheet reference. These model rules have no standards edition mapping. Other rule families and waiver history remain open.
 
 - `cad-engine.js` defines a stable project model with empty A1–A4 sections, shared metadata, open tabs, and cross-sheet connection storage. It supports A5 onward and uncapped sheet creation with stable IDs and project-wide sequential numbering. Engine operations rename/move/delete sheets while retaining identities and connections; deleting a referenced sheet records an unresolved-reference diagnostic.
