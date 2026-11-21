@@ -598,6 +598,10 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   assert.deepEqual(io.rows.filter(row => row.netId).map(row => row.terminal),
     ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X11:2', 'X12:2']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
+  const cables = engine.cableScheduleCsv(reopened.project);
+  assert.equal(cables.trim().split('\r\n').length, 7);
+  assert.match(cables, /"W-B1","4","branch-a","b1-signal-send"/);
+  assert.match(cables, /"W-B2","2","branch-b","b2-signal-send"/);
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {

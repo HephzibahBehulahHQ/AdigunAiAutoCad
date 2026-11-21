@@ -8,6 +8,8 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 **Electrical checks → Export terminal list CSV** lists each modeled terminal pin with its sheet, strip and position fields, marking, part number, and other pins on the same project net. **Export PLC I/O list CSV** lists the verified CPU hardware channels and their wired net members. Hardware channel names come from the catalog. Configured PLC memory addresses are outside the export.
 
+Select a wire to edit its **Cable ID** and **Core ID** in Properties. **Electrical checks → Export cable schedule CSV** lists the assigned wire segments and their net pin references. The SITOP example assigns W-B1 and W-B2 to the modeled sensor conductors. These assignments document the schematic and leave cable procurement and installed route lengths open.
+
 # 24 V DC relay-operated contactor coil
 
 Open this project as an editable copy from **Project Explorer → List**.
@@ -231,7 +233,7 @@ The analog connection assumes PN2070 OUT2 is configured for 0–10 V. Its factor
 
 The validator saves and reopens each example with the native CAD engine. It compares project data and a SHA-256 fingerprint of the project-wide nets, cross-sheet connections, and unresolved endpoints.
 
-It also generates the BOM, wire list, terminal list, and PLC I/O list CSV for each example, checks that their contents survive save and reopen, and records their fingerprints.
+It also generates the BOM, wire list, terminal list, PLC I/O list, and cable schedule CSV for each example, checks that their contents survive save and reopen, and records their fingerprints.
 
 The report counts authored sheets and electrically connected sheets separately. A connected sheet participates in a wired net that joins at least two component pins, including nets with explicit cross-sheet links. Run `node scripts/project-library-validation.js --check --require-release-scale` to enforce the library size requirement of 50 distinct topologies, 100 authored sheets and 70 connected sheets per qualifying project, and at least 5,000 qualifying sheets in total.
 

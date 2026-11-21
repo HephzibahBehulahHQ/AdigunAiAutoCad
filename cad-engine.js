@@ -1956,6 +1956,8 @@
       return {
         wireId: wire.id,
         ...(project ? { sheetId: id } : {}),
+        ...(typeof wire.cableId === 'string' && wire.cableId ? { cableId: wire.cableId } : {}),
+        ...(typeof wire.coreId === 'string' && wire.coreId ? { coreId: wire.coreId } : {}),
         netId: net ? net.id : '',
         startX: wire.x1,
         startY: wire.y1,
@@ -1982,7 +1984,19 @@
       ['Connected pin references on net', 'netPinRefs']
     ];
     if (!Array.isArray(input) && input && typeof input === 'object') columns.unshift(['Sheet ID', 'sheetId']);
+    if (report.rows.some(row => row.cableId || row.coreId)) columns.push(['Cable ID', 'cableId'], ['Core ID', 'coreId']);
     return connectionReportCsv(columns, report.rows);
+  }
+
+  function cableScheduleCsv(project) {
+    const report = wireList(project);
+    if (!report.valid) throw new Error('Cable schedule export blocked: ' + report.errors.join(' '));
+    const rows = report.rows.filter(row => row.cableId).sort((a, b) => a.cableId.localeCompare(b.cableId)
+      || (a.coreId || '').localeCompare(b.coreId || '') || a.wireId.localeCompare(b.wireId));
+    return connectionReportCsv([
+      ['Cable ID', 'cableId'], ['Core ID', 'coreId'], ['Sheet ID', 'sheetId'],
+      ['Wire ID', 'wireId'], ['Net ID', 'netId'], ['Connected pin references on net', 'netPinRefs']
+    ], rows);
   }
 
   function projectPinIndex(analysis) {
@@ -2126,6 +2140,7 @@
     billOfMaterialsCsv: billOfMaterialsCsv,
     wireList: wireList,
     wireListCsv: wireListCsv,
+    cableScheduleCsv: cableScheduleCsv,
     terminalList: terminalList,
     terminalListCsv: terminalListCsv,
     plcIoList: plcIoList,

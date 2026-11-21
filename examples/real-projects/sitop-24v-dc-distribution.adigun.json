@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.7",
+  "revision": "1.8",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -420,7 +420,9 @@
       "y2": 295,
       "potential": "+24 V DC",
       "stroke": "#b42318",
-      "strokeWidth": 1.5
+      "strokeWidth": 1.5,
+      "cableId": "W-B1",
+      "coreId": "1"
     },
     {
       "id": "a-return-send",
@@ -448,7 +450,9 @@
       "y2": 335,
       "potential": "0 V DC",
       "stroke": "#164eac",
-      "strokeWidth": 1.5
+      "strokeWidth": 1.5,
+      "cableId": "W-B1",
+      "coreId": "3"
     },
     {
       "schemaVersion": 1,
@@ -521,7 +525,9 @@
       "y2": 290,
       "potential": "+24 V DC",
       "stroke": "#b42318",
-      "strokeWidth": 1.5
+      "strokeWidth": 1.5,
+      "cableId": "W-B2",
+      "coreId": "1"
     },
     {
       "id": "b-return-send",
@@ -549,7 +555,9 @@
       "y2": 340,
       "potential": "0 V DC",
       "stroke": "#164eac",
-      "strokeWidth": 1.5
+      "strokeWidth": 1.5,
+      "cableId": "W-B2",
+      "coreId": "3"
     },
     {
       "schemaVersion": 1,
@@ -705,7 +713,9 @@
       "y2": 315,
       "stroke": "#38734b",
       "strokeWidth": 1.5,
-      "potential": "B1 switching output"
+      "potential": "B1 switching output",
+      "cableId": "W-B1",
+      "coreId": "4"
     },
     {
       "id": "b1-di0",
@@ -733,7 +743,9 @@
       "y2": 290,
       "stroke": "#38734b",
       "strokeWidth": 1.5,
-      "potential": "B2 analog output"
+      "potential": "B2 analog output",
+      "cableId": "W-B2",
+      "coreId": "2"
     },
     {
       "id": "b2-ai0",

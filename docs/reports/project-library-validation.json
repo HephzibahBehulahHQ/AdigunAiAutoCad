@@ -46,7 +46,8 @@
         "bom": "e0c90dded6f0f91ab8f3d9624e4674ed88ca5383a4875adf416e8787bcc9904c",
         "wires": "9b156b01833d34f2398d4e49f94eba63ecc4768e4ad7f292db7deceec3db306e",
         "terminals": "f9b6a1bca7e0bad3799623406fbcda20ff39e3d8cd207ccf33dacaf84ac55ef4",
-        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e"
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 72,
@@ -90,7 +91,8 @@
         "bom": "d2599a41414cb6f03d5ea7363ba81071eb9728609fbd5347c6cc4fca61d1cb74",
         "wires": "bee9c06c8a2ba067c93f1fb3061d84e11dc6d7c0c4a214db7e8bab2433d44f53",
         "terminals": "d5c967cef8d835bc1654baf6d7d81ee39aeca308cce9c9d478aaad146d4e5e79",
-        "plcIo": "5cb1d33193f99965ef67eda7a384bd05898e7d9c865fe1a8f3d7b5efcf996308"
+        "plcIo": "5cb1d33193f99965ef67eda7a384bd05898e7d9c865fe1a8f3d7b5efcf996308",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 1,
@@ -134,7 +136,8 @@
         "bom": "80979de60601460a799aeeb71800780cb470114db74be868e00761ad17d6c345",
         "wires": "c08e200af4db6e1a9aeb6ff2711c46328748271fba2055b96eeacd98d038d78c",
         "terminals": "cbbaad833a9af0d0fb77a46274d3c7205b74672272c7d19912c7e7966b7411b1",
-        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e"
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
@@ -178,7 +181,8 @@
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
         "wires": "22e7d7a296f2029f337629b0330b06a2c259ff53635a4f74a0a23ea572d593a4",
         "terminals": "a357d035462eb67efc79e03838880da56658369ef75a1fdd8a73f1008840e5c0",
-        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e"
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 1,
@@ -222,7 +226,8 @@
         "bom": "f8e218aee0028fdcfb0c463edce7bc4168870a381e53c102db354d7f74eb3919",
         "wires": "d978d43c1e4e9cad200e41358cadfde688934f97c21ffa5308e62f505c2e5029",
         "terminals": "9311a6358282cf726bc48c211ea2f73429603952fca50e7de3fff9e41a98d25e",
-        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e"
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 2,
@@ -266,7 +271,8 @@
         "bom": "c0dc985bcb054eb60a42dc7d0e7b4f3241d998d78034b8afd8ba6c5313868d6a",
         "wires": "98d86e3e5ea7de28d52d7d5bdf0d2b3cceb957bab5d2f60aa93979d0235da487",
         "terminals": "fd2260f8de14164452f60db50e799b350feddb77da920250efa1f75510535b76",
-        "plcIo": "d8d191c82092aae806d253c54eba88f5d279ee0646329fcfa80bf9f4ca4c2c60"
+        "plcIo": "d8d191c82092aae806d253c54eba88f5d279ee0646329fcfa80bf9f4ca4c2c60",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
@@ -310,7 +316,8 @@
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
         "wires": "763968feee6b2d95f49336dc456bb59026aff48d0e6751194d9cf0587eb5424a",
         "terminals": "b96cf2d7bc068c7227a1eaf00563c22208c592a5ab18d2cc223ac6e837cdefbc",
-        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e"
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
@@ -337,7 +344,7 @@
       "topologyId": "dc-two-branch-terminal-distribution",
       "role": "standalone-example",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
-      "revision": "1.7",
+      "revision": "1.8",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -352,9 +359,10 @@
       "topologySha256": "06da93d6d42244f88c2add20dfe076307882b4c79687cdcb75863687ce8978ca",
       "csvSha256": {
         "bom": "fae6357948d34872d4981d47d5e558ce232cadda823114a66b6e224f998d4b65",
-        "wires": "57e64276d077535b51b7782ac0023f55c278be734dfca7992e4b4630ff915dac",
+        "wires": "646371290f61250853d47e65547ccc02715d0da8ac3f80ee18c52fbac4c3a1a1",
         "terminals": "9ec2002f0728f55627a7565a30b3801ee81e5697536e1f608d7d0e0ed1b98f97",
-        "plcIo": "d9f20fd7b2daa7f9156e1484a33d286751266c6a3103a295b372199285cde27b"
+        "plcIo": "d9f20fd7b2daa7f9156e1484a33d286751266c6a3103a295b372199285cde27b",
+        "cables": "26c11a290a9a23b7eb75be0c79554a8a71a6d62e7d96436440f004afd3353852"
       },
       "metrics": {
         "sheetCount": 11,
