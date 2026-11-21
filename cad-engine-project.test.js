@@ -431,7 +431,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.locator('[data-action="fit"]').click();
     const zoomPoint = await freeDraftingPage.locator('#drawing').evaluate(node => {
       const bounds = node.getBoundingClientRect();
-      return { x: bounds.left + bounds.width * 0.28, y: bounds.top + bounds.height * 0.4 };
+      return { x: Math.round(bounds.left + bounds.width * 0.28), y: Math.round(bounds.top + bounds.height * 0.4) };
     });
     const worldAtZoomPoint = () => freeDraftingPage.locator('#drawing').evaluate((node, point) => {
       const world = new DOMPoint(point.x, point.y).matrixTransform(node.getScreenCTM().inverse());
@@ -442,7 +442,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.mouse.wheel(0, -120);
     await freeDraftingPage.waitForFunction(() => document.querySelector('#zoomValue').textContent !== '100%');
     const afterZoom = await worldAtZoomPoint();
-    assert.ok(Math.hypot(afterZoom.x - beforeZoom.x, afterZoom.y - beforeZoom.y) < 0.01);
+    assert.ok(Math.hypot(afterZoom.x - beforeZoom.x, afterZoom.y - beforeZoom.y) < 0.01, JSON.stringify({ beforeZoom, afterZoom }));
     await freeDraftingPage.setViewportSize({ width: 1120, height: 720 });
     await freeDraftingPage.keyboard.press('Control+Shift+S');
     await freeDraftingPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
