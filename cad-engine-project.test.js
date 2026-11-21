@@ -235,6 +235,9 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       assert.equal(await copyPage.locator('#projectTree [data-section-row]').count(), 4, entry.title + ' opens with the A1–A4 project sections');
       await copyPage.locator('#projectTree [data-sheet="' + sheetId + '"]').click();
       const drawn = copyPage.locator('#userDrawings [data-object="' + component.id + '"]');
+      const inheritedGraphics = await copyPage.locator('#sheetDesign > :not(:first-child):not(#userDrawings):not(#customSheetFrame)')
+        .evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).display !== 'none').length);
+      assert.equal(inheritedGraphics, 0, entry.title + ' shows only its native drawing content');
       await drawn.dispatchEvent('click', { bubbles: true });
       const color = component.stroke === '#4b367c' ? '#21645e' : '#4b367c';
       await copyPage.locator('[data-style-object="' + component.id + '"][data-drawing-style="stroke"]').evaluate((input, value) => {

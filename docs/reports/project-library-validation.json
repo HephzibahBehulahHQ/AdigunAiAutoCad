@@ -18,9 +18,9 @@
       "id": "relay-contactor-24v",
       "title": "24 V DC relay-operated contactor coil",
       "topologyId": "relay-contactor-control",
-      "role": "standalone-example",
+      "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
-      "revision": "1.1",
+      "revision": "1.2",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -30,9 +30,9 @@
         "zeroGeometryErrors": true
       },
       "metrics": {
-        "sheetCount": 1,
-        "authoredSheetCount": 1,
-        "contentObjectCount": 20,
+        "sheetCount": 11,
+        "authoredSheetCount": 11,
+        "contentObjectCount": 114,
         "emptyContentSheetIds": [],
         "componentCount": 4,
         "wireCount": 13,

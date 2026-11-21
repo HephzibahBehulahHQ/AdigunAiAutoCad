@@ -12,7 +12,7 @@
       "title": "24 V DC relay-operated contactor coil",
       "topologyId": "relay-contactor-control",
       "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
-      "role": "standalone-example"
+      "role": "multi-sheet-reference-package"
     },
     {
       "id": "ifm-sensor-plc-input",

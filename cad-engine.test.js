@@ -786,6 +786,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
 
   const project = parsed.project;
   const analysis = engine.analyze(project.objects);
+  assert.equal(project.sheets.length, 11);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
     [4, 13, 0, 0]
@@ -807,6 +808,15 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const wireList = engine.wireList(project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
   assert.equal(wireList.rows.length, 13);
+  const schedule = project.objects.filter(object => object.sheetId === 'relay-wire-schedule' && object.text?.startsWith('W-'));
+  assert.deepEqual(schedule.map(object => object.text.split(' | ')[0]), wireList.rows.map(row => row.wireId));
+  const layout = project.objects.filter(object => object.sheetId === 'relay-terminal-layout' && object.deviceTag);
+  assert.deepEqual(layout.map(object => [object.deviceTag, object.manufacturerPartNumber]), [['X1', '3210567'], ['X3', '3209510']]);
+  const copy = engine.copyExampleProject(project, 'relay-package-copy', 'Editable relay reference');
+  const editable = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(editable.valid, true, editable.errors.join(' '));
+  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0002');
+  assert.deepEqual(engine.analyzeProject(editable.project).globalNets, engine.analyzeProject(project).globalNets);
 
   const savedAgain = engine.serializeProject(project);
   const reopened = engine.parseProject(savedAgain);
