@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.1",
+  "revision": "2.2",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -95,6 +95,18 @@
       "id": "ifs204-field-interface",
       "number": "A2/014",
       "name": "IFS204 field cable terminal interface",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "remote-status-relay",
+      "number": "A2/015",
+      "name": "Q0.1 remote status relay coil",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "remote-status-terminals",
+      "number": "A2/016",
+      "name": "XT6 dry changeover output",
       "projectSectionId": "A2"
     }
   ],
@@ -2271,6 +2283,318 @@
       "y": 635,
       "text": "W-B1 core IDs 1, 3 and 4 match the sensor pins shown on A2/003. Cable selection remains open.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k2",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K2",
+      "x": 520,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "remote-status-relay"
+    },
+    {
+      "id": "q1-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 444,
+      "x1": 710,
+      "y1": 444,
+      "x2": 750,
+      "y2": 520,
+      "potential": "Q0.1 remote status command",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "q1-relay-send",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 750,
+      "y": 520,
+      "x1": 750,
+      "y1": 520,
+      "x2": 830,
+      "y2": 520,
+      "potential": "Q0.1 remote status command",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "q1-relay-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 210,
+      "y": 350,
+      "x1": 210,
+      "y1": 350,
+      "x2": 450,
+      "y2": 350,
+      "potential": "Q0.1 remote status command",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k2-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 690,
+      "y": 320,
+      "x1": 690,
+      "y1": 320,
+      "x2": 690,
+      "y2": 520,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k2-return-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 210,
+      "y": 310,
+      "x1": 210,
+      "y1": 310,
+      "x2": 450,
+      "y2": 310,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x16",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X16",
+      "x": 500,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "1",
+        "marking": "K2 common",
+        "comment": ""
+      },
+      "sheetId": "remote-status-terminals"
+    },
+    {
+      "id": "dry-11-send",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 590,
+      "y": 330,
+      "x1": 590,
+      "y1": 330,
+      "x2": 805,
+      "y2": 330,
+      "potential": "K2 common",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "dry-11-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-terminals",
+      "x": 210,
+      "y": 240,
+      "x1": 210,
+      "y1": 240,
+      "x2": 465,
+      "y2": 240,
+      "potential": "K2 common",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x16-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 575,
+      "y": 244,
+      "text": "X16:2 · common",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x17",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X17",
+      "x": 500,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "2",
+        "marking": "K2 normally closed",
+        "comment": ""
+      },
+      "sheetId": "remote-status-terminals"
+    },
+    {
+      "id": "dry-12-send",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 590,
+      "y": 305,
+      "x1": 590,
+      "y1": 305,
+      "x2": 805,
+      "y2": 305,
+      "potential": "K2 normally closed",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "dry-12-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-terminals",
+      "x": 210,
+      "y": 345,
+      "x1": 210,
+      "y1": 345,
+      "x2": 465,
+      "y2": 345,
+      "potential": "K2 normally closed",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x17-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 575,
+      "y": 349,
+      "text": "X17:2 · normally closed",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x18",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X18",
+      "x": 500,
+      "y": 450,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "3",
+        "marking": "K2 normally open",
+        "comment": ""
+      },
+      "sheetId": "remote-status-terminals"
+    },
+    {
+      "id": "dry-14-send",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 590,
+      "y": 355,
+      "x1": 590,
+      "y1": 355,
+      "x2": 805,
+      "y2": 355,
+      "potential": "K2 normally open",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "dry-14-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-terminals",
+      "x": 210,
+      "y": 450,
+      "x1": 210,
+      "y1": 450,
+      "x2": 465,
+      "y2": 450,
+      "potential": "K2 normally open",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x18-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 575,
+      "y": 454,
+      "text": "X18:2 · normally open",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-relay-title",
+      "kind": "text",
+      "sheetId": "remote-status-relay",
+      "x": 110,
+      "y": 108,
+      "text": "K2 · REMOTE STATUS RELAY OUTPUT",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-relay-coil",
+      "kind": "text",
+      "sheetId": "remote-status-relay",
+      "x": 110,
+      "y": 455,
+      "text": "A1 X12:3 / DQ a.1 / Q0.1 feeds K2:A1. K2:A2 returns to PS1 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-relay-connection",
+      "kind": "text",
+      "sheetId": "remote-status-relay",
+      "x": 110,
+      "y": 500,
+      "text": "K2 changeover terminals 11, 12 and 14 route separately to XT6 on A2/016.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-terminals-title",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 110,
+      "y": 108,
+      "text": "XT6 · DRY CHANGEOVER OUTPUT",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-terminals-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 110,
+      "y": 545,
+      "text": "XT6 provides common, normally closed and normally open contact boundaries. External supply and load are unassigned.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-terminals-scope",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 110,
+      "y": 590,
+      "text": "The static net model preserves each contact terminal separately. Relay actuation is outside scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-remote-status-output",
+      "kind": "text",
+      "sheetId": "plc-inputs",
+      "x": 110,
+      "y": 960,
+      "text": "Q0.1 drives the K2 remote status relay. The output function is assigned in PLC logic outside this example.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -3449,6 +3773,166 @@
             "direction": "left",
             "targetSheetId": "ifs204-field-interface",
             "targetRef": "X15"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-q1-relay",
+      "name": "Q0.1 remote status command",
+      "endpoints": [
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "q1-relay-send",
+          "point": {
+            "x": 830,
+            "y": 520
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "q1-relay-receive",
+          "point": {
+            "x": 210,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k2-return",
+      "name": "K2 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "k2-return-send",
+          "point": {
+            "x": 690,
+            "y": 520
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "k2-return-receive",
+          "point": {
+            "x": 210,
+            "y": 310
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry-11",
+      "name": "K2 common",
+      "endpoints": [
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "dry-11-send",
+          "point": {
+            "x": 805,
+            "y": 330
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-terminals",
+            "targetRef": "X16"
+          }
+        },
+        {
+          "sheetId": "remote-status-terminals",
+          "wireId": "dry-11-receive",
+          "point": {
+            "x": 210,
+            "y": 240
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry-12",
+      "name": "K2 normally closed",
+      "endpoints": [
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "dry-12-send",
+          "point": {
+            "x": 805,
+            "y": 305
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-terminals",
+            "targetRef": "X17"
+          }
+        },
+        {
+          "sheetId": "remote-status-terminals",
+          "wireId": "dry-12-receive",
+          "point": {
+            "x": 210,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry-14",
+      "name": "K2 normally open",
+      "endpoints": [
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "dry-14-send",
+          "point": {
+            "x": 805,
+            "y": 355
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-terminals",
+            "targetRef": "X18"
+          }
+        },
+        {
+          "sheetId": "remote-status-terminals",
+          "wireId": "dry-14-receive",
+          "point": {
+            "x": 210,
+            "y": 450
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
           }
         }
       ]
