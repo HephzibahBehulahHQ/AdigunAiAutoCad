@@ -1845,7 +1845,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         const sheets=Number.isInteger(metrics?.sheetCount)?metrics.sheetCount+' '+(metrics.sheetCount===1?'sheet':'sheets'):'';
         const status=metrics?(validation.status==='passed'?'Model checks passed':'Model checks require review'):'Validation unavailable';
         const complexity=metrics?[metrics.componentCount+' components',metrics.wireCount+' wire segments'].join(' · '):'';
-        const keywords=[entry.title,entry.role,entry.id,entry.topologyId,entry.domain,entry.standardProfile,sheets,status,complexity].join(' ').toLowerCase();
+        const connectedSheets=Number.isInteger(metrics?.connectedSheetCount)?metrics.connectedSheetCount+' electrically connected sheets':'';
+        const scaleStatus=metrics&&typeof validation.releaseScale?.qualified==='boolean'
+          ?(validation.releaseScale.qualified?'Meets project sheet targets':'Below project sheet targets'):'';
+        const keywords=[entry.title,entry.role,entry.id,entry.topologyId,entry.domain,entry.standardProfile,sheets,connectedSheets,status,scaleStatus,complexity].join(' ').toLowerCase();
         if(!terms.every(term=>keywords.includes(term)))return;
         const nextGroup=entry.role==='multi-sheet-reference-package'?'Multi-sheet reference packages':'Standalone project examples';
         if(nextGroup!==group){
@@ -1861,7 +1864,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         button.setAttribute('role','listitem');
         button.dataset.exampleProject=entry.id;
         button.setAttribute('aria-label','Open '+entry.title+' as an editable copy');
-        const description=[entry.domain,entry.standardProfile,sheets,complexity,status].filter(Boolean).join(' · ');
+        const description=[entry.domain,entry.standardProfile,sheets,connectedSheets,complexity,status,scaleStatus].filter(Boolean).join(' · ');
         button.setAttribute('aria-description',description);
         button.title=description;
         const preview=metrics?renderExamplePreview(validation.wirePreview):null;
@@ -1873,7 +1876,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         title.textContent=entry.title;
         const metadata=document.createElement('small');
         metadata.style.display='block';
-        metadata.textContent=entry.domain||'';
+        metadata.textContent=[entry.domain,scaleStatus].filter(Boolean).join(' · ');
         if(metadata.textContent)title.append(metadata);
         const detail=document.createElement('span');
         detail.className='detail';
