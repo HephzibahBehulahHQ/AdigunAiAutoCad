@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 7,
-    "validatedArtifactCount": 7,
-    "distinctTopologyCount": 5,
+    "projectArtifactCount": 8,
+    "validatedArtifactCount": 8,
+    "distinctTopologyCount": 6,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -321,6 +321,49 @@
         "bomRowCount": 6,
         "wireListRowCount": 38,
         "terminalListRowCount": 12
+      },
+      "errors": []
+    },
+    {
+      "id": "sitop-24v-dc-distribution",
+      "title": "SITOP 24 V DC two-branch terminal distribution",
+      "topologyId": "dc-two-branch-terminal-distribution",
+      "role": "standalone-example",
+      "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "zeroGeometryErrors": true
+      },
+      "topologySha256": "97017694a5ffd15ea050c030a7c542d8546230d0410f179978ad1e20398f8a91",
+      "csvSha256": {
+        "bom": "8007849fcb8b8dc42947d71ec47194d98aa0fd6b64f1df6b389b063f49b55f28",
+        "wires": "addcca012e4b8ec17db228ca58ab5bdacbcecec91ef689a6f5f16630051e8c18",
+        "terminals": "f30d4777d7ef6593d4c7e8bc929ed2f2c358876885fb735819415f8b10cd7ade"
+      },
+      "metrics": {
+        "sheetCount": 2,
+        "authoredSheetCount": 2,
+        "connectedSheetCount": 2,
+        "contentObjectCount": 24,
+        "emptyContentSheetIds": [],
+        "componentCount": 5,
+        "wireCount": 10,
+        "netCount": 4,
+        "globalNetCount": 2,
+        "crossSheetConnectionCount": 2,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 2,
+        "wireListRowCount": 10,
+        "terminalListRowCount": 8
       },
       "errors": []
     }

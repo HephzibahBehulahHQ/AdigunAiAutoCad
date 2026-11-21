@@ -1,0 +1,404 @@
+{
+  "product": "AdigunAiAutoCad",
+  "project": "SITOP 24 V DC two-branch terminal distribution",
+  "revision": "1.0",
+  "description": "Source-backed DC output and parallel terminal branches for two field loads.",
+  "activeSheet": "supply",
+  "theme": "light",
+  "zoom": 100,
+  "view": {
+    "x": 0,
+    "y": 0,
+    "w": 1200,
+    "h": 900
+  },
+  "sheets": [
+    {
+      "id": "supply",
+      "number": "A2/001",
+      "name": "DC supply output",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "distribution",
+      "number": "A2/002",
+      "name": "Two-branch DC terminal distribution",
+      "projectSectionId": "A2"
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 360,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "marking": "24 V DC source",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x1",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X1",
+      "x": 600,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "Branch A +24 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x2",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X2",
+      "x": 600,
+      "y": 360,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "Branch B +24 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x3",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X3",
+      "x": 600,
+      "y": 580,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "3",
+        "marking": "Branch A 0 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x4",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X4",
+      "x": 600,
+      "y": 700,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "4",
+        "marking": "Branch B 0 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "id": "positive-supply",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 450,
+      "y": 260,
+      "x1": 450,
+      "y1": 260,
+      "x2": 700,
+      "y2": 260,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-trunk",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 180,
+      "y": 240,
+      "x1": 180,
+      "y1": 240,
+      "x2": 400,
+      "y2": 240,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-branch-a",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 240,
+      "x1": 400,
+      "y1": 240,
+      "x2": 565,
+      "y2": 240,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-link",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 240,
+      "x1": 400,
+      "y1": 240,
+      "x2": 400,
+      "y2": 360,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-branch-b",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 360,
+      "x1": 400,
+      "y1": 360,
+      "x2": 565,
+      "y2": 360,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "return-supply",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 450,
+      "y": 320,
+      "x1": 450,
+      "y1": 320,
+      "x2": 700,
+      "y2": 320,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-trunk",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 180,
+      "y": 580,
+      "x1": 180,
+      "y1": 580,
+      "x2": 400,
+      "y2": 580,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-branch-a",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 580,
+      "x1": 400,
+      "y1": 580,
+      "x2": 565,
+      "y2": 580,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-link",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 580,
+      "x1": 400,
+      "y1": 580,
+      "x2": 400,
+      "y2": 700,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-branch-b",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 700,
+      "x1": 400,
+      "y1": 700,
+      "x2": 565,
+      "y2": 700,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "supply-title",
+      "kind": "text",
+      "sheetId": "supply",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "PS1 · SITOP PSU100C DC OUTPUT"
+    },
+    {
+      "id": "supply-scope",
+      "kind": "text",
+      "sheetId": "supply",
+      "x": 110,
+      "y": 470,
+      "stroke": "#13263b",
+      "text": "Scope: static DC output and terminal distribution. Input source, PE wiring and protection are outside this example."
+    },
+    {
+      "id": "supply-identity",
+      "kind": "text",
+      "sheetId": "supply",
+      "x": 110,
+      "y": 515,
+      "stroke": "#13263b",
+      "text": "PS1 is Siemens 6EP1332-5BA00. Use its source record for the input and output ratings."
+    },
+    {
+      "id": "distribution-title",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "XT1 · TWO-BRANCH DC DISTRIBUTION"
+    },
+    {
+      "id": "branch-a-positive",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 675,
+      "y": 244,
+      "stroke": "#13263b",
+      "text": "A · +24 V"
+    },
+    {
+      "id": "branch-b-positive",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 675,
+      "y": 364,
+      "stroke": "#13263b",
+      "text": "B · +24 V"
+    },
+    {
+      "id": "branch-a-return",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 675,
+      "y": 584,
+      "stroke": "#13263b",
+      "text": "A · 0 V"
+    },
+    {
+      "id": "branch-b-return",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 675,
+      "y": 704,
+      "stroke": "#13263b",
+      "text": "B · 0 V"
+    },
+    {
+      "id": "distribution-scope",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 110,
+      "y": 815,
+      "stroke": "#13263b",
+      "text": "The right-hand pins are field boundaries. Loads, branch protection and conductor sizing are outside this example."
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "dc-positive",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "positive-supply",
+          "point": {
+            "x": 700,
+            "y": 260
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "distribution"
+          }
+        },
+        {
+          "sheetId": "distribution",
+          "wireId": "positive-trunk",
+          "point": {
+            "x": 180,
+            "y": 240
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dc-return",
+      "name": "0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "return-supply",
+          "point": {
+            "x": 700,
+            "y": 320
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "distribution"
+          }
+        },
+        {
+          "sheetId": "distribution",
+          "wireId": "return-trunk",
+          "point": {
+            "x": 180,
+            "y": 580
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    }
+  ],
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}

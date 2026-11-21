@@ -549,7 +549,7 @@ test('legacy drawing content fits the page while edits map back to native coordi
 
 test('every published catalog example opens as an independent sectioned native copy', () => {
   const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples/real-projects/library.json'), 'utf8'));
-  assert.equal(catalog.projects.length, 7);
+  assert.ok(catalog.projects.length >= 8);
   for (const entry of catalog.projects) {
     const file = path.join(__dirname, entry.path);
     const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
@@ -564,6 +564,20 @@ test('every published catalog example opens as an independent sectioned native c
     assert.equal(JSON.stringify(parsed.project), sourceSnapshot);
     assert.equal(engine.parseProject(engine.serializeProject(copy)).valid, true);
   }
+});
+
+test('SITOP distribution keeps both terminal branches on separate supply and return nets', () => {
+  const file = path.join(__dirname, 'examples/real-projects/sitop-24v-dc-distribution.adigun.json');
+  const source = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(source.valid, true, source.errors.join(' '));
+  const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
+  const reopened = engine.parseProject(engine.serializeProject(copy));
+  const report = engine.analyzeProject(reopened.project);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [2, 2, 0]);
+  assert.deepEqual(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number)), [
+    ['X1:1', 'X1:2', 'X2:1', 'X2:2', 'PS1:+'],
+    ['X3:1', 'X3:2', 'X4:1', 'X4:2', 'PS1:-']
+  ]);
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {

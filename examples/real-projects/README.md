@@ -219,6 +219,12 @@ For A1/091, ifm lists PN2070-02 MTTF as 129 years; this product datum is not a p
 For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000-6-3; no project compliance or test result is claimed.
 
 
+## SITOP 24 V DC two-branch distribution
+
+Open **SITOP 24 V DC two-branch terminal distribution** from Project Explorer. A2/001 contains the verified SITOP PSU100C DC output. A2/002 contains two field branches on four Phoenix Contact PT 2,5 terminals in strip XT1. Two cross-sheet links carry the separate +24 V and 0 V nets. Move a terminal on A2/002 and the editor carries the attached wire endpoint with it.
+
+The field-facing pins are the example boundaries. The model covers static DC distribution and leaves the supply input, PE wiring, loads, branch protection and conductor sizing outside its scope. [SITOP component record](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md)
+
 ## Project library validation
 
 `library.json` indexes the source-backed examples and their distinct electrical topologies. Run `node scripts/project-library-validation.js --write` to regenerate the report and `node scripts/project-library-validation.js --check` to check it against the current files and CAD engine.
