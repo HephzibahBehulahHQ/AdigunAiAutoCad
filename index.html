@@ -169,7 +169,7 @@
       for(let index=first;index<=last;index+=1){
         const tick=index*step,at=offset+tick*transform.scale,label=Number(tick.toPrecision(10));
         const path=horizontal?'M'+at+' '+(view.y+band)+'v'+(-4*pixel):'M'+(view.x+band)+' '+at+'h'+(-4*pixel);
-        const x=horizontal?at+2*pixel:view.x+2*pixel,y=horizontal?view.y+11*pixel:at-2*pixel;
+        const x=horizontal?at+2*pixel:view.x+11*pixel,y=horizontal?view.y+11*pixel:at-2*pixel;
         markup+='<path d="'+path+'" stroke="#53677d" stroke-width="'+pixel+'"/>'
           +'<text x="'+x+'" y="'+y+'" font-size="'+9*pixel+'"'+(horizontal?'':' transform="rotate(-90 '+x+' '+y+')"')+'>'+label+'</text>';
       }
@@ -213,6 +213,36 @@
     state.view=view;
     applyView();
     persist();
+  }
+  const componentFootprints=new Map();
+  const footprintSurface=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  footprintSurface.setAttribute('aria-hidden','true');
+  footprintSurface.style.cssText='position:absolute;width:0;height:0;visibility:hidden;pointer-events:none';
+  document.body.append(footprintSurface);
+  function componentBounds(object){
+    const definition=window.AdigunCADEngine.component(object.componentId);
+    const item=symbolCatalog.find(entry=>entry.componentId===object.componentId);
+    if(!definition||!item)return null;
+    const reference=object.ref||item.tag,key=definition.id+'\n'+reference;
+    let local=componentFootprints.get(key);
+    if(!local){
+      const glyph=buildCatalogGlyph({id:'footprint',x:0,y:0,ref:reference},item,'#164eac',1);
+      markComponentPins(glyph,definition);
+      footprintSurface.append(glyph);
+      try{
+        const bounds=glyph.getBBox();
+        local={x:bounds.x,y:bounds.y,width:bounds.width,height:bounds.height};
+      }finally{glyph.remove();}
+      componentFootprints.set(key,local);
+    }
+    const scale=object.symbolScale??1;
+    const matrix=new DOMMatrix().translate(object.x,object.y).rotate(object.rotation||0).scale(scale);
+    const stroke=(object.strokeWidth||1.8)*scale/2;
+    const corners=[[local.x,local.y],[local.x+local.width,local.y],[local.x,local.y+local.height],[local.x+local.width,local.y+local.height]]
+      .map(([x,y])=>new DOMPoint(x,y).matrixTransform(matrix));
+    const left=Math.min(...corners.map(point=>point.x))-stroke,right=Math.max(...corners.map(point=>point.x))+stroke;
+    const top=Math.min(...corners.map(point=>point.y))-stroke,bottom=Math.max(...corners.map(point=>point.y))+stroke;
+    return {left,right,top,bottom,width:right-left,height:bottom-top,cx:(left+right)/2,cy:(top+bottom)/2};
   }
   function togglePrintFrame(){
     const sheet=state.projectModel?.sheets.find(item=>item.id===state.sheet);
@@ -445,7 +475,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     pushUndo(snapshot);renderObjects();persist();refreshSelectedProperties();notify('Object position updated.');
   }
   function selectionCanAlign(){return state.selectedObjectIds.length>1&&state.selectedObjectIds.every(function(id){const obj=state.objects.find(function(item){return item.id===id;});return obj&&obj.kind!=='wire';});}
-  function objectBounds(obj){if(obj&&obj.kind==='component-instance'){const definition=window.AdigunCADEngine.component(obj.componentId);if(!definition)return null;const rotated=obj.rotation===90||obj.rotation===270,scale=obj.symbolScale??1,width=(rotated?definition.symbol.height:definition.symbol.width)*scale,height=(rotated?definition.symbol.width:definition.symbol.height)*scale;return{left:obj.x-width/2,right:obj.x+width/2,top:obj.y-height/2,bottom:obj.y+height/2,width:width,height:height,cx:obj.x,cy:obj.y};}if(obj&&obj.kind==='circle'){const radius=Math.max(2,Math.hypot(obj.x2-obj.x,obj.y2-obj.y));return{left:obj.x-radius,right:obj.x+radius,top:obj.y-radius,bottom:obj.y+radius,width:radius*2,height:radius*2,cx:obj.x,cy:obj.y};}const xs=[],ys=[];[['x','y'],['x1','y1'],['x2','y2']].forEach(function(pair){if(Number.isFinite(obj[pair[0]])&&Number.isFinite(obj[pair[1]])){xs.push(obj[pair[0]]);ys.push(obj[pair[1]]);}});(obj.bends||obj.points||[]).forEach(function(point){if(Number.isFinite(point.x)&&Number.isFinite(point.y)){xs.push(point.x);ys.push(point.y);}});if(!xs.length)return null;const left=Math.min.apply(null,xs),right=Math.max.apply(null,xs),top=Math.min.apply(null,ys),bottom=Math.max.apply(null,ys);return{left:left,right:right,top:top,bottom:bottom,width:right-left,height:bottom-top,cx:(left+right)/2,cy:(top+bottom)/2};}
+  function objectBounds(obj){if(obj?.kind==='component-instance')return componentBounds(obj);if(obj&&obj.kind==='circle'){const radius=Math.max(2,Math.hypot(obj.x2-obj.x,obj.y2-obj.y));return{left:obj.x-radius,right:obj.x+radius,top:obj.y-radius,bottom:obj.y+radius,width:radius*2,height:radius*2,cx:obj.x,cy:obj.y};}const xs=[],ys=[];[['x','y'],['x1','y1'],['x2','y2']].forEach(function(pair){if(Number.isFinite(obj[pair[0]])&&Number.isFinite(obj[pair[1]])){xs.push(obj[pair[0]]);ys.push(obj[pair[1]]);}});(obj.bends||obj.points||[]).forEach(function(point){if(Number.isFinite(point.x)&&Number.isFinite(point.y)){xs.push(point.x);ys.push(point.y);}});if(!xs.length)return null;const left=Math.min.apply(null,xs),right=Math.max.apply(null,xs),top=Math.min.apply(null,ys),bottom=Math.max.apply(null,ys);return{left:left,right:right,top:top,bottom:bottom,width:right-left,height:bottom-top,cx:(left+right)/2,cy:(top+bottom)/2};}
   function focusObjectInView(obj,zoomToFit){const source=objectBounds(obj);if(!source){notify('This object has no navigable drawing bounds.');return;}const transform=state.drawingTransform||{scale:1,x:0,y:0};const bounds={width:source.width*transform.scale,height:source.height*transform.scale,cx:source.cx*transform.scale+transform.x,cy:source.cy*transform.scale+transform.y};if(zoomToFit){const page=activeCanvasSize(),width=Math.max(30,bounds.width*1.5),height=Math.max(30,bounds.height*1.5),fitZoom=Math.min(500,page.width*100/width,page.height*100/height);state.zoom=Math.max(10,Math.floor(fitZoom/5)*5);const viewWidth=page.width*100/state.zoom,viewHeight=page.height*100/state.zoom;state.view={x:bounds.cx-viewWidth/2,y:bounds.cy-viewHeight/2,w:viewWidth,h:viewHeight};}else state.view={...state.view,x:bounds.cx-state.view.w/2,y:bounds.cy-state.view.h/2};applyView();persist();notify(zoomToFit?'Zoomed to drawing object.':'Drawing object centered in view.');}
   function applyGraphicDeltas(deltas,message){if(!selectionCanAlign())return;const changed=Object.keys(deltas).filter(function(id){return Math.abs(deltas[id].x)>1e-7||Math.abs(deltas[id].y)>1e-7;});if(!changed.length){notify('The selected geometry is already arranged that way.');return;}const snapshot=drawingHistoryEntry();changed.forEach(function(id){const obj=state.objects.find(function(item){return item.id===id;});if(obj)translateObjectGeometry(obj,deltas[id].x,deltas[id].y);});if(rejectNewComponentOverlap(snapshot,changed))return;pushUndo(snapshot);renderObjects();persist();notify(message);}
   function alignSelection(edge){if(!selectionCanAlign()){notify('Align applies to selected objects except wires, which must be routed separately.');return;}const anchor=objectBounds(state.objects.find(function(obj){return obj.id===state.selected;}));if(!anchor)return;const deltas={};state.selectedObjectIds.forEach(function(id){const bounds=objectBounds(state.objects.find(function(obj){return obj.id===id;}));if(!bounds)return;let dx=0,dy=0;if(edge==='left')dx=anchor.left-bounds.left;else if(edge==='center-x')dx=anchor.cx-bounds.cx;else if(edge==='right')dx=anchor.right-bounds.right;else if(edge==='top')dy=anchor.top-bounds.top;else if(edge==='center-y')dy=anchor.cy-bounds.cy;else if(edge==='bottom')dy=anchor.bottom-bounds.bottom;deltas[id]={x:dx,y:dy};});applyGraphicDeltas(deltas,'Selected geometry aligned.');}
@@ -613,7 +643,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     placementPreview.dataset.placementBlocked=String(Boolean(conflict));
   }
   function componentPlacementConflict(item,point){
-    const bounds=objectBounds({kind:'component-instance',componentId:item.componentId,x:point.x,y:point.y,rotation:0});
+    const bounds=objectBounds({kind:'component-instance',componentId:item.componentId,ref:nextComponentReference(item.tag),x:point.x,y:point.y,rotation:0});
     return state.objects.find(function(object){
       if(object.kind!=='component-instance')return false;
       return componentBoundsOverlap(bounds,objectBounds(object));
