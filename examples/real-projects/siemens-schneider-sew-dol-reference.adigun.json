@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "DOL motor feeder — 96-sheet reference project",
-  "revision": "A2/096",
-  "status": "Ninety-five authored sheets: source-backed schematic A2/001, scope A2/002, BOM A2/003, revision record A2/004, design basis A2/005, index A2/006, pin/net schedule A2/007, wire schedules A2/008–A2/009, source register A2/010, terminal references A2/011–A2/014, static control path A2/015, three-phase power path A2/016, application-input omissions register A2/017, KM1 coil demand reference A2/018, DOL seal-in path reference A2/019, KM1 AC-3 catalog rating reference A2/020, KM1 dimensional/mounting reference A2/021, KM1 terminal torque reference A2/022, KM1 terminal conductor-options reference A2/023, KM1 coil voltage-limits reference A2/024, KM1 AC-3 electrical durability reference A2/025, KM1 rated insulation voltage reference A2/026, KM1 rated impulse withstand voltage reference A2/027, KM1 operating-rate reference A2/028, KM1 signalling-circuit minimum switching reference A2/029, KM1 auxiliary-contact non-overlap-time reference A2/030, KM1 front-face IP20 reference A2/031, KM1 ambient-temperature reference A2/032, KM1 operating-altitude reference A2/033, KM1 environmental-classification reference A2/034, KM1 vibration-and-shock reference A2/035, KM1 mechanical-durability reference A2/036, KM1 rated-breaking-capacity reference A2/037, KM1 rated-making-capacity reference A2/038, KM1 conventional free-air thermal-current reference A2/039, KM1 power-dissipation reference A2/040, KM1 signalling-circuit rated-making-capacity reference A2/041, signalling-circuit frequency reference A2/042, KM1 rated short-time withstand current reference A2/043, and KM1 associated fuse ratings reference A2/044, and KM1 AC-1 rated operational current reference A2/045, and KM1 AC-1 electrical durability reference A2/046, and KM1 manufacturer-listed B10d reference A2/047, and KM1 mirror-contact designation reference A2/048, and KM1 opening/closing time reference A2/049, and KM1 coil time-constant reference A2/050, and KM1 coil inrush/hold-in power reference A2/051, and KM1 AC-3 motor power ratings reference A2/054, and M1 SEW motor nameplate data A2/055, and Q1 Siemens 3RV2011-0FA10 release reference A2/056. Five additional sheets remain unauthored. Educational reference only; not construction-ready. A2/057, Q1 Siemens 3RV2011-0FA10 typical endurance reference. A2/058, Q1 Siemens 3RV2011-0FA10 surge-voltage resistance reference. A2/059, Q1 Siemens 3RV2011-0FA10 ambient-condition reference. A2/060, Q1 Siemens 3RV2011-0FA10 operating-humidity reference. A2/061, Q1 Siemens 3RV2011-0FA10 installation-altitude reference. A2/062, Q1 Siemens 3RV2011-0FA10 rated operating-voltage reference. A2/063, Q1 Siemens 3RV2011-0FA10 rated operating-frequency reference. A2/064, Q1 Siemens 3RV2011-0FA10 short-circuit breaking-capacity reference. A2/065, Q1 Siemens 3RV2011-0FA10 operating short-circuit current breaking-capacity reference. A2/066, Q1 Siemens 3RV2011-0FA10 instantaneous short-circuit trip response reference. A2/067, Q1 Siemens 3RV2011-0FA10 AC-3 motor-power rating reference. A2/068, Q1 Siemens 3RV2011-0FA10 AC-3 operating-frequency reference. A2/069, Q1 Siemens 3RV2011-0FA10 AC-3 operational-current reference. A2/070, Q1 Siemens 3RV2011-0FA10 phase-failure-detection function reference. A2/071, Q1 Siemens 3RV2011-0FA10 dimensional and mounting reference. A2/072, Q1 Siemens 3RV2011-0FA10 ground-fault-detection function reference. A2/073, Q1 Siemens 3RV2011-0FA10 insulation-voltage reference. A2/074, Q1 Siemens 3RV2011-0FA10 front-face protection-class reference. A2/075, Q1 Siemens 3RV2011-0FA10 terminal protection-class reference. A2/076, Q1 Siemens 3RV2011-0FA10 shock-resistance reference. A2/077, Q1 Siemens 3RV2011-0FA10 ambient-temperature reference. A2/078, Q1 Siemens 3RV2011-0FA10 component net-weight reference. A2/079, Q1 Siemens 3RV2011-0FA10 global-warming-potential reference. A2/080, Q1 Siemens 3RV2011-0FA10 manufacturing GWP reference. A2/081, Q1 Siemens 3RV2011-0FA10 sales-stage GWP reference. A2/082, Q1 Siemens 3RV2011-0FA10 operation-stage GWP reference. A2/083, Q1 Siemens 3RV2011-0FA10 end-of-life GWP reference. A2/084, Q1 Siemens 3RV2011-0FA10 power-loss reference. A2/085, M1 SEW DRN63MS4 starting-current-ratio reference. A2/086, M1 SEW DRN63MS4 torque-ratio reference. A2/087, M1 catalog-derived starting-current reference. A2/088, M1 catalog-derived torque reference. A2/089, M1 mass and rotor-inertia reference. A2/090, M1 catalog-derived rotor kinetic-energy reference. A2/091, M1 rated-output arithmetic cross-check. A2/092, M1 230/400 V winding-voltage and star-connection reference. A2/093, M1 catalog efficiency at 50%, 75%, and 100% load. A2/094, M1 rated ambient-temperature and installation-altitude basis. A3/001 is a preliminary editable panel arrangement with an assumed 400 × 300 mm example backplate; verify mechanical fit, specified electrical clearances, heat, enclosure, wiring, and mounting before use.",
+  "revision": "A2/099",
+  "status": "100 authored sheets: legacy source sheets A2/001–A2/099 and preliminary editable panel layout A3/001. See the drawing index for the complete set. A2/097–A2/099 record open M1 installation, Q1 protection, and KM1 control-supply evidence. Educational reference only; construction approval is pending.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -602,6 +602,24 @@
       "id": "dol-reference-096",
       "number": "A2/096",
       "name": "M1 motor temperature-sensor options",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dol-reference-097",
+      "number": "A2/097",
+      "name": "M1 installation evidence register",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dol-reference-098",
+      "number": "A2/098",
+      "name": "Q1 protection review evidence register",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dol-reference-099",
+      "number": "A2/099",
+      "name": "KM1 control supply review evidence register",
       "projectSectionId": "A2"
     }
   ],
@@ -1305,7 +1323,7 @@
       "id": "dol-ref-002-line-05",
       "x": 120,
       "y": 384,
-      "text": "Progress: 97 authored sheets; three additional project sheets remain to the 100-sheet target. A3/001 adds a preliminary editable panel layout.",
+      "text": "Progress: 100 authored sheets. The drawing set meets its 100-sheet target. A3/001 adds a preliminary editable panel layout.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-002"
     },
@@ -3239,7 +3257,7 @@
       "y": 1370,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current state: 97 authored sheets; three additional sheets remain to the 100-sheet target."
+      "text": "Current state: 100 authored sheets. The drawing set meets its 100-sheet target."
     },
     {
       "kind": "text",
@@ -7619,7 +7637,7 @@
       "y": 1568,
       "stroke": "#13263b",
       "sheetId": "dol-reference-006",
-      "text": "A2/070 Q1 phase failure; A2/071 Q1 dimensions; A2/072 Q1 ground-fault function; A2/073 Q1 insulation voltage; A2/074 Q1 front-face IP; A2/075 Q1 terminal IP; A2/076 Q1 shock resistance. A2/077 Q1 ambient temperature. A2/078 Q1 net weight. A2/079 Q1 global warming potential. A2/080 Q1 manufacturing GWP. A2/081 Q1 sales-stage GWP. A2/082 Q1 operation-stage GWP. A2/083 Q1 end-of-life GWP. A2/084 Q1 power loss. A2/085 M1 starting-current ratio. A2/086 M1 torque ratios. A2/087 M1 derived starting current. A2/088 M1 derived torques. A2/089 M1 mass and inertia. A2/090 M1 rotor energy. A2/091 M1 rated output check; A2/092 M1 230/400 V star connection; A2/093 M1 load-point efficiency; A2/094 M1 nameplate conditions. A2/095 M1 thermal-class options.; A2/096 M1 temperature-sensor options."
+      "text": "A2/070 Q1 phase failure; A2/071 Q1 dimensions; A2/072 Q1 ground-fault function; A2/073 Q1 insulation voltage; A2/074 Q1 front-face IP; A2/075 Q1 terminal IP; A2/076 Q1 shock resistance. A2/077 Q1 ambient temperature. A2/078 Q1 net weight. A2/079 Q1 global warming potential. A2/080 Q1 manufacturing GWP. A2/081 Q1 sales-stage GWP. A2/082 Q1 operation-stage GWP. A2/083 Q1 end-of-life GWP. A2/084 Q1 power loss. A2/085 M1 starting-current ratio. A2/086 M1 torque ratios. A2/087 M1 derived starting current. A2/088 M1 derived torques. A2/089 M1 mass and inertia. A2/090 M1 rotor energy. A2/091 M1 rated output check; A2/092 M1 230/400 V star connection; A2/093 M1 load-point efficiency; A2/094 M1 nameplate conditions. A2/095 M1 thermal-class options; A2/096 M1 temperature-sensor options; A2/097 M1 installation evidence register; A2/098 Q1 protection evidence; A2/099 KM1 control supply evidence."
     },
     {
       "kind": "text",
@@ -8084,7 +8102,7 @@
       "y": 1510,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "A2/061 | Q1 altitude; A2/062 | Q1 voltage; A2/063 | Q1 frequency; A2/064 | Q1 Icu; A2/065 | Q1 Ics; A2/066 | instantaneous trip response; A2/067 | Q1 AC-3 power; A2/068 | Q1 operating frequency; A2/069 | Q1 current; A2/070 | Q1 phase failure detection; A2/071 | Q1 dimensions and mounting; A2/072 | Q1 ground-fault detection; A2/073 | Q1 insulation voltage; A2/074 | Q1 front-face IP; A2/075 | Q1 terminal IP; A2/076 | Q1 shock resistance. A2/077 | Q1 ambient temperature. A2/078 | Q1 net weight. A2/079 | Q1 global warming potential. A2/080 | Q1 manufacturing GWP. A2/081 | Q1 sales-stage GWP. A2/082 | Q1 operation-stage GWP. A2/083 | Q1 end-of-life GWP. A2/084 | Q1 power loss. A2/085 | M1 starting-current ratio. A2/086 | M1 torque ratios. A2/087 | M1 derived starting current. A2/088 | M1 derived torques. A2/089 | M1 mass and inertia. A2/090 | M1 rotor-energy derivation. A2/091 | M1 output arithmetic cross-check; A2/092 | M1 winding voltage and connection; A2/093 | M1 load-point efficiency; A2/094 | rated ambient and altitude basis. A2/095 | M1 thermal-class options. A2/096 | M1 temperature-sensor options."
+      "text": "A2/061 | Q1 altitude; A2/062 | Q1 voltage; A2/063 | Q1 frequency; A2/064 | Q1 Icu; A2/065 | Q1 Ics; A2/066 | instantaneous trip response; A2/067 | Q1 AC-3 power; A2/068 | Q1 operating frequency; A2/069 | Q1 current; A2/070 | Q1 phase failure detection; A2/071 | Q1 dimensions and mounting; A2/072 | Q1 ground-fault detection; A2/073 | Q1 insulation voltage; A2/074 | Q1 front-face IP; A2/075 | Q1 terminal IP; A2/076 | Q1 shock resistance. A2/077 | Q1 ambient temperature. A2/078 | Q1 net weight. A2/079 | Q1 global warming potential. A2/080 | Q1 manufacturing GWP. A2/081 | Q1 sales-stage GWP. A2/082 | Q1 operation-stage GWP. A2/083 | Q1 end-of-life GWP. A2/084 | Q1 power loss. A2/085 | M1 starting-current ratio. A2/086 | M1 torque ratios. A2/087 | M1 derived starting current. A2/088 | M1 derived torques. A2/089 | M1 mass and inertia. A2/090 | M1 rotor-energy derivation. A2/091 | M1 output arithmetic cross-check; A2/092 | M1 winding voltage and connection; A2/093 | M1 load-point efficiency; A2/094 | rated ambient and altitude basis. A2/095 | M1 thermal-class options. A2/096 | M1 temperature-sensor options. A2/097 | M1 installation evidence register. A2/098 | Q1 protection evidence. A2/099 | KM1 control supply evidence."
     },
     {
       "kind": "rect",
@@ -11487,6 +11505,294 @@
       "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023, section 3.2.2, p. 66, https://download.sew-eurodrive.com/download/pdf/30590116.pdf (accessed 2026-11-15).",
       "stroke": "#13263b",
       "sheetId": "dol-reference-096"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-097-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 SEW-EURODRIVE DRN63MS4 · INSTALLATION EVIDENCE REGISTER",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Record the installed M1 nameplate and match its type designation to the motor order record.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "A2/094 | Compare measured site ambient and installation altitude with the nameplate basis.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Evidence pending: site measurements and any applicable manufacturer derating assessment.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A2/095 | Record the ordered winding thermal class from the nameplate or motor order record.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Evidence pending: installed M1 thermal class.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "A2/096 | Match the ordered sensor code and terminals to the delivered motor terminal diagram.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Evidence pending: fitted sensor option and terminal identification.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "Source trail: the three referenced sheets and their cited SEW-EURODRIVE catalog or nameplate evidence.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-097-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "This register records open checks. No installed values or suitability determination are recorded.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-097"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-098-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 SIEMENS SIRIUS 3RV2011-0FA10 · PROTECTION REVIEW EVIDENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "A2/016 | Trace the incoming phases from X1–X3 through Q1 and KM1 to M1.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "A2/017 | The recorded overload setting is unset. Collect the delivered motor nameplate and duty information.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "A2/064 | Icu is a component catalog rating. Record available short-circuit current at the installation point.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A2/065 | Ics is documented separately. Obtain the applicable component and combination evidence for review.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "A2/072 | Review upstream and ground-fault protection using the documented Q1 function limits.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Evidence pending: site fault-current basis, reviewed overload setting, and protective-device coordination.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-098-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Use the referenced sheets for the Siemens product evidence and the project model for terminal identities.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-098"
+    },
+    {
+      "kind": "rect",
+      "id": "dol-ref-099-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "KM1 SCHNEIDER ELECTRIC LC1D09BD · CONTROL SUPPLY REVIEW EVIDENCE",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "A2/017 | X5 and X6 are external +24 V DC and 0 V DC boundaries. Identify the actual supply and branch protection.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "A2/018 | Obtain applicable coil demand data for the ordered device and resolve the published power-value discrepancy.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "A2/019 | Trace the ON/OFF and seal-in references through S0, S1 and the KM1 auxiliary contact to the coil.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A2/024 | Collect measured or calculated coil-terminal voltage for comparison with the catalog operating limits.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Evidence pending: total branch load, source capacity, voltage at KM1 A1/A2, and protection details.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-099-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Use the referenced sheets for Schneider Electric product evidence and the project model for the static path.",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-099"
     }
   ]
 }
