@@ -454,6 +454,33 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       end: { instanceId: terminalIds[2], pinId: manualEnd.id }
     });
     assert.equal(engine.analyzeProject(manualSaved.project).openEndpointCount, 0);
+    const routedWire = wiringPage.locator('#userDrawings [data-object="' + manualWire.id + '"]');
+    const originalRoute = await routedWire.getAttribute('d');
+    await wiringPage.getByRole('button', { name: 'Properties', exact: true }).click();
+    await routedWire.dispatchEvent('click', { bubbles: true });
+    await wiringPage.getByRole('button', { name: 'Reroute wire', exact: true }).click();
+    await clickDrawingPoint(280, 200);
+    await wiringPage.keyboard.press('Escape');
+    assert.equal(await routedWire.getAttribute('d'), originalRoute, 'cancelling leaves the wire intact');
+    await routedWire.dispatchEvent('click', { bubbles: true });
+    await wiringPage.getByRole('button', { name: 'Reroute wire', exact: true }).click();
+    await clickDrawingPoint(280, 200);
+    await clickDrawingPoint(375, 225);
+    await wiringPage.getByRole('button', { name: 'Apply wire route' }).click();
+    const changedRoute = await routedWire.getAttribute('d');
+    assert.notEqual(changedRoute, originalRoute);
+    await wiringPage.locator('[data-action="undo"]').click();
+    assert.equal(await routedWire.getAttribute('d'), originalRoute);
+    await wiringPage.locator('[data-action="redo"]').click();
+    assert.equal(await routedWire.getAttribute('d'), changedRoute);
+    await wiringPage.keyboard.press('Control+Shift+S');
+    await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 2);
+    const reroutedProject = engine.parseProject(await wiringPage.evaluate(() => window.__savedProjectWrites[1]));
+    assert.equal(reroutedProject.valid, true, reroutedProject.errors.join(' '));
+    const reroutedWire = reroutedProject.project.objects.find(object => object.id === manualWire.id);
+    assert.deepEqual(reroutedWire.bends, [{ x: 280, y: 200 }, { x: 375, y: 225 }]);
+    assert.deepEqual(reroutedWire.pinAttachments, manualWire.pinAttachments);
+    assert.deepEqual(engine.analyzeProject(reroutedProject.project).globalNets, engine.analyzeProject(manualSaved.project).globalNets);
     if (process.env.CAD_SCREENSHOT_DIR) await wiringPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'connected-terminals.png') });
     await wiringPage.close({ runBeforeUnload: false });
 

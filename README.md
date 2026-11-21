@@ -21,6 +21,8 @@ Use **Wire** to click two pin anchors for an automatic orthogonal route. To draw
 
 Drag a selected catalog symbol's corner handle or edit **Symbol scale** in Properties to resize it proportionally. Attached wires follow the pins, and the editor rejects edits that introduce a component overlap. The manufacturer's dimensions remain available separately in Properties.
 
+To redraw a wire between its existing terminals, select the wire and choose **Reroute wire** in Properties. Click the drawing to set replacement bends, then press **Enter** or choose **Apply wire route**. Applying without bends restores the automatic route. Press **Esc** to cancel.
+
 Click the handle above a selected symbol to rotate it one quarter turn, or set **Rotation** in Properties. Attached wires follow the rotated pins.
 
 To join circuits across sheets, draw a wire with one free end on each sheet. Open **Electrical checks** on either sheet, select both ends under **Connect wire ends across sheets**, and name the connection. The resulting arrows open the corresponding sheets. Use **Remove link** under **Cross-sheet links on this sheet** to free the endpoints for reconnecting. Undo restores the link.
