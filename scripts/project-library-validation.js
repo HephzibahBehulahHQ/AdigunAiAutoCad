@@ -118,6 +118,37 @@ function checkCsvExports(project, reopened) {
   return { valid: errors.length === 0, fingerprints, errors };
 }
 
+function buildWirePreview(project) {
+  const sheets = Array.isArray(project.sheets) ? project.sheets : [];
+  const routes = new Map();
+  for (const wire of project.objects) {
+    if (wire.kind !== 'wire' || wire.hidden) continue;
+    const points = [wire.x1, wire.y1, wire.x2, wire.y2];
+    if (!points.every(Number.isFinite)) continue;
+    const sheetId = wire.sheetId || project.activeSheet || sheets[0]?.id || 'main';
+    if (!routes.has(sheetId)) routes.set(sheetId, []);
+    routes.get(sheetId).push(points);
+  }
+  const ordered = [...routes].sort((a, b) => b[1].length - a[1].length);
+  const selected = routes.has(project.activeSheet) ? [project.activeSheet, routes.get(project.activeSheet)] : ordered[0];
+  if (!selected) return null;
+  const [sheetId, segments] = selected;
+  const min = [Infinity, Infinity];
+  const max = [-Infinity, -Infinity];
+  for (const [x1, y1, x2, y2] of segments) {
+    min[0] = Math.min(min[0], x1, x2);
+    min[1] = Math.min(min[1], y1, y2);
+    max[0] = Math.max(max[0], x1, x2);
+    max[1] = Math.max(max[1], y1, y2);
+  }
+  const scale = 100 / Math.max(1, max[0] - min[0], max[1] - min[1]);
+  return {
+    sheetId,
+    sheetName: sheets.find(sheet => sheet.id === sheetId)?.name || sheetId,
+    segments: segments.map(points => points.map((coordinate, index) => Math.round((coordinate - min[index % 2]) * scale)).join(',')).join(' ')
+  };
+}
+
 function buildReport() {
   const manifest = readManifest();
   const { minimumSheetsPerProject, minimumConnectedSheetsPerProject } = manifest.scaleTarget;
@@ -189,6 +220,7 @@ function buildReport() {
       status: passed ? 'passed' : 'failed',
       checks,
       releaseScale,
+      wirePreview: buildWirePreview(project),
       topologySha256: roundTrip.hash,
       csvSha256: csv.fingerprints,
       metrics: {

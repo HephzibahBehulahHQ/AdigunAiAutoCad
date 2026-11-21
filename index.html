@@ -1275,6 +1275,27 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     openNativeProject(copy,entry.path);
     notify('Opened an independent editable copy. Save it locally under your project name when ready.');
   }
+  function renderExamplePreview(preview){
+    if(typeof preview?.segments!=='string'||!preview.segments)return null;
+    const canvas=document.createElement('canvas');
+    canvas.width=112;
+    canvas.height=112;
+    canvas.style.cssText='width:28px;height:28px;flex:none;background:#17293e;border-radius:3px';
+    canvas.setAttribute('aria-hidden','true');
+    const context=canvas.getContext('2d');
+    if(!context)return null;
+    context.strokeStyle='#83dbea';
+    context.lineWidth=3;
+    context.translate(6,6);
+    context.beginPath();
+    for(const segment of preview.segments.split(' ')){
+      const [x1,y1,x2,y2]=segment.split(',').map(Number);
+      context.moveTo(x1,y1);
+      context.lineTo(x2,y2);
+    }
+    context.stroke();
+    return canvas;
+  }
   async function renderEditableExampleProjects(query){
     const host=$('#editableExampleProjects');
     if(!host)return;
@@ -1315,9 +1336,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         const description=[entry.domain,entry.standardProfile,sheets,complexity,status].filter(Boolean).join(' · ');
         button.setAttribute('aria-description',description);
         button.title=description;
-        const folder=document.createElement('span');
-        folder.className='folder';
-        folder.textContent='▰';
+        const preview=metrics?renderExamplePreview(validation.wirePreview):null;
+        if(preview)button.style.height='auto';
         const number=document.createElement('b');
         number.textContent=String(index+1).padStart(2,'0');
         const title=document.createElement('span');
@@ -1330,7 +1350,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         const detail=document.createElement('span');
         detail.className='detail';
         detail.textContent=sheets?sheets+(validation.status==='passed'?' ✓':' !'):'Copy';
-        button.append(folder,number,title,detail);
+        if(preview)button.append(preview);
+        button.append(number,title,detail);
         button.addEventListener('click',async()=>{
           button.disabled=true;
           try{await openEditableExample(entry);}
