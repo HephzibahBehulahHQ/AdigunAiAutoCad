@@ -1245,7 +1245,28 @@
     return true;
   }
 
-  function component(id) { return COMPONENTS[id] || null; }
+  function customSymbolDefinition(symbol) {
+    if (!symbol || typeof symbol.id !== 'string' || !/^user-symbol-[a-z0-9-]+$/i.test(symbol.id)
+      || typeof symbol.name !== 'string' || !symbol.name.trim() || symbol.name.length > 80
+      || !Array.isArray(symbol.geometry) || !symbol.geometry.length || symbol.geometry.length > 500
+      || !symbol.geometry.every(shape => shape && ['line', 'rect', 'circle'].includes(shape.kind) && [shape.x, shape.y, shape.x2, shape.y2].every(finite))
+      || !Array.isArray(symbol.pins) || !symbol.pins.length || symbol.pins.length > 100
+      || !symbol.pins.every(pin => pin && typeof pin.number === 'string' && /^[a-z0-9:/._-]{1,24}$/i.test(pin.number) && finite(pin.x) && finite(pin.y))
+      || new Set(symbol.pins.map(pin => pin.number)).size !== symbol.pins.length) return null;
+    const points = symbol.geometry.flatMap(shape => [{ x: shape.x, y: shape.y }, { x: shape.x2, y: shape.y2 }]).concat(symbol.pins);
+    return {
+      id: symbol.id, name: symbol.name, model: symbol.name, manufacturer: '', manufacturerPartNumber: '',
+      family: 'user-authored', category: 'Project symbols', referencePrefix: 'X', instanceProperties: {}, sources: [],
+      symbol: { internalConnections: [], width: Math.max(...points.map(point => point.x)) - Math.min(...points.map(point => point.x)),
+        height: Math.max(...points.map(point => point.y)) - Math.min(...points.map(point => point.y)),
+        pins: symbol.pins.map(pin => ({ id: 'terminal-' + pin.number, localNumber: pin.number, name: 'Terminal ' + pin.number,
+          electricalType: 'passive', x: pin.x, y: pin.y })) }
+    };
+  }
+
+  function component(id, customSymbol) {
+    return Object.hasOwn(COMPONENTS, id) ? COMPONENTS[id] : customSymbol?.id === id ? customSymbolDefinition(customSymbol) : null;
+  }
   function isTerminalDefinition(definition) {
     return definition?.family === 'feedthrough-terminal' || definition?.family === 'protective-earth-terminal';
   }
@@ -1263,8 +1284,8 @@
       return { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber, category: def.category, family: def.family, tag: def.referencePrefix || 'X' };
     });
   }
-  function createInstance(componentId, x, y, ref) {
-    const def = component(componentId);
+  function createInstance(componentId, x, y, ref, customSymbol) {
+    const def = component(componentId, customSymbol);
     if (!def) throw new Error('Unknown verified component: ' + componentId);
     if (!finite(x) || !finite(y)) throw new TypeError('Component coordinates must be finite numbers.');
     const properties = {};
@@ -1282,13 +1303,14 @@
       x: x,
       y: y,
       rotation: 0,
+      ...(def.family === 'user-authored' ? { customSymbol: clone(customSymbol) } : {}),
       properties: properties
     };
   }
   function validateInstance(instance) {
     const errors = [];
     if (!instance || typeof instance !== 'object') return { valid: false, errors: ['Component instance must be an object.'] };
-    const def = component(instance.componentId);
+    const def = component(instance.componentId, instance.customSymbol);
     if (instance.kind !== 'component-instance') errors.push('Object is not a component instance.');
     if (instance.schemaVersion !== COMPONENT_SCHEMA_VERSION) errors.push('Unsupported component schema version.');
     if (!def) errors.push('Component ID has no verified definition.');
@@ -1359,6 +1381,11 @@
     if (project.format !== PROJECT_FORMAT) errors.push('Unsupported Adigun project format.');
     if (![1, PROJECT_VERSION].includes(project.version)) errors.push('Unsupported project version.');
     if (!Array.isArray(project.objects) || !Array.isArray(project.sheets)) errors.push('Project objects and sheets must be arrays.');
+    if (project.projectModel?.userSymbols !== undefined) {
+      const symbols = project.projectModel.userSymbols;
+      if (!Array.isArray(symbols) || symbols.some(symbol => !customSymbolDefinition(symbol))
+        || new Set(symbols.map(symbol => symbol.id)).size !== symbols.length) errors.push('Project symbol definitions are invalid.');
+    }
     if (Array.isArray(project.sheets)) {
       const sheetIds = new Set();
       project.sheets.forEach(function (sheet, index) {
@@ -1618,7 +1645,7 @@
     });
 
     validInstances.forEach(function (instance) {
-      const def = component(instance.componentId);
+      const def = component(instance.componentId, instance.customSymbol);
       def.symbol.internalConnections.forEach(function (pair) {
         const first = pins.find(function (pin) { return pin.instanceId === instance.id && pin.pinId === pair[0]; });
         const second = pins.find(function (pin) { return pin.instanceId === instance.id && pin.pinId === pair[1]; });
@@ -1696,7 +1723,7 @@
       if (!devicesByTag.has(tag)) devicesByTag.set(tag, []);
       const location = { sheetId: object.sheetId || reports[0].id, objectId: object.id, ref: object.ref };
       devicesByTag.get(tag).push(location);
-      if (!isTerminalDefinition(component(object.componentId))) return;
+      if (!isTerminalDefinition(component(object.componentId, object.customSymbol))) return;
       const strip = object.properties?.terminalStrip?.trim();
       const position = object.properties?.position?.trim();
       if (!strip || !position) return;
@@ -1739,7 +1766,7 @@
     const signalRolesByComponent = new Map();
     for (const object of objects) {
       if (object.kind !== 'component-instance') continue;
-      const definition = component(object.componentId);
+      const definition = component(object.componentId, object.customSymbol);
       if (definition.family === 'plc-cpu') {
         signalRolesByComponent.set(object.id, new Map(definition.symbol.pins.map(pin => [pin.id, plcChannelType(pin)])));
       } else if (definition.family === 'sensor-inductive-pnp') {
@@ -2022,7 +2049,7 @@
         return;
       }
       const definition = validation.definition;
-      if (!Array.isArray(definition.sources) || !definition.sources.length) {
+      if (definition.family !== 'user-authored' && (!Array.isArray(definition.sources) || !definition.sources.length)) {
         errors.push('Object ' + instance.ref + ': verified source provenance is missing.');
         return;
       }
@@ -2031,7 +2058,7 @@
     });
     const rows = Array.from(groups.values()).map(function (group) {
       const definition = group.definition;
-      const source = definition.sources[0];
+      const source = definition.sources[0] || { title: 'Project-authored symbol' };
       return {
         componentId: definition.id, manufacturer: definition.manufacturer, model: definition.model,
         partNumber: definition.manufacturerPartNumber, description: definition.name,
@@ -2039,7 +2066,7 @@
         references: group.references.slice().sort(function (a, b) { return a.localeCompare(b); }),
         sourcePublisher: source.publisher || '', sourceTitle: source.title || '',
         sourceDocumentRevision: source.documentRevision || '', sourceRevisionNote: source.revisionNote || '',
-        sourceUrl: source.url, sourceRetrievedAt: source.retrievedAt || ''
+        sourceUrl: source.url || '', sourceRetrievedAt: source.retrievedAt || ''
       };
     }).sort(function (a, b) { return a.componentId.localeCompare(b.componentId); });
     return { valid: errors.length === 0, errors: errors, rows: rows };
@@ -2195,7 +2222,7 @@
     const { pinKey, netByPin, sheetNumbers } = projectPinIndex(analysis);
     const rows = (project.objects || []).flatMap(function (object) {
       if (object?.kind !== 'component-instance') return [];
-      const definition = component(object.componentId);
+      const definition = component(object.componentId, object.customSymbol);
       if (!isTerminalDefinition(definition)) return [];
       const sheetId = object.sheetId || analysis.sheets[0].id;
       const properties = object.properties || {};
@@ -2232,7 +2259,7 @@
     const rows = [];
     for (const object of project.objects) {
       if (object?.kind !== 'component-instance') continue;
-      const definition = component(object.componentId);
+      const definition = component(object.componentId, object.customSymbol);
       if (definition?.family !== 'plc-cpu') continue;
       const sheet = sheetNumbers.get(object.sheetId || analysis.sheets[0].id);
       for (const pin of definition.symbol.pins) {
@@ -2268,7 +2295,7 @@
     const sheetNumbers = new Map(sheets.map(sheet => [sheet.id, sheet.number || sheet.name || sheet.id]));
     const sheetOrder = new Map(sheets.map((sheet, index) => [sheet.id, index]));
     const rows = project.objects.filter(object => object.kind === 'component-instance').map(object => {
-      const definition = component(object.componentId);
+      const definition = component(object.componentId, object.customSymbol);
       const sheetId = object.sheetId || project.activeSheet || sheets[0]?.id;
       return {
         sheetId,
@@ -2321,6 +2348,7 @@
     projectFormat: PROJECT_FORMAT,
     projectVersion: PROJECT_VERSION,
     component: component,
+    customSymbolDefinition: customSymbolDefinition,
     catalog: catalog,
     createInstance: createInstance,
     createProjectModel: createProjectModel,

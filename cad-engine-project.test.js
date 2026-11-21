@@ -530,6 +530,49 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       || firstQuick.bottom <= secondQuick.top || secondQuick.bottom <= firstQuick.top);
     await freeDraftingPage.close({ runBeforeUnload: false });
 
+    const symbolPage = await context.newPage();
+    await symbolPage.goto(address);
+    await symbolPage.getByRole('button', { name: 'New project' }).click();
+    await symbolPage.locator('#createProject').click();
+    await symbolPage.getByRole('button', { name: 'Add sheet to A2' }).click();
+    await symbolPage.locator('#projectTree [data-sheet]').click();
+    await symbolPage.getByRole('button', { name: 'Draw rectangle' }).click();
+    const drag = await symbolPage.locator('#userDrawings').evaluate(node => [[80, 100], [125, 125]].map(([x, y]) => {
+      const point = new DOMPoint(x, y).matrixTransform(node.getScreenCTM());
+      return { x: point.x, y: point.y };
+    }));
+    await symbolPage.mouse.move(drag[0].x, drag[0].y);
+    await symbolPage.mouse.down();
+    await symbolPage.mouse.move(drag[1].x, drag[1].y, { steps: 3 });
+    await symbolPage.mouse.up();
+    await symbolPage.getByRole('button', { name: 'Select and move', exact: true }).click();
+    await symbolPage.keyboard.press('Control+a');
+    symbolPage.on('dialog', dialog => dialog.accept(dialog.message().includes('name') ? 'Field connector' : '1,-22.5,0;2,22.5,0'));
+    await symbolPage.locator('#openCommands').click();
+    await symbolPage.getByRole('button', { name: 'Create project symbol from selection', exact: true }).click();
+    const authoredSymbol = symbolPage.locator('#symbolList [data-insert]').filter({ hasText: 'Field connector' });
+    await authoredSymbol.click({ modifiers: ['Shift'] });
+    await authoredSymbol.click({ modifiers: ['Shift'] });
+    const authoredPins = symbolPage.locator('#userDrawings [data-component-pin="terminal-2"]');
+    assert.equal(await authoredPins.count(), 2);
+    await symbolPage.getByRole('button', { name: 'Draw wire' }).click();
+    await authoredPins.first().click();
+    await symbolPage.locator('#userDrawings [data-component-pin="terminal-1"]').last().click();
+    await symbolPage.keyboard.press('Control+Shift+S');
+    await symbolPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const authoredText = await symbolPage.evaluate(() => window.__savedProjectWrites[0]);
+    const authoredProject = engine.parseProject(authoredText);
+    assert.equal(authoredProject.valid, true, authoredProject.errors.join(' '));
+    assert.equal(authoredProject.project.projectModel.userSymbols[0].name, 'Field connector');
+    const authoredAnalysis = engine.analyzeProject(authoredProject.project);
+    assert.equal(authoredAnalysis.wireCount, 1);
+    assert.equal(authoredAnalysis.openEndpointCount, 0);
+    await symbolPage.reload();
+    await symbolPage.locator('#openFile').setInputFiles({ name: 'Project-symbol.adigun.json', mimeType: 'application/json', buffer: Buffer.from(authoredText) });
+    await authoredSymbol.waitFor();
+    assert.equal(await authoredPins.count(), 2);
+    await symbolPage.close({ runBeforeUnload: false });
+
     const dxfPage = await context.newPage();
     await dxfPage.goto(address);
     await dxfPage.locator('#openFile').setInputFiles({
