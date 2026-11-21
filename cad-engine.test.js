@@ -3889,12 +3889,12 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(dolOpening.metrics.sheetCount, 100);
   assert.equal(dolOpening.metrics.authoredSheetCount, 100);
   assert.equal(dolOpening.releaseScale.additionalAuthoredSheetsRequired, 0);
-  assert.equal(dolOpening.releaseScale.additionalConnectedSheetsRequired, 69);
+  assert.equal(dolOpening.releaseScale.additionalConnectedSheetsRequired, 68);
   assert.ok(!dolOpening.releaseScale.sheetIdsWithoutElectricalConnectivity.includes('dol-reference-001'));
-  assert.equal(dolOpening.metrics.contentObjectCount, 1055);
+  assert.equal(dolOpening.metrics.contentObjectCount, 1059);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
-  assert.equal(dolOpening.metrics.wireCount, 38);
+  assert.equal(dolOpening.metrics.wireCount, 39);
   const dolProject = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples', 'real-projects', 'siemens-schneider-sew-dol-reference.adigun.json'), 'utf8'));
   assert.equal(new Set(dolProject.objects.map(object => object.id)).size, dolProject.objects.length);
   const revisionText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-004').map(object => object.text).join(' ');
@@ -4032,17 +4032,20 @@ test('the project-library manifest and generated validation report match the cur
   const topologyReport = engine.analyzeProject(dolProject);
   const scheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-007').map(object => object.text);
   const expectedNetRows = topologyReport.sheets.flatMap(sheet => sheet.analysis.nets.map(net => `${net.id} | ${net.pins.map(pin => `${pin.ref}:${pin.number}`).sort().join('; ')} | Wire segments: ${net.wireIds.length}`));
-  assert.equal(expectedNetRows.length, 15);
+  assert.equal(expectedNetRows.length, 16);
   for (const row of expectedNetRows) assert.ok(scheduleText.includes(row), 'A2/007 must match engine net analysis: ' + row);
-  const wireReport = engine.wireList(dolProject.objects);
+  const pe = topologyReport.globalNets.find(net => net.wireIds.includes('dol-reference-001:W017'));
+  assert.deepEqual(pe.pins.map(pin => pin.ref + ':' + pin.number), ['M1:PE', 'X4:1', 'X4:2']);
+  assert.deepEqual(pe.wireIds, ['dol-reference-001:W017', 'dol-reference-014:W039']);
+  const wireReport = engine.wireList(dolProject);
   const wireScheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-008').map(object => object.text);
   const expectedWireRows = wireReport.rows.slice(0, 19).map(row => `${row.wireId} | ${row.netId} | ${row.lengthMm} mm | Pin contacts ${row.startPinRefs.length ? row.startPinRefs.join('; ') : '—'} -> ${row.endPinRefs.length ? row.endPinRefs.join('; ') : '—'} | Net pins ${row.netPinRefs.join('; ')}`);
   assert.equal(wireReport.valid, true);
   assert.equal(expectedWireRows.length, 19);
   for (const row of expectedWireRows) assert.ok(wireScheduleText.includes(row), 'A2/008 must match engine wire-list analysis: ' + row);
   const secondWireScheduleText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-009').map(object => object.text);
-  const expectedSecondWireRows = wireReport.rows.slice(19, 38).map(row => row.wireId + ' | ' + row.netId + ' | ' + row.lengthMm + ' mm | Pin contacts ' + (row.startPinRefs.length ? row.startPinRefs.join('; ') : '—') + ' -> ' + (row.endPinRefs.length ? row.endPinRefs.join('; ') : '—') + ' | Net pins ' + row.netPinRefs.join('; '));
-  assert.equal(expectedSecondWireRows.length, 19);
+  const expectedSecondWireRows = wireReport.rows.slice(19).map(row => row.wireId + ' | ' + row.netId + ' | ' + row.lengthMm + ' mm | Pin contacts ' + (row.startPinRefs.length ? row.startPinRefs.join('; ') : '—') + ' -> ' + (row.endPinRefs.length ? row.endPinRefs.join('; ') : '—') + ' | Net pins ' + row.netPinRefs.join('; '));
+  assert.equal(expectedSecondWireRows.length, 20);
   for (const row of expectedSecondWireRows) assert.ok(secondWireScheduleText.includes(row), 'A2/009 must match engine wire-list analysis: ' + row);
   const powerPathText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-016').map(object => object.text);
   const powerAnalysis = engine.analyzeProject(dolProject).sheets.find(sheet => sheet.id === 'dol-reference-001').analysis;
@@ -4188,7 +4191,7 @@ test('the project-library manifest and generated validation report match the cur
       "Q1 | overloadSettingA = null; published 0.35–0.5 A range; no trip point is selected.",
       "AC supply | X1–X3 mark 400 V AC boundaries; source impedance and available short-circuit current are not modeled.",
       "Control supply | X5/X6 mark external +24 V / 0 V DC boundaries; source capacity and branch protection are not modeled.",
-      "Field conductors | 38 wire records use drawing-path geometry; conductor type, size, and field installation are not represented.",
+      "Field conductors | 39 wire records use drawing-path geometry; conductor type, size, and field installation are not represented.",
       "PE installation | A2/016 net-11 maps M1:PE to X4:1/X4:2; conductor sizing and installation-test evidence are not recorded.",
       "Motor application | M1 is rated 0.12 kW / 0.405 A; the driven load and operating duty are unspecified.",
       "Site conditions | ambient, enclosure, and derating inputs are not recorded."
@@ -4200,13 +4203,11 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(q1Setting, null, 'A2/017 Q1 entry must reflect the unset model property');
   const boundaryMarkings = dolProject.objects.filter(object => object.kind === 'component-instance' && ['X1', 'X2', 'X3', 'X5', 'X6'].includes(object.ref)).map(object => object.properties.marking);
   for (const marking of ['L1 · 400 V AC', 'L2 · 400 V AC', 'L3 · 400 V AC', '+24 V DC', '0 V DC']) assert.ok(boundaryMarkings.includes(marking));
-  assert.equal(wireReport.rows.length, 38);
+  assert.equal(wireReport.rows.length, 39);
   const modeledWires = dolProject.objects.filter(object => object.kind === 'wire');
   assert.ok(modeledWires.every(wire => !['conductorMaterial', 'conductorCrossSectionMm2', 'installationMethod'].some(field => Object.hasOwn(wire, field))));
   const peNet = powerAnalysis.nets.find(net => net.id === 'dol-reference-001:net-11');
   assert.ok(peNet.pins.some(pin => pin.ref === 'M1' && pin.number === 'PE'));
-  assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '1'));
-  assert.ok(peNet.pins.some(pin => pin.ref === 'X4' && pin.number === '2'));
 
 
   assert.equal(dolProject.revision, 'A2/099');
@@ -4391,11 +4392,9 @@ test('the project-library manifest and generated validation report match the cur
   const boundaryReferenceText = dolProject.objects.filter(object => object.kind === 'text' && object.sheetId === 'dol-reference-014').map(object => object.text);
   const boundaryInstances = dolProject.objects.filter(object => object.kind === 'component-instance' && /^X[1-6]$/.test(object.ref));
   const boundaryPinNets = new Map();
-  const boundaryAnalysis = engine.analyzeProject(dolProject).sheets.find(sheet => sheet.id === 'dol-reference-001').analysis;
-  for (const net of boundaryAnalysis.nets) for (const pin of net.pins) boundaryPinNets.set(pin.instanceId + ':' + pin.pinId, net.id);
-  const boundaryWires = engine.wireList(dolProject.objects);
+  for (const { analysis } of topologyReport.sheets) for (const net of analysis.nets) for (const pin of net.pins) boundaryPinNets.set(pin.instanceId + ':' + pin.pinId, net.id);
   const directRoutes = new Map();
-  for (const wire of boundaryWires.rows) for (const pinRef of [...wire.startPinRefs, ...wire.endPinRefs]) directRoutes.set(pinRef, [...(directRoutes.get(pinRef) || []), wire.wireId]);
+  for (const wire of wireReport.rows) for (const pinRef of [...wire.startPinRefs, ...wire.endPinRefs]) directRoutes.set(pinRef, [...(directRoutes.get(pinRef) || []), wire.wireId]);
   const expectedBoundaryRows = boundaryInstances.flatMap(instance => engine.worldPins(instance).map(pin => { const routes = directRoutes.get(instance.ref + ':' + pin.number) || []; return instance.ref + ' | ' + pin.number + ' | ' + pin.name + ' | ' + (routes.length ? 'authored route ' + routes.join('; ') : 'external boundary pin; no direct wire') + ' | net ' + (boundaryPinNets.get(instance.id + ':' + pin.id) || 'not in analyzed net'); }));
   assert.equal(boundaryInstances.length, 6);
   assert.ok(boundaryInstances.every(instance => instance.properties.comment.includes('External connection boundary')));
