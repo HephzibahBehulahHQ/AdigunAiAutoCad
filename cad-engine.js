@@ -23,15 +23,16 @@
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
 
   function fitDrawingToPage(bounds, pageWidth, pageHeight, margin, titleBlockHeight) {
-    if (!bounds || ![bounds.left, bounds.top, bounds.right, bounds.bottom, pageWidth, pageHeight].every(finite) || bounds.right <= bounds.left || bounds.bottom <= bounds.top || pageWidth <= 0 || pageHeight <= 0) {
-      throw new Error('Drawing bounds and page dimensions must be positive finite values.');
+    if (!bounds || ![bounds.left, bounds.top, bounds.right, bounds.bottom, pageWidth, pageHeight].every(finite) || bounds.right < bounds.left || bounds.bottom < bounds.top || pageWidth <= 0 || pageHeight <= 0) {
+      throw new Error('Drawing bounds must be ordered and page dimensions must be positive finite values.');
     }
     const inset = finite(margin) && margin >= 0 ? margin : 10;
     const titleHeight = finite(titleBlockHeight) && titleBlockHeight >= 0 ? titleBlockHeight : 60;
     const availableWidth = pageWidth - inset * 2;
     const availableHeight = pageHeight - inset * 2 - titleHeight;
     if (availableWidth <= 0 || availableHeight <= 0) throw new Error('The title block leaves no drawable sheet area.');
-    const scale = Math.min(availableWidth / (bounds.right - bounds.left), availableHeight / (bounds.bottom - bounds.top));
+    const width = bounds.right - bounds.left, height = bounds.bottom - bounds.top;
+    const scale = width || height ? Math.min(availableWidth / width, availableHeight / height) : 1;
     return {
       scale: scale,
       x: inset + (availableWidth - (bounds.right - bounds.left) * scale) / 2 - bounds.left * scale,

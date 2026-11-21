@@ -18,6 +18,7 @@ test('workspace boot always starts with no active project, drawing tab, or autom
   assert.match(inline, /\$\$\('#sheetTabs \.document-tab\[data-sheet\]'\)\.forEach/);
   assert.match(inline, /\$\('#newSheet'\)\.hidden=true/);
   assert.match(inline, /window\.addEventListener\('beforeunload'/);
+  assert.match(inline, /setProjectSheetDrawingScale\(sheet,input\.value\)/);
   assert.doesNotMatch(inline.slice(inline.lastIndexOf('state.projectModel=null;')), /copyExampleProject\(/);
 });
 
@@ -157,6 +158,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await scale.press('Tab');
     assert.equal(await scale.inputValue(), '1:2');
     assert.equal(await page.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
+    assert.match(await page.locator('[data-title-block-row="drawing"]').textContent(), /Scale: 1:2/);
     const description = page.getByLabel('Description', { exact: true });
     await description.fill('Saved through local file picker');
     await page.keyboard.press('Control+Shift+S');
@@ -451,6 +453,10 @@ test('legacy drawing content fits the page while edits map back to native coordi
   const restored = engine.invertDrawingTransform(pagePoint, transform);
   assert.ok(Math.abs(restored.x - sourcePoint.x) < 1e-9);
   assert.ok(Math.abs(restored.y - sourcePoint.y) < 1e-9);
+  assert.deepEqual(
+    engine.fitDrawingToPage({ left: 0, top: 20, right: 100, bottom: 20 }, 420, 297, 10, 62),
+    { scale: 4, x: 10, y: 37.5 }
+  );
 });
 
 test('every published catalog example opens as an independent sectioned native copy', () => {
@@ -668,7 +674,7 @@ test('sectioned project interface wires inline rename, section drag, title block
   const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
   assert.match(inline, /function beginInlineSheetRename\(id\)/);
   assert.match(inline, /function applyProjectDrawingTransform\(forceFit\)/);
-  assert.match(inline, /fitDrawingToPage\(bounds,page\.width,page\.height,10,60\)/);
+  assert.match(inline, /fitDrawingToPage\(bounds,page\.width,page\.height,10,projectTitleBlockHeight\(page\.height\)\)/);
   assert.match(inline, /invertDrawingTransform\(\{x:point\.x,y:point\.y\},transform\)/);
   assert.match(inline, /const anchor=svgViewPoint\(e\)/);
   assert.match(inline, /addEventListener\('dblclick'/);
