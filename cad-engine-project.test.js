@@ -248,8 +248,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }, color);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' renders the edited component');
+      const otherSheet = source.sheets.find(sheet => sheet.id !== sheetId);
+      if (otherSheet) await copyPage.locator('#projectTree [data-sheet="' + otherSheet.id + '"]').click();
       await copyPage.locator('[data-action="undo"]').click();
       assert.equal(await drawn.getAttribute('stroke'), originalStroke, entry.title + ' restores the original component color on undo');
+      if (otherSheet) await copyPage.locator('#projectTree [data-sheet="' + otherSheet.id + '"]').click();
       await copyPage.locator('[data-action="redo"]').click();
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the edited component color on redo');
       await copyPage.keyboard.press('Control+Shift+S');
