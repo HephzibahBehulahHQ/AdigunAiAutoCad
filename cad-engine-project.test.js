@@ -420,12 +420,20 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.locator('#projectTree [data-sheet]').click();
     await freeDraftingPage.locator('#openCommands').click();
     await freeDraftingPage.getByRole('button', { name: 'Go to origin' }).click();
-    for (const [componentId, x, y] of [['sew-eurodrive-drn63ms4', -125, -35], ['siemens-6es7212-1ae40-0xb0', 75, -35]]) {
+    const freePoint = (x, y) => freeDraftingPage.locator('#userDrawings').evaluate((node, coordinates) => {
+      const screen = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
+      return { x: screen.x, y: screen.y };
+    }, [x, y]);
+    for (const [componentId, x, y] of [['sew-eurodrive-drn63ms4', -125, -35], ['siemens-6es7212-1ae40-0xb0', 175, -35]]) {
       await freeDraftingPage.locator('#symbolList [data-insert="' + componentId + '"]').click();
-      const point = await freeDraftingPage.locator('#userDrawings').evaluate((node, coordinates) => {
-        const screen = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
-        return { x: screen.x, y: screen.y };
-      }, [x, y]);
+      if (x > 0) {
+        const overlap = await freePoint(75, y);
+        await freeDraftingPage.mouse.move(overlap.x, overlap.y);
+        assert.equal(await freeDraftingPage.locator('[data-component-preview]').getAttribute('data-placement-blocked'), 'true');
+        await freeDraftingPage.mouse.click(overlap.x, overlap.y);
+        assert.equal(await freeDraftingPage.locator('#userDrawings > [data-object]').count(), 1);
+      }
+      const point = await freePoint(x, y);
       await freeDraftingPage.mouse.click(point.x, point.y);
     }
     await freeDraftingPage.locator('[data-action="fit"]').click();
@@ -448,7 +456,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const freeText = await freeDraftingPage.evaluate(() => window.__savedProjectWrites[0]);
     const freeProject = engine.parseProject(freeText).project;
-    assert.deepEqual(freeProject.objects.map(object => [object.x, object.y]), [[-125, -35], [75, -35]]);
+    assert.deepEqual(freeProject.objects.map(object => [object.x, object.y]), [[-125, -35], [175, -35]]);
     assert.equal(freeProject.projectModel.sheets[0].showPrintFrame, false);
     await freeDraftingPage.locator('[data-action="fit"]').click();
     assert.ok(await freeDraftingPage.locator('#draftingRulers text').count() > 3);
