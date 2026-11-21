@@ -16,7 +16,7 @@ Use **Print project set** in the command palette to print every sheet in project
 
 ## Verified reference project increment
 
-The opening set contains 100 authored sheets through A1/100, including the source-backed Siemens/SEW starter, IFM sensor and PLC examples, and PN2070 manufacturer reference records. The authored sheet adds no components or wires; the project retains 32 component instances, 336 routed wire segments, 67 sheet-local nets and 21 explicit cross-sheet connections with no unresolved open endpoints.  See `examples/real-projects/siemens-sew-star-delta-reference.adigun.json`.
+The opening set contains 100 authored sheets through A1/100, including the source-backed Siemens/SEW starter, IFM sensor and PLC examples, and PN2070 manufacturer reference records. The authored sheet adds no components or wires; the project retains 33 component instances, 338 routed wire segments, 68 sheet-local nets and 22 explicit cross-sheet connections with no unresolved open endpoints.  See `examples/real-projects/siemens-sew-star-delta-reference.adigun.json`.
 
 ## Deployment and release
 
