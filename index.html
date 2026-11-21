@@ -847,10 +847,11 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       return '<details class="notice"'+(finding.severity==='error'?' open':'')+'><summary>'+title+'</summary>'
         +'<p>'+escapeHtml(finding.suggestedFix)+'</p>'+locations+'</details>';
     }).join('');
-    return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>' +report.summary.resolvedCrossSheetLinks+'</strong></div>'
+    return heading+'<div class="property-row"><span>Project-wide nets</span><strong>'+report.summary.projectNets+'</strong></div>'
+      +'<div class="property-row"><span>Resolved cross-sheet links</span><strong>' +report.summary.resolvedCrossSheetLinks+'</strong></div>'
       +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.summary.unresolvedWireEndpoints+'</strong></div>'
       +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.summary.geometryErrors+'</strong></div>'
-      +crossSheetLinkControls(numbers)+findings+crossSheetConnectionForm()+'</div>';
+      +crossSheetLinkControls(numbers)+findings+crossSheetConnectionForm(report.openEndpoints,numbers)+'</div>';
   }
   function crossSheetLinkControls(numbers){
     const rows=state.crossSheetConnections.filter(link=>link.endpoints.some(endpoint=>endpoint.sheetId===state.sheet)).map(function(link){
@@ -862,17 +863,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     });
     return rows.length?'<details class="notice"><summary>Cross-sheet links on this sheet</summary>'+rows.join('')+'</details>':'';
   }
-  function crossSheetConnectionForm(){
-    const project=electricalProject();
-    const analysis=window.AdigunCADEngine.analyzeProject(project);
-    if(!analysis.valid)return '';
-    const numbers=new Map(analysis.sheets.map(sheet=>[sheet.id,sheet.number||sheet.id]));
+  function crossSheetConnectionForm(openEndpoints,numbers){
     const options=endpoints=>endpoints.map(function(endpoint){
       const name=numbers.get(endpoint.sheetId)+' · '+endpoint.wireId+' ('+endpoint.point.x+', '+endpoint.point.y+')';
       return '<option value="'+escapeHtml(JSON.stringify(endpoint))+'">'+escapeHtml(name)+'</option>';
     }).join('');
-    const current=options(analysis.openEndpoints.filter(endpoint=>endpoint.sheetId===state.sheet));
-    const other=options(analysis.openEndpoints.filter(endpoint=>endpoint.sheetId!==state.sheet));
+    const current=options(openEndpoints.filter(endpoint=>endpoint.sheetId===state.sheet));
+    const other=options(openEndpoints.filter(endpoint=>endpoint.sheetId!==state.sheet));
     if(!current||!other)return '';
     return '<form data-cross-sheet-form><div class="inspector-title">Connect wire ends across sheets</div>'
       +'<label class="property-row"><span>This sheet</span><select name="from" required><option value="">Select wire end</option>'+current+'</select></label>'

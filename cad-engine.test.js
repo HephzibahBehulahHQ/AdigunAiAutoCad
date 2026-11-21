@@ -854,7 +854,12 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   for (const net of analysis.globalNets) {
     assert.equal(new Set(net.wireIds.map(id => assignedPotentials.get(id.slice(id.indexOf(':') + 1)))).size, 1);
   }
-  assert.ok(engine.projectElectricalReport(editable.project).findings.every(finding => finding.ruleId !== 'ERC-CONFLICTING-POTENTIALS'));
+  const electricalReport = engine.projectElectricalReport(editable.project);
+  assert.ok(electricalReport.findings.every(finding => finding.ruleId !== 'ERC-CONFLICTING-POTENTIALS'));
+  assert.equal(electricalReport.summary.projectNets, 4);
+  assert.deepEqual(electricalReport.globalNets, analysis.globalNets);
+  assert.equal(electricalReport.crossSheetConnections.length, 3);
+  assert.deepEqual(electricalReport.openEndpoints, []);
   const indexedNumbers = new Set(editable.project.objects
     .filter(object => object.sheetId.startsWith('relay-index'))
     .map(object => object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0])

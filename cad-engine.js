@@ -1799,11 +1799,15 @@
       analysisErrors: result.errors,
       sheets: result.sheets.map(function (sheet) { return { id: sheet.id, number: sheet.number, name: sheet.name }; }),
       summary: result.valid ? {
+        projectNets: result.globalNetCount,
         resolvedCrossSheetLinks: result.crossSheetConnectionCount,
         unresolvedWireEndpoints: result.openEndpointCount,
         geometryErrors: result.geometryErrorCount,
         findings: result.findings.length
       } : null,
+      globalNets: result.globalNets || [],
+      crossSheetConnections: result.crossSheetConnections || [],
+      openEndpoints: result.openEndpoints || [],
       findings: result.findings || [],
       scope: 'Authored geometry and electrical connectivity checks.'
     };
