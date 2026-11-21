@@ -735,8 +735,8 @@
       "id": "dol-x4",
       "componentId": "phoenix-contact-3212144",
       "ref": "X4",
-      "x": 950,
-      "y": 560,
+      "x": 900,
+      "y": 960,
       "rotation": 0,
       "properties": {
         "terminalStrip": "XT4",
@@ -744,7 +744,7 @@
         "marking": "PE",
         "comment": "External connection boundary; verify field conductors and upstream protection for the installation."
       },
-      "sheetId": "dol-reference-001"
+      "sheetId": "dol-reference-014"
     },
     {
       "schemaVersion": 1,
@@ -1013,7 +1013,7 @@
       "name": "Protective earth",
       "x1": 710,
       "y1": 560,
-      "x2": 915,
+      "x2": 850,
       "y2": 560,
       "stroke": "#16803c",
       "strokeWidth": 1.5
@@ -1905,7 +1905,7 @@
       "id": "dol-ref-007-line-13",
       "x": 120,
       "y": 841,
-      "text": "dol-reference-001:net-11 | M1:PE; X4:1; X4:2 | Wire segments: 1",
+      "text": "dol-reference-001:net-11 | M1:PE | Wire segments: 1",
       "stroke": "#13263b",
       "sheetId": "dol-reference-007"
     },
@@ -1950,7 +1950,7 @@
       "id": "dol-ref-007-line-18",
       "x": 120,
       "y": 1131,
-      "text": "Derived analysis: 15 sheet-local nets, 38 routed wire segments, and 39 connected terminal-pin records.",
+      "text": "Derived analysis: 16 sheet-local nets, 15 project nets and 39 routed wire segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-007"
     },
@@ -1995,7 +1995,7 @@
       "id": "dol-ref-006-line-03",
       "x": 120,
       "y": 282,
-      "text": "A2/001 | DOL motor feeder schematic | 11 components · 38 wires · 15 nets.",
+      "text": "A2/001 | DOL motor feeder schematic | 10 components · 38 wires · 15 sheet-local nets.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -2049,7 +2049,7 @@
       "id": "dol-ref-006-line-09",
       "x": 120,
       "y": 486,
-      "text": "A2/008 | Wire schedule, part 1 | engine-derived W001–W019 of 38 route segments.",
+      "text": "A2/008 | Wire schedule, part 1 | engine-derived W001–W019 of 39 route segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -2058,7 +2058,7 @@
       "id": "dol-ref-006-line-10",
       "x": 120,
       "y": 520,
-      "text": "A2/009 | Wire schedule, part 2 | engine-derived W020–W038 of 38 route segments.",
+      "text": "A2/009 | Wire schedule, part 2 | engine-derived W020–W039 of 39 route segments.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-006"
     },
@@ -2115,7 +2115,7 @@
       "id": "dol-ref-008-line-02",
       "x": 120,
       "y": 169,
-      "text": "WIRE SCHEDULE · PART 1 · W001–W019 OF 38",
+      "text": "WIRE SCHEDULE · PART 1 · W001–W019 OF 39",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2124,7 +2124,7 @@
       "id": "dol-ref-008-line-03",
       "x": 120,
       "y": 223,
-      "text": "W001 | net-1 | 215 mm | Pin contacts X1:2 -> — | Net pins Q1:1/L1; X1:1; X1:2",
+      "text": "W001 | global-net-1 | 215 mm | Pin contacts X1:2 -> — | Net pins Q1:1/L1; X1:1; X1:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2133,7 +2133,7 @@
       "id": "dol-ref-008-line-04",
       "x": 120,
       "y": 277,
-      "text": "W002 | net-1 | 40 mm | Pin contacts — -> Q1:1/L1 | Net pins Q1:1/L1; X1:1; X1:2",
+      "text": "W002 | global-net-1 | 40 mm | Pin contacts — -> Q1:1/L1 | Net pins Q1:1/L1; X1:1; X1:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2142,7 +2142,7 @@
       "id": "dol-ref-008-line-05",
       "x": 120,
       "y": 331,
-      "text": "W003 | net-2 | 265 mm | Pin contacts X2:2 -> — | Net pins Q1:3/L2; X2:1; X2:2",
+      "text": "W003 | global-net-8 | 265 mm | Pin contacts X2:2 -> — | Net pins Q1:3/L2; X2:1; X2:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2151,7 +2151,7 @@
       "id": "dol-ref-008-line-06",
       "x": 120,
       "y": 385,
-      "text": "W004 | net-2 | 20 mm | Pin contacts — -> Q1:3/L2 | Net pins Q1:3/L2; X2:1; X2:2",
+      "text": "W004 | global-net-8 | 20 mm | Pin contacts — -> Q1:3/L2 | Net pins Q1:3/L2; X2:1; X2:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2160,7 +2160,7 @@
       "id": "dol-ref-008-line-07",
       "x": 120,
       "y": 439,
-      "text": "W005 | net-3 | 315 mm | Pin contacts X3:2 -> — | Net pins Q1:5/L3; X3:1; X3:2",
+      "text": "W005 | global-net-9 | 315 mm | Pin contacts X3:2 -> — | Net pins Q1:5/L3; X3:1; X3:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2169,7 +2169,7 @@
       "id": "dol-ref-008-line-08",
       "x": 120,
       "y": 493,
-      "text": "W006 | net-3 | 80 mm | Pin contacts — -> Q1:5/L3 | Net pins Q1:5/L3; X3:1; X3:2",
+      "text": "W006 | global-net-9 | 80 mm | Pin contacts — -> Q1:5/L3 | Net pins Q1:5/L3; X3:1; X3:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2178,7 +2178,7 @@
       "id": "dol-ref-008-line-09",
       "x": 120,
       "y": 547,
-      "text": "W007 | net-4 | 55 mm | Pin contacts Q1:2/T1 -> KM1:1/L1 | Net pins KM1:1/L1; Q1:2/T1",
+      "text": "W007 | global-net-10 | 55 mm | Pin contacts Q1:2/T1 -> KM1:1/L1 | Net pins KM1:1/L1; Q1:2/T1",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2187,7 +2187,7 @@
       "id": "dol-ref-008-line-10",
       "x": 120,
       "y": 601,
-      "text": "W008 | net-5 | 55 mm | Pin contacts Q1:4/T2 -> KM1:3/L2 | Net pins KM1:3/L2; Q1:4/T2",
+      "text": "W008 | global-net-11 | 55 mm | Pin contacts Q1:4/T2 -> KM1:3/L2 | Net pins KM1:3/L2; Q1:4/T2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2196,7 +2196,7 @@
       "id": "dol-ref-008-line-11",
       "x": 120,
       "y": 655,
-      "text": "W009 | net-6 | 55 mm | Pin contacts Q1:6/T3 -> KM1:5/L3 | Net pins KM1:5/L3; Q1:6/T3",
+      "text": "W009 | global-net-12 | 55 mm | Pin contacts Q1:6/T3 -> KM1:5/L3 | Net pins KM1:5/L3; Q1:6/T3",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2205,7 +2205,7 @@
       "id": "dol-ref-008-line-12",
       "x": 120,
       "y": 709,
-      "text": "W010 | net-7 | 45 mm | Pin contacts KM1:2/T1 -> M1:U1 | Net pins KM1:2/T1; M1:U1",
+      "text": "W010 | global-net-13 | 45 mm | Pin contacts KM1:2/T1 -> M1:U1 | Net pins KM1:2/T1; M1:U1",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2214,7 +2214,7 @@
       "id": "dol-ref-008-line-13",
       "x": 120,
       "y": 763,
-      "text": "W011 | net-8 | 45 mm | Pin contacts KM1:4/T2 -> M1:V1 | Net pins KM1:4/T2; M1:V1",
+      "text": "W011 | global-net-14 | 45 mm | Pin contacts KM1:4/T2 -> M1:V1 | Net pins KM1:4/T2; M1:V1",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2223,7 +2223,7 @@
       "id": "dol-ref-008-line-14",
       "x": 120,
       "y": 817,
-      "text": "W012 | net-9 | 45 mm | Pin contacts KM1:6/T3 -> M1:W1 | Net pins KM1:6/T3; M1:W1",
+      "text": "W012 | global-net-15 | 45 mm | Pin contacts KM1:6/T3 -> M1:W1 | Net pins KM1:6/T3; M1:W1",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2232,7 +2232,7 @@
       "id": "dol-ref-008-line-15",
       "x": 120,
       "y": 871,
-      "text": "W013 | net-10 | 40 mm | Pin contacts M1:U2 -> — | Net pins M1:U2; M1:V2; M1:W2",
+      "text": "W013 | global-net-2 | 40 mm | Pin contacts M1:U2 -> — | Net pins M1:U2; M1:V2; M1:W2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2241,7 +2241,7 @@
       "id": "dol-ref-008-line-16",
       "x": 120,
       "y": 925,
-      "text": "W014 | net-10 | 40 mm | Pin contacts M1:V2 -> — | Net pins M1:U2; M1:V2; M1:W2",
+      "text": "W014 | global-net-2 | 40 mm | Pin contacts M1:V2 -> — | Net pins M1:U2; M1:V2; M1:W2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2250,7 +2250,7 @@
       "id": "dol-ref-008-line-17",
       "x": 120,
       "y": 979,
-      "text": "W015 | net-10 | 40 mm | Pin contacts M1:W2 -> — | Net pins M1:U2; M1:V2; M1:W2",
+      "text": "W015 | global-net-2 | 40 mm | Pin contacts M1:W2 -> — | Net pins M1:U2; M1:V2; M1:W2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2259,7 +2259,7 @@
       "id": "dol-ref-008-line-18",
       "x": 120,
       "y": 1033,
-      "text": "W016 | net-10 | 100 mm | Pin contacts — -> — | Net pins M1:U2; M1:V2; M1:W2",
+      "text": "W016 | global-net-2 | 100 mm | Pin contacts — -> — | Net pins M1:U2; M1:V2; M1:W2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2268,7 +2268,7 @@
       "id": "dol-ref-008-line-19",
       "x": 120,
       "y": 1087,
-      "text": "W017 | net-11 | 205 mm | Pin contacts M1:PE -> X4:1 | Net pins M1:PE; X4:1; X4:2",
+      "text": "W017 | global-net-3 | 140 mm | Pin contacts M1:PE -> — | Net pins M1:PE; X4:1; X4:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2277,7 +2277,7 @@
       "id": "dol-ref-008-line-20",
       "x": 120,
       "y": 1141,
-      "text": "W018 | net-12 | 50 mm | Pin contacts X5:1 -> — | Net pins S0:21; X5:1; X5:2",
+      "text": "W018 | global-net-4 | 50 mm | Pin contacts X5:1 -> — | Net pins S0:21; X5:1; X5:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2286,7 +2286,7 @@
       "id": "dol-ref-008-line-21",
       "x": 120,
       "y": 1195,
-      "text": "W019 | net-12 | 470 mm | Pin contacts — -> — | Net pins S0:21; X5:1; X5:2",
+      "text": "W019 | global-net-4 | 470 mm | Pin contacts — -> — | Net pins S0:21; X5:1; X5:2",
       "stroke": "#13263b",
       "sheetId": "dol-reference-008"
     },
@@ -2399,7 +2399,7 @@
       "y": 169,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "WIRE SCHEDULE · PART 2 · W020–W038 OF 38"
+      "text": "WIRE SCHEDULE · PART 2 · W020–W039 OF 39"
     },
     {
       "kind": "text",
@@ -2408,7 +2408,7 @@
       "y": 223,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W020 | net-12 | 50 mm | Pin contacts — -> S0:21 | Net pins S0:21; X5:1; X5:2"
+      "text": "W020 | global-net-4 | 50 mm | Pin contacts — -> S0:21 | Net pins S0:21; X5:1; X5:2"
     },
     {
       "kind": "text",
@@ -2417,7 +2417,7 @@
       "y": 277,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W021 | net-13 | 340 mm | Pin contacts S0:22 -> — | Net pins KM1:13; S0:22; S1:13"
+      "text": "W021 | global-net-5 | 340 mm | Pin contacts S0:22 -> — | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2426,7 +2426,7 @@
       "y": 331,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W022 | net-13 | 45 mm | Pin contacts KM1:13 -> — | Net pins KM1:13; S0:22; S1:13"
+      "text": "W022 | global-net-5 | 45 mm | Pin contacts KM1:13 -> — | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2435,7 +2435,7 @@
       "y": 385,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W023 | net-13 | 70 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+      "text": "W023 | global-net-5 | 70 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2444,7 +2444,7 @@
       "y": 439,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W024 | net-13 | 240 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+      "text": "W024 | global-net-5 | 240 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2453,7 +2453,7 @@
       "y": 493,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W025 | net-13 | 135 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+      "text": "W025 | global-net-5 | 135 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2462,7 +2462,7 @@
       "y": 547,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W026 | net-13 | 90 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
+      "text": "W026 | global-net-5 | 90 mm | Pin contacts — -> — | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2471,7 +2471,7 @@
       "y": 601,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W027 | net-13 | 140 mm | Pin contacts — -> S1:13 | Net pins KM1:13; S0:22; S1:13"
+      "text": "W027 | global-net-5 | 140 mm | Pin contacts — -> S1:13 | Net pins KM1:13; S0:22; S1:13"
     },
     {
       "kind": "text",
@@ -2480,7 +2480,7 @@
       "y": 655,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W028 | net-14 | 225 mm | Pin contacts KM1:14 -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W028 | global-net-6 | 225 mm | Pin contacts KM1:14 -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2489,7 +2489,7 @@
       "y": 709,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W029 | net-14 | 90 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W029 | global-net-6 | 90 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2498,7 +2498,7 @@
       "y": 763,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W030 | net-14 | 360 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W030 | global-net-6 | 360 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2507,7 +2507,7 @@
       "y": 817,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W031 | net-14 | 280 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W031 | global-net-6 | 280 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2516,7 +2516,7 @@
       "y": 871,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W032 | net-14 | 45 mm | Pin contacts — -> S1:14 | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W032 | global-net-6 | 45 mm | Pin contacts — -> S1:14 | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2525,7 +2525,7 @@
       "y": 925,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W033 | net-14 | 10 mm | Pin contacts KM1:A1 -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W033 | global-net-6 | 10 mm | Pin contacts KM1:A1 -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2534,7 +2534,7 @@
       "y": 979,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W034 | net-14 | 305 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W034 | global-net-6 | 305 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2543,7 +2543,7 @@
       "y": 1033,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W035 | net-14 | 320 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
+      "text": "W035 | global-net-6 | 320 mm | Pin contacts — -> — | Net pins KM1:14; KM1:A1; S1:14"
     },
     {
       "kind": "text",
@@ -2552,7 +2552,7 @@
       "y": 1087,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W036 | net-15 | 30 mm | Pin contacts KM1:A2 -> — | Net pins KM1:A2; X6:1; X6:2"
+      "text": "W036 | global-net-7 | 30 mm | Pin contacts KM1:A2 -> — | Net pins KM1:A2; X6:1; X6:2"
     },
     {
       "kind": "text",
@@ -2561,7 +2561,7 @@
       "y": 1141,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W037 | net-15 | 325 mm | Pin contacts — -> — | Net pins KM1:A2; X6:1; X6:2"
+      "text": "W037 | global-net-7 | 325 mm | Pin contacts — -> — | Net pins KM1:A2; X6:1; X6:2"
     },
     {
       "kind": "text",
@@ -2570,7 +2570,7 @@
       "y": 1195,
       "stroke": "#13263b",
       "sheetId": "dol-reference-009",
-      "text": "W038 | net-15 | 815 mm | Pin contacts — -> X6:1 | Net pins KM1:A2; X6:1; X6:2"
+      "text": "W038 | global-net-7 | 815 mm | Pin contacts — -> X6:1 | Net pins KM1:A2; X6:1; X6:2"
     },
     {
       "kind": "text",
@@ -3359,7 +3359,7 @@
       "y": 547,
       "stroke": "#13263b",
       "sheetId": "dol-reference-014",
-      "text": "X4 | 1 | Connection 1 | authored route W017 | net dol-reference-001:net-11"
+      "text": "X4 | 1 | Connection 1 | authored route W039 | net dol-reference-014:net-1"
     },
     {
       "kind": "text",
@@ -3368,7 +3368,7 @@
       "y": 601,
       "stroke": "#13263b",
       "sheetId": "dol-reference-014",
-      "text": "X4 | 2 | Connection 2 | external boundary pin; no direct wire | net dol-reference-001:net-11"
+      "text": "X4 | 2 | Connection 2 | external boundary pin; no direct wire | net dol-reference-014:net-1"
     },
     {
       "kind": "text",
@@ -3440,7 +3440,7 @@
       "y": 1422,
       "stroke": "#13263b",
       "sheetId": "dol-reference-004",
-      "text": "Current validation: 11 components, 38 wires, 15 nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
+      "text": "Current validation: 11 components, 39 wires, 15 project nets, 6 BOM rows, 0 open endpoints, 0 geometry errors."
     },
     {
       "kind": "text",
@@ -3689,7 +3689,7 @@
       "y": 763,
       "stroke": "#13263b",
       "sheetId": "dol-reference-016",
-      "text": "M1 protective earth to X4 boundary | dol-reference-001:net-11 | pins M1:PE; X4:1; X4:2 | wires W017 | 1 segment"
+      "text": "M1 protective earth to X4 boundary | dol-reference-001:net-11 | pins M1:PE | wires W017 | 1 segment"
     },
     {
       "kind": "text",
@@ -3782,7 +3782,7 @@
       "y": 385,
       "stroke": "#13263b",
       "sheetId": "dol-reference-017",
-      "text": "Field conductors | 38 wire records use drawing-path geometry; conductor type, size, and field installation are not represented."
+      "text": "Field conductors | 39 wire records use drawing-path geometry; conductor type, size, and field installation are not represented."
     },
     {
       "kind": "text",
@@ -11793,6 +11793,79 @@
       "text": "Use the referenced sheets for Schneider Electric product evidence and the project model for the static path.",
       "stroke": "#13263b",
       "sheetId": "dol-reference-099"
+    },
+    {
+      "id": "W039",
+      "kind": "wire",
+      "sheetId": "dol-reference-014",
+      "name": "Protective earth",
+      "x1": 440,
+      "y1": 960,
+      "x2": 865,
+      "y2": 960,
+      "stroke": "#16803c",
+      "strokeWidth": 1.5
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-014-pe-route",
+      "sheetId": "dol-reference-014",
+      "x": 120,
+      "y": 1020,
+      "text": "W039 · X4:1 to off-page M1:PE route W017.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-009-w039",
+      "x": 120,
+      "y": 1465,
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-009",
+      "text": "W039 | global-net-3 | 425 mm | Pin contacts — -> X4:1 | Net pins M1:PE; X4:1; X4:2"
+    },
+    {
+      "kind": "text",
+      "id": "dol-ref-007-x4-pe-net",
+      "x": 120,
+      "y": 1360,
+      "text": "dol-reference-014:net-1 | X4:1; X4:2 | Wire segments: 1",
+      "stroke": "#13263b",
+      "sheetId": "dol-reference-007"
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "dol-x4-pe",
+      "name": "M1 protective earth · X4 incoming PE",
+      "endpoints": [
+        {
+          "sheetId": "dol-reference-001",
+          "wireId": "W017",
+          "point": {
+            "x": 850,
+            "y": 560
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dol-reference-014",
+            "targetRef": "X4"
+          }
+        },
+        {
+          "sheetId": "dol-reference-014",
+          "wireId": "W039",
+          "point": {
+            "x": 440,
+            "y": 960
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dol-reference-001",
+            "targetRef": "M1"
+          }
+        }
+      ]
     }
   ]
 }

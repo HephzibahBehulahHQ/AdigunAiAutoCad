@@ -244,7 +244,7 @@ Open this project as an editable copy from **Project Explorer → List**. The pr
 
 ## DOL reference project status
 
-The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 100 authored sheets: 99 legacy A2-numbered pages through A2/099 and preliminary panel layout A3/001. Its static topology remains 11 components, 38 wires and 15 nets; manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
+The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 100 authored sheets: 99 legacy A2-numbered pages through A2/099 and preliminary panel layout A3/001. The motor protective-earth route reaches terminal X4 on A2/014 through a native cross-sheet link. The project has 11 components, 39 wire segments and 15 project nets. Manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
 
 
 A2/045 records Schneider Electric LC1D09BD rated operational current as 25 A AC-1 at ≤440 V AC and ambient ≤60 °C, separately from the 9 A AC-3 rating. These are utilization-category component ratings, not project load, cable or protection selections.

@@ -661,7 +661,7 @@
       "releaseScale": {
         "qualified": false,
         "additionalAuthoredSheetsRequired": 0,
-        "additionalConnectedSheetsRequired": 69,
+        "additionalConnectedSheetsRequired": 68,
         "sheetIdsWithoutElectricalConnectivity": [
           "dol-reference-002",
           "dol-reference-003",
@@ -675,7 +675,6 @@
           "dol-reference-011",
           "dol-reference-012",
           "dol-reference-013",
-          "dol-reference-014",
           "dol-reference-015",
           "dol-reference-016",
           "dol-reference-017",
@@ -767,31 +766,31 @@
       "wirePreview": {
         "sheetId": "dol-reference-001",
         "sheetName": "DOL motor feeder schematic",
-        "segments": "0,0,23,0 23,0,23,4 0,6,28,6 28,6,28,4 0,13,34,13 34,13,34,4 23,24,23,30 28,24,28,30 34,24,34,30 23,41,23,46 28,41,28,46 34,41,34,46 23,59,23,63 28,59,28,63 34,59,34,63 23,63,34,63 35,53,57,53 100,14,100,9 100,9,49,9 49,9,49,14 61,14,61,51 39,30,39,25 39,25,47,25 47,25,47,51 47,51,61,51 61,51,71,51 71,51,71,35 39,41,39,66 39,66,49,66 49,66,88,66 88,66,88,35 88,35,83,35 16,33,15,33 15,33,15,66 15,66,49,66 16,38,12,38 12,38,12,73 12,73,100,73"
+        "segments": "0,0,23,0 23,0,23,4 0,6,28,6 28,6,28,4 0,13,34,13 34,13,34,4 23,24,23,30 28,24,28,30 34,24,34,30 23,41,23,46 28,41,28,46 34,41,34,46 23,59,23,63 28,59,28,63 34,59,34,63 23,63,34,63 35,53,50,53 100,14,100,9 100,9,49,9 49,9,49,14 61,14,61,51 39,30,39,25 39,25,47,25 47,25,47,51 47,51,61,51 61,51,71,51 71,51,71,35 39,41,39,66 39,66,49,66 49,66,88,66 88,66,88,35 88,35,83,35 16,33,15,33 15,33,15,66 15,66,49,66 16,38,12,38 12,38,12,73 12,73,100,73"
       },
-      "topologySha256": "71275096f353f5e354d1e5224179ee2237e2384568832a520097800c87a58703",
+      "topologySha256": "2f459cc8fdf956bb116eda769f698840d212475ec4f92c5ef25f40f222e6b672",
       "csvSha256": {
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
-        "wires": "763968feee6b2d95f49336dc456bb59026aff48d0e6751194d9cf0587eb5424a",
-        "terminals": "cac330f412466bd63c854adea33d15fad5237124b7afeb9f48a7d71c54e99244",
+        "wires": "f3f732a0fee10a48064be56a25c9f04639385282260a9e0d97907dddc9f6dff2",
+        "terminals": "d03e5669391629dc309cfe373a9e5883d3929631ef4c0e09e41c110d2ee99571",
         "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
         "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
-        "connectedSheetCount": 1,
-        "contentObjectCount": 1055,
+        "connectedSheetCount": 2,
+        "contentObjectCount": 1059,
         "emptyContentSheetIds": [],
         "componentCount": 11,
-        "wireCount": 38,
-        "netCount": 15,
+        "wireCount": 39,
+        "netCount": 16,
         "globalNetCount": 15,
-        "crossSheetConnectionCount": 0,
+        "crossSheetConnectionCount": 1,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 6,
-        "wireListRowCount": 38,
+        "wireListRowCount": 39,
         "terminalListRowCount": 12
       },
       "errors": []
