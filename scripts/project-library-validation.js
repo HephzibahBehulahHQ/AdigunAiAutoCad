@@ -75,7 +75,7 @@ function buildReport() {
       projectSchema: parsed.valid && analysis.valid,
       allSheetsHaveEditableContent: sheetContent.emptyContentSheetIds.length === 0,
       sourceBackedBom: bom.valid,
-      connectedWireList: wireList.valid,
+      connectedWireList: wireList.valid && analysis.openEndpointCount === 0,
       zeroGeometryErrors: analysis.geometryErrorCount === 0
     };
     const errors = [
@@ -85,6 +85,10 @@ function buildReport() {
       ...wireList.errors
     ];
     if (analysis.geometryErrorCount !== 0) errors.push('Project contains geometry errors.');
+    if (analysis.openEndpointCount > 0) errors.push('Project contains unresolved wire endpoints.');
+    const connectedSheets = new Set((analysis.globalNets || [])
+      .filter(net => net.wireIds.length > 0 && net.pins.length >= 2)
+      .flatMap(net => net.sheetIds));
     return {
       id: entry.id,
       title: entry.title,
@@ -97,6 +101,7 @@ function buildReport() {
       metrics: {
         sheetCount: analysis.sheetCount,
         authoredSheetCount: sheetContent.authoredSheetCount,
+        connectedSheetCount: connectedSheets.size,
         contentObjectCount: sheetContent.contentObjectCount,
         emptyContentSheetIds: sheetContent.emptyContentSheetIds,
         componentCount: analysis.componentCount,
@@ -121,6 +126,16 @@ function buildReport() {
   const distinctTopologies = new Set(projects.map(project => project.topologyId));
   const completedScaleProjects = scaleQualifiedTopologies.size;
   const requiredScaleProjects = manifest.scaleTarget.firstGateDistinctProjects;
+  const releaseTopologies = new Map();
+  for (const project of validProjects) {
+    const { sheetCount, authoredSheetCount, connectedSheetCount } = project.metrics;
+    if (sheetCount < manifest.scaleTarget.minimumSheetsPerProject
+      || authoredSheetCount !== sheetCount
+      || connectedSheetCount < manifest.scaleTarget.minimumConnectedSheetsPerProject) continue;
+    releaseTopologies.set(project.topologyId, Math.max(sheetCount, releaseTopologies.get(project.topologyId) || 0));
+  }
+  const releaseSheetCount = [...releaseTopologies.values()].reduce((total, count) => total + count, 0);
+  const requiredReleaseSheetCount = manifest.scaleTarget.fullLibraryProjects * manifest.scaleTarget.minimumSheetsPerProject;
 
   return {
     schemaVersion: 1,
@@ -135,7 +150,17 @@ function buildReport() {
         completedDistinct100SheetProjects: completedScaleProjects,
         complete: completedScaleProjects >= requiredScaleProjects
       },
-      fullLibraryTarget: manifest.scaleTarget.fullLibraryProjects
+      fullLibraryTarget: manifest.scaleTarget.fullLibraryProjects,
+      releaseScaleGate: {
+        minimumSheetsPerProject: manifest.scaleTarget.minimumSheetsPerProject,
+        minimumConnectedSheetsPerProject: manifest.scaleTarget.minimumConnectedSheetsPerProject,
+        requiredDistinctProjects: manifest.scaleTarget.fullLibraryProjects,
+        qualifiedDistinctProjects: releaseTopologies.size,
+        requiredSheetCount: requiredReleaseSheetCount,
+        qualifiedSheetCount: releaseSheetCount,
+        complete: releaseTopologies.size >= manifest.scaleTarget.fullLibraryProjects
+          && releaseSheetCount >= requiredReleaseSheetCount
+      }
     },
     projects
   };
@@ -161,6 +186,11 @@ function run() {
     process.stdout.write(rendered);
   }
   if (report.status !== 'passed') process.exitCode = 1;
+  if (process.argv.includes('--require-release-scale') && !report.summary.releaseScaleGate.complete) {
+    const gate = report.summary.releaseScaleGate;
+    console.error(`Library release scale incomplete: ${gate.qualifiedDistinctProjects}/${gate.requiredDistinctProjects} qualified projects, ${gate.qualifiedSheetCount}/${gate.requiredSheetCount} qualified sheets.`);
+    process.exitCode = 1;
+  }
 }
 
 if (require.main === module) run();

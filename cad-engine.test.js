@@ -785,12 +785,15 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   assert.equal(parsed.valid, true, parsed.errors.join(' '));
 
   const project = parsed.project;
-  const analysis = engine.analyze(project.objects);
+  const analysis = engine.analyzeProject(project);
+  assert.equal(project.sheets.length, 71);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
-    [4, 13, 0, 0]
+    [4, 14, 0, 0]
   );
-  const netPins = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
+  assert.equal(analysis.crossSheetConnectionCount, 1);
+  assert.equal(engine.analyzeProject({ ...project, crossSheetConnections: [] }).openEndpointCount, 2);
+  const netPins = analysis.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(netPins, [
     'K1:11,X1:1:1,X1:1:2',
     'K1:14,KM1:A1',
@@ -806,12 +809,46 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   );
   const wireList = engine.wireList(project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
-  assert.equal(wireList.rows.length, 13);
+  assert.equal(wireList.rows.length, 14);
+  const schedule = project.objects.filter(object => object.sheetId === 'relay-wire-schedule' && object.text?.startsWith('W-'));
+  assert.deepEqual(schedule.map(object => object.text.split(' | ')[0]), wireList.rows.map(row => row.wireId));
+  const layout = project.objects.filter(object => object.sheetId === 'relay-terminal-layout' && object.deviceTag);
+  assert.deepEqual(layout.map(object => [object.deviceTag, object.manufacturerPartNumber]), [['X1', '3210567'], ['X3', '3209510']]);
+  const copy = engine.copyExampleProject(project, 'relay-package-copy', 'Editable relay reference');
+  const editable = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(editable.valid, true, editable.errors.join(' '));
+  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0007');
+  assert.deepEqual(engine.analyzeProject(editable.project).globalNets, engine.analyzeProject(project).globalNets);
+  const assignedPotentials = new Map(editable.project.objects.filter(object => object.kind === 'wire')
+    .map(object => [object.id, object.potential]));
+  assert.deepEqual([...new Set(assignedPotentials.values())].sort(), ['+24 V DC', '0 V DC', 'K1 switched feed', 'PLC Q0.0']);
+  for (const net of analysis.globalNets) {
+    assert.equal(new Set(net.wireIds.map(id => assignedPotentials.get(id.slice(id.indexOf(':') + 1)))).size, 1);
+  }
+  assert.ok(engine.projectElectricalReport(editable.project).findings.every(finding => finding.ruleId !== 'ERC-CONFLICTING-POTENTIALS'));
+  const indexedNumbers = new Set(editable.project.objects
+    .filter(object => object.sheetId.startsWith('relay-index'))
+    .map(object => object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0])
+    .filter(Boolean));
+  assert.deepEqual(indexedNumbers, new Set(editable.project.sheets.map(sheet => sheet.number)));
+  const routeTotals = editable.project.objects.filter(object => object.sheetId === 'relay-control-segment-geometry')
+    .map(object => object.text).filter(text => text?.startsWith('W-'));
+  const branches = ['W-Q0', 'W-24', 'W-K1-KM1', 'W-0V-K1', 'W-0V-KM1'];
+  assert.deepEqual(routeTotals, branches.map(prefix => {
+    const rows = wireList.rows.filter(row => row.wireId.startsWith(prefix + '-'));
+    return prefix + ' | ' + rows.length + ' segments | ' + rows.reduce((sum, row) => sum + row.lengthMm, 0) + ' drawing length units.';
+  }));
+  const tracedNets = ['relay-trace-plc', 'relay-trace-supply', 'relay-trace-coil', 'relay-trace-return']
+    .map(sheetId => editable.project.objects.filter(object => object.sheetId === sheetId && /-member-\d+$/.test(object.id))
+      .map(object => object.text).sort().join(',')).sort();
+  assert.deepEqual(tracedNets, netPins);
+  const deviceLayout = editable.project.objects.filter(object => object.sheetId === 'relay-coil-layout' && object.deviceTag);
+  assert.deepEqual(deviceLayout.map(object => [object.deviceTag, object.manufacturerPartNumber]), [['K1', '2966171'], ['KM1', 'LC1D09BD']]);
 
   const savedAgain = engine.serializeProject(project);
   const reopened = engine.parseProject(savedAgain);
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
-  assert.equal(engine.analyze(reopened.project.objects).nets.length, 4);
+  assert.deepEqual(engine.analyzeProject(reopened.project).globalNets, analysis.globalNets);
 });
 
 const starterId = 'siemens-3rm1201-1aa04';
@@ -3783,6 +3820,12 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.projects.every(project => project.metrics.authoredSheetCount === project.metrics.sheetCount
     && project.metrics.emptyContentSheetIds.length === 0));
   assert.ok(report.summary.distinctTopologyCount >= 5);
+  const relay = report.projects.find(project => project.id === 'relay-contactor-24v');
+  assert.equal(relay.metrics.connectedSheetCount, 2);
+  assert.ok(relay.metrics.authoredSheetCount > relay.metrics.connectedSheetCount);
+  assert.equal(report.summary.releaseScaleGate.minimumConnectedSheetsPerProject, 70);
+  assert.equal(report.summary.releaseScaleGate.requiredSheetCount, 5000);
+  assert.ok(report.summary.releaseScaleGate.qualifiedDistinctProjects <= report.summary.distinct100SheetTopologyCount);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
   assert.equal(dolOpening.metrics.sheetCount, 100);

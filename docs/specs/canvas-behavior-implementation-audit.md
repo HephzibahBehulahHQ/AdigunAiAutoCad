@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- Native project sheets suppress embedded starter artwork even when a legacy sheet ID is reused. Local Chrome checked the relay example before and after the correction and confirmed that both the canvas and SVG export use the authored project geometry. The relay reference now has 11 editable sheets, including model-derived electrical schedules and an illustrative XT1 terminal layout.
+
 - Deleting an off-page wire or connector target through the existing object commands preserves the original link as a diagnostic. Undo restores the object and its connection together. Local Chrome verified object deletion, undo/redo, valid native saves, and diagnostic persistence after reopening.
 
 - Local Chrome pointer input verified placement from the symbol bank and a new wire routed between two real terminal pins on an added sheet of the relay example. The workflow passed at 1:1 and 1:2, including undo, redo and native reopen. Placement assigns unique tags across the whole project, and clicking without dragging the Wire tool leaves no zero-length segment.

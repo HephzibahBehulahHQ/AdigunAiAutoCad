@@ -11,16 +11,25 @@
       "completedDistinct100SheetProjects": 3,
       "complete": false
     },
-    "fullLibraryTarget": 50
+    "fullLibraryTarget": 50,
+    "releaseScaleGate": {
+      "minimumSheetsPerProject": 100,
+      "minimumConnectedSheetsPerProject": 70,
+      "requiredDistinctProjects": 50,
+      "qualifiedDistinctProjects": 0,
+      "requiredSheetCount": 5000,
+      "qualifiedSheetCount": 0,
+      "complete": false
+    }
   },
   "projects": [
     {
       "id": "relay-contactor-24v",
       "title": "24 V DC relay-operated contactor coil",
       "topologyId": "relay-contactor-control",
-      "role": "standalone-example",
+      "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
-      "revision": "1.1",
+      "revision": "1.6",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -30,19 +39,20 @@
         "zeroGeometryErrors": true
       },
       "metrics": {
-        "sheetCount": 1,
-        "authoredSheetCount": 1,
-        "contentObjectCount": 20,
+        "sheetCount": 71,
+        "authoredSheetCount": 71,
+        "connectedSheetCount": 2,
+        "contentObjectCount": 524,
         "emptyContentSheetIds": [],
         "componentCount": 4,
-        "wireCount": 13,
-        "netCount": 4,
+        "wireCount": 14,
+        "netCount": 5,
         "globalNetCount": 4,
-        "crossSheetConnectionCount": 0,
+        "crossSheetConnectionCount": 1,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 4,
-        "wireListRowCount": 13
+        "wireListRowCount": 14
       },
       "errors": []
     },
@@ -64,6 +74,7 @@
       "metrics": {
         "sheetCount": 1,
         "authoredSheetCount": 1,
+        "connectedSheetCount": 1,
         "contentObjectCount": 14,
         "emptyContentSheetIds": [],
         "componentCount": 4,
@@ -96,6 +107,7 @@
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
+        "connectedSheetCount": 1,
         "contentObjectCount": 950,
         "emptyContentSheetIds": [],
         "componentCount": 15,
@@ -128,6 +140,7 @@
       "metrics": {
         "sheetCount": 1,
         "authoredSheetCount": 1,
+        "connectedSheetCount": 1,
         "contentObjectCount": 49,
         "emptyContentSheetIds": [],
         "componentCount": 11,
@@ -160,6 +173,7 @@
       "metrics": {
         "sheetCount": 2,
         "authoredSheetCount": 2,
+        "connectedSheetCount": 1,
         "contentObjectCount": 293,
         "emptyContentSheetIds": [],
         "componentCount": 15,
@@ -192,6 +206,7 @@
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
+        "connectedSheetCount": 8,
         "contentObjectCount": 1096,
         "emptyContentSheetIds": [],
         "componentCount": 32,
@@ -224,6 +239,7 @@
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
+        "connectedSheetCount": 1,
         "contentObjectCount": 1055,
         "emptyContentSheetIds": [],
         "componentCount": 11,
