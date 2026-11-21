@@ -711,13 +711,41 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       marker.append(title);
     }
   }
-  function insertCatalogSymbol(id){
+  function insertCatalogSymbol(id,quick=false){
     const item=symbolCatalog.find(x=>x.id===id);
     if(!item)return;
     if(placementPreview){placementPreview.remove();placementPreview=null;}
     state.pendingComponentId=id;
     setTool('component-placement');
+    if(quick&&state.sheet){
+      const point=findQuickInsertPoint(item);
+      if(point&&finishComponentPlacement(point))return;
+    }
     notify('Place '+item.name+' · move the pointer and click the sheet · Esc to cancel.');
+  }
+  function findQuickInsertPoint(item){
+    const viewport=drawing.getBoundingClientRect();
+    if(viewport.width<=48||viewport.height<=48)return null;
+    const topLeft=svgPoint({clientX:viewport.left+30,clientY:viewport.top+30});
+    const bottomRight=svgPoint({clientX:viewport.right-12,clientY:viewport.bottom-12});
+    const symbol={componentId:item.componentId,ref:nextComponentReference(item.tag),x:0,y:0,rotation:0};
+    const footprint=componentBounds(symbol);
+    if(!footprint)return null;
+    const occupied=state.objects.filter(object=>object.kind==='component-instance').map(objectBounds);
+    const centerX=(topLeft.x+bottomRight.x-footprint.left-footprint.right)/2;
+    const centerY=(topLeft.y+bottomRight.y-footprint.top-footprint.bottom)/2;
+    for(let ring=0;ring<=12;ring+=1){
+      for(let row=-ring;row<=ring;row+=1){
+        for(let column=-ring;column<=ring;column+=1){
+          if(Math.max(Math.abs(row),Math.abs(column))!==ring)continue;
+          const point=snapObjectPoint({x:centerX+column*(footprint.width+5),y:centerY+row*(footprint.height+5)});
+          const bounds={left:point.x+footprint.left,right:point.x+footprint.right,top:point.y+footprint.top,bottom:point.y+footprint.bottom};
+          if(bounds.left<topLeft.x||bounds.top<topLeft.y||bounds.right>bottomRight.x||bounds.bottom>bottomRight.y)continue;
+          if(!occupied.some(other=>componentBoundsOverlap(bounds,other)))return point;
+        }
+      }
+    }
+    return null;
   }
   function nextComponentReference(prefix){
     const used=new Set(collectProjectObjects().filter(object=>object.kind==='component-instance')
@@ -1607,7 +1635,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   $('#symbolSearch').addEventListener('input',e=>$('.symbol-row',$('#symbolList')).forEach(row=>row.hidden=!row.textContent.toLowerCase().includes(e.target.value.toLowerCase())));
   $('#projectTree').addEventListener('dblclick',function(event){const name=event.target.closest('[data-sheet-name]');const row=name&&name.closest('[data-sheet]');if(row&&state.projectModel){event.preventDefault();event.stopPropagation();beginInlineSheetRename(row.dataset.sheet);}});
   $('#projectTree').addEventListener('click',e=>{const addSheetButton=e.target.closest('[data-add-project-sheet]');if(addSheetButton){e.preventDefault();e.stopPropagation();addSheet('',addSheetButton.dataset.addProjectSheet);return;}const addSectionButton=e.target.closest('[data-add-project-section]');if(addSectionButton&&state.projectModel){e.preventDefault();e.stopPropagation();window.AdigunCADEngine.addProjectSection(state.projectModel,'Additional section','');renderCustomSheetNavigation();persist();return;}const toggle=e.target.closest('[data-toggle-section]');if(toggle&&state.projectModel){const section=state.projectModel.sections.find(item=>item.id===toggle.dataset.toggleSection);if(section){section.collapsed=!section.collapsed;renderProjectSectionNavigation();persist();}return;}const row=e.target.closest('[data-sheet]');if(row){if(state.projectModel){state.projectModel.activeSheetId=row.dataset.sheet;wrap.classList.remove('blank-start');}setSheet(row.dataset.sheet);}});$('#sheetTabs').addEventListener('click',e=>{const close=e.target.closest('[data-delete-sheet],[data-close-sheet]');if(close){e.preventDefault();e.stopPropagation();if(close.dataset.deleteSheet)deleteSheet(close.dataset.deleteSheet);else closeSheetTab(close.dataset.closeSheet);return;}const tab=e.target.closest('.document-tab[data-sheet]');if(tab)setSheet(tab.dataset.sheet);});$('#sheetTabs').addEventListener('keydown',e=>{const close=e.target.closest('[data-delete-sheet],[data-close-sheet]');if(close&&(e.key==='Enter'||e.key===' ')){e.preventDefault();if(close.dataset.deleteSheet)deleteSheet(close.dataset.deleteSheet);else closeSheetTab(close.dataset.closeSheet);}});
-  $('#symbolList').addEventListener('click',e=>{const b=e.target.closest('[data-insert]');if(b)insertCatalogSymbol(b.dataset.insert);});
+  $('#symbolList').addEventListener('click',e=>{const b=e.target.closest('[data-insert]');if(b)insertCatalogSymbol(b.dataset.insert,e.shiftKey);});
   $('#symbolSearch').addEventListener('input',e=>renderSymbolSidebar(e.target.value));
 
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}const remove=e.target.closest('[data-delete-object]');if(remove)deleteObject(remove.dataset.deleteObject);});
