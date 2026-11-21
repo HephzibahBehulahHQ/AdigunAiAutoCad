@@ -786,7 +786,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
 
   const project = parsed.project;
   const analysis = engine.analyze(project.objects);
-  assert.equal(project.sheets.length, 49);
+  assert.equal(project.sheets.length, 71);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
     [4, 13, 0, 0]
@@ -815,8 +815,15 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const copy = engine.copyExampleProject(project, 'relay-package-copy', 'Editable relay reference');
   const editable = engine.parseProject(engine.serializeProject(copy));
   assert.equal(editable.valid, true, editable.errors.join(' '));
-  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0005');
+  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0007');
   assert.deepEqual(engine.analyzeProject(editable.project).globalNets, engine.analyzeProject(project).globalNets);
+  const assignedPotentials = new Map(editable.project.objects.filter(object => object.kind === 'wire')
+    .map(object => [object.id, object.potential]));
+  assert.deepEqual([...new Set(assignedPotentials.values())].sort(), ['+24 V DC', '0 V DC', 'K1 switched feed', 'PLC Q0.0']);
+  for (const net of analysis.nets) {
+    assert.equal(new Set(net.wireIds.map(id => assignedPotentials.get(id))).size, 1);
+  }
+  assert.ok(engine.projectElectricalReport(editable.project).findings.every(finding => finding.ruleId !== 'ERC-CONFLICTING-POTENTIALS'));
   const indexedNumbers = new Set(editable.project.objects
     .filter(object => object.sheetId.startsWith('relay-index'))
     .map(object => object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0])
