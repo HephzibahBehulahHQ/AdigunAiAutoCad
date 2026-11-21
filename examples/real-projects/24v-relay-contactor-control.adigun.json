@@ -1,7 +1,7 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "24 V DC relay-operated contactor coil — wiring example",
-  "revision": "1.6",
+  "revision": "1.7",
   "status": "71 authored sheets: relay wiring, potential labels, editable layouts, component data and field review records.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
@@ -442,6 +442,12 @@
       "number": "A4/044",
       "name": "Wiring acceptance evidence by branch",
       "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-x1-feed-command",
+      "number": "A2/015",
+      "name": "X1 field feed and PLC command wiring",
+      "projectSectionId": "A2"
     }
   ],
   "sheetLabels": {},
@@ -453,7 +459,7 @@
       "id": "example-x1",
       "componentId": "phoenix-contact-3210567",
       "ref": "X1",
-      "x": 150,
+      "x": 500,
       "y": 385,
       "rotation": 0,
       "properties": {
@@ -462,7 +468,7 @@
         "marking": "Level 1 +24 V; level 2 PLC Q0.0",
         "comment": "External PLC output supplies the relay coil."
       },
-      "sheetId": "control"
+      "sheetId": "relay-x1-feed-command"
     },
     {
       "schemaVersion": 1,
@@ -519,8 +525,8 @@
       "id": "W-Q0-1",
       "kind": "wire",
       "sheetId": "control",
-      "name": "PLC Q0.0 to K1 A1",
-      "x1": 185,
+      "name": "A2/015 PLC Q0.0 to K1 A1",
+      "x1": 300,
       "y1": 400,
       "x2": 450,
       "y2": 400,
@@ -635,11 +641,11 @@
     {
       "id": "W-24-K1-2",
       "kind": "wire",
-      "sheetId": "control",
-      "name": "X2 to K1 pin 11",
-      "x1": 185,
-      "y1": 320,
-      "x2": 185,
+      "sheetId": "relay-x1-feed-command",
+      "name": "X1 level 1 to K1 contact supply cross-reference",
+      "x1": 535,
+      "y1": 370,
+      "x2": 680,
       "y2": 370,
       "stroke": "#b42318",
       "strokeWidth": 1.5,
@@ -837,7 +843,7 @@
       "sheetId": "relay-index",
       "x": 120,
       "y": 843,
-      "text": "Model summary: 4 components, 14 wire segments, 4 project-wide nets.",
+      "text": "Model summary: 4 components, 15 wire segments, 4 project-wide nets.",
       "stroke": "#13263b"
     },
     {
@@ -1014,7 +1020,7 @@
       "sheetId": "relay-wire-schedule",
       "x": 120,
       "y": 669,
-      "text": "W-24-K1-1 | K1:11 → route point | 405",
+      "text": "W-24-K1-1 | K1:11 to A2/015 cross-reference | 405",
       "stroke": "#13263b"
     },
     {
@@ -1023,7 +1029,7 @@
       "sheetId": "relay-wire-schedule",
       "x": 120,
       "y": 727,
-      "text": "W-24-K1-2 | route point → X1:1:2 | 50",
+      "text": "W-24-K1-2 | X1:1:2 to A2/001 cross-reference | 145",
       "stroke": "#13263b"
     },
     {
@@ -1059,7 +1065,7 @@
       "sheetId": "relay-wire-schedule",
       "x": 120,
       "y": 959,
-      "text": "W-Q0-1 | X1:2:2 → route point | 265",
+      "text": "W-Q0-1 | A2/015 cross-reference to route point | 150",
       "stroke": "#13263b"
     },
     {
@@ -1073,10 +1079,19 @@
     },
     {
       "kind": "text",
-      "id": "relay-wire-schedule-line-15",
+      "id": "relay-wire-schedule-x1-command",
       "sheetId": "relay-wire-schedule",
       "x": 120,
       "y": 1075,
+      "text": "W-Q0-3 | X1:2:2 to A2/001 cross-reference | 145",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-wire-schedule-line-15",
+      "sheetId": "relay-wire-schedule",
+      "x": 120,
+      "y": 1133,
       "text": "Lengths represent drawing geometry. Installed cable lengths and conductor selections remain open.",
       "stroke": "#13263b"
     },
@@ -4684,7 +4699,7 @@
       "sheetId": "relay-control-segment-geometry",
       "x": 120,
       "y": 205,
-      "text": "W-Q0 | 2 segments | 325 drawing length units.",
+      "text": "W-Q0 | 3 segments | 355 drawing length units.",
       "stroke": "#13263b"
     },
     {
@@ -4693,7 +4708,7 @@
       "sheetId": "relay-control-segment-geometry",
       "x": 120,
       "y": 263,
-      "text": "W-24 | 2 segments | 455 drawing length units.",
+      "text": "W-24 | 2 segments | 550 drawing length units.",
       "stroke": "#13263b"
     },
     {
@@ -5083,7 +5098,7 @@
       "sheetId": "relay-xt1-groups",
       "x": 120,
       "y": 205,
-      "text": "PLC Q0.0 | W-Q0-1, W-Q0-2",
+      "text": "PLC Q0.0 | W-Q0-1, W-Q0-2, W-Q0-3",
       "stroke": "#13263b"
     },
     {
@@ -6334,6 +6349,64 @@
       "stroke": "#b42318",
       "strokeWidth": 1.5,
       "potential": "0 V DC"
+    },
+    {
+      "id": "W-Q0-3",
+      "kind": "wire",
+      "sheetId": "relay-x1-feed-command",
+      "name": "X1 level 2 to K1 coil command cross-reference",
+      "x1": 535,
+      "y1": 400,
+      "x2": 680,
+      "y2": 400,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "PLC Q0.0"
+    },
+    {
+      "kind": "text",
+      "id": "relay-x1-feed-command-title",
+      "sheetId": "relay-x1-feed-command",
+      "x": 120,
+      "y": 128,
+      "text": "X1 FIELD FEED AND PLC COMMAND",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-x1-feed-command-feed",
+      "sheetId": "relay-x1-feed-command",
+      "x": 120,
+      "y": 220,
+      "text": "X1 level 1: external +24 V DC feed to K1 terminal 11 on A2/001.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-x1-feed-command-command",
+      "sheetId": "relay-x1-feed-command",
+      "x": 120,
+      "y": 260,
+      "text": "X1 level 2: external PLC Q0.0 command to K1 coil A1 on A2/001.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-x1-feed-command-boundary",
+      "sheetId": "relay-x1-feed-command",
+      "x": 120,
+      "y": 490,
+      "text": "The left pins of X1 are the external interface. The two terminal levels are electrically isolated.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-x1-feed-command",
+      "sheetId": "relay-index",
+      "x": 120,
+      "y": 959,
+      "text": "A2/015 | X1 field feed and PLC command wiring.",
+      "stroke": "#13263b"
     }
   ],
   "description": "A source-backed, one-sheet 24 V DC control wiring example. A PLC output energizes K1; K1's normally-open contact feeds the KM1 contactor coil. Relay state is not simulated.",
@@ -6364,6 +6437,70 @@
           },
           "connector": {
             "direction": "left",
+            "targetSheetId": "control",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "relay-x1-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "control",
+          "wireId": "W-24-K1-1",
+          "point": {
+            "x": 185,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "relay-x1-feed-command",
+            "targetRef": "X1"
+          }
+        },
+        {
+          "sheetId": "relay-x1-feed-command",
+          "wireId": "W-24-K1-2",
+          "point": {
+            "x": 680,
+            "y": 370
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "control",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "relay-x1-command",
+      "name": "PLC Q0.0",
+      "endpoints": [
+        {
+          "sheetId": "control",
+          "wireId": "W-Q0-1",
+          "point": {
+            "x": 300,
+            "y": 400
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "relay-x1-feed-command",
+            "targetRef": "X1"
+          }
+        },
+        {
+          "sheetId": "relay-x1-feed-command",
+          "wireId": "W-Q0-3",
+          "point": {
+            "x": 680,
+            "y": 400
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "control",
             "targetRef": "K1"
           }
