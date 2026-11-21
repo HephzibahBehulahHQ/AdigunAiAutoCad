@@ -70,19 +70,22 @@ function buildReport() {
     const analysis = engine.analyzeProject(project);
     const bom = engine.billOfMaterials(project.objects);
     const wireList = engine.wireList(project);
+    const terminals = engine.terminalList(project);
     const sheetContent = summarizeSheetContent(project);
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
       allSheetsHaveEditableContent: sheetContent.emptyContentSheetIds.length === 0,
       sourceBackedBom: bom.valid,
       connectedWireList: wireList.valid && analysis.openEndpointCount === 0,
+      terminalList: terminals.valid,
       zeroGeometryErrors: analysis.geometryErrorCount === 0
     };
     const errors = [
       ...parsed.errors,
       ...analysis.errors,
       ...bom.errors,
-      ...wireList.errors
+      ...wireList.errors,
+      ...terminals.errors
     ];
     if (analysis.geometryErrorCount !== 0) errors.push('Project contains geometry errors.');
     if (analysis.openEndpointCount > 0) errors.push('Project contains unresolved wire endpoints.');
@@ -112,7 +115,8 @@ function buildReport() {
         openEndpointCount: analysis.openEndpointCount,
         geometryErrorCount: analysis.geometryErrorCount,
         bomRowCount: bom.rows.length,
-        wireListRowCount: wireList.rows.length
+        wireListRowCount: wireList.rows.length,
+        terminalListRowCount: terminals.rows.length
       },
       errors
     };

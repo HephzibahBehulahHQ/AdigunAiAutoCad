@@ -792,6 +792,12 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
     [4, 14, 0, 0]
   );
   assert.equal(analysis.crossSheetConnectionCount, 1);
+  const terminalList = engine.terminalList(project);
+  assert.equal(terminalList.valid, true);
+  assert.equal(terminalList.rows.length, 6);
+  assert.deepEqual(terminalList.rows.find(row => row.ref === 'X3' && row.pin === '1').connectedPins,
+    ['A2/001 K1:A2', 'A2/001 KM1:A2', 'A2/004 X3:2']);
+  assert.match(engine.terminalListCsv(project), /"A2\/004","X3","1"/);
   assert.equal(engine.analyzeProject({ ...project, crossSheetConnections: [] }).openEndpointCount, 2);
   const netPins = analysis.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(netPins, [

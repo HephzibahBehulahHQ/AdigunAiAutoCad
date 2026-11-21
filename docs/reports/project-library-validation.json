@@ -36,6 +36,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -52,7 +53,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 4,
-        "wireListRowCount": 14
+        "wireListRowCount": 14,
+        "terminalListRowCount": 6
       },
       "errors": []
     },
@@ -69,6 +71,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -85,7 +88,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 3,
-        "wireListRowCount": 10
+        "wireListRowCount": 10,
+        "terminalListRowCount": 4
       },
       "errors": []
     },
@@ -102,6 +106,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -118,7 +123,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 3,
-        "wireListRowCount": 33
+        "wireListRowCount": 33,
+        "terminalListRowCount": 26
       },
       "errors": []
     },
@@ -135,6 +141,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -151,7 +158,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 6,
-        "wireListRowCount": 38
+        "wireListRowCount": 38,
+        "terminalListRowCount": 12
       },
       "errors": []
     },
@@ -168,6 +176,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -184,7 +193,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 8,
-        "wireListRowCount": 242
+        "wireListRowCount": 242,
+        "terminalListRowCount": 12
       },
       "errors": []
     },
@@ -201,6 +211,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -217,7 +228,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 15,
-        "wireListRowCount": 335
+        "wireListRowCount": 335,
+        "terminalListRowCount": 30
       },
       "errors": []
     },
@@ -234,6 +246,7 @@
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
+        "terminalList": true,
         "zeroGeometryErrors": true
       },
       "metrics": {
@@ -250,7 +263,8 @@
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 6,
-        "wireListRowCount": 38
+        "wireListRowCount": 38,
+        "terminalListRowCount": 12
       },
       "errors": []
     }

@@ -6,6 +6,8 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 **Bill of materials → Export CSV** includes verified components from every project sheet. **Electrical checks → Export wire list CSV** includes wires from every project sheet and follows explicit cross-sheet connections.
 
+**Electrical checks → Export terminal list CSV** lists each modeled terminal pin with its sheet, strip and position fields, marking, part number, and other pins on the same project net.
+
 # 24 V DC relay-operated contactor coil
 
 Open this project as an editable copy from **Project Explorer → List**.

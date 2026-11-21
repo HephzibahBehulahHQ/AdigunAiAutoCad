@@ -1963,13 +1963,63 @@
       ['Connected pin references on net', 'netPinRefs']
     ];
     if (!Array.isArray(input) && input && typeof input === 'object') columns.unshift(['Sheet ID', 'sheetId']);
+    return connectionReportCsv(columns, report.rows);
+  }
+
+  function terminalList(project) {
+    const analysis = analyzeProject(project);
+    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+    const pinKey = (instanceId, pinId) => JSON.stringify([instanceId, pinId]);
+    const netByPin = new Map();
+    const pinsByLocalNet = new Map(analysis.sheets.flatMap(sheet => sheet.analysis.nets.map(net => [
+      net.id, net.pins.map(pin => ({ ...pin, sheetId: sheet.id }))
+    ])));
+    for (const net of analysis.globalNets) {
+      const pins = net.localNetIds.flatMap(id => pinsByLocalNet.get(id));
+      const terminalNet = { id: net.id, pins: pins };
+      for (const pin of pins) netByPin.set(pinKey(pin.instanceId, pin.pinId), terminalNet);
+    }
+    const sheetNumbers = new Map(analysis.sheets.map(sheet => [sheet.id, sheet.number || sheet.id]));
+    const rows = (project.objects || []).flatMap(function (object) {
+      if (object?.kind !== 'component-instance') return [];
+      const definition = component(object.componentId);
+      if (!['feedthrough-terminal', 'protective-earth-terminal'].includes(definition?.family)) return [];
+      const sheetId = object.sheetId || analysis.sheets[0].id;
+      const properties = object.properties || {};
+      return definition.symbol.pins.map(function (pin) {
+        const key = pinKey(object.id, pin.id);
+        const net = netByPin.get(key);
+        return {
+          sheet: sheetNumbers.get(sheetId), ref: object.ref, pin: pin.localNumber,
+          strip: properties.terminalStrip || '', position: properties.position || '',
+          marking: properties.marking || '', partNumber: definition.manufacturerPartNumber,
+          netId: net?.id || '',
+          connectedPins: (net?.pins || []).filter(other => pinKey(other.instanceId, other.pinId) !== key)
+            .map(other => sheetNumbers.get(other.sheetId) + ' ' + other.ref + ':' + other.number).sort()
+        };
+      });
+    }).sort((a, b) => a.sheet.localeCompare(b.sheet) || a.ref.localeCompare(b.ref) || a.pin.localeCompare(b.pin));
+    return { valid: true, errors: [], rows: rows };
+  }
+
+  function terminalListCsv(project) {
+    const report = terminalList(project);
+    if (!report.valid) throw new Error('Terminal list export blocked: ' + report.errors.join(' '));
+    return connectionReportCsv([
+      ['Sheet', 'sheet'], ['Terminal reference', 'ref'], ['Pin', 'pin'], ['Strip', 'strip'],
+      ['Position', 'position'], ['Marking', 'marking'], ['Part number', 'partNumber'],
+      ['Net ID', 'netId'], ['Other pin references on net', 'connectedPins']
+    ], report.rows);
+  }
+
+  function connectionReportCsv(columns, rows) {
     function cell(value) {
       let text = Array.isArray(value) ? value.join('; ') : String(value == null ? '' : value);
       if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;
       return '"' + text.replace(/"/g, '""') + '"';
     }
     const lines = [columns.map(function (column) { return cell(column[0]); }).join(',')];
-    report.rows.forEach(function (row) {
+    rows.forEach(function (row) {
       lines.push(columns.map(function (column) { return cell(row[column[1]]); }).join(','));
     });
     return '\uFEFF' + lines.join('\r\n') + '\r\n';
@@ -2015,7 +2065,9 @@
     billOfMaterials: billOfMaterials,
     billOfMaterialsCsv: billOfMaterialsCsv,
     wireList: wireList,
-    wireListCsv: wireListCsv
+    wireListCsv: wireListCsv,
+    terminalList: terminalList,
+    terminalListCsv: terminalListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
 
