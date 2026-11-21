@@ -120,6 +120,7 @@ function checkCsvExports(project, reopened) {
 
 function buildReport() {
   const manifest = readManifest();
+  const { minimumSheetsPerProject, minimumConnectedSheetsPerProject } = manifest.scaleTarget;
   const projects = manifest.projects.map(entry => {
     const projectFile = path.resolve(repositoryRoot, entry.path);
     const source = fs.readFileSync(projectFile, 'utf8');
@@ -165,6 +166,19 @@ function buildReport() {
     const connectedSheets = new Set((analysis.globalNets || [])
       .filter(net => net.wireIds.length > 0 && net.pins.length >= 2)
       .flatMap(net => net.sheetIds));
+    const connectedSheetCount = connectedSheets.size;
+    const sheetCount = analysis.sheetCount;
+    const passed = Object.values(checks).every(Boolean);
+    const releaseScale = {
+      qualified: passed && sheetCount >= minimumSheetsPerProject
+        && sheetContent.authoredSheetCount === sheetCount
+        && connectedSheetCount >= minimumConnectedSheetsPerProject,
+      additionalAuthoredSheetsRequired: Math.max(0, minimumSheetsPerProject - sheetContent.authoredSheetCount),
+      additionalConnectedSheetsRequired: Math.max(0, minimumConnectedSheetsPerProject - connectedSheetCount),
+      sheetIdsWithoutElectricalConnectivity: (Array.isArray(project.sheets) ? project.sheets : [])
+        .filter(sheet => !connectedSheets.has(sheet.id))
+        .map(sheet => sheet.id)
+    };
     return {
       id: entry.id,
       title: entry.title,
@@ -172,14 +186,15 @@ function buildReport() {
       role: entry.role,
       path: entry.path,
       revision: project.revision || null,
-      status: Object.values(checks).every(Boolean) ? 'passed' : 'failed',
+      status: passed ? 'passed' : 'failed',
       checks,
+      releaseScale,
       topologySha256: roundTrip.hash,
       csvSha256: csv.fingerprints,
       metrics: {
-        sheetCount: analysis.sheetCount,
+        sheetCount,
         authoredSheetCount: sheetContent.authoredSheetCount,
-        connectedSheetCount: connectedSheets.size,
+        connectedSheetCount,
         contentObjectCount: sheetContent.contentObjectCount,
         emptyContentSheetIds: sheetContent.emptyContentSheetIds,
         componentCount: analysis.componentCount,
@@ -207,10 +222,8 @@ function buildReport() {
   const requiredScaleProjects = manifest.scaleTarget.firstGateDistinctProjects;
   const releaseTopologies = new Map();
   for (const project of validProjects) {
-    const { sheetCount, authoredSheetCount, connectedSheetCount } = project.metrics;
-    if (sheetCount < manifest.scaleTarget.minimumSheetsPerProject
-      || authoredSheetCount !== sheetCount
-      || connectedSheetCount < manifest.scaleTarget.minimumConnectedSheetsPerProject) continue;
+    if (!project.releaseScale.qualified) continue;
+    const { sheetCount } = project.metrics;
     releaseTopologies.set(project.topologyId, Math.max(sheetCount, releaseTopologies.get(project.topologyId) || 0));
   }
   const releaseSheetCount = [...releaseTopologies.values()].reduce((total, count) => total + count, 0);
@@ -268,6 +281,11 @@ function run() {
   if (process.argv.includes('--require-release-scale') && !report.summary.releaseScaleGate.complete) {
     const gate = report.summary.releaseScaleGate;
     console.error(`Library release scale incomplete: ${gate.qualifiedDistinctProjects}/${gate.requiredDistinctProjects} qualified projects, ${gate.qualifiedSheetCount}/${gate.requiredSheetCount} qualified sheets.`);
+    for (const project of report.projects.filter(entry => !entry.releaseScale.qualified)) {
+      const { additionalAuthoredSheetsRequired, additionalConnectedSheetsRequired } = project.releaseScale;
+      const validation = project.status === 'failed' ? ' Project validation also failed.' : '';
+      console.error(`${project.id}: ${additionalAuthoredSheetsRequired} more authored sheets, ${additionalConnectedSheetsRequired} more electrically connected sheets required.${validation}`);
+    }
     process.exitCode = 1;
   }
 }
