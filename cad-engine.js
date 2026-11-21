@@ -23,15 +23,16 @@
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
 
   function fitDrawingToPage(bounds, pageWidth, pageHeight, margin, titleBlockHeight) {
-    if (!bounds || ![bounds.left, bounds.top, bounds.right, bounds.bottom, pageWidth, pageHeight].every(finite) || bounds.right <= bounds.left || bounds.bottom <= bounds.top || pageWidth <= 0 || pageHeight <= 0) {
-      throw new Error('Drawing bounds and page dimensions must be positive finite values.');
+    if (!bounds || ![bounds.left, bounds.top, bounds.right, bounds.bottom, pageWidth, pageHeight].every(finite) || bounds.right < bounds.left || bounds.bottom < bounds.top || pageWidth <= 0 || pageHeight <= 0) {
+      throw new Error('Drawing bounds must be ordered and page dimensions must be positive finite values.');
     }
     const inset = finite(margin) && margin >= 0 ? margin : 10;
     const titleHeight = finite(titleBlockHeight) && titleBlockHeight >= 0 ? titleBlockHeight : 60;
     const availableWidth = pageWidth - inset * 2;
     const availableHeight = pageHeight - inset * 2 - titleHeight;
     if (availableWidth <= 0 || availableHeight <= 0) throw new Error('The title block leaves no drawable sheet area.');
-    const scale = Math.min(availableWidth / (bounds.right - bounds.left), availableHeight / (bounds.bottom - bounds.top));
+    const width = bounds.right - bounds.left, height = bounds.bottom - bounds.top;
+    const scale = width || height ? Math.min(availableWidth / width, availableHeight / height) : 1;
     return {
       scale: scale,
       x: inset + (availableWidth - (bounds.right - bounds.left) * scale) / 2 - bounds.left * scale,
@@ -236,6 +237,29 @@
     return { width: width, height: height };
   }
 
+  function drawingScaleRatio(value) {
+    const match = /^(\d+)\s*:\s*(\d+)$/.exec(String(value ?? '').trim());
+    if (!match) return null;
+    const drawing = Number(match[1]), world = Number(match[2]);
+    return Number.isSafeInteger(drawing) && Number.isSafeInteger(world) && drawing > 0 && world > 0
+      ? { label: drawing + ':' + world, factor: drawing / world }
+      : null;
+  }
+
+  function setProjectSheetDrawingScale(sheet, value) {
+    const fit = /^fit to page$/i.test(String(value ?? '').trim());
+    const ratio = drawingScaleRatio(value);
+    if (!sheet || (!fit && !ratio)) throw new Error('Enter a positive ratio such as 1:2, or Fit to page.');
+    sheet.scale = fit ? 'Fit to page' : ratio.label;
+    sheet.drawingFitToPage = fit;
+    delete sheet.drawingTransform;
+    return sheet.scale;
+  }
+
+  function projectSheetDrawingScaleFactor(sheet) {
+    return sheet?.drawingFitToPage === false ? (drawingScaleRatio(sheet.scale)?.factor ?? 1) : 1;
+  }
+
   function renameProjectSheet(project, sheetId, name) {
     if (!project || !Array.isArray(project.sheets)) throw new Error('Project sheets are unavailable.');
     const sheet = project.sheets.find(function (item) { return item.id === sheetId; });
@@ -260,11 +284,6 @@
     targetSheets.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
     const oldSectionSheets = project.sheets.filter(function (sheet) { return sheet.sectionId === previousSectionId && sheet.sectionId !== sectionId; });
     oldSectionSheets.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
-    const allSections = new Set(project.sections.map(function (section) { return section.id; }));
-    allSections.forEach(function (id) {
-      const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === id; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
-      siblings.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
-    });
     project.sheets.push(moved);
     renumberProjectSheets(project);
     return moved;
@@ -286,9 +305,14 @@
         type: 'unresolved-cross-sheet-reference',
         sheetId: sheetId,
         connectionId: connection.id,
+        connection: clone(connection),
         message: 'Connection ' + connection.id + ' references deleted sheet ' + removed.number + ' (' + removed.name + ').'
       });
     });
+    if (linked.length > 0) {
+      const affected = new Set(linked);
+      project.crossSheetConnections = project.crossSheetConnections.filter(function (connection) { return !affected.has(connection); });
+    }
     if (Array.isArray(project.openTabs)) project.openTabs = project.openTabs.filter(function (id) { return id !== sheetId; });
     if (project.activeSheetId === sheetId) project.activeSheetId = null;
     const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === removed.sectionId; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
@@ -1500,13 +1524,16 @@
       if (rootA !== rootB) parents.set(rootB, rootA);
     }
     const linkedOpenEndpointKeys = new Set();
+    function endpointKey(sheetId, endpoint) {
+      return sheetId + '\u0000' + endpoint.wireId + '\u0000' + endpoint.point.x + ',' + endpoint.point.y;
+    }
     const links = (Array.isArray(project.crossSheetConnections) ? project.crossSheetConnections : []).map(function (connection) {
       const endpointNets = connection.endpoints.map(function (endpoint) {
         return endpointToNet.get(endpoint.sheetId + '\u0000' + endpoint.wireId);
       });
       const open = connection.endpoints.map(function (endpoint, index) {
         const sheet = reports.find(function (entry) { return entry.id === endpoint.sheetId; });
-        const key = endpoint.sheetId + '\u0000' + endpoint.wireId + '\u0000' + endpoint.point.x + ',' + endpoint.point.y;
+        const key = endpointKey(endpoint.sheetId, endpoint);
         const isOpen = sheet && sheet.analysis.openEndpoints.some(function (candidate) {
           return candidate.wireId === endpoint.wireId &&
             candidate.point.x === endpoint.point.x && candidate.point.y === endpoint.point.y;
@@ -1552,6 +1579,11 @@
     }).sort(function (x, y) { return x.localNetIds[0].localeCompare(y.localNetIds[0]); })
       .map(function (group, index) { return Object.assign({ id: 'global-net-' + (index + 1) }, group); });
     const localOpenEndpointCount = reports.reduce(function (sum, sheet) { return sum + sheet.analysis.openEndpointCount; }, 0);
+    const openEndpoints = reports.flatMap(function (sheet) {
+      return sheet.analysis.openEndpoints
+        .filter(function (endpoint) { return !linkedOpenEndpointKeys.has(endpointKey(sheet.id, endpoint)); })
+        .map(function (endpoint) { return Object.assign({ sheetId: sheet.id }, endpoint); });
+    });
     return {
       valid: true,
       errors: [],
@@ -1564,10 +1596,11 @@
       crossSheetConnections: links,
       globalNets: globalNets,
       localOpenEndpointCount: localOpenEndpointCount,
-      openEndpointCount: localOpenEndpointCount - linkedOpenEndpointKeys.size,
+      openEndpointCount: openEndpoints.length,
+      openEndpoints: openEndpoints,
       geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
       sheets: reports,
-      scope: 'Sheet-local nets are joined only at exact, validated open endpoints; connector graphics are not yet rendered.'
+      scope: 'Sheet-local nets are joined only at exact, validated open endpoints.'
     };
   }
 
@@ -1749,6 +1782,8 @@
     renameProjectSection: renameProjectSection,
     addProjectSheet: addProjectSheet,
     setProjectSheetPaperFormat: setProjectSheetPaperFormat,
+    setProjectSheetDrawingScale: setProjectSheetDrawingScale,
+    projectSheetDrawingScaleFactor: projectSheetDrawingScaleFactor,
     renameProjectSheet: renameProjectSheet,
     moveProjectSheet: moveProjectSheet,
     deleteProjectSheet: deleteProjectSheet,

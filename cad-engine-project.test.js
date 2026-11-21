@@ -18,6 +18,7 @@ test('workspace boot always starts with no active project, drawing tab, or autom
   assert.match(inline, /\$\$\('#sheetTabs \.document-tab\[data-sheet\]'\)\.forEach/);
   assert.match(inline, /\$\('#newSheet'\)\.hidden=true/);
   assert.match(inline, /window\.addEventListener\('beforeunload'/);
+  assert.match(inline, /setProjectSheetDrawingScale\(sheet,input\.value\)/);
   assert.doesNotMatch(inline.slice(inline.lastIndexOf('state.projectModel=null;')), /copyExampleProject\(/);
 });
 
@@ -28,14 +29,15 @@ test('Save As uses a local project file picker and subsequent Save writes to tha
   assert.match(inline, /window\.showSaveFilePicker/);
   assert.match(inline, /projectSaveHandle\.createWritable\(\)/);
   assert.match(inline, /if\(e\.ctrlKey&&e\.shiftKey&&e\.key\.toLowerCase\(\)==='s'\)\{e\.preventDefault\(\);saveProjectAs\(\);return;\}/);
-  assert.match(inline, /projectSaveHandle=null;const payload=parsed\.project/);
+  assert.match(inline, /openNativeProject\(parsed\.project,f\.name\)/);
+  assert.match(inline, /function openNativeProject[\s\S]*?projectSaveHandle=null;state\.projectName/);
 });
 
 test('canvas audit reflects the current local Save As and reopen limits', () => {
   const audit = fs.readFileSync(path.join(__dirname, 'docs/specs/canvas-behavior-implementation-audit.md'), 'utf8');
   assert.match(audit, /Save As uses the browser file picker when available/);
   assert.match(audit, /Save writes to the selected file handle during the current page session/);
-  assert.match(audit, /not durable browser-local autosave/);
+  assert.match(audit, /Recover browser draft/);
   assert.match(audit, /CI Chromium verifies clean project creation, section sheet selection, canvas editing, and Save As\/reopen/);
   assert.match(audit, /opens a 100-sheet example as an A1–A4 native copy/);
   assert.match(audit, /source isolation and resolvable cross-sheet wire endpoints/);
@@ -104,6 +106,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0, 'adding a sheet must not open it');
     await sheetRow.click();
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 1, 'selecting a sheet opens its canvas tab');
+    await sheetRow.locator('[data-sheet-name]').dblclick();
+    const sheetNameInput = page.getByRole('textbox', { name: 'Rename sheet' });
+    await sheetNameInput.fill('Incoming power');
+    await sheetNameInput.press('Enter');
+    assert.match(await sheetRow.getAttribute('aria-label'), /^A2\/0001 · Incoming power$/);
     const titleBlock = page.locator('#projectTitleBlockDynamic [data-title-block="frame"]');
     await titleBlock.waitFor();
     const titleBlockRows = await page.locator('#projectTitleBlockDynamic [data-title-block-row]').evaluateAll(nodes => nodes.map(node => node.dataset.titleBlockRow));
@@ -148,7 +155,32 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await page.mouse.up();
     assert.ok(await page.locator('#userDrawings > *').count() > 0, 'canvas edit should create native vector geometry');
 
+    const nativeObjectCount = await page.locator('#userDrawings > *').count();
+    await page.locator('#openFile').setInputFiles({
+      name: 'read-only.svg',
+      mimeType: 'image/svg+xml',
+      buffer: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="60" viewBox="0 0 100 60"><rect id="preview-only" width="100" height="60"/></svg>')
+    });
+    const preview = page.getByRole('dialog', { name: 'SVG preview' });
+    const previewImage = preview.getByRole('img', { name: 'read-only.svg' });
+    await previewImage.waitFor();
+    assert.equal(await previewImage.evaluate(image => image.naturalWidth), 100);
+    assert.equal(await page.locator('#preview-only').count(), 0);
+    await preview.getByRole('button', { name: 'Close SVG preview' }).click();
+    await preview.waitFor({ state: 'hidden' });
+    assert.equal(await page.locator('#userDrawings > *').count(), nativeObjectCount);
+    assert.equal(await page.locator('#sheetTabs .document-tab[aria-selected="true"]').getAttribute('data-sheet'), sheetId);
+
     await page.locator('[aria-label="Properties"]').click();
+    const scale = page.getByLabel('Scale', { exact: true });
+    await scale.fill('1:2');
+    await scale.press('Tab');
+    assert.equal(await page.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
+    await scale.fill('1:0');
+    await scale.press('Tab');
+    assert.equal(await scale.inputValue(), '1:2');
+    assert.equal(await page.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
+    assert.match(await page.locator('[data-title-block-row="drawing"]').textContent(), /Scale: 1:2/);
     const description = page.getByLabel('Description', { exact: true });
     await description.fill('Saved through local file picker');
     await page.keyboard.press('Control+Shift+S');
@@ -160,6 +192,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const saved = JSON.parse(savedText);
     assert.equal(saved.projectModel.name, 'Browser local save test');
     assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).description, 'Updated with repeat Save');
+    assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).scale, '1:2');
     assert.ok(saved.objects.length > 0);
     await page.close();
 
@@ -173,6 +206,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     });
     await reopenedPage.locator('#projectTree [data-sheet]').first().waitFor();
     assert.equal(await reopenedPage.locator('#sheetTabs .document-tab[data-sheet]').count(), 1);
+    assert.equal(await reopenedPage.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
     await reopenedPage.locator('[aria-label="Properties"]').click();
     assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
@@ -330,6 +364,13 @@ test('new project has empty A1–A4 sections and supports uncapped continuous nu
   assert.deepEqual(engine.setProjectSheetPaperFormat(power, 'A4', 'portrait'), { width: 210, height: 297 });
   assert.deepEqual([power.paperSize, power.orientation], ['A4', 'portrait']);
   engine.setProjectSheetPaperFormat(power, 'A3', 'landscape');
+  assert.equal(engine.setProjectSheetDrawingScale(power, ' 1 : 2 '), '1:2');
+  assert.equal(engine.projectSheetDrawingScaleFactor(power), 0.5);
+  assert.throws(() => engine.setProjectSheetDrawingScale(power, '1:0'), /positive ratio/);
+  assert.equal(engine.projectSheetDrawingScaleFactor(power), 0.5);
+  assert.equal(engine.setProjectSheetDrawingScale(power, 'Fit to page'), 'Fit to page');
+  assert.equal(power.drawingFitToPage, true);
+  assert.equal(engine.projectSheetDrawingScaleFactor({ scale: '1:2' }), 1, 'legacy title labels do not scale drawings');
 
   const overview = engine.addProjectSheet(project, 'A1', '', 'sheet-overview');
   assert.equal(overview.number, 'A1/0001');
@@ -347,6 +388,19 @@ test('new project has empty A1–A4 sections and supports uncapped continuous nu
   assert.equal(project.sheets[0].id, overview.id);
   assert.equal(project.sheets.find(sheet => sheet.id === 'sheet-record-204').order, 207);
   assert.equal(project.sheets.at(-1).id, field.id);
+});
+
+test('moving a sheet before another preserves the requested position within a section', () => {
+  const project = engine.createProjectModel('sheet-order', 'Sheet order');
+  for (const id of ['first', 'second', 'third']) engine.addProjectSheet(project, 'A2', id, id);
+  engine.moveProjectSheet(project, 'first', 'A2', 1);
+  assert.deepEqual(project.sheets.map(sheet => [sheet.id, sheet.number]), [
+    ['second', 'A2/0001'], ['first', 'A2/0002'], ['third', 'A2/0003']
+  ]);
+  engine.moveProjectSheet(project, 'first', 'A4');
+  assert.deepEqual(project.sheets.map(sheet => [sheet.id, sheet.number]), [
+    ['second', 'A2/0001'], ['third', 'A2/0002'], ['first', 'A4/0003']
+  ]);
 });
 
 test('sheets can be renamed, moved, reordered, and deleted without changing link targets', () => {
@@ -374,9 +428,10 @@ test('sheets can be renamed, moved, reordered, and deleted without changing link
   assert.equal(project.sheets.some(sheet => sheet.id === layout.id), false);
   assert.equal(project.openTabs.includes(layout.id), false);
   assert.equal(project.activeSheetId, power.id);
-  assert.equal(project.crossSheetConnections[0].endpoints[1].sheetId, layout.id);
+  assert.deepEqual(project.crossSheetConnections, []);
   assert.equal(project.diagnostics[0].type, 'unresolved-cross-sheet-reference');
   assert.equal(project.diagnostics[0].connectionId, 'link-1');
+  assert.equal(project.diagnostics[0].connection.endpoints[1].sheetId, layout.id);
   assert.equal(power.number, 'A4/0002');
 });
 
@@ -413,6 +468,18 @@ test('project metadata, open views, sheets, links, and independent example copie
   assert.equal(first.project.projectModel.sheets.find(sheet => sheet.id === target.id).sectionId, 'A5');
   assert.deepEqual(first.project.projectModel.openTabs, [source.id, target.id]);
   assert.deepEqual(first.project.crossSheetConnections, payload.crossSheetConnections);
+  const edited = engine.copyExampleProject(first.project, 'linked-sheet-removal', 'Linked sheet removal');
+  const originalConnection = edited.crossSheetConnections[0];
+  engine.deleteProjectSheet(edited.projectModel, target.id);
+  edited.sheets = edited.projectModel.sheets;
+  edited.objects = edited.objects.filter(object => object.sheetId !== target.id);
+  edited.crossSheetConnections = edited.projectModel.crossSheetConnections;
+  const afterDeletion = engine.parseProject(engine.serializeProject(edited));
+  assert.equal(afterDeletion.valid, true);
+  assert.deepEqual(afterDeletion.project.crossSheetConnections, []);
+  assert.deepEqual(afterDeletion.project.projectModel.diagnostics[0].connection, originalConnection);
+  assert.equal(engine.analyzeProject(afterDeletion.project).openEndpointCount, 2);
+  assert.deepEqual(first.project.crossSheetConnections, payload.crossSheetConnections);
   first.project.projectModel.metadata.manager = 'Changed copy';
   assert.equal(second.project.projectModel.metadata.manager, 'Project manager');
   const nativeCopy = engine.copyExampleProject(first.project, 'project-roundtrip-copy', 'Named native copy');
@@ -434,6 +501,10 @@ test('legacy drawing content fits the page while edits map back to native coordi
   const restored = engine.invertDrawingTransform(pagePoint, transform);
   assert.ok(Math.abs(restored.x - sourcePoint.x) < 1e-9);
   assert.ok(Math.abs(restored.y - sourcePoint.y) < 1e-9);
+  assert.deepEqual(
+    engine.fitDrawingToPage({ left: 0, top: 20, right: 100, bottom: 20 }, 420, 297, 10, 62),
+    { scale: 4, x: 10, y: 37.5 }
+  );
 });
 
 test('every published catalog example opens as an independent sectioned native copy', () => {
@@ -651,7 +722,7 @@ test('sectioned project interface wires inline rename, section drag, title block
   const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
   assert.match(inline, /function beginInlineSheetRename\(id\)/);
   assert.match(inline, /function applyProjectDrawingTransform\(forceFit\)/);
-  assert.match(inline, /fitDrawingToPage\(bounds,page\.width,page\.height,10,60\)/);
+  assert.match(inline, /fitDrawingToPage\(bounds,page\.width,page\.height,10,projectTitleBlockHeight\(page\.height\)\)/);
   assert.match(inline, /invertDrawingTransform\(\{x:point\.x,y:point\.y\},transform\)/);
   assert.match(inline, /const anchor=svgViewPoint\(e\)/);
   assert.match(inline, /addEventListener\('dblclick'/);
