@@ -227,6 +227,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await distributionRow.waitFor();
     assert.equal(await examplePage.locator('#editableExampleProjects [data-example-project]').count(), 1);
     assert.match(await distributionRow.getAttribute('aria-description'), /30 components.*110 wire segments.*Model checks passed/);
+    assert.equal(await distributionRow.locator('canvas').evaluate(canvas => {
+      const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+      return pixels.some((value, index) => index % 4 === 3 && value > 0);
+    }), true, 'the catalog preview draws native wire geometry');
     await examplePage.locator('#projectSearch').clear();
     for (const entry of catalogProjects) {
       const sourceText = fs.readFileSync(path.join(root, entry.path), 'utf8');

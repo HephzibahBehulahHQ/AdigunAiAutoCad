@@ -3872,6 +3872,10 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const relay = report.projects.find(project => project.id === 'relay-contactor-24v');
   assert.equal(relay.metrics.connectedSheetCount, 3);
+  assert.equal(relay.wirePreview.sheetId, 'control');
+  const previewSegments = relay.wirePreview.segments.split(' ').map(segment => segment.split(',').map(Number));
+  assert.equal(previewSegments.length, 12);
+  assert.ok(previewSegments.every(segment => segment.length === 4 && segment.every(coordinate => coordinate >= 0 && coordinate <= 100)));
   assert.ok(relay.metrics.authoredSheetCount > relay.metrics.connectedSheetCount);
   assert.equal(relay.releaseScale.qualified, false);
   assert.equal(relay.releaseScale.additionalAuthoredSheetsRequired, 28);
