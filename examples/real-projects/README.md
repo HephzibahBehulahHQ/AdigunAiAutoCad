@@ -47,11 +47,12 @@ This is a control-wiring example, not a complete motor starter or construction p
 
 # Siemens 3RM12 reversing starter and SEW DRN63MS4 motor
 
-Open this project as an editable copy from **Project Explorer → List**. The 52-sheet reference includes the original wiring, net and wire schedules, component and manufacturer registers, terminal interface sheets, an editable XT1 rail view, and open application and PE checks. The wiring model uses one Siemens SIRIUS 3RM1201-1AA04 starter, one SEW-EURODRIVE DRN63MS4 motor, and thirteen Phoenix Contact PT 16 N OG terminals. It contains 33 orthogonal wire segments and 17 isolated nets. All seven motor terminals are represented; U2/V2/W2 form an explicit star link while each winding remains a separate external terminal.
+Open this project as an editable copy from **Project Explorer → List**. The 71-sheet reference includes the original wiring, net and wire schedules, component and manufacturer registers, terminal interface sheets, an editable XT1 rail view, and open application and PE checks. The wiring model uses one Siemens SIRIUS 3RM1201-1AA04 starter, one SEW-EURODRIVE DRN63MS4 motor, and thirteen Phoenix Contact PT 16 N OG terminals. It contains 33 orthogonal wire segments and 17 isolated nets. All seven motor terminals are represented; U2/V2/W2 form an explicit star link while each winding remains a separate external terminal.
 
 - SEW motor data, DRN63MS4, 400 V / 50 Hz / 4-pole: <https://download.sew-eurodrive.com/download/pdf/30590116.pdf>
 - SEW terminal identification and star connection manual: <https://download.sew-eurodrive.com/download/pdf/25957074.pdf>
 - Siemens starter catalog: <https://mall.industry.siemens.com/mall/en/en/Catalog/Product/?mlfb=3RM1201-1AA04>
+- Siemens article data sheet, July 2022 archive: <https://media.distributordatasolutions.com/siemenscomplete/2022q3/documents/e26eb7bdd5b6d456ac5fe570ec1c4bab0788cfde.pdf>
 - Siemens article data sheet, 16 December 2025 (manufacturer PDF hosted by Mouser): <https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf>
 
 The sourced motor table gives 0.12 kW, 0.405 A, 1380 rpm, 0.83 Nm and power factor 0.64 at 400 V / 50 Hz. Siemens publishes a maximum 0.12 kW motor rating and a 0.1–0.5 A adjustment range. These nameplate/catalog values fit the published rating envelope; this is not a protection coordination, application suitability or construction approval. Motor performance, starter switching, protection, safety and load behavior are not simulated. NOT FOR CONSTRUCTION without application-specific engineering review.

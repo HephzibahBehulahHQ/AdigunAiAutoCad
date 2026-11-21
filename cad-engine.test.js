@@ -929,7 +929,7 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
   const savedCopy = engine.parseProject(engine.serializeProject(copy));
   assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
-  assert.equal(savedCopy.project.sheets.length, 52);
+  assert.equal(savedCopy.project.sheets.length, 71);
   const originalIndexNumbers = new Set();
   const copiedIndexNumbers = new Set();
   for (const [workspace, numbers] of [[reopened.project, originalIndexNumbers], [savedCopy.project, copiedIndexNumbers]]) {
@@ -944,7 +944,11 @@ test('Siemens reversing-starter example imports with every real terminal wired a
     ['reversing-q1-mounting', ['22.5 mm', '100 mm', '141.6 mm']],
     ['reversing-q1-control-window', ['19.2–30 V DC']],
     ['reversing-m1-starting-point', ['0.405 A', '1.458 A']],
-    ['reversing-m1-speed-reference', ['1,500 r/min', '8%']]
+    ['reversing-m1-speed-reference', ['1,500 r/min', '8%']],
+    ['reversing-q1-overload-class', ['10A', 'no short-circuit protection function']],
+    ['reversing-q1-input-thresholds', ['0–5 V', '15–30 V']],
+    ['reversing-q1-control-transients', ['300 mA for 80 ms', '140 mA for 80 ms']],
+    ['reversing-m1-input-power-check', ['179.6 W', '185.2 W']]
   ]) {
     const content = savedCopy.project.objects.filter(object => object.sheetId === sheetId).map(object => object.text).join(' ');
     for (const value of values) assert.ok(content.includes(value), value);
