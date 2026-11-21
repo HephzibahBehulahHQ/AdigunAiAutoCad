@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.2",
+  "revision": "2.3",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -107,6 +107,12 @@
       "id": "remote-status-terminals",
       "number": "A2/016",
       "name": "XT6 dry changeover output",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "external-permissive",
+      "number": "A2/017",
+      "name": "External operational permissive contact interface",
       "projectSectionId": "A2"
     }
   ],
@@ -698,7 +704,7 @@
       "x1": 230,
       "y1": 312,
       "x2": 230,
-      "y2": 695,
+      "y2": 780,
       "stroke": "#164eac",
       "strokeWidth": 1.5,
       "potential": "0 V DC"
@@ -708,9 +714,9 @@
       "kind": "wire",
       "sheetId": "plc-inputs",
       "x": 230,
-      "y": 695,
+      "y": 780,
       "x1": 230,
-      "y1": 695,
+      "y1": 780,
       "x2": 1020,
       "y2": 294,
       "stroke": "#164eac",
@@ -1940,7 +1946,7 @@
       "sheetId": "plc-inputs",
       "x": 110,
       "y": 925,
-      "text": "I0.5 reads K1 normally closed status through XT2:3. I0.6 reads B2 OUT1 through XT4:2.",
+      "text": "I0.5 reads K1 NC status, I0.6 reads B2 OUT1, and I0.7 receives the XT7 operational permissive.",
       "stroke": "#13263b"
     },
     {
@@ -2594,6 +2600,164 @@
       "x": 110,
       "y": 960,
       "text": "Q0.1 drives the K2 remote status relay. The output function is assigned in PLC logic outside this example.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x19",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X19",
+      "x": 510,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "1",
+        "marking": "External contact feed",
+        "comment": ""
+      },
+      "sheetId": "external-permissive"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x20",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X20",
+      "x": 510,
+      "y": 365,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "2",
+        "marking": "External contact return to I0.7",
+        "comment": ""
+      },
+      "sheetId": "external-permissive"
+    },
+    {
+      "id": "xt7-feed-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 395,
+      "y": 240,
+      "x1": 395,
+      "y1": 240,
+      "x2": 395,
+      "y2": 174,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-feed",
+      "kind": "wire",
+      "sheetId": "external-permissive",
+      "x": 200,
+      "y": 250,
+      "x1": 200,
+      "y1": 250,
+      "x2": 475,
+      "y2": 250,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-permissive-send",
+      "kind": "wire",
+      "sheetId": "external-permissive",
+      "x": 200,
+      "y": 365,
+      "x1": 200,
+      "y1": 365,
+      "x2": 475,
+      "y2": 365,
+      "potential": "External operational permissive",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-permissive-receive",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 735,
+      "x1": 310,
+      "y1": 735,
+      "x2": 440,
+      "y2": 528,
+      "potential": "External operational permissive",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-permissive-di7",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 440,
+      "y": 528,
+      "x1": 440,
+      "y1": 528,
+      "x2": 450,
+      "y2": 528,
+      "potential": "External operational permissive",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "external-permissive-title",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 108,
+      "text": "XT7 · EXTERNAL OPERATIONAL PERMISSIVE INTERFACE",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-field-feed",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 580,
+      "y": 254,
+      "text": "X19:2 · +24 V feed to external contact",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-field-return",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 580,
+      "y": 369,
+      "text": "X20:2 · switched signal from external contact",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-pin",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 490,
+      "text": "X20 routes the external contact signal to A1 X10:14 / DI a.7 / I0.7.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-boundary",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 535,
+      "text": "An external dry contact would bridge X19:2 and X20:2 when closed. The field device is outside this example.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-scope",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 580,
+      "text": "This input is an operational permissive. Its logic and any safety circuit remain outside scope.",
       "stroke": "#13263b"
     }
   ],
@@ -3933,6 +4097,69 @@
             "direction": "left",
             "targetSheetId": "remote-status-relay",
             "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xt7-feed-link",
+      "name": "XT7 +24 V feed",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "xt7-feed-send",
+          "point": {
+            "x": 395,
+            "y": 174
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "external-permissive",
+            "targetRef": "X19"
+          }
+        },
+        {
+          "sheetId": "external-permissive",
+          "wireId": "xt7-feed",
+          "point": {
+            "x": 200,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xt7-permissive-link",
+      "name": "External operational permissive",
+      "endpoints": [
+        {
+          "sheetId": "external-permissive",
+          "wireId": "xt7-permissive-send",
+          "point": {
+            "x": 200,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "xt7-permissive-receive",
+          "point": {
+            "x": 310,
+            "y": 735
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "external-permissive",
+            "targetRef": "X20"
           }
         }
       ]
