@@ -11,6 +11,8 @@ Use **Export full drawing as SVG** for all visible geometry, including off-frame
 
 Open **Symbol Library**, pick a component, then click its position on the sheet. The component stays selected and its editable values appear in **Properties**. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
+Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
+
 Use **Wire** to click two pin anchors for an automatic orthogonal route. To draw your own route, click the first pin, click the sheet wherever you want to add bends, then click the destination pin. Press **Enter** to finish a manual route with an open end, or **Esc** to cancel. In **Select** mode, select a wire to change its color or use **Reconnect start** / **Reconnect end**. Moving either component keeps its wire endpoint attached and leaves the manual bends in place.
 
 Drag a selected catalog symbol's corner handle or edit **Symbol scale** in Properties to resize it proportionally. Attached wires follow the pins, and the editor rejects edits that introduce a component overlap. The manufacturer's dimensions remain available separately in Properties.

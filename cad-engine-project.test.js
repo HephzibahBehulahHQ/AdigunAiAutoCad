@@ -503,6 +503,17 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.locator('[data-action="fit"]').click();
     assert.ok(await freeDraftingPage.locator('#draftingRulers text').count() > 3);
     if (process.env.CAD_SCREENSHOT_DIR) await freeDraftingPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'free-drafting-canvas.png') });
+    const quickInsert = freeDraftingPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]');
+    await quickInsert.click({ modifiers: ['Shift'] });
+    await quickInsert.click({ modifiers: ['Shift'] });
+    const quickBounds = await freeDraftingPage.locator('#userDrawings > [data-object]').evaluateAll(nodes => nodes.slice(-2).map(node => {
+      const { left, right, top, bottom } = node.getBoundingClientRect();
+      return { left, right, top, bottom };
+    }));
+    assert.equal(await freeDraftingPage.locator('#userDrawings > [data-object]').count(), 4);
+    const [firstQuick, secondQuick] = quickBounds;
+    assert.ok(firstQuick.right <= secondQuick.left || secondQuick.right <= firstQuick.left
+      || firstQuick.bottom <= secondQuick.top || secondQuick.bottom <= firstQuick.top);
     await freeDraftingPage.close({ runBeforeUnload: false });
 
     const dxfPage = await context.newPage();
