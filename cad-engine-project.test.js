@@ -747,16 +747,22 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await copyPage.locator('#openFile').setInputFiles({ name: fileName, mimeType: 'application/json', buffer: Buffer.from(savedText) });
       await copyPage.waitForFunction(name => document.querySelector('#toast').textContent.includes(name + ' opened.'), fileName);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the saved component appearance');
-      if (entry.id === 'sitop-24v-dc-distribution') {
-        await copyPage.evaluate(() => { window.print = () => {}; });
-        await copyPage.keyboard.press('Control+k');
-        await copyPage.getByRole('button', { name: /Print project set/ }).click();
-        assert.deepEqual(await copyPage.locator('[data-print-sheet]').evaluateAll(pages => pages.map(page => page.dataset.printSheet)),
-          saved.project.sheets.map(sheet => sheet.id));
-        assert.equal(await copyPage.locator('#projectPrintSet [data-title-block-row="sheet"]').count(), source.sheets.length);
-        await copyPage.evaluate(() => window.dispatchEvent(new Event('afterprint')));
-        assert.equal(await copyPage.locator('#projectPrintSet').count(), 0);
-      }
+      await copyPage.evaluate(() => { window.print = () => {}; });
+      await copyPage.keyboard.press('Control+k');
+      await copyPage.getByRole('button', { name: /Print project set/ }).click();
+      const printSheets = copyPage.locator('#projectPrintSet [data-print-sheet]');
+      assert.deepEqual(await printSheets.evaluateAll(pages => pages.map(page => page.dataset.printSheet)),
+        saved.project.sheets.map(sheet => sheet.id), entry.title + ' prints the saved project in sheet order');
+      assert.equal(await printSheets.locator('[data-title-block-row="sheet"]').count(), source.sheets.length);
+      const printedComponent = printSheets.locator('[data-object="' + component.id + '"]');
+      assert.equal(await printedComponent.getAttribute('stroke'), color, entry.title + ' prints the edited native component');
+      const projectPdf = await copyPage.pdf({ preferCSSPageSize: true,
+        ...(process.env.CAD_SCREENSHOT_DIR ? { path: path.join(process.env.CAD_SCREENSHOT_DIR, entry.id + '-print-set.pdf') } : {}) });
+      assert.equal(projectPdf.subarray(0, 5).toString(), '%PDF-');
+      const pdfPages = projectPdf.toString('latin1').match(/\/Type\s*\/Page\b/g) || [];
+      assert.equal(pdfPages.length, source.sheets.length, entry.title + ' emits one PDF page per native sheet');
+      await copyPage.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+      assert.equal(await copyPage.locator('#projectPrintSet').count(), 0);
       assert.equal(fs.readFileSync(path.join(root, entry.path), 'utf8'), sourceText, entry.title + ' leaves the catalog source unchanged');
       await copyPage.close({ runBeforeUnload: false });
     }
