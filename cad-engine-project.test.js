@@ -196,6 +196,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await page.locator('[aria-label="Properties"]').click();
     const paperSize = page.getByLabel('Paper size', { exact: true });
     const orientation = page.getByLabel('Orientation', { exact: true });
+    const leftMargin = page.getByLabel('Left margin (mm)');
+    await leftMargin.fill('18');
+    await leftMargin.press('Tab');
+    assert.equal(await page.locator('#customSheetFrame > rect').getAttribute('x'), '18');
     for (const size of ['A4', 'A3', 'A2', 'A1', 'A0']) {
       for (const direction of ['landscape', 'portrait']) {
         await paperSize.selectOption(size);
@@ -266,6 +270,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(saved.projectModel.name, 'Browser local save test');
     assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).description, 'Updated with repeat Save');
     assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).scale, '1:2');
+    assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).paperMargins.left, 18);
     assert.ok(saved.objects.length > 0);
     await page.close();
 
@@ -280,6 +285,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await reopenedPage.locator('#projectTree [data-sheet]').first().waitFor();
     assert.equal(await reopenedPage.locator('#sheetTabs .document-tab[data-sheet]').count(), 1);
     assert.equal(await reopenedPage.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
+    assert.equal(await reopenedPage.locator('#customSheetFrame > rect').getAttribute('x'), '18');
     await reopenedPage.locator('[aria-label="Properties"]').click();
     assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
