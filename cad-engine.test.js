@@ -12,6 +12,23 @@ const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
 
+test('catalog placement allocates a unique tag from existing components on every sheet', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  const start = html.indexOf('  function nextComponentReference(');
+  const end = html.indexOf('  function updatePlacementPreview(', start);
+  assert.ok(start >= 0 && end > start);
+  const objects = [
+    { kind: 'component-instance', ref: 'x1', sheetId: 'power', componentId: 'phoenix-contact-3210567' },
+    { kind: 'component-instance', ref: 'X3', sheetId: 'power', componentId: 'phoenix-contact-3209510' }
+  ];
+  const next = vm.runInNewContext(html.slice(start, end) + '\nnextComponentReference', {
+    collectProjectObjects: () => objects
+  });
+  assert.equal(next('X'), 'X2');
+  objects.push({ kind: 'component-instance', ref: 'X2', sheetId: 'control' });
+  assert.equal(next('X'), 'X4');
+});
+
 test('moving an off-page wire remaps endpoints only on that exact sheet and wire', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const start = html.indexOf('  function remapOffPageWireEndpoints(');
@@ -193,9 +210,11 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 19);
+  assert.equal(items.length, 21);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
     ['siemens-3rt2026-2kb40', 'contactor', 'KM'],
@@ -769,13 +788,13 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const analysis = engine.analyze(project.objects);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
-    [5, 13, 0, 0]
+    [4, 13, 0, 0]
   );
   const netPins = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(netPins, [
-    'K1:11,X2:1,X2:2',
+    'K1:11,X1:1:1,X1:1:2',
     'K1:14,KM1:A1',
-    'K1:A1,X1:1,X1:2',
+    'K1:A1,X1:2:1,X1:2:2',
     'K1:A2,KM1:A2,X3:1,X3:2'
   ]);
 
@@ -783,7 +802,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(
     bom.rows.map(row => [row.partNumber, row.quantity]).sort((a, b) => a[0].localeCompare(b[0])),
-    [['2966171', 1], ['3212144', 3], ['LC1D09BD', 1]].sort((a, b) => a[0].localeCompare(b[0]))
+    [['2966171', 1], ['3209510', 1], ['3210567', 1], ['LC1D09BD', 1]].sort((a, b) => a[0].localeCompare(b[0]))
   );
   const wireList = engine.wireList(project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
@@ -1425,6 +1444,12 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
   assert.deepEqual(engine.crossSheetConnectors(project,'sheet-power').map(item=>[item.name,item.targetSheetId,item.targetRef,item.direction]),[
     ['L1','sheet-control','X2','left']
   ]);
+  const deletion = { sheets: parsed.project.sheets, crossSheetConnections: structuredClone(parsed.project.crossSheetConnections) };
+  const target = parsed.project.objects.find(object => object.kind === 'component-instance' && object.ref === 'X2');
+  assert.equal(engine.detachDeletedDrawingObjects(deletion, 'sheet-power', [target]), 0);
+  assert.equal(engine.detachDeletedDrawingObjects(deletion, 'sheet-control', [target]), 1);
+  assert.deepEqual(deletion.crossSheetConnections, []);
+  assert.deepEqual(deletion.diagnostics[0].connection, parsed.project.crossSheetConnections[0]);
   const invalid=JSON.parse(JSON.stringify(project));
   invalid.crossSheetConnections[0].endpoints[1].wireId='missing-wire';
   assert.equal(engine.validateProject(invalid).valid,false);

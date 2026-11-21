@@ -223,15 +223,41 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.deepEqual(catalogRows.map(row => row.id), catalogProjects.map(project => project.id), 'Project Explorer lists every catalog example in order');
     assert.deepEqual(catalogRows.map(row => row.number), catalogProjects.map((project, index) => String(index + 1).padStart(2, '0')));
     for (const entry of catalogProjects) {
+      const sourceText = fs.readFileSync(path.join(root, entry.path), 'utf8');
+      const source = engine.parseProject(sourceText).project;
+      const before = engine.analyzeProject(source);
+      const component = source.objects.find(object => object.kind === 'component-instance');
+      const sheetId = component.sheetId || source.sheets[0].id;
       const copyPage = await context.newPage();
       await copyPage.goto(address);
       await copyPage.locator('[data-example-project="' + entry.id + '"]').click();
       await copyPage.locator('#projectTree [data-section-row]').first().waitFor({ timeout: 5000 });
       assert.equal(await copyPage.locator('#projectTree [data-section-row]').count(), 4, entry.title + ' opens with the A1–A4 project sections');
-      const firstSheet = copyPage.locator('#projectTree [data-sheet]').first();
-      await firstSheet.waitFor({ timeout: 5000 });
-      await firstSheet.click();
-      await copyPage.locator('#sheetTabs .document-tab[data-sheet]').first().waitFor({ timeout: 5000 });
+      await copyPage.locator('#projectTree [data-sheet="' + sheetId + '"]').click();
+      const drawn = copyPage.locator('#userDrawings [data-object="' + component.id + '"]');
+      await drawn.dispatchEvent('click', { bubbles: true });
+      const color = component.stroke === '#4b367c' ? '#21645e' : '#4b367c';
+      await copyPage.locator('[data-style-object="' + component.id + '"][data-drawing-style="stroke"]').evaluate((input, value) => {
+        input.value = value;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }, color);
+      assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' renders the edited component');
+      await copyPage.keyboard.press('Control+Shift+S');
+      await copyPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+      const savedText = await copyPage.evaluate(() => window.__savedProjectWrites[0]);
+      const saved = engine.parseProject(savedText);
+      assert.equal(saved.valid, true, saved.errors.join(' '));
+      const after = engine.analyzeProject(saved.project);
+      assert.equal(after.valid, true, after.errors.join(' '));
+      assert.deepEqual(after.globalNets, before.globalNets, entry.title + ' preserves exact net members');
+      assert.equal(after.openEndpointCount, before.openEndpointCount);
+      assert.equal(after.wireCount, before.wireCount);
+      assert.equal(after.sheetCount, before.sheetCount);
+      const fileName = entry.id + '-edited.adigun.json';
+      await copyPage.locator('#openFile').setInputFiles({ name: fileName, mimeType: 'application/json', buffer: Buffer.from(savedText) });
+      await copyPage.waitForFunction(name => document.querySelector('#toast').textContent.includes(name + ' opened.'), fileName);
+      assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the saved component appearance');
+      assert.equal(fs.readFileSync(path.join(root, entry.path), 'utf8'), sourceText, entry.title + ' leaves the catalog source unchanged');
       await copyPage.close({ runBeforeUnload: false });
     }
     await examplePage.getByRole('listitem', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();

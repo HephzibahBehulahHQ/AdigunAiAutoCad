@@ -8,19 +8,21 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 Open this project as an editable copy from **Project Explorer → List**.
 
-This is a one-sheet, source-backed wiring example using five verified component instances: one Phoenix Contact PLC interface relay, one Schneider Electric TeSys D contactor, and three Phoenix Contact PT 16 N OG feed-through terminals. It contains 13 orthogonal wire segments and four pin/net groups. The project JSON is validated against the CAD engine's schema; its BOM and wire list are derived from the same component and wire instances.
+This one-sheet circuit uses four verified parts: a Phoenix Contact PLC interface relay, a Schneider Electric TeSys D contactor, a Phoenix Contact PTTB 2,5 double-level terminal, and a Phoenix Contact PT 2,5 feed-through terminal. Its 13 orthogonal wire segments form four pin/net groups. The BOM and wire list are derived from the editable objects.
 
 ## Intended circuit
 
-- X1 is the external PLC Q0.0 output boundary and feeds K1 coil A1; K1 coil A2 returns through X3.
-- X2 is the external +24 V DC feed to K1 common terminal 11.
+- X1 level 1 carries the external +24 V DC feed to K1 common terminal 11.
+- X1 level 2 carries the external PLC Q0.0 output to K1 coil A1. K1 coil A2 returns through X3.
 - K1 normally-open contact 14 feeds KM1 coil A1; KM1 coil A2 returns through X3.
-- X1–X3 are feed-through terminals. Their two connection pins are internally connected in the part model.
+- X1's two levels stay electrically separate. The two pins on each level connect to each other. X3 provides a single return level.
 - The model shows static relay contacts. It does not simulate relay actuation, prove a PLC output's suitability, or model an upstream 24 V supply.
 
 ## Verified source records
 
 - Phoenix Contact PLC-RSC- 24DC/21, item 2966171: <https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf>
+- Phoenix Contact PTTB 2,5, item 3210567: <https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567>
+- Phoenix Contact PT 2,5, item 3209510: <https://www.phoenixcontact.com/en-pc/products/feed-through-terminal-block-pt-25-3209510>
 
 
 # IFM IFS204 inductive sensor to Siemens S7-1200 PLC input
