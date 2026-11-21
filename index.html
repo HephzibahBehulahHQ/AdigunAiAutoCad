@@ -850,7 +850,17 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>' +report.summary.resolvedCrossSheetLinks+'</strong></div>'
       +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.summary.unresolvedWireEndpoints+'</strong></div>'
       +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.summary.geometryErrors+'</strong></div>'
-      +findings+crossSheetConnectionForm()+'</div>';
+      +crossSheetLinkControls(numbers)+findings+crossSheetConnectionForm()+'</div>';
+  }
+  function crossSheetLinkControls(numbers){
+    const rows=state.crossSheetConnections.filter(link=>link.endpoints.some(endpoint=>endpoint.sheetId===state.sheet)).map(function(link){
+      const destinations=[...new Set(link.endpoints.filter(endpoint=>endpoint.sheetId!==state.sheet)
+        .map(endpoint=>numbers.get(endpoint.sheetId)||endpoint.sheetId))];
+      return '<div class="property-row"><span>'+escapeHtml(link.name+' · '+destinations.join(', '))+'</span>'
+        +'<button type="button" class="command-item" data-remove-cross-sheet-link="'+escapeHtml(link.id)
+        +'" aria-label="'+escapeHtml('Remove '+link.name+' link to '+destinations.join(', '))+'">Remove link</button></div>';
+    });
+    return rows.length?'<details class="notice"><summary>Cross-sheet links on this sheet</summary>'+rows.join('')+'</details>':'';
   }
   function crossSheetConnectionForm(){
     const project=electricalProject();
@@ -887,14 +897,25 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const links=state.crossSheetConnections.concat(connection);
     const analysis=window.AdigunCADEngine.analyzeProject({...project,crossSheetConnections:links});
     if(!analysis.valid){notify(analysis.errors[0]||'Could not link these wire ends.');return;}
+    commitCrossSheetLinks(links,'Linked '+name+' across sheets.');
+  });
+  $('#inspectorContent').addEventListener('click',function(event){
+    const button=event.target.closest('[data-remove-cross-sheet-link]');
+    if(!button||!state.projectModel)return;
+    const link=state.crossSheetConnections.find(link=>link.id===button.dataset.removeCrossSheetLink);
+    if(!link)return;
+    commitCrossSheetLinks(state.crossSheetConnections.filter(item=>item.id!==link.id),
+      'Removed '+link.name+' link. Wire ends are available to reconnect.');
+  });
+  function commitCrossSheetLinks(links,message){
     pushUndo();
     state.crossSheetConnections=links;
     state.projectModel.crossSheetConnections=links;
     renderObjects();
     persist();
     openInspector('Electrical checks');
-    notify('Linked '+name+' across sheets.');
-  });
+    notify(message);
+  }
   function openInspector(name){
     $('#rightPanelTitle').textContent=name;
     $('#rightPanel').classList.add('open');

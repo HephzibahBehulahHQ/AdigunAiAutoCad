@@ -7,7 +7,7 @@ Open **Symbol Library**, pick a component, then click its position on the sheet.
 
 Use **Wire** to click two pin anchors or drag between them. In **Select** mode, select a wire to change its color or use **Reconnect start** / **Reconnect end** and click the new connection point. Press **Esc** to cancel a pending connection.
 
-To join circuits across sheets, draw a wire with one free end on each sheet. Open **Electrical checks** on either sheet, select both ends under **Connect wire ends across sheets**, and name the connection. The resulting arrows open the corresponding sheets.
+To join circuits across sheets, draw a wire with one free end on each sheet. Open **Electrical checks** on either sheet, select both ends under **Connect wire ends across sheets**, and name the connection. The resulting arrows open the corresponding sheets. Use **Remove link** under **Cross-sheet links on this sheet** to free the endpoints for reconnecting. Undo restores the link.
 
 
 ## Verified reference project increment
