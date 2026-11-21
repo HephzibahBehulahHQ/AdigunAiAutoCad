@@ -330,7 +330,7 @@
       "topologyId": "dc-two-branch-terminal-distribution",
       "role": "standalone-example",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
-      "revision": "1.4",
+      "revision": "1.5",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -342,27 +342,27 @@
         "terminalList": true,
         "zeroGeometryErrors": true
       },
-      "topologySha256": "326bbebfdd9638bf6ae34106c39ec30961e9bff480c821713d61b47e109956fb",
+      "topologySha256": "fd43fc5f8d84ec4003c74a9758883706e75417d688f3535ca8e4270551e58dd7",
       "csvSha256": {
-        "bom": "535561e50121134748539fb1ade31d4af1fed1d2d545e2085fb0b3804217d8c8",
-        "wires": "0414acd95f595d633308861ec7bd4fee90a0bb65e8750cbbfd7a0c90d33efd2d",
-        "terminals": "5b54cb7092d53f2c4fbacdec76b258b892885116431b152624d34ade3f82a35d"
+        "bom": "906d8a31a8d441dbc7be251f5fd64759fa4bc6318df0c2e174fe0bdb49232354",
+        "wires": "d7239e95ddfcf2d30558c87c444cdaf20e3f94c3b8a2599c9b8489067f272b1c",
+        "terminals": "7f8bd4b9f433987594c8b3dea66566f9f06477fe17eb57ac336c1fc3e6c5342e"
       },
       "metrics": {
-        "sheetCount": 7,
-        "authoredSheetCount": 7,
-        "connectedSheetCount": 7,
-        "contentObjectCount": 83,
+        "sheetCount": 9,
+        "authoredSheetCount": 9,
+        "connectedSheetCount": 9,
+        "contentObjectCount": 102,
         "emptyContentSheetIds": [],
-        "componentCount": 10,
-        "wireCount": 49,
-        "netCount": 25,
-        "globalNetCount": 7,
-        "crossSheetConnectionCount": 18,
+        "componentCount": 12,
+        "wireCount": 58,
+        "netCount": 31,
+        "globalNetCount": 9,
+        "crossSheetConnectionCount": 22,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
-        "bomRowCount": 7,
-        "wireListRowCount": 49,
+        "bomRowCount": 9,
+        "wireListRowCount": 58,
         "terminalListRowCount": 8
       },
       "errors": []

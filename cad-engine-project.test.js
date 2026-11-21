@@ -575,15 +575,17 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [7, 18, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [9, 22, 0]);
   assert.deepEqual(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number)), [
-    ['B1:1', 'B2:1', 'KM1:13', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'PS1:+'],
+    ['B1:1', 'B2:1', 'KM1:13', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+'],
     ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'K1:A2', 'PS1:-'],
     ['B1:4', 'A1:X10:7'],
     ['B2:2', 'A1:X11:2'],
     ['KM1:A1', 'K1:14'],
     ['KM1:14', 'A1:X10:8'],
-    ['A1:X12:2', 'K1:A1']
+    ['A1:X12:2', 'K1:A1'],
+    ['A1:X10:9', 'S1:14'],
+    ['A1:X10:10', 'S2:22']
   ]);
 });
 

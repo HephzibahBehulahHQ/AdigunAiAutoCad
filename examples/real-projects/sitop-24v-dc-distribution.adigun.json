@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.4",
+  "revision": "1.5",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -53,6 +53,18 @@
       "id": "contactor-feedback",
       "number": "A2/007",
       "name": "Contactor coil and auxiliary feedback",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "start-request",
+      "number": "A2/008",
+      "name": "Operator start request input",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "stop-request",
+      "number": "A2/009",
+      "name": "Operator stop request input",
       "projectSectionId": "A2"
     }
   ],
@@ -1127,6 +1139,238 @@
       "y": 610,
       "text": "Main poles and the NC auxiliary pair are unused. The model represents wiring and static contact symbols.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s1",
+      "componentId": "schneider-electric-xb5aa31",
+      "ref": "S1",
+      "x": 500,
+      "y": 295,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "start-request"
+    },
+    {
+      "id": "start-request-send-feed",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 240,
+      "y": 240,
+      "x1": 240,
+      "y1": 240,
+      "x2": 240,
+      "y2": 195,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-receive-feed",
+      "kind": "wire",
+      "sheetId": "start-request",
+      "x": 190,
+      "y": 295,
+      "x1": 190,
+      "y1": 295,
+      "x2": 445,
+      "y2": 295,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-send-signal",
+      "kind": "wire",
+      "sheetId": "start-request",
+      "x": 555,
+      "y": 295,
+      "x1": 555,
+      "y1": 295,
+      "x2": 720,
+      "y2": 295,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-receive-signal",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 385,
+      "y": 438,
+      "x1": 385,
+      "y1": 438,
+      "x2": 450,
+      "y2": 438,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-note-0",
+      "kind": "text",
+      "sheetId": "start-request",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "S1 · START REQUEST"
+    },
+    {
+      "id": "start-request-note-1",
+      "kind": "text",
+      "sheetId": "start-request",
+      "x": 110,
+      "y": 410,
+      "stroke": "#13263b",
+      "text": "NO 13–14 routes the XT1 +24 V distribution to A1 DI a.2 / I0.2 at X10:9."
+    },
+    {
+      "id": "start-request-note-2",
+      "kind": "text",
+      "sheetId": "start-request",
+      "x": 110,
+      "y": 455,
+      "stroke": "#13263b",
+      "text": "The contact is shown in its normal position. Request handling is assigned in PLC logic outside this example."
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s2",
+      "componentId": "schneider-electric-xb5aa42",
+      "ref": "S2",
+      "x": 500,
+      "y": 295,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "stop-request"
+    },
+    {
+      "id": "stop-request-send-feed",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 330,
+      "y": 240,
+      "x1": 330,
+      "y1": 240,
+      "x2": 330,
+      "y2": 150,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-receive-feed",
+      "kind": "wire",
+      "sheetId": "stop-request",
+      "x": 190,
+      "y": 295,
+      "x1": 190,
+      "y1": 295,
+      "x2": 445,
+      "y2": 295,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-send-signal",
+      "kind": "wire",
+      "sheetId": "stop-request",
+      "x": 555,
+      "y": 295,
+      "x1": 555,
+      "y1": 295,
+      "x2": 720,
+      "y2": 295,
+      "potential": "Stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-receive-signal",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 300,
+      "y": 500,
+      "x1": 300,
+      "y1": 500,
+      "x2": 395,
+      "y2": 456,
+      "potential": "Stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-pin",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 395,
+      "y": 456,
+      "x1": 395,
+      "y1": 456,
+      "x2": 450,
+      "y2": 456,
+      "potential": "Stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-note-0",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "S2 · STOP REQUEST"
+    },
+    {
+      "id": "stop-request-note-1",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 410,
+      "stroke": "#13263b",
+      "text": "NC 21–22 routes the XT1 +24 V distribution to A1 DI a.3 / I0.3 at X10:10."
+    },
+    {
+      "id": "stop-request-note-2",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 455,
+      "stroke": "#13263b",
+      "text": "The contact is shown in its normal position. Request handling is assigned in PLC logic outside this example."
+    },
+    {
+      "id": "stop-request-note-3",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 500,
+      "stroke": "#13263b",
+      "text": "This is an operational stop request input. Emergency-stop and safety circuits are outside scope."
+    },
+    {
+      "id": "cpu-operator-addresses",
+      "kind": "text",
+      "sheetId": "plc-inputs",
+      "x": 110,
+      "y": 890,
+      "text": "I0.2 receives S1 Start request; I0.3 receives S2 Stop request. PLC logic is outside scope.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -1700,6 +1944,132 @@
             "direction": "left",
             "targetSheetId": "contactor-feedback",
             "targetRef": "KM1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "start-request-feed",
+      "name": "S1 +24 V",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "start-request-send-feed",
+          "point": {
+            "x": 240,
+            "y": 195
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "start-request",
+            "targetRef": "S1"
+          }
+        },
+        {
+          "sheetId": "start-request",
+          "wireId": "start-request-receive-feed",
+          "point": {
+            "x": 190,
+            "y": 295
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "start-request-signal",
+      "name": "Start request",
+      "endpoints": [
+        {
+          "sheetId": "start-request",
+          "wireId": "start-request-send-signal",
+          "point": {
+            "x": 720,
+            "y": 295
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "start-request-receive-signal",
+          "point": {
+            "x": 385,
+            "y": 438
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "start-request",
+            "targetRef": "S1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stop-request-feed",
+      "name": "S2 +24 V",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "stop-request-send-feed",
+          "point": {
+            "x": 330,
+            "y": 150
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "stop-request",
+            "targetRef": "S2"
+          }
+        },
+        {
+          "sheetId": "stop-request",
+          "wireId": "stop-request-receive-feed",
+          "point": {
+            "x": 190,
+            "y": 295
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stop-request-signal",
+      "name": "Stop request",
+      "endpoints": [
+        {
+          "sheetId": "stop-request",
+          "wireId": "stop-request-send-signal",
+          "point": {
+            "x": 720,
+            "y": 295
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "stop-request-receive-signal",
+          "point": {
+            "x": 300,
+            "y": 500
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "stop-request",
+            "targetRef": "S2"
           }
         }
       ]
