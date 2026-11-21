@@ -456,6 +456,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(engine.analyzeProject(manualSaved.project).openEndpointCount, 0);
     const routedWire = wiringPage.locator('#userDrawings [data-object="' + manualWire.id + '"]');
     const originalRoute = await routedWire.getAttribute('d');
+    await wiringPage.getByRole('button', { name: 'Properties', exact: true }).click();
     await routedWire.dispatchEvent('click', { bubbles: true });
     await wiringPage.getByRole('button', { name: 'Reroute wire', exact: true }).click();
     await clickDrawingPoint(280, 200);
