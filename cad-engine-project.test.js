@@ -747,6 +747,25 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await copyPage.locator('#openFile').setInputFiles({ name: fileName, mimeType: 'application/json', buffer: Buffer.from(savedText) });
       await copyPage.waitForFunction(name => document.querySelector('#toast').textContent.includes(name + ' opened.'), fileName);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the saved component appearance');
+
+      const reports = [
+        ['Bill of materials', '[data-export-bom]', 'bom.csv', engine.billOfMaterialsCsv(saved.project.objects)],
+        ['Electrical checks', '[data-export-wire-list]', 'wire-list.csv', engine.wireListCsv(saved.project)],
+        [null, '[data-export-terminal-list]', 'terminal-list.csv', engine.terminalListCsv(saved.project)],
+        [null, '[data-export-electrical-report]', 'electrical-checks.json', JSON.stringify(engine.projectElectricalReport(saved.project), null, 2)]
+      ];
+      for (const [inspector, selector, reportName, expected] of reports) {
+        if (inspector) await copyPage.getByRole('button', { name: inspector, exact: true }).click();
+        const pending = copyPage.waitForEvent('download', { timeout: 10000 });
+        await copyPage.locator(selector).click();
+        const download = await pending;
+        const actual = fs.readFileSync(await download.path(), 'utf8');
+        assert.equal(actual, expected, entry.title + ' downloads the same ' + reportName + ' computed from the saved project');
+        if (process.env.CAD_SCREENSHOT_DIR) {
+          await download.saveAs(path.join(process.env.CAD_SCREENSHOT_DIR, entry.id + '-' + reportName));
+        }
+      }
+
       await copyPage.evaluate(() => { window.print = () => {}; });
       await copyPage.keyboard.press('Control+k');
       await copyPage.getByRole('button', { name: /Print project set/ }).click();
