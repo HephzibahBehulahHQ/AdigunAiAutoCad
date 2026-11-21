@@ -181,6 +181,9 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await sheetNameInput.fill('Incoming power');
     await sheetNameInput.press('Enter');
     assert.match(await sheetRow.getAttribute('aria-label'), /^A2\/0001 · Incoming power$/);
+    assert.equal(await page.locator('#customSheetFrame').isVisible(), false, 'a new sheet starts in free drafting mode');
+    await page.locator('#openCommands').click();
+    await page.getByRole('button', { name: 'Toggle print frame' }).click();
     const titleBlock = page.locator('#projectTitleBlockDynamic [data-title-block="frame"]');
     await titleBlock.waitFor();
     const titleBlockRows = await page.locator('#projectTitleBlockDynamic [data-title-block-row]').evaluateAll(nodes => nodes.map(node => node.dataset.titleBlockRow));
@@ -289,6 +292,14 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await wiringPage.locator('#createProject').click();
     await wiringPage.getByRole('button', { name: 'Add sheet to A2' }).click();
     await wiringPage.locator('#projectTree [data-sheet]').click();
+    const viewportSize = await wiringPage.locator('#drawing').evaluate(node => {
+      const drawing = node.getBoundingClientRect(), wrapper = node.closest('#drawingWrap').getBoundingClientRect();
+      return { width: drawing.width, height: drawing.height, wrapWidth: wrapper.width, wrapHeight: wrapper.height,
+        cameraAspect: node.viewBox.baseVal.width / node.viewBox.baseVal.height };
+    });
+    assert.equal(viewportSize.width, viewportSize.wrapWidth);
+    assert.equal(viewportSize.height, viewportSize.wrapHeight);
+    assert.ok(Math.abs(viewportSize.cameraAspect - viewportSize.width / viewportSize.height) < 0.005);
     const clickDrawingPoint = async (x, y) => {
       const point = await wiringPage.locator('#userDrawings').evaluate((node, coordinates) => {
         const transformed = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
@@ -398,7 +409,51 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     });
     assert.deepEqual([manualWire.x1, manualWire.y1, manualWire.x2, manualWire.y2], [manualStart.x, manualStart.y, manualEnd.x, manualEnd.y]);
     assert.equal(engine.analyzeProject(manualSaved.project).openEndpointCount, 0);
+    if (process.env.CAD_SCREENSHOT_DIR) await wiringPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'connected-terminals.png') });
     await wiringPage.close({ runBeforeUnload: false });
+
+    const freeDraftingPage = await context.newPage();
+    await freeDraftingPage.goto(address);
+    await freeDraftingPage.getByRole('button', { name: 'New project' }).click();
+    await freeDraftingPage.locator('#createProject').click();
+    await freeDraftingPage.getByRole('button', { name: 'Add sheet to A2' }).click();
+    await freeDraftingPage.locator('#projectTree [data-sheet]').click();
+    await freeDraftingPage.locator('#openCommands').click();
+    await freeDraftingPage.getByRole('button', { name: 'Go to origin' }).click();
+    for (const [componentId, x, y] of [['sew-eurodrive-drn63ms4', -125, -35], ['siemens-6es7212-1ae40-0xb0', 75, -35]]) {
+      await freeDraftingPage.locator('#symbolList [data-insert="' + componentId + '"]').click();
+      const point = await freeDraftingPage.locator('#userDrawings').evaluate((node, coordinates) => {
+        const screen = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
+        return { x: screen.x, y: screen.y };
+      }, [x, y]);
+      await freeDraftingPage.mouse.click(point.x, point.y);
+    }
+    await freeDraftingPage.locator('[data-action="fit"]').click();
+    const zoomPoint = await freeDraftingPage.locator('#drawing').evaluate(node => {
+      const bounds = node.getBoundingClientRect();
+      return { x: Math.round(bounds.left + bounds.width * 0.28), y: Math.round(bounds.top + bounds.height * 0.4) };
+    });
+    const worldAtZoomPoint = () => freeDraftingPage.locator('#drawing').evaluate((node, point) => {
+      const world = new DOMPoint(point.x, point.y).matrixTransform(node.getScreenCTM().inverse());
+      return { x: world.x, y: world.y };
+    }, zoomPoint);
+    const beforeZoom = await worldAtZoomPoint();
+    await freeDraftingPage.mouse.move(zoomPoint.x, zoomPoint.y);
+    await freeDraftingPage.mouse.wheel(0, -120);
+    await freeDraftingPage.waitForFunction(() => document.querySelector('#zoomValue').textContent !== '100%');
+    const afterZoom = await worldAtZoomPoint();
+    assert.ok(Math.hypot(afterZoom.x - beforeZoom.x, afterZoom.y - beforeZoom.y) < 0.01, JSON.stringify({ beforeZoom, afterZoom }));
+    await freeDraftingPage.setViewportSize({ width: 1120, height: 720 });
+    await freeDraftingPage.keyboard.press('Control+Shift+S');
+    await freeDraftingPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const freeText = await freeDraftingPage.evaluate(() => window.__savedProjectWrites[0]);
+    const freeProject = engine.parseProject(freeText).project;
+    assert.deepEqual(freeProject.objects.map(object => [object.x, object.y]), [[-125, -35], [75, -35]]);
+    assert.equal(freeProject.projectModel.sheets[0].showPrintFrame, false);
+    await freeDraftingPage.locator('[data-action="fit"]').click();
+    assert.ok(await freeDraftingPage.locator('#draftingRulers text').count() > 3);
+    if (process.env.CAD_SCREENSHOT_DIR) await freeDraftingPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'free-drafting-canvas.png') });
+    await freeDraftingPage.close({ runBeforeUnload: false });
 
     const dxfPage = await context.newPage();
     await dxfPage.goto(address);
