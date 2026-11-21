@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 7,
-    "validatedArtifactCount": 7,
-    "distinctTopologyCount": 5,
+    "projectArtifactCount": 8,
+    "validatedArtifactCount": 8,
+    "distinctTopologyCount": 6,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -39,13 +39,18 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "5bc460ffa931f5cade872066ee6579d49fadaa2195a4220b52f052f65153effe",
       "csvSha256": {
         "bom": "e0c90dded6f0f91ab8f3d9624e4674ed88ca5383a4875adf416e8787bcc9904c",
         "wires": "9b156b01833d34f2398d4e49f94eba63ecc4768e4ad7f292db7deceec3db306e",
-        "terminals": "f9b6a1bca7e0bad3799623406fbcda20ff39e3d8cd207ccf33dacaf84ac55ef4"
+        "terminals": "f9b6a1bca7e0bad3799623406fbcda20ff39e3d8cd207ccf33dacaf84ac55ef4",
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 72,
@@ -82,13 +87,18 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "a199f0118e8dee7d98e6adac4b66538af86ec21db8e9222a8881a40db8c85382",
       "csvSha256": {
         "bom": "d2599a41414cb6f03d5ea7363ba81071eb9728609fbd5347c6cc4fca61d1cb74",
         "wires": "bee9c06c8a2ba067c93f1fb3061d84e11dc6d7c0c4a214db7e8bab2433d44f53",
-        "terminals": "d5c967cef8d835bc1654baf6d7d81ee39aeca308cce9c9d478aaad146d4e5e79"
+        "terminals": "d5c967cef8d835bc1654baf6d7d81ee39aeca308cce9c9d478aaad146d4e5e79",
+        "plcIo": "0ca381998c1b580245947c80640acc4a0201c4aae44518aa02abe668255437da",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 1,
@@ -125,13 +135,18 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "0bbbb1b5fd2c5277d3eab4aa6e41c7ff90ec904be59319ae90cbba3db56aa10d",
       "csvSha256": {
         "bom": "80979de60601460a799aeeb71800780cb470114db74be868e00761ad17d6c345",
         "wires": "c08e200af4db6e1a9aeb6ff2711c46328748271fba2055b96eeacd98d038d78c",
-        "terminals": "cbbaad833a9af0d0fb77a46274d3c7205b74672272c7d19912c7e7966b7411b1"
+        "terminals": "cbbaad833a9af0d0fb77a46274d3c7205b74672272c7d19912c7e7966b7411b1",
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
@@ -168,13 +183,18 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "1caa05e1c9d4a86457ca9b5868882ce5d6c998a4030d8e3a1a699311b5a93aa2",
       "csvSha256": {
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
         "wires": "22e7d7a296f2029f337629b0330b06a2c259ff53635a4f74a0a23ea572d593a4",
-        "terminals": "a357d035462eb67efc79e03838880da56658369ef75a1fdd8a73f1008840e5c0"
+        "terminals": "95d6a58cee01fe517b005798f612b45c8ebf4fb4a4b4261fb3129078c972975f",
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 1,
@@ -211,13 +231,18 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "1a5ea9ee6bf9d54ae94c0351746426350ab32966be4e9b7b4f9e2a07ac8a6483",
       "csvSha256": {
         "bom": "f8e218aee0028fdcfb0c463edce7bc4168870a381e53c102db354d7f74eb3919",
         "wires": "d978d43c1e4e9cad200e41358cadfde688934f97c21ffa5308e62f505c2e5029",
-        "terminals": "9311a6358282cf726bc48c211ea2f73429603952fca50e7de3fff9e41a98d25e"
+        "terminals": "9311a6358282cf726bc48c211ea2f73429603952fca50e7de3fff9e41a98d25e",
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 2,
@@ -254,29 +279,34 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
-      "topologySha256": "4033fb190d2266902d500e8c2db36abd5cd7776aad3aa5c71acbece56a3c5dd0",
+      "topologySha256": "7939e6dffc8a01c3719cc009021d4ec5901e795bcd27e8ac8ff2d37e9983d259",
       "csvSha256": {
         "bom": "c0dc985bcb054eb60a42dc7d0e7b4f3241d998d78034b8afd8ba6c5313868d6a",
-        "wires": "98d86e3e5ea7de28d52d7d5bdf0d2b3cceb957bab5d2f60aa93979d0235da487",
-        "terminals": "fd2260f8de14164452f60db50e799b350feddb77da920250efa1f75510535b76"
+        "wires": "842a2c2c3d3156500e7b0346dd01de5da2a00a8d8dbee6d6c7e78e581ba89bfd",
+        "terminals": "eeef2c86990916699da42050d53cbdf9b8915cd8e091d3bb14691c6934bb2fd6",
+        "plcIo": "c7a6a70a6a6f3e63827e7cafb271c28e4acd772c822eceaba1a1c96655fa8548",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
         "connectedSheetCount": 8,
-        "contentObjectCount": 1096,
+        "contentObjectCount": 1097,
         "emptyContentSheetIds": [],
         "componentCount": 32,
-        "wireCount": 335,
+        "wireCount": 336,
         "netCount": 67,
         "globalNetCount": 43,
         "crossSheetConnectionCount": 21,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 15,
-        "wireListRowCount": 335,
+        "wireListRowCount": 336,
         "terminalListRowCount": 30
       },
       "errors": []
@@ -297,13 +327,18 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "71275096f353f5e354d1e5224179ee2237e2384568832a520097800c87a58703",
       "csvSha256": {
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
         "wires": "763968feee6b2d95f49336dc456bb59026aff48d0e6751194d9cf0587eb5424a",
-        "terminals": "b96cf2d7bc068c7227a1eaf00563c22208c592a5ab18d2cc223ac6e837cdefbc"
+        "terminals": "cac330f412466bd63c854adea33d15fad5237124b7afeb9f48a7d71c54e99244",
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
@@ -321,6 +356,54 @@
         "bomRowCount": 6,
         "wireListRowCount": 38,
         "terminalListRowCount": 12
+      },
+      "errors": []
+    },
+    {
+      "id": "sitop-24v-dc-distribution",
+      "title": "SITOP 24 V DC two-branch terminal distribution",
+      "topologyId": "dc-two-branch-terminal-distribution",
+      "role": "standalone-example",
+      "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
+      "revision": "2.5",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "topologySha256": "2fc799bb463025d6d0b44d4085a438b27c4efc2e3db0381828e0b4514a35c482",
+      "csvSha256": {
+        "bom": "fed2260c7a39c29a485de8fa591c9d08f6e2baccf52ee7f762992e2a52e94ef7",
+        "wires": "8c38412c5187fee38825dbc59f68c4a8f4748f57deac541b6971926a46c867f8",
+        "terminals": "a8dea5c677c5618a934f573bc891d34ab9f64603a046a4efd8ecc8b722fd115d",
+        "plcIo": "1da803583b1b2c7cb653096958fa0f77a2d6c4abf341dfc20da98349ad349e31",
+        "cables": "2c3130696d5e4bce0b434ed5be2fc5a39ff740756acab83cd0cea6009b8b5fe3"
+      },
+      "metrics": {
+        "sheetCount": 17,
+        "authoredSheetCount": 17,
+        "connectedSheetCount": 17,
+        "contentObjectCount": 208,
+        "emptyContentSheetIds": [],
+        "componentCount": 29,
+        "wireCount": 108,
+        "netCount": 64,
+        "globalNetCount": 20,
+        "crossSheetConnectionCount": 44,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 11,
+        "wireListRowCount": 108,
+        "terminalListRowCount": 40
       },
       "errors": []
     }

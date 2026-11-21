@@ -1,0 +1,4186 @@
+{
+  "product": "AdigunAiAutoCad",
+  "project": "SITOP 24 V DC two-branch terminal distribution",
+  "revision": "2.5",
+  "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
+  "activeSheet": "supply",
+  "theme": "light",
+  "zoom": 100,
+  "view": {
+    "x": 0,
+    "y": 0,
+    "w": 1200,
+    "h": 900
+  },
+  "sheets": [
+    {
+      "id": "supply",
+      "number": "A2/001",
+      "name": "PS1 AC input and DC output",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "distribution",
+      "number": "A2/002",
+      "name": "Two-branch DC terminal distribution",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-a",
+      "number": "A2/003",
+      "name": "ifm IFS204 inductive sensor power wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-b",
+      "number": "A2/004",
+      "name": "ifm PN2070 pressure sensor power wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "plc-inputs",
+      "number": "A2/005",
+      "name": "CPU 1212C power and sensor input wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "plc-relay-output",
+      "number": "A2/006",
+      "name": "CPU Q0.0 interface relay coil",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "contactor-feedback",
+      "number": "A2/007",
+      "name": "Contactor coil and auxiliary feedback",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "start-request",
+      "number": "A2/008",
+      "name": "Operator start request input",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "stop-request",
+      "number": "A2/009",
+      "name": "Operator stop request input",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "auxiliary-marshalling",
+      "number": "A2/010",
+      "name": "KM1 NC feedback terminal marshalling",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "ac-input-boundary",
+      "number": "A2/011",
+      "name": "PS1 AC input and protective-earth terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-status-marshalling",
+      "number": "A2/012",
+      "name": "K1 NC status terminal marshalling",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pressure-signal-terminals",
+      "number": "A2/013",
+      "name": "PN2070 analog and switching signal terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "ifs204-field-interface",
+      "number": "A2/014",
+      "name": "IFS204 field cable terminal interface",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "remote-status-relay",
+      "number": "A2/015",
+      "name": "Q0.1 remote status relay coil",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "remote-status-terminals",
+      "number": "A2/016",
+      "name": "XT6 dry changeover output",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "external-permissive",
+      "number": "A2/017",
+      "name": "External operational permissive contact interface",
+      "projectSectionId": "A2"
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 360,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "marking": "24 V DC source",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x1",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X1",
+      "x": 600,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "Branch A +24 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x2",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X2",
+      "x": 600,
+      "y": 360,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "Branch B +24 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x3",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X3",
+      "x": 600,
+      "y": 580,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "3",
+        "marking": "Branch A 0 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x4",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X4",
+      "x": 600,
+      "y": 700,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "4",
+        "marking": "Branch B 0 V",
+        "comment": ""
+      },
+      "sheetId": "distribution"
+    },
+    {
+      "id": "positive-supply",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 450,
+      "y": 260,
+      "x1": 450,
+      "y1": 260,
+      "x2": 700,
+      "y2": 260,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-trunk",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 180,
+      "y": 240,
+      "x1": 180,
+      "y1": 240,
+      "x2": 400,
+      "y2": 240,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-branch-a",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 240,
+      "x1": 400,
+      "y1": 240,
+      "x2": 565,
+      "y2": 240,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-link",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 240,
+      "x1": 400,
+      "y1": 240,
+      "x2": 400,
+      "y2": 360,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "positive-branch-b",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 360,
+      "x1": 400,
+      "y1": 360,
+      "x2": 565,
+      "y2": 360,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "return-supply",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 450,
+      "y": 320,
+      "x1": 450,
+      "y1": 320,
+      "x2": 700,
+      "y2": 320,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-trunk",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 180,
+      "y": 580,
+      "x1": 180,
+      "y1": 580,
+      "x2": 400,
+      "y2": 580,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-branch-a",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 580,
+      "x1": 400,
+      "y1": 580,
+      "x2": 565,
+      "y2": 580,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-link",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 580,
+      "x1": 400,
+      "y1": 580,
+      "x2": 400,
+      "y2": 700,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "return-branch-b",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 400,
+      "y": 700,
+      "x1": 400,
+      "y1": 700,
+      "x2": 565,
+      "y2": 700,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "supply-title",
+      "kind": "text",
+      "sheetId": "supply",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "PS1 · SITOP PSU100C INPUT AND OUTPUT"
+    },
+    {
+      "id": "supply-scope",
+      "kind": "text",
+      "sheetId": "supply",
+      "x": 110,
+      "y": 560,
+      "stroke": "#13263b",
+      "text": "L, N and PE route to XT3 on A2/011. Upstream source and protection remain outside the example."
+    },
+    {
+      "id": "supply-identity",
+      "kind": "text",
+      "sheetId": "supply",
+      "x": 110,
+      "y": 610,
+      "stroke": "#13263b",
+      "text": "PS1 is Siemens 6EP1332-5BA00. Use its source record for the input and output ratings."
+    },
+    {
+      "id": "distribution-title",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "XT1 · TWO-BRANCH DC DISTRIBUTION"
+    },
+    {
+      "id": "distribution-scope",
+      "kind": "text",
+      "sheetId": "distribution",
+      "x": 110,
+      "y": 815,
+      "stroke": "#13263b",
+      "text": "Right-hand cross-references route supply to B1 and B2. Branch protection and conductor sizing are outside this example."
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b1",
+      "componentId": "ifm-ifs204",
+      "ref": "B1",
+      "x": 510,
+      "y": 315,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "sensingTarget": "",
+        "comment": ""
+      },
+      "sheetId": "branch-a"
+    },
+    {
+      "id": "branch-a-title",
+      "kind": "text",
+      "sheetId": "branch-a",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "B1 · ifm IFS204 inductive sensor power wiring"
+    },
+    {
+      "id": "branch-a-scope",
+      "kind": "text",
+      "sheetId": "branch-a",
+      "x": 110,
+      "y": 435,
+      "stroke": "#13263b",
+      "text": "B1 switching output goes through XT5 to A1 DI a.0 on A2/005."
+    },
+    {
+      "id": "branch-a-supply",
+      "kind": "text",
+      "sheetId": "branch-a",
+      "x": 110,
+      "y": 480,
+      "stroke": "#13263b",
+      "text": "The +24 V and 0 V feeds arrive from XT1 through XT5 on A2/014."
+    },
+    {
+      "id": "a-positive-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 240,
+      "x1": 635,
+      "y1": 240,
+      "x2": 820,
+      "y2": 240,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "a-positive-receive",
+      "kind": "wire",
+      "sheetId": "branch-a",
+      "x": 190,
+      "y": 295,
+      "x1": 190,
+      "y1": 295,
+      "x2": 460,
+      "y2": 295,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "cableId": "W-B1",
+      "coreId": "1"
+    },
+    {
+      "id": "a-return-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 580,
+      "x1": 635,
+      "y1": 580,
+      "x2": 820,
+      "y2": 580,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "a-return-receive",
+      "kind": "wire",
+      "sheetId": "branch-a",
+      "x": 190,
+      "y": 335,
+      "x1": 190,
+      "y1": 335,
+      "x2": 460,
+      "y2": 335,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "cableId": "W-B1",
+      "coreId": "3"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b2",
+      "componentId": "ifm-pn2070",
+      "ref": "B2",
+      "x": 510,
+      "y": 315,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "processPoint": "",
+        "signalConfigurationNote": "",
+        "comment": ""
+      },
+      "sheetId": "branch-b"
+    },
+    {
+      "id": "branch-b-title",
+      "kind": "text",
+      "sheetId": "branch-b",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "B2 · ifm PN2070 pressure sensor power wiring"
+    },
+    {
+      "id": "branch-b-scope",
+      "kind": "text",
+      "sheetId": "branch-b",
+      "x": 110,
+      "y": 435,
+      "stroke": "#13263b",
+      "text": "B2 OUT2 and OUT1 route separately through XT4 on A2/013. The model assumes voltage and PNP switching modes."
+    },
+    {
+      "id": "branch-b-supply",
+      "kind": "text",
+      "sheetId": "branch-b",
+      "x": 110,
+      "y": 480,
+      "stroke": "#13263b",
+      "text": "The +24 V and 0 V conductors connect through XT1 on A2/002."
+    },
+    {
+      "id": "b-positive-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 360,
+      "x1": 635,
+      "y1": 360,
+      "x2": 820,
+      "y2": 360,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b-positive-receive",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 190,
+      "y": 290,
+      "x1": 190,
+      "y1": 290,
+      "x2": 445,
+      "y2": 290,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "cableId": "W-B2",
+      "coreId": "1"
+    },
+    {
+      "id": "b-return-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 700,
+      "x1": 635,
+      "y1": 700,
+      "x2": 820,
+      "y2": 700,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b-return-receive",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 190,
+      "y": 340,
+      "x1": 190,
+      "y1": 340,
+      "x2": 445,
+      "y2": 340,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "cableId": "W-B2",
+      "coreId": "3"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 580,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "plc-inputs"
+    },
+    {
+      "id": "cpu-feed-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 550,
+      "y": 260,
+      "x1": 550,
+      "y1": 260,
+      "x2": 550,
+      "y2": 190,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "cpu-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 550,
+      "y": 320,
+      "x1": 550,
+      "y1": 320,
+      "x2": 550,
+      "y2": 390,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-feed",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 180,
+      "y": 294,
+      "x1": 180,
+      "y1": 294,
+      "x2": 450,
+      "y2": 294,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "cpu-return",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 180,
+      "y": 312,
+      "x1": 180,
+      "y1": 312,
+      "x2": 450,
+      "y2": 312,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-1m-drop",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 350,
+      "y": 312,
+      "x1": 350,
+      "y1": 312,
+      "x2": 350,
+      "y2": 384,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-1m",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 350,
+      "y": 384,
+      "x1": 350,
+      "y1": 384,
+      "x2": 450,
+      "y2": 384,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-2m-drop",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 230,
+      "y": 312,
+      "x1": 230,
+      "y1": 312,
+      "x2": 230,
+      "y2": 780,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-2m-run",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 230,
+      "y": 780,
+      "x1": 230,
+      "y1": 780,
+      "x2": 1020,
+      "y2": 294,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-2m",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 1020,
+      "y": 294,
+      "x1": 1020,
+      "y1": 294,
+      "x2": 710,
+      "y2": 294,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "b1-signal-send",
+      "kind": "wire",
+      "sheetId": "branch-a",
+      "x": 560,
+      "y": 315,
+      "x1": 560,
+      "y1": 315,
+      "x2": 760,
+      "y2": 315,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B1 switching output",
+      "cableId": "W-B1",
+      "coreId": "4"
+    },
+    {
+      "id": "b1-di0",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 402,
+      "x1": 310,
+      "y1": 402,
+      "x2": 450,
+      "y2": 402,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B1 switching output"
+    },
+    {
+      "id": "b2-signal-send",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 575,
+      "y": 290,
+      "x1": 575,
+      "y1": 290,
+      "x2": 760,
+      "y2": 290,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B2 analog output",
+      "cableId": "W-B2",
+      "coreId": "2"
+    },
+    {
+      "id": "b2-ai0",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 780,
+      "y": 312,
+      "x1": 780,
+      "y1": 312,
+      "x2": 710,
+      "y2": 312,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B2 analog output"
+    },
+    {
+      "id": "cpu-title",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 108,
+      "text": "A1 · CPU 1212C POWER AND I/O",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-digital-address",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 710,
+      "text": "B1 OUT maps to DI a.0 / I0.0 at X10:7. Input group reference 1M returns to 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-analog-address",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 755,
+      "text": "B2 OUT2 maps to AI0 at X11:2. Analog reference 2M returns to 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-analog-mode",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 800,
+      "text": "The analog connection assumes PN2070 OUT2 is configured for 0–10 V. Its factory mode is 4–20 mA.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-scope",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 845,
+      "text": "Q0.0 drives K1 on A2/006. I0.1 reads the KM1 auxiliary contact on A2/007. PLC logic is outside scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k1",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K1",
+      "x": 520,
+      "y": 325,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "plc-relay-output"
+    },
+    {
+      "id": "plc-1l-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 610,
+      "y": 260,
+      "x1": 610,
+      "y1": 260,
+      "x2": 610,
+      "y2": 145,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "plc-1l-receive",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 412,
+      "x1": 710,
+      "y1": 412,
+      "x2": 780,
+      "y2": 390,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "q0-relay-send",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 444,
+      "x1": 710,
+      "y1": 444,
+      "x2": 780,
+      "y2": 470,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "Q0.0 relay command"
+    },
+    {
+      "id": "q0-relay-receive",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 210,
+      "y": 345,
+      "x1": 210,
+      "y1": 345,
+      "x2": 450,
+      "y2": 345,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "Q0.0 relay command"
+    },
+    {
+      "id": "relay-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 610,
+      "y": 320,
+      "x1": 610,
+      "y1": 320,
+      "x2": 610,
+      "y2": 430,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "relay-return-receive",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 210,
+      "y": 305,
+      "x1": 210,
+      "y1": 305,
+      "x2": 450,
+      "y2": 305,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "relay-title",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 108,
+      "text": "K1 · PLC OUTPUT INTERFACE RELAY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-coil-command",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 460,
+      "text": "A1 X12:3 / DQ a.0 / Q0.0 feeds K1:A1. K1:A2 returns to the SITOP 0 V net.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-output-common",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 505,
+      "text": "X12:1 / 3L+ feeds the transistor outputs. X12:2 / 3M returns to 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-contact-scope",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 550,
+      "text": "K1 NO 11–14 routes to KM1 on A2/007. K1 NC 11–12 reports through XT2:3 on A2/012.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "km1",
+      "componentId": "schneider-electric-lc1d09bd",
+      "ref": "KM1",
+      "x": 520,
+      "y": 325,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "contactor-feedback"
+    },
+    {
+      "id": "contact-feed-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 650,
+      "y": 260,
+      "x1": 650,
+      "y1": 260,
+      "x2": 650,
+      "y2": 112,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "k1-contact-feed",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 590,
+      "y": 325,
+      "x1": 590,
+      "y1": 325,
+      "x2": 970,
+      "y2": 265,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "km1-coil-send",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 590,
+      "y": 350,
+      "x1": 590,
+      "y1": 350,
+      "x2": 800,
+      "y2": 350,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 switched coil feed"
+    },
+    {
+      "id": "km1-coil-feed",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 190,
+      "y": 300,
+      "x1": 190,
+      "y1": 300,
+      "x2": 400,
+      "y2": 300,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 switched coil feed"
+    },
+    {
+      "id": "km1-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 660,
+      "y": 320,
+      "x1": 660,
+      "y1": 320,
+      "x2": 660,
+      "y2": 472,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "km1-return",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 190,
+      "y": 350,
+      "x1": 190,
+      "y1": 350,
+      "x2": 400,
+      "y2": 350,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "aux-feed-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 680,
+      "y": 260,
+      "x1": 680,
+      "y1": 260,
+      "x2": 680,
+      "y2": 78,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "aux-feed-rise",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 270,
+      "x1": 620,
+      "y1": 270,
+      "x2": 620,
+      "y2": 220,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "aux-feed",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 220,
+      "x1": 620,
+      "y1": 220,
+      "x2": 800,
+      "y2": 220,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "km1-feedback-drop",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 380,
+      "x1": 620,
+      "y1": 380,
+      "x2": 620,
+      "y2": 435,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 auxiliary feedback"
+    },
+    {
+      "id": "km1-feedback-send",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 435,
+      "x1": 620,
+      "y1": 435,
+      "x2": 800,
+      "y2": 435,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 auxiliary feedback"
+    },
+    {
+      "id": "km1-di1",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 320,
+      "y": 420,
+      "x1": 320,
+      "y1": 420,
+      "x2": 450,
+      "y2": 420,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 auxiliary feedback"
+    },
+    {
+      "id": "km1-title",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 108,
+      "text": "KM1 · CONTACTOR COIL AND AUXILIARY FEEDBACK",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "km1-coil-note",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 520,
+      "text": "K1 NO 11–14 switches the KM1 24 V DC coil circuit. Coil A2 connects to the SITOP return.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "km1-aux-note",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 565,
+      "text": "KM1 auxiliary NO 13–14 routes a separate +24 V feed to CPU X10:8 / DI a.1 / I0.1.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "km1-scope",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 610,
+      "text": "KM1 NC 21–22 routes to I0.4 through XT2 on A2/010. Main poles remain unused.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s1",
+      "componentId": "schneider-electric-xb5aa31",
+      "ref": "S1",
+      "x": 500,
+      "y": 295,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "start-request"
+    },
+    {
+      "id": "start-request-send-feed",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 240,
+      "y": 240,
+      "x1": 240,
+      "y1": 240,
+      "x2": 240,
+      "y2": 195,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-receive-feed",
+      "kind": "wire",
+      "sheetId": "start-request",
+      "x": 190,
+      "y": 295,
+      "x1": 190,
+      "y1": 295,
+      "x2": 445,
+      "y2": 295,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-send-signal",
+      "kind": "wire",
+      "sheetId": "start-request",
+      "x": 555,
+      "y": 295,
+      "x1": 555,
+      "y1": 295,
+      "x2": 720,
+      "y2": 295,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-receive-signal",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 385,
+      "y": 438,
+      "x1": 385,
+      "y1": 438,
+      "x2": 450,
+      "y2": 438,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-request-note-0",
+      "kind": "text",
+      "sheetId": "start-request",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "S1 · START REQUEST"
+    },
+    {
+      "id": "start-request-note-1",
+      "kind": "text",
+      "sheetId": "start-request",
+      "x": 110,
+      "y": 410,
+      "stroke": "#13263b",
+      "text": "NO 13–14 routes the XT1 +24 V distribution to A1 DI a.2 / I0.2 at X10:9."
+    },
+    {
+      "id": "start-request-note-2",
+      "kind": "text",
+      "sheetId": "start-request",
+      "x": 110,
+      "y": 455,
+      "stroke": "#13263b",
+      "text": "The contact is shown in its normal position. Request handling is assigned in PLC logic outside this example."
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s2",
+      "componentId": "schneider-electric-xb5aa42",
+      "ref": "S2",
+      "x": 500,
+      "y": 295,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "stop-request"
+    },
+    {
+      "id": "stop-request-send-feed",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 330,
+      "y": 240,
+      "x1": 330,
+      "y1": 240,
+      "x2": 330,
+      "y2": 150,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-receive-feed",
+      "kind": "wire",
+      "sheetId": "stop-request",
+      "x": 190,
+      "y": 295,
+      "x1": 190,
+      "y1": 295,
+      "x2": 445,
+      "y2": 295,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-send-signal",
+      "kind": "wire",
+      "sheetId": "stop-request",
+      "x": 555,
+      "y": 295,
+      "x1": 555,
+      "y1": 295,
+      "x2": 720,
+      "y2": 295,
+      "potential": "Stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-receive-signal",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 300,
+      "y": 500,
+      "x1": 300,
+      "y1": 500,
+      "x2": 395,
+      "y2": 456,
+      "potential": "Stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-pin",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 395,
+      "y": 456,
+      "x1": 395,
+      "y1": 456,
+      "x2": 450,
+      "y2": 456,
+      "potential": "Stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-request-note-0",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "S2 · STOP REQUEST"
+    },
+    {
+      "id": "stop-request-note-1",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 410,
+      "stroke": "#13263b",
+      "text": "NC 21–22 routes the XT1 +24 V distribution to A1 DI a.3 / I0.3 at X10:10."
+    },
+    {
+      "id": "stop-request-note-2",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 455,
+      "stroke": "#13263b",
+      "text": "The contact is shown in its normal position. Request handling is assigned in PLC logic outside this example."
+    },
+    {
+      "id": "stop-request-note-3",
+      "kind": "text",
+      "sheetId": "stop-request",
+      "x": 110,
+      "y": 500,
+      "stroke": "#13263b",
+      "text": "This is an operational stop request input. Emergency-stop and safety circuits are outside scope."
+    },
+    {
+      "id": "cpu-operator-addresses",
+      "kind": "text",
+      "sheetId": "plc-inputs",
+      "x": 110,
+      "y": 890,
+      "text": "I0.2 receives Start, I0.3 receives Stop, and I0.4 reads KM1 NC feedback through XT2.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x5",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X5",
+      "x": 510,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "1",
+        "marking": "KM1 NC contact feed",
+        "comment": ""
+      },
+      "sheetId": "auxiliary-marshalling"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x6",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X6",
+      "x": 510,
+      "y": 370,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "2",
+        "marking": "KM1 NC feedback to I0.4",
+        "comment": ""
+      },
+      "sheetId": "auxiliary-marshalling"
+    },
+    {
+      "id": "nc-feed-source",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 365,
+      "y": 240,
+      "x1": 365,
+      "y1": 240,
+      "x2": 365,
+      "y2": 112,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x5-feed",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 180,
+      "y": 250,
+      "x1": 180,
+      "y1": 250,
+      "x2": 475,
+      "y2": 250,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x5-aux-nc-send",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 545,
+      "y": 250,
+      "x1": 545,
+      "y1": 250,
+      "x2": 740,
+      "y2": 250,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-feed",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 665,
+      "y": 270,
+      "x1": 665,
+      "y1": 270,
+      "x2": 850,
+      "y2": 270,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-send",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 665,
+      "y": 380,
+      "x1": 665,
+      "y1": 380,
+      "x2": 850,
+      "y2": 380,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x6-feedback-receive",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 180,
+      "y": 370,
+      "x1": 180,
+      "y1": 370,
+      "x2": 475,
+      "y2": 370,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x6-feedback-send",
+      "kind": "wire",
+      "sheetId": "auxiliary-marshalling",
+      "x": 545,
+      "y": 370,
+      "x1": 545,
+      "y1": 370,
+      "x2": 740,
+      "y2": 370,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-di4-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 548,
+      "x1": 310,
+      "y1": 548,
+      "x2": 400,
+      "y2": 474,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "km1-nc-di4",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 400,
+      "y": 474,
+      "x1": 400,
+      "y1": 474,
+      "x2": 450,
+      "y2": 474,
+      "potential": "KM1 NC feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "auxiliary-marshalling-title",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 108,
+      "text": "XT2 · KM1 NORMALLY CLOSED FEEDBACK",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "auxiliary-marshalling-feed",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 455,
+      "text": "X5 passes +24 V from XT1 to KM1:21 on A2/007.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "auxiliary-marshalling-return",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 500,
+      "text": "X6 passes KM1:22 to A1 X10:11 / DI a.4 / I0.4 on A2/005.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "auxiliary-marshalling-scope",
+      "kind": "text",
+      "sheetId": "auxiliary-marshalling",
+      "x": 110,
+      "y": 545,
+      "text": "I0.1 is the separate NO feedback channel. The two inputs can be compared in PLC logic outside this example.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X7",
+      "x": 405,
+      "y": 230,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "1",
+        "marking": "L",
+        "comment": ""
+      },
+      "sheetId": "ac-input-boundary"
+    },
+    {
+      "id": "ac-l-send",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 440,
+      "y": 230,
+      "x1": 440,
+      "y1": 230,
+      "x2": 665,
+      "y2": 230,
+      "stroke": "#553b32",
+      "strokeWidth": 1.5,
+      "potential": "L"
+    },
+    {
+      "id": "ac-l-receive",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 155,
+      "y": 260,
+      "x1": 155,
+      "y1": 260,
+      "x2": 270,
+      "y2": 260,
+      "stroke": "#553b32",
+      "strokeWidth": 1.5,
+      "potential": "L"
+    },
+    {
+      "id": "ac-l-boundary-label",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 190,
+      "y": 234,
+      "text": "Incoming L · X7:1",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X8",
+      "x": 405,
+      "y": 335,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "2",
+        "marking": "N",
+        "comment": ""
+      },
+      "sheetId": "ac-input-boundary"
+    },
+    {
+      "id": "ac-n-send",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 440,
+      "y": 335,
+      "x1": 440,
+      "y1": 335,
+      "x2": 665,
+      "y2": 335,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "N"
+    },
+    {
+      "id": "ac-n-receive",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 155,
+      "y": 290,
+      "x1": 155,
+      "y1": 290,
+      "x2": 270,
+      "y2": 290,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "N"
+    },
+    {
+      "id": "ac-n-boundary-label",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 190,
+      "y": 339,
+      "text": "Incoming N · X8:1",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X9",
+      "x": 405,
+      "y": 440,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "3",
+        "marking": "PE",
+        "comment": ""
+      },
+      "sheetId": "ac-input-boundary"
+    },
+    {
+      "id": "ac-pe-send",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 440,
+      "y": 440,
+      "x1": 440,
+      "y1": 440,
+      "x2": 665,
+      "y2": 440,
+      "stroke": "#247548",
+      "strokeWidth": 1.5,
+      "potential": "PE"
+    },
+    {
+      "id": "ac-pe-receive",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 155,
+      "y": 320,
+      "x1": 155,
+      "y1": 320,
+      "x2": 270,
+      "y2": 320,
+      "stroke": "#247548",
+      "strokeWidth": 1.5,
+      "potential": "PE"
+    },
+    {
+      "id": "ac-pe-boundary-label",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 190,
+      "y": 444,
+      "text": "Incoming PE · X9:1",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ac-input-title",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 110,
+      "y": 108,
+      "text": "XT3 · PS1 AC INPUT BOUNDARY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ac-input-scope",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 110,
+      "y": 535,
+      "text": "XT3 presents separate line, neutral and protective-earth terminals for the SITOP input.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ac-input-review",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 110,
+      "y": 580,
+      "text": "Upstream source, isolation, protective devices, conductor sizing and cabinet bonding are outside scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 510,
+      "y": 270,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "3",
+        "marking": "K1 NC status to I0.5",
+        "comment": ""
+      },
+      "sheetId": "relay-status-marshalling"
+    },
+    {
+      "id": "k1-nc-send",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 590,
+      "y": 300,
+      "x1": 590,
+      "y1": 300,
+      "x2": 800,
+      "y2": 300,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x10-status-in",
+      "kind": "wire",
+      "sheetId": "relay-status-marshalling",
+      "x": 180,
+      "y": 270,
+      "x1": 180,
+      "y1": 270,
+      "x2": 475,
+      "y2": 270,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x10-status-out",
+      "kind": "wire",
+      "sheetId": "relay-status-marshalling",
+      "x": 545,
+      "y": 270,
+      "x1": 545,
+      "y1": 270,
+      "x2": 775,
+      "y2": 270,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k1-nc-di5-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 605,
+      "x1": 310,
+      "y1": 605,
+      "x2": 415,
+      "y2": 492,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k1-nc-di5",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 415,
+      "y": 492,
+      "x1": 415,
+      "y1": 492,
+      "x2": 450,
+      "y2": 492,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "relay-status-marshalling-title",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 108,
+      "text": "XT2:3 · K1 NORMALLY CLOSED STATUS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-status-marshalling-source",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 410,
+      "text": "K1:12 comes from the normally closed branch of the changeover contact on A2/006.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-status-marshalling-destination",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 455,
+      "text": "X10 passes that signal to A1 X10:12 / DI a.5 / I0.5 on A2/005.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-status-marshalling-scope",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 500,
+      "text": "I0.5 describes the K1 contact circuit. KM1 auxiliary feedback remains on I0.1 and I0.4.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-relay-status",
+      "kind": "text",
+      "sheetId": "plc-inputs",
+      "x": 110,
+      "y": 925,
+      "text": "I0.5 reads K1 NC status, I0.6 reads B2 OUT1, and I0.7 receives the XT7 operational permissive.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x11",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X11",
+      "x": 510,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "B2 OUT2 analog to AI0",
+        "comment": ""
+      },
+      "sheetId": "pressure-signal-terminals"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x12",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X12",
+      "x": 510,
+      "y": 365,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "B2 OUT1 switch to I0.6",
+        "comment": ""
+      },
+      "sheetId": "pressure-signal-terminals"
+    },
+    {
+      "id": "x11-b2-analog-in",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 180,
+      "y": 250,
+      "x1": 180,
+      "y1": 250,
+      "x2": 475,
+      "y2": 250,
+      "potential": "B2 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x11-b2-analog-out",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 545,
+      "y": 250,
+      "x1": 545,
+      "y1": 250,
+      "x2": 775,
+      "y2": 250,
+      "potential": "B2 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b2-switch-send",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 575,
+      "y": 340,
+      "x1": 575,
+      "y1": 340,
+      "x2": 760,
+      "y2": 340,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "cableId": "W-B2",
+      "coreId": "4"
+    },
+    {
+      "id": "x12-b2-switch-in",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 180,
+      "y": 365,
+      "x1": 180,
+      "y1": 365,
+      "x2": 475,
+      "y2": 365,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x12-b2-switch-out",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 545,
+      "y": 365,
+      "x1": 545,
+      "y1": 365,
+      "x2": 775,
+      "y2": 365,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b2-switch-di6-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 660,
+      "x1": 310,
+      "y1": 660,
+      "x2": 430,
+      "y2": 510,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b2-switch-di6",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 430,
+      "y": 510,
+      "x1": 430,
+      "y1": 510,
+      "x2": 450,
+      "y2": 510,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-signal-terminals-title",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 108,
+      "text": "XT4 · PN2070 PRESSURE SENSOR SIGNALS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "pressure-signal-terminals-analog",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 455,
+      "text": "X11 passes B2 OUT2 to AI0. The analog branch assumes the sensor is configured for 0–10 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "pressure-signal-terminals-switch",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 500,
+      "text": "X12 passes B2 OUT1 to I0.6. The digital branch assumes PNP switching mode and leaves the setpoint open.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "pressure-signal-terminals-scope",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 545,
+      "text": "The two signal nets stay separate. This model records wiring and does not implement pressure thresholds or IO-Link.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x13",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X13",
+      "x": 490,
+      "y": 235,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "1",
+        "marking": "W-B1 core 1 · +24 V",
+        "comment": ""
+      },
+      "sheetId": "ifs204-field-interface"
+    },
+    {
+      "id": "x13-field-in",
+      "kind": "wire",
+      "sheetId": "ifs204-field-interface",
+      "x": 180,
+      "y": 235,
+      "x1": 180,
+      "y1": 235,
+      "x2": 455,
+      "y2": 235,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x13-field-out",
+      "kind": "wire",
+      "sheetId": "ifs204-field-interface",
+      "x": 525,
+      "y": 235,
+      "x1": 525,
+      "y1": 235,
+      "x2": 765,
+      "y2": 235,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x14",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X14",
+      "x": 490,
+      "y": 340,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "2",
+        "marking": "W-B1 core 3 · 0 V",
+        "comment": ""
+      },
+      "sheetId": "ifs204-field-interface"
+    },
+    {
+      "id": "x14-field-in",
+      "kind": "wire",
+      "sheetId": "ifs204-field-interface",
+      "x": 180,
+      "y": 340,
+      "x1": 180,
+      "y1": 340,
+      "x2": 455,
+      "y2": 340,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x14-field-out",
+      "kind": "wire",
+      "sheetId": "ifs204-field-interface",
+      "x": 525,
+      "y": 340,
+      "x1": 525,
+      "y1": 340,
+      "x2": 765,
+      "y2": 340,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x15",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X15",
+      "x": 490,
+      "y": 445,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "3",
+        "marking": "W-B1 core 4 · switching signal",
+        "comment": ""
+      },
+      "sheetId": "ifs204-field-interface"
+    },
+    {
+      "id": "x15-field-in",
+      "kind": "wire",
+      "sheetId": "ifs204-field-interface",
+      "x": 180,
+      "y": 445,
+      "x1": 180,
+      "y1": 445,
+      "x2": 455,
+      "y2": 445,
+      "potential": "B1 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x15-field-out",
+      "kind": "wire",
+      "sheetId": "ifs204-field-interface",
+      "x": 525,
+      "y": 445,
+      "x1": 525,
+      "y1": 445,
+      "x2": 765,
+      "y2": 445,
+      "potential": "B1 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "ifs204-field-interface-title",
+      "kind": "text",
+      "sheetId": "ifs204-field-interface",
+      "x": 110,
+      "y": 108,
+      "text": "XT5 · IFS204 FIELD CABLE TERMINALS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ifs204-field-interface-supply",
+      "kind": "text",
+      "sheetId": "ifs204-field-interface",
+      "x": 110,
+      "y": 545,
+      "text": "X13 and X14 pass the separate +24 V and 0 V feeds from XT1 to B1.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ifs204-field-interface-signal",
+      "kind": "text",
+      "sheetId": "ifs204-field-interface",
+      "x": 110,
+      "y": 590,
+      "text": "X15 passes B1 switching output to A1 DI a.0 / I0.0.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ifs204-field-interface-cable",
+      "kind": "text",
+      "sheetId": "ifs204-field-interface",
+      "x": 110,
+      "y": 635,
+      "text": "W-B1 core IDs 1, 3 and 4 match the sensor pins shown on A2/003. Cable selection remains open.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k2",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K2",
+      "x": 520,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "remote-status-relay"
+    },
+    {
+      "id": "q1-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 460,
+      "x1": 710,
+      "y1": 460,
+      "x2": 750,
+      "y2": 520,
+      "potential": "Q0.1 remote status command",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "q1-relay-send",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 750,
+      "y": 520,
+      "x1": 750,
+      "y1": 520,
+      "x2": 830,
+      "y2": 520,
+      "potential": "Q0.1 remote status command",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "q1-relay-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 210,
+      "y": 350,
+      "x1": 210,
+      "y1": 350,
+      "x2": 450,
+      "y2": 350,
+      "potential": "Q0.1 remote status command",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k2-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 690,
+      "y": 320,
+      "x1": 690,
+      "y1": 320,
+      "x2": 690,
+      "y2": 520,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k2-return-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 210,
+      "y": 310,
+      "x1": 210,
+      "y1": 310,
+      "x2": 450,
+      "y2": 310,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x16",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X16",
+      "x": 500,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "1",
+        "marking": "K2 common",
+        "comment": ""
+      },
+      "sheetId": "remote-status-terminals"
+    },
+    {
+      "id": "dry-11-send",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 590,
+      "y": 330,
+      "x1": 590,
+      "y1": 330,
+      "x2": 805,
+      "y2": 330,
+      "potential": "K2 common",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "dry-11-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-terminals",
+      "x": 210,
+      "y": 240,
+      "x1": 210,
+      "y1": 240,
+      "x2": 465,
+      "y2": 240,
+      "potential": "K2 common",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x16-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 575,
+      "y": 244,
+      "text": "X16:2 · common",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x17",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X17",
+      "x": 500,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "2",
+        "marking": "K2 normally closed",
+        "comment": ""
+      },
+      "sheetId": "remote-status-terminals"
+    },
+    {
+      "id": "dry-12-send",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 590,
+      "y": 305,
+      "x1": 590,
+      "y1": 305,
+      "x2": 805,
+      "y2": 305,
+      "potential": "K2 normally closed",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "dry-12-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-terminals",
+      "x": 210,
+      "y": 345,
+      "x1": 210,
+      "y1": 345,
+      "x2": 465,
+      "y2": 345,
+      "potential": "K2 normally closed",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x17-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 575,
+      "y": 349,
+      "text": "X17:2 · normally closed",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x18",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X18",
+      "x": 500,
+      "y": 450,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "3",
+        "marking": "K2 normally open",
+        "comment": ""
+      },
+      "sheetId": "remote-status-terminals"
+    },
+    {
+      "id": "dry-14-send",
+      "kind": "wire",
+      "sheetId": "remote-status-relay",
+      "x": 590,
+      "y": 355,
+      "x1": 590,
+      "y1": 355,
+      "x2": 805,
+      "y2": 355,
+      "potential": "K2 normally open",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "dry-14-receive",
+      "kind": "wire",
+      "sheetId": "remote-status-terminals",
+      "x": 210,
+      "y": 450,
+      "x1": 210,
+      "y1": 450,
+      "x2": 465,
+      "y2": 450,
+      "potential": "K2 normally open",
+      "stroke": "#525f72",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x18-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 575,
+      "y": 454,
+      "text": "X18:2 · normally open",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-relay-title",
+      "kind": "text",
+      "sheetId": "remote-status-relay",
+      "x": 110,
+      "y": 108,
+      "text": "K2 · REMOTE STATUS RELAY OUTPUT",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-relay-coil",
+      "kind": "text",
+      "sheetId": "remote-status-relay",
+      "x": 110,
+      "y": 455,
+      "text": "A1 X12:4 / DQ a.1 / Q0.1 feeds K2:A1. K2:A2 returns to PS1 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-relay-connection",
+      "kind": "text",
+      "sheetId": "remote-status-relay",
+      "x": 110,
+      "y": 500,
+      "text": "K2 changeover terminals 11, 12 and 14 route separately to XT6 on A2/016.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-terminals-title",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 110,
+      "y": 108,
+      "text": "XT6 · DRY CHANGEOVER OUTPUT",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-terminals-boundary",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 110,
+      "y": 545,
+      "text": "XT6 provides common, normally closed and normally open contact boundaries. External supply and load are unassigned.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "remote-terminals-scope",
+      "kind": "text",
+      "sheetId": "remote-status-terminals",
+      "x": 110,
+      "y": 590,
+      "text": "The static net model preserves each contact terminal separately. Relay actuation is outside scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-remote-status-output",
+      "kind": "text",
+      "sheetId": "plc-inputs",
+      "x": 110,
+      "y": 960,
+      "text": "Q0.1 drives the K2 remote status relay. The output function is assigned in PLC logic outside this example.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x19",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X19",
+      "x": 510,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "1",
+        "marking": "External contact feed",
+        "comment": ""
+      },
+      "sheetId": "external-permissive"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x20",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X20",
+      "x": 510,
+      "y": 365,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "2",
+        "marking": "External contact return to I0.7",
+        "comment": ""
+      },
+      "sheetId": "external-permissive"
+    },
+    {
+      "id": "xt7-feed-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 395,
+      "y": 240,
+      "x1": 395,
+      "y1": 240,
+      "x2": 395,
+      "y2": 174,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-feed",
+      "kind": "wire",
+      "sheetId": "external-permissive",
+      "x": 200,
+      "y": 250,
+      "x1": 200,
+      "y1": 250,
+      "x2": 475,
+      "y2": 250,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-permissive-send",
+      "kind": "wire",
+      "sheetId": "external-permissive",
+      "x": 200,
+      "y": 365,
+      "x1": 200,
+      "y1": 365,
+      "x2": 475,
+      "y2": 365,
+      "potential": "External operational permissive",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-permissive-receive",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 735,
+      "x1": 310,
+      "y1": 735,
+      "x2": 440,
+      "y2": 528,
+      "potential": "External operational permissive",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "xt7-permissive-di7",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 440,
+      "y": 528,
+      "x1": 440,
+      "y1": 528,
+      "x2": 450,
+      "y2": 528,
+      "potential": "External operational permissive",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "external-permissive-title",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 108,
+      "text": "XT7 · EXTERNAL OPERATIONAL PERMISSIVE INTERFACE",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-field-feed",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 580,
+      "y": 254,
+      "text": "X19:2 · +24 V feed to external contact",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-field-return",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 580,
+      "y": 369,
+      "text": "X20:2 · switched signal from external contact",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-pin",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 490,
+      "text": "X20 routes the external contact signal to A1 X10:14 / DI a.7 / I0.7.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-boundary",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 535,
+      "text": "An external dry contact would bridge X19:2 and X20:2 when closed. The field device is outside this example.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "external-permissive-scope",
+      "kind": "text",
+      "sheetId": "external-permissive",
+      "x": 110,
+      "y": 580,
+      "text": "This input is an operational permissive. Its logic and any safety circuit remain outside scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "plc-output-return",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 428,
+      "x1": 710,
+      "y1": 428,
+      "x2": 1020,
+      "y2": 428,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "dc-positive",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "positive-supply",
+          "point": {
+            "x": 700,
+            "y": 260
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "distribution"
+          }
+        },
+        {
+          "sheetId": "distribution",
+          "wireId": "positive-trunk",
+          "point": {
+            "x": 180,
+            "y": 240
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dc-return",
+      "name": "0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "return-supply",
+          "point": {
+            "x": 700,
+            "y": 320
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "distribution"
+          }
+        },
+        {
+          "sheetId": "distribution",
+          "wireId": "return-trunk",
+          "point": {
+            "x": 180,
+            "y": 580
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-positive",
+      "name": "Branch A +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "a-positive-send",
+          "point": {
+            "x": 820,
+            "y": 240
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ifs204-field-interface",
+            "targetRef": "X13"
+          }
+        },
+        {
+          "sheetId": "ifs204-field-interface",
+          "wireId": "x13-field-in",
+          "point": {
+            "x": 180,
+            "y": 235
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-return",
+      "name": "Branch A 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "a-return-send",
+          "point": {
+            "x": 820,
+            "y": 580
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ifs204-field-interface",
+            "targetRef": "X14"
+          }
+        },
+        {
+          "sheetId": "ifs204-field-interface",
+          "wireId": "x14-field-in",
+          "point": {
+            "x": 180,
+            "y": 340
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b-positive",
+      "name": "Branch B +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "b-positive-send",
+          "point": {
+            "x": 820,
+            "y": 360
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "branch-b",
+          "wireId": "b-positive-receive",
+          "point": {
+            "x": 190,
+            "y": 290
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b-return",
+      "name": "Branch B 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "b-return-send",
+          "point": {
+            "x": 820,
+            "y": 700
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "branch-b",
+          "wireId": "b-return-receive",
+          "point": {
+            "x": 190,
+            "y": 340
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-feed",
+      "name": "CPU +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "cpu-feed-send",
+          "point": {
+            "x": 550,
+            "y": 190
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "cpu-feed",
+          "point": {
+            "x": 180,
+            "y": 294
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-return",
+      "name": "CPU 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "cpu-return-send",
+          "point": {
+            "x": 550,
+            "y": 390
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "cpu-return",
+          "point": {
+            "x": 180,
+            "y": 312
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b1-di0",
+      "name": "B1 switching output",
+      "endpoints": [
+        {
+          "sheetId": "branch-a",
+          "wireId": "b1-signal-send",
+          "point": {
+            "x": 760,
+            "y": 315
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ifs204-field-interface",
+            "targetRef": "X15"
+          }
+        },
+        {
+          "sheetId": "ifs204-field-interface",
+          "wireId": "x15-field-in",
+          "point": {
+            "x": 180,
+            "y": 445
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-a",
+            "targetRef": "B1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-1l",
+      "name": "CPU 3L+ supply",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "plc-1l-send",
+          "point": {
+            "x": 610,
+            "y": 145
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "plc-1l-receive",
+          "point": {
+            "x": 780,
+            "y": 390
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-q0-relay",
+      "name": "Q0.0 relay command",
+      "endpoints": [
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "q0-relay-send",
+          "point": {
+            "x": 780,
+            "y": 470
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "q0-relay-receive",
+          "point": {
+            "x": 210,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-relay-return",
+      "name": "K1 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "relay-return-send",
+          "point": {
+            "x": 610,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "relay-return-receive",
+          "point": {
+            "x": 210,
+            "y": 305
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact-feed",
+      "name": "K1 contact supply",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "contact-feed-send",
+          "point": {
+            "x": 650,
+            "y": 112
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "k1-contact-feed",
+          "point": {
+            "x": 970,
+            "y": 265
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-coil",
+      "name": "KM1 switched coil feed",
+      "endpoints": [
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "km1-coil-send",
+          "point": {
+            "x": 800,
+            "y": 350
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-coil-feed",
+          "point": {
+            "x": 190,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-return-link",
+      "name": "KM1 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "km1-return-send",
+          "point": {
+            "x": 660,
+            "y": 472
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-return",
+          "point": {
+            "x": 190,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aux-feed-link",
+      "name": "KM1 auxiliary supply",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "aux-feed-send",
+          "point": {
+            "x": 680,
+            "y": 78
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "aux-feed",
+          "point": {
+            "x": 800,
+            "y": 220
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-feedback-link",
+      "name": "KM1 auxiliary feedback",
+      "endpoints": [
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-feedback-send",
+          "point": {
+            "x": 800,
+            "y": 435
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "km1-di1",
+          "point": {
+            "x": 320,
+            "y": 420
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "start-request-feed",
+      "name": "S1 +24 V",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "start-request-send-feed",
+          "point": {
+            "x": 240,
+            "y": 195
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "start-request",
+            "targetRef": "S1"
+          }
+        },
+        {
+          "sheetId": "start-request",
+          "wireId": "start-request-receive-feed",
+          "point": {
+            "x": 190,
+            "y": 295
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "start-request-signal",
+      "name": "Start request",
+      "endpoints": [
+        {
+          "sheetId": "start-request",
+          "wireId": "start-request-send-signal",
+          "point": {
+            "x": 720,
+            "y": 295
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "start-request-receive-signal",
+          "point": {
+            "x": 385,
+            "y": 438
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "start-request",
+            "targetRef": "S1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stop-request-feed",
+      "name": "S2 +24 V",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "stop-request-send-feed",
+          "point": {
+            "x": 330,
+            "y": 150
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "stop-request",
+            "targetRef": "S2"
+          }
+        },
+        {
+          "sheetId": "stop-request",
+          "wireId": "stop-request-receive-feed",
+          "point": {
+            "x": 190,
+            "y": 295
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stop-request-signal",
+      "name": "Stop request",
+      "endpoints": [
+        {
+          "sheetId": "stop-request",
+          "wireId": "stop-request-send-signal",
+          "point": {
+            "x": 720,
+            "y": 295
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "stop-request-receive-signal",
+          "point": {
+            "x": 300,
+            "y": 500
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "stop-request",
+            "targetRef": "S2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xt2-feed",
+      "name": "XT2 +24 V",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "nc-feed-source",
+          "point": {
+            "x": 365,
+            "y": 112
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X5"
+          }
+        },
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x5-feed",
+          "point": {
+            "x": 180,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-nc-feed-link",
+      "name": "KM1 NC contact supply",
+      "endpoints": [
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x5-aux-nc-send",
+          "point": {
+            "x": 740,
+            "y": 250
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-nc-feed",
+          "point": {
+            "x": 850,
+            "y": 270
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-nc-return-link",
+      "name": "KM1 NC feedback",
+      "endpoints": [
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-nc-send",
+          "point": {
+            "x": 850,
+            "y": 380
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X6"
+          }
+        },
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x6-feedback-receive",
+          "point": {
+            "x": 180,
+            "y": 370
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-nc-di4-link",
+      "name": "KM1 NC feedback",
+      "endpoints": [
+        {
+          "sheetId": "auxiliary-marshalling",
+          "wireId": "x6-feedback-send",
+          "point": {
+            "x": 740,
+            "y": 370
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "km1-nc-di4-route",
+          "point": {
+            "x": 310,
+            "y": 548
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "auxiliary-marshalling",
+            "targetRef": "X6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ac-l",
+      "name": "L",
+      "endpoints": [
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "ac-l-send",
+          "point": {
+            "x": 665,
+            "y": 230
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "supply",
+          "wireId": "ac-l-receive",
+          "point": {
+            "x": 155,
+            "y": 260
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ac-n",
+      "name": "N",
+      "endpoints": [
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "ac-n-send",
+          "point": {
+            "x": 665,
+            "y": 335
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "supply",
+          "wireId": "ac-n-receive",
+          "point": {
+            "x": 155,
+            "y": 290
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ac-pe",
+      "name": "PE",
+      "endpoints": [
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "ac-pe-send",
+          "point": {
+            "x": 665,
+            "y": 440
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "supply",
+          "wireId": "ac-pe-receive",
+          "point": {
+            "x": 155,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k1-nc-marshalling",
+      "name": "K1 NC status",
+      "endpoints": [
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "k1-nc-send",
+          "point": {
+            "x": 800,
+            "y": 300
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "relay-status-marshalling",
+            "targetRef": "X10"
+          }
+        },
+        {
+          "sheetId": "relay-status-marshalling",
+          "wireId": "x10-status-in",
+          "point": {
+            "x": 180,
+            "y": 270
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k1-nc-di5-link",
+      "name": "K1 NC status",
+      "endpoints": [
+        {
+          "sheetId": "relay-status-marshalling",
+          "wireId": "x10-status-out",
+          "point": {
+            "x": 775,
+            "y": 270
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "k1-nc-di5-route",
+          "point": {
+            "x": 310,
+            "y": 605
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "relay-status-marshalling",
+            "targetRef": "X10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b2-analog-marshalling",
+      "name": "B2 analog output",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "b2-signal-send",
+          "point": {
+            "x": 760,
+            "y": 290
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X11"
+          }
+        },
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x11-b2-analog-in",
+          "point": {
+            "x": 180,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b2-ai0",
+      "name": "B2 analog output",
+      "endpoints": [
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x11-b2-analog-out",
+          "point": {
+            "x": 775,
+            "y": 250
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b2-ai0",
+          "point": {
+            "x": 780,
+            "y": 312
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b2-switch-marshalling",
+      "name": "B2 switching output",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "b2-switch-send",
+          "point": {
+            "x": 760,
+            "y": 340
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x12-b2-switch-in",
+          "point": {
+            "x": 180,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b2-di6",
+      "name": "B2 switching output",
+      "endpoints": [
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x12-b2-switch-out",
+          "point": {
+            "x": 775,
+            "y": 365
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b2-switch-di6-route",
+          "point": {
+            "x": 310,
+            "y": 660
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-positive-xt5",
+      "name": "Branch A +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "ifs204-field-interface",
+          "wireId": "x13-field-out",
+          "point": {
+            "x": 765,
+            "y": 235
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-a",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "branch-a",
+          "wireId": "a-positive-receive",
+          "point": {
+            "x": 190,
+            "y": 295
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ifs204-field-interface",
+            "targetRef": "X13"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-return-xt5",
+      "name": "Branch A 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "ifs204-field-interface",
+          "wireId": "x14-field-out",
+          "point": {
+            "x": 765,
+            "y": 340
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-a",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "branch-a",
+          "wireId": "a-return-receive",
+          "point": {
+            "x": 190,
+            "y": 335
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ifs204-field-interface",
+            "targetRef": "X14"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b1-di0-xt5",
+      "name": "B1 switching output",
+      "endpoints": [
+        {
+          "sheetId": "ifs204-field-interface",
+          "wireId": "x15-field-out",
+          "point": {
+            "x": 765,
+            "y": 445
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b1-di0",
+          "point": {
+            "x": 310,
+            "y": 402
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ifs204-field-interface",
+            "targetRef": "X15"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-q1-relay",
+      "name": "Q0.1 remote status command",
+      "endpoints": [
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "q1-relay-send",
+          "point": {
+            "x": 830,
+            "y": 520
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "q1-relay-receive",
+          "point": {
+            "x": 210,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k2-return",
+      "name": "K2 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "k2-return-send",
+          "point": {
+            "x": 690,
+            "y": 520
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "k2-return-receive",
+          "point": {
+            "x": 210,
+            "y": 310
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry-11",
+      "name": "K2 common",
+      "endpoints": [
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "dry-11-send",
+          "point": {
+            "x": 805,
+            "y": 330
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-terminals",
+            "targetRef": "X16"
+          }
+        },
+        {
+          "sheetId": "remote-status-terminals",
+          "wireId": "dry-11-receive",
+          "point": {
+            "x": 210,
+            "y": 240
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry-12",
+      "name": "K2 normally closed",
+      "endpoints": [
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "dry-12-send",
+          "point": {
+            "x": 805,
+            "y": 305
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-terminals",
+            "targetRef": "X17"
+          }
+        },
+        {
+          "sheetId": "remote-status-terminals",
+          "wireId": "dry-12-receive",
+          "point": {
+            "x": 210,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dry-14",
+      "name": "K2 normally open",
+      "endpoints": [
+        {
+          "sheetId": "remote-status-relay",
+          "wireId": "dry-14-send",
+          "point": {
+            "x": 805,
+            "y": 355
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "remote-status-terminals",
+            "targetRef": "X18"
+          }
+        },
+        {
+          "sheetId": "remote-status-terminals",
+          "wireId": "dry-14-receive",
+          "point": {
+            "x": 210,
+            "y": 450
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "remote-status-relay",
+            "targetRef": "K2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xt7-feed-link",
+      "name": "XT7 +24 V feed",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "xt7-feed-send",
+          "point": {
+            "x": 395,
+            "y": 174
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "external-permissive",
+            "targetRef": "X19"
+          }
+        },
+        {
+          "sheetId": "external-permissive",
+          "wireId": "xt7-feed",
+          "point": {
+            "x": 200,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xt7-permissive-link",
+      "name": "External operational permissive",
+      "endpoints": [
+        {
+          "sheetId": "external-permissive",
+          "wireId": "xt7-permissive-send",
+          "point": {
+            "x": 200,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "xt7-permissive-receive",
+          "point": {
+            "x": 310,
+            "y": 735
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "external-permissive",
+            "targetRef": "X20"
+          }
+        }
+      ]
+    }
+  ],
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}

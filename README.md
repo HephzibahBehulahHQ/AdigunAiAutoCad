@@ -9,10 +9,14 @@ Use **Wire** to click two pin anchors or drag between them. In **Select** mode, 
 
 To join circuits across sheets, draw a wire with one free end on each sheet. Open **Electrical checks** on either sheet, select both ends under **Connect wire ends across sheets**, and name the connection. The resulting arrows open the corresponding sheets. Use **Remove link** under **Cross-sheet links on this sheet** to free the endpoints for reconnecting. Undo restores the link.
 
+Drawing Undo and Redo follow edit order across sheet navigation and reopen the sheet containing the affected edit. Deleting a sheet clears drawing history.
+
+Use **Print project set** in the command palette to print every sheet in project order. Choose **Save as PDF** in the browser print dialog for a single project PDF.
+
 
 ## Verified reference project increment
 
-The opening set contains 100 authored sheets through A1/100, including the source-backed Siemens/SEW starter, IFM sensor and PLC examples, and PN2070 manufacturer reference records. The authored sheet adds no components or wires; the project retains 32 component instances, 335 routed wire segments, 67 sheet-local nets and 21 explicit cross-sheet connections with no unresolved open endpoints.  See `examples/real-projects/siemens-sew-star-delta-reference.adigun.json`.
+The opening set contains 100 authored sheets through A1/100, including the source-backed Siemens/SEW starter, IFM sensor and PLC examples, and PN2070 manufacturer reference records. The authored sheet adds no components or wires; the project retains 32 component instances, 336 routed wire segments, 67 sheet-local nets and 21 explicit cross-sheet connections with no unresolved open endpoints.  See `examples/real-projects/siemens-sew-star-delta-reference.adigun.json`.
 
 ## Deployment and release
 

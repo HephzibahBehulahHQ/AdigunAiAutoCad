@@ -1048,8 +1048,8 @@
     ['X10', '7', 'DI a.0'], ['X10', '8', 'DI a.1'], ['X10', '9', 'DI a.2'], ['X10', '10', 'DI a.3'],
     ['X10', '11', 'DI a.4'], ['X10', '12', 'DI a.5'], ['X10', '13', 'DI a.6'], ['X10', '14', 'DI a.7'],
     ['X11', '1', '2M'], ['X11', '2', 'AI 0'], ['X11', '3', 'AI 1'],
-    ['X12', '1', '1L'], ['X12', '2', 'DQ a.0'], ['X12', '3', 'DQ a.1'], ['X12', '4', 'DQ a.2'],
-    ['X12', '5', 'DQ a.3'], ['X12', '6', '2L'], ['X12', '7', 'DQ a.4'], ['X12', '8', 'DQ a.5']
+    ['X12', '1', '3L+'], ['X12', '2', '3M'], ['X12', '3', 'DQ a.0'], ['X12', '4', 'DQ a.1'],
+    ['X12', '5', 'DQ a.2'], ['X12', '6', 'DQ a.3'], ['X12', '7', 'DQ a.4'], ['X12', '8', 'DQ a.5']
   ];
   const siemensCpuPins = siemensCpuPinRows.map(function (row, index) {
     const group = row[0], groupIndex = siemensCpuPinRows.slice(0, index).filter(function (item) { return item[0] === group; }).length;
@@ -1059,7 +1059,7 @@
   const siemensCpuDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION, id: 'siemens-6es7212-1ae40-0xb0', manufacturer: 'Siemens', manufacturerPartNumber: '6ES7212-1AE40-0XB0',
     model: 'SIMATIC S7-1200 CPU 1212C DC/DC/DC', name: 'Compact PLC CPU', family: 'plc-cpu', referencePrefix: 'A', category: 'Automation · Verified PLC CPU',
-    symbol: { id: 'plc.siemens.cpu-1212c.dcdcdc.v1', view: 'schematic', unit: 'mm', width: 260, height: 290, pins: siemensCpuPins, internalConnections: [], numberingNote: 'Terminal group and pin identities X10, X11 and X12 match Siemens System Manual V4.7, Table A-49. Pin coordinates are schematic connection points, not physical connector geometry.' },
+    symbol: { id: 'plc.siemens.cpu-1212c.dcdcdc.v2', view: 'schematic', unit: 'mm', width: 260, height: 290, pins: siemensCpuPins, internalConnections: [], numberingNote: 'Terminal group and pin identities X10, X11 and X12 match Siemens System Manual V4.7, Table A-50. Pin coordinates are schematic connection points, not physical connector geometry.' },
     specifications: {
       onboardDigitalInputs: { value: 8, unit: '24 V DC DI' }, onboardDigitalOutputs: { value: 6, unit: '24 V DC transistor DQ' }, onboardAnalogInputs: { value: 2, unit: '0–10 V DC AI' },
       supplyVoltage: { minimum: 20.4, maximum: 28.8, unit: 'V DC' }, programDataMemory: { value: 100, unit: 'KB' },
@@ -1141,7 +1141,28 @@
     instanceProperties: { terminalStrip: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, marking: { type: 'string', default: '', maximumLength: 40 }, comment: { type: 'string', default: '', maximumLength: 160 } },
     sources: [{ publisher: 'Phoenix Contact', title: 'PT 16 N-PE · Protective conductor terminal block · Item 3212147', url: 'https://www.phoenixcontact.com/en-nl/products/ground-terminal-pt-16-n-pe-3212147', documentRevision: 'Live manufacturer product data · retrieved 2026-11-12', revisionNote: 'Manufacturer specifies two push-in connections, 16 mm² rated cross-section, 0.5–25 mm² conductor range, IEC 60947-7-2, green-yellow color and a grounding foot. It does not number the connection points.' , retrievedAt: '2026-11-12' }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition });
+  const pt25ProtectiveEarthTerminal = deepFreeze({
+    ...phoenixProtectiveEarthTerminalDefinition,
+    id: 'phoenix-contact-3209536', manufacturerPartNumber: '3209536', model: 'PT 2,5-PE',
+    symbol: { ...phoenixProtectiveEarthTerminalDefinition.symbol, id: 'terminal.phoenix.pt25pe.2-connection.v1' },
+    specifications: {
+      ...phoenixProtectiveEarthTerminalDefinition.specifications,
+      ratedCrossSection: { value: 2.5, unit: 'mm²' },
+      rigidConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+      flexibleConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+      strippingLength: { minimum: 8, maximum: 10, unit: 'mm' },
+      dimensions: {
+        width: { value: 5.2, unit: 'mm' }, height: { value: 48.5, unit: 'mm' },
+        depthOnNS35_7_5: { value: 36.8, unit: 'mm' }, depthOnNS35_15: { value: 44.3, unit: 'mm' }
+      }
+    },
+    sources: [{
+      publisher: 'Phoenix Contact', title: 'PT 2,5-PE · Protective conductor terminal block · Item 3209536',
+      url: 'https://www.phoenixcontact.com/en-be/products/ground-terminal-pt-25-pe-3209536',
+      documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
+    }]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -1193,6 +1214,12 @@
   }
 
   function component(id) { return COMPONENTS[id] || null; }
+  function isTerminalDefinition(definition) {
+    return definition?.family === 'feedthrough-terminal' || definition?.family === 'protective-earth-terminal';
+  }
+  function plcChannelType(pin) {
+    return /^(DI|DQ|AI) /.exec(pin.name)?.[1];
+  }
   function catalog(query = '') {
     const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
     const terms = String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
@@ -1328,8 +1355,15 @@
           validation.errors.forEach(function (error) { errors.push('Object ' + (object.ref || index + 1) + ': ' + error); });
         } else if (object.kind === 'catalog-symbol' || ['terminal', 'plc', 'motor', 'ground'].includes(object.kind)) {
           errors.push('Project contains a legacy visual-only component. It must be replaced with a verified component before import.');
-        } else if (object.kind === 'wire' && ![object.x1, object.y1, object.x2, object.y2].every(finite)) {
-          errors.push('Wire ' + (object.id || index + 1) + ' has invalid coordinates.');
+        } else if (object.kind === 'wire') {
+          const label = 'Wire ' + (object.id || index + 1);
+          if (![object.x1, object.y1, object.x2, object.y2].every(finite)) errors.push(label + ' has invalid coordinates.');
+          for (const field of ['cableId', 'coreId']) {
+            const value = object[field];
+            if (value !== undefined && (typeof value !== 'string' || value.length > 80)) {
+              errors.push(label + ' has an invalid ' + field + '. Expected text up to 80 characters.');
+            }
+          }
         }
       });
     }
@@ -1588,15 +1622,29 @@
         editionMapping: null, humanReviewStatus: 'pending', locations: locations });
     }
     const devicesByTag = new Map();
+    const terminalsByPosition = new Map();
     objects.filter(function (object) { return object.kind === 'component-instance'; }).forEach(function (object) {
       const tag = object.ref.trim().toUpperCase();
       if (!devicesByTag.has(tag)) devicesByTag.set(tag, []);
-      devicesByTag.get(tag).push({ sheetId: object.sheetId || reports[0].id, objectId: object.id, ref: object.ref });
+      const location = { sheetId: object.sheetId || reports[0].id, objectId: object.id, ref: object.ref };
+      devicesByTag.get(tag).push(location);
+      if (!isTerminalDefinition(component(object.componentId))) return;
+      const strip = object.properties?.terminalStrip?.trim();
+      const position = object.properties?.position?.trim();
+      if (!strip || !position) return;
+      const key = JSON.stringify([strip.toUpperCase(), position.toUpperCase()]);
+      if (!terminalsByPosition.has(key)) terminalsByPosition.set(key, { strip, position, locations: [] });
+      terminalsByPosition.get(key).locations.push(location);
     });
     devicesByTag.forEach(function (locations, tag) {
       if (locations.length < 2) return;
       add('ERC-DUPLICATE-DEVICE-TAG', 'error', 'Device tag ' + tag + ' is used by ' + locations.length + ' components.',
         'Assign a unique device tag to each instance and verify related references.', locations);
+    });
+    terminalsByPosition.forEach(function ({ strip, position, locations }) {
+      if (locations.length < 2) return;
+      add('ERC-TERMINAL-POSITION-CONFLICT', 'error', 'Terminal strip ' + strip + ' position ' + position + ' is assigned to multiple blocks.',
+        'Give each physical terminal block a distinct position within its strip.', locations);
     });
     openEndpoints.forEach(function (endpoint) {
       add('ERC-OPEN-WIRE-ENDPOINT', 'warning', 'Wire endpoint has no connection.',
@@ -1620,18 +1668,61 @@
     globalNets.forEach(function (net) {
       net.localNetIds.forEach(function (id) { localToGlobal.set(id, net.id); });
     });
+    const signalRolesByComponent = new Map();
+    for (const object of objects) {
+      if (object.kind !== 'component-instance') continue;
+      const definition = component(object.componentId);
+      if (definition.family === 'plc-cpu') {
+        signalRolesByComponent.set(object.id, new Map(definition.symbol.pins.map(pin => [pin.id, plcChannelType(pin)])));
+      } else if (definition.family === 'sensor-inductive-pnp') {
+        signalRolesByComponent.set(object.id, new Map([[definition.electricalFunctions.output.outputPin, 'digital-output']]));
+      } else if (definition.family === 'sensor-pressure-analog') {
+        const output = definition.electricalFunctions.analogOutput;
+        signalRolesByComponent.set(object.id, new Map([[output.outputPin, 'analog-output'], [output.digitalOutputPin, 'digital-output']]));
+      }
+    }
+    const signalsByNet = new Map();
+    for (const sheet of reports) {
+      for (const net of sheet.analysis.nets) {
+        const netId = localToGlobal.get(net.id);
+        for (const pin of net.pins) {
+          const role = signalRolesByComponent.get(pin.instanceId)?.get(pin.pinId);
+          if (!role) continue;
+          if (!signalsByNet.has(netId)) signalsByNet.set(netId, []);
+          signalsByNet.get(netId).push({ role, location: { sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number } });
+        }
+      }
+    }
+    for (const signals of signalsByNet.values()) {
+      for (const [outputRole, wrongInputRole] of [['analog-output', 'DI'], ['digital-output', 'AI']]) {
+        const outputs = signals.filter(signal => signal.role === outputRole);
+        const inputs = signals.filter(signal => signal.role === wrongInputRole);
+        if (!outputs.length || !inputs.length) continue;
+        add('ERC-PLC-INPUT-TYPE-MISMATCH', 'error',
+          (outputRole === 'analog-output' ? 'An analog' : 'A switching') + ' sensor output is wired to a ' + wrongInputRole + ' channel.',
+          'Check the sensor output mode and wire it to a compatible input channel.',
+          outputs.concat(inputs).map(signal => signal.location));
+      }
+    }
     const potentialsByNet = new Map();
     const netsByWireNumber = new Map();
+    const netsByCableCore = new Map();
     objects.forEach(function (object) {
       if (object.kind !== 'wire') return;
       const sheetId = object.sheetId || reports[0].id;
       if (!wiresBySheet.has(sheetId)) wiresBySheet.set(sheetId, new Set());
       wiresBySheet.get(sheetId).add(object.id);
       const netId = localToGlobal.get(endpointToNet.get(sheetId + '\u0000' + object.id));
+      const cable = (object.cableId || '').trim();
+      const core = (object.coreId || '').trim();
+      const location = { sheetId: sheetId, objectId: object.id };
+      if (Boolean(cable) !== Boolean(core)) {
+        add('ERC-INCOMPLETE-CABLE-CORE', 'warning', 'Cable or core ID is missing from this wire assignment.',
+          'Assign both identifiers or clear the incomplete assignment.', [location]);
+      }
       if (!netId) return;
       const potential = typeof object.potential === 'string' ? object.potential.trim() : '';
       const wireNumber = typeof object.wireNumber === 'string' ? object.wireNumber.trim() : '';
-      const location = { sheetId: sheetId, objectId: object.id };
       if (potential) {
         if (!potentialsByNet.has(netId)) potentialsByNet.set(netId, []);
         potentialsByNet.get(netId).push(Object.assign({ potential: potential }, location));
@@ -1640,6 +1731,11 @@
         const key = wireNumber.toUpperCase();
         if (!netsByWireNumber.has(key)) netsByWireNumber.set(key, []);
         netsByWireNumber.get(key).push({ netId: netId, location: location });
+      }
+      if (cable && core) {
+        const key = JSON.stringify([cable.toUpperCase(), core.toUpperCase()]);
+        if (!netsByCableCore.has(key)) netsByCableCore.set(key, []);
+        netsByCableCore.get(key).push({ netId: netId, location: location, cable: cable, core: core });
       }
     });
     potentialsByNet.forEach(function (locations) {
@@ -1654,6 +1750,14 @@
       add('ERC-WIRE-NUMBER-DISCONNECTED', 'warning', 'Wire number ' + number + ' is assigned to disconnected nets.',
         'Check whether the number should identify one continuous net and correct the labels or connectivity as needed.',
         assignments.map(function (assignment) { return assignment.location; }));
+    });
+    netsByCableCore.forEach(function (assignments) {
+      const nets = new Set(assignments.map(assignment => assignment.netId));
+      if (nets.size < 2) return;
+      const { cable, core } = assignments[0];
+      add('ERC-CABLE-CORE-DISCONNECTED', 'error', 'Cable ' + cable + ' core ' + core + ' is assigned to disconnected nets.',
+        'Use a different core identifier or correct the intended conductor continuity.',
+        assignments.map(assignment => assignment.location));
     });
     diagnostics.forEach(function (issue) {
       if (issue?.type !== 'unresolved-cross-sheet-reference') return;
@@ -1956,6 +2060,8 @@
       return {
         wireId: wire.id,
         ...(project ? { sheetId: id } : {}),
+        ...(typeof wire.cableId === 'string' && wire.cableId ? { cableId: wire.cableId } : {}),
+        ...(typeof wire.coreId === 'string' && wire.coreId ? { coreId: wire.coreId } : {}),
         netId: net ? net.id : '',
         startX: wire.x1,
         startY: wire.y1,
@@ -1982,12 +2088,22 @@
       ['Connected pin references on net', 'netPinRefs']
     ];
     if (!Array.isArray(input) && input && typeof input === 'object') columns.unshift(['Sheet ID', 'sheetId']);
+    if (report.rows.some(row => row.cableId || row.coreId)) columns.push(['Cable ID', 'cableId'], ['Core ID', 'coreId']);
     return connectionReportCsv(columns, report.rows);
   }
 
-  function terminalList(project) {
-    const analysis = analyzeProject(project);
-    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+  function cableScheduleCsv(project) {
+    const report = wireList(project);
+    if (!report.valid) throw new Error('Cable schedule export blocked: ' + report.errors.join(' '));
+    const rows = report.rows.filter(row => row.cableId).sort((a, b) => a.cableId.localeCompare(b.cableId)
+      || (a.coreId || '').localeCompare(b.coreId || '') || a.wireId.localeCompare(b.wireId));
+    return connectionReportCsv([
+      ['Cable ID', 'cableId'], ['Core ID', 'coreId'], ['Sheet ID', 'sheetId'],
+      ['Wire ID', 'wireId'], ['Net ID', 'netId'], ['Connected pin references on net', 'netPinRefs']
+    ], rows);
+  }
+
+  function projectPinIndex(analysis) {
     const pinKey = (instanceId, pinId) => JSON.stringify([instanceId, pinId]);
     const netByPin = new Map();
     const pinsByLocalNet = new Map(analysis.sheets.flatMap(sheet => sheet.analysis.nets.map(net => [
@@ -1995,14 +2111,21 @@
     ])));
     for (const net of analysis.globalNets) {
       const pins = net.localNetIds.flatMap(id => pinsByLocalNet.get(id));
-      const terminalNet = { id: net.id, pins: pins };
-      for (const pin of pins) netByPin.set(pinKey(pin.instanceId, pin.pinId), terminalNet);
+      const indexedNet = { id: net.id, pins: pins };
+      for (const pin of pins) netByPin.set(pinKey(pin.instanceId, pin.pinId), indexedNet);
     }
     const sheetNumbers = new Map(analysis.sheets.map(sheet => [sheet.id, sheet.number || sheet.id]));
+    return { pinKey, netByPin, sheetNumbers };
+  }
+
+  function terminalList(project) {
+    const analysis = analyzeProject(project);
+    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+    const { pinKey, netByPin, sheetNumbers } = projectPinIndex(analysis);
     const rows = (project.objects || []).flatMap(function (object) {
       if (object?.kind !== 'component-instance') return [];
       const definition = component(object.componentId);
-      if (!['feedthrough-terminal', 'protective-earth-terminal'].includes(definition?.family)) return [];
+      if (!isTerminalDefinition(definition)) return [];
       const sheetId = object.sheetId || analysis.sheets[0].id;
       const properties = object.properties || {};
       return definition.symbol.pins.map(function (pin) {
@@ -2027,6 +2150,42 @@
     return connectionReportCsv([
       ['Sheet', 'sheet'], ['Terminal reference', 'ref'], ['Pin', 'pin'], ['Strip', 'strip'],
       ['Position', 'position'], ['Marking', 'marking'], ['Part number', 'partNumber'],
+      ['Net ID', 'netId'], ['Other pin references on net', 'connectedPins']
+    ], report.rows);
+  }
+
+  function plcIoList(project) {
+    const analysis = analyzeProject(project);
+    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+    const { pinKey, netByPin, sheetNumbers } = projectPinIndex(analysis);
+    const rows = [];
+    for (const object of project.objects) {
+      if (object?.kind !== 'component-instance') continue;
+      const definition = component(object.componentId);
+      if (definition?.family !== 'plc-cpu') continue;
+      const sheet = sheetNumbers.get(object.sheetId || analysis.sheets[0].id);
+      for (const pin of definition.symbol.pins) {
+        const type = plcChannelType(pin);
+        if (!type) continue;
+        const key = pinKey(object.id, pin.id);
+        const net = netByPin.get(key);
+        const connectedPins = (net?.pins || []).filter(other => pinKey(other.instanceId, other.pinId) !== key)
+          .map(other => sheetNumbers.get(other.sheetId) + ' ' + other.ref + ':' + other.number).sort();
+        rows.push({
+          sheet, ref: object.ref, partNumber: definition.manufacturerPartNumber, terminal: pin.localNumber,
+          channel: pin.name, type, netId: net?.id || '', connectedPins
+        });
+      }
+    }
+    return { valid: true, errors: [], rows };
+  }
+
+  function plcIoListCsv(project) {
+    const report = plcIoList(project);
+    if (!report.valid) throw new Error('PLC I/O list export blocked: ' + report.errors.join(' '));
+    return connectionReportCsv([
+      ['Sheet', 'sheet'], ['PLC reference', 'ref'], ['Part number', 'partNumber'],
+      ['Terminal', 'terminal'], ['Hardware channel', 'channel'], ['Channel type', 'type'],
       ['Net ID', 'netId'], ['Other pin references on net', 'connectedPins']
     ], report.rows);
   }
@@ -2085,8 +2244,11 @@
     billOfMaterialsCsv: billOfMaterialsCsv,
     wireList: wireList,
     wireListCsv: wireListCsv,
+    cableScheduleCsv: cableScheduleCsv,
     terminalList: terminalList,
-    terminalListCsv: terminalListCsv
+    terminalListCsv: terminalListCsv,
+    plcIoList: plcIoList,
+    plcIoListCsv: plcIoListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
 

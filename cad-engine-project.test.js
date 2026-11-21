@@ -226,7 +226,9 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       const sourceText = fs.readFileSync(path.join(root, entry.path), 'utf8');
       const source = engine.parseProject(sourceText).project;
       const before = engine.analyzeProject(source);
-      const component = source.objects.find(object => object.kind === 'component-instance');
+      const component = entry.id === 'sitop-24v-dc-distribution'
+        ? source.objects.find(object => object.id === 'b2')
+        : source.objects.find(object => object.kind === 'component-instance');
       const sheetId = component.sheetId || source.sheets[0].id;
       const copyPage = await context.newPage();
       await copyPage.goto(address);
@@ -246,8 +248,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }, color);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' renders the edited component');
+      const otherSheet = source.sheets.find(sheet => sheet.id !== sheetId);
+      if (otherSheet) await copyPage.locator('#projectTree [data-sheet="' + otherSheet.id + '"]').click();
       await copyPage.locator('[data-action="undo"]').click();
       assert.equal(await drawn.getAttribute('stroke'), originalStroke, entry.title + ' restores the original component color on undo');
+      if (otherSheet) await copyPage.locator('#projectTree [data-sheet="' + otherSheet.id + '"]').click();
       await copyPage.locator('[data-action="redo"]').click();
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the edited component color on redo');
       await copyPage.keyboard.press('Control+Shift+S');
@@ -265,6 +270,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await copyPage.locator('#openFile').setInputFiles({ name: fileName, mimeType: 'application/json', buffer: Buffer.from(savedText) });
       await copyPage.waitForFunction(name => document.querySelector('#toast').textContent.includes(name + ' opened.'), fileName);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the saved component appearance');
+      if (entry.id === 'sitop-24v-dc-distribution') {
+        await copyPage.evaluate(() => { window.print = () => {}; });
+        await copyPage.keyboard.press('Control+k');
+        await copyPage.getByRole('button', { name: /Print project set/ }).click();
+        assert.deepEqual(await copyPage.locator('[data-print-sheet]').evaluateAll(pages => pages.map(page => page.dataset.printSheet)),
+          saved.project.sheets.map(sheet => sheet.id));
+        assert.equal(await copyPage.locator('#projectPrintSet [data-title-block-row="sheet"]').count(), source.sheets.length);
+        await copyPage.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+        assert.equal(await copyPage.locator('#projectPrintSet').count(), 0);
+      }
       assert.equal(fs.readFileSync(path.join(root, entry.path), 'utf8'), sourceText, entry.title + ' leaves the catalog source unchanged');
       await copyPage.close({ runBeforeUnload: false });
     }
@@ -549,7 +564,7 @@ test('legacy drawing content fits the page while edits map back to native coordi
 
 test('every published catalog example opens as an independent sectioned native copy', () => {
   const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, 'examples/real-projects/library.json'), 'utf8'));
-  assert.equal(catalog.projects.length, 7);
+  assert.ok(catalog.projects.length >= 8);
   for (const entry of catalog.projects) {
     const file = path.join(__dirname, entry.path);
     const parsed = engine.parseProject(fs.readFileSync(file, 'utf8'));
@@ -564,6 +579,78 @@ test('every published catalog example opens as an independent sectioned native c
     assert.equal(JSON.stringify(parsed.project), sourceSnapshot);
     assert.equal(engine.parseProject(engine.serializeProject(copy)).valid, true);
   }
+});
+
+test('SITOP distribution keeps both terminal branches on separate supply and return nets', () => {
+  const file = path.join(__dirname, 'examples/real-projects/sitop-24v-dc-distribution.adigun.json');
+  const source = engine.parseProject(fs.readFileSync(file, 'utf8'));
+  assert.equal(source.valid, true, source.errors.join(' '));
+  const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
+  const reopened = engine.parseProject(engine.serializeProject(copy));
+  const report = engine.analyzeProject(reopened.project);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [17, 44, 0]);
+  const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
+  assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
+    ['X7:1', 'X7:2', 'PS1:L'],
+    ['X8:1', 'X8:2', 'PS1:N'],
+    ['X9:1', 'X9:2', 'PS1:PE'],
+    ['B1:1', 'B2:1', 'KM1:13', 'KM1:21', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'X5:1', 'X5:2', 'X13:1', 'X13:2', 'X19:1', 'X19:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+'],
+    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'A1:X12:2', 'K1:A2', 'K2:A2', 'PS1:-'],
+    ['B1:4', 'X15:1', 'X15:2', 'A1:X10:7'],
+    ['B2:2', 'X11:1', 'X11:2', 'A1:X11:2'],
+    ['B2:4', 'X12:1', 'X12:2', 'A1:X10:13'],
+    ['KM1:A1', 'K1:14'],
+    ['KM1:14', 'A1:X10:8'],
+    ['A1:X12:3', 'K1:A1'],
+    ['A1:X10:9', 'S1:14'],
+    ['A1:X10:10', 'S2:22'],
+    ['X6:1', 'X6:2', 'KM1:22', 'A1:X10:11'],
+    ['K1:12', 'X10:1', 'X10:2', 'A1:X10:12'],
+    ['A1:X12:4', 'K2:A1'],
+    ['K2:11', 'X16:1', 'X16:2'],
+    ['K2:12', 'X17:1', 'X17:2'],
+    ['K2:14', 'X18:1', 'X18:2'],
+    ['X20:1', 'X20:2', 'A1:X10:14']
+  ]));
+  const io = engine.plcIoList(reopened.project);
+  assert.equal(io.valid, true);
+  assert.equal(io.rows.length, 16);
+  assert.deepEqual(io.rows.filter(row => row.netId).map(row => row.terminal),
+    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X12:3', 'X12:4']);
+  assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
+  const cables = engine.cableScheduleCsv(reopened.project);
+  assert.equal(cables.trim().split('\r\n').length, 8);
+  assert.match(cables, /"W-B1","4","branch-a","b1-signal-send"/);
+  assert.match(cables, /"W-B2","2","branch-b","b2-signal-send"/);
+  assert.match(cables, /"W-B2","4","branch-b","b2-switch-send"/);
+  assert.ok(report.findings.every(finding => !finding.ruleId.includes('CABLE-CORE')));
+  const edited = structuredClone(reopened.project);
+  Object.assign(edited.objects.find(object => object.id === 'a-positive-send'), { cableId: 'W-B1', coreId: '1' });
+  assert.ok(engine.analyzeProject(edited).findings.every(finding => !finding.ruleId.includes('CABLE-CORE')));
+  Object.assign(edited.objects.find(object => object.id === 'a-return-receive'), { cableId: 'w-b1', coreId: '1' });
+  delete edited.objects.find(object => object.id === 'b2-signal-send').cableId;
+  const findings = engine.analyzeProject(edited).findings;
+  const conflict = findings.find(finding => finding.ruleId === 'ERC-CABLE-CORE-DISCONNECTED');
+  assert.equal(conflict.severity, 'error');
+  assert.deepEqual(conflict.locations.map(location => location.objectId).sort(),
+    ['a-positive-receive', 'a-positive-send', 'a-return-receive']);
+  assert.ok(findings.some(finding => finding.ruleId === 'ERC-INCOMPLETE-CABLE-CORE'
+    && finding.locations[0].objectId === 'b2-signal-send'));
+  const terminal = edited.objects.find(object => object.id === 'x6');
+  Object.assign(terminal.properties, { terminalStrip: ' xt1 ', position: '1' });
+  const positionConflict = engine.analyzeProject(edited).findings.find(finding => finding.ruleId === 'ERC-TERMINAL-POSITION-CONFLICT');
+  assert.deepEqual(positionConflict.locations.map(location => [location.sheetId, location.objectId]), [
+    ['distribution', 'x1'], ['auxiliary-marshalling', 'x6']
+  ]);
+  const wrongInputs = structuredClone(reopened.project);
+  const ai = wrongInputs.crossSheetConnections.find(link => link.id === 'plc-b2-ai0');
+  const di = wrongInputs.crossSheetConnections.find(link => link.id === 'plc-b2-di6');
+  [ai.endpoints[0], di.endpoints[0]] = [di.endpoints[0], ai.endpoints[0]];
+  const wrongReport = engine.analyzeProject(wrongInputs);
+  assert.equal(wrongReport.openEndpointCount, 0);
+  const mismatches = wrongReport.findings.filter(finding => finding.ruleId === 'ERC-PLC-INPUT-TYPE-MISMATCH');
+  assert.deepEqual(mismatches.map(finding => finding.locations.map(location => location.ref + ':' + location.pinNumber).join(',')).sort(),
+    ['B2:2,A1:X10:13', 'B2:4,A1:X11:2']);
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
@@ -712,7 +799,7 @@ test('source-backed examples open as isolated native projects and retain editabl
   assert.notEqual(firstCopy.sheets, secondCopy.sheets);
   assert.notEqual(firstCopy.objects, secondCopy.objects);
   assert.equal(firstCopy.objects.filter(object => object.kind === 'component-instance').length, 32);
-  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 335);
+  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 336);
   assert.ok(firstCopy.crossSheetConnections.length > 0);
 
   const q1 = firstCopy.objects.find(object => object.kind === 'component-instance' && object.ref === 'Q1');

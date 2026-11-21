@@ -58,6 +58,13 @@
       "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
       "role": "multi-sheet-reference-package",
       "extendsProjectId": "dol-motor-feeder"
+    },
+    {
+      "id": "sitop-24v-dc-distribution",
+      "title": "SITOP 24 V DC two-branch terminal distribution",
+      "topologyId": "dc-two-branch-terminal-distribution",
+      "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
+      "role": "standalone-example"
     }
   ]
 }
