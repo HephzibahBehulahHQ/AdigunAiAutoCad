@@ -100,7 +100,7 @@
         }
         let points;
         if (kind === 'line') points = [[x1, y1], [x2, y2]];
-        if (kind === 'wire') points = [[x1, y1], [x2, y1], [x2, y2]];
+        if (kind === 'wire') points = root.AdigunCADEngine.wireRoutePoints(object).map(point => [point.x, point.y]);
         if (kind === 'rect') points = [[x, y], [x2, y], [x2, y2], [x, y2], [x, y]];
         if (kind === 'freehand') points = object.points?.map(point => [point.x, point.y]);
         if (points?.length > 1 && points.every(point => point.every(Number.isFinite))) {

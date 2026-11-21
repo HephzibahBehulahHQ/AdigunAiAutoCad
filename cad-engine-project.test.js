@@ -376,6 +376,28 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const reopenedWire = wiringPage.locator('#userDrawings [data-object="' + wireId + '"]');
     await reopenedWire.waitFor();
     assert.equal(await reopenedWire.getAttribute('stroke'), '#4b367c');
+    await wiringPage.getByRole('button', { name: 'Draw wire' }).click();
+    await pin(terminalIds[1], 2).click();
+    await clickDrawingPoint(250, 165);
+    await clickDrawingPoint(380, 190);
+    await pin(terminalIds[2], 2).click();
+    await wiringPage.getByRole('button', { name: 'Select and move', exact: true }).click();
+    await pin(terminalIds[1], 1).click();
+    await wiringPage.keyboard.press('ArrowDown');
+    await pin(terminalIds[2], 2).click();
+    await wiringPage.keyboard.press('ArrowUp');
+    await wiringPage.keyboard.press('Control+Shift+S');
+    await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const manualSaved = engine.parseProject(await wiringPage.evaluate(() => window.__savedProjectWrites[0]));
+    assert.equal(manualSaved.valid, true, manualSaved.errors.join(' '));
+    const manualWire = manualSaved.project.objects.find(object => object.kind === 'wire' && object.id !== wireId);
+    assert.deepEqual(manualWire.bends, [{ x: 250, y: 165 }, { x: 380, y: 190 }]);
+    const [manualStart, manualEnd] = terminalIds.slice(1).map(id => {
+      const component = manualSaved.project.objects.find(object => object.id === id);
+      return engine.worldPins(component).find(item => item.number === '2');
+    });
+    assert.deepEqual([manualWire.x1, manualWire.y1, manualWire.x2, manualWire.y2], [manualStart.x, manualStart.y, manualEnd.x, manualEnd.y]);
+    assert.equal(engine.analyzeProject(manualSaved.project).openEndpointCount, 0);
     await wiringPage.close({ runBeforeUnload: false });
 
     const dxfPage = await context.newPage();
