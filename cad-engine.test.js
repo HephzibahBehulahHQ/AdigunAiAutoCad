@@ -11,6 +11,28 @@ const engine = globalThis.AdigunCADEngine;
 const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
+
+test('project electrical checks locate duplicate tags and pins without attached wires across sheets', () => {
+  const first = { ...engine.createInstance(componentId, 50, 50, 'X1'), id: 'first-terminal', sheetId: 'first' };
+  const second = { ...engine.createInstance(componentId, 60, 50, 'x1'), id: 'second-terminal', sheetId: 'second' };
+  const project = engine.parseProject(engine.serializeProject({
+    sheets: [{ id: 'first' }, { id: 'second' }],
+    objects: [first, second]
+  })).project;
+  const report = engine.analyzeProject(project);
+  assert.equal(report.valid, true);
+  const duplicate = report.findings.find(finding => finding.ruleId === 'ERC-DUPLICATE-DEVICE-TAG');
+  assert.equal(duplicate.severity, 'error');
+  assert.deepEqual(duplicate.locations, [
+    { sheetId: 'first', objectId: 'first-terminal', ref: 'X1' },
+    { sheetId: 'second', objectId: 'second-terminal', ref: 'x1' }
+  ]);
+  const disconnected = report.findings.filter(finding => finding.ruleId === 'ERC-PIN-WITHOUT-WIRE');
+  assert.equal(disconnected.length, 4);
+  assert.ok(disconnected.every(finding => finding.severity === 'info' && finding.locations[0].pinNumber));
+  project.objects[1].ref = 'X2';
+  assert.ok(engine.analyzeProject(project).findings.every(finding => finding.ruleId !== duplicate.ruleId));
+});
 const motorProtectionBreakerId = 'siemens-3rv2011-1ja10';
 const lowRangeMotorProtectionBreakerId = 'siemens-3rv2011-0fa10';
 const startPushButtonId = 'schneider-electric-xb5aa31';
