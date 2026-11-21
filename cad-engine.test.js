@@ -929,7 +929,27 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
   const savedCopy = engine.parseProject(engine.serializeProject(copy));
   assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
-  assert.equal(savedCopy.project.sheets.length, 33);
+  assert.equal(savedCopy.project.sheets.length, 52);
+  const originalIndexNumbers = new Set();
+  const copiedIndexNumbers = new Set();
+  for (const [workspace, numbers] of [[reopened.project, originalIndexNumbers], [savedCopy.project, copiedIndexNumbers]]) {
+    for (const object of workspace.objects) {
+      if (!object.sheetId?.startsWith('reversing-index')) continue;
+      const number = object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0];
+      if (number) numbers.add(number);
+    }
+    assert.deepEqual(numbers, new Set(workspace.sheets.map(sheet => sheet.number)));
+  }
+  for (const [sheetId, values] of [
+    ['reversing-q1-mounting', ['22.5 mm', '100 mm', '141.6 mm']],
+    ['reversing-q1-control-window', ['19.2–30 V DC']],
+    ['reversing-m1-starting-point', ['0.405 A', '1.458 A']],
+    ['reversing-m1-speed-reference', ['1,500 r/min', '8%']]
+  ]) {
+    const content = savedCopy.project.objects.filter(object => object.sheetId === sheetId).map(object => object.text).join(' ');
+    for (const value of values) assert.ok(content.includes(value), value);
+    assert.match(content, /Source: (Siemens|SEW-EURODRIVE).*https:\/\//);
+  }
   const documentationIds = ['reversing-power-nets', 'reversing-control-nets'];
   const documentedNets = savedCopy.project.objects
     .filter(object => documentationIds.includes(object.sheetId) && object.text?.includes('  |  '))

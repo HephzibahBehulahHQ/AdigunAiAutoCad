@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Siemens SIRIUS 3RM12 with SEW DRN63MS4 motor — wiring example",
-  "revision": "1.4",
-  "status": "33 authored sheets: reversing-starter wiring, manufacturer records, editable XT1 layout and application review sheets.",
+  "revision": "1.5",
+  "status": "52 authored sheets: reversing-starter wiring, XT1 layout, schedules and source-backed component and operating data.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -217,6 +217,120 @@
       "number": "A1/005",
       "name": "Drawing index: layout and field wiring",
       "projectSectionId": "A1"
+    },
+    {
+      "id": "reversing-index-operating",
+      "number": "A1/006",
+      "name": "Drawing index: Q1 and M1 operating data",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "reversing-q1-main-ac",
+      "number": "A4/011",
+      "name": "Q1 AC operating basis",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-current-category",
+      "number": "A4/012",
+      "name": "Q1 utilization-category current",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-inputs",
+      "number": "A4/013",
+      "name": "Q1 digital input electrical data",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-fault-contact",
+      "number": "A4/014",
+      "name": "Q1 fault contact load categories",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-control-window",
+      "number": "A4/015",
+      "name": "Q1 control supply operating range",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-control-demand",
+      "number": "A4/016",
+      "name": "Q1 standby and operating current",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-control-loss",
+      "number": "A4/017",
+      "name": "Q1 control and auxiliary losses",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-response-delays",
+      "number": "A4/018",
+      "name": "Q1 component response delays",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-ambient-temperature",
+      "number": "A4/019",
+      "name": "Q1 ambient temperature limits",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-atmosphere",
+      "number": "A4/020",
+      "name": "Q1 atmosphere and altitude limits",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-motor-cable",
+      "number": "A4/021",
+      "name": "Q1 unshielded motor cable reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-mounting",
+      "number": "A3/005",
+      "name": "Q1 size and mounting reference",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-q1-spacing",
+      "number": "A3/006",
+      "name": "Q1 catalog separation and access",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-m1-starting-point",
+      "number": "A4/022",
+      "name": "M1 catalog-derived initial current",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-m1-rated-output-check",
+      "number": "A4/023",
+      "name": "M1 rated torque and speed check",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-m1-torque-reference",
+      "number": "A4/024",
+      "name": "M1 catalog torque ratios and references",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-m1-speed-reference",
+      "number": "A4/025",
+      "name": "M1 rated slip reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-m1-efficiency-reference",
+      "number": "A4/026",
+      "name": "M1 load point efficiency data",
+      "projectSectionId": "A4"
     }
   ],
   "sheetLabels": {},
@@ -4752,6 +4866,1656 @@
       "y": 1043,
       "text": "A1/005 | Continued index: rail layout and wiring.",
       "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-link",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 869,
+      "text": "A1/006 | Continued index: Q1 and M1 operating data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-index-operating-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "DRAWING INDEX: Q1 AND M1 OPERATING DATA",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "A1/005 | Previous index page.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "A1/006 | Q1 and M1 operating data.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "A4/011 | Q1 AC operating basis.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A4/012 | Q1 utilization-category current.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "A4/013 | Q1 digital input electrical data.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "A4/014 | Q1 fault contact load categories.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "A4/015 | Q1 control supply operating range.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "A4/016 | Q1 standby and operating current.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "A4/017 | Q1 control and auxiliary losses.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "A4/018 | Q1 component response delays.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "A4/019 | Q1 ambient temperature limits.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-14",
+      "x": 120,
+      "y": 869,
+      "text": "A4/020 | Q1 atmosphere and altitude limits.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-15",
+      "x": 120,
+      "y": 927,
+      "text": "A4/021 | Q1 unshielded motor cable reference.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-16",
+      "x": 120,
+      "y": 985,
+      "text": "A3/005 | Q1 size and mounting reference.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-17",
+      "x": 120,
+      "y": 1043,
+      "text": "A3/006 | Q1 catalog separation and access.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-18",
+      "x": 120,
+      "y": 1101,
+      "text": "A4/022 | M1 catalog-derived initial current.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-19",
+      "x": 120,
+      "y": 1159,
+      "text": "A4/023 | M1 rated torque and speed check.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-20",
+      "x": 120,
+      "y": 1217,
+      "text": "A4/024 | M1 catalog torque ratios and references.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-21",
+      "x": 120,
+      "y": 1275,
+      "text": "A4/025 | M1 rated slip reference.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-operating-line-22",
+      "x": 120,
+      "y": 1333,
+      "text": "A4/026 | M1 load point efficiency data.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index-operating"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-main-ac-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 AC OPERATING BASIS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Siemens lists a rated operating-voltage range of 48–500 V and rated frequencies of 50 Hz and 60 Hz.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "The specified symmetrical tolerances are 10% for voltage and 10% for frequency.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "The reference schematic records a 400 V / 50 Hz motor basis. The actual feeder supply remains to be confirmed.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 2.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-main-ac-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-main-ac"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-current-category-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 UTILIZATION-CATEGORY CURRENT",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "AC-3 | 0.5 A at 400 V.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "AC-53a | 0.5 A at 400 V and 40 °C ambient.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Confirm the actual switching duty and ambient conditions before choosing an applicable catalog category.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 2.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-current-category-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-current-category"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-inputs-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 DIGITAL INPUT ELECTRICAL DATA",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Digital input rated voltage | 24 V DC.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Input current | 11 mA at signal 1; 1 mA at signal 0.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "A2/009 identifies IN1, IN2 and IN3. Check the external controller output and wiring before applying these values.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 2.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-inputs-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-inputs"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-fault-contact-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 FAULT CONTACT LOAD CATEGORIES",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "The Siemens data sheet lists one changeover auxiliary contact.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "AC-15 | Maximum 3 A at 230 V.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "DC-13 | Maximum 1 A at 24 V.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A2/010 identifies 95/96/98. The external annunciation load and protection remain open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 2.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-fault-contact-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-fault-contact"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-control-window-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 CONTROL SUPPLY OPERATING RANGE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Nominal control voltage | 24 V DC.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Operating range | 19.2–30 V DC, corresponding to −20% and +25% of nominal.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "A2/008 identifies X7/A1 and X11/A2. Check voltage at Q1 across the actual operating conditions.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 2.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-window-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-window"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-control-demand-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 STANDBY AND OPERATING CURRENT",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Steady control current | 25 mA standby; 70 mA in operation.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Use the source’s separate inrush data when reviewing transient supply behavior.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "These are component inputs for a supply budget. The project does not include other field loads.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 2.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-demand-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-demand"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-control-loss-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 CONTROL AND AUXILIARY LOSSES",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "The catalog lists bypass-circuit loss in the auxiliary and control circuit separately for two states.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "OFF | 0.6 W.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "ON | 1.68 W.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A panel thermal assessment also needs main-path losses, duty, neighboring devices and enclosure conditions.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-control-loss-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-control-loss"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-response-delays-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 COMPONENT RESPONSE DELAYS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "ON delay | 60–90 ms.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "OFF delay | 60–90 ms.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Treat these as catalog device delays. Motor stopping time, reverse transition and external circuit timing remain open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-response-delays-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-response-delays"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-ambient-temperature-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 AMBIENT TEMPERATURE LIMITS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Operation | −25 to +60 °C.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Storage and transport | −40 to +70 °C.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "The relevant operating temperature is at Q1 in the installed panel. Use the specified orientation and derating conditions.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-ambient-temperature-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-ambient-temperature"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-atmosphere-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 ATMOSPHERE AND ALTITUDE LIMITS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Maximum installation altitude | 4,000 m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Operating relative humidity | 10–95%.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Listed air pressure range | 900–1,060 hPa.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Apply the product’s environmental restrictions together and confirm any derating for the actual site.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-atmosphere-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-atmosphere"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-motor-cable-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 UNSHIELDED MOTOR CABLE REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Siemens lists a maximum unshielded motor cable length of 100 m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "A2/004 reports schematic segment geometry. The routed installation length and cable type remain open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Check the installed route, voltage drop, protective conductors and applicable cable requirements.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-motor-cable-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-motor-cable"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-mounting-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 SIZE AND MOUNTING REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Published body dimensions | 22.5 mm wide × 100 mm high × 141.6 mm deep.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Mounting methods | Screw fixing or snap-on mounting on a 35 mm rail.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Catalog mounting positions include vertical, horizontal and standing, subject to derating.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Use A3/006 when checking the mounting space and separation requirements.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-mounting-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-mounting"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-spacing-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 CATALOG SEPARATION AND ACCESS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Side-by-side case | 50 mm above and below, 0 mm at the side.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Grounded parts case | 50 mm above and below, 3.5 mm at the side.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Confirm the mounting case independently of wire bend space, service access and thermal constraints.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A3/005 records the body envelope. The cabinet envelope remains open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: Siemens data sheet 3RM1201-1AA04, 16 December 2025, page 3.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-spacing-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://www.mouser.com/datasheet/3/5917/4/3RM12011AA04_datasheet_en.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-q1-spacing"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-m1-starting-point-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 CATALOG-DERIVED INITIAL CURRENT",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "DRN63MS4 | 400 V, 50 Hz, four-pole catalog row.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Catalog rated current 0.405 A × catalog initial-to-rated current ratio 3.6 = 1.458 A.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "This is a reference calculation from the specified catalog row. Supply impedance and reversal current remain open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-starting-point-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-starting-point"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-m1-rated-output-check-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 RATED TORQUE AND SPEED CHECK",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Catalog speed | 1,380 r/min. Catalog rated torque | 0.83 N·m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Angular speed | 2π × 1,380 ÷ 60 = 144.51 rad/s.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Shaft output from these rounded inputs | 0.83 × 144.51 ≈ 119.95 W, consistent with nominal 0.12 kW.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-rated-output-check-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-rated-output-check"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-m1-torque-reference-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 CATALOG TORQUE RATIOS AND REFERENCES",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Rated torque basis | 0.83 N·m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Starting ratio 2.7 | 0.83 × 2.7 ≈ 2.24 N·m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Pull-up ratio 2.6 | 0.83 × 2.6 ≈ 2.16 N·m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Breakdown ratio 2.7 | 0.83 × 2.7 ≈ 2.24 N·m.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Review the driven load and speed-torque curve before drawing conclusions about acceleration.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-torque-reference-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-torque-reference"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-m1-speed-reference-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 RATED SLIP REFERENCE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Synchronous speed | 120 × 50 Hz ÷ 4 poles = 1,500 r/min.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Rated catalog shaft speed | 1,380 r/min.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Rated-point slip | (1,500 − 1,380) ÷ 1,500 = 8%.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "The actual slip varies with operating point. The reversing example models static wiring.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-speed-reference-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-speed-reference"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-m1-efficiency-reference-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "M1 LOAD POINT EFFICIENCY DATA",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Catalog load fractions | 50%, 75%, 100%.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Published efficiencies | 58.3%, 63.9%, 64.8%, respectively.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Basis | DRN63MS4 at 400 V, 50 Hz and four poles.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Actual operating profile and losses remain to be established.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Source: SEW-EURODRIVE catalog 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-m1-efficiency-reference-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-m1-efficiency-reference"
     }
   ],
   "description": "One-sheet preliminary wiring model pairing a Siemens SIRIUS 3RM1201-1AA04 reversing starter with a source-backed SEW-EURODRIVE DRN63MS4 0.12 kW three-phase motor. Manufacturer pin identities and a 400 V star connection are represented. Starter, motor, protection, load and rotation behavior are not simulated; this example is not for construction."
