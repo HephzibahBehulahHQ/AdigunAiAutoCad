@@ -210,6 +210,10 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
+  assert.deepEqual(engine.catalog('Siemens 6EP13325BA00').map(item => item.id),
+    ['siemens-sitop-psu100c-6ep1332-5ba00']);
+  assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
+  assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
   assert.equal(items.length, 21);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
@@ -235,6 +239,25 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X']
   ]);
 });
+test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
+  for (const item of engine.catalog()) {
+    const part = engine.component(item.id);
+    const instance = engine.createInstance(item.id, 150, 220, item.tag + '1');
+    engine.moveInstance(instance, 151.125, 222.375);
+    engine.rotateInstance(instance, 90);
+    const pins = engine.worldPins(instance);
+    assert.ok(pins.length > 0, item.id);
+    assert.equal(new Set(pins.map(pin => JSON.stringify([pin.x, pin.y]))).size, pins.length, item.id);
+    assert.deepEqual(pins.map(pin => pin.id), part.symbol.pins.map(pin => pin.id));
+    const reopened = engine.parseProject(engine.serializeProject({
+      project: item.name, sheets: [{ id: 'catalog-test', name: 'Catalog test' }], objects: [instance]
+    }));
+    assert.equal(reopened.valid, true, reopened.errors.join(' '));
+    assert.deepEqual(reopened.project.objects, [instance]);
+    assert.deepEqual(engine.worldPins(reopened.project.objects[0]), pins);
+  }
+});
+
 test('Siemens CPU 1212C and ifm IFS204 expose manufacturer terminal identities and source-backed behavior', () => {
   const cpu = engine.component('siemens-6es7212-1ae40-0xb0');
   const sensor = engine.component('ifm-ifs204');
@@ -3832,6 +3855,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(report.status, 'passed', JSON.stringify(report.projects.filter(project => project.status !== 'passed')));
   assert.ok(report.summary.projectArtifactCount >= 6);
   assert.equal(report.summary.validatedArtifactCount, report.summary.projectArtifactCount);
+  assert.ok(report.projects.every(project => project.checks.nativeRoundTrip && /^[a-f0-9]{64}$/.test(project.topologySha256)));
   assert.ok(report.projects.every(project => project.metrics.authoredSheetCount === project.metrics.sheetCount
     && project.metrics.emptyContentSheetIds.length === 0));
   assert.ok(report.summary.distinctTopologyCount >= 5);

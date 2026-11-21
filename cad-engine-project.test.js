@@ -239,12 +239,17 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
         .evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).display !== 'none').length);
       assert.equal(inheritedGraphics, 0, entry.title + ' shows only its native drawing content');
       await drawn.dispatchEvent('click', { bubbles: true });
+      const originalStroke = await drawn.getAttribute('stroke');
       const color = component.stroke === '#4b367c' ? '#21645e' : '#4b367c';
       await copyPage.locator('[data-style-object="' + component.id + '"][data-drawing-style="stroke"]').evaluate((input, value) => {
         input.value = value;
         input.dispatchEvent(new Event('change', { bubbles: true }));
       }, color);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' renders the edited component');
+      await copyPage.locator('[data-action="undo"]').click();
+      assert.equal(await drawn.getAttribute('stroke'), originalStroke, entry.title + ' restores the original component color on undo');
+      await copyPage.locator('[data-action="redo"]').click();
+      assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the edited component color on redo');
       await copyPage.keyboard.press('Control+Shift+S');
       await copyPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
       const savedText = await copyPage.evaluate(() => window.__savedProjectWrites[0]);

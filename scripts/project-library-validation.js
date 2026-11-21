@@ -2,6 +2,8 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { createHash } = require('node:crypto');
+const { isDeepStrictEqual } = require('node:util');
 
 const repositoryRoot = path.resolve(__dirname, '..');
 const manifestPath = path.join(repositoryRoot, 'examples', 'real-projects', 'library.json');
@@ -61,19 +63,54 @@ function summarizeSheetContent(project) {
   };
 }
 
+function topologyHash(analysis) {
+  return createHash('sha256').update(JSON.stringify({
+    nets: analysis.globalNets,
+    crossSheetConnections: analysis.crossSheetConnections,
+    openEndpoints: analysis.openEndpoints
+  })).digest('hex');
+}
+
+function checkNativeRoundTrip(project, analysis) {
+  if (!analysis.valid) return { valid: false, hash: null, errors: [] };
+  const hash = topologyHash(analysis);
+  try {
+    const reopened = engine.parseProject(engine.serializeProject(project));
+    if (!reopened.valid) return { valid: false, hash, errors: reopened.errors };
+    const reopenedAnalysis = engine.analyzeProject(reopened.project);
+    if (!reopenedAnalysis.valid) return { valid: false, hash, errors: reopenedAnalysis.errors };
+    const expected = {
+      ...project,
+      format: engine.projectFormat,
+      version: engine.projectVersion,
+      componentSchemaVersion: engine.componentSchemaVersion,
+      netSchemaVersion: engine.netSchemaVersion
+    };
+    const errors = [];
+    if (!isDeepStrictEqual(expected, reopened.project)) errors.push('Native save and reopen changed project data.');
+    if (hash !== topologyHash(reopenedAnalysis)) errors.push('Native save and reopen changed electrical topology.');
+    return { valid: errors.length === 0, hash, errors };
+  } catch (error) {
+    return { valid: false, hash, errors: ['Native save and reopen failed: ' + error.message] };
+  }
+}
+
 function buildReport() {
   const manifest = readManifest();
   const projects = manifest.projects.map(entry => {
     const projectFile = path.resolve(repositoryRoot, entry.path);
-    const project = JSON.parse(fs.readFileSync(projectFile, 'utf8'));
-    const parsed = engine.parseProject(JSON.stringify(project));
+    const source = fs.readFileSync(projectFile, 'utf8');
+    const project = JSON.parse(source);
+    const parsed = engine.parseProject(source);
     const analysis = engine.analyzeProject(project);
+    const roundTrip = checkNativeRoundTrip(project, analysis);
     const bom = engine.billOfMaterials(project.objects);
     const wireList = engine.wireList(project);
     const terminals = engine.terminalList(project);
     const sheetContent = summarizeSheetContent(project);
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
+      nativeRoundTrip: roundTrip.valid,
       allSheetsHaveEditableContent: sheetContent.emptyContentSheetIds.length === 0,
       sourceBackedBom: bom.valid,
       connectedWireList: wireList.valid && analysis.openEndpointCount === 0,
@@ -83,6 +120,7 @@ function buildReport() {
     const errors = [
       ...parsed.errors,
       ...analysis.errors,
+      ...roundTrip.errors,
       ...bom.errors,
       ...wireList.errors,
       ...terminals.errors
@@ -101,6 +139,7 @@ function buildReport() {
       revision: project.revision || null,
       status: Object.values(checks).every(Boolean) ? 'passed' : 'failed',
       checks,
+      topologySha256: roundTrip.hash,
       metrics: {
         sheetCount: analysis.sheetCount,
         authoredSheetCount: sheetContent.authoredSheetCount,
