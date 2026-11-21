@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.6",
+  "revision": "1.7",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -16,7 +16,7 @@
     {
       "id": "supply",
       "number": "A2/001",
-      "name": "DC supply output",
+      "name": "PS1 AC input and DC output",
       "projectSectionId": "A2"
     },
     {
@@ -71,6 +71,12 @@
       "id": "auxiliary-marshalling",
       "number": "A2/010",
       "name": "KM1 NC feedback terminal marshalling",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "ac-input-boundary",
+      "number": "A2/011",
+      "name": "PS1 AC input and protective-earth terminals",
       "projectSectionId": "A2"
     }
   ],
@@ -306,7 +312,7 @@
       "x": 110,
       "y": 108,
       "stroke": "#13263b",
-      "text": "PS1 · SITOP PSU100C DC OUTPUT"
+      "text": "PS1 · SITOP PSU100C INPUT AND OUTPUT"
     },
     {
       "id": "supply-scope",
@@ -315,7 +321,7 @@
       "x": 110,
       "y": 560,
       "stroke": "#13263b",
-      "text": "Scope: static DC output and terminal distribution. Input source, PE wiring and protection are outside this example."
+      "text": "L, N and PE route to XT3 on A2/011. Upstream source and protection remain outside the example."
     },
     {
       "id": "supply-identity",
@@ -1573,6 +1579,195 @@
       "y": 545,
       "text": "I0.1 is the separate NO feedback channel. The two inputs can be compared in PLC logic outside this example.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X7",
+      "x": 405,
+      "y": 230,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "1",
+        "marking": "L",
+        "comment": ""
+      },
+      "sheetId": "ac-input-boundary"
+    },
+    {
+      "id": "ac-l-send",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 440,
+      "y": 230,
+      "x1": 440,
+      "y1": 230,
+      "x2": 665,
+      "y2": 230,
+      "stroke": "#553b32",
+      "strokeWidth": 1.5,
+      "potential": "L"
+    },
+    {
+      "id": "ac-l-receive",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 155,
+      "y": 260,
+      "x1": 155,
+      "y1": 260,
+      "x2": 270,
+      "y2": 260,
+      "stroke": "#553b32",
+      "strokeWidth": 1.5,
+      "potential": "L"
+    },
+    {
+      "id": "ac-l-boundary-label",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 190,
+      "y": 234,
+      "text": "Incoming L · X7:1",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3212144",
+      "ref": "X8",
+      "x": 405,
+      "y": 335,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "2",
+        "marking": "N",
+        "comment": ""
+      },
+      "sheetId": "ac-input-boundary"
+    },
+    {
+      "id": "ac-n-send",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 440,
+      "y": 335,
+      "x1": 440,
+      "y1": 335,
+      "x2": 665,
+      "y2": 335,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "N"
+    },
+    {
+      "id": "ac-n-receive",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 155,
+      "y": 290,
+      "x1": 155,
+      "y1": 290,
+      "x2": 270,
+      "y2": 290,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "N"
+    },
+    {
+      "id": "ac-n-boundary-label",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 190,
+      "y": 339,
+      "text": "Incoming N · X8:1",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3212147",
+      "ref": "X9",
+      "x": 405,
+      "y": 440,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "3",
+        "marking": "PE",
+        "comment": ""
+      },
+      "sheetId": "ac-input-boundary"
+    },
+    {
+      "id": "ac-pe-send",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 440,
+      "y": 440,
+      "x1": 440,
+      "y1": 440,
+      "x2": 665,
+      "y2": 440,
+      "stroke": "#247548",
+      "strokeWidth": 1.5,
+      "potential": "PE"
+    },
+    {
+      "id": "ac-pe-receive",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 155,
+      "y": 320,
+      "x1": 155,
+      "y1": 320,
+      "x2": 270,
+      "y2": 320,
+      "stroke": "#247548",
+      "strokeWidth": 1.5,
+      "potential": "PE"
+    },
+    {
+      "id": "ac-pe-boundary-label",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 190,
+      "y": 444,
+      "text": "Incoming PE · X9:1",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ac-input-title",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 110,
+      "y": 108,
+      "text": "XT3 · PS1 AC INPUT BOUNDARY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ac-input-scope",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 110,
+      "y": 535,
+      "text": "XT3 presents separate line, neutral and protective-earth terminals for the SITOP input.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ac-input-review",
+      "kind": "text",
+      "sheetId": "ac-input-boundary",
+      "x": 110,
+      "y": 580,
+      "text": "Upstream source, isolation, protective devices, conductor sizing and cabinet bonding are outside scope.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -2399,6 +2594,102 @@
             "direction": "left",
             "targetSheetId": "auxiliary-marshalling",
             "targetRef": "X6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ac-l",
+      "name": "L",
+      "endpoints": [
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "ac-l-send",
+          "point": {
+            "x": 665,
+            "y": 230
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "supply",
+          "wireId": "ac-l-receive",
+          "point": {
+            "x": 155,
+            "y": 260
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ac-n",
+      "name": "N",
+      "endpoints": [
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "ac-n-send",
+          "point": {
+            "x": 665,
+            "y": 335
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "supply",
+          "wireId": "ac-n-receive",
+          "point": {
+            "x": 155,
+            "y": 290
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ac-pe",
+      "name": "PE",
+      "endpoints": [
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "ac-pe-send",
+          "point": {
+            "x": 665,
+            "y": 440
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "supply",
+          "wireId": "ac-pe-receive",
+          "point": {
+            "x": 155,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X9"
           }
         }
       ]

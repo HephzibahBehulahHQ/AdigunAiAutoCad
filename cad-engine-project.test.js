@@ -575,9 +575,12 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [10, 26, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [11, 29, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
+    ['X7:1', 'X7:2', 'PS1:L'],
+    ['X8:1', 'X8:2', 'PS1:N'],
+    ['X9:1', 'X9:2', 'PS1:PE'],
     ['B1:1', 'B2:1', 'KM1:13', 'KM1:21', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'X5:1', 'X5:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+'],
     ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'K1:A2', 'PS1:-'],
     ['B1:4', 'A1:X10:7'],
