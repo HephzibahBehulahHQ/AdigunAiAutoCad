@@ -10,13 +10,14 @@ const source = JSON.parse(fs.readFileSync(file, 'utf8'));
 const annunciator = { id: 'annunciator-interface', number: 'A2/020', name: 'XT10 isolated annunciator request', projectSectionId: 'A2' };
 const testAccess = { id: 'distribution-test-access', number: 'A2/021', name: 'XT11 downstream DC voltage test access', projectSectionId: 'A2' };
 const fieldIndicator = { id: 'field-indicator', number: 'A2/022', name: 'Externally powered H1 annunciator', projectSectionId: 'A2' };
+const branchIndicator = { id: 'branch-a-indicator', number: 'A2/023', name: 'Branch A voltage indication', projectSectionId: 'A2' };
 const fieldSupplyPotential = 'External annunciator +24 V';
 const fieldRequestPotential = 'Annunciator switched +24 V';
-const authoredSheets = [annunciator, testAccess, fieldIndicator];
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '2.9';
+project.revision = '3.0';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -154,6 +155,30 @@ author(fieldIndicator, ({ device, pin, wire, link, notes }) => {
     ['feed-note', 230, 'XT12:1 feeds the K3 dry common on A2/020.'],
     ['command-note', 360, 'K3 normally open contact feeds H1. XT12:2 is the external return.'],
     ['scope', 510, 'The external supply, protection and cable are unassigned. No connection to the SITOP return is modeled.']
+  ]);
+});
+
+author(branchIndicator, ({ device, pin, wire, link, notes }) => {
+  const lamp = device('H2', 'schneider-electric-xb5avb3', 550, 320, { marking: 'Branch A voltage present' });
+  for (const [name, sourceId, sourceRef, terminal, potential, tapEndY, boundaryX] of [
+    ['feed', 'a-positive-send', 'X1', 'X1', '+24 V DC', 187, 230],
+    ['return', 'a-return-send', 'X3', 'X2', '0 V DC', 645, 880]
+  ]) {
+    const trunk = project.objects.find(object => object.id === sourceId);
+    const tapX = 735;
+    if (!trunk || trunk.y1 !== trunk.y2 || tapX <= trunk.x1 || tapX >= trunk.x2 || trunk.potential !== potential) {
+      throw new Error('Branch A indicator tap no longer meets ' + sourceId);
+    }
+    const end = pin(lamp, terminal);
+    const send = wire(name + '-send', trunk.sheetId, { x: tapX, y: trunk.y1 }, { x: tapX, y: tapEndY }, potential);
+    const receive = wire(name + '-receive', branchIndicator.id, { x: boundaryX, y: end.y }, end, potential);
+    link(name, 'Branch A H2 ' + potential, send, receive, sourceRef, lamp.ref);
+  }
+  notes([
+    ['title', 108, 'H2 · BRANCH A VOLTAGE INDICATION'],
+    ['feed-note', 225, 'H2 connects downstream of X1 and X3, in parallel with the Branch A load.'],
+    ['scope', 430, 'H2 indicates voltage at its terminals. The schematic does not establish voltage at the field sensor.'],
+    ['review', 475, 'Verify actual supply loading, protection and conductor sizing before installation.']
   ]);
 });
 
