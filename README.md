@@ -7,6 +7,8 @@ The drafting viewport fills the workspace. Model coordinates use positive X to t
 
 In **Drafting settings**, change the display grid and snap intervals independently. Select inches or millimetres for the ruler and cursor readout. Drag from the top ruler for a horizontal guide or from the left ruler for a vertical guide. The Guides controls let you enter exact positions, lock, hide, or delete guides. Guides save with the sheet and stay out of drawing exports.
 
+Use **Export full drawing as SVG** for all visible geometry, including off-frame objects. **Export print frame as SVG** and **Print drawing** use the configured paper size and warn before clipping off-frame geometry.
+
 Open **Symbol Library**, pick a component, then click its position on the sheet. The component stays selected and its editable values appear in **Properties**. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
 Use **Wire** to click two pin anchors for an automatic orthogonal route. To draw your own route, click the first pin, click the sheet wherever you want to add bends, then click the destination pin. Press **Enter** to finish a manual route with an open end, or **Esc** to cancel. In **Select** mode, select a wire to change its color or use **Reconnect start** / **Reconnect end**. Moving either component keeps its wire endpoint attached and leaves the manual bends in place.

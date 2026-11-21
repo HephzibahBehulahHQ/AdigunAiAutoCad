@@ -478,6 +478,28 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.deepEqual(freeProject.projectModel.sheets[0].guides, [{ axis: 'y', position: 92.5, locked: true }]);
     assert.equal(freeProject.projectModel.sheets[0].displayUnits, 'in');
     assert.equal(freeProject.projectModel.sheets[0].snapIntervalMm, 0.5);
+    await freeDraftingPage.locator('#openCommands').click();
+    const svgDownload = freeDraftingPage.waitForEvent('download');
+    await freeDraftingPage.getByRole('button', { name: 'Export full drawing as SVG' }).click();
+    const fullSvg = fs.readFileSync(await (await svgDownload).path(), 'utf8');
+    const fullBounds = /viewBox="([^\"]+)"/.exec(fullSvg)[1].split(' ').map(Number);
+    assert.ok(fullBounds[0] < -125 && fullBounds[1] < -35);
+    for (const object of freeProject.objects) assert.ok(fullSvg.includes(object.id));
+    assert.doesNotMatch(fullSvg, /draftingRulers|viewportGrid|resize-controls|customSheetFrame/);
+    await freeDraftingPage.evaluate(() => {
+      window.print = () => {};
+      window.confirm = message => { window.__frameWarning = message; return true; };
+    });
+    await freeDraftingPage.locator('#openCommands').click();
+    await freeDraftingPage.locator('#commands').getByRole('button', { name: 'Print drawing' }).click();
+    assert.match(await freeDraftingPage.evaluate(() => window.__frameWarning), /outside the print frame/);
+    const pdf = await freeDraftingPage.pdf({ preferCSSPageSize: true,
+      ...(process.env.CAD_SCREENSHOT_DIR ? { path: path.join(process.env.CAD_SCREENSHOT_DIR, 'a3-print-frame.pdf') } : {}) });
+    const media = /\/MediaBox\s*\[0 0 ([\d.]+) ([\d.]+)\]/.exec(pdf.toString('latin1'));
+    assert.ok(media, 'Chromium PDF contains the physical page dimensions');
+    assert.ok(Math.abs(Number(media[1]) * 25.4 / 72 - 420) < 1);
+    assert.ok(Math.abs(Number(media[2]) * 25.4 / 72 - 297) < 1);
+    await freeDraftingPage.evaluate(() => window.dispatchEvent(new Event('afterprint')));
     await freeDraftingPage.locator('[data-action="fit"]').click();
     assert.ok(await freeDraftingPage.locator('#draftingRulers text').count() > 3);
     if (process.env.CAD_SCREENSHOT_DIR) await freeDraftingPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'free-drafting-canvas.png') });
@@ -1224,7 +1246,7 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(inline, /function renderProjectTitleBlock\(\)/);
   assert.match(inline, /setProjectSheetPaperFormat\(sheet,sheet\.paperSize/);
   assert.match(inline, /function printActiveSheet\(\)/);
-  assert.match(inline, /exportSheet\.paperWidthMm/);
+  assert.match(inline, /function exportSvg\(mode='frame'\)/);
   assert.match(inline, /function closeSheetTab\(id\)/);
   assert.match(inline, /unresolved connection diagnostic/);
   assert.match(inline, /async function renderEditableExampleProjects\(query\)/);
