@@ -1328,8 +1328,15 @@
           validation.errors.forEach(function (error) { errors.push('Object ' + (object.ref || index + 1) + ': ' + error); });
         } else if (object.kind === 'catalog-symbol' || ['terminal', 'plc', 'motor', 'ground'].includes(object.kind)) {
           errors.push('Project contains a legacy visual-only component. It must be replaced with a verified component before import.');
-        } else if (object.kind === 'wire' && ![object.x1, object.y1, object.x2, object.y2].every(finite)) {
-          errors.push('Wire ' + (object.id || index + 1) + ' has invalid coordinates.');
+        } else if (object.kind === 'wire') {
+          const label = 'Wire ' + (object.id || index + 1);
+          if (![object.x1, object.y1, object.x2, object.y2].every(finite)) errors.push(label + ' has invalid coordinates.');
+          for (const field of ['cableId', 'coreId']) {
+            const value = object[field];
+            if (value !== undefined && (typeof value !== 'string' || value.length > 80)) {
+              errors.push(label + ' has an invalid ' + field + '. Expected text up to 80 characters.');
+            }
+          }
         }
       });
     }
@@ -1622,16 +1629,23 @@
     });
     const potentialsByNet = new Map();
     const netsByWireNumber = new Map();
+    const netsByCableCore = new Map();
     objects.forEach(function (object) {
       if (object.kind !== 'wire') return;
       const sheetId = object.sheetId || reports[0].id;
       if (!wiresBySheet.has(sheetId)) wiresBySheet.set(sheetId, new Set());
       wiresBySheet.get(sheetId).add(object.id);
       const netId = localToGlobal.get(endpointToNet.get(sheetId + '\u0000' + object.id));
+      const cable = (object.cableId || '').trim();
+      const core = (object.coreId || '').trim();
+      const location = { sheetId: sheetId, objectId: object.id };
+      if (Boolean(cable) !== Boolean(core)) {
+        add('ERC-INCOMPLETE-CABLE-CORE', 'warning', 'Cable or core ID is missing from this wire assignment.',
+          'Assign both identifiers or clear the incomplete assignment.', [location]);
+      }
       if (!netId) return;
       const potential = typeof object.potential === 'string' ? object.potential.trim() : '';
       const wireNumber = typeof object.wireNumber === 'string' ? object.wireNumber.trim() : '';
-      const location = { sheetId: sheetId, objectId: object.id };
       if (potential) {
         if (!potentialsByNet.has(netId)) potentialsByNet.set(netId, []);
         potentialsByNet.get(netId).push(Object.assign({ potential: potential }, location));
@@ -1640,6 +1654,11 @@
         const key = wireNumber.toUpperCase();
         if (!netsByWireNumber.has(key)) netsByWireNumber.set(key, []);
         netsByWireNumber.get(key).push({ netId: netId, location: location });
+      }
+      if (cable && core) {
+        const key = JSON.stringify([cable.toUpperCase(), core.toUpperCase()]);
+        if (!netsByCableCore.has(key)) netsByCableCore.set(key, []);
+        netsByCableCore.get(key).push({ netId: netId, location: location, cable: cable, core: core });
       }
     });
     potentialsByNet.forEach(function (locations) {
@@ -1654,6 +1673,14 @@
       add('ERC-WIRE-NUMBER-DISCONNECTED', 'warning', 'Wire number ' + number + ' is assigned to disconnected nets.',
         'Check whether the number should identify one continuous net and correct the labels or connectivity as needed.',
         assignments.map(function (assignment) { return assignment.location; }));
+    });
+    netsByCableCore.forEach(function (assignments) {
+      const nets = new Set(assignments.map(assignment => assignment.netId));
+      if (nets.size < 2) return;
+      const { cable, core } = assignments[0];
+      add('ERC-CABLE-CORE-DISCONNECTED', 'error', 'Cable ' + cable + ' core ' + core + ' is assigned to disconnected nets.',
+        'Use a different core identifier or correct the intended conductor continuity.',
+        assignments.map(assignment => assignment.location));
     });
     diagnostics.forEach(function (issue) {
       if (issue?.type !== 'unresolved-cross-sheet-reference') return;

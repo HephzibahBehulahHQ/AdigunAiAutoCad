@@ -602,6 +602,19 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   assert.equal(cables.trim().split('\r\n').length, 7);
   assert.match(cables, /"W-B1","4","branch-a","b1-signal-send"/);
   assert.match(cables, /"W-B2","2","branch-b","b2-signal-send"/);
+  assert.ok(report.findings.every(finding => !finding.ruleId.includes('CABLE-CORE')));
+  const edited = structuredClone(reopened.project);
+  Object.assign(edited.objects.find(object => object.id === 'a-positive-send'), { cableId: 'W-B1', coreId: '1' });
+  assert.ok(engine.analyzeProject(edited).findings.every(finding => !finding.ruleId.includes('CABLE-CORE')));
+  Object.assign(edited.objects.find(object => object.id === 'a-return-receive'), { cableId: 'w-b1', coreId: '1' });
+  delete edited.objects.find(object => object.id === 'b2-signal-send').cableId;
+  const findings = engine.analyzeProject(edited).findings;
+  const conflict = findings.find(finding => finding.ruleId === 'ERC-CABLE-CORE-DISCONNECTED');
+  assert.equal(conflict.severity, 'error');
+  assert.deepEqual(conflict.locations.map(location => location.objectId).sort(),
+    ['a-positive-receive', 'a-positive-send', 'a-return-receive']);
+  assert.ok(findings.some(finding => finding.ruleId === 'ERC-INCOMPLETE-CABLE-CORE'
+    && finding.locations[0].objectId === 'b2-signal-send'));
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {

@@ -131,6 +131,8 @@ function buildReport() {
     const bom = engine.billOfMaterials(project.objects);
     const wireList = engine.wireList(project);
     const terminals = engine.terminalList(project);
+    const cableFindings = (analysis.findings || []).filter(finding =>
+      finding.ruleId === 'ERC-INCOMPLETE-CABLE-CORE' || finding.ruleId === 'ERC-CABLE-CORE-DISCONNECTED');
     const sheetContent = summarizeSheetContent(project);
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
@@ -140,6 +142,7 @@ function buildReport() {
       sourceBackedBom: bom.valid,
       connectedWireList: wireList.valid && analysis.openEndpointCount === 0,
       terminalList: terminals.valid,
+      cableAssignments: cableFindings.length === 0,
       zeroGeometryErrors: analysis.geometryErrorCount === 0
     };
     const errors = [
@@ -149,7 +152,8 @@ function buildReport() {
       ...csv.errors,
       ...bom.errors,
       ...wireList.errors,
-      ...terminals.errors
+      ...terminals.errors,
+      ...cableFindings.map(finding => finding.message)
     ];
     if (analysis.geometryErrorCount !== 0) errors.push('Project contains geometry errors.');
     if (analysis.openEndpointCount > 0) errors.push('Project contains unresolved wire endpoints.');
