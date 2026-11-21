@@ -479,6 +479,12 @@ test('project metadata, open views, sheets, links, and independent example copie
   assert.deepEqual(afterDeletion.project.crossSheetConnections, []);
   assert.deepEqual(afterDeletion.project.projectModel.diagnostics[0].connection, originalConnection);
   assert.equal(engine.analyzeProject(afterDeletion.project).openEndpointCount, 2);
+  const electrical = engine.projectElectricalReport(afterDeletion.project);
+  assert.equal(electrical.analysisComplete, true);
+  assert.equal(electrical.summary.resolvedCrossSheetLinks, 0);
+  const unresolvedLink = electrical.findings.find(finding => finding.ruleId === 'ERC-UNRESOLVED-CROSS-SHEET-REFERENCE');
+  assert.match(unresolvedLink.message, /net-24v-1/);
+  assert.deepEqual(unresolvedLink.locations, [{ sheetId: source.id, objectId: 'wire-source' }]);
   assert.deepEqual(first.project.crossSheetConnections, payload.crossSheetConnections);
   first.project.projectModel.metadata.manager = 'Changed copy';
   assert.equal(second.project.projectModel.metadata.manager, 'Project manager');

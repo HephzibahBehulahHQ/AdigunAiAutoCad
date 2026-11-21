@@ -1490,7 +1490,7 @@
   }
 
 
-  function electricalFindings(reports, objects, openEndpoints) {
+  function electricalFindings(reports, objects, openEndpoints, diagnostics) {
     const findings = [];
     function add(ruleId, severity, message, suggestedFix, locations) {
       findings.push({ ruleId: ruleId, severity: severity, message: message, suggestedFix: suggestedFix,
@@ -1513,11 +1513,33 @@
         [{ sheetId: endpoint.sheetId, objectId: endpoint.wireId, point: endpoint.point }]);
     });
     reports.forEach(function (sheet) {
+      sheet.analysis.errors.forEach(function (error) {
+        add('ERC-DRAWING-GEOMETRY', 'error', error.message,
+          'Inspect the affected geometry or component and correct its coordinates or definition.',
+          error.objectId ? [{ sheetId: sheet.id, objectId: error.objectId }] : []);
+      });
       sheet.analysis.unconnectedPins.forEach(function (pin) {
         add('ERC-PIN-WITHOUT-WIRE', 'info', pin.ref + ':' + pin.number + ' has no attached wire.',
           'Check the intended terminal use before adding a connection.',
           [{ sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number, point: pin.point }]);
       });
+    });
+    const wiresBySheet = new Map();
+    objects.forEach(function (object) {
+      if (object.kind !== 'wire') return;
+      const sheetId = object.sheetId || reports[0].id;
+      if (!wiresBySheet.has(sheetId)) wiresBySheet.set(sheetId, new Set());
+      wiresBySheet.get(sheetId).add(object.id);
+    });
+    diagnostics.forEach(function (issue) {
+      if (issue?.type !== 'unresolved-cross-sheet-reference') return;
+      const endpoints = Array.isArray(issue.connection?.endpoints) ? issue.connection.endpoints : [];
+      const locations = endpoints
+        .filter(function (endpoint) { return endpoint && wiresBySheet.get(endpoint.sheetId)?.has(endpoint.wireId); })
+        .map(function (endpoint) { return { sheetId: endpoint.sheetId, objectId: endpoint.wireId }; });
+      add('ERC-UNRESOLVED-CROSS-SHEET-REFERENCE', 'error',
+        typeof issue.message === 'string' ? issue.message : 'A cross-sheet reference requires review.',
+        'Check the surviving endpoint and recreate the reference if the connection is still required.', locations);
     });
     return findings;
   }
@@ -1633,10 +1655,31 @@
       localOpenEndpointCount: localOpenEndpointCount,
       openEndpointCount: openEndpoints.length,
       openEndpoints: openEndpoints,
-      findings: electricalFindings(reports, objects, openEndpoints),
+      findings: electricalFindings(reports, objects, openEndpoints,
+        Array.isArray(project.projectModel?.diagnostics) ? project.projectModel.diagnostics : []),
       geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
       sheets: reports,
       scope: 'Sheet-local nets are joined only at exact, validated open endpoints.'
+    };
+  }
+
+  function projectElectricalReport(project) {
+    const result = analyzeProject(project);
+    return {
+      format: 'adigun-electrical-check-report',
+      version: 1,
+      project: typeof project?.project === 'string' ? project.project : '',
+      analysisComplete: result.valid,
+      analysisErrors: result.errors,
+      sheets: result.sheets.map(function (sheet) { return { id: sheet.id, number: sheet.number, name: sheet.name }; }),
+      summary: result.valid ? {
+        resolvedCrossSheetLinks: result.crossSheetConnectionCount,
+        unresolvedWireEndpoints: result.openEndpointCount,
+        geometryErrors: result.geometryErrorCount,
+        findings: result.findings.length
+      } : null,
+      findings: result.findings || [],
+      scope: 'Authored geometry and electrical connectivity checks.'
     };
   }
 
@@ -1835,6 +1878,7 @@
     parseProject: parseProject,
     analyze: analyze,
     analyzeProject: analyzeProject,
+    projectElectricalReport: projectElectricalReport,
     crossSheetConnectors: crossSheetConnectors,
     billOfMaterials: billOfMaterials,
     billOfMaterialsCsv: billOfMaterialsCsv,

@@ -131,7 +131,7 @@
     focusObjectInView(object,true);
     showObject(object);
   });
-  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();});
+  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();if(event.target.closest('[data-export-electrical-report]'))exportElectricalReport();});
   $('#inspectorContent').addEventListener('change',function(event){const input=event.target.closest('[data-layer]');if(!input)return;const layer=input.dataset.layer;if(!Object.prototype.hasOwnProperty.call(state.layerVisibility,layer))return;state.layerVisibility[layer]=input.checked;if(!input.checked){const hiddenIds=new Set(state.objects.filter(function(obj){return drawingLayerForObject(obj)===layer;}).map(function(obj){return obj.id;}));state.selectedObjectIds=state.selectedObjectIds.filter(function(id){return !hiddenIds.has(id);});if(hiddenIds.has(state.selected))state.selected=state.selectedObjectIds[0]||null;}renderObjects();refreshSelectedProperties();notify(layer[0].toUpperCase()+layer.slice(1)+' layer '+(input.checked?'shown.':'hidden.'));});
   const sheetNames={overview:['Z0010000','Control cabinet'],title:['A1/000','Title page'],contents:['A1/001','Contents'],device:['A1/005','Device list'],power:['A1/010','Power supply'],control:['A1/020','Control circuit'],plc:['A2/030','PLC / I/O'],drive:['A2/040','Drive interface'],safety:['A2/050','Safety circuit'],layout:['A3/100','Enclosure layout'],terminals:['A3/120','Terminal strip'],bom:['A3/200','Bill of materials']};
   const symbolNames={terminal:'Terminal · 2-pin',relay:'Relay coil · K',contact:'NO contact · 13 / 14',breaker:'Protective switch',sensor:'Sensor · 3-wire',motor:'Three-phase motor',plc:'PLC I/O module · 8-point',ground:'Protective earth'};
@@ -573,14 +573,28 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function exportWireListCsv(){try{const csv=window.AdigunCADEngine.wireListCsv(state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-wire-list-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('Wire list CSV exported from authored model geometry.');}catch(error){notify(error.message||'Wire list CSV export failed.');}}
   function exportSvg(){const clone=drawing.cloneNode(true);clone.querySelectorAll('.resize-controls').forEach(function(node){node.remove();});if(state.sheet!=='control'||wrap.classList.contains('blank-start')){clone.querySelectorAll('#sheetDesign > *').forEach(function(node,index){if(index!==0&&node.id!=='userDrawings'&&node.id!=='customSheetFrame')node.remove();});}if(state.sheet!=='control'||wrap.classList.contains('blank-start')){const frame=clone.querySelector('#customSheetFrame');if(frame)frame.style.display='block';}const exportSheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(exportSheet){clone.setAttribute('width',(exportSheet.paperWidthMm||420)+'mm');clone.setAttribute('height',(exportSheet.paperHeightMm||297)+'mm');clone.setAttribute('viewBox','0 0 '+(exportSheet.paperWidthMm||420)+' '+(exportSheet.paperHeightMm||297));}clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.removeAttribute('role');clone.removeAttribute('aria-label');const xml=new XMLSerializer().serializeToString(clone);const blob=new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${xml}`],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${sheetNames[state.sheet]?.[0]||state.sheets.find(s=>s.id===state.sheet)?.number||'sheet'}-drawing.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);notify('SVG drawing exported with embedded vector geometry.');}
   function selectPanel(id){const project=id==='project',symbols=id==='symbols';$('#projectPanel').hidden=!project;$('#symbolsPanel').hidden=!symbols;if(id==='layers'){openInspector('Layers and visibility');return;}$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.panel===id)));}
+  function currentElectricalReport(){
+    const engine=window.AdigunCADEngine;
+    return engine.projectElectricalReport({format:engine.projectFormat,version:engine.projectVersion,
+      componentSchemaVersion:engine.componentSchemaVersion,netSchemaVersion:engine.netSchemaVersion,
+      project:state.projectModel.name,projectModel:state.projectModel,
+      sheets:state.sheets,objects:collectProjectObjects(),crossSheetConnections:state.crossSheetConnections});
+  }
+  function exportElectricalReport(){
+    if(!state.projectModel)return;
+    const report=currentElectricalReport();
+    const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    const anchor=document.createElement('a'),url=URL.createObjectURL(blob);
+    anchor.href=url;anchor.download='adigun-electrical-checks.json';anchor.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    notify('Electrical check report downloaded.');
+  }
   function projectConnectivityPanel(){
     if(!state.projectModel)return '';
-    const engine=window.AdigunCADEngine;
-    const report=engine.analyzeProject({format:engine.projectFormat,version:engine.projectVersion,
-      componentSchemaVersion:engine.componentSchemaVersion,netSchemaVersion:engine.netSchemaVersion,
-      sheets:state.sheets,objects:collectProjectObjects(),crossSheetConnections:state.crossSheetConnections});
-    const heading='<div class="inspector-block"><div class="inspector-title">Project connectivity</div>';
-    if(!report.valid)return heading+'<p class="notice">'+report.errors.map(escapeHtml).join('<br>')+'</p></div>';
+    const report=currentElectricalReport();
+    const heading='<div class="inspector-block"><div class="inspector-title">Project connectivity</div>'
+      +'<button type="button" class="command-item" data-export-electrical-report>Download electrical check report</button>';
+    if(!report.analysisComplete)return heading+'<p class="notice">'+report.analysisErrors.map(escapeHtml).join('<br>')+'</p></div>';
     const numbers=new Map(report.sheets.map(sheet=>[sheet.id,sheet.number||sheet.name||sheet.id]));
     const findings=report.findings.map(function(finding){
       const title=escapeHtml(finding.severity.toUpperCase()+' · '+finding.ruleId+' · '+finding.message);
@@ -594,9 +608,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       return '<details class="notice"'+(finding.severity==='error'?' open':'')+'><summary>'+title+'</summary>'
         +'<p>'+escapeHtml(finding.suggestedFix)+'</p>'+locations+'</details>';
     }).join('');
-    return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>'+report.crossSheetConnectionCount+'</strong></div>'
-      +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.openEndpointCount+'</strong></div>'
-      +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.geometryErrorCount+'</strong></div>'
+    return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>' +report.summary.resolvedCrossSheetLinks+'</strong></div>'
+      +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.summary.unresolvedWireEndpoints+'</strong></div>'
+      +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.summary.geometryErrors+'</strong></div>'
       +findings+'</div>';
   }
   function openInspector(name){
