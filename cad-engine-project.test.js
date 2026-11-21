@@ -40,19 +40,19 @@ test('DXF imports and exports supported planar geometry and reports skipped enti
     [0, 0, 50, 0, 50, 0, 50, 30]);
 });
 
-function makeLargeDrawingFixture() {
+function makeLargeDrawingFixture(pageCount = 10, rowsPerSheet = 5) {
   const sheets = [];
   const objects = [];
   const crossSheetConnections = [];
-  for (let page = 0; page < 10; page += 1) {
+  for (let page = 0; page < pageCount; page += 1) {
     const sheetId = 'scale-' + page;
     sheets.push({ id: sheetId, number: 'A2/' + String(page + 1).padStart(3, '0'), name: 'Terminal routes ' + (page + 1), projectSectionId: 'A2' });
-    for (let row = 0; row < 5; row += 1) {
+    for (let row = 0; row < rowsPerSheet; row += 1) {
       const y = 150 + row * 100;
       const addWire = (id, x1, x2) => objects.push({ id, kind: 'wire', sheetId, x1, y1: y, x2, y2: y });
       for (let column = 0; column < 5; column += 1) {
         const x = 180 + column * 180;
-        const position = page * 25 + row * 5 + column + 1;
+        const position = page * rowsPerSheet * 5 + row * 5 + column + 1;
         objects.push({ id: 'scale-terminal-' + position, kind: 'component-instance', schemaVersion: 1,
           ref: 'X' + position, componentId: 'phoenix-contact-3212144', sheetId, x, y, rotation: 0,
           properties: { terminalStrip: 'XT1', position: String(position), marking: '', comment: '' } });
@@ -63,7 +63,7 @@ function makeLargeDrawingFixture() {
         }
       }
       if (page > 0) addWire(sheetId + '-receive-' + row, 80, 145);
-      if (page === 9) continue;
+      if (page === pageCount - 1) continue;
       const send = sheetId + '-send-' + row;
       const nextSheet = 'scale-' + (page + 1);
       addWire(send, 935, 1020);
@@ -549,7 +549,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await symbolPage.keyboard.press('Control+a');
     symbolPage.on('dialog', dialog => dialog.accept(dialog.message().includes('name') ? 'Field connector' : '1,-22.5,0;2,22.5,0'));
     await symbolPage.locator('#openCommands').click();
-    await symbolPage.getByRole('button', { name: 'Create project symbol from selection', exact: true }).click();
+    await symbolPage.locator('#commands').getByRole('button', { name: 'Create project symbol from selection' }).click();
     const authoredSymbol = symbolPage.locator('#symbolList [data-insert]').filter({ hasText: 'Field connector' });
     await authoredSymbol.click({ modifiers: ['Shift'] });
     await authoredSymbol.click({ modifiers: ['Shift'] });
@@ -640,6 +640,42 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await largePage.locator('#projectTree [data-sheet="scale-9"]').click();
     assert.equal(await lastTerminal.getAttribute('stroke'), '#4b367c');
     await largePage.close({ runBeforeUnload: false });
+
+    const denseDrawing = makeLargeDrawingFixture(1, 50);
+    const densePage = await context.newPage();
+    await densePage.goto(address);
+    const importStarted = performance.now();
+    await densePage.locator('#openFile').setInputFiles({
+      name: 'Dense-sheet.adigun.json', mimeType: 'application/json', buffer: Buffer.from(engine.serializeProject(denseDrawing))
+    });
+    await densePage.locator('#userDrawings [data-object="scale-terminal-250"]').waitFor();
+    const openMs = Math.round(performance.now() - importStarted);
+    const cameraStats = await densePage.locator('#drawing').evaluate(async svg => {
+      const bounds = svg.getBoundingClientRect();
+      const geometry = svg.querySelector('#userDrawings');
+      const nativeObjects = [...geometry.querySelectorAll(':scope > [data-object]')];
+      const intervals = [];
+      for (let index = 0; index < 12; index += 1) {
+        const start = performance.now();
+        svg.dispatchEvent(new WheelEvent('wheel', {
+          clientX: Math.round(bounds.left + bounds.width / 2), clientY: Math.round(bounds.top + bounds.height / 2),
+          deltaX: index % 2 ? 12 : 0, deltaY: index % 2 ? 0 : (index % 4 ? 100 : -100), cancelable: true
+        }));
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        intervals.push(performance.now() - start);
+      }
+      return { nativeObjectCount: nativeObjects.length, nativeNodesPreserved: nativeObjects.every(node => node.isConnected),
+        medianCameraFrameMs: Number(intervals.sort((a, b) => a - b)[6].toFixed(1)), slowestCameraFrameMs: Number(Math.max(...intervals).toFixed(1)) };
+    });
+    assert.equal(cameraStats.nativeObjectCount, 1450);
+    assert.equal(cameraStats.nativeNodesPreserved, true, 'camera motion does not rebuild the dense drawing');
+    const denseStats = { sheets: 1, components: 250, wireSegments: 1200, openMs, ...cameraStats };
+    console.info('Dense Chromium drawing timings:', JSON.stringify(denseStats));
+    if (process.env.CAD_SCREENSHOT_DIR) {
+      fs.mkdirSync(process.env.CAD_SCREENSHOT_DIR, { recursive: true });
+      fs.writeFileSync(path.join(process.env.CAD_SCREENSHOT_DIR, 'dense-drawing-timings.json'), JSON.stringify(denseStats, null, 2));
+    }
+    await densePage.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
     await examplePage.goto(address);
