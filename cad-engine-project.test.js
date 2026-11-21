@@ -92,7 +92,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await page.getByRole('button', { name: 'New project' }).click();
     assert.equal(await page.locator('#newProjectDialog #editableExampleProjects').count(), 0, 'New Project does not show example projects');
     assert.match(await page.locator('#blankProjectTemplate').innerText(), /A1[\s\S]*A2[\s\S]*A3[\s\S]*A4/);
-    await page.locator('#newProjectName').pressSequentially('Browser local save test');
+    await page.locator('#newProjectName').fill('Browser local save test');
     await page.locator('#createProject').click();
     for (const section of ['A1', 'A2', 'A3', 'A4']) {
       assert.equal(await page.locator('#projectTree b').filter({ hasText: new RegExp('^' + section + '$') }).count(), 1);
