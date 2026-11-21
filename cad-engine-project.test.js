@@ -336,6 +336,9 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     for (const x of [85, 210, 335]) {
       await wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]').click();
       await clickDrawingPoint(x, 110);
+      assert.equal(await wiringPage.locator('#rightPanel.open').count(), 0, 'placement keeps a closed inspector closed');
+      assert.equal((await wiringPage.locator('#drawing').boundingBox()).width, viewportSize.width,
+        'consecutive placements keep the same canvas width');
       const selected = wiringPage.locator('#userDrawings [data-object].selected-object');
       terminalIds.push(await selected.getAttribute('data-object'));
     }
