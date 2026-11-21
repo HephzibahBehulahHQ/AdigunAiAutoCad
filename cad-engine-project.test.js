@@ -375,6 +375,15 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text())), originalExample, 'editing the copy must not change its source example');
     await examplePage.close({ runBeforeUnload: false });
 
+    const offlineLibraryPage = await context.newPage();
+    await offlineLibraryPage.route('**/examples/real-projects/**', route => route.abort('internetdisconnected'));
+    await offlineLibraryPage.goto(address);
+    await offlineLibraryPage.locator('[data-example-project="star-delta-100-sheet"]').click();
+    await offlineLibraryPage.locator('#projectTree [data-sheet="ref-006"]').click();
+    const breakerId = sourceProject.objects.find(object => object.ref === 'Q1').id;
+    await offlineLibraryPage.locator('#userDrawings [data-object="' + breakerId + '"]').waitFor();
+    await offlineLibraryPage.close({ runBeforeUnload: false });
+
     const reopenedExample = await context.newPage();
     await reopenedExample.goto(address);
     await reopenedExample.locator('#openFile').setInputFiles({
@@ -864,7 +873,8 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(inline, /function closeSheetTab\(id\)/);
   assert.match(inline, /unresolved connection diagnostic/);
   assert.match(inline, /async function renderEditableExampleProjects\(query\)/);
-  assert.match(inline, /copyExampleProject\(parsed\.project/);
+  assert.match(inline, /copyExampleProject\(source,uniqueId,copyName\)/);
+  assert.match(inline, /openNativeProject\(copy,entry\.path\)/);
   assert.match(inline, /state\.projectName\|\|'Untitled electrical project'/);
   assert.match(inline, /state\.projectName\|\|'Adigun-AutoCAD-project'/);
   assert.match(inline, /examples\/real-projects\/library\.json/);

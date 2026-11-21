@@ -20,4 +20,6 @@ The opening set contains 100 authored sheets through A1/100, including the sourc
 
 ## Deployment and release
 
+Project Explorer keeps copies of previously opened examples in browsers that support Cache Storage. If the library request fails while the editor is available, you can open those examples from the local cache and save an independent drawing.
+
 The GitHub Pages workflow checks the committed example report and publishes the editor, native example files, and validation report. Before client release, run `node scripts/project-library-validation.js --check --require-release-scale` and verify the remaining acceptance criteria in the master specification.
