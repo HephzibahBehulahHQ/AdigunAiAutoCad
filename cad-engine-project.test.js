@@ -341,9 +341,20 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     }
     assert.equal(new Set(terminalIds).size, 3);
     const pin = (objectId, number) => wiringPage.locator('#userDrawings [data-object="' + objectId + '"] [data-component-pin="connection-' + number + '"]');
+    const terminalClickPoint = async (objectId, number) => {
+      const box = await pin(objectId, number).boundingBox();
+      return { x: box.x + box.width / 2, y: box.y + box.height / 2 + 8 };
+    };
     await wiringPage.getByRole('button', { name: 'Draw wire' }).click();
-    await pin(terminalIds[0], 2).click();
-    await pin(terminalIds[1], 1).click();
+    const startClick = await terminalClickPoint(terminalIds[0], 2);
+    await wiringPage.mouse.move(startClick.x, startClick.y);
+    await wiringPage.mouse.down();
+    await wiringPage.mouse.move(startClick.x, startClick.y + 4);
+    await wiringPage.mouse.up();
+    assert.equal(await wiringPage.locator('[data-wire-pin-target]').getAttribute('data-wire-pin-target'), 'connection-2');
+    const endClick = await terminalClickPoint(terminalIds[1], 1);
+    await wiringPage.mouse.click(endClick.x, endClick.y);
+    assert.equal(await wiringPage.locator('#userDrawings path[data-object]').count(), 1);
     await wiringPage.getByRole('button', { name: 'Select and move', exact: true }).click();
     const wire = wiringPage.locator('#userDrawings path[data-object]');
     await wire.dispatchEvent('click', { bubbles: true });
@@ -420,7 +431,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await pin(terminalIds[1], 2).click();
     await clickDrawingPoint(250, 165);
     await clickDrawingPoint(380, 190);
-    await pin(terminalIds[2], 2).click();
+    const manualEndClick = await terminalClickPoint(terminalIds[2], 2);
+    await wiringPage.mouse.click(manualEndClick.x, manualEndClick.y);
     await wiringPage.getByRole('button', { name: 'Select and move', exact: true }).click();
     await pin(terminalIds[1], 1).click();
     await wiringPage.keyboard.press('ArrowDown');
@@ -815,6 +827,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await examplePage.locator('#projectTree [data-sheet="ref-007"]').click();
     const offPageConnector = examplePage.locator('#userDrawings .cross-sheet-connector').first();
     await offPageConnector.waitFor();
+    await examplePage.getByRole('button', { name: 'Draw wire' }).click();
+    await offPageConnector.locator('path').first().click();
+    assert.equal(await examplePage.locator('#sheetTabs [data-sheet="ref-007"][aria-selected="true"]').count(), 1,
+      'an off-page connector does not navigate away during wiring');
+    await examplePage.keyboard.press('Escape');
+    await examplePage.getByRole('button', { name: 'Select and move', exact: true }).click();
     await offPageConnector.locator('path').first().click();
     await examplePage.locator('#sheetTabs .document-tab[data-sheet="ref-009"][aria-selected="true"]').waitFor({ timeout: 5000 }).catch(async () => {
       const diagnostics = await examplePage.evaluate(() => JSON.stringify({ activeTabs: [...document.querySelectorAll('#sheetTabs .document-tab[aria-selected="true"]')].map(tab => tab.dataset.sheet), connectors: [...document.querySelectorAll('#userDrawings .cross-sheet-connector')].map(node => node.getAttribute('aria-label')) }));
