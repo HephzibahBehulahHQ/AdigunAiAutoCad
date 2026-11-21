@@ -484,6 +484,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function insertCatalogSymbol(id){
     const item=symbolCatalog.find(x=>x.id===id);
     if(!item)return;
+    if(placementPreview){placementPreview.remove();placementPreview=null;}
     state.pendingComponentId=id;
     setTool('component-placement');
     notify('Place '+item.name+' · move the pointer and click the sheet · Esc to cancel.');
@@ -502,15 +503,34 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     if(!placementPreview?.isConnected){
       placementPreview=buildCatalogGlyph({id:'placement-preview',x:location.x,y:location.y,ref:nextComponentReference(item.tag)},item,'#164eac',1.8);
       placementPreview.removeAttribute('data-object');
+      placementPreview.setAttribute('data-component-preview','');
       placementPreview.setAttribute('opacity','0.55');
       placementPreview.setAttribute('pointer-events','none');
       userDrawings.append(placementPreview);
     }else placementPreview.setAttribute('transform','translate('+location.x+' '+location.y+')');
+    const conflict=componentPlacementConflict(item,location);
+    placementPreview.setAttribute('stroke',conflict?'#b42318':'#164eac');
+    placementPreview.dataset.placementBlocked=String(Boolean(conflict));
+  }
+  function componentPlacementConflict(item,point){
+    const bounds=objectBounds({kind:'component-instance',componentId:item.componentId,x:point.x,y:point.y,rotation:0});
+    return state.objects.find(function(object){
+      if(object.kind!=='component-instance')return false;
+      const other=objectBounds(object);
+      return other&&bounds.left<other.right&&bounds.right>other.left
+        &&bounds.top<other.bottom&&bounds.bottom>other.top;
+    });
   }
   function finishComponentPlacement(point){
     const item=symbolCatalog.find(x=>x.id===state.pendingComponentId);
     if(!item)return false;
     const location=snapObjectPoint(point);
+    const conflict=componentPlacementConflict(item,location);
+    if(conflict){
+      updatePlacementPreview(point);
+      notify('Placement overlaps '+conflict.ref+'. Choose a clear position.');
+      return false;
+    }
     const ref=nextComponentReference(item.tag);
     state.pendingComponentId=null;
     if(placementPreview){placementPreview.remove();placementPreview=null;}
@@ -794,7 +814,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     async function saveProjectAs(){const saved=prepareProjectSave();if(!saved)return;if(typeof window.showSaveFilePicker!=='function'){downloadProjectFile(saved);return;}try{const handle=await window.showSaveFilePicker({suggestedName:saved.fileName,types:[{description:'Adigun AI AutoCAD project',accept:{'application/json':['.adigun.json']}}]});const writable=await handle.createWritable();await writable.write(saved.serialized);await writable.close();projectSaveHandle=handle;dirty=false;notify('Project saved locally as '+handle.name+'.');}catch(error){if(error&&error.name==='AbortError')return;notify('Project was not saved: '+error.message);}}
   function exportBillOfMaterialsCsv(){try{const csv=window.AdigunCADEngine.billOfMaterialsCsv(state.projectModel?collectProjectObjects():state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-bom-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('BOM CSV exported with manufacturer sources and retrieval dates.');}catch(error){notify(error.message||'BOM CSV export failed.');}}
   function exportWireListCsv(){try{const csv=window.AdigunCADEngine.wireListCsv(state.projectModel?electricalProject():state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-wire-list-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('Wire list CSV exported from authored model geometry.');}catch(error){notify(error.message||'Wire list CSV export failed.');}}
-  function exportSvg(){const clone=drawing.cloneNode(true);clone.querySelectorAll('.resize-controls,[data-wire-preview]').forEach(function(node){node.remove();});if(state.projectModel||state.sheet!=='control'||wrap.classList.contains('blank-start')){clone.querySelectorAll('#sheetDesign > *').forEach(function(node,index){if(index!==0&&node.id!=='userDrawings'&&node.id!=='customSheetFrame')node.remove();});}if(state.projectModel||state.sheet!=='control'||wrap.classList.contains('blank-start')){const frame=clone.querySelector('#customSheetFrame');if(frame)frame.style.display='block';}const exportSheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(exportSheet){clone.setAttribute('width',(exportSheet.paperWidthMm||420)+'mm');clone.setAttribute('height',(exportSheet.paperHeightMm||297)+'mm');clone.setAttribute('viewBox','0 0 '+(exportSheet.paperWidthMm||420)+' '+(exportSheet.paperHeightMm||297));}clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.removeAttribute('role');clone.removeAttribute('aria-label');const xml=new XMLSerializer().serializeToString(clone);const blob=new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${xml}`],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${sheetNames[state.sheet]?.[0]||state.sheets.find(s=>s.id===state.sheet)?.number||'sheet'}-drawing.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);notify('SVG drawing exported with embedded vector geometry.');}
+  function exportSvg(){const clone=drawing.cloneNode(true);clone.querySelectorAll('.resize-controls,[data-wire-preview],[data-component-preview]').forEach(function(node){node.remove();});if(state.projectModel||state.sheet!=='control'||wrap.classList.contains('blank-start')){clone.querySelectorAll('#sheetDesign > *').forEach(function(node,index){if(index!==0&&node.id!=='userDrawings'&&node.id!=='customSheetFrame')node.remove();});}if(state.projectModel||state.sheet!=='control'||wrap.classList.contains('blank-start')){const frame=clone.querySelector('#customSheetFrame');if(frame)frame.style.display='block';}const exportSheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(exportSheet){clone.setAttribute('width',(exportSheet.paperWidthMm||420)+'mm');clone.setAttribute('height',(exportSheet.paperHeightMm||297)+'mm');clone.setAttribute('viewBox','0 0 '+(exportSheet.paperWidthMm||420)+' '+(exportSheet.paperHeightMm||297));}clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.removeAttribute('role');clone.removeAttribute('aria-label');const xml=new XMLSerializer().serializeToString(clone);const blob=new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${xml}`],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${sheetNames[state.sheet]?.[0]||state.sheets.find(s=>s.id===state.sheet)?.number||'sheet'}-drawing.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);notify('SVG drawing exported with embedded vector geometry.');}
   function selectPanel(id){const project=id==='project',symbols=id==='symbols';$('#projectPanel').hidden=!project;$('#symbolsPanel').hidden=!symbols;if(id==='layers'){openInspector('Layers and visibility');return;}$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.panel===id)));}
   function electricalProject(){
     const engine=window.AdigunCADEngine;
