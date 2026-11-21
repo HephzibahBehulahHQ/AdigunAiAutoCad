@@ -97,6 +97,10 @@
         const sheet = model.sheets.find(function (item) { return item.id === entry[0]; });
         return [entry[1], sheet && sheet.number];
       }).filter(function (entry) { return entry[0] && entry[1] && entry[0] !== entry[1]; }).sort(function (a, b) { return b[0].length - a[0].length; });
+      const replacements = new Map(numberChanges);
+      const numberPattern = numberChanges.length ? new RegExp('(?:' + numberChanges.map(function (entry) {
+        return entry[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }).join('|') + ')(?!\\d)', 'g') : null;
       model.activeSheetId = activeSheetId;
       model.openTabs = activeSheetId ? [activeSheetId] : [];
       model.crossSheetConnections = clone(copy.crossSheetConnections || []);
@@ -107,8 +111,8 @@
       copy.crossSheetConnections = model.crossSheetConnections;
       copy.objects = clone(copy.objects || []);
       copy.objects.forEach(function (object) {
-        if (!object || typeof object.text !== 'string') return;
-        numberChanges.forEach(function (entry) { object.text = object.text.split(entry[0]).join(entry[1]); });
+        if (!numberPattern || !object || typeof object.text !== 'string') return;
+        object.text = object.text.replace(numberPattern, function (number) { return replacements.get(number); });
       });
       copy.sheetLabels = clone(copy.sheetLabels || {});
       copy.sheetViews = clone(copy.sheetViews || {});

@@ -926,6 +926,104 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const reopened = engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).netCount, 17);
+  const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
+  const savedCopy = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
+  assert.equal(savedCopy.project.sheets.length, 100);
+  const originalIndexNumbers = new Set();
+  const copiedIndexNumbers = new Set();
+  for (const [workspace, numbers] of [[reopened.project, originalIndexNumbers], [savedCopy.project, copiedIndexNumbers]]) {
+    for (const object of workspace.objects) {
+      if (!object.sheetId?.startsWith('reversing-index')) continue;
+      const number = object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0];
+      if (number) numbers.add(number);
+    }
+    assert.deepEqual(numbers, new Set(workspace.sheets.map(sheet => sheet.number)));
+  }
+  for (const [sheetId, values] of [
+    ['reversing-q1-mounting', ['22.5 mm', '100 mm', '141.6 mm']],
+    ['reversing-q1-control-window', ['19.2–30 V DC']],
+    ['reversing-m1-starting-point', ['0.405 A', '1.458 A']],
+    ['reversing-m1-speed-reference', ['1,500 r/min', '8%']],
+    ['reversing-q1-overload-class', ['10A', 'no short-circuit protection function']],
+    ['reversing-q1-input-thresholds', ['0–5 V', '15–30 V']],
+    ['reversing-q1-control-transients', ['300 mA for 80 ms', '140 mA for 80 ms']],
+    ['reversing-m1-input-power-check', ['179.6 W', '185.2 W']]
+  ]) {
+    const content = savedCopy.project.objects.filter(object => object.sheetId === sheetId).map(object => object.text).join(' ');
+    for (const value of values) assert.ok(content.includes(value), value);
+    assert.match(content, /Source: (Siemens|SEW-EURODRIVE).*https:\/\//);
+  }
+  const documentationIds = ['reversing-power-nets', 'reversing-control-nets'];
+  const documentedNets = savedCopy.project.objects
+    .filter(object => documentationIds.includes(object.sheetId) && object.text?.includes('  |  '))
+    .map(object => object.text)
+    .sort();
+  const modeledNets = analysis.nets
+    .map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join('  |  '))
+    .sort();
+  assert.deepEqual(documentedNets, modeledNets);
+  const traceLabels = savedCopy.project.objects.filter(object => object.sheetId?.startsWith('reversing-trace-'));
+  const tracePeers = new Map(traceLabels.filter(object => /-peers-\d+$/.test(object.id))
+    .map(object => [object.id, object.text.split('  ·  ')]));
+  const tracedNets = traceLabels.filter(object => /-pin-\d+$/.test(object.id))
+    .map(object => [object.text, ...tracePeers.get(object.id.replace('-pin-', '-peers-'))].sort().join('  |  '))
+    .sort();
+  assert.deepEqual(tracedNets, modeledNets);
+  const wireScheduleIds = ['reversing-line-wire-list', 'reversing-motor-wire-list', 'reversing-control-wire-list'];
+  const documentedWires = savedCopy.project.objects
+    .filter(object => wireScheduleIds.includes(object.sheetId) && object.text?.startsWith('W-'))
+    .map(object => object.text.split(' | ')[0])
+    .sort();
+  assert.deepEqual(documentedWires, wireList.rows.map(row => row.wireId).sort());
+  const sourceRecords = savedCopy.project.objects.filter(object => object.sheetId === 'reversing-source-register');
+  for (const row of bom.rows) {
+    assert.ok(sourceRecords.some(object => object.text === row.sourceUrl));
+  }
+  const interfaces = [
+    ['reversing-power-boundary', 'Q1', ['1/L1', '3/L2', '5/L3']],
+    ['reversing-supply-boundary', 'Q1', ['A1', 'A2']],
+    ['reversing-command-boundary', 'Q1', ['IN1', 'IN2', 'IN3']],
+    ['reversing-signal-boundary', 'Q1', ['OUT', '95', '96', '98']],
+    ['reversing-motor-board', 'M1', ['U1', 'V1', 'W1', 'U2']],
+    ['reversing-pe-review', 'M1', ['PE']]
+  ];
+  for (const [sheetId, ref, numbers] of interfaces) {
+    const rows = savedCopy.project.objects.filter(object => object.sheetId === sheetId);
+    for (const number of numbers) {
+      const net = analysis.nets.find(candidate => candidate.pins.some(pin => pin.ref === ref && pin.number === number));
+      const expectedPeers = net.pins.filter(pin => pin.ref !== ref || pin.number !== number)
+        .map(pin => pin.ref + ':' + pin.number).sort().join(', ');
+      const expectedRow = ref + ':' + number + ' | ' + expectedPeers;
+      assert.ok(rows.some(row => row.text === expectedRow || row.text?.startsWith(expectedRow + ' | ')), expectedRow);
+    }
+  }
+  const correctedMarks = {
+    X8: 'Start direction 1',
+    X9: 'Start direction 2',
+    X10: 'Reset',
+    X11: '0 V DC'
+  };
+  for (const [ref, marking] of Object.entries(correctedMarks)) {
+    const terminal = savedCopy.project.objects.find(object => object.kind === 'component-instance' && object.ref === ref);
+    assert.equal(terminal.properties.marking, marking);
+    assert.ok(savedCopy.project.objects.some(object => object.sheetId === 'reversing-control-marking'
+      && object.text?.startsWith(ref + ' | ' + marking + ' | Q1:')));
+  }
+  const layoutId = 'reversing-xt1-layout';
+  const footprints = savedCopy.project.objects.filter(object => object.sheetId === layoutId && object.deviceTag);
+  assert.equal(footprints.length, 13);
+  assert.equal(savedCopy.project.sheets.find(sheet => sheet.id === layoutId).sectionId, 'A3');
+  const peFootprint = footprints.find(object => object.deviceTag === 'X16');
+  assert.equal(peFootprint.projectAssumption, true);
+  assert.equal(peFootprint.manufacturerPartNumber, undefined);
+  const copyFootprint = copy.objects.find(object => object.id === footprints[0].id);
+  copyFootprint.y += 14;
+  copyFootprint.y2 += 14;
+  const editedCopy = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(editedCopy.valid, true, editedCopy.errors.join(' '));
+  assert.equal(editedCopy.project.objects.find(object => object.id === copyFootprint.id).y, footprints[0].y + 14);
+  assert.equal(reopened.project.objects.find(object => object.id === copyFootprint.id).y, footprints[0].y);
 });
 
 test('source-backed DOL motor-feeder example preserves its power, PE, star and control nets', () => {
