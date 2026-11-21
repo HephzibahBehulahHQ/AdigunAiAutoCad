@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.3",
-  "description": "Source-backed SITOP distribution, ifm sensor input wiring and a CPU 1212C transistor output to a 24 V DC interface relay.",
+  "revision": "1.4",
+  "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
   "zoom": 100,
@@ -47,6 +47,12 @@
       "id": "plc-relay-output",
       "number": "A2/006",
       "name": "CPU Q0.0 interface relay coil",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "contactor-feedback",
+      "number": "A2/007",
+      "name": "Contactor coil and auxiliary feedback",
       "projectSectionId": "A2"
     }
   ],
@@ -289,7 +295,7 @@
       "kind": "text",
       "sheetId": "supply",
       "x": 110,
-      "y": 470,
+      "y": 560,
       "stroke": "#13263b",
       "text": "Scope: static DC output and terminal distribution. Input source, PE wiring and protection are outside this example."
     },
@@ -298,7 +304,7 @@
       "kind": "text",
       "sheetId": "supply",
       "x": 110,
-      "y": 515,
+      "y": 610,
       "stroke": "#13263b",
       "text": "PS1 is Siemens 6EP1332-5BA00. Use its source record for the input and output ratings."
     },
@@ -761,7 +767,7 @@
       "kind": "text",
       "x": 110,
       "y": 845,
-      "text": "Q0.0 drives K1 on A2/006. Functional earth, other outputs, sensor calibration and PLC logic remain outside this example.",
+      "text": "Q0.0 drives K1 on A2/006. I0.1 reads the KM1 auxiliary contact on A2/007. PLC logic is outside scope.",
       "stroke": "#13263b"
     },
     {
@@ -898,7 +904,228 @@
       "kind": "text",
       "x": 110,
       "y": 550,
-      "text": "K1 contacts 11, 12 and 14 are available for a separate load. Relay actuation and PLC logic are not simulated.",
+      "text": "K1 NO 11–14 routes the KM1 coil feed to A2/007. Relay actuation and PLC logic are not simulated.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "km1",
+      "componentId": "schneider-electric-lc1d09bd",
+      "ref": "KM1",
+      "x": 520,
+      "y": 325,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "contactor-feedback"
+    },
+    {
+      "id": "contact-feed-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 650,
+      "y": 260,
+      "x1": 650,
+      "y1": 260,
+      "x2": 650,
+      "y2": 112,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "k1-contact-feed",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 590,
+      "y": 325,
+      "x1": 590,
+      "y1": 325,
+      "x2": 760,
+      "y2": 265,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "km1-coil-send",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 590,
+      "y": 350,
+      "x1": 590,
+      "y1": 350,
+      "x2": 800,
+      "y2": 350,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 switched coil feed"
+    },
+    {
+      "id": "km1-coil-feed",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 190,
+      "y": 300,
+      "x1": 190,
+      "y1": 300,
+      "x2": 400,
+      "y2": 300,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 switched coil feed"
+    },
+    {
+      "id": "km1-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 660,
+      "y": 320,
+      "x1": 660,
+      "y1": 320,
+      "x2": 660,
+      "y2": 472,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "km1-return",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 190,
+      "y": 350,
+      "x1": 190,
+      "y1": 350,
+      "x2": 400,
+      "y2": 350,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "aux-feed-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 680,
+      "y": 260,
+      "x1": 680,
+      "y1": 260,
+      "x2": 680,
+      "y2": 78,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "aux-feed-rise",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 270,
+      "x1": 620,
+      "y1": 270,
+      "x2": 620,
+      "y2": 220,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "aux-feed",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 220,
+      "x1": 620,
+      "y1": 220,
+      "x2": 800,
+      "y2": 220,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "km1-feedback-drop",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 380,
+      "x1": 620,
+      "y1": 380,
+      "x2": 620,
+      "y2": 435,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 auxiliary feedback"
+    },
+    {
+      "id": "km1-feedback-send",
+      "kind": "wire",
+      "sheetId": "contactor-feedback",
+      "x": 620,
+      "y": 435,
+      "x1": 620,
+      "y1": 435,
+      "x2": 800,
+      "y2": 435,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 auxiliary feedback"
+    },
+    {
+      "id": "km1-di1",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 320,
+      "y": 420,
+      "x1": 320,
+      "y1": 420,
+      "x2": 450,
+      "y2": 420,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "KM1 auxiliary feedback"
+    },
+    {
+      "id": "km1-title",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 108,
+      "text": "KM1 · CONTACTOR COIL AND AUXILIARY FEEDBACK",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "km1-coil-note",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 520,
+      "text": "K1 NO 11–14 switches the KM1 24 V DC coil circuit. Coil A2 connects to the SITOP return.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "km1-aux-note",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 565,
+      "text": "KM1 auxiliary NO 13–14 routes a separate +24 V feed to CPU X10:8 / DI a.1 / I0.1.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "km1-scope",
+      "sheetId": "contactor-feedback",
+      "kind": "text",
+      "x": 110,
+      "y": 610,
+      "text": "Main poles and the NC auxiliary pair are unused. The model represents wiring and static contact symbols.",
       "stroke": "#13263b"
     }
   ],
@@ -1313,6 +1540,166 @@
             "direction": "left",
             "targetSheetId": "supply",
             "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact-feed",
+      "name": "K1 contact supply",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "contact-feed-send",
+          "point": {
+            "x": 650,
+            "y": 112
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "k1-contact-feed",
+          "point": {
+            "x": 760,
+            "y": 265
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-coil",
+      "name": "KM1 switched coil feed",
+      "endpoints": [
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "km1-coil-send",
+          "point": {
+            "x": 800,
+            "y": 350
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-coil-feed",
+          "point": {
+            "x": 190,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-return-link",
+      "name": "KM1 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "km1-return-send",
+          "point": {
+            "x": 660,
+            "y": 472
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-return",
+          "point": {
+            "x": 190,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aux-feed-link",
+      "name": "KM1 auxiliary supply",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "aux-feed-send",
+          "point": {
+            "x": 680,
+            "y": 78
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
+          }
+        },
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "aux-feed",
+          "point": {
+            "x": 800,
+            "y": 220
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "km1-feedback-link",
+      "name": "KM1 auxiliary feedback",
+      "endpoints": [
+        {
+          "sheetId": "contactor-feedback",
+          "wireId": "km1-feedback-send",
+          "point": {
+            "x": 800,
+            "y": 435
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "km1-di1",
+          "point": {
+            "x": 320,
+            "y": 420
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "contactor-feedback",
+            "targetRef": "KM1"
           }
         }
       ]
