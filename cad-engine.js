@@ -1490,7 +1490,7 @@
   }
 
 
-  function electricalFindings(reports, objects, openEndpoints, diagnostics) {
+  function electricalFindings(reports, objects, openEndpoints, diagnostics, endpointToNet, globalNets) {
     const findings = [];
     function add(ruleId, severity, message, suggestedFix, locations) {
       findings.push({ ruleId: ruleId, severity: severity, message: message, suggestedFix: suggestedFix,
@@ -1525,11 +1525,44 @@
       });
     });
     const wiresBySheet = new Map();
+    const localToGlobal = new Map();
+    globalNets.forEach(function (net) {
+      net.localNetIds.forEach(function (id) { localToGlobal.set(id, net.id); });
+    });
+    const potentialsByNet = new Map();
+    const netsByWireNumber = new Map();
     objects.forEach(function (object) {
       if (object.kind !== 'wire') return;
       const sheetId = object.sheetId || reports[0].id;
       if (!wiresBySheet.has(sheetId)) wiresBySheet.set(sheetId, new Set());
       wiresBySheet.get(sheetId).add(object.id);
+      const netId = localToGlobal.get(endpointToNet.get(sheetId + '\u0000' + object.id));
+      if (!netId) return;
+      const potential = typeof object.potential === 'string' ? object.potential.trim() : '';
+      const wireNumber = typeof object.wireNumber === 'string' ? object.wireNumber.trim() : '';
+      const location = { sheetId: sheetId, objectId: object.id };
+      if (potential) {
+        if (!potentialsByNet.has(netId)) potentialsByNet.set(netId, []);
+        potentialsByNet.get(netId).push(Object.assign({ potential: potential }, location));
+      }
+      if (wireNumber) {
+        const key = wireNumber.toUpperCase();
+        if (!netsByWireNumber.has(key)) netsByWireNumber.set(key, []);
+        netsByWireNumber.get(key).push({ netId: netId, location: location });
+      }
+    });
+    potentialsByNet.forEach(function (locations) {
+      const names = new Set(locations.map(function (location) { return location.potential.toUpperCase(); }));
+      if (names.size < 2) return;
+      add('ERC-CONFLICTING-POTENTIALS', 'error', 'One connected net has conflicting potential assignments: ' + Array.from(names).join(', ') + '.',
+        'Review the assigned potentials and verify the wiring and cross-sheet connections.', locations);
+    });
+    netsByWireNumber.forEach(function (assignments, number) {
+      const nets = new Set(assignments.map(function (assignment) { return assignment.netId; }));
+      if (nets.size < 2) return;
+      add('ERC-WIRE-NUMBER-DISCONNECTED', 'warning', 'Wire number ' + number + ' is assigned to disconnected nets.',
+        'Check whether the number should identify one continuous net and correct the labels or connectivity as needed.',
+        assignments.map(function (assignment) { return assignment.location; }));
     });
     diagnostics.forEach(function (issue) {
       if (issue?.type !== 'unresolved-cross-sheet-reference') return;
@@ -1656,7 +1689,7 @@
       openEndpointCount: openEndpoints.length,
       openEndpoints: openEndpoints,
       findings: electricalFindings(reports, objects, openEndpoints,
-        Array.isArray(project.projectModel?.diagnostics) ? project.projectModel.diagnostics : []),
+        Array.isArray(project.projectModel?.diagnostics) ? project.projectModel.diagnostics : [], endpointToNet, globalNets),
       geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
       sheets: reports,
       scope: 'Sheet-local nets are joined only at exact, validated open endpoints.'

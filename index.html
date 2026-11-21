@@ -449,6 +449,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.x)+'"></label>'
         +'<label class="property-row"><span>Y (mm)</span><input type="number" step="2.5" data-object-coordinate="y" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.y)+'"></label>'
         +(obj.kind==='text'?'<label class="property-row"><span>Text</span><input maxlength="120" data-object-text="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.text||'')+'"></label>':'')
+        +(obj.kind==='wire'?[['Potential','potential'],['Wire number','wireNumber']].map(function(entry){
+          return '<label class="property-row"><span>'+entry[0]+'</span><input maxlength="80" data-wire-property="'+entry[1]
+            +'" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj[entry[1]]||'')+'"></label>';
+        }).join(''):'')
         +'<div class="property-row"><span>Rotation</span><strong>'+escapeHtml((obj.rotation||0)+'°')+'</strong></div>'
         +'<button class="command-item" data-rotate-object="'+escapeHtml(obj.id)+'"><span>↻</span><span>Rotate 90° clockwise</span></button>'
         +'<div class="property-row"><span>Object ID</span><strong>'+escapeHtml(obj.id.slice(0,13))+'</strong></div>'
@@ -600,7 +604,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       const title=escapeHtml(finding.severity.toUpperCase()+' · '+finding.ruleId+' · '+finding.message);
       const locations=finding.locations.map(function(location){
         const name=(numbers.get(location.sheetId)||location.sheetId)+' · '+(location.ref||location.objectId)
-          +(location.pinNumber?':'+location.pinNumber:'')
+          +(location.pinNumber?':'+location.pinNumber:'')+(location.potential?' · '+location.potential:'')
           +(location.point?' · ('+location.point.x+', '+location.point.y+')':'');
         return '<button type="button" class="command-item" data-finding-sheet="'+escapeHtml(location.sheetId)
           +'" data-finding-object="'+escapeHtml(location.objectId)+'">'+escapeHtml(name)+'</button>';
@@ -738,6 +742,20 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
 
   $('#inspectorContent').addEventListener('change',e=>{const key=e.target.dataset.layer;if(!key)return;const map={connections:'.wire,.wire-blue,.wire-dark,.cross-sheet-connector',devices:'.drawing-object[data-object]',annotations:'.accent,.small,.medium,.tiny'};drawing.querySelectorAll(map[key]).forEach(el=>el.style.display=e.target.checked?'':'none');notify(`${key} layer ${e.target.checked?'shown':'hidden'}.`);});
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}if(e.target.closest('[data-delete-object]')){const id=e.target.closest('[data-delete-object]').dataset.deleteObject;pushUndo();state.objects=state.objects.filter(o=>o.id!==id);state.selected=null;renderObjects();$('#selectionDetails').innerHTML='<div class="inspector-title">Selection</div><div class="empty-selection">Select an electrical object on the sheet to inspect its drawing designation.</div>';persist();notify('Drawing object removed.');}});
+  $('#inspectorContent').addEventListener('change',function(event){
+    const field=event.target.closest('[data-wire-property]');
+    if(!field)return;
+    const key=field.dataset.wireProperty;
+    if(key!=='potential'&&key!=='wireNumber')return;
+    const wire=state.objects.find(item=>item.id===field.dataset.objectId&&item.kind==='wire');
+    if(!wire)return;
+    const value=field.value.trim().slice(0,80);
+    field.value=value;
+    if(value===(wire[key]||''))return;
+    pushUndo();
+    if(value)wire[key]=value;else delete wire[key];
+    persist();
+  });
   $('#inspectorContent').addEventListener('change',e=>{const coordinate=e.target.closest('[data-object-coordinate]');if(coordinate){updateObjectCoordinate(coordinate.dataset.objectId,coordinate.dataset.objectCoordinate,coordinate.value);return;}const textField=e.target.closest('[data-object-text]');if(textField){const obj=state.objects.find(function(item){return item.id===textField.dataset.objectText;});if(!obj||obj.kind!=='text')return;const next=textField.value.slice(0,120);if(next===obj.text)return;pushUndo();obj.text=next;renderObjects();persist();refreshSelectedProperties();notify('Drawing text updated.');}});
   $$('[data-new-sheet]').forEach(b=>b.addEventListener('click',()=>{addSheet(b.dataset.newSheet);$('#sheetDialog').close();}));
   function setProjectExplorerView(view){const list=view==='list',tree=$('#projectTree'),projects=$('#editableExampleProjects');if(!tree||!projects)return;tree.style.display=list?'none':'';projects.style.display=list?'block':'none';$$('[data-tree-view]').forEach(function(button){button.classList.toggle('active',button.dataset.treeView===(list?'list':'tree'));});const search=$('#projectSearch');search.placeholder=list?'Find example project':'Find sheet or device';search.setAttribute('aria-label',search.placeholder);}

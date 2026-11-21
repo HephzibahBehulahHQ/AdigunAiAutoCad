@@ -1388,6 +1388,19 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
     { sheetId: 'sheet-power', wireId: 'cross-sheet-wire-0', point: { x: 400, y: 260 } },
     { sheetId: 'sheet-control', wireId: 'cross-sheet-wire-1', point: { x: 400, y: 260 } }
   ]);
+  const tagged = parsed.project.objects.map(object => object.kind === 'wire'
+    ? { ...object, potential: object.sheetId === 'sheet-power' ? 'L1' : 'N', wireNumber: 'W-101' }
+    : object);
+  const assigned = engine.parseProject(engine.serializeProject({ ...parsed.project, objects: tagged })).project;
+  const linkedFindings = engine.analyzeProject(assigned).findings;
+  const conflict = linkedFindings.find(finding => finding.ruleId === 'ERC-CONFLICTING-POTENTIALS');
+  assert.deepEqual(conflict.locations.map(location => [location.sheetId, location.potential]), [
+    ['sheet-power', 'L1'], ['sheet-control', 'N']
+  ]);
+  assert.ok(!linkedFindings.some(finding => finding.ruleId === 'ERC-WIRE-NUMBER-DISCONNECTED'));
+  const unlinkedFindings = engine.analyzeProject({ ...assigned, crossSheetConnections: [] }).findings;
+  assert.ok(!unlinkedFindings.some(finding => finding.ruleId === 'ERC-CONFLICTING-POTENTIALS'));
+  assert.ok(unlinkedFindings.some(finding => finding.ruleId === 'ERC-WIRE-NUMBER-DISCONNECTED' && finding.locations.length === 2));
   assert.deepEqual(report.globalNets[0].sheetIds,['sheet-control','sheet-power']);
   assert.deepEqual(report.globalNets[0].pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),[
     'sheet-control:X2:1','sheet-control:X2:2','sheet-power:X1:1','sheet-power:X1:2'
