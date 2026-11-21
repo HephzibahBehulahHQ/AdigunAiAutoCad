@@ -929,7 +929,7 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
   const savedCopy = engine.parseProject(engine.serializeProject(copy));
   assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
-  assert.equal(savedCopy.project.sheets.length, 71);
+  assert.equal(savedCopy.project.sheets.length, 100);
   const originalIndexNumbers = new Set();
   const copiedIndexNumbers = new Set();
   for (const [workspace, numbers] of [[reopened.project, originalIndexNumbers], [savedCopy.project, copiedIndexNumbers]]) {
@@ -963,6 +963,13 @@ test('Siemens reversing-starter example imports with every real terminal wired a
     .map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join('  |  '))
     .sort();
   assert.deepEqual(documentedNets, modeledNets);
+  const traceLabels = savedCopy.project.objects.filter(object => object.sheetId?.startsWith('reversing-trace-'));
+  const tracePeers = new Map(traceLabels.filter(object => /-peers-\d+$/.test(object.id))
+    .map(object => [object.id, object.text.split('  ·  ')]));
+  const tracedNets = traceLabels.filter(object => /-pin-\d+$/.test(object.id))
+    .map(object => [object.text, ...tracePeers.get(object.id.replace('-pin-', '-peers-'))].sort().join('  |  '))
+    .sort();
+  assert.deepEqual(tracedNets, modeledNets);
   const wireScheduleIds = ['reversing-line-wire-list', 'reversing-motor-wire-list', 'reversing-control-wire-list'];
   const documentedWires = savedCopy.project.objects
     .filter(object => wireScheduleIds.includes(object.sheetId) && object.text?.startsWith('W-'))

@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Siemens SIRIUS 3RM12 with SEW DRN63MS4 motor — wiring example",
-  "revision": "1.6",
-  "status": "71 authored sheets: reversing-starter wiring, panel layout, terminal schedules and source-backed application references.",
+  "revision": "1.7",
+  "status": "100 authored reversing-starter reference sheets: wiring, layout, manufacturer data, derived continuity diagrams and handover records.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -445,6 +445,180 @@
       "number": "A4/044",
       "name": "M1 discrete load point input estimates",
       "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-mass",
+      "number": "A4/045",
+      "name": "M1 catalog mass and mounting basis",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-inertia",
+      "number": "A4/046",
+      "name": "M1 rotor kinetic energy at rated speed",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-brake-option",
+      "number": "A4/047",
+      "name": "M1 catalog brake option and model scope",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-installation-basis",
+      "number": "A4/048",
+      "name": "M1 installation rating basis",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-class",
+      "number": "A4/049",
+      "name": "M1 winding thermal class evidence",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-temperature-option",
+      "number": "A4/050",
+      "name": "M1 temperature sensing options and wiring scope",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-motor-voltage-check",
+      "number": "A4/051",
+      "name": "M1 winding voltage consistency check",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-reference-circuit",
+      "number": "A4/052",
+      "name": "Q1 Siemens reversing circuit reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-aux-interface-review",
+      "number": "A4/053",
+      "name": "Q1 receiver interface review",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-command-review",
+      "number": "A4/054",
+      "name": "Q1 direction command review",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-variant-review",
+      "number": "A4/055",
+      "name": "Q1 device variant verification",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-q1-revision-register",
+      "number": "A4/056",
+      "name": "Q1 source revision comparison record",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-panel-fit-dimensions",
+      "number": "A3/007",
+      "name": "Panel depth comparison for Q1 and XT1",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-panel-mounting-zones",
+      "number": "A3/008",
+      "name": "Q1 mounting and service zones review",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-panel-route-record",
+      "number": "A3/009",
+      "name": "Field routing and enclosure entry record",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-handover-device-evidence",
+      "number": "A4/057",
+      "name": "Delivered device evidence register",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-handover-settings",
+      "number": "A4/058",
+      "name": "Protection setting change record",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-handover-motor-interface",
+      "number": "A4/059",
+      "name": "Motor installation evidence register",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-handover-control-evidence",
+      "number": "A4/060",
+      "name": "Control supply and receiver evidence register",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-handover-continuity",
+      "number": "A4/061",
+      "name": "Continuity inspection record",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-handover-final-index",
+      "number": "A4/062",
+      "name": "As-built drawing reconciliation",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-timeline-reference",
+      "number": "A1/008",
+      "name": "Reference revision and release record",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "reversing-trace-mains",
+      "number": "A2/016",
+      "name": "Incoming mains continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-trace-motor",
+      "number": "A2/017",
+      "name": "Motor output continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-trace-control",
+      "number": "A2/018",
+      "name": "Control supply and command continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-trace-signals",
+      "number": "A2/019",
+      "name": "Run and fault continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-trace-star-pe",
+      "number": "A2/020",
+      "name": "Star point and PE continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-index-installation",
+      "number": "A1/009",
+      "name": "Drawing index: final references",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "reversing-index-handover",
+      "number": "A1/010",
+      "name": "Drawing index: handover and review",
+      "projectSectionId": "A1"
     }
   ],
   "sheetLabels": {},
@@ -8216,6 +8390,2602 @@
       "x": 120,
       "y": 521,
       "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-mass-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-mass"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-mass-brand",
+      "sheetId": "reversing-motor-mass",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-mass-title",
+      "sheetId": "reversing-motor-mass",
+      "x": 120,
+      "y": 173,
+      "text": "M1 CATALOG MASS AND MOUNTING BASIS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-mass-line-01",
+      "sheetId": "reversing-motor-mass",
+      "x": 120,
+      "y": 231,
+      "text": "Catalog motor-only mass | 4.9 kg for DRN 63MS 4.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-mass-line-02",
+      "sheetId": "reversing-motor-mass",
+      "x": 120,
+      "y": 289,
+      "text": "The model records IM B3. Confirm the delivered motor, actual mounting interface, fasteners and supporting structure.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-mass-line-03",
+      "sheetId": "reversing-motor-mass",
+      "x": 120,
+      "y": 347,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-mass-line-04",
+      "sheetId": "reversing-motor-mass",
+      "x": 120,
+      "y": 405,
+      "text": "https://download.sew-eurodrive.com/download/html/33346739/de-DE/36955862411.html",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-inertia-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-inertia"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-brand",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-title",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 173,
+      "text": "M1 ROTOR KINETIC ENERGY AT RATED SPEED",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-line-01",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 231,
+      "text": "Catalog inertia | 2.95 × 10⁻⁴ kg·m².",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-line-02",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 289,
+      "text": "At 1,380 r/min, angular velocity is 144.51 rad/s and rotor-only energy is ½ × J × ω² ≈ 3.08 J.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-line-03",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 347,
+      "text": "Driven load, coupling and braking energy require separate application data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-line-04",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-inertia-line-05",
+      "sheetId": "reversing-motor-inertia",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/html/33346739/de-DE/36955862411.html",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-brake-option-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-brake-option"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-brand",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-title",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 173,
+      "text": "M1 CATALOG BRAKE OPTION AND MODEL SCOPE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-line-01",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 231,
+      "text": "The DRN 63MS 4 catalog row includes the BE03 brake option separately from the motor-only values.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-line-02",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 289,
+      "text": "The unbraked and brake-equipped mass entries are 4.9 kg and 6.8 kg, respectively.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-line-03",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 347,
+      "text": "The project does not identify an installed brake or associated power and control connections. Confirm the ordered variant.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-line-04",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-brake-option-line-05",
+      "sheetId": "reversing-motor-brake-option",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/html/33346739/de-DE/36955862411.html",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-installation-basis-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-installation-basis"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-brand",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-title",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 173,
+      "text": "M1 INSTALLATION RATING BASIS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-line-01",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 231,
+      "text": "SEW states a 40 °C and 1,000 m nameplate basis for the applicable motor catalog.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-line-02",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 289,
+      "text": "For conditions beyond that basis, the catalog gives P_N,red = P_N × f_T × f_H.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-line-03",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 347,
+      "text": "Record the actual site and delivered nameplate. This sheet assigns no derating factors.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-line-04",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-installation-basis-line-05",
+      "sheetId": "reversing-motor-installation-basis",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-class-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-class"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-class-brand",
+      "sheetId": "reversing-motor-class",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-class-title",
+      "sheetId": "reversing-motor-class",
+      "x": 120,
+      "y": 173,
+      "text": "M1 WINDING THERMAL CLASS EVIDENCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-class-line-01",
+      "sheetId": "reversing-motor-class",
+      "x": 120,
+      "y": 231,
+      "text": "SEW catalog section 5.7 describes class 130 (B) as standard and classes 155 (F) and 180 (H) as request options.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-class-line-02",
+      "sheetId": "reversing-motor-class",
+      "x": 120,
+      "y": 289,
+      "text": "The class is an insulation-system characteristic. Confirm the ordered class and actual motor nameplate before recording it.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-class-line-03",
+      "sheetId": "reversing-motor-class",
+      "x": 120,
+      "y": 347,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-class-line-04",
+      "sheetId": "reversing-motor-class",
+      "x": 120,
+      "y": 405,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-temperature-option-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-temperature-option"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-brand",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-title",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 173,
+      "text": "M1 TEMPERATURE SENSING OPTIONS AND WIRING SCOPE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-line-01",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 231,
+      "text": "Catalog section 3.2.2 lists /TF PTC, /TH thermostat, /PK Pt1000 and /PT Pt100 options.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-line-02",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 289,
+      "text": "A1/002 models winding and PE terminals only. The installed option and evaluation circuit remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-line-03",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 347,
+      "text": "Use the ordered motor designation and delivered terminal diagram to resolve sensor presence and wiring.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-line-04",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-temperature-option-line-05",
+      "sheetId": "reversing-motor-temperature-option",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-voltage-check-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-voltage-check"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-brand",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-title",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 173,
+      "text": "M1 WINDING VOLTAGE CONSISTENCY CHECK",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-line-01",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 231,
+      "text": "The modeled configuration connects the 230 V winding system in star on a 400 V three-phase line supply.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-line-02",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 289,
+      "text": "Catalog reference calculation | 400 V ÷ √3 ≈ 230.9 V RMS per winding.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-line-03",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 347,
+      "text": "Verify the available supply, delivery configuration and terminal-board links using A2/011.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-line-04",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-voltage-check-line-05",
+      "sheetId": "reversing-motor-voltage-check",
+      "x": 120,
+      "y": 463,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-reference-circuit-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-reference-circuit"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-brand",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-title",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 SIEMENS REVERSING CIRCUIT REFERENCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-line-01",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 231,
+      "text": "Siemens manual 07/2025 appendix A.1.6 describes a reversing starter with external PLC operation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-line-02",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 289,
+      "text": "Use that figure to identify the terminal roles. The local schematic ends at the external terminals and includes no PLC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-line-03",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 347,
+      "text": "Record a reviewed external controller drawing and its direction mapping as separate deliverables.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-line-04",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-reference-circuit-line-05",
+      "sheetId": "reversing-q1-reference-circuit",
+      "x": 120,
+      "y": 463,
+      "text": "https://support.industry.siemens.com/cs/attachments/66295730/manual_motorstarter_SIRIUS_3RM1_en-US.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-aux-interface-review-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-aux-interface-review"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-brand",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-title",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 RECEIVER INTERFACE REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-line-01",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 231,
+      "text": "Record receiver supply and input requirements for X12, X13, X14 and X15.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-line-02",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 289,
+      "text": "Use A4/036 for electronic OUT and A4/014 for the changeover contact ratings.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-line-03",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 347,
+      "text": "Verify the intended indication for run, fault and a missing control supply. No observation has been recorded.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-line-04",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-aux-interface-review-line-05",
+      "sheetId": "reversing-q1-aux-interface-review",
+      "x": 120,
+      "y": 463,
+      "text": "https://support.industry.siemens.com/cs/attachments/66295730/manual_motorstarter_SIRIUS_3RM1_en-US.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-command-review-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-command-review"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-brand",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-title",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 DIRECTION COMMAND REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-line-01",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 231,
+      "text": "Compare the external direction requests with X8/IN1 and X9/IN2, and the reset request with X10/IN3.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-line-02",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 289,
+      "text": "The expected behavior for competing or invalid requests belongs in the reviewed controller design.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-line-03",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 347,
+      "text": "Document the verified direction-to-machine mapping before releasing operating instructions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-line-04",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-command-review-line-05",
+      "sheetId": "reversing-q1-command-review",
+      "x": 120,
+      "y": 463,
+      "text": "https://support.industry.siemens.com/cs/attachments/66295730/manual_motorstarter_SIRIUS_3RM1_en-US.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-variant-review-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-variant-review"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-brand",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-title",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 DEVICE VARIANT VERIFICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-line-01",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 231,
+      "text": "Recorded device | Siemens standard 3RM12 reversing starter, article 3RM1201-1AA04.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-line-02",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 289,
+      "text": "Capture the delivered article label and matching manual revision before applying wiring and rating references.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-line-03",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 347,
+      "text": "An equipment manual may cover multiple variants. Match the selected diagram to the actual article.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-line-04",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-variant-review-line-05",
+      "sheetId": "reversing-q1-variant-review",
+      "x": 120,
+      "y": 463,
+      "text": "https://support.industry.siemens.com/cs/attachments/66295730/manual_motorstarter_SIRIUS_3RM1_en-US.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-q1-revision-register-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-q1-revision-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-brand",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-title",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 SOURCE REVISION COMPARISON RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-line-01",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 231,
+      "text": "Operating data A4/011–A4/021 cite the December 2025 article data sheet. A4/027–A4/042 cite the July 2022 archive.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-line-02",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 289,
+      "text": "The current manual link points to the July 2025 equipment manual. Retain its document identifier with the project.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-line-03",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 347,
+      "text": "Resolve any lifecycle, approval or technical changes against records for the delivered article.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-line-04",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 405,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-q1-revision-register-line-05",
+      "sheetId": "reversing-q1-revision-register",
+      "x": 120,
+      "y": 463,
+      "text": "https://support.industry.siemens.com/cs/attachments/66295730/manual_motorstarter_SIRIUS_3RM1_en-US.pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-panel-fit-dimensions-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-panel-fit-dimensions"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-fit-dimensions-brand",
+      "sheetId": "reversing-panel-fit-dimensions",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-fit-dimensions-title",
+      "sheetId": "reversing-panel-fit-dimensions",
+      "x": 120,
+      "y": 173,
+      "text": "PANEL DEPTH COMPARISON FOR Q1 AND XT1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-fit-dimensions-line-01",
+      "sheetId": "reversing-panel-fit-dimensions",
+      "x": 120,
+      "y": 231,
+      "text": "Q1 body depth from A3/005 | 141.6 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-fit-dimensions-line-02",
+      "sheetId": "reversing-panel-fit-dimensions",
+      "x": 120,
+      "y": 289,
+      "text": "XT1 body depth on NS 35/15 from A3/004 | 60.1 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-fit-dimensions-line-03",
+      "sheetId": "reversing-panel-fit-dimensions",
+      "x": 120,
+      "y": 347,
+      "text": "The nominal body-depth difference is 81.5 mm. Compare mounting datums and actual wire and cover clearances before using a cabinet depth.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-panel-mounting-zones-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-panel-mounting-zones"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-mounting-zones-brand",
+      "sheetId": "reversing-panel-mounting-zones",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-mounting-zones-title",
+      "sheetId": "reversing-panel-mounting-zones",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 MOUNTING AND SERVICE ZONES REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-mounting-zones-line-01",
+      "sheetId": "reversing-panel-mounting-zones",
+      "x": 120,
+      "y": 231,
+      "text": "Mark a Q1 body zone, the separation above and below, and the side case from A3/006.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-mounting-zones-line-02",
+      "sheetId": "reversing-panel-mounting-zones",
+      "x": 120,
+      "y": 289,
+      "text": "Review the route from the mains boundary to Q1 and from Q1 to the motor interface.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-mounting-zones-line-03",
+      "sheetId": "reversing-panel-mounting-zones",
+      "x": 120,
+      "y": 347,
+      "text": "Document access for operating controls, conductor insertion and servicing with the actual enclosure and rail selection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-panel-route-record-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-panel-route-record"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-route-record-brand",
+      "sheetId": "reversing-panel-route-record",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-route-record-title",
+      "sheetId": "reversing-panel-route-record",
+      "x": 120,
+      "y": 173,
+      "text": "FIELD ROUTING AND ENCLOSURE ENTRY RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-route-record-line-01",
+      "sheetId": "reversing-panel-route-record",
+      "x": 120,
+      "y": 231,
+      "text": "Incoming supply | X1–X3. Control and signals | X7–X15. Protective-earth boundary | X16.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-route-record-line-02",
+      "sheetId": "reversing-panel-route-record",
+      "x": 120,
+      "y": 289,
+      "text": "Record actual entry points, duct routes and any circuit separation requirements.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-panel-route-record-line-03",
+      "sheetId": "reversing-panel-route-record",
+      "x": 120,
+      "y": 347,
+      "text": "Cross-check the issued wiring list against reconciled field labels. Schematic path lengths are drawing data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-handover-device-evidence-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-handover-device-evidence"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-device-evidence-brand",
+      "sheetId": "reversing-handover-device-evidence",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-device-evidence-title",
+      "sheetId": "reversing-handover-device-evidence",
+      "x": 120,
+      "y": 173,
+      "text": "DELIVERED DEVICE EVIDENCE REGISTER",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-device-evidence-line-01",
+      "sheetId": "reversing-handover-device-evidence",
+      "x": 120,
+      "y": 231,
+      "text": "Q1 | Capture article and revision evidence for 3RM1201-1AA04.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-device-evidence-line-02",
+      "sheetId": "reversing-handover-device-evidence",
+      "x": 120,
+      "y": 289,
+      "text": "M1 | Capture nameplate, ordered options and motor-specific terminal diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-device-evidence-line-03",
+      "sheetId": "reversing-handover-device-evidence",
+      "x": 120,
+      "y": 347,
+      "text": "XT1 | Capture actual terminal articles and accessories. Resolve X16 separately as recorded in A4/007.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-device-evidence-line-04",
+      "sheetId": "reversing-handover-device-evidence",
+      "x": 120,
+      "y": 405,
+      "text": "Status | Delivered equipment evidence has not been entered into this model.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-handover-settings-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-handover-settings"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-settings-brand",
+      "sheetId": "reversing-handover-settings",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-settings-title",
+      "sheetId": "reversing-handover-settings",
+      "x": 120,
+      "y": 173,
+      "text": "PROTECTION SETTING CHANGE RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-settings-line-01",
+      "sheetId": "reversing-handover-settings",
+      "x": 120,
+      "y": 231,
+      "text": "Record the proposed Q1 setting, engineering basis, verified physical setting and approval reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-settings-line-02",
+      "sheetId": "reversing-handover-settings",
+      "x": 120,
+      "y": 289,
+      "text": "Cross-reference the available fault current and upstream protection review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-settings-line-03",
+      "sheetId": "reversing-handover-settings",
+      "x": 120,
+      "y": 347,
+      "text": "Model status | Catalog range is documented. Selected and verified settings remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-handover-motor-interface-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-handover-motor-interface"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-motor-interface-brand",
+      "sheetId": "reversing-handover-motor-interface",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-motor-interface-title",
+      "sheetId": "reversing-handover-motor-interface",
+      "x": 120,
+      "y": 173,
+      "text": "MOTOR INSTALLATION EVIDENCE REGISTER",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-motor-interface-line-01",
+      "sheetId": "reversing-handover-motor-interface",
+      "x": 120,
+      "y": 231,
+      "text": "Record terminal arrangement, actual winding links, motor mount and driven equipment documentation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-motor-interface-line-02",
+      "sheetId": "reversing-handover-motor-interface",
+      "x": 120,
+      "y": 289,
+      "text": "Use A4/045–A4/051 to verify which catalog assumptions apply to the delivered M1.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-motor-interface-line-03",
+      "sheetId": "reversing-handover-motor-interface",
+      "x": 120,
+      "y": 347,
+      "text": "Capture normal duty, direction labels and stopping behavior in the machine documentation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-handover-control-evidence-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-handover-control-evidence"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-control-evidence-brand",
+      "sheetId": "reversing-handover-control-evidence",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-control-evidence-title",
+      "sheetId": "reversing-handover-control-evidence",
+      "x": 120,
+      "y": 173,
+      "text": "CONTROL SUPPLY AND RECEIVER EVIDENCE REGISTER",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-control-evidence-line-01",
+      "sheetId": "reversing-handover-control-evidence",
+      "x": 120,
+      "y": 231,
+      "text": "Record actual source, source protection and measured control terminal voltage at X7 and X11.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-control-evidence-line-02",
+      "sheetId": "reversing-handover-control-evidence",
+      "x": 120,
+      "y": 289,
+      "text": "Use A4/038 for transient reference and A4/053 for run/fault receiver checks.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-control-evidence-line-03",
+      "sheetId": "reversing-handover-control-evidence",
+      "x": 120,
+      "y": 347,
+      "text": "Document the control drawing revision and independent review status.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-handover-continuity-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-handover-continuity"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-continuity-brand",
+      "sheetId": "reversing-handover-continuity",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-continuity-title",
+      "sheetId": "reversing-handover-continuity",
+      "x": 120,
+      "y": 173,
+      "text": "CONTINUITY INSPECTION RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-continuity-line-01",
+      "sheetId": "reversing-handover-continuity",
+      "x": 120,
+      "y": 231,
+      "text": "Use A2/001 and A2/002 as the list of expected electrical groups.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-continuity-line-02",
+      "sheetId": "reversing-handover-continuity",
+      "x": 120,
+      "y": 289,
+      "text": "Record the authorized inspection procedure, test identifiers and observed results separately.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-continuity-line-03",
+      "sheetId": "reversing-handover-continuity",
+      "x": 120,
+      "y": 347,
+      "text": "The engine validates internal CAD connectivity. The installation inspection record remains open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-handover-final-index-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-handover-final-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-final-index-brand",
+      "sheetId": "reversing-handover-final-index",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-final-index-title",
+      "sheetId": "reversing-handover-final-index",
+      "x": 120,
+      "y": 173,
+      "text": "AS-BUILT DRAWING RECONCILIATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-final-index-line-01",
+      "sheetId": "reversing-handover-final-index",
+      "x": 120,
+      "y": 231,
+      "text": "Reconcile devices, terminal labels and installed wiring with the issued schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-final-index-line-02",
+      "sheetId": "reversing-handover-final-index",
+      "x": 120,
+      "y": 289,
+      "text": "Record drawing revision, approved deviations, inspection evidence and open items.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-handover-final-index-line-03",
+      "sheetId": "reversing-handover-final-index",
+      "x": 120,
+      "y": 347,
+      "text": "The library export represents the reference design and remains independent of any as-built record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-timeline-reference-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-timeline-reference"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-timeline-reference-brand",
+      "sheetId": "reversing-timeline-reference",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-timeline-reference-title",
+      "sheetId": "reversing-timeline-reference",
+      "x": 120,
+      "y": 173,
+      "text": "REFERENCE REVISION AND RELEASE RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-timeline-reference-line-01",
+      "sheetId": "reversing-timeline-reference",
+      "x": 120,
+      "y": 231,
+      "text": "1.1–1.2 | Project index, net schedules, wire schedules, sources and component quantities.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-timeline-reference-line-02",
+      "sheetId": "reversing-timeline-reference",
+      "x": 120,
+      "y": 289,
+      "text": "1.3–1.4 | Interface definitions, terminal labels and editable XT1 front view.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-timeline-reference-line-03",
+      "sheetId": "reversing-timeline-reference",
+      "x": 120,
+      "y": 347,
+      "text": "1.5–1.7 | Catalog operating data, protection boundaries, layout review and handover references.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-timeline-reference-line-04",
+      "sheetId": "reversing-timeline-reference",
+      "x": 120,
+      "y": 405,
+      "text": "Release scope | Editable educational schematic and authored documentation. Installation review remains open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-trace-mains-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-trace-mains"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-brand",
+      "sheetId": "reversing-trace-mains",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-title",
+      "sheetId": "reversing-trace-mains",
+      "x": 120,
+      "y": 173,
+      "text": "INCOMING MAINS CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-scope",
+      "sheetId": "reversing-trace-mains",
+      "x": 120,
+      "y": 231,
+      "text": "Derived from A1/002. Each line represents one modeled continuity group.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-pin-0",
+      "sheetId": "reversing-trace-mains",
+      "x": 155,
+      "y": 355,
+      "text": "Q1:1/L1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-mains-link-0",
+      "sheetId": "reversing-trace-mains",
+      "x1": 410,
+      "y1": 350,
+      "x2": 760,
+      "y2": 350,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-peers-0",
+      "sheetId": "reversing-trace-mains",
+      "x": 815,
+      "y": 355,
+      "text": "X1:1  ·  X1:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-pin-1",
+      "sheetId": "reversing-trace-mains",
+      "x": 155,
+      "y": 480,
+      "text": "Q1:3/L2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-mains-link-1",
+      "sheetId": "reversing-trace-mains",
+      "x1": 410,
+      "y1": 475,
+      "x2": 760,
+      "y2": 475,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-peers-1",
+      "sheetId": "reversing-trace-mains",
+      "x": 815,
+      "y": 480,
+      "text": "X2:1  ·  X2:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-pin-2",
+      "sheetId": "reversing-trace-mains",
+      "x": 155,
+      "y": 605,
+      "text": "Q1:5/L3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-mains-link-2",
+      "sheetId": "reversing-trace-mains",
+      "x1": 410,
+      "y1": 600,
+      "x2": 760,
+      "y2": 600,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-peers-2",
+      "sheetId": "reversing-trace-mains",
+      "x": 815,
+      "y": 605,
+      "text": "X3:1  ·  X3:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-reference",
+      "sheetId": "reversing-trace-mains",
+      "x": 120,
+      "y": 1080,
+      "text": "A2/003 | Incoming phase wire schedule.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-mains-scope-note",
+      "sheetId": "reversing-trace-mains",
+      "x": 120,
+      "y": 1138,
+      "text": "These drawing graphics summarize static connectivity from the source schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-trace-motor-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-trace-motor"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-brand",
+      "sheetId": "reversing-trace-motor",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-title",
+      "sheetId": "reversing-trace-motor",
+      "x": 120,
+      "y": 173,
+      "text": "MOTOR OUTPUT CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-scope",
+      "sheetId": "reversing-trace-motor",
+      "x": 120,
+      "y": 231,
+      "text": "Derived from A1/002. Each line represents one modeled continuity group.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-pin-0",
+      "sheetId": "reversing-trace-motor",
+      "x": 155,
+      "y": 355,
+      "text": "Q1:2/T1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-motor-link-0",
+      "sheetId": "reversing-trace-motor",
+      "x1": 410,
+      "y1": 350,
+      "x2": 760,
+      "y2": 350,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-peers-0",
+      "sheetId": "reversing-trace-motor",
+      "x": 815,
+      "y": 355,
+      "text": "M1:U1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-pin-1",
+      "sheetId": "reversing-trace-motor",
+      "x": 155,
+      "y": 480,
+      "text": "Q1:4/T2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-motor-link-1",
+      "sheetId": "reversing-trace-motor",
+      "x1": 410,
+      "y1": 475,
+      "x2": 760,
+      "y2": 475,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-peers-1",
+      "sheetId": "reversing-trace-motor",
+      "x": 815,
+      "y": 480,
+      "text": "M1:V1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-pin-2",
+      "sheetId": "reversing-trace-motor",
+      "x": 155,
+      "y": 605,
+      "text": "Q1:6/T3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-motor-link-2",
+      "sheetId": "reversing-trace-motor",
+      "x1": 410,
+      "y1": 600,
+      "x2": 760,
+      "y2": 600,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-peers-2",
+      "sheetId": "reversing-trace-motor",
+      "x": 815,
+      "y": 605,
+      "text": "M1:W1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-reference",
+      "sheetId": "reversing-trace-motor",
+      "x": 120,
+      "y": 1080,
+      "text": "A2/011 | Motor winding board and star-point note.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-motor-scope-note",
+      "sheetId": "reversing-trace-motor",
+      "x": 120,
+      "y": 1138,
+      "text": "These drawing graphics summarize static connectivity from the source schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-trace-control-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-trace-control"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-brand",
+      "sheetId": "reversing-trace-control",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-title",
+      "sheetId": "reversing-trace-control",
+      "x": 120,
+      "y": 173,
+      "text": "CONTROL SUPPLY AND COMMAND CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-scope",
+      "sheetId": "reversing-trace-control",
+      "x": 120,
+      "y": 231,
+      "text": "Derived from A1/002. Each line represents one modeled continuity group.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-pin-0",
+      "sheetId": "reversing-trace-control",
+      "x": 155,
+      "y": 355,
+      "text": "Q1:A1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-control-link-0",
+      "sheetId": "reversing-trace-control",
+      "x1": 410,
+      "y1": 350,
+      "x2": 760,
+      "y2": 350,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-peers-0",
+      "sheetId": "reversing-trace-control",
+      "x": 815,
+      "y": 355,
+      "text": "X7:1  ·  X7:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-pin-1",
+      "sheetId": "reversing-trace-control",
+      "x": 155,
+      "y": 480,
+      "text": "Q1:A2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-control-link-1",
+      "sheetId": "reversing-trace-control",
+      "x1": 410,
+      "y1": 475,
+      "x2": 760,
+      "y2": 475,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-peers-1",
+      "sheetId": "reversing-trace-control",
+      "x": 815,
+      "y": 480,
+      "text": "X11:1  ·  X11:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-pin-2",
+      "sheetId": "reversing-trace-control",
+      "x": 155,
+      "y": 605,
+      "text": "Q1:IN1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-control-link-2",
+      "sheetId": "reversing-trace-control",
+      "x1": 410,
+      "y1": 600,
+      "x2": 760,
+      "y2": 600,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-peers-2",
+      "sheetId": "reversing-trace-control",
+      "x": 815,
+      "y": 605,
+      "text": "X8:1  ·  X8:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-pin-3",
+      "sheetId": "reversing-trace-control",
+      "x": 155,
+      "y": 730,
+      "text": "Q1:IN2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-control-link-3",
+      "sheetId": "reversing-trace-control",
+      "x1": 410,
+      "y1": 725,
+      "x2": 760,
+      "y2": 725,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-peers-3",
+      "sheetId": "reversing-trace-control",
+      "x": 815,
+      "y": 730,
+      "text": "X9:1  ·  X9:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-pin-4",
+      "sheetId": "reversing-trace-control",
+      "x": 155,
+      "y": 855,
+      "text": "Q1:IN3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-control-link-4",
+      "sheetId": "reversing-trace-control",
+      "x1": 410,
+      "y1": 850,
+      "x2": 760,
+      "y2": 850,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-peers-4",
+      "sheetId": "reversing-trace-control",
+      "x": 815,
+      "y": 855,
+      "text": "X10:1  ·  X10:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-reference",
+      "sheetId": "reversing-trace-control",
+      "x": 120,
+      "y": 1080,
+      "text": "A2/008 | Control supply, and A2/009 | Command interface.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-control-scope-note",
+      "sheetId": "reversing-trace-control",
+      "x": 120,
+      "y": 1138,
+      "text": "These drawing graphics summarize static connectivity from the source schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-trace-signals-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-trace-signals"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-brand",
+      "sheetId": "reversing-trace-signals",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-title",
+      "sheetId": "reversing-trace-signals",
+      "x": 120,
+      "y": 173,
+      "text": "RUN AND FAULT CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-scope",
+      "sheetId": "reversing-trace-signals",
+      "x": 120,
+      "y": 231,
+      "text": "Derived from A1/002. Each line represents one modeled continuity group.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-pin-0",
+      "sheetId": "reversing-trace-signals",
+      "x": 155,
+      "y": 355,
+      "text": "Q1:OUT",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-signals-link-0",
+      "sheetId": "reversing-trace-signals",
+      "x1": 410,
+      "y1": 350,
+      "x2": 760,
+      "y2": 350,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-peers-0",
+      "sheetId": "reversing-trace-signals",
+      "x": 815,
+      "y": 355,
+      "text": "X12:1  ·  X12:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-pin-1",
+      "sheetId": "reversing-trace-signals",
+      "x": 155,
+      "y": 480,
+      "text": "Q1:95",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-signals-link-1",
+      "sheetId": "reversing-trace-signals",
+      "x1": 410,
+      "y1": 475,
+      "x2": 760,
+      "y2": 475,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-peers-1",
+      "sheetId": "reversing-trace-signals",
+      "x": 815,
+      "y": 480,
+      "text": "X13:1  ·  X13:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-pin-2",
+      "sheetId": "reversing-trace-signals",
+      "x": 155,
+      "y": 605,
+      "text": "Q1:96",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-signals-link-2",
+      "sheetId": "reversing-trace-signals",
+      "x1": 410,
+      "y1": 600,
+      "x2": 760,
+      "y2": 600,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-peers-2",
+      "sheetId": "reversing-trace-signals",
+      "x": 815,
+      "y": 605,
+      "text": "X14:1  ·  X14:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-pin-3",
+      "sheetId": "reversing-trace-signals",
+      "x": 155,
+      "y": 730,
+      "text": "Q1:98",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-signals-link-3",
+      "sheetId": "reversing-trace-signals",
+      "x1": 410,
+      "y1": 725,
+      "x2": 760,
+      "y2": 725,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-peers-3",
+      "sheetId": "reversing-trace-signals",
+      "x": 815,
+      "y": 730,
+      "text": "X15:1  ·  X15:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-reference",
+      "sheetId": "reversing-trace-signals",
+      "x": 120,
+      "y": 1080,
+      "text": "A2/010 | Run and fault interface.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-signals-scope-note",
+      "sheetId": "reversing-trace-signals",
+      "x": 120,
+      "y": 1138,
+      "text": "These drawing graphics summarize static connectivity from the source schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-trace-star-pe-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-trace-star-pe"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-brand",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-title",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 120,
+      "y": 173,
+      "text": "STAR POINT AND PE CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-scope",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 120,
+      "y": 231,
+      "text": "Derived from A1/002. Each line represents one modeled continuity group.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-pin-0",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 155,
+      "y": 355,
+      "text": "M1:U2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-star-pe-link-0",
+      "sheetId": "reversing-trace-star-pe",
+      "x1": 410,
+      "y1": 350,
+      "x2": 760,
+      "y2": 350,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-peers-0",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 815,
+      "y": 355,
+      "text": "M1:V2  ·  M1:W2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-pin-1",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 155,
+      "y": 480,
+      "text": "M1:PE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "reversing-trace-star-pe-link-1",
+      "sheetId": "reversing-trace-star-pe",
+      "x1": 410,
+      "y1": 475,
+      "x2": 760,
+      "y2": 475,
+      "stroke": "#17628c",
+      "strokeWidth": 3
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-peers-1",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 815,
+      "y": 480,
+      "text": "X16:1  ·  X16:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-reference",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 120,
+      "y": 1080,
+      "text": "A2/011 | Winding board, and A4/007 | Protective-earth evidence.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-trace-star-pe-scope-note",
+      "sheetId": "reversing-trace-star-pe",
+      "x": 120,
+      "y": 1138,
+      "text": "These drawing graphics summarize static connectivity from the source schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-protection-reversing-index-installation-link",
+      "sheetId": "reversing-index-protection",
+      "x": 120,
+      "y": 1391,
+      "text": "A1/009 | Continued index: installation and handover references.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-index-installation-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-index-installation"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-brand",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-title",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 173,
+      "text": "DRAWING INDEX: FINAL REFERENCES",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-01",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 231,
+      "text": "A1/007 | Previous index page.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-02",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 289,
+      "text": "A1/009 | Final references and continuity diagrams.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-03",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 347,
+      "text": "A1/010 | Continued index: handover records.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-04",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 405,
+      "text": "A1/008 | Reference revision and release record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-05",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 463,
+      "text": "A2/016 | Incoming mains continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-06",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 521,
+      "text": "A2/017 | Motor output continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-07",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 579,
+      "text": "A2/018 | Control supply and command continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-08",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 637,
+      "text": "A2/019 | Run and fault continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-09",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 695,
+      "text": "A2/020 | Star point and PE continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-10",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 753,
+      "text": "A3/007 | Panel depth comparison for Q1 and XT1.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-11",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 811,
+      "text": "A3/008 | Q1 mounting and service zones review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-12",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 869,
+      "text": "A3/009 | Field routing and enclosure entry record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-13",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 927,
+      "text": "A4/045 | M1 catalog mass and mounting basis.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-14",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 985,
+      "text": "A4/046 | M1 rotor kinetic energy at rated speed.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-15",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 1043,
+      "text": "A4/047 | M1 catalog brake option and model scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-16",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 1101,
+      "text": "A4/048 | M1 installation rating basis.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-installation-line-17",
+      "sheetId": "reversing-index-installation",
+      "x": 120,
+      "y": 1159,
+      "text": "A4/049 | M1 winding thermal class evidence.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-index-handover-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-index-handover"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-brand",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-title",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 173,
+      "text": "DRAWING INDEX: HANDOVER AND REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-01",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 231,
+      "text": "A1/009 | Previous index page.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-02",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 289,
+      "text": "A4/050 | M1 temperature sensing options and wiring scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-03",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 347,
+      "text": "A4/051 | M1 winding voltage consistency check.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-04",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 405,
+      "text": "A4/052 | Q1 Siemens reversing circuit reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-05",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 463,
+      "text": "A4/053 | Q1 receiver interface review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-06",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 521,
+      "text": "A4/054 | Q1 direction command review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-07",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 579,
+      "text": "A4/055 | Q1 device variant verification.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-08",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 637,
+      "text": "A4/056 | Q1 source revision comparison record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-09",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 695,
+      "text": "A4/057 | Delivered device evidence register.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-10",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 753,
+      "text": "A4/058 | Protection setting change record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-11",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 811,
+      "text": "A4/059 | Motor installation evidence register.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-12",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 869,
+      "text": "A4/060 | Control supply and receiver evidence register.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-13",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 927,
+      "text": "A4/061 | Continuity inspection record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-handover-line-14",
+      "sheetId": "reversing-index-handover",
+      "x": 120,
+      "y": 985,
+      "text": "A4/062 | As-built drawing reconciliation.",
       "stroke": "#13263b"
     }
   ],
