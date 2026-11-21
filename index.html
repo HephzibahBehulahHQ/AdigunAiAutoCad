@@ -362,7 +362,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     pushUndo(snapshot);renderObjects();persist();refreshSelectedProperties();notify('Object position updated.');
   }
   function selectionCanAlign(){return state.selectedObjectIds.length>1&&state.selectedObjectIds.every(function(id){const obj=state.objects.find(function(item){return item.id===id;});return obj&&obj.kind!=='wire';});}
-  function objectBounds(obj){if(obj&&obj.kind==='component-instance'){const definition=window.AdigunCADEngine.component(obj.componentId);if(!definition)return null;const rotated=obj.rotation===90||obj.rotation===270,width=rotated?definition.symbol.height:definition.symbol.width,height=rotated?definition.symbol.width:definition.symbol.height;return{left:obj.x-width/2,right:obj.x+width/2,top:obj.y-height/2,bottom:obj.y+height/2,width:width,height:height,cx:obj.x,cy:obj.y};}if(obj&&obj.kind==='circle'){const radius=Math.max(2,Math.hypot(obj.x2-obj.x,obj.y2-obj.y));return{left:obj.x-radius,right:obj.x+radius,top:obj.y-radius,bottom:obj.y+radius,width:radius*2,height:radius*2,cx:obj.x,cy:obj.y};}const xs=[],ys=[];[['x','y'],['x1','y1'],['x2','y2']].forEach(function(pair){if(Number.isFinite(obj[pair[0]])&&Number.isFinite(obj[pair[1]])){xs.push(obj[pair[0]]);ys.push(obj[pair[1]]);}});if(Array.isArray(obj.points))obj.points.forEach(function(point){if(Number.isFinite(point.x)&&Number.isFinite(point.y)){xs.push(point.x);ys.push(point.y);}});if(!xs.length)return null;const left=Math.min.apply(null,xs),right=Math.max.apply(null,xs),top=Math.min.apply(null,ys),bottom=Math.max.apply(null,ys);return{left:left,right:right,top:top,bottom:bottom,width:right-left,height:bottom-top,cx:(left+right)/2,cy:(top+bottom)/2};}
+  function objectBounds(obj){if(obj&&obj.kind==='component-instance'){const definition=window.AdigunCADEngine.component(obj.componentId);if(!definition)return null;const rotated=obj.rotation===90||obj.rotation===270,scale=obj.symbolScale??1,width=(rotated?definition.symbol.height:definition.symbol.width)*scale,height=(rotated?definition.symbol.width:definition.symbol.height)*scale;return{left:obj.x-width/2,right:obj.x+width/2,top:obj.y-height/2,bottom:obj.y+height/2,width:width,height:height,cx:obj.x,cy:obj.y};}if(obj&&obj.kind==='circle'){const radius=Math.max(2,Math.hypot(obj.x2-obj.x,obj.y2-obj.y));return{left:obj.x-radius,right:obj.x+radius,top:obj.y-radius,bottom:obj.y+radius,width:radius*2,height:radius*2,cx:obj.x,cy:obj.y};}const xs=[],ys=[];[['x','y'],['x1','y1'],['x2','y2']].forEach(function(pair){if(Number.isFinite(obj[pair[0]])&&Number.isFinite(obj[pair[1]])){xs.push(obj[pair[0]]);ys.push(obj[pair[1]]);}});if(Array.isArray(obj.points))obj.points.forEach(function(point){if(Number.isFinite(point.x)&&Number.isFinite(point.y)){xs.push(point.x);ys.push(point.y);}});if(!xs.length)return null;const left=Math.min.apply(null,xs),right=Math.max.apply(null,xs),top=Math.min.apply(null,ys),bottom=Math.max.apply(null,ys);return{left:left,right:right,top:top,bottom:bottom,width:right-left,height:bottom-top,cx:(left+right)/2,cy:(top+bottom)/2};}
   function focusObjectInView(obj,zoomToFit){const source=objectBounds(obj);if(!source){notify('This object has no navigable drawing bounds.');return;}const transform=state.drawingTransform||{scale:1,x:0,y:0};const bounds={width:source.width*transform.scale,height:source.height*transform.scale,cx:source.cx*transform.scale+transform.x,cy:source.cy*transform.scale+transform.y};if(zoomToFit){const page=activeCanvasSize(),width=Math.max(30,bounds.width*1.5),height=Math.max(30,bounds.height*1.5),fitZoom=Math.min(500,page.width*100/width,page.height*100/height);state.zoom=Math.max(10,Math.floor(fitZoom/5)*5);const viewWidth=page.width*100/state.zoom,viewHeight=page.height*100/state.zoom;state.view={x:bounds.cx-viewWidth/2,y:bounds.cy-viewHeight/2,w:viewWidth,h:viewHeight};}else state.view={...state.view,x:bounds.cx-state.view.w/2,y:bounds.cy-state.view.h/2};applyView();persist();notify(zoomToFit?'Zoomed to drawing object.':'Drawing object centered in view.');}
   function applyGraphicDeltas(deltas,message){if(!selectionCanAlign())return;const changed=Object.keys(deltas).filter(function(id){return Math.abs(deltas[id].x)>1e-7||Math.abs(deltas[id].y)>1e-7;});if(!changed.length){notify('The selected geometry is already arranged that way.');return;}const snapshot=drawingHistoryEntry();changed.forEach(function(id){const obj=state.objects.find(function(item){return item.id===id;});if(obj)translateObjectGeometry(obj,deltas[id].x,deltas[id].y);});if(rejectNewComponentOverlap(snapshot,changed))return;pushUndo(snapshot);renderObjects();persist();notify(message);}
   function alignSelection(edge){if(!selectionCanAlign()){notify('Align applies to selected objects except wires, which must be routed separately.');return;}const anchor=objectBounds(state.objects.find(function(obj){return obj.id===state.selected;}));if(!anchor)return;const deltas={};state.selectedObjectIds.forEach(function(id){const bounds=objectBounds(state.objects.find(function(obj){return obj.id===id;}));if(!bounds)return;let dx=0,dy=0;if(edge==='left')dx=anchor.left-bounds.left;else if(edge==='center-x')dx=anchor.cx-bounds.cx;else if(edge==='right')dx=anchor.right-bounds.right;else if(edge==='top')dy=anchor.top-bounds.top;else if(edge==='center-y')dy=anchor.cy-bounds.cy;else if(edge==='bottom')dy=anchor.bottom-bounds.bottom;deltas[id]={x:dx,y:dy};});applyGraphicDeltas(deltas,'Selected geometry aligned.');}
@@ -443,7 +443,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function toggleObjectHidden(id){const obj=state.objects.find(function(item){return item.id===id;});if(!obj)return;pushUndo();obj.hidden=!obj.hidden;renderObjects();persist();notify(obj.hidden?'Object hidden. Right-click the blank canvas to show hidden objects.':'Object shown.');}
   function flipObject(id,axis){const obj=state.objects.find(function(item){return item.id===id;});if(!obj||obj.kind==='component-instance')return;pushUndo();if(axis==='x')obj.flipX=!obj.flipX;else obj.flipY=!obj.flipY;renderObjects();persist();notify(axis==='x'?'Object flipped horizontally.':'Object flipped vertically.');}
   function finishObjectMove(id,point){const obj=state.objects.find(function(item){return item.id===id;});if(!obj)return;const destination=snapObjectPoint(point),dx=destination.x-(Number(obj.x)||0),dy=destination.y-(Number(obj.y)||0);state.pendingMoveObjectId=null;if(Math.abs(dx)<1e-6&&Math.abs(dy)<1e-6){notify('Object is already at that point.');return;}const snapshot=drawingHistoryEntry();translateObjectGeometry(obj,dx,dy);if(rejectNewComponentOverlap(snapshot,[id]))return;pushUndo(snapshot);state.selected=id;renderObjects();persist();refreshSelectedProperties();notify('Object moved to the selected point.');}
-  function buildCatalogGlyph(obj,item,stroke,width){const ns='http://www.w3.org/2000/svg',g=document.createElementNS(ns,'g');g.setAttribute('transform','translate('+obj.x+' '+obj.y+') rotate('+(obj.rotation||0)+')');g.setAttribute('stroke',stroke);g.setAttribute('stroke-width',width);g.setAttribute('stroke-linecap','round');g.setAttribute('stroke-linejoin','round');g.setAttribute('fill','none');g.setAttribute('class','drawing-object '+(obj.id===state.selected?'selected-object':''));const add=function(tag,a){const e=document.createElementNS(ns,tag);Object.keys(a||{}).forEach(k=>e.setAttribute(k,String(a[k])));g.append(e);return e;},line=function(a,b,c,d){return add('path',{d:'M'+a+' '+b+'L'+c+' '+d});},path=function(d){return add('path',{d:d});},rect=function(x,y,w,h){return add('rect',{x:x,y:y,width:w,height:h});},circle=function(x,y,r){return add('circle',{cx:x,cy:y,r:r});},label=function(v,x,y,z){const t=add('text',{x:x||0,y:y||4,'text-anchor':'middle','font-size':z||9,fill:stroke,stroke:'none','font-family':'Arial, sans-serif','font-weight':'600'});t.textContent=v;};switch(item.family){case'contactor':
+  function buildCatalogGlyph(obj,item,stroke,width){const ns='http://www.w3.org/2000/svg',g=document.createElementNS(ns,'g');g.setAttribute('transform','translate('+obj.x+' '+obj.y+') rotate('+(obj.rotation||0)+') scale('+(obj.symbolScale??1)+')');g.setAttribute('stroke',stroke);g.setAttribute('stroke-width',width);g.setAttribute('stroke-linecap','round');g.setAttribute('stroke-linejoin','round');g.setAttribute('fill','none');g.setAttribute('class','drawing-object '+(obj.id===state.selected?'selected-object':''));const add=function(tag,a){const e=document.createElementNS(ns,tag);Object.keys(a||{}).forEach(k=>e.setAttribute(k,String(a[k])));g.append(e);return e;},line=function(a,b,c,d){return add('path',{d:'M'+a+' '+b+'L'+c+' '+d});},path=function(d){return add('path',{d:d});},rect=function(x,y,w,h){return add('rect',{x:x,y:y,width:w,height:h});},circle=function(x,y,r){return add('circle',{cx:x,cy:y,r:r});},label=function(v,x,y,z){const t=add('text',{x:x||0,y:y||4,'text-anchor':'middle','font-size':z||9,fill:stroke,stroke:'none','font-family':'Arial, sans-serif','font-weight':'600'});t.textContent=v;};switch(item.family){case'contactor':
         line(-120,-25,-97,-25);line(-120,25,-97,25);circle(-120,-25,2.6);circle(-120,25,2.6);
         rect(-97,-18,28,36);path('M-91 -8a4 8 0 0 1 8 0a4 8 0 0 1 8 0');label('24 V DC',-83,-23,6);
         path('M-40 -32V32').setAttribute('stroke-dasharray','3 3');
@@ -539,7 +539,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function componentBoundsOverlap(a,b){
     return a&&b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
   }
-  function rejectNewComponentOverlap(snapshot,ids){
+  function rejectNewComponentOverlap(snapshot,ids,action='Move'){
     const moved=new Set(ids);
     const parts=state.objects.filter(object=>object.kind==='component-instance');
     const movedParts=parts.filter(object=>moved.has(object.id));
@@ -554,7 +554,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         restoreDrawingHistory(snapshot);
         renderObjects();
         refreshSelectedProperties();
-        notify('Move would overlap '+conflict.ref+'. Original position restored.');
+        notify(action+' would overlap '+conflict.ref+'. Original geometry restored.');
         return true;
       }
     }
@@ -736,6 +736,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       +specRows
       +'<div class="property-row"><span>External terminals</span><strong>'+escapeHtml(def.symbol.pins.length+' · '+pinSummary)+'</strong></div>'
       +'<div class="property-row"><span>Rotation</span><strong>'+escapeHtml(obj.rotation+'°')+'</strong></div>'
+      +'<label class="property-row"><span>Symbol scale</span><input type="number" min="0.25" max="4" step="0.05" data-symbol-scale="'+escapeHtml(obj.id)+'" value="'+(obj.symbolScale??1)+'"'+(obj.locked?' disabled':'')+'></label>'
+      +'<div class="property-row"><span>Symbol size (mm)</span><strong>'+Number((def.symbol.width*(obj.symbolScale??1)).toFixed(2))+' × '+Number((def.symbol.height*(obj.symbolScale??1)).toFixed(2))+'</strong></div>'
       +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.x)+'"></label>'
       +'<label class="property-row"><span>Y (mm)</span><input type="number" step="2.5" data-object-coordinate="y" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.y)+'"></label>'
       +'<button class="command-item" data-rotate-object="'+escapeHtml(obj.id)+'"><span>↻</span><span>Rotate 90° clockwise</span></button>'
@@ -746,6 +748,29 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       +'<button class="command-item" data-delete-object="'+escapeHtml(obj.id)+'"><span>⌫</span><span>Remove verified component</span><kbd>Delete</kbd></button>';
   }
   let activeComponentEdit=null;
+  $('#inspectorContent').addEventListener('change',function(event){
+    const field=event.target.closest('[data-symbol-scale]');
+    if(!field)return;
+    const object=state.objects.find(item=>item.id===field.dataset.symbolScale);
+    if(!object||object.locked)return;
+    const current=object.symbolScale??1,scale=field.valueAsNumber;
+    if(!Number.isFinite(scale)||scale<0.25||scale>4){
+      field.value=current;
+      notify('Symbol scale must be between 0.25 and 4.');
+      return;
+    }
+    if(scale===current)return;
+    const snapshot=drawingHistoryEntry();
+    const engine=window.AdigunCADEngine;
+    const oldPins=engine.worldPins(object);
+    object.symbolScale=scale;
+    remapConnectedWireEnds(oldPins,engine.worldPins(object));
+    if(rejectNewComponentOverlap(snapshot,[object.id],'Resize'))return;
+    pushUndo(snapshot);
+    renderObjects();
+    refreshSelectedProperties();
+    persist();
+  });
   $('#inspectorContent').addEventListener('focusin',function(e){
     const field=e.target.closest('[data-component-property]');
     if(field)activeComponentEdit={field:field,snapshot:JSON.stringify(state.objects),historyRecorded:false};
