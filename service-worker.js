@@ -3,7 +3,7 @@
 const shellCacheName = 'adigun-editor-shell-v1';
 const scope = new URL(self.registration.scope);
 const editorUrl = new URL('index.html', scope).href;
-const scripts = ['cad-engine.js', 'cad-dxf.js', 'vendor/dxf-parser-1.1.2.js'].map(path => new URL(path, scope).href);
+const scripts = ['cad-engine.js', 'cad-dxf.js', 'vendor/dxf-parser-1.1.2.js', 'vendor/dxf-writer-2.8.9.mjs'].map(path => new URL(path, scope).href);
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(shellCacheName).then(cache => cache.addAll([editorUrl, ...scripts])));

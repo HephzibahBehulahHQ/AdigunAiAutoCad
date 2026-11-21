@@ -17,7 +17,7 @@ const sampleDxf = [
   '0', 'ENDSEC', '0', 'EOF', ''
 ].join('\n');
 
-test('DXF imports supported planar geometry, converts units, and reports skipped entities', () => {
+test('DXF imports and exports supported planar geometry and reports skipped entities', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');
   const { project, unsupported } = globalThis.AdigunDXF.importDrawing(sampleDxf, 'Drawing outline', 'dxf-regression');
@@ -28,6 +28,16 @@ test('DXF imports supported planar geometry, converts units, and reports skipped
   assert.equal(circle.kind, 'circle');
   assert.ok(Math.abs(circle.x2 - circle.x - 25.4) < 1e-9);
   assert.deepEqual(engine.parseProject(engine.serializeProject(project)).project.objects, project.objects);
+  const exported = await globalThis.AdigunDXF.exportDrawing([...project.objects,
+    { kind: 'wire', x1: 0, y1: 0, x2: 50, y2: 30, stroke: '#164eac' }, { kind: 'component-instance' }]);
+  assert.deepEqual(exported.unsupported, ['component-instance × 1']);
+  assert.equal(new globalThis.DxfParser().parseSync(exported.text).header.$INSUNITS, 4);
+  const reopened = globalThis.AdigunDXF.importDrawing(exported.text, 'Round trip', 'dxf-round-trip');
+  const [restoredLine, restoredCircle, horizontal, vertical] = reopened.project.objects;
+  assert.deepEqual(restoredLine, line);
+  assert.deepEqual(restoredCircle, circle);
+  assert.deepEqual([horizontal.x1, horizontal.y1, horizontal.x2, horizontal.y2, vertical.x1, vertical.y1, vertical.x2, vertical.y2],
+    [0, 0, 50, 0, 50, 0, 50, 30]);
 });
 
 function makeLargeDrawingFixture() {
@@ -109,7 +119,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
 }, async () => {
   const { chromium } = require('playwright');
   const root = path.resolve(__dirname);
-  const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml' };
+  const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml' };
   const server = http.createServer((request, response) => {
     let pathname;
     try { pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname); }
@@ -280,6 +290,17 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await dxfPage.locator('#userDrawings [data-object="dxf-1"]').waitFor();
     assert.equal(await dxfPage.locator('#userDrawings circle[data-object="dxf-2"]').count(), 1);
     assert.match(await dxfPage.locator('#toast').textContent(), /Skipped: ARC/);
+    await dxfPage.locator('#openCommands').click();
+    const pendingDxf = dxfPage.waitForEvent('download');
+    await dxfPage.getByRole('button', { name: 'Export current sheet as DXF' }).click();
+    const dxfDownload = await pendingDxf;
+    assert.match(dxfDownload.suggestedFilename(), /\.dxf$/);
+    const roundTripDxf = fs.readFileSync(await dxfDownload.path(), 'utf8');
+    await dxfPage.locator('#openFile').setInputFiles({
+      name: 'Exported-outline.dxf', mimeType: 'application/dxf', buffer: Buffer.from(roundTripDxf)
+    });
+    await dxfPage.getByText('Exported-outline', { exact: true }).first().waitFor();
+    assert.equal(await dxfPage.locator('#userDrawings circle[data-object="dxf-2"]').count(), 1);
     await dxfPage.close({ runBeforeUnload: false });
 
     const largeDrawing = makeLargeDrawingFixture();
