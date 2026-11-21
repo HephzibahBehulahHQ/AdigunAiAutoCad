@@ -2190,6 +2190,47 @@
     ], report.rows);
   }
 
+  function deviceIndexCsv(project) {
+    const validation = validateProject(project);
+    if (!validation.valid) throw new Error('Device index export blocked: ' + validation.errors.join(' '));
+    const sheets = project.projectModel?.sheets || project.sheets || [];
+    const sheetNumbers = new Map(sheets.map(sheet => [sheet.id, sheet.number || sheet.name || sheet.id]));
+    const sheetOrder = new Map(sheets.map((sheet, index) => [sheet.id, index]));
+    const rows = project.objects.filter(object => object.kind === 'component-instance').map(object => {
+      const definition = component(object.componentId);
+      const sheetId = object.sheetId || project.activeSheet || sheets[0]?.id;
+      return {
+        sheetId,
+        sheet: sheetNumbers.get(sheetId) || sheetId,
+        ref: object.ref,
+        manufacturer: definition.manufacturer,
+        partNumber: definition.manufacturerPartNumber,
+        model: definition.model,
+        description: definition.name
+      };
+    }).sort((a, b) => (sheetOrder.get(a.sheetId) ?? 0) - (sheetOrder.get(b.sheetId) ?? 0)
+      || a.ref.localeCompare(b.ref, 'en', { numeric: true }));
+    return connectionReportCsv([
+      ['Sheet', 'sheet'], ['Reference', 'ref'], ['Manufacturer', 'manufacturer'],
+      ['Part number', 'partNumber'], ['Model', 'model'], ['Description', 'description']
+    ], rows);
+  }
+
+  function sheetIndexCsv(project) {
+    const validation = validateProject(project);
+    if (!validation.valid) throw new Error('Sheet index export blocked: ' + validation.errors.join(' '));
+    const sections = new Map((project.projectModel?.sections || []).map(section => [section.id, section.name]));
+    const sheets = project.projectModel?.sheets || project.sheets || [];
+    const rows = sheets.map(sheet => {
+      const sectionId = sheet.sectionId || sheet.projectSectionId;
+      return { ...sheet, section: sections.get(sectionId) || sectionId };
+    });
+    return connectionReportCsv([
+      ['Sheet', 'number'], ['Title', 'name'], ['Section', 'section'], ['Description', 'description'],
+      ['Paper size', 'paperSize'], ['Orientation', 'orientation'], ['Scale', 'scale'], ['Revision', 'revision']
+    ], rows);
+  }
+
   function connectionReportCsv(columns, rows) {
     function cell(value) {
       let text = Array.isArray(value) ? value.join('; ') : String(value == null ? '' : value);
@@ -2248,7 +2289,9 @@
     terminalList: terminalList,
     terminalListCsv: terminalListCsv,
     plcIoList: plcIoList,
-    plcIoListCsv: plcIoListCsv
+    plcIoListCsv: plcIoListCsv,
+    deviceIndexCsv: deviceIndexCsv,
+    sheetIndexCsv: sheetIndexCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
 

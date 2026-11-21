@@ -275,6 +275,17 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await lastTerminal.getAttribute('stroke'), originalColor);
     await largePage.locator('[data-action="redo"]').click();
     assert.equal(await lastTerminal.getAttribute('stroke'), '#4b367c');
+    await largePage.getByRole('button', { name: 'Electrical checks', exact: true }).click();
+    for (const [label, name, content] of [
+      ['Export device index CSV', 'device-index', /"A2\/0010","X250","Phoenix Contact","3212144"/],
+      ['Export sheet index CSV', 'sheet-index', /"A2\/0010","Terminal routes 10","Electrical design"/]
+    ]) {
+      const pending = largePage.waitForEvent('download');
+      await largePage.getByRole('button', { name: label }).click();
+      const download = await pending;
+      assert.equal(download.suggestedFilename(), 'adigun-electrical-' + name + '.csv');
+      assert.match(fs.readFileSync(await download.path(), 'utf8'), content);
+    }
     await largePage.keyboard.press('Control+Shift+S');
     await largePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const largeSavedText = await largePage.evaluate(() => window.__savedProjectWrites[0]);
