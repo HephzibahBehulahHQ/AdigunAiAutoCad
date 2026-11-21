@@ -23,13 +23,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify published example data
+        run: node scripts/project-library-validation.js --check
+      - name: Stage public site
+        run: |
+          site="$RUNNER_TEMP/adigun-pages"
+          mkdir -p "$site/examples/real-projects" "$site/docs/reports"
+          cp index.html cad-engine.js CNAME .nojekyll "$site/"
+          cp examples/real-projects/library.json examples/real-projects/*.adigun.json "$site/examples/real-projects/"
+          cp docs/reports/project-library-validation.json "$site/docs/reports/"
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-          path: .
+          path: ${{ runner.temp }}/adigun-pages
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v5
