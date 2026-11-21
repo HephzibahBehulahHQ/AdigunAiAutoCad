@@ -323,6 +323,13 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await pin(terminalIds[0], 1).click();
     assert.match(await terminal.getAttribute('class'), /selected-object/);
     await wiringPage.keyboard.press('ArrowDown');
+    const symbolScale = wiringPage.locator('[data-symbol-scale="' + terminalIds[0] + '"]');
+    await symbolScale.fill('4');
+    await symbolScale.press('Tab');
+    assert.equal(await symbolScale.inputValue(), '1', 'resize rejects overlap with the next terminal');
+    await symbolScale.fill('1.25');
+    await symbolScale.press('Tab');
+    assert.match(await terminal.getAttribute('transform'), /scale\(1\.25\)/);
     await wiringPage.keyboard.press('Control+Shift+S');
     await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const wiringSavedText = await wiringPage.evaluate(() => window.__savedProjectWrites[0]);
@@ -334,6 +341,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const origin = engine.worldPins(movedTerminal).find(item => item.number === '2');
     const destination = engine.worldPins(newTarget).find(item => item.number === '1');
     assert.ok(movedTerminal.y > unusedTerminal.y, 'keyboard movement nudges the connected terminal');
+    assert.equal(movedTerminal.symbolScale, 1.25);
     assert.deepEqual([savedWire.x1, savedWire.y1, savedWire.x2, savedWire.y2], [origin.x, origin.y, destination.x, destination.y]);
     const wiringAnalysis = engine.analyzeProject(wiringSaved.project);
     assert.equal(wiringAnalysis.openEndpointCount, 0);
