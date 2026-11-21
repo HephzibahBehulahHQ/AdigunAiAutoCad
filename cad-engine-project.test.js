@@ -457,7 +457,7 @@ test('every published catalog example opens as an independent sectioned native c
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
   const cases = [
-    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 16, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4', 'dol-reference-095': 'A2', 'dol-reference-096': 'A2' } },
+    { file: 'siemens-schneider-sew-dol-reference.adigun.json', counts: { A1: 6, A2: 19, A3: 5, A4: 70 }, sections: { 'dol-reference-001': 'A2', 'dol-reference-002': 'A1', 'dol-reference-021': 'A3', 'dol-reference-panel-layout': 'A3', 'dol-reference-024': 'A4', 'dol-reference-095': 'A2', 'dol-reference-096': 'A2', 'dol-reference-097': 'A2', 'dol-reference-098': 'A2', 'dol-reference-099': 'A2' } },
     { file: 'siemens-sew-star-delta-reference.adigun.json', counts: { A1: 5, A2: 19, A3: 4, A4: 72 }, sections: { 'ref-001': 'A1', 'ref-006': 'A2', 'ref-040': 'A3', 'ref-025': 'A4' } }
   ];
   for (const [index, item] of cases.entries()) {
@@ -513,6 +513,32 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
       editableCopyFootprint.stroke = '#dc2626';
       const reopened = engine.parseProject(engine.serializeProject(copy));
       assert.equal(reopened.valid, true, reopened.errors.join(' '));
+      const evidenceSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-097');
+      assert.equal(evidenceSheet.number, 'A2/097');
+      assert.equal(reopened.project.sheets.find(sheet => sheet.id === evidenceSheet.id).number, 'A2/0023');
+      const evidenceObjects = parsed.project.objects.filter(object => object.sheetId === evidenceSheet.id);
+      assert.ok(evidenceObjects.every(object => object.kind === 'rect' || object.kind === 'text'));
+      const evidenceText = evidenceObjects.map(object => object.text).join(' ');
+      assert.match(evidenceText, /A2\/094.*site ambient.*installation altitude/);
+      assert.match(evidenceText, /A2\/095.*thermal class/);
+      assert.match(evidenceText, /A2\/096.*sensor code.*terminal diagram/);
+      const reopenedEvidence = reopened.project.objects.filter(object => object.sheetId === evidenceSheet.id);
+      assert.deepEqual(reopenedEvidence, copy.objects.filter(object => object.sheetId === evidenceSheet.id));
+      for (const number of ['094', '095', '096']) {
+        const target = reopened.project.sheets.find(sheet => sheet.id === 'dol-reference-' + number);
+        assert.ok(reopenedEvidence.some(object => object.text?.startsWith(target.number + ' | ')));
+      }
+      for (const [suffix, copiedNumber, evidence] of [
+        ['098', 'A2/0024', /Evidence pending: site fault-current basis/],
+        ['099', 'A2/0025', /Evidence pending: total branch load/]
+      ]) {
+        const id = 'dol-reference-' + suffix;
+        assert.equal(parsed.project.sheets.find(sheet => sheet.id === id).number, 'A2/' + suffix);
+        assert.equal(reopened.project.sheets.find(sheet => sheet.id === id).number, copiedNumber);
+        const objects = reopened.project.objects.filter(object => object.sheetId === id);
+        assert.ok(objects.every(object => object.kind === 'rect' || object.kind === 'text'));
+        assert.ok(objects.some(object => evidence.test(object.text)));
+      }
       const reopenedFootprint = reopened.project.objects.find(object => object.id === editableCopyFootprint.id);
       assert.equal(reopenedFootprint.x, sourceLayoutSnapshot.x + 14);
       assert.equal(reopenedFootprint.stroke, '#dc2626');
