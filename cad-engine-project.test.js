@@ -320,7 +320,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await wiringPage.getByRole('button', { name: 'Reconnect end' }).click();
     await pin(terminalIds[2], 1).click();
     const terminal = wiringPage.locator('#userDrawings [data-object="' + terminalIds[0] + '"]');
-    await terminal.dispatchEvent('click', { bubbles: true });
+    await pin(terminalIds[0], 1).click();
+    assert.match(await terminal.getAttribute('class'), /selected-object/);
     await wiringPage.keyboard.press('ArrowDown');
     await wiringPage.keyboard.press('Control+Shift+S');
     await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
