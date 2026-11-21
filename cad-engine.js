@@ -377,6 +377,64 @@
       retrievedAt: '2026-11-12'
     }]
   });
+  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths) {
+    const pins = [], internalConnections = [];
+    for (let level = 1; level <= levels; level += 1) {
+      const y = (level - (levels + 1) / 2) * 30;
+      const prefix = levels > 1 ? level + ':' : '';
+      const pair = ['level-' + level + '-left', 'level-' + level + '-right'];
+      pair.forEach(function (id, index) {
+        pins.push({ id: id, localNumber: prefix + (index + 1), name: 'Level ' + level + ', connection ' + (index + 1),
+          x: index === 0 ? -35 : 35, y: y, electricalType: 'passive', connectionType: 'push-in' });
+      });
+      internalConnections.push(pair);
+    }
+    const name = levels > 1 ? 'Double-level terminal block' : 'Feed-through terminal block';
+    return deepFreeze({
+      schemaVersion: COMPONENT_SCHEMA_VERSION,
+      id: 'phoenix-contact-' + partNumber,
+      manufacturer: 'Phoenix Contact',
+      manufacturerPartNumber: partNumber,
+      model: model,
+      name: name,
+      family: 'feedthrough-terminal',
+      referencePrefix: 'X',
+      category: terminalDefinition.category,
+      symbol: {
+        id: 'terminal.feedthrough.' + partNumber + '.v1', view: 'schematic', unit: 'mm',
+        width: 70, height: levels > 1 ? 56 : 26, pins: pins, internalConnections: internalConnections,
+        numberingNote: 'Connection numbers and level prefixes are model-local identifiers.'
+      },
+      specifications: {
+        nominalVoltage: { value: voltage, unit: 'V' },
+        nominalCurrent: { value: current, unit: 'A' },
+        ratedCrossSection: { value: 2.5, unit: 'mm²' },
+        rigidConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+        flexibleConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+        connectionCount: { value: levels * 2, unit: 'connections' },
+        connectionMethod: { value: 'Push-in' },
+        productStandard: { value: 'IEC 60947-7-1' },
+        mountingRails: { value: ['NS 35/7.5', 'NS 35/15'] },
+        dimensions: {
+          width: { value: 5.2, unit: 'mm' },
+          height: { value: height, unit: 'mm' },
+          depthOnNS35_7_5: { value: railDepths[0], unit: 'mm' },
+          depthOnNS35_15: { value: railDepths[1], unit: 'mm' }
+        }
+      },
+      instanceProperties: terminalDefinition.instanceProperties,
+      sources: [{
+        publisher: 'Phoenix Contact', title: model + ' · ' + name + ' · Item ' + partNumber, url: url,
+        documentRevision: null, revisionNote: 'Live manufacturer product catalog.', retrievedAt: '2026-11-21'
+      }]
+    });
+  }
+
+  const pt25Terminal = compactTerminal('3209510', 'PT 2,5',
+    'https://www.phoenixcontact.com/en-pc/products/feed-through-terminal-block-pt-25-3209510', 1, 800, 24, 48.6, [36.8, 44.3]);
+  const pttb25Terminal = compactTerminal('3210567', 'PTTB 2,5',
+    'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567', 2, 500, 22, 68.2, [47.4, 54.9]);
+
   const relayDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
     id: 'phoenix-contact-2966171',
@@ -1063,7 +1121,7 @@
     instanceProperties: { terminalStrip: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, marking: { type: 'string', default: '', maximumLength: 40 }, comment: { type: 'string', default: '', maximumLength: 160 } },
     sources: [{ publisher: 'Phoenix Contact', title: 'PT 16 N-PE · Protective conductor terminal block · Item 3212147', url: 'https://www.phoenixcontact.com/en-nl/products/ground-terminal-pt-16-n-pe-3212147', documentRevision: 'Live manufacturer product data · retrieved 2026-11-12', revisionNote: 'Manufacturer specifies two push-in connections, 16 mm² rated cross-section, 0.5–25 mm² conductor range, IEC 60947-7-2, green-yellow color and a grounding foot. It does not number the connection points.' , retrievedAt: '2026-11-12' }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

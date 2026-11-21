@@ -193,9 +193,11 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
-  assert.equal(items.length, 19);
+  assert.equal(items.length, 21);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
     ['siemens-3rt2026-2kb40', 'contactor', 'KM'],
@@ -769,13 +771,13 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const analysis = engine.analyze(project.objects);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
-    [5, 13, 0, 0]
+    [4, 13, 0, 0]
   );
   const netPins = analysis.nets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(netPins, [
-    'K1:11,X2:1,X2:2',
+    'K1:11,X1:1:1,X1:1:2',
     'K1:14,KM1:A1',
-    'K1:A1,X1:1,X1:2',
+    'K1:A1,X1:2:1,X1:2:2',
     'K1:A2,KM1:A2,X3:1,X3:2'
   ]);
 
@@ -783,7 +785,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   assert.equal(bom.valid, true, bom.errors.join(' '));
   assert.deepEqual(
     bom.rows.map(row => [row.partNumber, row.quantity]).sort((a, b) => a[0].localeCompare(b[0])),
-    [['2966171', 1], ['3212144', 3], ['LC1D09BD', 1]].sort((a, b) => a[0].localeCompare(b[0]))
+    [['2966171', 1], ['3209510', 1], ['3210567', 1], ['LC1D09BD', 1]].sort((a, b) => a[0].localeCompare(b[0]))
   );
   const wireList = engine.wireList(project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));

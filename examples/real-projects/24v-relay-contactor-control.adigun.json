@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "24 V DC relay-operated contactor coil — wiring example",
-  "revision": "1.0",
-  "status": "Educational wiring example; external supply and PLC output connect at X1–X3.",
+  "revision": "1.1",
+  "status": "Educational 24 V DC control circuit with two independent PTTB terminal levels.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -30,15 +30,15 @@
       "schemaVersion": 1,
       "kind": "component-instance",
       "id": "example-x1",
-      "componentId": "phoenix-contact-3212144",
+      "componentId": "phoenix-contact-3210567",
       "ref": "X1",
       "x": 150,
-      "y": 400,
+      "y": 385,
       "rotation": 0,
       "properties": {
         "terminalStrip": "",
         "position": "",
-        "marking": "PLC Q0.0",
+        "marking": "Level 1 +24 V; level 2 PLC Q0.0",
         "comment": "External PLC output supplies the relay coil."
       },
       "sheetId": "control"
@@ -46,25 +46,8 @@
     {
       "schemaVersion": 1,
       "kind": "component-instance",
-      "id": "example-x2",
-      "componentId": "phoenix-contact-3212144",
-      "ref": "X2",
-      "x": 150,
-      "y": 180,
-      "rotation": 0,
-      "properties": {
-        "terminalStrip": "",
-        "position": "",
-        "marking": "+24 V DC",
-        "comment": "External control supply feed for relay contact common."
-      },
-      "sheetId": "control"
-    },
-    {
-      "schemaVersion": 1,
-      "kind": "component-instance",
       "id": "example-x3",
-      "componentId": "phoenix-contact-3212144",
+      "componentId": "phoenix-contact-3209510",
       "ref": "X3",
       "x": 150,
       "y": 560,
@@ -227,7 +210,7 @@
       "x1": 185,
       "y1": 320,
       "x2": 185,
-      "y2": 180,
+      "y2": 370,
       "stroke": "#b42318",
       "strokeWidth": 1.5
     },
@@ -282,7 +265,7 @@
       "sheetId": "control",
       "x": 50,
       "y": 78,
-      "text": "Static wiring model · External PLC output at X1 · +24 V at X2 · 0 V return at X3",
+      "text": "Static wiring model · X1 level 1 +24 V · X1 level 2 PLC output · X3 0 V return",
       "stroke": "#164eac"
     },
     {
