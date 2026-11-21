@@ -1348,6 +1348,13 @@
         }
         if (sheetIds.has(sheet.id)) errors.push('Duplicate sheet ID: ' + sheet.id + '.');
         sheetIds.add(sheet.id);
+        for (const key of ['gridIntervalMm', 'snapIntervalMm']) {
+          if (sheet[key] !== undefined && (!finite(sheet[key]) || sheet[key] < 0.001 || sheet[key] > 10000)) {
+            errors.push('Sheet ' + sheet.id + ' has an invalid ' + key + '.');
+          }
+        }
+        if (sheet.guides !== undefined && (!Array.isArray(sheet.guides) || sheet.guides.some(guide => !guide
+          || !['x', 'y'].includes(guide.axis) || !finite(guide.position)))) errors.push('Sheet ' + sheet.id + ' has invalid guides.');
       });
       if (Array.isArray(project.objects)) {
         project.objects.forEach(function (object, index) {
