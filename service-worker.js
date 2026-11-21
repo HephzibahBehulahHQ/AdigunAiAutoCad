@@ -3,10 +3,10 @@
 const shellCacheName = 'adigun-editor-shell-v1';
 const scope = new URL(self.registration.scope);
 const editorUrl = new URL('index.html', scope).href;
-const engineUrl = new URL('cad-engine.js', scope).href;
+const scripts = ['cad-engine.js', 'cad-dxf.js', 'vendor/dxf-parser-1.1.2.js'].map(path => new URL(path, scope).href);
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(shellCacheName).then(cache => cache.addAll([editorUrl, engineUrl])));
+  event.waitUntil(caches.open(shellCacheName).then(cache => cache.addAll([editorUrl, ...scripts])));
 });
 
 self.addEventListener('activate', event => {
@@ -19,10 +19,9 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   const editorNavigation = request.mode === 'navigate' && url.origin === scope.origin
     && [scope.pathname, new URL(editorUrl).pathname].includes(url.pathname);
-  const engineRequest = url.href === engineUrl;
-  if (!editorNavigation && !engineRequest) return;
+  if (!editorNavigation && !scripts.includes(url.href)) return;
 
-  event.respondWith(loadShellResource(request, editorNavigation ? editorUrl : engineUrl));
+  event.respondWith(loadShellResource(request, editorNavigation ? editorUrl : url.href));
 });
 
 async function loadShellResource(request, cacheKey) {

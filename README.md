@@ -13,6 +13,10 @@ Drawing Undo and Redo follow edit order across sheet navigation and reopen the s
 
 In **Electrical checks**, use **Export device index CSV** for component references and part numbers across the project, or **Export sheet index CSV** for sheet order, titles, paper formats, scales, and revisions.
 
+**Open** accepts ASCII DXF model-space lines, circles, and straight polylines as editable drawing geometry in a new project. The import converts supported drawing units to millimetres, treats unitless coordinates as millimetres, and preserves the original layer name on each imported entity. Blocks, arcs, bulged polylines, and other unsupported entities are listed when skipped. Use native project JSON to save the imported drawing. DXF geometry has no electrical part or net identities.
+
+The browser bundles [dxf-parser 1.1.2](https://github.com/gdsestimating/dxf-parser) from its pinned npm tarball. The [parser license](vendor/dxf-parser-LICENSE.txt) and [bundled loglevel license](vendor/loglevel-LICENSE.txt) are included.
+
 Use **Print project set** in the command palette to print every sheet in project order. Choose **Save as PDF** in the browser print dialog for a single project PDF.
 
 

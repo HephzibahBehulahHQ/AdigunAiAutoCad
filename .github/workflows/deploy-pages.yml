@@ -32,8 +32,9 @@ jobs:
       - name: Stage public site
         run: |
           site="$RUNNER_TEMP/adigun-pages"
-          mkdir -p "$site/examples/real-projects" "$site/docs/reports"
-          cp index.html cad-engine.js service-worker.js CNAME .nojekyll "$site/"
+          mkdir -p "$site/examples/real-projects" "$site/docs/reports" "$site/vendor"
+          cp index.html cad-engine.js cad-dxf.js service-worker.js CNAME .nojekyll "$site/"
+          cp vendor/dxf-parser-1.1.2.js vendor/*LICENSE.txt "$site/vendor/"
           cp examples/real-projects/library.json examples/real-projects/*.adigun.json "$site/examples/real-projects/"
           cp docs/reports/project-library-validation.json "$site/docs/reports/"
       - name: Configure GitHub Pages

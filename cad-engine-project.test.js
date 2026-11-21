@@ -8,6 +8,27 @@ const path = require('node:path');
 require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
+const sampleDxf = [
+  '0', 'SECTION', '2', 'HEADER', '9', '$INSUNITS', '70', '1', '0', 'ENDSEC',
+  '0', 'SECTION', '2', 'ENTITIES',
+  '0', 'LINE', '8', 'OUTLINE', '10', '1', '20', '2', '11', '3', '21', '4',
+  '0', 'CIRCLE', '8', 'CUTOUTS', '10', '6', '20', '4', '40', '1',
+  '0', 'ARC', '8', '0', '10', '10', '20', '2', '40', '1', '50', '0', '51', '90',
+  '0', 'ENDSEC', '0', 'EOF', ''
+].join('\n');
+
+test('DXF imports supported planar geometry, converts units, and reports skipped entities', () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const { project, unsupported } = globalThis.AdigunDXF.importDrawing(sampleDxf, 'Drawing outline', 'dxf-regression');
+  assert.deepEqual(unsupported, ['ARC × 1']);
+  const [line, circle] = project.objects;
+  assert.equal(project.objects.length, 2);
+  assert.deepEqual([line.kind, line.dxfLayer, line.x1, line.y1, line.x2, line.y2], ['line', 'OUTLINE', 25.4, -50.8, 3 * 25.4, -101.6]);
+  assert.equal(circle.kind, 'circle');
+  assert.ok(Math.abs(circle.x2 - circle.x - 25.4) < 1e-9);
+  assert.deepEqual(engine.parseProject(engine.serializeProject(project)).project.objects, project.objects);
+});
 
 function makeLargeDrawingFixture() {
   const sheets = [];
@@ -250,6 +271,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
     await reopenedPage.close({ runBeforeUnload: false });
+
+    const dxfPage = await context.newPage();
+    await dxfPage.goto(address);
+    await dxfPage.locator('#openFile').setInputFiles({
+      name: 'Drawing-outline.dxf', mimeType: 'application/dxf', buffer: Buffer.from(sampleDxf)
+    });
+    await dxfPage.locator('#userDrawings [data-object="dxf-1"]').waitFor();
+    assert.equal(await dxfPage.locator('#userDrawings circle[data-object="dxf-2"]').count(), 1);
+    assert.match(await dxfPage.locator('#toast').textContent(), /Skipped: ARC/);
+    await dxfPage.close({ runBeforeUnload: false });
 
     const largeDrawing = makeLargeDrawingFixture();
     const beforeLargeEdit = engine.analyzeProject(largeDrawing);
