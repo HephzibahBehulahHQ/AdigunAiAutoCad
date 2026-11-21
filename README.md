@@ -15,6 +15,8 @@ Open **Symbol Library**, pick a component, then click its position on the sheet.
 
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 
+To author a reusable symbol, select unrotated lines, rectangles, or circles and run **Create project symbol from selection**. Enter a name and terminal coordinates in millimetres relative to the selection center. The symbol appears under **Project symbols** and stays with the drawing after Save and Open.
+
 Use **Wire** to click two pin anchors for an automatic orthogonal route. To draw your own route, click the first pin, click the sheet wherever you want to add bends, then click the destination pin. Press **Enter** to finish a manual route with an open end, or **Esc** to cancel. In **Select** mode, select a wire to change its color or use **Reconnect start** / **Reconnect end**. Moving either component keeps its wire endpoint attached and leaves the manual bends in place.
 
 Drag a selected catalog symbol's corner handle or edit **Symbol scale** in Properties to resize it proportionally. Attached wires follow the pins, and the editor rejects edits that introduce a component overlap. The manufacturer's dimensions remain available separately in Properties.
