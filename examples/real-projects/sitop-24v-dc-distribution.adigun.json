@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.1",
-  "description": "Source-backed DC output and separate parallel terminal branches to the supply pins of two ifm sensors.",
+  "revision": "1.2",
+  "description": "Source-backed DC distribution and digital and analog ifm sensor input wiring to a Siemens CPU 1212C.",
   "activeSheet": "supply",
   "theme": "light",
   "zoom": 100,
@@ -35,6 +35,12 @@
       "id": "branch-b",
       "number": "A2/004",
       "name": "ifm PN2070 pressure sensor power wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "plc-inputs",
+      "number": "A2/005",
+      "name": "CPU 1212C power and sensor input wiring",
       "projectSectionId": "A2"
     }
   ],
@@ -341,7 +347,7 @@
       "x": 110,
       "y": 435,
       "stroke": "#13263b",
-      "text": "This sheet routes sensor supply only. Signal outputs are available for subsequent I/O assignment."
+      "text": "B1 switching output goes to A1 DI a.0 on A2/005."
     },
     {
       "id": "branch-a-supply",
@@ -442,7 +448,7 @@
       "x": 110,
       "y": 435,
       "stroke": "#13263b",
-      "text": "This sheet routes sensor supply only. Signal outputs are available for subsequent I/O assignment."
+      "text": "B2 OUT2 goes to A1 AI0 on A2/005, conditional on 0–10 V mode. OUT1 remains unassigned."
     },
     {
       "id": "branch-b-supply",
@@ -508,6 +514,249 @@
       "potential": "0 V DC",
       "stroke": "#164eac",
       "strokeWidth": 1.5
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 580,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "plc-inputs"
+    },
+    {
+      "id": "cpu-feed-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 550,
+      "y": 260,
+      "x1": 550,
+      "y1": 260,
+      "x2": 550,
+      "y2": 190,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "cpu-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 550,
+      "y": 320,
+      "x1": 550,
+      "y1": 320,
+      "x2": 550,
+      "y2": 390,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-feed",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 180,
+      "y": 294,
+      "x1": 180,
+      "y1": 294,
+      "x2": 450,
+      "y2": 294,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "cpu-return",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 180,
+      "y": 312,
+      "x1": 180,
+      "y1": 312,
+      "x2": 450,
+      "y2": 312,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-1m-drop",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 350,
+      "y": 312,
+      "x1": 350,
+      "y1": 312,
+      "x2": 350,
+      "y2": 384,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-1m",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 350,
+      "y": 384,
+      "x1": 350,
+      "y1": 384,
+      "x2": 450,
+      "y2": 384,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-2m-drop",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 230,
+      "y": 312,
+      "x1": 230,
+      "y1": 312,
+      "x2": 230,
+      "y2": 638,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-2m-run",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 230,
+      "y": 638,
+      "x1": 230,
+      "y1": 638,
+      "x2": 830,
+      "y2": 294,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "cpu-2m",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 830,
+      "y": 294,
+      "x1": 830,
+      "y1": 294,
+      "x2": 710,
+      "y2": 294,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "b1-signal-send",
+      "kind": "wire",
+      "sheetId": "branch-a",
+      "x": 560,
+      "y": 315,
+      "x1": 560,
+      "y1": 315,
+      "x2": 760,
+      "y2": 315,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B1 switching output"
+    },
+    {
+      "id": "b1-di0",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 402,
+      "x1": 310,
+      "y1": 402,
+      "x2": 450,
+      "y2": 402,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B1 switching output"
+    },
+    {
+      "id": "b2-signal-send",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 575,
+      "y": 290,
+      "x1": 575,
+      "y1": 290,
+      "x2": 760,
+      "y2": 290,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B2 analog output"
+    },
+    {
+      "id": "b2-ai0",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 780,
+      "y": 312,
+      "x1": 780,
+      "y1": 312,
+      "x2": 710,
+      "y2": 312,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "B2 analog output"
+    },
+    {
+      "id": "cpu-title",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 108,
+      "text": "A1 · CPU 1212C POWER AND SENSOR INPUTS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-digital-address",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 710,
+      "text": "B1 OUT maps to DI a.0 / I0.0 at X10:7. Input group reference 1M returns to 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-analog-address",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 755,
+      "text": "B2 OUT2 maps to AI0 at X11:2. Analog reference 2M returns to 0 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-analog-mode",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 800,
+      "text": "The analog connection assumes PN2070 OUT2 is configured for 0–10 V. Its factory mode is 4–20 mA.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-scope",
+      "sheetId": "plc-inputs",
+      "kind": "text",
+      "x": 110,
+      "y": 845,
+      "text": "Functional earth, output groups, sensor calibration and executable PLC logic are outside this example.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -697,6 +946,134 @@
             "direction": "left",
             "targetSheetId": "distribution",
             "targetRef": "X4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-feed",
+      "name": "CPU +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "cpu-feed-send",
+          "point": {
+            "x": 550,
+            "y": 190
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "cpu-feed",
+          "point": {
+            "x": 180,
+            "y": 294
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-return",
+      "name": "CPU 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "cpu-return-send",
+          "point": {
+            "x": 550,
+            "y": 390
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "cpu-return",
+          "point": {
+            "x": 180,
+            "y": 312
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b1-di0",
+      "name": "B1 switching output",
+      "endpoints": [
+        {
+          "sheetId": "branch-a",
+          "wireId": "b1-signal-send",
+          "point": {
+            "x": 760,
+            "y": 315
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b1-di0",
+          "point": {
+            "x": 310,
+            "y": 402
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-a",
+            "targetRef": "B1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b2-ai0",
+      "name": "B2 analog output",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "b2-signal-send",
+          "point": {
+            "x": 760,
+            "y": 290
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b2-ai0",
+          "point": {
+            "x": 780,
+            "y": 312
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
           }
         }
       ]
