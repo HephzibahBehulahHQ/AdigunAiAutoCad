@@ -381,6 +381,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(movedTerminal.symbolScale, draggedScale);
     assert.equal(movedTerminal.rotation, 270);
     assert.deepEqual([savedWire.x1, savedWire.y1, savedWire.x2, savedWire.y2], [origin.x, origin.y, destination.x, destination.y]);
+    assert.deepEqual(savedWire.pinAttachments, {
+      start: { instanceId: movedTerminal.id, pinId: origin.id },
+      end: { instanceId: newTarget.id, pinId: destination.id }
+    });
     const wiringAnalysis = engine.analyzeProject(wiringSaved.project);
     assert.equal(wiringAnalysis.openEndpointCount, 0);
     const savedNet = wiringAnalysis.globalNets.find(net => net.wireIds.includes(savedWire.sheetId + ':' + wireId));
@@ -414,6 +418,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       return engine.worldPins(component).find(item => item.number === '2');
     });
     assert.deepEqual([manualWire.x1, manualWire.y1, manualWire.x2, manualWire.y2], [manualStart.x, manualStart.y, manualEnd.x, manualEnd.y]);
+    assert.deepEqual(manualWire.pinAttachments, {
+      start: { instanceId: terminalIds[1], pinId: manualStart.id },
+      end: { instanceId: terminalIds[2], pinId: manualEnd.id }
+    });
     assert.equal(engine.analyzeProject(manualSaved.project).openEndpointCount, 0);
     if (process.env.CAD_SCREENSHOT_DIR) await wiringPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'connected-terminals.png') });
     await wiringPage.close({ runBeforeUnload: false });
