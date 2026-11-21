@@ -149,6 +149,14 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.ok(await page.locator('#userDrawings > *').count() > 0, 'canvas edit should create native vector geometry');
 
     await page.locator('[aria-label="Properties"]').click();
+    const scale = page.getByLabel('Scale', { exact: true });
+    await scale.fill('1:2');
+    await scale.press('Tab');
+    assert.equal(await page.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
+    await scale.fill('1:0');
+    await scale.press('Tab');
+    assert.equal(await scale.inputValue(), '1:2');
+    assert.equal(await page.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
     const description = page.getByLabel('Description', { exact: true });
     await description.fill('Saved through local file picker');
     await page.keyboard.press('Control+Shift+S');
@@ -160,6 +168,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const saved = JSON.parse(savedText);
     assert.equal(saved.projectModel.name, 'Browser local save test');
     assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).description, 'Updated with repeat Save');
+    assert.equal(saved.projectModel.sheets.find(sheet => sheet.id === sheetId).scale, '1:2');
     assert.ok(saved.objects.length > 0);
     await page.close();
 
@@ -173,6 +182,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     });
     await reopenedPage.locator('#projectTree [data-sheet]').first().waitFor();
     assert.equal(await reopenedPage.locator('#sheetTabs .document-tab[data-sheet]').count(), 1);
+    assert.equal(await reopenedPage.locator('#userDrawings').getAttribute('transform'), 'scale(0.5)');
     await reopenedPage.locator('[aria-label="Properties"]').click();
     assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
@@ -330,6 +340,13 @@ test('new project has empty A1–A4 sections and supports uncapped continuous nu
   assert.deepEqual(engine.setProjectSheetPaperFormat(power, 'A4', 'portrait'), { width: 210, height: 297 });
   assert.deepEqual([power.paperSize, power.orientation], ['A4', 'portrait']);
   engine.setProjectSheetPaperFormat(power, 'A3', 'landscape');
+  assert.equal(engine.setProjectSheetDrawingScale(power, ' 1 : 2 '), '1:2');
+  assert.equal(engine.projectSheetDrawingScaleFactor(power), 0.5);
+  assert.throws(() => engine.setProjectSheetDrawingScale(power, '1:0'), /positive ratio/);
+  assert.equal(engine.projectSheetDrawingScaleFactor(power), 0.5);
+  assert.equal(engine.setProjectSheetDrawingScale(power, 'Fit to page'), 'Fit to page');
+  assert.equal(power.drawingFitToPage, true);
+  assert.equal(engine.projectSheetDrawingScaleFactor({ scale: '1:2' }), 1, 'legacy title labels do not scale drawings');
 
   const overview = engine.addProjectSheet(project, 'A1', '', 'sheet-overview');
   assert.equal(overview.number, 'A1/0001');

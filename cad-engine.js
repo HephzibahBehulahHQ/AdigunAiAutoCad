@@ -236,6 +236,29 @@
     return { width: width, height: height };
   }
 
+  function drawingScaleRatio(value) {
+    const match = /^(\d+)\s*:\s*(\d+)$/.exec(String(value ?? '').trim());
+    if (!match) return null;
+    const drawing = Number(match[1]), world = Number(match[2]);
+    return Number.isSafeInteger(drawing) && Number.isSafeInteger(world) && drawing > 0 && world > 0
+      ? { label: drawing + ':' + world, factor: drawing / world }
+      : null;
+  }
+
+  function setProjectSheetDrawingScale(sheet, value) {
+    const fit = /^fit to page$/i.test(String(value ?? '').trim());
+    const ratio = drawingScaleRatio(value);
+    if (!sheet || (!fit && !ratio)) throw new Error('Enter a positive ratio such as 1:2, or Fit to page.');
+    sheet.scale = fit ? 'Fit to page' : ratio.label;
+    sheet.drawingFitToPage = fit;
+    delete sheet.drawingTransform;
+    return sheet.scale;
+  }
+
+  function projectSheetDrawingScaleFactor(sheet) {
+    return sheet?.drawingFitToPage === false ? (drawingScaleRatio(sheet.scale)?.factor ?? 1) : 1;
+  }
+
   function renameProjectSheet(project, sheetId, name) {
     if (!project || !Array.isArray(project.sheets)) throw new Error('Project sheets are unavailable.');
     const sheet = project.sheets.find(function (item) { return item.id === sheetId; });
@@ -1749,6 +1772,8 @@
     renameProjectSection: renameProjectSection,
     addProjectSheet: addProjectSheet,
     setProjectSheetPaperFormat: setProjectSheetPaperFormat,
+    setProjectSheetDrawingScale: setProjectSheetDrawingScale,
+    projectSheetDrawingScaleFactor: projectSheetDrawingScaleFactor,
     renameProjectSheet: renameProjectSheet,
     moveProjectSheet: moveProjectSheet,
     deleteProjectSheet: deleteProjectSheet,
