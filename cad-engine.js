@@ -1392,6 +1392,7 @@
       }
     }
     if (Array.isArray(project.objects)) {
+      const componentsById = new Map(project.objects.filter(object => object?.kind === 'component-instance').map(object => [object.id, object]));
       project.objects.forEach(function (object, index) {
         if (!object || typeof object !== 'object') {
           errors.push('Drawing object ' + (index + 1) + ' is invalid.');
@@ -1406,6 +1407,19 @@
           const label = 'Wire ' + (object.id || index + 1);
           if (![object.x1, object.y1, object.x2, object.y2].every(finite)) errors.push(label + ' has invalid coordinates.');
           if (object.bends !== undefined && !validWireBends(object.bends)) errors.push(label + ' has invalid route bends.');
+          if (object.pinAttachments !== undefined) {
+            if (!object.pinAttachments || typeof object.pinAttachments !== 'object' || Array.isArray(object.pinAttachments)) {
+              errors.push(label + ' has invalid terminal attachments.');
+            } else for (const [end, index] of [['start', 1], ['end', 2]]) {
+              const attachment = object.pinAttachments[end];
+              if (attachment == null) continue;
+              const instance = componentsById.get(attachment.instanceId);
+              const pin = instance && instance.sheetId === object.sheetId && worldPins(instance).find(item => item.id === attachment.pinId);
+              if (!pin || Math.abs(pin.x - object['x' + index]) > EPSILON || Math.abs(pin.y - object['y' + index]) > EPSILON) {
+                errors.push(label + ' has an invalid ' + end + ' terminal reference or anchor.');
+              }
+            }
+          }
           for (const field of ['cableId', 'coreId']) {
             const value = object[field];
             if (value !== undefined && (typeof value !== 'string' || value.length > 80)) {
