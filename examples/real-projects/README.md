@@ -4,6 +4,8 @@ Choose a numbered project in **Project Explorer → List** to open an independen
 
 Use **Save project locally** to download the `.adigun.json` project under its project name. Use **Open project file** to reopen that saved file and continue editing. SVG imports are read-only artwork and are not editable example projects.
 
+**Bill of materials → Export CSV** includes verified components from every project sheet. **Electrical checks → Export wire list CSV** includes wires from every project sheet and follows explicit cross-sheet connections.
+
 # 24 V DC relay-operated contactor coil
 
 Open this project as an editable copy from **Project Explorer → List**.
