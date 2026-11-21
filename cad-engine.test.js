@@ -210,6 +210,10 @@ test('resizable drawing geometry preserves anchors and rejects unsupported or un
 
 test('catalog contains only source-backed engineering components', () => {
   const items = engine.catalog();
+  assert.deepEqual(engine.catalog('Siemens 6EP13325BA00').map(item => item.id),
+    ['siemens-sitop-psu100c-6ep1332-5ba00']);
+  assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
+  assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
   assert.equal(items.length, 21);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],

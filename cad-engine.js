@@ -1193,9 +1193,14 @@
   }
 
   function component(id) { return COMPONENTS[id] || null; }
-  function catalog() {
-    return Object.keys(COMPONENTS).map(function (id) {
-      const def = COMPONENTS[id];
+  function catalog(query = '') {
+    const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const terms = String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
+    return Object.values(COMPONENTS).filter(function (def) {
+      if (!terms.length) return true;
+      const fields = [def.id, def.name, def.model, def.manufacturerPartNumber, def.manufacturer, def.category, def.family].map(normalize);
+      return terms.every(term => fields.some(field => field.includes(term)));
+    }).map(function (def) {
       return { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber, category: def.category, family: def.family, tag: def.referencePrefix || 'X' };
     });
   }
