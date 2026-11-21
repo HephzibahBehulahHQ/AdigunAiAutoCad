@@ -69,5 +69,57 @@
     return { project, unsupported };
   }
 
-  root.AdigunDXF = Object.freeze({ importDrawing });
+  async function exportDrawing(objects) {
+    const { DxfWriter, Units, point3d } = await import('./vendor/dxf-writer-2.8.9.mjs');
+    const writer = new DxfWriter();
+    writer.setUnits(Units.Millimeters);
+    const layers = new Set(['0']);
+    const skipped = new Map();
+    let entities = 0;
+    for (const object of objects) {
+      if (object.hidden) continue;
+      const { kind, x, y, x1, y1, x2, y2 } = object;
+      const layerName = String(object.dxfLayer || object.layer || (kind === 'wire' ? 'connections' : 'annotations'))
+        .replace(/[<>/\\":;?*|=\x00-\x1f]/g, '_').slice(0, 255);
+      const options = { layerName };
+      if (/^#[\da-f]{6}$/i.test(object.stroke || '')) options.trueColor = object.stroke;
+      const addLayer = () => {
+        if (layers.has(layerName)) return;
+        writer.addLayer(layerName, 7, 'Continuous');
+        layers.add(layerName);
+      };
+      if (!object.rotation) {
+        if (kind === 'circle' && [x, y, x2, y2].every(Number.isFinite)) {
+          const radius = Math.hypot(x2 - x, y2 - y);
+          if (radius > 0) {
+            addLayer();
+            writer.addCircle(point3d(x, -y), radius, options);
+            entities += 1;
+            continue;
+          }
+        }
+        let points;
+        if (kind === 'line') points = [[x1, y1], [x2, y2]];
+        if (kind === 'wire') points = [[x1, y1], [x2, y1], [x2, y2]];
+        if (kind === 'rect') points = [[x, y], [x2, y], [x2, y2], [x, y2], [x, y]];
+        if (kind === 'freehand') points = object.points?.map(point => [point.x, point.y]);
+        if (points?.length > 1 && points.every(point => point.every(Number.isFinite))) {
+          for (let index = 1; index < points.length; index += 1) {
+            const [fromX, fromY] = points[index - 1];
+            const [toX, toY] = points[index];
+            if (fromX === toX && fromY === toY) continue;
+            addLayer();
+            writer.addLine(point3d(fromX, -fromY), point3d(toX, -toY), options);
+            entities += 1;
+          }
+          continue;
+        }
+      }
+      skipped.set(kind, (skipped.get(kind) || 0) + 1);
+    }
+    if (!entities) throw new Error('This sheet has no supported visible DXF geometry.');
+    return { text: writer.stringify(), unsupported: [...skipped].map(([kind, count]) => kind + ' × ' + count) };
+  }
+
+  root.AdigunDXF = Object.freeze({ importDrawing, exportDrawing });
 })(globalThis);
