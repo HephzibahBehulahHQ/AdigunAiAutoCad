@@ -33,12 +33,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "7d766013a56ba1356782d41a265664d0642143cad78c01fb4e1a7713a027bd01",
       "metrics": {
         "sheetCount": 71,
         "authoredSheetCount": 71,
@@ -68,12 +70,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "a199f0118e8dee7d98e6adac4b66538af86ec21db8e9222a8881a40db8c85382",
       "metrics": {
         "sheetCount": 1,
         "authoredSheetCount": 1,
@@ -103,12 +107,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "0bbbb1b5fd2c5277d3eab4aa6e41c7ff90ec904be59319ae90cbba3db56aa10d",
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
@@ -138,12 +144,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "1caa05e1c9d4a86457ca9b5868882ce5d6c998a4030d8e3a1a699311b5a93aa2",
       "metrics": {
         "sheetCount": 1,
         "authoredSheetCount": 1,
@@ -173,12 +181,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "1a5ea9ee6bf9d54ae94c0351746426350ab32966be4e9b7b4f9e2a07ac8a6483",
       "metrics": {
         "sheetCount": 2,
         "authoredSheetCount": 2,
@@ -208,12 +218,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "4033fb190d2266902d500e8c2db36abd5cd7776aad3aa5c71acbece56a3c5dd0",
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
@@ -243,12 +255,14 @@
       "status": "passed",
       "checks": {
         "projectSchema": true,
+        "nativeRoundTrip": true,
         "allSheetsHaveEditableContent": true,
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
         "zeroGeometryErrors": true
       },
+      "topologySha256": "71275096f353f5e354d1e5224179ee2237e2384568832a520097800c87a58703",
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,

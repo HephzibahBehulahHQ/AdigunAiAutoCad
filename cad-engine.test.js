@@ -3832,6 +3832,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(report.status, 'passed', JSON.stringify(report.projects.filter(project => project.status !== 'passed')));
   assert.ok(report.summary.projectArtifactCount >= 6);
   assert.equal(report.summary.validatedArtifactCount, report.summary.projectArtifactCount);
+  assert.ok(report.projects.every(project => project.checks.nativeRoundTrip && /^[a-f0-9]{64}$/.test(project.topologySha256)));
   assert.ok(report.projects.every(project => project.metrics.authoredSheetCount === project.metrics.sheetCount
     && project.metrics.emptyContentSheetIds.length === 0));
   assert.ok(report.summary.distinctTopologyCount >= 5);
