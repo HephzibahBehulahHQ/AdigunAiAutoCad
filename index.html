@@ -1367,6 +1367,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   initializing=false;
   $('#recoverBrowserDraft').addEventListener('click',recoverBrowserDraft);
   showBrowserDraft();
+  if('serviceWorker' in navigator){
+    void navigator.serviceWorker.register(new URL('service-worker.js',document.baseURI)).catch(()=>{});
+  }
   document.addEventListener('visibilitychange',()=>{if(document.hidden)flushBrowserDraft();});
   window.addEventListener('beforeunload',e=>{flushBrowserDraft();if(!dirty)return;e.preventDefault();e.returnValue='';});
 })();</script>
