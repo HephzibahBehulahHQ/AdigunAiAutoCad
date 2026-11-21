@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.9",
+  "revision": "3.0",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -143,6 +143,12 @@
       "id": "field-indicator",
       "number": "A2/022",
       "name": "Externally powered H1 annunciator",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-a-indicator",
+      "number": "A2/023",
+      "name": "Branch A voltage indication",
       "projectSectionId": "A2"
     }
   ],
@@ -3627,6 +3633,124 @@
       "y": 510,
       "text": "The external supply, protection and cable are unassigned. No connection to the SITOP return is modeled.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-a-indicator-h2",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H2",
+      "x": 550,
+      "y": 320,
+      "rotation": 0,
+      "properties": {
+        "marking": "Branch A voltage present"
+      },
+      "sheetId": "branch-a-indicator"
+    },
+    {
+      "id": "branch-a-indicator-feed-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 735,
+      "y": 240,
+      "x1": 735,
+      "y1": 240,
+      "x2": 735,
+      "y2": 187,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-a-indicator-feed-receive",
+      "kind": "wire",
+      "sheetId": "branch-a-indicator",
+      "x": 230,
+      "y": 320,
+      "x1": 230,
+      "y1": 320,
+      "x2": 523,
+      "y2": 320,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-a-indicator-h2",
+          "pinId": "x1"
+        }
+      }
+    },
+    {
+      "id": "branch-a-indicator-return-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 735,
+      "y": 580,
+      "x1": 735,
+      "y1": 580,
+      "x2": 735,
+      "y2": 645,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-a-indicator-return-receive",
+      "kind": "wire",
+      "sheetId": "branch-a-indicator",
+      "x": 880,
+      "y": 320,
+      "x1": 880,
+      "y1": 320,
+      "x2": 577,
+      "y2": 320,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-a-indicator-h2",
+          "pinId": "x2"
+        }
+      }
+    },
+    {
+      "id": "branch-a-indicator-title",
+      "kind": "text",
+      "sheetId": "branch-a-indicator",
+      "x": 110,
+      "y": 108,
+      "text": "H2 · BRANCH A VOLTAGE INDICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-a-indicator-feed-note",
+      "kind": "text",
+      "sheetId": "branch-a-indicator",
+      "x": 110,
+      "y": 225,
+      "text": "H2 connects downstream of X1 and X3, in parallel with the Branch A load.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-a-indicator-scope",
+      "kind": "text",
+      "sheetId": "branch-a-indicator",
+      "x": 110,
+      "y": 430,
+      "text": "H2 indicates voltage at its terminals. The schematic does not establish voltage at the field sensor.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-a-indicator-review",
+      "kind": "text",
+      "sheetId": "branch-a-indicator",
+      "x": 110,
+      "y": 475,
+      "text": "Verify actual supply loading, protection and conductor sizing before installation.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -5316,6 +5440,70 @@
             "direction": "left",
             "targetSheetId": "annunciator-interface",
             "targetRef": "X25"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-a-indicator-feed",
+      "name": "Branch A H2 +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "branch-a-indicator-feed-send",
+          "point": {
+            "x": 735,
+            "y": 187
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-a-indicator",
+            "targetRef": "H2"
+          }
+        },
+        {
+          "sheetId": "branch-a-indicator",
+          "wireId": "branch-a-indicator-feed-receive",
+          "point": {
+            "x": 230,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-a-indicator-return",
+      "name": "Branch A H2 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "branch-a-indicator-return-send",
+          "point": {
+            "x": 735,
+            "y": 645
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-a-indicator",
+            "targetRef": "H2"
+          }
+        },
+        {
+          "sheetId": "branch-a-indicator",
+          "wireId": "branch-a-indicator-return-receive",
+          "point": {
+            "x": 880,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X3"
           }
         }
       ]
