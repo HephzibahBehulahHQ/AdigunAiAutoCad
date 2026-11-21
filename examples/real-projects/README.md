@@ -221,9 +221,9 @@ For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000
 
 ## SITOP 24 V DC two-branch distribution
 
-Open **SITOP 24 V DC two-branch terminal distribution** from Project Explorer. A2/001 contains the SITOP PSU100C DC output. A2/002 distributes the separate +24 V and 0 V nets through four Phoenix Contact PT 2,5 terminals in strip XT1. A2/003 and A2/004 wire the ifm IFS204 and PN2070 sensors. A2/005 maps IFS204 OUT to CPU 1212C DI a.0 and PN2070 OUT2 to AI0. Ten native links connect the five sheets.
+Open **SITOP 24 V DC two-branch terminal distribution** from Project Explorer. A2/001 contains the SITOP PSU100C DC output. A2/002 distributes the separate +24 V and 0 V nets through four Phoenix Contact PT 2,5 terminals in strip XT1. A2/003 and A2/004 wire the ifm IFS204 and PN2070 sensors. A2/005 maps IFS204 OUT to CPU 1212C DI a.0 and PN2070 OUT2 to AI0. A2/006 carries Q0.0 to the Phoenix Contact interface relay K1 coil. Thirteen native links connect the six sheets.
 
-The analog connection assumes PN2070 OUT2 is configured for 0–10 V. Its factory mode is 4–20 mA. Supply input, earth wiring, branch protection, conductor sizing, and controller logic remain outside the example. [SITOP component record](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md) [PN2070 component record](../../docs/components/ifm-pn2070.md)
+The analog connection assumes PN2070 OUT2 is configured for 0–10 V. Its factory mode is 4–20 mA. K1's changeover contacts remain available for a separate load. Supply input, earth wiring, branch protection, conductor sizing, and controller logic remain outside the example. [SITOP component record](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md) [PN2070 component record](../../docs/components/ifm-pn2070.md)
 
 ## Project library validation
 

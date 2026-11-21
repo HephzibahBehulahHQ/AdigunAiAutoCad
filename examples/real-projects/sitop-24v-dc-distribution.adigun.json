@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.2",
-  "description": "Source-backed DC distribution and digital and analog ifm sensor input wiring to a Siemens CPU 1212C.",
+  "revision": "1.3",
+  "description": "Source-backed SITOP distribution, ifm sensor input wiring and a CPU 1212C transistor output to a 24 V DC interface relay.",
   "activeSheet": "supply",
   "theme": "light",
   "zoom": 100,
@@ -41,6 +41,12 @@
       "id": "plc-inputs",
       "number": "A2/005",
       "name": "CPU 1212C power and sensor input wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "plc-relay-output",
+      "number": "A2/006",
+      "name": "CPU Q0.0 interface relay coil",
       "projectSectionId": "A2"
     }
   ],
@@ -637,7 +643,7 @@
       "y": 638,
       "x1": 230,
       "y1": 638,
-      "x2": 830,
+      "x2": 1020,
       "y2": 294,
       "stroke": "#164eac",
       "strokeWidth": 1.5,
@@ -647,9 +653,9 @@
       "id": "cpu-2m",
       "kind": "wire",
       "sheetId": "plc-inputs",
-      "x": 830,
+      "x": 1020,
       "y": 294,
-      "x1": 830,
+      "x1": 1020,
       "y1": 294,
       "x2": 710,
       "y2": 294,
@@ -719,7 +725,7 @@
       "kind": "text",
       "x": 110,
       "y": 108,
-      "text": "A1 · CPU 1212C POWER AND SENSOR INPUTS",
+      "text": "A1 · CPU 1212C POWER AND I/O",
       "stroke": "#13263b"
     },
     {
@@ -755,7 +761,144 @@
       "kind": "text",
       "x": 110,
       "y": 845,
-      "text": "Functional earth, output groups, sensor calibration and executable PLC logic are outside this example.",
+      "text": "Q0.0 drives K1 on A2/006. Functional earth, other outputs, sensor calibration and PLC logic remain outside this example.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k1",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K1",
+      "x": 520,
+      "y": 325,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "",
+        "comment": ""
+      },
+      "sheetId": "plc-relay-output"
+    },
+    {
+      "id": "plc-1l-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 610,
+      "y": 260,
+      "x1": 610,
+      "y1": 260,
+      "x2": 610,
+      "y2": 145,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "plc-1l-receive",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 412,
+      "x1": 710,
+      "y1": 412,
+      "x2": 780,
+      "y2": 390,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "+24 V DC"
+    },
+    {
+      "id": "q0-relay-send",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 428,
+      "x1": 710,
+      "y1": 428,
+      "x2": 780,
+      "y2": 470,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "Q0.0 relay command"
+    },
+    {
+      "id": "q0-relay-receive",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 210,
+      "y": 345,
+      "x1": 210,
+      "y1": 345,
+      "x2": 450,
+      "y2": 345,
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "potential": "Q0.0 relay command"
+    },
+    {
+      "id": "relay-return-send",
+      "kind": "wire",
+      "sheetId": "supply",
+      "x": 610,
+      "y": 320,
+      "x1": 610,
+      "y1": 320,
+      "x2": 610,
+      "y2": 430,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "relay-return-receive",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 210,
+      "y": 305,
+      "x1": 210,
+      "y1": 305,
+      "x2": 450,
+      "y2": 305,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
+    },
+    {
+      "id": "relay-title",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 108,
+      "text": "K1 · PLC OUTPUT INTERFACE RELAY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-coil-command",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 460,
+      "text": "A1 X12:2 / DQ a.0 / Q0.0 feeds K1:A1. K1:A2 returns to the SITOP 0 V net.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-output-common",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 505,
+      "text": "The output group feed is A1 X12:1 / 1L. The other output group remains outside this circuit.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-contact-scope",
+      "sheetId": "plc-relay-output",
+      "kind": "text",
+      "x": 110,
+      "y": 550,
+      "text": "K1 contacts 11, 12 and 14 are available for a separate load. Relay actuation and PLC logic are not simulated.",
       "stroke": "#13263b"
     }
   ],
@@ -1074,6 +1217,102 @@
             "direction": "right",
             "targetSheetId": "branch-b",
             "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-1l",
+      "name": "CPU 1L supply",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "plc-1l-send",
+          "point": {
+            "x": 610,
+            "y": 145
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "plc-1l-receive",
+          "point": {
+            "x": 780,
+            "y": 390
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-q0-relay",
+      "name": "Q0.0 relay command",
+      "endpoints": [
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "q0-relay-send",
+          "point": {
+            "x": 780,
+            "y": 470
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "q0-relay-receive",
+          "point": {
+            "x": 210,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-relay-return",
+      "name": "K1 coil return",
+      "endpoints": [
+        {
+          "sheetId": "supply",
+          "wireId": "relay-return-send",
+          "point": {
+            "x": 610,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "relay-return-receive",
+          "point": {
+            "x": 210,
+            "y": 305
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "supply",
+            "targetRef": "PS1"
           }
         }
       ]
