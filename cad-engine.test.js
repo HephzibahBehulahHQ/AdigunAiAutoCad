@@ -290,7 +290,7 @@ test('PLC and inductive sensor use dedicated schematic glyphs and verified inspe
   assert.ok(html.includes("case'sensor-inductive-pnp':"));
   assert.ok(html.includes("def.family==='plc-cpu'"));
   assert.ok(html.includes("def.family==='sensor-inductive-pnp'"));
-  assert.ok(html.includes('data-component-property="sensingTarget"'));
+  assert.ok(html.includes("sensingTarget:'Sensing target'"));
   assert.ok(html.includes('manufacturer circuit diagram'));
   assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
 });
@@ -325,7 +325,7 @@ test('Siemens SITOP PSU100C keeps source-backed terminals, ratings and a dedicat
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   assert.ok(html.includes("case'power-supply-ac-dc':"));
   assert.ok(html.includes("def.family==='power-supply-ac-dc'"));
-  assert.ok(html.includes('data-component-property="marking"'));
+  assert.ok(html.includes("marking:'Marking'"));
   assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
 });
 
@@ -1016,9 +1016,9 @@ test('motor-protection symbol and numeric inspector setting preserve the worksta
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   assert.ok(html.includes("case'motor-protection-breaker':"));
   assert.ok(html.includes("def.family==='motor-protection-breaker'"));
-  assert.ok(html.includes('data-component-property="overloadSettingA"'));
-  assert.ok(html.includes("escapeHtml(overloadRule.minimum)"));
-  assert.ok(html.includes("escapeHtml(overloadRule.maximum)"));
+  assert.ok(html.includes("overloadSettingA:'Overload setting (A)'"));
+  assert.ok(html.includes("escapeHtml(rule.minimum)"));
+  assert.ok(html.includes("escapeHtml(rule.maximum)"));
   assert.ok(html.includes('rule.type===\'number\''));
   assert.ok(html.includes('.topbar{position:relative'));
   assert.ok(html.includes('.toolbar{display:flex'));
@@ -1280,8 +1280,8 @@ test('star-delta components render in the existing workstation shell with editab
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   assert.ok(html.includes("case'star-delta-timer':"));
   assert.ok(html.includes("case'motor-overload-relay':"));
-  assert.ok(html.includes('data-component-property="delaySeconds"'));
-  assert.ok(html.includes('data-component-property="overloadSettingA"'));
+  assert.ok(html.includes("delaySeconds:'Transition time (s)'"));
+  assert.ok(html.includes("overloadSettingA:'Overload setting (A)'"));
   assert.ok(html.includes('.toolbar{display:flex'));
   assert.ok(html.includes('.topbar{position:relative'));
 });
@@ -1983,8 +1983,8 @@ test('PN2070 has a dedicated analog pressure-sensor glyph and editable notes wit
   const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
   assert.ok(html.includes("case'sensor-pressure-analog':"));
   assert.ok(html.includes("def.family==='sensor-pressure-analog'"));
-  assert.ok(html.includes('data-component-property="processPoint"'));
-  assert.ok(html.includes('data-component-property="signalConfigurationNote"'));
+  assert.ok(html.includes("processPoint:'Process point'"));
+  assert.ok(html.includes("signalConfigurationNote:'Signal configuration note'"));
   assert.ok(html.includes('grid-template-columns:36px minmax(210px,250px) minmax(0,1fr) 36px'));
 });
 

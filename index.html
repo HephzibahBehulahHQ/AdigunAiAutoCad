@@ -635,6 +635,19 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     state.selected=target.id;state.selectedObjectIds=[target.id];renderObjects();showObject(target);
     notify('Opened '+connector.targetSheetNumber+' · '+connector.targetRef+' from '+connector.name+'.');
   }
+  const componentPropertyLabels={terminalStrip:'Terminal strip',position:'Position',marking:'Marking',comment:'Comment',
+    overloadSettingA:'Overload setting (A)',delaySeconds:'Transition time (s)',sensingTarget:'Sensing target',
+    processPoint:'Process point',signalConfigurationNote:'Signal configuration note'};
+  function componentPropertyFields(object,definition){
+    return Object.entries(definition.instanceProperties).map(function([name,rule]){
+      const attributes=rule.type==='number'
+        ? 'type="number" min="'+escapeHtml(rule.minimum)+'" max="'+escapeHtml(rule.maximum)+'" step="'+escapeHtml(rule.step||'any')+'"'
+        : 'maxlength="'+escapeHtml(rule.maximumLength)+'"';
+      return '<label class="property-row"><span>'+escapeHtml(componentPropertyLabels[name]||name)+'</span>'
+        +'<input class="component-edit" data-component-property="'+escapeHtml(name)+'" data-component-object="'+escapeHtml(object.id)
+        +'" value="'+escapeHtml(object.properties[name]??rule.default)+'" '+attributes+(object.locked?' disabled':'')+'></label>';
+    }).join('');
+  }
   function escapeHtml(value){return String(value==null?'':value).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
   function drawingAppearanceFields(object){
     const attrs=' data-style-object="'+escapeHtml(object.id)+'"'+(object.locked?' disabled':'');
@@ -673,8 +686,6 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       return;
     }
     const spec=def.specifications;
-    const props=obj.properties||{};
-    const overloadRule=def.instanceProperties.overloadSettingA;
     const source=def.sources[0];
     const rows=def.family==='pushbutton' ? [['Operator profile',spec.operatorProfile.value],['Actuation',spec.operatorType.value],['Contact',spec.contactComposition.value],['Terminal pair',spec.terminalDesignation.value],['Connection',spec.terminalConnection.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Positive opening',spec.positiveOpening.value?'Yes':'No']] : def.family==='motor-protection-breaker'
       ? [['Frame size',spec.frameSize.value],['Trip class',spec.overloadTripClass.value+' '+spec.overloadTripClass.unit],['Adjustable overload release',spec.adjustableOverloadRelease.minimum+'–'+spec.adjustableOverloadRelease.maximum+' '+spec.adjustableOverloadRelease.unit],['Instantaneous N-release',spec.instantaneousShortCircuitRelease.value+' '+spec.instantaneousShortCircuitRelease.unit],['Main poles',spec.mainPoleCount.value],['Rated operational voltage',spec.ratedOperationalVoltage.minimum+'–'+spec.ratedOperationalVoltage.maximum+' '+spec.ratedOperationalVoltage.unit],['Connection',spec.connectionMethod.value]]
@@ -708,22 +719,14 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     
       +'<div class="property-row"><span>Part number</span><strong>'+escapeHtml(def.manufacturerPartNumber)+'</strong></div>'
       +specRows
-      +(def.family==='motor-protection-breaker'||def.family==='motor-overload-relay' ? '<label class="property-row"><span>Overload setting (A)</span><input class="component-edit" type="number" min="'+escapeHtml(overloadRule.minimum)+'" max="'+escapeHtml(overloadRule.maximum)+'" step="any" data-component-property="overloadSettingA" data-component-object="'+escapeHtml(obj.id)+'" value="'+escapeHtml(props.overloadSettingA==null?'':props.overloadSettingA)+'"></label>' : def.family==='star-delta-timer' ? '<label class="property-row"><span>Transition time (s)</span><input class="component-edit" type="number" min="'+escapeHtml(def.instanceProperties.delaySeconds.minimum)+'" max="'+escapeHtml(def.instanceProperties.delaySeconds.maximum)+'" step="any" data-component-property="delaySeconds" data-component-object="'+escapeHtml(obj.id)+'" value="'+escapeHtml(props.delaySeconds==null?'':props.delaySeconds)+'"></label>' : '')
       +'<div class="property-row"><span>External terminals</span><strong>'+escapeHtml(def.symbol.pins.length+' · '+pinSummary)+'</strong></div>'
       +'<div class="property-row"><span>Rotation</span><strong>'+escapeHtml(obj.rotation+'°')+'</strong></div>'
       +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.x)+'"></label>'
       +'<label class="property-row"><span>Y (mm)</span><input type="number" step="2.5" data-object-coordinate="y" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.y)+'"></label>'
       +'<button class="command-item" data-rotate-object="'+escapeHtml(obj.id)+'"><span>↻</span><span>Rotate 90° clockwise</span></button>'
       +'<label class="property-row"><span>Reference</span><input class="component-edit" data-component-property="ref" data-component-object="'+escapeHtml(obj.id)+'" maxlength="32" value="'+escapeHtml(obj.ref)+'"></label>'
-      +'<label class="property-row"><span>Terminal strip</span><input class="component-edit" data-component-property="terminalStrip" data-component-object="'+escapeHtml(obj.id)+'" maxlength="40" value="'+escapeHtml(props.terminalStrip)+'"></label>'
-      +'<label class="property-row"><span>Position</span><input class="component-edit" data-component-property="position" data-component-object="'+escapeHtml(obj.id)+'" maxlength="24" value="'+escapeHtml(props.position)+'"></label>'
-      +'<label class="property-row"><span>Marking</span><input class="component-edit" data-component-property="marking" data-component-object="'+escapeHtml(obj.id)+'" maxlength="40" value="'+escapeHtml(props.marking)+'"></label>'
-      +'<label class="property-row"><span>Comment</span><input class="component-edit" data-component-property="comment" data-component-object="'+escapeHtml(obj.id)+'" maxlength="160" value="'+escapeHtml(props.comment)+'"></label>'
-      +(def.family==='sensor-pressure-analog' ? '<label class="property-row"><span>Process point</span><input class="component-edit" data-component-property="processPoint" data-component-object="'+escapeHtml(obj.id)+'" maxlength="60" value="'+escapeHtml(props.processPoint)+'"></label>' : '')
-      +(def.family==='sensor-pressure-analog' ? '<label class="property-row"><span>Signal configuration note</span><input class="component-edit" data-component-property="signalConfigurationNote" data-component-object="'+escapeHtml(obj.id)+'" maxlength="100" value="'+escapeHtml(props.signalConfigurationNote)+'"></label>' : '')
+      +componentPropertyFields(obj,def)
       +'<a class="component-source" href="'+escapeHtml(source.url)+'" target="_blank" rel="noopener noreferrer">Manufacturer source · '+escapeHtml(source.retrievedAt)+'</a>'
-      +(def.family==='sensor-inductive-pnp' ? '<label class="property-row"><span>Sensing target</span><input class="component-edit" data-component-property="sensingTarget" data-component-object="'+escapeHtml(obj.id)+'" maxlength="60" value="'+escapeHtml(props.sensingTarget)+'"></label>' : '')
-      +(def.family==='sensor-inductive-pnp' ? '<label class="property-row"><span>Sensing target</span><input class="component-edit" data-component-property="sensingTarget" data-component-object="'+escapeHtml(obj.id)+'" maxlength="60" value="'+escapeHtml(props.sensingTarget)+'"></label>' : '')
       +'<p class="notice component-specs">'+escapeHtml(def.symbol.numberingNote+' '+behaviorNote)+' Manufacturer ratings remain read-only.</p>'
       +'<button class="command-item" data-delete-object="'+escapeHtml(obj.id)+'"><span>⌫</span><span>Remove verified component</span><kbd>Delete</kbd></button>';
   }
@@ -741,12 +744,19 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const obj=state.objects.find(function(item){return item.id===field.dataset.componentObject;});
     if(!obj||obj.kind!=='component-instance')return;
     const name=field.dataset.componentProperty;
-    let nextValue,currentValue;
     if(name==='ref'||obj.locked)return;
-    if(Object.prototype.hasOwnProperty.call(obj.properties,name)){
-      const rule=window.AdigunCADEngine.component(obj.componentId).instanceProperties[name];
-      if(rule.type==='number'){nextValue=field.value===''?null:field.valueAsNumber;if(nextValue!==null&&(!Number.isFinite(nextValue)||nextValue<rule.minimum||nextValue>rule.maximum)){field.setCustomValidity('Enter a setting from '+rule.minimum+' to '+rule.maximum+' '+(window.AdigunCADEngine.component(obj.componentId).specifications.adjustableOverloadRelease.unit||'')+'.');return;}field.setCustomValidity('');}else nextValue=field.value.slice(0,rule.maximumLength);currentValue=obj.properties[name];
-    }else return;
+    const rule=window.AdigunCADEngine.component(obj.componentId)?.instanceProperties[name];
+    if(!rule)return;
+    const currentValue=obj.properties[name]??rule.default;
+    let nextValue;
+    if(rule.type==='number'){
+      nextValue=field.value===''?null:field.valueAsNumber;
+      if(nextValue!==null&&(!Number.isFinite(nextValue)||nextValue<rule.minimum||nextValue>rule.maximum)){
+        field.setCustomValidity('Enter a setting from '+rule.minimum+' to '+rule.maximum+'.');
+        return;
+      }
+      field.setCustomValidity('');
+    }else nextValue=field.value.slice(0,rule.maximumLength);
     if(Object.is(currentValue,nextValue))return;
     if(!activeComponentEdit||activeComponentEdit.field!==field)activeComponentEdit={field:field,snapshot:JSON.stringify(state.objects),historyRecorded:false};
     if(!activeComponentEdit.historyRecorded){pushUndo(activeComponentEdit.snapshot);activeComponentEdit.historyRecorded=true;}
