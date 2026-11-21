@@ -305,9 +305,14 @@
         type: 'unresolved-cross-sheet-reference',
         sheetId: sheetId,
         connectionId: connection.id,
+        connection: clone(connection),
         message: 'Connection ' + connection.id + ' references deleted sheet ' + removed.number + ' (' + removed.name + ').'
       });
     });
+    if (linked.length > 0) {
+      const affected = new Set(linked);
+      project.crossSheetConnections = project.crossSheetConnections.filter(function (connection) { return !affected.has(connection); });
+    }
     if (Array.isArray(project.openTabs)) project.openTabs = project.openTabs.filter(function (id) { return id !== sheetId; });
     if (project.activeSheetId === sheetId) project.activeSheetId = null;
     const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === removed.sectionId; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });

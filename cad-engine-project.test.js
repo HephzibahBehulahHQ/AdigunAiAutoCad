@@ -411,9 +411,10 @@ test('sheets can be renamed, moved, reordered, and deleted without changing link
   assert.equal(project.sheets.some(sheet => sheet.id === layout.id), false);
   assert.equal(project.openTabs.includes(layout.id), false);
   assert.equal(project.activeSheetId, power.id);
-  assert.equal(project.crossSheetConnections[0].endpoints[1].sheetId, layout.id);
+  assert.deepEqual(project.crossSheetConnections, []);
   assert.equal(project.diagnostics[0].type, 'unresolved-cross-sheet-reference');
   assert.equal(project.diagnostics[0].connectionId, 'link-1');
+  assert.equal(project.diagnostics[0].connection.endpoints[1].sheetId, layout.id);
   assert.equal(power.number, 'A4/0002');
 });
 
@@ -449,6 +450,18 @@ test('project metadata, open views, sheets, links, and independent example copie
   assert.equal(first.project.projectModel.sheets.find(sheet => sheet.id === source.id).revision, 'B');
   assert.equal(first.project.projectModel.sheets.find(sheet => sheet.id === target.id).sectionId, 'A5');
   assert.deepEqual(first.project.projectModel.openTabs, [source.id, target.id]);
+  assert.deepEqual(first.project.crossSheetConnections, payload.crossSheetConnections);
+  const edited = engine.copyExampleProject(first.project, 'linked-sheet-removal', 'Linked sheet removal');
+  const originalConnection = edited.crossSheetConnections[0];
+  engine.deleteProjectSheet(edited.projectModel, target.id);
+  edited.sheets = edited.projectModel.sheets;
+  edited.objects = edited.objects.filter(object => object.sheetId !== target.id);
+  edited.crossSheetConnections = edited.projectModel.crossSheetConnections;
+  const afterDeletion = engine.parseProject(engine.serializeProject(edited));
+  assert.equal(afterDeletion.valid, true);
+  assert.deepEqual(afterDeletion.project.crossSheetConnections, []);
+  assert.deepEqual(afterDeletion.project.projectModel.diagnostics[0].connection, originalConnection);
+  assert.equal(engine.analyzeProject(afterDeletion.project).openEndpointCount, 2);
   assert.deepEqual(first.project.crossSheetConnections, payload.crossSheetConnections);
   first.project.projectModel.metadata.manager = 'Changed copy';
   assert.equal(second.project.projectModel.metadata.manager, 'Project manager');
