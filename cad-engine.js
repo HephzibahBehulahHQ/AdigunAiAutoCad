@@ -235,6 +235,25 @@
     return sheet;
   }
 
+  function projectSheetMargins(sheet) {
+    return { top: 10, right: 10, bottom: 10, left: 10, ...sheet?.paperMargins };
+  }
+
+  function checkPaperMargins(margins, width, height) {
+    if (['top', 'right', 'bottom', 'left'].some(edge => !finite(margins[edge]) || margins[edge] < 0)
+      || margins.left + margins.right >= width || margins.top + margins.bottom >= height) {
+      throw new Error('Paper margins must be nonnegative and leave a positive drawing area.');
+    }
+  }
+
+  function setProjectSheetMargin(sheet, edge, value) {
+    if (!['top', 'right', 'bottom', 'left'].includes(edge)) throw new Error('Unknown paper margin.');
+    const margins = { ...projectSheetMargins(sheet), [edge]: value };
+    checkPaperMargins(margins, sheet.paperWidthMm || 420, sheet.paperHeightMm || 297);
+    sheet.paperMargins = margins;
+    return margins;
+  }
+
   function setProjectSheetPaperFormat(sheet, paperSize, orientation) {
     if (!sheet || !Object.prototype.hasOwnProperty.call(PAPER_SIZES_MM, paperSize)) throw new Error('Choose a supported ISO paper size.');
     if (orientation !== 'landscape' && orientation !== 'portrait') throw new Error('Choose landscape or portrait orientation.');
@@ -242,6 +261,7 @@
     if (orientation === 'portrait' && width > height || orientation === 'landscape' && height > width) {
       const swap = width; width = height; height = swap;
     }
+    checkPaperMargins(projectSheetMargins(sheet), width, height);
     sheet.paperSize = paperSize;
     sheet.orientation = orientation;
     sheet.paperWidthMm = width;
@@ -1348,6 +1368,10 @@
         }
         if (sheetIds.has(sheet.id)) errors.push('Duplicate sheet ID: ' + sheet.id + '.');
         sheetIds.add(sheet.id);
+        if (sheet.paperMargins !== undefined) {
+          try { checkPaperMargins(projectSheetMargins(sheet), sheet.paperWidthMm || 420, sheet.paperHeightMm || 297); }
+          catch (error) { errors.push('Sheet ' + sheet.id + ': ' + error.message); }
+        }
         for (const key of ['gridIntervalMm', 'snapIntervalMm']) {
           if (sheet[key] !== undefined && (!finite(sheet[key]) || sheet[key] < 0.001 || sheet[key] > 10000)) {
             errors.push('Sheet ' + sheet.id + ' has an invalid ' + key + '.');
@@ -2296,6 +2320,8 @@
     renameProjectSection: renameProjectSection,
     addProjectSheet: addProjectSheet,
     setProjectSheetPaperFormat: setProjectSheetPaperFormat,
+    projectSheetMargins: projectSheetMargins,
+    setProjectSheetMargin: setProjectSheetMargin,
     setProjectSheetDrawingScale: setProjectSheetDrawingScale,
     projectSheetDrawingScaleFactor: projectSheetDrawingScaleFactor,
     renameProjectSheet: renameProjectSheet,

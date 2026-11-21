@@ -146,7 +146,7 @@
   function persist(){if(initializing)return;dirty=true;scheduleBrowserDraft();}
   function projectTitleBlockHeight(height){return Math.min(62,height*.21);}
   function activeCanvasSize(){const sheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});return sheet?{width:sheet.paperWidthMm||420,height:sheet.paperHeightMm||297}:{width:1200,height:760};}
-  function applyProjectSheetFormat(resetView){const sheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(!sheet)return;let dimensions;try{dimensions=window.AdigunCADEngine.setProjectSheetPaperFormat(sheet,sheet.paperSize||'A3',sheet.orientation||'landscape');}catch(error){notify('Sheet format was not changed: '+error.message);return;}const width=dimensions.width,height=dimensions.height,background=$('#sheetBackground'),frame=$('#customSheetFrame');if(background){background.setAttribute('width',String(width));background.setAttribute('height',String(height));}if(frame){const rect=frame.querySelector(':scope > rect'),outline=frame.querySelector(':scope > path'),texts=frame.querySelectorAll(':scope > text');if(rect){rect.setAttribute('x','10');rect.setAttribute('y','10');rect.setAttribute('width',String(width-20));rect.setAttribute('height',String(height-20));}if(outline)outline.setAttribute('d','M10 '+(height-60)+'H'+(width-10)+'M10 '+(height-60)+'V'+(height-10)+'M'+(width-140)+' '+(height-60)+'V'+(height-10)+'M'+(width-95)+' '+(height-60)+'V'+(height-10)+'M'+(width-50)+' '+(height-60)+'V'+(height-10));if(texts[0]){texts[0].setAttribute('x','20');texts[0].setAttribute('y',String(height-14));texts[0].setAttribute('font-size','4.5');}const sheetName=$('#customSheetName'),sheetNumber=$('#customSheetNumber');if(sheetName){sheetName.setAttribute('x',String(width-135));sheetName.setAttribute('y',String(height-53));sheetName.setAttribute('font-size','3.5');}if(sheetNumber){sheetNumber.setAttribute('x',String(width-135));sheetNumber.setAttribute('y',String(height-43));sheetNumber.setAttribute('font-size','3.2');}if(texts[3]){texts[3].setAttribute('x',String(width-62));texts[3].setAttribute('y',String(height-14));texts[3].setAttribute('font-size','3');}}if(resetView||!state.view||!Number.isFinite(state.view.w)){state.view={x:0,y:0,w:width,h:height};}state.sheetViews[sheet.id]=state.view;applyView();applyProjectDrawingTransform(resetView);renderProjectTitleBlock();}
+  function applyProjectSheetFormat(resetView){const sheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(!sheet)return;let dimensions;try{dimensions=window.AdigunCADEngine.setProjectSheetPaperFormat(sheet,sheet.paperSize||'A3',sheet.orientation||'landscape');}catch(error){notify('Sheet format was not changed: '+error.message);return;}const width=dimensions.width,height=dimensions.height,background=$('#sheetBackground'),frame=$('#customSheetFrame');if(background){background.setAttribute('width',String(width));background.setAttribute('height',String(height));}if(frame){const rect=frame.querySelector(':scope > rect'),outline=frame.querySelector(':scope > path'),texts=frame.querySelectorAll(':scope > text');if(rect)setFrameBounds(frame,sheet,width,height);if(outline)outline.setAttribute('d','M10 '+(height-60)+'H'+(width-10)+'M10 '+(height-60)+'V'+(height-10)+'M'+(width-140)+' '+(height-60)+'V'+(height-10)+'M'+(width-95)+' '+(height-60)+'V'+(height-10)+'M'+(width-50)+' '+(height-60)+'V'+(height-10));if(texts[0]){texts[0].setAttribute('x','20');texts[0].setAttribute('y',String(height-14));texts[0].setAttribute('font-size','4.5');}const sheetName=$('#customSheetName'),sheetNumber=$('#customSheetNumber');if(sheetName){sheetName.setAttribute('x',String(width-135));sheetName.setAttribute('y',String(height-53));sheetName.setAttribute('font-size','3.5');}if(sheetNumber){sheetNumber.setAttribute('x',String(width-135));sheetNumber.setAttribute('y',String(height-43));sheetNumber.setAttribute('font-size','3.2');}if(texts[3]){texts[3].setAttribute('x',String(width-62));texts[3].setAttribute('y',String(height-14));texts[3].setAttribute('font-size','3');}}if(resetView||!state.view||!Number.isFinite(state.view.w)){state.view={x:0,y:0,w:width,h:height};}state.sheetViews[sheet.id]=state.view;applyView();applyProjectDrawingTransform(resetView);renderProjectTitleBlock();}
   function setZoom(value){state.zoom=Math.max(10,Math.min(500,Math.round(value/5)*5));$('#zoomValue').textContent=`${state.zoom}%`;const size=activeCanvasSize(),scale=100/state.zoom;const w=size.width*scale,h=size.height*scale,cx=state.view.x+state.view.w/2,cy=state.view.y+state.view.h/2;state.view={x:cx-w/2,y:cy-h/2,w,h};applyView();persist();}
   let printingSheet=false,spacePan=false,guideDrag=null;
   const draftingRulers=document.createElementNS('http://www.w3.org/2000/svg','g');
@@ -155,6 +155,12 @@
   draftingRulers.setAttribute('aria-hidden','true');
   drawing.append(draftingRulers);
   function currentDraftingSheet(){return state.projectModel?.sheets.find(item=>item.id===state.sheet);}
+  function setFrameBounds(frame,sheet,width,height){
+    const margins=window.AdigunCADEngine.projectSheetMargins(sheet);
+    const border=frame?.querySelector(':scope > rect');
+    if(!border)return;
+    for(const [attribute,value] of [['x',margins.left],['y',margins.top],['width',width-margins.left-margins.right],['height',height-margins.top-margins.bottom]])border.setAttribute(attribute,value);
+  }
   function snapInterval(){return currentDraftingSheet()?.snapIntervalMm??2.5;}
   function displayUnit(){return currentDraftingSheet()?.displayUnits==='in'?'in':'mm';}
   function displayUnitScale(){return displayUnit()==='in'?25.4:1;}
@@ -291,12 +297,16 @@
       +'<button type="button" data-guide-action="locked" data-guide-index="'+index+'">'+(guide.locked?'Unlock':'Lock')+'</button>'
       +'<button type="button" data-guide-action="hidden" data-guide-index="'+index+'">'+(guide.hidden?'Show':'Hide')+'</button>'
       +'<button type="button" data-guide-action="delete" data-guide-index="'+index+'"'+(guide.locked?' disabled':'')+'>Delete</button></div>').join('');
+    const margins=window.AdigunCADEngine.projectSheetMargins(sheet);
+    const marginFields=Object.keys(margins).filter(edge=>['top','right','bottom','left'].includes(edge)).map(edge=>
+      '<label class="property-row"><span>'+edge[0].toUpperCase()+edge.slice(1)+' margin (mm)</span><input type="number" min="0" step="any" data-paper-margin="'+edge+'" value="'+margins[edge]+'"></label>').join('');
     block.innerHTML='<div class="inspector-title">Drafting settings</div>'
       +'<label class="property-row"><span>Display units</span><select aria-label="Display units" data-drafting-units><option value="mm">Millimetres</option><option value="in"'+(displayUnit()==='in'?' selected':'')+'>Inches</option></select></label>'
       +'<label class="property-row"><span>Grid interval (mm)</span><input type="number" step="any" data-drafting-interval="gridIntervalMm" value="'+(sheet.gridIntervalMm??10)+'"></label>'
       +'<label class="property-row"><span>Snap interval (mm)</span><input type="number" step="any" data-drafting-interval="snapIntervalMm" value="'+snapInterval()+'"></label>'
       +'<div class="inspector-title">Guides</div><div class="property-row"><select aria-label="Guide axis" data-guide-axis><option value="x">Vertical · X</option><option value="y">Horizontal · Y</option></select>'
-      +'<input type="number" step="any" aria-label="New guide position (mm)" data-new-guide-position value="0"><button type="button" data-add-guide>Add guide</button></div>'+guideRows;
+      +'<input type="number" step="any" aria-label="New guide position (mm)" data-new-guide-position value="0"><button type="button" data-add-guide>Add guide</button></div>'+guideRows
+      +'<div class="inspector-title">Paper margins</div>'+marginFields;
     panel.prepend(block);
   }
   function commitGuideChange(change){
@@ -314,7 +324,12 @@
     if(!sheet)return;
     const interval=field.dataset.draftingInterval;
     const value=field.valueAsNumber;
-    if(field.hasAttribute('data-drafting-units')){
+    if(field.hasAttribute('data-paper-margin')){
+      try{window.AdigunCADEngine.setProjectSheetMargin(sheet,field.dataset.paperMargin,value);}
+      catch(error){renderProjectMetadataEditor();notify(error.message);return;}
+      applyProjectSheetFormat(false);
+      persist();
+    }else if(field.hasAttribute('data-drafting-units')){
       sheet.displayUnits=field.value==='in'?'in':'mm';
       applyView();
       persist();
@@ -373,7 +388,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   if(!state.projectModel)return;
   const model=state.projectModel,meta=model.metadata||{},sheet=model.sheets.find(function(item){return item.id===state.sheet;});
   if(!sheet)return;
-  const size=activeCanvasSize(),w=size.width,h=size.height,boxWidth=Math.min(170,Math.max(95,w*.405)),boxHeight=projectTitleBlockHeight(h),x=w-10-boxWidth,y=h-10-boxHeight,fontSize=Math.max(1.65,Math.min(2.35,h/126)),topInset=fontSize*2.2,bottomInset=fontSize*1.3,lineHeight=(boxHeight-topInset-bottomInset)/8;
+  const size=activeCanvasSize(),w=size.width,h=size.height,margins=window.AdigunCADEngine.projectSheetMargins(sheet);
+  const boxWidth=Math.min(w-margins.left-margins.right,170,Math.max(95,w*.405)),boxHeight=Math.min(h-margins.top-margins.bottom,projectTitleBlockHeight(h));
+  const x=w-margins.right-boxWidth,y=h-margins.bottom-boxHeight,fontSize=Math.min(boxHeight/13,Math.max(1.65,Math.min(2.35,h/126))),topInset=fontSize*2.2,bottomInset=fontSize*1.3,lineHeight=(boxHeight-topInset-bottomInset)/8;
   const ns='http://www.w3.org/2000/svg',box=document.createElementNS(ns,'rect');
   box.setAttribute('x',String(x));box.setAttribute('y',String(y));box.setAttribute('width',String(boxWidth));box.setAttribute('height',String(boxHeight));box.setAttribute('fill','#fff');box.setAttribute('stroke','#17212f');box.setAttribute('stroke-width','.35');box.setAttribute('data-title-block','frame');group.append(box);
   function addLine(key,value,index,bold){
@@ -1292,9 +1309,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         background.setAttribute('fill','#fff');
         const frame=svg.querySelector('#customSheetFrame');
         frame.style.display='block';
-        const border=frame.querySelector(':scope > rect');
-        border.setAttribute('width',String(width-20));
-        border.setAttribute('height',String(height-20));
+        setFrameBounds(frame,sheet,width,height);
         svg.removeAttribute('class');
         svg.removeAttribute('style');
         svg.setAttribute('width',width+'mm');
