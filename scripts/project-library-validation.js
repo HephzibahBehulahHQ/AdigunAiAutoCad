@@ -69,7 +69,7 @@ function buildReport() {
     const parsed = engine.parseProject(JSON.stringify(project));
     const analysis = engine.analyzeProject(project);
     const bom = engine.billOfMaterials(project.objects);
-    const wireList = engine.wireList(project.objects);
+    const wireList = engine.wireList(project);
     const sheetContent = summarizeSheetContent(project);
     const checks = {
       projectSchema: parsed.valid && analysis.valid,

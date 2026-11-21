@@ -1874,7 +1874,9 @@
   }
 
 
-  function wireList(objects) {
+  function wireList(input) {
+    const project = !Array.isArray(input) && input && typeof input === 'object' ? input : null;
+    const objects = project ? project.objects : input;
     const source = Array.isArray(objects) ? objects : [];
     const wires = source.filter(function (object) { return object && object.kind === 'wire'; });
     const errors = [];
@@ -1889,35 +1891,52 @@
         errors.push('Object ' + (object.ref || object.id || index + 1) + ': unverified legacy symbols cannot be used for a connected wire list.');
       }
     });
-    const analysis = analyze(source);
-    analysis.errors.forEach(function (issue) {
-      errors.push((issue.objectId ? issue.objectId + ': ' : '') + issue.message);
+    const analysis = project ? analyzeProject(project) : analyze(source);
+    const sheets = project ? analysis.sheets : [{ id: '', analysis: analysis }];
+    if (project && !analysis.valid) errors.push(...analysis.errors);
+    sheets.forEach(function (sheet) {
+      sheet.analysis.errors.forEach(function (issue) {
+        errors.push((issue.objectId ? issue.objectId + ': ' : '') + issue.message);
+      });
     });
     if (errors.length) return { valid: false, errors: errors, rows: [] };
 
     const netByWire = new Map();
-    analysis.nets.forEach(function (net) {
-      net.wireIds.forEach(function (id) { netByWire.set(id, net); });
+    const globalByLocal = new Map();
+    if (project) analysis.globalNets.forEach(function (net) {
+      net.localNetIds.forEach(function (id) { globalByLocal.set(id, net); });
     });
-    const pinLocations = [];
+    sheets.forEach(function (sheet) {
+      sheet.analysis.nets.forEach(function (net) {
+        net.wireIds.forEach(function (id) { netByWire.set(id, project ? globalByLocal.get(net.id) : net); });
+      });
+    });
+    const pinsBySheet = new Map();
+    function sheetId(object) {
+      return project ? (object.sheetId || sheets[0]?.id || '') : '';
+    }
     source.forEach(function (instance) {
       if (!instance || instance.kind !== 'component-instance') return;
       const validation = validateInstance(instance);
       if (!validation.valid) return;
-      worldPins(instance).forEach(function (pin) {
-        pinLocations.push({ ref: instance.ref, number: pin.number, x: pin.x, y: pin.y });
-      });
+      const id = sheetId(instance);
+      if (!pinsBySheet.has(id)) pinsBySheet.set(id, []);
+      pinsBySheet.get(id).push(...worldPins(instance).map(function (pin) {
+        return { ref: instance.ref, number: pin.number, x: pin.x, y: pin.y };
+      }));
     });
-    function refsAt(x, y) {
-      return pinLocations.filter(function (pin) {
+    function refsAt(id, x, y) {
+      return (pinsBySheet.get(id) || []).filter(function (pin) {
         return Math.abs(pin.x - x) <= EPSILON && Math.abs(pin.y - y) <= EPSILON;
       }).map(function (pin) { return pin.ref + ':' + pin.number; }).sort();
     }
     const rows = wires.map(function (wire) {
+      const id = sheetId(wire);
       const net = netByWire.get(wire.id);
       const netPins = net ? net.pins.map(function (pin) { return pin.ref + ':' + pin.number; }).sort() : [];
       return {
         wireId: wire.id,
+        ...(project ? { sheetId: id } : {}),
         netId: net ? net.id : '',
         startX: wire.x1,
         startY: wire.y1,
@@ -1925,16 +1944,16 @@
         endX: wire.x2,
         endY: wire.y2,
         lengthMm: Number((Math.abs(wire.x2 - wire.x1) + Math.abs(wire.y2 - wire.y1)).toFixed(6)),
-        startPinRefs: refsAt(wire.x1, wire.y1),
-        endPinRefs: refsAt(wire.x2, wire.y2),
+        startPinRefs: refsAt(id, wire.x1, wire.y1),
+        endPinRefs: refsAt(id, wire.x2, wire.y2),
         netPinRefs: netPins
       };
     }).sort(function (a, b) { return a.wireId.localeCompare(b.wireId); });
     return { valid: true, errors: [], rows: rows };
   }
 
-  function wireListCsv(objects) {
-    const report = wireList(objects);
+  function wireListCsv(input) {
+    const report = wireList(input);
     if (!report.valid) throw new Error('Wire list export blocked: ' + report.errors.join(' '));
     const columns = [
       ['Wire ID', 'wireId'], ['Net ID', 'netId'], ['Start X (mm)', 'startX'],
@@ -1943,6 +1962,7 @@
       ['Start pin references', 'startPinRefs'], ['End pin references', 'endPinRefs'],
       ['Connected pin references on net', 'netPinRefs']
     ];
+    if (!Array.isArray(input) && input && typeof input === 'object') columns.unshift(['Sheet ID', 'sheetId']);
     function cell(value) {
       let text = Array.isArray(value) ? value.join('; ') : String(value == null ? '' : value);
       if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;

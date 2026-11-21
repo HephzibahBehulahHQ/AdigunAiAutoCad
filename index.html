@@ -678,15 +678,18 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     async function saveLocal(){const saved=prepareProjectSave();if(!saved)return;if(projectSaveHandle){try{const writable=await projectSaveHandle.createWritable();await writable.write(saved.serialized);await writable.close();dirty=false;notify('Project saved locally to '+projectSaveHandle.name+'.');}catch(error){notify('Project was not saved: '+error.message);}return;}downloadProjectFile(saved);}
     async function saveProjectAs(){const saved=prepareProjectSave();if(!saved)return;if(typeof window.showSaveFilePicker!=='function'){downloadProjectFile(saved);return;}try{const handle=await window.showSaveFilePicker({suggestedName:saved.fileName,types:[{description:'Adigun AI AutoCAD project',accept:{'application/json':['.adigun.json']}}]});const writable=await handle.createWritable();await writable.write(saved.serialized);await writable.close();projectSaveHandle=handle;dirty=false;notify('Project saved locally as '+handle.name+'.');}catch(error){if(error&&error.name==='AbortError')return;notify('Project was not saved: '+error.message);}}
   function exportBillOfMaterialsCsv(){try{const csv=window.AdigunCADEngine.billOfMaterialsCsv(state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-bom-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('BOM CSV exported with manufacturer sources and retrieval dates.');}catch(error){notify(error.message||'BOM CSV export failed.');}}
-  function exportWireListCsv(){try{const csv=window.AdigunCADEngine.wireListCsv(state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-wire-list-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('Wire list CSV exported from authored model geometry.');}catch(error){notify(error.message||'Wire list CSV export failed.');}}
+  function exportWireListCsv(){try{const csv=window.AdigunCADEngine.wireListCsv(state.projectModel?electricalProject():state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-wire-list-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('Wire list CSV exported from authored model geometry.');}catch(error){notify(error.message||'Wire list CSV export failed.');}}
   function exportSvg(){const clone=drawing.cloneNode(true);clone.querySelectorAll('.resize-controls').forEach(function(node){node.remove();});if(state.projectModel||state.sheet!=='control'||wrap.classList.contains('blank-start')){clone.querySelectorAll('#sheetDesign > *').forEach(function(node,index){if(index!==0&&node.id!=='userDrawings'&&node.id!=='customSheetFrame')node.remove();});}if(state.projectModel||state.sheet!=='control'||wrap.classList.contains('blank-start')){const frame=clone.querySelector('#customSheetFrame');if(frame)frame.style.display='block';}const exportSheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(exportSheet){clone.setAttribute('width',(exportSheet.paperWidthMm||420)+'mm');clone.setAttribute('height',(exportSheet.paperHeightMm||297)+'mm');clone.setAttribute('viewBox','0 0 '+(exportSheet.paperWidthMm||420)+' '+(exportSheet.paperHeightMm||297));}clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.removeAttribute('role');clone.removeAttribute('aria-label');const xml=new XMLSerializer().serializeToString(clone);const blob=new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${xml}`],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${sheetNames[state.sheet]?.[0]||state.sheets.find(s=>s.id===state.sheet)?.number||'sheet'}-drawing.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);notify('SVG drawing exported with embedded vector geometry.');}
   function selectPanel(id){const project=id==='project',symbols=id==='symbols';$('#projectPanel').hidden=!project;$('#symbolsPanel').hidden=!symbols;if(id==='layers'){openInspector('Layers and visibility');return;}$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.panel===id)));}
-  function currentElectricalReport(){
+  function electricalProject(){
     const engine=window.AdigunCADEngine;
-    return engine.projectElectricalReport({format:engine.projectFormat,version:engine.projectVersion,
+    return {format:engine.projectFormat,version:engine.projectVersion,
       componentSchemaVersion:engine.componentSchemaVersion,netSchemaVersion:engine.netSchemaVersion,
       project:state.projectModel.name,projectModel:state.projectModel,
-      sheets:state.sheets,objects:collectProjectObjects(),crossSheetConnections:state.crossSheetConnections});
+      sheets:state.sheets,objects:collectProjectObjects(),crossSheetConnections:state.crossSheetConnections};
+  }
+  function currentElectricalReport(){
+    return window.AdigunCADEngine.projectElectricalReport(electricalProject());
   }
   function exportElectricalReport(){
     if(!state.projectModel)return;
@@ -729,7 +732,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const panel=$('#inspectorContent');
     if(name==='Electrical checks'){
       const report=window.AdigunCADEngine.analyze(state.objects);
-      const wireReport=window.AdigunCADEngine.wireList(state.objects);
+      const wireReport=window.AdigunCADEngine.wireList(state.projectModel?electricalProject():state.objects);
       const findings=[];
       if(report.openEndpointCount)findings.push(report.openEndpointCount+' open wire endpoints.');
       if(report.unconnectedPinCount)findings.push(report.unconnectedPinCount+' component pins are not connected to a wire.');
@@ -741,7 +744,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         : findings.length
           ? '<div class="assistant-state"><span style="color:#f0bd4b">●</span><span><b>Review required</b><br>'+findings.map(escapeHtml).join('<br>')+'</span></div>'
           : '<div class="assistant-state"><span style="color:#73e6f4">●</span><span><b>No wire geometry issues found</b><br>Connectivity is based on authored wire endpoints and orthogonal bends.</span></div>';
-      const wireRows=wireReport.rows.map(function(row){
+      const wireRows=wireReport.rows.filter(row=>!state.projectModel||row.sheetId===state.sheet).map(function(row){
         const pins=row.netPinRefs.length?row.netPinRefs.join(', '):'No verified component pins are attached to this net.';
         return '<div class="inspector-block"><div class="property-row"><span>'+escapeHtml(row.wireId)+' · '+escapeHtml(row.netId)+'</span><strong>'+row.lengthMm.toFixed(3)+' mm</strong></div>'
           +'<div class="notice">Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div></div>';
