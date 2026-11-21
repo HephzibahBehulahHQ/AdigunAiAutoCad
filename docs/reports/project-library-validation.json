@@ -489,7 +489,7 @@
       "releaseScale": {
         "qualified": false,
         "additionalAuthoredSheetsRequired": 0,
-        "additionalConnectedSheetsRequired": 58,
+        "additionalConnectedSheetsRequired": 57,
         "sheetIdsWithoutElectricalConnectivity": [
           "ref-001",
           "ref-002",
@@ -499,7 +499,6 @@
           "ref-013",
           "ref-017",
           "ref-019",
-          "ref-020",
           "ref-021",
           "ref-023",
           "ref-024",
@@ -581,30 +580,30 @@
           "ref-100"
         ]
       },
-      "topologySha256": "86ba18141689ab2eaa1968accc728e595c84a951d393fdbffc049582e9023d0d",
+      "topologySha256": "368b42e2cb3b2cb28618fc4c286de3d1655b6c9eb0593526b24ef4d1207a538b",
       "csvSha256": {
-        "bom": "7e0d2bfba2e149b13670808feebe1ea19ec4c85eaea90d8391b913bb7ef81134",
-        "wires": "80bb9afb67339fd122ec85b022128b568ec9ce36ab221246710f852a5503e9c0",
-        "terminals": "858b1208dee18f9e0a743492ac969f67120bb8d638cce2e36c0802fdb054e9ef",
-        "plcIo": "4fe95415b633fd3fa602e494c555b8027e7e32db0b764ecdb6c33813d239fbf6",
+        "bom": "7afa084e4dcaed186eed2a263aa1e845bc1d44a205a222e83f366982b5e9eec7",
+        "wires": "d968527e563de4ba634159d5c15ce869504197fb48b7f3a9e641d29d6d50e8e7",
+        "terminals": "d023bebe0de5ff66f203122bd2be5a510807b98e36177f47d981d362e56b2b90",
+        "plcIo": "3134c94d1c54b23d820ff6f1a3d49368abf4e8a063f7e18496e67c782c4c525f",
         "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
-        "connectedSheetCount": 12,
-        "contentObjectCount": 1109,
+        "connectedSheetCount": 13,
+        "contentObjectCount": 1115,
         "emptyContentSheetIds": [],
-        "componentCount": 36,
-        "wireCount": 344,
-        "netCount": 71,
+        "componentCount": 38,
+        "wireCount": 348,
+        "netCount": 73,
         "globalNetCount": 43,
-        "crossSheetConnectionCount": 25,
+        "crossSheetConnectionCount": 27,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 15,
-        "wireListRowCount": 344,
-        "terminalListRowCount": 38
+        "wireListRowCount": 348,
+        "terminalListRowCount": 42
       },
       "errors": []
     },
