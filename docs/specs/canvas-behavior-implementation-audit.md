@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- Component reference changes from Properties and the context menu use the same operation. Undo and redo restore objects together with their connector targets. Local Chrome verified that renaming a linked component, undoing, redoing, and rotating the component each produced a valid save with its attached wire. The existing menu and toolbar markup stayed unchanged.
+
 - The existing Properties inspector edits object layer, stroke color, and applicable line weight and type. Changes are undoable, and layer visibility is saved with the native project. Local Chrome verified component style changes, undo/redo, and reopen with the reassigned layer hidden. The menu and toolbar markup stayed unchanged.
 
 - Electrical checks shows project-wide connectivity counts and navigable findings for unresolved wire endpoints, duplicate device tags, pins without directly attached wires, drawing geometry errors, and unresolved references from sheet deletion. Download electrical check report exports JSON with the sheet index, counts, findings and any analysis errors. Local Chrome verified download and the surviving location of a deleted-sheet reference. These model rules have no standards edition mapping. Other rule families and waiver history remain open.

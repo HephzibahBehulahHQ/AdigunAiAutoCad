@@ -215,11 +215,19 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
 
   function setTool(tool){if(state.pendingMoveObjectId){state.pendingMoveObjectId=null;notify('Move cancelled.');}if(state.pendingComponentId&&tool!=='component-placement'){state.pendingComponentId=null;if(placementPreview){placementPreview.remove();placementPreview=null;}}state.tool=tool;$$('[data-draw]').forEach(b=>{const on=b.dataset.draw===tool;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});drawing.style.cursor=tool==='select'?'default':tool==='pan'?'grab':'crosshair';const names={freehand:'Freehand pencil',ellipse:'Ellipse',curve:'Bézier curve',triangle:'Triangle',arrow:'Arrow',pan:'Pan'};notify((names[tool]||tool[0].toUpperCase()+tool.slice(1))+' tool selected · drag on the sheet to draw.');}
 
-  function pushUndo(snapshot){state.undo.push(snapshot||JSON.stringify(state.objects));if(state.undo.length>40)state.undo.shift();state.redo=[];updateHistoryButtons();}
+  function drawingHistoryEntry(objects){
+    return {objects:objects||JSON.stringify(state.objects),links:JSON.stringify(state.crossSheetConnections)};
+  }
+  function restoreDrawingHistory(entry){
+    state.objects=JSON.parse(entry.objects);
+    state.crossSheetConnections=JSON.parse(entry.links);
+    if(state.projectModel)state.projectModel.crossSheetConnections=state.crossSheetConnections;
+  }
+  function pushUndo(snapshot){state.undo.push(drawingHistoryEntry(snapshot));if(state.undo.length>40)state.undo.shift();state.redo=[];updateHistoryButtons();}
   function updateHistoryButtons(){$('[data-action="undo"]').disabled=!state.undo.length;$('[data-action="redo"]').disabled=!state.redo.length;}
   function refreshSelectedProperties(){if($('#rightPanelTitle').textContent!=='Properties'||!state.selected)return;const selected=state.objects.find(function(obj){return obj.id===state.selected;});if(selected)showObject(selected);}
-  function undo(){if(!state.undo.length)return;state.redo.push(JSON.stringify(state.objects));state.objects=JSON.parse(state.undo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command undone.');}
-  function redo(){if(!state.redo.length)return;state.undo.push(JSON.stringify(state.objects));state.objects=JSON.parse(state.redo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command restored.');}
+  function undo(){if(!state.undo.length)return;state.redo.push(drawingHistoryEntry());restoreDrawingHistory(state.undo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command undone.');}
+  function redo(){if(!state.redo.length)return;state.undo.push(drawingHistoryEntry());restoreDrawingHistory(state.redo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command restored.');}
   function snapDrawingPoint(point){
     if(state.osnap){
       const bounds=drawing.getBoundingClientRect();
@@ -271,7 +279,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   }
   function rotateObject(id){
     const obj=state.objects.find(function(item){return item.id===id;});
-    if(!obj)return;
+    if(!obj||obj.locked)return;
     const snapshot=JSON.stringify(state.objects);
     if(obj.kind==='component-instance'){
       const oldPins=window.AdigunCADEngine.worldPins(obj);
@@ -301,7 +309,28 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function applyGraphicDeltas(deltas,message){if(!selectionCanAlign())return;const changed=Object.keys(deltas).filter(function(id){return Math.abs(deltas[id].x)>1e-7||Math.abs(deltas[id].y)>1e-7;});if(!changed.length){notify('The selected geometry is already arranged that way.');return;}pushUndo();changed.forEach(function(id){const obj=state.objects.find(function(item){return item.id===id;});if(obj)translateObjectGeometry(obj,deltas[id].x,deltas[id].y);});renderObjects();persist();notify(message);}
   function alignSelection(edge){if(!selectionCanAlign()){notify('Align applies to selected objects except wires, which must be routed separately.');return;}const anchor=objectBounds(state.objects.find(function(obj){return obj.id===state.selected;}));if(!anchor)return;const deltas={};state.selectedObjectIds.forEach(function(id){const bounds=objectBounds(state.objects.find(function(obj){return obj.id===id;}));if(!bounds)return;let dx=0,dy=0;if(edge==='left')dx=anchor.left-bounds.left;else if(edge==='center-x')dx=anchor.cx-bounds.cx;else if(edge==='right')dx=anchor.right-bounds.right;else if(edge==='top')dy=anchor.top-bounds.top;else if(edge==='center-y')dy=anchor.cy-bounds.cy;else if(edge==='bottom')dy=anchor.bottom-bounds.bottom;deltas[id]={x:dx,y:dy};});applyGraphicDeltas(deltas,'Selected geometry aligned.');}
   function distributeSelection(axis){if(!selectionCanAlign()){notify('Distribute applies to selected objects except wires, which must be routed separately.');return;}const horizontal=axis==='horizontal',items=state.selectedObjectIds.map(function(id){return{id:id,bounds:objectBounds(state.objects.find(function(obj){return obj.id===id;}))};}).filter(function(item){return item.bounds;}).sort(function(a,b){return horizontal?a.bounds.left-b.bounds.left:a.bounds.top-b.bounds.top;});if(items.length<3){notify('Select at least three drawing objects to distribute.');return;}const extent=horizontal?items[items.length-1].bounds.right-items[0].bounds.left:items[items.length-1].bounds.bottom-items[0].bounds.top,totalSize=items.reduce(function(sum,item){return sum+(horizontal?item.bounds.width:item.bounds.height);},0),gap=(extent-totalSize)/(items.length-1),deltas={};if(gap< -1e-7){notify('Move the outer objects farther apart before distributing this selection.');return;}let cursor=horizontal?items[0].bounds.right+gap:items[0].bounds.bottom+gap;items.slice(1,-1).forEach(function(item){const position=horizontal?item.bounds.left:item.bounds.top,delta=cursor-position;deltas[item.id]=horizontal?{x:delta,y:0}:{x:0,y:delta};cursor+=(horizontal?item.bounds.width:item.bounds.height)+gap;});applyGraphicDeltas(deltas,horizontal?'Selected geometry distributed horizontally.':'Selected geometry distributed vertically.');}
-  function renameComponent(id){const obj=state.objects.find(function(item){return item.id===id&&item.kind==='component-instance';});if(!obj)return;const answer=window.prompt('Rename component reference',obj.ref);if(answer===null)return;const ref=answer.trim().slice(0,32);if(!ref){notify('Component reference cannot be blank.');return;}const duplicate=collectProjectObjects().some(function(item){return item.kind==='component-instance'&&item.id!==id&&item.ref.toLowerCase()===ref.toLowerCase();});if(duplicate){notify('That component reference is already used in this project.');return;}const oldRef=obj.ref,sheetId=obj.sheetId||state.sheet;pushUndo();obj.ref=ref;state.crossSheetConnections.forEach(function(connection){connection.endpoints.forEach(function(endpoint){if(endpoint.connector&&endpoint.connector.targetSheetId===sheetId&&endpoint.connector.targetRef===oldRef)endpoint.connector.targetRef=ref;});});renderObjects();persist();showObject(obj);notify('Component reference changed to '+ref+'.');}
+  function setComponentReference(object,value){
+    const ref=String(value).trim().slice(0,32);
+    if(object.locked||ref===object.ref)return;
+    if(!ref){notify('Component reference cannot be blank.');return;}
+    const used=collectProjectObjects().some(item=>item.kind==='component-instance'&&item.id!==object.id&&item.ref.toLowerCase()===ref.toLowerCase());
+    if(used){notify('That component reference is already used in this project.');return;}
+    pushUndo();
+    const previous=object.ref,sheetId=object.sheetId||state.sheet;
+    object.ref=ref;
+    state.crossSheetConnections.forEach(connection=>connection.endpoints.forEach(endpoint=>{
+      const target=endpoint.connector;
+      if(target?.targetSheetId===sheetId&&target.targetRef===previous)target.targetRef=ref;
+    }));
+    renderObjects();persist();notify('Component reference changed to '+ref+'.');
+  }
+  function renameComponent(id){
+    const object=state.objects.find(item=>item.id===id&&item.kind==='component-instance');
+    if(!object||object.locked)return;
+    const value=window.prompt('Rename component reference',object.ref);
+    if(value===null)return;
+    setComponentReference(object,value);showObject(object);
+  }
   function handleObjectDoubleClick(event,id){if(state.tool!=='select')return;event.preventDefault();event.stopPropagation();const current=state.objects.find(function(item){return item.id===id;});if(!current)return;setSelection([current.id],true);openInspector('Properties');}
   function drawingObjectVisible(obj){return !obj.hidden&&state.layerVisibility[drawingLayerForObject(obj)]!==false;}
   function drawingLayerForObject(obj){if(['connections','devices','annotations'].includes(obj.layer))return obj.layer;if(obj.kind==='wire')return 'connections';if(obj.kind==='component-instance'||['terminal','relay','contact','breaker','sensor','motor','plc','ground'].includes(obj.kind))return 'devices';return 'annotations';}
@@ -542,18 +571,25 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     if(!obj||obj.kind!=='component-instance')return;
     const name=field.dataset.componentProperty;
     let nextValue,currentValue;
-    if(name==='ref'){nextValue=field.value.slice(0,32);currentValue=obj.ref;}
-    else if(Object.prototype.hasOwnProperty.call(obj.properties,name)){
+    if(name==='ref'||obj.locked)return;
+    if(Object.prototype.hasOwnProperty.call(obj.properties,name)){
       const rule=window.AdigunCADEngine.component(obj.componentId).instanceProperties[name];
       if(rule.type==='number'){nextValue=field.value===''?null:field.valueAsNumber;if(nextValue!==null&&(!Number.isFinite(nextValue)||nextValue<rule.minimum||nextValue>rule.maximum)){field.setCustomValidity('Enter a setting from '+rule.minimum+' to '+rule.maximum+' '+(window.AdigunCADEngine.component(obj.componentId).specifications.adjustableOverloadRelease.unit||'')+'.');return;}field.setCustomValidity('');}else nextValue=field.value.slice(0,rule.maximumLength);currentValue=obj.properties[name];
     }else return;
     if(Object.is(currentValue,nextValue))return;
     if(!activeComponentEdit||activeComponentEdit.field!==field)activeComponentEdit={field:field,snapshot:JSON.stringify(state.objects),historyRecorded:false};
     if(!activeComponentEdit.historyRecorded){pushUndo(activeComponentEdit.snapshot);activeComponentEdit.historyRecorded=true;}
-    if(name==='ref')obj.ref=nextValue;
-    else obj.properties[name]=nextValue;
+    obj.properties[name]=nextValue;
     renderObjects();
     persist();
+  });
+
+  $('#inspectorContent').addEventListener('change',function(event){
+    const field=event.target.closest('[data-component-property=ref]');
+    if(!field)return;
+    const object=state.objects.find(item=>item.id===field.dataset.componentObject&&item.kind==='component-instance');
+    if(!object)return;
+    setComponentReference(object,field.value);field.value=object.ref;
   });
 
   let drawStart=null,freehandPoints=null,placementPreview=null,objectDrag=null,resizeDrag=null,selectionBox=null;
