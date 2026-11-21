@@ -565,6 +565,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.mouse.down();
     await freeDraftingPage.mouse.move(ruler.x + ruler.width * 0.35, ruler.y + 120);
     await freeDraftingPage.mouse.up();
+    await freeDraftingPage.getByRole('button', { name: 'Properties', exact: true }).click();
     const guide = freeDraftingPage.getByLabel('Guide 1 position (mm)');
     await guide.fill('92.5');
     await guide.press('Tab');
