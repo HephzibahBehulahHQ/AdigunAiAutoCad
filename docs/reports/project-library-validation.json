@@ -29,7 +29,7 @@
       "topologyId": "relay-contactor-control",
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
-      "revision": "1.5",
+      "revision": "1.6",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -41,18 +41,18 @@
       "metrics": {
         "sheetCount": 71,
         "authoredSheetCount": 71,
-        "connectedSheetCount": 1,
-        "contentObjectCount": 522,
+        "connectedSheetCount": 2,
+        "contentObjectCount": 524,
         "emptyContentSheetIds": [],
         "componentCount": 4,
-        "wireCount": 13,
-        "netCount": 4,
+        "wireCount": 14,
+        "netCount": 5,
         "globalNetCount": 4,
-        "crossSheetConnectionCount": 0,
+        "crossSheetConnectionCount": 1,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 4,
-        "wireListRowCount": 13
+        "wireListRowCount": 14
       },
       "errors": []
     },

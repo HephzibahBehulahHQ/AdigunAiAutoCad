@@ -1,7 +1,7 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "24 V DC relay-operated contactor coil — wiring example",
-  "revision": "1.5",
+  "revision": "1.6",
   "status": "71 authored sheets: relay wiring, potential labels, editable layouts, component data and field review records.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
@@ -470,8 +470,8 @@
       "id": "example-x3",
       "componentId": "phoenix-contact-3209510",
       "ref": "X3",
-      "x": 150,
-      "y": 560,
+      "x": 500,
+      "y": 800,
       "rotation": 0,
       "properties": {
         "terminalStrip": "",
@@ -479,7 +479,7 @@
         "marking": "0 V DC",
         "comment": "External DC control return."
       },
-      "sheetId": "control"
+      "sheetId": "relay-field-terminals"
     },
     {
       "schemaVersion": 1,
@@ -571,10 +571,10 @@
       "id": "W-0V-K1-3",
       "kind": "wire",
       "sheetId": "control",
-      "name": "K1 A2 to X3",
+      "name": "Shared 0 V return to X3 sheet",
       "x1": 400,
       "y1": 560,
-      "x2": 115,
+      "x2": 300,
       "y2": 560,
       "stroke": "#b42318",
       "strokeWidth": 1.5,
@@ -610,10 +610,10 @@
       "id": "W-0V-KM1-3",
       "kind": "wire",
       "sheetId": "control",
-      "name": "X3 to KM1 A2",
+      "name": "KM1 return to shared junction",
       "x1": 820,
       "y1": 560,
-      "x2": 185,
+      "x2": 400,
       "y2": 560,
       "stroke": "#b42318",
       "strokeWidth": 1.5,
@@ -837,7 +837,7 @@
       "sheetId": "relay-index",
       "x": 120,
       "y": 843,
-      "text": "Model summary: 4 components, 13 wire segments, 4 static nets.",
+      "text": "Model summary: 4 components, 14 wire segments, 4 project-wide nets.",
       "stroke": "#13263b"
     },
     {
@@ -969,7 +969,7 @@
       "sheetId": "relay-wire-schedule",
       "x": 120,
       "y": 379,
-      "text": "W-0V-K1-3 | route point → X3:1 | 285",
+      "text": "W-0V-K1-3 | return junction to A2/004 cross-reference | 100",
       "stroke": "#13263b"
     },
     {
@@ -996,7 +996,16 @@
       "sheetId": "relay-wire-schedule",
       "x": 120,
       "y": 553,
-      "text": "W-0V-KM1-3 | route point → X3:2 | 635",
+      "text": "W-0V-KM1-3 | route point to return junction | 420",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-wire-schedule-x3-return",
+      "sheetId": "relay-wire-schedule",
+      "x": 120,
+      "y": 611,
+      "text": "W-0V-X3-1 | A2/001 cross-reference to X3:1 | 175",
       "stroke": "#13263b"
     },
     {
@@ -1004,7 +1013,7 @@
       "id": "relay-wire-schedule-line-08",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 611,
+      "y": 669,
       "text": "W-24-K1-1 | K1:11 → route point | 405",
       "stroke": "#13263b"
     },
@@ -1013,7 +1022,7 @@
       "id": "relay-wire-schedule-line-09",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 669,
+      "y": 727,
       "text": "W-24-K1-2 | route point → X1:1:2 | 50",
       "stroke": "#13263b"
     },
@@ -1022,7 +1031,7 @@
       "id": "relay-wire-schedule-line-10",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 727,
+      "y": 785,
       "text": "W-K1-KM1-1 | KM1:A1 → route point | 100",
       "stroke": "#13263b"
     },
@@ -1031,7 +1040,7 @@
       "id": "relay-wire-schedule-line-11",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 785,
+      "y": 843,
       "text": "W-K1-KM1-2 | route point → route point | 50",
       "stroke": "#13263b"
     },
@@ -1040,7 +1049,7 @@
       "id": "relay-wire-schedule-line-12",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 843,
+      "y": 901,
       "text": "W-K1-KM1-3 | route point → K1:14 | 90",
       "stroke": "#13263b"
     },
@@ -1049,7 +1058,7 @@
       "id": "relay-wire-schedule-line-13",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 901,
+      "y": 959,
       "text": "W-Q0-1 | X1:2:2 → route point | 265",
       "stroke": "#13263b"
     },
@@ -1058,7 +1067,7 @@
       "id": "relay-wire-schedule-line-14",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 959,
+      "y": 1017,
       "text": "W-Q0-2 | route point → K1:A1 | 60",
       "stroke": "#13263b"
     },
@@ -1067,7 +1076,7 @@
       "id": "relay-wire-schedule-line-15",
       "sheetId": "relay-wire-schedule",
       "x": 120,
-      "y": 1017,
+      "y": 1075,
       "text": "Lengths represent drawing geometry. Installed cable lengths and conductor selections remain open.",
       "stroke": "#13263b"
     },
@@ -4702,7 +4711,7 @@
       "sheetId": "relay-control-segment-geometry",
       "x": 120,
       "y": 379,
-      "text": "W-0V-K1 | 3 segments | 595 drawing length units.",
+      "text": "W-0V-K1 | 3 segments | 410 drawing length units.",
       "stroke": "#13263b"
     },
     {
@@ -4711,7 +4720,7 @@
       "sheetId": "relay-control-segment-geometry",
       "x": 120,
       "y": 437,
-      "text": "W-0V-KM1 | 3 segments | 890 drawing length units.",
+      "text": "W-0V-KM1 | 3 segments | 675 drawing length units.",
       "stroke": "#13263b"
     },
     {
@@ -5101,7 +5110,7 @@
       "sheetId": "relay-xt1-groups",
       "x": 120,
       "y": 379,
-      "text": "0 V DC | W-0V-K1-1, W-0V-K1-2, W-0V-K1-3, W-0V-KM1-1, W-0V-KM1-2, W-0V-KM1-3",
+      "text": "0 V DC | W-0V-K1-1, W-0V-K1-2, W-0V-K1-3, W-0V-KM1-1, W-0V-KM1-2, W-0V-KM1-3, W-0V-X3-1",
       "stroke": "#13263b"
     },
     {
@@ -5206,7 +5215,7 @@
       "sheetId": "relay-x3-shared-return",
       "x": 120,
       "y": 205,
-      "text": "Model X3:1 terminates W-0V-K1-3 from K1:A2.",
+      "text": "X3:1 terminates W-0V-X3-1 from the shared coil return through cross-reference A2/001.",
       "stroke": "#13263b"
     },
     {
@@ -5215,7 +5224,7 @@
       "sheetId": "relay-x3-shared-return",
       "x": 120,
       "y": 263,
-      "text": "Model X3:2 terminates W-0V-KM1-3 from KM1:A2.",
+      "text": "X3:2 belongs to the same internal feed-through and is the external return boundary.",
       "stroke": "#13263b"
     },
     {
@@ -6312,7 +6321,54 @@
       "y": 321,
       "text": "Record inspection results and drawing revision in the issued acceptance record.",
       "stroke": "#13263b"
+    },
+    {
+      "id": "W-0V-X3-1",
+      "kind": "wire",
+      "sheetId": "relay-field-terminals",
+      "name": "Shared 0 V return to X3:1",
+      "x1": 290,
+      "y1": 800,
+      "x2": 465,
+      "y2": 800,
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
     }
   ],
-  "description": "A source-backed, one-sheet 24 V DC control wiring example. A PLC output energizes K1; K1's normally-open contact feeds the KM1 contactor coil. Relay state is not simulated."
+  "description": "A source-backed, one-sheet 24 V DC control wiring example. A PLC output energizes K1; K1's normally-open contact feeds the KM1 contactor coil. Relay state is not simulated.",
+  "crossSheetConnections": [
+    {
+      "id": "relay-x3-return",
+      "name": "0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "control",
+          "wireId": "W-0V-K1-3",
+          "point": {
+            "x": 300,
+            "y": 560
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "relay-field-terminals",
+            "targetRef": "X3"
+          }
+        },
+        {
+          "sheetId": "relay-field-terminals",
+          "wireId": "W-0V-X3-1",
+          "point": {
+            "x": 290,
+            "y": 800
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "control",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    }
+  ]
 }
