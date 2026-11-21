@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.4",
+  "revision": "2.5",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -892,9 +892,9 @@
       "kind": "wire",
       "sheetId": "plc-inputs",
       "x": 710,
-      "y": 428,
+      "y": 444,
       "x1": 710,
-      "y1": 428,
+      "y1": 444,
       "x2": 780,
       "y2": 470,
       "stroke": "#38734b",
@@ -958,7 +958,7 @@
       "kind": "text",
       "x": 110,
       "y": 460,
-      "text": "A1 X12:2 / DQ a.0 / Q0.0 feeds K1:A1. K1:A2 returns to the SITOP 0 V net.",
+      "text": "A1 X12:3 / DQ a.0 / Q0.0 feeds K1:A1. K1:A2 returns to the SITOP 0 V net.",
       "stroke": "#13263b"
     },
     {
@@ -967,7 +967,7 @@
       "kind": "text",
       "x": 110,
       "y": 505,
-      "text": "The output group feed is A1 X12:1 / 1L. The other output group remains outside this circuit.",
+      "text": "X12:1 / 3L+ feeds the transistor outputs. X12:2 / 3M returns to 0 V.",
       "stroke": "#13263b"
     },
     {
@@ -2312,9 +2312,9 @@
       "kind": "wire",
       "sheetId": "plc-inputs",
       "x": 710,
-      "y": 444,
+      "y": 460,
       "x1": 710,
-      "y1": 444,
+      "y1": 460,
       "x2": 750,
       "y2": 520,
       "potential": "Q0.1 remote status command",
@@ -2554,7 +2554,7 @@
       "sheetId": "remote-status-relay",
       "x": 110,
       "y": 455,
-      "text": "A1 X12:3 / DQ a.1 / Q0.1 feeds K2:A1. K2:A2 returns to PS1 0 V.",
+      "text": "A1 X12:4 / DQ a.1 / Q0.1 feeds K2:A1. K2:A2 returns to PS1 0 V.",
       "stroke": "#13263b"
     },
     {
@@ -2759,6 +2759,20 @@
       "y": 580,
       "text": "This input is an operational permissive. Its logic and any safety circuit remain outside scope.",
       "stroke": "#13263b"
+    },
+    {
+      "id": "plc-output-return",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 710,
+      "y": 428,
+      "x1": 710,
+      "y1": 428,
+      "x2": 1020,
+      "y2": 428,
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "potential": "0 V DC"
     }
   ],
   "crossSheetConnections": [
@@ -3050,7 +3064,7 @@
     },
     {
       "id": "plc-1l",
-      "name": "CPU 1L supply",
+      "name": "CPU 3L+ supply",
       "endpoints": [
         {
           "sheetId": "supply",

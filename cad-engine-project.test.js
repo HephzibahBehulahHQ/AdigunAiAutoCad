@@ -595,18 +595,18 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['X8:1', 'X8:2', 'PS1:N'],
     ['X9:1', 'X9:2', 'PS1:PE'],
     ['B1:1', 'B2:1', 'KM1:13', 'KM1:21', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'X5:1', 'X5:2', 'X13:1', 'X13:2', 'X19:1', 'X19:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+'],
-    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'K1:A2', 'K2:A2', 'PS1:-'],
+    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'A1:X12:2', 'K1:A2', 'K2:A2', 'PS1:-'],
     ['B1:4', 'X15:1', 'X15:2', 'A1:X10:7'],
     ['B2:2', 'X11:1', 'X11:2', 'A1:X11:2'],
     ['B2:4', 'X12:1', 'X12:2', 'A1:X10:13'],
     ['KM1:A1', 'K1:14'],
     ['KM1:14', 'A1:X10:8'],
-    ['A1:X12:2', 'K1:A1'],
+    ['A1:X12:3', 'K1:A1'],
     ['A1:X10:9', 'S1:14'],
     ['A1:X10:10', 'S2:22'],
     ['X6:1', 'X6:2', 'KM1:22', 'A1:X10:11'],
     ['K1:12', 'X10:1', 'X10:2', 'A1:X10:12'],
-    ['A1:X12:3', 'K2:A1'],
+    ['A1:X12:4', 'K2:A1'],
     ['K2:11', 'X16:1', 'X16:2'],
     ['K2:12', 'X17:1', 'X17:2'],
     ['K2:14', 'X18:1', 'X18:2'],
@@ -616,7 +616,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   assert.equal(io.valid, true);
   assert.equal(io.rows.length, 16);
   assert.deepEqual(io.rows.filter(row => row.netId).map(row => row.terminal),
-    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X12:2', 'X12:3']);
+    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X12:3', 'X12:4']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
   const cables = engine.cableScheduleCsv(reopened.project);
   assert.equal(cables.trim().split('\r\n').length, 8);
@@ -799,7 +799,7 @@ test('source-backed examples open as isolated native projects and retain editabl
   assert.notEqual(firstCopy.sheets, secondCopy.sheets);
   assert.notEqual(firstCopy.objects, secondCopy.objects);
   assert.equal(firstCopy.objects.filter(object => object.kind === 'component-instance').length, 32);
-  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 335);
+  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 336);
   assert.ok(firstCopy.crossSheetConnections.length > 0);
 
   const q1 = firstCopy.objects.find(object => object.kind === 'component-instance' && object.ref === 'Q1');
