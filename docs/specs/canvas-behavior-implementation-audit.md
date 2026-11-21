@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- Local headless Chrome opened all seven published examples through Project Explorer. In each copy, a component was rendered, recolored in Properties, saved as native JSON and reopened. The saved project retained the exact global net members, sheet and wire counts, and open-endpoint count. All seven source files remained byte-for-byte unchanged. The Playwright suite now includes the same edit and round-trip assertions.
+
 - Moving or rotating a linked wire updates only its matching off-page endpoint. Undo and redo restore both the wire and its reference point. A local Chrome check verified coordinate edits, rotation, undo/redo, native save, and project connectivity analysis.
 
 - Component reference changes from Properties and the context menu use the same operation. Undo and redo restore objects together with their connector targets. Local Chrome verified that renaming a linked component, undoing, redoing, and rotating the component each produced a valid save with its attached wire. The existing menu and toolbar markup stayed unchanged.
