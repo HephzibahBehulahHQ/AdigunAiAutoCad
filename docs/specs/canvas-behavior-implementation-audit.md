@@ -28,7 +28,7 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ## Implementation order
 
-1. Extend Chromium acceptance to cover inline rename, drag/reorder/section move, tab close/reopen, delete diagnostics, and project isolation through the actual interface.
+1. Local headless Chrome exercised inline rename and cancel, drag reorder within a section, section moves, tab close/reopen and deletion of an unlinked sheet. Extend Chromium acceptance to cover linked-sheet deletion diagnostics and verify project isolation throughout those operations.
 2. Verify drawing-scale behavior in Chromium and ensure the title-block footprint stays clear through zoom, pan, print and SVG export.
 3. Verify reciprocal cross-sheet continuity, identifiers, diagnostics and supported save/reopen/export across A2 and every section, including A5.
 4. Author a source-backed, at-least-30-sheet native A1–A4 example from the repo's engineering topics. Every example must open as an independent editable project copy; verify component edits, values, colors, connections, save-as, close and reopen.

@@ -105,6 +105,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 0, 'adding a sheet must not open it');
     await sheetRow.click();
     assert.equal(await page.locator('#sheetTabs .document-tab[data-sheet]').count(), 1, 'selecting a sheet opens its canvas tab');
+    await sheetRow.locator('[data-sheet-name]').dblclick();
+    const sheetNameInput = page.getByRole('textbox', { name: 'Rename sheet' });
+    await sheetNameInput.fill('Incoming power');
+    await sheetNameInput.press('Enter');
+    assert.match(await sheetRow.getAttribute('aria-label'), /^A2\/0001 · Incoming power$/);
     const titleBlock = page.locator('#projectTitleBlockDynamic [data-title-block="frame"]');
     await titleBlock.waitFor();
     const titleBlockRows = await page.locator('#projectTitleBlockDynamic [data-title-block-row]').evaluateAll(nodes => nodes.map(node => node.dataset.titleBlockRow));
@@ -366,6 +371,19 @@ test('new project has empty A1–A4 sections and supports uncapped continuous nu
   assert.equal(project.sheets[0].id, overview.id);
   assert.equal(project.sheets.find(sheet => sheet.id === 'sheet-record-204').order, 207);
   assert.equal(project.sheets.at(-1).id, field.id);
+});
+
+test('moving a sheet before another preserves the requested position within a section', () => {
+  const project = engine.createProjectModel('sheet-order', 'Sheet order');
+  for (const id of ['first', 'second', 'third']) engine.addProjectSheet(project, 'A2', id, id);
+  engine.moveProjectSheet(project, 'first', 'A2', 1);
+  assert.deepEqual(project.sheets.map(sheet => [sheet.id, sheet.number]), [
+    ['second', 'A2/0001'], ['first', 'A2/0002'], ['third', 'A2/0003']
+  ]);
+  engine.moveProjectSheet(project, 'first', 'A4');
+  assert.deepEqual(project.sheets.map(sheet => [sheet.id, sheet.number]), [
+    ['second', 'A2/0001'], ['third', 'A2/0002'], ['first', 'A4/0003']
+  ]);
 });
 
 test('sheets can be renamed, moved, reordered, and deleted without changing link targets', () => {

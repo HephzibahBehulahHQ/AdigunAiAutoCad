@@ -284,11 +284,6 @@
     targetSheets.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
     const oldSectionSheets = project.sheets.filter(function (sheet) { return sheet.sectionId === previousSectionId && sheet.sectionId !== sectionId; });
     oldSectionSheets.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
-    const allSections = new Set(project.sections.map(function (section) { return section.id; }));
-    allSections.forEach(function (id) {
-      const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === id; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
-      siblings.forEach(function (sheet, index) { sheet.sectionOrder = index + 1; });
-    });
     project.sheets.push(moved);
     renumberProjectSheets(project);
     return moved;
