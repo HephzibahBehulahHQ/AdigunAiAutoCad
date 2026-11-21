@@ -47,7 +47,7 @@ This is a control-wiring example, not a complete motor starter or construction p
 
 # Siemens 3RM12 reversing starter and SEW DRN63MS4 motor
 
-Open this project as an editable copy from **Project Explorer → List**. The four-sheet reference includes the wiring model, an index, and separate power and control net schedules. The wiring model uses one Siemens SIRIUS 3RM1201-1AA04 starter, one SEW-EURODRIVE DRN63MS4 motor, and thirteen Phoenix Contact PT 16 N OG terminals. It contains 33 orthogonal wire segments and 17 isolated nets. All seven motor terminals are represented; U2/V2/W2 form an explicit star link while each winding remains a separate external terminal.
+Open this project as an editable copy from **Project Explorer → List**. The ten-sheet reference includes the wiring model, an index, separate power and control net schedules, three wire lists, the Q1 terminal register, and component and source registers. The wiring model uses one Siemens SIRIUS 3RM1201-1AA04 starter, one SEW-EURODRIVE DRN63MS4 motor, and thirteen Phoenix Contact PT 16 N OG terminals. It contains 33 orthogonal wire segments and 17 isolated nets. All seven motor terminals are represented; U2/V2/W2 form an explicit star link while each winding remains a separate external terminal.
 
 - SEW motor data, DRN63MS4, 400 V / 50 Hz / 4-pole: <https://download.sew-eurodrive.com/download/pdf/30590116.pdf>
 - SEW terminal identification and star connection manual: <https://download.sew-eurodrive.com/download/pdf/25957074.pdf>

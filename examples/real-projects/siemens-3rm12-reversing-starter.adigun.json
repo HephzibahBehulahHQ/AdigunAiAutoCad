@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Siemens SIRIUS 3RM12 with SEW DRN63MS4 motor — wiring example",
-  "revision": "1.1",
-  "status": "Educational reversing-starter reference with one wiring sheet and three authored documentation sheets.",
+  "revision": "1.2",
+  "status": "Educational reversing-starter reference with one wiring sheet and nine authored documentation sheets.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -39,6 +39,42 @@
       "id": "reversing-control-nets",
       "number": "A2/002",
       "name": "Control and auxiliary continuity groups",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-bom",
+      "number": "A4/001",
+      "name": "Component and quantity register",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-source-register",
+      "number": "A4/002",
+      "name": "Catalog source register",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-line-wire-list",
+      "number": "A2/003",
+      "name": "Incoming phase wire schedule",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-motor-wire-list",
+      "number": "A2/004",
+      "name": "Motor, star-point and PE wire schedule",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-control-wire-list",
+      "number": "A2/005",
+      "name": "Control and signalling wire schedule",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-starter-pin-register",
+      "number": "A2/006",
+      "name": "Q1 starter terminal register",
       "projectSectionId": "A2"
     }
   ],
@@ -1085,6 +1121,915 @@
       "text": "External control and signalling logic is outside the wiring model.",
       "stroke": "#13263b",
       "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-entry-reversing-bom",
+      "x": 120,
+      "y": 695,
+      "text": "A4/001 | Component and quantity register.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-entry-reversing-source-register",
+      "x": 120,
+      "y": 753,
+      "text": "A4/002 | Catalog source register.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-entry-reversing-line-wire-list",
+      "x": 120,
+      "y": 811,
+      "text": "A2/003 | Incoming phase wire schedule.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-entry-reversing-motor-wire-list",
+      "x": 120,
+      "y": 869,
+      "text": "A2/004 | Motor, star-point and PE wire schedule.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-entry-reversing-control-wire-list",
+      "x": 120,
+      "y": 927,
+      "text": "A2/005 | Control and signalling wire schedule.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-entry-reversing-starter-pin-register",
+      "x": 120,
+      "y": 985,
+      "text": "A2/006 | Q1 starter terminal register.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-bom-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "COMPONENT AND QUANTITY REGISTER",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing A1/002 | Quantities are derived from component instances.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Phoenix Contact 3212144 | Quantity 13",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Designators: X1, X10, X11, X12, X13, X14, X15, X16, X2, X3, X7, X8, X9",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "SEW-EURODRIVE DRN63MS4 | Quantity 1",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Designators: M1",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Siemens 3RM1201-1AA04 | Quantity 1",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Designators: Q1",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-bom-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "A4/002 lists the manufacturer records used by the catalog.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-bom"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-source-register-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "CATALOG SOURCE REGISTER",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "The following manufacturer records are attached to the components in the project catalog.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "3212144 | PT 16 N OG · Feed-through terminal block · Item 3212144",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Document revision is unspecified in the project catalog.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "DRN63MS4 | DRN.. AC motors · motor data table, 400 V, 50 Hz, 4-pole",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "https://download.sew-eurodrive.com/download/pdf/30590116.pdf",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Manufacturer catalog/document 30590116/EN, 03/2023.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "3RM1201-1AA04 | 3RM1201-1AA04 · SIRIUS 3RM1 reversing starter · Industry Mall",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "https://mall.industry.siemens.com/mall/en/en/Catalog/Product/?mlfb=3RM1201-1AA04",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "Live manufacturer product catalog; retrieved 2026-11-12.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-source-register-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "Confirm the ordered part and applicable documentation revision during project review.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-source-register"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-line-wire-list-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "INCOMING PHASE WIRE SCHEDULE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing A1/002 | Segment ID, start and end pin references, and drawing length.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "W-X1-L1-1 | X1:2 → route point | 125 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "W-X1-L1-2 | route point → route point | 30 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "W-X1-L1-3 | route point → route point | 200 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "W-X1-L1-4 | route point → route point | 150 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "W-X1-L1-5 | route point → Q1:1/L1 | 50 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "W-X2-L2-1 | X2:2 → route point | 175 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "W-X2-L2-2 | route point → route point | 20 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "W-X2-L2-3 | route point → route point | 220 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "W-X2-L2-4 | route point → route point | 110 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "W-X2-L2-5 | route point → Q1:3/L2 | 30 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-14",
+      "x": 120,
+      "y": 869,
+      "text": "W-X3-L3-1 | X3:2 → route point | 225 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-15",
+      "x": 120,
+      "y": 927,
+      "text": "W-X3-L3-2 | route point → route point | 10 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-16",
+      "x": 120,
+      "y": 985,
+      "text": "W-X3-L3-3 | route point → route point | 230 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-17",
+      "x": 120,
+      "y": 1043,
+      "text": "W-X3-L3-4 | route point → route point | 70 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-18",
+      "x": 120,
+      "y": 1101,
+      "text": "W-X3-L3-5 | route point → Q1:5/L3 | 20 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-line-wire-list-line-19",
+      "x": 120,
+      "y": 1159,
+      "text": "Drawing lengths describe routing geometry. Installed conductor lengths and allowances are open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-line-wire-list"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-motor-wire-list-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "MOTOR, STAR-POINT AND PE WIRE SCHEDULE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing A1/002 | Segment ID, start and end pin references, and drawing length.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "W-M1-PE-X16-1 | M1:PE → X16:1 | 65 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "W-M1-U2-star-1 | M1:U2 → route point | 40 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "W-M1-U2-star-2 | route point → route point | 50 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "W-M1-V2-star-1 | M1:V2 → route point | 40 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "W-M1-W2-star-1 | M1:W2 → route point | 40 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "W-M1-W2-star-2 | route point → route point | 50 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "W-T1-M1-winding-u1 | Q1:2/T1 → M1:U1 | 50 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "W-T2-M1-winding-v1 | Q1:4/T2 → M1:V1 | 50 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "W-T3-M1-winding-w1 | Q1:6/T3 → M1:W1 | 50 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-motor-wire-list-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "Drawing lengths describe routing geometry. Installed conductor lengths and allowances are open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-motor-wire-list"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-control-wire-list-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "CONTROL AND SIGNALLING WIRE SCHEDULE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing A1/002 | Segment ID, start and end pin references, and drawing length.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "W-95-X13-1 | Q1:95 → X13:1 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "W-96-X14-1 | Q1:96 → X14:1 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "W-98-X15-1 | Q1:98 → X15:1 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "W-OUT-X12-1 | Q1:OUT → X12:1 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "W-X10-IN3-1 | X10:2 → Q1:IN3 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "W-X11-A2-1 | X11:2 → Q1:A2 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "W-X7-A1-1 | X7:2 → Q1:A1 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "W-X8-IN1-1 | X8:2 → Q1:IN1 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "W-X9-IN2-1 | X9:2 → Q1:IN2 | 305 mm on drawing",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-wire-list-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "Drawing lengths describe routing geometry. Installed conductor lengths and allowances are open.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-wire-list"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-starter-pin-register-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "Q1 STARTER TERMINAL REGISTER",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing A1/002 | Siemens 3RM1201-1AA04 pin names from the project catalog.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Q1:1/L1 | Phase L1 line terminal",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Q1:3/L2 | Phase L2 line terminal",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Q1:5/L3 | Phase L3 line terminal",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Q1:2/T1 | Motor phase T1 output",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Q1:4/T2 | Motor phase T2 output",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Q1:6/T3 | Motor phase T3 output",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "Q1:A1 | 24 V DC control supply positive",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "Q1:IN1 | Start input, direction 1",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "Q1:IN2 | Start input, direction 2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "Q1:IN3 | Reset input",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-14",
+      "x": 120,
+      "y": 869,
+      "text": "Q1:A2 | 24 V DC control supply return",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-15",
+      "x": 120,
+      "y": 927,
+      "text": "Q1:OUT | Run signaling output, 24 V DC version",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-16",
+      "x": 120,
+      "y": 985,
+      "text": "Q1:95 | Fault signaling contact common",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-17",
+      "x": 120,
+      "y": 1043,
+      "text": "Q1:96 | Fault signaling contact terminal 96",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-18",
+      "x": 120,
+      "y": 1101,
+      "text": "Q1:98 | Fault signaling contact terminal 98",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-starter-pin-register-line-19",
+      "x": 120,
+      "y": 1159,
+      "text": "A2/001 and A2/002 show the corresponding physical net groups.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-starter-pin-register"
     }
   ],
   "description": "One-sheet preliminary wiring model pairing a Siemens SIRIUS 3RM1201-1AA04 reversing starter with a source-backed SEW-EURODRIVE DRN63MS4 0.12 kW three-phase motor. Manufacturer pin identities and a 400 V star connection are represented. Starter, motor, protection, load and rotation behavior are not simulated; this example is not for construction."
