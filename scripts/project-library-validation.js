@@ -95,7 +95,8 @@ function checkCsvExports(project, reopened) {
   const exporters = {
     bom: input => engine.billOfMaterialsCsv(input.objects),
     wires: engine.wireListCsv,
-    terminals: engine.terminalListCsv
+    terminals: engine.terminalListCsv,
+    plcIo: engine.plcIoListCsv
   };
   const fingerprints = {};
   const errors = [];

@@ -132,7 +132,7 @@
     focusObjectInView(object,true);
     showObject(object);
   });
-  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();if(event.target.closest('[data-export-terminal-list]'))exportTerminalListCsv();if(event.target.closest('[data-export-electrical-report]'))exportElectricalReport();});
+  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();if(event.target.closest('[data-export-terminal-list]'))exportTerminalListCsv();if(event.target.closest('[data-export-plc-io]'))exportConnectionCsv('plcIoListCsv','plc-io-list','PLC I/O list');if(event.target.closest('[data-export-electrical-report]'))exportElectricalReport();});
   $('#inspectorContent').addEventListener('change',function(event){const input=event.target.closest('[data-layer]');if(!input)return;const layer=input.dataset.layer;if(!Object.prototype.hasOwnProperty.call(state.layerVisibility,layer))return;state.layerVisibility[layer]=input.checked;if(!input.checked){const hiddenIds=new Set(state.objects.filter(function(obj){return drawingLayerForObject(obj)===layer;}).map(function(obj){return obj.id;}));state.selectedObjectIds=state.selectedObjectIds.filter(function(id){return !hiddenIds.has(id);});if(hiddenIds.has(state.selected))state.selected=state.selectedObjectIds[0]||null;}renderObjects();const legacyLayers={connections:'.wire,.wire-blue,.wire-dark,.cross-sheet-connector',devices:'.drawing-object[data-object]',annotations:'.accent,.small,.medium,.tiny'};drawing.querySelectorAll(legacyLayers[layer]).forEach(node=>{if(!userDrawings.contains(node))node.style.display=input.checked?'':'none';});refreshSelectedProperties();persist();notify(layer[0].toUpperCase()+layer.slice(1)+' layer '+(input.checked?'shown.':'hidden.'));});
   const sheetNames={overview:['Z0010000','Control cabinet'],title:['A1/000','Title page'],contents:['A1/001','Contents'],device:['A1/005','Device list'],power:['A1/010','Power supply'],control:['A1/020','Control circuit'],plc:['A2/030','PLC / I/O'],drive:['A2/040','Drive interface'],safety:['A2/050','Safety circuit'],layout:['A3/100','Enclosure layout'],terminals:['A3/120','Terminal strip'],bom:['A3/200','Bill of materials']};
   const symbolNames={terminal:'Terminal · 2-pin',relay:'Relay coil · K',contact:'NO contact · 13 / 14',breaker:'Protective switch',sensor:'Sensor · 3-wire',motor:'Three-phase motor',plc:'PLC I/O module · 8-point',ground:'Protective earth'};
@@ -864,16 +864,19 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     return window.AdigunCADEngine.projectElectricalReport(electricalProject());
   }
   function exportTerminalListCsv(){
+    exportConnectionCsv('terminalListCsv','terminal-list','Terminal list');
+  }
+  function exportConnectionCsv(method,fileName,label){
     try{
-      const csv=window.AdigunCADEngine.terminalListCsv(electricalProject());
+      const csv=window.AdigunCADEngine[method](electricalProject());
       const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
       const anchor=document.createElement('a');
       anchor.href=url;
-      anchor.download='adigun-electrical-terminal-list.csv';
+      anchor.download='adigun-electrical-'+fileName+'.csv';
       anchor.click();
       setTimeout(()=>URL.revokeObjectURL(url),1000);
-      notify('Terminal list CSV exported.');
-    }catch(error){notify(error.message||'Terminal list CSV export failed.');}
+      notify(label+' CSV exported.');
+    }catch(error){notify(error.message||label+' CSV export failed.');}
   }
   function exportElectricalReport(){
     if(!state.projectModel)return;
@@ -889,7 +892,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const report=currentElectricalReport();
     const heading='<div class="inspector-block"><div class="inspector-title">Project connectivity</div>'
       +'<button type="button" class="command-item" data-export-electrical-report>Download electrical check report</button>'
-      +'<button type="button" class="command-item" data-export-terminal-list'+(report.analysisComplete?'':' disabled')+'>Export terminal list CSV</button>';
+      +'<button type="button" class="command-item" data-export-terminal-list'+(report.analysisComplete?'':' disabled')+'>Export terminal list CSV</button>'
+      +'<button type="button" class="command-item" data-export-plc-io'+(report.analysisComplete?'':' disabled')+'>Export PLC I/O list CSV</button>';
     if(!report.analysisComplete)return heading+'<p class="notice">'+report.analysisErrors.map(escapeHtml).join('<br>')+'</p></div>';
     const numbers=new Map(report.sheets.map(sheet=>[sheet.id,sheet.number||sheet.name||sheet.id]));
     const findings=report.findings.map(function(finding){

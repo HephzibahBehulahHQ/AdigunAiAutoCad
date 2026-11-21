@@ -592,6 +592,12 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['A1:X10:10', 'S2:22'],
     ['X6:1', 'X6:2', 'KM1:22', 'A1:X10:11']
   ]));
+  const io = engine.plcIoList(reopened.project);
+  assert.equal(io.valid, true);
+  assert.equal(io.rows.length, 16);
+  assert.deepEqual(io.rows.filter(row => row.netId).map(row => row.terminal),
+    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X11:2', 'X12:2']);
+  assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {

@@ -6,7 +6,7 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 **Bill of materials → Export CSV** includes verified components from every project sheet. **Electrical checks → Export wire list CSV** includes wires from every project sheet and follows explicit cross-sheet connections.
 
-**Electrical checks → Export terminal list CSV** lists each modeled terminal pin with its sheet, strip and position fields, marking, part number, and other pins on the same project net.
+**Electrical checks → Export terminal list CSV** lists each modeled terminal pin with its sheet, strip and position fields, marking, part number, and other pins on the same project net. **Export PLC I/O list CSV** lists the verified CPU hardware channels and their wired net members. Hardware channel names come from the catalog. Configured PLC memory addresses are outside the export.
 
 # 24 V DC relay-operated contactor coil
 
@@ -231,7 +231,7 @@ The analog connection assumes PN2070 OUT2 is configured for 0–10 V. Its factor
 
 The validator saves and reopens each example with the native CAD engine. It compares project data and a SHA-256 fingerprint of the project-wide nets, cross-sheet connections, and unresolved endpoints.
 
-It also generates the BOM, wire list, and terminal list CSV for each example, checks that their contents survive save and reopen, and records the three CSV fingerprints.
+It also generates the BOM, wire list, terminal list, and PLC I/O list CSV for each example, checks that their contents survive save and reopen, and records their fingerprints.
 
 The report counts authored sheets and electrically connected sheets separately. A connected sheet participates in a wired net that joins at least two component pins, including nets with explicit cross-sheet links. Run `node scripts/project-library-validation.js --check --require-release-scale` to enforce the library size requirement of 50 distinct topologies, 100 authored sheets and 70 connected sheets per qualifying project, and at least 5,000 qualifying sheets in total.
 

@@ -1985,9 +1985,7 @@
     return connectionReportCsv(columns, report.rows);
   }
 
-  function terminalList(project) {
-    const analysis = analyzeProject(project);
-    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+  function projectPinIndex(analysis) {
     const pinKey = (instanceId, pinId) => JSON.stringify([instanceId, pinId]);
     const netByPin = new Map();
     const pinsByLocalNet = new Map(analysis.sheets.flatMap(sheet => sheet.analysis.nets.map(net => [
@@ -1995,10 +1993,17 @@
     ])));
     for (const net of analysis.globalNets) {
       const pins = net.localNetIds.flatMap(id => pinsByLocalNet.get(id));
-      const terminalNet = { id: net.id, pins: pins };
-      for (const pin of pins) netByPin.set(pinKey(pin.instanceId, pin.pinId), terminalNet);
+      const indexedNet = { id: net.id, pins: pins };
+      for (const pin of pins) netByPin.set(pinKey(pin.instanceId, pin.pinId), indexedNet);
     }
     const sheetNumbers = new Map(analysis.sheets.map(sheet => [sheet.id, sheet.number || sheet.id]));
+    return { pinKey, netByPin, sheetNumbers };
+  }
+
+  function terminalList(project) {
+    const analysis = analyzeProject(project);
+    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+    const { pinKey, netByPin, sheetNumbers } = projectPinIndex(analysis);
     const rows = (project.objects || []).flatMap(function (object) {
       if (object?.kind !== 'component-instance') return [];
       const definition = component(object.componentId);
@@ -2027,6 +2032,42 @@
     return connectionReportCsv([
       ['Sheet', 'sheet'], ['Terminal reference', 'ref'], ['Pin', 'pin'], ['Strip', 'strip'],
       ['Position', 'position'], ['Marking', 'marking'], ['Part number', 'partNumber'],
+      ['Net ID', 'netId'], ['Other pin references on net', 'connectedPins']
+    ], report.rows);
+  }
+
+  function plcIoList(project) {
+    const analysis = analyzeProject(project);
+    if (!analysis.valid) return { valid: false, errors: analysis.errors, rows: [] };
+    const { pinKey, netByPin, sheetNumbers } = projectPinIndex(analysis);
+    const rows = [];
+    for (const object of project.objects) {
+      if (object?.kind !== 'component-instance') continue;
+      const definition = component(object.componentId);
+      if (definition?.family !== 'plc-cpu') continue;
+      const sheet = sheetNumbers.get(object.sheetId || analysis.sheets[0].id);
+      for (const pin of definition.symbol.pins) {
+        const type = /^(DI|DQ|AI) /.exec(pin.name)?.[1];
+        if (!type) continue;
+        const key = pinKey(object.id, pin.id);
+        const net = netByPin.get(key);
+        const connectedPins = (net?.pins || []).filter(other => pinKey(other.instanceId, other.pinId) !== key)
+          .map(other => sheetNumbers.get(other.sheetId) + ' ' + other.ref + ':' + other.number).sort();
+        rows.push({
+          sheet, ref: object.ref, partNumber: definition.manufacturerPartNumber, terminal: pin.localNumber,
+          channel: pin.name, type, netId: net?.id || '', connectedPins
+        });
+      }
+    }
+    return { valid: true, errors: [], rows };
+  }
+
+  function plcIoListCsv(project) {
+    const report = plcIoList(project);
+    if (!report.valid) throw new Error('PLC I/O list export blocked: ' + report.errors.join(' '));
+    return connectionReportCsv([
+      ['Sheet', 'sheet'], ['PLC reference', 'ref'], ['Part number', 'partNumber'],
+      ['Terminal', 'terminal'], ['Hardware channel', 'channel'], ['Channel type', 'type'],
       ['Net ID', 'netId'], ['Other pin references on net', 'connectedPins']
     ], report.rows);
   }
@@ -2086,7 +2127,9 @@
     wireList: wireList,
     wireListCsv: wireListCsv,
     terminalList: terminalList,
-    terminalListCsv: terminalListCsv
+    terminalListCsv: terminalListCsv,
+    plcIoList: plcIoList,
+    plcIoListCsv: plcIoListCsv
   });
 })(typeof window !== 'undefined' ? window : globalThis);
 
