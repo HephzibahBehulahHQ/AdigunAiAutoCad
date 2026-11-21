@@ -337,8 +337,9 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.deepEqual([savedWire.x1, savedWire.y1, savedWire.x2, savedWire.y2], [origin.x, origin.y, destination.x, destination.y]);
     const wiringAnalysis = engine.analyzeProject(wiringSaved.project);
     assert.equal(wiringAnalysis.openEndpointCount, 0);
-    assert.deepEqual(wiringAnalysis.globalNets[0].pins.map(item => item.instanceId).filter((id, index, all) => all.indexOf(id) === index).sort(),
-      [movedTerminal.id, newTarget.id].sort());
+    const savedNet = wiringAnalysis.globalNets.find(net => net.wireIds.includes(savedWire.sheetId + ':' + wireId));
+    assert.deepEqual(savedNet.pins.map(item => item.ref + ':' + item.number).sort(),
+      [movedTerminal.ref + ':1', movedTerminal.ref + ':2', newTarget.ref + ':1', newTarget.ref + ':2'].sort());
     await wiringPage.reload();
     await wiringPage.locator('#openFile').setInputFiles({
       name: 'Component-wiring.adigun.json', mimeType: 'application/json', buffer: Buffer.from(wiringSavedText)
