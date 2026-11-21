@@ -9,6 +9,45 @@ require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
 
+function makeLargeDrawingFixture() {
+  const sheets = [];
+  const objects = [];
+  const crossSheetConnections = [];
+  for (let page = 0; page < 10; page += 1) {
+    const sheetId = 'scale-' + page;
+    sheets.push({ id: sheetId, number: 'A2/' + String(page + 1).padStart(3, '0'), name: 'Terminal routes ' + (page + 1), projectSectionId: 'A2' });
+    for (let row = 0; row < 5; row += 1) {
+      const y = 150 + row * 100;
+      const addWire = (id, x1, x2) => objects.push({ id, kind: 'wire', sheetId, x1, y1: y, x2, y2: y });
+      for (let column = 0; column < 5; column += 1) {
+        const x = 180 + column * 180;
+        const position = page * 25 + row * 5 + column + 1;
+        objects.push({ id: 'scale-terminal-' + position, kind: 'component-instance', schemaVersion: 1,
+          ref: 'X' + position, componentId: 'phoenix-contact-3212144', sheetId, x, y, rotation: 0,
+          properties: { terminalStrip: 'XT1', position: String(position), marking: '', comment: '' } });
+        if (column === 4) continue;
+        for (let segment = 0; segment < 6; segment += 1) {
+          const from = x + 35 + segment * 18;
+          addWire('scale-wire-' + position + '-' + segment, from, segment === 5 ? x + 145 : from + 18);
+        }
+      }
+      if (page > 0) addWire(sheetId + '-receive-' + row, 80, 145);
+      if (page === 9) continue;
+      const send = sheetId + '-send-' + row;
+      const nextSheet = 'scale-' + (page + 1);
+      addWire(send, 935, 1020);
+      crossSheetConnections.push({ id: send, name: 'Route ' + (row + 1), endpoints: [
+        { sheetId, wireId: send, point: { x: 1020, y } },
+        { sheetId: nextSheet, wireId: nextSheet + '-receive-' + row, point: { x: 80, y } }
+      ] });
+    }
+  }
+  const project = 'Large drawing regression';
+  return engine.copyExampleProject({ format: engine.projectFormat, version: engine.projectVersion,
+    componentSchemaVersion: engine.componentSchemaVersion, netSchemaVersion: engine.netSchemaVersion,
+    project, activeSheet: sheets[0].id, sheets, objects, crossSheetConnections }, 'large-drawing-regression', project);
+}
+
 test('workspace boot always starts with no active project, drawing tab, or automatic example', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   const inline = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].find(match => !/\bsrc\s*=/.test(match[1]))[2];
@@ -211,6 +250,42 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await reopenedPage.getByLabel('Description', { exact: true }).inputValue(), 'Updated with repeat Save');
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
     await reopenedPage.close({ runBeforeUnload: false });
+
+    const largeDrawing = makeLargeDrawingFixture();
+    const beforeLargeEdit = engine.analyzeProject(largeDrawing);
+    assert.equal(beforeLargeEdit.valid, true, beforeLargeEdit.errors.join(' '));
+    assert.deepEqual([beforeLargeEdit.sheetCount, beforeLargeEdit.componentCount, beforeLargeEdit.wireCount,
+      beforeLargeEdit.crossSheetConnectionCount, beforeLargeEdit.openEndpointCount], [10, 250, 1290, 45, 0]);
+    const largePage = await context.newPage();
+    await largePage.goto(address);
+    const openLargeDrawing = text => largePage.locator('#openFile').setInputFiles({
+      name: 'Large-drawing-regression.adigun.json', mimeType: 'application/json', buffer: Buffer.from(text)
+    });
+    await openLargeDrawing(engine.serializeProject(largeDrawing));
+    await largePage.locator('#projectTree [data-sheet="scale-9"]').click();
+    const lastTerminal = largePage.locator('#userDrawings [data-object="scale-terminal-250"]');
+    const originalColor = await lastTerminal.getAttribute('stroke');
+    await lastTerminal.dispatchEvent('click', { bubbles: true });
+    await largePage.locator('[data-style-object="scale-terminal-250"][data-drawing-style="stroke"]').evaluate(input => {
+      input.value = '#4b367c';
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    assert.equal(await lastTerminal.getAttribute('stroke'), '#4b367c');
+    await largePage.locator('[data-action="undo"]').click();
+    assert.equal(await lastTerminal.getAttribute('stroke'), originalColor);
+    await largePage.locator('[data-action="redo"]').click();
+    assert.equal(await lastTerminal.getAttribute('stroke'), '#4b367c');
+    await largePage.keyboard.press('Control+Shift+S');
+    await largePage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const largeSavedText = await largePage.evaluate(() => window.__savedProjectWrites[0]);
+    const largeSaved = engine.parseProject(largeSavedText);
+    assert.equal(largeSaved.valid, true, largeSaved.errors.join(' '));
+    assert.deepEqual(engine.analyzeProject(largeSaved.project).globalNets, beforeLargeEdit.globalNets);
+    await largePage.reload();
+    await openLargeDrawing(largeSavedText);
+    await largePage.locator('#projectTree [data-sheet="scale-9"]').click();
+    assert.equal(await lastTerminal.getAttribute('stroke'), '#4b367c');
+    await largePage.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
     await examplePage.goto(address);
