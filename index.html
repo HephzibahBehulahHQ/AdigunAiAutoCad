@@ -249,12 +249,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   }
   function undo(){applyDrawingHistory(state.undo,state.redo,'Drawing command undone.');}
   function redo(){applyDrawingHistory(state.redo,state.undo,'Drawing command restored.');}
-  function nearbyWirePin(point){
-    if(state.osnap){
+  function nearbyWirePin(point,radius=state.osnap?12:0){
+    if(radius>0){
       const screen=userDrawings.getScreenCTM();
       if(screen){
         const cursor=new DOMPoint(point.x,point.y).matrixTransform(screen);
-        let nearest=null,best=12;
+        let nearest=null,best=radius;
         state.objects.filter(function(obj){return obj.kind==='component-instance'&&drawingObjectVisible(obj);}).forEach(function(obj){
           window.AdigunCADEngine.worldPins(obj).forEach(function(pin){
             const anchor=new DOMPoint(pin.x,pin.y).matrixTransform(screen);
@@ -284,7 +284,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         if(pin)return {x:pin.x,y:pin.y};
       }
     }
-    return nearbyWirePin(svgPoint(event));
+    return nearbyWirePin(svgPoint(event),state.osnap?12:5);
   }
   function wirePointerPoint(event){
     return wirePinPoint(event)||snapDrawingPoint(svgPoint(event));

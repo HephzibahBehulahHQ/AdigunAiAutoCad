@@ -384,7 +384,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await wiringPage.getByRole('button', { name: 'Select and move', exact: true }).click();
     await pin(terminalIds[1], 1).click();
     await wiringPage.keyboard.press('ArrowDown');
-    await pin(terminalIds[2], 2).click();
+    await wiringPage.locator('#userDrawings [data-object="' + terminalIds[2] + '"] rect').first().click();
     await wiringPage.keyboard.press('ArrowUp');
     await wiringPage.keyboard.press('Control+Shift+S');
     await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
