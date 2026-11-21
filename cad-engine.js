@@ -289,16 +289,12 @@
     return moved;
   }
 
-  function deleteProjectSheet(project, sheetId) {
-    if (!project || !Array.isArray(project.sheets)) throw new Error('Project sheets are unavailable.');
-    const index = project.sheets.findIndex(function (sheet) { return sheet.id === sheetId; });
-    if (index < 0) throw new Error('The selected sheet no longer exists.');
-    const removed = project.sheets.splice(index, 1)[0];
-    const linked = (Array.isArray(project.crossSheetConnections) ? project.crossSheetConnections : []).filter(function (connection) {
-      return Array.isArray(connection.endpoints) && connection.endpoints.some(function (endpoint) {
-        return endpoint.sheetId === sheetId || endpoint.connector && endpoint.connector.targetSheetId === sheetId;
-      });
+  function retireCrossSheetConnections(project, sheetId, isAffected, message) {
+    if (!Array.isArray(project.crossSheetConnections)) return 0;
+    const linked = project.crossSheetConnections.filter(function (connection) {
+      return Array.isArray(connection.endpoints) && connection.endpoints.some(isAffected);
     });
+    if (!linked.length) return 0;
     if (!Array.isArray(project.diagnostics)) project.diagnostics = [];
     linked.forEach(function (connection) {
       project.diagnostics.push({
@@ -306,13 +302,37 @@
         sheetId: sheetId,
         connectionId: connection.id,
         connection: clone(connection),
-        message: 'Connection ' + connection.id + ' references deleted sheet ' + removed.number + ' (' + removed.name + ').'
+        message: 'Connection ' + connection.id + ' ' + message
       });
     });
-    if (linked.length > 0) {
-      const affected = new Set(linked);
-      project.crossSheetConnections = project.crossSheetConnections.filter(function (connection) { return !affected.has(connection); });
-    }
+    const affected = new Set(linked);
+    project.crossSheetConnections = project.crossSheetConnections.filter(function (connection) { return !affected.has(connection); });
+    return linked.length;
+  }
+
+  function detachDeletedDrawingObjects(project, sheetId, objects) {
+    const wires = new Set(), components = new Set();
+    objects.forEach(function (object) {
+      if (object.kind === 'wire') wires.add(object.id);
+      if (object.kind === 'component-instance') components.add(object.ref);
+    });
+    const sheet = project.sheets.find(function (item) { return item.id === sheetId; });
+    if (!sheet || (!wires.size && !components.size)) return 0;
+    return retireCrossSheetConnections(project, sheetId, function (endpoint) {
+      const target = endpoint.connector;
+      return (endpoint.sheetId === sheetId && wires.has(endpoint.wireId)) ||
+        (target?.targetSheetId === sheetId && components.has(target.targetRef));
+    }, 'references a deleted wire or component on sheet ' + (sheet.number || sheetId) + '.');
+  }
+
+  function deleteProjectSheet(project, sheetId) {
+    if (!project || !Array.isArray(project.sheets)) throw new Error('Project sheets are unavailable.');
+    const index = project.sheets.findIndex(function (sheet) { return sheet.id === sheetId; });
+    if (index < 0) throw new Error('The selected sheet no longer exists.');
+    const removed = project.sheets.splice(index, 1)[0];
+    retireCrossSheetConnections(project, sheetId, function (endpoint) {
+      return endpoint.sheetId === sheetId || endpoint.connector?.targetSheetId === sheetId;
+    }, 'references deleted sheet ' + removed.number + ' (' + removed.name + ').');
     if (Array.isArray(project.openTabs)) project.openTabs = project.openTabs.filter(function (id) { return id !== sheetId; });
     if (project.activeSheetId === sheetId) project.activeSheetId = null;
     const siblings = project.sheets.filter(function (sheet) { return sheet.sectionId === removed.sectionId; }).sort(function (a, b) { return a.sectionOrder - b.sectionOrder; });
@@ -1957,6 +1977,7 @@
     renameProjectSheet: renameProjectSheet,
     moveProjectSheet: moveProjectSheet,
     deleteProjectSheet: deleteProjectSheet,
+    detachDeletedDrawingObjects: detachDeletedDrawingObjects,
     renumberProjectSheets: renumberProjectSheets,
     moveInstance: moveInstance,
     reorderObject: reorderObject,

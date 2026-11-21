@@ -1444,6 +1444,12 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
   assert.deepEqual(engine.crossSheetConnectors(project,'sheet-power').map(item=>[item.name,item.targetSheetId,item.targetRef,item.direction]),[
     ['L1','sheet-control','X2','left']
   ]);
+  const deletion = { sheets: parsed.project.sheets, crossSheetConnections: structuredClone(parsed.project.crossSheetConnections) };
+  const target = parsed.project.objects.find(object => object.kind === 'component-instance' && object.ref === 'X2');
+  assert.equal(engine.detachDeletedDrawingObjects(deletion, 'sheet-power', [target]), 0);
+  assert.equal(engine.detachDeletedDrawingObjects(deletion, 'sheet-control', [target]), 1);
+  assert.deepEqual(deletion.crossSheetConnections, []);
+  assert.deepEqual(deletion.diagnostics[0].connection, parsed.project.crossSheetConnections[0]);
   const invalid=JSON.parse(JSON.stringify(project));
   invalid.crossSheetConnections[0].endpoints[1].wireId='missing-wire';
   assert.equal(engine.validateProject(invalid).valid,false);

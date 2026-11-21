@@ -216,12 +216,17 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function setTool(tool){if(state.pendingMoveObjectId){state.pendingMoveObjectId=null;notify('Move cancelled.');}if(state.pendingComponentId&&tool!=='component-placement'){state.pendingComponentId=null;if(placementPreview){placementPreview.remove();placementPreview=null;}}state.tool=tool;$$('[data-draw]').forEach(b=>{const on=b.dataset.draw===tool;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});drawing.style.cursor=tool==='select'?'default':tool==='pan'?'grab':'crosshair';const names={freehand:'Freehand pencil',ellipse:'Ellipse',curve:'Bézier curve',triangle:'Triangle',arrow:'Arrow',pan:'Pan'};notify((names[tool]||tool[0].toUpperCase()+tool.slice(1))+' tool selected · drag on the sheet to draw.');}
 
   function drawingHistoryEntry(objects){
-    return {objects:objects||JSON.stringify(state.objects),links:JSON.stringify(state.crossSheetConnections)};
+    return {objects:objects||JSON.stringify(state.objects),links:JSON.stringify(state.crossSheetConnections),diagnostics:JSON.stringify(state.projectModel?.diagnostics||[])};
   }
   function restoreDrawingHistory(entry){
     state.objects=JSON.parse(entry.objects);
     state.crossSheetConnections=JSON.parse(entry.links);
-    if(state.projectModel)state.projectModel.crossSheetConnections=state.crossSheetConnections;
+    if(state.projectModel){
+      const changed=JSON.stringify(state.projectModel.diagnostics||[])!==entry.diagnostics;
+      state.projectModel.crossSheetConnections=state.crossSheetConnections;
+      state.projectModel.diagnostics=JSON.parse(entry.diagnostics);
+      if(changed)renderCustomSheetNavigation();
+    }
   }
   function pushUndo(snapshot){state.undo.push(snapshot&&typeof snapshot==='object'?snapshot:drawingHistoryEntry(snapshot));if(state.undo.length>40)state.undo.shift();state.redo=[];updateHistoryButtons();}
   function updateHistoryButtons(){$('[data-action="undo"]').disabled=!state.undo.length;$('[data-action="redo"]').disabled=!state.redo.length;}
@@ -365,7 +370,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function toggleSelection(id){const selected=new Set(state.selectedObjectIds);if(selected.has(id))selected.delete(id);else selected.add(id);setSelection(Array.from(selected),true);}
   function groupSelection(){if(state.selectedObjectIds.length<2){notify('Select at least two objects to group.');return;}pushUndo();const groupId='group-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);state.selectedObjectIds.forEach(function(id){const obj=state.objects.find(function(item){return item.id===id;});if(obj)obj.groupId=groupId;});renderObjects();persist();notify(state.selectedObjectIds.length+' objects grouped.');}
   function ungroupSelection(){const ids=new Set(state.selectedObjectIds),groups=new Set(state.objects.filter(function(obj){return ids.has(obj.id)&&obj.groupId;}).map(function(obj){return obj.groupId;}));if(!groups.size){notify('The selection has no grouped objects.');return;}pushUndo();state.objects.forEach(function(obj){if(groups.has(obj.groupId))delete obj.groupId;});renderObjects();persist();notify('Selected group ungrouped.');}
-  function deleteSelection(){const ids=new Set(state.selectedObjectIds);if(!ids.size)return;pushUndo();state.objects=state.objects.filter(function(obj){return !ids.has(obj.id);});state.selectedObjectIds=[];state.selected=null;renderObjects();persist();refreshSelectedProperties();notify(ids.size+' selected objects deleted. Undo is available.');}
+  function deleteSelection(){return removeDrawingObjects(state.selectedObjectIds);}
   function translateObjectSet(ids,dx,dy){const selected=new Set(ids),objects=state.objects.filter(function(obj){return selected.has(obj.id);});objects.filter(function(obj){return obj.kind!=='component-instance';}).forEach(function(obj){translateObjectGeometry(obj,dx,dy);});objects.filter(function(obj){return obj.kind==='component-instance';}).forEach(function(obj){translateObjectGeometry(obj,dx,dy);});}
   function beginObjectDrag(obj,point,pointerId){
     if(!state.selectedObjectIds.includes(obj.id)){const ids=obj.groupId?state.objects.filter(function(item){return item.groupId===obj.groupId;}).map(function(item){return item.id;}):[obj.id];setSelection(ids,true);}
@@ -375,10 +380,31 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     drawing.style.cursor='grabbing';drawing.setPointerCapture(pointerId);
     showObject(obj);
   }
-  function deleteObject(id){const index=state.objects.findIndex(function(obj){return obj.id===id;});if(index<0)return;pushUndo();state.objects.splice(index,1);if(state.selected===id)state.selected=null;state.selectedObjectIds=state.selectedObjectIds.filter(function(selectedId){return selectedId!==id;});renderObjects();persist();refreshSelectedProperties();notify('Drawing object deleted. Undo is available.');}
+  function removeDrawingObjects(ids){
+    const selection=new Set(ids),removed=state.objects.filter(object=>selection.has(object.id));
+    if(!removed.length)return false;
+    if(removed.some(object=>object.locked)){notify('Unlock the selected objects before deleting them.');return false;}
+    pushUndo();
+    const project=state.projectModel||{sheets:state.sheets};
+    project.crossSheetConnections=state.crossSheetConnections;
+    const affected=window.AdigunCADEngine.detachDeletedDrawingObjects(project,state.sheet,removed);
+    state.crossSheetConnections=project.crossSheetConnections;
+    state.objects=state.objects.filter(object=>!selection.has(object.id));
+    setSelection(state.selectedObjectIds.filter(id=>!selection.has(id)),false);
+    if(affected&&state.projectModel)renderCustomSheetNavigation();
+    if($('#rightPanelTitle').textContent==='Electrical checks')openInspector('Electrical checks');
+    else if(!state.selected){
+      const details=$('#selectionDetails');
+      if(details)details.innerHTML='<div class="inspector-title">Selection</div><div class="empty-selection">Select an electrical object on the sheet to inspect its drawing designation.</div>';
+    }
+    renderObjects();refreshSelectedProperties();persist();
+    notify(removed.length+' drawing object'+(removed.length===1?'':'s')+' deleted.'+(affected?' Review unresolved cross-sheet references.':'')+' Undo is available.');
+    return true;
+  }
+  function deleteObject(id){return removeDrawingObjects([id]);}
   function duplicateObject(id){copyObject(id);pasteObject();}
   function copyObject(id){const ids=state.selectedObjectIds.includes(id)&&state.selectedObjectIds.length>1?state.selectedObjectIds:[id],selected=ids.map(function(objectId){return state.objects.find(function(obj){return obj.id===objectId;});}).filter(Boolean);if(!selected.length)return;state.clipboardObject=JSON.parse(JSON.stringify(selected));notify(selected.length+' object'+(selected.length===1?'':'s')+' copied.');}
-  function cutObject(id){copyObject(id);if(state.selectedObjectIds.includes(id)&&state.selectedObjectIds.length>1)deleteSelection();else deleteObject(id);notify('Selection cut to clipboard.');}
+  function cutObject(id){copyObject(id);if(state.selectedObjectIds.includes(id)&&state.selectedObjectIds.length>1)deleteSelection();else deleteObject(id);}
   function pasteObject(){if(!state.clipboardObject){notify('Clipboard is empty.');return;}const sources=Array.isArray(state.clipboardObject)?state.clipboardObject:[state.clipboardObject],copies=JSON.parse(JSON.stringify(sources)),counts=new Map();copies.forEach(function(obj){if(obj.groupId)counts.set(obj.groupId,(counts.get(obj.groupId)||0)+1);});const groupMap=new Map(),occupiedRefs=new Set(collectProjectObjects().filter(function(obj){return obj.kind==='component-instance';}).map(function(obj){return obj.ref;})),stamp=Date.now();copies.forEach(function(copy,index){copy.id='obj-paste-'+stamp+'-'+index+'-'+Math.random().toString(36).slice(2,7);if(copy.groupId&&counts.get(copy.groupId)>1){if(!groupMap.has(copy.groupId))groupMap.set(copy.groupId,'group-paste-'+stamp+'-'+groupMap.size);copy.groupId=groupMap.get(copy.groupId);}else delete copy.groupId;if(copy.kind==='component-instance'){const definition=window.AdigunCADEngine.component(copy.componentId),prefix=definition&&definition.referencePrefix||'X';let number=1;while(occupiedRefs.has(prefix+number))number++;copy.ref=prefix+number;occupiedRefs.add(copy.ref);copy.x+=50;copy.y+=50;}else translateObjectGeometry(copy,50,50);});pushUndo();state.objects.push.apply(state.objects,copies);state.selectedObjectIds=copies.map(function(obj){return obj.id;});state.selected=state.selectedObjectIds[state.selectedObjectIds.length-1]||null;renderObjects();persist();refreshSelectedProperties();notify(copies.length+' object'+(copies.length===1?'':'s')+' pasted 50 mm right and down.');}
   function changeObjectOrder(id,front){const index=state.objects.findIndex(function(obj){return obj.id===id;});if(index<0)return;pushUndo();const obj=state.objects.splice(index,1)[0];if(front)state.objects.push(obj);else state.objects.unshift(obj);renderObjects();persist();notify(front?'Object brought to front.':'Object sent to back.');}
   function stepObjectOrder(id,direction){const index=state.objects.findIndex(function(obj){return obj.id===id;}),target=index+direction;if(index<0)return;if((direction!==1&&direction!==-1)||target<0||target>=state.objects.length){notify(direction>0?'Object is already at the front.':'Object is already at the back.');return;}pushUndo();if(!window.AdigunCADEngine.reorderObject(state.objects,id,direction))return;renderObjects();persist();notify(direction>0?'Object brought forward.':'Object sent backward.');}
@@ -818,7 +844,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   $('#symbolList').addEventListener('click',e=>{const b=e.target.closest('[data-insert]');if(b)insertCatalogSymbol(b.dataset.insert);});
   $('#symbolSearch').addEventListener('input',e=>renderSymbolSidebar(e.target.value));
 
-  $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}if(e.target.closest('[data-delete-object]')){const id=e.target.closest('[data-delete-object]').dataset.deleteObject;pushUndo();state.objects=state.objects.filter(o=>o.id!==id);state.selected=null;renderObjects();$('#selectionDetails').innerHTML='<div class="inspector-title">Selection</div><div class="empty-selection">Select an electrical object on the sheet to inspect its drawing designation.</div>';persist();notify('Drawing object removed.');}});
+  $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}const remove=e.target.closest('[data-delete-object]');if(remove)deleteObject(remove.dataset.deleteObject);});
   $('#inspectorContent').addEventListener('change',function(event){
     const field=event.target.closest('[data-drawing-style]');
     if(!field)return;

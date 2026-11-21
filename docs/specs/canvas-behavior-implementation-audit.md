@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- Deleting an off-page wire or connector target through the existing object commands preserves the original link as a diagnostic. Undo restores the object and its connection together. Local Chrome verified object deletion, undo/redo, valid native saves, and diagnostic persistence after reopening.
+
 - Local Chrome pointer input verified placement from the symbol bank and a new wire routed between two real terminal pins on an added sheet of the relay example. The workflow passed at 1:1 and 1:2, including undo, redo and native reopen. Placement assigns unique tags across the whole project, and clicking without dragging the Wire tool leaves no zero-length segment.
 
 - Local headless Chrome opened all seven published examples through Project Explorer. In each copy, a component was rendered, recolored in Properties, saved as native JSON and reopened. The saved project retained the exact global net members, sheet and wire counts, and open-endpoint count. All seven source files remained byte-for-byte unchanged. The Playwright suite now includes the same edit and round-trip assertions.
