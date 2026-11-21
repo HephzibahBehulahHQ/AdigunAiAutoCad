@@ -575,7 +575,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [11, 29, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [12, 31, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
@@ -590,13 +590,14 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['A1:X12:2', 'K1:A1'],
     ['A1:X10:9', 'S1:14'],
     ['A1:X10:10', 'S2:22'],
-    ['X6:1', 'X6:2', 'KM1:22', 'A1:X10:11']
+    ['X6:1', 'X6:2', 'KM1:22', 'A1:X10:11'],
+    ['K1:12', 'X10:1', 'X10:2', 'A1:X10:12']
   ]));
   const io = engine.plcIoList(reopened.project);
   assert.equal(io.valid, true);
   assert.equal(io.rows.length, 16);
   assert.deepEqual(io.rows.filter(row => row.netId).map(row => row.terminal),
-    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X11:2', 'X12:2']);
+    ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X11:2', 'X12:2']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
   const cables = engine.cableScheduleCsv(reopened.project);
   assert.equal(cables.trim().split('\r\n').length, 7);

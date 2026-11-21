@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.8",
+  "revision": "1.9",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -77,6 +77,12 @@
       "id": "ac-input-boundary",
       "number": "A2/011",
       "name": "PS1 AC input and protective-earth terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-status-marshalling",
+      "number": "A2/012",
+      "name": "K1 NC status terminal marshalling",
       "projectSectionId": "A2"
     }
   ],
@@ -940,7 +946,7 @@
       "kind": "text",
       "x": 110,
       "y": 550,
-      "text": "K1 NO 11–14 routes the KM1 coil feed to A2/007. Relay actuation and PLC logic are not simulated.",
+      "text": "K1 NO 11–14 routes to KM1 on A2/007. K1 NC 11–12 reports through XT2:3 on A2/012.",
       "stroke": "#13263b"
     },
     {
@@ -982,7 +988,7 @@
       "y": 325,
       "x1": 590,
       "y1": 325,
-      "x2": 760,
+      "x2": 970,
       "y2": 265,
       "stroke": "#b42318",
       "strokeWidth": 1.5,
@@ -1780,6 +1786,138 @@
       "y": 580,
       "text": "Upstream source, isolation, protective devices, conductor sizing and cabinet bonding are outside scope.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 510,
+      "y": 270,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "3",
+        "marking": "K1 NC status to I0.5",
+        "comment": ""
+      },
+      "sheetId": "relay-status-marshalling"
+    },
+    {
+      "id": "k1-nc-send",
+      "kind": "wire",
+      "sheetId": "plc-relay-output",
+      "x": 590,
+      "y": 300,
+      "x1": 590,
+      "y1": 300,
+      "x2": 800,
+      "y2": 300,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x10-status-in",
+      "kind": "wire",
+      "sheetId": "relay-status-marshalling",
+      "x": 180,
+      "y": 270,
+      "x1": 180,
+      "y1": 270,
+      "x2": 475,
+      "y2": 270,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x10-status-out",
+      "kind": "wire",
+      "sheetId": "relay-status-marshalling",
+      "x": 545,
+      "y": 270,
+      "x1": 545,
+      "y1": 270,
+      "x2": 775,
+      "y2": 270,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k1-nc-di5-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 605,
+      "x1": 310,
+      "y1": 605,
+      "x2": 435,
+      "y2": 492,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "k1-nc-di5",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 435,
+      "y": 492,
+      "x1": 435,
+      "y1": 492,
+      "x2": 450,
+      "y2": 492,
+      "potential": "K1 NC status",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "relay-status-marshalling-title",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 108,
+      "text": "XT2:3 · K1 NORMALLY CLOSED STATUS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-status-marshalling-source",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 410,
+      "text": "K1:12 comes from the normally closed branch of the changeover contact on A2/006.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-status-marshalling-destination",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 455,
+      "text": "X10 passes that signal to A1 X10:12 / DI a.5 / I0.5 on A2/005.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "relay-status-marshalling-scope",
+      "kind": "text",
+      "sheetId": "relay-status-marshalling",
+      "x": 110,
+      "y": 500,
+      "text": "I0.5 describes the K1 contact circuit. KM1 auxiliary feedback remains on I0.1 and I0.4.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "cpu-relay-status",
+      "kind": "text",
+      "sheetId": "plc-inputs",
+      "x": 110,
+      "y": 925,
+      "text": "I0.5 reads K1 normally closed status through XT2:3.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -2218,7 +2356,7 @@
           "sheetId": "plc-relay-output",
           "wireId": "k1-contact-feed",
           "point": {
-            "x": 760,
+            "x": 970,
             "y": 265
           },
           "connector": {
@@ -2702,6 +2840,70 @@
             "direction": "left",
             "targetSheetId": "ac-input-boundary",
             "targetRef": "X9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k1-nc-marshalling",
+      "name": "K1 NC status",
+      "endpoints": [
+        {
+          "sheetId": "plc-relay-output",
+          "wireId": "k1-nc-send",
+          "point": {
+            "x": 800,
+            "y": 300
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "relay-status-marshalling",
+            "targetRef": "X10"
+          }
+        },
+        {
+          "sheetId": "relay-status-marshalling",
+          "wireId": "x10-status-in",
+          "point": {
+            "x": 180,
+            "y": 270
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "plc-relay-output",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k1-nc-di5-link",
+      "name": "K1 NC status",
+      "endpoints": [
+        {
+          "sheetId": "relay-status-marshalling",
+          "wireId": "x10-status-out",
+          "point": {
+            "x": 775,
+            "y": 270
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "k1-nc-di5-route",
+          "point": {
+            "x": 310,
+            "y": 605
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "relay-status-marshalling",
+            "targetRef": "X10"
           }
         }
       ]
