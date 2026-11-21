@@ -67,6 +67,33 @@ function topologyHash(analysis) {
   })).digest('hex');
 }
 
+function electricalStructureHash(project, globalNets) {
+  const defaultSheet = project.sheets?.[0]?.id;
+  const deviceKey = device => JSON.stringify([device.sheetId || defaultSheet, device.ref]);
+  const devices = new Map(project.objects.filter(object => object.kind === 'component-instance')
+    .map(object => [deviceKey(object), { label: JSON.stringify(['device', object.componentId]), neighbors: [] }]));
+  const vertices = [...devices.values()];
+  for (const net of globalNets) {
+    if (!net.wireIds.length || net.pins.length < 2) continue;
+    const vertex = { label: 'net', neighbors: [] };
+    for (const pin of net.pins) {
+      const device = devices.get(deviceKey(pin));
+      if (!device) throw new Error('Unknown device in electrical net: ' + pin.ref);
+      device.neighbors.push({ vertex, terminal: pin.number });
+      vertex.neighbors.push({ vertex: device, terminal: pin.number });
+    }
+    vertices.push(vertex);
+  }
+  const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+  let labels = new Map(vertices.map(vertex => [vertex, digest(vertex.label)]));
+  // Refine device and net labels together. Routing, sheet names, tags and order do not affect the result.
+  for (let round = 0; round < 4; round++) {
+    labels = new Map(vertices.map(vertex => [vertex, digest([labels.get(vertex), vertex.neighbors
+      .map(edge => JSON.stringify([edge.terminal, labels.get(edge.vertex)])).sort()])]));
+  }
+  return digest([...labels.values()].sort());
+}
+
 function checkNativeRoundTrip(project, analysis) {
   if (!analysis.valid) return { valid: false, hash: null, errors: [] };
   const hash = topologyHash(analysis);
@@ -229,6 +256,7 @@ function buildReport() {
       releaseScale,
       wirePreview: buildWirePreview(project),
       topologySha256: roundTrip.hash,
+      electricalStructureSha256: analysis.valid ? electricalStructureHash(project, analysis.globalNets) : null,
       csvSha256: csv.fingerprints,
       metrics: {
         sheetCount,
@@ -260,12 +288,20 @@ function buildReport() {
   const completedScaleProjects = scaleQualifiedTopologies.size;
   const requiredScaleProjects = manifest.scaleTarget.firstGateDistinctProjects;
   const releaseTopologies = new Map();
-  for (const project of validProjects) {
-    if (!project.releaseScale.qualified) continue;
-    const { sheetCount } = project.metrics;
-    releaseTopologies.set(project.topologyId, Math.max(sheetCount, releaseTopologies.get(project.topologyId) || 0));
+  const releaseStructures = new Map();
+  const duplicateReleaseProjects = [];
+  const candidates = validProjects.filter(project => project.releaseScale.qualified)
+    .sort((first, second) => second.metrics.sheetCount - first.metrics.sheetCount);
+  for (const project of candidates) {
+    const duplicate = releaseTopologies.get(project.topologyId) || releaseStructures.get(project.electricalStructureSha256);
+    if (duplicate) {
+      duplicateReleaseProjects.push({ id: project.id, matches: duplicate.id });
+      continue;
+    }
+    releaseTopologies.set(project.topologyId, project);
+    releaseStructures.set(project.electricalStructureSha256, project);
   }
-  const releaseSheetCount = [...releaseTopologies.values()].reduce((total, count) => total + count, 0);
+  const releaseSheetCount = [...releaseTopologies.values()].reduce((total, project) => total + project.metrics.sheetCount, 0);
   const requiredReleaseSheetCount = manifest.scaleTarget.fullLibraryProjects * manifest.scaleTarget.minimumSheetsPerProject;
 
   return {
@@ -289,6 +325,7 @@ function buildReport() {
         qualifiedDistinctProjects: releaseTopologies.size,
         requiredSheetCount: requiredReleaseSheetCount,
         qualifiedSheetCount: releaseSheetCount,
+        duplicateReleaseProjects,
         complete: releaseTopologies.size >= manifest.scaleTarget.fullLibraryProjects
           && releaseSheetCount >= requiredReleaseSheetCount
       }
@@ -325,11 +362,14 @@ function run() {
       const validation = project.status === 'failed' ? ' Project validation also failed.' : '';
       console.error(`${project.id}: ${additionalAuthoredSheetsRequired} more authored sheets, ${additionalConnectedSheetsRequired} more electrically connected sheets required.${validation}`);
     }
+    for (const { id, matches } of gate.duplicateReleaseProjects) {
+      console.error(id + ': Shares a topology ID or electrical structure fingerprint with ' + matches + '.');
+    }
     process.exitCode = 1;
   }
 }
 
 if (require.main === module) run();
 
-module.exports = { buildReport, manifestPath, reportPath };
+module.exports = { buildReport, electricalStructureHash, manifestPath, reportPath };
 

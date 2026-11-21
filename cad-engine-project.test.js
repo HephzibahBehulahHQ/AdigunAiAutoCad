@@ -9,6 +9,24 @@ const path = require('node:path');
 require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
+const { electricalStructureHash } = require('./scripts/project-library-validation.js');
+
+test('library structure fingerprint distinguishes terminal changes from renamed copies', () => {
+  const project = { objects: [
+    { kind: 'component-instance', componentId: 'relay', sheetId: 'control', ref: 'K1' },
+    { kind: 'component-instance', componentId: 'terminal', sheetId: 'field', ref: 'X1' }
+  ] };
+  const nets = [{ wireIds: ['wire-a'], pins: [
+    { sheetId: 'control', ref: 'K1', number: '14' }, { sheetId: 'field', ref: 'X1', number: '1' }
+  ] }];
+  const renamedProject = { objects: project.objects.map(device => ({ ...device, ref: device.ref + '0', sheetId: 'renamed-' + device.sheetId })).reverse() };
+  const routedNets = [{ wireIds: ['new-segment-1', 'new-segment-2'], pins: nets[0].pins
+    .map(pin => ({ ...pin, ref: pin.ref + '0', sheetId: 'renamed-' + pin.sheetId })).reverse() }];
+  const fingerprint = electricalStructureHash(project, nets);
+  assert.equal(electricalStructureHash(renamedProject, routedNets), fingerprint);
+  routedNets[0].pins.find(pin => pin.ref === 'K10').number = '12';
+  assert.notEqual(electricalStructureHash(renamedProject, routedNets), fingerprint);
+});
 const sampleDxf = [
   '0', 'SECTION', '2', 'HEADER', '9', '$INSUNITS', '70', '1', '0', 'ENDSEC',
   '0', 'SECTION', '2', 'ENTITIES',
