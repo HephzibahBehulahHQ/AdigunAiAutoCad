@@ -15,6 +15,7 @@ on:
       - "docs/components/**"
       - "docs/reports/project-library-validation.json"
       - "scripts/project-library-validation.js"
+      - "scripts/author-sitop-sheets.js"
   push:
     branches: [main]
     paths:
@@ -30,6 +31,7 @@ on:
       - "docs/components/**"
       - "docs/reports/project-library-validation.json"
       - "scripts/project-library-validation.js"
+      - "scripts/author-sitop-sheets.js"
 
 permissions:
   contents: read
