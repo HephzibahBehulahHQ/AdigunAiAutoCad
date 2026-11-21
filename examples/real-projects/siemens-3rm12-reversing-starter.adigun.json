@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Siemens SIRIUS 3RM12 with SEW DRN63MS4 motor — wiring example",
-  "revision": "1.0",
-  "status": "Educational source-backed wiring example; three-phase and control interfaces terminate at X1–X3, X7–X16.",
+  "revision": "1.1",
+  "status": "Educational reversing-starter reference with one wiring sheet and three authored documentation sheets.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -20,7 +20,26 @@
     {
       "id": "reversing",
       "number": "A1/002",
-      "name": "3RM12 Reversing Starter"
+      "name": "3RM12 Reversing Starter",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "reversing-index",
+      "number": "A1/003",
+      "name": "Drawing index and scope",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "reversing-power-nets",
+      "number": "A2/001",
+      "name": "Power and motor continuity groups",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-control-nets",
+      "number": "A2/002",
+      "name": "Control and auxiliary continuity groups",
+      "projectSectionId": "A2"
     }
   ],
   "sheetLabels": {},
@@ -715,6 +734,357 @@
       "stroke": "#b42318",
       "fill": "#b42318",
       "strokeWidth": 1
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-index-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "DRAWING INDEX AND SCOPE",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "A1/002 | Original wiring model: Siemens 3RM1201-1AA04 and SEW DRN63MS4.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "A1/003 | Drawing index and scope.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "A2/001 | Three-phase, star point and PE continuity groups.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "A2/002 | Control and auxiliary terminal continuity groups.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Model summary: 15 components, 33 wire segments, 17 isolated nets.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "The two schedules describe static continuity in the wiring model.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Supply, command and signalling circuits outside the terminal boundaries require separate application review.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-index"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-power-nets-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "POWER AND MOTOR CONTINUITY GROUPS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing: A1/002 · One row per modeled power, motor star-point or PE net.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "M1:PE  |  X16:1  |  X16:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "M1:U2  |  M1:V2  |  M1:W2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "M1:U1  |  Q1:2/T1",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "M1:V1  |  Q1:4/T2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "M1:W1  |  Q1:6/T3",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Q1:1/L1  |  X1:1  |  X1:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "Q1:3/L2  |  X2:1  |  X2:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "Q1:5/L3  |  X3:1  |  X3:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "The star group and protective-earth group are separate nets.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-nets-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "The schedule records physical pin connectivity. It does not predict phase reversal or motor behavior.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-power-nets"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-control-nets-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-01",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-02",
+      "x": 120,
+      "y": 173,
+      "text": "CONTROL AND AUXILIARY CONTINUITY GROUPS",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-03",
+      "x": 120,
+      "y": 231,
+      "text": "Source drawing: A1/002 · One row per modeled control or auxiliary net.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-04",
+      "x": 120,
+      "y": 289,
+      "text": "Q1:95  |  X13:1  |  X13:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-05",
+      "x": 120,
+      "y": 347,
+      "text": "Q1:96  |  X14:1  |  X14:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-06",
+      "x": 120,
+      "y": 405,
+      "text": "Q1:98  |  X15:1  |  X15:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-07",
+      "x": 120,
+      "y": 463,
+      "text": "Q1:OUT  |  X12:1  |  X12:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-08",
+      "x": 120,
+      "y": 521,
+      "text": "Q1:IN3  |  X10:1  |  X10:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-09",
+      "x": 120,
+      "y": 579,
+      "text": "Q1:A2  |  X11:1  |  X11:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-10",
+      "x": 120,
+      "y": 637,
+      "text": "Q1:A1  |  X7:1  |  X7:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-11",
+      "x": 120,
+      "y": 695,
+      "text": "Q1:IN1  |  X8:1  |  X8:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-12",
+      "x": 120,
+      "y": 753,
+      "text": "Q1:IN2  |  X9:1  |  X9:2",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-nets-line-13",
+      "x": 120,
+      "y": 811,
+      "text": "External control and signalling logic is outside the wiring model.",
+      "stroke": "#13263b",
+      "sheetId": "reversing-control-nets"
     }
   ],
   "description": "One-sheet preliminary wiring model pairing a Siemens SIRIUS 3RM1201-1AA04 reversing starter with a source-backed SEW-EURODRIVE DRN63MS4 0.12 kW three-phase motor. Manufacturer pin identities and a 400 V star connection are represented. Starter, motor, protection, load and rotation behavior are not simulated; this example is not for construction."

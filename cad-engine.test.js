@@ -926,6 +926,19 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const reopened = engine.parseProject(engine.serializeProject(parsed.project));
   assert.equal(reopened.valid, true, reopened.errors.join(' '));
   assert.equal(engine.analyze(reopened.project.objects).netCount, 17);
+  const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
+  const savedCopy = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
+  assert.equal(savedCopy.project.sheets.length, 4);
+  const documentationIds = ['reversing-power-nets', 'reversing-control-nets'];
+  const documentedNets = savedCopy.project.objects
+    .filter(object => documentationIds.includes(object.sheetId) && object.text?.includes('  |  '))
+    .map(object => object.text)
+    .sort();
+  const modeledNets = analysis.nets
+    .map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join('  |  '))
+    .sort();
+  assert.deepEqual(documentedNets, modeledNets);
 });
 
 test('source-backed DOL motor-feeder example preserves its power, PE, star and control nets', () => {
