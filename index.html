@@ -420,7 +420,22 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         const contactPair=function(x,first,second,normallyClosed){line(x,-55,x,-15);line(x,15,x,55);circle(x,-15,2.6);circle(x,15,2.6);if(normallyClosed)line(x,-15,x,15);else line(x,-15,x+10,6);label(first,x,-65,7);label(second,x,69,7);};
         contactPair(-50,'1/L1','2/T1',false);contactPair(0,'3/L2','4/T2',false);contactPair(50,'5/L3','6/T3',false);contactPair(100,'13','14',false);contactPair(145,'21','22',true);
         label('A1',-120,-32,7);label('A2',-120,35,7);label('KM',-83,4,10);
-        break;case'relay-module':
+        break;case'motor-starter-reversing':{
+          const definition=window.AdigunCADEngine.component(item.id);
+          rect(-82,-86,164,172);
+          label('SIRIUS 3RM1',0,-42,10);
+          label('Reversing starter',0,-23,8);
+          label(obj.ref||item.tag,0,10,11);
+          for(const pin of definition.symbol.pins){
+            const side=Math.abs(pin.x)===120;
+            line(pin.x,pin.y,side?Math.sign(pin.x)*82:pin.x,side?pin.y:Math.sign(pin.y)*86);
+            circle(pin.x,pin.y,2.6).setAttribute('data-component-pin',pin.id);
+            label(pin.localNumber,side?Math.sign(pin.x)*100:pin.x,pin.y-5,7);
+          }
+          g.dataset.object=obj.id;
+          return g;
+        }
+        case'relay-module':
         line(-70,-20,-42,-20);line(-70,20,-42,20);circle(-70,-20,2.6);circle(-70,20,2.6);
         rect(-42,-18,28,36);label('K',-28,4,12);label('24 V DC',-28,-23,6);
         const mechanical=add('path',{d:'M-5 -25V25','stroke-dasharray':'3 3'});mechanical.setAttribute('aria-hidden','true');
