@@ -1141,7 +1141,28 @@
     instanceProperties: { terminalStrip: { type: 'string', default: '', maximumLength: 40 }, position: { type: 'string', default: '', maximumLength: 24 }, marking: { type: 'string', default: '', maximumLength: 40 }, comment: { type: 'string', default: '', maximumLength: 160 } },
     sources: [{ publisher: 'Phoenix Contact', title: 'PT 16 N-PE · Protective conductor terminal block · Item 3212147', url: 'https://www.phoenixcontact.com/en-nl/products/ground-terminal-pt-16-n-pe-3212147', documentRevision: 'Live manufacturer product data · retrieved 2026-11-12', revisionNote: 'Manufacturer specifies two push-in connections, 16 mm² rated cross-section, 0.5–25 mm² conductor range, IEC 60947-7-2, green-yellow color and a grounding foot. It does not number the connection points.' , retrievedAt: '2026-11-12' }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition });
+  const pt25ProtectiveEarthTerminal = deepFreeze({
+    ...phoenixProtectiveEarthTerminalDefinition,
+    id: 'phoenix-contact-3209536', manufacturerPartNumber: '3209536', model: 'PT 2,5-PE',
+    symbol: { ...phoenixProtectiveEarthTerminalDefinition.symbol, id: 'terminal.phoenix.pt25pe.2-connection.v1' },
+    specifications: {
+      ...phoenixProtectiveEarthTerminalDefinition.specifications,
+      ratedCrossSection: { value: 2.5, unit: 'mm²' },
+      rigidConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+      flexibleConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+      strippingLength: { minimum: 8, maximum: 10, unit: 'mm' },
+      dimensions: {
+        width: { value: 5.2, unit: 'mm' }, height: { value: 48.5, unit: 'mm' },
+        depthOnNS35_7_5: { value: 36.8, unit: 'mm' }, depthOnNS35_15: { value: 44.3, unit: 'mm' }
+      }
+    },
+    sources: [{
+      publisher: 'Phoenix Contact', title: 'PT 2,5-PE · Protective conductor terminal block · Item 3209536',
+      url: 'https://www.phoenixcontact.com/en-be/products/ground-terminal-pt-25-pe-3209536',
+      documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
+    }]
+  });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

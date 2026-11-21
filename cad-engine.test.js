@@ -214,7 +214,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 21);
+  assert.equal(items.length, 22);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -236,8 +236,12 @@ test('catalog contains only source-backed engineering components', () => {
     ['ifm-ifs204', 'sensor-inductive-pnp', 'B'],
     ['ifm-pn2070', 'sensor-pressure-analog', 'B'],
     ['siemens-sitop-psu100c-6ep1332-5ba00', 'power-supply-ac-dc', 'PS'],
-    ['phoenix-contact-3212147', 'protective-earth-terminal', 'X']
+    ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
+  const compactPe = engine.component('phoenix-contact-3209536');
+  assert.deepEqual(compactPe.specifications.ratedCrossSection, { value: 2.5, unit: 'mm²' });
+  assert.deepEqual(compactPe.symbol.internalConnections, [['connection-1', 'connection-2']]);
 });
 test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
   for (const item of engine.catalog()) {

@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.3",
+  "revision": "2.4",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -1740,7 +1740,7 @@
       "schemaVersion": 1,
       "kind": "component-instance",
       "id": "x9",
-      "componentId": "phoenix-contact-3212147",
+      "componentId": "phoenix-contact-3209536",
       "ref": "X9",
       "x": 405,
       "y": 440,

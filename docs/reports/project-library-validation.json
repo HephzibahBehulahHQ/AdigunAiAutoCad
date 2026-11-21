@@ -365,7 +365,7 @@
       "topologyId": "dc-two-branch-terminal-distribution",
       "role": "standalone-example",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
-      "revision": "2.3",
+      "revision": "2.4",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -382,9 +382,9 @@
       },
       "topologySha256": "3565c7b4d06454d62cf88a436c77ec80ecfd2e8be7123d3ba2f418042a56d6ed",
       "csvSha256": {
-        "bom": "9c54491232d1bbc0ca932f26f375c22e7f830d12b9acdf683a05de81d9d21749",
+        "bom": "fed2260c7a39c29a485de8fa591c9d08f6e2baccf52ee7f762992e2a52e94ef7",
         "wires": "adadae9819d4bcbad742f6c2a4fde12214a4b0af498b71d1cdd60742448820d7",
-        "terminals": "ba5fcf933f606f38d5950cdcd6e36233e037aeee54a2eb144806c5ec6e37796e",
+        "terminals": "1c9263d8116d74877ff8745b655e2bea011f0f455424774ef11eedf61eac3296",
         "plcIo": "57fc7dcc97177d8f7084e2d11110a3ea07e5666791b9580426d17f303dace1b0",
         "cables": "011d3c65d08a911baacf882afa593509cc3e604853662d5d43651e2a8020fafc"
       },
