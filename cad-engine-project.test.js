@@ -324,7 +324,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await wiringPage.keyboard.press('ArrowDown');
     await wiringPage.keyboard.press('Control+Shift+S');
     await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
-    const wiringSaved = engine.parseProject(await wiringPage.evaluate(() => window.__savedProjectWrites[0]));
+    const wiringSavedText = await wiringPage.evaluate(() => window.__savedProjectWrites[0]);
+    const wiringSaved = engine.parseProject(wiringSavedText);
     assert.equal(wiringSaved.valid, true, wiringSaved.errors.join(' '));
     const savedWire = wiringSaved.project.objects.find(object => object.id === wireId);
     assert.equal(savedWire.stroke, '#4b367c');
@@ -337,6 +338,13 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(wiringAnalysis.openEndpointCount, 0);
     assert.deepEqual(wiringAnalysis.globalNets[0].pins.map(item => item.instanceId).filter((id, index, all) => all.indexOf(id) === index).sort(),
       [movedTerminal.id, newTarget.id].sort());
+    await wiringPage.reload();
+    await wiringPage.locator('#openFile').setInputFiles({
+      name: 'Component-wiring.adigun.json', mimeType: 'application/json', buffer: Buffer.from(wiringSavedText)
+    });
+    const reopenedWire = wiringPage.locator('#userDrawings [data-object="' + wireId + '"]');
+    await reopenedWire.waitFor();
+    assert.equal(await reopenedWire.getAttribute('stroke'), '#4b367c');
     await wiringPage.close({ runBeforeUnload: false });
 
     const dxfPage = await context.newPage();
