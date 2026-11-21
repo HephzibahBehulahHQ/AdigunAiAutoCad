@@ -282,6 +282,73 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.ok(await reopenedPage.locator('#userDrawings > *').count() > 0, 'saved canvas geometry survives reopen');
     await reopenedPage.close({ runBeforeUnload: false });
 
+    const wiringPage = await context.newPage();
+    await wiringPage.goto(address);
+    await wiringPage.getByRole('button', { name: 'New project' }).click();
+    await wiringPage.locator('#newProjectName').fill('Component wiring workflow');
+    await wiringPage.locator('#createProject').click();
+    await wiringPage.getByRole('button', { name: 'Add sheet to A2' }).click();
+    await wiringPage.locator('#projectTree [data-sheet]').click();
+    const clickDrawingPoint = async (x, y) => {
+      const point = await wiringPage.locator('#userDrawings').evaluate((node, coordinates) => {
+        const transformed = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
+        return { x: transformed.x, y: transformed.y };
+      }, [x, y]);
+      await wiringPage.mouse.click(point.x, point.y);
+    };
+    const terminalIds = [];
+    for (const x of [85, 210, 335]) {
+      await wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]').click();
+      await clickDrawingPoint(x, 110);
+      const selected = wiringPage.locator('#userDrawings [data-object].selected-object');
+      terminalIds.push(await selected.getAttribute('data-object'));
+    }
+    assert.equal(new Set(terminalIds).size, 3);
+    const pin = (objectId, number) => wiringPage.locator('#userDrawings [data-object="' + objectId + '"] [data-component-pin="connection-' + number + '"]');
+    await wiringPage.getByRole('button', { name: 'Draw wire' }).click();
+    await pin(terminalIds[0], 2).click();
+    await pin(terminalIds[1], 1).click();
+    await wiringPage.getByRole('button', { name: 'Select and move', exact: true }).click();
+    const wire = wiringPage.locator('#userDrawings path[data-object]');
+    await wire.dispatchEvent('click', { bubbles: true });
+    const wireId = await wire.getAttribute('data-object');
+    await wiringPage.locator('[aria-label="Properties"]').click();
+    await wiringPage.locator('[data-style-object="' + wireId + '"][data-drawing-style="stroke"]').evaluate(input => {
+      input.value = '#4b367c';
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await wiringPage.getByRole('button', { name: 'Reconnect end' }).click();
+    await pin(terminalIds[2], 1).click();
+    const terminal = wiringPage.locator('#userDrawings [data-object="' + terminalIds[0] + '"]');
+    await pin(terminalIds[0], 1).click();
+    assert.match(await terminal.getAttribute('class'), /selected-object/);
+    await wiringPage.keyboard.press('ArrowDown');
+    await wiringPage.keyboard.press('Control+Shift+S');
+    await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const wiringSavedText = await wiringPage.evaluate(() => window.__savedProjectWrites[0]);
+    const wiringSaved = engine.parseProject(wiringSavedText);
+    assert.equal(wiringSaved.valid, true, wiringSaved.errors.join(' '));
+    const savedWire = wiringSaved.project.objects.find(object => object.id === wireId);
+    assert.equal(savedWire.stroke, '#4b367c');
+    const [movedTerminal, unusedTerminal, newTarget] = terminalIds.map(id => wiringSaved.project.objects.find(object => object.id === id));
+    const origin = engine.worldPins(movedTerminal).find(item => item.number === '2');
+    const destination = engine.worldPins(newTarget).find(item => item.number === '1');
+    assert.ok(movedTerminal.y > unusedTerminal.y, 'keyboard movement nudges the connected terminal');
+    assert.deepEqual([savedWire.x1, savedWire.y1, savedWire.x2, savedWire.y2], [origin.x, origin.y, destination.x, destination.y]);
+    const wiringAnalysis = engine.analyzeProject(wiringSaved.project);
+    assert.equal(wiringAnalysis.openEndpointCount, 0);
+    const savedNet = wiringAnalysis.globalNets.find(net => net.wireIds.includes(savedWire.sheetId + ':' + wireId));
+    assert.deepEqual(savedNet.pins.map(item => item.ref + ':' + item.number).sort(),
+      [movedTerminal.ref + ':1', movedTerminal.ref + ':2', newTarget.ref + ':1', newTarget.ref + ':2'].sort());
+    await wiringPage.reload();
+    await wiringPage.locator('#openFile').setInputFiles({
+      name: 'Component-wiring.adigun.json', mimeType: 'application/json', buffer: Buffer.from(wiringSavedText)
+    });
+    const reopenedWire = wiringPage.locator('#userDrawings [data-object="' + wireId + '"]');
+    await reopenedWire.waitFor();
+    assert.equal(await reopenedWire.getAttribute('stroke'), '#4b367c');
+    await wiringPage.close({ runBeforeUnload: false });
+
     const dxfPage = await context.newPage();
     await dxfPage.goto(address);
     await dxfPage.locator('#openFile').setInputFiles({
