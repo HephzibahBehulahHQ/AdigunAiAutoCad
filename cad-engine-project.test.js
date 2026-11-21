@@ -270,6 +270,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await copyPage.locator('#openFile').setInputFiles({ name: fileName, mimeType: 'application/json', buffer: Buffer.from(savedText) });
       await copyPage.waitForFunction(name => document.querySelector('#toast').textContent.includes(name + ' opened.'), fileName);
       assert.equal(await drawn.getAttribute('stroke'), color, entry.title + ' restores the saved component appearance');
+      if (entry.id === 'sitop-24v-dc-distribution') {
+        await copyPage.evaluate(() => { window.print = () => {}; });
+        await copyPage.keyboard.press('Control+k');
+        await copyPage.getByRole('button', { name: /Print project set/ }).click();
+        assert.deepEqual(await copyPage.locator('[data-print-sheet]').evaluateAll(pages => pages.map(page => page.dataset.printSheet)),
+          saved.project.sheets.map(sheet => sheet.id));
+        assert.equal(await copyPage.locator('#projectPrintSet [data-title-block-row="sheet"]').count(), source.sheets.length);
+        await copyPage.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+        assert.equal(await copyPage.locator('#projectPrintSet').count(), 0);
+      }
       assert.equal(fs.readFileSync(path.join(root, entry.path), 'utf8'), sourceText, entry.title + ' leaves the catalog source unchanged');
       await copyPage.close({ runBeforeUnload: false });
     }

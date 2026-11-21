@@ -11,6 +11,8 @@ To join circuits across sheets, draw a wire with one free end on each sheet. Ope
 
 Drawing Undo and Redo follow edit order across sheet navigation and reopen the sheet containing the affected edit. Deleting a sheet clears drawing history.
 
+Use **Print project set** in the command palette to print every sheet in project order. Choose **Save as PDF** in the browser print dialog for a single project PDF.
+
 
 ## Verified reference project increment
 
