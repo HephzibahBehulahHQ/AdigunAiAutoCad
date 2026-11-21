@@ -84,7 +84,7 @@
       "topologyId": "reversing-starter",
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/siemens-3rm12-reversing-starter.adigun.json",
-      "revision": "1.3",
+      "revision": "1.4",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -94,9 +94,9 @@
         "zeroGeometryErrors": true
       },
       "metrics": {
-        "sheetCount": 23,
-        "authoredSheetCount": 23,
-        "contentObjectCount": 316,
+        "sheetCount": 33,
+        "authoredSheetCount": 33,
+        "contentObjectCount": 412,
         "emptyContentSheetIds": [],
         "componentCount": 15,
         "wireCount": 33,

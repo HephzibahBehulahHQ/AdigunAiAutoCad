@@ -929,7 +929,7 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
   const savedCopy = engine.parseProject(engine.serializeProject(copy));
   assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
-  assert.equal(savedCopy.project.sheets.length, 23);
+  assert.equal(savedCopy.project.sheets.length, 33);
   const documentationIds = ['reversing-power-nets', 'reversing-control-nets'];
   const documentedNets = savedCopy.project.objects
     .filter(object => documentationIds.includes(object.sheetId) && object.text?.includes('  |  '))
@@ -967,6 +967,32 @@ test('Siemens reversing-starter example imports with every real terminal wired a
       assert.ok(rows.some(row => row.text === expectedRow || row.text?.startsWith(expectedRow + ' | ')), expectedRow);
     }
   }
+  const correctedMarks = {
+    X8: 'Start direction 1',
+    X9: 'Start direction 2',
+    X10: 'Reset',
+    X11: '0 V DC'
+  };
+  for (const [ref, marking] of Object.entries(correctedMarks)) {
+    const terminal = savedCopy.project.objects.find(object => object.kind === 'component-instance' && object.ref === ref);
+    assert.equal(terminal.properties.marking, marking);
+    assert.ok(savedCopy.project.objects.some(object => object.sheetId === 'reversing-control-marking'
+      && object.text?.startsWith(ref + ' | ' + marking + ' | Q1:')));
+  }
+  const layoutId = 'reversing-xt1-layout';
+  const footprints = savedCopy.project.objects.filter(object => object.sheetId === layoutId && object.deviceTag);
+  assert.equal(footprints.length, 13);
+  assert.equal(savedCopy.project.sheets.find(sheet => sheet.id === layoutId).sectionId, 'A3');
+  const peFootprint = footprints.find(object => object.deviceTag === 'X16');
+  assert.equal(peFootprint.projectAssumption, true);
+  assert.equal(peFootprint.manufacturerPartNumber, undefined);
+  const copyFootprint = copy.objects.find(object => object.id === footprints[0].id);
+  copyFootprint.y += 14;
+  copyFootprint.y2 += 14;
+  const editedCopy = engine.parseProject(engine.serializeProject(copy));
+  assert.equal(editedCopy.valid, true, editedCopy.errors.join(' '));
+  assert.equal(editedCopy.project.objects.find(object => object.id === copyFootprint.id).y, footprints[0].y + 14);
+  assert.equal(reopened.project.objects.find(object => object.id === copyFootprint.id).y, footprints[0].y);
 });
 
 test('source-backed DOL motor-feeder example preserves its power, PE, star and control nets', () => {

@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "Siemens SIRIUS 3RM12 with SEW DRN63MS4 motor — wiring example",
-  "revision": "1.3",
-  "status": "23 authored sheets: original reversing-starter wiring, schedules, manufacturer references and application review records.",
+  "revision": "1.4",
+  "status": "33 authored sheets: reversing-starter wiring, manufacturer records, editable XT1 layout and application review sheets.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -154,6 +154,69 @@
       "number": "A4/008",
       "name": "Application review inputs",
       "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-xt1-layout",
+      "number": "A3/002",
+      "name": "Editable XT1 rail front view",
+      "projectSectionId": "A3",
+      "paperSize": "A3",
+      "orientation": "landscape",
+      "scale": "Diagrammatic"
+    },
+    {
+      "id": "reversing-terminal-position",
+      "number": "A3/003",
+      "name": "XT1 position and marking schedule",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-rail-side",
+      "number": "A3/004",
+      "name": "XT1 rail-profile depth comparison",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "reversing-power-marking",
+      "number": "A2/012",
+      "name": "Incoming field terminal identification",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-control-marking",
+      "number": "A2/013",
+      "name": "Control supply and command terminal identification",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-fault-marking",
+      "number": "A2/014",
+      "name": "Run and fault terminal identification",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-pe-marking",
+      "number": "A2/015",
+      "name": "PE boundary identification",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "reversing-fit-review",
+      "number": "A4/009",
+      "name": "Rail and terminal fit review",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-wiring-review",
+      "number": "A4/010",
+      "name": "Field wiring review records",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "reversing-index-layout",
+      "number": "A1/005",
+      "name": "Drawing index: layout and field wiring",
+      "projectSectionId": "A1"
     }
   ],
   "sheetLabels": {},
@@ -239,7 +302,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "",
-        "marking": "0 V DC",
+        "marking": "Start direction 1",
         "comment": "External field/control boundary; verify conductor and protection for the actual installation."
       },
       "sheetId": "reversing"
@@ -256,7 +319,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "",
-        "marking": "Start direction 1",
+        "marking": "Start direction 2",
         "comment": "External field/control boundary; verify conductor and protection for the actual installation."
       },
       "sheetId": "reversing"
@@ -273,7 +336,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "",
-        "marking": "Start direction 2",
+        "marking": "Reset",
         "comment": "External field/control boundary; verify conductor and protection for the actual installation."
       },
       "sheetId": "reversing"
@@ -290,7 +353,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "",
-        "marking": "Reset",
+        "marking": "0 V DC",
         "comment": "External field/control boundary; verify conductor and protection for the actual installation."
       },
       "sheetId": "reversing"
@@ -3497,6 +3560,1198 @@
       "text": "A1/004 | Continued index: interfaces, ratings and review records.",
       "stroke": "#13263b",
       "sheetId": "reversing-index"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-xt1-layout"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-title",
+      "sheetId": "reversing-xt1-layout",
+      "x": 120,
+      "y": 145,
+      "text": "XT1 TERMINAL STRIP · EDITABLE FRONT VIEW",
+      "stroke": "#13263b",
+      "fontSize": 28
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-basis",
+      "sheetId": "reversing-xt1-layout",
+      "x": 120,
+      "y": 205,
+      "text": "Thirteen schematic terminal positions · width and height based on the catalog body envelope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-rail",
+      "sheetId": "reversing-xt1-layout",
+      "x": 150,
+      "y": 620,
+      "x2": 1880,
+      "y2": 670,
+      "stroke": "#64748b",
+      "fill": "#e2e8f0",
+      "projectAssumption": true
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-rail-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 120,
+      "y": 1110,
+      "text": "Illustrative rail and position order. Review actual rail, accessories and clearances on A4/009.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-pe-note",
+      "sheetId": "reversing-xt1-layout",
+      "x": 120,
+      "y": 1170,
+      "text": "X16 is an indicative reservation. The installed protective terminal and its envelope remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x1",
+      "sheetId": "reversing-xt1-layout",
+      "x": 300,
+      "y": 320,
+      "x2": 397.6,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X1",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x1-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 314,
+      "y": 980,
+      "text": "X1",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x2",
+      "sheetId": "reversing-xt1-layout",
+      "x": 397.6,
+      "y": 320,
+      "x2": 495.20000000000005,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X2",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x2-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 411.6,
+      "y": 980,
+      "text": "X2",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x3",
+      "sheetId": "reversing-xt1-layout",
+      "x": 495.2,
+      "y": 320,
+      "x2": 592.8,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X3",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x3-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 509.2,
+      "y": 980,
+      "text": "X3",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x7",
+      "sheetId": "reversing-xt1-layout",
+      "x": 592.8,
+      "y": 320,
+      "x2": 690.4,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X7",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x7-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 606.8,
+      "y": 980,
+      "text": "X7",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x8",
+      "sheetId": "reversing-xt1-layout",
+      "x": 690.4,
+      "y": 320,
+      "x2": 788,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X8",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x8-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 704.4,
+      "y": 980,
+      "text": "X8",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x9",
+      "sheetId": "reversing-xt1-layout",
+      "x": 788,
+      "y": 320,
+      "x2": 885.6,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X9",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x9-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 802,
+      "y": 980,
+      "text": "X9",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x10",
+      "sheetId": "reversing-xt1-layout",
+      "x": 885.5999999999999,
+      "y": 320,
+      "x2": 983.1999999999999,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X10",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x10-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 899.5999999999999,
+      "y": 980,
+      "text": "X10",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x11",
+      "sheetId": "reversing-xt1-layout",
+      "x": 983.1999999999999,
+      "y": 320,
+      "x2": 1080.8,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X11",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x11-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 997.1999999999999,
+      "y": 980,
+      "text": "X11",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x12",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1080.8,
+      "y": 320,
+      "x2": 1178.3999999999999,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X12",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x12-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1094.8,
+      "y": 980,
+      "text": "X12",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x13",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1178.4,
+      "y": 320,
+      "x2": 1276,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X13",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x13-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1192.4,
+      "y": 980,
+      "text": "X13",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x14",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1276,
+      "y": 320,
+      "x2": 1373.6,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X14",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x14-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1290,
+      "y": 980,
+      "text": "X14",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x15",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1373.6,
+      "y": 320,
+      "x2": 1471.1999999999998,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#f9bb79",
+      "deviceTag": "X15",
+      "manufacturerPartNumber": "3212144"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x15-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1387.6,
+      "y": 980,
+      "text": "X15",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-xt1-layout-x16",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1471.1999999999998,
+      "y": 320,
+      "x2": 1568.7999999999997,
+      "y2": 923.2,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#e2e8f0",
+      "deviceTag": "X16",
+      "projectAssumption": true
+    },
+    {
+      "kind": "text",
+      "id": "reversing-xt1-layout-x16-label",
+      "sheetId": "reversing-xt1-layout",
+      "x": 1485.1999999999998,
+      "y": 980,
+      "text": "X16",
+      "stroke": "#13263b",
+      "fontSize": 19
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-terminal-position-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-terminal-position"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-01",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-02",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 173,
+      "text": "XT1 POSITION AND MARKING SCHEDULE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-03",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 231,
+      "text": "Reference order: front view A3/002, left to right. Positions are illustrative.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-04",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 289,
+      "text": "01 | X1 | L1 supply | Q1:1/L1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-05",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 347,
+      "text": "02 | X2 | L2 supply | Q1:3/L2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-06",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 405,
+      "text": "03 | X3 | L3 supply | Q1:5/L3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-07",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 463,
+      "text": "04 | X7 | +24 V DC | Q1:A1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-08",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 521,
+      "text": "05 | X8 | Start direction 1 | Q1:IN1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-09",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 579,
+      "text": "06 | X9 | Start direction 2 | Q1:IN2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-10",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 637,
+      "text": "07 | X10 | Reset | Q1:IN3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-11",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 695,
+      "text": "08 | X11 | 0 V DC | Q1:A2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-12",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 753,
+      "text": "09 | X12 | Run OUT | Q1:OUT",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-13",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 811,
+      "text": "10 | X13 | Fault 95 | Q1:95",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-14",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 869,
+      "text": "11 | X14 | Fault 96 | Q1:96",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-15",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 927,
+      "text": "12 | X15 | Fault 98 | Q1:98",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-16",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 985,
+      "text": "13 | X16 | PE | M1:PE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-terminal-position-line-17",
+      "sheetId": "reversing-terminal-position",
+      "x": 120,
+      "y": 1043,
+      "text": "X16 is a PE boundary in the schematic. The selected protective terminal remains open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-rail-side-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-rail-side"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-01",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-02",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 173,
+      "text": "XT1 RAIL-PROFILE DEPTH COMPARISON",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-03",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 231,
+      "text": "PT 16 N OG | Catalog depth depends on the selected rail profile.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-04",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 289,
+      "text": "NS 35/7.5 | 52.6 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-05",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 347,
+      "text": "NS 35/15 | 60.1 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-06",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 405,
+      "text": "Published depth difference | 7.5 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-07",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 463,
+      "text": "Check the door, duct and wire bend envelope using installed part geometry.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-rail-side-line-08",
+      "sheetId": "reversing-rail-side",
+      "x": 120,
+      "y": 521,
+      "text": "https://www.phoenixcontact.com/en-lt/products/feed-through-terminal-block-pt-16-n-og-3212144",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-power-marking-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-power-marking"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-01",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-02",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 173,
+      "text": "INCOMING FIELD TERMINAL IDENTIFICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-03",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 231,
+      "text": "X1 | L1 supply | Q1:1/L1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-04",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 289,
+      "text": "X2 | L2 supply | Q1:3/L2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-05",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 347,
+      "text": "X3 | L3 supply | Q1:5/L3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-06",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 405,
+      "text": "Match the actual incoming conductor labels and phase identities to the schematic.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-power-marking-line-07",
+      "sheetId": "reversing-power-marking",
+      "x": 120,
+      "y": 463,
+      "text": "The diagram leaves incoming conductor type and protection details open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-control-marking-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-control-marking"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-01",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-02",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 173,
+      "text": "CONTROL SUPPLY AND COMMAND TERMINAL IDENTIFICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-03",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 231,
+      "text": "X7 | +24 V DC | Q1:A1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-04",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 289,
+      "text": "X8 | Start direction 1 | Q1:IN1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-05",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 347,
+      "text": "X9 | Start direction 2 | Q1:IN2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-06",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 405,
+      "text": "X10 | Reset | Q1:IN3",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-07",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 463,
+      "text": "X11 | 0 V DC | Q1:A2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-control-marking-line-08",
+      "sheetId": "reversing-control-marking",
+      "x": 120,
+      "y": 521,
+      "text": "Verify the terminal labels and external interface against the reviewed control wiring drawing.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-fault-marking-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-fault-marking"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-01",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-02",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 173,
+      "text": "RUN AND FAULT TERMINAL IDENTIFICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-03",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 231,
+      "text": "X12 | Run OUT | Q1:OUT",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-04",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 289,
+      "text": "X13 | Fault 95 | Q1:95",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-05",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 347,
+      "text": "X14 | Fault 96 | Q1:96",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-06",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 405,
+      "text": "X15 | Fault 98 | Q1:98",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fault-marking-line-07",
+      "sheetId": "reversing-fault-marking",
+      "x": 120,
+      "y": 463,
+      "text": "Record the receiving devices and expected signal states separately.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-pe-marking-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-pe-marking"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-pe-marking-line-01",
+      "sheetId": "reversing-pe-marking",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-pe-marking-line-02",
+      "sheetId": "reversing-pe-marking",
+      "x": 120,
+      "y": 173,
+      "text": "PE BOUNDARY IDENTIFICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-pe-marking-line-03",
+      "sheetId": "reversing-pe-marking",
+      "x": 120,
+      "y": 231,
+      "text": "X16 | PE | M1:PE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-pe-marking-line-04",
+      "sheetId": "reversing-pe-marking",
+      "x": 120,
+      "y": 289,
+      "text": "The layout reserves a schematic reference position for X16. Actual protective-terminal size and bonding details remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-pe-marking-line-05",
+      "sheetId": "reversing-pe-marking",
+      "x": 120,
+      "y": 347,
+      "text": "See A4/007 for the installation evidence record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-fit-review-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-fit-review"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-01",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-02",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 173,
+      "text": "RAIL AND TERMINAL FIT REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-03",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 231,
+      "text": "A3/002 compares schematic terminal tags in one editable rail concept.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-04",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 289,
+      "text": "Confirm the actual XT1 part list, rail profile and length before checking usable placement width.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-05",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 347,
+      "text": "Record end stops, end covers, markers, separation accessories and conductor access.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-06",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 405,
+      "text": "Confirm the Q1 mounting footprint, wire routing and service access in the selected enclosure.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-fit-review-line-07",
+      "sheetId": "reversing-fit-review",
+      "x": 120,
+      "y": 463,
+      "text": "The modeled X16 position requires a separate protective-terminal and bonding decision.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-wiring-review-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-wiring-review"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-wiring-review-line-01",
+      "sheetId": "reversing-wiring-review",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-wiring-review-line-02",
+      "sheetId": "reversing-wiring-review",
+      "x": 120,
+      "y": 173,
+      "text": "FIELD WIRING REVIEW RECORDS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-wiring-review-line-03",
+      "sheetId": "reversing-wiring-review",
+      "x": 120,
+      "y": 231,
+      "text": "Use the segment lists A2/003–A2/005 to reconcile drawing identifiers.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-wiring-review-line-04",
+      "sheetId": "reversing-wiring-review",
+      "x": 120,
+      "y": 289,
+      "text": "Record actual wire length, conductor cross-section, insulation and termination method after routing review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-wiring-review-line-05",
+      "sheetId": "reversing-wiring-review",
+      "x": 120,
+      "y": 347,
+      "text": "Verify installed labels against A2/012–A2/015 and the final panel documentation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-wiring-review-line-06",
+      "sheetId": "reversing-wiring-review",
+      "x": 120,
+      "y": 405,
+      "text": "Record continuity and protective bonding results separately from drawing geometry.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "reversing-index-layout-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "reversing-index-layout"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-01",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 115,
+      "text": "Adigun AI AutoCAD | HB Elektroniker",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-02",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 173,
+      "text": "DRAWING INDEX: LAYOUT AND FIELD WIRING",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-03",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 231,
+      "text": "A1/004 | Previous index page.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-04",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 289,
+      "text": "A1/005 | Drawing index: layout and field wiring.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-05",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 347,
+      "text": "A3/002 | Editable XT1 rail front view.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-06",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 405,
+      "text": "A3/003 | XT1 position and marking schedule.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-07",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 463,
+      "text": "A3/004 | XT1 rail-profile depth comparison.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-08",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 521,
+      "text": "A2/012 | Incoming field terminal identification.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-09",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 579,
+      "text": "A2/013 | Control supply and command terminal identification.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-10",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 637,
+      "text": "A2/014 | Run and fault terminal identification.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-11",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 695,
+      "text": "A2/015 | PE boundary identification.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-12",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 753,
+      "text": "A4/009 | Rail and terminal fit review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-line-13",
+      "sheetId": "reversing-index-layout",
+      "x": 120,
+      "y": 811,
+      "text": "A4/010 | Field wiring review records.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "reversing-index-layout-link",
+      "sheetId": "reversing-index-continued",
+      "x": 120,
+      "y": 1043,
+      "text": "A1/005 | Continued index: rail layout and wiring.",
+      "stroke": "#13263b"
     }
   ],
   "description": "One-sheet preliminary wiring model pairing a Siemens SIRIUS 3RM1201-1AA04 reversing starter with a source-backed SEW-EURODRIVE DRN63MS4 0.12 kW three-phase motor. Manufacturer pin identities and a 400 V star connection are represented. Starter, motor, protection, load and rotation behavior are not simulated; this example is not for construction."
