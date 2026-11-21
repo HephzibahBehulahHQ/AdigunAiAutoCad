@@ -786,7 +786,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
 
   const project = parsed.project;
   const analysis = engine.analyze(project.objects);
-  assert.equal(project.sheets.length, 27);
+  assert.equal(project.sheets.length, 49);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
     [4, 13, 0, 0]
@@ -815,8 +815,20 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const copy = engine.copyExampleProject(project, 'relay-package-copy', 'Editable relay reference');
   const editable = engine.parseProject(engine.serializeProject(copy));
   assert.equal(editable.valid, true, editable.errors.join(' '));
-  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0003');
+  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0005');
   assert.deepEqual(engine.analyzeProject(editable.project).globalNets, engine.analyzeProject(project).globalNets);
+  const indexedNumbers = new Set(editable.project.objects
+    .filter(object => object.sheetId.startsWith('relay-index'))
+    .map(object => object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0])
+    .filter(Boolean));
+  assert.deepEqual(indexedNumbers, new Set(editable.project.sheets.map(sheet => sheet.number)));
+  const routeTotals = editable.project.objects.filter(object => object.sheetId === 'relay-control-segment-geometry')
+    .map(object => object.text).filter(text => text?.startsWith('W-'));
+  const branches = ['W-Q0', 'W-24', 'W-K1-KM1', 'W-0V-K1', 'W-0V-KM1'];
+  assert.deepEqual(routeTotals, branches.map(prefix => {
+    const rows = wireList.rows.filter(row => row.wireId.startsWith(prefix + '-'));
+    return prefix + ' | ' + rows.length + ' segments | ' + rows.reduce((sum, row) => sum + row.lengthMm, 0) + ' drawing length units.';
+  }));
   const tracedNets = ['relay-trace-plc', 'relay-trace-supply', 'relay-trace-coil', 'relay-trace-return']
     .map(sheetId => editable.project.objects.filter(object => object.sheetId === sheetId && /-member-\d+$/.test(object.id))
       .map(object => object.text).sort().join(',')).sort();

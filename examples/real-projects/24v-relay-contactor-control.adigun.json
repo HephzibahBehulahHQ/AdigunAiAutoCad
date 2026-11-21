@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "24 V DC relay-operated contactor coil — wiring example",
-  "revision": "1.3",
-  "status": "27 authored sheets: relay and contactor wiring, editable layouts, manufacturer data, and continuity diagrams.",
+  "revision": "1.4",
+  "status": "49 authored sheets: relay wiring, derived schedules, editable layouts, catalog data and open field review.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -178,6 +178,138 @@
       "number": "A3/002",
       "name": "Editable K1 and KM1 device front view",
       "projectSectionId": "A3"
+    },
+    {
+      "id": "relay-index-review",
+      "number": "A1/003",
+      "name": "Drawing index: catalog and application checks",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "relay-index-field",
+      "number": "A1/004",
+      "name": "Drawing index: field review",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "relay-k1-polarity",
+      "number": "A4/013",
+      "name": "K1 polarized control input",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-indicator",
+      "number": "A4/014",
+      "name": "K1 operating indicator and observation record",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-minimum-load",
+      "number": "A4/015",
+      "name": "K1 minimum switching conditions",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-contact-inrush",
+      "number": "A4/016",
+      "name": "K1 transient contact current reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-dc-switching",
+      "number": "A4/017",
+      "name": "K1 DC-13 contact loading table",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-resistive-switching",
+      "number": "A4/018",
+      "name": "K1 resistive interruption reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-output-protection",
+      "number": "A4/019",
+      "name": "K1 output protection catalog entries",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-thermal-budget",
+      "number": "A4/020",
+      "name": "K1 nominal dissipation reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-ambient",
+      "number": "A4/021",
+      "name": "K1 operating and storage environment",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-environment-protection",
+      "number": "A4/022",
+      "name": "K1 relay base and installation protection",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-termination-prep",
+      "number": "A4/023",
+      "name": "K1 termination preparation",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-endurance",
+      "number": "A4/024",
+      "name": "K1 mechanical endurance and duty records",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-main-rating",
+      "number": "A4/025",
+      "name": "KM1 main-pole catalog ratings",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-switch-time",
+      "number": "A4/026",
+      "name": "KM1 manufacturer switching times",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-duty",
+      "number": "A4/027",
+      "name": "KM1 operating rate and electrical endurance",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-insulation",
+      "number": "A4/028",
+      "name": "KM1 rated insulation and impulse distinctions",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-boundary-comparison",
+      "number": "A4/029",
+      "name": "X1 and X3 component rating comparison",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-boundary-rail-depth",
+      "number": "A3/004",
+      "name": "XT1 profile-specific terminal depths",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "relay-control-segment-geometry",
+      "number": "A2/011",
+      "name": "Control branch routing totals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-measurement-plan",
+      "number": "A4/030",
+      "name": "Control circuit measurement record",
+      "projectSectionId": "A4"
     }
   ],
   "sheetLabels": {},
@@ -2923,6 +3055,1584 @@
       "x": 960,
       "y": 1180,
       "text": "45 × 77 mm",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-next-index",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 1191,
+      "text": "A1/003 | Continued index: protection, terminals and measurement.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-index-review-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-index-review"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-title",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 128,
+      "text": "DRAWING INDEX: CATALOG AND APPLICATION CHECKS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-01",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 205,
+      "text": "A1/002 | Previous index.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-02",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 263,
+      "text": "A1/003 | Catalog and installation references.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-03",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 321,
+      "text": "A1/004 | Continued index: supply, enclosure and field review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-04",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 379,
+      "text": "A2/011 | Control branch routing totals.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-05",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 437,
+      "text": "A3/004 | XT1 profile-specific terminal depths.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-06",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 495,
+      "text": "A4/013 | K1 polarized control input.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-07",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 553,
+      "text": "A4/014 | K1 operating indicator and observation record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-08",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 611,
+      "text": "A4/015 | K1 minimum switching conditions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-09",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 669,
+      "text": "A4/016 | K1 transient contact current reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-10",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 727,
+      "text": "A4/017 | K1 DC-13 contact loading table.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-11",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 785,
+      "text": "A4/018 | K1 resistive interruption reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-12",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 843,
+      "text": "A4/019 | K1 output protection catalog entries.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-13",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 901,
+      "text": "A4/020 | K1 nominal dissipation reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-14",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 959,
+      "text": "A4/021 | K1 operating and storage environment.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-review-line-15",
+      "sheetId": "relay-index-review",
+      "x": 120,
+      "y": 1017,
+      "text": "A4/022 | K1 relay base and installation protection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-index-field-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-index-field"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-title",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 128,
+      "text": "DRAWING INDEX: FIELD REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-01",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 205,
+      "text": "A1/003 | Previous index.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-02",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 263,
+      "text": "A4/023 | K1 termination preparation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-03",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 321,
+      "text": "A4/024 | K1 mechanical endurance and duty records.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-04",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 379,
+      "text": "A4/025 | KM1 main-pole catalog ratings.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-05",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 437,
+      "text": "A4/026 | KM1 manufacturer switching times.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-06",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 495,
+      "text": "A4/027 | KM1 operating rate and electrical endurance.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-07",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 553,
+      "text": "A4/028 | KM1 rated insulation and impulse distinctions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-08",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 611,
+      "text": "A4/029 | X1 and X3 component rating comparison.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-field-line-09",
+      "sheetId": "relay-index-field",
+      "x": 120,
+      "y": 669,
+      "text": "A4/030 | Control circuit measurement record.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-polarity-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-polarity"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-polarity-title",
+      "sheetId": "relay-k1-polarity",
+      "x": 120,
+      "y": 128,
+      "text": "K1 POLARIZED CONTROL INPUT",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-polarity-line-01",
+      "sheetId": "relay-k1-polarity",
+      "x": 120,
+      "y": 205,
+      "text": "Phoenix Contact describes a polarized monostable input with reverse-polarity protection and a freewheeling diode.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-polarity-line-02",
+      "sheetId": "relay-k1-polarity",
+      "x": 120,
+      "y": 263,
+      "text": "In this model X1 level 2 connects to K1:A1 and X3 returns K1:A2. Verify the field wiring polarity and controller output.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-polarity-line-03",
+      "sheetId": "relay-k1-polarity",
+      "x": 120,
+      "y": 321,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-polarity-line-04",
+      "sheetId": "relay-k1-polarity",
+      "x": 120,
+      "y": 379,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-indicator-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-indicator"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-indicator-title",
+      "sheetId": "relay-k1-indicator",
+      "x": 120,
+      "y": 128,
+      "text": "K1 OPERATING INDICATOR AND OBSERVATION RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-indicator-line-01",
+      "sheetId": "relay-k1-indicator",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog operating-voltage indicator | Yellow LED.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-indicator-line-02",
+      "sheetId": "relay-k1-indicator",
+      "x": 120,
+      "y": 263,
+      "text": "At handover, record the commanded state, applied coil voltage and observed indicator state.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-indicator-line-03",
+      "sheetId": "relay-k1-indicator",
+      "x": 120,
+      "y": 321,
+      "text": "Confirm contact operation separately. The indicator alone gives no evidence about the KM1 coil or switching path.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-indicator-line-04",
+      "sheetId": "relay-k1-indicator",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-indicator-line-05",
+      "sheetId": "relay-k1-indicator",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-minimum-load-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-minimum-load"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-minimum-load-title",
+      "sheetId": "relay-k1-minimum-load",
+      "x": 120,
+      "y": 128,
+      "text": "K1 MINIMUM SWITCHING CONDITIONS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-minimum-load-line-01",
+      "sheetId": "relay-k1-minimum-load",
+      "x": 120,
+      "y": 205,
+      "text": "Minimum switching voltage entry | 5 V at 100 mA.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-minimum-load-line-02",
+      "sheetId": "relay-k1-minimum-load",
+      "x": 120,
+      "y": 263,
+      "text": "Minimum switching current entry | 10 mA at 12 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-minimum-load-line-03",
+      "sheetId": "relay-k1-minimum-load",
+      "x": 120,
+      "y": 321,
+      "text": "Keep each published condition paired. Compare the actual voltage and load curve for the contact circuit.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-minimum-load-line-04",
+      "sheetId": "relay-k1-minimum-load",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-minimum-load-line-05",
+      "sheetId": "relay-k1-minimum-load",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-contact-inrush-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-contact-inrush"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contact-inrush-title",
+      "sheetId": "relay-k1-contact-inrush",
+      "x": 120,
+      "y": 128,
+      "text": "K1 TRANSIENT CONTACT CURRENT REFERENCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contact-inrush-line-01",
+      "sheetId": "relay-k1-contact-inrush",
+      "x": 120,
+      "y": 205,
+      "text": "Manufacturer maximum inrush entry | 10 A for 4 s.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contact-inrush-line-02",
+      "sheetId": "relay-k1-contact-inrush",
+      "x": 120,
+      "y": 263,
+      "text": "Separate limiting continuous-current entry | 6 A.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contact-inrush-line-03",
+      "sheetId": "relay-k1-contact-inrush",
+      "x": 120,
+      "y": 321,
+      "text": "Evaluate the measured or documented KM1 coil current profile with the applicable switching category.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contact-inrush-line-04",
+      "sheetId": "relay-k1-contact-inrush",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contact-inrush-line-05",
+      "sheetId": "relay-k1-contact-inrush",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-dc-switching-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-dc-switching"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-dc-switching-title",
+      "sheetId": "relay-k1-dc-switching",
+      "x": 120,
+      "y": 128,
+      "text": "K1 DC-13 CONTACT LOADING TABLE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-dc-switching-line-01",
+      "sheetId": "relay-k1-dc-switching",
+      "x": 120,
+      "y": 205,
+      "text": "24 V | 2 A. 110 V | 0.2 A. 220 V | 0.1 A.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-dc-switching-line-02",
+      "sheetId": "relay-k1-dc-switching",
+      "x": 120,
+      "y": 263,
+      "text": "These are catalog DC-13 entries. The drawing uses an external nominal 24 V source, whose actual conditions remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-dc-switching-line-03",
+      "sheetId": "relay-k1-dc-switching",
+      "x": 120,
+      "y": 321,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-dc-switching-line-04",
+      "sheetId": "relay-k1-dc-switching",
+      "x": 120,
+      "y": 379,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-resistive-switching-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-resistive-switching"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-resistive-switching-title",
+      "sheetId": "relay-k1-resistive-switching",
+      "x": 120,
+      "y": 128,
+      "text": "K1 RESISTIVE INTERRUPTION REFERENCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-resistive-switching-line-01",
+      "sheetId": "relay-k1-resistive-switching",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog maximum ohmic interruption at 24 V DC | 140 W.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-resistive-switching-line-02",
+      "sheetId": "relay-k1-resistive-switching",
+      "x": 120,
+      "y": 263,
+      "text": "This resistive-load test condition is separate from the DC-13 entries on A4/017.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-resistive-switching-line-03",
+      "sheetId": "relay-k1-resistive-switching",
+      "x": 120,
+      "y": 321,
+      "text": "Use the applicable load category for the intended circuit and verified component conditions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-resistive-switching-line-04",
+      "sheetId": "relay-k1-resistive-switching",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-resistive-switching-line-05",
+      "sheetId": "relay-k1-resistive-switching",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-output-protection-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-output-protection"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-output-protection-title",
+      "sheetId": "relay-k1-output-protection",
+      "x": 120,
+      "y": 128,
+      "text": "K1 OUTPUT PROTECTION CATALOG ENTRIES",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-output-protection-line-01",
+      "sheetId": "relay-k1-output-protection",
+      "x": 120,
+      "y": 205,
+      "text": "Output fuse entry | 4 A gL/gG NEOZED.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-output-protection-line-02",
+      "sheetId": "relay-k1-output-protection",
+      "x": 120,
+      "y": 263,
+      "text": "Catalog conditional short-circuit current entry | 200 A.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-output-protection-line-03",
+      "sheetId": "relay-k1-output-protection",
+      "x": 120,
+      "y": 321,
+      "text": "Supply fault level, selected protection and the applicability of the manufacturer conditions still require review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-output-protection-line-04",
+      "sheetId": "relay-k1-output-protection",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-output-protection-line-05",
+      "sheetId": "relay-k1-output-protection",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-thermal-budget-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-thermal-budget"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-thermal-budget-title",
+      "sheetId": "relay-k1-thermal-budget",
+      "x": 120,
+      "y": 128,
+      "text": "K1 NOMINAL DISSIPATION REFERENCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-thermal-budget-line-01",
+      "sheetId": "relay-k1-thermal-budget",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog maximum power dissipation under nominal conditions | 0.22 W.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-thermal-budget-line-02",
+      "sheetId": "relay-k1-thermal-budget",
+      "x": 120,
+      "y": 263,
+      "text": "Assign installation losses using the selected operating conditions and neighboring equipment.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-thermal-budget-line-03",
+      "sheetId": "relay-k1-thermal-budget",
+      "x": 120,
+      "y": 321,
+      "text": "The relay example carries no enclosure thermal calculation.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-thermal-budget-line-04",
+      "sheetId": "relay-k1-thermal-budget",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-thermal-budget-line-05",
+      "sheetId": "relay-k1-thermal-budget",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-ambient-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-ambient"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-ambient-title",
+      "sheetId": "relay-k1-ambient",
+      "x": 120,
+      "y": 128,
+      "text": "K1 OPERATING AND STORAGE ENVIRONMENT",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-ambient-line-01",
+      "sheetId": "relay-k1-ambient",
+      "x": 120,
+      "y": 205,
+      "text": "Operation | −40 to +70 °C, subject to derating.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-ambient-line-02",
+      "sheetId": "relay-k1-ambient",
+      "x": 120,
+      "y": 263,
+      "text": "Storage and transport | −40 to +85 °C.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-ambient-line-03",
+      "sheetId": "relay-k1-ambient",
+      "x": 120,
+      "y": 321,
+      "text": "Record the ambient temperature around the relay and verify the applicable derating conditions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-ambient-line-04",
+      "sheetId": "relay-k1-ambient",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-ambient-line-05",
+      "sheetId": "relay-k1-ambient",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-environment-protection-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-environment-protection"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-environment-protection-title",
+      "sheetId": "relay-k1-environment-protection",
+      "x": 120,
+      "y": 128,
+      "text": "K1 RELAY BASE AND INSTALLATION PROTECTION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-environment-protection-line-01",
+      "sheetId": "relay-k1-environment-protection",
+      "x": 120,
+      "y": 205,
+      "text": "Relay base | IP20. Installation location | ≥ IP54.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-environment-protection-line-02",
+      "sheetId": "relay-k1-environment-protection",
+      "x": 120,
+      "y": 263,
+      "text": "The catalog distinguishes the device base from its intended installation environment.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-environment-protection-line-03",
+      "sheetId": "relay-k1-environment-protection",
+      "x": 120,
+      "y": 321,
+      "text": "Record the enclosure and the conditions that apply after cable entries and field wiring are installed.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-environment-protection-line-04",
+      "sheetId": "relay-k1-environment-protection",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-environment-protection-line-05",
+      "sheetId": "relay-k1-environment-protection",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-termination-prep-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-termination-prep"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-termination-prep-title",
+      "sheetId": "relay-k1-termination-prep",
+      "x": 120,
+      "y": 128,
+      "text": "K1 TERMINATION PREPARATION",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-termination-prep-line-01",
+      "sheetId": "relay-k1-termination-prep",
+      "x": 120,
+      "y": 205,
+      "text": "Stripping length | 8 mm. Screw thread | M3. Tightening torque | 0.6–0.8 N·m.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-termination-prep-line-02",
+      "sheetId": "relay-k1-termination-prep",
+      "x": 120,
+      "y": 263,
+      "text": "Single ferrule range | 0.2–2.5 mm². TWIN ferrule range | 2 × 0.5–1.5 mm².",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-termination-prep-line-03",
+      "sheetId": "relay-k1-termination-prep",
+      "x": 120,
+      "y": 321,
+      "text": "Confirm the chosen conductors, approved end preparation and the issued terminal schedule.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-termination-prep-line-04",
+      "sheetId": "relay-k1-termination-prep",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-termination-prep-line-05",
+      "sheetId": "relay-k1-termination-prep",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-endurance-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-endurance"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-endurance-title",
+      "sheetId": "relay-k1-endurance",
+      "x": 120,
+      "y": 128,
+      "text": "K1 MECHANICAL ENDURANCE AND DUTY RECORDS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-endurance-line-01",
+      "sheetId": "relay-k1-endurance",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog mechanical service-life entry | 20 million cycles.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-endurance-line-02",
+      "sheetId": "relay-k1-endurance",
+      "x": 120,
+      "y": 263,
+      "text": "Record expected switching frequency and electrical load so the application can be checked against the relevant endurance data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-endurance-line-03",
+      "sheetId": "relay-k1-endurance",
+      "x": 120,
+      "y": 321,
+      "text": "Mechanical cycle count alone gives no installed electrical service life.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-endurance-line-04",
+      "sheetId": "relay-k1-endurance",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-endurance-line-05",
+      "sheetId": "relay-k1-endurance",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-gb/products/relay-module-plc-rsc-24dc21-2966171",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-main-rating-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-main-rating"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-main-rating-title",
+      "sheetId": "relay-km1-main-rating",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 MAIN-POLE CATALOG RATINGS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-main-rating-line-01",
+      "sheetId": "relay-km1-main-rating",
+      "x": 120,
+      "y": 205,
+      "text": "Main pole arrangement | 3P, 3 normally-open main poles.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-main-rating-line-02",
+      "sheetId": "relay-km1-main-rating",
+      "x": 120,
+      "y": 263,
+      "text": "AC-3 rated current | 9 A at ≤440 V AC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-main-rating-line-03",
+      "sheetId": "relay-km1-main-rating",
+      "x": 120,
+      "y": 321,
+      "text": "The example uses only the coil circuit. The main poles remain available on the component but have no attached wires.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-main-rating-line-04",
+      "sheetId": "relay-km1-main-rating",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-main-rating-line-05",
+      "sheetId": "relay-km1-main-rating",
+      "x": 120,
+      "y": 437,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-switch-time-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-switch-time"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-switch-time-title",
+      "sheetId": "relay-km1-switch-time",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 MANUFACTURER SWITCHING TIMES",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-switch-time-line-01",
+      "sheetId": "relay-km1-switch-time",
+      "x": 120,
+      "y": 205,
+      "text": "Published closing time | 63 ms ±15%. Opening time | 20 ms ±20%.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-switch-time-line-02",
+      "sheetId": "relay-km1-switch-time",
+      "x": 120,
+      "y": 263,
+      "text": "Confirm the applicable data for the delivered coil and record actual behavior under the intended conditions.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-switch-time-line-03",
+      "sheetId": "relay-km1-switch-time",
+      "x": 120,
+      "y": 321,
+      "text": "These catalog timings do not include external PLC logic, K1 response or any driven equipment.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-switch-time-line-04",
+      "sheetId": "relay-km1-switch-time",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-switch-time-line-05",
+      "sheetId": "relay-km1-switch-time",
+      "x": 120,
+      "y": 437,
+      "text": "https://eshop.se.com/sg/contactor-tesys-deca-3p3-no-ac-3-ac-3e-0-to-440v-9a-24vdc-coil-lc1d09bd.html",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-duty-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-duty"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-duty-title",
+      "sheetId": "relay-km1-duty",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 OPERATING RATE AND ELECTRICAL ENDURANCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-duty-line-01",
+      "sheetId": "relay-km1-duty",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog operating rate | 3,600 cycles/h at ambient temperature ≤60 °C.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-duty-line-02",
+      "sheetId": "relay-km1-duty",
+      "x": 120,
+      "y": 263,
+      "text": "Electrical durability reference | 2 million cycles, 9 A AC-3 at Ue ≤440 V AC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-duty-line-03",
+      "sheetId": "relay-km1-duty",
+      "x": 120,
+      "y": 321,
+      "text": "Log actual operation and load separately. No main-pole duty is assigned in this coil example.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-duty-line-04",
+      "sheetId": "relay-km1-duty",
+      "x": 120,
+      "y": 379,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-duty-line-05",
+      "sheetId": "relay-km1-duty",
+      "x": 120,
+      "y": 437,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-insulation-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-insulation"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-title",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 RATED INSULATION AND IMPULSE DISTINCTIONS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-line-01",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog IEC insulation-voltage entries | 690 V for power and signalling circuits.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-line-02",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 263,
+      "text": "Catalog CSA and UL insulation-voltage entries | 600 V for power and signalling circuits.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-line-03",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 321,
+      "text": "Rated impulse withstand | 6 kV.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-line-04",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 379,
+      "text": "Identify the applicable application conditions rather than interchanging these component ratings.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-line-05",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 437,
+      "text": "Manufacturer source:",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-insulation-line-06",
+      "sheetId": "relay-km1-insulation",
+      "x": 120,
+      "y": 495,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-boundary-comparison-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-boundary-comparison"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-comparison-title",
+      "sheetId": "relay-boundary-comparison",
+      "x": 120,
+      "y": 128,
+      "text": "X1 AND X3 COMPONENT RATING COMPARISON",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-comparison-line-01",
+      "sheetId": "relay-boundary-comparison",
+      "x": 120,
+      "y": 205,
+      "text": "X1 PTTB 2,5 | 500 V, 22 A, four connections on two isolated levels.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-comparison-line-02",
+      "sheetId": "relay-boundary-comparison",
+      "x": 120,
+      "y": 263,
+      "text": "X3 PT 2,5 | 800 V, 24 A, two connections on one level.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-comparison-line-03",
+      "sheetId": "relay-boundary-comparison",
+      "x": 120,
+      "y": 321,
+      "text": "These product ratings do not specify circuit current, conductor size or protection.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-comparison-line-04",
+      "sheetId": "relay-boundary-comparison",
+      "x": 120,
+      "y": 379,
+      "text": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-comparison-line-05",
+      "sheetId": "relay-boundary-comparison",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-pc/products/feed-through-terminal-block-pt-25-3209510",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-boundary-rail-depth-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-boundary-rail-depth"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-rail-depth-title",
+      "sheetId": "relay-boundary-rail-depth",
+      "x": 120,
+      "y": 128,
+      "text": "XT1 PROFILE-SPECIFIC TERMINAL DEPTHS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-rail-depth-line-01",
+      "sheetId": "relay-boundary-rail-depth",
+      "x": 120,
+      "y": 205,
+      "text": "PTTB 2,5 | 47.4 mm on NS 35/7.5; 54.9 mm on NS 35/15.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-rail-depth-line-02",
+      "sheetId": "relay-boundary-rail-depth",
+      "x": 120,
+      "y": 263,
+      "text": "PT 2,5 | 36.8 mm on NS 35/7.5; 44.3 mm on NS 35/15.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-rail-depth-line-03",
+      "sheetId": "relay-boundary-rail-depth",
+      "x": 120,
+      "y": 321,
+      "text": "Record the actual rail profile and check door, wiring and duct clearances independently of body depth.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-rail-depth-line-04",
+      "sheetId": "relay-boundary-rail-depth",
+      "x": 120,
+      "y": 379,
+      "text": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-boundary-rail-depth-line-05",
+      "sheetId": "relay-boundary-rail-depth",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-pc/products/feed-through-terminal-block-pt-25-3209510",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-control-segment-geometry-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-control-segment-geometry"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-title",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 128,
+      "text": "CONTROL BRANCH ROUTING TOTALS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-line-01",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 205,
+      "text": "W-Q0 | 2 segments | 325 drawing length units.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-line-02",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 263,
+      "text": "W-24 | 2 segments | 455 drawing length units.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-line-03",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 321,
+      "text": "W-K1-KM1 | 3 segments | 240 drawing length units.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-line-04",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 379,
+      "text": "W-0V-K1 | 3 segments | 595 drawing length units.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-line-05",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 437,
+      "text": "W-0V-KM1 | 3 segments | 890 drawing length units.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-control-segment-geometry-line-06",
+      "sheetId": "relay-control-segment-geometry",
+      "x": 120,
+      "y": 495,
+      "text": "These totals reconcile A2/003 geometry. Field routing and termination allowance remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-measurement-plan-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-measurement-plan"
+    },
+    {
+      "kind": "text",
+      "id": "relay-measurement-plan-title",
+      "sheetId": "relay-measurement-plan",
+      "x": 120,
+      "y": 128,
+      "text": "CONTROL CIRCUIT MEASUREMENT RECORD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-measurement-plan-line-01",
+      "sheetId": "relay-measurement-plan",
+      "x": 120,
+      "y": 205,
+      "text": "Record command voltage at X1 level 2 and relay coil voltage at K1:A1/A2.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-measurement-plan-line-02",
+      "sheetId": "relay-measurement-plan",
+      "x": 120,
+      "y": 263,
+      "text": "Record the contact feed at X1 level 1 and switched KM1 coil voltage at A1/A2.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-measurement-plan-line-03",
+      "sheetId": "relay-measurement-plan",
+      "x": 120,
+      "y": 321,
+      "text": "Compare readings with the selected source and delivered devices under the approved test procedure.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-measurement-plan-line-04",
+      "sheetId": "relay-measurement-plan",
+      "x": 120,
+      "y": 379,
+      "text": "The reference contains connectivity and catalog data. No measurement results have been entered.",
       "stroke": "#13263b"
     }
   ],

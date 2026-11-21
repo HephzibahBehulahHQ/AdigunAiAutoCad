@@ -8,7 +8,7 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 Open this project as an editable copy from **Project Explorer → List**.
 
-This 27-sheet reference includes the wiring, net and wire schedules, continuity diagrams, editable terminal and device layouts, and catalog-backed operating, mounting and termination references. The circuit uses four verified parts: a Phoenix Contact PLC interface relay, a Schneider Electric TeSys D contactor, a Phoenix Contact PTTB 2,5 double-level terminal, and a Phoenix Contact PT 2,5 feed-through terminal. Its 13 orthogonal wire segments form four pin/net groups. The BOM and wire list are derived from the editable objects.
+This 49-sheet reference includes the wiring, net and wire schedules, continuity diagrams, editable terminal and device layouts, and catalog-backed operating, mounting and termination references. The circuit uses four verified parts: a Phoenix Contact PLC interface relay, a Schneider Electric TeSys D contactor, a Phoenix Contact PTTB 2,5 double-level terminal, and a Phoenix Contact PT 2,5 feed-through terminal. Its 13 orthogonal wire segments form four pin/net groups. The BOM and wire list are derived from the editable objects.
 
 ## Intended circuit
 
