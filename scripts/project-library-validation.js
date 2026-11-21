@@ -129,7 +129,12 @@ function buildWirePreview(project) {
     if (!points.every(Number.isFinite)) continue;
     const sheetId = wire.sheetId || project.activeSheet || sheets[0]?.id || 'main';
     if (!routes.has(sheetId)) routes.set(sheetId, []);
-    routes.get(sheetId).push(points);
+    if (wire.bends) {
+      const route = engine.wireRoutePoints(wire);
+      for (let index = 1; index < route.length; index += 1) {
+        routes.get(sheetId).push([route[index - 1].x, route[index - 1].y, route[index].x, route[index].y]);
+      }
+    } else routes.get(sheetId).push(points);
   }
   const ordered = [...routes].sort((a, b) => b[1].length - a[1].length);
   const selected = routes.has(project.activeSheet) ? [project.activeSheet, routes.get(project.activeSheet)] : ordered[0];

@@ -1362,6 +1362,7 @@
         } else if (object.kind === 'wire') {
           const label = 'Wire ' + (object.id || index + 1);
           if (![object.x1, object.y1, object.x2, object.y2].every(finite)) errors.push(label + ' has invalid coordinates.');
+          if (object.bends !== undefined && !validWireBends(object.bends)) errors.push(label + ' has invalid route bends.');
           for (const field of ['cableId', 'coreId']) {
             const value = object[field];
             if (value !== undefined && (typeof value !== 'string' || value.length > 80)) {
@@ -1468,6 +1469,14 @@
     return { valid: validation.valid, errors: validation.errors, project: validation.valid ? project : null };
   }
 
+  function validWireBends(bends) {
+    return Array.isArray(bends) && bends.every(point => point && finite(point.x) && finite(point.y));
+  }
+
+  function wireRoutePoints(wire) {
+    return [{ x: wire.x1, y: wire.y1 }, ...(wire.bends ?? [{ x: wire.x2, y: wire.y1 }]), { x: wire.x2, y: wire.y2 }];
+  }
+
   function pointOnSegment(point, segment) {
     const cross = (point.x - segment.a.x) * (segment.b.y - segment.a.y)
       - (point.y - segment.a.y) * (segment.b.x - segment.a.x);
@@ -1487,21 +1496,19 @@
     source.forEach(function (object, index) {
       if (!object || object.kind !== 'wire') return;
       const coords = [object.x1, object.y1, object.x2, object.y2];
-      if (!coords.every(finite)) {
+      if (!coords.every(finite) || (object.bends !== undefined && !validWireBends(object.bends))) {
         errors.push({ code: 'invalid-coordinate', objectId: object.id || null, message: 'A wire has a missing or non-finite endpoint.' });
         return;
       }
-      const start = { x: object.x1, y: object.y1 };
-      const bend = { x: object.x2, y: object.y1 };
-      const end = { x: object.x2, y: object.y2 };
-      const segments = [[start, bend], [bend, end]]
+      const points = wireRoutePoints(object);
+      const segments = points.slice(1).map((point, index) => [points[index], point])
         .filter(function (pair) { return Math.abs(pair[0].x - pair[1].x) > EPSILON || Math.abs(pair[0].y - pair[1].y) > EPSILON; })
         .map(function (pair) { return { a: pair[0], b: pair[1] }; });
       if (!segments.length) {
         errors.push({ code: 'zero-length-wire', objectId: object.id || null, message: 'A wire has zero length.' });
         return;
       }
-      wires.push({ id: object.id || 'wire-' + (index + 1), points: [start, bend, end], start: start, end: end, segments: segments });
+      wires.push({ id: object.id || 'wire-' + (index + 1), points, start: points[0], end: points.at(-1), segments });
     });
 
     source.forEach(function (object) {
@@ -2069,10 +2076,12 @@
         netId: net ? net.id : '',
         startX: wire.x1,
         startY: wire.y1,
-        bendX: wire.x2,
+        bendX: wire.bends ? null : wire.x2,
         endX: wire.x2,
         endY: wire.y2,
-        lengthMm: Number((Math.abs(wire.x2 - wire.x1) + Math.abs(wire.y2 - wire.y1)).toFixed(6)),
+        lengthMm: Number(wireRoutePoints(wire).reduce((length, point, index, points) => index
+          ? length + Math.hypot(point.x - points[index - 1].x, point.y - points[index - 1].y) : length, 0).toFixed(6)),
+        ...(wire.bends?.length ? { bends: wire.bends.map(point => point.x + ', ' + point.y) } : {}),
         startPinRefs: refsAt(id, wire.x1, wire.y1),
         endPinRefs: refsAt(id, wire.x2, wire.y2),
         netPinRefs: netPins
@@ -2092,6 +2101,7 @@
       ['Connected pin references on net', 'netPinRefs']
     ];
     if (!Array.isArray(input) && input && typeof input === 'object') columns.unshift(['Sheet ID', 'sheetId']);
+    if (report.rows.some(row => row.bends)) columns.push(['Route bends (X, Y mm)', 'bends']);
     if (report.rows.some(row => row.cableId || row.coreId)) columns.push(['Cable ID', 'cableId'], ['Core ID', 'coreId']);
     return connectionReportCsv(columns, report.rows);
   }
@@ -2289,6 +2299,7 @@
     billOfMaterialsCsv: billOfMaterialsCsv,
     wireList: wireList,
     wireListCsv: wireListCsv,
+    wireRoutePoints: wireRoutePoints,
     cableScheduleCsv: cableScheduleCsv,
     terminalList: terminalList,
     terminalListCsv: terminalListCsv,
