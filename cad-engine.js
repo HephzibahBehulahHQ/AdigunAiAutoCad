@@ -1524,13 +1524,16 @@
       if (rootA !== rootB) parents.set(rootB, rootA);
     }
     const linkedOpenEndpointKeys = new Set();
+    function endpointKey(sheetId, endpoint) {
+      return sheetId + '\u0000' + endpoint.wireId + '\u0000' + endpoint.point.x + ',' + endpoint.point.y;
+    }
     const links = (Array.isArray(project.crossSheetConnections) ? project.crossSheetConnections : []).map(function (connection) {
       const endpointNets = connection.endpoints.map(function (endpoint) {
         return endpointToNet.get(endpoint.sheetId + '\u0000' + endpoint.wireId);
       });
       const open = connection.endpoints.map(function (endpoint, index) {
         const sheet = reports.find(function (entry) { return entry.id === endpoint.sheetId; });
-        const key = endpoint.sheetId + '\u0000' + endpoint.wireId + '\u0000' + endpoint.point.x + ',' + endpoint.point.y;
+        const key = endpointKey(endpoint.sheetId, endpoint);
         const isOpen = sheet && sheet.analysis.openEndpoints.some(function (candidate) {
           return candidate.wireId === endpoint.wireId &&
             candidate.point.x === endpoint.point.x && candidate.point.y === endpoint.point.y;
@@ -1576,6 +1579,11 @@
     }).sort(function (x, y) { return x.localNetIds[0].localeCompare(y.localNetIds[0]); })
       .map(function (group, index) { return Object.assign({ id: 'global-net-' + (index + 1) }, group); });
     const localOpenEndpointCount = reports.reduce(function (sum, sheet) { return sum + sheet.analysis.openEndpointCount; }, 0);
+    const openEndpoints = reports.flatMap(function (sheet) {
+      return sheet.analysis.openEndpoints
+        .filter(function (endpoint) { return !linkedOpenEndpointKeys.has(endpointKey(sheet.id, endpoint)); })
+        .map(function (endpoint) { return Object.assign({ sheetId: sheet.id }, endpoint); });
+    });
     return {
       valid: true,
       errors: [],
@@ -1588,10 +1596,11 @@
       crossSheetConnections: links,
       globalNets: globalNets,
       localOpenEndpointCount: localOpenEndpointCount,
-      openEndpointCount: localOpenEndpointCount - linkedOpenEndpointKeys.size,
+      openEndpointCount: openEndpoints.length,
+      openEndpoints: openEndpoints,
       geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
       sheets: reports,
-      scope: 'Sheet-local nets are joined only at exact, validated open endpoints; connector graphics are not yet rendered.'
+      scope: 'Sheet-local nets are joined only at exact, validated open endpoints.'
     };
   }
 

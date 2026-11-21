@@ -1360,6 +1360,12 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
   assert.equal(report.valid,true,report.errors.join(' '));
   assert.deepEqual([report.sheetCount,report.netCount,report.globalNetCount,report.crossSheetConnectionCount],[2,2,1,1]);
   assert.deepEqual([report.localOpenEndpointCount,report.openEndpointCount],[2,0]);
+  assert.deepEqual(report.openEndpoints, []);
+  const disconnected = engine.analyzeProject({ ...parsed.project, crossSheetConnections: [] });
+  assert.deepEqual(disconnected.openEndpoints, [
+    { sheetId: 'sheet-power', wireId: 'cross-sheet-wire-0', point: { x: 400, y: 260 } },
+    { sheetId: 'sheet-control', wireId: 'cross-sheet-wire-1', point: { x: 400, y: 260 } }
+  ]);
   assert.deepEqual(report.globalNets[0].sheetIds,['sheet-control','sheet-power']);
   assert.deepEqual(report.globalNets[0].pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),[
     'sheet-control:X2:1','sheet-control:X2:2','sheet-power:X1:1','sheet-power:X1:2'

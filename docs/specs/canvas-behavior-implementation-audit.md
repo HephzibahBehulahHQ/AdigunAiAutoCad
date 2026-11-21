@@ -11,6 +11,8 @@ The merged foundation implements the empty sectioned-project scaffold and severa
 
 ### Implemented in this slice
 
+- Electrical checks shows project-wide counts and locates unresolved wire endpoints by sheet, wire, and drawing coordinates. A local Chrome check confirmed that valid cross-sheet links are excluded from the unresolved list and that a finding opens the affected sheet and selects its wire.
+
 - `cad-engine.js` defines a stable project model with empty A1–A4 sections, shared metadata, open tabs, and cross-sheet connection storage. It supports A5 onward and uncapped sheet creation with stable IDs and project-wide sequential numbering. Engine operations rename/move/delete sheets while retaining identities and connections; deleting a referenced sheet records an unresolved-reference diagnostic.
 - `index.html` creates a named, empty project with A1–A4 in the existing editor shell. Sections collapse/expand and have sidebar add controls. Adding a sheet does not activate the canvas; selecting opens it; closing a canvas tab leaves the document. Project sheets support inline rename and drag/drop reorder or section moves.
 - The inspector edits shared project metadata and per-sheet title-block values. A-series size/orientation update sheet coordinates and frame geometry; print and SVG export use full sheet dimensions. The title block uses the required fixed identities. Project JSON carries the project model, title fields, active sheet, open views and cross-sheet connections; exported filenames use the project title.
