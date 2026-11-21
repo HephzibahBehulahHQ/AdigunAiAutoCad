@@ -380,30 +380,30 @@
         "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
-      "topologySha256": "2fc799bb463025d6d0b44d4085a438b27c4efc2e3db0381828e0b4514a35c482",
+      "topologySha256": "0c45c2f8bcedfe043b08337b54a7950ff6fb4be002dc4893a6777681f5953f2d",
       "csvSha256": {
-        "bom": "fed2260c7a39c29a485de8fa591c9d08f6e2baccf52ee7f762992e2a52e94ef7",
-        "wires": "8c38412c5187fee38825dbc59f68c4a8f4748f57deac541b6971926a46c867f8",
-        "terminals": "a8dea5c677c5618a934f573bc891d34ab9f64603a046a4efd8ecc8b722fd115d",
+        "bom": "4c1e2577424c3166555b7838a639d2bad010e2fc85766c5fa2b867728d35e088",
+        "wires": "5ed5fda09a7cd48733936b1af8f020b8ceca6a157c04b851f02687adc34a306e",
+        "terminals": "e564e0349efa54b32a84ac86a0531e00028dc477784182400c848e2327499c66",
         "plcIo": "1da803583b1b2c7cb653096958fa0f77a2d6c4abf341dfc20da98349ad349e31",
         "cables": "2c3130696d5e4bce0b434ed5be2fc5a39ff740756acab83cd0cea6009b8b5fe3"
       },
       "metrics": {
-        "sheetCount": 17,
-        "authoredSheetCount": 17,
-        "connectedSheetCount": 17,
-        "contentObjectCount": 208,
+        "sheetCount": 18,
+        "authoredSheetCount": 18,
+        "connectedSheetCount": 18,
+        "contentObjectCount": 215,
         "emptyContentSheetIds": [],
-        "componentCount": 29,
-        "wireCount": 108,
-        "netCount": 64,
+        "componentCount": 30,
+        "wireCount": 110,
+        "netCount": 65,
         "globalNetCount": 20,
-        "crossSheetConnectionCount": 44,
+        "crossSheetConnectionCount": 45,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 11,
-        "wireListRowCount": 108,
-        "terminalListRowCount": 40
+        "wireListRowCount": 110,
+        "terminalListRowCount": 42
       },
       "errors": []
     }

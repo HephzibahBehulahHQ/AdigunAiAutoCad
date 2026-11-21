@@ -114,6 +114,12 @@
       "number": "A2/017",
       "name": "External operational permissive contact interface",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "protective-earth-entry",
+      "number": "A2/018",
+      "name": "Incoming protective conductor to PS1",
+      "projectSectionId": "A2"
     }
   ],
   "objects": [
@@ -1786,8 +1792,8 @@
       "kind": "text",
       "sheetId": "ac-input-boundary",
       "x": 190,
-      "y": 444,
-      "text": "Incoming PE · X9:1",
+      "y": 421,
+      "text": "From X21 → X9:1",
       "stroke": "#13263b"
     },
     {
@@ -2773,6 +2779,87 @@
       "stroke": "#164eac",
       "strokeWidth": 1.5,
       "potential": "0 V DC"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x21",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X21",
+      "x": 405,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT8",
+        "position": "1",
+        "marking": "PE",
+        "comment": "Incoming protective conductor boundary"
+      },
+      "sheetId": "protective-earth-entry"
+    },
+    {
+      "id": "entry-pe-send",
+      "kind": "wire",
+      "sheetId": "protective-earth-entry",
+      "x": 440,
+      "y": 300,
+      "x1": 440,
+      "y1": 300,
+      "x2": 665,
+      "y2": 300,
+      "stroke": "#247548",
+      "strokeWidth": 1.5,
+      "potential": "PE"
+    },
+    {
+      "id": "entry-pe-title",
+      "kind": "text",
+      "sheetId": "protective-earth-entry",
+      "x": 110,
+      "y": 108,
+      "text": "XT8 · PROTECTIVE CONDUCTOR ENTRY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "entry-pe-boundary",
+      "kind": "text",
+      "sheetId": "protective-earth-entry",
+      "x": 135,
+      "y": 304,
+      "text": "Incoming PE · X21:1",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "entry-pe-route",
+      "kind": "text",
+      "sheetId": "protective-earth-entry",
+      "x": 110,
+      "y": 420,
+      "text": "Protective conductor route: X21 → X9 → PS1:PE.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "entry-pe-scope",
+      "kind": "text",
+      "sheetId": "protective-earth-entry",
+      "x": 110,
+      "y": 460,
+      "text": "Rail and enclosure bonding details belong to the installation design.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "entry-pe-receive",
+      "kind": "wire",
+      "sheetId": "ac-input-boundary",
+      "x": 175,
+      "y": 440,
+      "x1": 175,
+      "y1": 440,
+      "x2": 370,
+      "y2": 440,
+      "stroke": "#247548",
+      "strokeWidth": 1.5,
+      "potential": "PE"
     }
   ],
   "crossSheetConnections": [
@@ -4174,6 +4261,38 @@
             "direction": "left",
             "targetSheetId": "external-permissive",
             "targetRef": "X20"
+          }
+        }
+      ]
+    },
+    {
+      "id": "entry-pe",
+      "name": "PE",
+      "endpoints": [
+        {
+          "sheetId": "protective-earth-entry",
+          "wireId": "entry-pe-send",
+          "point": {
+            "x": 665,
+            "y": 300
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ac-input-boundary",
+            "targetRef": "X9"
+          }
+        },
+        {
+          "sheetId": "ac-input-boundary",
+          "wireId": "entry-pe-receive",
+          "point": {
+            "x": 175,
+            "y": 440
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "protective-earth-entry",
+            "targetRef": "X21"
           }
         }
       ]
