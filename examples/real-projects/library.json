@@ -3,6 +3,7 @@
   "library": "Adigun AI AutoCAD source-backed electrical project library",
   "scaleTarget": {
     "minimumSheetsPerProject": 100,
+    "minimumConnectedSheetsPerProject": 70,
     "firstGateDistinctProjects": 5,
     "fullLibraryProjects": 50
   },

@@ -217,7 +217,9 @@ For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000
 
 ## Project library validation
 
-`library.json` is the machine-readable index of the source-backed examples and their distinct electrical topologies. To regenerate the per-project model report, run `node scripts/project-library-validation.js --write`; to verify that the committed report still matches the manifest, CAD engine, component catalog, and project files, run `node scripts/project-library-validation.js --check`. The committed report records measured sheet, component, wire, net, BOM, and connectivity counts. It currently validates five distinct topologies, while the first gate of five distinct 100-sheet projects remains incomplete; only the star-delta reference package currently meets the 100-sheet threshold.
+`library.json` indexes the source-backed examples and their distinct electrical topologies. Run `node scripts/project-library-validation.js --write` to regenerate the report and `node scripts/project-library-validation.js --check` to check it against the current files and CAD engine.
+
+The report counts authored sheets and electrically connected sheets separately. A connected sheet participates in a wired net that joins at least two component pins, including nets with explicit cross-sheet links. Run `node scripts/project-library-validation.js --check --require-release-scale` to enforce the library size requirement of 50 distinct topologies, 100 authored sheets and 70 connected sheets per qualifying project, and at least 5,000 qualifying sheets in total.
 
 
 # DOL motor feeder — second 100-sheet reference project opening (A2/001)

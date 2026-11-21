@@ -11,7 +11,16 @@
       "completedDistinct100SheetProjects": 3,
       "complete": false
     },
-    "fullLibraryTarget": 50
+    "fullLibraryTarget": 50,
+    "releaseScaleGate": {
+      "minimumSheetsPerProject": 100,
+      "minimumConnectedSheetsPerProject": 70,
+      "requiredDistinctProjects": 50,
+      "qualifiedDistinctProjects": 0,
+      "requiredSheetCount": 5000,
+      "qualifiedSheetCount": 0,
+      "complete": false
+    }
   },
   "projects": [
     {
@@ -32,6 +41,7 @@
       "metrics": {
         "sheetCount": 71,
         "authoredSheetCount": 71,
+        "connectedSheetCount": 1,
         "contentObjectCount": 522,
         "emptyContentSheetIds": [],
         "componentCount": 4,
@@ -64,6 +74,7 @@
       "metrics": {
         "sheetCount": 1,
         "authoredSheetCount": 1,
+        "connectedSheetCount": 1,
         "contentObjectCount": 14,
         "emptyContentSheetIds": [],
         "componentCount": 4,
@@ -96,6 +107,7 @@
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
+        "connectedSheetCount": 1,
         "contentObjectCount": 950,
         "emptyContentSheetIds": [],
         "componentCount": 15,
@@ -128,6 +140,7 @@
       "metrics": {
         "sheetCount": 1,
         "authoredSheetCount": 1,
+        "connectedSheetCount": 1,
         "contentObjectCount": 49,
         "emptyContentSheetIds": [],
         "componentCount": 11,
@@ -160,6 +173,7 @@
       "metrics": {
         "sheetCount": 2,
         "authoredSheetCount": 2,
+        "connectedSheetCount": 1,
         "contentObjectCount": 293,
         "emptyContentSheetIds": [],
         "componentCount": 15,
@@ -192,6 +206,7 @@
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
+        "connectedSheetCount": 8,
         "contentObjectCount": 1096,
         "emptyContentSheetIds": [],
         "componentCount": 32,
@@ -224,6 +239,7 @@
       "metrics": {
         "sheetCount": 100,
         "authoredSheetCount": 100,
+        "connectedSheetCount": 1,
         "contentObjectCount": 1055,
         "emptyContentSheetIds": [],
         "componentCount": 11,

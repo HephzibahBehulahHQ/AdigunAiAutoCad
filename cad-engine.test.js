@@ -3818,6 +3818,12 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(report.projects.every(project => project.metrics.authoredSheetCount === project.metrics.sheetCount
     && project.metrics.emptyContentSheetIds.length === 0));
   assert.ok(report.summary.distinctTopologyCount >= 5);
+  const relay = report.projects.find(project => project.id === 'relay-contactor-24v');
+  assert.equal(relay.metrics.connectedSheetCount, 1);
+  assert.ok(relay.metrics.authoredSheetCount > relay.metrics.connectedSheetCount);
+  assert.equal(report.summary.releaseScaleGate.minimumConnectedSheetsPerProject, 70);
+  assert.equal(report.summary.releaseScaleGate.requiredSheetCount, 5000);
+  assert.ok(report.summary.releaseScaleGate.qualifiedDistinctProjects <= report.summary.distinct100SheetTopologyCount);
   const dolOpening = report.projects.find(project => project.id === 'dol-reference-opening');
   assert.ok(dolOpening);
   assert.equal(dolOpening.metrics.sheetCount, 100);
