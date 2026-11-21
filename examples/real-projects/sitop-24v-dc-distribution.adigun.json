@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "2.7",
+  "revision": "2.8",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -131,6 +131,12 @@
       "id": "annunciator-interface",
       "number": "A2/020",
       "name": "XT10 isolated annunciator request",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "distribution-test-access",
+      "number": "A2/021",
+      "name": "XT11 downstream DC voltage test access",
       "projectSectionId": "A2"
     }
   ],
@@ -3289,6 +3295,144 @@
       "y": 515,
       "text": "External annunciator power, load and cable are unassigned. Switching logic is outside this drawing.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "distribution-test-access-x26",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X26",
+      "x": 565,
+      "y": 275,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT11",
+        "position": "1",
+        "marking": "Branch B +24 V DC",
+        "comment": "Reserved voltage measurement access. No instrument installed."
+      },
+      "sheetId": "distribution-test-access"
+    },
+    {
+      "id": "distribution-test-access-positive-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 760,
+      "y": 360,
+      "x1": 760,
+      "y1": 360,
+      "x2": 760,
+      "y2": 305,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "distribution-test-access-positive-receive",
+      "kind": "wire",
+      "sheetId": "distribution-test-access",
+      "x": 225,
+      "y": 275,
+      "x1": 225,
+      "y1": 275,
+      "x2": 530,
+      "y2": 275,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "distribution-test-access-x26",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "distribution-test-access-x27",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X27",
+      "x": 565,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT11",
+        "position": "2",
+        "marking": "Branch B 0 V DC",
+        "comment": "Reserved voltage measurement access. No instrument installed."
+      },
+      "sheetId": "distribution-test-access"
+    },
+    {
+      "id": "distribution-test-access-return-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 760,
+      "y": 700,
+      "x1": 760,
+      "y1": 700,
+      "x2": 760,
+      "y2": 745,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "distribution-test-access-return-receive",
+      "kind": "wire",
+      "sheetId": "distribution-test-access",
+      "x": 225,
+      "y": 390,
+      "x1": 225,
+      "y1": 390,
+      "x2": 530,
+      "y2": 390,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "distribution-test-access-x27",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "distribution-test-access-title",
+      "kind": "text",
+      "sheetId": "distribution-test-access",
+      "x": 110,
+      "y": 108,
+      "text": "XT11 · BRANCH B VOLTAGE TEST ACCESS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "distribution-test-access-positive-note",
+      "kind": "text",
+      "sheetId": "distribution-test-access",
+      "x": 110,
+      "y": 225,
+      "text": "XT11:1 is taken downstream of X2 on the Branch B positive conductor.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "distribution-test-access-return-note",
+      "kind": "text",
+      "sheetId": "distribution-test-access",
+      "x": 110,
+      "y": 340,
+      "text": "XT11:2 is taken downstream of X4 on the Branch B return conductor.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "distribution-test-access-scope",
+      "kind": "text",
+      "sheetId": "distribution-test-access",
+      "x": 110,
+      "y": 490,
+      "text": "The terminals document measurement access. No instrument or test result is assigned.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -4850,6 +4994,70 @@
             "direction": "left",
             "targetSheetId": "supply",
             "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "distribution-test-access-positive",
+      "name": "Branch B test access +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "distribution-test-access-positive-send",
+          "point": {
+            "x": 760,
+            "y": 305
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "distribution-test-access",
+            "targetRef": "X26"
+          }
+        },
+        {
+          "sheetId": "distribution-test-access",
+          "wireId": "distribution-test-access-positive-receive",
+          "point": {
+            "x": 225,
+            "y": 275
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "distribution-test-access-return",
+      "name": "Branch B test access 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "distribution-test-access-return-send",
+          "point": {
+            "x": 760,
+            "y": 745
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "distribution-test-access",
+            "targetRef": "X27"
+          }
+        },
+        {
+          "sheetId": "distribution-test-access",
+          "wireId": "distribution-test-access-return-receive",
+          "point": {
+            "x": 225,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X4"
           }
         }
       ]
