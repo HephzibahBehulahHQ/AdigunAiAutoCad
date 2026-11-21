@@ -345,6 +345,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(Number(await symbolScale.inputValue()), 1.25);
     await wiringPage.locator('[data-action="redo"]').click();
     assert.equal(Number(await symbolScale.inputValue()), draggedScale);
+    const rotation = wiringPage.locator('[data-symbol-rotation="' + terminalIds[0] + '"]');
+    await wiringPage.locator('[data-rotation-handle="' + terminalIds[0] + '"]').click();
+    assert.equal(await rotation.inputValue(), '90');
+    await rotation.selectOption('270');
+    assert.match(await terminal.getAttribute('transform'), /rotate\(270\)/);
     await wiringPage.keyboard.press('Control+Shift+S');
     await wiringPage.waitForFunction(() => window.__savedProjectWrites.length === 1);
     const wiringSavedText = await wiringPage.evaluate(() => window.__savedProjectWrites[0]);
@@ -357,6 +362,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const destination = engine.worldPins(newTarget).find(item => item.number === '1');
     assert.ok(movedTerminal.y > unusedTerminal.y, 'keyboard movement nudges the connected terminal');
     assert.equal(movedTerminal.symbolScale, draggedScale);
+    assert.equal(movedTerminal.rotation, 270);
     assert.deepEqual([savedWire.x1, savedWire.y1, savedWire.x2, savedWire.y2], [origin.x, origin.y, destination.x, destination.y]);
     const wiringAnalysis = engine.analyzeProject(wiringSaved.project);
     assert.equal(wiringAnalysis.openEndpointCount, 0);

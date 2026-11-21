@@ -332,13 +332,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     if(Number.isFinite(obj.x1)&&Number.isFinite(obj.y1)&&Number.isFinite(obj.x2)&&Number.isFinite(obj.y2))return{x:(obj.x1+obj.x2)/2,y:(obj.y1+obj.y2)/2};
     return{x:Number(obj.x)||0,y:Number(obj.y)||0};
   }
-  function rotateObject(id){
+  function rotateObject(id,degrees=90){
     const obj=state.objects.find(function(item){return item.id===id;});
     if(!obj||obj.locked)return;
     const snapshot=drawingHistoryEntry();
     if(obj.kind==='component-instance'){
       const oldPins=window.AdigunCADEngine.worldPins(obj);
-      window.AdigunCADEngine.rotateInstance(obj,90);
+      window.AdigunCADEngine.rotateInstance(obj,degrees);
       remapConnectedWireEnds(oldPins,window.AdigunCADEngine.worldPins(obj));
     }else if(['wire','line','arrow','curve'].includes(obj.kind)&&Number.isFinite(obj.x1)&&Number.isFinite(obj.y1)&&Number.isFinite(obj.x2)&&Number.isFinite(obj.y2)){
       const center=objectCenter(obj),rotate=function(x,y){return{x:center.x-(y-center.y),y:center.y+(x-center.x)};},a=rotate(obj.x1,obj.y1),b=rotate(obj.x2,obj.y2);
@@ -347,8 +347,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }else if(obj.kind==='freehand'&&Array.isArray(obj.points)){
       const center=objectCenter(obj);obj.points=obj.points.map(function(point){return{x:center.x-(point.y-center.y),y:center.y+(point.x-center.x)};});
     }else obj.rotation=((obj.rotation||0)+90)%360;
-    if(rejectNewComponentOverlap(snapshot,[id]))return;
-    pushUndo(snapshot);renderObjects();persist();refreshSelectedProperties();notify('Selected object rotated 90°.');
+    if(rejectNewComponentOverlap(snapshot,[id],'Rotation'))return;
+    pushUndo(snapshot);renderObjects();persist();refreshSelectedProperties();
+    notify(obj.kind==='component-instance'?'Symbol rotation set to '+obj.rotation+'°.':'Selected object rotated 90°.');
   }
   function updateObjectCoordinate(id,axis,value){
     const obj=state.objects.find(function(item){return item.id===id;});
@@ -630,7 +631,38 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     setSymbolScale(object,scale);
     return true;
   }
-  function renderResizeHandles(){const old=userDrawings.querySelector('.resize-controls');if(old)old.remove();if(state.tool!=='select'||state.selectedObjectIds.length!==1)return;const obj=state.objects.find(function(item){return item.id===state.selectedObjectIds[0];});if(!canResizeObject(obj)||!drawingObjectVisible(obj))return;const bounds=objectBounds(obj);if(!bounds)return;const group=document.createElementNS('http://www.w3.org/2000/svg','g');group.setAttribute('class','resize-controls');group.setAttribute('role','group');group.setAttribute('aria-label','Selected shape resize handles');const scale=state.view.w/Math.max(1,drawing.clientWidth),radius=6*scale,outline=document.createElementNS('http://www.w3.org/2000/svg','rect');outline.setAttribute('class','resize-outline');outline.setAttribute('x',bounds.left);outline.setAttribute('y',bounds.top);outline.setAttribute('width',Math.max(1,bounds.width));outline.setAttribute('height',Math.max(1,bounds.height));outline.setAttribute('stroke-width',scale);outline.setAttribute('stroke-dasharray',(3*scale)+' '+(2*scale));group.append(outline);['nw','ne','sw','se'].forEach(function(corner){const point=resizeCornerPoint(bounds,corner),handle=document.createElementNS('http://www.w3.org/2000/svg','circle');handle.setAttribute('class','resize-handle');handle.setAttribute('cx',point.x);handle.setAttribute('cy',point.y);handle.setAttribute('r',radius);handle.setAttribute('stroke-width',Math.max(.8,scale));handle.setAttribute('data-resize-handle',corner);handle.setAttribute('data-resize-object',obj.id);handle.setAttribute('role','button');handle.setAttribute('tabindex','0');handle.setAttribute('focusable','true');handle.setAttribute('aria-label','Resize '+obj.kind+' from '+({nw:'top left',ne:'top right',sw:'bottom left',se:'bottom right'})[corner]);handle.addEventListener('keydown',function(event){const delta={ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1}}[event.key];if(!delta)return;event.preventDefault();event.stopPropagation();const current=state.objects.find(function(item){return item.id===obj.id;});if(!canResizeObject(current))return;const currentBounds=objectBounds(current),origin=resizeCornerPoint(currentBounds,corner),step=event.shiftKey?20:4,snapshot=drawingHistoryEntry(),point={x:origin.x+delta.x*step,y:origin.y+delta.y*step},next=current.kind==='component-instance'?point:snapObjectPoint(point);if(!resizeAtCorner(current,corner,next)||rejectNewComponentOverlap(snapshot,[current.id],'Resize'))return;if(snapshot.objects===JSON.stringify(state.objects))return;pushUndo(snapshot);renderObjects();persist();refreshSelectedProperties();const nextHandle=Array.from(userDrawings.querySelectorAll('[data-resize-handle]')).find(function(item){return item.dataset.resizeObject===obj.id&&item.dataset.resizeHandle===corner;});if(nextHandle)nextHandle.focus();});group.append(handle);});userDrawings.append(group);}
+  function appendComponentRotationHandle(group,object,bounds,radius){
+    const namespace='http://www.w3.org/2000/svg';
+    const stem=document.createElementNS(namespace,'line');
+    const y=bounds.top-radius*3;
+    stem.setAttribute('x1',object.x);
+    stem.setAttribute('x2',object.x);
+    stem.setAttribute('y1',bounds.top);
+    stem.setAttribute('y2',y);
+    stem.setAttribute('stroke','#0891b2');
+    stem.setAttribute('pointer-events','none');
+    const handle=document.createElementNS(namespace,'circle');
+    handle.setAttribute('class','resize-handle');
+    handle.style.cursor='pointer';
+    handle.setAttribute('cx',object.x);
+    handle.setAttribute('cy',y);
+    handle.setAttribute('r',radius);
+    handle.setAttribute('data-rotation-handle',object.id);
+    handle.setAttribute('role','button');
+    handle.setAttribute('tabindex','0');
+    handle.setAttribute('aria-label','Rotate '+object.ref+' 90° clockwise');
+    handle.addEventListener('pointerdown',event=>event.stopPropagation());
+    handle.addEventListener('click',event=>{event.stopPropagation();rotateObject(object.id);});
+    handle.addEventListener('keydown',event=>{
+      if(event.key!=='Enter'&&event.key!==' ')return;
+      event.preventDefault();
+      event.stopPropagation();
+      rotateObject(object.id);
+      userDrawings.querySelector('[data-rotation-handle]')?.focus();
+    });
+    group.append(stem,handle);
+  }
+  function renderResizeHandles(){const old=userDrawings.querySelector('.resize-controls');if(old)old.remove();if(state.tool!=='select'||state.selectedObjectIds.length!==1)return;const obj=state.objects.find(function(item){return item.id===state.selectedObjectIds[0];});if(!canResizeObject(obj)||!drawingObjectVisible(obj))return;const bounds=objectBounds(obj);if(!bounds)return;const group=document.createElementNS('http://www.w3.org/2000/svg','g');group.setAttribute('class','resize-controls');group.setAttribute('role','group');group.setAttribute('aria-label','Selected shape resize handles');const scale=state.view.w/Math.max(1,drawing.clientWidth),radius=6*scale,outline=document.createElementNS('http://www.w3.org/2000/svg','rect');outline.setAttribute('class','resize-outline');outline.setAttribute('x',bounds.left);outline.setAttribute('y',bounds.top);outline.setAttribute('width',Math.max(1,bounds.width));outline.setAttribute('height',Math.max(1,bounds.height));outline.setAttribute('stroke-width',scale);outline.setAttribute('stroke-dasharray',(3*scale)+' '+(2*scale));group.append(outline);['nw','ne','sw','se'].forEach(function(corner){const point=resizeCornerPoint(bounds,corner),handle=document.createElementNS('http://www.w3.org/2000/svg','circle');handle.setAttribute('class','resize-handle');handle.setAttribute('cx',point.x);handle.setAttribute('cy',point.y);handle.setAttribute('r',radius);handle.setAttribute('stroke-width',Math.max(.8,scale));handle.setAttribute('data-resize-handle',corner);handle.setAttribute('data-resize-object',obj.id);handle.setAttribute('role','button');handle.setAttribute('tabindex','0');handle.setAttribute('focusable','true');handle.setAttribute('aria-label','Resize '+obj.kind+' from '+({nw:'top left',ne:'top right',sw:'bottom left',se:'bottom right'})[corner]);handle.addEventListener('keydown',function(event){const delta={ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1}}[event.key];if(!delta)return;event.preventDefault();event.stopPropagation();const current=state.objects.find(function(item){return item.id===obj.id;});if(!canResizeObject(current))return;const currentBounds=objectBounds(current),origin=resizeCornerPoint(currentBounds,corner),step=event.shiftKey?20:4,snapshot=drawingHistoryEntry(),point={x:origin.x+delta.x*step,y:origin.y+delta.y*step},next=current.kind==='component-instance'?point:snapObjectPoint(point);if(!resizeAtCorner(current,corner,next)||rejectNewComponentOverlap(snapshot,[current.id],'Resize'))return;if(snapshot.objects===JSON.stringify(state.objects))return;pushUndo(snapshot);renderObjects();persist();refreshSelectedProperties();const nextHandle=Array.from(userDrawings.querySelectorAll('[data-resize-handle]')).find(function(item){return item.dataset.resizeObject===obj.id&&item.dataset.resizeHandle===corner;});if(nextHandle)nextHandle.focus();});group.append(handle);});if(obj.kind==='component-instance')appendComponentRotationHandle(group,obj,bounds,radius);userDrawings.append(group);}
   function beginObjectResize(obj,handle,event){
     const corner=handle.dataset.resizeHandle;
     if(!canResizeObject(obj)||!['nw','ne','sw','se'].includes(corner))return;
@@ -789,7 +821,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       +'<div class="property-row"><span>Part number</span><strong>'+escapeHtml(def.manufacturerPartNumber)+'</strong></div>'
       +specRows
       +'<div class="property-row"><span>External terminals</span><strong>'+escapeHtml(def.symbol.pins.length+' · '+pinSummary)+'</strong></div>'
-      +'<div class="property-row"><span>Rotation</span><strong>'+escapeHtml(obj.rotation+'°')+'</strong></div>'
+      +'<label class="property-row"><span>Rotation</span><select data-symbol-rotation="'+escapeHtml(obj.id)+'"'+(obj.locked?' disabled':'')+'>'+[0,90,180,270].map(degrees=>'<option value="'+degrees+'"'+(obj.rotation===degrees?' selected':'')+'>'+degrees+'°</option>').join('')+'</select></label>'
       +'<label class="property-row"><span>Symbol scale</span><input type="number" min="0.25" max="4" step="0.05" data-symbol-scale="'+escapeHtml(obj.id)+'" value="'+(obj.symbolScale??1)+'"'+(obj.locked?' disabled':'')+'></label>'
       +'<div class="property-row"><span>Symbol size (mm)</span><strong>'+Number((def.symbol.width*(obj.symbolScale??1)).toFixed(2))+' × '+Number((def.symbol.height*(obj.symbolScale??1)).toFixed(2))+'</strong></div>'
       +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.x)+'"></label>'
@@ -802,6 +834,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       +'<button class="command-item" data-delete-object="'+escapeHtml(obj.id)+'"><span>⌫</span><span>Remove verified component</span><kbd>Delete</kbd></button>';
   }
   let activeComponentEdit=null;
+  $('#inspectorContent').addEventListener('change',function(event){
+    const field=event.target.closest('[data-symbol-rotation]');
+    if(!field)return;
+    const object=state.objects.find(item=>item.id===field.dataset.symbolRotation);
+    const degrees=Number(field.value);
+    if(object&&[0,90,180,270].includes(degrees)&&degrees!==object.rotation)rotateObject(object.id,degrees-object.rotation);
+  });
   $('#inspectorContent').addEventListener('change',function(event){
     const field=event.target.closest('[data-symbol-scale]');
     if(!field)return;
