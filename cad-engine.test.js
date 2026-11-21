@@ -929,7 +929,7 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const copy = engine.copyExampleProject(reopened.project, 'reversing-reference-copy', 'Editable reversing reference');
   const savedCopy = engine.parseProject(engine.serializeProject(copy));
   assert.equal(savedCopy.valid, true, savedCopy.errors.join(' '));
-  assert.equal(savedCopy.project.sheets.length, 10);
+  assert.equal(savedCopy.project.sheets.length, 23);
   const documentationIds = ['reversing-power-nets', 'reversing-control-nets'];
   const documentedNets = savedCopy.project.objects
     .filter(object => documentationIds.includes(object.sheetId) && object.text?.includes('  |  '))
@@ -948,6 +948,24 @@ test('Siemens reversing-starter example imports with every real terminal wired a
   const sourceRecords = savedCopy.project.objects.filter(object => object.sheetId === 'reversing-source-register');
   for (const row of bom.rows) {
     assert.ok(sourceRecords.some(object => object.text === row.sourceUrl));
+  }
+  const interfaces = [
+    ['reversing-power-boundary', 'Q1', ['1/L1', '3/L2', '5/L3']],
+    ['reversing-supply-boundary', 'Q1', ['A1', 'A2']],
+    ['reversing-command-boundary', 'Q1', ['IN1', 'IN2', 'IN3']],
+    ['reversing-signal-boundary', 'Q1', ['OUT', '95', '96', '98']],
+    ['reversing-motor-board', 'M1', ['U1', 'V1', 'W1', 'U2']],
+    ['reversing-pe-review', 'M1', ['PE']]
+  ];
+  for (const [sheetId, ref, numbers] of interfaces) {
+    const rows = savedCopy.project.objects.filter(object => object.sheetId === sheetId);
+    for (const number of numbers) {
+      const net = analysis.nets.find(candidate => candidate.pins.some(pin => pin.ref === ref && pin.number === number));
+      const expectedPeers = net.pins.filter(pin => pin.ref !== ref || pin.number !== number)
+        .map(pin => pin.ref + ':' + pin.number).sort().join(', ');
+      const expectedRow = ref + ':' + number + ' | ' + expectedPeers;
+      assert.ok(rows.some(row => row.text === expectedRow || row.text?.startsWith(expectedRow + ' | ')), expectedRow);
+    }
   }
 });
 
