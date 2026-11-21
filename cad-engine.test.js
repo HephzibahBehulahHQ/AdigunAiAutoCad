@@ -225,7 +225,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 22);
+  assert.equal(items.length, 23);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -237,6 +237,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-3rp2576-2nw30', 'star-delta-timer', 'K'],
     [startPushButtonId, 'pushbutton', 'S'],
     [stopPushButtonId, 'pushbutton', 'S'],
+    ['schneider-electric-xb5avb3', 'lamp', 'H'],
     [motorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     [lowRangeMotorProtectionBreakerId, 'motor-protection-breaker', 'Q'],
     ['siemens-3rv2021-4aa10', 'motor-protection-breaker', 'Q'],

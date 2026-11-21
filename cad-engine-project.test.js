@@ -688,11 +688,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const catalogRows = await examplePage.locator('#editableExampleProjects [data-example-project]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.exampleProject, number: node.querySelector('b')?.textContent })));
     assert.deepEqual(catalogRows.map(row => row.id), catalogProjects.map(project => project.id), 'Project Explorer lists every catalog example in order');
     assert.deepEqual(catalogRows.map(row => row.number), catalogProjects.map((project, index) => String(index + 1).padStart(2, '0')));
-    await examplePage.locator('#projectSearch').fill('DC distribution IEC-style 21 sheets below project sheet targets');
+    await examplePage.locator('#projectSearch').fill('DC distribution IEC-style 22 sheets below project sheet targets');
     const distributionRow = examplePage.locator('#editableExampleProjects [data-example-project="sitop-24v-dc-distribution"]');
     await distributionRow.waitFor();
     assert.equal(await examplePage.locator('#editableExampleProjects [data-example-project]').count(), 1);
-    assert.match(await distributionRow.getAttribute('aria-description'), /21 electrically connected sheets.*37 components.*128 wire segments.*Model checks passed.*Below project sheet targets/);
+    assert.match(await distributionRow.getAttribute('aria-description'), /22 electrically connected sheets.*40 components.*133 wire segments.*Model checks passed.*Below project sheet targets/);
     assert.match(await distributionRow.locator('small').textContent(), /Below project sheet targets/);
     assert.equal(await distributionRow.locator('canvas').evaluate(canvas => {
       const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
@@ -783,6 +783,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await copyPage.evaluate(() => window.dispatchEvent(new Event('afterprint')));
       assert.equal(await copyPage.locator('#projectPrintSet').count(), 0);
       assert.equal(fs.readFileSync(path.join(root, entry.path), 'utf8'), sourceText, entry.title + ' leaves the catalog source unchanged');
+      if (entry.id === 'sitop-24v-dc-distribution') {
+        await copyPage.locator('#projectTree [data-sheet="field-indicator"]').click();
+        await copyPage.locator('#userDrawings [data-object="field-indicator-h1"]').dispatchEvent('click', { bubbles: true });
+        assert.match(await copyPage.locator('#inspectorContent').innerText(), /XB5AVB3.*24 V AC\/DC/s);
+      }
       await copyPage.close({ runBeforeUnload: false });
     }
     await examplePage.getByRole('listitem', { name: 'Open Star-delta 100-sheet reference package as an editable copy' }).click();
@@ -1109,7 +1114,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [21, 51, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [22, 53, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
@@ -1130,8 +1135,9 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['K1:12', 'X10:1', 'X10:2', 'A1:X10:12'],
     ['A1:X12:4', 'K2:A1'],
     ['A1:X12:5', 'K3:A1'],
-    ['K3:11', 'X24:1', 'X24:2'],
-    ['K3:14', 'X25:1', 'X25:2'],
+    ['K3:11', 'X24:1', 'X24:2', 'X28:1', 'X28:2'],
+    ['K3:14', 'X25:1', 'X25:2', 'H1:X1'],
+    ['H1:X2', 'X29:1', 'X29:2'],
     ['K2:11', 'X16:1', 'X16:2'],
     ['K2:12', 'X17:1', 'X17:2'],
     ['K2:14', 'X18:1', 'X18:2'],
