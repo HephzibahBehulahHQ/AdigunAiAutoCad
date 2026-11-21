@@ -1414,11 +1414,13 @@
       }
     }
     let connectedPinCount = 0;
+    const unconnectedPins = [];
     pins.forEach(function (pin) {
       const attachedWires = wires.filter(function (wire) {
         return wire.segments.some(function (segment) { return pointOnSegment(pin.point, segment); });
       });
       if (attachedWires.length) connectedPinCount += 1;
+      else unconnectedPins.push({ instanceId: pin.instanceId, ref: pin.ref, pinId: pin.pinId, number: pin.number, point: pin.point });
       attachedWires.forEach(function (wire) { join(pin.node, wire.node); });
     });
 
@@ -1476,6 +1478,7 @@
       componentPinCount: pins.length,
       connectedPinCount: connectedPinCount,
       unconnectedPinCount: pins.length - connectedPinCount,
+      unconnectedPins: unconnectedPins,
       netCount: serializedNets.length,
       nets: serializedNets,
       openEndpointCount: openEndpoints.length,
@@ -1486,6 +1489,93 @@
     };
   }
 
+
+  function electricalFindings(reports, objects, openEndpoints, diagnostics, endpointToNet, globalNets) {
+    const findings = [];
+    function add(ruleId, severity, message, suggestedFix, locations) {
+      findings.push({ ruleId: ruleId, severity: severity, message: message, suggestedFix: suggestedFix,
+        editionMapping: null, humanReviewStatus: 'pending', locations: locations });
+    }
+    const devicesByTag = new Map();
+    objects.filter(function (object) { return object.kind === 'component-instance'; }).forEach(function (object) {
+      const tag = object.ref.trim().toUpperCase();
+      if (!devicesByTag.has(tag)) devicesByTag.set(tag, []);
+      devicesByTag.get(tag).push({ sheetId: object.sheetId || reports[0].id, objectId: object.id, ref: object.ref });
+    });
+    devicesByTag.forEach(function (locations, tag) {
+      if (locations.length < 2) return;
+      add('ERC-DUPLICATE-DEVICE-TAG', 'error', 'Device tag ' + tag + ' is used by ' + locations.length + ' components.',
+        'Assign a unique device tag to each instance and verify related references.', locations);
+    });
+    openEndpoints.forEach(function (endpoint) {
+      add('ERC-OPEN-WIRE-ENDPOINT', 'warning', 'Wire endpoint has no connection.',
+        'Connect it to a pin, wire, or valid cross-sheet link, or confirm the open end is intentional.',
+        [{ sheetId: endpoint.sheetId, objectId: endpoint.wireId, point: endpoint.point }]);
+    });
+    reports.forEach(function (sheet) {
+      sheet.analysis.errors.forEach(function (error) {
+        add('ERC-DRAWING-GEOMETRY', 'error', error.message,
+          'Inspect the affected geometry or component and correct its coordinates or definition.',
+          error.objectId ? [{ sheetId: sheet.id, objectId: error.objectId }] : []);
+      });
+      sheet.analysis.unconnectedPins.forEach(function (pin) {
+        add('ERC-PIN-WITHOUT-WIRE', 'info', pin.ref + ':' + pin.number + ' has no attached wire.',
+          'Check the intended terminal use before adding a connection.',
+          [{ sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number, point: pin.point }]);
+      });
+    });
+    const wiresBySheet = new Map();
+    const localToGlobal = new Map();
+    globalNets.forEach(function (net) {
+      net.localNetIds.forEach(function (id) { localToGlobal.set(id, net.id); });
+    });
+    const potentialsByNet = new Map();
+    const netsByWireNumber = new Map();
+    objects.forEach(function (object) {
+      if (object.kind !== 'wire') return;
+      const sheetId = object.sheetId || reports[0].id;
+      if (!wiresBySheet.has(sheetId)) wiresBySheet.set(sheetId, new Set());
+      wiresBySheet.get(sheetId).add(object.id);
+      const netId = localToGlobal.get(endpointToNet.get(sheetId + '\u0000' + object.id));
+      if (!netId) return;
+      const potential = typeof object.potential === 'string' ? object.potential.trim() : '';
+      const wireNumber = typeof object.wireNumber === 'string' ? object.wireNumber.trim() : '';
+      const location = { sheetId: sheetId, objectId: object.id };
+      if (potential) {
+        if (!potentialsByNet.has(netId)) potentialsByNet.set(netId, []);
+        potentialsByNet.get(netId).push(Object.assign({ potential: potential }, location));
+      }
+      if (wireNumber) {
+        const key = wireNumber.toUpperCase();
+        if (!netsByWireNumber.has(key)) netsByWireNumber.set(key, []);
+        netsByWireNumber.get(key).push({ netId: netId, location: location });
+      }
+    });
+    potentialsByNet.forEach(function (locations) {
+      const names = new Set(locations.map(function (location) { return location.potential.toUpperCase(); }));
+      if (names.size < 2) return;
+      add('ERC-CONFLICTING-POTENTIALS', 'error', 'One connected net has conflicting potential assignments: ' + Array.from(names).join(', ') + '.',
+        'Review the assigned potentials and verify the wiring and cross-sheet connections.', locations);
+    });
+    netsByWireNumber.forEach(function (assignments, number) {
+      const nets = new Set(assignments.map(function (assignment) { return assignment.netId; }));
+      if (nets.size < 2) return;
+      add('ERC-WIRE-NUMBER-DISCONNECTED', 'warning', 'Wire number ' + number + ' is assigned to disconnected nets.',
+        'Check whether the number should identify one continuous net and correct the labels or connectivity as needed.',
+        assignments.map(function (assignment) { return assignment.location; }));
+    });
+    diagnostics.forEach(function (issue) {
+      if (issue?.type !== 'unresolved-cross-sheet-reference') return;
+      const endpoints = Array.isArray(issue.connection?.endpoints) ? issue.connection.endpoints : [];
+      const locations = endpoints
+        .filter(function (endpoint) { return endpoint && wiresBySheet.get(endpoint.sheetId)?.has(endpoint.wireId); })
+        .map(function (endpoint) { return { sheetId: endpoint.sheetId, objectId: endpoint.wireId }; });
+      add('ERC-UNRESOLVED-CROSS-SHEET-REFERENCE', 'error',
+        typeof issue.message === 'string' ? issue.message : 'A cross-sheet reference requires review.',
+        'Check the surviving endpoint and recreate the reference if the connection is still required.', locations);
+    });
+    return findings;
+  }
 
   function analyzeProject(project) {
     const validation = validateProject(project);
@@ -1598,9 +1688,31 @@
       localOpenEndpointCount: localOpenEndpointCount,
       openEndpointCount: openEndpoints.length,
       openEndpoints: openEndpoints,
+      findings: electricalFindings(reports, objects, openEndpoints,
+        Array.isArray(project.projectModel?.diagnostics) ? project.projectModel.diagnostics : [], endpointToNet, globalNets),
       geometryErrorCount: reports.reduce(function (sum, sheet) { return sum + sheet.analysis.geometryErrorCount; }, 0),
       sheets: reports,
       scope: 'Sheet-local nets are joined only at exact, validated open endpoints.'
+    };
+  }
+
+  function projectElectricalReport(project) {
+    const result = analyzeProject(project);
+    return {
+      format: 'adigun-electrical-check-report',
+      version: 1,
+      project: typeof project?.project === 'string' ? project.project : '',
+      analysisComplete: result.valid,
+      analysisErrors: result.errors,
+      sheets: result.sheets.map(function (sheet) { return { id: sheet.id, number: sheet.number, name: sheet.name }; }),
+      summary: result.valid ? {
+        resolvedCrossSheetLinks: result.crossSheetConnectionCount,
+        unresolvedWireEndpoints: result.openEndpointCount,
+        geometryErrors: result.geometryErrorCount,
+        findings: result.findings.length
+      } : null,
+      findings: result.findings || [],
+      scope: 'Authored geometry and electrical connectivity checks.'
     };
   }
 
@@ -1799,6 +1911,7 @@
     parseProject: parseProject,
     analyze: analyze,
     analyzeProject: analyzeProject,
+    projectElectricalReport: projectElectricalReport,
     crossSheetConnectors: crossSheetConnectors,
     billOfMaterials: billOfMaterials,
     billOfMaterialsCsv: billOfMaterialsCsv,

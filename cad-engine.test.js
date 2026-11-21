@@ -11,6 +11,28 @@ const engine = globalThis.AdigunCADEngine;
 const componentId = 'phoenix-contact-3212144';
 const relayId = 'phoenix-contact-2966171';
 const contactorId = 'schneider-electric-lc1d09bd';
+
+test('project electrical checks locate duplicate tags and pins without attached wires across sheets', () => {
+  const first = { ...engine.createInstance(componentId, 50, 50, 'X1'), id: 'first-terminal', sheetId: 'first' };
+  const second = { ...engine.createInstance(componentId, 60, 50, 'x1'), id: 'second-terminal', sheetId: 'second' };
+  const project = engine.parseProject(engine.serializeProject({
+    sheets: [{ id: 'first' }, { id: 'second' }],
+    objects: [first, second]
+  })).project;
+  const report = engine.analyzeProject(project);
+  assert.equal(report.valid, true);
+  const duplicate = report.findings.find(finding => finding.ruleId === 'ERC-DUPLICATE-DEVICE-TAG');
+  assert.equal(duplicate.severity, 'error');
+  assert.deepEqual(duplicate.locations, [
+    { sheetId: 'first', objectId: 'first-terminal', ref: 'X1' },
+    { sheetId: 'second', objectId: 'second-terminal', ref: 'x1' }
+  ]);
+  const disconnected = report.findings.filter(finding => finding.ruleId === 'ERC-PIN-WITHOUT-WIRE');
+  assert.equal(disconnected.length, 4);
+  assert.ok(disconnected.every(finding => finding.severity === 'info' && finding.locations[0].pinNumber));
+  project.objects[1].ref = 'X2';
+  assert.ok(engine.analyzeProject(project).findings.every(finding => finding.ruleId !== duplicate.ruleId));
+});
 const motorProtectionBreakerId = 'siemens-3rv2011-1ja10';
 const lowRangeMotorProtectionBreakerId = 'siemens-3rv2011-0fa10';
 const startPushButtonId = 'schneider-electric-xb5aa31';
@@ -1366,6 +1388,19 @@ test('project-level cross-sheet links merge only explicitly referenced wire nets
     { sheetId: 'sheet-power', wireId: 'cross-sheet-wire-0', point: { x: 400, y: 260 } },
     { sheetId: 'sheet-control', wireId: 'cross-sheet-wire-1', point: { x: 400, y: 260 } }
   ]);
+  const tagged = parsed.project.objects.map(object => object.kind === 'wire'
+    ? { ...object, potential: object.sheetId === 'sheet-power' ? 'L1' : 'N', wireNumber: 'W-101' }
+    : object);
+  const assigned = engine.parseProject(engine.serializeProject({ ...parsed.project, objects: tagged })).project;
+  const linkedFindings = engine.analyzeProject(assigned).findings;
+  const conflict = linkedFindings.find(finding => finding.ruleId === 'ERC-CONFLICTING-POTENTIALS');
+  assert.deepEqual(conflict.locations.map(location => [location.sheetId, location.potential]), [
+    ['sheet-power', 'L1'], ['sheet-control', 'N']
+  ]);
+  assert.ok(!linkedFindings.some(finding => finding.ruleId === 'ERC-WIRE-NUMBER-DISCONNECTED'));
+  const unlinkedFindings = engine.analyzeProject({ ...assigned, crossSheetConnections: [] }).findings;
+  assert.ok(!unlinkedFindings.some(finding => finding.ruleId === 'ERC-CONFLICTING-POTENTIALS'));
+  assert.ok(unlinkedFindings.some(finding => finding.ruleId === 'ERC-WIRE-NUMBER-DISCONNECTED' && finding.locations.length === 2));
   assert.deepEqual(report.globalNets[0].sheetIds,['sheet-control','sheet-power']);
   assert.deepEqual(report.globalNets[0].pins.map(pin=>pin.sheetId+':'+pin.ref+':'+pin.number),[
     'sheet-control:X2:1','sheet-control:X2:2','sheet-power:X1:1','sheet-power:X1:2'

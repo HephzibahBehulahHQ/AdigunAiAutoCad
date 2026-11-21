@@ -120,18 +120,18 @@
   objectContextMenu.addEventListener('click',function(event){const button=event.target.closest('[data-object-command]');if(!button)return;const id=state.selected,command=button.dataset.objectCommand;closeObjectContextMenu();if(command==='copy-selection')copyObject(id);else if(command==='cut-selection')cutObject(id);else if(command==='duplicate-selection')duplicateObject(id);else if(command==='properties'){const obj=state.objects.find(function(item){return item.id===id;});if(obj){showObject(obj);openInspector('Properties');}}else if(command==='rename-component')renameComponent(id);else if(command==='select-layer')selectObjectsOnSameLayer(id);else if(command==='select-type')selectComponentsByType(id);else if(command==='select-similar')selectSimilarObjects(id);else if(command==='select-connected')selectConnectedComponents(id);else if(command==='zoom-component')focusObjectInView(state.objects.find(function(item){return item.id===id;}),true);else if(command==='center-component')focusObjectInView(state.objects.find(function(item){return item.id===id;}),false);else if(command==='move'){state.pendingMoveObjectId=id;state.tool='select';notify('Move mode: click the destination on the sheet · Esc to cancel.');}else if(command==='rotate')rotateObject(id);else if(command==='duplicate')duplicateObject(id);else if(command==='copy')copyObject(id);else if(command==='cut')cutObject(id);else if(command==='paste')pasteObject();else if(command==='send-front')changeObjectOrder(id,true);else if(command==='bring-forward')stepObjectOrder(id,1);else if(command==='send-backward')stepObjectOrder(id,-1);else if(command==='send-back')changeObjectOrder(id,false);else if(command==='lock')toggleObjectLock(id);else if(command==='hide')toggleObjectHidden(id);else if(command==='flip-horizontal')flipObject(id,'x');else if(command==='flip-vertical')flipObject(id,'y');else if(command==='group')groupSelection();else if(command==='ungroup')ungroupSelection();else if(command==='delete-selection')deleteSelection();else if(command==='align-left')alignSelection('left');else if(command==='align-center-x')alignSelection('center-x');else if(command==='align-right')alignSelection('right');else if(command==='align-top')alignSelection('top');else if(command==='align-center-y')alignSelection('center-y');else if(command==='align-bottom')alignSelection('bottom');else if(command==='distribute-horizontal')distributeSelection('horizontal');else if(command==='distribute-vertical')distributeSelection('vertical');else if(command==='delete')deleteObject(id);});
   objectContextMenu.addEventListener('click',function(event){const canvasButton=event.target.closest('[data-canvas-command]');if(canvasButton){const command=canvasButton.dataset.canvasCommand;closeObjectContextMenu();if(command==='select-all'){const ids=state.objects.map(function(obj){return obj.id;});setSelection(ids,true);notify(ids.length+' drawing objects selected.');}else if(command==='invert-selection')invertSelection();else if(command==='deselect-all'){setSelection([],true);notify('Selection cleared.');}else if(command==='paste')pasteObject();else if(command==='show-hidden'){pushUndo();state.objects.forEach(function(obj){obj.hidden=false;});renderObjects();persist();notify('Hidden objects are visible again.');}return;}const button=event.target.closest('[data-sheet-command]');if(!button)return;const id=state.contextSheetId,command=button.dataset.sheetCommand;closeObjectContextMenu();if(command==='rename')renameSheet(id);else if(command==='duplicate')duplicateSheet(id);else if(command==='move')moveSheetToPosition(id);else if(command==='delete')deleteSheet(id);});document.addEventListener('pointerdown',function(event){if(!objectContextMenu.hidden&&!objectContextMenu.contains(event.target)&&!(event.target.closest&&event.target.closest('[data-object]')))closeObjectContextMenu();});document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!objectContextMenu.hidden)closeObjectContextMenu();else if(event.key==='Escape'&&state.selectedObjectIds.length){setSelection([],true);}const target=event.target;if(target&&target.matches&&target.matches('input,textarea,[contenteditable=true]'))return;const modifier=event.ctrlKey||event.metaKey;const nudgeDirection={ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0},ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1}}[event.key];if(nudgeDirection&&state.selectedObjectIds.length&&!modifier){event.preventDefault();const selectedIds=state.selectedObjectIds.slice();if(selectedIds.some(function(id){const obj=state.objects.find(function(item){return item.id===id;});return obj&&obj.locked;})){if(!event.repeat)notify('Unlock every selected object before moving the selection.');return;}const step=event.shiftKey?10:2.5;pushUndo();translateObjectSet(selectedIds,nudgeDirection.x*step,nudgeDirection.y*step);renderObjects();refreshSelectedProperties();persist();return;}if(modifier&&event.key.toLowerCase()==='a'){event.preventDefault();setSelection(state.objects.map(function(obj){return obj.id;}),true);}else if(modifier&&event.key.toLowerCase()==='c'&&state.selected){event.preventDefault();copyObject(state.selected);}else if(modifier&&event.key.toLowerCase()==='x'&&state.selected){event.preventDefault();cutObject(state.selected);}else if(modifier&&event.key.toLowerCase()==='v'&&state.clipboardObject){event.preventDefault();pasteObject();}});
   $('#inspectorContent').addEventListener('click',function(event){
-    const finding=event.target.closest('[data-endpoint-wire]');
+    const finding=event.target.closest('[data-finding-object]');
     if(!finding)return;
-    const {endpointSheet,endpointWire}=finding.dataset;
+    const {findingSheet,findingObject}=finding.dataset;
     openInspector('Properties');
-    if(!setSheet(endpointSheet))return;
-    const wire=state.objects.find(object=>object.id===endpointWire&&object.kind==='wire');
-    if(!wire)return;
-    setSelection([wire.id],true);
-    focusObjectInView(wire,true);
-    showObject(wire);
+    if(!setSheet(findingSheet))return;
+    const object=state.objects.find(item=>item.id===findingObject);
+    if(!object)return;
+    setSelection([object.id],true);
+    focusObjectInView(object,true);
+    showObject(object);
   });
-  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();});
+  $('#inspectorContent').addEventListener('click',function(event){if(event.target.closest('[data-export-bom]'))exportBillOfMaterialsCsv();if(event.target.closest('[data-export-wire-list]'))exportWireListCsv();if(event.target.closest('[data-export-electrical-report]'))exportElectricalReport();});
   $('#inspectorContent').addEventListener('change',function(event){const input=event.target.closest('[data-layer]');if(!input)return;const layer=input.dataset.layer;if(!Object.prototype.hasOwnProperty.call(state.layerVisibility,layer))return;state.layerVisibility[layer]=input.checked;if(!input.checked){const hiddenIds=new Set(state.objects.filter(function(obj){return drawingLayerForObject(obj)===layer;}).map(function(obj){return obj.id;}));state.selectedObjectIds=state.selectedObjectIds.filter(function(id){return !hiddenIds.has(id);});if(hiddenIds.has(state.selected))state.selected=state.selectedObjectIds[0]||null;}renderObjects();refreshSelectedProperties();notify(layer[0].toUpperCase()+layer.slice(1)+' layer '+(input.checked?'shown.':'hidden.'));});
   const sheetNames={overview:['Z0010000','Control cabinet'],title:['A1/000','Title page'],contents:['A1/001','Contents'],device:['A1/005','Device list'],power:['A1/010','Power supply'],control:['A1/020','Control circuit'],plc:['A2/030','PLC / I/O'],drive:['A2/040','Drive interface'],safety:['A2/050','Safety circuit'],layout:['A3/100','Enclosure layout'],terminals:['A3/120','Terminal strip'],bom:['A3/200','Bill of materials']};
   const symbolNames={terminal:'Terminal · 2-pin',relay:'Relay coil · K',contact:'NO contact · 13 / 14',breaker:'Protective switch',sensor:'Sensor · 3-wire',motor:'Three-phase motor',plc:'PLC I/O module · 8-point',ground:'Protective earth'};
@@ -449,6 +449,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.x)+'"></label>'
         +'<label class="property-row"><span>Y (mm)</span><input type="number" step="2.5" data-object-coordinate="y" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.y)+'"></label>'
         +(obj.kind==='text'?'<label class="property-row"><span>Text</span><input maxlength="120" data-object-text="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.text||'')+'"></label>':'')
+        +(obj.kind==='wire'?[['Potential','potential'],['Wire number','wireNumber']].map(function(entry){
+          return '<label class="property-row"><span>'+entry[0]+'</span><input maxlength="80" data-wire-property="'+entry[1]
+            +'" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj[entry[1]]||'')+'"></label>';
+        }).join(''):'')
         +'<div class="property-row"><span>Rotation</span><strong>'+escapeHtml((obj.rotation||0)+'°')+'</strong></div>'
         +'<button class="command-item" data-rotate-object="'+escapeHtml(obj.id)+'"><span>↻</span><span>Rotate 90° clockwise</span></button>'
         +'<div class="property-row"><span>Object ID</span><strong>'+escapeHtml(obj.id.slice(0,13))+'</strong></div>'
@@ -573,24 +577,45 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function exportWireListCsv(){try{const csv=window.AdigunCADEngine.wireListCsv(state.objects),blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download='adigun-ai-autocad-wire-list-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(anchor);anchor.click();anchor.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);notify('Wire list CSV exported from authored model geometry.');}catch(error){notify(error.message||'Wire list CSV export failed.');}}
   function exportSvg(){const clone=drawing.cloneNode(true);clone.querySelectorAll('.resize-controls').forEach(function(node){node.remove();});if(state.sheet!=='control'||wrap.classList.contains('blank-start')){clone.querySelectorAll('#sheetDesign > *').forEach(function(node,index){if(index!==0&&node.id!=='userDrawings'&&node.id!=='customSheetFrame')node.remove();});}if(state.sheet!=='control'||wrap.classList.contains('blank-start')){const frame=clone.querySelector('#customSheetFrame');if(frame)frame.style.display='block';}const exportSheet=state.projectModel&&state.projectModel.sheets.find(function(item){return item.id===state.sheet;});if(exportSheet){clone.setAttribute('width',(exportSheet.paperWidthMm||420)+'mm');clone.setAttribute('height',(exportSheet.paperHeightMm||297)+'mm');clone.setAttribute('viewBox','0 0 '+(exportSheet.paperWidthMm||420)+' '+(exportSheet.paperHeightMm||297));}clone.setAttribute('xmlns','http://www.w3.org/2000/svg');clone.removeAttribute('role');clone.removeAttribute('aria-label');const xml=new XMLSerializer().serializeToString(clone);const blob=new Blob([`<?xml version="1.0" encoding="UTF-8"?>\n${xml}`],{type:'image/svg+xml'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${sheetNames[state.sheet]?.[0]||state.sheets.find(s=>s.id===state.sheet)?.number||'sheet'}-drawing.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);notify('SVG drawing exported with embedded vector geometry.');}
   function selectPanel(id){const project=id==='project',symbols=id==='symbols';$('#projectPanel').hidden=!project;$('#symbolsPanel').hidden=!symbols;if(id==='layers'){openInspector('Layers and visibility');return;}$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.panel===id)));}
+  function currentElectricalReport(){
+    const engine=window.AdigunCADEngine;
+    return engine.projectElectricalReport({format:engine.projectFormat,version:engine.projectVersion,
+      componentSchemaVersion:engine.componentSchemaVersion,netSchemaVersion:engine.netSchemaVersion,
+      project:state.projectModel.name,projectModel:state.projectModel,
+      sheets:state.sheets,objects:collectProjectObjects(),crossSheetConnections:state.crossSheetConnections});
+  }
+  function exportElectricalReport(){
+    if(!state.projectModel)return;
+    const report=currentElectricalReport();
+    const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
+    const anchor=document.createElement('a'),url=URL.createObjectURL(blob);
+    anchor.href=url;anchor.download='adigun-electrical-checks.json';anchor.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    notify('Electrical check report downloaded.');
+  }
   function projectConnectivityPanel(){
     if(!state.projectModel)return '';
-    const engine=window.AdigunCADEngine;
-    const report=engine.analyzeProject({format:engine.projectFormat,version:engine.projectVersion,
-      componentSchemaVersion:engine.componentSchemaVersion,netSchemaVersion:engine.netSchemaVersion,
-      sheets:state.sheets,objects:collectProjectObjects(),crossSheetConnections:state.crossSheetConnections});
-    const heading='<div class="inspector-block"><div class="inspector-title">Project connectivity</div>';
-    if(!report.valid)return heading+'<p class="notice">'+report.errors.map(escapeHtml).join('<br>')+'</p></div>';
+    const report=currentElectricalReport();
+    const heading='<div class="inspector-block"><div class="inspector-title">Project connectivity</div>'
+      +'<button type="button" class="command-item" data-export-electrical-report>Download electrical check report</button>';
+    if(!report.analysisComplete)return heading+'<p class="notice">'+report.analysisErrors.map(escapeHtml).join('<br>')+'</p></div>';
     const numbers=new Map(report.sheets.map(sheet=>[sheet.id,sheet.number||sheet.name||sheet.id]));
-    const endpoints=report.openEndpoints.map(function(endpoint){
-      const title=numbers.get(endpoint.sheetId)+' · '+endpoint.wireId+' · ('+endpoint.point.x+', '+endpoint.point.y+')';
-      return '<button type="button" class="command-item" data-endpoint-sheet="'+escapeHtml(endpoint.sheetId)
-        +'" data-endpoint-wire="'+escapeHtml(endpoint.wireId)+'">'+escapeHtml(title)+'</button>';
+    const findings=report.findings.map(function(finding){
+      const title=escapeHtml(finding.severity.toUpperCase()+' · '+finding.ruleId+' · '+finding.message);
+      const locations=finding.locations.map(function(location){
+        const name=(numbers.get(location.sheetId)||location.sheetId)+' · '+(location.ref||location.objectId)
+          +(location.pinNumber?':'+location.pinNumber:'')+(location.potential?' · '+location.potential:'')
+          +(location.point?' · ('+location.point.x+', '+location.point.y+')':'');
+        return '<button type="button" class="command-item" data-finding-sheet="'+escapeHtml(location.sheetId)
+          +'" data-finding-object="'+escapeHtml(location.objectId)+'">'+escapeHtml(name)+'</button>';
+      }).join('');
+      return '<details class="notice"'+(finding.severity==='error'?' open':'')+'><summary>'+title+'</summary>'
+        +'<p>'+escapeHtml(finding.suggestedFix)+'</p>'+locations+'</details>';
     }).join('');
-    return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>'+report.crossSheetConnectionCount+'</strong></div>'
-      +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.openEndpointCount+'</strong></div>'
-      +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.geometryErrorCount+'</strong></div>'
-      +endpoints+'</div>';
+    return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>' +report.summary.resolvedCrossSheetLinks+'</strong></div>'
+      +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.summary.unresolvedWireEndpoints+'</strong></div>'
+      +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.summary.geometryErrors+'</strong></div>'
+      +findings+'</div>';
   }
   function openInspector(name){
     $('#rightPanelTitle').textContent=name;
@@ -717,6 +742,20 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
 
   $('#inspectorContent').addEventListener('change',e=>{const key=e.target.dataset.layer;if(!key)return;const map={connections:'.wire,.wire-blue,.wire-dark,.cross-sheet-connector',devices:'.drawing-object[data-object]',annotations:'.accent,.small,.medium,.tiny'};drawing.querySelectorAll(map[key]).forEach(el=>el.style.display=e.target.checked?'':'none');notify(`${key} layer ${e.target.checked?'shown':'hidden'}.`);});
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}if(e.target.closest('[data-delete-object]')){const id=e.target.closest('[data-delete-object]').dataset.deleteObject;pushUndo();state.objects=state.objects.filter(o=>o.id!==id);state.selected=null;renderObjects();$('#selectionDetails').innerHTML='<div class="inspector-title">Selection</div><div class="empty-selection">Select an electrical object on the sheet to inspect its drawing designation.</div>';persist();notify('Drawing object removed.');}});
+  $('#inspectorContent').addEventListener('change',function(event){
+    const field=event.target.closest('[data-wire-property]');
+    if(!field)return;
+    const key=field.dataset.wireProperty;
+    if(key!=='potential'&&key!=='wireNumber')return;
+    const wire=state.objects.find(item=>item.id===field.dataset.objectId&&item.kind==='wire');
+    if(!wire)return;
+    const value=field.value.trim().slice(0,80);
+    field.value=value;
+    if(value===(wire[key]||''))return;
+    pushUndo();
+    if(value)wire[key]=value;else delete wire[key];
+    persist();
+  });
   $('#inspectorContent').addEventListener('change',e=>{const coordinate=e.target.closest('[data-object-coordinate]');if(coordinate){updateObjectCoordinate(coordinate.dataset.objectId,coordinate.dataset.objectCoordinate,coordinate.value);return;}const textField=e.target.closest('[data-object-text]');if(textField){const obj=state.objects.find(function(item){return item.id===textField.dataset.objectText;});if(!obj||obj.kind!=='text')return;const next=textField.value.slice(0,120);if(next===obj.text)return;pushUndo();obj.text=next;renderObjects();persist();refreshSelectedProperties();notify('Drawing text updated.');}});
   $$('[data-new-sheet]').forEach(b=>b.addEventListener('click',()=>{addSheet(b.dataset.newSheet);$('#sheetDialog').close();}));
   function setProjectExplorerView(view){const list=view==='list',tree=$('#projectTree'),projects=$('#editableExampleProjects');if(!tree||!projects)return;tree.style.display=list?'none':'';projects.style.display=list?'block':'none';$$('[data-tree-view]').forEach(function(button){button.classList.toggle('active',button.dataset.treeView===(list?'list':'tree'));});const search=$('#projectSearch');search.placeholder=list?'Find example project':'Find sheet or device';search.setAttribute('aria-label',search.placeholder);}
