@@ -29,14 +29,15 @@ test('Save As uses a local project file picker and subsequent Save writes to tha
   assert.match(inline, /window\.showSaveFilePicker/);
   assert.match(inline, /projectSaveHandle\.createWritable\(\)/);
   assert.match(inline, /if\(e\.ctrlKey&&e\.shiftKey&&e\.key\.toLowerCase\(\)==='s'\)\{e\.preventDefault\(\);saveProjectAs\(\);return;\}/);
-  assert.match(inline, /projectSaveHandle=null;const payload=parsed\.project/);
+  assert.match(inline, /openNativeProject\(parsed\.project,f\.name\)/);
+  assert.match(inline, /function openNativeProject[\s\S]*?projectSaveHandle=null;state\.projectName/);
 });
 
 test('canvas audit reflects the current local Save As and reopen limits', () => {
   const audit = fs.readFileSync(path.join(__dirname, 'docs/specs/canvas-behavior-implementation-audit.md'), 'utf8');
   assert.match(audit, /Save As uses the browser file picker when available/);
   assert.match(audit, /Save writes to the selected file handle during the current page session/);
-  assert.match(audit, /not durable browser-local autosave/);
+  assert.match(audit, /Recover browser draft/);
   assert.match(audit, /CI Chromium verifies clean project creation, section sheet selection, canvas editing, and Save As\/reopen/);
   assert.match(audit, /opens a 100-sheet example as an A1–A4 native copy/);
   assert.match(audit, /source isolation and resolvable cross-sheet wire endpoints/);
@@ -91,7 +92,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await page.getByRole('button', { name: 'New project' }).click();
     assert.equal(await page.locator('#newProjectDialog #editableExampleProjects').count(), 0, 'New Project does not show example projects');
     assert.match(await page.locator('#blankProjectTemplate').innerText(), /A1[\s\S]*A2[\s\S]*A3[\s\S]*A4/);
-    await page.locator('#newProjectName').fill('Browser local save test');
+    await page.locator('#newProjectName').pressSequentially('Browser local save test');
     await page.locator('#createProject').click();
     for (const section of ['A1', 'A2', 'A3', 'A4']) {
       assert.equal(await page.locator('#projectTree b').filter({ hasText: new RegExp('^' + section + '$') }).count(), 1);
