@@ -375,14 +375,20 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text())), originalExample, 'editing the copy must not change its source example');
     await examplePage.close({ runBeforeUnload: false });
 
-    const offlineLibraryPage = await context.newPage();
-    await offlineLibraryPage.route('**/examples/real-projects/**', route => route.abort('internetdisconnected'));
-    await offlineLibraryPage.goto(address);
-    await offlineLibraryPage.locator('[data-example-project="star-delta-100-sheet"]').click();
-    await offlineLibraryPage.locator('#projectTree [data-sheet="ref-006"]').click();
     const breakerId = sourceProject.objects.find(object => object.ref === 'Q1').id;
-    await offlineLibraryPage.locator('#userDrawings [data-object="' + breakerId + '"]').waitFor();
-    await offlineLibraryPage.close({ runBeforeUnload: false });
+    const offlineLibraryPage = await context.newPage();
+    await offlineLibraryPage.goto(address);
+    await offlineLibraryPage.waitForFunction(() => !!navigator.serviceWorker.controller);
+    await context.setOffline(true);
+    try {
+      await offlineLibraryPage.reload();
+      await offlineLibraryPage.locator('[data-example-project="star-delta-100-sheet"]').click();
+      await offlineLibraryPage.locator('#projectTree [data-sheet="ref-006"]').click();
+      await offlineLibraryPage.locator('#userDrawings [data-object="' + breakerId + '"]').waitFor();
+    } finally {
+      await context.setOffline(false);
+      await offlineLibraryPage.close({ runBeforeUnload: false });
+    }
 
     const reopenedExample = await context.newPage();
     await reopenedExample.goto(address);

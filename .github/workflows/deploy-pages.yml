@@ -33,7 +33,7 @@ jobs:
         run: |
           site="$RUNNER_TEMP/adigun-pages"
           mkdir -p "$site/examples/real-projects" "$site/docs/reports"
-          cp index.html cad-engine.js CNAME .nojekyll "$site/"
+          cp index.html cad-engine.js service-worker.js CNAME .nojekyll "$site/"
           cp examples/real-projects/library.json examples/real-projects/*.adigun.json "$site/examples/real-projects/"
           cp docs/reports/project-library-validation.json "$site/docs/reports/"
       - name: Configure GitHub Pages
