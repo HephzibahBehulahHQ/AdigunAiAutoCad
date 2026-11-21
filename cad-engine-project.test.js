@@ -226,7 +226,9 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       const sourceText = fs.readFileSync(path.join(root, entry.path), 'utf8');
       const source = engine.parseProject(sourceText).project;
       const before = engine.analyzeProject(source);
-      const component = source.objects.find(object => object.kind === 'component-instance');
+      const component = entry.id === 'sitop-24v-dc-distribution'
+        ? source.objects.find(object => object.id === 'b2')
+        : source.objects.find(object => object.kind === 'component-instance');
       const sheetId = component.sheetId || source.sheets[0].id;
       const copyPage = await context.newPage();
       await copyPage.goto(address);
@@ -573,10 +575,10 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [2, 2, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [4, 6, 0]);
   assert.deepEqual(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number)), [
-    ['X1:1', 'X1:2', 'X2:1', 'X2:2', 'PS1:+'],
-    ['X3:1', 'X3:2', 'X4:1', 'X4:2', 'PS1:-']
+    ['B1:1', 'B2:1', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'PS1:+'],
+    ['B1:3', 'B2:3', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'PS1:-']
   ]);
 });
 

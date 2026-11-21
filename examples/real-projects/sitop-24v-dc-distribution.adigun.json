@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.0",
-  "description": "Source-backed DC output and parallel terminal branches for two field loads.",
+  "revision": "1.1",
+  "description": "Source-backed DC output and separate parallel terminal branches to the supply pins of two ifm sensors.",
   "activeSheet": "supply",
   "theme": "light",
   "zoom": 100,
@@ -23,6 +23,18 @@
       "id": "distribution",
       "number": "A2/002",
       "name": "Two-branch DC terminal distribution",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-a",
+      "number": "A2/003",
+      "name": "ifm IFS204 inductive sensor power wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-b",
+      "number": "A2/004",
+      "name": "ifm PN2070 pressure sensor power wiring",
       "projectSectionId": "A2"
     }
   ],
@@ -288,49 +300,214 @@
       "text": "XT1 · TWO-BRANCH DC DISTRIBUTION"
     },
     {
-      "id": "branch-a-positive",
-      "kind": "text",
-      "sheetId": "distribution",
-      "x": 675,
-      "y": 244,
-      "stroke": "#13263b",
-      "text": "A · +24 V"
-    },
-    {
-      "id": "branch-b-positive",
-      "kind": "text",
-      "sheetId": "distribution",
-      "x": 675,
-      "y": 364,
-      "stroke": "#13263b",
-      "text": "B · +24 V"
-    },
-    {
-      "id": "branch-a-return",
-      "kind": "text",
-      "sheetId": "distribution",
-      "x": 675,
-      "y": 584,
-      "stroke": "#13263b",
-      "text": "A · 0 V"
-    },
-    {
-      "id": "branch-b-return",
-      "kind": "text",
-      "sheetId": "distribution",
-      "x": 675,
-      "y": 704,
-      "stroke": "#13263b",
-      "text": "B · 0 V"
-    },
-    {
       "id": "distribution-scope",
       "kind": "text",
       "sheetId": "distribution",
       "x": 110,
       "y": 815,
       "stroke": "#13263b",
-      "text": "The right-hand pins are field boundaries. Loads, branch protection and conductor sizing are outside this example."
+      "text": "Right-hand cross-references route supply to B1 and B2. Branch protection and conductor sizing are outside this example."
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b1",
+      "componentId": "ifm-ifs204",
+      "ref": "B1",
+      "x": 510,
+      "y": 315,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "sensingTarget": "",
+        "comment": ""
+      },
+      "sheetId": "branch-a"
+    },
+    {
+      "id": "branch-a-title",
+      "kind": "text",
+      "sheetId": "branch-a",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "B1 · ifm IFS204 inductive sensor power wiring"
+    },
+    {
+      "id": "branch-a-scope",
+      "kind": "text",
+      "sheetId": "branch-a",
+      "x": 110,
+      "y": 435,
+      "stroke": "#13263b",
+      "text": "This sheet routes sensor supply only. Signal outputs are available for subsequent I/O assignment."
+    },
+    {
+      "id": "branch-a-supply",
+      "kind": "text",
+      "sheetId": "branch-a",
+      "x": 110,
+      "y": 480,
+      "stroke": "#13263b",
+      "text": "The +24 V and 0 V conductors connect through XT1 on A2/002."
+    },
+    {
+      "id": "a-positive-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 240,
+      "x1": 635,
+      "y1": 240,
+      "x2": 820,
+      "y2": 240,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "a-positive-receive",
+      "kind": "wire",
+      "sheetId": "branch-a",
+      "x": 190,
+      "y": 295,
+      "x1": 190,
+      "y1": 295,
+      "x2": 460,
+      "y2": 295,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "a-return-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 580,
+      "x1": 635,
+      "y1": 580,
+      "x2": 820,
+      "y2": 580,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "a-return-receive",
+      "kind": "wire",
+      "sheetId": "branch-a",
+      "x": 190,
+      "y": 335,
+      "x1": 190,
+      "y1": 335,
+      "x2": 460,
+      "y2": 335,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b2",
+      "componentId": "ifm-pn2070",
+      "ref": "B2",
+      "x": 510,
+      "y": 315,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "processPoint": "",
+        "signalConfigurationNote": "",
+        "comment": ""
+      },
+      "sheetId": "branch-b"
+    },
+    {
+      "id": "branch-b-title",
+      "kind": "text",
+      "sheetId": "branch-b",
+      "x": 110,
+      "y": 108,
+      "stroke": "#13263b",
+      "text": "B2 · ifm PN2070 pressure sensor power wiring"
+    },
+    {
+      "id": "branch-b-scope",
+      "kind": "text",
+      "sheetId": "branch-b",
+      "x": 110,
+      "y": 435,
+      "stroke": "#13263b",
+      "text": "This sheet routes sensor supply only. Signal outputs are available for subsequent I/O assignment."
+    },
+    {
+      "id": "branch-b-supply",
+      "kind": "text",
+      "sheetId": "branch-b",
+      "x": 110,
+      "y": 480,
+      "stroke": "#13263b",
+      "text": "The +24 V and 0 V conductors connect through XT1 on A2/002."
+    },
+    {
+      "id": "b-positive-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 360,
+      "x1": 635,
+      "y1": 360,
+      "x2": 820,
+      "y2": 360,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b-positive-receive",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 190,
+      "y": 290,
+      "x1": 190,
+      "y1": 290,
+      "x2": 445,
+      "y2": 290,
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b-return-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 635,
+      "y": 700,
+      "x1": 635,
+      "y1": 700,
+      "x2": 820,
+      "y2": 700,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b-return-receive",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 190,
+      "y": 340,
+      "x1": 190,
+      "y1": 340,
+      "x2": 445,
+      "y2": 340,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
     }
   ],
   "crossSheetConnections": [
@@ -392,6 +569,134 @@
             "direction": "left",
             "targetSheetId": "supply",
             "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-positive",
+      "name": "Branch A +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "a-positive-send",
+          "point": {
+            "x": 820,
+            "y": 240
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-a",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "branch-a",
+          "wireId": "a-positive-receive",
+          "point": {
+            "x": 190,
+            "y": 295
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-return",
+      "name": "Branch A 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "a-return-send",
+          "point": {
+            "x": 820,
+            "y": 580
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-a",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "branch-a",
+          "wireId": "a-return-receive",
+          "point": {
+            "x": 190,
+            "y": 335
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b-positive",
+      "name": "Branch B +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "b-positive-send",
+          "point": {
+            "x": 820,
+            "y": 360
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "branch-b",
+          "wireId": "b-positive-receive",
+          "point": {
+            "x": 190,
+            "y": 290
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b-return",
+      "name": "Branch B 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "b-return-send",
+          "point": {
+            "x": 820,
+            "y": 700
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "branch-b",
+          "wireId": "b-return-receive",
+          "point": {
+            "x": 190,
+            "y": 340
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X4"
           }
         }
       ]

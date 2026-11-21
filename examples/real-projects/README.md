@@ -221,9 +221,9 @@ For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000
 
 ## SITOP 24 V DC two-branch distribution
 
-Open **SITOP 24 V DC two-branch terminal distribution** from Project Explorer. A2/001 contains the verified SITOP PSU100C DC output. A2/002 contains two field branches on four Phoenix Contact PT 2,5 terminals in strip XT1. Two cross-sheet links carry the separate +24 V and 0 V nets. Move a terminal on A2/002 and the editor carries the attached wire endpoint with it.
+Open **SITOP 24 V DC two-branch terminal distribution** from Project Explorer. A2/001 contains the SITOP PSU100C DC output. A2/002 distributes the separate +24 V and 0 V nets through four Phoenix Contact PT 2,5 terminals in strip XT1. A2/003 and A2/004 wire the supply pins of the ifm IFS204 and PN2070 sensors. Six native links connect the four sheets. Move a terminal or sensor and the editor carries its attached wire endpoints with it.
 
-The field-facing pins are the example boundaries. The model covers static DC distribution and leaves the supply input, PE wiring, loads, branch protection and conductor sizing outside its scope. [SITOP component record](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md)
+The model covers static sensor power distribution. Sensor outputs are available for subsequent I/O assignment. Supply input, PE wiring, branch protection, and conductor sizing remain outside its scope. [SITOP component record](../../docs/components/siemens-sitop-psu100c-6ep1332-5ba00.md) [PN2070 component record](../../docs/components/ifm-pn2070.md)
 
 ## Project library validation
 
