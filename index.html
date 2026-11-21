@@ -232,8 +232,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function pushUndo(snapshot){state.undo.push(snapshot&&typeof snapshot==='object'?snapshot:drawingHistoryEntry(snapshot));if(state.undo.length>40)state.undo.shift();state.redo=[];updateHistoryButtons();}
   function updateHistoryButtons(){$('[data-action="undo"]').disabled=!state.undo.length;$('[data-action="redo"]').disabled=!state.redo.length;}
   function refreshSelectedProperties(){if($('#rightPanelTitle').textContent!=='Properties'||!state.selected)return;const selected=state.objects.find(function(obj){return obj.id===state.selected;});if(selected)showObject(selected);}
-  function undo(){if(!state.undo.length)return;state.redo.push(drawingHistoryEntry());restoreDrawingHistory(state.undo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command undone.');}
-  function redo(){if(!state.redo.length)return;state.undo.push(drawingHistoryEntry());restoreDrawingHistory(state.redo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();notify('Drawing command restored.');}
+  function undo(){if(!state.undo.length)return;state.redo.push(drawingHistoryEntry());restoreDrawingHistory(state.undo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();if($('#rightPanel').classList.contains('open')&&$('#rightPanelTitle').textContent==='Electrical checks')openInspector('Electrical checks');notify('Drawing command undone.');}
+  function redo(){if(!state.redo.length)return;state.undo.push(drawingHistoryEntry());restoreDrawingHistory(state.redo.pop());renderObjects();refreshSelectedProperties();updateHistoryButtons();persist();if($('#rightPanel').classList.contains('open')&&$('#rightPanelTitle').textContent==='Electrical checks')openInspector('Electrical checks');notify('Drawing command restored.');}
   function snapDrawingPoint(point){
     if(state.osnap){
       const screen=userDrawings.getScreenCTM();
@@ -555,7 +555,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     graphics.forEach(function(connector){
       const sign=connector.direction==='left'?-1:1,x=connector.point.x,y=connector.point.y,end=x+sign*18;
       const group=document.createElementNS('http://www.w3.org/2000/svg','g');
-      group.setAttribute('class','cross-sheet-connector');group.dataset.layer='connections';group.setAttribute('role','link');group.setAttribute('tabindex','0');group.setAttribute('aria-label','Open '+connector.targetSheetNumber+' · '+connector.targetRef+' · '+connector.name);group.style.cursor='pointer';if(state.layerVisibility.connections===false)group.style.display='none';
+      const destination=connector.targetSheetNumber+(connector.targetRef?' · '+connector.targetRef:'');
+      group.setAttribute('class','cross-sheet-connector');group.dataset.layer='connections';group.setAttribute('role','link');group.setAttribute('tabindex','0');group.setAttribute('aria-label','Open '+destination+' · '+connector.name);group.style.cursor='pointer';if(state.layerVisibility.connections===false)group.style.display='none';
       group.addEventListener('pointerdown',function(event){if(event.button!==0)return;event.preventDefault();event.stopPropagation();openCrossSheetConnector(connector);});
       group.addEventListener('click',function(event){if(event.detail!==0)return;event.stopPropagation();openCrossSheetConnector(connector);});
       group.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();openCrossSheetConnector(connector);}});
@@ -564,12 +565,16 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       const path=document.createElementNS('http://www.w3.org/2000/svg','path');
       path.setAttribute('d','M'+x+' '+y+'H'+end+'M'+(end-sign*6)+' '+(y-5)+'L'+end+' '+y+'L'+(end-sign*6)+' '+(y+5));path.setAttribute('fill','none');path.setAttribute('stroke','#164eac');path.setAttribute('stroke-width','2');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');path.style.pointerEvents='none';group.append(path);
       const anchor=sign<0?'end':'start',labelX=end+sign*7;
-      [[connector.targetSheetNumber+' · '+connector.targetRef,y-5,10],[connector.name,y+10,9]].forEach(function(line){const text=document.createElementNS('http://www.w3.org/2000/svg','text');text.setAttribute('x',labelX);text.setAttribute('y',line[1]);text.setAttribute('text-anchor',anchor);text.setAttribute('font-size',String(line[2]));text.setAttribute('font-weight','600');text.setAttribute('fill','#164eac');text.textContent=line[0];group.append(text);});
+      [[destination,y-5,10],[connector.name,y+10,9]].forEach(function(line){const text=document.createElementNS('http://www.w3.org/2000/svg','text');text.setAttribute('x',labelX);text.setAttribute('y',line[1]);text.setAttribute('text-anchor',anchor);text.setAttribute('font-size',String(line[2]));text.setAttribute('font-weight','600');text.setAttribute('fill','#164eac');text.textContent=line[0];group.append(text);});
       userDrawings.append(group);
     });
   }
   function openCrossSheetConnector(connector){
     if(!setSheet(connector.targetSheetId))return;
+    if(!connector.targetRef){
+      notify('Opened '+connector.targetSheetNumber+' from '+connector.name+'.');
+      return;
+    }
     const target=state.objects.find(function(object){return object.kind==='component-instance'&&object.ref===connector.targetRef;});
     if(!target)return;
     state.selected=target.id;state.selectedObjectIds=[target.id];renderObjects();showObject(target);
@@ -845,8 +850,51 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     return heading+'<div class="property-row"><span>Resolved cross-sheet links</span><strong>' +report.summary.resolvedCrossSheetLinks+'</strong></div>'
       +'<div class="property-row"><span>Unresolved wire endpoints</span><strong>'+report.summary.unresolvedWireEndpoints+'</strong></div>'
       +'<div class="property-row"><span>Project geometry errors</span><strong>'+report.summary.geometryErrors+'</strong></div>'
-      +findings+'</div>';
+      +findings+crossSheetConnectionForm()+'</div>';
   }
+  function crossSheetConnectionForm(){
+    const project=electricalProject();
+    const analysis=window.AdigunCADEngine.analyzeProject(project);
+    if(!analysis.valid)return '';
+    const numbers=new Map(analysis.sheets.map(sheet=>[sheet.id,sheet.number||sheet.id]));
+    const options=endpoints=>endpoints.map(function(endpoint){
+      const name=numbers.get(endpoint.sheetId)+' · '+endpoint.wireId+' ('+endpoint.point.x+', '+endpoint.point.y+')';
+      return '<option value="'+escapeHtml(JSON.stringify(endpoint))+'">'+escapeHtml(name)+'</option>';
+    }).join('');
+    const current=options(analysis.openEndpoints.filter(endpoint=>endpoint.sheetId===state.sheet));
+    const other=options(analysis.openEndpoints.filter(endpoint=>endpoint.sheetId!==state.sheet));
+    if(!current||!other)return '';
+    return '<form data-cross-sheet-form><div class="inspector-title">Connect wire ends across sheets</div>'
+      +'<label class="property-row"><span>This sheet</span><select name="from" required><option value="">Select wire end</option>'+current+'</select></label>'
+      +'<label class="property-row"><span>Other sheet</span><select name="to" required><option value="">Select wire end</option>'+other+'</select></label>'
+      +'<label class="property-row"><span>Connection name</span><input name="name" maxlength="80" required></label>'
+      +'<button type="submit" class="command-item">Link wire ends</button></form>';
+  }
+  $('#inspectorContent').addEventListener('submit',function(event){
+    const form=event.target.closest('[data-cross-sheet-form]');
+    if(!form)return;
+    event.preventDefault();
+    const values=new FormData(form);
+    const name=String(values.get('name')||'').trim();
+    if(!name){notify('Enter a connection name.');return;}
+    const endpoints=['from','to'].map(key=>JSON.parse(values.get(key)));
+    const project=electricalProject();
+    const connection={id:crypto.randomUUID(),name,endpoints:endpoints.map(function(endpoint,index){
+      const wire=project.objects.find(object=>object.id===endpoint.wireId&&object.sheetId===endpoint.sheetId);
+      const direction=wire&&endpoint.point.x===Math.min(wire.x1,wire.x2)&&wire.x1!==wire.x2?'left':'right';
+      return {...endpoint,connector:{direction,targetSheetId:endpoints[1-index].sheetId}};
+    })};
+    const links=state.crossSheetConnections.concat(connection);
+    const analysis=window.AdigunCADEngine.analyzeProject({...project,crossSheetConnections:links});
+    if(!analysis.valid){notify(analysis.errors[0]||'Could not link these wire ends.');return;}
+    pushUndo();
+    state.crossSheetConnections=links;
+    state.projectModel.crossSheetConnections=links;
+    renderObjects();
+    persist();
+    openInspector('Electrical checks');
+    notify('Linked '+name+' across sheets.');
+  });
   function openInspector(name){
     $('#rightPanelTitle').textContent=name;
     $('#rightPanel').classList.add('open');

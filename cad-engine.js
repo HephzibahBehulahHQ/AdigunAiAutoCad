@@ -1384,11 +1384,11 @@
             if (!graphic || typeof graphic !== 'object' ||
                 !['left', 'right'].includes(graphic.direction) ||
                 typeof graphic.targetSheetId !== 'string' || !graphic.targetSheetId.trim() ||
-                typeof graphic.targetRef !== 'string' || !graphic.targetRef.trim()) {
+                (graphic.targetRef !== undefined && (typeof graphic.targetRef !== 'string' || !graphic.targetRef.trim()))) {
               errors.push(label + ' has an invalid off-page connector graphic.');
             } else if (graphic.targetSheetId === endpoint.sheetId || !knownSheetIds.has(graphic.targetSheetId)) {
               errors.push(label + ' off-page connector must reference a different known sheet.');
-            } else if (!(Array.isArray(project.objects) ? project.objects : []).some(function (object) {
+            } else if (graphic.targetRef !== undefined && !(Array.isArray(project.objects) ? project.objects : []).some(function (object) {
               return object && object.kind === 'component-instance' && object.sheetId === graphic.targetSheetId && object.ref === graphic.targetRef;
             })) {
               errors.push(label + ' off-page connector target ' + graphic.targetRef + ' does not exist on sheet ' + graphic.targetSheetId + '.');
