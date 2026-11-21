@@ -3871,6 +3871,10 @@ test('the project-library manifest and generated validation report match the cur
   const relay = report.projects.find(project => project.id === 'relay-contactor-24v');
   assert.equal(relay.metrics.connectedSheetCount, 3);
   assert.ok(relay.metrics.authoredSheetCount > relay.metrics.connectedSheetCount);
+  assert.equal(relay.releaseScale.qualified, false);
+  assert.equal(relay.releaseScale.additionalAuthoredSheetsRequired, 28);
+  assert.equal(relay.releaseScale.additionalConnectedSheetsRequired, 67);
+  assert.equal(relay.releaseScale.sheetIdsWithoutElectricalConnectivity.length, relay.metrics.sheetCount - 3);
   assert.equal(report.summary.releaseScaleGate.minimumConnectedSheetsPerProject, 70);
   assert.equal(report.summary.releaseScaleGate.requiredSheetCount, 5000);
   assert.ok(report.summary.releaseScaleGate.qualifiedDistinctProjects <= report.summary.distinct100SheetTopologyCount);
@@ -3878,6 +3882,9 @@ test('the project-library manifest and generated validation report match the cur
   assert.ok(dolOpening);
   assert.equal(dolOpening.metrics.sheetCount, 100);
   assert.equal(dolOpening.metrics.authoredSheetCount, 100);
+  assert.equal(dolOpening.releaseScale.additionalAuthoredSheetsRequired, 0);
+  assert.equal(dolOpening.releaseScale.additionalConnectedSheetsRequired, 69);
+  assert.ok(!dolOpening.releaseScale.sheetIdsWithoutElectricalConnectivity.includes('dol-reference-001'));
   assert.equal(dolOpening.metrics.contentObjectCount, 1055);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
