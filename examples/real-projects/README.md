@@ -225,6 +225,8 @@ For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000
 
 The validator saves and reopens each example with the native CAD engine. It compares project data and a SHA-256 fingerprint of the project-wide nets, cross-sheet connections, and unresolved endpoints.
 
+It also generates the BOM, wire list, and terminal list CSV for each example, checks that their contents survive save and reopen, and records the three CSV fingerprints.
+
 The report counts authored sheets and electrically connected sheets separately. A connected sheet participates in a wired net that joins at least two component pins, including nets with explicit cross-sheet links. Run `node scripts/project-library-validation.js --check --require-release-scale` to enforce the library size requirement of 50 distinct topologies, 100 authored sheets and 70 connected sheets per qualifying project, and at least 5,000 qualifying sheets in total.
 
 

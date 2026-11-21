@@ -85,10 +85,35 @@ function checkNativeRoundTrip(project, analysis) {
     const errors = [];
     if (!isDeepStrictEqual(expected, reopened.project)) errors.push('Native save and reopen changed project data.');
     if (hash !== topologyHash(reopenedAnalysis)) errors.push('Native save and reopen changed electrical topology.');
-    return { valid: errors.length === 0, hash, errors };
+    return { valid: errors.length === 0, hash, errors, reopened: reopened.project };
   } catch (error) {
     return { valid: false, hash, errors: ['Native save and reopen failed: ' + error.message] };
   }
+}
+
+function checkCsvExports(project, reopened) {
+  const exporters = {
+    bom: input => engine.billOfMaterialsCsv(input.objects),
+    wires: engine.wireListCsv,
+    terminals: engine.terminalListCsv
+  };
+  const fingerprints = {};
+  const errors = [];
+  if (!reopened) return { valid: false, fingerprints, errors };
+
+  for (const [name, exportCsv] of Object.entries(exporters)) {
+    try {
+      const csv = exportCsv(project);
+      if (csv !== exportCsv(reopened)) {
+        errors.push(name + ' CSV changed after native save and reopen.');
+        continue;
+      }
+      fingerprints[name] = createHash('sha256').update(csv).digest('hex');
+    } catch (error) {
+      errors.push(name + ' CSV export failed: ' + error.message);
+    }
+  }
+  return { valid: errors.length === 0, fingerprints, errors };
 }
 
 function buildReport() {
@@ -100,6 +125,7 @@ function buildReport() {
     const parsed = engine.parseProject(source);
     const analysis = engine.analyzeProject(project);
     const roundTrip = checkNativeRoundTrip(project, analysis);
+    const csv = checkCsvExports(project, roundTrip.reopened);
     const bom = engine.billOfMaterials(project.objects);
     const wireList = engine.wireList(project);
     const terminals = engine.terminalList(project);
@@ -107,6 +133,7 @@ function buildReport() {
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
       nativeRoundTrip: roundTrip.valid,
+      csvExportRoundTrip: csv.valid,
       allSheetsHaveEditableContent: sheetContent.emptyContentSheetIds.length === 0,
       sourceBackedBom: bom.valid,
       connectedWireList: wireList.valid && analysis.openEndpointCount === 0,
@@ -117,6 +144,7 @@ function buildReport() {
       ...parsed.errors,
       ...analysis.errors,
       ...roundTrip.errors,
+      ...csv.errors,
       ...bom.errors,
       ...wireList.errors,
       ...terminals.errors
@@ -136,6 +164,7 @@ function buildReport() {
       status: Object.values(checks).every(Boolean) ? 'passed' : 'failed',
       checks,
       topologySha256: roundTrip.hash,
+      csvSha256: csv.fingerprints,
       metrics: {
         sheetCount: analysis.sheetCount,
         authoredSheetCount: sheetContent.authoredSheetCount,
