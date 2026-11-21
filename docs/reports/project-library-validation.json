@@ -39,6 +39,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -85,6 +86,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -131,6 +133,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -177,6 +180,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -184,7 +188,7 @@
       "csvSha256": {
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
         "wires": "22e7d7a296f2029f337629b0330b06a2c259ff53635a4f74a0a23ea572d593a4",
-        "terminals": "a357d035462eb67efc79e03838880da56658369ef75a1fdd8a73f1008840e5c0",
+        "terminals": "95d6a58cee01fe517b005798f612b45c8ebf4fb4a4b4261fb3129078c972975f",
         "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
         "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
@@ -223,6 +227,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -269,6 +274,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -276,7 +282,7 @@
       "csvSha256": {
         "bom": "c0dc985bcb054eb60a42dc7d0e7b4f3241d998d78034b8afd8ba6c5313868d6a",
         "wires": "98d86e3e5ea7de28d52d7d5bdf0d2b3cceb957bab5d2f60aa93979d0235da487",
-        "terminals": "fd2260f8de14164452f60db50e799b350feddb77da920250efa1f75510535b76",
+        "terminals": "83fab9affe6fb29e6a995aea02dbbe35ae29e355fa7f78605000f70ab2578879",
         "plcIo": "d8d191c82092aae806d253c54eba88f5d279ee0646329fcfa80bf9f4ca4c2c60",
         "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
@@ -315,6 +321,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
@@ -322,7 +329,7 @@
       "csvSha256": {
         "bom": "c5c73002ff7cb493bbb04997dc7c7483c27a3420537abd1b963b3f57f513fab1",
         "wires": "763968feee6b2d95f49336dc456bb59026aff48d0e6751194d9cf0587eb5424a",
-        "terminals": "b96cf2d7bc068c7227a1eaf00563c22208c592a5ab18d2cc223ac6e837cdefbc",
+        "terminals": "cac330f412466bd63c854adea33d15fad5237124b7afeb9f48a7d71c54e99244",
         "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
         "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208"
       },
@@ -361,6 +368,7 @@
         "sourceBackedBom": true,
         "connectedWireList": true,
         "terminalList": true,
+        "uniqueTerminalPositions": true,
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },

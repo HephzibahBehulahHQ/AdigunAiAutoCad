@@ -1193,6 +1193,9 @@
   }
 
   function component(id) { return COMPONENTS[id] || null; }
+  function isTerminalDefinition(definition) {
+    return definition?.family === 'feedthrough-terminal' || definition?.family === 'protective-earth-terminal';
+  }
   function catalog(query = '') {
     const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
     const terms = String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
@@ -1595,15 +1598,29 @@
         editionMapping: null, humanReviewStatus: 'pending', locations: locations });
     }
     const devicesByTag = new Map();
+    const terminalsByPosition = new Map();
     objects.filter(function (object) { return object.kind === 'component-instance'; }).forEach(function (object) {
       const tag = object.ref.trim().toUpperCase();
       if (!devicesByTag.has(tag)) devicesByTag.set(tag, []);
-      devicesByTag.get(tag).push({ sheetId: object.sheetId || reports[0].id, objectId: object.id, ref: object.ref });
+      const location = { sheetId: object.sheetId || reports[0].id, objectId: object.id, ref: object.ref };
+      devicesByTag.get(tag).push(location);
+      if (!isTerminalDefinition(component(object.componentId))) return;
+      const strip = object.properties?.terminalStrip?.trim();
+      const position = object.properties?.position?.trim();
+      if (!strip || !position) return;
+      const key = JSON.stringify([strip.toUpperCase(), position.toUpperCase()]);
+      if (!terminalsByPosition.has(key)) terminalsByPosition.set(key, { strip, position, locations: [] });
+      terminalsByPosition.get(key).locations.push(location);
     });
     devicesByTag.forEach(function (locations, tag) {
       if (locations.length < 2) return;
       add('ERC-DUPLICATE-DEVICE-TAG', 'error', 'Device tag ' + tag + ' is used by ' + locations.length + ' components.',
         'Assign a unique device tag to each instance and verify related references.', locations);
+    });
+    terminalsByPosition.forEach(function ({ strip, position, locations }) {
+      if (locations.length < 2) return;
+      add('ERC-TERMINAL-POSITION-CONFLICT', 'error', 'Terminal strip ' + strip + ' position ' + position + ' is assigned to multiple blocks.',
+        'Give each physical terminal block a distinct position within its strip.', locations);
     });
     openEndpoints.forEach(function (endpoint) {
       add('ERC-OPEN-WIRE-ENDPOINT', 'warning', 'Wire endpoint has no connection.',
@@ -2048,7 +2065,7 @@
     const rows = (project.objects || []).flatMap(function (object) {
       if (object?.kind !== 'component-instance') return [];
       const definition = component(object.componentId);
-      if (!['feedthrough-terminal', 'protective-earth-terminal'].includes(definition?.family)) return [];
+      if (!isTerminalDefinition(definition)) return [];
       const sheetId = object.sheetId || analysis.sheets[0].id;
       const properties = object.properties || {};
       return definition.symbol.pins.map(function (pin) {

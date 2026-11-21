@@ -689,7 +689,7 @@
       "rotation": 0,
       "properties": {
         "terminalStrip": "XT1",
-        "position": "Incoming supply",
+        "position": "01",
         "marking": "L1 · 400 V AC",
         "comment": "External connection boundary; verify field conductors and upstream protection for the installation."
       },
@@ -706,7 +706,7 @@
       "rotation": 0,
       "properties": {
         "terminalStrip": "XT1",
-        "position": "Incoming supply",
+        "position": "02",
         "marking": "L2 · 400 V AC",
         "comment": "External connection boundary; verify field conductors and upstream protection for the installation."
       },
@@ -723,7 +723,7 @@
       "rotation": 0,
       "properties": {
         "terminalStrip": "XT1",
-        "position": "Incoming supply",
+        "position": "03",
         "marking": "L3 · 400 V AC",
         "comment": "External connection boundary; verify field conductors and upstream protection for the installation."
       },

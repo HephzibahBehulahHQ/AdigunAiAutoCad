@@ -5467,7 +5467,7 @@
       "y": 260,
       "rotation": 0,
       "properties": {
-        "terminalStrip": "XT2",
+        "terminalStrip": "XT4",
         "position": "01",
         "marking": "+24 V DC",
         "comment": "Phoenix Contact 3212144 feed-through terminal; source-backed definition; no current rating suitability is inferred."
@@ -5484,7 +5484,7 @@
       "y": 430,
       "rotation": 0,
       "properties": {
-        "terminalStrip": "XT2",
+        "terminalStrip": "XT4",
         "position": "02",
         "marking": "0 V DC",
         "comment": "Phoenix Contact 3212144 feed-through terminal; source-backed definition; no current rating suitability is inferred."

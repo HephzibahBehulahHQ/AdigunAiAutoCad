@@ -615,6 +615,12 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['a-positive-receive', 'a-positive-send', 'a-return-receive']);
   assert.ok(findings.some(finding => finding.ruleId === 'ERC-INCOMPLETE-CABLE-CORE'
     && finding.locations[0].objectId === 'b2-signal-send'));
+  const terminal = edited.objects.find(object => object.id === 'x6');
+  Object.assign(terminal.properties, { terminalStrip: ' xt1 ', position: '1' });
+  const positionConflict = engine.analyzeProject(edited).findings.find(finding => finding.ruleId === 'ERC-TERMINAL-POSITION-CONFLICT');
+  assert.deepEqual(positionConflict.locations.map(location => [location.sheetId, location.objectId]), [
+    ['distribution', 'x1'], ['auxiliary-marshalling', 'x6']
+  ]);
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {
