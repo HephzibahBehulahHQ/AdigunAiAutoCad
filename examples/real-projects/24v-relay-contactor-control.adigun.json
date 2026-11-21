@@ -1,8 +1,8 @@
 {
   "product": "Adigun AI AutoCAD",
   "project": "24 V DC relay-operated contactor coil — wiring example",
-  "revision": "1.2",
-  "status": "11 authored sheets covering the relay-contactor circuit, schedules, manufacturer records and editable terminal layout.",
+  "revision": "1.3",
+  "status": "27 authored sheets: relay and contactor wiring, editable layouts, manufacturer data, and continuity diagrams.",
   "format": "adigun-ai-autocad-workspace",
   "version": 2,
   "componentSchemaVersion": 1,
@@ -81,6 +81,102 @@
       "id": "relay-terminal-layout",
       "number": "A3/001",
       "name": "Editable XT1 front view",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "relay-index-reference",
+      "number": "A1/002",
+      "name": "Drawing index continued",
+      "projectSectionId": "A1"
+    },
+    {
+      "id": "relay-k1-coil",
+      "number": "A4/004",
+      "name": "K1 PLC output interface rating",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-timing",
+      "number": "A4/005",
+      "name": "K1 relay response and release",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-contacts",
+      "number": "A4/006",
+      "name": "K1 contact loading reference",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-isolation",
+      "number": "A4/007",
+      "name": "K1 insulation and test references",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-k1-terminations",
+      "number": "A4/008",
+      "name": "K1 screw terminal data",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-demand",
+      "number": "A4/009",
+      "name": "KM1 coil current reference and source discrepancy",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-voltage",
+      "number": "A4/010",
+      "name": "KM1 operating and drop-out voltage data",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-suppression",
+      "number": "A4/011",
+      "name": "KM1 coil suppression and interface review",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-km1-control-terminals",
+      "number": "A4/012",
+      "name": "KM1 control terminal conductor combinations",
+      "projectSectionId": "A4"
+    },
+    {
+      "id": "relay-panel-depth",
+      "number": "A3/003",
+      "name": "Device depth comparison",
+      "projectSectionId": "A3"
+    },
+    {
+      "id": "relay-trace-plc",
+      "number": "A2/007",
+      "name": "PLC command continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-trace-supply",
+      "number": "A2/008",
+      "name": "Contact supply continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-trace-coil",
+      "number": "A2/009",
+      "name": "Switched coil-feed continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-trace-return",
+      "number": "A2/010",
+      "name": "Shared return continuity diagram",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "relay-coil-layout",
+      "number": "A3/002",
+      "name": "Editable K1 and KM1 device front view",
       "projectSectionId": "A3"
     }
   ],
@@ -1342,6 +1438,1491 @@
       "x": 870,
       "y": 1138,
       "text": "5.2 × 48.6 mm",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-continued",
+      "sheetId": "relay-index",
+      "x": 120,
+      "y": 901,
+      "text": "A1/002 | Continued index: continuity diagrams and component references.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-index-reference-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-index-reference"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-title",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 128,
+      "text": "DRAWING INDEX CONTINUED",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-01",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 205,
+      "text": "A1/001 | First index and project scope.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-02",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 263,
+      "text": "A1/002 | Drawing index continued.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-03",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 321,
+      "text": "A2/007 | PLC command continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-04",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 379,
+      "text": "A2/008 | Contact supply continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-05",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 437,
+      "text": "A2/009 | Switched coil-feed continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-06",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 495,
+      "text": "A2/010 | Shared return continuity diagram.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-07",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 553,
+      "text": "A3/002 | Editable K1 and KM1 device front view.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-08",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 611,
+      "text": "A3/003 | Device depth comparison.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-09",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 669,
+      "text": "A4/004 | K1 PLC output interface rating.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-10",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 727,
+      "text": "A4/005 | K1 relay response and release.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-11",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 785,
+      "text": "A4/006 | K1 contact loading reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-12",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 843,
+      "text": "A4/007 | K1 insulation and test references.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-13",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 901,
+      "text": "A4/008 | K1 screw terminal data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-14",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 959,
+      "text": "A4/009 | KM1 coil current reference and source discrepancy.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-15",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 1017,
+      "text": "A4/010 | KM1 operating and drop-out voltage data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-16",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 1075,
+      "text": "A4/011 | KM1 coil suppression and interface review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-index-reference-line-17",
+      "sheetId": "relay-index-reference",
+      "x": 120,
+      "y": 1133,
+      "text": "A4/012 | KM1 control terminal conductor combinations.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-coil-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-coil"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-title",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 128,
+      "text": "K1 PLC OUTPUT INTERFACE RATING",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-line-01",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 205,
+      "text": "Nominal relay coil supply | 24 V DC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-line-02",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 263,
+      "text": "Catalog input range at 20 °C | 18.5–33.6 V DC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-line-03",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 321,
+      "text": "Typical input current | 9 mA.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-line-04",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 379,
+      "text": "At X1 level 2, compare the selected PLC output rating and actual coil-terminal voltage with these component data.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-line-05",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 437,
+      "text": "Phoenix Contact | Manufacturer catalog PDF generated May 19, 2026 · circuit diagram page 9 of 12",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-coil-line-06",
+      "sheetId": "relay-k1-coil",
+      "x": 120,
+      "y": 495,
+      "text": "https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-timing-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-timing"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-timing-title",
+      "sheetId": "relay-k1-timing",
+      "x": 120,
+      "y": 128,
+      "text": "K1 RELAY RESPONSE AND RELEASE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-timing-line-01",
+      "sheetId": "relay-k1-timing",
+      "x": 120,
+      "y": 205,
+      "text": "Published response time | 5 ms.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-timing-line-02",
+      "sheetId": "relay-k1-timing",
+      "x": 120,
+      "y": 263,
+      "text": "Published release time | 8 ms.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-timing-line-03",
+      "sheetId": "relay-k1-timing",
+      "x": 120,
+      "y": 321,
+      "text": "Timing values apply to K1. Record PLC output delay, KM1 response and actual conditions separately.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-timing-line-04",
+      "sheetId": "relay-k1-timing",
+      "x": 120,
+      "y": 379,
+      "text": "Phoenix Contact | Manufacturer catalog PDF generated May 19, 2026 · circuit diagram page 9 of 12",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-timing-line-05",
+      "sheetId": "relay-k1-timing",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-contacts-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-contacts"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-title",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 128,
+      "text": "K1 CONTACT LOADING REFERENCE",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-line-01",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 205,
+      "text": "Contact topology | 1 changeover contact.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-line-02",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 263,
+      "text": "Published maximum switching voltage | 250 V AC/DC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-line-03",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 321,
+      "text": "Published limiting continuous current | 6 A.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-line-04",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 379,
+      "text": "Check inductive switching duty, suppression and derating when reviewing the KM1 coil interface.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-line-05",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 437,
+      "text": "Phoenix Contact | Manufacturer catalog PDF generated May 19, 2026 · circuit diagram page 9 of 12",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-contacts-line-06",
+      "sheetId": "relay-k1-contacts",
+      "x": 120,
+      "y": 495,
+      "text": "https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-isolation-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-isolation"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-isolation-title",
+      "sheetId": "relay-k1-isolation",
+      "x": 120,
+      "y": 128,
+      "text": "K1 INSULATION AND TEST REFERENCES",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-isolation-line-01",
+      "sheetId": "relay-k1-isolation",
+      "x": 120,
+      "y": 205,
+      "text": "Rated impulse withstand | 6 kV.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-isolation-line-02",
+      "sheetId": "relay-k1-isolation",
+      "x": 120,
+      "y": 263,
+      "text": "Coil-to-contact test voltage | 4 kV AC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-isolation-line-03",
+      "sheetId": "relay-k1-isolation",
+      "x": 120,
+      "y": 321,
+      "text": "These values apply to the relay module. Panel spacing and installed circuit separation remain open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-isolation-line-04",
+      "sheetId": "relay-k1-isolation",
+      "x": 120,
+      "y": 379,
+      "text": "Phoenix Contact | Manufacturer catalog PDF generated May 19, 2026 · circuit diagram page 9 of 12",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-isolation-line-05",
+      "sheetId": "relay-k1-isolation",
+      "x": 120,
+      "y": 437,
+      "text": "https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-k1-terminations-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-k1-terminations"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-title",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 128,
+      "text": "K1 SCREW TERMINAL DATA",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-line-01",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 205,
+      "text": "Screw connection · M3 · 0.6–0.8 Nm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-line-02",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 263,
+      "text": "Rigid conductor range | 0.14–2.5 mm².",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-line-03",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 321,
+      "text": "Flexible conductor range | 0.14–2.5 mm².",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-line-04",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 379,
+      "text": "Record actual conductor preparation and terminal markings against A2/005.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-line-05",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 437,
+      "text": "Phoenix Contact | Manufacturer catalog PDF generated May 19, 2026 · circuit diagram page 9 of 12",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-k1-terminations-line-06",
+      "sheetId": "relay-k1-terminations",
+      "x": 120,
+      "y": 495,
+      "text": "https://www.phoenixcontact.com/en-pc/products/relay-module-plc-rsc-24dc-21-2966171?type=pdf",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-demand-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-demand"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-title",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 COIL CURRENT REFERENCE AND SOURCE DISCREPANCY",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-01",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 205,
+      "text": "Schneider FAQ average at 20 °C and nominal Uc | 2.4 W and 100 mA.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-02",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 263,
+      "text": "The product-sheet 5.4 W inrush and hold-in entries differ from the FAQ average.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-03",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 321,
+      "text": "Confirm the applicable coil data and conditions for the delivered part before completing the supply and contact-loading review.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-04",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 379,
+      "text": "Schneider Electric | Manufacturer product data sheet; wiring diagram page 6; source document dated September 8, 2017.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-05",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 437,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-06",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 495,
+      "text": "Schneider Electric | FAQ FA33405 · Low-consumption LC1D09–D38 coil current at 24 V DC",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-demand-line-07",
+      "sheetId": "relay-km1-demand",
+      "x": 120,
+      "y": 553,
+      "text": "https://www.se.com/es/es/faqs/FA33405/",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-voltage-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-voltage"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-title",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 OPERATING AND DROP-OUT VOLTAGE DATA",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-line-01",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 205,
+      "text": "Nominal coil voltage | 24 V DC.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-line-02",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 263,
+      "text": "Operating range at 60 °C | 0.7–1.25 × Uc.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-line-03",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 321,
+      "text": "Drop-out range at 60 °C | 0.1–0.25 × Uc.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-line-04",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 379,
+      "text": "Verify the actual coil voltage at A1/A2 and the relevant component temperature.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-line-05",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 437,
+      "text": "Schneider Electric | Manufacturer product data sheet; wiring diagram page 6; source document dated September 8, 2017.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-voltage-line-06",
+      "sheetId": "relay-km1-voltage",
+      "x": 120,
+      "y": 495,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-suppression-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-suppression"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-suppression-title",
+      "sheetId": "relay-km1-suppression",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 COIL SUPPRESSION AND INTERFACE REVIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-suppression-line-01",
+      "sheetId": "relay-km1-suppression",
+      "x": 120,
+      "y": 205,
+      "text": "Catalog coil suppressor | Built-in bidirectional peak-limiting diode.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-suppression-line-02",
+      "sheetId": "relay-km1-suppression",
+      "x": 120,
+      "y": 263,
+      "text": "A2/006 identifies the modeled coil and return terminals.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-suppression-line-03",
+      "sheetId": "relay-km1-suppression",
+      "x": 120,
+      "y": 321,
+      "text": "Confirm the delivered coil variant and review its behavior with K1, the supply and external controls.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-suppression-line-04",
+      "sheetId": "relay-km1-suppression",
+      "x": 120,
+      "y": 379,
+      "text": "Schneider Electric | Manufacturer product data sheet; wiring diagram page 6; source document dated September 8, 2017.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-suppression-line-05",
+      "sheetId": "relay-km1-suppression",
+      "x": 120,
+      "y": 437,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-km1-control-terminals-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-km1-control-terminals"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-title",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 128,
+      "text": "KM1 CONTROL TERMINAL CONDUCTOR COMBINATIONS",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-01",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 205,
+      "text": "2 conductor(s) | flexible with cable end | 1–2.5 mm²",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-02",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 263,
+      "text": "1 conductor(s) | flexible without cable end | 1–4 mm²",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-03",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 321,
+      "text": "2 conductor(s) | flexible without cable end | 1–4 mm²",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-04",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 379,
+      "text": "1 conductor(s) | flexible with cable end | 1–4 mm²",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-05",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 437,
+      "text": "1 conductor(s) | solid without cable end | 1–4 mm²",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-06",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 495,
+      "text": "2 conductor(s) | solid without cable end | 1–4 mm²",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-07",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 553,
+      "text": "Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Philips No. 2 screwdriver.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-08",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 611,
+      "text": "The circuit includes A1/A2 only. The table is a catalog terminal reference and leaves the conductor selection open.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-09",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 669,
+      "text": "Schneider Electric | Manufacturer product data sheet; wiring diagram page 6; source document dated September 8, 2017.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-km1-control-terminals-line-10",
+      "sheetId": "relay-km1-control-terminals",
+      "x": 120,
+      "y": 727,
+      "text": "https://iportal.se.com/Contents/docs/SQD-LC1D09BD.PDF",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-panel-depth-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-panel-depth"
+    },
+    {
+      "kind": "text",
+      "id": "relay-panel-depth-title",
+      "sheetId": "relay-panel-depth",
+      "x": 120,
+      "y": 128,
+      "text": "DEVICE DEPTH COMPARISON",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-panel-depth-line-01",
+      "sheetId": "relay-panel-depth",
+      "x": 120,
+      "y": 205,
+      "text": "K1 published body depth | 94 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-panel-depth-line-02",
+      "sheetId": "relay-panel-depth",
+      "x": 120,
+      "y": 263,
+      "text": "KM1 published envelope depth | 95 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-panel-depth-line-03",
+      "sheetId": "relay-panel-depth",
+      "x": 120,
+      "y": 321,
+      "text": "The nominal recorded depth difference is 1 mm.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-panel-depth-line-04",
+      "sheetId": "relay-panel-depth",
+      "x": 120,
+      "y": 379,
+      "text": "Check each device mounting datum, rail or plate, wire access, and service clearance using the selected assembly.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-panel-depth-line-05",
+      "sheetId": "relay-panel-depth",
+      "x": 120,
+      "y": 437,
+      "text": "Source pages are listed on A4/002.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-trace-plc-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-trace-plc"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-plc-title",
+      "sheetId": "relay-trace-plc",
+      "x": 120,
+      "y": 128,
+      "text": "PLC COMMAND CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-plc-line-01",
+      "sheetId": "relay-trace-plc",
+      "x": 120,
+      "y": 205,
+      "text": "Static continuity derived from A2/001.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-plc-line-02",
+      "sheetId": "relay-trace-plc",
+      "x": 120,
+      "y": 263,
+      "text": "X1 lower level carries the PLC command.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "relay-trace-plc-continuity",
+      "sheetId": "relay-trace-plc",
+      "x1": 250,
+      "y1": 490,
+      "x2": 1500,
+      "y2": 490,
+      "stroke": "#17628c",
+      "strokeWidth": 4
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-plc-anchor-0",
+      "sheetId": "relay-trace-plc",
+      "x": 250,
+      "y": 490,
+      "x2": 258,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-plc-member-0",
+      "sheetId": "relay-trace-plc",
+      "x": 218,
+      "y": 548,
+      "text": "K1:A1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-plc-anchor-1",
+      "sheetId": "relay-trace-plc",
+      "x": 875,
+      "y": 490,
+      "x2": 883,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-plc-member-1",
+      "sheetId": "relay-trace-plc",
+      "x": 843,
+      "y": 548,
+      "text": "X1:2:1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-plc-anchor-2",
+      "sheetId": "relay-trace-plc",
+      "x": 1500,
+      "y": 490,
+      "x2": 1508,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-plc-member-2",
+      "sheetId": "relay-trace-plc",
+      "x": 1468,
+      "y": 548,
+      "text": "X1:2:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-trace-supply-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-trace-supply"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-supply-title",
+      "sheetId": "relay-trace-supply",
+      "x": 120,
+      "y": 128,
+      "text": "CONTACT SUPPLY CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-supply-line-01",
+      "sheetId": "relay-trace-supply",
+      "x": 120,
+      "y": 205,
+      "text": "Static continuity derived from A2/001.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-supply-line-02",
+      "sheetId": "relay-trace-supply",
+      "x": 120,
+      "y": 263,
+      "text": "X1 upper level feeds K1 common terminal 11.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "relay-trace-supply-continuity",
+      "sheetId": "relay-trace-supply",
+      "x1": 250,
+      "y1": 490,
+      "x2": 1500,
+      "y2": 490,
+      "stroke": "#17628c",
+      "strokeWidth": 4
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-supply-anchor-0",
+      "sheetId": "relay-trace-supply",
+      "x": 250,
+      "y": 490,
+      "x2": 258,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-supply-member-0",
+      "sheetId": "relay-trace-supply",
+      "x": 218,
+      "y": 548,
+      "text": "K1:11",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-supply-anchor-1",
+      "sheetId": "relay-trace-supply",
+      "x": 875,
+      "y": 490,
+      "x2": 883,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-supply-member-1",
+      "sheetId": "relay-trace-supply",
+      "x": 843,
+      "y": 548,
+      "text": "X1:1:1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-supply-anchor-2",
+      "sheetId": "relay-trace-supply",
+      "x": 1500,
+      "y": 490,
+      "x2": 1508,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-supply-member-2",
+      "sheetId": "relay-trace-supply",
+      "x": 1468,
+      "y": 548,
+      "text": "X1:1:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-trace-coil-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-trace-coil"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-coil-title",
+      "sheetId": "relay-trace-coil",
+      "x": 120,
+      "y": 128,
+      "text": "SWITCHED COIL-FEED CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-coil-line-01",
+      "sheetId": "relay-trace-coil",
+      "x": 120,
+      "y": 205,
+      "text": "Static continuity derived from A2/001.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-coil-line-02",
+      "sheetId": "relay-trace-coil",
+      "x": 120,
+      "y": 263,
+      "text": "This net joins K1 normally-open output 14 and KM1 coil A1.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "relay-trace-coil-continuity",
+      "sheetId": "relay-trace-coil",
+      "x1": 250,
+      "y1": 490,
+      "x2": 1500,
+      "y2": 490,
+      "stroke": "#17628c",
+      "strokeWidth": 4
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-coil-anchor-0",
+      "sheetId": "relay-trace-coil",
+      "x": 250,
+      "y": 490,
+      "x2": 258,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-coil-member-0",
+      "sheetId": "relay-trace-coil",
+      "x": 218,
+      "y": 548,
+      "text": "K1:14",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-coil-anchor-1",
+      "sheetId": "relay-trace-coil",
+      "x": 1500,
+      "y": 490,
+      "x2": 1508,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-coil-member-1",
+      "sheetId": "relay-trace-coil",
+      "x": 1468,
+      "y": 548,
+      "text": "KM1:A1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-trace-return-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-trace-return"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-title",
+      "sheetId": "relay-trace-return",
+      "x": 120,
+      "y": 128,
+      "text": "SHARED RETURN CONTINUITY DIAGRAM",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-line-01",
+      "sheetId": "relay-trace-return",
+      "x": 120,
+      "y": 205,
+      "text": "Static continuity derived from A2/001.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-line-02",
+      "sheetId": "relay-trace-return",
+      "x": 120,
+      "y": 263,
+      "text": "X3 joins the relay and contactor coil returns.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "line",
+      "id": "relay-trace-return-continuity",
+      "sheetId": "relay-trace-return",
+      "x1": 250,
+      "y1": 490,
+      "x2": 1500,
+      "y2": 490,
+      "stroke": "#17628c",
+      "strokeWidth": 4
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-return-anchor-0",
+      "sheetId": "relay-trace-return",
+      "x": 250,
+      "y": 490,
+      "x2": 258,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-member-0",
+      "sheetId": "relay-trace-return",
+      "x": 218,
+      "y": 548,
+      "text": "K1:A2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-return-anchor-1",
+      "sheetId": "relay-trace-return",
+      "x": 666.6666666666667,
+      "y": 490,
+      "x2": 674.6666666666667,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-member-1",
+      "sheetId": "relay-trace-return",
+      "x": 634.6666666666667,
+      "y": 548,
+      "text": "KM1:A2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-return-anchor-2",
+      "sheetId": "relay-trace-return",
+      "x": 1083.3333333333335,
+      "y": 490,
+      "x2": 1091.3333333333335,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-member-2",
+      "sheetId": "relay-trace-return",
+      "x": 1051.3333333333335,
+      "y": 548,
+      "text": "X3:1",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "circle",
+      "id": "relay-trace-return-anchor-3",
+      "sheetId": "relay-trace-return",
+      "x": 1500,
+      "y": 490,
+      "x2": 1508,
+      "y2": 490,
+      "stroke": "#17628c",
+      "fill": "#17628c"
+    },
+    {
+      "kind": "text",
+      "id": "relay-trace-return-member-3",
+      "sheetId": "relay-trace-return",
+      "x": 1468,
+      "y": 548,
+      "text": "X3:2",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-coil-layout-frame",
+      "x": 70,
+      "y": 70,
+      "x2": 2030,
+      "y2": 1530,
+      "stroke": "#17324d",
+      "strokeWidth": 3,
+      "fill": "none",
+      "sheetId": "relay-coil-layout"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-title",
+      "sheetId": "relay-coil-layout",
+      "x": 120,
+      "y": 128,
+      "text": "EDITABLE K1 AND KM1 DEVICE FRONT VIEW",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-line-01",
+      "sheetId": "relay-coil-layout",
+      "x": 120,
+      "y": 205,
+      "text": "Manufacturer widths and heights establish the footprints. Spacing and support locations are illustrative.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-line-02",
+      "sheetId": "relay-coil-layout",
+      "x": 120,
+      "y": 263,
+      "text": "The terminals are shown separately on A3/001. Review actual supports, clearance and enclosure depth with A3/003.",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-coil-layout-k1",
+      "sheetId": "relay-coil-layout",
+      "x": 420,
+      "y": 410,
+      "x2": 469.6,
+      "y2": 1050,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#a9c8d9",
+      "deviceTag": "K1",
+      "manufacturerPartNumber": "2966171"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-k1-tag",
+      "sheetId": "relay-coil-layout",
+      "x": 420,
+      "y": 1120,
+      "text": "K1 · PLC-RSC- 24DC/21",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-k1-dimensions",
+      "sheetId": "relay-coil-layout",
+      "x": 420,
+      "y": 1180,
+      "text": "6.2 × 80 mm",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "rect",
+      "id": "relay-coil-layout-km1",
+      "sheetId": "relay-coil-layout",
+      "x": 960,
+      "y": 434,
+      "x2": 1320,
+      "y2": 1050,
+      "stroke": "#17324d",
+      "strokeWidth": 2,
+      "fill": "#c5d3db",
+      "deviceTag": "KM1",
+      "manufacturerPartNumber": "LC1D09BD"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-km1-tag",
+      "sheetId": "relay-coil-layout",
+      "x": 960,
+      "y": 1120,
+      "text": "KM1 · TeSys D LC1D09BD",
+      "stroke": "#13263b"
+    },
+    {
+      "kind": "text",
+      "id": "relay-coil-layout-km1-dimensions",
+      "sheetId": "relay-coil-layout",
+      "x": 960,
+      "y": 1180,
+      "text": "45 × 77 mm",
       "stroke": "#13263b"
     }
   ],

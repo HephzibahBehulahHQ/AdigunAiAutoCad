@@ -786,7 +786,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
 
   const project = parsed.project;
   const analysis = engine.analyze(project.objects);
-  assert.equal(project.sheets.length, 11);
+  assert.equal(project.sheets.length, 27);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
     [4, 13, 0, 0]
@@ -815,8 +815,14 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   const copy = engine.copyExampleProject(project, 'relay-package-copy', 'Editable relay reference');
   const editable = engine.parseProject(engine.serializeProject(copy));
   assert.equal(editable.valid, true, editable.errors.join(' '));
-  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0002');
+  assert.equal(editable.project.sheets.find(sheet => sheet.id === 'control').number, 'A2/0003');
   assert.deepEqual(engine.analyzeProject(editable.project).globalNets, engine.analyzeProject(project).globalNets);
+  const tracedNets = ['relay-trace-plc', 'relay-trace-supply', 'relay-trace-coil', 'relay-trace-return']
+    .map(sheetId => editable.project.objects.filter(object => object.sheetId === sheetId && /-member-\d+$/.test(object.id))
+      .map(object => object.text).sort().join(',')).sort();
+  assert.deepEqual(tracedNets, netPins);
+  const deviceLayout = editable.project.objects.filter(object => object.sheetId === 'relay-coil-layout' && object.deviceTag);
+  assert.deepEqual(deviceLayout.map(object => [object.deviceTag, object.manufacturerPartNumber]), [['K1', '2966171'], ['KM1', 'LC1D09BD']]);
 
   const savedAgain = engine.serializeProject(project);
   const reopened = engine.parseProject(savedAgain);
