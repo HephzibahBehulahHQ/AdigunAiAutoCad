@@ -3,7 +3,7 @@ This is adigunAiAutoCad Project
 
 ## Edit a circuit
 
-Open **Symbol Library**, pick a component, then click its position on the sheet. The component stays selected and its editable values appear in **Properties**. Turn off **Snap** for unrestricted movement and keep **Object Snap** on to pick exact pin locations.
+Open **Symbol Library**, pick a component, then click its position on the sheet. The component stays selected and its editable values appear in **Properties**. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
 Use **Wire** to click two pin anchors or drag between them. In **Select** mode, select a wire to change its color or use **Reconnect start** / **Reconnect end** and click the new connection point. Press **Esc** to cancel a pending connection.
 
