@@ -358,7 +358,7 @@
       "topologyId": "dc-two-branch-terminal-distribution",
       "role": "standalone-example",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
-      "revision": "1.9",
+      "revision": "2.0",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -372,30 +372,30 @@
         "cableAssignments": true,
         "zeroGeometryErrors": true
       },
-      "topologySha256": "bb5bc9f1df117c87c66ec725cedc3d1293e9ab043e29bd1f5f10f9cc5e550397",
+      "topologySha256": "84025d93ff4c9ff920b28a03f4c274cd502d398e8566cdef7e7dbed3c24e4534",
       "csvSha256": {
-        "bom": "59f20588f5e9898d8a1be1118161ad92d6070b3ea7e7d4999cf60770b9e82eba",
-        "wires": "1e9068219586a7ac696122c70b1f4b4f1905b84136a590fc6de0d4afb2aa0252",
-        "terminals": "ba0888c5c03cf1df1a8dd5f6da22b92adb69db50a8a4a99edcace893de03acd0",
-        "plcIo": "26d53748e3d9f2e7dca190faf4311e061b9976adb98af22463e6a44e0c108e1b",
-        "cables": "26c11a290a9a23b7eb75be0c79554a8a71a6d62e7d96436440f004afd3353852"
+        "bom": "79c329c34a85c8854a2fedb118208c82db1e4d9121920d08df4ee15da91649c9",
+        "wires": "5304010073aacf0304cacb32c3bce7b94672be08989f98c5a1f018c9ecbd9e51",
+        "terminals": "9d7736bbc73c22ec5e06f05c68b958820b6de2260429220875181a4672cc08fc",
+        "plcIo": "e9b5a3f99b1b710f8902cee431ed1c9e7e1e6de4fa5110711b401f0ccae5df26",
+        "cables": "64bde727e4075f18ba5cf6e4b1db58d2704469e56b29c0fdc369304ff60d6621"
       },
       "metrics": {
-        "sheetCount": 12,
-        "authoredSheetCount": 12,
-        "connectedSheetCount": 12,
-        "contentObjectCount": 143,
+        "sheetCount": 13,
+        "authoredSheetCount": 13,
+        "connectedSheetCount": 13,
+        "contentObjectCount": 156,
         "emptyContentSheetIds": [],
-        "componentCount": 18,
-        "wireCount": 78,
-        "netCount": 45,
-        "globalNetCount": 14,
-        "crossSheetConnectionCount": 31,
+        "componentCount": 20,
+        "wireCount": 85,
+        "netCount": 49,
+        "globalNetCount": 15,
+        "crossSheetConnectionCount": 34,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 11,
-        "wireListRowCount": 78,
-        "terminalListRowCount": 20
+        "wireListRowCount": 85,
+        "terminalListRowCount": 24
       },
       "errors": []
     }

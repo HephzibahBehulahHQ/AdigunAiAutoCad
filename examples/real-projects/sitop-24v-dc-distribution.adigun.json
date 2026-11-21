@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "1.9",
+  "revision": "2.0",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -83,6 +83,12 @@
       "id": "relay-status-marshalling",
       "number": "A2/012",
       "name": "K1 NC status terminal marshalling",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pressure-signal-terminals",
+      "number": "A2/013",
+      "name": "PN2070 analog and switching signal terminals",
       "projectSectionId": "A2"
     }
   ],
@@ -494,7 +500,7 @@
       "x": 110,
       "y": 435,
       "stroke": "#13263b",
-      "text": "B2 OUT2 goes to A1 AI0 on A2/005, conditional on 0–10 V mode. OUT1 remains unassigned."
+      "text": "B2 OUT2 and OUT1 route separately through XT4 on A2/013. The model assumes voltage and PNP switching modes."
     },
     {
       "id": "branch-b-supply",
@@ -674,7 +680,7 @@
       "x1": 230,
       "y1": 312,
       "x2": 230,
-      "y2": 638,
+      "y2": 695,
       "stroke": "#164eac",
       "strokeWidth": 1.5,
       "potential": "0 V DC"
@@ -684,9 +690,9 @@
       "kind": "wire",
       "sheetId": "plc-inputs",
       "x": 230,
-      "y": 638,
+      "y": 695,
       "x1": 230,
-      "y1": 638,
+      "y1": 695,
       "x2": 1020,
       "y2": 294,
       "stroke": "#164eac",
@@ -1542,7 +1548,7 @@
       "y": 548,
       "x1": 310,
       "y1": 548,
-      "x2": 425,
+      "x2": 400,
       "y2": 474,
       "potential": "KM1 NC feedback",
       "stroke": "#38734b",
@@ -1552,9 +1558,9 @@
       "id": "km1-nc-di4",
       "kind": "wire",
       "sheetId": "plc-inputs",
-      "x": 425,
+      "x": 400,
       "y": 474,
-      "x1": 425,
+      "x1": 400,
       "y1": 474,
       "x2": 450,
       "y2": 474,
@@ -1854,7 +1860,7 @@
       "y": 605,
       "x1": 310,
       "y1": 605,
-      "x2": 435,
+      "x2": 415,
       "y2": 492,
       "potential": "K1 NC status",
       "stroke": "#38734b",
@@ -1864,9 +1870,9 @@
       "id": "k1-nc-di5",
       "kind": "wire",
       "sheetId": "plc-inputs",
-      "x": 435,
+      "x": 415,
       "y": 492,
-      "x1": 435,
+      "x1": 415,
       "y1": 492,
       "x2": 450,
       "y2": 492,
@@ -1916,7 +1922,177 @@
       "sheetId": "plc-inputs",
       "x": 110,
       "y": 925,
-      "text": "I0.5 reads K1 normally closed status through XT2:3.",
+      "text": "I0.5 reads K1 normally closed status through XT2:3. I0.6 reads B2 OUT1 through XT4:2.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x11",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X11",
+      "x": 510,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "B2 OUT2 analog to AI0",
+        "comment": ""
+      },
+      "sheetId": "pressure-signal-terminals"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x12",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X12",
+      "x": 510,
+      "y": 365,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "B2 OUT1 switch to I0.6",
+        "comment": ""
+      },
+      "sheetId": "pressure-signal-terminals"
+    },
+    {
+      "id": "x11-b2-analog-in",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 180,
+      "y": 250,
+      "x1": 180,
+      "y1": 250,
+      "x2": 475,
+      "y2": 250,
+      "potential": "B2 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x11-b2-analog-out",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 545,
+      "y": 250,
+      "x1": 545,
+      "y1": 250,
+      "x2": 775,
+      "y2": 250,
+      "potential": "B2 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b2-switch-send",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 575,
+      "y": 340,
+      "x1": 575,
+      "y1": 340,
+      "x2": 760,
+      "y2": 340,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "cableId": "W-B2",
+      "coreId": "4"
+    },
+    {
+      "id": "x12-b2-switch-in",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 180,
+      "y": 365,
+      "x1": 180,
+      "y1": 365,
+      "x2": 475,
+      "y2": 365,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "x12-b2-switch-out",
+      "kind": "wire",
+      "sheetId": "pressure-signal-terminals",
+      "x": 545,
+      "y": 365,
+      "x1": 545,
+      "y1": 365,
+      "x2": 775,
+      "y2": 365,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b2-switch-di6-route",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 310,
+      "y": 660,
+      "x1": 310,
+      "y1": 660,
+      "x2": 430,
+      "y2": 510,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b2-switch-di6",
+      "kind": "wire",
+      "sheetId": "plc-inputs",
+      "x": 430,
+      "y": 510,
+      "x1": 430,
+      "y1": 510,
+      "x2": 450,
+      "y2": 510,
+      "potential": "B2 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-signal-terminals-title",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 108,
+      "text": "XT4 · PN2070 PRESSURE SENSOR SIGNALS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "pressure-signal-terminals-analog",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 455,
+      "text": "X11 passes B2 OUT2 to AI0. The analog branch assumes the sensor is configured for 0–10 V.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "pressure-signal-terminals-switch",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 500,
+      "text": "X12 passes B2 OUT1 to I0.6. The digital branch assumes PNP switching mode and leaves the setpoint open.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "pressure-signal-terminals-scope",
+      "kind": "text",
+      "sheetId": "pressure-signal-terminals",
+      "x": 110,
+      "y": 545,
+      "text": "The two signal nets stay separate. This model records wiring and does not implement pressure thresholds or IO-Link.",
       "stroke": "#13263b"
     }
   ],
@@ -2203,38 +2379,6 @@
             "direction": "left",
             "targetSheetId": "branch-a",
             "targetRef": "B1"
-          }
-        }
-      ]
-    },
-    {
-      "id": "plc-b2-ai0",
-      "name": "B2 analog output",
-      "endpoints": [
-        {
-          "sheetId": "branch-b",
-          "wireId": "b2-signal-send",
-          "point": {
-            "x": 760,
-            "y": 290
-          },
-          "connector": {
-            "direction": "right",
-            "targetSheetId": "plc-inputs",
-            "targetRef": "A1"
-          }
-        },
-        {
-          "sheetId": "plc-inputs",
-          "wireId": "b2-ai0",
-          "point": {
-            "x": 780,
-            "y": 312
-          },
-          "connector": {
-            "direction": "right",
-            "targetSheetId": "branch-b",
-            "targetRef": "B2"
           }
         }
       ]
@@ -2904,6 +3048,134 @@
             "direction": "left",
             "targetSheetId": "relay-status-marshalling",
             "targetRef": "X10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b2-analog-marshalling",
+      "name": "B2 analog output",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "b2-signal-send",
+          "point": {
+            "x": 760,
+            "y": 290
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X11"
+          }
+        },
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x11-b2-analog-in",
+          "point": {
+            "x": 180,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b2-ai0",
+      "name": "B2 analog output",
+      "endpoints": [
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x11-b2-analog-out",
+          "point": {
+            "x": 775,
+            "y": 250
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b2-ai0",
+          "point": {
+            "x": 780,
+            "y": 312
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b2-switch-marshalling",
+      "name": "B2 switching output",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "b2-switch-send",
+          "point": {
+            "x": 760,
+            "y": 340
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x12-b2-switch-in",
+          "point": {
+            "x": 180,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plc-b2-di6",
+      "name": "B2 switching output",
+      "endpoints": [
+        {
+          "sheetId": "pressure-signal-terminals",
+          "wireId": "x12-b2-switch-out",
+          "point": {
+            "x": 775,
+            "y": 365
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "plc-inputs",
+            "targetRef": "A1"
+          }
+        },
+        {
+          "sheetId": "plc-inputs",
+          "wireId": "b2-switch-di6-route",
+          "point": {
+            "x": 310,
+            "y": 660
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pressure-signal-terminals",
+            "targetRef": "X12"
           }
         }
       ]
