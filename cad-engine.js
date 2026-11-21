@@ -1343,6 +1343,18 @@
       }).map(function (sheet) { return sheet.id; }));
       const connectionIds = new Set();
       const globallyUsedEndpoints = new Set();
+      const wiresBySheet = new Map();
+      const refsBySheet = new Map();
+      for (const object of (Array.isArray(project.objects) ? project.objects : [])) {
+        if (object?.kind === 'wire') {
+          if (!wiresBySheet.has(object.sheetId)) wiresBySheet.set(object.sheetId, new Map());
+          const wires = wiresBySheet.get(object.sheetId);
+          if (!wires.has(object.id)) wires.set(object.id, object);
+        } else if (object?.kind === 'component-instance') {
+          if (!refsBySheet.has(object.sheetId)) refsBySheet.set(object.sheetId, new Set());
+          refsBySheet.get(object.sheetId).add(object.ref);
+        }
+      }
       project.crossSheetConnections.forEach(function (connection, index) {
         const label = 'Cross-sheet connection ' + (connection && connection.id || index + 1);
         if (!connection || typeof connection !== 'object' || typeof connection.id !== 'string' ||
@@ -1371,9 +1383,7 @@
           globallyUsedEndpoints.add(key);
           endpointSheets.add(endpoint.sheetId);
           if (!knownSheetIds.has(endpoint.sheetId)) errors.push(label + ' refers to unknown sheet ' + endpoint.sheetId + '.');
-          const wire = (Array.isArray(project.objects) ? project.objects : []).find(function (object) {
-            return object && object.kind === 'wire' && object.id === endpoint.wireId && object.sheetId === endpoint.sheetId;
-          });
+          const wire = wiresBySheet.get(endpoint.sheetId)?.get(endpoint.wireId);
           if (!wire) errors.push(label + ' refers to missing wire ' + endpoint.wireId + ' on sheet ' + endpoint.sheetId + '.');
           else if (!((endpoint.point.x === wire.x1 && endpoint.point.y === wire.y1) ||
                      (endpoint.point.x === wire.x2 && endpoint.point.y === wire.y2))) {
@@ -1384,13 +1394,11 @@
             if (!graphic || typeof graphic !== 'object' ||
                 !['left', 'right'].includes(graphic.direction) ||
                 typeof graphic.targetSheetId !== 'string' || !graphic.targetSheetId.trim() ||
-                typeof graphic.targetRef !== 'string' || !graphic.targetRef.trim()) {
+                (graphic.targetRef !== undefined && (typeof graphic.targetRef !== 'string' || !graphic.targetRef.trim()))) {
               errors.push(label + ' has an invalid off-page connector graphic.');
             } else if (graphic.targetSheetId === endpoint.sheetId || !knownSheetIds.has(graphic.targetSheetId)) {
               errors.push(label + ' off-page connector must reference a different known sheet.');
-            } else if (!(Array.isArray(project.objects) ? project.objects : []).some(function (object) {
-              return object && object.kind === 'component-instance' && object.sheetId === graphic.targetSheetId && object.ref === graphic.targetRef;
-            })) {
+            } else if (graphic.targetRef !== undefined && !refsBySheet.get(graphic.targetSheetId)?.has(graphic.targetRef)) {
               errors.push(label + ' off-page connector target ' + graphic.targetRef + ' does not exist on sheet ' + graphic.targetSheetId + '.');
             }
           }
@@ -1666,11 +1674,13 @@
     const objects = Array.isArray(project.objects) ? project.objects : [];
     const definitions = Array.isArray(project.sheets) ? project.sheets : [];
     const sheets = definitions.length ? definitions : [{ id: project.activeSheet || 'main', number: '', name: 'Main sheet' }];
+    const objectsBySheet = new Map(sheets.map(sheet => [sheet.id, []]));
+    const defaultSheet = sheets.length === 1 ? sheets[0].id : undefined;
+    for (const object of objects) {
+      if (object) objectsBySheet.get(object.sheetId || defaultSheet)?.push(object);
+    }
     const reports = sheets.map(function (sheet) {
-      const sheetObjects = objects.filter(function (object) {
-        return object && (object.sheetId === sheet.id || (!object.sheetId && sheets.length === 1));
-      });
-      const analysis = analyze(sheetObjects);
+      const analysis = analyze(objectsBySheet.get(sheet.id));
       analysis.nets.forEach(function (net) { net.id = sheet.id + ':' + net.id; });
       return { id: sheet.id, number: sheet.number || '', name: sheet.name || '', analysis: analysis };
     });
@@ -1789,11 +1799,15 @@
       analysisErrors: result.errors,
       sheets: result.sheets.map(function (sheet) { return { id: sheet.id, number: sheet.number, name: sheet.name }; }),
       summary: result.valid ? {
+        projectNets: result.globalNetCount,
         resolvedCrossSheetLinks: result.crossSheetConnectionCount,
         unresolvedWireEndpoints: result.openEndpointCount,
         geometryErrors: result.geometryErrorCount,
         findings: result.findings.length
       } : null,
+      globalNets: result.globalNets || [],
+      crossSheetConnections: result.crossSheetConnections || [],
+      openEndpoints: result.openEndpoints || [],
       findings: result.findings || [],
       scope: 'Authored geometry and electrical connectivity checks.'
     };

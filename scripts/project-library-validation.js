@@ -40,26 +40,22 @@ function summarizeSheetContent(project) {
     ? project.sheets
     : [{ id: project.activeSheet || 'main' }];
   const objects = Array.isArray(project.objects) ? project.objects : [];
-  const perSheet = sheets.map(sheet => {
-    const pageObjects = objects.filter(object => object
-      && (object.sheetId === sheet.id || (!object.sheetId && sheets.length === 1)));
-    const contentObjects = pageObjects.filter(object => {
-      if (object.kind === 'component-instance' || object.kind === 'wire') return true;
-      return object.kind === 'text'
-        && typeof object.text === 'string'
-        && object.text.trim().length > 0
-        && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text);
-    });
-    return {
-      id: sheet.id,
-      objectCount: pageObjects.length,
-      contentObjectCount: contentObjects.length
-    };
-  });
+  const counts = new Map(sheets.map(sheet => [sheet.id, 0]));
+  const defaultSheet = sheets.length === 1 ? sheets[0].id : undefined;
+  for (const object of objects) {
+    if (!object) continue;
+    const id = object.sheetId || defaultSheet;
+    if (!counts.has(id)) continue;
+    const meaningful = object.kind === 'component-instance' || object.kind === 'wire'
+      || (object.kind === 'text' && typeof object.text === 'string' && object.text.trim().length > 0
+        && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text));
+    if (meaningful) counts.set(id, counts.get(id) + 1);
+  }
+  const emptyContentSheetIds = sheets.filter(sheet => counts.get(sheet.id) === 0).map(sheet => sheet.id);
   return {
-    authoredSheetCount: perSheet.filter(sheet => sheet.contentObjectCount > 0).length,
-    contentObjectCount: perSheet.reduce((sum, sheet) => sum + sheet.contentObjectCount, 0),
-    emptyContentSheetIds: perSheet.filter(sheet => sheet.contentObjectCount === 0).map(sheet => sheet.id)
+    authoredSheetCount: sheets.length - emptyContentSheetIds.length,
+    contentObjectCount: [...counts.values()].reduce((sum, count) => sum + count, 0),
+    emptyContentSheetIds
   };
 }
 
@@ -89,10 +85,35 @@ function checkNativeRoundTrip(project, analysis) {
     const errors = [];
     if (!isDeepStrictEqual(expected, reopened.project)) errors.push('Native save and reopen changed project data.');
     if (hash !== topologyHash(reopenedAnalysis)) errors.push('Native save and reopen changed electrical topology.');
-    return { valid: errors.length === 0, hash, errors };
+    return { valid: errors.length === 0, hash, errors, reopened: reopened.project };
   } catch (error) {
     return { valid: false, hash, errors: ['Native save and reopen failed: ' + error.message] };
   }
+}
+
+function checkCsvExports(project, reopened) {
+  const exporters = {
+    bom: input => engine.billOfMaterialsCsv(input.objects),
+    wires: engine.wireListCsv,
+    terminals: engine.terminalListCsv
+  };
+  const fingerprints = {};
+  const errors = [];
+  if (!reopened) return { valid: false, fingerprints, errors };
+
+  for (const [name, exportCsv] of Object.entries(exporters)) {
+    try {
+      const csv = exportCsv(project);
+      if (csv !== exportCsv(reopened)) {
+        errors.push(name + ' CSV changed after native save and reopen.');
+        continue;
+      }
+      fingerprints[name] = createHash('sha256').update(csv).digest('hex');
+    } catch (error) {
+      errors.push(name + ' CSV export failed: ' + error.message);
+    }
+  }
+  return { valid: errors.length === 0, fingerprints, errors };
 }
 
 function buildReport() {
@@ -104,6 +125,7 @@ function buildReport() {
     const parsed = engine.parseProject(source);
     const analysis = engine.analyzeProject(project);
     const roundTrip = checkNativeRoundTrip(project, analysis);
+    const csv = checkCsvExports(project, roundTrip.reopened);
     const bom = engine.billOfMaterials(project.objects);
     const wireList = engine.wireList(project);
     const terminals = engine.terminalList(project);
@@ -111,6 +133,7 @@ function buildReport() {
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
       nativeRoundTrip: roundTrip.valid,
+      csvExportRoundTrip: csv.valid,
       allSheetsHaveEditableContent: sheetContent.emptyContentSheetIds.length === 0,
       sourceBackedBom: bom.valid,
       connectedWireList: wireList.valid && analysis.openEndpointCount === 0,
@@ -121,6 +144,7 @@ function buildReport() {
       ...parsed.errors,
       ...analysis.errors,
       ...roundTrip.errors,
+      ...csv.errors,
       ...bom.errors,
       ...wireList.errors,
       ...terminals.errors
@@ -140,6 +164,7 @@ function buildReport() {
       status: Object.values(checks).every(Boolean) ? 'passed' : 'failed',
       checks,
       topologySha256: roundTrip.hash,
+      csvSha256: csv.fingerprints,
       metrics: {
         sheetCount: analysis.sheetCount,
         authoredSheetCount: sheetContent.authoredSheetCount,

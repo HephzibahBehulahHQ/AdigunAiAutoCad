@@ -809,19 +809,19 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
 
   const project = parsed.project;
   const analysis = engine.analyzeProject(project);
-  assert.equal(project.sheets.length, 71);
+  assert.equal(project.sheets.length, 72);
   assert.deepEqual(
     [analysis.componentCount, analysis.wireCount, analysis.openEndpointCount, analysis.errors.length],
-    [4, 14, 0, 0]
+    [4, 15, 0, 0]
   );
-  assert.equal(analysis.crossSheetConnectionCount, 1);
+  assert.equal(analysis.crossSheetConnectionCount, 3);
   const terminalList = engine.terminalList(project);
   assert.equal(terminalList.valid, true);
   assert.equal(terminalList.rows.length, 6);
   assert.deepEqual(terminalList.rows.find(row => row.ref === 'X3' && row.pin === '1').connectedPins,
     ['A2/001 K1:A2', 'A2/001 KM1:A2', 'A2/004 X3:2']);
   assert.match(engine.terminalListCsv(project), /"A2\/004","X3","1"/);
-  assert.equal(engine.analyzeProject({ ...project, crossSheetConnections: [] }).openEndpointCount, 2);
+  assert.equal(engine.analyzeProject({ ...project, crossSheetConnections: [] }).openEndpointCount, 6);
   const netPins = analysis.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(netPins, [
     'K1:11,X1:1:1,X1:1:2',
@@ -838,7 +838,7 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   );
   const wireList = engine.wireList(project.objects);
   assert.equal(wireList.valid, true, wireList.errors.join(' '));
-  assert.equal(wireList.rows.length, 14);
+  assert.equal(wireList.rows.length, 15);
   const schedule = project.objects.filter(object => object.sheetId === 'relay-wire-schedule' && object.text?.startsWith('W-'));
   assert.deepEqual(schedule.map(object => object.text.split(' | ')[0]), wireList.rows.map(row => row.wireId));
   const layout = project.objects.filter(object => object.sheetId === 'relay-terminal-layout' && object.deviceTag);
@@ -854,7 +854,12 @@ test('24 V DC relay-contactor example round-trips with source-backed parts and c
   for (const net of analysis.globalNets) {
     assert.equal(new Set(net.wireIds.map(id => assignedPotentials.get(id.slice(id.indexOf(':') + 1)))).size, 1);
   }
-  assert.ok(engine.projectElectricalReport(editable.project).findings.every(finding => finding.ruleId !== 'ERC-CONFLICTING-POTENTIALS'));
+  const electricalReport = engine.projectElectricalReport(editable.project);
+  assert.ok(electricalReport.findings.every(finding => finding.ruleId !== 'ERC-CONFLICTING-POTENTIALS'));
+  assert.equal(electricalReport.summary.projectNets, 4);
+  assert.deepEqual(electricalReport.globalNets, analysis.globalNets);
+  assert.equal(electricalReport.crossSheetConnections.length, 3);
+  assert.deepEqual(electricalReport.openEndpoints, []);
   const indexedNumbers = new Set(editable.project.objects
     .filter(object => object.sheetId.startsWith('relay-index'))
     .map(object => object.text?.match(/^A[1-4]\/\d+(?= \| )/)?.[0])
@@ -3860,7 +3865,7 @@ test('the project-library manifest and generated validation report match the cur
     && project.metrics.emptyContentSheetIds.length === 0));
   assert.ok(report.summary.distinctTopologyCount >= 5);
   const relay = report.projects.find(project => project.id === 'relay-contactor-24v');
-  assert.equal(relay.metrics.connectedSheetCount, 2);
+  assert.equal(relay.metrics.connectedSheetCount, 3);
   assert.ok(relay.metrics.authoredSheetCount > relay.metrics.connectedSheetCount);
   assert.equal(report.summary.releaseScaleGate.minimumConnectedSheetsPerProject, 70);
   assert.equal(report.summary.releaseScaleGate.requiredSheetCount, 5000);

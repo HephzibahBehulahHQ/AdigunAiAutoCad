@@ -12,7 +12,7 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 Open this project as an editable copy from **Project Explorer → List**.
 
-This 71-sheet reference includes the wiring, net and wire schedules, continuity diagrams, editable terminal and device layouts, and catalog-backed operating, mounting and termination references. The circuit uses four verified parts: a Phoenix Contact PLC interface relay, a Schneider Electric TeSys D contactor, a Phoenix Contact PTTB 2,5 double-level terminal, and a Phoenix Contact PT 2,5 feed-through terminal. Its 14 orthogonal wire segments form four project-wide nets. The shared 0 V return connects the coil junction on A2/001 to X3 on A2/004 through a native cross-sheet connection. The BOM and wire list are derived from the editable objects.
+This 72-sheet reference includes wiring, net and wire schedules, continuity diagrams, editable terminal and device layouts, and catalog-backed operating, mounting and termination references. Its four verified parts and 15 orthogonal wire segments form four project-wide nets. Three native cross-sheet connections link the coil schematic on A2/001 to the X3 return on A2/004 and the separate X1 supply and PLC command on A2/015. The BOM and wire list are derived from the editable objects.
 
 ## Intended circuit
 
@@ -224,6 +224,8 @@ For A1/092, ifm's PN2070-02 EMC row references DIN EN 61000-6-2 and DIN EN 61000
 `library.json` indexes the source-backed examples and their distinct electrical topologies. Run `node scripts/project-library-validation.js --write` to regenerate the report and `node scripts/project-library-validation.js --check` to check it against the current files and CAD engine.
 
 The validator saves and reopens each example with the native CAD engine. It compares project data and a SHA-256 fingerprint of the project-wide nets, cross-sheet connections, and unresolved endpoints.
+
+It also generates the BOM, wire list, and terminal list CSV for each example, checks that their contents survive save and reopen, and records the three CSV fingerprints.
 
 The report counts authored sheets and electrically connected sheets separately. A connected sheet participates in a wired net that joins at least two component pins, including nets with explicit cross-sheet links. Run `node scripts/project-library-validation.js --check --require-release-scale` to enforce the library size requirement of 50 distinct topologies, 100 authored sheets and 70 connected sheets per qualifying project, and at least 5,000 qualifying sheets in total.
 
