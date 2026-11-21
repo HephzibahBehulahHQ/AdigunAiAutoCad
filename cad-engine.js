@@ -721,6 +721,41 @@
   };
   const schneiderStartPushButtonDefinition = createHarmonyPushButtonDefinition('XB5AA31', 'Green', 'normally-open', '13', '14', false);
   const schneiderStopPushButtonDefinition = createHarmonyPushButtonDefinition('XB5AA42', 'Red', 'normally-closed', '21', '22', true);
+  const schneiderPilotLightDefinition = deepFreeze({
+    schemaVersion: COMPONENT_SCHEMA_VERSION,
+    id: 'schneider-electric-xb5avb3',
+    manufacturer: 'Schneider Electric',
+    manufacturerPartNumber: 'XB5AVB3',
+    model: 'Harmony XB5 XB5AVB3',
+    name: 'Green 24 V AC/DC pilot light',
+    family: 'lamp',
+    referencePrefix: 'H',
+    category: 'Electrical · Verified panel signaling',
+    symbol: {
+      id: 'lamp.harmony-xb5.xb5avb3.v1', view: 'schematic', unit: 'mm', width: 70, height: 60,
+      representation: { standard: 'IEC-style functional representation', text: 'H', symbolType: 'pilot light' },
+      pins: [
+        { id: 'x1', localNumber: 'X1', name: 'Pilot light terminal X1', x: -27, y: 0, electricalType: 'passive', connectionType: 'screw-clamp' },
+        { id: 'x2', localNumber: 'X2', name: 'Pilot light terminal X2', x: 27, y: 0, electricalType: 'passive', connectionType: 'screw-clamp' }
+      ],
+      internalConnections: [],
+      numberingNote: 'Schneider Electric identifies the pilot light terminal pair as X1–X2.'
+    },
+    electricalFunctions: { simulationNote: 'The CAD model preserves both terminal nets and does not simulate illumination or current draw.' },
+    specifications: {
+      ratedSupplyVoltage: { value: 24, unit: 'V AC/DC' },
+      mountingDiameter: { value: 22, unit: 'mm' },
+      lightSource: { value: 'Integral green LED' },
+      terminalConnection: { value: 'Screw clamp' }
+    },
+    instanceProperties: {
+      marking: { type: 'string', default: '', maximumLength: 40 },
+      comment: { type: 'string', default: '', maximumLength: 160 }
+    },
+    sources: [{ publisher: 'Schneider Electric', title: 'XB5AVB3 product data sheet',
+      url: 'https://iportal.se.com/Contents/docs/SQD-XB5AVB3.PDF', documentRevision: '13-Mar-2018',
+      revisionNote: 'Identifies the X1–X2 terminals, 24 V AC/DC rating, mounting diameter and green integral LED.', retrievedAt: '2026-11-21' }]
+  });
   const motorStarterDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
     id: 'siemens-3rm1201-1aa04',
@@ -1194,7 +1229,7 @@
       documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

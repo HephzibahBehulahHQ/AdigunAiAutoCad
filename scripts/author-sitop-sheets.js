@@ -9,11 +9,14 @@ const file = path.join(__dirname, '../examples/real-projects/sitop-24v-dc-distri
 const source = JSON.parse(fs.readFileSync(file, 'utf8'));
 const annunciator = { id: 'annunciator-interface', number: 'A2/020', name: 'XT10 isolated annunciator request', projectSectionId: 'A2' };
 const testAccess = { id: 'distribution-test-access', number: 'A2/021', name: 'XT11 downstream DC voltage test access', projectSectionId: 'A2' };
-const authoredSheets = [annunciator, testAccess];
+const fieldIndicator = { id: 'field-indicator', number: 'A2/022', name: 'Externally powered H1 annunciator', projectSectionId: 'A2' };
+const fieldSupplyPotential = 'External annunciator +24 V';
+const fieldRequestPotential = 'Annunciator switched +24 V';
+const authoredSheets = [annunciator, testAccess, fieldIndicator];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '2.8';
+project.revision = '2.9';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -69,7 +72,7 @@ author(annunciator, ({ device, pin, wire, link, notes }) => {
   const sheet = annunciator;
   const relay = device('K3', 'phoenix-contact-2966171', 435, 345, { marking: 'Annunciator request' });
   const xt10 = (ref, y, position, marking) => device(ref, 'phoenix-contact-3209510', 760, y,
-    { terminalStrip: 'XT10', position, marking, comment: 'External annunciator circuit unassigned.' });
+    { terminalStrip: 'XT10', position, marking, comment: 'Field indicator circuit on A2/022.' });
   const common = xt10('X24', 345, '1', 'Dry contact common');
   const request = xt10('X25', 412, '2', 'Dry normally open request');
   const cpuPin = pin(project.objects.find(object => object.id === 'a1'), 'X12:5');
@@ -86,20 +89,20 @@ author(annunciator, ({ device, pin, wire, link, notes }) => {
     wire('coil', sheet.id, { x: 195, y: coil.y }, coil, command), 'A1', 'K3');
   link('return', 'K3 coil return', returnSend,
     wire('coil-return', sheet.id, { x: 195, y: coilReturn.y }, coilReturn, '0 V DC'), 'PS1', 'K3');
-  wire('common', sheet.id, pin(relay, '11'), pin(common, '1'), 'K3 dry common');
+  wire('common', sheet.id, pin(relay, '11'), pin(common, '1'), fieldSupplyPotential);
   const requestPin = pin(relay, '14');
   const requestTerminal = pin(request, '1');
   const requestTurn = { x: 620, y: requestPin.y };
   const requestDrop = { x: 620, y: requestTerminal.y };
-  wire('request-contact', sheet.id, requestPin, requestTurn, 'K3 dry request');
-  wire('request-drop', sheet.id, requestTurn, requestDrop, 'K3 dry request');
-  wire('request-terminal', sheet.id, requestDrop, requestTerminal, 'K3 dry request');
+  wire('request-contact', sheet.id, requestPin, requestTurn, fieldRequestPotential);
+  wire('request-drop', sheet.id, requestTurn, requestDrop, fieldRequestPotential);
+  wire('request-terminal', sheet.id, requestDrop, requestTerminal, fieldRequestPotential);
 
   notes([
     ['title', 108, 'XT10 · ISOLATED ANNUNCIATOR REQUEST'],
     ['coil-note', 198, 'A1 Q0.2 commands K3. The coil returns to PS1 0 V.'],
     ['contact-note', 465, 'XT10:1 is K3 common. XT10:2 is the normally open request contact.'],
-    ['scope', 515, 'External annunciator power, load and cable are unassigned. Switching logic is outside this drawing.']
+    ['scope', 515, 'See A2/022 for the separate field supply boundary and H1 indicator. PLC switching logic is outside this drawing.']
   ]);
 });
 
@@ -126,6 +129,31 @@ author(testAccess, ({ device, pin, wire, link, notes }) => {
     ['positive-note', 225, 'XT11:1 is taken downstream of X2 on the Branch B positive conductor.'],
     ['return-note', 340, 'XT11:2 is taken downstream of X4 on the Branch B return conductor.'],
     ['scope', 490, 'The terminals document measurement access. No instrument or test result is assigned.']
+  ]);
+});
+
+author(fieldIndicator, ({ device, pin, wire, link, notes }) => {
+  const lamp = device('H1', 'schneider-electric-xb5avb3', 620, 410, { marking: 'Annunciator requested' });
+  const terminal = (ref, x, y, position, marking) => device(ref, 'phoenix-contact-3209510', x, y,
+    { terminalStrip: 'XT12', position, marking, comment: 'External annunciator supply boundary.' });
+  const positive = terminal('X28', 430, 280, '1', 'External +24 V');
+  const returnTerminal = terminal('X29', 840, 410, '2', 'External 0 V');
+  const xt10Common = project.objects.find(object => object.ref === 'X24');
+  const xt10Request = project.objects.find(object => object.ref === 'X25');
+  const common = pin(xt10Common, '2');
+  const request = pin(xt10Request, '2');
+  const feed = fieldSupplyPotential;
+  const switched = fieldRequestPotential;
+  link('feed', feed, wire('common-send', annunciator.id, common, { x: 960, y: common.y }, feed),
+    wire('feed-receive', fieldIndicator.id, { x: 225, y: 280 }, pin(positive, '1'), feed), 'X24', 'X28');
+  link('request', switched, wire('request-send', annunciator.id, request, { x: 960, y: request.y }, switched),
+    wire('request-receive', fieldIndicator.id, { x: 225, y: 410 }, pin(lamp, 'X1'), switched), 'X25', 'H1');
+  wire('return', fieldIndicator.id, pin(lamp, 'X2'), pin(returnTerminal, '1'), 'External annunciator 0 V');
+  notes([
+    ['title', 108, 'H1 · EXTERNALLY POWERED ANNUNCIATOR'],
+    ['feed-note', 230, 'XT12:1 feeds the K3 dry common on A2/020.'],
+    ['command-note', 360, 'K3 normally open contact feeds H1. XT12:2 is the external return.'],
+    ['scope', 510, 'The external supply, protection and cable are unassigned. No connection to the SITOP return is modeled.']
   ]);
 });
 
