@@ -484,6 +484,39 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     if (process.env.CAD_SCREENSHOT_DIR) await wiringPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'connected-terminals.png') });
     await wiringPage.close({ runBeforeUnload: false });
 
+    const touchContext = await browser.newContext({ hasTouch: true, viewport: { width: 1024, height: 768 } });
+    const touchPage = await touchContext.newPage();
+    await touchPage.goto(address);
+    await touchPage.getByRole('button', { name: 'New project' }).tap();
+    await touchPage.locator('#createProject').tap();
+    await touchPage.getByRole('button', { name: 'Add sheet to A2' }).tap();
+    await touchPage.locator('#projectTree [data-sheet]').tap();
+    const tapDrawingPoint = async (x, y) => {
+      const point = await touchPage.locator('#userDrawings').evaluate((node, [x, y]) => {
+        const screen = new DOMPoint(x, y).matrixTransform(node.getScreenCTM());
+        return { x: screen.x, y: screen.y };
+      }, [x, y]);
+      await touchPage.touchscreen.tap(point.x, point.y);
+    };
+    for (const x of [85, 235, 385]) {
+      await touchPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]').tap();
+      await tapDrawingPoint(x, 100);
+    }
+    const touchTerminals = touchPage.locator('#userDrawings [data-object]');
+    const touchPin = (index, number) => touchTerminals.nth(index).locator('[data-component-pin="connection-' + number + '"]');
+    await touchPage.getByRole('button', { name: 'Draw wire' }).tap();
+    await touchPin(0, 2).tap();
+    await touchPin(1, 1).tap();
+    const touchWires = touchPage.locator('#userDrawings path[data-object]');
+    assert.equal(await touchWires.count(), 1, 'touch taps connect two terminal anchors');
+    await touchPin(1, 2).tap();
+    await tapDrawingPoint(285, 165);
+    await tapDrawingPoint(325, 185);
+    await touchPin(2, 1).tap();
+    assert.equal(await touchWires.count(), 2, 'touch taps finish a second wire with manual bends');
+    assert.match(await touchWires.nth(1).getAttribute('d'), /L285 165L325 185L/);
+    await touchContext.close();
+
     const freeDraftingPage = await context.newPage();
     await freeDraftingPage.goto(address);
     await freeDraftingPage.getByRole('button', { name: 'New project' }).click();
