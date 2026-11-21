@@ -642,6 +642,15 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   assert.deepEqual(positionConflict.locations.map(location => [location.sheetId, location.objectId]), [
     ['distribution', 'x1'], ['auxiliary-marshalling', 'x6']
   ]);
+  const wrongInputs = structuredClone(reopened.project);
+  const ai = wrongInputs.crossSheetConnections.find(link => link.id === 'plc-b2-ai0');
+  const di = wrongInputs.crossSheetConnections.find(link => link.id === 'plc-b2-di6');
+  [ai.endpoints[0], di.endpoints[0]] = [di.endpoints[0], ai.endpoints[0]];
+  const wrongReport = engine.analyzeProject(wrongInputs);
+  assert.equal(wrongReport.openEndpointCount, 0);
+  const mismatches = wrongReport.findings.filter(finding => finding.ruleId === 'ERC-PLC-INPUT-TYPE-MISMATCH');
+  assert.deepEqual(mismatches.map(finding => finding.locations.map(location => location.ref + ':' + location.pinNumber).join(',')).sort(),
+    ['B2:2,A1:X10:13', 'B2:4,A1:X11:2']);
 });
 
 test('multi-sheet reference examples classify overview, circuits, installation, and reports by section', () => {

@@ -1196,6 +1196,9 @@
   function isTerminalDefinition(definition) {
     return definition?.family === 'feedthrough-terminal' || definition?.family === 'protective-earth-terminal';
   }
+  function plcChannelType(pin) {
+    return /^(DI|DQ|AI) /.exec(pin.name)?.[1];
+  }
   function catalog(query = '') {
     const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
     const terms = String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
@@ -1644,6 +1647,42 @@
     globalNets.forEach(function (net) {
       net.localNetIds.forEach(function (id) { localToGlobal.set(id, net.id); });
     });
+    const signalRolesByComponent = new Map();
+    for (const object of objects) {
+      if (object.kind !== 'component-instance') continue;
+      const definition = component(object.componentId);
+      if (definition.family === 'plc-cpu') {
+        signalRolesByComponent.set(object.id, new Map(definition.symbol.pins.map(pin => [pin.id, plcChannelType(pin)])));
+      } else if (definition.family === 'sensor-inductive-pnp') {
+        signalRolesByComponent.set(object.id, new Map([[definition.electricalFunctions.output.outputPin, 'digital-output']]));
+      } else if (definition.family === 'sensor-pressure-analog') {
+        const output = definition.electricalFunctions.analogOutput;
+        signalRolesByComponent.set(object.id, new Map([[output.outputPin, 'analog-output'], [output.digitalOutputPin, 'digital-output']]));
+      }
+    }
+    const signalsByNet = new Map();
+    for (const sheet of reports) {
+      for (const net of sheet.analysis.nets) {
+        const netId = localToGlobal.get(net.id);
+        for (const pin of net.pins) {
+          const role = signalRolesByComponent.get(pin.instanceId)?.get(pin.pinId);
+          if (!role) continue;
+          if (!signalsByNet.has(netId)) signalsByNet.set(netId, []);
+          signalsByNet.get(netId).push({ role, location: { sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number } });
+        }
+      }
+    }
+    for (const signals of signalsByNet.values()) {
+      for (const [outputRole, wrongInputRole] of [['analog-output', 'DI'], ['digital-output', 'AI']]) {
+        const outputs = signals.filter(signal => signal.role === outputRole);
+        const inputs = signals.filter(signal => signal.role === wrongInputRole);
+        if (!outputs.length || !inputs.length) continue;
+        add('ERC-PLC-INPUT-TYPE-MISMATCH', 'error',
+          (outputRole === 'analog-output' ? 'An analog' : 'A switching') + ' sensor output is wired to a ' + wrongInputRole + ' channel.',
+          'Check the sensor output mode and wire it to a compatible input channel.',
+          outputs.concat(inputs).map(signal => signal.location));
+      }
+    }
     const potentialsByNet = new Map();
     const netsByWireNumber = new Map();
     const netsByCableCore = new Map();
@@ -2105,7 +2144,7 @@
       if (definition?.family !== 'plc-cpu') continue;
       const sheet = sheetNumbers.get(object.sheetId || analysis.sheets[0].id);
       for (const pin of definition.symbol.pins) {
-        const type = /^(DI|DQ|AI) /.exec(pin.name)?.[1];
+        const type = plcChannelType(pin);
         if (!type) continue;
         const key = pinKey(object.id, pin.id);
         const net = netByPin.get(key);

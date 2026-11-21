@@ -41,6 +41,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "5bc460ffa931f5cade872066ee6579d49fadaa2195a4220b52f052f65153effe",
@@ -88,6 +89,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "a199f0118e8dee7d98e6adac4b66538af86ec21db8e9222a8881a40db8c85382",
@@ -135,6 +137,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "0bbbb1b5fd2c5277d3eab4aa6e41c7ff90ec904be59319ae90cbba3db56aa10d",
@@ -182,6 +185,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "1caa05e1c9d4a86457ca9b5868882ce5d6c998a4030d8e3a1a699311b5a93aa2",
@@ -229,6 +233,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "1a5ea9ee6bf9d54ae94c0351746426350ab32966be4e9b7b4f9e2a07ac8a6483",
@@ -276,6 +281,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "4033fb190d2266902d500e8c2db36abd5cd7776aad3aa5c71acbece56a3c5dd0",
@@ -323,6 +329,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "71275096f353f5e354d1e5224179ee2237e2384568832a520097800c87a58703",
@@ -370,6 +377,7 @@
         "terminalList": true,
         "uniqueTerminalPositions": true,
         "cableAssignments": true,
+        "noElectricalRuleErrors": true,
         "zeroGeometryErrors": true
       },
       "topologySha256": "3565c7b4d06454d62cf88a436c77ec80ecfd2e8be7123d3ba2f418042a56d6ed",

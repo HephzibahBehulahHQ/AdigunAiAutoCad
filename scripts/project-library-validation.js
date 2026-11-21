@@ -134,6 +134,7 @@ function buildReport() {
     const cableFindings = (analysis.findings || []).filter(finding =>
       finding.ruleId === 'ERC-INCOMPLETE-CABLE-CORE' || finding.ruleId === 'ERC-CABLE-CORE-DISCONNECTED');
     const terminalConflicts = (analysis.findings || []).filter(finding => finding.ruleId === 'ERC-TERMINAL-POSITION-CONFLICT');
+    const electricalErrors = (analysis.findings || []).filter(finding => finding.severity === 'error');
     const sheetContent = summarizeSheetContent(project);
     const checks = {
       projectSchema: parsed.valid && analysis.valid,
@@ -145,6 +146,7 @@ function buildReport() {
       terminalList: terminals.valid,
       uniqueTerminalPositions: terminalConflicts.length === 0,
       cableAssignments: cableFindings.length === 0,
+      noElectricalRuleErrors: electricalErrors.length === 0,
       zeroGeometryErrors: analysis.geometryErrorCount === 0
     };
     const errors = [
@@ -156,7 +158,7 @@ function buildReport() {
       ...wireList.errors,
       ...terminals.errors,
       ...cableFindings.map(finding => finding.message),
-      ...terminalConflicts.map(finding => finding.message)
+      ...electricalErrors.map(finding => finding.message)
     ];
     if (analysis.geometryErrorCount !== 0) errors.push('Project contains geometry errors.');
     if (analysis.openEndpointCount > 0) errors.push('Project contains unresolved wire endpoints.');
@@ -191,7 +193,7 @@ function buildReport() {
         wireListRowCount: wireList.rows.length,
         terminalListRowCount: terminals.rows.length
       },
-      errors
+      errors: [...new Set(errors)]
     };
   });
 
