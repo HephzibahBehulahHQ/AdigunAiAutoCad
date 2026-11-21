@@ -13,35 +13,45 @@
       "title": "24 V DC relay-operated contactor coil",
       "topologyId": "relay-contactor-control",
       "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
-      "role": "multi-sheet-reference-package"
+      "role": "multi-sheet-reference-package",
+      "domain": "Relay control",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "ifm-sensor-plc-input",
       "title": "IFM IFS204 sensor to Siemens S7-1200 input",
       "topologyId": "sensor-to-plc-input",
       "path": "examples/real-projects/ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json",
-      "role": "standalone-example"
+      "role": "standalone-example",
+      "domain": "PLC instrumentation",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "siemens-3rm12-reversing",
       "title": "Siemens 3RM12 reversing starter",
       "topologyId": "reversing-starter",
       "path": "examples/real-projects/siemens-3rm12-reversing-starter.adigun.json",
-      "role": "multi-sheet-reference-package"
+      "role": "multi-sheet-reference-package",
+      "domain": "Motor reversing",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "dol-motor-feeder",
       "title": "DOL motor feeder",
       "topologyId": "direct-on-line-motor-feeder",
       "path": "examples/real-projects/siemens-schneider-sew-dol-starter.adigun.json",
-      "role": "standalone-example"
+      "role": "standalone-example",
+      "domain": "Direct-on-line motor control",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "star-delta-starter",
       "title": "Siemens/SEW star-delta starter",
       "topologyId": "star-delta-starter",
       "path": "examples/real-projects/siemens-sew-star-delta-starter.adigun.json",
-      "role": "standalone-example"
+      "role": "standalone-example",
+      "domain": "Star-delta motor control",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "star-delta-100-sheet",
@@ -49,7 +59,9 @@
       "topologyId": "star-delta-starter",
       "path": "examples/real-projects/siemens-sew-star-delta-reference.adigun.json",
       "role": "multi-sheet-reference-package",
-      "extendsProjectId": "star-delta-starter"
+      "extendsProjectId": "star-delta-starter",
+      "domain": "Star-delta motor control",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "dol-reference-opening",
@@ -57,14 +69,18 @@
       "topologyId": "direct-on-line-motor-feeder",
       "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
       "role": "multi-sheet-reference-package",
-      "extendsProjectId": "dol-motor-feeder"
+      "extendsProjectId": "dol-motor-feeder",
+      "domain": "Direct-on-line motor control",
+      "standardProfile": "IEC-style symbols"
     },
     {
       "id": "sitop-24v-dc-distribution",
       "title": "SITOP 24 V DC two-branch terminal distribution",
       "topologyId": "dc-two-branch-terminal-distribution",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
-      "role": "standalone-example"
+      "role": "standalone-example",
+      "domain": "DC distribution and PLC instrumentation",
+      "standardProfile": "IEC-style symbols"
     }
   ]
 }

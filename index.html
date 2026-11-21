@@ -1275,17 +1275,75 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     openNativeProject(copy,entry.path);
     notify('Opened an independent editable copy. Save it locally under your project name when ready.');
   }
-  async function showExampleValidation(entry,button,detail){
-    const validation=(await loadExampleValidation()).get(entry.id);
-    const count=validation?.metrics?.sheetCount;
-    if(!button.isConnected||validation?.path!==entry.path||!Number.isInteger(count)||count<1)return;
-    const sheets=count+' '+(count===1?'sheet':'sheets');
-    const status=validation.status==='passed'?'Model checks passed':'Model checks require review';
-    detail.textContent=sheets+(validation.status==='passed'?' ✓':' !');
-    detail.title=status;
-    button.setAttribute('aria-description',sheets+'. '+status+' in the library report.');
+  async function renderEditableExampleProjects(query){
+    const host=$('#editableExampleProjects');
+    if(!host)return;
+    const generation=++exampleSearchGeneration;
+    const terms=String(query||'').trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const statusRow=document.createElement('div');
+    statusRow.className='notice';
+    statusRow.textContent='Loading editable project examples…';
+    host.replaceChildren(statusRow);
+    try{
+      const [catalog,validations]=await Promise.all([loadExampleCatalog(),loadExampleValidation()]);
+      if(generation!==exampleSearchGeneration)return;
+      host.replaceChildren();
+      let group='';
+      catalog.projects.forEach((entry,index)=>{
+        if(typeof entry.path!=='string'||!entry.path.startsWith('examples/real-projects/')||!entry.path.endsWith('.adigun.json'))return;
+        const validation=validations.get(entry.id);
+        const metrics=validation?.path===entry.path?validation.metrics:null;
+        const sheets=Number.isInteger(metrics?.sheetCount)?metrics.sheetCount+' '+(metrics.sheetCount===1?'sheet':'sheets'):'';
+        const status=metrics?(validation.status==='passed'?'Model checks passed':'Model checks require review'):'Validation unavailable';
+        const complexity=metrics?[metrics.componentCount+' components',metrics.wireCount+' wire segments'].join(' · '):'';
+        const keywords=[entry.title,entry.role,entry.id,entry.topologyId,entry.domain,entry.standardProfile,sheets,status,complexity].join(' ').toLowerCase();
+        if(!terms.every(term=>keywords.includes(term)))return;
+        const nextGroup=entry.role==='multi-sheet-reference-package'?'Multi-sheet reference packages':'Standalone project examples';
+        if(nextGroup!==group){
+          group=nextGroup;
+          const heading=document.createElement('div');
+          heading.className='library-group';
+          heading.textContent=group;
+          host.append(heading);
+        }
+        const button=document.createElement('button');
+        button.type='button';
+        button.className='tree-row project-example-row';
+        button.setAttribute('role','listitem');
+        button.dataset.exampleProject=entry.id;
+        button.setAttribute('aria-label','Open '+entry.title+' as an editable copy');
+        const description=[entry.domain,entry.standardProfile,sheets,complexity,status].filter(Boolean).join(' · ');
+        button.setAttribute('aria-description',description);
+        button.title=description;
+        const folder=document.createElement('span');
+        folder.className='folder';
+        folder.textContent='▰';
+        const number=document.createElement('b');
+        number.textContent=String(index+1).padStart(2,'0');
+        const title=document.createElement('span');
+        title.className='project-example-title';
+        title.textContent=entry.title;
+        const metadata=document.createElement('small');
+        metadata.style.display='block';
+        metadata.textContent=entry.domain||'';
+        if(metadata.textContent)title.append(metadata);
+        const detail=document.createElement('span');
+        detail.className='detail';
+        detail.textContent=sheets?sheets+(validation.status==='passed'?' ✓':' !'):'Copy';
+        button.append(folder,number,title,detail);
+        button.addEventListener('click',async()=>{
+          button.disabled=true;
+          try{await openEditableExample(entry);}
+          catch(error){notify('Example copy could not be opened: '+error.message);button.disabled=false;}
+        });
+        host.append(button);
+      });
+      if(!host.querySelector('[data-example-project]')){
+        statusRow.textContent='No editable project examples match this search.';
+        host.append(statusRow);
+      }
+    }catch(error){statusRow.textContent='Example catalog could not be loaded: '+error.message;}
   }
-  async function renderEditableExampleProjects(query){const host=$('#editableExampleProjects');if(!host)return;const generation=++exampleSearchGeneration,filter=String(query||'').trim().toLowerCase();host.replaceChildren();const statusRow=document.createElement('div');statusRow.className='notice';statusRow.textContent='Loading editable project examples…';host.append(statusRow);try{const catalog=await loadExampleCatalog();if(generation!==exampleSearchGeneration)return;host.replaceChildren();let group='';catalog.projects.forEach(function(entry,index){if(typeof entry.path!=='string'||!entry.path.startsWith('examples/real-projects/')||!entry.path.endsWith('.adigun.json'))return;const keywords=[entry.title,entry.role,entry.id,entry.topologyId].join(' ').toLowerCase();if(filter&&!filter.split(/\s+/).every(term=>keywords.includes(term)))return;const nextGroup=entry.role==='multi-sheet-reference-package'?'Multi-sheet reference packages':'Standalone project examples';if(nextGroup!==group){group=nextGroup;const heading=document.createElement('div');heading.className='library-group';heading.textContent=group;host.append(heading);}const button=document.createElement('button');button.type='button';button.className='tree-row project-example-row';button.setAttribute('role','listitem');button.dataset.exampleProject=entry.id;button.setAttribute('aria-label','Open '+entry.title+' as an editable copy');const folder=document.createElement('span');folder.className='folder';folder.textContent='▰';const number=document.createElement('b');number.textContent=String(index+1).padStart(2,'0');const title=document.createElement('span');title.className='project-example-title';title.textContent=entry.title;const copyLabel=document.createElement('span');copyLabel.className='detail';copyLabel.textContent='Copy';button.append(folder,number,title,copyLabel);void showExampleValidation(entry,button,copyLabel);button.addEventListener('click',async function(){button.disabled=true;try{await openEditableExample(entry);}catch(error){notify('Example copy could not be opened: '+error.message);button.disabled=false;}});host.append(button);});if(!host.querySelector('[data-example-project]')){const empty=document.createElement('div');empty.className='notice';empty.textContent='No editable project examples match this search.';host.append(empty);}}catch(error){statusRow.textContent='Example catalog could not be loaded: '+error.message;}}
   const browserDraftKey='adigun-native-draft-v1';
   let browserDraftTimer=null,browserDraftPending=false;
   function scheduleBrowserDraft(){

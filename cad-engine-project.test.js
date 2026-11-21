@@ -222,6 +222,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const catalogRows = await examplePage.locator('#editableExampleProjects [data-example-project]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.exampleProject, number: node.querySelector('b')?.textContent })));
     assert.deepEqual(catalogRows.map(row => row.id), catalogProjects.map(project => project.id), 'Project Explorer lists every catalog example in order');
     assert.deepEqual(catalogRows.map(row => row.number), catalogProjects.map((project, index) => String(index + 1).padStart(2, '0')));
+    await examplePage.locator('#projectSearch').fill('DC distribution IEC-style 18 sheets');
+    const distributionRow = examplePage.locator('#editableExampleProjects [data-example-project="sitop-24v-dc-distribution"]');
+    await distributionRow.waitFor();
+    assert.equal(await examplePage.locator('#editableExampleProjects [data-example-project]').count(), 1);
+    assert.match(await distributionRow.getAttribute('aria-description'), /30 components.*110 wire segments.*Model checks passed/);
+    await examplePage.locator('#projectSearch').clear();
     for (const entry of catalogProjects) {
       const sourceText = fs.readFileSync(path.join(root, entry.path), 'utf8');
       const source = engine.parseProject(sourceText).project;
