@@ -40,26 +40,22 @@ function summarizeSheetContent(project) {
     ? project.sheets
     : [{ id: project.activeSheet || 'main' }];
   const objects = Array.isArray(project.objects) ? project.objects : [];
-  const perSheet = sheets.map(sheet => {
-    const pageObjects = objects.filter(object => object
-      && (object.sheetId === sheet.id || (!object.sheetId && sheets.length === 1)));
-    const contentObjects = pageObjects.filter(object => {
-      if (object.kind === 'component-instance' || object.kind === 'wire') return true;
-      return object.kind === 'text'
-        && typeof object.text === 'string'
-        && object.text.trim().length > 0
-        && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text);
-    });
-    return {
-      id: sheet.id,
-      objectCount: pageObjects.length,
-      contentObjectCount: contentObjects.length
-    };
-  });
+  const counts = new Map(sheets.map(sheet => [sheet.id, 0]));
+  const defaultSheet = sheets.length === 1 ? sheets[0].id : undefined;
+  for (const object of objects) {
+    if (!object) continue;
+    const id = object.sheetId || defaultSheet;
+    if (!counts.has(id)) continue;
+    const meaningful = object.kind === 'component-instance' || object.kind === 'wire'
+      || (object.kind === 'text' && typeof object.text === 'string' && object.text.trim().length > 0
+        && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text));
+    if (meaningful) counts.set(id, counts.get(id) + 1);
+  }
+  const emptyContentSheetIds = sheets.filter(sheet => counts.get(sheet.id) === 0).map(sheet => sheet.id);
   return {
-    authoredSheetCount: perSheet.filter(sheet => sheet.contentObjectCount > 0).length,
-    contentObjectCount: perSheet.reduce((sum, sheet) => sum + sheet.contentObjectCount, 0),
-    emptyContentSheetIds: perSheet.filter(sheet => sheet.contentObjectCount === 0).map(sheet => sheet.id)
+    authoredSheetCount: sheets.length - emptyContentSheetIds.length,
+    contentObjectCount: [...counts.values()].reduce((sum, count) => sum + count, 0),
+    emptyContentSheetIds
   };
 }
 
