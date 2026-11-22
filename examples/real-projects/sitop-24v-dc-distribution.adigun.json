@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.6",
+  "revision": "3.7",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -179,6 +179,12 @@
       "id": "indicator-supply-test",
       "number": "A2/028",
       "name": "XT16 independent indicator supply test access",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "b3-field-terminations",
+      "number": "A2/029",
+      "name": "XT17 B3 field cable terminations",
       "projectSectionId": "A2"
     }
   ],
@@ -2934,7 +2940,7 @@
         "terminalStrip": "XT9",
         "position": "1",
         "marking": "B3 OUT2 to AI1",
-        "comment": "B3 OUT2 on A2/024."
+        "comment": "B3 OUT2 through XT17 on A2/029."
       },
       "sheetId": "spare-analog-interface"
     },
@@ -2951,7 +2957,7 @@
         "terminalStrip": "XT9",
         "position": "2",
         "marking": "Analog reference 2M",
-        "comment": "B3 L− on A2/024 and CPU 2M on A2/005."
+        "comment": "B3 L− through XT17 on A2/029 and CPU 2M on A2/005."
       },
       "sheetId": "spare-analog-interface"
     },
@@ -3062,7 +3068,7 @@
       "sheetId": "spare-analog-interface",
       "x": 110,
       "y": 455,
-      "text": "B3 uses XT9:1 for OUT2 and XT9:2 for L−. No cable or scaling is assigned.",
+      "text": "B3 uses XT9:1 for OUT2 and XT9:2 for L− via XT17. Scaling is unassigned.",
       "stroke": "#13263b"
     },
     {
@@ -3785,6 +3791,90 @@
     {
       "schemaVersion": 1,
       "kind": "component-instance",
+      "id": "b3-field-terminations-x42",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X42",
+      "x": 560,
+      "y": 280,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT17",
+        "position": "1",
+        "marking": "B3 supply"
+      },
+      "sheetId": "b3-field-terminations"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-field-terminations-x43",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X43",
+      "x": 560,
+      "y": 350,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT17",
+        "position": "2",
+        "marking": "B3 OUT2 to AI1"
+      },
+      "sheetId": "b3-field-terminations"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-field-terminations-x44",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X44",
+      "x": 560,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT17",
+        "position": "3",
+        "marking": "B3 return to 2M"
+      },
+      "sheetId": "b3-field-terminations"
+    },
+    {
+      "id": "b3-field-terminations-title",
+      "kind": "text",
+      "sheetId": "b3-field-terminations",
+      "x": 110,
+      "y": 108,
+      "text": "XT17 · B3 FIELD CABLE TERMINATIONS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-field-terminations-feed",
+      "kind": "text",
+      "sheetId": "b3-field-terminations",
+      "x": 110,
+      "y": 205,
+      "text": "XT17 picks up Branch B power and the AI1 signal and reference from XT9.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-field-terminations-cable",
+      "kind": "text",
+      "sheetId": "b3-field-terminations",
+      "x": 110,
+      "y": 500,
+      "text": "W-B3 carries L+, OUT2 and L− to B3. OUT1 is unused.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-field-terminations-scope",
+      "kind": "text",
+      "sheetId": "b3-field-terminations",
+      "x": 110,
+      "y": 545,
+      "text": "The schedule identifies the connected cores. Cable construction and routing remain unassigned.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
       "id": "ai1-pressure-sensor-b3",
       "componentId": "ifm-pn2070",
       "ref": "B3",
@@ -3812,6 +3902,48 @@
       "strokeWidth": 1.5
     },
     {
+      "id": "ai1-pressure-sensor-power-xt17-feed",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 210,
+      "y": 280,
+      "x1": 210,
+      "y1": 280,
+      "x2": 525,
+      "y2": 280,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-field-terminations-x42",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-power-cable-send",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 595,
+      "y": 280,
+      "x1": 595,
+      "y1": 280,
+      "x2": 890,
+      "y2": 280,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-field-terminations-x42",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-B3",
+      "coreId": "1"
+    },
+    {
       "id": "ai1-pressure-sensor-power",
       "kind": "wire",
       "sheetId": "ai1-pressure-sensor",
@@ -3829,7 +3961,9 @@
           "instanceId": "ai1-pressure-sensor-b3",
           "pinId": "pin-1-lplus"
         }
-      }
+      },
+      "cableId": "W-B3",
+      "coreId": "1"
     },
     {
       "id": "ai1-pressure-sensor-signal-send",
@@ -3852,6 +3986,48 @@
       }
     },
     {
+      "id": "ai1-pressure-sensor-signal-xt17-feed",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 210,
+      "y": 350,
+      "x1": 210,
+      "y1": 350,
+      "x2": 525,
+      "y2": 350,
+      "potential": "B3 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-field-terminations-x43",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-signal-cable-send",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 595,
+      "y": 350,
+      "x1": 595,
+      "y1": 350,
+      "x2": 890,
+      "y2": 350,
+      "potential": "B3 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-field-terminations-x43",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-B3",
+      "coreId": "2"
+    },
+    {
       "id": "ai1-pressure-sensor-signal",
       "kind": "wire",
       "sheetId": "ai1-pressure-sensor",
@@ -3869,7 +4045,9 @@
           "instanceId": "ai1-pressure-sensor-b3",
           "pinId": "pin-2-out2"
         }
-      }
+      },
+      "cableId": "W-B3",
+      "coreId": "2"
     },
     {
       "id": "ai1-pressure-sensor-return-send",
@@ -3892,6 +4070,48 @@
       }
     },
     {
+      "id": "ai1-pressure-sensor-return-xt17-feed",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 210,
+      "y": 420,
+      "x1": 210,
+      "y1": 420,
+      "x2": 525,
+      "y2": 420,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-field-terminations-x44",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-return-cable-send",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 595,
+      "y": 420,
+      "x1": 595,
+      "y1": 420,
+      "x2": 890,
+      "y2": 420,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-field-terminations-x44",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-B3",
+      "coreId": "3"
+    },
+    {
       "id": "ai1-pressure-sensor-return",
       "kind": "wire",
       "sheetId": "ai1-pressure-sensor",
@@ -3909,7 +4129,9 @@
           "instanceId": "ai1-pressure-sensor-b3",
           "pinId": "pin-3-lminus"
         }
-      }
+      },
+      "cableId": "W-B3",
+      "coreId": "3"
     },
     {
       "id": "ai1-pressure-sensor-title",
@@ -3944,7 +4166,7 @@
       "sheetId": "ai1-pressure-sensor",
       "x": 110,
       "y": 490,
-      "text": "The schematic assumes 0–10 V output mode. OUT1, process location, cable and scaling are unassigned.",
+      "text": "W-B3 terminates at XT17 on A2/029. The drawing assumes 0–10 V output mode. OUT1 and scaling are unassigned.",
       "stroke": "#13263b"
     },
     {
@@ -6799,7 +7021,7 @@
     },
     {
       "id": "ai1-pressure-sensor-power",
-      "name": "Branch B feed to B3",
+      "name": "B3 supply",
       "endpoints": [
         {
           "sheetId": "distribution",
@@ -6807,6 +7029,38 @@
           "point": {
             "x": 690,
             "y": 425
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X42"
+          }
+        },
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-power-xt17-feed",
+          "point": {
+            "x": 210,
+            "y": 280
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-power-cable",
+      "name": "W-B3:1 · B3 supply",
+      "endpoints": [
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-power-cable-send",
+          "point": {
+            "x": 890,
+            "y": 280
           },
           "connector": {
             "direction": "right",
@@ -6823,8 +7077,8 @@
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "distribution",
-            "targetRef": "X2"
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X42"
           }
         }
       ]
@@ -6842,6 +7096,38 @@
           },
           "connector": {
             "direction": "left",
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X43"
+          }
+        },
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-signal-xt17-feed",
+          "point": {
+            "x": 210,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "spare-analog-interface",
+            "targetRef": "X22"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-signal-cable",
+      "name": "W-B3:2 · B3 OUT2 to AI1",
+      "endpoints": [
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-signal-cable-send",
+          "point": {
+            "x": 890,
+            "y": 350
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "ai1-pressure-sensor",
             "targetRef": "B3"
           }
@@ -6855,15 +7141,15 @@
           },
           "connector": {
             "direction": "right",
-            "targetSheetId": "spare-analog-interface",
-            "targetRef": "X22"
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X43"
           }
         }
       ]
     },
     {
       "id": "ai1-pressure-sensor-return",
-      "name": "B3 L− to 2M",
+      "name": "B3 return to 2M",
       "endpoints": [
         {
           "sheetId": "spare-analog-interface",
@@ -6874,6 +7160,38 @@
           },
           "connector": {
             "direction": "left",
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X44"
+          }
+        },
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-return-xt17-feed",
+          "point": {
+            "x": 210,
+            "y": 420
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "spare-analog-interface",
+            "targetRef": "X23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-return-cable",
+      "name": "W-B3:3 · B3 return to 2M",
+      "endpoints": [
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-return-cable-send",
+          "point": {
+            "x": 890,
+            "y": 420
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "ai1-pressure-sensor",
             "targetRef": "B3"
           }
@@ -6887,8 +7205,8 @@
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "spare-analog-interface",
-            "targetRef": "X23"
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X44"
           }
         }
       ]
