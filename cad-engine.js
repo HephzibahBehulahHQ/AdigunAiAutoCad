@@ -2200,9 +2200,7 @@
       ['Source URL', 'sourceUrl'], ['Source retrieved date', 'sourceRetrievedAt']
     ];
     function cell(value) {
-      let text = Array.isArray(value) ? value.join(', ') : String(value == null ? '' : value);
-      if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;
-      return '"' + text.replace(/"/g, '""') + '"';
+      return spreadsheetCsvCell(value, ', ');
     }
     const lines = [columns.map(function (column) { return cell(column[0]); }).join(',')];
     report.rows.forEach(function (row) { lines.push(columns.map(function (column) { return cell(row[column[1]]); }).join(',')); });
@@ -2451,11 +2449,15 @@
     ], rows);
   }
 
+  function spreadsheetCsvCell(value, listSeparator) {
+    let text = Array.isArray(value) ? value.join(listSeparator) : String(value ?? '');
+    if (typeof value !== 'number' && /^[\s\uFEFF]*(?:[=+\-@\t\r\n])/.test(text)) text = "'" + text;
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+
   function connectionReportCsv(columns, rows) {
     function cell(value) {
-      let text = Array.isArray(value) ? value.join('; ') : String(value == null ? '' : value);
-      if (/^[=+\-@\t\r]/.test(text)) text = "'" + text;
-      return '"' + text.replace(/"/g, '""') + '"';
+      return spreadsheetCsvCell(value, '; ');
     }
     const lines = [columns.map(function (column) { return cell(column[0]); }).join(',')];
     rows.forEach(function (row) {

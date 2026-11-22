@@ -697,6 +697,10 @@ test('wire list CSV is deterministic and protects spreadsheet formula prefixes',
   assert.ok(csv.startsWith('\uFEFF'));
   assert.match(csv, /"Wire ID"/);
   assert.match(csv, /"'=1\+1"/);
+  const offsetWire = { id: '  =1+1', kind: 'wire', x1: -12, y1: -5, x2: 0, y2: -5 };
+  const offsetCsv = engine.wireListCsv([offsetWire]);
+  assert.match(offsetCsv, /"'  =1\+1"/);
+  assert.match(offsetCsv, /"-12","-5"/);
   assert.equal(csv, engine.wireListCsv([...objects].reverse()));
 });
 
