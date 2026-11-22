@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.1",
+  "revision": "1.2",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum and release pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -33,6 +33,12 @@
       "id": "pick-place-vacuum-confirmation",
       "number": "A2/005",
       "name": "Vacuum achieved switch interface",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-air-pressure-confirmation",
+      "number": "A2/006",
+      "name": "Compressed-air pressure switch interface",
       "projectSectionId": "A2"
     }
   ],
@@ -684,6 +690,135 @@
     {
       "schemaVersion": 1,
       "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X9",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "1",
+        "marking": "Feed to external air-pressure switch",
+        "comment": ""
+      },
+      "sheetId": "pick-place-air-pressure-confirmation"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "2",
+        "marking": "Air-pressure-ready contact return",
+        "comment": ""
+      },
+      "sheetId": "pick-place-air-pressure-confirmation"
+    },
+    {
+      "id": "air-switch-feed-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 185,
+      "x1": 960,
+      "y1": 185,
+      "x2": 1020,
+      "y2": 185,
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "air-switch-feed-field",
+      "sheetId": "pick-place-air-pressure-confirmation",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 265,
+      "x1": 435,
+      "y1": 265,
+      "x2": 215,
+      "y2": 265,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x9",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "air-pressure-confirmation-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "XT5 air pressure ready to DI a.3",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 396,
+      "x1": 600,
+      "y1": 396,
+      "x2": 215,
+      "y2": 486,
+      "bends": [
+        {
+          "x": 593,
+          "y": 396
+        },
+        {
+          "x": 593,
+          "y": 486
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-10"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "id": "air-pressure-confirmation-field",
+      "sheetId": "pick-place-air-pressure-confirmation",
+      "kind": "wire",
+      "potential": "XT5 air pressure ready to DI a.3",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 390,
+      "x1": 435,
+      "y1": 390,
+      "x2": 215,
+      "y2": 390,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x10",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
       "id": "k1",
       "componentId": "phoenix-contact-2966171",
       "ref": "K1",
@@ -1152,6 +1287,22 @@
       "x": 105,
       "y": 588,
       "text": "W-01 carries the feed and DI a.2 return for an external contact that closes at the required vacuum. Sensor selection and threshold remain unassigned."
+    },
+    {
+      "id": "pick-place-air-pressure-confirmation-note-0",
+      "sheetId": "pick-place-air-pressure-confirmation",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "COMPRESSED-AIR PRESSURE SWITCH · XT5"
+    },
+    {
+      "id": "pick-place-air-pressure-confirmation-note-1",
+      "sheetId": "pick-place-air-pressure-confirmation",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "W-02 carries the feed and DI a.3 return for an external air-pressure-ready contact. The switch, pressure threshold and PLC response remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -1335,6 +1486,70 @@
         {
           "sheetId": "pick-place-vacuum-confirmation",
           "wireId": "vacuum-confirmation-field",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "air-switch-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "air-switch-feed-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 185
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-air-pressure-confirmation",
+            "targetRef": "X9"
+          }
+        },
+        {
+          "sheetId": "pick-place-air-pressure-confirmation",
+          "wireId": "air-switch-feed-field",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "air-pressure-confirmation",
+      "name": "XT5 air pressure ready to DI a.3",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "air-pressure-confirmation-cabinet",
+          "point": {
+            "x": 215,
+            "y": 486
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-air-pressure-confirmation",
+            "targetRef": "X10"
+          }
+        },
+        {
+          "sheetId": "pick-place-air-pressure-confirmation",
+          "wireId": "air-pressure-confirmation-field",
           "point": {
             "x": 215,
             "y": 390
