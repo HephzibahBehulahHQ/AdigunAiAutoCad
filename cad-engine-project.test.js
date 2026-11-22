@@ -1038,6 +1038,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await disconnectGlyph.dispatchEvent('dblclick', { bubbles: true });
     const knifePosition = disconnectPage.getByLabel('Knife position', { exact: true });
     assert.equal(await knifePosition.inputValue(), 'closed');
+    const initialSymbolTransform = await disconnectGlyph.getAttribute('transform');
+    await knifePosition.press('ArrowLeft');
+    assert.equal(await disconnectGlyph.getAttribute('transform'), initialSymbolTransform,
+      'arrow keys in the properties dropdown do not nudge the selected symbol');
     await knifePosition.selectOption('open');
     await disconnectGlyph.locator('path[d="M-12 0L12 -11"]').waitFor({ state: 'attached' });
     await disconnectPage.getByRole('button', { name: 'Electrical checks', exact: true }).click();
