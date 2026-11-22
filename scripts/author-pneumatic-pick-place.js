@@ -18,10 +18,11 @@ const interlock = 'pick-place-slide-interlock';
 const power = 'pick-place-control-supply';
 const cabinetEarth = 'pick-place-cabinet-protective-earth';
 const fieldEarth = 'pick-place-field-protective-earth';
+const station = 'pick-place-local-operator-station';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.6',
+  revision: '1.7',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -36,7 +37,8 @@ const project = {
     { id: interlock, number: 'A2/009', name: 'Opposite-command slide inhibit', projectSectionId: 'A2' },
     { id: power, number: 'A2/010', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
     { id: cabinetEarth, number: 'A2/011', name: 'Cabinet protective-earth distribution', projectSectionId: 'A2' },
-    { id: fieldEarth, number: 'A2/012', name: 'Remote valve and slide frame PE terminals', projectSectionId: 'A2' }
+    { id: fieldEarth, number: 'A2/012', name: 'Remote valve and slide frame PE terminals', projectSectionId: 'A2' },
+    { id: station, number: 'A2/013', name: 'Local start and operational stop station', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -235,6 +237,27 @@ for (const [sheet, entry, first, second] of [
   wire(sheet, sheet + '-lower', 'PE', junction, pin(second, '1'), [{ x: 575, y: 425 }]);
 }
 
+const start = device(station, 'S1', 'schneider-electric-xb5aa31', 605, 270, { marking: 'Local start request' });
+const stop = device(station, 'S2', 'schneider-electric-xb5aa42', 605, 410, { marking: 'Local operational stop' });
+const stationFeed = { x: 390, y: 270 };
+connectSheets('operator-station-feed', '+24 V DC',
+  cabinetPort('X1', { x: 960, y: 215 }, 1020, 215, 'right'),
+  fieldPort(station, start.ref, stationFeed, 215, 270, 'left'),
+  { cableId: 'W-03', coreId: '1' });
+wire(station, 'start-switch-feed', '+24 V DC', stationFeed, pin(start, '13'));
+wire(station, 'stop-switch-feed', '+24 V DC', stationFeed, pin(stop, '21'), [{ x: 390, y: 410 }]);
+for (const [button, terminalNumber, contact, signal, coreId, elbow, edgeY] of [
+  [start, 'X10:11', '14', 'S1 start request to DI a.4', '2', 595, 520],
+  [stop, 'X10:12', '22', 'S2 stop request to DI a.5', '3', 598, 555]
+]) {
+  const input = pin(plc, terminalNumber);
+  const terminal = pin(button, contact);
+  connectSheets(button.id + '-operator-input', signal,
+    cabinetPort('A1', input, 215, edgeY, 'left', [{ x: elbow, y: input.y }, { x: elbow, y: edgeY }]),
+    fieldPort(station, button.ref, terminal, 960, terminal.y, 'right'),
+    { cableId: 'W-03', coreId });
+}
+
 for (const [sheetId, title, text] of [
   [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives 24 V DC from PS1. B1 and B2 report slide position. Four outputs command isolated pilot interfaces.'],
   [sensors, 'SLIDE POSITION SENSORS · B1 AND B2', 'B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned.'],
@@ -247,7 +270,8 @@ for (const [sheetId, title, text] of [
   [interlock, 'SLIDE OPPOSITE-COMMAND INHIBIT · K5 AND K6', 'Each asserted command opens the opposite pilot path after relay operation. Transition timing and safety functions remain outside this schematic.'],
   [power, 'CONTROL SUPPLY · PS1', 'XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
   [cabinetEarth, 'CABINET PROTECTIVE EARTH · XT10', 'XT10 branches incoming PE to the controller enclosure terminal and the remote assembly. Physical bonds remain unassigned.'],
-  [fieldEarth, 'REMOTE VALVE AND SLIDE PROTECTIVE EARTH · XT11', 'XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned.']
+  [fieldEarth, 'REMOTE VALVE AND SLIDE PROTECTIVE EARTH · XT11', 'XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned.'],
+  [station, 'LOCAL START AND OPERATIONAL STOP · S1 AND S2', 'W-03 carries the feed and both request inputs. S1 closes DI a.4 and S2 opens DI a.5 when pressed. Emergency-stop functions remain outside this drawing.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label

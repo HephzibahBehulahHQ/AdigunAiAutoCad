@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.6",
+  "revision": "1.7",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -75,6 +75,12 @@
       "id": "pick-place-field-protective-earth",
       "number": "A2/012",
       "name": "Remote valve and slide frame PE terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-local-operator-station",
+      "number": "A2/013",
+      "name": "Local start and operational stop station",
       "projectSectionId": "A2"
     }
   ],
@@ -2586,6 +2592,232 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s1",
+      "componentId": "schneider-electric-xb5aa31",
+      "ref": "S1",
+      "x": 605,
+      "y": 270,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Local start request",
+        "comment": ""
+      },
+      "sheetId": "pick-place-local-operator-station"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s2",
+      "componentId": "schneider-electric-xb5aa42",
+      "ref": "S2",
+      "x": 605,
+      "y": 410,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Local operational stop",
+        "comment": ""
+      },
+      "sheetId": "pick-place-local-operator-station"
+    },
+    {
+      "id": "operator-station-feed-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 215,
+      "x1": 960,
+      "y1": 215,
+      "x2": 1020,
+      "y2": 215,
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "operator-station-feed-field",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 270,
+      "x1": 390,
+      "y1": 270,
+      "x2": 215,
+      "y2": 270,
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "start-switch-feed",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 270,
+      "x1": 390,
+      "y1": 270,
+      "x2": 550,
+      "y2": 270,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s1",
+          "pinId": "contact-13"
+        }
+      }
+    },
+    {
+      "id": "stop-switch-feed",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 270,
+      "x1": 390,
+      "y1": 270,
+      "x2": 550,
+      "y2": 410,
+      "bends": [
+        {
+          "x": 390,
+          "y": 410
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s2",
+          "pinId": "contact-21"
+        }
+      }
+    },
+    {
+      "id": "s1-operator-input-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "S1 start request to DI a.4",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 414,
+      "x1": 600,
+      "y1": 414,
+      "x2": 215,
+      "y2": 520,
+      "bends": [
+        {
+          "x": 595,
+          "y": 414
+        },
+        {
+          "x": 595,
+          "y": 520
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-11"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
+      "id": "s1-operator-input-field",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "wire",
+      "potential": "S1 start request to DI a.4",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 660,
+      "y": 270,
+      "x1": 660,
+      "y1": 270,
+      "x2": 960,
+      "y2": 270,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s1",
+          "pinId": "contact-14"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
+      "id": "s2-operator-input-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "S2 stop request to DI a.5",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 432,
+      "x1": 600,
+      "y1": 432,
+      "x2": 215,
+      "y2": 555,
+      "bends": [
+        {
+          "x": 598,
+          "y": 432
+        },
+        {
+          "x": 598,
+          "y": 555
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-12"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "3"
+    },
+    {
+      "id": "s2-operator-input-field",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "wire",
+      "potential": "S2 stop request to DI a.5",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 660,
+      "y": 410,
+      "x1": 660,
+      "y1": 410,
+      "x2": 960,
+      "y2": 410,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s2",
+          "pinId": "contact-22"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "3"
+    },
+    {
       "id": "pick-place-plc-note-0",
       "sheetId": "pick-place-plc",
       "kind": "text",
@@ -2776,6 +3008,22 @@
       "x": 105,
       "y": 588,
       "text": "XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned."
+    },
+    {
+      "id": "pick-place-local-operator-station-note-0",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "LOCAL START AND OPERATIONAL STOP · S1 AND S2"
+    },
+    {
+      "id": "pick-place-local-operator-station-note-1",
+      "sheetId": "pick-place-local-operator-station",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "W-03 carries the feed and both request inputs. S1 closes DI a.4 and S2 opens DI a.5 when pressed. Emergency-stop functions remain outside this drawing."
     }
   ],
   "crossSheetConnections": [
@@ -3607,6 +3855,102 @@
             "direction": "left",
             "targetSheetId": "pick-place-cabinet-protective-earth",
             "targetRef": "X22"
+          }
+        }
+      ]
+    },
+    {
+      "id": "operator-station-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "operator-station-feed-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 215
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-local-operator-station",
+            "targetRef": "S1"
+          }
+        },
+        {
+          "sheetId": "pick-place-local-operator-station",
+          "wireId": "operator-station-feed-field",
+          "point": {
+            "x": 215,
+            "y": 270
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s1-operator-input",
+      "name": "S1 start request to DI a.4",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "s1-operator-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 520
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-local-operator-station",
+            "targetRef": "S1"
+          }
+        },
+        {
+          "sheetId": "pick-place-local-operator-station",
+          "wireId": "s1-operator-input-field",
+          "point": {
+            "x": 960,
+            "y": 270
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2-operator-input",
+      "name": "S2 stop request to DI a.5",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "s2-operator-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 555
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-local-operator-station",
+            "targetRef": "S2"
+          }
+        },
+        {
+          "sheetId": "pick-place-local-operator-station",
+          "wireId": "s2-operator-input-field",
+          "point": {
+            "x": 960,
+            "y": 410
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
           }
         }
       ]
