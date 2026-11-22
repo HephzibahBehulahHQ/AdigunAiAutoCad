@@ -403,8 +403,18 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const terminalIds = [];
     let propertiesViewportWidth;
     for (const x of [85, 210, 335]) {
-      await wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]').click();
-      await clickDrawingPoint(x, 110);
+      const symbol = wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]');
+      if (x === 85) {
+        const targetPosition = await wiringPage.locator('#userDrawings').evaluate(node => {
+          const point = new DOMPoint(85, 110).matrixTransform(node.getScreenCTM());
+          const bounds = node.ownerSVGElement.getBoundingClientRect();
+          return { x: point.x - bounds.left, y: point.y - bounds.top };
+        });
+        await symbol.dragTo(wiringPage.locator('#drawing'), { targetPosition });
+      } else {
+        await symbol.click();
+        await clickDrawingPoint(x, 110);
+      }
       const selected = wiringPage.locator('#userDrawings [data-object].selected-object');
       const terminalId = await selected.getAttribute('data-object');
       terminalIds.push(terminalId);
