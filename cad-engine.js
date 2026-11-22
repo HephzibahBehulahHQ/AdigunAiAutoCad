@@ -1470,6 +1470,11 @@
       def.category, def.family, ...(def.aliases || [])].map(normalizeCatalogText);
     return { item, fields };
   });
+  const catalogItemsById = new Map(catalogIndex.map(({ item }) => [item.id, item]));
+  function catalogItem(id) {
+    const item = catalogItemsById.get(id);
+    return item ? { ...item } : null;
+  }
   function catalog(query = '') {
     const terms = String(query).trim().split(/\s+/).map(normalizeCatalogText).filter(Boolean);
     return catalogIndex.filter(entry => terms.every(term => entry.fields.some(field => field.includes(term))))
@@ -2628,6 +2633,7 @@
     component: component,
     customSymbolDefinition: customSymbolDefinition,
     catalog: catalog,
+    catalogItem: catalogItem,
     createInstance: createInstance,
     createPanelEnvelope: createPanelEnvelope,
     createProjectModel: createProjectModel,

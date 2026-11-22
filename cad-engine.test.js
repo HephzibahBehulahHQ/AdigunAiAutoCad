@@ -496,6 +496,17 @@ test('terminal panel envelopes use manufacturer dimensions independently of sche
   assert.equal(engine.createPanelEnvelope('unknown', 'missing', 0, 0), null);
 });
 
+test('direct catalog lookup matches searchable entries and protects the index', () => {
+  for (const item of engine.catalog()) {
+    const direct = engine.catalogItem(item.id);
+    assert.deepEqual(direct, item);
+    direct.name = 'Edited result';
+    assert.equal(engine.catalogItem(item.id).name, item.name);
+  }
+  assert.equal(engine.catalogItem('missing-component'), null);
+  assert.equal(engine.catalogItem('constructor'), null);
+});
+
 test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
   for (const item of engine.catalog()) {
     const part = engine.component(item.id);
