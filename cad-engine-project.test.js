@@ -630,6 +630,22 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const selectionBounds = /viewBox="([^"]+)"/.exec(selectionSvg)[1].split(' ').map(Number);
     assert.ok(selectionBounds[0] < selectedForExport.x && selectionBounds[2] < fullBounds[2]);
     assert.doesNotMatch(selectionSvg, /draftingRulers|viewportGrid|resize-controls|customSheetFrame|selected-object/);
+    await freeDraftingPage.locator('#openCommands').click();
+    await freeDraftingPage.locator('#commands').getByRole('button', { name: 'Export region as SVG' }).click();
+    const regionFrom = await freePoint(-130, -55);
+    const regionTo = await freePoint(40, 25);
+    const regionDownload = freeDraftingPage.waitForEvent('download');
+    await freeDraftingPage.mouse.move(regionFrom.x, regionFrom.y);
+    await freeDraftingPage.mouse.down();
+    await freeDraftingPage.mouse.move(regionTo.x, regionTo.y, { steps: 4 });
+    await freeDraftingPage.mouse.up();
+    const regionSvg = fs.readFileSync(await (await regionDownload).path(), 'utf8');
+    const regionBounds = /viewBox="([^"]+)"/.exec(regionSvg)[1].split(' ').map(Number);
+    for (const [actual, expected] of regionBounds.map((value, index) => [value, [-130, -55, 170, 80][index]])) {
+      assert.ok(Math.abs(actual - expected) < 0.5, 'region crop is in sheet coordinates');
+    }
+    assert.match(regionSvg, /overflow="hidden"/);
+    assert.doesNotMatch(regionSvg, /draftingRulers|viewportGrid|resize-controls|customSheetFrame|selection-window/);
     await freeDraftingPage.evaluate(() => {
       window.print = () => {};
       window.confirm = message => { window.__frameWarning = message; return true; };
@@ -1570,7 +1586,7 @@ test('sectioned project interface wires inline rename, section drag, title block
   assert.match(inline, /function renderProjectTitleBlock\(\)/);
   assert.match(inline, /setProjectSheetPaperFormat\(sheet,sheet\.paperSize/);
   assert.match(inline, /function printActiveSheet\(\)/);
-  assert.match(inline, /function exportSvg\(mode='frame'\)/);
+  assert.match(inline, /function exportSvg\(mode='frame',region\)/);
   assert.match(inline, /function closeSheetTab\(id\)/);
   assert.match(inline, /unresolved connection diagnostic/);
   assert.match(inline, /async function renderEditableExampleProjects\(query\)/);
