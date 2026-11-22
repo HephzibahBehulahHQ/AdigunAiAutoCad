@@ -921,7 +921,24 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await linkedExample.goto(exampleLink.href);
     await linkedExample.getByText(/Example link could not be opened: The linked sheet/).first().waitFor();
     assert.equal(await linkedExample.locator('#sheetTabs .document-tab[data-sheet]').count(), 0);
-    await linkedExample.close();
+    exampleLink.searchParams.set('sheet', 'marshalling-analog-pressure');
+    await linkedExample.goto(exampleLink.href);
+    const feedSegment = linkedExample.locator('#userDrawings [data-object="transducer-feed-1"]');
+    const returnSegment = linkedExample.locator('#userDrawings [data-object="transducer-return-1"]');
+    await feedSegment.waitFor();
+    const originalFeedColor = await feedSegment.getAttribute('stroke');
+    const originalReturnColor = await returnSegment.getAttribute('stroke');
+    await feedSegment.dispatchEvent('contextmenu', { bubbles: true, button: 2 });
+    await linkedExample.getByRole('menuitem', { name: 'Select wires on this net' }).click();
+    const selectedWires = linkedExample.locator('#userDrawings path[data-object].selected-object');
+    assert.equal(await selectedWires.count(), 4);
+    await linkedExample.locator('[data-action="palette"]').click();
+    await linkedExample.locator('#paletteSwatches [data-color="#ed3f38"]').click();
+    assert.deepEqual(await selectedWires.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('stroke'))), Array(4).fill('#ed3f38'));
+    assert.equal(await returnSegment.getAttribute('stroke'), originalReturnColor);
+    await linkedExample.keyboard.press('Control+z');
+    assert.equal(await feedSegment.getAttribute('stroke'), originalFeedColor);
+    await linkedExample.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
     await examplePage.goto(address);
