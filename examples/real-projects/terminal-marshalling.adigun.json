@@ -1,0 +1,911 @@
+{
+  "product": "AdigunAiAutoCad",
+  "project": "Controller-to-field terminal marshalling",
+  "revision": "1.0",
+  "description": "Two-ended feed-through marshalling for a 24 V PNP sensor, with separately identified supply, return and signal cores.",
+  "activeSheet": "marshalling-cabinet",
+  "sheets": [
+    {
+      "id": "marshalling-cabinet",
+      "number": "A2/001",
+      "name": "Controller and XT1 terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "marshalling-field",
+      "number": "A2/002",
+      "name": "Field XT2 and sensor wiring",
+      "projectSectionId": "A2"
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x1",
+      "componentId": "phoenix-contact-3210567",
+      "ref": "X1",
+      "x": 310,
+      "y": 327,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "Sensor supply and return",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x2",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X2",
+      "x": 310,
+      "y": 440,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "Sensor switching signal",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x3",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X3",
+      "x": 495,
+      "y": 195,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT0",
+        "position": "1",
+        "marking": "External +24 V DC",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x4",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X4",
+      "x": 495,
+      "y": 245,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT0",
+        "position": "2",
+        "marking": "External 0 V",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 850,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x5",
+      "componentId": "phoenix-contact-3210567",
+      "ref": "X5",
+      "x": 325,
+      "y": 360,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "1",
+        "marking": "Sensor supply and return",
+        "comment": ""
+      },
+      "sheetId": "marshalling-field"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x6",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X6",
+      "x": 325,
+      "y": 470,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "2",
+        "marking": "Sensor switching signal",
+        "comment": ""
+      },
+      "sheetId": "marshalling-field"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b1",
+      "componentId": "ifm-ifs204",
+      "ref": "B1",
+      "x": 650,
+      "y": 365,
+      "rotation": 0,
+      "properties": {
+        "marking": "Field proximity sensor",
+        "position": "",
+        "sensingTarget": "",
+        "comment": ""
+      },
+      "sheetId": "marshalling-field"
+    },
+    {
+      "id": "external-plus-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 530,
+      "y": 195,
+      "x1": 530,
+      "y1": 195,
+      "x2": 677,
+      "y2": 195,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x3",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "external-plus-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 677,
+      "y": 195,
+      "x1": 677,
+      "y1": 195,
+      "x2": 677,
+      "y2": 264,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "external-plus-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 677,
+      "y": 264,
+      "x1": 677,
+      "y1": 264,
+      "x2": 720,
+      "y2": 264,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-1"
+        }
+      }
+    },
+    {
+      "id": "external-return-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 530,
+      "y": 245,
+      "x1": 530,
+      "y1": 245,
+      "x2": 620,
+      "y2": 245,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x4",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "external-return-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 620,
+      "y": 245,
+      "x1": 620,
+      "y1": 245,
+      "x2": 620,
+      "y2": 282,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "external-return-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 620,
+      "y": 282,
+      "x1": 620,
+      "y1": 282,
+      "x2": 720,
+      "y2": 282,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-2"
+        }
+      }
+    },
+    {
+      "id": "sensor-plus-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 345,
+      "y": 312,
+      "x1": 345,
+      "y1": 312,
+      "x2": 525,
+      "y2": 312,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-plus-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 525,
+      "y": 312,
+      "x1": 525,
+      "y1": 312,
+      "x2": 525,
+      "y2": 318,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "sensor-plus-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 525,
+      "y": 318,
+      "x1": 525,
+      "y1": 318,
+      "x2": 720,
+      "y2": 318,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-4"
+        }
+      }
+    },
+    {
+      "id": "sensor-return-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 345,
+      "y": 342,
+      "x1": 345,
+      "y1": 342,
+      "x2": 525,
+      "y2": 342,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-2-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-return-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 525,
+      "y": 342,
+      "x1": 525,
+      "y1": 342,
+      "x2": 525,
+      "y2": 336,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "sensor-return-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 525,
+      "y": 336,
+      "x1": 525,
+      "y1": 336,
+      "x2": 720,
+      "y2": 336,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-5"
+        }
+      }
+    },
+    {
+      "id": "return-reference-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 690,
+      "y": 282,
+      "x1": 690,
+      "y1": 282,
+      "x2": 690,
+      "y2": 336,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "return-reference-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 690,
+      "y": 336,
+      "x1": 690,
+      "y1": 336,
+      "x2": 690,
+      "y2": 354,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "return-reference-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 690,
+      "y": 354,
+      "x1": 690,
+      "y1": 354,
+      "x2": 720,
+      "y2": 354,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-6"
+        }
+      }
+    },
+    {
+      "id": "sensor-input-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 345,
+      "y": 440,
+      "x1": 345,
+      "y1": 440,
+      "x2": 560,
+      "y2": 440,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-input-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 560,
+      "y": 440,
+      "x1": 560,
+      "y1": 440,
+      "x2": 560,
+      "y2": 372,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "sensor-input-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 560,
+      "y": 372,
+      "x1": 560,
+      "y1": 372,
+      "x2": 720,
+      "y2": 372,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-7"
+        }
+      }
+    },
+    {
+      "id": "sensor-power-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 360,
+      "y": 345,
+      "x1": 360,
+      "y1": 345,
+      "x2": 600,
+      "y2": 345,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x5",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "sensor-ground-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 360,
+      "y": 375,
+      "x1": 360,
+      "y1": 375,
+      "x2": 505,
+      "y2": 375,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x5",
+          "pinId": "level-2-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-ground-2",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 505,
+      "y": 375,
+      "x1": 505,
+      "y1": 375,
+      "x2": 505,
+      "y2": 385,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "sensor-ground-3",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 505,
+      "y": 385,
+      "x1": 505,
+      "y1": 385,
+      "x2": 600,
+      "y2": 385,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "sensor-output-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 700,
+      "y": 365,
+      "x1": 700,
+      "y1": 365,
+      "x2": 805,
+      "y2": 365,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b1",
+          "pinId": "pin-4-output"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-output-2",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 805,
+      "y": 365,
+      "x1": 805,
+      "y1": 365,
+      "x2": 805,
+      "y2": 470,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "sensor-output-3",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 805,
+      "y": 470,
+      "x1": 805,
+      "y1": 470,
+      "x2": 360,
+      "y2": 470,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x6",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "w01-cabinet-1-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 312,
+      "x1": 275,
+      "y1": 312,
+      "x2": 190,
+      "y2": 312,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "1"
+    },
+    {
+      "id": "w01-field-1-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 290,
+      "y": 345,
+      "x1": 290,
+      "y1": 345,
+      "x2": 190,
+      "y2": 345,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x5",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "1"
+    },
+    {
+      "id": "w01-cabinet-2-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 342,
+      "x1": 275,
+      "y1": 342,
+      "x2": 190,
+      "y2": 342,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-2-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "2"
+    },
+    {
+      "id": "w01-field-2-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 290,
+      "y": 375,
+      "x1": 290,
+      "y1": 375,
+      "x2": 190,
+      "y2": 375,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x5",
+          "pinId": "level-2-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "2"
+    },
+    {
+      "id": "w01-cabinet-3-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 440,
+      "x1": 275,
+      "y1": 440,
+      "x2": 190,
+      "y2": 440,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "3"
+    },
+    {
+      "id": "w01-field-3-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 290,
+      "y": 470,
+      "x1": 290,
+      "y1": 470,
+      "x2": 190,
+      "y2": 470,
+      "potential": "B1 switching signal",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x6",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "3"
+    },
+    {
+      "id": "marshalling-cabinet-title",
+      "sheetId": "marshalling-cabinet",
+      "kind": "text",
+      "x": 105,
+      "y": 97,
+      "text": "XT1 · CONTROLLER MARSHALLING"
+    },
+    {
+      "id": "marshalling-cabinet-note",
+      "sheetId": "marshalling-cabinet",
+      "kind": "text",
+      "x": 105,
+      "y": 565,
+      "text": "XT0 is the external supply boundary. A1 sensor supply feeds XT1; X10:7 receives the PNP switching signal."
+    },
+    {
+      "id": "marshalling-cabinet-scope",
+      "sheetId": "marshalling-cabinet",
+      "kind": "text",
+      "x": 105,
+      "y": 602,
+      "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
+    },
+    {
+      "id": "marshalling-field-title",
+      "sheetId": "marshalling-field",
+      "kind": "text",
+      "x": 105,
+      "y": 97,
+      "text": "XT2 · FIELD SENSOR MARSHALLING"
+    },
+    {
+      "id": "marshalling-field-note",
+      "sheetId": "marshalling-field",
+      "kind": "text",
+      "x": 105,
+      "y": 565,
+      "text": "W-01 cores 1, 2 and 3 carry sensor supply, return and switching signal through XT2."
+    },
+    {
+      "id": "marshalling-field-scope",
+      "sheetId": "marshalling-field",
+      "kind": "text",
+      "x": 105,
+      "y": 602,
+      "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "w01-core-1",
+      "name": "W-01:1 · Sensor +24 V",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w01-cabinet-1-1",
+          "point": {
+            "x": 190,
+            "y": 312
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-field",
+            "targetRef": "X5"
+          }
+        },
+        {
+          "sheetId": "marshalling-field",
+          "wireId": "w01-field-1-1",
+          "point": {
+            "x": 190,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w01-core-2",
+      "name": "W-01:2 · Sensor return",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w01-cabinet-2-1",
+          "point": {
+            "x": 190,
+            "y": 342
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-field",
+            "targetRef": "X5"
+          }
+        },
+        {
+          "sheetId": "marshalling-field",
+          "wireId": "w01-field-2-1",
+          "point": {
+            "x": 190,
+            "y": 375
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w01-core-3",
+      "name": "W-01:3 · B1 switching signal",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w01-cabinet-3-1",
+          "point": {
+            "x": 190,
+            "y": 440
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-field",
+            "targetRef": "X6"
+          }
+        },
+        {
+          "sheetId": "marshalling-field",
+          "wireId": "w01-field-3-1",
+          "point": {
+            "x": 190,
+            "y": 470
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    }
+  ],
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}

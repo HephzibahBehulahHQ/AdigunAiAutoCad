@@ -84,6 +84,16 @@
       "role": "standalone-example",
       "domain": "DC distribution and PLC instrumentation",
       "standardProfile": "IEC-style symbols"
+    },
+    {
+      "id": "terminal-marshalling",
+      "title": "Controller-to-field terminal marshalling",
+      "topologyId": "two-ended-sensor-terminal-marshalling",
+      "path": "examples/real-projects/terminal-marshalling.adigun.json",
+      "role": "standalone-example",
+      "domain": "Terminal and cable marshalling",
+      "standardProfile": "IEC-style symbols",
+      "briefId": "44"
     }
   ],
   "briefs": [

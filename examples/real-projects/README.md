@@ -10,6 +10,12 @@ Use **Save project locally** to download the `.adigun.json` project under its pr
 
 Select a wire to edit its **Cable ID** and **Core ID** in Properties. **Electrical checks → Export cable schedule CSV** lists the assigned wire segments and their net pin references. The SITOP example assigns W-B1 and W-B2 to the modeled sensor conductors. These assignments document the schematic and leave cable procurement and installed route lengths open.
 
+## Controller-to-field terminal marshalling
+
+Open **Controller-to-field terminal marshalling** from Project Explorer. The first sheet contains the CPU 1212C and cabinet strip XT1. The second contains field strip XT2 and the IFM IFS204 sensor. Three editable cross-sheet connections carry the sensor feed, return, and PNP switching signal. The generated cable schedule lists both ends of each W-01 core.
+
+This two-sheet reference starts brief 44. XT0 marks the external 24 V supply boundary. Cable construction, conductor sizing, and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
+
 # 24 V DC relay-operated contactor coil
 
 Open this project as an editable copy from **Project Explorer → List**.
