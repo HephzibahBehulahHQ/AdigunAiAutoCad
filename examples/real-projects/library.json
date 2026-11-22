@@ -94,6 +94,16 @@
       "domain": "Terminal and cable marshalling",
       "standardProfile": "IEC-style symbols",
       "briefId": "44"
+    },
+    {
+      "id": "relay-test-bench",
+      "title": "Relay changeover test bench",
+      "topologyId": "relay-changeover-two-supply-test-fixture",
+      "path": "examples/real-projects/relay-test-bench.adigun.json",
+      "role": "standalone-example",
+      "domain": "Industrial test instrumentation",
+      "standardProfile": "IEC-style symbols",
+      "briefId": "40"
     }
   ],
   "briefs": [

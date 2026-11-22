@@ -24,6 +24,12 @@ A2/006 adds a Schneider Electric Harmony XB5AVB3 field indicator via XT6. W-04 c
 
 This six-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
 
+## Relay changeover test bench
+
+This two-sheet opening for brief 40 uses a momentary push-button to energize a Phoenix Contact relay under test. An independent indicator supply lights H1 through the normally closed path at rest or H2 through the normally open path when the relay operates. W-T01 identifies the common, NC, and NO cores between sheets. The drawing leaves the supply hardware, protection, and test procedure unassigned.
+
+Open **Relay changeover test bench** from Project Explorer. Run `node scripts/author-relay-test-bench.js --write` to regenerate the editable native project.
+
 # 24 V DC relay-operated contactor coil
 
 Open this project as an editable copy from **Project Explorer → List**.
