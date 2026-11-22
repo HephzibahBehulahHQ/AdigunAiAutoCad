@@ -913,11 +913,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const catalogRows = await examplePage.locator('#editableExampleProjects [data-example-project]').evaluateAll(nodes => nodes.map(node => ({ id: node.dataset.exampleProject, number: node.querySelector('b')?.textContent })));
     assert.deepEqual(catalogRows.map(row => row.id), catalogProjects.map(project => project.id), 'Project Explorer lists every catalog example in order');
     assert.deepEqual(catalogRows.map(row => row.number), catalogProjects.map((project, index) => String(index + 1).padStart(2, '0')));
-    await examplePage.locator('#projectSearch').fill('DC distribution IEC-style 24 sheets below project sheet targets');
+    const validation = JSON.parse(fs.readFileSync(path.join(root, 'docs/reports/project-library-validation.json'), 'utf8'));
+    const { sheetCount, connectedSheetCount, componentCount, wireCount } =
+      validation.projects.find(project => project.id === 'sitop-24v-dc-distribution').metrics;
+    await examplePage.locator('#projectSearch').fill(`DC distribution IEC-style ${sheetCount} sheets below project sheet targets`);
     const distributionRow = examplePage.locator('#editableExampleProjects [data-example-project="sitop-24v-dc-distribution"]');
     await distributionRow.waitFor();
     assert.equal(await examplePage.locator('#editableExampleProjects [data-example-project]').count(), 1);
-    assert.match(await distributionRow.getAttribute('aria-description'), /24 electrically connected sheets.*42 components.*143 wire segments.*Model checks passed.*Below project sheet targets/);
+    assert.match(await distributionRow.getAttribute('aria-description'), new RegExp(
+      `${connectedSheetCount} electrically connected sheets.*${componentCount} components.*${wireCount} wire segments.*Model checks passed.*Below project sheet targets`
+    ));
     assert.match(await distributionRow.locator('small').textContent(), /Below project sheet targets/);
     assert.equal(await distributionRow.locator('canvas').evaluate(canvas => {
       const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
