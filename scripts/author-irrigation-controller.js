@@ -15,8 +15,9 @@ const indication = 'irrigation-run-indication';
 const fault = 'irrigation-starter-fault';
 const power = 'irrigation-control-supply';
 const earth = 'irrigation-protective-earth';
+const alarm = 'irrigation-alarm-interface';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.6',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.7',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -28,7 +29,8 @@ const project = {
     { id: indication, number: 'A2/006', name: 'Local pump run indication', projectSectionId: 'A2' },
     { id: fault, number: 'A2/007', name: 'Starter fault contact at XT4', projectSectionId: 'A2' },
     { id: power, number: 'A2/008', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
-    { id: earth, number: 'A2/009', name: 'Cabinet and starter enclosure PE terminals', projectSectionId: 'A2' }
+    { id: earth, number: 'A2/009', name: 'Cabinet and starter enclosure PE terminals', projectSectionId: 'A2' },
+    { id: alarm, number: 'A2/010', name: 'Isolated starter fault annunciator interface', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -121,6 +123,18 @@ wire(earth, 'enclosure-earth-trunk', 'PE', pin(earthEntry, '2'), earthBranch);
 wire(earth, 'controller-enclosure-earth', 'PE', earthBranch, pin(cabinetEarth, '1'));
 wire(earth, 'starter-enclosure-earth', 'PE', earthBranch, pin(starterEarth, '1'), [{ x: 575, y: 425 }]);
 
+const alarmRelay = device(alarm, 'K2', 'phoenix-contact-2966171', 590, 345, { marking: 'PLC fault annunciator relay' });
+for (const [ref, position, contact, y, marking, bendX] of [
+  ['X16', '2', '12', 255, 'De-energized contact', 760],
+  ['X15', '1', '11', 345, 'Alarm circuit common', 0],
+  ['X17', '3', '14', 435, 'Energized contact', 760]
+]) {
+  const boundary = terminal(alarm, ref, 910, y, 'XT7', position, marking);
+  const start = pin(alarmRelay, contact);
+  const bends = bendX ? [{ x: bendX, y: start.y }, { x: bendX, y }] : undefined;
+  wire(alarm, 'alarm-contact-' + contact, marking, start, pin(boundary, '1'), bends);
+}
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -159,7 +173,11 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['control-feed', '+24 V DC', 'X1', pin(supply, '1'), { x: 215, y: 260 },
     [{ x: 315, y: 205 }, { x: 315, y: 260 }], psu, '+', 'right'],
   ['control-return', '0 V', 'X2', pin(common, '1'), { x: 215, y: 315 },
-    [{ x: 315, y: 280 }, { x: 315, y: 315 }], psu, '-', 'right']
+    [{ x: 315, y: 280 }, { x: 315, y: 315 }], psu, '-', 'right'],
+  ['fault-annunciation-output', 'DQ a.2 to K2', 'A1', pin(plc, 'X12:5'), { x: 1020, y: 454 },
+    [{ x: 875, y: 421 }, { x: 875, y: 454 }], alarmRelay, 'A1', 'left', ['W-05', '1']],
+  ['fault-annunciation-return', '0 V', 'A1', { x: 925, y: 535 }, { x: 1020, y: 550 },
+    [{ x: 950, y: 535 }, { x: 950, y: 550 }], alarmRelay, 'A2', 'left', ['W-05', '2']]
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -182,7 +200,8 @@ for (const [sheetId, title, description] of [
   [indication, 'LOCAL PUMP RUN INDICATION · H1', 'W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned.'],
   [fault, 'PUMP STARTER FAULT INPUT · XT4', 'W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact.'],
   [power, 'CONTROL SUPPLY · PS1', 'XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
-  [earth, 'ENCLOSURE PROTECTIVE EARTH · XT6', 'XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned.']
+  [earth, 'ENCLOSURE PROTECTIVE EARTH · XT6', 'XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned.'],
+  [alarm, 'STARTER FAULT ANNUNCIATOR INTERFACE · K2', 'DQ a.2 commands K2. XT7 exposes the changeover contacts. PLC alarm logic and the external annunciator supply and load remain unassigned.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
