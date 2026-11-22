@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.8",
+  "revision": "1.9",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -87,6 +87,12 @@
       "id": "pick-place-sensor-test-access",
       "number": "A2/014",
       "name": "Position sensor feed disconnect and test terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-motion-command-test",
+      "number": "A2/015",
+      "name": "Slide command disconnect and test terminals",
       "projectSectionId": "A2"
     }
   ],
@@ -1026,6 +1032,76 @@
     {
       "schemaVersion": 1,
       "kind": "component-instance",
+      "id": "x29",
+      "componentId": "phoenix-contact-3210156",
+      "ref": "X29",
+      "x": 440,
+      "y": 255,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "1",
+        "marking": "Extend command disconnect",
+        "comment": "",
+        "knifePosition": "closed"
+      },
+      "sheetId": "pick-place-motion-command-test"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x31",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X31",
+      "x": 710,
+      "y": 255,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "2",
+        "marking": "Extend downstream command test point",
+        "comment": ""
+      },
+      "sheetId": "pick-place-motion-command-test"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x30",
+      "componentId": "phoenix-contact-3210156",
+      "ref": "X30",
+      "x": 440,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "3",
+        "marking": "Retract command disconnect",
+        "comment": "",
+        "knifePosition": "closed"
+      },
+      "sheetId": "pick-place-motion-command-test"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x32",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X32",
+      "x": 710,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "4",
+        "marking": "Retract downstream command test point",
+        "comment": ""
+      },
+      "sheetId": "pick-place-motion-command-test"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
       "id": "k1",
       "componentId": "phoenix-contact-2966171",
       "ref": "K1",
@@ -1557,6 +1633,72 @@
     },
     {
       "id": "k3-request-field",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "wire",
+      "potential": "Slide extend pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 405,
+      "y": 255,
+      "x1": 405,
+      "y1": 255,
+      "x2": 215,
+      "y2": 255,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x29",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k3-downstream-test",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "wire",
+      "potential": "Slide extend pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 475,
+      "y": 255,
+      "x1": 475,
+      "y1": 255,
+      "x2": 675,
+      "y2": 255,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x29",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "x31",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "k3-gated-request-cabinet",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "wire",
+      "potential": "Slide extend pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 745,
+      "y": 255,
+      "x1": 745,
+      "y1": 255,
+      "x2": 960,
+      "y2": 255,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x31",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k3-gated-request-field",
       "sheetId": "pick-place-slide-extend",
       "kind": "wire",
       "potential": "Slide extend pilot request",
@@ -1753,6 +1895,72 @@
     },
     {
       "id": "k4-request-field",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "wire",
+      "potential": "Slide retract pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 405,
+      "y": 425,
+      "x1": 405,
+      "y1": 425,
+      "x2": 215,
+      "y2": 425,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x30",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k4-downstream-test",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "wire",
+      "potential": "Slide retract pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 475,
+      "y": 425,
+      "x1": 475,
+      "y1": 425,
+      "x2": 675,
+      "y2": 425,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x30",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "x32",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "k4-gated-request-cabinet",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "wire",
+      "potential": "Slide retract pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 745,
+      "y": 425,
+      "x1": 745,
+      "y1": 425,
+      "x2": 960,
+      "y2": 425,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x32",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k4-gated-request-field",
       "sheetId": "pick-place-slide-retract",
       "kind": "wire",
       "potential": "Slide retract pilot request",
@@ -3205,6 +3413,22 @@
       "x": 105,
       "y": 588,
       "text": "X26 disconnects the B1 and B2 feed. X27 and X28 expose the downstream +24 V and 0 V reference. Test equipment and procedures remain unassigned."
+    },
+    {
+      "id": "pick-place-motion-command-test-note-0",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "SLIDE COMMAND TEST ACCESS · XT13"
+    },
+    {
+      "id": "pick-place-motion-command-test-note-1",
+      "sheetId": "pick-place-motion-command-test",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "X29 and X30 open the respective extend and retract coil commands. X31 and X32 expose the downstream signals. Physical energy isolation remains outside this drawing."
     }
   ],
   "crossSheetConnections": [
@@ -3669,21 +3893,53 @@
           },
           "connector": {
             "direction": "right",
+            "targetSheetId": "pick-place-motion-command-test",
+            "targetRef": "X29"
+          }
+        },
+        {
+          "sheetId": "pick-place-motion-command-test",
+          "wireId": "k3-request-field",
+          "point": {
+            "x": 215,
+            "y": 255
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k3-gated-request",
+      "name": "Slide extend pilot request",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-motion-command-test",
+          "wireId": "k3-gated-request-cabinet",
+          "point": {
+            "x": 960,
+            "y": 255
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "pick-place-slide-extend",
             "targetRef": "K3"
           }
         },
         {
           "sheetId": "pick-place-slide-extend",
-          "wireId": "k3-request-field",
+          "wireId": "k3-gated-request-field",
           "point": {
             "x": 215,
             "y": 365
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "pick-place-plc",
-            "targetRef": "A1"
+            "targetSheetId": "pick-place-motion-command-test",
+            "targetRef": "X31"
           }
         }
       ]
@@ -3733,21 +3989,53 @@
           },
           "connector": {
             "direction": "right",
+            "targetSheetId": "pick-place-motion-command-test",
+            "targetRef": "X30"
+          }
+        },
+        {
+          "sheetId": "pick-place-motion-command-test",
+          "wireId": "k4-request-field",
+          "point": {
+            "x": 215,
+            "y": 425
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k4-gated-request",
+      "name": "Slide retract pilot request",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-motion-command-test",
+          "wireId": "k4-gated-request-cabinet",
+          "point": {
+            "x": 960,
+            "y": 425
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "pick-place-slide-retract",
             "targetRef": "K4"
           }
         },
         {
           "sheetId": "pick-place-slide-retract",
-          "wireId": "k4-request-field",
+          "wireId": "k4-gated-request-field",
           "point": {
             "x": 215,
             "y": 365
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "pick-place-plc",
-            "targetRef": "A1"
+            "targetSheetId": "pick-place-motion-command-test",
+            "targetRef": "X32"
           }
         }
       ]

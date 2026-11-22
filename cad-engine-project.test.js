@@ -2030,12 +2030,12 @@ test('pneumatic pick-and-place keeps position feedback and pilot demand on disti
   const file = path.join(__dirname, 'examples/real-projects/pneumatic-pick-place.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [14, 31, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [15, 33, 0, 0]);
   const nets = report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(nets, [
     'A1:X10:1,A1:X12:1,B1:1,B2:1,PS1:+,S1:13,S2:21,X1:1,X1:2,X26:1,X26:2,X27:1,X27:2,X7:1,X7:2,X9:1,X9:2', 'A1:X10:10,X10:1,X10:2', 'A1:X10:11,S1:14', 'A1:X10:12,S2:22',
     'A1:X10:2,A1:X10:6,A1:X12:2,B1:3,B2:3,K1:A2,K2:A2,K3:A2,K4:A2,K5:A2,K6:A2,PS1:-,X28:1,X28:2,X2:1,X2:2',
-    'A1:X10:7,B1:4', 'A1:X10:8,B2:4', 'A1:X10:9,X8:1,X8:2', 'A1:X12:3,K1:A1', 'A1:X12:4,K2:A1', 'A1:X12:5,K3:A1,K5:A1', 'A1:X12:6,K4:A1,K6:A1',
+    'A1:X10:7,B1:4', 'A1:X10:8,B2:4', 'A1:X10:9,X8:1,X8:2', 'A1:X12:3,K1:A1', 'A1:X12:4,K2:A1', 'A1:X12:5,K3:A1,K5:A1,X29:1,X29:2,X31:1,X31:2', 'A1:X12:6,K4:A1,K6:A1,X30:1,X30:2,X32:1,X32:2',
     'K1:11,X3:1,X3:2', 'K1:14,X4:1,X4:2', 'K2:11,X5:1,X5:2', 'K2:14,X6:1,X6:2',
     'K3:11,X11:1,X11:2', 'K3:14,K6:11,X12:1,X12:2', 'K4:11,X13:1,X13:2', 'K4:14,K5:11,X14:1,X14:2', 'K5:12,X15:1,X15:2', 'K6:12,X16:1,X16:2', 'PS1:L,X17:1,X17:2', 'PS1:N,X18:1,X18:2', 'PS1:PE,X19:1,X19:2,X20:1,X20:2,X21:1,X21:2,X22:1,X22:2,X23:1,X23:2,X24:1,X24:2,X25:1,X25:2'
   ]);
@@ -2044,4 +2044,15 @@ test('pneumatic pick-and-place keeps position feedback and pilot demand on disti
   const openedNets = engine.analyzeProject(opened).globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(','));
   assert.ok(openedNets.includes('B1:1,B2:1,X26:2,X27:1,X27:2'));
   assert.ok(openedNets.some(net => net.includes('PS1:+') && net.includes('A1:X12:1') && net.includes('X26:1') && !net.includes('B1:1')));
+  for (const [ref, upstream, downstream, other] of [
+    ['X29', 'A1:X12:5,X29:1', 'K3:A1,K5:A1,X29:2,X31:1,X31:2', 'A1:X12:6,K4:A1,K6:A1,X30:1,X30:2,X32:1,X32:2'],
+    ['X30', 'A1:X12:6,X30:1', 'K4:A1,K6:A1,X30:2,X32:1,X32:2', 'A1:X12:5,K3:A1,K5:A1,X29:1,X29:2,X31:1,X31:2']
+  ]) {
+    const commandOpened = structuredClone(project);
+    commandOpened.objects.find(object => object.ref === ref).properties.knifePosition = 'open';
+    const commandNets = engine.analyzeProject(commandOpened).globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(','));
+    assert.ok(commandNets.includes(upstream));
+    assert.ok(commandNets.includes(downstream));
+    assert.ok(commandNets.includes(other));
+  }
 });
