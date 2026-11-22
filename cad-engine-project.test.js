@@ -154,11 +154,18 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
   const { chromium } = require('playwright');
   const root = path.resolve(__dirname);
   const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml' };
+  let shellOutage = false;
+  const outageRequests = new Set();
   const server = http.createServer((request, response) => {
     let pathname;
     try { pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname); }
     catch { response.writeHead(400).end(); return; }
     const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
+    if (shellOutage && ['index.html', 'cad-engine.js'].includes(relative)) {
+      outageRequests.add(relative);
+      response.writeHead(503, { 'Cache-Control': 'no-store' }).end('Editor temporarily unavailable');
+      return;
+    }
     const file = path.resolve(root, relative);
     if (!file.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }
     fs.readFile(file, (error, data) => {
@@ -1115,6 +1122,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const offlineLibraryPage = await context.newPage();
     await offlineLibraryPage.goto(address);
     await offlineLibraryPage.waitForFunction(() => !!navigator.serviceWorker.controller);
+    shellOutage = true;
+    try {
+      await offlineLibraryPage.reload();
+      await offlineLibraryPage.locator('[data-example-project="star-delta-100-sheet"]').click();
+      await offlineLibraryPage.locator('#projectTree [data-sheet="ref-006"]').click();
+      await offlineLibraryPage.locator('#userDrawings [data-object="' + breakerId + '"]').waitFor();
+      assert.deepEqual([...outageRequests].sort(), ['cad-engine.js', 'index.html'], 'both cached shell resources were needed during the outage');
+    } finally {
+      shellOutage = false;
+    }
     await context.setOffline(true);
     try {
       await offlineLibraryPage.reload();

@@ -58,7 +58,7 @@ The opening set contains 100 authored sheets through A1/100, including the sourc
 
 ## Deployment and release
 
-After an online visit, supported browsers can reload the editor offline. Project Explorer keeps previously opened examples on this device so you can open and save an independent drawing without a network connection.
+After an online visit, supported browsers can reload the editor offline or during a temporary server error. Project Explorer keeps previously opened examples on this device so you can open and save an independent drawing without a network connection.
 
 The GitHub Pages workflow checks the committed example report and publishes the editor, native example files, and validation report. Before client release, run `node scripts/project-library-validation.js --check --require-release-scale` and verify the remaining acceptance criteria in the master specification.
 
