@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 74);
+  assert.equal(items.length, 84);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -289,6 +289,16 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3002389', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3036042', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3038710', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044076', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045088', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044089', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045046', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044102', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3046281', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031212', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3037122', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3037106', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031364', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
@@ -311,7 +321,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -447,6 +457,24 @@ test('verified triple-level terminal blocks keep all three levels electrically i
       [['w0', 'w1'], ['w2', 'w3'], ['w4', 'w5']]);
   }
 });
+test('UT and ST feed-through order codes carry their verified connection methods and common potential', () => {
+  const variants = [
+    ['3044076', 'screw', 1000, 4], ['3045088', 'screw', 1000, 4], ['3044089', 'screw', 1000, 4],
+    ['3045046', 'screw', 1000, 4], ['3044102', 'screw', 1000, 6], ['3046281', 'screw', 1000, 16],
+    ['3031212', 'spring-cage', 800, 2.5], ['3037122', 'spring-cage', 800, 2.5],
+    ['3037106', 'spring-cage', 800, 2.5], ['3031364', 'spring-cage', 800, 4]
+  ];
+  for (const [orderCode, method, voltage, maximumFlexible] of variants) {
+    const part = engine.component('phoenix-contact-' + orderCode);
+    assert.ok(part.sources[0].url.endsWith(orderCode));
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [method, method]);
+    assert.deepEqual(part.symbol.internalConnections, [['level-1-left', 'level-1-right']]);
+    assert.equal(part.specifications.nominalVoltage.value, voltage);
+    assert.equal(part.specifications.flexibleConductorRange.maximum, maximumFlexible);
+    assert.equal(part.physicalRepresentations[0].width, part.specifications.dimensions.width.value);
+  }
+});
+
 test('terminal panel envelopes use manufacturer dimensions independently of schematic scale', () => {
   const id = 'phoenix-contact-3210499';
   const part = engine.component(id);

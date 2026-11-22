@@ -145,7 +145,7 @@
     const filter=String(query).trim().toLowerCase();
     const local=(state.projectModel?.userSymbols||[]).filter(symbol=>symbol.name.toLowerCase().includes(filter))
       .map(symbol=>({id:symbol.id,componentId:symbol.id,name:symbol.name,tag:'X',family:'user-authored',category:'Project symbols',customSymbol:symbol}));
-    return [...window.AdigunCADEngine.catalog(query),...local];
+    return [...local,...window.AdigunCADEngine.catalog(query)];
   }
   function catalogItemForObject(object){
     return object.customSymbol?{id:object.componentId,componentId:object.componentId,name:object.customSymbol.name,
