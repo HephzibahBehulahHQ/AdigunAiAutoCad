@@ -79,7 +79,7 @@
     for (const object of objects) {
       if (object.hidden) continue;
       const { kind, x, y, x1, y1, x2, y2 } = object;
-      const layerName = String(object.dxfLayer || object.layer || (kind === 'wire' ? 'connections' : 'annotations'))
+      const layerName = String(object.dxfLayer || object.layer || (kind === 'wire' ? 'connections' : kind === 'component-instance' ? 'devices' : 'annotations'))
         .replace(/[<>/\\":;?*|=\x00-\x1f]/g, '_').slice(0, 255);
       const options = { layerName };
       if (/^#[\da-f]{6}$/i.test(object.stroke || '')) options.trueColor = object.stroke;
@@ -88,6 +88,22 @@
         writer.addLayer(layerName, 7, 'Continuous');
         layers.add(layerName);
       };
+      const engine = root.AdigunCADEngine;
+      if (kind === 'component-instance' && engine.component(object.componentId)?.family === 'disconnect-terminal'
+          && engine.validateInstance(object).valid) {
+        const { segments, circles } = engine.disconnectTerminalGeometry(object);
+        const angle = object.rotation * Math.PI / 180;
+        const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
+        function toDxf(localX, localY) {
+          return point3d(x + scale * (localX * cosine - localY * sine),
+            -(y + scale * (localX * sine + localY * cosine)));
+        }
+        addLayer();
+        for (const [ax, ay, bx, by] of segments) writer.addLine(toDxf(ax, ay), toDxf(bx, by), options);
+        for (const [cx, cy, radius] of circles) writer.addCircle(toDxf(cx, cy), radius * scale, options);
+        entities += segments.length + circles.length;
+        continue;
+      }
       if (!object.rotation) {
         if (kind === 'circle' && [x, y, x2, y2].every(Number.isFinite)) {
           const radius = Math.hypot(x2 - x, y2 - y);
