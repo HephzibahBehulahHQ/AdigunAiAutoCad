@@ -1985,7 +1985,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
     return exampleValidationRequest;
   }
-  async function openEditableExample(entry){
+  function isEditableExample(entry){
+    return typeof entry.path==='string' && /^examples\/real-projects\/[a-z0-9-]+\.adigun\.json$/.test(entry.path);
+  }
+  async function openEditableExample(entry,{sheetId=null,atStartup=false}={}){
     const source=await loadExampleResource(entry.path,async response=>{
       const parsed=window.AdigunCADEngine.parseProject(await response.text());
       if(!parsed.valid)throw new Error(parsed.errors.join(' '));
@@ -1994,8 +1997,26 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const copyName=('Copy of '+String(source.project||entry.title)).slice(0,80);
     const uniqueId='example-copy-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
     const copy=window.AdigunCADEngine.copyExampleProject(source,uniqueId,copyName);
+    if(atStartup&&(state.projectModel||state.sheet||dirty))return;
+    if(sheetId){
+      if(!copy.sheets.some(sheet=>sheet.id===sheetId))throw new Error('The linked sheet is not in this example.');
+      copy.activeSheet=sheetId;
+    }
     openNativeProject(copy,entry.path);
     notify('Opened an independent editable copy. Save it locally under your project name when ready.');
+  }
+  async function openLinkedExample(){
+    const query=new URLSearchParams(location.search);
+    const exampleId=query.get('example');
+    if(!exampleId)return;
+    try{
+      const catalog=await loadExampleCatalog();
+      const entry=catalog.projects.find(project=>project.id===exampleId&&isEditableExample(project));
+      if(!entry)throw new Error('The linked example is not in Project Explorer.');
+      await openEditableExample(entry,{sheetId:query.get('sheet'),atStartup:true});
+    }catch(error){
+      notify('Example link could not be opened: '+error.message);
+    }
   }
   function renderExamplePreview(preview){
     if(typeof preview?.segments!=='string'||!preview.segments)return null;
@@ -2033,7 +2054,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       host.replaceChildren();
       let group='';
       catalog.projects.forEach((entry,index)=>{
-        if(typeof entry.path!=='string'||!entry.path.startsWith('examples/real-projects/')||!entry.path.endsWith('.adigun.json'))return;
+        if(!isEditableExample(entry))return;
         const validation=validations.get(entry.id);
         const metrics=validation?.path===entry.path?validation.metrics:null;
         const sheets=Number.isInteger(metrics?.sheetCount)?metrics.sheetCount+' '+(metrics.sheetCount===1?'sheet':'sheets'):'';
@@ -2171,6 +2192,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   initializing=false;
   $('#recoverBrowserDraft').addEventListener('click',recoverBrowserDraft);
   showBrowserDraft();
+  void openLinkedExample();
   if('ResizeObserver' in window)new ResizeObserver(applyView).observe(drawing);
   if('serviceWorker' in navigator){
     void navigator.serviceWorker.register(new URL('service-worker.js',document.baseURI)).catch(()=>{});

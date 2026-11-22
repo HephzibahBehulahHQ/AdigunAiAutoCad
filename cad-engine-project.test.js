@@ -903,6 +903,20 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     }
     await densePage.close({ runBeforeUnload: false });
 
+    const linkedExample = await context.newPage();
+    const exampleLink = new URL(address);
+    exampleLink.searchParams.set('example', 'terminal-marshalling');
+    exampleLink.searchParams.set('sheet', 'marshalling-analog-pressure');
+    await linkedExample.goto(exampleLink.href);
+    await linkedExample.locator('#sheetTabs [data-sheet="marshalling-analog-pressure"][aria-selected="true"]').waitFor();
+    await linkedExample.locator('#userDrawings [data-object="b2"]').waitFor();
+    assert.match(await linkedExample.locator('#projectTree').innerText(), /Copy of Controller-to-field terminal marshalling/);
+    exampleLink.searchParams.set('sheet', 'missing-sheet');
+    await linkedExample.goto(exampleLink.href);
+    await linkedExample.getByText(/Example link could not be opened: The linked sheet/).first().waitFor();
+    assert.equal(await linkedExample.locator('#sheetTabs .document-tab[data-sheet]').count(), 0);
+    await linkedExample.close();
+
     const examplePage = await context.newPage();
     await examplePage.goto(address);
     const originalExample = await examplePage.evaluate(async () => fetch('examples/real-projects/siemens-sew-star-delta-reference.adigun.json').then(response => response.text()));
