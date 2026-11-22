@@ -928,7 +928,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await feedSegment.waitFor({ state: 'attached' });
     const originalFeedColor = await feedSegment.getAttribute('stroke');
     const originalReturnColor = await returnSegment.getAttribute('stroke');
-    await feedSegment.dispatchEvent('contextmenu', { bubbles: true, button: 2 });
+    const feedPoint = await feedSegment.evaluate(path => {
+      const center = path.getPointAtLength(path.getTotalLength() / 2).matrixTransform(path.getScreenCTM());
+      return { x: center.x, y: center.y };
+    });
+    await linkedExample.mouse.click(feedPoint.x, feedPoint.y, { button: 'right' });
     await linkedExample.getByRole('menuitem', { name: 'Select wires on this net' }).click();
     const selectedWires = linkedExample.locator('#userDrawings path[data-object].selected-object');
     assert.equal(await selectedWires.count(), 4);
