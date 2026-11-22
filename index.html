@@ -1005,7 +1005,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     notify('Component placement cancelled.');
     return true;
   }
-  function renderSymbolSidebar(query){const host=$('#symbolList');host.replaceChildren();let group='';for(const item of catalogItems(query)){if(item.category!==group){group=item.category;const head=document.createElement('div');head.className='library-group';head.textContent=group;host.append(head);}const b=document.createElement('button');b.className='symbol-row';b.dataset.insert=item.id;const glyph=document.createElement('span');glyph.className='symbol-glyph';glyph.textContent=item.tag.slice(0,3);const label=document.createElement('span');label.textContent=item.name;b.append(glyph,label);host.append(b);}if(!host.children.length){const empty=document.createElement('div');empty.className='library-group';empty.textContent='No symbols match this search.';host.append(empty);}}
+  function renderSymbolSidebar(query){const host=$('#symbolList');host.replaceChildren();let group='';for(const item of catalogItems(query)){if(item.category!==group){group=item.category;const head=document.createElement('div');head.className='library-group';head.textContent=group;host.append(head);}const b=document.createElement('button');b.className='symbol-row';b.draggable=true;b.dataset.insert=item.id;const glyph=document.createElement('span');glyph.className='symbol-glyph';glyph.textContent=item.tag.slice(0,3);const label=document.createElement('span');label.textContent=item.name;b.append(glyph,label);host.append(b);}if(!host.children.length){const empty=document.createElement('div');empty.className='library-group';empty.textContent='No symbols match this search.';host.append(empty);}}
   function componentHoverDescription(obj,definition){const lines=[(obj.ref||'Component')+' · '+definition.name,'Manufacturer: '+definition.manufacturer,'Model: '+definition.model,'Part no.: '+definition.manufacturerPartNumber,'Position: X '+Number(obj.x).toFixed(2)+' mm, Y '+Number(obj.y).toFixed(2)+' mm','Rotation: '+(Number(obj.rotation)||0)+'°','Pins: '+definition.symbol.pins.map(function(pin){return pin.localNumber+' '+pin.name;}).join(' · ')];Object.keys(obj.properties||{}).forEach(function(name){const value=obj.properties[name];if(typeof value==='string'&&value.trim())lines.push(name+': '+value.trim());else if(typeof value==='number'&&Number.isFinite(value))lines.push(name+': '+value);});return lines.join('\n');}
   function canResizeObject(obj){
     if(!obj||obj.locked)return false;
@@ -1972,6 +1972,34 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   $('#projectTree').addEventListener('dblclick',function(event){const name=event.target.closest('[data-sheet-name]');const row=name&&name.closest('[data-sheet]');if(row&&state.projectModel){event.preventDefault();event.stopPropagation();beginInlineSheetRename(row.dataset.sheet);}});
   $('#projectTree').addEventListener('click',e=>{const addSheetButton=e.target.closest('[data-add-project-sheet]');if(addSheetButton){e.preventDefault();e.stopPropagation();addSheet('',addSheetButton.dataset.addProjectSheet);return;}const addSectionButton=e.target.closest('[data-add-project-section]');if(addSectionButton&&state.projectModel){e.preventDefault();e.stopPropagation();window.AdigunCADEngine.addProjectSection(state.projectModel,'Additional section','');renderCustomSheetNavigation();persist();return;}const toggle=e.target.closest('[data-toggle-section]');if(toggle&&state.projectModel){const section=state.projectModel.sections.find(item=>item.id===toggle.dataset.toggleSection);if(section){section.collapsed=!section.collapsed;renderProjectSectionNavigation();persist();}return;}const row=e.target.closest('[data-sheet]');if(row){if(state.projectModel){state.projectModel.activeSheetId=row.dataset.sheet;wrap.classList.remove('blank-start');}setSheet(row.dataset.sheet);}});$('#sheetTabs').addEventListener('click',e=>{const close=e.target.closest('[data-delete-sheet],[data-close-sheet]');if(close){e.preventDefault();e.stopPropagation();if(close.dataset.deleteSheet)deleteSheet(close.dataset.deleteSheet);else closeSheetTab(close.dataset.closeSheet);return;}const tab=e.target.closest('.document-tab[data-sheet]');if(tab)setSheet(tab.dataset.sheet);});$('#sheetTabs').addEventListener('keydown',e=>{const close=e.target.closest('[data-delete-sheet],[data-close-sheet]');if(close&&(e.key==='Enter'||e.key===' ')){e.preventDefault();if(close.dataset.deleteSheet)deleteSheet(close.dataset.deleteSheet);else closeSheetTab(close.dataset.closeSheet);}});
   $('#symbolList').addEventListener('click',e=>{const b=e.target.closest('[data-insert]');if(b)insertCatalogSymbol(b.dataset.insert,e.shiftKey);});
+  let draggedSymbol=null;
+  $('#symbolList').addEventListener('dragstart',event=>{
+    const row=event.target.closest('[data-insert]');
+    if(!row||!state.sheet||!event.dataTransfer){event.preventDefault();return;}
+    draggedSymbol={id:row.dataset.insert,sheet:state.sheet};
+    event.dataTransfer.setData('application/x-adigun-symbol',draggedSymbol.id);
+    event.dataTransfer.effectAllowed='copy';
+    insertCatalogSymbol(draggedSymbol.id);
+  });
+  function acceptsSymbolDrop(){
+    return draggedSymbol&&draggedSymbol.sheet===state.sheet&&draggedSymbol.id===state.pendingComponentId;
+  }
+  drawing.addEventListener('dragover',event=>{
+    if(!acceptsSymbolDrop())return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect='copy';
+    updatePlacementPreview(svgPoint(event));
+  });
+  drawing.addEventListener('drop',event=>{
+    if(!acceptsSymbolDrop())return;
+    event.preventDefault();
+    draggedSymbol=null;
+    finishComponentPlacement(svgPoint(event));
+  });
+  $('#symbolList').addEventListener('dragend',()=>{
+    if(draggedSymbol&&draggedSymbol.id===state.pendingComponentId)cancelComponentPlacement();
+    draggedSymbol=null;
+  });
   $('#symbolSearch').addEventListener('input',e=>renderSymbolSidebar(e.target.value));
 
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}const remove=e.target.closest('[data-delete-object]');if(remove)deleteObject(remove.dataset.deleteObject);});
