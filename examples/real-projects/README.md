@@ -26,7 +26,7 @@ This six-sheet reference extends brief 44. XT0 marks the external 24 V supply bo
 
 ## Irrigation pressure monitoring and pump request
 
-This three-sheet opening for brief 46 uses the PN2070 OUT2 voltage signal at PLC AI0 and the separate OUT1 switching signal at DI a.0. DQ a.0 drives K1 on A2/003. XT2 exposes the isolated normally open pump demand contact for an external starter. The drawing leaves pressure scaling, setpoints, PLC sequencing and the motor feeder unassigned.
+This four-sheet opening for brief 46 uses the PN2070 OUT2 voltage signal at PLC AI0 and the separate OUT1 switching signal at DI a.0. DQ a.0 drives K1 on A2/003. XT2 exposes the isolated normally open pump demand contact for an external starter. The drawing leaves pressure scaling, setpoints, PLC sequencing and the motor feeder unassigned. A2/004 adds S1 as a momentary local request at DI a.1, with both W-01 cores recorded in the cable schedule.
 
 Run `node scripts/author-irrigation-controller.js --write` to regenerate the editable drawing.
 
