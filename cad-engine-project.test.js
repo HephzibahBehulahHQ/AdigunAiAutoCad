@@ -1449,7 +1449,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [27, 66, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [28, 68, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
@@ -1476,10 +1476,10 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['K2:11', 'X16:1', 'X16:2'],
     ['K2:12', 'X17:1', 'X17:2'],
     ['K2:14', 'X18:1', 'X18:2'],
-    ['K4:11', 'X30:1', 'X30:2', 'X33:1', 'X33:2'],
+    ['K4:11', 'X30:1', 'X30:2', 'X33:1', 'X33:2', 'X40:1', 'X40:2', 'H5:X1'],
     ['K4:12', 'X31:1', 'X31:2', 'X35:1', 'X35:2', 'X36:1', 'X36:2', 'H3:X1'],
     ['K4:14', 'X32:1', 'X32:2', 'X38:1', 'X38:2', 'X39:1', 'X39:2', 'H4:X1'],
-    ['H3:X2', 'H4:X2', 'X34:1', 'X34:2', 'X37:1', 'X37:2'],
+    ['H3:X2', 'H4:X2', 'X34:1', 'X34:2', 'X37:1', 'X37:2', 'X41:1', 'X41:2', 'H5:X2'],
     ['X20:1', 'X20:2', 'A1:X10:14']
   ]));
   const io = engine.plcIoList(reopened.project);
