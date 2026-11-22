@@ -24,6 +24,12 @@ A2/006 adds a Schneider Electric Harmony XB5AVB3 field indicator via XT6. W-04 c
 
 This six-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
 
+## Water-treatment dosing and pressure monitoring
+
+This three-sheet opening for brief 12 routes filter inlet B1 and outlet B2 pressure voltages to AI 0 and AI 1. DQ a.0 operates K1, whose normally open dry contact at XT2 requests enable from an external dosing controller. Sensor ranges, differential-pressure logic, dosing permissives and chemical-handling hardware remain unassigned.
+
+Run `node scripts/author-water-treatment-dosing.js --write` to regenerate the editable drawing.
+
 ## Pneumatic pick-and-place controls
 
 This 16-sheet opening for brief 34 uses B1 and B2 to report the retracted and extended slide positions on separate PLC inputs. K1 and K2 expose isolated normally open vacuum and release pilot contacts at XT2 and XT3. XT4 and W-01 route the external vacuum-achieved contact to DI a.2 independently of the vacuum command. XT5 and W-02 route the external compressed-air pressure-ready contact to DI a.3. A2/007 and A2/008 add isolated slide extend and retract demand contacts at XT6 and XT7, driven by DQ a.2 and DQ a.3. A2/009 adds parallel monitor coils K5 and K6. Each normally closed contact interrupts the opposite pilot command at XT8 after relay operation. Transition timing and safety functions remain outside this schematic. A2/010 adds PS1 with XT9 incoming L, N and PE terminals and +24 V DC and 0 V links to XT1. A2/011 and A2/012 route PE through XT10 and XT11 to the controller enclosure, remote valve enclosure and slide frame terminal boundaries. A2/013 adds S1 start and S2 operational stop requests on W-03 to DI a.4 and DI a.5. A2/014 adds the X26 disconnect and downstream test terminals at XT12 for the two position sensors. A2/015 adds individual command disconnects X29 and X30 and downstream test terminals X31 and X32 at XT13. A4/001 records the ten wired PLC channels and their connected pins for this revision. Export the I/O list in the editor for current values after edits. The valve hardware, pneumatic circuit, and PLC motion and interlock logic remain unassigned.

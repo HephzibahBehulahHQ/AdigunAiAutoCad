@@ -124,6 +124,16 @@
       "domain": "Pneumatic automation controls",
       "standardProfile": "IEC-style symbols",
       "briefId": "34"
+    },
+    {
+      "id": "water-treatment-dosing",
+      "title": "Water-treatment dosing and pressure monitoring",
+      "topologyId": "water-treatment-dual-pressure-isolated-dosing",
+      "path": "examples/real-projects/water-treatment-dosing.adigun.json",
+      "role": "standalone-example",
+      "domain": "Water-treatment instrumentation and dosing controls",
+      "standardProfile": "IEC-style symbols",
+      "briefId": "12"
     }
   ],
   "briefs": [

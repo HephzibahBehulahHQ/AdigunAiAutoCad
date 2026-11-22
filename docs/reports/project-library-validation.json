@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 12,
-    "validatedArtifactCount": 12,
-    "distinctTopologyCount": 10,
+    "projectArtifactCount": 13,
+    "validatedArtifactCount": 13,
+    "distinctTopologyCount": 11,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -107,7 +107,9 @@
           "id": "12",
           "category": "PLC, process and automation",
           "title": "Water-treatment dosing and monitoring plant",
-          "projectIds": [],
+          "projectIds": [
+            "water-treatment-dosing"
+          ],
           "qualifiedProjectId": null
         },
         {
@@ -1518,6 +1520,70 @@
         "bomRowCount": 9,
         "wireListRowCount": 99,
         "terminalListRowCount": 64
+      },
+      "errors": []
+    },
+    {
+      "id": "water-treatment-dosing",
+      "title": "Water-treatment dosing and pressure monitoring",
+      "topologyId": "water-treatment-dual-pressure-isolated-dosing",
+      "briefId": "12",
+      "role": "standalone-example",
+      "path": "examples/real-projects/water-treatment-dosing.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "releaseScale": {
+        "qualified": false,
+        "additionalAuthoredSheetsRequired": 97,
+        "additionalConnectedSheetsRequired": 67,
+        "sheetIdsWithoutElectricalConnectivity": []
+      },
+      "wirePreview": {
+        "sheetId": "dosing-controller",
+        "sheetName": "PLC supply, analog inputs and dosing output",
+        "segments": "24,11,48,11 24,18,31,18 31,18,31,13 31,13,48,13 34,11,34,0 34,0,94,0 94,0,94,26 94,26,80,26 31,18,31,48 31,48,91,48 91,48,91,28 91,28,80,28 37,13,37,4 37,4,86,4 86,4,86,11 86,11,80,11 15,11,0,11 15,18,0,18 80,13,100,13 80,16,89,16 89,16,89,19 89,19,100,19 80,30,100,30 91,41,100,41"
+      },
+      "topologySha256": "28567cbf8d9fa5385eaf26abecb98aaede35c86d0736ea670b9f7275f29de30f",
+      "electricalStructureSha256": "9987914488f82d6c63df7074d2972c3efd446b9a84e10918c28086e8a2dcddac",
+      "csvSha256": {
+        "bom": "ce108cea711ab16f7ca50431d2b9676e12adb78d580e3098e0550cf88218e4a5",
+        "wires": "11c0ae912db372e75688e36e7e1291dae50dabd52df01439545e95393e8b040a",
+        "terminals": "404f7190c84e6fde9eec4cf01bd3562cd1b575cce53ffb854ed0b84a4e7b756c",
+        "plcIo": "16528f9f1863b2198cbc19c533f9764773b5457ff07abc24bc285cd23e80042f",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208",
+        "devices": "9d1d79e0788ab5c140466d25687a0d5aaecb08378a544429b074922f5d265251",
+        "sheets": "fc7359aaa93ff8f2f9b5acab5271362429b8e35b48cd1602b60c3531352741ec"
+      },
+      "metrics": {
+        "sheetCount": 3,
+        "authoredSheetCount": 3,
+        "connectedSheetCount": 3,
+        "contentObjectCount": 37,
+        "emptyContentSheetIds": [],
+        "repeatedContentSheets": [],
+        "componentCount": 8,
+        "wireCount": 23,
+        "netCount": 13,
+        "globalNetCount": 7,
+        "crossSheetConnectionCount": 6,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 4,
+        "wireListRowCount": 23,
+        "terminalListRowCount": 8
       },
       "errors": []
     }

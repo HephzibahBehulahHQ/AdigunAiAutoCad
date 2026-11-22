@@ -20,6 +20,7 @@ on:
       - "scripts/author-relay-test-bench.js"
       - "scripts/author-irrigation-controller.js"
       - "scripts/author-pneumatic-pick-place.js"
+      - "scripts/author-water-treatment-dosing.js"
   push:
     branches: [main]
     paths:
@@ -40,6 +41,7 @@ on:
       - "scripts/author-relay-test-bench.js"
       - "scripts/author-irrigation-controller.js"
       - "scripts/author-pneumatic-pick-place.js"
+      - "scripts/author-water-treatment-dosing.js"
 
 permissions:
   contents: read
