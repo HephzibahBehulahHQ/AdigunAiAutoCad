@@ -17,9 +17,10 @@ const power = 'irrigation-control-supply';
 const earth = 'irrigation-protective-earth';
 const alarm = 'irrigation-alarm-interface';
 const permissive = 'irrigation-source-permissive';
+const stopStation = 'irrigation-operational-stop';
 const ioSchedule = 'irrigation-plc-io-schedule';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.9',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.10',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -34,6 +35,7 @@ const project = {
     { id: earth, number: 'A2/009', name: 'Cabinet and starter enclosure PE terminals', projectSectionId: 'A2' },
     { id: alarm, number: 'A2/010', name: 'Isolated starter fault annunciator interface', projectSectionId: 'A2' },
     { id: permissive, number: 'A2/011', name: 'Water source permissive at XT8', projectSectionId: 'A2' },
+    { id: stopStation, number: 'A2/012', name: 'Pump-side operational stop request', projectSectionId: 'A2' },
     { id: ioSchedule, number: 'A4/001', name: 'Wired PLC I/O schedule', projectSectionId: 'A4' }
   ],
   objects: [], crossSheetConnections: []
@@ -142,6 +144,8 @@ for (const [ref, position, contact, y, marking, bendX] of [
 const levelFeed = terminal(permissive, 'X18', 470, 265, 'XT8', '1', 'Feed to external water-available contact');
 const levelReturn = terminal(permissive, 'X19', 470, 390, 'XT8', '2', 'Water-available contact return');
 
+const stop = device(stopStation, 'S2', 'schneider-electric-xb5aa42', 605, 345, { marking: 'Pump-side operational stop request' });
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -188,7 +192,11 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['source-permissive-feed', '+24 V DC', 'X1', { x: 280, y: 135 }, { x: 215, y: 160 },
     [{ x: 280, y: 160 }], levelFeed, '1', 'left', ['W-06', '1']],
   ['source-permissive-input', 'XT8 water available to DI a.4', 'A1', pin(plc, 'X10:11'), { x: 215, y: 515 },
-    [{ x: 565, y: 419 }, { x: 565, y: 515 }], levelReturn, '1', 'left', ['W-06', '2']]
+    [{ x: 565, y: 419 }, { x: 565, y: 515 }], levelReturn, '1', 'left', ['W-06', '2']],
+  ['operational-stop-feed', '+24 V DC', 'X1', { x: 960, y: 185 }, { x: 1020, y: 185 },
+    null, stop, '21', 'left', ['W-07', '1']],
+  ['operational-stop-input', 'S2 stop request to DI a.5', 'A1', pin(plc, 'X10:12'), { x: 215, y: 550 },
+    [{ x: 568, y: 437 }, { x: 568, y: 550 }], stop, '22', 'right', ['W-07', '2']]
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -213,7 +221,8 @@ for (const [sheetId, title, description] of [
   [power, 'CONTROL SUPPLY · PS1', 'XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
   [earth, 'ENCLOSURE PROTECTIVE EARTH · XT6', 'XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned.'],
   [alarm, 'STARTER FAULT ANNUNCIATOR INTERFACE · K2', 'DQ a.2 commands K2. XT7 exposes the changeover contacts. PLC alarm logic and the external annunciator supply and load remain unassigned.'],
-  [permissive, 'WATER SOURCE PERMISSIVE · XT8', 'W-06 serves the external contact that closes when water is available. DI a.4 is a PLC input. Sensor selection and PLC permissive logic remain unassigned.']
+  [permissive, 'WATER SOURCE PERMISSIVE · XT8', 'W-06 serves the external contact that closes when water is available. DI a.4 is a PLC input. Sensor selection and PLC permissive logic remain unassigned.'],
+  [stopStation, 'PUMP-SIDE OPERATIONAL STOP · S2', 'Pressing S2 opens the DI a.5 circuit. W-07 carries the feed and return. This is a PLC operational input. Emergency-stop functions remain outside this drawing.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
@@ -226,6 +235,7 @@ const purposeByTerminal = {
   'X10:9': 'Starter run contact',
   'X10:10': 'Starter fault contact',
   'X10:11': 'Water-available contact',
+  'X10:12': 'Operational stop request',
   'X11:2': 'Header pressure voltage',
   'X12:3': 'Pump demand relay',
   'X12:4': 'Local run indication',

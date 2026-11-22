@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.9",
+  "revision": "1.10",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -69,6 +69,12 @@
       "id": "irrigation-source-permissive",
       "number": "A2/011",
       "name": "Water source permissive at XT8",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-operational-stop",
+      "number": "A2/012",
+      "name": "Pump-side operational stop request",
       "projectSectionId": "A2"
     },
     {
@@ -812,6 +818,23 @@
         "comment": ""
       },
       "sheetId": "irrigation-source-permissive"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s2",
+      "componentId": "schneider-electric-xb5aa42",
+      "ref": "S2",
+      "x": 605,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Pump-side operational stop request",
+        "comment": ""
+      },
+      "sheetId": "irrigation-operational-stop"
     },
     {
       "id": "plc-supply",
@@ -2005,6 +2028,101 @@
       "coreId": "2"
     },
     {
+      "id": "operational-stop-feed-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 185,
+      "x1": 960,
+      "y1": 185,
+      "x2": 1020,
+      "y2": 185,
+      "cableId": "W-07",
+      "coreId": "1"
+    },
+    {
+      "id": "operational-stop-feed-remote",
+      "sheetId": "irrigation-operational-stop",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 345,
+      "x1": 215,
+      "y1": 345,
+      "x2": 550,
+      "y2": 345,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s2",
+          "pinId": "contact-21"
+        }
+      },
+      "cableId": "W-07",
+      "coreId": "1"
+    },
+    {
+      "id": "operational-stop-input-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "S2 stop request to DI a.5",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 570,
+      "y": 437,
+      "x1": 570,
+      "y1": 437,
+      "x2": 215,
+      "y2": 550,
+      "bends": [
+        {
+          "x": 568,
+          "y": 437
+        },
+        {
+          "x": 568,
+          "y": 550
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-12"
+        },
+        "end": null
+      },
+      "cableId": "W-07",
+      "coreId": "2"
+    },
+    {
+      "id": "operational-stop-input-remote",
+      "sheetId": "irrigation-operational-stop",
+      "kind": "wire",
+      "potential": "S2 stop request to DI a.5",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 345,
+      "x1": 960,
+      "y1": 345,
+      "x2": 660,
+      "y2": 345,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s2",
+          "pinId": "contact-22"
+        }
+      },
+      "cableId": "W-07",
+      "coreId": "2"
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -2179,6 +2297,22 @@
       "x": 105,
       "y": 585,
       "text": "W-06 serves the external contact that closes when water is available. DI a.4 is a PLC input. Sensor selection and PLC permissive logic remain unassigned."
+    },
+    {
+      "id": "irrigation-operational-stop-note-0",
+      "sheetId": "irrigation-operational-stop",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "PUMP-SIDE OPERATIONAL STOP · S2"
+    },
+    {
+      "id": "irrigation-operational-stop-note-1",
+      "sheetId": "irrigation-operational-stop",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "Pressing S2 opens the DI a.5 circuit. W-07 carries the feed and return. This is a PLC operational input. Emergency-stop functions remain outside this drawing."
     },
     {
       "id": "io-schedule-0-0",
@@ -2378,7 +2512,7 @@
       "kind": "text",
       "x": 105,
       "y": 404,
-      "text": "A1 X11:2"
+      "text": "A1 X10:12"
     },
     {
       "id": "io-schedule-6-1",
@@ -2386,7 +2520,7 @@
       "kind": "text",
       "x": 255,
       "y": 404,
-      "text": "AI 0"
+      "text": "DI a.5"
     },
     {
       "id": "io-schedule-6-2",
@@ -2394,7 +2528,7 @@
       "kind": "text",
       "x": 360,
       "y": 404,
-      "text": "Header pressure voltage"
+      "text": "Operational stop request"
     },
     {
       "id": "io-schedule-6-3",
@@ -2402,7 +2536,7 @@
       "kind": "text",
       "x": 655,
       "y": 404,
-      "text": "A2/002 B1:2"
+      "text": "A2/012 S2:22"
     },
     {
       "id": "io-schedule-7-0",
@@ -2410,7 +2544,7 @@
       "kind": "text",
       "x": 105,
       "y": 438,
-      "text": "A1 X12:3"
+      "text": "A1 X11:2"
     },
     {
       "id": "io-schedule-7-1",
@@ -2418,7 +2552,7 @@
       "kind": "text",
       "x": 255,
       "y": 438,
-      "text": "DQ a.0"
+      "text": "AI 0"
     },
     {
       "id": "io-schedule-7-2",
@@ -2426,7 +2560,7 @@
       "kind": "text",
       "x": 360,
       "y": 438,
-      "text": "Pump demand relay"
+      "text": "Header pressure voltage"
     },
     {
       "id": "io-schedule-7-3",
@@ -2434,7 +2568,7 @@
       "kind": "text",
       "x": 655,
       "y": 438,
-      "text": "A2/003 K1:A1"
+      "text": "A2/002 B1:2"
     },
     {
       "id": "io-schedule-8-0",
@@ -2442,7 +2576,7 @@
       "kind": "text",
       "x": 105,
       "y": 472,
-      "text": "A1 X12:4"
+      "text": "A1 X12:3"
     },
     {
       "id": "io-schedule-8-1",
@@ -2450,7 +2584,7 @@
       "kind": "text",
       "x": 255,
       "y": 472,
-      "text": "DQ a.1"
+      "text": "DQ a.0"
     },
     {
       "id": "io-schedule-8-2",
@@ -2458,7 +2592,7 @@
       "kind": "text",
       "x": 360,
       "y": 472,
-      "text": "Local run indication"
+      "text": "Pump demand relay"
     },
     {
       "id": "io-schedule-8-3",
@@ -2466,7 +2600,7 @@
       "kind": "text",
       "x": 655,
       "y": 472,
-      "text": "A2/006 H1:X1"
+      "text": "A2/003 K1:A1"
     },
     {
       "id": "io-schedule-9-0",
@@ -2474,7 +2608,7 @@
       "kind": "text",
       "x": 105,
       "y": 506,
-      "text": "A1 X12:5"
+      "text": "A1 X12:4"
     },
     {
       "id": "io-schedule-9-1",
@@ -2482,7 +2616,7 @@
       "kind": "text",
       "x": 255,
       "y": 506,
-      "text": "DQ a.2"
+      "text": "DQ a.1"
     },
     {
       "id": "io-schedule-9-2",
@@ -2490,7 +2624,7 @@
       "kind": "text",
       "x": 360,
       "y": 506,
-      "text": "Fault annunciator relay"
+      "text": "Local run indication"
     },
     {
       "id": "io-schedule-9-3",
@@ -2498,6 +2632,38 @@
       "kind": "text",
       "x": 655,
       "y": 506,
+      "text": "A2/006 H1:X1"
+    },
+    {
+      "id": "io-schedule-10-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 540,
+      "text": "A1 X12:5"
+    },
+    {
+      "id": "io-schedule-10-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 540,
+      "text": "DQ a.2"
+    },
+    {
+      "id": "io-schedule-10-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 540,
+      "text": "Fault annunciator relay"
+    },
+    {
+      "id": "io-schedule-10-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 540,
       "text": "A2/010 K2:A1"
     },
     {
@@ -2514,7 +2680,7 @@
       "kind": "text",
       "x": 105,
       "y": 150,
-      "text": "A1 hardware channels and connected pin references from revision 1.9."
+      "text": "A1 hardware channels and connected pin references from revision 1.10."
     },
     {
       "id": "io-schedule-source",
@@ -3192,6 +3358,70 @@
           },
           "connector": {
             "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "operational-stop-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "operational-stop-feed-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 185
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-operational-stop",
+            "targetRef": "S2"
+          }
+        },
+        {
+          "sheetId": "irrigation-operational-stop",
+          "wireId": "operational-stop-feed-remote",
+          "point": {
+            "x": 215,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "operational-stop-input",
+      "name": "S2 stop request to DI a.5",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "operational-stop-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 550
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-operational-stop",
+            "targetRef": "S2"
+          }
+        },
+        {
+          "sheetId": "irrigation-operational-stop",
+          "wireId": "operational-stop-input-remote",
+          "point": {
+            "x": 960,
+            "y": 345
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "irrigation-plc",
             "targetRef": "A1"
           }
