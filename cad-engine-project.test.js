@@ -2030,10 +2030,10 @@ test('pneumatic pick-and-place keeps position feedback and pilot demand on disti
   const file = path.join(__dirname, 'examples/real-projects/pneumatic-pick-place.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [12, 26, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [13, 29, 0, 0]);
   const nets = report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(nets, [
-    'A1:X10:1,A1:X12:1,B1:1,B2:1,PS1:+,X1:1,X1:2,X7:1,X7:2,X9:1,X9:2', 'A1:X10:10,X10:1,X10:2',
+    'A1:X10:1,A1:X12:1,B1:1,B2:1,PS1:+,S1:13,S2:21,X1:1,X1:2,X7:1,X7:2,X9:1,X9:2', 'A1:X10:10,X10:1,X10:2', 'A1:X10:11,S1:14', 'A1:X10:12,S2:22',
     'A1:X10:2,A1:X10:6,A1:X12:2,B1:3,B2:3,K1:A2,K2:A2,K3:A2,K4:A2,K5:A2,K6:A2,PS1:-,X2:1,X2:2',
     'A1:X10:7,B1:4', 'A1:X10:8,B2:4', 'A1:X10:9,X8:1,X8:2', 'A1:X12:3,K1:A1', 'A1:X12:4,K2:A1', 'A1:X12:5,K3:A1,K5:A1', 'A1:X12:6,K4:A1,K6:A1',
     'K1:11,X3:1,X3:2', 'K1:14,X4:1,X4:2', 'K2:11,X5:1,X5:2', 'K2:14,X6:1,X6:2',
