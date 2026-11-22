@@ -2030,7 +2030,7 @@ test('pneumatic pick-and-place keeps position feedback and pilot demand on disti
   const file = path.join(__dirname, 'examples/real-projects/pneumatic-pick-place.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [15, 33, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [16, 33, 0, 0]);
   const nets = report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(nets, [
     'A1:X10:1,A1:X12:1,B1:1,B2:1,PS1:+,S1:13,S2:21,X1:1,X1:2,X26:1,X26:2,X27:1,X27:2,X7:1,X7:2,X9:1,X9:2', 'A1:X10:10,X10:1,X10:2', 'A1:X10:11,S1:14', 'A1:X10:12,S2:22',
@@ -2055,4 +2055,14 @@ test('pneumatic pick-and-place keeps position feedback and pilot demand on disti
     assert.ok(commandNets.includes(downstream));
     assert.ok(commandNets.includes(other));
   }
+  const schedule = project.objects.filter(object => object.sheetId === 'pick-place-plc-io-schedule');
+  const channels = engine.plcIoList(project).rows.filter(row => row.connectedPins.length);
+  assert.equal(channels.length, 10);
+  channels.forEach((channel, index) => {
+    const prefix = 'plc-io-row-' + index;
+    assert.equal(schedule.find(object => object.id === prefix + '-0').text, channel.ref + ' ' + channel.terminal);
+    assert.equal(schedule.find(object => object.id === prefix + '-1').text, channel.channel);
+    const pins = schedule.filter(object => object.id.startsWith(prefix + '-pins-')).flatMap(object => object.text.split(' · '));
+    assert.deepEqual(pins, channel.connectedPins);
+  });
 });

@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.9",
+  "revision": "1.10",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -94,6 +94,12 @@
       "number": "A2/015",
       "name": "Slide command disconnect and test terminals",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-plc-io-schedule",
+      "number": "A4/001",
+      "name": "Wired PLC I/O schedule",
+      "projectSectionId": "A4"
     }
   ],
   "objects": [
@@ -3429,6 +3435,398 @@
       "x": 105,
       "y": 588,
       "text": "X29 and X30 open the respective extend and retract coil commands. X31 and X32 expose the downstream signals. Physical energy isolation remains outside this drawing."
+    },
+    {
+      "id": "plc-io-title",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "PNEUMATIC PICK-AND-PLACE · WIRED PLC I/O SCHEDULE",
+      "x": 105,
+      "y": 105
+    },
+    {
+      "id": "plc-io-revision",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 hardware channel connections · Revision 1.10",
+      "x": 105,
+      "y": 150
+    },
+    {
+      "id": "plc-io-heading-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "PLC terminal",
+      "x": 105,
+      "y": 195
+    },
+    {
+      "id": "plc-io-heading-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Channel",
+      "x": 250,
+      "y": 195
+    },
+    {
+      "id": "plc-io-heading-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Signal purpose",
+      "x": 345,
+      "y": 195
+    },
+    {
+      "id": "plc-io-heading-3",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Connected pins",
+      "x": 640,
+      "y": 195
+    },
+    {
+      "id": "plc-io-row-0-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X10:7",
+      "x": 105,
+      "y": 231
+    },
+    {
+      "id": "plc-io-row-0-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DI a.0",
+      "x": 250,
+      "y": 231
+    },
+    {
+      "id": "plc-io-row-0-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Slide retracted position",
+      "x": 345,
+      "y": 231
+    },
+    {
+      "id": "plc-io-row-0-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/002 B1:4",
+      "x": 640,
+      "y": 231
+    },
+    {
+      "id": "plc-io-row-1-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X10:8",
+      "x": 105,
+      "y": 268
+    },
+    {
+      "id": "plc-io-row-1-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DI a.1",
+      "x": 250,
+      "y": 268
+    },
+    {
+      "id": "plc-io-row-1-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Slide extended position",
+      "x": 345,
+      "y": 268
+    },
+    {
+      "id": "plc-io-row-1-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/002 B2:4",
+      "x": 640,
+      "y": 268
+    },
+    {
+      "id": "plc-io-row-2-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X10:9",
+      "x": 105,
+      "y": 305
+    },
+    {
+      "id": "plc-io-row-2-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DI a.2",
+      "x": 250,
+      "y": 305
+    },
+    {
+      "id": "plc-io-row-2-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Vacuum achieved",
+      "x": 345,
+      "y": 305
+    },
+    {
+      "id": "plc-io-row-2-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/005 X8:1 · A2/005 X8:2",
+      "x": 640,
+      "y": 305
+    },
+    {
+      "id": "plc-io-row-3-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X10:10",
+      "x": 105,
+      "y": 342
+    },
+    {
+      "id": "plc-io-row-3-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DI a.3",
+      "x": 250,
+      "y": 342
+    },
+    {
+      "id": "plc-io-row-3-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Compressed air ready",
+      "x": 345,
+      "y": 342
+    },
+    {
+      "id": "plc-io-row-3-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/006 X10:1 · A2/006 X10:2",
+      "x": 640,
+      "y": 342
+    },
+    {
+      "id": "plc-io-row-4-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X10:11",
+      "x": 105,
+      "y": 379
+    },
+    {
+      "id": "plc-io-row-4-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DI a.4",
+      "x": 250,
+      "y": 379
+    },
+    {
+      "id": "plc-io-row-4-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Local start request",
+      "x": 345,
+      "y": 379
+    },
+    {
+      "id": "plc-io-row-4-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/013 S1:14",
+      "x": 640,
+      "y": 379
+    },
+    {
+      "id": "plc-io-row-5-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X10:12",
+      "x": 105,
+      "y": 416
+    },
+    {
+      "id": "plc-io-row-5-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DI a.5",
+      "x": 250,
+      "y": 416
+    },
+    {
+      "id": "plc-io-row-5-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Local operational stop",
+      "x": 345,
+      "y": 416
+    },
+    {
+      "id": "plc-io-row-5-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/013 S2:22",
+      "x": 640,
+      "y": 416
+    },
+    {
+      "id": "plc-io-row-6-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X12:3",
+      "x": 105,
+      "y": 453
+    },
+    {
+      "id": "plc-io-row-6-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DQ a.0",
+      "x": 250,
+      "y": 453
+    },
+    {
+      "id": "plc-io-row-6-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Vacuum pilot request",
+      "x": 345,
+      "y": 453
+    },
+    {
+      "id": "plc-io-row-6-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/003 K1:A1",
+      "x": 640,
+      "y": 453
+    },
+    {
+      "id": "plc-io-row-7-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X12:4",
+      "x": 105,
+      "y": 490
+    },
+    {
+      "id": "plc-io-row-7-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DQ a.1",
+      "x": 250,
+      "y": 490
+    },
+    {
+      "id": "plc-io-row-7-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Release pilot request",
+      "x": 345,
+      "y": 490
+    },
+    {
+      "id": "plc-io-row-7-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/004 K2:A1",
+      "x": 640,
+      "y": 490
+    },
+    {
+      "id": "plc-io-row-8-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X12:5",
+      "x": 105,
+      "y": 527
+    },
+    {
+      "id": "plc-io-row-8-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DQ a.2",
+      "x": 250,
+      "y": 527
+    },
+    {
+      "id": "plc-io-row-8-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Slide extend request",
+      "x": 345,
+      "y": 527
+    },
+    {
+      "id": "plc-io-row-8-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/007 K3:A1 · A2/009 K5:A1 · A2/015 X29:1",
+      "x": 640,
+      "y": 527
+    },
+    {
+      "id": "plc-io-row-8-pins-3",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/015 X29:2 · A2/015 X31:1 · A2/015 X31:2",
+      "x": 640,
+      "y": 543
+    },
+    {
+      "id": "plc-io-row-9-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A1 X12:6",
+      "x": 105,
+      "y": 564
+    },
+    {
+      "id": "plc-io-row-9-1",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "DQ a.3",
+      "x": 250,
+      "y": 564
+    },
+    {
+      "id": "plc-io-row-9-2",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Slide retract request",
+      "x": 345,
+      "y": 564
+    },
+    {
+      "id": "plc-io-row-9-pins-0",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/008 K4:A1 · A2/009 K6:A1 · A2/015 X30:1",
+      "x": 640,
+      "y": 564
+    },
+    {
+      "id": "plc-io-row-9-pins-3",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "A2/015 X30:2 · A2/015 X32:1 · A2/015 X32:2",
+      "x": 640,
+      "y": 580
+    },
+    {
+      "id": "plc-io-scope",
+      "kind": "text",
+      "sheetId": "pick-place-plc-io-schedule",
+      "text": "Revision snapshot of wired hardware channels. PLC addresses, program logic and timing remain unassigned.",
+      "x": 105,
+      "y": 610
     }
   ],
   "crossSheetConnections": [
