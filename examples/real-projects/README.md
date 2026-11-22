@@ -14,7 +14,9 @@ Select a wire to edit its **Cable ID** and **Core ID** in Properties. **Electric
 
 Open **Controller-to-field terminal marshalling** from Project Explorer. The first sheet contains the CPU 1212C and cabinet strip XT1. The second contains field strip XT2 and the IFM IFS204 sensor. Three editable cross-sheet connections carry the sensor feed, return, and PNP switching signal. The generated cable schedule lists both ends of each W-01 core.
 
-This two-sheet reference starts brief 44. XT0 marks the external 24 V supply boundary. Cable construction, conductor sizing, and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
+A2/003 adds an operator station on XT3. Three W-02 cores carry a common feed, a normally open Start request to DI a.1, and a normally closed operational Stop request to DI a.2. The stop contact documents a PLC input request. Emergency-stop and safety functions are outside the model.
+
+This three-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction, conductor sizing, and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
 
 # 24 V DC relay-operated contactor coil
 

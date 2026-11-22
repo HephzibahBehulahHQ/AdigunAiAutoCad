@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Controller-to-field terminal marshalling",
-  "revision": "1.0",
-  "description": "Two-ended feed-through marshalling for a 24 V PNP sensor, with separately identified supply, return and signal cores.",
+  "revision": "1.1",
+  "description": "Feed-through marshalling for a 24 V PNP sensor and a separate two-button operator station, with identified cable cores.",
   "activeSheet": "marshalling-cabinet",
   "sheets": [
     {
@@ -15,6 +15,12 @@
       "id": "marshalling-field",
       "number": "A2/002",
       "name": "Field XT2 and sensor wiring",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "marshalling-operator-station",
+      "number": "A2/003",
+      "name": "XT3 operator station requests",
       "projectSectionId": "A2"
     }
   ],
@@ -758,6 +764,566 @@
       "coreId": "3"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X7",
+      "x": 310,
+      "y": 274,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "3",
+        "marking": "Operator station feed",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X8",
+      "x": 310,
+      "y": 480,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "4",
+        "marking": "Start request",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X9",
+      "x": 310,
+      "y": 520,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "5",
+        "marking": "Operational stop request",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 310,
+      "y": 250,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "1",
+        "marking": "Operator station feed",
+        "comment": ""
+      },
+      "sheetId": "marshalling-operator-station"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x11",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X11",
+      "x": 795,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "2",
+        "marking": "Start request",
+        "comment": ""
+      },
+      "sheetId": "marshalling-operator-station"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x12",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X12",
+      "x": 795,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "3",
+        "marking": "Operational stop request",
+        "comment": ""
+      },
+      "sheetId": "marshalling-operator-station"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s1",
+      "componentId": "schneider-electric-xb5aa31",
+      "ref": "S1",
+      "x": 575,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Start request",
+        "comment": ""
+      },
+      "sheetId": "marshalling-operator-station"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s2",
+      "componentId": "schneider-electric-xb5aa42",
+      "ref": "S2",
+      "x": 575,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Operational stop request",
+        "comment": ""
+      },
+      "sheetId": "marshalling-operator-station"
+    },
+    {
+      "id": "station-feed-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 500,
+      "y": 312,
+      "x1": 500,
+      "y1": 312,
+      "x2": 500,
+      "y2": 274,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "station-feed-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 500,
+      "y": 274,
+      "x1": 500,
+      "y1": 274,
+      "x2": 345,
+      "y2": 274,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x7",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "start-input-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 345,
+      "y": 480,
+      "x1": 345,
+      "y1": 480,
+      "x2": 590,
+      "y2": 480,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x8",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "start-input-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 590,
+      "y": 480,
+      "x1": 590,
+      "y1": 480,
+      "x2": 590,
+      "y2": 390,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "start-input-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 590,
+      "y": 390,
+      "x1": 590,
+      "y1": 390,
+      "x2": 720,
+      "y2": 390,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-8"
+        }
+      }
+    },
+    {
+      "id": "stop-input-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 345,
+      "y": 520,
+      "x1": 345,
+      "y1": 520,
+      "x2": 615,
+      "y2": 520,
+      "potential": "Operational stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x9",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "stop-input-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 615,
+      "y": 520,
+      "x1": 615,
+      "y1": 520,
+      "x2": 615,
+      "y2": 408,
+      "potential": "Operational stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "stop-input-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 615,
+      "y": 408,
+      "x1": 615,
+      "y1": 408,
+      "x2": 720,
+      "y2": 408,
+      "potential": "Operational stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-9"
+        }
+      }
+    },
+    {
+      "id": "station-feed-trunk-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 345,
+      "y": 250,
+      "x1": 345,
+      "y1": 250,
+      "x2": 410,
+      "y2": 250,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x10",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "station-feed-trunk-2",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 410,
+      "y": 250,
+      "x1": 410,
+      "y1": 250,
+      "x2": 410,
+      "y2": 300,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "station-feed-trunk-3",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 410,
+      "y": 300,
+      "x1": 410,
+      "y1": 300,
+      "x2": 410,
+      "y2": 420,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "station-feed-trunk-4",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 410,
+      "y": 420,
+      "x1": 410,
+      "y1": 420,
+      "x2": 520,
+      "y2": 420,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s2",
+          "pinId": "contact-21"
+        }
+      }
+    },
+    {
+      "id": "station-start-feed-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 410,
+      "y": 300,
+      "x1": 410,
+      "y1": 300,
+      "x2": 520,
+      "y2": 300,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s1",
+          "pinId": "contact-13"
+        }
+      }
+    },
+    {
+      "id": "station-start-return-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 630,
+      "y": 300,
+      "x1": 630,
+      "y1": 300,
+      "x2": 760,
+      "y2": 300,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s1",
+          "pinId": "contact-14"
+        },
+        "end": {
+          "instanceId": "x11",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "station-stop-return-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 630,
+      "y": 420,
+      "x1": 630,
+      "y1": 420,
+      "x2": 760,
+      "y2": 420,
+      "potential": "Operational stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s2",
+          "pinId": "contact-22"
+        },
+        "end": {
+          "instanceId": "x12",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "w02-cabinet-1-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 274,
+      "x1": 275,
+      "y1": 274,
+      "x2": 190,
+      "y2": 274,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x7",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "w02-field-1-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 275,
+      "y": 250,
+      "x1": 275,
+      "y1": 250,
+      "x2": 190,
+      "y2": 250,
+      "potential": "Sensor +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x10",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "w02-cabinet-2-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 480,
+      "x1": 275,
+      "y1": 480,
+      "x2": 190,
+      "y2": 480,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x8",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "id": "w02-field-2-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 830,
+      "y": 300,
+      "x1": 830,
+      "y1": 300,
+      "x2": 920,
+      "y2": 300,
+      "potential": "Start request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x11",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "id": "w02-cabinet-3-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 520,
+      "x1": 275,
+      "y1": 520,
+      "x2": 190,
+      "y2": 520,
+      "potential": "Operational stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x9",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "3"
+    },
+    {
+      "id": "w02-field-3-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 830,
+      "y": 420,
+      "x1": 830,
+      "y1": 420,
+      "x2": 920,
+      "y2": 420,
+      "potential": "Operational stop request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x12",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "3"
+    },
+    {
       "id": "marshalling-cabinet-title",
       "sheetId": "marshalling-cabinet",
       "kind": "text",
@@ -804,6 +1370,38 @@
       "x": 105,
       "y": 602,
       "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
+    },
+    {
+      "id": "marshalling-operator-station-title",
+      "sheetId": "marshalling-operator-station",
+      "kind": "text",
+      "x": 105,
+      "y": 97,
+      "text": "XT3 · OPERATOR STATION MARSHALLING"
+    },
+    {
+      "id": "marshalling-operator-station-note",
+      "sheetId": "marshalling-operator-station",
+      "kind": "text",
+      "x": 105,
+      "y": 565,
+      "text": "W-02 carries a common feed, a normally open Start request and a normally closed operational Stop request."
+    },
+    {
+      "id": "marshalling-operator-station-scope",
+      "sheetId": "marshalling-operator-station",
+      "kind": "text",
+      "x": 105,
+      "y": 602,
+      "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
+    },
+    {
+      "id": "marshalling-operator-station-operational-scope",
+      "sheetId": "marshalling-operator-station",
+      "kind": "text",
+      "x": 105,
+      "y": 640,
+      "text": "The Stop contact documents a PLC input request. Emergency-stop and safety functions are outside this drawing."
     }
   ],
   "crossSheetConnections": [
@@ -899,6 +1497,102 @@
             "direction": "left",
             "targetSheetId": "marshalling-cabinet",
             "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w02-core-1",
+      "name": "W-02:1 · Sensor +24 V",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w02-cabinet-1-1",
+          "point": {
+            "x": 190,
+            "y": 274
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-operator-station",
+            "targetRef": "X10"
+          }
+        },
+        {
+          "sheetId": "marshalling-operator-station",
+          "wireId": "w02-field-1-1",
+          "point": {
+            "x": 190,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w02-core-2",
+      "name": "W-02:2 · Start request",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w02-cabinet-2-1",
+          "point": {
+            "x": 190,
+            "y": 480
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-operator-station",
+            "targetRef": "X11"
+          }
+        },
+        {
+          "sheetId": "marshalling-operator-station",
+          "wireId": "w02-field-2-1",
+          "point": {
+            "x": 920,
+            "y": 300
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w02-core-3",
+      "name": "W-02:3 · Operational stop request",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w02-cabinet-3-1",
+          "point": {
+            "x": 190,
+            "y": 520
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-operator-station",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "marshalling-operator-station",
+          "wireId": "w02-field-3-1",
+          "point": {
+            "x": 920,
+            "y": 420
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X9"
           }
         }
       ]
