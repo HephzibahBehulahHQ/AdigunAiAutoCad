@@ -615,6 +615,21 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.ok(fullBounds[0] < -125 && fullBounds[1] < -35);
     for (const object of freeProject.objects) assert.ok(fullSvg.includes(object.id));
     assert.doesNotMatch(fullSvg, /draftingRulers|viewportGrid|resize-controls|customSheetFrame/);
+    const selectedForExport = freeProject.objects.find(object => object.kind === 'component-instance' && object.x < 0);
+    await freeDraftingPage.getByRole('button', { name: 'Select and move', exact: true }).click();
+    await freeDraftingPage.keyboard.press('Escape');
+    await freeDraftingPage.locator('#userDrawings [data-object="' + selectedForExport.id + '"]').dispatchEvent('click', { bubbles: true });
+    await freeDraftingPage.locator('#openCommands').click();
+    const selectionDownload = freeDraftingPage.waitForEvent('download');
+    await freeDraftingPage.locator('#commands').getByRole('button', { name: 'Export selection as SVG' }).click();
+    const selectionSvg = fs.readFileSync(await (await selectionDownload).path(), 'utf8');
+    assert.ok(selectionSvg.includes(selectedForExport.id));
+    for (const object of freeProject.objects.filter(object => object.id !== selectedForExport.id)) {
+      assert.ok(!selectionSvg.includes(object.id));
+    }
+    const selectionBounds = /viewBox="([^"]+)"/.exec(selectionSvg)[1].split(' ').map(Number);
+    assert.ok(selectionBounds[0] < selectedForExport.x && selectionBounds[2] < fullBounds[2]);
+    assert.doesNotMatch(selectionSvg, /draftingRulers|viewportGrid|resize-controls|customSheetFrame|selected-object/);
     await freeDraftingPage.evaluate(() => {
       window.print = () => {};
       window.confirm = message => { window.__frameWarning = message; return true; };

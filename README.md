@@ -9,6 +9,8 @@ In **Drafting settings**, change the display grid and snap intervals independent
 
 Use **Export full drawing as SVG** for all visible geometry, including off-frame objects. **Export print frame as SVG** and **Print drawing** use the configured paper size and warn before clipping off-frame geometry.
 
+Select one or more drawing objects and use **Export selection as SVG** to export just those objects, cropped to their bounds.
+
 Set each paper margin independently in Properties. Margins position the print frame and its title block, and are saved with the sheet without moving drawing objects.
 
 For a custom sheet, choose **Custom** in the **Paper size** field in Properties, then set the width and height in millimetres. Print and frame SVG export use the saved dimensions.
