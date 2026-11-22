@@ -68,7 +68,7 @@ The opening set contains 100 authored sheets through A1/100, including the sourc
 
 After an online visit, supported browsers can reload the editor offline or during a temporary server error. Project Explorer keeps previously opened examples on this device so you can open and save an independent drawing without a network connection.
 
-The GitHub Pages workflow checks the committed example report and publishes the editor, native example files, and validation report. Before client release, run `node scripts/project-library-validation.js --check --require-release-scale` and verify the remaining acceptance criteria in the master specification.
+The GitHub Pages workflow checks the committed example report and publishes the editor, native example files, and validation report. Before client release, run **Verify client release** in GitHub Actions against the candidate branch. It requires the full project library and then runs the Chromium CAD workflow. The equivalent library-only check is `node scripts/project-library-validation.js --check --require-release-scale`. Verify the remaining acceptance criteria in the master specification before delivering the release.
 
 The release count checks declared topology IDs and electrical structure fingerprints. Renaming devices and sheets or rerouting the same connections does not qualify a copy as another project. Matching fingerprints are flagged for review because they do not prove graph equivalence.
 
