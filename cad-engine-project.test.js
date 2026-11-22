@@ -1030,6 +1030,25 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await reopenedExample.locator('[data-component-property="delaySeconds"][data-component-object="' + timerId + '"]').inputValue(), '10');
     assert.equal(await reopenedExample.locator('[data-component-property="position"][data-component-object="' + timerId + '"]').inputValue(), 'KT1');
     assert.ok(await reopenedExample.locator('#userDrawings [data-object="' + addedWire.id + '"]').count() > 0, 'added wire geometry survives reopen');
+    await reopenedExample.locator('#projectTree [data-sheet="ref-007"]').click();
+    const spareOutputLink = reopenedExample.getByRole('link', { name: /Q0\.1 spare field output/ });
+    await spareOutputLink.press('Enter');
+    await reopenedExample.locator('#sheetTabs [data-sheet="ref-019"][aria-selected="true"]').waitFor();
+    const spareTerminal = reopenedExample.locator('#userDrawings [data-object="a1-019-xt6-x22"]');
+    assert.match(await spareTerminal.getAttribute('class'), /selected-object/, 'the cross-reference selects X22');
+    const spareWire = reopenedExample.locator('#userDrawings [data-object="a1-019-xt6-x22-receive"]');
+    const beforeMove = await spareWire.getAttribute('d');
+    await reopenedExample.keyboard.press('ArrowDown');
+    assert.notEqual(await spareWire.getAttribute('d'), beforeMove, 'moving X22 updates the routed endpoint');
+    await reopenedExample.getByRole('link', { name: /Q0\.1 spare field output/ }).press('Enter');
+    await reopenedExample.locator('#sheetTabs [data-sheet="ref-007"][aria-selected="true"]').waitFor();
+    assert.match(await reopenedExample.locator('#userDrawings [data-object="sensor-plc-a1"]').getAttribute('class'), /selected-object/);
+    await reopenedExample.keyboard.press('Control+Shift+S');
+    await reopenedExample.waitForFunction(() => window.__savedProjectWrites.length === 1);
+    const xt6Copy = engine.parseProject(await reopenedExample.evaluate(() => window.__savedProjectWrites[0]));
+    assert.equal(xt6Copy.valid, true, xt6Copy.errors.join(' '));
+    const output = engine.analyzeProject(xt6Copy.project).globalNets.find(net => net.pins.some(pin => pin.ref === 'X22'));
+    assert.deepEqual(output.pins.map(pin => pin.ref + ':' + pin.number).sort(), ['A1:X12:4', 'X22:1', 'X22:2']);
     await reopenedExample.close({ runBeforeUnload: false });
   } finally {
     if (browser) await browser.close();
