@@ -16,12 +16,12 @@ const branchBMonitor = { id: 'branch-b-monitor', number: 'A2/025', name: 'Branch
 const branchBLossAlert = { id: 'branch-b-loss-alert', number: 'A2/026', name: 'Branch B loss indication from independent supply', projectSectionId: 'A2' };
 const fieldSupplyPotential = 'External annunciator +24 V';
 const fieldRequestPotential = 'Annunciator switched +24 V';
-const remoteLossIndicator = { id: 'branch-b-remote-indicator', number: 'A2/027', name: 'XT15 remote Branch B loss indicator', projectSectionId: 'A2' };
+const remoteLossIndicator = { id: 'branch-b-remote-indicator', number: 'A2/027', name: 'XT15 remote Branch B status indicators', projectSectionId: 'A2' };
 const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.4';
+project.revision = '3.5';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -275,6 +275,7 @@ author(branchBMonitor, ({ device, pin, wire, link, notes }) => {
 });
 
 const lossSignal = 'K4 Normally closed';
+const presentSignal = 'K4 Normally open';
 const indicatorReturn = 'Independent indicator 0 V';
 author(branchBLossAlert, ({ device, pin, wire, link, notes }) => {
   const feed = device('X33', 'phoenix-contact-3209510', 430, 245,
@@ -283,10 +284,13 @@ author(branchBLossAlert, ({ device, pin, wire, link, notes }) => {
     { terminalStrip: 'XT14', position: '2', marking: 'Independent 0 V' });
   const output = device('X35', 'phoenix-contact-3209510', 850, 345,
     { terminalStrip: 'XT14', position: '3', marking: 'Switched power to H3' });
-  const monitorTerminals = ['x30', 'x31'].map(ref => project.objects.find(object => object.id === branchBMonitor.id + '-' + ref));
+  const presentOutput = device('X38', 'phoenix-contact-3209510', 850, 290,
+    { terminalStrip: 'XT14', position: '4', marking: 'Switched power to H4' });
+  const monitorTerminals = ['x30', 'x31', 'x32'].map(ref => project.objects.find(object => object.id === branchBMonitor.id + '-' + ref));
   for (const [key, marking, terminal, destination, destinationPin, boundaryX, direction] of [
     ['common', 'Dry contact common', monitorTerminals[0], feed, '2', 940, 'right'],
-    ['nc', 'Normally closed', monitorTerminals[1], output, '1', 215, 'left']
+    ['nc', 'Normally closed', monitorTerminals[1], output, '1', 215, 'left'],
+    ['no', 'Normally open', monitorTerminals[2], presentOutput, '1', 215, 'left']
   ]) {
     const start = pin(terminal, '2'), end = pin(destination, destinationPin);
     const potential = 'K4 ' + marking;
@@ -295,9 +299,9 @@ author(branchBLossAlert, ({ device, pin, wire, link, notes }) => {
     link(key, 'Branch B loss alert · ' + marking, send, receive, terminal.ref, destination.ref, ['right', direction]);
   }
   notes([
-    ['title', 108, 'XT14 · BRANCH B LOSS INDICATOR SUPPLY'],
+    ['title', 108, 'XT14 · BRANCH B INDICATOR SUPPLY'],
     ['feed', 195, 'XT14:1 supplies K4 common from an independent 24 V DC source.'],
-    ['signal', 465, 'XT14:3 sends switched power from K4 NC to the remote indicator on A2/027.'],
+    ['signal', 465, 'XT14:3 and XT14:4 send K4 NC and NO power to the indicators on A2/027.'],
     ['scope', 505, 'XT14:2 returns to the independent source. The drawing leaves that source and its protection unassigned.']
   ]);
 });
@@ -308,11 +312,21 @@ author(remoteLossIndicator, ({ device, pin, wire, link, notes }) => {
     { terminalStrip: 'XT15', position: '1', marking: 'Switched feed from K4 NC' });
   const fieldReturn = device('X37', 'phoenix-contact-3209510', 850, 370,
     { terminalStrip: 'XT15', position: '2', marking: 'Independent indicator 0 V' });
+  const presentLamp = device('H4', 'schneider-electric-xb5avb3', 620, 270, { marking: 'Branch B relay energized' });
+  const presentFeed = device('X39', 'phoenix-contact-3209510', 370, 270,
+    { terminalStrip: 'XT15', position: '3', marking: 'Switched feed from K4 NO' });
   wire('lamp-feed', remoteLossIndicator.id, pin(fieldFeed, '2'), pin(lamp, 'X1'), lossSignal);
-  wire('lamp-return', remoteLossIndicator.id, pin(lamp, 'X2'), pin(fieldReturn, '1'), indicatorReturn);
+  wire('present-lamp-feed', remoteLossIndicator.id, pin(presentFeed, '2'), pin(presentLamp, 'X1'), presentSignal);
+  const returnJunction = { x: 745, y: 370 };
+  const returnBend = { x: 745, y: 270 };
+  wire('lamp-return', remoteLossIndicator.id, pin(lamp, 'X2'), returnJunction, indicatorReturn);
+  wire('present-lamp-return', remoteLossIndicator.id, pin(presentLamp, 'X2'), returnBend, indicatorReturn);
+  wire('shared-return-drop', remoteLossIndicator.id, returnBend, returnJunction, indicatorReturn);
+  wire('shared-return-terminal', remoteLossIndicator.id, returnJunction, pin(fieldReturn, '1'), indicatorReturn);
   for (const [coreId, potential, cabinetRef, terminal, pinNumber, boundaryX, direction] of [
     ['1', lossSignal, 'X35', fieldFeed, '1', 200, 'left'],
-    ['2', indicatorReturn, 'X34', fieldReturn, '2', 1020, 'right']
+    ['2', indicatorReturn, 'X34', fieldReturn, '2', 1020, 'right'],
+    ['3', presentSignal, 'X38', presentFeed, '1', 200, 'left']
   ]) {
     const cabinetTerminal = project.objects.find(object => object.id === branchBLossAlert.id + '-' + cabinetRef.toLowerCase());
     const start = pin(cabinetTerminal, '2'), end = pin(terminal, pinNumber);
@@ -323,9 +337,9 @@ author(remoteLossIndicator, ({ device, pin, wire, link, notes }) => {
     link(id, 'W-H3:' + coreId + ' · ' + potential, send, receive, cabinetRef, terminal.ref, ['right', direction]);
   }
   notes([
-    ['title', 108, 'XT15 · REMOTE BRANCH B LOSS INDICATOR'],
-    ['feed', 220, 'W-H3 carries K4 switched power and independent return from cabinet strip XT14.'],
-    ['function', 465, 'H3 illuminates when K4 de-energizes and the independent source remains available.'],
+    ['title', 108, 'XT15 · REMOTE BRANCH B STATUS INDICATORS'],
+    ['feed', 220, 'W-H3 carries K4 NC, independent return and K4 NO from cabinet strip XT14.'],
+    ['function', 465, 'With independent power available, H3 indicates K4 de-energized and H4 indicates K4 energized.'],
     ['scope', 510, 'Cable construction, routing, and conductor sizing are unassigned.']
   ]);
 });
