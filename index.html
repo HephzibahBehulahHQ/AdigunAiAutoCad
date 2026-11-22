@@ -1835,10 +1835,11 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       const wireRows=wireReport.rows.filter(row=>!state.projectModel||row.sheetId===state.sheet).map(function(row){
         const pins=row.netPinRefs.length?row.netPinRefs.join(', '):'No verified component pins are attached to this net.';
         const cable=[row.cableId,row.coreId].filter(Boolean).join(':');
-        const keywords=[row.wireId,row.netId,cable,...row.netPinRefs].join(' ').toLowerCase();
+        const identifiers=[row.wireNumber,row.potential].filter(Boolean).join(' · ');
+        const keywords=[row.wireId,row.netId,cable,identifiers,...row.netPinRefs].join(' ').toLowerCase();
         return '<div class="inspector-block" data-wire-list-row="'+escapeHtml(keywords)+'"><div class="property-row"><span>'+escapeHtml(row.wireId)+' · '+escapeHtml(row.netId)
           +(cable?' · '+escapeHtml(cable):'')+'</span><strong>'+row.lengthMm.toFixed(3)+' mm</strong></div>'
-          +'<div class="notice">Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div>'
+          +'<div class="notice">'+(identifiers?escapeHtml(identifiers)+'<br>':'')+'Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div>'
           +'<button type="button" class="command-item" data-finding-sheet="'+escapeHtml(state.sheet)+'" data-finding-object="'+escapeHtml(row.wireId)+'"'
           +(visibleWires.has(row.wireId)?'':' disabled title="Show the wire or its layer to locate it."')
           +' aria-label="Locate wire '+escapeHtml(row.wireId)+'">Locate wire</button></div>';
