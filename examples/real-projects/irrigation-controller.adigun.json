@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.10",
+  "revision": "1.11",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -75,6 +75,12 @@
       "id": "irrigation-operational-stop",
       "number": "A2/012",
       "name": "Pump-side operational stop request",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-pressure-test-access",
+      "number": "A2/013",
+      "name": "Pressure transmitter disconnect and test terminals",
       "projectSectionId": "A2"
     },
     {
@@ -837,6 +843,124 @@
       "sheetId": "irrigation-operational-stop"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x20",
+      "componentId": "phoenix-contact-3210156",
+      "ref": "X20",
+      "x": 445,
+      "y": 295,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "1",
+        "marking": "Pressure transmitter feed disconnect",
+        "comment": "",
+        "knifePosition": "closed"
+      },
+      "sheetId": "irrigation-pressure-test-access"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x21",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X21",
+      "x": 710,
+      "y": 295,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "2",
+        "marking": "Switched transmitter feed test point",
+        "comment": ""
+      },
+      "sheetId": "irrigation-pressure-test-access"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x22",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X22",
+      "x": 710,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "3",
+        "marking": "Transmitter reference test point",
+        "comment": ""
+      },
+      "sheetId": "irrigation-pressure-test-access"
+    },
+    {
+      "id": "pressure-test-switched-feed",
+      "sheetId": "irrigation-pressure-test-access",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 480,
+      "y": 295,
+      "x1": 480,
+      "y1": 295,
+      "x2": 675,
+      "y2": 295,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x20",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "x21",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "pressure-field-feed-cabinet",
+      "sheetId": "irrigation-pressure-test-access",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 745,
+      "y": 295,
+      "x1": 745,
+      "y1": 295,
+      "x2": 960,
+      "y2": 295,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x21",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pressure-field-feed-remote",
+      "sheetId": "irrigation-pressure",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 320,
+      "x1": 215,
+      "y1": 320,
+      "x2": 545,
+      "y2": 320,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
       "id": "plc-supply",
       "sheetId": "irrigation-plc",
       "kind": "wire",
@@ -1116,22 +1240,22 @@
     },
     {
       "id": "pressure-feed-remote",
-      "sheetId": "irrigation-pressure",
+      "sheetId": "irrigation-pressure-test-access",
       "kind": "wire",
       "potential": "+24 V DC",
       "stroke": "#b42318",
       "strokeWidth": 1.5,
       "x": 215,
-      "y": 320,
+      "y": 295,
       "x1": 215,
-      "y1": 320,
-      "x2": 545,
-      "y2": 320,
+      "y1": 295,
+      "x2": 410,
+      "y2": 295,
       "pinAttachments": {
         "start": null,
         "end": {
-          "instanceId": "b1",
-          "pinId": "pin-1-lplus"
+          "instanceId": "x20",
+          "pinId": "level-1-left"
         }
       }
     },
@@ -2123,6 +2247,41 @@
       "coreId": "2"
     },
     {
+      "id": "pressure-test-reference-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 925,
+      "y": 495,
+      "x1": 925,
+      "y1": 495,
+      "x2": 1020,
+      "y2": 495
+    },
+    {
+      "id": "pressure-test-reference-remote",
+      "sheetId": "irrigation-pressure-test-access",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 420,
+      "x1": 960,
+      "y1": 420,
+      "x2": 745,
+      "y2": 420,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x22",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -2313,6 +2472,22 @@
       "x": 105,
       "y": 585,
       "text": "Pressing S2 opens the DI a.5 circuit. W-07 carries the feed and return. This is a PLC operational input. Emergency-stop functions remain outside this drawing."
+    },
+    {
+      "id": "irrigation-pressure-test-access-note-0",
+      "sheetId": "irrigation-pressure-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "PRESSURE TRANSMITTER TEST ACCESS · XT9"
+    },
+    {
+      "id": "irrigation-pressure-test-access-note-1",
+      "sheetId": "irrigation-pressure-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "X20 opens the transmitter feed. X21 and X22 expose its downstream feed and 0 V reference. Test equipment and procedure remain unassigned."
     },
     {
       "id": "io-schedule-0-0",
@@ -2680,7 +2855,7 @@
       "kind": "text",
       "x": 105,
       "y": 150,
-      "text": "A1 hardware channels and connected pin references from revision 1.10."
+      "text": "A1 hardware channels and connected pin references from revision 1.11."
     },
     {
       "id": "io-schedule-source",
@@ -2725,6 +2900,38 @@
       ]
     },
     {
+      "id": "pressure-field-feed",
+      "name": "XT9 switched transmitter feed",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-pressure-test-access",
+          "wireId": "pressure-field-feed-cabinet",
+          "point": {
+            "x": 960,
+            "y": 295
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-pressure",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "irrigation-pressure",
+          "wireId": "pressure-field-feed-remote",
+          "point": {
+            "x": 215,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-pressure-test-access",
+            "targetRef": "X21"
+          }
+        }
+      ]
+    },
+    {
       "id": "pressure-feed",
       "name": "+24 V DC",
       "endpoints": [
@@ -2737,16 +2944,16 @@
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "irrigation-pressure",
-            "targetRef": "B1"
+            "targetSheetId": "irrigation-pressure-test-access",
+            "targetRef": "X20"
           }
         },
         {
-          "sheetId": "irrigation-pressure",
+          "sheetId": "irrigation-pressure-test-access",
           "wireId": "pressure-feed-remote",
           "point": {
             "x": 215,
-            "y": 320
+            "y": 295
           },
           "connector": {
             "direction": "left",
@@ -3424,6 +3631,38 @@
             "direction": "right",
             "targetSheetId": "irrigation-plc",
             "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pressure-test-reference",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "pressure-test-reference-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 495
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-pressure-test-access",
+            "targetRef": "X22"
+          }
+        },
+        {
+          "sheetId": "irrigation-pressure-test-access",
+          "wireId": "pressure-test-reference-remote",
+          "point": {
+            "x": 960,
+            "y": 420
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "X2"
           }
         }
       ]
