@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.0",
+  "revision": "1.1",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum and release pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -27,6 +27,12 @@
       "id": "pick-place-release-pilot",
       "number": "A2/004",
       "name": "Release pilot interface",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-vacuum-confirmation",
+      "number": "A2/005",
+      "name": "Vacuum achieved switch interface",
       "projectSectionId": "A2"
     }
   ],
@@ -543,6 +549,141 @@
     {
       "schemaVersion": 1,
       "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X7",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "Feed to external vacuum switch",
+        "comment": ""
+      },
+      "sheetId": "pick-place-vacuum-confirmation"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X8",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "Vacuum-achieved contact return",
+        "comment": ""
+      },
+      "sheetId": "pick-place-vacuum-confirmation"
+    },
+    {
+      "id": "vacuum-switch-feed-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 270,
+      "y": 234,
+      "x1": 270,
+      "y1": 234,
+      "x2": 215,
+      "y2": 190,
+      "bends": [
+        {
+          "x": 270,
+          "y": 190
+        }
+      ],
+      "cableId": "W-01",
+      "coreId": "1"
+    },
+    {
+      "id": "vacuum-switch-feed-field",
+      "sheetId": "pick-place-vacuum-confirmation",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 265,
+      "x1": 435,
+      "y1": 265,
+      "x2": 215,
+      "y2": 265,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x7",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "1"
+    },
+    {
+      "id": "vacuum-confirmation-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "XT4 vacuum achieved to DI a.2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 378,
+      "x1": 600,
+      "y1": 378,
+      "x2": 215,
+      "y2": 452,
+      "bends": [
+        {
+          "x": 585,
+          "y": 378
+        },
+        {
+          "x": 585,
+          "y": 452
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-9"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "2"
+    },
+    {
+      "id": "vacuum-confirmation-field",
+      "sheetId": "pick-place-vacuum-confirmation",
+      "kind": "wire",
+      "potential": "XT4 vacuum achieved to DI a.2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 390,
+      "x1": 435,
+      "y1": 390,
+      "x2": 215,
+      "y2": 390,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x8",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "2"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
       "id": "k1",
       "componentId": "phoenix-contact-2966171",
       "ref": "K1",
@@ -995,6 +1136,22 @@
       "x": 105,
       "y": 588,
       "text": "XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned."
+    },
+    {
+      "id": "pick-place-vacuum-confirmation-note-0",
+      "sheetId": "pick-place-vacuum-confirmation",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "VACUUM ACHIEVED SWITCH INTERFACE · XT4"
+    },
+    {
+      "id": "pick-place-vacuum-confirmation-note-1",
+      "sheetId": "pick-place-vacuum-confirmation",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "W-01 carries the feed and DI a.2 return for an external contact that closes at the required vacuum. Sensor selection and threshold remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -1120,6 +1277,70 @@
           },
           "connector": {
             "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vacuum-switch-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "vacuum-switch-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 190
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-vacuum-confirmation",
+            "targetRef": "X7"
+          }
+        },
+        {
+          "sheetId": "pick-place-vacuum-confirmation",
+          "wireId": "vacuum-switch-feed-field",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vacuum-confirmation",
+      "name": "XT4 vacuum achieved to DI a.2",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "vacuum-confirmation-cabinet",
+          "point": {
+            "x": 215,
+            "y": 452
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-vacuum-confirmation",
+            "targetRef": "X8"
+          }
+        },
+        {
+          "sheetId": "pick-place-vacuum-confirmation",
+          "wireId": "vacuum-confirmation-field",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
             "targetSheetId": "pick-place-plc",
             "targetRef": "A1"
           }

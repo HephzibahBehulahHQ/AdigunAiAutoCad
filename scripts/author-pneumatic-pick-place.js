@@ -10,17 +10,19 @@ const cabinet = 'pick-place-plc';
 const sensors = 'pick-place-position-sensors';
 const vacuum = 'pick-place-vacuum-pilot';
 const release = 'pick-place-release-pilot';
+const confirmation = 'pick-place-vacuum-confirmation';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.0',
+  revision: '1.1',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum and release pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'PLC power and I/O', projectSectionId: 'A2' },
     { id: sensors, number: 'A2/002', name: 'Retracted and extended position sensing', projectSectionId: 'A2' },
     { id: vacuum, number: 'A2/003', name: 'Vacuum pilot interface', projectSectionId: 'A2' },
-    { id: release, number: 'A2/004', name: 'Release pilot interface', projectSectionId: 'A2' }
+    { id: release, number: 'A2/004', name: 'Release pilot interface', projectSectionId: 'A2' },
+    { id: confirmation, number: 'A2/005', name: 'Vacuum achieved switch interface', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -56,10 +58,11 @@ function wire(sheetId, id, potential, start, end, bends) {
   return segment;
 }
 
-function connectSheets(id, potential, cabinetEnd, fieldEnd) {
+function connectSheets(id, potential, cabinetEnd, fieldEnd, cable) {
   const endpoints = [cabinetEnd, fieldEnd].map(({ sheet, ref, connection, edge, direction, bends }, index) => {
     const other = index === 0 ? fieldEnd : cabinetEnd;
     const segment = wire(sheet, id + (index === 0 ? '-cabinet' : '-field'), potential, connection, edge, bends);
+    if (cable) Object.assign(segment, cable);
     return { sheetId: sheet, wireId: segment.id, point: edge, connector: { direction, targetSheetId: other.sheet, targetRef: other.ref } };
   });
   project.crossSheetConnections.push({ id, name: potential, endpoints });
@@ -102,6 +105,17 @@ for (const [probe, terminalNumber, y, bendX, signal] of [
     fieldPort(sensors, probe.ref, contact, 960, contact.y, 'right'));
 }
 
+const vacuumFeed = terminal(confirmation, 'X7', 470, 265, 'XT4', '1', 'Feed to external vacuum switch');
+const vacuumReturn = terminal(confirmation, 'X8', 470, 390, 'XT4', '2', 'Vacuum-achieved contact return');
+connectSheets('vacuum-switch-feed', '+24 V DC',
+  cabinetPort('X1', { x: 270, y: 234 }, 215, 190, 'left', [{ x: 270, y: 190 }]),
+  fieldPort(confirmation, vacuumFeed.ref, pin(vacuumFeed, '1'), 215, 265, 'left'),
+  { cableId: 'W-01', coreId: '1' });
+connectSheets('vacuum-confirmation', 'XT4 vacuum achieved to DI a.2',
+  cabinetPort('A1', pin(plc, 'X10:9'), 215, 452, 'left', [{ x: 585, y: 378 }, { x: 585, y: 452 }]),
+  fieldPort(confirmation, vacuumReturn.ref, pin(vacuumReturn, '1'), 215, 390, 'left'),
+  { cableId: 'W-01', coreId: '2' });
+
 for (const [sheet, ref, terminalNumber, strip, commonRef, noRef, role, outputY, returnY, elbow] of [
   [vacuum, 'K1', 'X12:3', 'XT2', 'X3', 'X4', 'Vacuum pilot', 408, 475, 920],
   [release, 'K2', 'X12:4', 'XT3', 'X5', 'X6', 'Release pilot', 442, 532, 905]
@@ -127,7 +141,8 @@ for (const [sheetId, title, text] of [
   [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives external 24 V DC. Two separate inputs report slide position. Two outputs command isolated pilot interfaces.'],
   [sensors, 'SLIDE POSITION SENSORS · B1 AND B2', 'B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned.'],
   [vacuum, 'VACUUM PILOT INTERFACE · K1', 'XT2 exposes the isolated normally open vacuum demand contact. The valve and its electrical supply remain external.'],
-  [release, 'RELEASE PILOT INTERFACE · K2', 'XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned.']
+  [release, 'RELEASE PILOT INTERFACE · K2', 'XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned.'],
+  [confirmation, 'VACUUM ACHIEVED SWITCH INTERFACE · XT4', 'W-01 carries the feed and DI a.2 return for an external contact that closes at the required vacuum. Sensor selection and threshold remain unassigned.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
