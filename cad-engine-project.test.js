@@ -911,6 +911,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await linkedExample.locator('#sheetTabs [data-sheet="marshalling-analog-pressure"][aria-selected="true"]').waitFor();
     await linkedExample.locator('#userDrawings [data-object="b2"]').waitFor();
     assert.match(await linkedExample.locator('#projectTree').innerText(), /Copy of Controller-to-field terminal marshalling/);
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: exampleLink.origin });
+    await linkedExample.locator('#openCommands').click();
+    await linkedExample.locator('#commands').getByRole('button', { name: /Copy source example sheet link/ }).click();
+    await linkedExample.getByText('Source example sheet link copied.', { exact: true }).first().waitFor();
+    assert.equal(await linkedExample.evaluate(() => navigator.clipboard.readText()), exampleLink.href);
+    await context.clearPermissions();
     exampleLink.searchParams.set('sheet', 'missing-sheet');
     await linkedExample.goto(exampleLink.href);
     await linkedExample.getByText(/Example link could not be opened: The linked sheet/).first().waitFor();
