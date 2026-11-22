@@ -141,15 +141,21 @@
   const sheetNames={overview:['Z0010000','Control cabinet'],title:['A1/000','Title page'],contents:['A1/001','Contents'],device:['A1/005','Device list'],power:['A1/010','Power supply'],control:['A1/020','Control circuit'],plc:['A2/030','PLC / I/O'],drive:['A2/040','Drive interface'],safety:['A2/050','Safety circuit'],layout:['A3/100','Enclosure layout'],terminals:['A3/120','Terminal strip'],bom:['A3/200','Bill of materials']};
   const symbolNames={terminal:'Terminal · 2-pin',relay:'Relay coil · K',contact:'NO contact · 13 / 14',breaker:'Protective switch',sensor:'Sensor · 3-wire',motor:'Three-phase motor',plc:'PLC I/O module · 8-point',ground:'Protective earth'};
   const symbolCatalog=window.AdigunCADEngine.catalog();
+  function projectCatalogItem(symbol){
+    return {id:symbol.id,componentId:symbol.id,name:symbol.name,tag:'X',family:'user-authored',category:'Project symbols',customSymbol:symbol};
+  }
+  function catalogItemById(id){
+    const symbol=state.projectModel?.userSymbols?.find(item=>item.id===id);
+    return symbol?projectCatalogItem(symbol):window.AdigunCADEngine.catalogItem(id);
+  }
   function catalogItems(query=''){
     const filter=String(query).trim().toLowerCase();
     const local=(state.projectModel?.userSymbols||[]).filter(symbol=>symbol.name.toLowerCase().includes(filter))
-      .map(symbol=>({id:symbol.id,componentId:symbol.id,name:symbol.name,tag:'X',family:'user-authored',category:'Project symbols',customSymbol:symbol}));
+      .map(projectCatalogItem);
     return [...local,...window.AdigunCADEngine.catalog(query)];
   }
   function catalogItemForObject(object){
-    return object.customSymbol?{id:object.componentId,componentId:object.componentId,name:object.customSymbol.name,
-      tag:'X',family:'user-authored',customSymbol:object.customSymbol}:symbolCatalog.find(item=>item.componentId===object.componentId);
+    return object.customSymbol?projectCatalogItem(object.customSymbol):window.AdigunCADEngine.catalogItem(object.componentId);
   }
   function createSymbolFromSelection(){
     if(!state.projectModel){notify('Open a project to create a symbol.');return;}
@@ -879,7 +885,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
   }
   function insertCatalogSymbol(id,quick=false){
-    const item=catalogItems().find(x=>x.id===id);
+    const item=catalogItemById(id);
     if(!item)return;
     if(placementPreview){placementPreview.remove();placementPreview=null;}
     state.pendingComponentId=id;
@@ -928,7 +934,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     return window.AdigunCADEngine.createPanelEnvelope(item.componentId,id,point.x,point.y);
   }
   function updatePlacementPreview(point){
-    const id=state.pendingComponentId,item=catalogItems().find(x=>x.id===id);
+    const id=state.pendingComponentId,item=catalogItemById(id);
     if(!item)return;
     const location=snapObjectPoint(point);
     if(!placementPreview?.isConnected){
@@ -1003,7 +1009,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     notify('Object moved. Connected component pins and wire ends were preserved.');
   }
   function finishComponentPlacement(point){
-    const item=catalogItems().find(x=>x.id===state.pendingComponentId);
+    const item=catalogItemById(state.pendingComponentId);
     if(!item)return false;
     const location=snapObjectPoint(point);
     const conflict=componentPlacementConflict(item,location);
@@ -1953,7 +1959,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
     if(name!=='Properties')return;
     if(state.projectModel)renderProjectMetadataEditor();
-    const pending=state.pendingComponentId&&catalogItems().find(item=>item.id===state.pendingComponentId);
+    const pending=state.pendingComponentId&&catalogItemById(state.pendingComponentId);
     const selected=state.objects.find(obj=>obj.id===state.selected);
     const details=$('#selectionDetails');
     if(pending||selected){panel.prepend(details);panel.scrollTop=0;}
