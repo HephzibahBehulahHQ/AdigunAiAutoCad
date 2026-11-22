@@ -1,9 +1,9 @@
 {
   "summary": {
-    "manufacturerParts": 55,
+    "manufacturerParts": 61,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 55,
-    "partsWithPhysicalDimensions": 41,
+    "partsWithTerminalMaps": 61,
+    "partsWithPhysicalDimensions": 47,
     "partsWithPhysicalRepresentations": 0,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
@@ -4170,7 +4170,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "3211019",
       "model": "PT 2,5/S-QUATTRO",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Gray (RAL 7042)"
       ],
@@ -4333,7 +4333,7 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 2,5/S-QUATTRO · Four-conductor feed-through terminal block · Item 3211019",
+          "title": "PT 2,5/S-QUATTRO · Multi-conductor feed-through terminal block · Item 3211019",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25s-quattro-3211019",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
@@ -4350,7 +4350,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "3211022",
       "model": "PT 2,5/S-QUATTRO BU",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Blue (RAL 5015)"
       ],
@@ -4513,7 +4513,7 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 2,5/S-QUATTRO BU · Four-conductor feed-through terminal block · Item 3211022",
+          "title": "PT 2,5/S-QUATTRO BU · Multi-conductor feed-through terminal block · Item 3211022",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25s-quattro-bu-3211022",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
@@ -4530,7 +4530,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "3209578",
       "model": "PT 2,5-QUATTRO",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Gray (RAL 7042)"
       ],
@@ -4693,7 +4693,7 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 2,5-QUATTRO · Four-conductor feed-through terminal block · Item 3209578",
+          "title": "PT 2,5-QUATTRO · Multi-conductor feed-through terminal block · Item 3209578",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25-quattro-3209578",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
@@ -4710,7 +4710,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "3209581",
       "model": "PT 2,5-QUATTRO BU",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Blue (RAL 5015)"
       ],
@@ -4873,7 +4873,7 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 2,5-QUATTRO BU · Four-conductor feed-through terminal block · Item 3209581",
+          "title": "PT 2,5-QUATTRO BU · Multi-conductor feed-through terminal block · Item 3209581",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25-quattro-bu-3209581",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
@@ -4890,7 +4890,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "3211797",
       "model": "PT 4-QUATTRO",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Gray (RAL 7042)"
       ],
@@ -5053,7 +5053,7 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 4-QUATTRO · Four-conductor feed-through terminal block · Item 3211797",
+          "title": "PT 4-QUATTRO · Multi-conductor feed-through terminal block · Item 3211797",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-4-quattro-3211797",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
@@ -5070,7 +5070,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "3211802",
       "model": "PT 4-QUATTRO BU",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Blue (RAL 5015)"
       ],
@@ -5233,7 +5233,7 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 4-QUATTRO BU · Four-conductor feed-through terminal block · Item 3211802",
+          "title": "PT 4-QUATTRO BU · Multi-conductor feed-through terminal block · Item 3211802",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-4-quattro-bu-3211802",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
@@ -5250,7 +5250,7 @@
       "manufacturer": "Phoenix Contact",
       "orderCode": "1110405",
       "model": "PT 4-QUATTRO OG",
-      "function": "Four-conductor feed-through terminal block",
+      "function": "Multi-conductor feed-through terminal block",
       "aliases": [
         "Orange (RAL 2003)"
       ],
@@ -5413,8 +5413,1028 @@
       "sourceEvidence": [
         {
           "publisher": "Phoenix Contact",
-          "title": "PT 4-QUATTRO OG · Four-conductor feed-through terminal block · Item 1110405",
+          "title": "PT 4-QUATTRO OG · Multi-conductor feed-through terminal block · Item 1110405",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-4-quattro-og-1110405",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3209549",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3209549",
+      "model": "PT 2,5-TWIN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3209549.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 60.4,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 60.4,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.8,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 2,5-TWIN · Multi-conductor feed-through terminal block · Item 3209549",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25-twin-3209549",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211252",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211252",
+      "model": "PT 2,5-TWIN BK",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211252.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 60.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 60.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.8,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 2,5-TWIN BK · Multi-conductor feed-through terminal block · Item 3211252",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25-twin-bk-3211252",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3209552",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3209552",
+      "model": "PT 2,5-TWIN BU",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3209552.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 60.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 60.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.8,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 2,5-TWIN BU · Multi-conductor feed-through terminal block · Item 3209552",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-25-twin-bu-3209552",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211775",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211775",
+      "model": "PT 4-TWIN BU",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211775.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 66.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 66.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4-TWIN BU · Multi-conductor feed-through terminal block · Item 3211775",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-twin-bu-3211775",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211255",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211255",
+      "model": "PT 4-TWIN BK",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211255.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 66.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 66.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4-TWIN BK · Multi-conductor feed-through terminal block · Item 3211255",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-4-twin-bk-3211255",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211254",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211254",
+      "model": "PT 4-TWIN BN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Brown (RAL 8028)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211254.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Brown (RAL 8028)"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 66.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 66.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4-TWIN BN · Multi-conductor feed-through terminal block · Item 3211254",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-4-twin-bn-3211254",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
           "retrievedAt": "2026-11-22"

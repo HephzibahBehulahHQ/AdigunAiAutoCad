@@ -436,19 +436,24 @@
   function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths, disconnect = false, variant = {}) {
     const pins = [], internalConnections = [];
     const connectionsPerLevel = variant.connectionsPerLevel ?? 2;
+    const terminalPatterns = {
+      2: [['left', -35, 0], ['right', 35, 0]],
+      3: [['upper-left', -35, -13], ['right', 35, 0], ['lower-left', -35, 13]],
+      4: [['upper-left', -35, -13], ['upper-right', 35, -13], ['lower-left', -35, 13], ['lower-right', 35, 13]]
+    };
+    const pattern = terminalPatterns[connectionsPerLevel];
     for (let level = 1; level <= levels; level += 1) {
       const y = (level - (levels + 1) / 2) * 30;
       const prefix = levels > 1 ? level + ':' : '';
-      const group = connectionsPerLevel === 4
-        ? ['upper-left', 'upper-right', 'lower-left', 'lower-right'].map(position => 'level-' + level + '-' + position)
-        : ['level-' + level + '-left', 'level-' + level + '-right'];
-      group.forEach(function (id, index) {
+      const group = pattern.map(function ([position, x, offset], index) {
+        const id = 'level-' + level + '-' + position;
         pins.push({ id: id, localNumber: prefix + (index + 1), name: 'Level ' + level + ', connection ' + (index + 1),
-          x: index % 2 === 0 ? -35 : 35, y: y + (connectionsPerLevel === 4 ? (index < 2 ? -13 : 13) : 0), electricalType: 'passive', connectionType: 'push-in' });
+          x: x, y: y + offset, electricalType: 'passive', connectionType: 'push-in' });
+        return id;
       });
       internalConnections.push(group);
     }
-    const name = disconnect ? 'Knife-disconnect terminal block' : levels > 1 ? 'Double-level terminal block' : connectionsPerLevel === 4 ? 'Four-conductor feed-through terminal block' : 'Feed-through terminal block';
+    const name = disconnect ? 'Knife-disconnect terminal block' : levels > 1 ? 'Double-level terminal block' : connectionsPerLevel > 2 ? 'Multi-conductor feed-through terminal block' : 'Feed-through terminal block';
     const family = disconnect ? 'disconnect-terminal' : 'feedthrough-terminal';
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION,
@@ -463,7 +468,7 @@
       category: disconnect ? 'Electrical · Verified disconnect terminal' : terminalDefinition.category,
       symbol: {
         id: 'terminal.' + (disconnect ? 'disconnect' : 'feedthrough') + '.' + partNumber + '.v1', view: 'schematic', unit: 'mm',
-        width: 70, height: connectionsPerLevel === 4 ? 70 : levels > 1 ? 56 : 26, pins: pins, internalConnections: internalConnections,
+        width: 70, height: connectionsPerLevel > 2 ? 70 : levels > 1 ? 56 : 26, pins: pins, internalConnections: internalConnections,
         numberingNote: 'Connection numbers and level prefixes are model-local identifiers.'
       },
       specifications: {
@@ -548,6 +553,17 @@
       'https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-pt-' + sourcePath,
       1, voltage, current, height, railDepths, false,
       { color, crossSection, width, minimumConductor, maximumConductor, connectionsPerLevel: 4, retrievedAt: '2026-11-22' }));
+  const ptTwinTerminals = [
+    ['3209549', 'PT 2,5-TWIN', 'multi-conductor-terminal-block-pt-25-twin-3209549', 'Gray (RAL 7042)', 2.5, 24, 5.2, 60.4, 0.14, 4, [36.8, 44.3]],
+    ['3211252', 'PT 2,5-TWIN BK', 'multi-conductor-terminal-block-pt-25-twin-bk-3211252', 'Black (RAL 9005)', 2.5, 24, 5.2, 60.5, 0.14, 4, [36.8, 44.3]],
+    ['3209552', 'PT 2,5-TWIN BU', 'multi-conductor-terminal-block-pt-25-twin-bu-3209552', 'Blue (RAL 5015)', 2.5, 24, 5.2, 60.5, 0.14, 4, [36.8, 44.3]],
+    ['3211775', 'PT 4-TWIN BU', 'feed-through-terminal-block-pt-4-twin-bu-3211775', 'Blue (RAL 5015)', 4, 32, 6.2, 66.5, 0.2, 6, [36.5, 44]],
+    ['3211255', 'PT 4-TWIN BK', 'multi-conductor-terminal-block-pt-4-twin-bk-3211255', 'Black (RAL 9005)', 4, 32, 6.2, 66.5, 0.2, 6, [36.5, 44]],
+    ['3211254', 'PT 4-TWIN BN', 'multi-conductor-terminal-block-pt-4-twin-bn-3211254', 'Brown (RAL 8028)', 4, 32, 6.2, 66.5, 0.2, 6, [36.5, 44]]
+  ].map(([id, model, sourcePath, color, crossSection, current, width, height, minimumConductor, maximumConductor, railDepths]) =>
+    compactTerminal(id, model, 'https://www.phoenixcontact.com/en-us/products/' + sourcePath,
+      1, 800, current, height, railDepths, false,
+      { color, crossSection, width, minimumConductor, maximumConductor, connectionsPerLevel: 3, retrievedAt: '2026-11-22' }));
   const pttb25Terminal = compactTerminal('3210567', 'PTTB 2,5',
     'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567', 2, 500, 22, 68.2, [47.4, 54.9]);
   const pt25DisconnectTerminal = compactTerminal('3210156', 'PT 2,5-MT',
@@ -1296,7 +1312,7 @@
       documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
