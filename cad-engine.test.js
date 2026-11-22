@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 113);
+  assert.equal(items.length, 122);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -328,6 +328,15 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3044209', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-1179676', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3044225', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3037135', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044197', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045169', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045198', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045156', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045075', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3045062', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3037151', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044207', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
@@ -520,6 +529,15 @@ test('UT and ST feed-through order codes carry their verified connection methods
     ['3044199', 'screw', 1000, 25, 12.2, 55.5, [55, 62.5]],
     ['3044209', 'screw', 1000, 25, 12.2, 55.5, [55, 62.5]],
     ['1179676', 'screw', 1000, 25, 12.2, 55.5, [55, 62.5]],
+    ['3037135', 'spring-cage', 800, 4, 6.2, 56, [36.5, 44]],
+    ['3044197', 'screw', 1000, 25, 12.2, 55.5, [55, 62.5]],
+    ['3045169', 'screw', 1000, 10, 8.2, 47.7, [47.5, 55]],
+    ['3045198', 'screw', 1000, 10, 8.2, 47.7, [47.5, 55]],
+    ['3045156', 'screw', 1000, 6, 6.2, 47.7, [47.5, 55]],
+    ['3045075', 'screw', 1000, 4, 5.2, 47.7, [47.5, 55]],
+    ['3045062', 'screw', 1000, 4, 5.2, 47.7, [47.5, 55]],
+    ['3037151', 'spring-cage', 800, 4, 6.2, 56, [36.5, 44]],
+    ['3044207', 'screw', 1000, 25, 12.2, 55.5, [55, 62.5]],
     ['3044225', 'screw', 1000, 50, 16, 61.2, [65.7, 73.2]]
   ];
   for (const [orderCode, method, voltage, maximumFlexible, width, height, railDepths] of variants) {
