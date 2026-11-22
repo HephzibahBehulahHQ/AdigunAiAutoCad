@@ -13,8 +13,9 @@ const operator = 'irrigation-operator';
 const feedback = 'irrigation-run-feedback';
 const indication = 'irrigation-run-indication';
 const fault = 'irrigation-starter-fault';
+const power = 'irrigation-control-supply';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.4',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.5',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -24,7 +25,8 @@ const project = {
     { id: operator, number: 'A2/004', name: 'Local irrigation request station', projectSectionId: 'A2' },
     { id: feedback, number: 'A2/005', name: 'Pump starter run feedback at XT3', projectSectionId: 'A2' },
     { id: indication, number: 'A2/006', name: 'Local pump run indication', projectSectionId: 'A2' },
-    { id: fault, number: 'A2/007', name: 'Starter fault contact at XT4', projectSectionId: 'A2' }
+    { id: fault, number: 'A2/007', name: 'Starter fault contact at XT4', projectSectionId: 'A2' },
+    { id: power, number: 'A2/008', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -68,8 +70,8 @@ function link(id, name, from, to) {
 }
 
 const plc = device(cabinet, 'A1', 'siemens-6es7212-1ae40-0xb0', 700, 365);
-const supply = terminal(cabinet, 'X1', 395, 205, 'XT1', '1', 'External +24 V DC');
-const common = terminal(cabinet, 'X2', 395, 280, 'XT1', '2', 'External 0 V');
+const supply = terminal(cabinet, 'X1', 395, 205, 'XT1', '1', 'PS1 +24 V DC');
+const common = terminal(cabinet, 'X2', 395, 280, 'XT1', '2', 'PS1 0 V');
 const sensor = device(field, 'B1', 'ifm-pn2070', 610, 345, {
   marking: 'Irrigation header pressure', signalConfigurationNote: 'OUT2 wiring assumes voltage mode. Pressure scaling remains unassigned.'
 });
@@ -86,6 +88,18 @@ const runLamp = device(indication, 'H1', 'schneider-electric-xb5avb3', 605, 345,
 
 const faultFeed = terminal(fault, 'X7', 470, 265, 'XT4', '1', 'Supply to external fault contact');
 const faultReturn = terminal(fault, 'X8', 470, 390, 'XT4', '2', 'Return from external fault contact');
+
+const psu = device(power, 'PS1', 'siemens-sitop-psu100c-6ep1332-5ba00', 585, 345, { marking: 'Irrigation control supply' });
+for (const [ref, position, input, y, part] of [
+  ['X9', '1', 'L', 230, 'phoenix-contact-3209510'],
+  ['X10', '2', 'N', 345, 'phoenix-contact-3209510'],
+  ['X11', '3', 'PE', 460, 'phoenix-contact-3209536']
+]) {
+  const terminal = device(power, ref, part, 300, y, { terminalStrip: 'XT5', position, marking: 'Incoming ' + input });
+  const end = pin(psu, input);
+  const bends = y === end.y ? undefined : [{ x: 405, y }, { x: 405, y: end.y }];
+  wire(power, 'ps1-input-' + input.toLowerCase(), input, pin(terminal, '2'), end, bends);
+}
 
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
@@ -121,7 +135,11 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['starter-fault-feed', '+24 V DC', 'X1', { x: 460, y: 205 }, { x: 215, y: 205 },
     null, faultFeed, '1', 'left', ['W-04', '1']],
   ['starter-fault-input', 'XT4 starter fault to DI a.3', 'A1', pin(plc, 'X10:10'), { x: 215, y: 510 },
-    [{ x: 568, y: 401 }, { x: 568, y: 510 }], faultReturn, '1', 'left', ['W-04', '2']]
+    [{ x: 568, y: 401 }, { x: 568, y: 510 }], faultReturn, '1', 'left', ['W-04', '2']],
+  ['control-feed', '+24 V DC', 'X1', pin(supply, '1'), { x: 215, y: 260 },
+    [{ x: 315, y: 205 }, { x: 315, y: 260 }], psu, '+', 'right'],
+  ['control-return', '0 V', 'X2', pin(common, '1'), { x: 215, y: 315 },
+    [{ x: 315, y: 280 }, { x: 315, y: 315 }], psu, '-', 'right']
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -136,13 +154,14 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
 }
 
 for (const [sheetId, title, description] of [
-  [cabinet, 'IRRIGATION CONTROLLER · POWER AND I/O', 'XT1 is the external 24 V DC boundary. AI0 records header pressure and DI a.0 reads the separate OUT1 signal.'],
+  [cabinet, 'IRRIGATION CONTROLLER · POWER AND I/O', 'XT1 receives the PS1 24 V DC output. AI0 records header pressure and DI a.0 reads the separate OUT1 signal.'],
   [field, 'IRRIGATION HEADER PRESSURE · B1', 'OUT2 assumes voltage mode. Pressure scaling, OUT1 setpoints and PLC program logic remain unassigned.'],
   [output, 'IRRIGATION PUMP REQUEST · K1', 'XT2 exposes the normally open demand contact. The external starter, motor feeder and safety controls remain outside this drawing.'],
   [operator, 'LOCAL IRRIGATION REQUEST · S1', 'W-01 carries supply and the momentary request to DI a.1. The input requests PLC action through the program.'],
   [feedback, 'PUMP STARTER RUN FEEDBACK · XT3', 'XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1.'],
   [indication, 'LOCAL PUMP RUN INDICATION · H1', 'W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned.'],
-  [fault, 'PUMP STARTER FAULT INPUT · XT4', 'W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact.']
+  [fault, 'PUMP STARTER FAULT INPUT · XT4', 'W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact.'],
+  [power, 'CONTROL SUPPLY · PS1', 'XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
