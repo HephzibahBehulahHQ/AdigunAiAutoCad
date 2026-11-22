@@ -1469,17 +1469,17 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [28, 68, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [29, 71, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
     ['X8:1', 'X8:2', 'PS1:N'],
     ['X21:1', 'X21:2', 'X9:1', 'X9:2', 'PS1:PE'],
-    ['B1:1', 'B2:1', 'KM1:13', 'KM1:21', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'X5:1', 'X5:2', 'X13:1', 'X13:2', 'X19:1', 'X19:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+', 'X26:1', 'X26:2', 'H2:X1', 'B3:1', 'K4:A1'],
-    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'A1:X12:2', 'K1:A2', 'K2:A2', 'K3:A2', 'PS1:-', 'X23:1', 'X23:2', 'X27:1', 'X27:2', 'H2:X2', 'B3:3', 'K4:A2'],
+    ['B1:1', 'B2:1', 'KM1:13', 'KM1:21', 'X1:1', 'X1:2', 'X2:1', 'X2:2', 'X5:1', 'X5:2', 'X13:1', 'X13:2', 'X19:1', 'X19:2', 'A1:X10:1', 'A1:X12:1', 'K1:11', 'S1:13', 'S2:21', 'PS1:+', 'X26:1', 'X26:2', 'H2:X1', 'B3:1', 'K4:A1', 'X42:1', 'X42:2'],
+    ['B1:3', 'B2:3', 'KM1:A2', 'X3:1', 'X3:2', 'X4:1', 'X4:2', 'X14:1', 'X14:2', 'A1:X10:2', 'A1:X10:6', 'A1:X11:1', 'A1:X12:2', 'K1:A2', 'K2:A2', 'K3:A2', 'PS1:-', 'X23:1', 'X23:2', 'X27:1', 'X27:2', 'H2:X2', 'B3:3', 'K4:A2', 'X44:1', 'X44:2'],
     ['B1:4', 'X15:1', 'X15:2', 'A1:X10:7'],
     ['B2:2', 'X11:1', 'X11:2', 'A1:X11:2'],
-    ['X22:1', 'X22:2', 'A1:X11:3', 'B3:2'],
+    ['X22:1', 'X22:2', 'A1:X11:3', 'B3:2', 'X43:1', 'X43:2'],
     ['B2:4', 'X12:1', 'X12:2', 'A1:X10:13'],
     ['KM1:A1', 'K1:14'],
     ['KM1:14', 'A1:X10:8'],
@@ -1509,7 +1509,11 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X11:3', 'X12:3', 'X12:4', 'X12:5']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
   const cables = engine.cableScheduleCsv(reopened.project);
-  assert.equal(cables.trim().split('\r\n').length, 14);
+  assert.equal(cables.trim().split('\r\n').length, 20);
+  for (const [core, route] of [['1', 'power'], ['2', 'signal'], ['3', 'return']]) {
+    assert.ok(cables.includes(`"W-B3","${core}","b3-field-terminations","ai1-pressure-sensor-${route}-cable-send"`));
+    assert.ok(cables.includes(`"W-B3","${core}","ai1-pressure-sensor","ai1-pressure-sensor-${route}"`));
+  }
   for (const core of ['1', '2', '3']) {
     assert.match(cables, new RegExp('"W-H3","' + core + '","branch-b-loss-alert","branch-b-remote-indicator-core-' + core + '-send"'));
     assert.match(cables, new RegExp('"W-H3","' + core + '","branch-b-remote-indicator","branch-b-remote-indicator-core-' + core + '-receive"'));

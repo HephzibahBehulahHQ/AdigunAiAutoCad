@@ -18,11 +18,12 @@ const fieldSupplyPotential = 'External annunciator +24 V';
 const fieldRequestPotential = 'Annunciator switched +24 V';
 const remoteLossIndicator = { id: 'branch-b-remote-indicator', number: 'A2/027', name: 'XT15 remote Branch B status indicators', projectSectionId: 'A2' };
 const indicatorSupplyTest = { id: 'indicator-supply-test', number: 'A2/028', name: 'XT16 independent indicator supply test access', projectSectionId: 'A2' };
-const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest];
+const pressureTerminations = { id: 'b3-field-terminations', number: 'A2/029', name: 'XT17 B3 field cable terminations', projectSectionId: 'A2' };
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest, pressureTerminations];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.6';
+project.revision = '3.7';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -187,6 +188,23 @@ author(branchIndicator, ({ device, pin, wire, link, notes }) => {
   ]);
 });
 
+const pressureCable = [
+  { id: 'power', coreId: '1', ref: 'X42', pinNumber: '1', potential: '+24 V DC', marking: 'B3 supply', y: 280 },
+  { id: 'signal', coreId: '2', ref: 'X43', pinNumber: '2', potential: 'B3 analog output', marking: 'B3 OUT2 to AI1', y: 350 },
+  { id: 'return', coreId: '3', ref: 'X44', pinNumber: '3', potential: '0 V DC', marking: 'B3 return to 2M', y: 420 }
+];
+author(pressureTerminations, ({ device, notes }) => {
+  for (const { ref, coreId, marking, y } of pressureCable) {
+    device(ref, 'phoenix-contact-3209510', 560, y, { terminalStrip: 'XT17', position: coreId, marking });
+  }
+  notes([
+    ['title', 108, 'XT17 · B3 FIELD CABLE TERMINATIONS'],
+    ['feed', 205, 'XT17 picks up Branch B power and the AI1 signal and reference from XT9.'],
+    ['cable', 500, 'W-B3 carries L+, OUT2 and L− to B3. OUT1 is unused.'],
+    ['scope', 545, 'The schedule identifies the connected cores. Cable construction and routing remain unassigned.']
+  ]);
+});
+
 author(secondPressureSensor, ({ device, pin, wire, link, notes }) => {
   const sensor = device('B3', 'ifm-pn2070', 510, 325, {
     marking: 'Second pressure input', signalConfigurationNote: 'Illustrative connection assumes OUT2 configured for 0–10 V.'
@@ -197,37 +215,39 @@ author(secondPressureSensor, ({ device, pin, wire, link, notes }) => {
   const output = project.objects.find(object => object.id === 'x22');
   const reference = project.objects.find(object => object.id === 'x23');
   output.properties.marking = 'B3 OUT2 to AI1';
-  output.properties.comment = 'B3 OUT2 on A2/024.';
-  reference.properties.comment = 'B3 L− on A2/024 and CPU 2M on A2/005.';
+  output.properties.comment = 'B3 OUT2 through XT17 on A2/029.';
+  reference.properties.comment = 'B3 L− through XT17 on A2/029 and CPU 2M on A2/005.';
   for (const id of ['xt9-ai1', 'ai1-to-xt9']) project.objects.find(object => object.id === id).potential = analogSignal;
   project.crossSheetConnections.find(item => item.id === 'xt9-ai1-link').name = analogSignal;
   for (const [suffix, text] of [
     ['title', 'XT9 · B3 ANALOG VOLTAGE INPUT'],
-    ['scope', 'B3 uses XT9:1 for OUT2 and XT9:2 for L−. No cable or scaling is assigned.'],
+    ['scope', 'B3 uses XT9:1 for OUT2 and XT9:2 for L− via XT17. Scaling is unassigned.'],
     ['mode', 'The modeled connection assumes voltage mode on B3 OUT2.']
   ]) project.objects.find(object => object.id === analogSheet + '-' + suffix).text = text;
 
   const supply = project.objects.find(object => object.id === 'b-positive-send');
   const tapX = 690;
   if (supply.y1 !== supply.y2 || tapX <= supply.x1 || tapX >= supply.x2) throw new Error('B3 supply tap no longer meets Branch B.');
-  const powerPin = pin(sensor, '1'), signalPin = pin(sensor, '2'), returnPin = pin(sensor, '3');
   const power = wire('power-send', supply.sheetId, { x: tapX, y: supply.y1 }, { x: tapX, y: supply.y1 + 65 }, '+24 V DC');
-  link('power', 'Branch B feed to B3', power,
-    wire('power', secondPressureSensor.id, { x: 200, y: powerPin.y }, powerPin, '+24 V DC'), 'X2', 'B3');
-  for (const [name, terminal, target, potential, side, boundaryX] of [
-    ['signal', output, signalPin, analogSignal, 'right', 815],
-    ['return', reference, returnPin, '0 V DC', 'left', 200]
-  ]) {
-    const contact = pin(terminal, '1');
-    const send = wire(name + '-send', analogSheet, contact, { x: 210, y: contact.y }, potential);
-    const receive = wire(name, secondPressureSensor.id, { x: boundaryX, y: target.y }, target, potential);
-    link(name, 'B3 ' + (name === 'signal' ? 'OUT2 to AI1' : 'L− to 2M'), send, receive, terminal.ref, 'B3', ['left', side]);
+  for (const { id, coreId, ref, pinNumber, potential, marking } of pressureCable) {
+    const cabinet = id === 'signal' ? output : reference;
+    const cabinetPin = pin(cabinet, '1');
+    const send = id === 'power' ? power : wire(id + '-send', analogSheet, cabinetPin, { x: 210, y: cabinetPin.y }, potential);
+    const terminal = project.objects.find(object => object.id === pressureTerminations.id + '-' + ref.toLowerCase());
+    const input = pin(terminal, '1'), cablePin = pin(terminal, '2'), target = pin(sensor, pinNumber);
+    const feed = wire(id + '-xt17-feed', pressureTerminations.id, { x: 210, y: input.y }, input, potential);
+    link(id, marking, send, feed, id === 'power' ? 'X2' : cabinet.ref, ref, [id === 'power' ? 'right' : 'left', 'left']);
+    const cableSend = wire(id + '-cable-send', pressureTerminations.id, cablePin, { x: 890, y: cablePin.y }, potential);
+    const signal = id === 'signal';
+    const cableReceive = wire(id, secondPressureSensor.id, { x: signal ? 815 : 200, y: target.y }, target, potential);
+    for (const segment of [cableSend, cableReceive]) Object.assign(segment, { cableId: 'W-B3', coreId });
+    link(id + '-cable', 'W-B3:' + coreId + ' · ' + marking, cableSend, cableReceive, ref, 'B3', ['right', signal ? 'right' : 'left']);
   }
   notes([
     ['title', 108, 'B3 · SECOND PRESSURE INPUT TO AI1'],
     ['input', 218, 'B3 OUT2 routes through XT9:1 to CPU AI1. B2 retains its own AI0 signal.'],
     ['return-note', 440, 'B3 L− returns via XT9:2 to the shared 2M and 0 V reference.'],
-    ['scope', 490, 'The schematic assumes 0–10 V output mode. OUT1, process location, cable and scaling are unassigned.']
+    ['scope', 490, 'W-B3 terminates at XT17 on A2/029. The drawing assumes 0–10 V output mode. OUT1 and scaling are unassigned.']
   ]);
 });
 
