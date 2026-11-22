@@ -27,7 +27,7 @@ Set each paper margin independently in Properties. Margins position the print fr
 
 For a custom sheet, choose **Custom** in the **Paper size** field in Properties, then set the width and height in millimetres. Print and frame SVG export use the saved dimensions.
 
-Open **Symbol Library**, pick a component, then click its position on the sheet. Placement opens **Properties** for the selected component. A click on a placed component opens its properties as well. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
+Open **Symbol Library**, pick a component to see its terminals in **Properties**, then click its position on the sheet. The placed component is selected and its instance properties are ready to edit. A click on a placed component opens its properties as well. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 

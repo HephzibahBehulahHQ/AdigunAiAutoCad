@@ -400,20 +400,28 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       }, [x, y]);
       await wiringPage.mouse.click(point.x, point.y);
     };
+    const symbol = wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]');
+    await symbol.click();
+    const pickup = wiringPage.locator('#rightPanel.open #selectionDetails');
+    await pickup.getByText('Terminals', { exact: true }).waitFor();
+    assert.equal(await wiringPage.locator('#userDrawings [data-object]').count(), 0);
+    await wiringPage.keyboard.press('Escape');
+    await pickup.getByText('Terminals', { exact: true }).waitFor({ state: 'detached' });
+    await wiringPage.locator('#closeRightPanel').click();
     const terminalIds = [];
     let propertiesViewportWidth;
     for (const x of [85, 210, 335]) {
-      const symbol = wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]');
       if (x === 85) {
-        const targetPosition = await wiringPage.locator('#userDrawings').evaluate(node => {
-          const point = new DOMPoint(85, 110).matrixTransform(node.getScreenCTM());
-          const bounds = node.ownerSVGElement.getBoundingClientRect();
-          return { x: point.x - bounds.left, y: point.y - bounds.top };
-        });
-        const bounds = await wiringPage.locator('#drawing').boundingBox();
-        const x = bounds.x + targetPosition.x, y = bounds.y + targetPosition.y;
         await symbol.hover();
+        const sourceBounds = await symbol.boundingBox();
         await wiringPage.mouse.down();
+        await wiringPage.mouse.move(sourceBounds.x + sourceBounds.width / 2 + 12, sourceBounds.y + sourceBounds.height / 2);
+        await pickup.getByText('Terminals', { exact: true }).waitFor();
+        await wiringPage.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+        const { x, y } = await wiringPage.locator('#userDrawings').evaluate(node => {
+          const point = new DOMPoint(85, 110).matrixTransform(node.getScreenCTM());
+          return { x: point.x, y: point.y };
+        });
         await wiringPage.mouse.move(x, y, { steps: 12 });
         await wiringPage.mouse.move(x + 1, y);
         await wiringPage.mouse.move(x, y);
@@ -433,6 +441,13 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       propertiesViewportWidth ??= width;
       assert.equal(width, propertiesViewportWidth, 'consecutive placements keep the Properties dock stable');
     }
+    const desktopViewport = wiringPage.viewportSize();
+    await wiringPage.setViewportSize({ width: 600, height: 800 });
+    await wiringPage.locator('#rightPanel.open [data-symbol-scale="' + terminalIds.at(-1) + '"]').waitFor();
+    const narrowCanvas = await wiringPage.locator('#drawing').boundingBox();
+    const dock = await wiringPage.locator('#rightPanel').boundingBox();
+    assert.ok(narrowCanvas.height > 100 && narrowCanvas.y + narrowCanvas.height <= dock.y + 1);
+    await wiringPage.setViewportSize(desktopViewport);
     assert.equal(new Set(terminalIds).size, 3);
     const pin = (objectId, number) => wiringPage.locator('#userDrawings [data-object="' + objectId + '"] [data-component-pin="connection-' + number + '"]');
     const terminalClickPoint = async (objectId, number) => {
