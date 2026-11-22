@@ -40,23 +40,47 @@ function summarizeSheetContent(project) {
     ? project.sheets
     : [{ id: project.activeSheet || 'main' }];
   const objects = Array.isArray(project.objects) ? project.objects : [];
-  const counts = new Map(sheets.map(sheet => [sheet.id, 0]));
+  const content = new Map(sheets.map(sheet => [sheet.id, []]));
   const defaultSheet = sheets.length === 1 ? sheets[0].id : undefined;
   for (const object of objects) {
-    if (!object) continue;
+    if (!object || object.hidden) continue;
     const id = object.sheetId || defaultSheet;
-    if (!counts.has(id)) continue;
+    if (!content.has(id)) continue;
     const meaningful = object.kind === 'component-instance' || object.kind === 'wire'
       || (object.kind === 'text' && typeof object.text === 'string' && object.text.trim().length > 0
         && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text));
-    if (meaningful) counts.set(id, counts.get(id) + 1);
+    if (meaningful) {
+      const { id: objectId, sheetId, groupId, pinAttachments, ...drawing } = object;
+      content.get(id).push(JSON.stringify(stableDrawingValue(drawing)));
+    }
   }
-  const emptyContentSheetIds = sheets.filter(sheet => counts.get(sheet.id) === 0).map(sheet => sheet.id);
+  const emptyContentSheetIds = [];
+  const repeatedContentSheets = [];
+  const firstSheetByContent = new Map();
+  for (const [id, drawings] of content) {
+    if (!drawings.length) {
+      emptyContentSheetIds.push(id);
+      continue;
+    }
+    const signature = JSON.stringify(drawings.sort());
+    const firstSheet = firstSheetByContent.get(signature);
+    if (firstSheet) repeatedContentSheets.push({ id, matches: firstSheet });
+    else firstSheetByContent.set(signature, id);
+  }
   return {
     authoredSheetCount: sheets.length - emptyContentSheetIds.length,
-    contentObjectCount: [...counts.values()].reduce((sum, count) => sum + count, 0),
-    emptyContentSheetIds
+    contentObjectCount: [...content.values()].reduce((sum, objects) => sum + objects.length, 0),
+    emptyContentSheetIds,
+    repeatedContentSheets
   };
+}
+
+function stableDrawingValue(value) {
+  if (Array.isArray(value)) return value.map(stableDrawingValue);
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(Object.keys(value).sort().map(key => [key, stableDrawingValue(value[key])]));
+  }
+  return value;
 }
 
 function topologyHash(analysis) {
@@ -237,6 +261,7 @@ function buildReport() {
     const releaseScale = {
       qualified: passed && sheetCount >= minimumSheetsPerProject
         && sheetContent.authoredSheetCount === sheetCount
+        && sheetContent.repeatedContentSheets.length === 0
         && connectedSheetCount >= minimumConnectedSheetsPerProject,
       additionalAuthoredSheetsRequired: Math.max(0, minimumSheetsPerProject - sheetContent.authoredSheetCount),
       additionalConnectedSheetsRequired: Math.max(0, minimumConnectedSheetsPerProject - connectedSheetCount),
@@ -264,6 +289,7 @@ function buildReport() {
         connectedSheetCount,
         contentObjectCount: sheetContent.contentObjectCount,
         emptyContentSheetIds: sheetContent.emptyContentSheetIds,
+        repeatedContentSheets: sheetContent.repeatedContentSheets,
         componentCount: analysis.componentCount,
         wireCount: analysis.wireCount,
         netCount: analysis.netCount,
@@ -282,7 +308,8 @@ function buildReport() {
   const validProjects = projects.filter(project => project.status === 'passed');
   const scaleQualifiedTopologies = new Set(validProjects
     .filter(project => project.metrics.sheetCount >= manifest.scaleTarget.minimumSheetsPerProject
-      && project.metrics.authoredSheetCount === project.metrics.sheetCount)
+      && project.metrics.authoredSheetCount === project.metrics.sheetCount
+      && project.metrics.repeatedContentSheets.length === 0)
     .map(project => project.topologyId));
   const distinctTopologies = new Set(projects.map(project => project.topologyId));
   const completedScaleProjects = scaleQualifiedTopologies.size;
@@ -361,6 +388,9 @@ function run() {
       const { additionalAuthoredSheetsRequired, additionalConnectedSheetsRequired } = project.releaseScale;
       const validation = project.status === 'failed' ? ' Project validation also failed.' : '';
       console.error(`${project.id}: ${additionalAuthoredSheetsRequired} more authored sheets, ${additionalConnectedSheetsRequired} more electrically connected sheets required.${validation}`);
+      for (const { id, matches } of project.metrics.repeatedContentSheets) {
+        console.error(`  ${id} repeats the visible editable content of ${matches}.`);
+      }
     }
     for (const { id, matches } of gate.duplicateReleaseProjects) {
       console.error(id + ': Shares a topology ID or electrical structure fingerprint with ' + matches + '.');
@@ -371,5 +401,5 @@ function run() {
 
 if (require.main === module) run();
 
-module.exports = { buildReport, electricalStructureHash, manifestPath, reportPath };
+module.exports = { buildReport, electricalStructureHash, summarizeSheetContent, manifestPath, reportPath };
 

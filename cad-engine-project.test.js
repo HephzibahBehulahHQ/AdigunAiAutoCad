@@ -9,7 +9,22 @@ const path = require('node:path');
 require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
-const { electricalStructureHash } = require('./scripts/project-library-validation.js');
+const { electricalStructureHash, summarizeSheetContent } = require('./scripts/project-library-validation.js');
+
+test('library sheet audit finds copied content and hidden-only sheets', () => {
+  const note = (sheetId, text, extra) => ({ kind: 'text', id: sheetId + text, sheetId, x: 10, y: 20, text, ...extra });
+  const result = summarizeSheetContent({
+    sheets: ['original', 'copy', 'distinct', 'hidden'].map(id => ({ id })),
+    objects: [note('original', 'Supply sizing'), note('original', 'Terminal map'),
+      note('copy', 'Terminal map', { groupId: 'copy-group' }), note('copy', 'Supply sizing'),
+      note('distinct', 'Supply sizing'), note('distinct', 'Installation clearances'),
+      note('hidden', 'Supply sizing', { hidden: true })]
+  });
+  assert.equal(result.authoredSheetCount, 3);
+  assert.equal(result.contentObjectCount, 6);
+  assert.deepEqual(result.emptyContentSheetIds, ['hidden']);
+  assert.deepEqual(result.repeatedContentSheets, [{ id: 'copy', matches: 'original' }]);
+});
 
 test('library structure fingerprint distinguishes terminal changes from renamed copies', () => {
   const project = { objects: [
