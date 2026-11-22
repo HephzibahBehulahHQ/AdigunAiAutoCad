@@ -1394,7 +1394,7 @@
       "briefId": "46",
       "role": "standalone-example",
       "path": "examples/real-projects/irrigation-controller.adigun.json",
-      "revision": "1.4",
+      "revision": "1.5",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1411,43 +1411,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 93,
-        "additionalConnectedSheetsRequired": 63,
+        "additionalAuthoredSheetsRequired": 92,
+        "additionalConnectedSheetsRequired": 62,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "irrigation-plc",
         "sheetName": "Controller supply and I/O",
-        "segments": "27,9,29,9 29,9,29,13 29,13,44,13 27,18,29,18 29,18,29,15 29,15,44,15 40,15,40,24 40,24,44,24 76,13,85,13 85,13,85,2 85,2,34,2 34,2,34,15 33,13,33,0 33,0,93,0 93,0,93,28 93,28,76,28 38,15,38,50 38,50,88,50 88,50,88,30 88,30,76,30 30,13,30,6 30,6,0,6 34,15,34,42 34,42,0,42 76,15,100,15 44,26,0,26 76,32,100,32 88,42,100,42 33,0,0,0 44,29,42,29 42,29,42,34 42,34,0,34 30,12,0,12 44,31,43,31 43,31,43,38 43,38,0,38 76,34,84,34 84,34,84,37 84,37,100,37 88,47,100,47 30,9,0,9 44,33,44,33 44,33,44,47 44,47,0,47"
+        "segments": "27,9,29,9 29,9,29,13 29,13,44,13 27,18,29,18 29,18,29,15 29,15,44,15 40,15,40,24 40,24,44,24 76,13,85,13 85,13,85,2 85,2,34,2 34,2,34,15 33,13,33,0 33,0,93,0 93,0,93,28 93,28,76,28 38,15,38,50 38,50,88,50 88,50,88,30 88,30,76,30 30,13,30,6 30,6,0,6 34,15,34,42 34,42,0,42 76,15,100,15 44,26,0,26 76,32,100,32 88,42,100,42 33,0,0,0 44,29,42,29 42,29,42,34 42,34,0,34 30,12,0,12 44,31,43,31 43,31,43,38 43,38,0,38 76,34,84,34 84,34,84,37 84,37,100,37 88,47,100,47 30,9,0,9 44,33,44,33 44,33,44,47 44,47,0,47 18,9,12,9 12,9,12,16 12,16,0,16 18,18,12,18 12,18,12,22 12,22,0,22"
       },
-      "topologySha256": "67848384fb7e652b74b7c8ea245bc21d4a32e9ef284ad0572b7c5ec95eaf544c",
-      "electricalStructureSha256": "e6f73b2a811037d5c325801a4e79616d88ad17a59417e58d4c06d9047f5d388d",
+      "topologySha256": "1c84b1bc5794d081766b15ef1bef375a8a490e557c54ffecc3638bfe112dd13b",
+      "electricalStructureSha256": "7d1a038dd545fff3aeb98c0ba0e1c811e866a57a293b9a7f2c567955278d1ba3",
       "csvSha256": {
-        "bom": "b464a4b89e031f3c9ba6ea3003dd8b5343014c9b6dbe9a97506977ffacfa7a0c",
-        "wires": "5584d42a8a24324cc6051a3f5fce40e9b5bbf7c87dc3c140ee604f23f0e3c91c",
-        "terminals": "09014c455d65466947f3f087c293714a35b0d26c843264b8fa4684b8d10bb1f0",
-        "plcIo": "fcdbbf4e3820d584c0507457bf778c0de43be6f937fef8ef13e393375ed94ec2",
-        "cables": "e2177898e680485ca7cf3bffa007a87a44dd15213f7a00f1ede9b5693c27de92",
-        "devices": "0ade8ecccd66e36c106d95780c537b3ac15f3380d63fd2b8e1ffb510a4582c57",
-        "sheets": "fcd9564d922a4d81c1976df2ff850d1d36ee384b59bb4832779689a7da9738a4"
+        "bom": "5495dd9d90bd1fdf2310aa919eca0705d18b454b725492ff91f66a733cc829b0",
+        "wires": "90219034231a6f22fef20a70abc252caaebc892767ab4ef18c74bc87d6b09533",
+        "terminals": "cfdb70f9c5180968197f8d93f9e46af1ea07dd3e30232621dc36b329f76db30f",
+        "plcIo": "277b48a29ffb784abf783d9fb830047b798ff0e05c97addd36a15cc5457ba69f",
+        "cables": "6ef99158fef1984dfbcf31f9a8cbe1e515c07815e9cbf66ee2d2286bbd57822a",
+        "devices": "ae63bb9b3cc4b9020c8cdbc879d3b911e09418a188aad4b63c76e41de942d716",
+        "sheets": "460f417c1c754a8c0106d22c6c9cb904debdae34e4f5a04d5317d80e1dc79b5e"
       },
       "metrics": {
-        "sheetCount": 7,
-        "authoredSheetCount": 7,
-        "connectedSheetCount": 7,
-        "contentObjectCount": 63,
+        "sheetCount": 8,
+        "authoredSheetCount": 8,
+        "connectedSheetCount": 8,
+        "contentObjectCount": 76,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 13,
-        "wireCount": 36,
-        "netCount": 25,
-        "globalNetCount": 11,
-        "crossSheetConnectionCount": 14,
+        "componentCount": 17,
+        "wireCount": 43,
+        "netCount": 30,
+        "globalNetCount": 14,
+        "crossSheetConnectionCount": 16,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
-        "bomRowCount": 6,
-        "wireListRowCount": 36,
-        "terminalListRowCount": 16
+        "bomRowCount": 8,
+        "wireListRowCount": 43,
+        "terminalListRowCount": 22
       },
       "errors": []
     }

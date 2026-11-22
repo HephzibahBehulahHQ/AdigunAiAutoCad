@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.4",
+  "revision": "1.5",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -46,6 +46,12 @@
       "number": "A2/007",
       "name": "Starter fault contact at XT4",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-control-supply",
+      "number": "A2/008",
+      "name": "PS1 control supply and AC inlet",
+      "projectSectionId": "A2"
     }
   ],
   "objects": [
@@ -77,7 +83,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "1",
-        "marking": "External +24 V DC",
+        "marking": "PS1 +24 V DC",
         "comment": ""
       },
       "sheetId": "irrigation-plc"
@@ -94,7 +100,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "2",
-        "marking": "External 0 V",
+        "marking": "PS1 0 V",
         "comment": ""
       },
       "sheetId": "irrigation-plc"
@@ -267,6 +273,165 @@
         "comment": ""
       },
       "sheetId": "irrigation-starter-fault"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 585,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "marking": "Irrigation control supply",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "irrigation-control-supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X9",
+      "x": 300,
+      "y": 230,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "1",
+        "marking": "Incoming L",
+        "comment": ""
+      },
+      "sheetId": "irrigation-control-supply"
+    },
+    {
+      "id": "ps1-input-l",
+      "sheetId": "irrigation-control-supply",
+      "kind": "wire",
+      "potential": "L",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 230,
+      "x1": 335,
+      "y1": 230,
+      "x2": 495,
+      "y2": 315,
+      "bends": [
+        {
+          "x": 405,
+          "y": 230
+        },
+        {
+          "x": 405,
+          "y": 315
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x9",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-l"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 300,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "2",
+        "marking": "Incoming N",
+        "comment": ""
+      },
+      "sheetId": "irrigation-control-supply"
+    },
+    {
+      "id": "ps1-input-n",
+      "sheetId": "irrigation-control-supply",
+      "kind": "wire",
+      "potential": "N",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 345,
+      "x1": 335,
+      "y1": 345,
+      "x2": 495,
+      "y2": 345,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x10",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-n"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x11",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X11",
+      "x": 300,
+      "y": 460,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "3",
+        "marking": "Incoming PE",
+        "comment": ""
+      },
+      "sheetId": "irrigation-control-supply"
+    },
+    {
+      "id": "ps1-input-pe",
+      "sheetId": "irrigation-control-supply",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 460,
+      "x1": 335,
+      "y1": 460,
+      "x2": 495,
+      "y2": 375,
+      "bends": [
+        {
+          "x": 405,
+          "y": 460
+        },
+        {
+          "x": 405,
+          "y": 375
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x11",
+          "pinId": "connection-2"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-pe"
+        }
+      }
     },
     {
       "id": "plc-supply",
@@ -1150,6 +1315,110 @@
       "coreId": "2"
     },
     {
+      "id": "control-feed-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 360,
+      "y": 205,
+      "x1": 360,
+      "y1": 205,
+      "x2": 215,
+      "y2": 260,
+      "bends": [
+        {
+          "x": 315,
+          "y": 205
+        },
+        {
+          "x": 315,
+          "y": 260
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "control-feed-remote",
+      "sheetId": "irrigation-control-supply",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 315,
+      "x1": 960,
+      "y1": 315,
+      "x2": 675,
+      "y2": 315,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "output-positive"
+        }
+      }
+    },
+    {
+      "id": "control-return-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 360,
+      "y": 280,
+      "x1": 360,
+      "y1": 280,
+      "x2": 215,
+      "y2": 315,
+      "bends": [
+        {
+          "x": 315,
+          "y": 280
+        },
+        {
+          "x": 315,
+          "y": 315
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "control-return-remote",
+      "sheetId": "irrigation-control-supply",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 375,
+      "x1": 960,
+      "y1": 375,
+      "x2": 675,
+      "y2": 375,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "output-negative"
+        }
+      }
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -1163,7 +1432,7 @@
       "kind": "text",
       "x": 105,
       "y": 585,
-      "text": "XT1 is the external 24 V DC boundary. AI0 records header pressure and DI a.0 reads the separate OUT1 signal."
+      "text": "XT1 receives the PS1 24 V DC output. AI0 records header pressure and DI a.0 reads the separate OUT1 signal."
     },
     {
       "id": "irrigation-pressure-note-0",
@@ -1260,6 +1529,22 @@
       "x": 105,
       "y": 585,
       "text": "W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact."
+    },
+    {
+      "id": "irrigation-control-supply-note-0",
+      "sheetId": "irrigation-control-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "CONTROL SUPPLY · PS1"
+    },
+    {
+      "id": "irrigation-control-supply-note-1",
+      "sheetId": "irrigation-control-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -1707,6 +1992,70 @@
             "direction": "left",
             "targetSheetId": "irrigation-plc",
             "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "control-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 260
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-control-supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "irrigation-control-supply",
+          "wireId": "control-feed-remote",
+          "point": {
+            "x": 960,
+            "y": 315
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "control-return-cabinet",
+          "point": {
+            "x": 215,
+            "y": 315
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-control-supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "irrigation-control-supply",
+          "wireId": "control-return-remote",
+          "point": {
+            "x": 960,
+            "y": 375
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "X2"
           }
         }
       ]
