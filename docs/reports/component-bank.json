@@ -4,7 +4,7 @@
     "symbolFamilies": 16,
     "partsWithTerminalMaps": 74,
     "partsWithPhysicalDimensions": 60,
-    "partsWithPhysicalRepresentations": 0,
+    "partsWithPhysicalRepresentations": 53,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -287,7 +287,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209510.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.6,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -447,7 +461,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209523.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -607,7 +635,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3212330.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -767,7 +809,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209512.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -927,7 +983,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209513.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -1087,7 +1157,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209514.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -1247,7 +1331,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209511.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -1407,7 +1505,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1233142.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.6,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -1567,7 +1679,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1176299.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -1727,7 +1853,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3212329.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -1887,7 +2027,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1233140.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.6,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -2047,7 +2201,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211757.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -2207,7 +2375,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211760.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -2367,7 +2549,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211813.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 57.7,
+          "railDepths": {
+            "NS 35/7.5": 43.5,
+            "NS 35/15": 51
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -2527,7 +2723,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211819.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 57.7,
+          "railDepths": {
+            "NS 35/7.5": 43.5,
+            "NS 35/15": 51
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -2687,7 +2897,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3212120.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 10.2,
+          "height": 67.7,
+          "railDepths": {
+            "NS 35/7.5": 50.5,
+            "NS 35/15": 58
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -2847,7 +3071,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3212123.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 10.2,
+          "height": 67.7,
+          "railDepths": {
+            "NS 35/7.5": 50.5,
+            "NS 35/15": 58
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3007,7 +3245,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211776.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3167,7 +3419,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211777.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3327,7 +3593,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211758.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3487,7 +3767,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1182209.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3647,7 +3941,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211814.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 57.7,
+          "railDepths": {
+            "NS 35/7.5": 43.5,
+            "NS 35/15": 51
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3807,7 +4115,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211815.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 57.7,
+          "railDepths": {
+            "NS 35/7.5": 43.5,
+            "NS 35/15": 51
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -3967,7 +4289,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211820.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 57.7,
+          "railDepths": {
+            "NS 35/7.5": 43.5,
+            "NS 35/15": 51
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -4127,7 +4463,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1322453.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 10.2,
+          "height": 67.7,
+          "railDepths": {
+            "NS 35/7.5": 50.5,
+            "NS 35/15": 58
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -4307,7 +4657,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211019.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.6,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -4487,7 +4851,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211022.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 48.6,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -4667,7 +5045,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209578.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 72.2,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -4847,7 +5239,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209581.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 72.2,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -5027,7 +5433,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211797.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 77,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -5207,7 +5627,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211802.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 77,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -5387,7 +5821,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1110405.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 77,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -5557,7 +6005,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209549.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 60.4,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -5727,7 +6189,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211252.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 60.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -5897,7 +6373,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3209552.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 60.5,
+          "railDepths": {
+            "NS 35/7.5": 36.8,
+            "NS 35/15": 44.3
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -6067,7 +6557,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211775.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 66.5,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -6237,7 +6741,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211255.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 66.5,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -6407,7 +6925,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211254.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 66.5,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -6584,7 +7116,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3210567.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 68.2,
+          "railDepths": {
+            "NS 35/7.5": 47.4,
+            "NS 35/15": 54.9
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -6766,7 +7312,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211786.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 83.7,
+          "railDepths": {
+            "NS 35/7.5": 47.3,
+            "NS 35/15": 54.8
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -6948,7 +7508,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211793.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 83.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -7130,7 +7704,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211794.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 83.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -7312,7 +7900,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3211792.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 83.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -7494,7 +8096,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3210570.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 68,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -7676,7 +8292,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.1467082.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 68,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -7858,7 +8488,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3208524.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 3.5,
+          "height": 65.4,
+          "railDepths": {
+            "NS 35/7.5": 42.6,
+            "NS 35/15": 50.1
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -8062,7 +8706,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3210499.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 102.2,
+          "railDepths": {
+            "NS 35/7.5": 58,
+            "NS 35/15": 65.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -8266,7 +8924,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3210509.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 102,
+          "railDepths": {
+            "NS 35/7.5": 58,
+            "NS 35/15": 65.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -8470,7 +9142,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3214259.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 90,
+          "railDepths": {
+            "NS 35/7.5": 77.5,
+            "NS 35/15": 85
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -8674,7 +9360,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3002389.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 90,
+          "railDepths": {
+            "NS 35/7.5": 77.5,
+            "NS 35/15": 85
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -8878,7 +9578,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3036042.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 99.5,
+          "railDepths": {
+            "NS 35/7.5": 58,
+            "NS 35/15": 65.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -9082,7 +9796,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3038710.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 99.5,
+          "railDepths": {
+            "NS 35/7.5": 58,
+            "NS 35/15": 65.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",
@@ -9237,7 +9965,21 @@
           "unit": "mm"
         }
       },
-      "physicalRepresentations": [],
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3210156.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 62.2,
+          "railDepths": {
+            "NS 35/7.5": 36.7,
+            "NS 35/15": 44.2
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
       "editableProperties": {
         "terminalStrip": {
           "type": "string",

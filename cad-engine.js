@@ -454,6 +454,17 @@
       internalConnections.push(group);
     }
     const name = disconnect ? 'Knife-disconnect terminal block' : levels === 3 ? 'Triple-level terminal block' : levels === 2 ? 'Double-level terminal block' : connectionsPerLevel > 2 ? 'Multi-conductor feed-through terminal block' : 'Feed-through terminal block';
+    const width = variant.width ?? 5.2;
+    const panelEnvelope = {
+      id: 'terminal.panel-envelope.' + partNumber + '.v1',
+      view: 'panel-front-envelope',
+      unit: 'mm',
+      width,
+      height,
+      railDepths: { 'NS 35/7.5': railDepths[0], 'NS 35/15': railDepths[1] },
+      sourceIndex: 0,
+      scope: 'Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.'
+    };
     const family = disconnect ? 'disconnect-terminal' : 'feedthrough-terminal';
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION,
@@ -466,6 +477,7 @@
       family: family,
       referencePrefix: 'X',
       category: disconnect ? 'Electrical · Verified disconnect terminal' : terminalDefinition.category,
+      physicalRepresentations: [panelEnvelope],
       symbol: {
         id: 'terminal.' + (disconnect ? 'disconnect' : 'feedthrough') + '.' + partNumber + '.v1', view: 'schematic', unit: 'mm',
         width: 70, height: connectionsPerLevel > 2 ? 70 : 26 + (levels - 1) * 30, pins: pins, internalConnections: internalConnections,
@@ -483,7 +495,7 @@
         productStandard: { value: 'IEC 60947-7-1' },
         mountingRails: { value: ['NS 35/7.5', 'NS 35/15'] },
         dimensions: {
-          width: { value: variant.width ?? 5.2, unit: 'mm' },
+          width: { value: width, unit: 'mm' },
           height: { value: height, unit: 'mm' },
           depthOnNS35_7_5: { value: railDepths[0], unit: 'mm' },
           depthOnNS35_15: { value: railDepths[1], unit: 'mm' }
@@ -1445,6 +1457,24 @@
     return catalogIndex.filter(entry => terms.every(term => entry.fields.some(field => field.includes(term))))
       .map(entry => ({ ...entry.item }));
   }
+  function createPanelEnvelope(componentId, id, x, y) {
+    const part = component(componentId);
+    const envelope = part?.physicalRepresentations?.find(view => view.view === 'panel-front-envelope');
+    if (!envelope || typeof id !== 'string' || !id.trim() || !Number.isFinite(x) || !Number.isFinite(y)) return null;
+    return {
+      id,
+      kind: 'rect',
+      x,
+      y,
+      x1: x,
+      y1: y,
+      x2: x + envelope.width,
+      y2: y + envelope.height,
+      manufacturerPartNumber: part.manufacturerPartNumber,
+      physicalRepresentationId: envelope.id
+    };
+  }
+
   function createInstance(componentId, x, y, ref, customSymbol) {
     const def = component(componentId, customSymbol);
     if (!def) throw new Error('Unknown verified component: ' + componentId);
@@ -2581,6 +2611,7 @@
     customSymbolDefinition: customSymbolDefinition,
     catalog: catalog,
     createInstance: createInstance,
+    createPanelEnvelope: createPanelEnvelope,
     createProjectModel: createProjectModel,
     copyExampleProject: copyExampleProject,
     fitDrawingToPage: fitDrawingToPage,

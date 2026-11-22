@@ -447,6 +447,27 @@ test('verified triple-level terminal blocks keep all three levels electrically i
       [['w0', 'w1'], ['w2', 'w3'], ['w4', 'w5']]);
   }
 });
+test('terminal panel envelopes use manufacturer dimensions independently of schematic scale', () => {
+  const id = 'phoenix-contact-3210499';
+  const part = engine.component(id);
+  const [view] = part.physicalRepresentations;
+  assert.deepEqual([view.unit, view.width, view.height, view.railDepths], ['mm', 5.2, 102.2, { 'NS 35/7.5': 58, 'NS 35/15': 65.5 }]);
+  assert.ok(part.sources[view.sourceIndex].url.endsWith('3210499'));
+  const envelope = engine.createPanelEnvelope(id, 'front-1', 20, 40);
+  assert.deepEqual(envelope, {
+    id: 'front-1', kind: 'rect', x: 20, y: 40, x1: 20, y1: 40, x2: 25.2, y2: 142.2,
+    manufacturerPartNumber: '3210499', physicalRepresentationId: view.id
+  });
+  envelope.sheetId = 'panel';
+  const reopened = engine.parseProject(engine.serializeProject({
+    project: 'Panel envelope', sheets: [{ id: 'panel', name: 'Panel' }], objects: [envelope]
+  }));
+  assert.equal(reopened.valid, true, reopened.errors.join(' '));
+  assert.deepEqual(reopened.project.objects, [envelope]);
+  assert.notEqual(part.symbol.width, view.width);
+  assert.equal(engine.createPanelEnvelope('unknown', 'missing', 0, 0), null);
+});
+
 test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
   for (const item of engine.catalog()) {
     const part = engine.component(item.id);
