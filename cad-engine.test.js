@@ -331,7 +331,9 @@ test('off-page connector references navigate to their target components with mou
   assert.ok(html.includes('openCrossSheetConnector(connector)'));
   assert.ok(html.includes('setSheet(connector.targetSheetId)'));
   assert.ok(html.includes('object.ref===connector.targetRef'));
-  assert.ok(html.includes('state.selectedObjectIds=[target.id]'));
+  const navigation = html.slice(html.indexOf('function openCrossSheetConnector'), html.indexOf('const componentPropertyLabels'));
+  assert.ok(navigation.includes('setSelection([target.id],true)'));
+  assert.ok(navigation.includes("openInspector('Properties')"));
 });
 
 test('Siemens SITOP PSU100C keeps source-backed terminals, ratings and a dedicated existing-shell symbol', () => {
