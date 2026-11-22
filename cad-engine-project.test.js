@@ -1387,7 +1387,7 @@ test('terminal-marshalling project regenerates and keeps its three field cable c
     assert.ok(net.pins.some(pin => pin.ref === 'A1' && pin.number === terminal));
     const sheets = ['marshalling-cabinet', 'marshalling-field'];
     if (terminal === 'X10:4') sheets.push('marshalling-operator-station');
-    if (terminal === 'X10:5') sheets.push('marshalling-analog-pressure');
+    if (terminal === 'X10:5') sheets.push('marshalling-analog-pressure', 'marshalling-field-indicator');
     assert.deepEqual([...net.sheetIds].sort(), sheets.sort());
   }
   const start = analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'S1' && pin.number === '14'));
@@ -1411,8 +1411,14 @@ test('terminal-marshalling project regenerates and keeps its three field cable c
   assert.equal(reference.id, nets[1].id);
   assert.ok(reference.pins.some(pin => pin.ref === 'A1' && pin.number === 'X11:1'));
   assert.equal(unused, undefined);
+  const lampOutput = analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'H1' && pin.number === 'X1'));
+  assert.deepEqual(lampOutput.pins.map(pin => pin.ref + ':' + pin.number).sort(),
+    ['A1:X12:3', 'H1:X1', 'X25:1', 'X25:2', 'X27:1', 'X27:2']);
+  assert.ok(feed.pins.some(pin => pin.ref === 'A1' && pin.number === 'X12:1'));
+  assert.ok(reference.pins.some(pin => pin.ref === 'A1' && pin.number === 'X12:2'));
+  assert.ok(reference.pins.some(pin => pin.ref === 'H1' && pin.number === 'X2'));
   assert.equal(analysis.openEndpointCount, 0);
-  assert.equal(engine.cableScheduleCsv(project).trim().split('\r\n').length, 19);
+  assert.equal(engine.cableScheduleCsv(project).trim().split('\r\n').length, 23);
 });
 
 test('PE designation check follows the connected net across sheets', () => {

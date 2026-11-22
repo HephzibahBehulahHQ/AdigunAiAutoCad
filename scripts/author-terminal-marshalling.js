@@ -11,16 +11,18 @@ const field = 'marshalling-field';
 const operator = 'marshalling-operator-station';
 const protectiveEarth = 'marshalling-protective-earth';
 const pressure = 'marshalling-analog-pressure';
+const indicator = 'marshalling-field-indicator';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Controller-to-field terminal marshalling', revision: '1.3',
-  description: 'Feed-through marshalling for a proximity sensor, an analog pressure sensor, a two-button operator station, and separate protective-earth boundaries.',
+  product: 'AdigunAiAutoCad', project: 'Controller-to-field terminal marshalling', revision: '1.4',
+  description: 'Feed-through marshalling for two sensors, operator station requests, a PLC-driven field indicator, and separate protective-earth boundaries.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'Controller and XT1 terminals', projectSectionId: 'A2' },
     { id: field, number: 'A2/002', name: 'Field XT2 and sensor wiring', projectSectionId: 'A2' },
     { id: operator, number: 'A2/003', name: 'XT3 operator station requests', projectSectionId: 'A2' },
     { id: protectiveEarth, number: 'A2/004', name: 'Protective-earth terminal distribution', projectSectionId: 'A2' },
-    { id: pressure, number: 'A2/005', name: 'XT5 pressure transducer to AI0', projectSectionId: 'A2' }
+    { id: pressure, number: 'A2/005', name: 'XT5 pressure transducer to AI0', projectSectionId: 'A2' },
+    { id: indicator, number: 'A2/006', name: 'XT6 field indicator from DQ a.0', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -144,9 +146,9 @@ const pressureSensor = device(pressure, 'B2', 'ifm-pn2070', 650, 365, {
   signalConfigurationNote: 'Illustrative connection assumes OUT2 configured for 0–10 V.'
 });
 const pressureSignal = 'B2 analog voltage', externalSupply = 'External +24 V';
-wire(cabinet, 'pressure-feed', externalSupply, [point(585, 195), point(585, 126), point(1055, 126), point(1055, 200), pin(pressureFeed, '1')]);
+wire(cabinet, 'pressure-feed', externalSupply, [point(585, 195), point(585, 126), point(1055, 126), point(1055, 180), point(1055, 200), pin(pressureFeed, '1')]);
 wire(cabinet, 'pressure-return', sensorReturn, [point(565, 245), point(565, 155), point(1020, 155), point(1020, 230), pin(pressureReturn, '1')]);
-wire(cabinet, 'pressure-reference', sensorReturn, [point(1020, 230), point(1020, 264), pin(cpu, 'X11:1')]);
+wire(cabinet, 'pressure-reference', sensorReturn, [point(1020, 230), point(1020, 250), point(1020, 264), pin(cpu, 'X11:1')]);
 wire(cabinet, 'pressure-input', pressureSignal, [pin(cpu, 'X11:2'), pin(pressureInput, '1')]);
 wire(pressure, 'transducer-feed', externalSupply, [pin(remoteFeed, '2'), point(485, 300), point(485, 340), pin(pressureSensor, '1')]);
 wire(pressure, 'transducer-return', sensorReturn, [pin(remoteReturn, '2'), point(485, 425), point(485, 390), pin(pressureSensor, '3')]);
@@ -160,12 +162,30 @@ for (const [coreId, potential, source, target, targetPin, boundary] of [
     source, '2', target, targetPin, { cableId: 'W-03', coreId }, 1220, boundary);
 }
 
+const indicatorOutput = terminal(cabinet, 'X25', 1100, 414, 'XT1', '9', 'Field indication output');
+const indicatorReturn = terminal(cabinet, 'X26', 1100, 350, 'XT1', '10', 'Field indication return');
+const fieldIndicatorInput = terminal(indicator, 'X27', 325, 330, 'XT6', '1', 'Switched +24 V from DQ a.0');
+const fieldIndicatorReturn = terminal(indicator, 'X28', 870, 330, 'XT6', '2', 'Indicator 0 V');
+const lamp = device(indicator, 'H1', 'schneider-electric-xb5avb3', 610, 330, { marking: 'PLC-controlled field indication' });
+const indicatorSignal = 'H1 switched output';
+wire(cabinet, 'digital-output-feed', externalSupply, [point(1055, 180), point(1045, 180), point(1045, 382), pin(cpu, 'X12:1')]);
+wire(cabinet, 'digital-output-common', sensorReturn, [point(1020, 250), point(1028, 250), point(1028, 350), point(1028, 398), pin(cpu, 'X12:2')]);
+wire(cabinet, 'indicator-return', sensorReturn, [point(1028, 350), pin(indicatorReturn, '1')]);
+wire(cabinet, 'indicator-output', indicatorSignal, [pin(cpu, 'X12:3'), pin(indicatorOutput, '1')]);
+wire(indicator, 'lamp-input', indicatorSignal, [pin(fieldIndicatorInput, '2'), pin(lamp, 'X1')]);
+wire(indicator, 'lamp-return', sensorReturn, [pin(lamp, 'X2'), pin(fieldIndicatorReturn, '1')]);
+connectTerminals('w04-core-1', 'W-04:1 · ' + indicatorSignal, indicatorSignal,
+  indicatorOutput, '2', fieldIndicatorInput, '1', { cableId: 'W-04', coreId: '1' }, 1220, 190);
+connectTerminals('w04-core-2', 'W-04:2 · Control 0 V', sensorReturn,
+  indicatorReturn, '2', fieldIndicatorReturn, '2', { cableId: 'W-04', coreId: '2' }, 1220, 1040);
+
 for (const [sheetId, title, note] of [
   [cabinet, 'XT1 · CONTROLLER MARSHALLING', 'XT0 is the external supply boundary. A1 sensor supply feeds XT1; X10:7 receives the PNP switching signal.'],
   [field, 'XT2 · FIELD SENSOR MARSHALLING', 'W-01 cores 1, 2 and 3 carry sensor supply, return and switching signal through XT2.'],
   [operator, 'XT3 · OPERATOR STATION MARSHALLING', 'W-02 carries a common feed, a normally open Start request and a normally closed operational Stop request.'],
   [protectiveEarth, 'XT4 · PROTECTIVE-EARTH DISTRIBUTION', 'Incoming PE is routed separately to the field equipment and operator enclosure terminal boundaries.'],
-  [pressure, 'XT5 · FIELD PRESSURE INPUT', 'W-03 carries external +24 V, the shared 0 V reference and B2 OUT2 to A1 AI0.']
+  [pressure, 'XT5 · FIELD PRESSURE INPUT', 'W-03 carries external +24 V, the shared 0 V reference and B2 OUT2 to A1 AI0.'],
+  [indicator, 'XT6 · PLC FIELD INDICATION', 'W-04 carries DQ a.0 switched power and 0 V to the H1 indicator.']
 ]) {
   project.objects.push({ id: sheetId + '-title', sheetId, kind: 'text', x: 105, y: 97, text: title });
   project.objects.push({ id: sheetId + '-note', sheetId, kind: 'text', x: 105, y: 565, text: note });
@@ -178,6 +198,8 @@ project.objects.push({ id: protectiveEarth + '-scope-review', sheetId: protectiv
   text: 'The drawing defines terminal connectivity. Physical bonding paths, rail mounting and protective-conductor sizing require review.' });
 project.objects.push({ id: pressure + '-configuration', sheetId: pressure, kind: 'text', x: 105, y: 640,
   text: 'Set OUT2 to voltage mode and verify load and scaling against actual equipment. OUT1 is unused; no process range is assigned.' });
+project.objects.push({ id: indicator + '-function', sheetId: indicator, kind: 'text', x: 105, y: 640,
+  text: 'H1 indicates an energized output. The drawing leaves its PLC command and process meaning unassigned.' });
 
 const report = engine.analyzeProject(JSON.parse(engine.serializeProject(project)));
 const errors = (report.findings || []).filter(finding => finding.severity === 'error');
