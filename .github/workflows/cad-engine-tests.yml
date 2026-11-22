@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "cad-engine.js"
+      - "terminal-catalog.js"
       - "cad-engine.test.js"
       - "cad-engine-project.test.js"
       - "scripts/export-component-bank.js"
@@ -27,6 +28,7 @@ on:
     branches: [main]
     paths:
       - "cad-engine.js"
+      - "terminal-catalog.js"
       - "cad-engine.test.js"
       - "cad-engine-project.test.js"
       - "scripts/export-component-bank.js"
