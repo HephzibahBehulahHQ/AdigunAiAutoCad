@@ -14,10 +14,11 @@ const confirmation = 'pick-place-vacuum-confirmation';
 const airPressure = 'pick-place-air-pressure-confirmation';
 const extend = 'pick-place-slide-extend';
 const retract = 'pick-place-slide-retract';
+const interlock = 'pick-place-slide-interlock';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.3',
+  revision: '1.4',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -28,7 +29,8 @@ const project = {
     { id: confirmation, number: 'A2/005', name: 'Vacuum achieved switch interface', projectSectionId: 'A2' },
     { id: airPressure, number: 'A2/006', name: 'Compressed-air pressure switch interface', projectSectionId: 'A2' },
     { id: extend, number: 'A2/007', name: 'Slide extend pilot interface', projectSectionId: 'A2' },
-    { id: retract, number: 'A2/008', name: 'Slide retract pilot interface', projectSectionId: 'A2' }
+    { id: retract, number: 'A2/008', name: 'Slide retract pilot interface', projectSectionId: 'A2' },
+    { id: interlock, number: 'A2/009', name: 'Opposite-command slide inhibit', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -156,6 +158,30 @@ for (const [sheet, ref, terminalNumber, strip, commonRef, noRef, role, outputY, 
     fieldPort(sheet, ref, commonPin, 215, commonPin.y, 'left'));
 }
 
+for (const [sheet, request, pilotRef, marker, y, oppositeSheet, oppositeRef, terminalRef, position] of [
+  [extend, 'Slide extend pilot', 'K3', 'K5', 260, retract, 'X14', 'X15', '1'],
+  [retract, 'Slide retract pilot', 'K4', 'K6', 430, extend, 'X12', 'X16', '2']
+]) {
+  const direction = sheet === extend ? 'Retract' : 'Extend';
+  const monitor = device(interlock, marker, 'phoenix-contact-2966171', 550, y, { marking: direction + ' inhibit relay' });
+  const coil = pin(monitor, 'A1');
+  const zero = pin(monitor, 'A2');
+  const contact = pin(monitor, '11');
+  const incoming = project.objects.find(object => object.ref === oppositeRef);
+  const outgoing = terminal(interlock, terminalRef, 835, y - 55, 'XT8', position, direction + ' pilot command');
+  connectSheets(marker.toLowerCase() + '-monitor', request + ' request',
+    { ...fieldPort(sheet, pilotRef, { x: 375, y: 365 }, 215, 405, 'left'), bends: [{ x: 375, y: 405 }] },
+    fieldPort(interlock, marker, coil, 215, coil.y, 'left'));
+  connectSheets(marker.toLowerCase() + '-return', '0 V',
+    { ...fieldPort(sheet, pilotRef, { x: 375, y: 325 }, 215, 285, 'left'), bends: [{ x: 375, y: 285 }] },
+    fieldPort(interlock, marker, zero, 215, zero.y, 'left'));
+  connectSheets(marker.toLowerCase() + '-contact-feed', 'Slide ' + direction.toLowerCase() + ' pilot contact NO',
+    fieldPort(oppositeSheet, oppositeRef, pin(incoming, '2'), 1030, incoming.y, 'right'),
+    fieldPort(interlock, marker, contact, 960, contact.y, 'right'));
+  wire(interlock, marker.toLowerCase() + '-inhibited-output', direction + ' pilot gated command', pin(monitor, '12'),
+    pin(outgoing, '1'), [{ x: 715, y: y - 25 }, { x: 715, y: y - 55 }]);
+}
+
 for (const [sheetId, title, text] of [
   [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives external 24 V DC. B1 and B2 report slide position. Four outputs command isolated pilot interfaces.'],
   [sensors, 'SLIDE POSITION SENSORS · B1 AND B2', 'B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned.'],
@@ -163,8 +189,9 @@ for (const [sheetId, title, text] of [
   [release, 'RELEASE PILOT INTERFACE · K2', 'XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned.'],
   [confirmation, 'VACUUM ACHIEVED SWITCH INTERFACE · XT4', 'W-01 carries the feed and DI a.2 return for an external contact that closes at the required vacuum. Sensor selection and threshold remain unassigned.'],
   [airPressure, 'COMPRESSED-AIR PRESSURE SWITCH · XT5', 'W-02 carries the feed and DI a.3 return for an external air-pressure-ready contact. The switch, pressure threshold and PLC response remain unassigned.'],
-  [extend, 'SLIDE EXTEND PILOT INTERFACE · K3', 'XT6 exposes the isolated normally open extend demand contact. The directional valve and coil supply remain external.'],
-  [retract, 'SLIDE RETRACT PILOT INTERFACE · K4', 'XT7 exposes the isolated normally open retract demand contact. Mutual exclusion and motion sequencing remain unassigned.']
+  [extend, 'SLIDE EXTEND PILOT INTERFACE · K3', 'XT6 carries the extend contact to the opposite-command inhibit sheet. The directional valve and coil supply remain external.'],
+  [retract, 'SLIDE RETRACT PILOT INTERFACE · K4', 'XT7 carries the retract contact to the opposite-command inhibit sheet. Motion sequencing remains unassigned.'],
+  [interlock, 'SLIDE OPPOSITE-COMMAND INHIBIT · K5 AND K6', 'Each asserted command opens the opposite pilot path after relay operation. Transition timing and safety functions remain outside this schematic.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
