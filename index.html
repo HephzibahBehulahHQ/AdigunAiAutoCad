@@ -883,6 +883,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     if(!item)return;
     if(placementPreview){placementPreview.remove();placementPreview=null;}
     state.pendingComponentId=id;
+    state.pendingPanelEnvelope=false;
     setTool('component-placement');
     if(quick&&state.sheet){
       const point=findQuickInsertPoint(item);
@@ -899,7 +900,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const symbol={componentId:item.componentId,customSymbol:item.customSymbol,ref:nextComponentReference(item.tag),x:0,y:0,rotation:0};
     const footprint=componentBounds(symbol);
     if(!footprint)return null;
-    const occupied=state.objects.filter(object=>object.kind==='component-instance').map(objectBounds);
+    const occupied=state.objects.filter(object=>object.kind==='component-instance'||object.physicalRepresentationId).map(objectBounds);
     const centerX=(topLeft.x+bottomRight.x-footprint.left-footprint.right)/2;
     const centerY=(topLeft.y+bottomRight.y-footprint.top-footprint.bottom)/2;
     for(let ring=0;ring<=12;ring+=1){
@@ -922,12 +923,25 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     while(used.has((prefix+number).toUpperCase()))number++;
     return prefix+number;
   }
+  function pendingPanelEnvelope(item,id,point){
+    if(!state.pendingPanelEnvelope)return null;
+    return window.AdigunCADEngine.createPanelEnvelope(item.componentId,id,point.x,point.y);
+  }
   function updatePlacementPreview(point){
     const id=state.pendingComponentId,item=catalogItems().find(x=>x.id===id);
     if(!item)return;
     const location=snapObjectPoint(point);
     if(!placementPreview?.isConnected){
-      placementPreview=buildCatalogGlyph({id:'placement-preview',x:location.x,y:location.y,ref:nextComponentReference(item.tag)},item,'#164eac',1.8);
+      const envelope=pendingPanelEnvelope(item,'placement-preview',location);
+      if(envelope){
+        placementPreview=document.createElementNS('http://www.w3.org/2000/svg','rect');
+        placementPreview.setAttribute('width',envelope.x2-envelope.x1);
+        placementPreview.setAttribute('height',envelope.y2-envelope.y1);
+        placementPreview.setAttribute('fill','none');
+        placementPreview.setAttribute('transform','translate('+location.x+' '+location.y+')');
+      }else{
+        placementPreview=buildCatalogGlyph({id:'placement-preview',x:location.x,y:location.y,ref:nextComponentReference(item.tag)},item,'#164eac',1.8);
+      }
       placementPreview.removeAttribute('data-object');
       placementPreview.setAttribute('data-component-preview','');
       placementPreview.setAttribute('opacity','0.55');
@@ -939,9 +953,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     placementPreview.dataset.placementBlocked=String(Boolean(conflict));
   }
   function componentPlacementConflict(item,point){
-    const bounds=objectBounds({kind:'component-instance',componentId:item.componentId,customSymbol:item.customSymbol,ref:nextComponentReference(item.tag),x:point.x,y:point.y,rotation:0});
+    const envelope=pendingPanelEnvelope(item,'placement-preview',point);
+    const bounds=objectBounds(envelope||{kind:'component-instance',componentId:item.componentId,customSymbol:item.customSymbol,ref:nextComponentReference(item.tag),x:point.x,y:point.y,rotation:0});
     return state.objects.find(function(object){
-      if(object.kind!=='component-instance')return false;
+      if(object.kind!=='component-instance'&&!object.physicalRepresentationId)return false;
       return componentBoundsOverlap(bounds,objectBounds(object));
     });
   }
@@ -994,14 +1009,16 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const conflict=componentPlacementConflict(item,location);
     if(conflict){
       updatePlacementPreview(point);
-      notify('Placement overlaps '+conflict.ref+'. Choose a clear position.');
+      notify('Placement overlaps '+(conflict.ref||conflict.manufacturerPartNumber)+'. Choose a clear position.');
       return false;
     }
     const ref=nextComponentReference(item.tag);
     state.pendingComponentId=null;
     if(placementPreview){placementPreview.remove();placementPreview=null;}
     pushUndo();
-    const instance=window.AdigunCADEngine.createInstance(item.componentId,location.x,location.y,ref,item.customSymbol);
+    const envelope=pendingPanelEnvelope(item,crypto.randomUUID(),location);
+    const instance=envelope||window.AdigunCADEngine.createInstance(item.componentId,location.x,location.y,ref,item.customSymbol);
+    state.pendingPanelEnvelope=false;
     state.objects.push(instance);
     state.tool='select';
     $$('[data-draw]').forEach(x=>{const on=x.dataset.draw==='select';x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});
@@ -1009,7 +1026,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     setSelection([instance.id],true);
     openInspector('Properties');
     persist();
-    notify(item.name+' '+ref+' placed with verified pins and part data.');
+    notify(envelope?item.name+' panel outline placed.':item.name+' '+ref+' placed with verified pins and part data.');
     return true;
   }
   function cancelComponentPlacement(){
@@ -1238,6 +1255,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       host.innerHTML='<div class="inspector-title">Drawing object · '+escapeHtml(symbolNames[obj.symbolId]||symbolNames[obj.kind]||obj.kind)+'</div>'+drawingAppearanceFields(obj)
         +'<label class="property-row"><span>X (mm)</span><input type="number" step="2.5" data-object-coordinate="x" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.kind==='wire'?obj.x1:obj.x)+'"></label>'
         +'<label class="property-row"><span>Y (mm)</span><input type="number" step="2.5" data-object-coordinate="y" data-object-id="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.kind==='wire'?obj.y1:obj.y)+'"></label>'
+        +(obj.physicalRepresentationId?'<div class="property-row"><span>Panel outline · Order code</span><strong>'+escapeHtml(obj.manufacturerPartNumber)+'</strong></div>':'')
         +(obj.kind==='dimension'?'<div class="property-row"><span>Measured distance</span><strong>'+dimensionLabel(obj)+'</strong></div>'+['x1','y1','x2','y2'].map(key=>'<label class="property-row"><span>'+key.toUpperCase()+' (mm)</span><input type="number" step="any" data-dimension-coordinate="'+key+'" data-object-id="'+escapeHtml(obj.id)+'" value="'+obj[key]+'"'+(obj.locked?' disabled':'')+'></label>').join(''):'')
         +(obj.kind==='text'?'<label class="property-row"><span>Text</span><input maxlength="120" data-object-text="'+escapeHtml(obj.id)+'" value="'+escapeHtml(obj.text||'')+'"></label>':'')
         +(obj.kind==='wire'?[['Potential','potential'],['Wire number','wireNumber'],['Cable ID','cableId'],['Core ID','coreId']].map(function(entry){
@@ -1942,9 +1960,11 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     if(pending){
       const definition=window.AdigunCADEngine.component(pending.componentId,pending.customSymbol);
       const pins=definition.symbol.pins.map(pin=>pin.localNumber+' '+pin.name).join(' · ');
+      const envelope=definition.physicalRepresentations?.find(view=>view.view==='panel-front-envelope');
       details.innerHTML='<div class="inspector-title">'+escapeHtml(definition.name)+'</div>'
         +'<div class="property-row"><span>Terminals</span><strong>'+escapeHtml(pins)+'</strong></div>'
-        +'<p class="notice">Place this component on the sheet to edit its instance properties.</p>';
+        +(envelope?'<label class="property-row"><span>Place panel outline ('+envelope.width+' × '+envelope.height+' mm)</span><input type="checkbox" data-place-panel-outline'+(state.pendingPanelEnvelope?' checked':'')+'></label>':'')
+        +(state.pendingPanelEnvelope?'<p class="notice">Click the sheet to place the manufacturer-dimensioned outline.</p>':'<p class="notice">Place this component on the sheet to edit its instance properties.</p>');
     }else if(selected)showObject(selected);
   }
   function openAssistant(){openInspector('Adigun BOT');$('#inspectorContent').innerHTML='<div class="inspector-block"><div class="inspector-title">Adigun BOT · connection status</div><div class="assistant-state"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#73e6f4" stroke-width="1.6"><use href="#i-bot"/></svg><span><b>AI service not connected</b><br>This workspace is running locally. Connect a secured product API to enable cited, project-aware engineering assistance.</span></div><p class="notice">Manual drawing, local saving and SVG export are available without an AI provider. No suggestion or edit has been generated.</p></div>';}
@@ -2109,6 +2129,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     notify('Choose a new '+wireReconnection.end+' point · Esc to cancel.');
   });
   $('#inspectorContent').addEventListener('change',function(event){
+    const outline=event.target.closest('[data-place-panel-outline]');
+    if(outline&&state.pendingComponentId){
+      state.pendingPanelEnvelope=outline.checked;
+      placementPreview?.remove();
+      placementPreview=null;
+      openInspector('Properties');
+      $('#selectionDetails [data-place-panel-outline]')?.focus();
+      return;
+    }
     const coordinate=event.target.closest('[data-dimension-coordinate]');
     if(coordinate){
       const object=state.objects.find(item=>item.id===coordinate.dataset.objectId&&item.kind==='dimension');

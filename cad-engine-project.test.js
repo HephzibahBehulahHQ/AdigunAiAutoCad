@@ -593,6 +593,40 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     if (process.env.CAD_SCREENSHOT_DIR) await wiringPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'connected-terminals.png') });
     await wiringPage.close({ runBeforeUnload: false });
 
+    const panelPage = await context.newPage();
+    await panelPage.goto(address);
+    await panelPage.getByRole('button', { name: 'New project' }).click();
+    await panelPage.locator('#createProject').click();
+    await panelPage.getByRole('button', { name: 'Add sheet to A2' }).click();
+    await panelPage.locator('#projectTree [data-sheet]').click();
+    const panelPart = panelPage.locator('#symbolList [data-insert="phoenix-contact-3210499"]');
+    const clickPanel = async (x, y) => {
+      const point = await panelPage.locator('#userDrawings').evaluate((node, coordinates) => {
+        const transformed = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
+        return { x: transformed.x, y: transformed.y };
+      }, [x, y]);
+      await panelPage.mouse.click(point.x, point.y);
+    };
+    await panelPart.click();
+    await panelPage.getByRole('checkbox', { name: /Place panel outline/ }).check();
+    await clickPanel(100, 70);
+    const outline = panelPage.locator('#userDrawings rect[data-object]');
+    await outline.waitFor();
+    assert.ok(Math.abs(Number(await outline.getAttribute('width')) - 5.2) < 0.001);
+    assert.ok(Math.abs(Number(await outline.getAttribute('height')) - 102.2) < 0.001);
+    assert.match(await panelPage.locator('#selectionDetails').innerText(), /Order code\s+3210499/);
+    await panelPart.click();
+    await panelPage.getByRole('checkbox', { name: /Place panel outline/ }).check();
+    await clickPanel(100, 70);
+    assert.equal(await outline.count(), 1);
+    assert.match(await panelPage.locator('#toast').innerText(), /Placement overlaps/);
+    await panelPage.keyboard.press('Escape');
+    await panelPart.click();
+    assert.equal(await panelPage.getByRole('checkbox', { name: /Place panel outline/ }).isChecked(), false);
+    await clickPanel(260, 100);
+    assert.equal(await panelPage.locator('#userDrawings [data-component-pin]').count(), 6);
+    await panelPage.close({ runBeforeUnload: false });
+
     const touchContext = await browser.newContext({ hasTouch: true, viewport: { width: 1024, height: 768 } });
     const touchPage = await touchContext.newPage();
     await touchPage.goto(address);
