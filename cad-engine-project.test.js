@@ -1387,7 +1387,8 @@ test('terminal-marshalling project regenerates and keeps its three field cable c
     assert.ok(net.pins.some(pin => pin.ref === 'A1' && pin.number === terminal));
     const sheets = ['marshalling-cabinet', 'marshalling-field'];
     if (terminal === 'X10:4') sheets.push('marshalling-operator-station');
-    assert.deepEqual([...net.sheetIds].sort(), sheets);
+    if (terminal === 'X10:5') sheets.push('marshalling-analog-pressure');
+    assert.deepEqual([...net.sheetIds].sort(), sheets.sort());
   }
   const start = analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'S1' && pin.number === '14'));
   const stop = analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'S2' && pin.number === '22'));
@@ -1399,8 +1400,19 @@ test('terminal-marshalling project regenerates and keeps its three field cable c
   assert.equal(new Set(pe.sheetIds).size, 4);
   assert.deepEqual([...new Set(pe.pins.map(pin => pin.ref))].sort(), ['X13', 'X14', 'X15', 'X16', 'X17', 'X18']);
   assert.ok(!analysis.findings.some(finding => finding.ruleId === 'ERC-PE-DESIGNATION-MISSING'));
+  const pressureNets = ['1', '2', '3', '4'].map(number =>
+    analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'B2' && pin.number === number))
+  );
+  const [feed, signal, reference, unused] = pressureNets;
+  assert.equal(new Set([feed.id, signal.id, reference.id]).size, 3);
+  assert.ok(feed.pins.some(pin => pin.ref === 'A1' && pin.number === 'X10:1'));
+  assert.deepEqual(signal.pins.map(pin => pin.ref + ':' + pin.number).sort(),
+    ['A1:X11:2', 'B2:2', 'X21:1', 'X21:2', 'X24:1', 'X24:2']);
+  assert.equal(reference.id, nets[1].id);
+  assert.ok(reference.pins.some(pin => pin.ref === 'A1' && pin.number === 'X11:1'));
+  assert.equal(unused, undefined);
   assert.equal(analysis.openEndpointCount, 0);
-  assert.equal(engine.cableScheduleCsv(project).trim().split('\r\n').length, 13);
+  assert.equal(engine.cableScheduleCsv(project).trim().split('\r\n').length, 19);
 });
 
 test('PE designation check follows the connected net across sheets', () => {

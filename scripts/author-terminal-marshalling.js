@@ -10,15 +10,17 @@ const cabinet = 'marshalling-cabinet';
 const field = 'marshalling-field';
 const operator = 'marshalling-operator-station';
 const protectiveEarth = 'marshalling-protective-earth';
+const pressure = 'marshalling-analog-pressure';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Controller-to-field terminal marshalling', revision: '1.2',
-  description: 'Feed-through marshalling for a 24 V sensor, a two-button operator station, and separate protective-earth boundaries.',
+  product: 'AdigunAiAutoCad', project: 'Controller-to-field terminal marshalling', revision: '1.3',
+  description: 'Feed-through marshalling for a proximity sensor, an analog pressure sensor, a two-button operator station, and separate protective-earth boundaries.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'Controller and XT1 terminals', projectSectionId: 'A2' },
     { id: field, number: 'A2/002', name: 'Field XT2 and sensor wiring', projectSectionId: 'A2' },
     { id: operator, number: 'A2/003', name: 'XT3 operator station requests', projectSectionId: 'A2' },
-    { id: protectiveEarth, number: 'A2/004', name: 'Protective-earth terminal distribution', projectSectionId: 'A2' }
+    { id: protectiveEarth, number: 'A2/004', name: 'Protective-earth terminal distribution', projectSectionId: 'A2' },
+    { id: pressure, number: 'A2/005', name: 'XT5 pressure transducer to AI0', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -131,11 +133,39 @@ connectTerminals('pe-incoming', 'Incoming PE', 'PE', peSource, '1', peEntry, '1'
 connectTerminals('pe-field', 'Field protective conductor', 'PE', peField, '2', fieldPeBoundary, '1', null, 870);
 connectTerminals('pe-operator', 'Operator station protective conductor', 'PE', peOperator, '2', operatorPeBoundary, '1', null, 870);
 
+const pressureFeed = terminal(cabinet, 'X19', 1100, 200, 'XT1', '6', 'Pressure sensor supply');
+const pressureReturn = terminal(cabinet, 'X20', 1100, 230, 'XT1', '7', 'Pressure sensor and AI0 return');
+const pressureInput = terminal(cabinet, 'X21', 1100, 282, 'XT1', '8', 'Pressure signal to AI0');
+const remoteFeed = terminal(pressure, 'X22', 325, 300, 'XT5', '1', 'Pressure sensor supply');
+const remoteReturn = terminal(pressure, 'X23', 325, 425, 'XT5', '2', 'Pressure sensor return');
+const remoteSignal = terminal(pressure, 'X24', 865, 340, 'XT5', '3', 'OUT2 analog voltage');
+const pressureSensor = device(pressure, 'B2', 'ifm-pn2070', 650, 365, {
+  marking: 'Field pressure transducer',
+  signalConfigurationNote: 'Illustrative connection assumes OUT2 configured for 0–10 V.'
+});
+const pressureSignal = 'B2 analog voltage', externalSupply = 'External +24 V';
+wire(cabinet, 'pressure-feed', externalSupply, [point(585, 195), point(585, 126), point(1055, 126), point(1055, 200), pin(pressureFeed, '1')]);
+wire(cabinet, 'pressure-return', sensorReturn, [point(565, 245), point(565, 155), point(1020, 155), point(1020, 230), pin(pressureReturn, '1')]);
+wire(cabinet, 'pressure-reference', sensorReturn, [point(1020, 230), point(1020, 264), pin(cpu, 'X11:1')]);
+wire(cabinet, 'pressure-input', pressureSignal, [pin(cpu, 'X11:2'), pin(pressureInput, '1')]);
+wire(pressure, 'transducer-feed', externalSupply, [pin(remoteFeed, '2'), point(485, 300), point(485, 340), pin(pressureSensor, '1')]);
+wire(pressure, 'transducer-return', sensorReturn, [pin(remoteReturn, '2'), point(485, 425), point(485, 390), pin(pressureSensor, '3')]);
+wire(pressure, 'transducer-output', pressureSignal, [pin(pressureSensor, '2'), pin(remoteSignal, '1')]);
+for (const [coreId, potential, source, target, targetPin, boundary] of [
+  ['1', externalSupply, pressureFeed, remoteFeed, '1', 190],
+  ['2', sensorReturn, pressureReturn, remoteReturn, '1', 190],
+  ['3', pressureSignal, pressureInput, remoteSignal, '2', 1010]
+]) {
+  connectTerminals('w03-core-' + coreId, 'W-03:' + coreId + ' · ' + potential, potential,
+    source, '2', target, targetPin, { cableId: 'W-03', coreId }, 1220, boundary);
+}
+
 for (const [sheetId, title, note] of [
   [cabinet, 'XT1 · CONTROLLER MARSHALLING', 'XT0 is the external supply boundary. A1 sensor supply feeds XT1; X10:7 receives the PNP switching signal.'],
   [field, 'XT2 · FIELD SENSOR MARSHALLING', 'W-01 cores 1, 2 and 3 carry sensor supply, return and switching signal through XT2.'],
   [operator, 'XT3 · OPERATOR STATION MARSHALLING', 'W-02 carries a common feed, a normally open Start request and a normally closed operational Stop request.'],
-  [protectiveEarth, 'XT4 · PROTECTIVE-EARTH DISTRIBUTION', 'Incoming PE is routed separately to the field equipment and operator enclosure terminal boundaries.']
+  [protectiveEarth, 'XT4 · PROTECTIVE-EARTH DISTRIBUTION', 'Incoming PE is routed separately to the field equipment and operator enclosure terminal boundaries.'],
+  [pressure, 'XT5 · FIELD PRESSURE INPUT', 'W-03 carries external +24 V, the shared 0 V reference and B2 OUT2 to A1 AI0.']
 ]) {
   project.objects.push({ id: sheetId + '-title', sheetId, kind: 'text', x: 105, y: 97, text: title });
   project.objects.push({ id: sheetId + '-note', sheetId, kind: 'text', x: 105, y: 565, text: note });
@@ -146,6 +176,8 @@ project.objects.push({ id: operator + '-operational-scope', sheetId: operator, k
   text: 'The Stop contact documents a PLC input request. Emergency-stop and safety functions are outside this drawing.' });
 project.objects.push({ id: protectiveEarth + '-scope-review', sheetId: protectiveEarth, kind: 'text', x: 105, y: 640,
   text: 'The drawing defines terminal connectivity. Physical bonding paths, rail mounting and protective-conductor sizing require review.' });
+project.objects.push({ id: pressure + '-configuration', sheetId: pressure, kind: 'text', x: 105, y: 640,
+  text: 'Set OUT2 to voltage mode and verify load and scaling against actual equipment. OUT1 is unused; no process range is assigned.' });
 
 const report = engine.analyzeProject(JSON.parse(engine.serializeProject(project)));
 const errors = (report.findings || []).filter(finding => finding.severity === 'error');

@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Controller-to-field terminal marshalling",
-  "revision": "1.2",
-  "description": "Feed-through marshalling for a 24 V sensor, a two-button operator station, and separate protective-earth boundaries.",
+  "revision": "1.3",
+  "description": "Feed-through marshalling for a proximity sensor, an analog pressure sensor, a two-button operator station, and separate protective-earth boundaries.",
   "activeSheet": "marshalling-cabinet",
   "sheets": [
     {
@@ -27,6 +27,12 @@
       "id": "marshalling-protective-earth",
       "number": "A2/004",
       "name": "Protective-earth terminal distribution",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "marshalling-analog-pressure",
+      "number": "A2/005",
+      "name": "XT5 pressure transducer to AI0",
       "projectSectionId": "A2"
     }
   ],
@@ -1617,6 +1623,585 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x19",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X19",
+      "x": 1100,
+      "y": 200,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "6",
+        "marking": "Pressure sensor supply",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x20",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X20",
+      "x": 1100,
+      "y": 230,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "7",
+        "marking": "Pressure sensor and AI0 return",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x21",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X21",
+      "x": 1100,
+      "y": 282,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "8",
+        "marking": "Pressure signal to AI0",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x22",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X22",
+      "x": 325,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "1",
+        "marking": "Pressure sensor supply",
+        "comment": ""
+      },
+      "sheetId": "marshalling-analog-pressure"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x23",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X23",
+      "x": 325,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "2",
+        "marking": "Pressure sensor return",
+        "comment": ""
+      },
+      "sheetId": "marshalling-analog-pressure"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x24",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X24",
+      "x": 865,
+      "y": 340,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "3",
+        "marking": "OUT2 analog voltage",
+        "comment": ""
+      },
+      "sheetId": "marshalling-analog-pressure"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b2",
+      "componentId": "ifm-pn2070",
+      "ref": "B2",
+      "x": 650,
+      "y": 365,
+      "rotation": 0,
+      "properties": {
+        "marking": "Field pressure transducer",
+        "position": "",
+        "processPoint": "",
+        "signalConfigurationNote": "Illustrative connection assumes OUT2 configured for 0–10 V.",
+        "comment": ""
+      },
+      "sheetId": "marshalling-analog-pressure"
+    },
+    {
+      "id": "pressure-feed-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 585,
+      "y": 195,
+      "x1": 585,
+      "y1": 195,
+      "x2": 585,
+      "y2": 126,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-feed-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 585,
+      "y": 126,
+      "x1": 585,
+      "y1": 126,
+      "x2": 1055,
+      "y2": 126,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-feed-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1055,
+      "y": 126,
+      "x1": 1055,
+      "y1": 126,
+      "x2": 1055,
+      "y2": 200,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-feed-4",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1055,
+      "y": 200,
+      "x1": 1055,
+      "y1": 200,
+      "x2": 1065,
+      "y2": 200,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x19",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "pressure-return-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 565,
+      "y": 245,
+      "x1": 565,
+      "y1": 245,
+      "x2": 565,
+      "y2": 155,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-return-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 565,
+      "y": 155,
+      "x1": 565,
+      "y1": 155,
+      "x2": 1020,
+      "y2": 155,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-return-3",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1020,
+      "y": 155,
+      "x1": 1020,
+      "y1": 155,
+      "x2": 1020,
+      "y2": 230,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-return-4",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1020,
+      "y": 230,
+      "x1": 1020,
+      "y1": 230,
+      "x2": 1065,
+      "y2": 230,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x20",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "pressure-reference-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1020,
+      "y": 230,
+      "x1": 1020,
+      "y1": 230,
+      "x2": 1020,
+      "y2": 264,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pressure-reference-2",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1020,
+      "y": 264,
+      "x1": 1020,
+      "y1": 264,
+      "x2": 980,
+      "y2": 264,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x11-1"
+        }
+      }
+    },
+    {
+      "id": "pressure-input-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 980,
+      "y": 282,
+      "x1": 980,
+      "y1": 282,
+      "x2": 1065,
+      "y2": 282,
+      "potential": "B2 analog voltage",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x11-2"
+        },
+        "end": {
+          "instanceId": "x21",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "transducer-feed-1",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 360,
+      "y": 300,
+      "x1": 360,
+      "y1": 300,
+      "x2": 485,
+      "y2": 300,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x22",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "transducer-feed-2",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 485,
+      "y": 300,
+      "x1": 485,
+      "y1": 300,
+      "x2": 485,
+      "y2": 340,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "transducer-feed-3",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 485,
+      "y": 340,
+      "x1": 485,
+      "y1": 340,
+      "x2": 585,
+      "y2": 340,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b2",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "transducer-return-1",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 360,
+      "y": 425,
+      "x1": 360,
+      "y1": 425,
+      "x2": 485,
+      "y2": 425,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x23",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "transducer-return-2",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 485,
+      "y": 425,
+      "x1": 485,
+      "y1": 425,
+      "x2": 485,
+      "y2": 390,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "transducer-return-3",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 485,
+      "y": 390,
+      "x1": 485,
+      "y1": 390,
+      "x2": 585,
+      "y2": 390,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b2",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "transducer-output-1",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 715,
+      "y": 340,
+      "x1": 715,
+      "y1": 340,
+      "x2": 830,
+      "y2": 340,
+      "potential": "B2 analog voltage",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b2",
+          "pinId": "pin-2-out2"
+        },
+        "end": {
+          "instanceId": "x24",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "w03-core-1-source-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1135,
+      "y": 200,
+      "x1": 1135,
+      "y1": 200,
+      "x2": 1220,
+      "y2": 200,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x19",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "w03-core-1-target-1",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 290,
+      "y": 300,
+      "x1": 290,
+      "y1": 300,
+      "x2": 190,
+      "y2": 300,
+      "potential": "External +24 V",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x22",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "w03-core-2-source-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1135,
+      "y": 230,
+      "x1": 1135,
+      "y1": 230,
+      "x2": 1220,
+      "y2": 230,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x20",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
+      "id": "w03-core-2-target-1",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 290,
+      "y": 425,
+      "x1": 290,
+      "y1": 425,
+      "x2": 190,
+      "y2": 425,
+      "potential": "Sensor return",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x23",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
+      "id": "w03-core-3-source-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 1135,
+      "y": 282,
+      "x1": 1135,
+      "y1": 282,
+      "x2": 1220,
+      "y2": 282,
+      "potential": "B2 analog voltage",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x21",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "3"
+    },
+    {
+      "id": "w03-core-3-target-1",
+      "kind": "wire",
+      "sheetId": "marshalling-analog-pressure",
+      "x": 900,
+      "y": 340,
+      "x1": 900,
+      "y1": 340,
+      "x2": 1010,
+      "y2": 340,
+      "potential": "B2 analog voltage",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x24",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "3"
+    },
+    {
       "id": "marshalling-cabinet-title",
       "sheetId": "marshalling-cabinet",
       "kind": "text",
@@ -1713,6 +2298,30 @@
       "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
     },
     {
+      "id": "marshalling-analog-pressure-title",
+      "sheetId": "marshalling-analog-pressure",
+      "kind": "text",
+      "x": 105,
+      "y": 97,
+      "text": "XT5 · FIELD PRESSURE INPUT"
+    },
+    {
+      "id": "marshalling-analog-pressure-note",
+      "sheetId": "marshalling-analog-pressure",
+      "kind": "text",
+      "x": 105,
+      "y": 565,
+      "text": "W-03 carries external +24 V, the shared 0 V reference and B2 OUT2 to A1 AI0."
+    },
+    {
+      "id": "marshalling-analog-pressure-scope",
+      "sheetId": "marshalling-analog-pressure",
+      "kind": "text",
+      "x": 105,
+      "y": 602,
+      "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
+    },
+    {
       "id": "marshalling-operator-station-operational-scope",
       "sheetId": "marshalling-operator-station",
       "kind": "text",
@@ -1727,6 +2336,14 @@
       "x": 105,
       "y": 640,
       "text": "The drawing defines terminal connectivity. Physical bonding paths, rail mounting and protective-conductor sizing require review."
+    },
+    {
+      "id": "marshalling-analog-pressure-configuration",
+      "sheetId": "marshalling-analog-pressure",
+      "kind": "text",
+      "x": 105,
+      "y": 640,
+      "text": "Set OUT2 to voltage mode and verify load and scaling against actual equipment. OUT1 is unused; no process range is assigned."
     }
   ],
   "crossSheetConnections": [
@@ -2014,6 +2631,102 @@
             "direction": "left",
             "targetSheetId": "marshalling-protective-earth",
             "targetRef": "X16"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w03-core-1",
+      "name": "W-03:1 · External +24 V",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w03-core-1-source-1",
+          "point": {
+            "x": 1220,
+            "y": 200
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-analog-pressure",
+            "targetRef": "X22"
+          }
+        },
+        {
+          "sheetId": "marshalling-analog-pressure",
+          "wireId": "w03-core-1-target-1",
+          "point": {
+            "x": 190,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X19"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w03-core-2",
+      "name": "W-03:2 · Sensor return",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w03-core-2-source-1",
+          "point": {
+            "x": 1220,
+            "y": 230
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-analog-pressure",
+            "targetRef": "X23"
+          }
+        },
+        {
+          "sheetId": "marshalling-analog-pressure",
+          "wireId": "w03-core-2-target-1",
+          "point": {
+            "x": 190,
+            "y": 425
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X20"
+          }
+        }
+      ]
+    },
+    {
+      "id": "w03-core-3",
+      "name": "W-03:3 · B2 analog voltage",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "w03-core-3-source-1",
+          "point": {
+            "x": 1220,
+            "y": 282
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-analog-pressure",
+            "targetRef": "X24"
+          }
+        },
+        {
+          "sheetId": "marshalling-analog-pressure",
+          "wireId": "w03-core-3-target-1",
+          "point": {
+            "x": 1010,
+            "y": 340
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X21"
           }
         }
       ]
