@@ -1146,7 +1146,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         const options=Object.entries(rule.choices).map(([id,label])=>
           '<option value="'+escapeHtml(id)+'"'+(id===value?' selected':'')+'>'+escapeHtml(label)+'</option>').join('');
         return '<label class="property-row"><span>'+escapeHtml(componentPropertyLabels[name]||name)+'</span>'
-          +'<select class="component-edit" data-component-property="'+escapeHtml(name)+'" data-component-object="'+escapeHtml(object.id)+'"'
+          +'<select class="component-edit" aria-label="'+escapeHtml(componentPropertyLabels[name]||name)+'" data-component-property="'+escapeHtml(name)+'" data-component-object="'+escapeHtml(object.id)+'"'
           +(object.locked?' disabled':'')+'>'+options+'</select></label>';
       }
       const attributes=rule.type==='number'

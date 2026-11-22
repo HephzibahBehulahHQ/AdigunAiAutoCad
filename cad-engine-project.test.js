@@ -975,7 +975,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await knifePosition.selectOption('open');
     await disconnectGlyph.locator('path[d="M-12 0L12 -11"]').waitFor({ state: 'attached' });
     await disconnectPage.locator('[data-action="undo"]').click();
-    assert.equal(await knifePosition.inputValue(), 'closed');
+    await disconnectGlyph.locator('path[d="M-12 0L12 0"]').waitFor({ state: 'attached' });
     await disconnectPage.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
