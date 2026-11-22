@@ -946,6 +946,13 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await returnSegment.getAttribute('stroke'), originalReturnColor);
     await linkedExample.keyboard.press('Control+z');
     assert.equal(await feedSegment.getAttribute('stroke'), originalFeedColor);
+    await linkedExample.keyboard.press('Escape');
+    const nearFeed = await feedSegment.evaluate(path => {
+      const center = path.getPointAtLength(path.getTotalLength() / 2).matrixTransform(path.getScreenCTM());
+      return { x: center.x, y: center.y + 3 };
+    });
+    await linkedExample.mouse.click(nearFeed.x, nearFeed.y);
+    await linkedExample.locator('#rightPanel.open [data-style-object="transducer-feed-1"][data-drawing-style="stroke"]').waitFor({ timeout: 5000 });
     await linkedExample.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
