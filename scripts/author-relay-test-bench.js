@@ -12,8 +12,9 @@ const contactTest = 'bench-contact-test-access';
 const supplyCheck = 'bench-supply-check';
 const indicatorDisconnect = 'bench-indicator-disconnect';
 const switchedIndicatorCheck = 'bench-switched-indicator-check';
+const coilPower = 'bench-coil-power-supply';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.5',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.6',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -23,7 +24,8 @@ const project = {
     { id: contactTest, number: 'A2/004', name: 'XT4 NC and NO output test access', projectSectionId: 'A2' },
     { id: supplyCheck, number: 'A2/005', name: 'XT5 independent supply presence checks', projectSectionId: 'A2' },
     { id: indicatorDisconnect, number: 'A2/006', name: 'XT2 indicator supply disconnect', projectSectionId: 'A2' },
-    { id: switchedIndicatorCheck, number: 'A2/007', name: 'XT6 switched indicator voltage check', projectSectionId: 'A2' }
+    { id: switchedIndicatorCheck, number: 'A2/007', name: 'XT6 switched indicator voltage check', projectSectionId: 'A2' },
+    { id: coilPower, number: 'A2/008', name: 'PS1 coil supply and incoming power boundary', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -74,6 +76,28 @@ wire(actuation, 'coil-feed', 'Coil supply +24 V', pin(coilSupply, '2'), pin(disc
 wire(actuation, 'coil-feed-switched-terminal', 'Coil supply +24 V', pin(disconnect, '2'), pin(button, '13'));
 wire(actuation, 'coil-command', 'Switched coil supply', pin(button, '14'), pin(relay, 'A1'), [{ x: 600, y: 320 }, { x: 600, y: 365 }]);
 wire(actuation, 'coil-return', 'Coil supply 0 V', pin(coilReturn, '2'), pin(relay, 'A2'), [{ x: 625, y: 240 }, { x: 625, y: 325 }]);
+
+const psu = device(coilPower, 'PS1', 'siemens-sitop-psu100c-6ep1332-5ba00', 560, 330, { marking: 'Bench coil supply' });
+for (const [ref, position, terminalNumber, potential, y] of [
+  ['X18', '1', 'L', 'Incoming L', 240],
+  ['X19', '2', 'N', 'Incoming N', 330],
+  ['X20', '3', 'PE', 'PE', 420]
+]) {
+  const part = terminalNumber === 'PE' ? 'phoenix-contact-3209536' : 'phoenix-contact-3209510';
+  const entry = device(coilPower, ref, part, 315, y, { terminalStrip: 'XT7', position, marking: potential });
+  const end = pin(psu, terminalNumber);
+  const bends = y === end.y ? undefined : [{ x: 405, y }, { x: 405, y: end.y }];
+  wire(coilPower, 'ps1-input-' + terminalNumber.toLowerCase(), potential, pin(entry, '2'), end, bends);
+}
+for (const [id, terminalNumber, potential, destination] of [
+  ['ps1-coil-feed', '+', 'Coil supply +24 V', coilSupply],
+  ['ps1-coil-return', '-', 'Coil supply 0 V', coilReturn]
+]) {
+  const start = pin(psu, terminalNumber), end = pin(destination, '1');
+  const send = wire(coilPower, id + '-send', potential, start, { x: 865, y: start.y });
+  const receive = wire(actuation, id + '-receive', potential, { x: 165, y: end.y }, end);
+  link(id, potential, send, receive, psu.ref, destination.ref, 'right', 'left');
+}
 
 const lampSupply = terminal(indicatorDisconnect, 'X3', 370, 310, 'XT2', '1', 'Indicator supply +24 V');
 const lampDisconnect = device(indicatorDisconnect, 'X15', 'phoenix-contact-3210156', 625, 310,
@@ -190,6 +214,10 @@ for (const [sheetId, title, lines] of [
   [switchedIndicatorCheck, 'RELAY TEST BENCH · XT6 SWITCHED INDICATOR VOLTAGE', [
     'H6 monitors the feed downstream of X15. H5 on A2/005 monitors the upstream supply.',
     'XT6 provides local test access across the switched feed and its independent return.'
+  ]],
+  [coilPower, 'RELAY TEST BENCH · PS1 COIL SUPPLY', [
+    'PS1 feeds the coil circuit through XT1. The separate indicator supply remains external.',
+    'XT7 marks incoming L, N and PE. Incoming source, protection, and conductor sizing remain unassigned.'
   ]]
 ]) {
   [title, ...lines].forEach((text, index) => project.objects.push({

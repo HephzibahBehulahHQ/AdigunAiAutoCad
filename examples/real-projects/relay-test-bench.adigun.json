@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Relay changeover test bench",
-  "revision": "1.5",
+  "revision": "1.6",
   "description": "Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.",
   "activeSheet": "bench-coil-actuation",
   "sheets": [
@@ -45,6 +45,12 @@
       "id": "bench-switched-indicator-check",
       "number": "A2/007",
       "name": "XT6 switched indicator voltage check",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-coil-power-supply",
+      "number": "A2/008",
+      "name": "PS1 coil supply and incoming power boundary",
       "projectSectionId": "A2"
     }
   ],
@@ -248,6 +254,249 @@
         "end": {
           "instanceId": "k1",
           "pinId": "coil-a2"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 560,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "marking": "Bench coil supply",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-power-supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x18",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X18",
+      "x": 315,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "1",
+        "marking": "Incoming L",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-power-supply"
+    },
+    {
+      "id": "ps1-input-l",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "wire",
+      "x": 350,
+      "y": 240,
+      "x1": 350,
+      "y1": 240,
+      "x2": 470,
+      "y2": 300,
+      "potential": "Incoming L",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 405,
+          "y": 240
+        },
+        {
+          "x": 405,
+          "y": 300
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x18",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-l"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x19",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X19",
+      "x": 315,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "2",
+        "marking": "Incoming N",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-power-supply"
+    },
+    {
+      "id": "ps1-input-n",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "wire",
+      "x": 350,
+      "y": 330,
+      "x1": 350,
+      "y1": 330,
+      "x2": 470,
+      "y2": 330,
+      "potential": "Incoming N",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x19",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-n"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x20",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X20",
+      "x": 315,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "3",
+        "marking": "PE",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-power-supply"
+    },
+    {
+      "id": "ps1-input-pe",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "wire",
+      "x": 350,
+      "y": 420,
+      "x1": 350,
+      "y1": 420,
+      "x2": 470,
+      "y2": 360,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 405,
+          "y": 420
+        },
+        {
+          "x": 405,
+          "y": 360
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x20",
+          "pinId": "connection-2"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-pe"
+        }
+      }
+    },
+    {
+      "id": "ps1-coil-feed-send",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "wire",
+      "x": 650,
+      "y": 300,
+      "x1": 650,
+      "y1": 300,
+      "x2": 865,
+      "y2": 300,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "ps1",
+          "pinId": "output-positive"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "ps1-coil-feed-receive",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 165,
+      "y": 320,
+      "x1": 165,
+      "y1": 320,
+      "x2": 265,
+      "y2": 320,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x1",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "ps1-coil-return-send",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "wire",
+      "x": 650,
+      "y": 360,
+      "x1": 650,
+      "y1": 360,
+      "x2": 865,
+      "y2": 360,
+      "potential": "Coil supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "ps1",
+          "pinId": "output-negative"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "ps1-coil-return-receive",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 165,
+      "y": 240,
+      "x1": 165,
+      "y1": 240,
+      "x2": 265,
+      "y2": 240,
+      "potential": "Coil supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x2",
+          "pinId": "level-1-left"
         }
       }
     },
@@ -1575,9 +1824,97 @@
       "x": 105,
       "y": 555,
       "text": "XT6 provides local test access across the switched feed and its independent return."
+    },
+    {
+      "id": "bench-coil-power-supply-note-0",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · PS1 COIL SUPPLY"
+    },
+    {
+      "id": "bench-coil-power-supply-note-1",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "PS1 feeds the coil circuit through XT1. The separate indicator supply remains external."
+    },
+    {
+      "id": "bench-coil-power-supply-note-2",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "XT7 marks incoming L, N and PE. Incoming source, protection, and conductor sizing remain unassigned."
     }
   ],
   "crossSheetConnections": [
+    {
+      "id": "ps1-coil-feed",
+      "name": "Coil supply +24 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-power-supply",
+          "wireId": "ps1-coil-feed-send",
+          "point": {
+            "x": 865,
+            "y": 300
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "X1"
+          }
+        },
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "ps1-coil-feed-receive",
+          "point": {
+            "x": 165,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-coil-power-supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ps1-coil-return",
+      "name": "Coil supply 0 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-power-supply",
+          "wireId": "ps1-coil-return-send",
+          "point": {
+            "x": 865,
+            "y": 360
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "X2"
+          }
+        },
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "ps1-coil-return-receive",
+          "point": {
+            "x": 165,
+            "y": 240
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-coil-power-supply",
+            "targetRef": "PS1"
+          }
+        }
+      ]
+    },
     {
       "id": "fixture-core-1",
       "name": "W-T01:1 · Indicator supply +24 V",
