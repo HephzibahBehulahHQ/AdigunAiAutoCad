@@ -26,7 +26,7 @@ This six-sheet reference extends brief 44. XT0 marks the external 24 V supply bo
 
 ## Water-treatment dosing and pressure monitoring
 
-This six-sheet opening for brief 12 routes filter inlet B1 and outlet B2 pressure voltages to AI 0 and AI 1. DQ a.0 operates K1, whose normally open dry contact at XT2 requests enable from an external dosing controller. A2/004 through A2/006 route independent ready, running, and fault dry contacts to DI a.0 through DI a.2 using W-01 through W-03. Sensor ranges, differential-pressure logic, dosing permissives and chemical-handling hardware remain unassigned.
+This eight-sheet opening for brief 12 routes filter inlet B1 and outlet B2 pressure voltages to AI 0 and AI 1. DQ a.0 operates K1, whose normally open dry contact at XT2 requests enable from an external dosing controller. A2/004 through A2/006 route independent ready, running, and fault dry contacts to DI a.0 through DI a.2 using W-01 through W-03. A2/007 adds the PS1 supply and XT6 incoming AC boundary. A2/008 routes PE through XT7 to the cabinet and dosing enclosure terminals. Sensor ranges, differential-pressure logic, dosing permissives and chemical-handling hardware remain unassigned.
 
 Run `node scripts/author-water-treatment-dosing.js --write` to regenerate the editable drawing.
 

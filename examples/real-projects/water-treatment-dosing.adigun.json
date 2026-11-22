@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Water-treatment dosing and pressure monitoring",
-  "revision": "1.1",
+  "revision": "1.2",
   "description": "Two independent filter pressure inputs and an isolated dosing-enable contact interface.",
   "activeSheet": "dosing-controller",
   "sheets": [
@@ -40,6 +40,18 @@
       "number": "A2/006",
       "name": "External dosing controller fault contact",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-control-supply",
+      "number": "A2/007",
+      "name": "PS1 control supply and AC inlet",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-protective-earth",
+      "number": "A2/008",
+      "name": "Cabinet and dosing enclosure PE terminals",
+      "projectSectionId": "A2"
     }
   ],
   "objects": [
@@ -71,7 +83,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "1",
-        "marking": "External control +24 V DC",
+        "marking": "PS1 control +24 V DC",
         "comment": ""
       },
       "sheetId": "dosing-controller"
@@ -88,7 +100,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "2",
-        "marking": "External control 0 V",
+        "marking": "PS1 control 0 V",
         "comment": ""
       },
       "sheetId": "dosing-controller"
@@ -1153,6 +1165,409 @@
       "coreId": "2"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 585,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "marking": "Dosing cabinet control supply",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "dosing-control-supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x13",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X13",
+      "x": 300,
+      "y": 460,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "3",
+        "marking": "Incoming PE",
+        "comment": ""
+      },
+      "sheetId": "dosing-control-supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x11",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X11",
+      "x": 300,
+      "y": 230,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "1",
+        "marking": "Incoming L",
+        "comment": ""
+      },
+      "sheetId": "dosing-control-supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x12",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X12",
+      "x": 300,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "2",
+        "marking": "Incoming N",
+        "comment": ""
+      },
+      "sheetId": "dosing-control-supply"
+    },
+    {
+      "id": "ps1-input-l",
+      "sheetId": "dosing-control-supply",
+      "kind": "wire",
+      "potential": "L",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 230,
+      "x1": 335,
+      "y1": 230,
+      "x2": 495,
+      "y2": 315,
+      "bends": [
+        {
+          "x": 405,
+          "y": 230
+        },
+        {
+          "x": 405,
+          "y": 315
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x11",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-l"
+        }
+      }
+    },
+    {
+      "id": "ps1-input-n",
+      "sheetId": "dosing-control-supply",
+      "kind": "wire",
+      "potential": "N",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 345,
+      "x1": 335,
+      "y1": 345,
+      "x2": 495,
+      "y2": 345,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x12",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-n"
+        }
+      }
+    },
+    {
+      "id": "ps1-input-pe",
+      "sheetId": "dosing-control-supply",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 460,
+      "x1": 335,
+      "y1": 460,
+      "x2": 495,
+      "y2": 375,
+      "bends": [
+        {
+          "x": 405,
+          "y": 460
+        },
+        {
+          "x": 405,
+          "y": 375
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x13",
+          "pinId": "connection-2"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-pe"
+        }
+      }
+    },
+    {
+      "id": "control-power-feed-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 302,
+      "y": 234,
+      "x1": 302,
+      "y1": 234,
+      "x2": 215,
+      "y2": 260,
+      "bends": [
+        {
+          "x": 302,
+          "y": 260
+        }
+      ]
+    },
+    {
+      "id": "control-power-feed-field",
+      "sheetId": "dosing-control-supply",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 315,
+      "x1": 675,
+      "y1": 315,
+      "x2": 960,
+      "y2": 315,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "ps1",
+          "pinId": "output-positive"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "control-power-return-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 302,
+      "y": 292,
+      "x1": 302,
+      "y1": 292,
+      "x2": 215,
+      "y2": 320,
+      "bends": [
+        {
+          "x": 302,
+          "y": 320
+        }
+      ]
+    },
+    {
+      "id": "control-power-return-field",
+      "sheetId": "dosing-control-supply",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 375,
+      "x1": 675,
+      "y1": 375,
+      "x2": 960,
+      "y2": 375,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "ps1",
+          "pinId": "output-negative"
+        },
+        "end": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x14",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X14",
+      "x": 380,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "1",
+        "marking": "PE from XT6",
+        "comment": ""
+      },
+      "sheetId": "dosing-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x15",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X15",
+      "x": 785,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "2",
+        "marking": "Control cabinet enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "dosing-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x16",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X16",
+      "x": 785,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "3",
+        "marking": "Dosing equipment enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "dosing-protective-earth"
+    },
+    {
+      "id": "cabinet-earth-feed-cabinet",
+      "sheetId": "dosing-control-supply",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 265,
+      "y": 460,
+      "x1": 265,
+      "y1": 460,
+      "x2": 215,
+      "y2": 460,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x13",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "cabinet-earth-feed-field",
+      "sheetId": "dosing-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 345,
+      "y": 300,
+      "x1": 345,
+      "y1": 300,
+      "x2": 215,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x14",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "earth-trunk",
+      "sheetId": "dosing-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 415,
+      "y": 300,
+      "x1": 415,
+      "y1": 300,
+      "x2": 575,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x14",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "controller-enclosure-earth",
+      "sheetId": "dosing-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 750,
+      "y2": 300,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x15",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "dosing-enclosure-earth",
+      "sheetId": "dosing-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 750,
+      "y2": 425,
+      "bends": [
+        {
+          "x": 575,
+          "y": 425
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x16",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
       "id": "dosing-controller-note-0",
       "sheetId": "dosing-controller",
       "kind": "text",
@@ -1166,7 +1581,7 @@
       "kind": "text",
       "x": 105,
       "y": 585,
-      "text": "A1 receives two distinct pressure voltages. External controller power enters through XT1."
+      "text": "A1 receives two distinct pressure voltages. PS1 feeds the control circuits through XT1."
     },
     {
       "id": "dosing-pressure-monitoring-note-0",
@@ -1247,6 +1662,38 @@
       "x": 105,
       "y": 585,
       "text": "W-03 connects the external contact that closes on fault to DI a.2. Contact selection and fault handling remain unassigned."
+    },
+    {
+      "id": "dosing-control-supply-note-0",
+      "sheetId": "dosing-control-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "DOSING CABINET CONTROL SUPPLY · PS1"
+    },
+    {
+      "id": "dosing-control-supply-note-1",
+      "sheetId": "dosing-control-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "XT6 marks the incoming L, N and PE boundary. PS1 feeds XT1. Incoming protection and conductor sizing remain unassigned."
+    },
+    {
+      "id": "dosing-protective-earth-note-0",
+      "sheetId": "dosing-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "CABINET AND DOSING ENCLOSURE PROTECTIVE EARTH · XT7"
+    },
+    {
+      "id": "dosing-protective-earth-note-1",
+      "sheetId": "dosing-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "XT7 carries PE to the cabinet and dosing equipment enclosure terminal boundaries. Physical bonding and conductor sizing remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -1630,6 +2077,102 @@
             "direction": "left",
             "targetSheetId": "dosing-controller",
             "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-power-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "control-power-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 260
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-control-supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "dosing-control-supply",
+          "wireId": "control-power-feed-field",
+          "point": {
+            "x": 960,
+            "y": 315
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "control-power-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "control-power-return-cabinet",
+          "point": {
+            "x": 215,
+            "y": 320
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-control-supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "dosing-control-supply",
+          "wireId": "control-power-return-field",
+          "point": {
+            "x": 960,
+            "y": 375
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cabinet-earth-feed",
+      "name": "PE",
+      "endpoints": [
+        {
+          "sheetId": "dosing-control-supply",
+          "wireId": "cabinet-earth-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 460
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-protective-earth",
+            "targetRef": "X14"
+          }
+        },
+        {
+          "sheetId": "dosing-protective-earth",
+          "wireId": "cabinet-earth-feed-field",
+          "point": {
+            "x": 215,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-control-supply",
+            "targetRef": "X13"
           }
         }
       ]
