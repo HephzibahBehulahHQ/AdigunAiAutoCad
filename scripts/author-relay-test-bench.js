@@ -10,8 +10,9 @@ const indication = 'bench-contact-indication';
 const diagnostics = 'bench-coil-test-access';
 const contactTest = 'bench-contact-test-access';
 const supplyCheck = 'bench-supply-check';
+const indicatorDisconnect = 'bench-indicator-disconnect';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.3',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.4',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -19,7 +20,8 @@ const project = {
     { id: indication, number: 'A2/002', name: 'Dry changeover contact indication', projectSectionId: 'A2' },
     { id: diagnostics, number: 'A2/003', name: 'XT3 relay coil voltage test access', projectSectionId: 'A2' },
     { id: contactTest, number: 'A2/004', name: 'XT4 NC and NO output test access', projectSectionId: 'A2' },
-    { id: supplyCheck, number: 'A2/005', name: 'XT5 independent supply presence checks', projectSectionId: 'A2' }
+    { id: supplyCheck, number: 'A2/005', name: 'XT5 independent supply presence checks', projectSectionId: 'A2' },
+    { id: indicatorDisconnect, number: 'A2/006', name: 'XT2 indicator supply disconnect', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -71,20 +73,23 @@ wire(actuation, 'coil-feed-switched-terminal', 'Coil supply +24 V', pin(disconne
 wire(actuation, 'coil-command', 'Switched coil supply', pin(button, '14'), pin(relay, 'A1'), [{ x: 600, y: 320 }, { x: 600, y: 365 }]);
 wire(actuation, 'coil-return', 'Coil supply 0 V', pin(coilReturn, '2'), pin(relay, 'A2'), [{ x: 625, y: 240 }, { x: 625, y: 325 }]);
 
-const lampSupply = terminal(indication, 'X3', 510, 220, 'XT2', '1', 'Indicator supply +24 V');
+const lampSupply = terminal(indicatorDisconnect, 'X3', 370, 310, 'XT2', '1', 'Indicator supply +24 V');
+const lampDisconnect = device(indicatorDisconnect, 'X15', 'phoenix-contact-3210156', 625, 310,
+  { terminalStrip: 'XT2', position: '3', marking: 'Indicator supply disconnect', knifePosition: 'closed' });
+wire(indicatorDisconnect, 'indicator-disconnect-feed', 'Indicator supply +24 V', pin(lampSupply, '2'), pin(lampDisconnect, '1'));
 const lampReturn = terminal(indication, 'X4', 890, 335, 'XT2', '2', 'Indicator supply 0 V');
 const ncLamp = device(indication, 'H1', 'schneider-electric-xb5avb3', 710, 285, { marking: 'Normally closed path' });
 const noLamp = device(indication, 'H2', 'schneider-electric-xb5avb3', 710, 385, { marking: 'Normally open path' });
 
 for (const [coreId, relayPin, potential, destination, targetPin, boundaryX, direction] of [
-  ['1', '11', 'Indicator supply +24 V', lampSupply, '2', 955, 'right'],
+  ['1', '11', 'Indicator supply +24 V', lampDisconnect, '2', 955, 'right'],
   ['2', '12', 'Normally closed indication', ncLamp, 'X1', 210, 'left'],
   ['3', '14', 'Normally open indication', noLamp, 'X1', 210, 'left']
 ]) {
   const start = pin(relay, relayPin), end = pin(destination, targetPin);
   const id = 'fixture-core-' + coreId;
   const send = wire(actuation, id + '-relay', potential, start, { x: 970, y: start.y });
-  const receive = wire(indication, id + '-indicator', potential, { x: boundaryX, y: end.y }, end);
+  const receive = wire(destination.sheetId, id + '-indicator', potential, { x: boundaryX, y: end.y }, end);
   for (const segment of [send, receive]) Object.assign(segment, { cableId: 'W-T01', coreId });
   link(id, 'W-T01:' + coreId + ' · ' + potential, send, receive, relay.ref, destination.ref, 'right', direction);
 }
@@ -128,7 +133,7 @@ const indicatorNegative = pin(lampReturn, '2');
 for (const [id, sheetId, sourceRef, lamp, ref, position, potential, start, end, lampPin, direction] of [
   ['coil-supply-plus', actuation, 'X1', coilSupplyLamp, 'X10', '1', 'Coil supply +24 V', { x: 350, y: 320 }, { x: 350, y: 405 }, 'X1', 'right'],
   ['coil-supply-minus', actuation, 'X2', coilSupplyLamp, 'X11', '2', 'Coil supply 0 V', { x: 540, y: 240 }, { x: 540, y: 185 }, 'X2', 'right'],
-  ['indicator-supply-plus', indication, 'X3', indicatorSupplyLamp, 'X12', '3', 'Indicator supply +24 V', indicatorPositive, { x: 215, y: indicatorPositive.y }, 'X1', 'left'],
+  ['indicator-supply-plus', indicatorDisconnect, 'X3', indicatorSupplyLamp, 'X12', '3', 'Indicator supply +24 V', indicatorPositive, { x: 215, y: indicatorPositive.y }, 'X1', 'left'],
   ['indicator-supply-minus', indication, 'X4', indicatorSupplyLamp, 'X13', '4', 'Indicator supply 0 V', indicatorNegative, { x: 1030, y: indicatorNegative.y }, 'X2', 'right']
 ]) {
   const positive = lampPin === 'X1';
@@ -159,6 +164,10 @@ for (const [sheetId, title, lines] of [
   [supplyCheck, 'RELAY TEST BENCH · XT5 INDEPENDENT SUPPLY CHECKS', [
     'H4 checks the incoming coil supply upstream of S1. H5 checks the separate indicator supply.',
     'The two returns remain independent. Lamp illumination indicates local voltage at each branch.'
+  ]],
+  [indicatorDisconnect, 'RELAY TEST BENCH · INDICATOR SUPPLY DISCONNECT', [
+    'X15 opens the indicator feed to K1 common. H5 monitors the supply upstream of X15.',
+    'The coil is on a separate supply. The drawing does not establish a physical isolation procedure.'
   ]]
 ]) {
   [title, ...lines].forEach((text, index) => project.objects.push({
