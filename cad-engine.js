@@ -1324,7 +1324,7 @@
     }]
   });
   const protectiveEarthVariants = terminalCatalog.protectiveEarthVariants.map(([id, model, slug, connectionType, connectionMethod, area, minimum, maximumRigid, maximumFlexible,
-    width, height, depthOnLowRail, depthOnHighRail]) => {
+    width, height, depthOnLowRail, depthOnHighRail, mountingScrew]) => {
     const base = phoenixProtectiveEarthTerminalDefinition;
     return deepFreeze({
       ...base,
@@ -1343,6 +1343,7 @@
         rigidConductorRange: { minimum, maximum: maximumRigid, unit: 'mm²' },
         flexibleConductorRange: { minimum, maximum: maximumFlexible, unit: 'mm²' },
         connectionMethod: { value: connectionMethod },
+        ...(mountingScrew ? { groundingFootMountingScrew: { value: mountingScrew } } : {}),
         dimensions: {
           width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
           depthOnNS35_7_5: { value: depthOnLowRail, unit: 'mm' }, depthOnNS35_15: { value: depthOnHighRail, unit: 'mm' }
