@@ -12,8 +12,9 @@ const output = 'irrigation-request';
 const operator = 'irrigation-operator';
 const feedback = 'irrigation-run-feedback';
 const indication = 'irrigation-run-indication';
+const fault = 'irrigation-starter-fault';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.3',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.4',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -22,7 +23,8 @@ const project = {
     { id: output, number: 'A2/003', name: 'Isolated pump request', projectSectionId: 'A2' },
     { id: operator, number: 'A2/004', name: 'Local irrigation request station', projectSectionId: 'A2' },
     { id: feedback, number: 'A2/005', name: 'Pump starter run feedback at XT3', projectSectionId: 'A2' },
-    { id: indication, number: 'A2/006', name: 'Local pump run indication', projectSectionId: 'A2' }
+    { id: indication, number: 'A2/006', name: 'Local pump run indication', projectSectionId: 'A2' },
+    { id: fault, number: 'A2/007', name: 'Starter fault contact at XT4', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -82,6 +84,9 @@ const feedbackReturn = terminal(feedback, 'X6', 470, 390, 'XT3', '2', 'Return fr
 
 const runLamp = device(indication, 'H1', 'schneider-electric-xb5avb3', 605, 345, { marking: 'PLC pump run indication' });
 
+const faultFeed = terminal(fault, 'X7', 470, 265, 'XT4', '1', 'Supply to external fault contact');
+const faultReturn = terminal(fault, 'X8', 470, 390, 'XT4', '2', 'Return from external fault contact');
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -105,14 +110,18 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['operator-feed', '+24 V DC', 'X1', { x: 480, y: 135 }, { x: 215, y: 135 }, null, request, '13', 'left', ['W-01', '1']],
   ['operator-request', 'S1 request to DI a.1', 'A1', pin(plc, 'X10:8'), { x: 215, y: 405 },
     [{ x: 555, y: 365 }, { x: 555, y: 405 }], request, '14', 'right', ['W-01', '2']],
-  ['run-feedback-feed', '+24 V DC', 'X1', { x: 460, y: 220 }, { x: 215, y: 220 },
+  ['run-feedback-feed', '+24 V DC', 'X1', { x: 460, y: 230 }, { x: 215, y: 230 },
     null, feedbackFeed, '1', 'left', ['W-02', '1']],
   ['run-feedback-input', 'XT3 run feedback to DI a.2', 'A1', pin(plc, 'X10:9'), { x: 215, y: 440 },
     [{ x: 565, y: 383 }, { x: 565, y: 440 }], feedbackReturn, '1', 'left', ['W-02', '2']],
   ['run-indication-output', 'DQ a.1 to H1', 'A1', pin(plc, 'X12:4'), { x: 1020, y: 430 },
     [{ x: 895, y: 405 }, { x: 895, y: 430 }], runLamp, 'X1', 'left', ['W-03', '1']],
   ['run-indication-common', '0 V', 'A1', { x: 925, y: 515 }, { x: 1020, y: 515 },
-    null, runLamp, 'X2', 'right', ['W-03', '2']]
+    null, runLamp, 'X2', 'right', ['W-03', '2']],
+  ['starter-fault-feed', '+24 V DC', 'X1', { x: 460, y: 205 }, { x: 215, y: 205 },
+    null, faultFeed, '1', 'left', ['W-04', '1']],
+  ['starter-fault-input', 'XT4 starter fault to DI a.3', 'A1', pin(plc, 'X10:10'), { x: 215, y: 510 },
+    [{ x: 568, y: 401 }, { x: 568, y: 510 }], faultReturn, '1', 'left', ['W-04', '2']]
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -132,7 +141,8 @@ for (const [sheetId, title, description] of [
   [output, 'IRRIGATION PUMP REQUEST · K1', 'XT2 exposes the normally open demand contact. The external starter, motor feeder and safety controls remain outside this drawing.'],
   [operator, 'LOCAL IRRIGATION REQUEST · S1', 'W-01 carries supply and the momentary request to DI a.1. The input requests PLC action through the program.'],
   [feedback, 'PUMP STARTER RUN FEEDBACK · XT3', 'XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1.'],
-  [indication, 'LOCAL PUMP RUN INDICATION · H1', 'W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned.']
+  [indication, 'LOCAL PUMP RUN INDICATION · H1', 'W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned.'],
+  [fault, 'PUMP STARTER FAULT INPUT · XT4', 'W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
