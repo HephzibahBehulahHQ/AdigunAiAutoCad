@@ -1462,7 +1462,7 @@
       "briefId": "34",
       "role": "standalone-example",
       "path": "examples/real-projects/pneumatic-pick-place.adigun.json",
-      "revision": "1.4",
+      "revision": "1.5",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1479,43 +1479,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 91,
-        "additionalConnectedSheetsRequired": 61,
+        "additionalAuthoredSheetsRequired": 90,
+        "additionalConnectedSheetsRequired": 60,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "pick-place-plc",
         "sheetName": "PLC power and I/O",
-        "segments": "22,11,48,11 22,17,30,17 30,17,30,13 30,13,48,13 37,13,37,22 37,22,48,22 31,11,31,0 31,0,93,0 93,0,93,26 93,26,80,26 30,17,30,57 30,57,89,57 89,57,89,28 89,28,80,28 13,11,0,11 13,17,0,17 48,25,42,25 42,25,42,27 42,27,0,27 48,27,45,27 45,27,45,33 45,33,0,33 7,11,7,6 7,6,0,6 48,29,46,29 46,29,46,38 46,38,0,38 93,5,100,5 48,31,47,31 47,31,47,42 47,42,0,42 80,30,88,30 88,30,88,33 88,33,100,33 89,46,100,46 80,32,86,32 86,32,86,37 86,37,100,37 89,49,100,49 80,34,84,34 84,34,84,40 84,40,100,40 89,52,100,52 80,36,83,36 83,36,83,43 83,43,100,43 89,55,100,55"
+        "segments": "22,11,48,11 22,17,30,17 30,17,30,13 30,13,48,13 37,13,37,22 37,22,48,22 31,11,31,0 31,0,93,0 93,0,93,26 93,26,80,26 30,17,30,57 30,57,89,57 89,57,89,28 89,28,80,28 13,11,0,11 13,17,0,17 48,25,42,25 42,25,42,27 42,27,0,27 48,27,45,27 45,27,45,33 45,33,0,33 7,11,7,6 7,6,0,6 48,29,46,29 46,29,46,38 46,38,0,38 93,5,100,5 48,31,47,31 47,31,47,42 47,42,0,42 80,30,88,30 88,30,88,33 88,33,100,33 89,46,100,46 80,32,86,32 86,32,86,37 86,37,100,37 89,49,100,49 80,34,84,34 84,34,84,40 84,40,100,40 89,52,100,52 80,36,83,36 83,36,83,43 83,43,100,43 89,55,100,55 11,11,11,14 11,14,0,14 11,17,11,20 11,20,0,20"
       },
-      "topologySha256": "27c76501ba7956d98886f698b622cc0a74d7450db51940ac09c03eae0ed1e758",
-      "electricalStructureSha256": "f07065a194d6f4805fbc098e1a772f4e45e8359d8520f050e451333404a62b74",
+      "topologySha256": "ee85b3659432726b23956badce741b5e3dc069600d320f7570ec74d01cdd0f13",
+      "electricalStructureSha256": "548db01b5797953084a665f64dd2226b88776e65a35f3ea7158d99e69d7bfd4d",
       "csvSha256": {
-        "bom": "4e745ed112fad28bc038a847e65a24363b44da3364f0d1010ac31be949cec2f0",
-        "wires": "61f0f6307125940f0ae8280b8e8d0d72a2ef1f198bedc623ae75d6377635e834",
-        "terminals": "4ee5bcbc04d9118c6ee183949564d638276124a2fd32513b4ba1e0c806a286a3",
-        "plcIo": "7f1395e0356bedd3285fa71cfe21ec3486b8f9cb73066605665e93b2b15a8b76",
-        "cables": "aadc2c7c2a4c84e36e98e8c5c8a9d8fe7eddc09fb1de8c83a50fbde85c5e7167",
-        "devices": "59bb3cd2fc516913df34ac0162dffa5717137853b17e32cbddda764b76df59cd",
-        "sheets": "8640f284cd79d1311e66cd42d0a6af83a74ad327ae4feca76c16a8eb96d20647"
+        "bom": "7a86a5d5e6a81f0d4fe0ec6daf8528a0d13790bb15f612136fc9620f9deeae40",
+        "wires": "a2efc908bcf17e29970a06e6161866a2a8886d1d73e27984eb0d7e9bded3056d",
+        "terminals": "cc179d4bde595d3349b6809ae3d87795b9113d56335813463744cea7675a90f1",
+        "plcIo": "6140a5425b44df7afc9b65703aa2dedec03a5f06eb8c5ae7fd3ffcb876492226",
+        "cables": "3b9c4e7e293107a00bbbbf364ed7d86011b79cd1f1bbca2647fec15b678c918e",
+        "devices": "f71201b97c1aacc5e6b8b00fd03a348fd865e9243251dce5a904f604e4f19ae7",
+        "sheets": "9282b8762de5cc9cb1e55505e68616ae2be40471fbf786e0397490f02c8731a2"
       },
       "metrics": {
-        "sheetCount": 9,
-        "authoredSheetCount": 9,
-        "connectedSheetCount": 9,
-        "contentObjectCount": 106,
+        "sheetCount": 10,
+        "authoredSheetCount": 10,
+        "connectedSheetCount": 10,
+        "contentObjectCount": 119,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 25,
-        "wireCount": 63,
-        "netCount": 42,
-        "globalNetCount": 20,
-        "crossSheetConnectionCount": 22,
+        "componentCount": 29,
+        "wireCount": 70,
+        "netCount": 47,
+        "globalNetCount": 23,
+        "crossSheetConnectionCount": 24,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
-        "bomRowCount": 4,
-        "wireListRowCount": 63,
-        "terminalListRowCount": 32
+        "bomRowCount": 6,
+        "wireListRowCount": 70,
+        "terminalListRowCount": 38
       },
       "errors": []
     }
