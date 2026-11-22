@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -44,6 +45,21 @@ jobs:
         with:
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/adigun-pages
+      - name: Wait for Pages artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_ARTIFACT: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          endpoint="repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts"
+          for delay in 0 2 4 8 16 30; do
+            sleep "$delay"
+            if gh api --method GET "$endpoint" -f name="$PAGES_ARTIFACT" \
+              --jq '.artifacts[] | select(.expired == false) | .name' | grep -Fxq "$PAGES_ARTIFACT"; then
+              exit 0
+            fi
+          done
+          echo "::error::Pages artifact did not become visible: $PAGES_ARTIFACT"
+          exit 1
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v5
