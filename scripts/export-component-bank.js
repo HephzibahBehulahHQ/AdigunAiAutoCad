@@ -17,14 +17,48 @@ const parts = engine.catalog().map(item => {
   const { symbol } = part;
   const terminals = symbol.pins;
   const anchors = new Set(terminals.map(pin => pin.id));
+  const numbers = new Set(terminals.map(pin => pin.localNumber));
   const positions = new Set(terminals.map(pin => JSON.stringify([pin.x, pin.y])));
-  if (anchors.size !== terminals.length || positions.size !== terminals.length ||
-      terminals.some(pin => !pin.id || !pin.localNumber || !Number.isFinite(pin.x) || !Number.isFinite(pin.y)) ||
-      symbol.internalConnections.some(group => group.some(id => !anchors.has(id)))) {
+  const groups = symbol.internalConnections;
+  const groupedAnchors = groups.flat();
+  if (!terminals.length || anchors.size !== terminals.length || numbers.size !== terminals.length ||
+      positions.size !== terminals.length ||
+      terminals.some(pin => !pin.id?.trim() || !pin.localNumber?.trim() || !Number.isFinite(pin.x) || !Number.isFinite(pin.y)) ||
+      groups.some(group => !Array.isArray(group) || group.length < 2) ||
+      new Set(groupedAnchors).size !== groupedAnchors.length || groupedAnchors.some(id => !anchors.has(id))) {
     throw new Error('Invalid terminal map: ' + part.id);
   }
-  if (!part.sources.length || part.sources.some(source => !source.url?.startsWith('https://') || !source.retrievedAt)) {
+  if (symbol.view !== 'schematic' || symbol.unit !== 'mm' || !symbol.id?.trim() ||
+      ![symbol.width, symbol.height].every(value => Number.isFinite(value) && value > 0)) {
+    throw new Error('Invalid schematic geometry: ' + part.id);
+  }
+  if (!part.sources.length || part.sources.some(source => {
+    const url = URL.canParse(source.url) && new URL(source.url);
+    return !url || url.protocol !== 'https:' || url.username || url.password ||
+      !source.publisher?.trim() || !source.title?.trim() || !/^\d{4}-\d{2}-\d{2}$/.test(source.retrievedAt);
+  })) {
     throw new Error('Missing manufacturer source evidence: ' + part.id);
+  }
+  const physicalRepresentations = part.physicalRepresentations ?? [];
+  if (new Set(physicalRepresentations.map(view => view.id)).size !== physicalRepresentations.length ||
+      physicalRepresentations.some(view => !view.id?.trim() || view.unit !== 'mm' ||
+        !Number.isInteger(view.sourceIndex) || !part.sources[view.sourceIndex] ||
+        ![view.width, view.height].every(value => Number.isFinite(value) && value > 0))) {
+    throw new Error('Invalid physical representation: ' + part.id);
+  }
+  for (const view of physicalRepresentations) {
+    if (view.view !== 'panel-front-envelope') continue;
+    const dimensions = part.specifications?.dimensions;
+    const documentedMeasurements = [
+      [view.width, dimensions?.width],
+      [view.height, dimensions?.height],
+      [view.railDepths?.['NS 35/7.5'], dimensions?.depthOnNS35_7_5],
+      [view.railDepths?.['NS 35/15'], dimensions?.depthOnNS35_15]
+    ];
+    if (!view.scope?.trim() || documentedMeasurements.some(([value, dimension]) =>
+      !Number.isFinite(value) || value <= 0 || dimension?.unit !== 'mm' || value !== dimension.value)) {
+      throw new Error('Panel envelope differs from documented dimensions: ' + part.id);
+    }
   }
   return {
     componentId: part.id,
@@ -37,12 +71,12 @@ const parts = engine.catalog().map(item => {
     function: part.name,
     aliases: part.aliases || [],
     terminals,
-    nodeGroups: symbol.internalConnections,
+    nodeGroups: groups,
     electricalFunctions: part.electricalFunctions || null,
     geometry: { id: symbol.id, view: symbol.view, unit: symbol.unit, width: symbol.width, height: symbol.height },
     specifications: part.specifications || null,
     physicalDimensions: part.specifications?.dimensions || null,
-    physicalRepresentations: part.physicalRepresentations || [],
+    physicalRepresentations,
     editableProperties: part.instanceProperties,
     sourceEvidence: part.sources,
     status: 'source-backed native part'
