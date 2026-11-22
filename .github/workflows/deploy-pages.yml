@@ -36,7 +36,7 @@ jobs:
         run: |
           site="$RUNNER_TEMP/adigun-pages"
           mkdir -p "$site/examples/real-projects" "$site/docs/reports" "$site/vendor"
-          cp index.html cad-engine.js cad-dxf.js service-worker.js CNAME .nojekyll "$site/"
+          cp index.html terminal-catalog.js cad-engine.js cad-dxf.js service-worker.js CNAME .nojekyll "$site/"
           cp vendor/dxf-parser-1.1.2.js vendor/dxf-writer-2.8.9.mjs vendor/*LICENSE.txt "$site/vendor/"
           cp examples/real-projects/library.json examples/real-projects/*.adigun.json "$site/examples/real-projects/"
           cp docs/reports/project-library-validation.json docs/reports/component-bank.json docs/reports/component-bank.csv "$site/docs/reports/"

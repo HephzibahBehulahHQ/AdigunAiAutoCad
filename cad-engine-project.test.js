@@ -207,7 +207,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     try { pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname); }
     catch { response.writeHead(400).end(); return; }
     const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
-    if (shellOutage && ['index.html', 'cad-engine.js'].includes(relative)) {
+    if (shellOutage && ['index.html', 'cad-engine.js', 'terminal-catalog.js'].includes(relative)) {
       outageRequests.add(relative);
       response.writeHead(503, { 'Cache-Control': 'no-store' }).end('Editor temporarily unavailable');
       return;
@@ -1331,7 +1331,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await offlineLibraryPage.locator('[data-example-project="star-delta-100-sheet"]').click();
       await offlineLibraryPage.locator('#projectTree [data-sheet="ref-006"]').click();
       await offlineLibraryPage.locator('#userDrawings [data-object="' + breakerId + '"]').waitFor();
-      assert.deepEqual([...outageRequests].sort(), ['cad-engine.js', 'index.html'], 'both cached shell resources were needed during the outage');
+      assert.deepEqual([...outageRequests].sort(), ['cad-engine.js', 'index.html', 'terminal-catalog.js'], 'the cached editor, engine and terminal catalog were needed during the outage');
     } finally {
       shellOutage = false;
     }
