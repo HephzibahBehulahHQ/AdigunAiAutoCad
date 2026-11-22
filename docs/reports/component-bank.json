@@ -1,9 +1,9 @@
 {
   "summary": {
-    "manufacturerParts": 40,
+    "manufacturerParts": 48,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 40,
-    "partsWithPhysicalDimensions": 26,
+    "partsWithTerminalMaps": 48,
+    "partsWithPhysicalDimensions": 34,
     "partsWithPhysicalRepresentations": 0,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
@@ -2875,6 +2875,1286 @@
           "publisher": "Phoenix Contact",
           "title": "PT 10 BU · Feed-through terminal block · Item 3212123",
           "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-10-bu-3212123",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211776",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211776",
+      "model": "PT 4 BK",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211776.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4 BK · Feed-through terminal block · Item 3211776",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-bk-3211776",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211777",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211777",
+      "model": "PT 4 RD",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Red (RAL 3001)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211777.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4 RD · Feed-through terminal block · Item 3211777",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-rd-3211777",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211758",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211758",
+      "model": "PT 4 OG",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211758.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4 OG · Feed-through terminal block · Item 3211758",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-og-3211758",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-1182209",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "1182209",
+      "model": "PT 4 BN",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Brown (RAL 8028)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.1182209.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Brown (RAL 8028)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4 BN · Feed-through terminal block · Item 1182209",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-bn-1182209",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211814",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211814",
+      "model": "PT 6 BK",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211814.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 57.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 43.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 51,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 57.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 43.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 51,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 6 BK · Feed-through terminal block · Item 3211814",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-6-bk-3211814",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211815",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211815",
+      "model": "PT 6 RD",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Red (RAL 3001)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211815.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 57.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 43.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 51,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 57.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 43.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 51,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 6 RD · Feed-through terminal block · Item 3211815",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-6-rd-3211815",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211820",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211820",
+      "model": "PT 6 OG",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211820.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 57.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 43.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 51,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 57.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 43.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 51,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 6 OG · Feed-through terminal block · Item 3211820",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-6-og-3211820",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-1322453",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "1322453",
+      "model": "PT 10 BK",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.1322453.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 57,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 10,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 67.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 50.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 58,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 67.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 50.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 58,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 10 BK · Feed-through terminal block · Item 1322453",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-10-bk-1322453",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
           "retrievedAt": "2026-11-22"

@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 40);
+  assert.equal(items.length, 48);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -254,6 +254,14 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3211819', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3212120', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3212123', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211776', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211777', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211758', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1182209', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211814', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211815', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211820', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1322453', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -304,7 +312,15 @@ test('larger PT terminals use their specific ratings and share the verified feed
   for (const [number, crossSection, width, current, voltage, minimum, maximum] of [
     ['3211757', 4, 6.2, 32, 800, 0.2, 6], ['3211760', 4, 6.2, 32, 800, 0.2, 6],
     ['3211813', 6, 8.2, 41, 1000, 0.5, 10], ['3211819', 6, 8.2, 41, 1000, 0.5, 10],
-    ['3212120', 10, 10.2, 57, 1000, 0.5, 16], ['3212123', 10, 10.2, 57, 1000, 0.5, 16]
+    ['3212120', 10, 10.2, 57, 1000, 0.5, 16], ['3212123', 10, 10.2, 57, 1000, 0.5, 16],
+    ['3211776', 4, 6.2, 32, 800, 0.2, 6],
+    ['3211777', 4, 6.2, 32, 800, 0.2, 6],
+    ['3211758', 4, 6.2, 32, 800, 0.2, 6],
+    ['1182209', 4, 6.2, 32, 800, 0.2, 6],
+    ['3211814', 6, 8.2, 41, 1000, 0.5, 10],
+    ['3211815', 6, 8.2, 41, 1000, 0.5, 10],
+    ['3211820', 6, 8.2, 41, 1000, 0.5, 10],
+    ['1322453', 10, 10.2, 57, 1000, 0.5, 16]
   ]) {
     const part = engine.component('phoenix-contact-' + number);
     const spec = part.specifications;
