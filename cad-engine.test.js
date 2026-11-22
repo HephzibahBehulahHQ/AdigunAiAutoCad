@@ -234,11 +234,12 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 23);
+  assert.equal(items.length, 24);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
     ['siemens-3rt2026-2kb40', 'contactor', 'KM'],
