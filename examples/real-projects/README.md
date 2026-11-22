@@ -26,7 +26,7 @@ This six-sheet reference extends brief 44. XT0 marks the external 24 V supply bo
 
 ## Relay changeover test bench
 
-This two-sheet opening for brief 40 uses a momentary push-button to energize a Phoenix Contact relay under test. An independent indicator supply lights H1 through the normally closed path at rest or H2 through the normally open path when the relay operates. W-T01 identifies the common, NC, and NO cores between sheets. The drawing leaves the supply hardware, protection, and test procedure unassigned.
+This three-sheet opening for brief 40 uses a momentary push-button to energize a Phoenix Contact relay under test. An independent indicator supply lights H1 through the normally closed path at rest or H2 through the normally open path when the relay operates. W-T01 identifies the common, NC, and NO cores between sheets. A2/003 adds coil voltage test access at XT3 and an H3 indicator across A1 and A2. The drawing leaves the supply hardware, protection, and test procedure unassigned.
 
 Open **Relay changeover test bench** from Project Explorer. Run `node scripts/author-relay-test-bench.js --write` to regenerate the editable native project.
 

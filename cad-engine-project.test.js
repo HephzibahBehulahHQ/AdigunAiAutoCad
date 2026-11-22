@@ -1483,10 +1483,10 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   const file = path.join(__dirname, 'examples/real-projects/relay-test-bench.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [2, 3, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [3, 5, 0, 0]);
   assert.deepEqual(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort(), [
     'H1:X1,K1:12', 'H1:X2,H2:X2,X4:1,X4:2', 'H2:X1,K1:14', 'K1:11,X3:1,X3:2',
-    'K1:A1,S1:14', 'K1:A2,X2:1,X2:2', 'S1:13,X1:1,X1:2'
+    'H3:X1,K1:A1,S1:14,X5:1,X5:2', 'H3:X2,K1:A2,X2:1,X2:2,X6:1,X6:2', 'S1:13,X1:1,X1:2'
   ].sort());
   const schedule = engine.cableScheduleCsv(project);
   for (const core of ['1', '2', '3']) {

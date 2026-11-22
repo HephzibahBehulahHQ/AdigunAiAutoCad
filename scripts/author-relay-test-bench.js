@@ -7,13 +7,15 @@ const engine = globalThis.AdigunCADEngine;
 const file = path.join(__dirname, '../examples/real-projects/relay-test-bench.adigun.json');
 const actuation = 'bench-coil-actuation';
 const indication = 'bench-contact-indication';
+const diagnostics = 'bench-coil-test-access';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.0',
-  description: 'Manual coil actuation and separately powered NC and NO indication for an industrial relay test fixture.',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.1',
+  description: 'Manual coil actuation, coil voltage test access, and separately powered NC and NO indication for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
     { id: actuation, number: 'A2/001', name: 'Manual relay coil actuation', projectSectionId: 'A2' },
-    { id: indication, number: 'A2/002', name: 'Dry changeover contact indication', projectSectionId: 'A2' }
+    { id: indication, number: 'A2/002', name: 'Dry changeover contact indication', projectSectionId: 'A2' },
+    { id: diagnostics, number: 'A2/003', name: 'XT3 relay coil voltage test access', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -82,6 +84,24 @@ for (const lamp of [ncLamp, noLamp]) {
 }
 wire(indication, 'indicator-return', 'Indicator supply 0 V', join, pin(lampReturn, '1'));
 
+const testPlus = terminal(diagnostics, 'X5', 370, 340, 'XT3', '1', 'Coil A1 voltage test point');
+const testReturn = terminal(diagnostics, 'X6', 850, 340, 'XT3', '2', 'Coil A2 voltage test point');
+const coilLamp = device(diagnostics, 'H3', 'schneider-electric-xb5avb3', 605, 340, { marking: 'Coil voltage indication' });
+for (const [id, potential, tap, boundary, destination, destinationPin, entryX, direction, lampPin] of [
+  ['coil-test-feed', 'Switched coil supply', { x: 610, y: 365 }, { x: 610, y: 455 }, testPlus, '1', 210, 'left', 'X1'],
+  ['coil-test-return', 'Coil supply 0 V', { x: 455, y: 240 }, { x: 455, y: 165 }, testReturn, '2', 1000, 'right', 'X2']
+]) {
+  const end = pin(destination, destinationPin);
+  const send = wire(actuation, id + '-send', potential, tap, boundary);
+  const receive = wire(diagnostics, id + '-receive', potential, { x: entryX, y: end.y }, end);
+  const inner = pin(destination, destinationPin === '1' ? '2' : '1');
+  wire(diagnostics, id + '-lamp', potential, inner, pin(coilLamp, lampPin));
+  project.crossSheetConnections.push({ id, name: 'XT3 ' + potential, endpoints: [
+    { sheetId: actuation, wireId: send.id, point: boundary, connector: { direction: 'right', targetSheetId: diagnostics, targetRef: destination.ref } },
+    { sheetId: diagnostics, wireId: receive.id, point: { x: receive.x1, y: receive.y1 }, connector: { direction, targetSheetId: actuation, targetRef: relay.ref } }
+  ] });
+}
+
 for (const [sheetId, title, lines] of [
   [actuation, 'RELAY TEST BENCH · COIL ACTUATION', [
     'S1 applies the XT1 coil supply to K1 A1. K1 A2 returns to XT1:2.',
@@ -90,6 +110,10 @@ for (const [sheetId, title, lines] of [
   [indication, 'RELAY TEST BENCH · CHANGEOVER INDICATION', [
     'With indicator power available, H1 shows the NC path at rest and H2 shows the NO path when K1 operates.',
     'XT2 is the independent indicator supply. The drawing leaves source hardware, protection and test procedure unassigned.'
+  ]],
+  [diagnostics, 'RELAY TEST BENCH · XT3 COIL VOLTAGE TEST ACCESS', [
+    'XT3 provides access to the commanded coil voltage between K1 A1 and A2.',
+    'H3 indicates voltage at the test terminals. H1 and H2 on A2/002 show the resulting contact paths.'
   ]]
 ]) {
   [title, ...lines].forEach((text, index) => project.objects.push({
