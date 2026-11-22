@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 179,
+    "manufacturerParts": 192,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 179,
-    "partsWithPhysicalDimensions": 165,
-    "partsWithPhysicalRepresentations": 158,
+    "partsWithTerminalMaps": 192,
+    "partsWithPhysicalDimensions": 178,
+    "partsWithPhysicalRepresentations": 171,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -24322,6 +24322,2554 @@
           "publisher": "Phoenix Contact",
           "title": "UT 2,5-QUATTRO BU · Multi-conductor feed-through terminal block · Item 3044555",
           "url": "https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-ut-25-quattro-bu-3044555",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044636",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044636",
+      "model": "UTTB 2,5",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044636.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044636.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 2,5 · Double-level terminal block · Item 3044636",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-25-3044636",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044649",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044649",
+      "model": "UTTB 2,5 BU",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044649.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044649.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 2,5 BU · Double-level terminal block · Item 3044649",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-25-bu-3044649",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044637",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044637",
+      "model": "UTTB 2,5 BK",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044637.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044637.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 2,5 BK · Double-level terminal block · Item 3044637",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-25-bk-3044637",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044639",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044639",
+      "model": "UTTB 2,5 OG",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044639.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044639.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 2,5 OG · Double-level terminal block · Item 3044639",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-25-og-3044639",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044814",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044814",
+      "model": "UTTB 4",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044814.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 30,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044814.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 4 · Double-level terminal block · Item 3044814",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-4-3044814",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044791",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044791",
+      "model": "UTTB 4 BU",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044791.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 30,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044791.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 4 BU · Double-level terminal block · Item 3044791",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-4-bu-3044791",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044815",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044815",
+      "model": "UTTB 4 OG",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044815.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 30,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044815.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 4 OG · Double-level terminal block · Item 3044815",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-4-og-3044815",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3072637",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3072637",
+      "model": "UTTB 4 BK",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3072637.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 30,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3072637.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 4 BK · Double-level terminal block · Item 3072637",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-4-bk-3072637",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3046786",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3046786",
+      "model": "UTTB 4 RD",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Red (RAL 3001)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3046786.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 30,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 69.9,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 65,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 72.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 69.9,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 65,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 72.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3046786.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 69.9,
+          "railDepths": {
+            "NS 35/7.5": 65,
+            "NS 35/15": 72.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UTTB 4 RD · Double-level terminal block · Item 3046786",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-uttb-4-rd-3046786",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3031270",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3031270",
+      "model": "STTB 2,5",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3031270.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 22,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.08,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.08,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Spring-cage"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 67.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 67.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3031270.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 67.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "STTB 2,5 · Double-level terminal block · Item 3031270",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-sttb-25-3031270",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3031283",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3031283",
+      "model": "STTB 2,5 BU",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3031283.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 22,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.08,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.08,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Spring-cage"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 67.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 67.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3031283.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 67.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "STTB 2,5 BU · Double-level terminal block · Item 3031283",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-sttb-25-bu-3031283",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3035373",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3035373",
+      "model": "STTB 2,5 OG",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3035373.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 22,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.08,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.08,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Spring-cage"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 67.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 67.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3035373.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 67.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "STTB 2,5 OG · Double-level terminal block · Item 3035373",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-sttb-25-og-3035373",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3031429",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3031429",
+      "model": "STTB 4",
+      "function": "Double-level terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1:1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "1:2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-left",
+          "localNumber": "2:1",
+          "name": "Level 2, connection 1",
+          "x": -35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-2-right",
+          "localNumber": "2:2",
+          "name": "Level 2, connection 2",
+          "x": 35,
+          "y": 15,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ],
+        [
+          "level-2-left",
+          "level-2-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3031429.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 30,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.08,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.08,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Spring-cage"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 83.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 83.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3031429.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 83.5,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "STTB 4 · Double-level terminal block · Item 3031429",
+          "url": "https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-sttb-4-3031429",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
           "retrievedAt": "2026-11-22"

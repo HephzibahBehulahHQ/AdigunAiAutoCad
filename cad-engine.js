@@ -571,12 +571,14 @@
       { color, crossSection, width, minimumConductor, maximumConductor, maximumFlexibleConductor,
         connectionType: screw ? 'screw' : 'spring-cage', connectionMethod: screw ? 'Screw' : 'Spring-cage', retrievedAt: '2026-11-22' });
   });
-  const screwAndSpringMultiConductorTerminals = terminalCatalog.screwAndSpringMultiConductorTerminals.map(
+  const screwAndSpringMultiConductorTerminals = terminalCatalog.screwAndSpringMultiConductorTerminals
+    .concat(terminalCatalog.screwAndSpringDoubleLevelTerminals).map(
     ([id, model, path, color, crossSection, voltage, current, width, height,
-      minimumConductor, maximumConductor, maximumFlexibleConductor, connectionsPerLevel, railDepths]) => {
-      const screw = model.startsWith('UT ');
-      return compactTerminal(id, model, 'https://www.phoenixcontact.com/en-us/products/multi-conductor-terminal-block-' + path + '-' + id,
-        1, voltage, current, height, railDepths, false,
+      minimumConductor, maximumConductor, maximumFlexibleConductor, connectionsPerLevel, railDepths, levels = 1]) => {
+      const screw = model.startsWith('UT ') || model.startsWith('UTTB ');
+      const type = levels === 1 ? 'multi-conductor' : 'multi-level';
+      return compactTerminal(id, model, 'https://www.phoenixcontact.com/en-us/products/' + type + '-terminal-block-' + path + '-' + id,
+        levels, voltage, current, height, railDepths, false,
         { color, crossSection, width, minimumConductor, maximumConductor, maximumFlexibleConductor, connectionsPerLevel,
           connectionType: screw ? 'screw' : 'spring-cage', connectionMethod: screw ? 'Screw' : 'Spring-cage', retrievedAt: '2026-11-22' });
     });
