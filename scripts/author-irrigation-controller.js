@@ -17,8 +17,9 @@ const power = 'irrigation-control-supply';
 const earth = 'irrigation-protective-earth';
 const alarm = 'irrigation-alarm-interface';
 const permissive = 'irrigation-source-permissive';
+const ioSchedule = 'irrigation-plc-io-schedule';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.8',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.9',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -32,7 +33,8 @@ const project = {
     { id: power, number: 'A2/008', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
     { id: earth, number: 'A2/009', name: 'Cabinet and starter enclosure PE terminals', projectSectionId: 'A2' },
     { id: alarm, number: 'A2/010', name: 'Isolated starter fault annunciator interface', projectSectionId: 'A2' },
-    { id: permissive, number: 'A2/011', name: 'Water source permissive at XT8', projectSectionId: 'A2' }
+    { id: permissive, number: 'A2/011', name: 'Water source permissive at XT8', projectSectionId: 'A2' },
+    { id: ioSchedule, number: 'A4/001', name: 'Wired PLC I/O schedule', projectSectionId: 'A4' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -216,6 +218,37 @@ for (const [sheetId, title, description] of [
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
   }));
+}
+
+const purposeByTerminal = {
+  'X10:7': 'Pressure switch feedback',
+  'X10:8': 'Local irrigation request',
+  'X10:9': 'Starter run contact',
+  'X10:10': 'Starter fault contact',
+  'X10:11': 'Water-available contact',
+  'X11:2': 'Header pressure voltage',
+  'X12:3': 'Pump demand relay',
+  'X12:4': 'Local run indication',
+  'X12:5': 'Fault annunciator relay'
+};
+const ioReport = engine.plcIoList(JSON.parse(engine.serializeProject(project)));
+if (!ioReport.valid) throw new Error(ioReport.errors.join(' '));
+const wiredChannels = ioReport.rows.filter(row => row.connectedPins.length);
+const table = [['PLC terminal', 'Channel', 'Signal purpose', 'Connected pins'], ...wiredChannels.map(row => {
+  const purpose = purposeByTerminal[row.terminal];
+  if (!purpose) throw new Error('Missing irrigation signal purpose for ' + row.terminal);
+  return [row.ref + ' ' + row.terminal, row.channel, purpose, row.connectedPins.join(' · ')];
+})];
+table.forEach((cells, row) => cells.forEach((text, column) => {
+  project.objects.push({ id: 'io-schedule-' + row + '-' + column, sheetId: ioSchedule, kind: 'text',
+    x: [105, 255, 360, 655][column], y: 200 + 34 * row, text });
+}));
+for (const [id, y, text] of [
+  ['title', 105, 'IRRIGATION CONTROLLER · WIRED PLC I/O SCHEDULE'],
+  ['scope', 150, 'A1 hardware channels and connected pin references from revision ' + project.revision + '.'],
+  ['source', 566, 'Regenerate this schedule from the native wiring model. PLC tag addresses, scaling and program logic remain unassigned.']
+]) {
+  project.objects.push({ id: 'io-schedule-' + id, sheetId: ioSchedule, kind: 'text', x: 105, y, text });
 }
 
 const serialized = engine.serializeProject(project);
