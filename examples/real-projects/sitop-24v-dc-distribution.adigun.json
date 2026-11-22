@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.4",
+  "revision": "3.5",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -172,7 +172,7 @@
     {
       "id": "branch-b-remote-indicator",
       "number": "A2/027",
-      "name": "XT15 remote Branch B loss indicator",
+      "name": "XT15 remote Branch B status indicators",
       "projectSectionId": "A2"
     }
   ],
@@ -4288,6 +4288,22 @@
       "sheetId": "branch-b-loss-alert"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-loss-alert-x38",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X38",
+      "x": 850,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT14",
+        "position": "4",
+        "marking": "Switched power to H4"
+      },
+      "sheetId": "branch-b-loss-alert"
+    },
+    {
       "id": "branch-b-loss-alert-common-send",
       "kind": "wire",
       "sheetId": "branch-b-monitor",
@@ -4368,12 +4384,52 @@
       }
     },
     {
+      "id": "branch-b-loss-alert-no-send",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 820,
+      "y": 420,
+      "x1": 820,
+      "y1": 420,
+      "x2": 940,
+      "y2": 420,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-monitor-x32",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "branch-b-loss-alert-no-receive",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 215,
+      "y": 290,
+      "x1": 215,
+      "y1": 290,
+      "x2": 815,
+      "y2": 290,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-loss-alert-x38",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
       "id": "branch-b-loss-alert-title",
       "kind": "text",
       "sheetId": "branch-b-loss-alert",
       "x": 110,
       "y": 108,
-      "text": "XT14 · BRANCH B LOSS INDICATOR SUPPLY",
+      "text": "XT14 · BRANCH B INDICATOR SUPPLY",
       "stroke": "#13263b"
     },
     {
@@ -4391,7 +4447,7 @@
       "sheetId": "branch-b-loss-alert",
       "x": 110,
       "y": 465,
-      "text": "XT14:3 sends switched power from K4 NC to the remote indicator on A2/027.",
+      "text": "XT14:3 and XT14:4 send K4 NC and NO power to the indicators on A2/027.",
       "stroke": "#13263b"
     },
     {
@@ -4450,6 +4506,36 @@
       "sheetId": "branch-b-remote-indicator"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-remote-indicator-h4",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H4",
+      "x": 620,
+      "y": 270,
+      "rotation": 0,
+      "properties": {
+        "marking": "Branch B relay energized"
+      },
+      "sheetId": "branch-b-remote-indicator"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-remote-indicator-x39",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X39",
+      "x": 370,
+      "y": 270,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT15",
+        "position": "3",
+        "marking": "Switched feed from K4 NO"
+      },
+      "sheetId": "branch-b-remote-indicator"
+    },
+    {
       "id": "branch-b-remote-indicator-lamp-feed",
       "kind": "wire",
       "sheetId": "branch-b-remote-indicator",
@@ -4474,6 +4560,30 @@
       }
     },
     {
+      "id": "branch-b-remote-indicator-present-lamp-feed",
+      "kind": "wire",
+      "sheetId": "branch-b-remote-indicator",
+      "x": 405,
+      "y": 270,
+      "x1": 405,
+      "y1": 270,
+      "x2": 593,
+      "y2": 270,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-remote-indicator-x39",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "branch-b-remote-indicator-h4",
+          "pinId": "x1"
+        }
+      }
+    },
+    {
       "id": "branch-b-remote-indicator-lamp-return",
       "kind": "wire",
       "sheetId": "branch-b-remote-indicator",
@@ -4481,7 +4591,7 @@
       "y": 370,
       "x1": 647,
       "y1": 370,
-      "x2": 815,
+      "x2": 745,
       "y2": 370,
       "potential": "Independent indicator 0 V",
       "stroke": "#38734b",
@@ -4490,7 +4600,57 @@
         "start": {
           "instanceId": "branch-b-remote-indicator-h3",
           "pinId": "x2"
-        },
+        }
+      }
+    },
+    {
+      "id": "branch-b-remote-indicator-present-lamp-return",
+      "kind": "wire",
+      "sheetId": "branch-b-remote-indicator",
+      "x": 647,
+      "y": 270,
+      "x1": 647,
+      "y1": 270,
+      "x2": 745,
+      "y2": 270,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-remote-indicator-h4",
+          "pinId": "x2"
+        }
+      }
+    },
+    {
+      "id": "branch-b-remote-indicator-shared-return-drop",
+      "kind": "wire",
+      "sheetId": "branch-b-remote-indicator",
+      "x": 745,
+      "y": 270,
+      "x1": 745,
+      "y1": 270,
+      "x2": 745,
+      "y2": 370,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-b-remote-indicator-shared-return-terminal",
+      "kind": "wire",
+      "sheetId": "branch-b-remote-indicator",
+      "x": 745,
+      "y": 370,
+      "x1": 745,
+      "y1": 370,
+      "x2": 815,
+      "y2": 370,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
         "end": {
           "instanceId": "branch-b-remote-indicator-x37",
           "pinId": "level-1-left"
@@ -4586,12 +4746,56 @@
       "coreId": "2"
     },
     {
+      "id": "branch-b-remote-indicator-core-3-send",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 885,
+      "y": 290,
+      "x1": 885,
+      "y1": 290,
+      "x2": 1020,
+      "y2": 290,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-loss-alert-x38",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-H3",
+      "coreId": "3"
+    },
+    {
+      "id": "branch-b-remote-indicator-core-3-receive",
+      "kind": "wire",
+      "sheetId": "branch-b-remote-indicator",
+      "x": 200,
+      "y": 270,
+      "x1": 200,
+      "y1": 270,
+      "x2": 335,
+      "y2": 270,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-remote-indicator-x39",
+          "pinId": "level-1-left"
+        }
+      },
+      "cableId": "W-H3",
+      "coreId": "3"
+    },
+    {
       "id": "branch-b-remote-indicator-title",
       "kind": "text",
       "sheetId": "branch-b-remote-indicator",
       "x": 110,
       "y": 108,
-      "text": "XT15 · REMOTE BRANCH B LOSS INDICATOR",
+      "text": "XT15 · REMOTE BRANCH B STATUS INDICATORS",
       "stroke": "#13263b"
     },
     {
@@ -4600,7 +4804,7 @@
       "sheetId": "branch-b-remote-indicator",
       "x": 110,
       "y": 220,
-      "text": "W-H3 carries K4 switched power and independent return from cabinet strip XT14.",
+      "text": "W-H3 carries K4 NC, independent return and K4 NO from cabinet strip XT14.",
       "stroke": "#13263b"
     },
     {
@@ -4609,7 +4813,7 @@
       "sheetId": "branch-b-remote-indicator",
       "x": 110,
       "y": 465,
-      "text": "H3 illuminates when K4 de-energizes and the independent source remains available.",
+      "text": "With independent power available, H3 indicates K4 de-energized and H4 indicates K4 energized.",
       "stroke": "#13263b"
     },
     {
@@ -6602,6 +6806,38 @@
       ]
     },
     {
+      "id": "branch-b-loss-alert-no",
+      "name": "Branch B loss alert · Normally open",
+      "endpoints": [
+        {
+          "sheetId": "branch-b-monitor",
+          "wireId": "branch-b-loss-alert-no-send",
+          "point": {
+            "x": 940,
+            "y": 420
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-loss-alert",
+            "targetRef": "X38"
+          }
+        },
+        {
+          "sheetId": "branch-b-loss-alert",
+          "wireId": "branch-b-loss-alert-no-receive",
+          "point": {
+            "x": 215,
+            "y": 290
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b-monitor",
+            "targetRef": "X32"
+          }
+        }
+      ]
+    },
+    {
       "id": "branch-b-remote-indicator-core-1",
       "name": "W-H3:1 · K4 Normally closed",
       "endpoints": [
@@ -6661,6 +6897,38 @@
             "direction": "right",
             "targetSheetId": "branch-b-loss-alert",
             "targetRef": "X34"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-b-remote-indicator-core-3",
+      "name": "W-H3:3 · K4 Normally open",
+      "endpoints": [
+        {
+          "sheetId": "branch-b-loss-alert",
+          "wireId": "branch-b-remote-indicator-core-3-send",
+          "point": {
+            "x": 1020,
+            "y": 290
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-remote-indicator",
+            "targetRef": "X39"
+          }
+        },
+        {
+          "sheetId": "branch-b-remote-indicator",
+          "wireId": "branch-b-remote-indicator-core-3-receive",
+          "point": {
+            "x": 200,
+            "y": 270
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b-loss-alert",
+            "targetRef": "X38"
           }
         }
       ]
