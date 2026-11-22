@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.8",
+  "revision": "1.9",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -70,6 +70,12 @@
       "number": "A2/011",
       "name": "Water source permissive at XT8",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-plc-io-schedule",
+      "number": "A4/001",
+      "name": "Wired PLC I/O schedule",
+      "projectSectionId": "A4"
     }
   ],
   "objects": [
@@ -2173,6 +2179,350 @@
       "x": 105,
       "y": 585,
       "text": "W-06 serves the external contact that closes when water is available. DI a.4 is a PLC input. Sensor selection and PLC permissive logic remain unassigned."
+    },
+    {
+      "id": "io-schedule-0-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 200,
+      "text": "PLC terminal"
+    },
+    {
+      "id": "io-schedule-0-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 200,
+      "text": "Channel"
+    },
+    {
+      "id": "io-schedule-0-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 200,
+      "text": "Signal purpose"
+    },
+    {
+      "id": "io-schedule-0-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 200,
+      "text": "Connected pins"
+    },
+    {
+      "id": "io-schedule-1-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 234,
+      "text": "A1 X10:7"
+    },
+    {
+      "id": "io-schedule-1-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 234,
+      "text": "DI a.0"
+    },
+    {
+      "id": "io-schedule-1-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 234,
+      "text": "Pressure switch feedback"
+    },
+    {
+      "id": "io-schedule-1-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 234,
+      "text": "A2/002 B1:4"
+    },
+    {
+      "id": "io-schedule-2-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 268,
+      "text": "A1 X10:8"
+    },
+    {
+      "id": "io-schedule-2-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 268,
+      "text": "DI a.1"
+    },
+    {
+      "id": "io-schedule-2-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 268,
+      "text": "Local irrigation request"
+    },
+    {
+      "id": "io-schedule-2-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 268,
+      "text": "A2/004 S1:14"
+    },
+    {
+      "id": "io-schedule-3-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 302,
+      "text": "A1 X10:9"
+    },
+    {
+      "id": "io-schedule-3-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 302,
+      "text": "DI a.2"
+    },
+    {
+      "id": "io-schedule-3-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 302,
+      "text": "Starter run contact"
+    },
+    {
+      "id": "io-schedule-3-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 302,
+      "text": "A2/005 X6:1 · A2/005 X6:2"
+    },
+    {
+      "id": "io-schedule-4-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 336,
+      "text": "A1 X10:10"
+    },
+    {
+      "id": "io-schedule-4-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 336,
+      "text": "DI a.3"
+    },
+    {
+      "id": "io-schedule-4-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 336,
+      "text": "Starter fault contact"
+    },
+    {
+      "id": "io-schedule-4-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 336,
+      "text": "A2/007 X8:1 · A2/007 X8:2"
+    },
+    {
+      "id": "io-schedule-5-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 370,
+      "text": "A1 X10:11"
+    },
+    {
+      "id": "io-schedule-5-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 370,
+      "text": "DI a.4"
+    },
+    {
+      "id": "io-schedule-5-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 370,
+      "text": "Water-available contact"
+    },
+    {
+      "id": "io-schedule-5-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 370,
+      "text": "A2/011 X19:1 · A2/011 X19:2"
+    },
+    {
+      "id": "io-schedule-6-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 404,
+      "text": "A1 X11:2"
+    },
+    {
+      "id": "io-schedule-6-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 404,
+      "text": "AI 0"
+    },
+    {
+      "id": "io-schedule-6-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 404,
+      "text": "Header pressure voltage"
+    },
+    {
+      "id": "io-schedule-6-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 404,
+      "text": "A2/002 B1:2"
+    },
+    {
+      "id": "io-schedule-7-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 438,
+      "text": "A1 X12:3"
+    },
+    {
+      "id": "io-schedule-7-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 438,
+      "text": "DQ a.0"
+    },
+    {
+      "id": "io-schedule-7-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 438,
+      "text": "Pump demand relay"
+    },
+    {
+      "id": "io-schedule-7-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 438,
+      "text": "A2/003 K1:A1"
+    },
+    {
+      "id": "io-schedule-8-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 472,
+      "text": "A1 X12:4"
+    },
+    {
+      "id": "io-schedule-8-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 472,
+      "text": "DQ a.1"
+    },
+    {
+      "id": "io-schedule-8-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 472,
+      "text": "Local run indication"
+    },
+    {
+      "id": "io-schedule-8-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 472,
+      "text": "A2/006 H1:X1"
+    },
+    {
+      "id": "io-schedule-9-0",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 506,
+      "text": "A1 X12:5"
+    },
+    {
+      "id": "io-schedule-9-1",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 255,
+      "y": 506,
+      "text": "DQ a.2"
+    },
+    {
+      "id": "io-schedule-9-2",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 360,
+      "y": 506,
+      "text": "Fault annunciator relay"
+    },
+    {
+      "id": "io-schedule-9-3",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 655,
+      "y": 506,
+      "text": "A2/010 K2:A1"
+    },
+    {
+      "id": "io-schedule-title",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 105,
+      "text": "IRRIGATION CONTROLLER · WIRED PLC I/O SCHEDULE"
+    },
+    {
+      "id": "io-schedule-scope",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 150,
+      "text": "A1 hardware channels and connected pin references from revision 1.9."
+    },
+    {
+      "id": "io-schedule-source",
+      "sheetId": "irrigation-plc-io-schedule",
+      "kind": "text",
+      "x": 105,
+      "y": 566,
+      "text": "Regenerate this schedule from the native wiring model. PLC tag addresses, scaling and program logic remain unassigned."
     }
   ],
   "crossSheetConnections": [

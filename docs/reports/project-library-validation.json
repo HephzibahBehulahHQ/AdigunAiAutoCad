@@ -1394,7 +1394,7 @@
       "briefId": "46",
       "role": "standalone-example",
       "path": "examples/real-projects/irrigation-controller.adigun.json",
-      "revision": "1.8",
+      "revision": "1.9",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1411,9 +1411,11 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 89,
+        "additionalAuthoredSheetsRequired": 88,
         "additionalConnectedSheetsRequired": 59,
-        "sheetIdsWithoutElectricalConnectivity": []
+        "sheetIdsWithoutElectricalConnectivity": [
+          "irrigation-plc-io-schedule"
+        ]
       },
       "wirePreview": {
         "sheetId": "irrigation-plc",
@@ -1429,13 +1431,13 @@
         "plcIo": "125e9291e3b46a0970cfc530b4921a81dac8bae5448a3d7021dc3f6bc9d6fd8e",
         "cables": "f08c57f8a30e8fcff33c5a8807b694deb7346b2d5f46b42aaa763ce90c48c0e7",
         "devices": "6dae9cd6cef8f157eb572cc12152f4ee58a4e535177290155d622a77c4a98317",
-        "sheets": "2e8b329eaebb297a32f3582fc49360d11a15db64aa5d4384232605a3059e4d23"
+        "sheets": "41589953d0af8beedaae9f734587664bf768fe7c153f17b1fc05905a858f4ca8"
       },
       "metrics": {
-        "sheetCount": 11,
-        "authoredSheetCount": 11,
+        "sheetCount": 12,
+        "authoredSheetCount": 12,
         "connectedSheetCount": 11,
-        "contentObjectCount": 107,
+        "contentObjectCount": 150,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
         "componentCount": 26,
