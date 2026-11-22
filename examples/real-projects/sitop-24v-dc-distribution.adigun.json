@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.7",
+  "revision": "3.8",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -185,6 +185,12 @@
       "id": "b3-field-terminations",
       "number": "A2/029",
       "name": "XT17 B3 field cable terminations",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "b3-switching-boundary",
+      "number": "A2/030",
+      "name": "XT18 B3 switching output boundary",
       "projectSectionId": "A2"
     }
   ],
@@ -3837,6 +3843,22 @@
       "sheetId": "b3-field-terminations"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-field-terminations-x45",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X45",
+      "x": 560,
+      "y": 480,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT17",
+        "position": "4",
+        "marking": "B3 OUT1 to XT18"
+      },
+      "sheetId": "b3-field-terminations"
+    },
+    {
       "id": "b3-field-terminations-title",
       "kind": "text",
       "sheetId": "b3-field-terminations",
@@ -3859,8 +3881,8 @@
       "kind": "text",
       "sheetId": "b3-field-terminations",
       "x": 110,
-      "y": 500,
-      "text": "W-B3 carries L+, OUT2 and L− to B3. OUT1 is unused.",
+      "y": 545,
+      "text": "W-B3 carries L+, OUT2, L− and OUT1 to B3. OUT1 terminates at XT18 on A2/030.",
       "stroke": "#13263b"
     },
     {
@@ -3868,7 +3890,7 @@
       "kind": "text",
       "sheetId": "b3-field-terminations",
       "x": 110,
-      "y": 545,
+      "y": 580,
       "text": "The schedule identifies the connected cores. Cable construction and routing remain unassigned.",
       "stroke": "#13263b"
     },
@@ -4134,6 +4156,50 @@
       "coreId": "3"
     },
     {
+      "id": "ai1-pressure-sensor-switch-cable-send",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 595,
+      "y": 480,
+      "x1": 595,
+      "y1": 480,
+      "x2": 890,
+      "y2": 480,
+      "potential": "B3 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-field-terminations-x45",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-B3",
+      "coreId": "4"
+    },
+    {
+      "id": "ai1-pressure-sensor-switch",
+      "kind": "wire",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 815,
+      "y": 350,
+      "x1": 815,
+      "y1": 350,
+      "x2": 575,
+      "y2": 350,
+      "potential": "B3 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "ai1-pressure-sensor-b3",
+          "pinId": "pin-4-out1"
+        }
+      },
+      "cableId": "W-B3",
+      "coreId": "4"
+    },
+    {
       "id": "ai1-pressure-sensor-title",
       "kind": "text",
       "sheetId": "ai1-pressure-sensor",
@@ -4166,7 +4232,149 @@
       "sheetId": "ai1-pressure-sensor",
       "x": 110,
       "y": 490,
-      "text": "W-B3 terminates at XT17 on A2/029. The drawing assumes 0–10 V output mode. OUT1 and scaling are unassigned.",
+      "text": "W-B3 terminates at XT17 on A2/029. OUT2 assumes voltage mode. OUT1 reaches XT18 without an assigned load.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-switching-boundary-x46",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X46",
+      "x": 550,
+      "y": 280,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT18",
+        "position": "1",
+        "marking": "B3 OUT1 boundary"
+      },
+      "sheetId": "b3-switching-boundary"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-switching-boundary-x47",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X47",
+      "x": 550,
+      "y": 385,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT18",
+        "position": "2",
+        "marking": "B3 0 V reference"
+      },
+      "sheetId": "b3-switching-boundary"
+    },
+    {
+      "id": "b3-switching-boundary-switch-send",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 525,
+      "y": 480,
+      "x1": 525,
+      "y1": 480,
+      "x2": 215,
+      "y2": 480,
+      "potential": "B3 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-field-terminations-x45",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-boundary-switch-receive",
+      "kind": "wire",
+      "sheetId": "b3-switching-boundary",
+      "x": 215,
+      "y": 280,
+      "x1": 215,
+      "y1": 280,
+      "x2": 515,
+      "y2": 280,
+      "potential": "B3 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-switching-boundary-x46",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-boundary-return-send",
+      "kind": "wire",
+      "sheetId": "b3-field-terminations",
+      "x": 355,
+      "y": 420,
+      "x1": 355,
+      "y1": 420,
+      "x2": 355,
+      "y2": 645,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b3-switching-boundary-return-receive",
+      "kind": "wire",
+      "sheetId": "b3-switching-boundary",
+      "x": 215,
+      "y": 385,
+      "x1": 215,
+      "y1": 385,
+      "x2": 515,
+      "y2": 385,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-switching-boundary-x47",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-boundary-title",
+      "kind": "text",
+      "sheetId": "b3-switching-boundary",
+      "x": 110,
+      "y": 108,
+      "text": "XT18 · B3 SWITCHING OUTPUT BOUNDARY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-switching-boundary-signal",
+      "kind": "text",
+      "sheetId": "b3-switching-boundary",
+      "x": 110,
+      "y": 205,
+      "text": "XT18:1 brings OUT1 from W-B3 core 4 to an available cabinet terminal.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-switching-boundary-reference",
+      "kind": "text",
+      "sheetId": "b3-switching-boundary",
+      "x": 110,
+      "y": 465,
+      "text": "XT18:2 provides the associated 0 V reference. AI1 stays on the separate OUT2 net.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-switching-boundary-scope",
+      "kind": "text",
+      "sheetId": "b3-switching-boundary",
+      "x": 110,
+      "y": 510,
+      "text": "The receiving device, switching parameters and sensing threshold remain unassigned.",
       "stroke": "#13263b"
     },
     {
@@ -7202,6 +7410,102 @@
           "point": {
             "x": 200,
             "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X44"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-switch-cable",
+      "name": "W-B3:4 · B3 OUT1 to XT18",
+      "endpoints": [
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "ai1-pressure-sensor-switch-cable-send",
+          "point": {
+            "x": 890,
+            "y": 480
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ai1-pressure-sensor",
+            "targetRef": "B3"
+          }
+        },
+        {
+          "sheetId": "ai1-pressure-sensor",
+          "wireId": "ai1-pressure-sensor-switch",
+          "point": {
+            "x": 815,
+            "y": 350
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X45"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b3-switching-boundary-switch",
+      "name": "B3 OUT1 to XT18:1",
+      "endpoints": [
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "b3-switching-boundary-switch-send",
+          "point": {
+            "x": 215,
+            "y": 480
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "b3-switching-boundary",
+            "targetRef": "X46"
+          }
+        },
+        {
+          "sheetId": "b3-switching-boundary",
+          "wireId": "b3-switching-boundary-switch-receive",
+          "point": {
+            "x": 215,
+            "y": 280
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "b3-field-terminations",
+            "targetRef": "X45"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b3-switching-boundary-reference",
+      "name": "B3 return to XT18:2",
+      "endpoints": [
+        {
+          "sheetId": "b3-field-terminations",
+          "wireId": "b3-switching-boundary-return-send",
+          "point": {
+            "x": 355,
+            "y": 645
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-switching-boundary",
+            "targetRef": "X47"
+          }
+        },
+        {
+          "sheetId": "b3-switching-boundary",
+          "wireId": "b3-switching-boundary-return-receive",
+          "point": {
+            "x": 215,
+            "y": 385
           },
           "connector": {
             "direction": "left",
