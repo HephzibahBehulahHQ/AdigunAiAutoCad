@@ -17,11 +17,12 @@ const branchBLossAlert = { id: 'branch-b-loss-alert', number: 'A2/026', name: 'B
 const fieldSupplyPotential = 'External annunciator +24 V';
 const fieldRequestPotential = 'Annunciator switched +24 V';
 const remoteLossIndicator = { id: 'branch-b-remote-indicator', number: 'A2/027', name: 'XT15 remote Branch B status indicators', projectSectionId: 'A2' };
-const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator];
+const indicatorSupplyTest = { id: 'indicator-supply-test', number: 'A2/028', name: 'XT16 independent indicator supply test access', projectSectionId: 'A2' };
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.5';
+project.revision = '3.6';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -341,6 +342,30 @@ author(remoteLossIndicator, ({ device, pin, wire, link, notes }) => {
     ['feed', 220, 'W-H3 carries K4 NC, independent return and K4 NO from cabinet strip XT14.'],
     ['function', 465, 'With independent power available, H3 indicates K4 de-energized and H4 indicates K4 energized.'],
     ['scope', 510, 'Cable construction, routing, and conductor sizing are unassigned.']
+  ]);
+});
+
+author(indicatorSupplyTest, ({ device, pin, wire, link, notes }) => {
+  const lamp = device('H5', 'schneider-electric-xb5avb3', 615, 330, { marking: 'Independent supply present' });
+  for (const [key, sourceRef, ref, position, marking, potential, lampPin, boundaryX, direction] of [
+    ['feed', 'X33', 'X40', '1', 'Independent +24 V test point', 'K4 Dry contact common', 'X1', 200, 'left'],
+    ['return', 'X34', 'X41', '2', 'Independent 0 V test point', indicatorReturn, 'X2', 1010, 'right']
+  ]) {
+    const input = direction === 'left';
+    const cabinet = project.objects.find(object => object.id === branchBLossAlert.id + '-' + sourceRef.toLowerCase());
+    const testPoint = device(ref, 'phoenix-contact-3209510', input ? 365 : 850, 330,
+      { terminalStrip: 'XT16', position, marking });
+    const source = pin(cabinet, '1'), entry = pin(testPoint, input ? '1' : '2');
+    const send = wire(key + '-send', branchBLossAlert.id, source, { x: 215, y: source.y }, potential);
+    const receive = wire(key + '-receive', indicatorSupplyTest.id, { x: boundaryX, y: entry.y }, entry, potential);
+    link(key, 'XT16 independent supply ' + key, send, receive, sourceRef, ref, ['left', direction]);
+    wire(key + '-lamp', indicatorSupplyTest.id, pin(testPoint, input ? '2' : '1'), pin(lamp, lampPin), potential);
+  }
+  notes([
+    ['title', 108, 'XT16 · INDEPENDENT INDICATOR SUPPLY TEST ACCESS'],
+    ['purpose', 210, 'H5 monitors the supply feeding K4 common ahead of the changeover contacts.'],
+    ['test', 460, 'XT16:1 and XT16:2 provide local test access to the independent 24 V supply.'],
+    ['scope', 500, 'H5 shows local supply indication. Test equipment, source protection and cable sizing remain unassigned.']
   ]);
 });
 

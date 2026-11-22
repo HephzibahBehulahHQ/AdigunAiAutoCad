@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.5",
+  "revision": "3.6",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -173,6 +173,12 @@
       "id": "branch-b-remote-indicator",
       "number": "A2/027",
       "name": "XT15 remote Branch B status indicators",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "indicator-supply-test",
+      "number": "A2/028",
+      "name": "XT16 independent indicator supply test access",
       "projectSectionId": "A2"
     }
   ],
@@ -4824,6 +4830,216 @@
       "y": 510,
       "text": "Cable construction, routing, and conductor sizing are unassigned.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "indicator-supply-test-h5",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H5",
+      "x": 615,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "marking": "Independent supply present"
+      },
+      "sheetId": "indicator-supply-test"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "indicator-supply-test-x40",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X40",
+      "x": 365,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT16",
+        "position": "1",
+        "marking": "Independent +24 V test point"
+      },
+      "sheetId": "indicator-supply-test"
+    },
+    {
+      "id": "indicator-supply-test-feed-send",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 395,
+      "y": 245,
+      "x1": 395,
+      "y1": 245,
+      "x2": 215,
+      "y2": 245,
+      "potential": "K4 Dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-loss-alert-x33",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-test-feed-receive",
+      "kind": "wire",
+      "sheetId": "indicator-supply-test",
+      "x": 200,
+      "y": 330,
+      "x1": 200,
+      "y1": 330,
+      "x2": 330,
+      "y2": 330,
+      "potential": "K4 Dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "indicator-supply-test-x40",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-test-feed-lamp",
+      "kind": "wire",
+      "sheetId": "indicator-supply-test",
+      "x": 400,
+      "y": 330,
+      "x1": 400,
+      "y1": 330,
+      "x2": 588,
+      "y2": 330,
+      "potential": "K4 Dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "indicator-supply-test-x40",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "indicator-supply-test-h5",
+          "pinId": "x1"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "indicator-supply-test-x41",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X41",
+      "x": 850,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT16",
+        "position": "2",
+        "marking": "Independent 0 V test point"
+      },
+      "sheetId": "indicator-supply-test"
+    },
+    {
+      "id": "indicator-supply-test-return-send",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 815,
+      "y": 425,
+      "x1": 815,
+      "y1": 425,
+      "x2": 215,
+      "y2": 425,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-loss-alert-x34",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-test-return-receive",
+      "kind": "wire",
+      "sheetId": "indicator-supply-test",
+      "x": 1010,
+      "y": 330,
+      "x1": 1010,
+      "y1": 330,
+      "x2": 885,
+      "y2": 330,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "indicator-supply-test-x41",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-test-return-lamp",
+      "kind": "wire",
+      "sheetId": "indicator-supply-test",
+      "x": 815,
+      "y": 330,
+      "x1": 815,
+      "y1": 330,
+      "x2": 642,
+      "y2": 330,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "indicator-supply-test-x41",
+          "pinId": "level-1-left"
+        },
+        "end": {
+          "instanceId": "indicator-supply-test-h5",
+          "pinId": "x2"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-test-title",
+      "kind": "text",
+      "sheetId": "indicator-supply-test",
+      "x": 110,
+      "y": 108,
+      "text": "XT16 · INDEPENDENT INDICATOR SUPPLY TEST ACCESS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "indicator-supply-test-purpose",
+      "kind": "text",
+      "sheetId": "indicator-supply-test",
+      "x": 110,
+      "y": 210,
+      "text": "H5 monitors the supply feeding K4 common ahead of the changeover contacts.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "indicator-supply-test-test",
+      "kind": "text",
+      "sheetId": "indicator-supply-test",
+      "x": 110,
+      "y": 460,
+      "text": "XT16:1 and XT16:2 provide local test access to the independent 24 V supply.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "indicator-supply-test-scope",
+      "kind": "text",
+      "sheetId": "indicator-supply-test",
+      "x": 110,
+      "y": 500,
+      "text": "H5 shows local supply indication. Test equipment, source protection and cable sizing remain unassigned.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -6929,6 +7145,70 @@
             "direction": "left",
             "targetSheetId": "branch-b-loss-alert",
             "targetRef": "X38"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indicator-supply-test-feed",
+      "name": "XT16 independent supply feed",
+      "endpoints": [
+        {
+          "sheetId": "branch-b-loss-alert",
+          "wireId": "indicator-supply-test-feed-send",
+          "point": {
+            "x": 215,
+            "y": 245
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "indicator-supply-test",
+            "targetRef": "X40"
+          }
+        },
+        {
+          "sheetId": "indicator-supply-test",
+          "wireId": "indicator-supply-test-feed-receive",
+          "point": {
+            "x": 200,
+            "y": 330
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b-loss-alert",
+            "targetRef": "X33"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indicator-supply-test-return",
+      "name": "XT16 independent supply return",
+      "endpoints": [
+        {
+          "sheetId": "branch-b-loss-alert",
+          "wireId": "indicator-supply-test-return-send",
+          "point": {
+            "x": 215,
+            "y": 425
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "indicator-supply-test",
+            "targetRef": "X41"
+          }
+        },
+        {
+          "sheetId": "indicator-supply-test",
+          "wireId": "indicator-supply-test-return-receive",
+          "point": {
+            "x": 1010,
+            "y": 330
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-loss-alert",
+            "targetRef": "X34"
           }
         }
       ]
