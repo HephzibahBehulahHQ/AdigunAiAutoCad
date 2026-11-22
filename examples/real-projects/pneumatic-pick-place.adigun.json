@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.5",
+  "revision": "1.6",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -63,6 +63,18 @@
       "id": "pick-place-control-supply",
       "number": "A2/010",
       "name": "PS1 control supply and AC inlet",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-cabinet-protective-earth",
+      "number": "A2/011",
+      "name": "Cabinet protective-earth distribution",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-field-protective-earth",
+      "number": "A2/012",
+      "name": "Remote valve and slide frame PE terminals",
       "projectSectionId": "A2"
     }
   ],
@@ -2250,6 +2262,330 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x20",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X20",
+      "x": 380,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT10",
+        "position": "1",
+        "marking": "PE from XT9",
+        "comment": ""
+      },
+      "sheetId": "pick-place-cabinet-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x21",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X21",
+      "x": 785,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT10",
+        "position": "2",
+        "marking": "Controller enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "pick-place-cabinet-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x22",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X22",
+      "x": 785,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT10",
+        "position": "3",
+        "marking": "PE toward remote valve assembly",
+        "comment": ""
+      },
+      "sheetId": "pick-place-cabinet-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x23",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X23",
+      "x": 380,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT11",
+        "position": "1",
+        "marking": "PE from cabinet XT10",
+        "comment": ""
+      },
+      "sheetId": "pick-place-field-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x24",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X24",
+      "x": 785,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT11",
+        "position": "2",
+        "marking": "Valve enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "pick-place-field-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x25",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X25",
+      "x": 785,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT11",
+        "position": "3",
+        "marking": "Slide frame PE boundary",
+        "comment": ""
+      },
+      "sheetId": "pick-place-field-protective-earth"
+    },
+    {
+      "id": "cabinet-earth-inlet-cabinet",
+      "sheetId": "pick-place-control-supply",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 265,
+      "y": 460,
+      "x1": 265,
+      "y1": 460,
+      "x2": 215,
+      "y2": 460,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x19",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "cabinet-earth-inlet-field",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 345,
+      "y": 300,
+      "x1": 345,
+      "y1": 300,
+      "x2": 215,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x20",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "remote-earth-feed-cabinet",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 820,
+      "y": 425,
+      "x1": 820,
+      "y1": 425,
+      "x2": 960,
+      "y2": 425,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x22",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "remote-earth-feed-field",
+      "sheetId": "pick-place-field-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 345,
+      "y": 300,
+      "x1": 345,
+      "y1": 300,
+      "x2": 215,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x23",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pick-place-cabinet-protective-earth-trunk",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 415,
+      "y": 300,
+      "x1": 415,
+      "y1": 300,
+      "x2": 575,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x20",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pick-place-cabinet-protective-earth-upper",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 750,
+      "y2": 300,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x21",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "pick-place-cabinet-protective-earth-lower",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 750,
+      "y2": 425,
+      "bends": [
+        {
+          "x": 575,
+          "y": 425
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x22",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "pick-place-field-protective-earth-trunk",
+      "sheetId": "pick-place-field-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 415,
+      "y": 300,
+      "x1": 415,
+      "y1": 300,
+      "x2": 575,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x23",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pick-place-field-protective-earth-upper",
+      "sheetId": "pick-place-field-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 750,
+      "y2": 300,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x24",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "pick-place-field-protective-earth-lower",
+      "sheetId": "pick-place-field-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 750,
+      "y2": 425,
+      "bends": [
+        {
+          "x": 575,
+          "y": 425
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x25",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
       "id": "pick-place-plc-note-0",
       "sheetId": "pick-place-plc",
       "kind": "text",
@@ -2407,7 +2743,39 @@
       "kind": "text",
       "x": 105,
       "y": 588,
-      "text": "XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned."
+      "text": "XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned."
+    },
+    {
+      "id": "pick-place-cabinet-protective-earth-note-0",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "CABINET PROTECTIVE EARTH · XT10"
+    },
+    {
+      "id": "pick-place-cabinet-protective-earth-note-1",
+      "sheetId": "pick-place-cabinet-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "XT10 branches incoming PE to the controller enclosure terminal and the remote assembly. Physical bonds remain unassigned."
+    },
+    {
+      "id": "pick-place-field-protective-earth-note-0",
+      "sheetId": "pick-place-field-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "REMOTE VALVE AND SLIDE PROTECTIVE EARTH · XT11"
+    },
+    {
+      "id": "pick-place-field-protective-earth-note-1",
+      "sheetId": "pick-place-field-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -3175,6 +3543,70 @@
             "direction": "right",
             "targetSheetId": "pick-place-plc",
             "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cabinet-earth-inlet",
+      "name": "PE",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-control-supply",
+          "wireId": "cabinet-earth-inlet-cabinet",
+          "point": {
+            "x": 215,
+            "y": 460
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-cabinet-protective-earth",
+            "targetRef": "X20"
+          }
+        },
+        {
+          "sheetId": "pick-place-cabinet-protective-earth",
+          "wireId": "cabinet-earth-inlet-field",
+          "point": {
+            "x": 215,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-control-supply",
+            "targetRef": "X19"
+          }
+        }
+      ]
+    },
+    {
+      "id": "remote-earth-feed",
+      "name": "PE",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-cabinet-protective-earth",
+          "wireId": "remote-earth-feed-cabinet",
+          "point": {
+            "x": 960,
+            "y": 425
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-field-protective-earth",
+            "targetRef": "X23"
+          }
+        },
+        {
+          "sheetId": "pick-place-field-protective-earth",
+          "wireId": "remote-earth-feed-field",
+          "point": {
+            "x": 215,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-cabinet-protective-earth",
+            "targetRef": "X22"
           }
         }
       ]

@@ -16,10 +16,12 @@ const extend = 'pick-place-slide-extend';
 const retract = 'pick-place-slide-retract';
 const interlock = 'pick-place-slide-interlock';
 const power = 'pick-place-control-supply';
+const cabinetEarth = 'pick-place-cabinet-protective-earth';
+const fieldEarth = 'pick-place-field-protective-earth';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.5',
+  revision: '1.6',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -32,7 +34,9 @@ const project = {
     { id: extend, number: 'A2/007', name: 'Slide extend pilot interface', projectSectionId: 'A2' },
     { id: retract, number: 'A2/008', name: 'Slide retract pilot interface', projectSectionId: 'A2' },
     { id: interlock, number: 'A2/009', name: 'Opposite-command slide inhibit', projectSectionId: 'A2' },
-    { id: power, number: 'A2/010', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' }
+    { id: power, number: 'A2/010', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
+    { id: cabinetEarth, number: 'A2/011', name: 'Cabinet protective-earth distribution', projectSectionId: 'A2' },
+    { id: fieldEarth, number: 'A2/012', name: 'Remote valve and slide frame PE terminals', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -205,6 +209,32 @@ for (const [id, polarity, potential, boundary, startY, edgeY] of [
     fieldPort(power, psu.ref, output, 960, output.y, 'right'));
 }
 
+const incomingEarth = project.objects.find(object => object.ref === 'X19');
+const [earthEntry, cabinetBond, fieldExit, fieldEntry, valveBond, slideBond] = [
+  [cabinetEarth, 'X20', 380, 300, 'XT10', '1', 'PE from XT9'],
+  [cabinetEarth, 'X21', 785, 300, 'XT10', '2', 'Controller enclosure PE boundary'],
+  [cabinetEarth, 'X22', 785, 425, 'XT10', '3', 'PE toward remote valve assembly'],
+  [fieldEarth, 'X23', 380, 300, 'XT11', '1', 'PE from cabinet XT10'],
+  [fieldEarth, 'X24', 785, 300, 'XT11', '2', 'Valve enclosure PE boundary'],
+  [fieldEarth, 'X25', 785, 425, 'XT11', '3', 'Slide frame PE boundary']
+].map(([sheet, ref, x, y, terminalStrip, position, marking]) =>
+  device(sheet, ref, 'phoenix-contact-3209536', x, y, { terminalStrip, position, marking }));
+connectSheets('cabinet-earth-inlet', 'PE',
+  fieldPort(power, incomingEarth.ref, pin(incomingEarth, '1'), 215, 460, 'left'),
+  fieldPort(cabinetEarth, earthEntry.ref, pin(earthEntry, '1'), 215, 300, 'left'));
+connectSheets('remote-earth-feed', 'PE',
+  fieldPort(cabinetEarth, fieldExit.ref, pin(fieldExit, '2'), 960, 425, 'right'),
+  fieldPort(fieldEarth, fieldEntry.ref, pin(fieldEntry, '1'), 215, 300, 'left'));
+for (const [sheet, entry, first, second] of [
+  [cabinetEarth, earthEntry, cabinetBond, fieldExit],
+  [fieldEarth, fieldEntry, valveBond, slideBond]
+]) {
+  const junction = { x: 575, y: 300 };
+  wire(sheet, sheet + '-trunk', 'PE', pin(entry, '2'), junction);
+  wire(sheet, sheet + '-upper', 'PE', junction, pin(first, '1'));
+  wire(sheet, sheet + '-lower', 'PE', junction, pin(second, '1'), [{ x: 575, y: 425 }]);
+}
+
 for (const [sheetId, title, text] of [
   [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives 24 V DC from PS1. B1 and B2 report slide position. Four outputs command isolated pilot interfaces.'],
   [sensors, 'SLIDE POSITION SENSORS · B1 AND B2', 'B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned.'],
@@ -215,7 +245,9 @@ for (const [sheetId, title, text] of [
   [extend, 'SLIDE EXTEND PILOT INTERFACE · K3', 'XT6 carries the extend contact to the opposite-command inhibit sheet. The directional valve and coil supply remain external.'],
   [retract, 'SLIDE RETRACT PILOT INTERFACE · K4', 'XT7 carries the retract contact to the opposite-command inhibit sheet. Motion sequencing remains unassigned.'],
   [interlock, 'SLIDE OPPOSITE-COMMAND INHIBIT · K5 AND K6', 'Each asserted command opens the opposite pilot path after relay operation. Transition timing and safety functions remain outside this schematic.'],
-  [power, 'CONTROL SUPPLY · PS1', 'XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned.']
+  [power, 'CONTROL SUPPLY · PS1', 'XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
+  [cabinetEarth, 'CABINET PROTECTIVE EARTH · XT10', 'XT10 branches incoming PE to the controller enclosure terminal and the remote assembly. Physical bonds remain unassigned.'],
+  [fieldEarth, 'REMOTE VALVE AND SLIDE PROTECTIVE EARTH · XT11', 'XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
