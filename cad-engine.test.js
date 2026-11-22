@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 55);
+  assert.equal(items.length, 61);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -269,6 +269,12 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3211797', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3211802', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-1110405', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209549', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211252', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209552', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211775', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211255', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211254', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -292,7 +298,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -339,22 +345,24 @@ test('larger PT terminals use their specific ratings and share the verified feed
     assert.ok(part.sources[0].url.endsWith(number));
   }
 });
-test('verified QUATTRO terminals connect four distinct anchors on one net', () => {
-  for (const [orderCode, voltage, current, height] of [
+test('verified multi-conductor terminals connect all distinct anchors on one net', () => {
+  for (const [orderCode, voltage, current, height, connectionCount = 4] of [
     ['3211019', 500, 17.5, 48.6], ['3211022', 500, 17.5, 48.6],
     ['3209578', 800, 24, 72.2], ['3209581', 800, 24, 72.2],
-    ['3211797', 800, 32, 77], ['3211802', 800, 32, 77], ['1110405', 800, 32, 77]
+    ['3211797', 800, 32, 77], ['3211802', 800, 32, 77], ['1110405', 800, 32, 77],
+    ['3209549', 800, 24, 60.4, 3], ['3211252', 800, 24, 60.5, 3], ['3209552', 800, 24, 60.5, 3],
+    ['3211775', 800, 32, 66.5, 3], ['3211255', 800, 32, 66.5, 3], ['3211254', 800, 32, 66.5, 3]
   ]) {
     const id = 'phoenix-contact-' + orderCode;
     const definition = engine.component(id);
     const specification = definition.specifications;
     assert.deepEqual([specification.nominalVoltage.value, specification.nominalCurrent.value, specification.dimensions.height.value],
       [voltage, current, height]);
-    assert.equal(specification.connectionCount.value, 4);
+    assert.equal(specification.connectionCount.value, connectionCount);
     assert.ok(definition.sources[0].url.endsWith(orderCode));
     const terminal = engine.createInstance(id, 100, 100, 'X1');
     const pins = engine.worldPins(terminal);
-    assert.equal(new Set(pins.map(pin => pin.id)).size, 4);
+    assert.equal(new Set(pins.map(pin => pin.id)).size, connectionCount);
     const wires = pins.map((pin, index) => ({
       id: 'w' + index, kind: 'wire', x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
       x2: pin.x + (pin.x < terminal.x ? -25 : 25), y2: pin.y,
