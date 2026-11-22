@@ -20,10 +20,11 @@ const cabinetEarth = 'pick-place-cabinet-protective-earth';
 const fieldEarth = 'pick-place-field-protective-earth';
 const station = 'pick-place-local-operator-station';
 const sensorTest = 'pick-place-sensor-test-access';
+const motionTest = 'pick-place-motion-command-test';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.8',
+  revision: '1.9',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -40,7 +41,8 @@ const project = {
     { id: cabinetEarth, number: 'A2/011', name: 'Cabinet protective-earth distribution', projectSectionId: 'A2' },
     { id: fieldEarth, number: 'A2/012', name: 'Remote valve and slide frame PE terminals', projectSectionId: 'A2' },
     { id: station, number: 'A2/013', name: 'Local start and operational stop station', projectSectionId: 'A2' },
-    { id: sensorTest, number: 'A2/014', name: 'Position sensor feed disconnect and test terminals', projectSectionId: 'A2' }
+    { id: sensorTest, number: 'A2/014', name: 'Position sensor feed disconnect and test terminals', projectSectionId: 'A2' },
+    { id: motionTest, number: 'A2/015', name: 'Slide command disconnect and test terminals', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -156,6 +158,16 @@ connectSheets('air-pressure-confirmation', 'XT5 air pressure ready to DI a.3',
   fieldPort(airPressure, airReturn.ref, pin(airReturn, '1'), 215, 390, 'left'),
   { cableId: 'W-02', coreId: '2' });
 
+const motionAccess = new Map([
+  [extend, 'X29', 'X31', 'Extend', 255, '1', '2'],
+  [retract, 'X30', 'X32', 'Retract', 425, '3', '4']
+].map(([sheet, disconnectRef, testRef, direction, y, disconnectPosition, testPosition]) => {
+  const disconnect = device(motionTest, disconnectRef, 'phoenix-contact-3210156', 440, y,
+    { terminalStrip: 'XT13', position: disconnectPosition, marking: direction + ' command disconnect', knifePosition: 'closed' });
+  const test = terminal(motionTest, testRef, 710, y, 'XT13', testPosition, direction + ' downstream command test point');
+  return [sheet, { disconnect, test }];
+}));
+
 for (const [sheet, ref, terminalNumber, strip, commonRef, noRef, role, outputY, returnY, elbow] of [
   [vacuum, 'K1', 'X12:3', 'XT2', 'X3', 'X4', 'Vacuum pilot', 408, 514, 920],
   [release, 'K2', 'X12:4', 'XT3', 'X5', 'X6', 'Release pilot', 442, 538, 905],
@@ -171,9 +183,22 @@ for (const [sheet, ref, terminalNumber, strip, commonRef, noRef, role, outputY, 
   const dq = pin(plc, terminalNumber);
   const coil = pin(relay, 'A1');
   const commonPin = pin(relay, 'A2');
-  connectSheets(ref.toLowerCase() + '-request', role + ' request',
-    cabinetPort('A1', dq, 1020, outputY, 'right', [{ x: elbow, y: dq.y }, { x: elbow, y: outputY }]),
-    fieldPort(sheet, ref, coil, 215, coil.y, 'left'));
+  const signal = role + ' request';
+  const plcPort = cabinetPort('A1', dq, 1020, outputY, 'right', [{ x: elbow, y: dq.y }, { x: elbow, y: outputY }]);
+  const relayPort = fieldPort(sheet, ref, coil, 215, coil.y, 'left');
+  const access = motionAccess.get(sheet);
+  if (access) {
+    const { disconnect, test } = access;
+    connectSheets(ref.toLowerCase() + '-request', signal, plcPort,
+      fieldPort(motionTest, disconnect.ref, pin(disconnect, '1'), 215, disconnect.y, 'left'));
+    wire(motionTest, ref.toLowerCase() + '-downstream-test', signal, pin(disconnect, '2'), pin(test, '1'));
+    connectSheets(ref.toLowerCase() + '-gated-request', signal,
+      fieldPort(motionTest, test.ref, pin(test, '2'), 960, test.y, 'right'), relayPort);
+  } else {
+    connectSheets(ref.toLowerCase() + '-request', signal, plcPort, relayPort);
+  }
+
+
   connectSheets(ref.toLowerCase() + '-return', '0 V',
     cabinetPort('A1', { x: 935, y: returnY }, 1020, returnY, 'right'),
     fieldPort(sheet, ref, commonPin, 215, commonPin.y, 'left'));
@@ -285,7 +310,8 @@ for (const [sheetId, title, text] of [
   [cabinetEarth, 'CABINET PROTECTIVE EARTH · XT10', 'XT10 branches incoming PE to the controller enclosure terminal and the remote assembly. Physical bonds remain unassigned.'],
   [fieldEarth, 'REMOTE VALVE AND SLIDE PROTECTIVE EARTH · XT11', 'XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned.'],
   [station, 'LOCAL START AND OPERATIONAL STOP · S1 AND S2', 'W-03 carries the feed and both request inputs. S1 closes DI a.4 and S2 opens DI a.5 when pressed. Emergency-stop functions remain outside this drawing.'],
-  [sensorTest, 'POSITION SENSOR FEED TEST ACCESS · XT12', 'X26 disconnects the B1 and B2 feed. X27 and X28 expose the downstream +24 V and 0 V reference. Test equipment and procedures remain unassigned.']
+  [sensorTest, 'POSITION SENSOR FEED TEST ACCESS · XT12', 'X26 disconnects the B1 and B2 feed. X27 and X28 expose the downstream +24 V and 0 V reference. Test equipment and procedures remain unassigned.'],
+  [motionTest, 'SLIDE COMMAND TEST ACCESS · XT13', 'X29 and X30 open the respective extend and retract coil commands. X31 and X32 expose the downstream signals. Physical energy isolation remains outside this drawing.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
