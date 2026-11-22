@@ -433,7 +433,7 @@
       retrievedAt: '2026-11-12'
     }]
   });
-  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths, disconnect = false) {
+  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths, disconnect = false, variant = {}) {
     const pins = [], internalConnections = [];
     for (let level = 1; level <= levels; level += 1) {
       const y = (level - (levels + 1) / 2) * 30;
@@ -453,6 +453,7 @@
       manufacturer: 'Phoenix Contact',
       manufacturerPartNumber: partNumber,
       model: model,
+      ...(variant.color ? { aliases: [variant.color] } : {}),
       name: name,
       family: family,
       referencePrefix: 'X',
@@ -468,6 +469,7 @@
         ratedCrossSection: { value: 2.5, unit: 'mm²' },
         rigidConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
         flexibleConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+        ...(variant.color ? { color: { value: variant.color } } : {}),
         connectionCount: { value: levels * 2, unit: 'connections' },
         connectionMethod: { value: 'Push-in' },
         productStandard: { value: 'IEC 60947-7-1' },
@@ -487,13 +489,22 @@
         publisher: 'Phoenix Contact', title: model + ' · ' + name + ' · Item ' + partNumber, url: url,
         documentRevision: disconnect ? 'Catalog PDF · 2026-11-09' : null,
         revisionNote: disconnect ? 'Manufacturer data for two push-in connections, rated values and DIN-rail dimensions.' : 'Live manufacturer product catalog.',
-        retrievedAt: disconnect ? '2026-11-22' : '2026-11-21'
+        retrievedAt: variant.retrievedAt || (disconnect ? '2026-11-22' : '2026-11-21')
       }]
     });
   }
 
   const pt25Terminal = compactTerminal('3209510', 'PT 2,5',
     'https://www.phoenixcontact.com/en-pc/products/feed-through-terminal-block-pt-25-3209510', 1, 800, 24, 48.6, [36.8, 44.3]);
+  const pt25BlueTerminal = compactTerminal('3209523', 'PT 2,5 BU',
+    'https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-25-bu-3209523',
+    1, 800, 24, 48.5, [36.8, 44.3], false, { color: 'Blue (RAL 5015)', retrievedAt: '2026-11-22' });
+  const pt25BlackTerminal = compactTerminal('3212330', 'PT 2,5 BK',
+    'https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-25-bk-3212330',
+    1, 800, 24, 48.5, [36.8, 44.3], false, { color: 'Black (RAL 9005)', retrievedAt: '2026-11-22' });
+  const pt25RedTerminal = compactTerminal('3209512', 'PT 2,5 RD',
+    'https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-25-rd-3209512',
+    1, 800, 24, 48.5, [36.8, 44.3], false, { color: 'Red (RAL 3001)', retrievedAt: '2026-11-22' });
   const pttb25Terminal = compactTerminal('3210567', 'PTTB 2,5',
     'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567', 2, 500, 22, 68.2, [47.4, 54.9]);
   const pt25DisconnectTerminal = compactTerminal('3210156', 'PT 2,5-MT',
@@ -1242,7 +1253,7 @@
       documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pt25BlueTerminal.id]: pt25BlueTerminal, [pt25BlackTerminal.id]: pt25BlackTerminal, [pt25RedTerminal.id]: pt25RedTerminal, [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -1327,16 +1338,20 @@
   function plcChannelType(pin) {
     return /^(DI|DQ|AI) /.exec(pin.name)?.[1];
   }
+  function normalizeCatalogText(value) {
+    return String(value).normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+  const catalogIndex = Object.values(COMPONENTS).map(function (def) {
+    const item = { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber,
+      category: def.category, family: def.family, tag: def.referencePrefix || 'X' };
+    const fields = [def.id, def.name, def.model, def.manufacturerPartNumber, def.manufacturer,
+      def.category, def.family, ...(def.aliases || [])].map(normalizeCatalogText);
+    return { item, fields };
+  });
   function catalog(query = '') {
-    const normalize = value => value.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
-    const terms = String(query).trim().split(/\s+/).map(normalize).filter(Boolean);
-    return Object.values(COMPONENTS).filter(function (def) {
-      if (!terms.length) return true;
-      const fields = [def.id, def.name, def.model, def.manufacturerPartNumber, def.manufacturer, def.category, def.family].map(normalize);
-      return terms.every(term => fields.some(field => field.includes(term)));
-    }).map(function (def) {
-      return { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber, category: def.category, family: def.family, tag: def.referencePrefix || 'X' };
-    });
+    const terms = String(query).trim().split(/\s+/).map(normalizeCatalogText).filter(Boolean);
+    return catalogIndex.filter(entry => terms.every(term => entry.fields.some(field => field.includes(term))))
+      .map(entry => ({ ...entry.item }));
   }
   function createInstance(componentId, x, y, ref, customSymbol) {
     const def = component(componentId, customSymbol);
