@@ -11,8 +11,9 @@ const diagnostics = 'bench-coil-test-access';
 const contactTest = 'bench-contact-test-access';
 const supplyCheck = 'bench-supply-check';
 const indicatorDisconnect = 'bench-indicator-disconnect';
+const switchedIndicatorCheck = 'bench-switched-indicator-check';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.4',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.5',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -21,7 +22,8 @@ const project = {
     { id: diagnostics, number: 'A2/003', name: 'XT3 relay coil voltage test access', projectSectionId: 'A2' },
     { id: contactTest, number: 'A2/004', name: 'XT4 NC and NO output test access', projectSectionId: 'A2' },
     { id: supplyCheck, number: 'A2/005', name: 'XT5 independent supply presence checks', projectSectionId: 'A2' },
-    { id: indicatorDisconnect, number: 'A2/006', name: 'XT2 indicator supply disconnect', projectSectionId: 'A2' }
+    { id: indicatorDisconnect, number: 'A2/006', name: 'XT2 indicator supply disconnect', projectSectionId: 'A2' },
+    { id: switchedIndicatorCheck, number: 'A2/007', name: 'XT6 switched indicator voltage check', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -100,6 +102,22 @@ for (const lamp of [ncLamp, noLamp]) {
 }
 wire(indication, 'indicator-return', 'Indicator supply 0 V', join, pin(lampReturn, '1'));
 
+const downstreamLamp = device(switchedIndicatorCheck, 'H6', 'schneider-electric-xb5avb3', 605, 340,
+  { marking: 'Switched indicator voltage' });
+for (const [id, sourceSheet, sourceRef, ref, position, potential, tap, end, entryX, terminalPin, lampPin] of [
+  ['switched-indicator-feed', indicatorDisconnect, 'X15', 'X16', '1', 'Indicator supply +24 V',
+    { x: 780, y: 310 }, { x: 780, y: 425 }, 215, '1', 'X1'],
+  ['switched-indicator-reference', indication, 'X4', 'X17', '2', 'Indicator supply 0 V',
+    { x: 840, y: 335 }, { x: 840, y: 468 }, 1010, '2', 'X2']
+]) {
+  const testPoint = terminal(switchedIndicatorCheck, ref, terminalPin === '1' ? 370 : 840, 340, 'XT6', position, potential);
+  const entry = pin(testPoint, terminalPin);
+  const send = wire(sourceSheet, id + '-send', potential, tap, end);
+  const receive = wire(switchedIndicatorCheck, id + '-receive', potential, { x: entryX, y: entry.y }, entry);
+  wire(switchedIndicatorCheck, id + '-lamp', potential, pin(testPoint, terminalPin === '1' ? '2' : '1'), pin(downstreamLamp, lampPin));
+  link(id, 'XT6 ' + potential, send, receive, sourceRef, ref, 'right', terminalPin === '1' ? 'left' : 'right');
+}
+
 const testPlus = terminal(diagnostics, 'X5', 370, 340, 'XT3', '1', 'Coil A1 voltage test point');
 const testReturn = terminal(diagnostics, 'X6', 850, 340, 'XT3', '2', 'Coil A2 voltage test point');
 const coilLamp = device(diagnostics, 'H3', 'schneider-electric-xb5avb3', 605, 340, { marking: 'Coil voltage indication' });
@@ -168,6 +186,10 @@ for (const [sheetId, title, lines] of [
   [indicatorDisconnect, 'RELAY TEST BENCH · INDICATOR SUPPLY DISCONNECT', [
     'X15 opens the indicator feed to K1 common. H5 monitors the supply upstream of X15.',
     'The coil is on a separate supply. The drawing does not establish a physical isolation procedure.'
+  ]],
+  [switchedIndicatorCheck, 'RELAY TEST BENCH · XT6 SWITCHED INDICATOR VOLTAGE', [
+    'H6 monitors the feed downstream of X15. H5 on A2/005 monitors the upstream supply.',
+    'XT6 provides local test access across the switched feed and its independent return.'
   ]]
 ]) {
   [title, ...lines].forEach((text, index) => project.objects.push({
