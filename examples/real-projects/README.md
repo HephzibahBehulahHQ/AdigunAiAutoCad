@@ -18,7 +18,9 @@ A2/003 adds an operator station on XT3. Three W-02 cores carry a common feed, a 
 
 A2/004 routes incoming protective earth through XT4 to the field equipment and operator enclosure terminal boundaries. This PE net stays separate from the control return. Physical bonding, rail mounting, and conductor sizing remain open for review.
 
-This four-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
+Sheet A2/005 adds an ifm PN2070 pressure sensor via XT5 and W-03. Its OUT2 wire connects to PLC AI0 with a shared 0 V reference at 2M. The connection assumes OUT2 voltage mode. The drawing leaves the pressure range and scaling unassigned.
+
+This five-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
 
 # 24 V DC relay-operated contactor coil
 
