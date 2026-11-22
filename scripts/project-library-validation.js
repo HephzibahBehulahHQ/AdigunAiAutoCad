@@ -19,12 +19,23 @@ function readManifest() {
   }
   const ids = new Set();
   const paths = new Set();
+  const briefIds = new Set();
+  if (!Array.isArray(manifest.briefs) || manifest.briefs.length !== manifest.scaleTarget.fullLibraryProjects) {
+    throw new Error('The manifest must define every required project brief.');
+  }
+  for (const brief of manifest.briefs) {
+    if (!brief || !/^\d{2}$/.test(brief.id) || briefIds.has(brief.id) || !brief.title || !brief.category) {
+      throw new Error('Project briefs need unique two-digit IDs, titles and categories.');
+    }
+    briefIds.add(brief.id);
+  }
   for (const project of manifest.projects) {
     if (!project || !project.id || !project.title || !project.topologyId || !project.path) {
       throw new Error('Every manifest entry needs an id, title, topologyId, and path.');
     }
     if (ids.has(project.id)) throw new Error('Duplicate project id: ' + project.id);
     if (paths.has(project.path)) throw new Error('Duplicate project path: ' + project.path);
+    if (project.briefId !== undefined && !briefIds.has(project.briefId)) throw new Error('Unknown project brief: ' + project.briefId);
     ids.add(project.id);
     paths.add(project.path);
     const absolutePath = path.resolve(repositoryRoot, project.path);
@@ -273,6 +284,7 @@ function buildReport() {
       id: entry.id,
       title: entry.title,
       topologyId: entry.topologyId,
+      briefId: entry.briefId || null,
       role: entry.role,
       path: entry.path,
       revision: project.revision || null,
@@ -316,18 +328,25 @@ function buildReport() {
   const requiredScaleProjects = manifest.scaleTarget.firstGateDistinctProjects;
   const releaseTopologies = new Map();
   const releaseStructures = new Map();
+  const releaseBriefs = new Map();
   const duplicateReleaseProjects = [];
-  const candidates = validProjects.filter(project => project.releaseScale.qualified)
+  const candidates = validProjects.filter(project => project.briefId && project.releaseScale.qualified)
     .sort((first, second) => second.metrics.sheetCount - first.metrics.sheetCount);
   for (const project of candidates) {
-    const duplicate = releaseTopologies.get(project.topologyId) || releaseStructures.get(project.electricalStructureSha256);
+    const duplicate = releaseTopologies.get(project.topologyId) || releaseStructures.get(project.electricalStructureSha256)
+      || releaseBriefs.get(project.briefId);
     if (duplicate) {
       duplicateReleaseProjects.push({ id: project.id, matches: duplicate.id });
       continue;
     }
     releaseTopologies.set(project.topologyId, project);
     releaseStructures.set(project.electricalStructureSha256, project);
+    releaseBriefs.set(project.briefId, project);
   }
+  const briefCoverage = manifest.briefs.map(brief => ({ ...brief,
+    projectIds: projects.filter(project => project.briefId === brief.id).map(project => project.id),
+    qualifiedProjectId: releaseBriefs.get(brief.id)?.id || null
+  }));
   const releaseSheetCount = [...releaseTopologies.values()].reduce((total, project) => total + project.metrics.sheetCount, 0);
   const requiredReleaseSheetCount = manifest.scaleTarget.fullLibraryProjects * manifest.scaleTarget.minimumSheetsPerProject;
 
@@ -353,7 +372,8 @@ function buildReport() {
         requiredSheetCount: requiredReleaseSheetCount,
         qualifiedSheetCount: releaseSheetCount,
         duplicateReleaseProjects,
-        complete: releaseTopologies.size >= manifest.scaleTarget.fullLibraryProjects
+        briefCoverage,
+        complete: briefCoverage.every(brief => brief.qualifiedProjectId)
           && releaseSheetCount >= requiredReleaseSheetCount
       }
     },
@@ -393,8 +413,10 @@ function run() {
       }
     }
     for (const { id, matches } of gate.duplicateReleaseProjects) {
-      console.error(id + ': Shares a topology ID or electrical structure fingerprint with ' + matches + '.');
+      console.error(id + ': Shares a brief, topology ID or electrical structure fingerprint with ' + matches + '.');
     }
+    const missingBriefs = gate.briefCoverage.filter(brief => !brief.projectIds.length);
+    if (missingBriefs.length) console.error(`${missingBriefs.length} required briefs have no mapped project yet.`);
     process.exitCode = 1;
   }
 }

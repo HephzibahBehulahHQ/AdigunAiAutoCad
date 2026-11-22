@@ -53,3 +53,5 @@ The GitHub Pages workflow checks the committed example report and publishes the 
 The release count checks declared topology IDs and electrical structure fingerprints. Renaming devices and sheets or rerouting the same connections does not qualify a copy as another project. Matching fingerprints are flagged for review because they do not prove graph equivalence.
 
 The report flags sheets with identical visible editable content even if their IDs or object order differ. Hidden-only sheets count as empty. The check catches exact copies. Engineering review is still required to assess relevance and originality.
+
+The library manifest records the 50 required project briefs and links published examples to the briefs they address. The release report shows which briefs lack a project and which have a qualifying project. Unmapped examples remain available in Project Explorer.
