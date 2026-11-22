@@ -1462,7 +1462,7 @@
       "briefId": "34",
       "role": "standalone-example",
       "path": "examples/real-projects/pneumatic-pick-place.adigun.json",
-      "revision": "1.3",
+      "revision": "1.4",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1479,8 +1479,8 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 92,
-        "additionalConnectedSheetsRequired": 62,
+        "additionalAuthoredSheetsRequired": 91,
+        "additionalConnectedSheetsRequired": 61,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
@@ -1488,34 +1488,34 @@
         "sheetName": "PLC power and I/O",
         "segments": "22,11,48,11 22,17,30,17 30,17,30,13 30,13,48,13 37,13,37,22 37,22,48,22 31,11,31,0 31,0,93,0 93,0,93,26 93,26,80,26 30,17,30,57 30,57,89,57 89,57,89,28 89,28,80,28 13,11,0,11 13,17,0,17 48,25,42,25 42,25,42,27 42,27,0,27 48,27,45,27 45,27,45,33 45,33,0,33 7,11,7,6 7,6,0,6 48,29,46,29 46,29,46,38 46,38,0,38 93,5,100,5 48,31,47,31 47,31,47,42 47,42,0,42 80,30,88,30 88,30,88,33 88,33,100,33 89,46,100,46 80,32,86,32 86,32,86,37 86,37,100,37 89,49,100,49 80,34,84,34 84,34,84,40 84,40,100,40 89,52,100,52 80,36,83,36 83,36,83,43 83,43,100,43 89,55,100,55"
       },
-      "topologySha256": "5fb3c0426a3cc1bf9551d29c02983d5b3fa57b4b7a8cb168e02ae0a0a8d2f528",
-      "electricalStructureSha256": "ef62a7bd44985c1468ab1272e088246eb27e5a671f949e9023e8d24b89877e81",
+      "topologySha256": "27c76501ba7956d98886f698b622cc0a74d7450db51940ac09c03eae0ed1e758",
+      "electricalStructureSha256": "f07065a194d6f4805fbc098e1a772f4e45e8359d8520f050e451333404a62b74",
       "csvSha256": {
-        "bom": "8c5478f65539e85996398dfcb448c24a63c385c922c0494ba47361d2a4610002",
-        "wires": "621c0a01a0fb01bb9eef3c931b14f74353e77bca03f483901c51f3503d1e0a82",
-        "terminals": "a2dc34416530a577900c6c74ee59aadef8c117f45e233846bc1a742cd3f89266",
-        "plcIo": "0b97f1c2b1d13a7ffbb06f98e2ae0cc20e0789aae44a4fbc6207a6af23a886ff",
+        "bom": "4e745ed112fad28bc038a847e65a24363b44da3364f0d1010ac31be949cec2f0",
+        "wires": "61f0f6307125940f0ae8280b8e8d0d72a2ef1f198bedc623ae75d6377635e834",
+        "terminals": "4ee5bcbc04d9118c6ee183949564d638276124a2fd32513b4ba1e0c806a286a3",
+        "plcIo": "7f1395e0356bedd3285fa71cfe21ec3486b8f9cb73066605665e93b2b15a8b76",
         "cables": "aadc2c7c2a4c84e36e98e8c5c8a9d8fe7eddc09fb1de8c83a50fbde85c5e7167",
-        "devices": "2c084a5ba4706c5ca723887d90bea80b4144dd3eda67dfe59ac2a15c164a0329",
-        "sheets": "35131f049f519445e8063620fe64343d697e24f5f2e5d336d6bf4f1bc57f1948"
+        "devices": "59bb3cd2fc516913df34ac0162dffa5717137853b17e32cbddda764b76df59cd",
+        "sheets": "8640f284cd79d1311e66cd42d0a6af83a74ad327ae4feca76c16a8eb96d20647"
       },
       "metrics": {
-        "sheetCount": 8,
-        "authoredSheetCount": 8,
-        "connectedSheetCount": 8,
-        "contentObjectCount": 86,
+        "sheetCount": 9,
+        "authoredSheetCount": 9,
+        "connectedSheetCount": 9,
+        "contentObjectCount": 106,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 21,
-        "wireCount": 49,
-        "netCount": 34,
-        "globalNetCount": 18,
-        "crossSheetConnectionCount": 16,
+        "componentCount": 25,
+        "wireCount": 63,
+        "netCount": 42,
+        "globalNetCount": 20,
+        "crossSheetConnectionCount": 22,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 4,
-        "wireListRowCount": 49,
-        "terminalListRowCount": 28
+        "wireListRowCount": 63,
+        "terminalListRowCount": 32
       },
       "errors": []
     }
