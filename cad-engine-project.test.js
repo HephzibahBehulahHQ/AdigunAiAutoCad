@@ -954,6 +954,13 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await linkedExample.mouse.click(nearFeed.x, nearFeed.y);
     await linkedExample.locator('#rightPanel.open [data-style-object="transducer-feed-1"][data-drawing-style="stroke"]').waitFor({ timeout: 5000 });
     await linkedExample.getByRole('button', { name: 'Electrical checks', exact: true }).click();
+    const wireSearch = linkedExample.getByRole('searchbox', { name: 'Find wires' });
+    await wireSearch.fill('w-03:2 x23:1');
+    assert.equal(await linkedExample.locator('[data-wire-list-row]:visible').count(), 1);
+    await linkedExample.getByRole('button', { name: 'Locate wire w03-core-2-target-1', exact: true }).waitFor();
+    await wireSearch.fill('not-a-wire');
+    await linkedExample.getByText('No wires match this search on the current sheet.').waitFor();
+    await wireSearch.clear();
     await linkedExample.getByRole('button', { name: 'Locate wire transducer-return-1', exact: true }).click();
     assert.match(await returnSegment.getAttribute('class'), /selected-object/);
     await linkedExample.locator('#rightPanel.open [data-style-object="transducer-return-1"][data-drawing-style="stroke"]').waitFor();

@@ -1790,6 +1790,16 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     openInspector('Electrical checks');
     notify(message);
   }
+  $('#inspectorContent').addEventListener('input',function(event){
+    if(!event.target.matches('[data-wire-list-search]'))return;
+    const terms=event.target.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let matches=0;
+    for(const row of this.querySelectorAll('[data-wire-list-row]')){
+      row.hidden=!terms.every(term=>row.dataset.wireListRow.includes(term));
+      if(!row.hidden)matches++;
+    }
+    this.querySelector('[data-wire-list-empty]').hidden=matches>0;
+  });
   function openInspector(name){
     $('#rightPanelTitle').textContent=name;
     $('#rightPanel').classList.add('open');
@@ -1813,7 +1823,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       const visibleWires=new Set(state.objects.filter(object=>object.kind==='wire'&&drawingObjectVisible(object)).map(object=>object.id));
       const wireRows=wireReport.rows.filter(row=>!state.projectModel||row.sheetId===state.sheet).map(function(row){
         const pins=row.netPinRefs.length?row.netPinRefs.join(', '):'No verified component pins are attached to this net.';
-        return '<div class="inspector-block"><div class="property-row"><span>'+escapeHtml(row.wireId)+' · '+escapeHtml(row.netId)+'</span><strong>'+row.lengthMm.toFixed(3)+' mm</strong></div>'
+        const cable=[row.cableId,row.coreId].filter(Boolean).join(':');
+        const keywords=[row.wireId,row.netId,cable,...row.netPinRefs].join(' ').toLowerCase();
+        return '<div class="inspector-block" data-wire-list-row="'+escapeHtml(keywords)+'"><div class="property-row"><span>'+escapeHtml(row.wireId)+' · '+escapeHtml(row.netId)
+          +(cable?' · '+escapeHtml(cable):'')+'</span><strong>'+row.lengthMm.toFixed(3)+' mm</strong></div>'
           +'<div class="notice">Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div>'
           +'<button type="button" class="command-item" data-finding-sheet="'+escapeHtml(state.sheet)+'" data-finding-object="'+escapeHtml(row.wireId)+'"'
           +(visibleWires.has(row.wireId)?'':' disabled title="Show the wire or its layer to locate it."')
@@ -1833,7 +1846,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         +'<div class="property-row"><span>Geometry errors</span><strong>'+report.geometryErrorCount+'</strong></div>'
         +details+'<p class="notice">This report checks source-backed component pins and authored wire geometry only. It does not evaluate electrical suitability, standards compliance, or safety.</p></div>'
         +'<div class="inspector-block"><div class="inspector-title">Wire list · authored model geometry</div>'
-        +(wireRows||'<p class="notice">No authored wire segments are available in the project model.</p>')
+        +(wireRows?'<label class="property-row"><span>Find wires</span><input type="search" data-wire-list-search></label>'
+          +'<p class="notice" role="status" data-wire-list-empty hidden>No wires match this search on the current sheet.</p>'+wireRows
+          :'<p class="notice">No authored wire segments are available in the project model.</p>')
         +wireErrors
         +'<button type="button" data-export-wire-list '+(!wireReport.valid||!wireReport.rows.length?'disabled ':'')+'style="border:1px solid var(--line);padding:4px 8px;border-radius:5px;background:var(--navy-3);font:inherit;color:inherit;white-space:nowrap">Export wire list CSV</button>'
         +'<p class="notice">Lengths follow the editor’s orthogonal route geometry. Pin references identify exact connected component pins; no wire numbers are inferred.</p></div>';
