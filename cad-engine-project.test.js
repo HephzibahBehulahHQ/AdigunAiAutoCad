@@ -533,6 +533,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await touchPin(2, 1).tap();
     assert.equal(await touchWires.count(), 2, 'touch taps finish a second wire with manual bends');
     assert.match(await touchWires.nth(1).getAttribute('d'), /L285 165L325 185L/);
+    await touchPage.getByRole('button', { name: 'Insert Phoenix Contact PT 2,5-PE terminal' }).tap();
+    await tapDrawingPoint(235, 245);
+    const placedEarth = touchPage.locator('#userDrawings [data-object].selected-object');
+    assert.match(await placedEarth.getAttribute('aria-label'), /3209536/);
+    assert.equal(await placedEarth.locator('[data-component-pin]').count(), 2);
     await touchContext.close();
 
     const freeDraftingPage = await context.newPage();
@@ -547,8 +552,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       const screen = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
       return { x: screen.x, y: screen.y };
     }, [x, y]);
-    for (const [componentId, x, y] of [['sew-eurodrive-drn63ms4', -125, -35], ['siemens-6es7212-1ae40-0xb0', 175, -35]]) {
-      await freeDraftingPage.locator('#symbolList [data-insert="' + componentId + '"]').click();
+    for (const [label, x, y] of [['Insert SEW-EURODRIVE DRN63MS4 motor', -125, -35], ['Insert Siemens SIMATIC S7-1200 CPU 1212C', 175, -35]]) {
+      await freeDraftingPage.getByRole('button', { name: label, exact: true }).click();
       if (x > 0) {
         const overlap = await freePoint(75, y);
         await freeDraftingPage.mouse.move(overlap.x, overlap.y);
