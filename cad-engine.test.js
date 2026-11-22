@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 30);
+  assert.equal(items.length, 34);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -244,6 +244,10 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3209513', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209514', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209511', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1233142', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1176299', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3212329', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1233140', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -268,10 +272,21 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523']);
-  for (const id of ['3209523', '3212330', '3209512', '3209513', '3209514', '3209511']) {
+  for (const [id, height] of [
+    ['3209523', 48.5],
+    ['3212330', 48.5],
+    ['3209512', 48.5],
+    ['3209513', 48.5],
+    ['3209514', 48.5],
+    ['3209511', 48.5],
+    ['1233142', 48.6],
+    ['1176299', 48.5],
+    ['3212329', 48.5],
+    ['1233140', 48.6]
+  ]) {
     const terminal = engine.component('phoenix-contact-' + id);
     assert.equal(terminal.manufacturerPartNumber, id);
-    assert.equal(terminal.specifications.dimensions.height.value, 48.5);
+    assert.equal(terminal.specifications.dimensions.height.value, height);
     assert.ok(terminal.sources[0].url.endsWith(id));
     assert.deepEqual(terminal.symbol.internalConnections, [['level-1-left', 'level-1-right']]);
   }
