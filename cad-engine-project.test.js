@@ -975,6 +975,11 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       assert.equal(await printSheets.locator('[data-title-block-row="sheet"]').count(), source.sheets.length);
       const printedComponent = printSheets.locator('[data-object="' + component.id + '"]');
       assert.equal(await printedComponent.getAttribute('stroke'), color, entry.title + ' prints the edited native component');
+      if (entry.id === 'dol-reference-opening') {
+        const printedLayout = copyPage.locator('#projectPrintSet [data-print-sheet="dol-reference-panel-layout"]');
+        assert.equal(await printedLayout.locator('[data-object="dol-layout-plate-width"] text').textContent(), '400 mm');
+        assert.equal(await printedLayout.locator('[data-object="dol-layout-plate-height"] text').textContent(), '300 mm');
+      }
       const projectPdf = await copyPage.pdf({ preferCSSPageSize: true,
         ...(process.env.CAD_SCREENSHOT_DIR ? { path: path.join(process.env.CAD_SCREENSHOT_DIR, entry.id + '-print-set.pdf') } : {}) });
       assert.equal(projectPdf.subarray(0, 5).toString(), '%PDF-');
@@ -1459,6 +1464,11 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
       const layoutSheet = parsed.project.sheets.find(sheet => sheet.id === 'dol-reference-panel-layout');
       assert.equal(layoutSheet.projectSectionId, 'A3');
       const layoutObjects = parsed.project.objects.filter(object => object.sheetId === layoutSheet.id);
+      const plate = layoutObjects.find(object => object.id === 'dol-layout-enclosure');
+      const width = layoutObjects.find(object => object.id === 'dol-layout-plate-width');
+      const height = layoutObjects.find(object => object.id === 'dol-layout-plate-height');
+      assert.deepEqual([plate.x2 - plate.x, plate.y2 - plate.y], [400, 300]);
+      assert.deepEqual([width.x1, width.x2, height.y1, height.y2], [plate.x, plate.x2, plate.y, plate.y2]);
       assert.ok(layoutObjects.some(object => object.id === 'dol-layout-enclosure' && object.kind === 'rect' && object.projectAssumption === true));
       assert.ok(layoutObjects.some(object => object.deviceTag === 'Q1' && object.manufacturerPartNumber === '3RV2011-0FA10'));
       assert.ok(layoutObjects.some(object => object.deviceTag === 'KM1' && object.manufacturerPartNumber === 'LC1D09BD'));
@@ -1500,7 +1510,7 @@ test('multi-sheet reference examples classify overview, circuits, installation, 
       const reopenedFootprint = reopened.project.objects.find(object => object.id === editableCopyFootprint.id);
       assert.equal(reopenedFootprint.x, sourceLayoutSnapshot.x + 14);
       assert.equal(reopenedFootprint.stroke, '#dc2626');
-      assert.equal(sourceLayoutSnapshot.x, 245, 'editing a copied layout must leave the library template unchanged');
+      assert.equal(sourceLayoutSnapshot.x, 122.5, 'editing a copied layout must leave the library template unchanged');
     }
     assert.equal(engine.analyzeProject(copy).componentCount, engine.analyzeProject(parsed.project).componentCount);
     assert.equal(engine.analyzeProject(copy).wireCount, engine.analyzeProject(parsed.project).wireCount);
