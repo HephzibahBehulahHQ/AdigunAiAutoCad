@@ -21,10 +21,11 @@ const fieldEarth = 'pick-place-field-protective-earth';
 const station = 'pick-place-local-operator-station';
 const sensorTest = 'pick-place-sensor-test-access';
 const motionTest = 'pick-place-motion-command-test';
+const ioSchedule = 'pick-place-plc-io-schedule';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.9',
+  revision: '1.10',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -42,7 +43,8 @@ const project = {
     { id: fieldEarth, number: 'A2/012', name: 'Remote valve and slide frame PE terminals', projectSectionId: 'A2' },
     { id: station, number: 'A2/013', name: 'Local start and operational stop station', projectSectionId: 'A2' },
     { id: sensorTest, number: 'A2/014', name: 'Position sensor feed disconnect and test terminals', projectSectionId: 'A2' },
-    { id: motionTest, number: 'A2/015', name: 'Slide command disconnect and test terminals', projectSectionId: 'A2' }
+    { id: motionTest, number: 'A2/015', name: 'Slide command disconnect and test terminals', projectSectionId: 'A2' },
+    { id: ioSchedule, number: 'A4/001', name: 'Wired PLC I/O schedule', projectSectionId: 'A4' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -317,6 +319,42 @@ for (const [sheetId, title, text] of [
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
   }));
 }
+
+const signalPurpose = {
+  'X10:7': 'Slide retracted position',
+  'X10:8': 'Slide extended position',
+  'X10:9': 'Vacuum achieved',
+  'X10:10': 'Compressed air ready',
+  'X10:11': 'Local start request',
+  'X10:12': 'Local operational stop',
+  'X12:3': 'Vacuum pilot request',
+  'X12:4': 'Release pilot request',
+  'X12:5': 'Slide extend request',
+  'X12:6': 'Slide retract request'
+};
+const ioReport = engine.plcIoList(JSON.parse(engine.serializeProject(project)));
+if (!ioReport.valid) throw new Error(ioReport.errors.join(' '));
+function scheduleText(id, text, x, y) {
+  project.objects.push({ id: 'plc-io-' + id, kind: 'text', sheetId: ioSchedule, text, x, y });
+}
+scheduleText('title', 'PNEUMATIC PICK-AND-PLACE · WIRED PLC I/O SCHEDULE', 105, 105);
+scheduleText('revision', 'A1 hardware channel connections · Revision ' + project.revision, 105, 150);
+const columns = [105, 250, 345, 640];
+['PLC terminal', 'Channel', 'Signal purpose', 'Connected pins'].forEach((text, column) =>
+  scheduleText('heading-' + column, text, columns[column], 195));
+const channels = ioReport.rows.filter(row => row.connectedPins.length);
+channels.forEach((row, index) => {
+  const purpose = signalPurpose[row.terminal];
+  if (!purpose) throw new Error('Missing signal purpose for ' + row.terminal);
+  const y = 231 + index * 37;
+  [row.ref + ' ' + row.terminal, row.channel, purpose].forEach((text, column) =>
+    scheduleText('row-' + index + '-' + column, text, columns[column], y));
+  for (let pinIndex = 0; pinIndex < row.connectedPins.length; pinIndex += 3) {
+    scheduleText('row-' + index + '-pins-' + pinIndex, row.connectedPins.slice(pinIndex, pinIndex + 3).join(' · '),
+      columns[3], y + pinIndex / 3 * 16);
+  }
+});
+scheduleText('scope', 'Revision snapshot of wired hardware channels. PLC addresses, program logic and timing remain unassigned.', 105, 610);
 
 const serialized = engine.serializeProject(project);
 const report = engine.analyzeProject(JSON.parse(serialized));

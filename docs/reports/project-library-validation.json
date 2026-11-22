@@ -1462,7 +1462,7 @@
       "briefId": "34",
       "role": "standalone-example",
       "path": "examples/real-projects/pneumatic-pick-place.adigun.json",
-      "revision": "1.9",
+      "revision": "1.10",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1479,9 +1479,11 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 85,
+        "additionalAuthoredSheetsRequired": 84,
         "additionalConnectedSheetsRequired": 55,
-        "sheetIdsWithoutElectricalConnectivity": []
+        "sheetIdsWithoutElectricalConnectivity": [
+          "pick-place-plc-io-schedule"
+        ]
       },
       "wirePreview": {
         "sheetId": "pick-place-plc",
@@ -1497,13 +1499,13 @@
         "plcIo": "92e230cdeb4c9d60167616fc7c5c538de5cdcb64eef65702f670ba3199731389",
         "cables": "22dba5e5a4cd9b5efcbaefc666c25d30ebc3eccee84710905e17e0b959bf05ad",
         "devices": "54ff0614caa33c3b7ab9508cbb709b3171ce96bce8721a4b43fbc0abed6cebf5",
-        "sheets": "29f165822a541a29c4c5e78c3eb0b72096877c341ffb4c9eff8817284bf766bf"
+        "sheets": "26b11331a734583f0f937c2fd4ecaea62e7ffa8c7261ee76cebfd83c4f098d80"
       },
       "metrics": {
-        "sheetCount": 15,
-        "authoredSheetCount": 15,
+        "sheetCount": 16,
+        "authoredSheetCount": 16,
         "connectedSheetCount": 15,
-        "contentObjectCount": 173,
+        "contentObjectCount": 222,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
         "componentCount": 44,
