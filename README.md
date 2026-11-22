@@ -11,6 +11,8 @@ Use **Export full drawing as SVG** for all visible geometry, including off-frame
 
 Set each paper margin independently in Properties. Margins position the print frame and its title block, and are saved with the sheet without moving drawing objects.
 
+For a custom sheet, choose **Custom** in the **Paper size** field in Properties, then set the width and height in millimetres. Print and frame SVG export use the saved dimensions.
+
 Open **Symbol Library**, pick a component, then click its position on the sheet. The component stays selected. Open **Properties** to edit its values. An open Properties panel updates automatically. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
