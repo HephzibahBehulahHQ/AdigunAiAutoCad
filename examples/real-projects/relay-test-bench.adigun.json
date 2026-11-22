@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Relay changeover test bench",
-  "revision": "1.7",
+  "revision": "1.8",
   "description": "Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.",
   "activeSheet": "bench-coil-actuation",
   "sheets": [
@@ -58,6 +58,12 @@
       "number": "A2/009",
       "name": "XT8 cabinet and indicator protective-earth boundaries",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-indication-matrix",
+      "number": "A4/001",
+      "name": "Expected relay bench indicator states",
+      "projectSectionId": "A4"
     }
   ],
   "objects": [
@@ -2033,6 +2039,422 @@
       "x": 105,
       "y": 555,
       "text": "Physical bonding, rail installation and protective-conductor sizing remain unassigned."
+    },
+    {
+      "id": "bench-matrix-0-0",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Case",
+      "x": 105,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-1",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "X14",
+      "x": 380,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-2",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "S1",
+      "x": 485,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-3",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "X15",
+      "x": 600,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-4",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "H3",
+      "x": 710,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-5",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "H6",
+      "x": 760,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-6",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "H1",
+      "x": 810,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-0-7",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "H2",
+      "x": 860,
+      "y": 215
+    },
+    {
+      "id": "bench-matrix-1-0",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Rest",
+      "x": 105,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-1",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 380,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-2",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Released",
+      "x": 485,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-3",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 600,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-4",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 710,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-5",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 760,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-6",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 810,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-1-7",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 860,
+      "y": 257
+    },
+    {
+      "id": "bench-matrix-2-0",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Coil command",
+      "x": 105,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-1",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 380,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-2",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Pressed",
+      "x": 485,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-3",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 600,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-4",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 710,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-5",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 760,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-6",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 810,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-2-7",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 860,
+      "y": 299
+    },
+    {
+      "id": "bench-matrix-3-0",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Coil feed open",
+      "x": 105,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-1",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Open",
+      "x": 380,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-2",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Pressed",
+      "x": 485,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-3",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 600,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-4",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 710,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-5",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 760,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-6",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 810,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-3-7",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 860,
+      "y": 341
+    },
+    {
+      "id": "bench-matrix-4-0",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Indicator feed open, at rest",
+      "x": 105,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-1",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 380,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-2",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Released",
+      "x": 485,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-3",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Open",
+      "x": 600,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-4",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 710,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-5",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 760,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-6",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 810,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-4-7",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 860,
+      "y": 383
+    },
+    {
+      "id": "bench-matrix-5-0",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Indicator feed open, commanded",
+      "x": 105,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-1",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Closed",
+      "x": 380,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-2",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Pressed",
+      "x": 485,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-3",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Open",
+      "x": 600,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-4",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "On",
+      "x": 710,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-5",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 760,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-6",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 810,
+      "y": 425
+    },
+    {
+      "id": "bench-matrix-5-7",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "text": "Off",
+      "x": 860,
+      "y": 425
+    },
+    {
+      "id": "bench-indication-matrix-title",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · EXPECTED INDICATOR STATES"
+    },
+    {
+      "id": "bench-indication-matrix-assumptions",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "x": 105,
+      "y": 160,
+      "text": "Assumes both supplies are available, wiring follows A2/001–A2/008, and K1 operates normally."
+    },
+    {
+      "id": "bench-indication-matrix-reference",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "x": 105,
+      "y": 503,
+      "text": "H3: coil voltage. H6: switched indicator voltage. H1: NC output. H2: NO output."
+    },
+    {
+      "id": "bench-indication-matrix-scope",
+      "sheetId": "bench-indication-matrix",
+      "kind": "text",
+      "x": 105,
+      "y": 550,
+      "text": "Expected steady states only. No measurements, timing verification, or commissioning results are recorded."
     }
   ],
   "crossSheetConnections": [

@@ -1580,7 +1580,11 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   const file = path.join(__dirname, 'examples/real-projects/relay-test-bench.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [9, 17, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [10, 17, 0, 0]);
+  const matrix = project.objects.filter(object => object.sheetId === 'bench-indication-matrix');
+  const matrixRow = row => matrix.filter(object => object.id.startsWith('bench-matrix-' + row + '-')).map(object => object.text);
+  assert.deepEqual(matrixRow(2), ['Coil command', 'Closed', 'Pressed', 'Closed', 'On', 'On', 'Off', 'On']);
+  assert.deepEqual(matrixRow(5), ['Indicator feed open, commanded', 'Closed', 'Pressed', 'Open', 'On', 'Off', 'Off', 'Off']);
   const membership = analysis => analysis.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(membership(report), [
     'H1:X1,K1:12,X7:1,X7:2', 'H1:X2,H2:X2,H5:X2,H6:X2,X13:1,X13:2,X17:1,X17:2,X4:1,X4:2,X9:1,X9:2',
