@@ -12,13 +12,14 @@ const testAccess = { id: 'distribution-test-access', number: 'A2/021', name: 'XT
 const fieldIndicator = { id: 'field-indicator', number: 'A2/022', name: 'Externally powered H1 annunciator', projectSectionId: 'A2' };
 const branchIndicator = { id: 'branch-a-indicator', number: 'A2/023', name: 'Branch A voltage indication', projectSectionId: 'A2' };
 const secondPressureSensor = { id: 'ai1-pressure-sensor', number: 'A2/024', name: 'B3 pressure sensor to AI1', projectSectionId: 'A2' };
+const branchBMonitor = { id: 'branch-b-monitor', number: 'A2/025', name: 'Branch B voltage-present relay and dry contacts', projectSectionId: 'A2' };
 const fieldSupplyPotential = 'External annunciator +24 V';
 const fieldRequestPotential = 'Annunciator switched +24 V';
-const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor];
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.1';
+project.revision = '3.2';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -224,6 +225,50 @@ author(secondPressureSensor, ({ device, pin, wire, link, notes }) => {
     ['input', 218, 'B3 OUT2 routes through XT9:1 to CPU AI1. B2 retains its own AI0 signal.'],
     ['return-note', 440, 'B3 L− returns via XT9:2 to the shared 2M and 0 V reference.'],
     ['scope', 490, 'The schematic assumes 0–10 V output mode. OUT1, process location, cable and scaling are unassigned.']
+  ]);
+});
+
+author(branchBMonitor, ({ device, pin, wire, link, notes }) => {
+  const relay = device('K4', 'phoenix-contact-2966171', 475, 330, { marking: 'Branch B voltage present' });
+  const tapX = 315;
+  for (const [key, trunkId, potential, pinNumber, boundaryY] of [
+    ['feed', 'b-positive-receive', '+24 V DC', 'A1', 205],
+    ['return', 'b-return-receive', '0 V DC', 'A2', 430]
+  ]) {
+    const trunk = project.objects.find(object => object.id === trunkId);
+    if (!trunk || trunk.y1 !== trunk.y2 || tapX <= trunk.x1 || tapX >= trunk.x2 || trunk.potential !== potential) {
+      throw new Error('Branch B monitor tap no longer meets ' + trunkId);
+    }
+    const send = wire(key + '-send', trunk.sheetId, { x: tapX, y: trunk.y1 }, { x: tapX, y: boundaryY }, potential);
+    const end = pin(relay, pinNumber);
+    const receive = wire(key + '-receive', branchBMonitor.id, { x: 190, y: end.y }, end, potential);
+    link(key, 'Branch B K4 ' + potential, send, receive, 'B2', relay.ref);
+  }
+  for (const [ref, position, pinNumber, y, marking] of [
+    ['X30', '1', '11', 330, 'Dry contact common'],
+    ['X31', '2', '12', 240, 'Normally closed'],
+    ['X32', '3', '14', 420, 'Normally open']
+  ]) {
+    const terminal = device(ref, 'phoenix-contact-3209510', 785, y, { terminalStrip: 'XT13', position, marking });
+    const start = pin(relay, pinNumber);
+    const end = pin(terminal, '1');
+    const net = 'K4 ' + marking;
+    const id = 'contact-' + pinNumber;
+    if (start.y === end.y) {
+      wire(id, branchBMonitor.id, start, end, net);
+    } else {
+      const turn = { x: 625, y: start.y };
+      const drop = { x: turn.x, y: end.y };
+      wire(id + '-pin', branchBMonitor.id, start, turn, net);
+      wire(id + '-bend', branchBMonitor.id, turn, drop, net);
+      wire(id + '-terminal', branchBMonitor.id, drop, end, net);
+    }
+  }
+  notes([
+    ['title', 108, 'XT13 · BRANCH B VOLTAGE-PRESENT CONTACTS'],
+    ['coil', 175, 'K4 is wired in parallel with B2 on the downstream Branch B supply.'],
+    ['contacts', 485, 'XT13 presents dry COM, NC and NO terminals for external indication.'],
+    ['scope', 525, 'K4 reports coil energization. The receiving circuit, alarm thresholds and protection are unassigned.']
   ]);
 });
 
