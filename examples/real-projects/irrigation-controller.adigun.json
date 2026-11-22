@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.5",
+  "revision": "1.6",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -51,6 +51,12 @@
       "id": "irrigation-control-supply",
       "number": "A2/008",
       "name": "PS1 control supply and AC inlet",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-protective-earth",
+      "number": "A2/009",
+      "name": "Cabinet and starter enclosure PE terminals",
       "projectSectionId": "A2"
     }
   ],
@@ -430,6 +436,168 @@
         "end": {
           "instanceId": "ps1",
           "pinId": "line-pe"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x12",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X12",
+      "x": 380,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "1",
+        "marking": "PE from XT5",
+        "comment": ""
+      },
+      "sheetId": "irrigation-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x13",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X13",
+      "x": 780,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "2",
+        "marking": "Controller enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "irrigation-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x14",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X14",
+      "x": 780,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT6",
+        "position": "3",
+        "marking": "Starter enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "irrigation-protective-earth"
+    },
+    {
+      "id": "enclosure-earth-cabinet",
+      "sheetId": "irrigation-control-supply",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 265,
+      "y": 460,
+      "x1": 265,
+      "y1": 460,
+      "x2": 215,
+      "y2": 460,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x11",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "enclosure-earth-remote",
+      "sheetId": "irrigation-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 300,
+      "x1": 215,
+      "y1": 300,
+      "x2": 345,
+      "y2": 300,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x12",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "enclosure-earth-trunk",
+      "sheetId": "irrigation-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 415,
+      "y": 300,
+      "x1": 415,
+      "y1": 300,
+      "x2": 575,
+      "y2": 300,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x12",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "controller-enclosure-earth",
+      "sheetId": "irrigation-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 745,
+      "y2": 300,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x13",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "starter-enclosure-earth",
+      "sheetId": "irrigation-protective-earth",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 575,
+      "y": 300,
+      "x1": 575,
+      "y1": 300,
+      "x2": 745,
+      "y2": 425,
+      "bends": [
+        {
+          "x": 575,
+          "y": 425
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x14",
+          "pinId": "connection-1"
         }
       }
     },
@@ -1544,10 +1712,58 @@
       "kind": "text",
       "x": 105,
       "y": 585,
-      "text": "XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned."
+      "text": "XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned."
+    },
+    {
+      "id": "irrigation-protective-earth-note-0",
+      "sheetId": "irrigation-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "ENCLOSURE PROTECTIVE EARTH · XT6"
+    },
+    {
+      "id": "irrigation-protective-earth-note-1",
+      "sheetId": "irrigation-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned."
     }
   ],
   "crossSheetConnections": [
+    {
+      "id": "enclosure-earth",
+      "name": "XT6 enclosure protective earth",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-control-supply",
+          "wireId": "enclosure-earth-cabinet",
+          "point": {
+            "x": 215,
+            "y": 460
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-protective-earth",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "irrigation-protective-earth",
+          "wireId": "enclosure-earth-remote",
+          "point": {
+            "x": 215,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-control-supply",
+            "targetRef": "X11"
+          }
+        }
+      ]
+    },
     {
       "id": "pressure-feed",
       "name": "+24 V DC",
