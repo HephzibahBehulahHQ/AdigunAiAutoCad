@@ -13,8 +13,9 @@ const supplyCheck = 'bench-supply-check';
 const indicatorDisconnect = 'bench-indicator-disconnect';
 const switchedIndicatorCheck = 'bench-switched-indicator-check';
 const coilPower = 'bench-coil-power-supply';
+const protectiveEarth = 'bench-protective-earth';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.6',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.7',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -25,7 +26,8 @@ const project = {
     { id: supplyCheck, number: 'A2/005', name: 'XT5 independent supply presence checks', projectSectionId: 'A2' },
     { id: indicatorDisconnect, number: 'A2/006', name: 'XT2 indicator supply disconnect', projectSectionId: 'A2' },
     { id: switchedIndicatorCheck, number: 'A2/007', name: 'XT6 switched indicator voltage check', projectSectionId: 'A2' },
-    { id: coilPower, number: 'A2/008', name: 'PS1 coil supply and incoming power boundary', projectSectionId: 'A2' }
+    { id: coilPower, number: 'A2/008', name: 'PS1 coil supply and incoming power boundary', projectSectionId: 'A2' },
+    { id: protectiveEarth, number: 'A2/009', name: 'XT8 cabinet and indicator protective-earth boundaries', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -98,6 +100,19 @@ for (const [id, terminalNumber, potential, destination] of [
   const receive = wire(actuation, id + '-receive', potential, { x: 165, y: end.y }, end);
   link(id, potential, send, receive, psu.ref, destination.ref, 'right', 'left');
 }
+
+const earthTerminal = (ref, position, marking, x, y) => device(protectiveEarth, ref, 'phoenix-contact-3209536',
+  x, y, { terminalStrip: 'XT8', position, marking });
+const earthEntry = earthTerminal('X21', '1', 'Incoming bench PE', 300, 300);
+const cabinetEarth = earthTerminal('X22', '2', 'Bench cabinet PE boundary', 720, 300);
+const indicatorEarth = earthTerminal('X23', '3', 'Indicator enclosure PE boundary', 720, 425);
+const earthJunction = { x: 520, y: 300 };
+const earthSend = wire(coilPower, 'bench-pe-send', 'PE', { x: 380, y: 420 }, { x: 380, y: 470 });
+const earthReceive = wire(protectiveEarth, 'bench-pe-receive', 'PE', { x: 165, y: 300 }, pin(earthEntry, '1'));
+link('bench-pe', 'Bench protective earth', earthSend, earthReceive, 'X20', earthEntry.ref, 'right', 'left');
+wire(protectiveEarth, 'bench-pe-trunk', 'PE', pin(earthEntry, '2'), earthJunction);
+wire(protectiveEarth, 'bench-cabinet-pe', 'PE', earthJunction, pin(cabinetEarth, '1'));
+wire(protectiveEarth, 'bench-indicator-pe', 'PE', earthJunction, pin(indicatorEarth, '1'), [{ x: 520, y: 425 }]);
 
 const lampSupply = terminal(indicatorDisconnect, 'X3', 370, 310, 'XT2', '1', 'Indicator supply +24 V');
 const lampDisconnect = device(indicatorDisconnect, 'X15', 'phoenix-contact-3210156', 625, 310,
@@ -218,6 +233,10 @@ for (const [sheetId, title, lines] of [
   [coilPower, 'RELAY TEST BENCH · PS1 COIL SUPPLY', [
     'PS1 feeds the coil circuit through XT1. The separate indicator supply remains external.',
     'XT7 marks incoming L, N and PE. Incoming source, protection, and conductor sizing remain unassigned.'
+  ]],
+  [protectiveEarth, 'RELAY TEST BENCH · XT8 PROTECTIVE-EARTH BOUNDARIES', [
+    'XT8 routes PE from XT7 to the bench cabinet and indicator enclosure terminal boundaries.',
+    'Physical bonding, rail installation and protective-conductor sizing remain unassigned.'
   ]]
 ]) {
   [title, ...lines].forEach((text, index) => project.objects.push({
