@@ -18,9 +18,10 @@ const earth = 'irrigation-protective-earth';
 const alarm = 'irrigation-alarm-interface';
 const permissive = 'irrigation-source-permissive';
 const stopStation = 'irrigation-operational-stop';
+const pressureTest = 'irrigation-pressure-test-access';
 const ioSchedule = 'irrigation-plc-io-schedule';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.10',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.11',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -36,6 +37,7 @@ const project = {
     { id: alarm, number: 'A2/010', name: 'Isolated starter fault annunciator interface', projectSectionId: 'A2' },
     { id: permissive, number: 'A2/011', name: 'Water source permissive at XT8', projectSectionId: 'A2' },
     { id: stopStation, number: 'A2/012', name: 'Pump-side operational stop request', projectSectionId: 'A2' },
+    { id: pressureTest, number: 'A2/013', name: 'Pressure transmitter disconnect and test terminals', projectSectionId: 'A2' },
     { id: ioSchedule, number: 'A4/001', name: 'Wired PLC I/O schedule', projectSectionId: 'A4' }
   ],
   objects: [], crossSheetConnections: []
@@ -146,6 +148,18 @@ const levelReturn = terminal(permissive, 'X19', 470, 390, 'XT8', '2', 'Water-ava
 
 const stop = device(stopStation, 'S2', 'schneider-electric-xb5aa42', 605, 345, { marking: 'Pump-side operational stop request' });
 
+const pressureDisconnect = device(pressureTest, 'X20', 'phoenix-contact-3210156', 445, 295,
+  { terminalStrip: 'XT9', position: '1', marking: 'Pressure transmitter feed disconnect', knifePosition: 'closed' });
+const pressureTestFeed = terminal(pressureTest, 'X21', 710, 295, 'XT9', '2', 'Switched transmitter feed test point');
+const pressureTestCommon = terminal(pressureTest, 'X22', 710, 420, 'XT9', '3', 'Transmitter reference test point');
+wire(pressureTest, 'pressure-test-switched-feed', '+24 V DC', pin(pressureDisconnect, '2'), pin(pressureTestFeed, '1'));
+const pressureTestEdge = { x: 960, y: 295 };
+const transmitterEdge = { x: 215, y: pin(sensor, '1').y };
+wire(pressureTest, 'pressure-field-feed-cabinet', '+24 V DC', pin(pressureTestFeed, '2'), pressureTestEdge);
+wire(field, 'pressure-field-feed-remote', '+24 V DC', transmitterEdge, pin(sensor, '1'));
+link('pressure-field-feed', 'XT9 switched transmitter feed', [pressureTest, pressureTestFeed.ref, pressureTestEdge, 'right'],
+  [field, sensor.ref, transmitterEdge, 'left']);
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -160,7 +174,7 @@ wire(output, 'remote-demand', 'Remote starter demand', pin(relay, '14'), pin(con
   [{ x: 770, y: 370 }, { x: 770, y: 400 }]);
 
 for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, cable] of [
-  ['pressure-feed', '+24 V DC', 'X1', { x: 460, y: 239 }, { x: 215, y: 182 }, [{ x: 460, y: 182 }], sensor, '1', 'left'],
+  ['pressure-feed', '+24 V DC', 'X1', { x: 460, y: 239 }, { x: 215, y: 182 }, [{ x: 460, y: 182 }], pressureDisconnect, '1', 'left'],
   ['pressure-common', '0 V', 'X2', { x: 490, y: 257 }, { x: 215, y: 475 }, [{ x: 490, y: 475 }], sensor, '3', 'left'],
   ['pressure-voltage', 'B1 OUT2 to AI0', 'A1', pin(plc, 'X11:2'), { x: 1020, y: 257 }, null, sensor, '2', 'right'],
   ['pressure-switch', 'B1 OUT1 to DI a.0', 'A1', pin(plc, 'X10:7'), { x: 215, y: 347 }, null, sensor, '4', 'right'],
@@ -196,7 +210,9 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['operational-stop-feed', '+24 V DC', 'X1', { x: 960, y: 185 }, { x: 1020, y: 185 },
     null, stop, '21', 'left', ['W-07', '1']],
   ['operational-stop-input', 'S2 stop request to DI a.5', 'A1', pin(plc, 'X10:12'), { x: 215, y: 550 },
-    [{ x: 568, y: 437 }, { x: 568, y: 550 }], stop, '22', 'right', ['W-07', '2']]
+    [{ x: 568, y: 437 }, { x: 568, y: 550 }], stop, '22', 'right', ['W-07', '2']],
+  ['pressure-test-reference', '0 V', 'X2', { x: 925, y: 495 }, { x: 1020, y: 495 },
+    null, pressureTestCommon, '2', 'right']
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -222,7 +238,8 @@ for (const [sheetId, title, description] of [
   [earth, 'ENCLOSURE PROTECTIVE EARTH · XT6', 'XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned.'],
   [alarm, 'STARTER FAULT ANNUNCIATOR INTERFACE · K2', 'DQ a.2 commands K2. XT7 exposes the changeover contacts. PLC alarm logic and the external annunciator supply and load remain unassigned.'],
   [permissive, 'WATER SOURCE PERMISSIVE · XT8', 'W-06 serves the external contact that closes when water is available. DI a.4 is a PLC input. Sensor selection and PLC permissive logic remain unassigned.'],
-  [stopStation, 'PUMP-SIDE OPERATIONAL STOP · S2', 'Pressing S2 opens the DI a.5 circuit. W-07 carries the feed and return. This is a PLC operational input. Emergency-stop functions remain outside this drawing.']
+  [stopStation, 'PUMP-SIDE OPERATIONAL STOP · S2', 'Pressing S2 opens the DI a.5 circuit. W-07 carries the feed and return. This is a PLC operational input. Emergency-stop functions remain outside this drawing.'],
+  [pressureTest, 'PRESSURE TRANSMITTER TEST ACCESS · XT9', 'X20 opens the transmitter feed. X21 and X22 expose its downstream feed and 0 V reference. Test equipment and procedure remain unassigned.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
