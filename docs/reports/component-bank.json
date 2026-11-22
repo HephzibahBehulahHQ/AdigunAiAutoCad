@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 113,
+    "manufacturerParts": 122,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 113,
-    "partsWithPhysicalDimensions": 99,
-    "partsWithPhysicalRepresentations": 92,
+    "partsWithTerminalMaps": 122,
+    "partsWithPhysicalDimensions": 108,
+    "partsWithPhysicalRepresentations": 101,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -16624,6 +16624,1572 @@
           "publisher": "Phoenix Contact",
           "title": "UT 35 · Feed-through terminal block · Item 3044225",
           "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-35-3044225",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3037135",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3037135",
+      "model": "ST 4 OG",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3037135.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.08,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.08,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Spring-cage"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3037135.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "ST 4 OG · Feed-through terminal block · Item 3037135",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-st-4-og-3037135",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044197",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044197",
+      "model": "UT 16 BK",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Black (RAL 9005)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044197.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 76,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 16,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 1.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 1.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 55.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 55,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 62.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 55.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 55,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 62.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044197.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.2,
+          "height": 55.5,
+          "railDepths": {
+            "NS 35/7.5": 55,
+            "NS 35/15": 62.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 16 BK · Feed-through terminal block · Item 3044197",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-16-bk-3044197",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3045169",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3045169",
+      "model": "UT 6 OG",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Orange (RAL 2003)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3045169.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 47.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 47.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3045169.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 47.7,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 6 OG · Feed-through terminal block · Item 3045169",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-6-og-3045169",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3045198",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3045198",
+      "model": "UT 6 WH",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "White (RAL 9010)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3045198.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "White (RAL 9010)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 47.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 47.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3045198.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.2,
+          "height": 47.7,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 6 WH · Feed-through terminal block · Item 3045198",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-6-wh-3045198",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3045156",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3045156",
+      "model": "UT 4 GN",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Green (RAL 6021)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3045156.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Green (RAL 6021)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 47.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 47.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3045156.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 47.7,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 4 GN · Feed-through terminal block · Item 3045156",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-4-gn-3045156",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3045075",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3045075",
+      "model": "UT 2,5 WH",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "White (RAL 9010)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3045075.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "White (RAL 9010)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 47.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 47.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3045075.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 47.7,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 2,5 WH · Feed-through terminal block · Item 3045075",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-25-wh-3045075",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3045062",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3045062",
+      "model": "UT 2,5 RD",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Red (RAL 3001)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3045062.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 47.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 55,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 47.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 47.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 55,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3045062.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.2,
+          "height": 47.7,
+          "railDepths": {
+            "NS 35/7.5": 47.5,
+            "NS 35/15": 55
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 2,5 RD · Feed-through terminal block · Item 3045062",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-25-rd-3045062",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3037151",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3037151",
+      "model": "ST 4 RD",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Red (RAL 3001)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "spring-cage"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3037151.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.08,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.08,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Spring-cage"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3037151.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.2,
+          "height": 56,
+          "railDepths": {
+            "NS 35/7.5": 36.5,
+            "NS 35/15": 44
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "ST 4 RD · Feed-through terminal block · Item 3037151",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-st-4-rd-3037151",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3044207",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3044207",
+      "model": "UT 16 RD",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Red (RAL 3001)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3044207.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 76,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 16,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 1.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 1.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Screw"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 55.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 55,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 62.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 55.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 55,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 62.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.3044207.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.2,
+          "height": 55.5,
+          "railDepths": {
+            "NS 35/7.5": 55,
+            "NS 35/15": 62.5
+          },
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified."
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "UT 16 RD · Feed-through terminal block · Item 3044207",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-ut-16-rd-3044207",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
           "retrievedAt": "2026-11-22"
