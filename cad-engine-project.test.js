@@ -873,7 +873,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const denseTerminal = densePage.locator('#userDrawings [data-object="scale-terminal-125"]');
     await denseTerminal.dispatchEvent('click', { bubbles: true });
     await densePage.locator('#openCommands').click();
-    await densePage.getByRole('button', { name: 'Fit selection', exact: true }).click();
+    await densePage.locator('#commands').getByRole('button', { name: /Fit selection/ }).click();
     await densePage.getByRole('button', { name: 'Draw wire', exact: true }).click();
     const densePin = denseTerminal.locator('[data-component-pin="connection-2"]');
     const anchor = await densePin.evaluate(marker => {
