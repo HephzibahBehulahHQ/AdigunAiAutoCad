@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.3",
+  "revision": "1.4",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -39,6 +39,12 @@
       "id": "irrigation-run-indication",
       "number": "A2/006",
       "name": "Local pump run indication",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-starter-fault",
+      "number": "A2/007",
+      "name": "Starter fault contact at XT4",
       "projectSectionId": "A2"
     }
   ],
@@ -227,6 +233,40 @@
         "comment": ""
       },
       "sheetId": "irrigation-run-indication"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X7",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "Supply to external fault contact",
+        "comment": ""
+      },
+      "sheetId": "irrigation-starter-fault"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X8",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "Return from external fault contact",
+        "comment": ""
+      },
+      "sheetId": "irrigation-starter-fault"
     },
     {
       "id": "plc-supply",
@@ -832,11 +872,11 @@
       "stroke": "#b42318",
       "strokeWidth": 1.5,
       "x": 460,
-      "y": 220,
+      "y": 230,
       "x1": 460,
-      "y1": 220,
+      "y1": 230,
       "x2": 215,
-      "y2": 220,
+      "y2": 230,
       "cableId": "W-02",
       "coreId": "1"
     },
@@ -1015,6 +1055,101 @@
       "coreId": "2"
     },
     {
+      "id": "starter-fault-feed-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 460,
+      "y": 205,
+      "x1": 460,
+      "y1": 205,
+      "x2": 215,
+      "y2": 205,
+      "cableId": "W-04",
+      "coreId": "1"
+    },
+    {
+      "id": "starter-fault-feed-remote",
+      "sheetId": "irrigation-starter-fault",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 265,
+      "x1": 215,
+      "y1": 265,
+      "x2": 435,
+      "y2": 265,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x7",
+          "pinId": "level-1-left"
+        }
+      },
+      "cableId": "W-04",
+      "coreId": "1"
+    },
+    {
+      "id": "starter-fault-input-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "XT4 starter fault to DI a.3",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 570,
+      "y": 401,
+      "x1": 570,
+      "y1": 401,
+      "x2": 215,
+      "y2": 510,
+      "bends": [
+        {
+          "x": 568,
+          "y": 401
+        },
+        {
+          "x": 568,
+          "y": 510
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-10"
+        },
+        "end": null
+      },
+      "cableId": "W-04",
+      "coreId": "2"
+    },
+    {
+      "id": "starter-fault-input-remote",
+      "sheetId": "irrigation-starter-fault",
+      "kind": "wire",
+      "potential": "XT4 starter fault to DI a.3",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 390,
+      "x1": 215,
+      "y1": 390,
+      "x2": 435,
+      "y2": 390,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x8",
+          "pinId": "level-1-left"
+        }
+      },
+      "cableId": "W-04",
+      "coreId": "2"
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -1109,6 +1244,22 @@
       "x": 105,
       "y": 585,
       "text": "W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned."
+    },
+    {
+      "id": "irrigation-starter-fault-note-0",
+      "sheetId": "irrigation-starter-fault",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "PUMP STARTER FAULT INPUT · XT4"
+    },
+    {
+      "id": "irrigation-starter-fault-note-1",
+      "sheetId": "irrigation-starter-fault",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact."
     }
   ],
   "crossSheetConnections": [
@@ -1377,7 +1528,7 @@
           "wireId": "run-feedback-feed-cabinet",
           "point": {
             "x": 215,
-            "y": 220
+            "y": 230
           },
           "connector": {
             "direction": "left",
@@ -1490,6 +1641,70 @@
           },
           "connector": {
             "direction": "right",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "starter-fault-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "starter-fault-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 205
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-starter-fault",
+            "targetRef": "X7"
+          }
+        },
+        {
+          "sheetId": "irrigation-starter-fault",
+          "wireId": "starter-fault-feed-remote",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "starter-fault-input",
+      "name": "XT4 starter fault to DI a.3",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "starter-fault-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 510
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-starter-fault",
+            "targetRef": "X8"
+          }
+        },
+        {
+          "sheetId": "irrigation-starter-fault",
+          "wireId": "starter-fault-input-remote",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
             "targetSheetId": "irrigation-plc",
             "targetRef": "A1"
           }
