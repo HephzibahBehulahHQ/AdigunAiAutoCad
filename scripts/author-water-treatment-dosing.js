@@ -9,14 +9,20 @@ const file = path.join(__dirname, '../examples/real-projects/water-treatment-dos
 const cabinet = 'dosing-controller';
 const sensing = 'dosing-pressure-monitoring';
 const command = 'dosing-enable-interface';
+const ready = 'dosing-ready-feedback';
+const running = 'dosing-running-feedback';
+const fault = 'dosing-fault-feedback';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Water-treatment dosing and pressure monitoring', revision: '1.0',
+  product: 'AdigunAiAutoCad', project: 'Water-treatment dosing and pressure monitoring', revision: '1.1',
   description: 'Two independent filter pressure inputs and an isolated dosing-enable contact interface.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'PLC supply, analog inputs and dosing output', projectSectionId: 'A2' },
     { id: sensing, number: 'A2/002', name: 'Filter inlet and outlet pressure transmitters', projectSectionId: 'A2' },
-    { id: command, number: 'A2/003', name: 'Isolated chemical dosing enable contact', projectSectionId: 'A2' }
+    { id: command, number: 'A2/003', name: 'Isolated chemical dosing enable contact', projectSectionId: 'A2' },
+    { id: ready, number: 'A2/004', name: 'External dosing controller ready contact', projectSectionId: 'A2' },
+    { id: running, number: 'A2/005', name: 'External dosing controller running contact', projectSectionId: 'A2' },
+    { id: fault, number: 'A2/006', name: 'External dosing controller fault contact', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -48,17 +54,19 @@ function wire(sheetId, id, potential, start, end, bends) {
     segment.pinAttachments = { start: start.attachment || null, end: end.attachment || null };
   }
   project.objects.push(segment);
+  return segment;
 }
 
 function port(sheetId, ref, connection, x, y, direction, bends) {
   return { sheetId, ref, connection, edge: { x, y }, direction, bends };
 }
 
-function connect(id, potential, cabinetPort, fieldPort) {
+function connect(id, potential, cabinetPort, fieldPort, cable) {
   const endpoints = [cabinetPort, fieldPort].map((source, index) => {
     const target = index === 0 ? fieldPort : cabinetPort;
     const wireId = id + (index === 0 ? '-cabinet' : '-field');
-    wire(source.sheetId, wireId, potential, source.connection, source.edge, source.bends);
+    const segment = wire(source.sheetId, wireId, potential, source.connection, source.edge, source.bends);
+    if (cable) Object.assign(segment, cable);
     return { sheetId: source.sheetId, wireId, point: source.edge, connector: {
       direction: source.direction, targetSheetId: target.sheetId, targetRef: target.ref
     } };
@@ -83,6 +91,9 @@ wire(cabinet, 'plc-output-reference', '0 V', { x: 465, y: 292 }, pin(plc, 'X12:2
   [{ x: 465, y: 535 }, { x: 950, y: 535 }, { x: 950, y: 368 }]);
 wire(cabinet, 'plc-analog-reference', '0 V', { x: 510, y: 252 }, pin(plc, 'X11:1'),
   [{ x: 510, y: 175 }, { x: 910, y: 175 }, { x: 910, y: 234 }]);
+
+wire(cabinet, 'plc-input-reference', '0 V', { x: 535, y: 252 }, pin(plc, 'X10:6'),
+  [{ x: 535, y: 324 }]);
 
 const fieldFeed = { x: 385, y: 265 };
 const fieldReturn = { x: 445, y: 480 };
@@ -112,10 +123,28 @@ wire(command, 'dosing-contact-common', 'Dosing contact common', pin(relay, '11')
 wire(command, 'dosing-contact-no', 'Dosing contact enable', pin(relay, '14'), pin(contactEnable, '1'),
   [{ x: 770, y: 375 }, { x: 770, y: 420 }]);
 
+for (const [sheet, stateLabel, inputPin, channel, strip, cableId, feedRef, returnRef, feedY, elbow, signalY] of [
+  [ready, 'Ready', 'X10:7', 'DI a.0', 'XT3', 'W-01', 'X5', 'X6', 168, 545, 365],
+  [running, 'Running', 'X10:8', 'DI a.1', 'XT4', 'W-02', 'X7', 'X8', 194, 565, 410],
+  [fault, 'Fault', 'X10:9', 'DI a.2', 'XT5', 'W-03', 'X9', 'X10', 220, 585, 455]
+]) {
+  const feed = terminal(sheet, feedRef, 470, 265, strip, '1', stateLabel + ' contact feed');
+  const feedback = terminal(sheet, returnRef, 470, 390, strip, '2', stateLabel + ' contact return');
+  const input = pin(plc, inputPin);
+  connect(sheet + '-feed', '+24 V DC', port(cabinet, source.ref, { x: 975, y: feedY }, 1020, feedY, 'right'),
+    port(sheet, feed.ref, pin(feed, '1'), 215, 265, 'left'), { cableId, coreId: '1' });
+  connect(sheet + '-input', strip + ' ' + stateLabel.toLowerCase() + ' feedback to ' + channel,
+    port(cabinet, plc.ref, input, 215, signalY, 'left', [{ x: elbow, y: input.y }, { x: elbow, y: signalY }]),
+    port(sheet, feedback.ref, pin(feedback, '1'), 215, 390, 'left'), { cableId, coreId: '2' });
+}
+
 for (const [sheetId, title, note] of [
   [cabinet, 'WATER TREATMENT · DOSING AND PRESSURE CONTROL', 'A1 receives two distinct pressure voltages. External controller power enters through XT1.'],
   [sensing, 'FILTER INLET AND OUTLET PRESSURES · B1 AND B2', 'Both OUT2 links assume voltage mode. Sensor suitability, range, scaling and filter differential limits remain unassigned.'],
-  [command, 'CHEMICAL DOSING ENABLE INTERFACE · K1', 'XT2 exposes a normally open enable contact. The external dosing controller, dose logic and permissives remain unassigned.']
+  [command, 'CHEMICAL DOSING ENABLE INTERFACE · K1', 'XT2 exposes a normally open enable contact. The external dosing controller, dose logic and permissives remain unassigned.'],
+  [ready, 'EXTERNAL DOSING READY CONTACT · XT3', 'W-01 connects the external ready contact to DI a.0. Any program use of the ready input remains unassigned.'],
+  [running, 'EXTERNAL DOSING RUNNING CONTACT · XT4', 'W-02 connects the external running contact to DI a.1. The input reports the external controller contact, independently of the enable command.'],
+  [fault, 'EXTERNAL DOSING FAULT CONTACT · XT5', 'W-03 connects the external contact that closes on fault to DI a.2. Contact selection and fault handling remain unassigned.']
 ]) {
   [title, note].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text

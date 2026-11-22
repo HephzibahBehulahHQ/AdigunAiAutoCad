@@ -1530,7 +1530,7 @@
       "briefId": "12",
       "role": "standalone-example",
       "path": "examples/real-projects/water-treatment-dosing.adigun.json",
-      "revision": "1.0",
+      "revision": "1.1",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1547,43 +1547,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 97,
-        "additionalConnectedSheetsRequired": 67,
+        "additionalAuthoredSheetsRequired": 94,
+        "additionalConnectedSheetsRequired": 64,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "dosing-controller",
         "sheetName": "PLC supply, analog inputs and dosing output",
-        "segments": "24,11,48,11 24,18,31,18 31,18,31,13 31,13,48,13 34,11,34,0 34,0,94,0 94,0,94,26 94,26,80,26 31,18,31,48 31,48,91,48 91,48,91,28 91,28,80,28 37,13,37,4 37,4,86,4 86,4,86,11 86,11,80,11 15,11,0,11 15,18,0,18 80,13,100,13 80,16,89,16 89,16,89,19 89,19,100,19 80,30,100,30 91,41,100,41"
+        "segments": "24,11,48,11 24,18,31,18 31,18,31,13 31,13,48,13 34,11,34,0 34,0,94,0 94,0,94,26 94,26,80,26 31,18,31,48 31,48,91,48 91,48,91,28 91,28,80,28 37,13,37,4 37,4,86,4 86,4,86,11 86,11,80,11 40,13,40,22 40,22,48,22 15,11,0,11 15,18,0,18 80,13,100,13 80,16,89,16 89,16,89,19 89,19,100,19 80,30,100,30 91,41,100,41 94,3,100,3 48,24,41,24 41,24,41,27 41,27,0,27 94,6,100,6 48,27,43,27 43,27,43,33 43,33,0,33 94,9,100,9 48,29,46,29 46,29,46,39 46,39,0,39"
       },
-      "topologySha256": "28567cbf8d9fa5385eaf26abecb98aaede35c86d0736ea670b9f7275f29de30f",
-      "electricalStructureSha256": "9987914488f82d6c63df7074d2972c3efd446b9a84e10918c28086e8a2dcddac",
+      "topologySha256": "6661699600b6bdc767b7bbc9e7a97ed56010f8a4074977ce1cef314d7cc539aa",
+      "electricalStructureSha256": "c47277064cd4ed751d0da3def2312eb2710544c0222871bc5a0d3a52c826dc80",
       "csvSha256": {
-        "bom": "ce108cea711ab16f7ca50431d2b9676e12adb78d580e3098e0550cf88218e4a5",
-        "wires": "11c0ae912db372e75688e36e7e1291dae50dabd52df01439545e95393e8b040a",
-        "terminals": "404f7190c84e6fde9eec4cf01bd3562cd1b575cce53ffb854ed0b84a4e7b756c",
-        "plcIo": "16528f9f1863b2198cbc19c533f9764773b5457ff07abc24bc285cd23e80042f",
-        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208",
-        "devices": "9d1d79e0788ab5c140466d25687a0d5aaecb08378a544429b074922f5d265251",
-        "sheets": "fc7359aaa93ff8f2f9b5acab5271362429b8e35b48cd1602b60c3531352741ec"
+        "bom": "f89fbe6f71c0af6419d71d719f4d3578eb422ccc99921d8c2779a9a746fe7c5d",
+        "wires": "ced30bda74f0aa99f47e19dfe20357e994dfb6fbdf8d24e69fd5c53956006eae",
+        "terminals": "a7522f27998ca1e518762a9f45f2c86c330c13db9244d4c34dc3c525bca80932",
+        "plcIo": "bfeb52e08afe1ba14c987feac63322f413d9b332e2166dfcdf4c9d972356aad3",
+        "cables": "41b84403d486680e7236557c3df7cd0b462ddf4bda8f19590d866c81a1eef847",
+        "devices": "3e4b85201c7ffe8864609f444dbd5d713f1683de58d59de0939bbf490a2a5aa7",
+        "sheets": "f069f41a0497fad409e08031866b00889f4c6ffa6eee58bbf66b6251ccf3e435"
       },
       "metrics": {
-        "sheetCount": 3,
-        "authoredSheetCount": 3,
-        "connectedSheetCount": 3,
-        "contentObjectCount": 37,
+        "sheetCount": 6,
+        "authoredSheetCount": 6,
+        "connectedSheetCount": 6,
+        "contentObjectCount": 62,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 8,
-        "wireCount": 23,
-        "netCount": 13,
-        "globalNetCount": 7,
-        "crossSheetConnectionCount": 6,
+        "componentCount": 14,
+        "wireCount": 36,
+        "netCount": 22,
+        "globalNetCount": 10,
+        "crossSheetConnectionCount": 12,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 4,
-        "wireListRowCount": 23,
-        "terminalListRowCount": 8
+        "wireListRowCount": 36,
+        "terminalListRowCount": 20
       },
       "errors": []
     }

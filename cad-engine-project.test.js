@@ -2076,11 +2076,12 @@ test('water-treatment dosing separates the filter pressure signals and dosing en
   const file = path.join(__dirname, 'examples/real-projects/water-treatment-dosing.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [3, 6, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [6, 12, 0, 0]);
   const nets = report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(nets, [
-    'A1:X10:1,A1:X12:1,B1:1,B2:1,X1:1,X1:2',
-    'A1:X10:2,A1:X11:1,A1:X12:2,B1:3,B2:3,K1:A2,X2:1,X2:2',
+    'A1:X10:1,A1:X12:1,B1:1,B2:1,X1:1,X1:2,X5:1,X5:2,X7:1,X7:2,X9:1,X9:2',
+    'A1:X10:2,A1:X10:6,A1:X11:1,A1:X12:2,B1:3,B2:3,K1:A2,X2:1,X2:2',
+    'A1:X10:7,X6:1,X6:2', 'A1:X10:8,X8:1,X8:2', 'A1:X10:9,X10:1,X10:2',
     'A1:X11:2,B1:2', 'A1:X11:3,B2:2', 'A1:X12:3,K1:A1',
     'K1:11,X3:1,X3:2', 'K1:14,X4:1,X4:2'
   ]);

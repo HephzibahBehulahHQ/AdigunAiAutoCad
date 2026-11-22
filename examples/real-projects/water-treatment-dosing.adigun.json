@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Water-treatment dosing and pressure monitoring",
-  "revision": "1.0",
+  "revision": "1.1",
   "description": "Two independent filter pressure inputs and an isolated dosing-enable contact interface.",
   "activeSheet": "dosing-controller",
   "sheets": [
@@ -21,6 +21,24 @@
       "id": "dosing-enable-interface",
       "number": "A2/003",
       "name": "Isolated chemical dosing enable contact",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-ready-feedback",
+      "number": "A2/004",
+      "name": "External dosing controller ready contact",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-running-feedback",
+      "number": "A2/005",
+      "name": "External dosing controller running contact",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-fault-feedback",
+      "number": "A2/006",
+      "name": "External dosing controller fault contact",
       "projectSectionId": "A2"
     }
   ],
@@ -322,6 +340,33 @@
         "end": {
           "instanceId": "a1",
           "pinId": "x11-1"
+        }
+      }
+    },
+    {
+      "id": "plc-input-reference",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 535,
+      "y": 252,
+      "x1": 535,
+      "y1": 252,
+      "x2": 600,
+      "y2": 324,
+      "bends": [
+        {
+          "x": 535,
+          "y": 324
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-6"
         }
       }
     },
@@ -721,6 +766,393 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x5",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X5",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "1",
+        "marking": "Ready contact feed",
+        "comment": ""
+      },
+      "sheetId": "dosing-ready-feedback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x6",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X6",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "2",
+        "marking": "Ready contact return",
+        "comment": ""
+      },
+      "sheetId": "dosing-ready-feedback"
+    },
+    {
+      "id": "dosing-ready-feedback-feed-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 975,
+      "y": 168,
+      "x1": 975,
+      "y1": 168,
+      "x2": 1020,
+      "y2": 168,
+      "cableId": "W-01",
+      "coreId": "1"
+    },
+    {
+      "id": "dosing-ready-feedback-feed-field",
+      "sheetId": "dosing-ready-feedback",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 265,
+      "x1": 435,
+      "y1": 265,
+      "x2": 215,
+      "y2": 265,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x5",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "1"
+    },
+    {
+      "id": "dosing-ready-feedback-input-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "XT3 ready feedback to DI a.0",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 342,
+      "x1": 600,
+      "y1": 342,
+      "x2": 215,
+      "y2": 365,
+      "bends": [
+        {
+          "x": 545,
+          "y": 342
+        },
+        {
+          "x": 545,
+          "y": 365
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-7"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "2"
+    },
+    {
+      "id": "dosing-ready-feedback-input-field",
+      "sheetId": "dosing-ready-feedback",
+      "kind": "wire",
+      "potential": "XT3 ready feedback to DI a.0",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 390,
+      "x1": 435,
+      "y1": 390,
+      "x2": 215,
+      "y2": 390,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x6",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-01",
+      "coreId": "2"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X7",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "Running contact feed",
+        "comment": ""
+      },
+      "sheetId": "dosing-running-feedback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X8",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "Running contact return",
+        "comment": ""
+      },
+      "sheetId": "dosing-running-feedback"
+    },
+    {
+      "id": "dosing-running-feedback-feed-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 975,
+      "y": 194,
+      "x1": 975,
+      "y1": 194,
+      "x2": 1020,
+      "y2": 194,
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "dosing-running-feedback-feed-field",
+      "sheetId": "dosing-running-feedback",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 265,
+      "x1": 435,
+      "y1": 265,
+      "x2": 215,
+      "y2": 265,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x7",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "dosing-running-feedback-input-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "XT4 running feedback to DI a.1",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 360,
+      "x1": 600,
+      "y1": 360,
+      "x2": 215,
+      "y2": 410,
+      "bends": [
+        {
+          "x": 565,
+          "y": 360
+        },
+        {
+          "x": 565,
+          "y": 410
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-8"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "id": "dosing-running-feedback-input-field",
+      "sheetId": "dosing-running-feedback",
+      "kind": "wire",
+      "potential": "XT4 running feedback to DI a.1",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 390,
+      "x1": 435,
+      "y1": 390,
+      "x2": 215,
+      "y2": 390,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x8",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X9",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "1",
+        "marking": "Fault contact feed",
+        "comment": ""
+      },
+      "sheetId": "dosing-fault-feedback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "2",
+        "marking": "Fault contact return",
+        "comment": ""
+      },
+      "sheetId": "dosing-fault-feedback"
+    },
+    {
+      "id": "dosing-fault-feedback-feed-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 975,
+      "y": 220,
+      "x1": 975,
+      "y1": 220,
+      "x2": 1020,
+      "y2": 220,
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "dosing-fault-feedback-feed-field",
+      "sheetId": "dosing-fault-feedback",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 265,
+      "x1": 435,
+      "y1": 265,
+      "x2": 215,
+      "y2": 265,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x9",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "dosing-fault-feedback-input-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "XT5 fault feedback to DI a.2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 378,
+      "x1": 600,
+      "y1": 378,
+      "x2": 215,
+      "y2": 455,
+      "bends": [
+        {
+          "x": 585,
+          "y": 378
+        },
+        {
+          "x": 585,
+          "y": 455
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-9"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
+      "id": "dosing-fault-feedback-input-field",
+      "sheetId": "dosing-fault-feedback",
+      "kind": "wire",
+      "potential": "XT5 fault feedback to DI a.2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 390,
+      "x1": 435,
+      "y1": 390,
+      "x2": 215,
+      "y2": 390,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x10",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
       "id": "dosing-controller-note-0",
       "sheetId": "dosing-controller",
       "kind": "text",
@@ -767,6 +1199,54 @@
       "x": 105,
       "y": 585,
       "text": "XT2 exposes a normally open enable contact. The external dosing controller, dose logic and permissives remain unassigned."
+    },
+    {
+      "id": "dosing-ready-feedback-note-0",
+      "sheetId": "dosing-ready-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "EXTERNAL DOSING READY CONTACT · XT3"
+    },
+    {
+      "id": "dosing-ready-feedback-note-1",
+      "sheetId": "dosing-ready-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "W-01 connects the external ready contact to DI a.0. Any program use of the ready input remains unassigned."
+    },
+    {
+      "id": "dosing-running-feedback-note-0",
+      "sheetId": "dosing-running-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "EXTERNAL DOSING RUNNING CONTACT · XT4"
+    },
+    {
+      "id": "dosing-running-feedback-note-1",
+      "sheetId": "dosing-running-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "W-02 connects the external running contact to DI a.1. The input reports the external controller contact, independently of the enable command."
+    },
+    {
+      "id": "dosing-fault-feedback-note-0",
+      "sheetId": "dosing-fault-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "EXTERNAL DOSING FAULT CONTACT · XT5"
+    },
+    {
+      "id": "dosing-fault-feedback-note-1",
+      "sheetId": "dosing-fault-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "W-03 connects the external contact that closes on fault to DI a.2. Contact selection and fault handling remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -953,6 +1433,198 @@
           "point": {
             "x": 215,
             "y": 330
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-ready-feedback-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-ready-feedback-feed-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 168
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-ready-feedback",
+            "targetRef": "X5"
+          }
+        },
+        {
+          "sheetId": "dosing-ready-feedback",
+          "wireId": "dosing-ready-feedback-feed-field",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-ready-feedback-input",
+      "name": "XT3 ready feedback to DI a.0",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-ready-feedback-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-ready-feedback",
+            "targetRef": "X6"
+          }
+        },
+        {
+          "sheetId": "dosing-ready-feedback",
+          "wireId": "dosing-ready-feedback-input-field",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-running-feedback-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-running-feedback-feed-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 194
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-running-feedback",
+            "targetRef": "X7"
+          }
+        },
+        {
+          "sheetId": "dosing-running-feedback",
+          "wireId": "dosing-running-feedback-feed-field",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-running-feedback-input",
+      "name": "XT4 running feedback to DI a.1",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-running-feedback-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 410
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-running-feedback",
+            "targetRef": "X8"
+          }
+        },
+        {
+          "sheetId": "dosing-running-feedback",
+          "wireId": "dosing-running-feedback-input-field",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-fault-feedback-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-fault-feedback-feed-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 220
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-fault-feedback",
+            "targetRef": "X9"
+          }
+        },
+        {
+          "sheetId": "dosing-fault-feedback",
+          "wireId": "dosing-fault-feedback-feed-field",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-fault-feedback-input",
+      "name": "XT5 fault feedback to DI a.2",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-fault-feedback-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 455
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-fault-feedback",
+            "targetRef": "X10"
+          }
+        },
+        {
+          "sheetId": "dosing-fault-feedback",
+          "wireId": "dosing-fault-feedback-input-field",
+          "point": {
+            "x": 215,
+            "y": 390
           },
           "connector": {
             "direction": "left",
