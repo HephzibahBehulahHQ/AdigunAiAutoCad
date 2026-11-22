@@ -1595,15 +1595,15 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   const file = path.join(__dirname, 'examples/real-projects/relay-test-bench.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [10, 17, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [11, 19, 0, 0]);
   const matrix = project.objects.filter(object => object.sheetId === 'bench-indication-matrix');
   const matrixRow = row => matrix.filter(object => object.id.startsWith('bench-matrix-' + row + '-')).map(object => object.text);
   assert.deepEqual(matrixRow(2), ['Coil command', 'Closed', 'Pressed', 'Closed', 'On', 'On', 'Off', 'On']);
   assert.deepEqual(matrixRow(5), ['Indicator feed open, commanded', 'Closed', 'Pressed', 'Open', 'On', 'Off', 'Off', 'Off']);
   const membership = analysis => analysis.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(membership(report), [
-    'H1:X1,K1:12,X7:1,X7:2', 'H1:X2,H2:X2,H5:X2,H6:X2,X13:1,X13:2,X17:1,X17:2,X4:1,X4:2,X9:1,X9:2',
-    'H2:X1,K1:14,X8:1,X8:2', 'H5:X1,H6:X1,K1:11,X12:1,X12:2,X15:1,X15:2,X16:1,X16:2,X3:1,X3:2',
+    'H1:X1,K1:12,X7:1,X7:2', 'H1:X2,H2:X2,H5:X2,H6:X2,X13:1,X13:2,X17:1,X17:2,X25:1,X25:2,X4:1,X4:2,X9:1,X9:2',
+    'H2:X1,K1:14,X8:1,X8:2', 'H5:X1,H6:X1,K1:11,X12:1,X12:2,X15:1,X15:2,X16:1,X16:2,X24:1,X24:2,X3:1,X3:2',
     'H3:X1,K1:A1,S1:14,X5:1,X5:2', 'H3:X2,H4:X2,K1:A2,PS1:-,X11:1,X11:2,X2:1,X2:2,X6:1,X6:2',
     'H4:X1,PS1:+,S1:13,X10:1,X10:2,X14:1,X14:2,X1:1,X1:2',
     'PS1:L,X18:1,X18:2', 'PS1:N,X19:1,X19:2',
@@ -1624,7 +1624,7 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   indicatorOpen.objects.find(object => object.ref === 'X15').properties.knifePosition = 'open';
   const indicatorOpenNets = membership(engine.analyzeProject(indicatorOpen));
   assert.ok(indicatorOpenNets.includes('H6:X1,K1:11,X15:2,X16:1,X16:2'));
-  assert.ok(indicatorOpenNets.includes('H5:X1,X12:1,X12:2,X15:1,X3:1,X3:2'));
+  assert.ok(indicatorOpenNets.includes('H5:X1,X12:1,X12:2,X15:1,X24:1,X24:2,X3:1,X3:2'));
   assert.ok(indicatorOpenNets.includes('H4:X1,PS1:+,S1:13,X10:1,X10:2,X14:1,X14:2,X1:1,X1:2'));
   const bypassedProject = structuredClone(reopened.project);
   const [left, right] = engine.worldPins(disconnect);

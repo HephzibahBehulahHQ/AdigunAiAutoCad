@@ -1326,7 +1326,7 @@
       "briefId": "40",
       "role": "standalone-example",
       "path": "examples/real-projects/relay-test-bench.adigun.json",
-      "revision": "1.8",
+      "revision": "1.9",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1343,8 +1343,8 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 90,
-        "additionalConnectedSheetsRequired": 61,
+        "additionalAuthoredSheetsRequired": 89,
+        "additionalConnectedSheetsRequired": 60,
         "sheetIdsWithoutElectricalConnectivity": [
           "bench-indication-matrix"
         ]
@@ -1354,34 +1354,34 @@
         "sheetName": "Manual relay coil actuation",
         "segments": "21,19,25,19 34,19,35,19 48,19,54,19 54,19,54,25 54,25,60,25 21,9,57,9 57,9,57,20 57,20,60,20 0,19,12,19 0,9,12,9 78,22,100,22 78,19,100,19 78,25,100,25 55,25,55,36 36,9,36,0 23,19,23,30 47,9,47,2"
       },
-      "topologySha256": "f9998fe0aa72b6220353510cab40ad7f1925e72da71e9f5c748b72478a1ea5e1",
-      "electricalStructureSha256": "2f2e69b03219c97bac02a66961e00900d4fd0f0803c6592d9664d24e98f91689",
+      "topologySha256": "293b794b7318c104e1ae88197a7c0070d8ab19e4f1d20dd05ab5fff04ad06ca4",
+      "electricalStructureSha256": "9f9a398484c82a31591d5a4153dcc34822916202ce3d38fbc5dd60521d29746a",
       "csvSha256": {
-        "bom": "9630ddcb3671341e534e9ffa32fe8ed139b2d193bfc188d09a5171d6128f2ad2",
-        "wires": "2827c827522cc853bc949d5a8b036888c8c66a6bb8c0b6926d2cc4f2b29d62d8",
-        "terminals": "2e9f8e1f63ede4ee33425bd1cedb93933cd9929a2de691ab637c08ef819dc5ba",
+        "bom": "e0522c2f6fcd439995933b5223086e7e5bc3ed6a492616acb8194afbcc8e9a8f",
+        "wires": "e1feab97f42a4e7ad86b9fed52ba5f34ec43091299e6a6be64dfe88b2d6c6304",
+        "terminals": "7fb532f21a4088c7551008bb1aa9de031f2f0ab253a6953410fece46c058109d",
         "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
-        "cables": "2c0cd4028a0de9fbf1b1e130f4723458a0dd0666baddcfa2b38b58ff0c80e173",
-        "devices": "cc974aaaafc7092736a6d75ce6f765b1d78daeff4119a3062853bbb44392da49",
-        "sheets": "5999484d63da4dd3dfa5ed9d8ca7617376f016baaf629f172a2105b5ec65db84"
+        "cables": "d424385d7702f191142a1cdd17e2341356f7c86cfba5d25438417201a6930f57",
+        "devices": "c8f7dff7047d9ea2412c3b16bb28cf5592eeeb5f702b38bf20955f236b223ef5",
+        "sheets": "6a2681c85a4eab9dd082f03d8d55eb62c46b782e45c78343d4ba9b9cf090653a"
       },
       "metrics": {
-        "sheetCount": 10,
-        "authoredSheetCount": 10,
-        "connectedSheetCount": 9,
-        "contentObjectCount": 167,
+        "sheetCount": 11,
+        "authoredSheetCount": 11,
+        "connectedSheetCount": 10,
+        "contentObjectCount": 176,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 32,
-        "wireCount": 56,
-        "netCount": 27,
+        "componentCount": 34,
+        "wireCount": 60,
+        "netCount": 29,
         "globalNetCount": 10,
-        "crossSheetConnectionCount": 17,
+        "crossSheetConnectionCount": 19,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 7,
-        "wireListRowCount": 56,
-        "terminalListRowCount": 46
+        "wireListRowCount": 60,
+        "terminalListRowCount": 50
       },
       "errors": []
     }

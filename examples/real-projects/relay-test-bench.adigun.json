@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Relay changeover test bench",
-  "revision": "1.8",
+  "revision": "1.9",
   "description": "Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.",
   "activeSheet": "bench-coil-actuation",
   "sheets": [
@@ -57,6 +57,12 @@
       "id": "bench-protective-earth",
       "number": "A2/009",
       "name": "XT8 cabinet and indicator protective-earth boundaries",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-indicator-supply-inlet",
+      "number": "A2/010",
+      "name": "XT9 external indicator supply inlet",
       "projectSectionId": "A2"
     },
     {
@@ -1825,6 +1831,146 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x24",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X24",
+      "x": 465,
+      "y": 255,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "1",
+        "marking": "Indicator supply +24 V",
+        "comment": ""
+      },
+      "sheetId": "bench-indicator-supply-inlet"
+    },
+    {
+      "id": "indicator-inlet-feed-send",
+      "sheetId": "bench-indicator-supply-inlet",
+      "kind": "wire",
+      "x": 500,
+      "y": 255,
+      "x1": 500,
+      "y1": 255,
+      "x2": 950,
+      "y2": 255,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x24",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "indicator-inlet-feed-receive",
+      "sheetId": "bench-indicator-disconnect",
+      "kind": "wire",
+      "x": 215,
+      "y": 190,
+      "x1": 215,
+      "y1": 190,
+      "x2": 280,
+      "y2": 310,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 280,
+          "y": 190
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x25",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X25",
+      "x": 465,
+      "y": 355,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "2",
+        "marking": "Indicator supply 0 V",
+        "comment": ""
+      },
+      "sheetId": "bench-indicator-supply-inlet"
+    },
+    {
+      "id": "indicator-inlet-return-send",
+      "sheetId": "bench-indicator-supply-inlet",
+      "kind": "wire",
+      "x": 500,
+      "y": 355,
+      "x1": 500,
+      "y1": 355,
+      "x2": 950,
+      "y2": 355,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x25",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "indicator-inlet-return-receive",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 1030,
+      "y": 190,
+      "x1": 1030,
+      "y1": 190,
+      "x2": 960,
+      "y2": 335,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 960,
+          "y": 190
+        }
+      ]
+    },
+    {
+      "id": "bench-indicator-supply-inlet-note-0",
+      "sheetId": "bench-indicator-supply-inlet",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · XT9 INDICATOR SUPPLY INLET"
+    },
+    {
+      "id": "bench-indicator-supply-inlet-note-1",
+      "sheetId": "bench-indicator-supply-inlet",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "XT9:1 and XT9:2 bring the external 24 V DC indicator supply to X3 and X4."
+    },
+    {
+      "id": "bench-indicator-supply-inlet-note-2",
+      "sheetId": "bench-indicator-supply-inlet",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "The indicator return stays separate from the PS1 coil return. The external source remains unassigned."
+    },
+    {
       "id": "bench-coil-actuation-note-0",
       "sheetId": "bench-coil-actuation",
       "kind": "text",
@@ -2998,6 +3144,70 @@
             "direction": "right",
             "targetSheetId": "bench-contact-indication",
             "targetRef": "X4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indicator-inlet-feed",
+      "name": "XT9 Indicator supply +24 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-indicator-supply-inlet",
+          "wireId": "indicator-inlet-feed-send",
+          "point": {
+            "x": 950,
+            "y": 255
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-indicator-disconnect",
+            "targetRef": "X3"
+          }
+        },
+        {
+          "sheetId": "bench-indicator-disconnect",
+          "wireId": "indicator-inlet-feed-receive",
+          "point": {
+            "x": 215,
+            "y": 190
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-indicator-supply-inlet",
+            "targetRef": "X24"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indicator-inlet-return",
+      "name": "XT9 Indicator supply 0 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-indicator-supply-inlet",
+          "wireId": "indicator-inlet-return-send",
+          "point": {
+            "x": 950,
+            "y": 355
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "X4"
+          }
+        },
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "indicator-inlet-return-receive",
+          "point": {
+            "x": 1030,
+            "y": 190
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-indicator-supply-inlet",
+            "targetRef": "X25"
           }
         }
       ]

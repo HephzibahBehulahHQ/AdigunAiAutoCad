@@ -14,9 +14,10 @@ const indicatorDisconnect = 'bench-indicator-disconnect';
 const switchedIndicatorCheck = 'bench-switched-indicator-check';
 const coilPower = 'bench-coil-power-supply';
 const protectiveEarth = 'bench-protective-earth';
+const indicatorInlet = 'bench-indicator-supply-inlet';
 const testMatrix = 'bench-indication-matrix';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.8',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.9',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -29,6 +30,7 @@ const project = {
     { id: switchedIndicatorCheck, number: 'A2/007', name: 'XT6 switched indicator voltage check', projectSectionId: 'A2' },
     { id: coilPower, number: 'A2/008', name: 'PS1 coil supply and incoming power boundary', projectSectionId: 'A2' },
     { id: protectiveEarth, number: 'A2/009', name: 'XT8 cabinet and indicator protective-earth boundaries', projectSectionId: 'A2' },
+    { id: indicatorInlet, number: 'A2/010', name: 'XT9 external indicator supply inlet', projectSectionId: 'A2' },
     { id: testMatrix, number: 'A4/001', name: 'Expected relay bench indicator states', projectSectionId: 'A4' }
   ],
   objects: [], crossSheetConnections: []
@@ -203,7 +205,22 @@ for (const [id, sheetId, sourceRef, lamp, ref, position, potential, start, end, 
   link(id, 'XT5 ' + potential, send, receive, sourceRef, ref, direction, positive ? 'left' : 'right');
 }
 
+for (const [id, ref, position, potential, y, destination, branchX, targetPin] of [
+  ['indicator-inlet-feed', 'X24', '1', 'Indicator supply +24 V', 255, lampSupply, 280, '1'],
+  ['indicator-inlet-return', 'X25', '2', 'Indicator supply 0 V', 355, lampReturn, 960, '2']
+]) {
+  const inlet = terminal(indicatorInlet, ref, 465, y, 'XT9', position, potential);
+  const branchY = pin(destination, targetPin).y;
+  const send = wire(indicatorInlet, id + '-send', potential, pin(inlet, '2'), { x: 950, y });
+  const receive = wire(destination.sheetId, id + '-receive', potential, { x: branchX < destination.x ? 215 : 1030, y: 190 }, { x: branchX, y: branchY }, [{ x: branchX, y: 190 }]);
+  link(id, 'XT9 ' + potential, send, receive, ref, destination.ref, 'right', branchX < destination.x ? 'left' : 'right');
+}
+
 for (const [sheetId, title, lines] of [
+  [indicatorInlet, 'RELAY TEST BENCH · XT9 INDICATOR SUPPLY INLET', [
+    'XT9:1 and XT9:2 bring the external 24 V DC indicator supply to X3 and X4.',
+    'The indicator return stays separate from the PS1 coil return. The external source remains unassigned.'
+  ]],
   [actuation, 'RELAY TEST BENCH · COIL ACTUATION', [
     'X14 disconnects the S1 feed. With X14 closed, S1 applies the XT1 coil supply to K1 A1.',
     'W-T01 takes K1 common, normally closed and normally open terminals to the indication sheet.'
