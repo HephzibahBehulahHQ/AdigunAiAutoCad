@@ -57,7 +57,7 @@ function summarizeSheetContent(project) {
     if (!object || object.hidden) continue;
     const id = object.sheetId || defaultSheet;
     if (!content.has(id)) continue;
-    const meaningful = object.kind === 'component-instance' || object.kind === 'wire'
+    const meaningful = object.kind === 'component-instance' || object.kind === 'wire' || object.kind === 'dimension'
       || (object.kind === 'text' && typeof object.text === 'string' && object.text.trim().length > 0
         && !/\b(?:TODO|TBD|PLACEHOLDER|LOREM IPSUM)\b/i.test(object.text));
     if (meaningful) {

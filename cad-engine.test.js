@@ -3907,7 +3907,7 @@ test('the project-library manifest and generated validation report match the cur
   assert.equal(dolOpening.releaseScale.additionalAuthoredSheetsRequired, 0);
   assert.equal(dolOpening.releaseScale.additionalConnectedSheetsRequired, 68);
   assert.ok(!dolOpening.releaseScale.sheetIdsWithoutElectricalConnectivity.includes('dol-reference-001'));
-  assert.equal(dolOpening.metrics.contentObjectCount, 1059);
+  assert.equal(dolOpening.metrics.contentObjectCount, 1061);
   assert.deepEqual(dolOpening.metrics.emptyContentSheetIds, []);
   assert.equal(dolOpening.metrics.componentCount, 11);
   assert.equal(dolOpening.metrics.wireCount, 39);

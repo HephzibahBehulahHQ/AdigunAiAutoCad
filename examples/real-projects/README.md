@@ -246,6 +246,8 @@ Open this project as an editable copy from **Project Explorer → List**. The pr
 
 ## DOL reference project status
 
+The editable A3/001 layout uses millimetre geometry for its assumed 400 × 300 mm backplate and source-sized device footprints. Native dimension annotations show the backplate spans. The page fits to the print frame and remains a preliminary layout.
+
 The source-backed Schneider/Siemens/SEW direct-on-line motor feeder has 100 authored sheets: 99 legacy A2-numbered pages through A2/099 and preliminary panel layout A3/001. The motor protective-earth route reaches terminal X4 on A2/014 through a native cross-sheet link. The project has 11 components, 39 wire segments and 15 project nets. Manufacturer ratings do not establish project suitability or construction approval. See `siemens-schneider-sew-dol-reference.adigun.json`.
 
 
