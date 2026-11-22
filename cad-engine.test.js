@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 143);
+  assert.equal(items.length, 151);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -378,7 +378,15 @@ test('catalog contains only source-backed engineering components', () => {
     ['ifm-pn2070', 'sensor-pressure-analog', 'B'],
     ['siemens-sitop-psu100c-6ep1332-5ba00', 'power-supply-ac-dc', 'PS'],
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
-    ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
+    ['phoenix-contact-3209536', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3211766', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3211822', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3212131', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3044092', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3044128', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3044157', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3031238', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3031500', 'protective-earth-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977']);
   for (const [id, height] of [
@@ -606,6 +614,28 @@ test('UK terminal blocks preserve separate conductor ranges and three documented
     assert.deepEqual(part.specifications.flexibleConductorRange, { minimum: minimumFlexible, maximum: maximumFlexible, unit: 'mm²' });
     assert.deepEqual(part.specifications.mountingRails.value, ['NS 35/7.5', 'NS 35/15', 'NS 32']);
     assert.equal(part.physicalRepresentations[0].railDepths['NS 32'], depthOnNS32);
+  }
+});
+
+test('new protective conductor terminals retain the common PE potential and documented grounding foot', () => {
+  for (const [id, connectionType, area, maximumFlexible] of [
+    ['3211766', 'push-in', 4, 6],
+    ['3211822', 'push-in', 6, 10],
+    ['3212131', 'push-in', 10, 16],
+    ['3044092', 'screw', 2.5, 4],
+    ['3044128', 'screw', 4, 6],
+    ['3044157', 'screw', 6, 10],
+    ['3031238', 'spring-cage', 2.5, 2.5],
+    ['3031500', 'spring-cage', 6, 6]
+  ]) {
+    const part = engine.component('phoenix-contact-' + id);
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [connectionType, connectionType]);
+    assert.deepEqual(part.symbol.internalConnections, [['connection-1', 'connection-2']]);
+    assert.equal(part.specifications.groundingFoot.value, true);
+    assert.equal(part.specifications.productStandard.value, 'IEC 60947-7-2');
+    assert.equal(part.specifications.ratedCrossSection.value, area);
+    assert.equal(part.specifications.flexibleConductorRange.maximum, maximumFlexible);
   }
 });
 
