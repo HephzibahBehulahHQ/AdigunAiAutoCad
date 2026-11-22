@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 34);
+  assert.equal(items.length, 40);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -248,6 +248,12 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-1176299', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3212329', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-1233140', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211757', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211760', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211813', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211819', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3212120', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3212123', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -271,7 +277,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -293,6 +299,22 @@ test('catalog contains only source-backed engineering components', () => {
   const compactPe = engine.component('phoenix-contact-3209536');
   assert.deepEqual(compactPe.specifications.ratedCrossSection, { value: 2.5, unit: 'mm²' });
   assert.deepEqual(compactPe.symbol.internalConnections, [['connection-1', 'connection-2']]);
+});
+test('larger PT terminals use their specific ratings and share the verified feed-through topology', () => {
+  for (const [number, crossSection, width, current, voltage, minimum, maximum] of [
+    ['3211757', 4, 6.2, 32, 800, 0.2, 6], ['3211760', 4, 6.2, 32, 800, 0.2, 6],
+    ['3211813', 6, 8.2, 41, 1000, 0.5, 10], ['3211819', 6, 8.2, 41, 1000, 0.5, 10],
+    ['3212120', 10, 10.2, 57, 1000, 0.5, 16], ['3212123', 10, 10.2, 57, 1000, 0.5, 16]
+  ]) {
+    const part = engine.component('phoenix-contact-' + number);
+    const spec = part.specifications;
+    assert.deepEqual([spec.ratedCrossSection.value, spec.dimensions.width.value, spec.nominalCurrent.value, spec.nominalVoltage.value],
+      [crossSection, width, current, voltage]);
+    assert.deepEqual(spec.rigidConductorRange, { minimum, maximum, unit: 'mm²' });
+    assert.deepEqual(spec.flexibleConductorRange, spec.rigidConductorRange);
+    assert.deepEqual(part.symbol.internalConnections, [part.symbol.pins.map(pin => pin.id)]);
+    assert.ok(part.sources[0].url.endsWith(number));
+  }
 });
 test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
   for (const item of engine.catalog()) {
