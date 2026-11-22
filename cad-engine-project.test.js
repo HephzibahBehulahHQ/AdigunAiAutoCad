@@ -1444,8 +1444,8 @@ test('source-backed examples open as isolated native projects and retain editabl
   assert.equal(firstCopy.sheets.length, 100);
   assert.notEqual(firstCopy.sheets, secondCopy.sheets);
   assert.notEqual(firstCopy.objects, secondCopy.objects);
-  assert.equal(firstCopy.objects.filter(object => object.kind === 'component-instance').length, 38);
-  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 348);
+  assert.equal(firstCopy.objects.filter(object => object.kind === 'component-instance').length, 40);
+  assert.equal(firstCopy.objects.filter(object => object.kind === 'wire').length, 354);
   assert.ok(firstCopy.crossSheetConnections.length > 0);
 
   const q1 = firstCopy.objects.find(object => object.kind === 'component-instance' && object.ref === 'Q1');
