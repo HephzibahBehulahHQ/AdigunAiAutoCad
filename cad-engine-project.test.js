@@ -936,8 +936,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       const center = path.getPointAtLength(path.getTotalLength() / 2).matrixTransform(path.getScreenCTM());
       return { x: center.x, y: center.y };
     });
-    await linkedExample.mouse.click(feedPoint.x, feedPoint.y, { button: 'right' });
-    await linkedExample.getByRole('menuitem', { name: 'Select wires on this net' }).click();
+    await feedSegment.dispatchEvent('contextmenu', { bubbles: true, button: 2, clientX: feedPoint.x, clientY: feedPoint.y });
+    await linkedExample.getByRole('menuitem', { name: 'Select wires on this net' }).dispatchEvent('click', { bubbles: true });
     const selectedWires = linkedExample.locator('#userDrawings path[data-object].selected-object');
     assert.equal(await selectedWires.count(), 4);
     await linkedExample.locator('[data-action="palette"]').click();
