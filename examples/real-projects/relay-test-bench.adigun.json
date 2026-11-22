@@ -1,0 +1,610 @@
+{
+  "product": "AdigunAiAutoCad",
+  "project": "Relay changeover test bench",
+  "revision": "1.0",
+  "description": "Manual coil actuation and separately powered NC and NO indication for an industrial relay test fixture.",
+  "activeSheet": "bench-coil-actuation",
+  "sheets": [
+    {
+      "id": "bench-coil-actuation",
+      "number": "A2/001",
+      "name": "Manual relay coil actuation",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-contact-indication",
+      "number": "A2/002",
+      "name": "Dry changeover contact indication",
+      "projectSectionId": "A2"
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x1",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X1",
+      "x": 300,
+      "y": 320,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "Coil supply +24 V",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-actuation"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x2",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X2",
+      "x": 300,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "Coil supply 0 V",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-actuation"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s1",
+      "componentId": "schneider-electric-xb5aa31",
+      "ref": "S1",
+      "x": 500,
+      "y": 320,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Energize relay under test",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-actuation"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k1",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K1",
+      "x": 720,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Relay under test",
+        "comment": ""
+      },
+      "sheetId": "bench-coil-actuation"
+    },
+    {
+      "id": "coil-feed",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 335,
+      "y": 320,
+      "x1": 335,
+      "y1": 320,
+      "x2": 445,
+      "y2": 320,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "s1",
+          "pinId": "contact-13"
+        }
+      }
+    },
+    {
+      "id": "coil-command",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 555,
+      "y": 320,
+      "x1": 555,
+      "y1": 320,
+      "x2": 650,
+      "y2": 365,
+      "potential": "Switched coil supply",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 600,
+          "y": 320
+        },
+        {
+          "x": 600,
+          "y": 365
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s1",
+          "pinId": "contact-14"
+        },
+        "end": {
+          "instanceId": "k1",
+          "pinId": "coil-a1"
+        }
+      }
+    },
+    {
+      "id": "coil-return",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 335,
+      "y": 240,
+      "x1": 335,
+      "y1": 240,
+      "x2": 650,
+      "y2": 325,
+      "potential": "Coil supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 625,
+          "y": 240
+        },
+        {
+          "x": 625,
+          "y": 325
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "k1",
+          "pinId": "coil-a2"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x3",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X3",
+      "x": 510,
+      "y": 220,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "1",
+        "marking": "Indicator supply +24 V",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-indication"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x4",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X4",
+      "x": 890,
+      "y": 335,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "2",
+        "marking": "Indicator supply 0 V",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-indication"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "h1",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H1",
+      "x": 710,
+      "y": 285,
+      "rotation": 0,
+      "properties": {
+        "marking": "Normally closed path",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-indication"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "h2",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H2",
+      "x": 710,
+      "y": 385,
+      "rotation": 0,
+      "properties": {
+        "marking": "Normally open path",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-indication"
+    },
+    {
+      "id": "fixture-core-1-relay",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 790,
+      "y": 345,
+      "x1": 790,
+      "y1": 345,
+      "x2": 970,
+      "y2": 345,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-11"
+        },
+        "end": null
+      },
+      "cableId": "W-T01",
+      "coreId": "1"
+    },
+    {
+      "id": "fixture-core-1-indicator",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 955,
+      "y": 220,
+      "x1": 955,
+      "y1": 220,
+      "x2": 545,
+      "y2": 220,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x3",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-T01",
+      "coreId": "1"
+    },
+    {
+      "id": "fixture-core-2-relay",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 790,
+      "y": 320,
+      "x1": 790,
+      "y1": 320,
+      "x2": 970,
+      "y2": 320,
+      "potential": "Normally closed indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-12"
+        },
+        "end": null
+      },
+      "cableId": "W-T01",
+      "coreId": "2"
+    },
+    {
+      "id": "fixture-core-2-indicator",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 210,
+      "y": 285,
+      "x1": 210,
+      "y1": 285,
+      "x2": 683,
+      "y2": 285,
+      "potential": "Normally closed indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "h1",
+          "pinId": "x1"
+        }
+      },
+      "cableId": "W-T01",
+      "coreId": "2"
+    },
+    {
+      "id": "fixture-core-3-relay",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 790,
+      "y": 370,
+      "x1": 790,
+      "y1": 370,
+      "x2": 970,
+      "y2": 370,
+      "potential": "Normally open indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-14"
+        },
+        "end": null
+      },
+      "cableId": "W-T01",
+      "coreId": "3"
+    },
+    {
+      "id": "fixture-core-3-indicator",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 210,
+      "y": 385,
+      "x1": 210,
+      "y1": 385,
+      "x2": 683,
+      "y2": 385,
+      "potential": "Normally open indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "h2",
+          "pinId": "x1"
+        }
+      },
+      "cableId": "W-T01",
+      "coreId": "3"
+    },
+    {
+      "id": "h1-return",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 737,
+      "y": 285,
+      "x1": 737,
+      "y1": 285,
+      "x2": 795,
+      "y2": 335,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 795,
+          "y": 285
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "h1",
+          "pinId": "x2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "h2-return",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 737,
+      "y": 385,
+      "x1": 737,
+      "y1": 385,
+      "x2": 795,
+      "y2": 335,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 795,
+          "y": 385
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "h2",
+          "pinId": "x2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "indicator-return",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 795,
+      "y": 335,
+      "x1": 795,
+      "y1": 335,
+      "x2": 855,
+      "y2": 335,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x4",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "bench-coil-actuation-note-0",
+      "sheetId": "bench-coil-actuation",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · COIL ACTUATION"
+    },
+    {
+      "id": "bench-coil-actuation-note-1",
+      "sheetId": "bench-coil-actuation",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "S1 applies the XT1 coil supply to K1 A1. K1 A2 returns to XT1:2."
+    },
+    {
+      "id": "bench-coil-actuation-note-2",
+      "sheetId": "bench-coil-actuation",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "W-T01 takes K1 common, normally closed and normally open terminals to the indication sheet."
+    },
+    {
+      "id": "bench-contact-indication-note-0",
+      "sheetId": "bench-contact-indication",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · CHANGEOVER INDICATION"
+    },
+    {
+      "id": "bench-contact-indication-note-1",
+      "sheetId": "bench-contact-indication",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "With indicator power available, H1 shows the NC path at rest and H2 shows the NO path when K1 operates."
+    },
+    {
+      "id": "bench-contact-indication-note-2",
+      "sheetId": "bench-contact-indication",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "XT2 is the independent indicator supply. The drawing leaves source hardware, protection and test procedure unassigned."
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "fixture-core-1",
+      "name": "W-T01:1 · Indicator supply +24 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "fixture-core-1-relay",
+          "point": {
+            "x": 970,
+            "y": 345
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "X3"
+          }
+        },
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "fixture-core-1-indicator",
+          "point": {
+            "x": 955,
+            "y": 220
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixture-core-2",
+      "name": "W-T01:2 · Normally closed indication",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "fixture-core-2-relay",
+          "point": {
+            "x": 970,
+            "y": 320
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "H1"
+          }
+        },
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "fixture-core-2-indicator",
+          "point": {
+            "x": 210,
+            "y": 285
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fixture-core-3",
+      "name": "W-T01:3 · Normally open indication",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "fixture-core-3-relay",
+          "point": {
+            "x": 970,
+            "y": 370
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "H2"
+          }
+        },
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "fixture-core-3-indicator",
+          "point": {
+            "x": 210,
+            "y": 385
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "K1"
+          }
+        }
+      ]
+    }
+  ],
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}

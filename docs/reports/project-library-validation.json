@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 9,
-    "validatedArtifactCount": 9,
-    "distinctTopologyCount": 7,
+    "projectArtifactCount": 10,
+    "validatedArtifactCount": 10,
+    "distinctTopologyCount": 8,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -303,7 +303,9 @@
           "id": "40",
           "category": "Manufacturing and robotics",
           "title": "Industrial test bench and instrumentation rack",
-          "projectIds": [],
+          "projectIds": [
+            "relay-test-bench"
+          ],
           "qualifiedProjectId": null
         },
         {
@@ -1314,6 +1316,70 @@
         "bomRowCount": 9,
         "wireListRowCount": 102,
         "terminalListRowCount": 60
+      },
+      "errors": []
+    },
+    {
+      "id": "relay-test-bench",
+      "title": "Relay changeover test bench",
+      "topologyId": "relay-changeover-two-supply-test-fixture",
+      "briefId": "40",
+      "role": "standalone-example",
+      "path": "examples/real-projects/relay-test-bench.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "releaseScale": {
+        "qualified": false,
+        "additionalAuthoredSheetsRequired": 98,
+        "additionalConnectedSheetsRequired": 68,
+        "sheetIdsWithoutElectricalConnectivity": []
+      },
+      "wirePreview": {
+        "sheetId": "bench-coil-actuation",
+        "sheetName": "Manual relay coil actuation",
+        "segments": "0,13,17,13 35,13,42,13 42,13,42,20 42,20,50,20 0,0,46,0 46,0,46,13 46,13,50,13 72,17,100,17 72,13,100,13 72,20,100,20"
+      },
+      "topologySha256": "27369c6ea7e1904c6f4b213eed9a95d3eaf379c846f99e4c9d0156a831070bf3",
+      "electricalStructureSha256": "37f42a594a68710dcb37b7542e487f62f0e5b29f5574f87acf32d451ed330d0d",
+      "csvSha256": {
+        "bom": "8e3f25386b1071171c0a19193dacf8b440a3f9bf24ea39caf98d9f39cd7dd80b",
+        "wires": "2c02a0b3f8fc327a38cbfd1df9a0a244b99dfb38f619387867b59d92c387b78a",
+        "terminals": "c938e2419a9b0e9400ced041c36bed7cf82b9ef187aad671b04278e2a8620f96",
+        "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
+        "cables": "6718500ed50af666cb4b9e21dd2aca3ed905071ebcd7d80bdc643126cfb1b8c6",
+        "devices": "91cbaee1bc71f8de796aef11bdf0534883b8ef97ea25a038959ba8117f171cc1",
+        "sheets": "f5768520d3198310af8f1b43d887c118786a995d0fb976c067f850db38dde4a5"
+      },
+      "metrics": {
+        "sheetCount": 2,
+        "authoredSheetCount": 2,
+        "connectedSheetCount": 2,
+        "contentObjectCount": 26,
+        "emptyContentSheetIds": [],
+        "repeatedContentSheets": [],
+        "componentCount": 8,
+        "wireCount": 12,
+        "netCount": 10,
+        "globalNetCount": 7,
+        "crossSheetConnectionCount": 3,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 4,
+        "wireListRowCount": 12,
+        "terminalListRowCount": 8
       },
       "errors": []
     }
