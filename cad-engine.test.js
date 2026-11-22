@@ -691,6 +691,8 @@ test('wire list CSV is deterministic and protects spreadsheet formula prefixes',
     { id: 'W2', kind: 'wire', x1: 615, y1: 415, x2: 660, y2: 425 },
     { id: 'W1', kind: 'wire', x1: 500, y1: 415, x2: 545, y2: 415 }
   ];
+  const numbered = [{ ...objects.find(object => object.kind === 'wire'), wireNumber: 'A-07', potential: 'Return 0 V' }];
+  assert.match(engine.wireListCsv(numbered), /"Wire number","Potential"\r\n.*"A-07","Return 0 V"/);
   const csv = engine.wireListCsv(objects);
   assert.ok(csv.startsWith('\uFEFF'));
   assert.match(csv, /"Wire ID"/);

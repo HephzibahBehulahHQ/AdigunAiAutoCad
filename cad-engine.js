@@ -2273,6 +2273,8 @@
       return {
         wireId: wire.id,
         ...(project ? { sheetId: id } : {}),
+        ...(typeof wire.wireNumber === 'string' && wire.wireNumber.trim() ? { wireNumber: wire.wireNumber.trim() } : {}),
+        ...(typeof wire.potential === 'string' && wire.potential.trim() ? { potential: wire.potential.trim() } : {}),
         ...(typeof wire.cableId === 'string' && wire.cableId ? { cableId: wire.cableId } : {}),
         ...(typeof wire.coreId === 'string' && wire.coreId ? { coreId: wire.coreId } : {}),
         netId: net ? net.id : '',
@@ -2305,6 +2307,8 @@
     if (!Array.isArray(input) && input && typeof input === 'object') columns.unshift(['Sheet ID', 'sheetId']);
     if (report.rows.some(row => row.bends)) columns.push(['Route bends (X, Y mm)', 'bends']);
     if (report.rows.some(row => row.cableId || row.coreId)) columns.push(['Cable ID', 'cableId'], ['Core ID', 'coreId']);
+    if (report.rows.some(row => row.wireNumber)) columns.push(['Wire number', 'wireNumber']);
+    if (report.rows.some(row => row.potential)) columns.push(['Potential', 'potential']);
     return connectionReportCsv(columns, report.rows);
   }
 
