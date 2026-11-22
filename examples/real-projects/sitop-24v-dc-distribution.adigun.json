@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.0",
+  "revision": "3.1",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -124,7 +124,7 @@
     {
       "id": "spare-analog-interface",
       "number": "A2/019",
-      "name": "XT9 spare analog voltage input interface",
+      "name": "XT9 B3 analog voltage input interface",
       "projectSectionId": "A2"
     },
     {
@@ -149,6 +149,12 @@
       "id": "branch-a-indicator",
       "number": "A2/023",
       "name": "Branch A voltage indication",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "ai1-pressure-sensor",
+      "number": "A2/024",
+      "name": "B3 pressure sensor to AI1",
       "projectSectionId": "A2"
     }
   ],
@@ -2903,8 +2909,8 @@
       "properties": {
         "terminalStrip": "XT9",
         "position": "1",
-        "marking": "Spare AI1 voltage signal",
-        "comment": "Field side reserved; no source assigned."
+        "marking": "B3 OUT2 to AI1",
+        "comment": "B3 OUT2 on A2/024."
       },
       "sheetId": "spare-analog-interface"
     },
@@ -2921,7 +2927,7 @@
         "terminalStrip": "XT9",
         "position": "2",
         "marking": "Analog reference 2M",
-        "comment": "Field side reserved; no source assigned."
+        "comment": "B3 L− on A2/024 and CPU 2M on A2/005."
       },
       "sheetId": "spare-analog-interface"
     },
@@ -2935,7 +2941,7 @@
       "y1": 330,
       "x2": 856,
       "y2": 330,
-      "potential": "Spare AI1 voltage signal",
+      "potential": "B3 analog output",
       "stroke": "#38734b",
       "strokeWidth": 1.5,
       "pinAttachments": {
@@ -2969,7 +2975,7 @@
       "y1": 250,
       "x2": 775,
       "y2": 250,
-      "potential": "Spare AI1 voltage signal",
+      "potential": "B3 analog output",
       "stroke": "#38734b",
       "strokeWidth": 1.5,
       "pinAttachments": {
@@ -3005,7 +3011,7 @@
       "sheetId": "spare-analog-interface",
       "x": 110,
       "y": 108,
-      "text": "XT9 · SPARE ANALOG VOLTAGE INPUT",
+      "text": "XT9 · B3 ANALOG VOLTAGE INPUT",
       "stroke": "#13263b"
     },
     {
@@ -3032,7 +3038,7 @@
       "sheetId": "spare-analog-interface",
       "x": 110,
       "y": 455,
-      "text": "Field-side terminals are reserved. No transducer, power feed, cable or scaling is assigned.",
+      "text": "B3 uses XT9:1 for OUT2 and XT9:2 for L−. No cable or scaling is assigned.",
       "stroke": "#13263b"
     },
     {
@@ -3041,7 +3047,7 @@
       "sheetId": "spare-analog-interface",
       "x": 110,
       "y": 500,
-      "text": "Use an appropriate voltage signal referenced to 2M. A current-loop source is outside this circuit.",
+      "text": "The modeled connection assumes voltage mode on B3 OUT2.",
       "stroke": "#13263b"
     },
     {
@@ -3750,6 +3756,171 @@
       "x": 110,
       "y": 475,
       "text": "Verify actual supply loading, protection and conductor sizing before installation.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ai1-pressure-sensor-b3",
+      "componentId": "ifm-pn2070",
+      "ref": "B3",
+      "x": 510,
+      "y": 325,
+      "rotation": 0,
+      "properties": {
+        "marking": "Second pressure input",
+        "signalConfigurationNote": "Illustrative connection assumes OUT2 configured for 0–10 V."
+      },
+      "sheetId": "ai1-pressure-sensor"
+    },
+    {
+      "id": "ai1-pressure-sensor-power-send",
+      "kind": "wire",
+      "sheetId": "distribution",
+      "x": 690,
+      "y": 360,
+      "x1": 690,
+      "y1": 360,
+      "x2": 690,
+      "y2": 425,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "ai1-pressure-sensor-power",
+      "kind": "wire",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 200,
+      "y": 300,
+      "x1": 200,
+      "y1": 300,
+      "x2": 445,
+      "y2": 300,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "ai1-pressure-sensor-b3",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-signal-send",
+      "kind": "wire",
+      "sheetId": "spare-analog-interface",
+      "x": 475,
+      "y": 250,
+      "x1": 475,
+      "y1": 250,
+      "x2": 210,
+      "y2": 250,
+      "potential": "B3 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x22",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-signal",
+      "kind": "wire",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 815,
+      "y": 300,
+      "x1": 815,
+      "y1": 300,
+      "x2": 575,
+      "y2": 300,
+      "potential": "B3 analog output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "ai1-pressure-sensor-b3",
+          "pinId": "pin-2-out2"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-return-send",
+      "kind": "wire",
+      "sheetId": "spare-analog-interface",
+      "x": 475,
+      "y": 365,
+      "x1": 475,
+      "y1": 365,
+      "x2": 210,
+      "y2": 365,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x23",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-return",
+      "kind": "wire",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 200,
+      "y": 350,
+      "x1": 200,
+      "y1": 350,
+      "x2": 445,
+      "y2": 350,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "ai1-pressure-sensor-b3",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "ai1-pressure-sensor-title",
+      "kind": "text",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 110,
+      "y": 108,
+      "text": "B3 · SECOND PRESSURE INPUT TO AI1",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ai1-pressure-sensor-input",
+      "kind": "text",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 110,
+      "y": 218,
+      "text": "B3 OUT2 routes through XT9:1 to CPU AI1. B2 retains its own AI0 signal.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ai1-pressure-sensor-return-note",
+      "kind": "text",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 110,
+      "y": 440,
+      "text": "B3 L− returns via XT9:2 to the shared 2M and 0 V reference.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "ai1-pressure-sensor-scope",
+      "kind": "text",
+      "sheetId": "ai1-pressure-sensor",
+      "x": 110,
+      "y": 490,
+      "text": "The schematic assumes 0–10 V output mode. OUT1, process location, cable and scaling are unassigned.",
       "stroke": "#13263b"
     }
   ],
@@ -5190,7 +5361,7 @@
     },
     {
       "id": "xt9-ai1-link",
-      "name": "Spare AI1 voltage signal",
+      "name": "B3 analog output",
       "endpoints": [
         {
           "sheetId": "plc-inputs",
@@ -5504,6 +5675,102 @@
             "direction": "left",
             "targetSheetId": "distribution",
             "targetRef": "X3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-power",
+      "name": "Branch B feed to B3",
+      "endpoints": [
+        {
+          "sheetId": "distribution",
+          "wireId": "ai1-pressure-sensor-power-send",
+          "point": {
+            "x": 690,
+            "y": 425
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "ai1-pressure-sensor",
+            "targetRef": "B3"
+          }
+        },
+        {
+          "sheetId": "ai1-pressure-sensor",
+          "wireId": "ai1-pressure-sensor-power",
+          "point": {
+            "x": 200,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "distribution",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-signal",
+      "name": "B3 OUT2 to AI1",
+      "endpoints": [
+        {
+          "sheetId": "spare-analog-interface",
+          "wireId": "ai1-pressure-sensor-signal-send",
+          "point": {
+            "x": 210,
+            "y": 250
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ai1-pressure-sensor",
+            "targetRef": "B3"
+          }
+        },
+        {
+          "sheetId": "ai1-pressure-sensor",
+          "wireId": "ai1-pressure-sensor-signal",
+          "point": {
+            "x": 815,
+            "y": 300
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "spare-analog-interface",
+            "targetRef": "X22"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ai1-pressure-sensor-return",
+      "name": "B3 L− to 2M",
+      "endpoints": [
+        {
+          "sheetId": "spare-analog-interface",
+          "wireId": "ai1-pressure-sensor-return-send",
+          "point": {
+            "x": 210,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "ai1-pressure-sensor",
+            "targetRef": "B3"
+          }
+        },
+        {
+          "sheetId": "ai1-pressure-sensor",
+          "wireId": "ai1-pressure-sensor-return",
+          "point": {
+            "x": 200,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "spare-analog-interface",
+            "targetRef": "X23"
           }
         }
       ]
