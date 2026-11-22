@@ -1326,7 +1326,7 @@
       "briefId": "40",
       "role": "standalone-example",
       "path": "examples/real-projects/relay-test-bench.adigun.json",
-      "revision": "1.7",
+      "revision": "1.8",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1343,9 +1343,11 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 91,
+        "additionalAuthoredSheetsRequired": 90,
         "additionalConnectedSheetsRequired": 61,
-        "sheetIdsWithoutElectricalConnectivity": []
+        "sheetIdsWithoutElectricalConnectivity": [
+          "bench-indication-matrix"
+        ]
       },
       "wirePreview": {
         "sheetId": "bench-coil-actuation",
@@ -1361,13 +1363,13 @@
         "plcIo": "af83968981e80ad4733aa361e16e8f11097b1ab6f2947ac320650f69b15e117e",
         "cables": "2c0cd4028a0de9fbf1b1e130f4723458a0dd0666baddcfa2b38b58ff0c80e173",
         "devices": "cc974aaaafc7092736a6d75ce6f765b1d78daeff4119a3062853bbb44392da49",
-        "sheets": "2c120539e8994835b45c686a4ab8170961cfe2b13de7093e2c7224e5512dfeb5"
+        "sheets": "5999484d63da4dd3dfa5ed9d8ca7617376f016baaf629f172a2105b5ec65db84"
       },
       "metrics": {
-        "sheetCount": 9,
-        "authoredSheetCount": 9,
+        "sheetCount": 10,
+        "authoredSheetCount": 10,
         "connectedSheetCount": 9,
-        "contentObjectCount": 115,
+        "contentObjectCount": 167,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
         "componentCount": 32,

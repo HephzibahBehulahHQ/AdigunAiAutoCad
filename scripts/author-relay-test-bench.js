@@ -14,8 +14,9 @@ const indicatorDisconnect = 'bench-indicator-disconnect';
 const switchedIndicatorCheck = 'bench-switched-indicator-check';
 const coilPower = 'bench-coil-power-supply';
 const protectiveEarth = 'bench-protective-earth';
+const testMatrix = 'bench-indication-matrix';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.7',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.8',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -27,7 +28,8 @@ const project = {
     { id: indicatorDisconnect, number: 'A2/006', name: 'XT2 indicator supply disconnect', projectSectionId: 'A2' },
     { id: switchedIndicatorCheck, number: 'A2/007', name: 'XT6 switched indicator voltage check', projectSectionId: 'A2' },
     { id: coilPower, number: 'A2/008', name: 'PS1 coil supply and incoming power boundary', projectSectionId: 'A2' },
-    { id: protectiveEarth, number: 'A2/009', name: 'XT8 cabinet and indicator protective-earth boundaries', projectSectionId: 'A2' }
+    { id: protectiveEarth, number: 'A2/009', name: 'XT8 cabinet and indicator protective-earth boundaries', projectSectionId: 'A2' },
+    { id: testMatrix, number: 'A4/001', name: 'Expected relay bench indicator states', projectSectionId: 'A4' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -242,6 +244,33 @@ for (const [sheetId, title, lines] of [
   [title, ...lines].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: [110, 510, 555][index], text
   }));
+}
+
+const matrixRows = [
+  ['Rest', true, false, true],
+  ['Coil command', true, true, true],
+  ['Coil feed open', false, true, true],
+  ['Indicator feed open, at rest', true, false, false],
+  ['Indicator feed open, commanded', true, true, false]
+].map(([name, coilFeed, command, indicatorFeed]) => {
+  const coilOn = coilFeed && command;
+  return [name, coilFeed ? 'Closed' : 'Open', command ? 'Pressed' : 'Released', indicatorFeed ? 'Closed' : 'Open',
+    ...[coilOn, indicatorFeed, indicatorFeed && !coilOn, indicatorFeed && coilOn].map(active => active ? 'On' : 'Off')];
+});
+const table = [['Case', 'X14', 'S1', 'X15', 'H3', 'H6', 'H1', 'H2'], ...matrixRows];
+for (let row = 0; row < table.length; row++) {
+  table[row].forEach((text, column) => project.objects.push({
+    id: 'bench-matrix-' + row + '-' + column, sheetId: testMatrix, kind: 'text', text,
+    x: [105, 380, 485, 600, 710, 760, 810, 860][column], y: 215 + row * 42
+  }));
+}
+for (const [id, y, text] of [
+  ['title', 110, 'RELAY TEST BENCH · EXPECTED INDICATOR STATES'],
+  ['assumptions', 160, 'Assumes both supplies are available, wiring follows A2/001–A2/008, and K1 operates normally.'],
+  ['reference', 503, 'H3: coil voltage. H6: switched indicator voltage. H1: NC output. H2: NO output.'],
+  ['scope', 550, 'Expected steady states only. No measurements, timing verification, or commissioning results are recorded.']
+]) {
+  project.objects.push({ id: testMatrix + '-' + id, sheetId: testMatrix, kind: 'text', x: 105, y, text });
 }
 
 const serialized = engine.serializeProject(project);
