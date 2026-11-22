@@ -10,15 +10,17 @@ const cabinet = 'irrigation-plc';
 const field = 'irrigation-pressure';
 const output = 'irrigation-request';
 const operator = 'irrigation-operator';
+const feedback = 'irrigation-run-feedback';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.1',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.2',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'Controller supply and I/O', projectSectionId: 'A2' },
     { id: field, number: 'A2/002', name: 'Field pressure transmitter', projectSectionId: 'A2' },
     { id: output, number: 'A2/003', name: 'Isolated pump request', projectSectionId: 'A2' },
-    { id: operator, number: 'A2/004', name: 'Local irrigation request station', projectSectionId: 'A2' }
+    { id: operator, number: 'A2/004', name: 'Local irrigation request station', projectSectionId: 'A2' },
+    { id: feedback, number: 'A2/005', name: 'Pump starter run feedback at XT3', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -73,6 +75,9 @@ const contactNO = terminal(output, 'X4', 920, 400, 'XT2', '2', 'Remote starter p
 
 const request = device(operator, 'S1', 'schneider-electric-xb5aa31', 605, 345, { marking: 'Local irrigation request' });
 
+const feedbackFeed = terminal(feedback, 'X5', 470, 265, 'XT3', '1', 'Supply to external run contact');
+const feedbackReturn = terminal(feedback, 'X6', 470, 390, 'XT3', '2', 'Return from external run contact');
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -86,23 +91,28 @@ wire(output, 'remote-common', 'Remote starter common', pin(relay, '11'), pin(con
 wire(output, 'remote-demand', 'Remote starter demand', pin(relay, '14'), pin(contactNO, '1'),
   [{ x: 770, y: 370 }, { x: 770, y: 400 }]);
 
-for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, coreId] of [
+for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, cable] of [
   ['pressure-feed', '+24 V DC', 'X1', { x: 460, y: 239 }, { x: 215, y: 182 }, [{ x: 460, y: 182 }], sensor, '1', 'left'],
   ['pressure-common', '0 V', 'X2', { x: 490, y: 257 }, { x: 215, y: 475 }, [{ x: 490, y: 475 }], sensor, '3', 'left'],
   ['pressure-voltage', 'B1 OUT2 to AI0', 'A1', pin(plc, 'X11:2'), { x: 1020, y: 257 }, null, sensor, '2', 'right'],
   ['pressure-switch', 'B1 OUT1 to DI a.0', 'A1', pin(plc, 'X10:7'), { x: 215, y: 347 }, null, sensor, '4', 'right'],
   ['pump-request', 'DQ a.0 pump request', 'A1', pin(plc, 'X12:3'), { x: 1020, y: 389 }, null, relay, 'A1', 'left'],
   ['relay-common', '0 V', 'A1', { x: 925, y: 475 }, { x: 1020, y: 475 }, null, relay, 'A2', 'left'],
-  ['operator-feed', '+24 V DC', 'X1', { x: 480, y: 135 }, { x: 215, y: 135 }, null, request, '13', 'left', '1'],
+  ['operator-feed', '+24 V DC', 'X1', { x: 480, y: 135 }, { x: 215, y: 135 }, null, request, '13', 'left', ['W-01', '1']],
   ['operator-request', 'S1 request to DI a.1', 'A1', pin(plc, 'X10:8'), { x: 215, y: 405 },
-    [{ x: 555, y: 365 }, { x: 555, y: 405 }], request, '14', 'right', '2']
+    [{ x: 555, y: 365 }, { x: 555, y: 405 }], request, '14', 'right', ['W-01', '2']],
+  ['run-feedback-feed', '+24 V DC', 'X1', { x: 460, y: 220 }, { x: 215, y: 220 },
+    null, feedbackFeed, '1', 'left', ['W-02', '1']],
+  ['run-feedback-input', 'XT3 run feedback to DI a.2', 'A1', pin(plc, 'X10:9'), { x: 215, y: 440 },
+    [{ x: 565, y: 383 }, { x: 565, y: 440 }], feedbackReturn, '1', 'left', ['W-02', '2']]
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
   const cabinetSegment = wire(cabinet, id + '-cabinet', name, from, fromEdge, bends);
   const remoteSegment = wire(target.sheetId, id + '-remote', name, targetEdge, targetPoint);
-  if (coreId) {
-    for (const segment of [cabinetSegment, remoteSegment]) Object.assign(segment, { cableId: 'W-01', coreId });
+  if (cable) {
+    const [cableId, coreId] = cable;
+    for (const segment of [cabinetSegment, remoteSegment]) Object.assign(segment, { cableId, coreId });
   }
   link(id, name, [cabinet, fromRef, fromEdge, fromEdge.x < plc.x ? 'left' : 'right'],
     [target.sheetId, target.ref, targetEdge, side]);
@@ -112,7 +122,8 @@ for (const [sheetId, title, description] of [
   [cabinet, 'IRRIGATION CONTROLLER · POWER AND I/O', 'XT1 is the external 24 V DC boundary. AI0 records header pressure and DI a.0 reads the separate OUT1 signal.'],
   [field, 'IRRIGATION HEADER PRESSURE · B1', 'OUT2 assumes voltage mode. Pressure scaling, OUT1 setpoints and PLC program logic remain unassigned.'],
   [output, 'IRRIGATION PUMP REQUEST · K1', 'XT2 exposes the normally open demand contact. The external starter, motor feeder and safety controls remain outside this drawing.'],
-  [operator, 'LOCAL IRRIGATION REQUEST · S1', 'W-01 carries supply and the momentary request to DI a.1. The input requests PLC action through the program.']
+  [operator, 'LOCAL IRRIGATION REQUEST · S1', 'W-01 carries supply and the momentary request to DI a.1. The input requests PLC action through the program.'],
+  [feedback, 'PUMP STARTER RUN FEEDBACK · XT3', 'XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
