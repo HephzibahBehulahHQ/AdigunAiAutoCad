@@ -30,6 +30,8 @@ jobs:
           node-version: 24
       - name: Verify published example data
         run: node scripts/project-library-validation.js --check
+      - name: Verify published component inventory
+        run: node scripts/export-component-bank.js
       - name: Stage public site
         run: |
           site="$RUNNER_TEMP/adigun-pages"
@@ -37,7 +39,7 @@ jobs:
           cp index.html cad-engine.js cad-dxf.js service-worker.js CNAME .nojekyll "$site/"
           cp vendor/dxf-parser-1.1.2.js vendor/dxf-writer-2.8.9.mjs vendor/*LICENSE.txt "$site/vendor/"
           cp examples/real-projects/library.json examples/real-projects/*.adigun.json "$site/examples/real-projects/"
-          cp docs/reports/project-library-validation.json "$site/docs/reports/"
+          cp docs/reports/project-library-validation.json docs/reports/component-bank.json docs/reports/component-bank.csv "$site/docs/reports/"
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static site

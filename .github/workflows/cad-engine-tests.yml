@@ -6,6 +6,8 @@ on:
       - "cad-engine.js"
       - "cad-engine.test.js"
       - "cad-engine-project.test.js"
+      - "scripts/export-component-bank.js"
+      - "docs/reports/component-bank.*"
       - ".github/workflows/cad-engine-tests.yml"
       - "index.html"
       - "service-worker.js"
@@ -27,6 +29,8 @@ on:
       - "cad-engine.js"
       - "cad-engine.test.js"
       - "cad-engine-project.test.js"
+      - "scripts/export-component-bank.js"
+      - "docs/reports/component-bank.*"
       - ".github/workflows/cad-engine-tests.yml"
       - "index.html"
       - "service-worker.js"
@@ -65,6 +69,8 @@ jobs:
         env:
           CAD_BROWSER_WORKFLOW: "1"
           CAD_SCREENSHOT_DIR: ${{ runner.temp }}/cad-screenshots
+      - name: Check component bank inventory
+        run: node scripts/export-component-bank.js
       - name: Check generated project-library validation report
         run: node scripts/project-library-validation.js --check
       - name: Upload editor verification screenshots

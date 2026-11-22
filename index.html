@@ -1004,7 +1004,51 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     notify('Component placement cancelled.');
     return true;
   }
-  function renderSymbolSidebar(query){const host=$('#symbolList');host.replaceChildren();let group='';for(const item of catalogItems(query)){if(item.category!==group){group=item.category;const head=document.createElement('div');head.className='library-group';head.textContent=group;host.append(head);}const b=document.createElement('button');b.className='symbol-row';b.draggable=true;b.dataset.insert=item.id;const glyph=document.createElement('span');glyph.className='symbol-glyph';glyph.textContent=item.tag.slice(0,3);const label=document.createElement('span');label.textContent=item.name;b.append(glyph,label);host.append(b);}if(!host.children.length){const empty=document.createElement('div');empty.className='library-group';empty.textContent='No symbols match this search.';host.append(empty);}}
+  function showCatalogPage(host,items,renderItems){
+    const pageSize=80;
+    function show(offset){
+      host.replaceChildren();
+      renderItems(items.slice(offset,offset+pageSize));
+      if(items.length<=pageSize)return;
+      const navigation=document.createElement("div");
+      navigation.className="panel-tabs";
+      navigation.setAttribute("role","group");
+      navigation.setAttribute("aria-label","Component results");
+      for(const [label,start,disabled] of [
+        ["Previous",offset-pageSize,offset===0],["Next",offset+pageSize,offset+pageSize>=items.length]
+      ]){
+        const button=document.createElement("button");
+        button.type="button";button.textContent=label;button.disabled=disabled;
+        button.addEventListener("click",()=>{show(start);host.scrollTop=0;host.querySelector("button")?.focus();});
+        navigation.append(button);
+      }
+      host.append(navigation);
+    }
+    show(0);
+  }
+  function renderSymbolSidebar(query){
+    const host=$("#symbolList");
+    showCatalogPage(host,catalogItems(query),items=>{
+      let group="";
+      for(const item of items){
+        if(item.category!==group){
+          group=item.category;
+          const head=document.createElement("div");
+          head.className="library-group";head.textContent=group;host.append(head);
+        }
+        const button=document.createElement("button");
+        button.className="symbol-row";button.draggable=true;button.dataset.insert=item.id;
+        const glyph=document.createElement("span");
+        glyph.className="symbol-glyph";glyph.textContent=item.tag.slice(0,3);
+        const label=document.createElement("span");label.textContent=item.name;
+        button.append(glyph,label);host.append(button);
+      }
+      if(!items.length){
+        const empty=document.createElement("div");
+        empty.className="library-group";empty.textContent="No symbols match this search.";host.append(empty);
+      }
+    });
+  }
   function componentHoverDescription(obj,definition){const lines=[(obj.ref||'Component')+' · '+definition.name,'Manufacturer: '+definition.manufacturer,'Model: '+definition.model,'Part no.: '+definition.manufacturerPartNumber,'Position: X '+Number(obj.x).toFixed(2)+' mm, Y '+Number(obj.y).toFixed(2)+' mm','Rotation: '+(Number(obj.rotation)||0)+'°','Pins: '+definition.symbol.pins.map(function(pin){return pin.localNumber+' '+pin.name;}).join(' · ')];Object.keys(obj.properties||{}).forEach(function(name){const value=obj.properties[name];if(typeof value==='string'&&value.trim())lines.push(name+': '+value.trim());else if(typeof value==='number'&&Number.isFinite(value))lines.push(name+': '+value);});return lines.join('\n');}
   function canResizeObject(obj){
     if(!obj||obj.locked)return false;
@@ -1890,7 +1934,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }else if(selected)showObject(selected);
   }
   function openAssistant(){openInspector('Adigun BOT');$('#inspectorContent').innerHTML='<div class="inspector-block"><div class="inspector-title">Adigun BOT · connection status</div><div class="assistant-state"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#73e6f4" stroke-width="1.6"><use href="#i-bot"/></svg><span><b>AI service not connected</b><br>This workspace is running locally. Connect a secured product API to enable cited, project-aware engineering assistance.</span></div><p class="notice">Manual drawing, local saving and SVG export are available without an AI provider. No suggestion or edit has been generated.</p></div>';}
-  function openSymbolPicker(){const box=$('#symbolsDialogList');box.replaceChildren();const search=document.createElement('input');search.className='palette-search';search.placeholder='Search engineering symbols';search.setAttribute('aria-label','Search component library');const category=document.createElement('select');category.className='palette-search';category.setAttribute('aria-label','Filter symbol discipline');const all=document.createElement('option');all.value='';all.textContent='All disciplines';category.append(all);for(const name of [...new Set(catalogItems().map(x=>x.category))]){const option=document.createElement('option');option.value=name;option.textContent=name;category.append(option);}const list=document.createElement('div');list.className='command-list';box.append(search,category,list);const render=function(){list.replaceChildren();for(const item of catalogItems(search.value)){if(category.value&&item.category!==category.value)continue;const b=document.createElement('button');b.className='command-item';const glyph=document.createElement('span');glyph.textContent=item.tag;glyph.style.color='#22d3ee';const label=document.createElement('span');label.textContent=item.name;b.append(glyph,label);b.addEventListener('click',function(){insertCatalogSymbol(item.id);$('#symbolsDialog').close();});list.append(b);}};search.addEventListener('input',render);category.addEventListener('change',render);render();$('#symbolsDialog').showModal();search.focus();}
+  function openSymbolPicker(){const box=$('#symbolsDialogList');box.replaceChildren();const search=document.createElement('input');search.className='palette-search';search.placeholder='Search engineering symbols';search.setAttribute('aria-label','Search component library');const category=document.createElement('select');category.className='palette-search';category.setAttribute('aria-label','Filter symbol discipline');const all=document.createElement('option');all.value='';all.textContent='All disciplines';category.append(all);for(const name of [...new Set(catalogItems().map(x=>x.category))]){const option=document.createElement('option');option.value=name;option.textContent=name;category.append(option);}const list=document.createElement('div');list.className='command-list';box.append(search,category,list);const render=function(){const items=catalogItems(search.value).filter(item=>!category.value||item.category===category.value);showCatalogPage(list,items,page=>{for(const item of page){const b=document.createElement('button');b.className='command-item';const glyph=document.createElement('span');glyph.textContent=item.tag;glyph.style.color='#22d3ee';const label=document.createElement('span');label.textContent=item.name;b.append(glyph,label);b.addEventListener('click',function(){insertCatalogSymbol(item.id);$('#symbolsDialog').close();});list.append(b);}});};search.addEventListener('input',render);category.addEventListener('change',render);render();$('#symbolsDialog').showModal();search.focus();}
   function createPalette(){const list=$('#commandList');list.replaceChildren();for(const [name,action,key]of menuCommands){if(action==='copy-example-link'&&!sourceExampleSheetUrl())continue;const b=document.createElement('button');b.className='command-item';b.dataset.search=name.toLowerCase();b.innerHTML=`<span>⌘</span><span>${name}</span>${key?`<kbd>${key}</kbd>`:''}`;b.addEventListener('click',()=>{if(action==='symbol-picker')openSymbolPicker();else if(action==='inspector')openInspector('Properties');else if(action==='maximize')workspace.classList.toggle('maximized');else runAction(action);$('#commands').close();});list.append(b);}}
   function runAction(action){switch(action){case'copy-example-link':void copySourceExampleSheetLink();break;case'save':saveLocal();break;case'save-as':saveProjectAs();break;case'open':$('#openFile').click();break;case'print':printActiveSheet();break;case'print-project-set':printProjectSet();break;case'undo':undo();break;case'redo':redo();break;case'fit':fitDraftingView('drawing');break;case'fit-selection':fitDraftingView('selection');break;case'fit-frame':fitDraftingView('frame');break;case'origin':fitDraftingView('origin');break;case'print-frame':togglePrintFrame();break;case'zoom-in':setZoom(state.zoom+10);break;case'zoom-out':setZoom(state.zoom-10);break;case'theme':state.theme=state.theme==='light'?'dark':'light';wrap.classList.toggle('dark-paper',state.theme==='dark');$('#drawing').style.background=state.theme==='dark'?'#17202a':'#fff';persist();notify(`Drawing paper set to ${state.theme} mode.`);break;case'maximize':workspace.classList.toggle('maximized');break;case'export-svg':exportSvg();break;case'export-drawing-svg':exportSvg('drawing');break;case'export-selection-svg':exportSvg('selection');break;case'export-region-svg':beginRegionExport();break;case'export-dxf':void exportDxf();break;case'assistant':openAssistant();break;case'symbol-picker':openSymbolPicker();break;case'create-project-symbol':createSymbolFromSelection();break;case'dimension':setTool('dimension');break;case'settings':openInspector('Workspace settings');break;case'new':$('#newProjectDialog').showModal();break;case'palette':toggleColorPalette();break;case'fill-toggle':state.fillEnabled=!state.fillEnabled;if(state.selected){const obj=state.objects.find(o=>o.id===state.selected);if(obj&&['rect','circle','ellipse','triangle'].includes(obj.kind))obj.fill=state.fillEnabled?state.fillColor:'none';}$('#fillEnabledTool').setAttribute('aria-pressed',String(state.fillEnabled));$('#paletteFillEnabled').checked=state.fillEnabled;renderObjects();persist();notify(state.fillEnabled?'Shape fill enabled.':'Shape fill disabled.');break;}}
   const paletteColors=['#111827','#164eac','#ed3f38','#22d3ee','#16864a','#a20c98','#d4af37','#f97316','#f8fafc','#78869a','#7c3aed','#000000'];
@@ -1980,7 +2024,6 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   $('#openCommands').addEventListener('click',()=>{createPalette();$('#commands').showModal();$('#commandSearch').focus();});$('#closeCommands').addEventListener('click',()=>$('#commands').close());$('#closeSymbols').addEventListener('click',()=>$('#symbolsDialog').close());$('#closeNewProject').addEventListener('click',()=>$('#newProjectDialog').close());$('#closeSheetDialog').addEventListener('click',()=>$('#sheetDialog').close());
   $('#commandSearch').addEventListener('input',e=>$('.command-item',$('#commandList')).forEach(b=>b.hidden=!b.dataset.search.includes(e.target.value.toLowerCase())));
   $('#projectSearch').addEventListener('input',e=>{if($('#editableExampleProjects').style.display!=='none'){renderEditableExampleProjects(e.target.value);return;}$$('.tree-row',$('#projectTree')).forEach(row=>row.hidden=!row.textContent.toLowerCase().includes(e.target.value.toLowerCase()));});
-  $('#symbolSearch').addEventListener('input',e=>$('.symbol-row',$('#symbolList')).forEach(row=>row.hidden=!row.textContent.toLowerCase().includes(e.target.value.toLowerCase())));
   $('#projectTree').addEventListener('dblclick',function(event){const name=event.target.closest('[data-sheet-name]');const row=name&&name.closest('[data-sheet]');if(row&&state.projectModel){event.preventDefault();event.stopPropagation();beginInlineSheetRename(row.dataset.sheet);}});
   $('#projectTree').addEventListener('click',e=>{const addSheetButton=e.target.closest('[data-add-project-sheet]');if(addSheetButton){e.preventDefault();e.stopPropagation();addSheet('',addSheetButton.dataset.addProjectSheet);return;}const addSectionButton=e.target.closest('[data-add-project-section]');if(addSectionButton&&state.projectModel){e.preventDefault();e.stopPropagation();window.AdigunCADEngine.addProjectSection(state.projectModel,'Additional section','');renderCustomSheetNavigation();persist();return;}const toggle=e.target.closest('[data-toggle-section]');if(toggle&&state.projectModel){const section=state.projectModel.sections.find(item=>item.id===toggle.dataset.toggleSection);if(section){section.collapsed=!section.collapsed;renderProjectSectionNavigation();persist();}return;}const row=e.target.closest('[data-sheet]');if(row){if(state.projectModel){state.projectModel.activeSheetId=row.dataset.sheet;wrap.classList.remove('blank-start');}setSheet(row.dataset.sheet);}});$('#sheetTabs').addEventListener('click',e=>{const close=e.target.closest('[data-delete-sheet],[data-close-sheet]');if(close){e.preventDefault();e.stopPropagation();if(close.dataset.deleteSheet)deleteSheet(close.dataset.deleteSheet);else closeSheetTab(close.dataset.closeSheet);return;}const tab=e.target.closest('.document-tab[data-sheet]');if(tab)setSheet(tab.dataset.sheet);});$('#sheetTabs').addEventListener('keydown',e=>{const close=e.target.closest('[data-delete-sheet],[data-close-sheet]');if(close&&(e.key==='Enter'||e.key===' ')){e.preventDefault();if(close.dataset.deleteSheet)deleteSheet(close.dataset.deleteSheet);else closeSheetTab(close.dataset.closeSheet);}});
   $('#symbolList').addEventListener('click',e=>{const b=e.target.closest('[data-insert]');if(b)insertCatalogSymbol(b.dataset.insert,e.shiftKey);});

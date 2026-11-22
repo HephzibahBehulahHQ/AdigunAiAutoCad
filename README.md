@@ -31,6 +31,8 @@ Open **Symbol Library**, pick a component to see its terminals in **Properties**
 
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 
+The component bank inventory is available in [JSON](docs/reports/component-bank.json) and [CSV](docs/reports/component-bank.csv). It is generated from the same native definitions the editor uses. Physical dimensions in the inventory describe the manufacturer part. The schematic dimensions and terminal coordinates describe the editable symbol.
+
 With a sheet open, you can also drag a symbol from the sidebar and drop it on the drawing. The preview marks overlaps, and a successful drop opens Properties.
 
 To author a reusable symbol, select unrotated lines, rectangles, or circles and run **Create project symbol from selection**. Enter a name and terminal coordinates in millimetres relative to the selection center. The symbol appears under **Project symbols** and stays with the drawing after Save and Open.
