@@ -7,7 +7,7 @@ Open the [pressure-sensor drawing](https://adigunaiautocad.hephzibahbehulah.com/
 
 While editing a published example, use **Copy source example sheet link** in the command palette to share the original drawing. Share the saved project file to send your edits.
 
-Right-click a wire and choose **Select wires on this net** to select its visible segments on the current sheet. A stroke color change applies to the selection as one undoable edit.
+Click a wire to open **Properties** for its color, line weight, and line type. Right-click a wire and choose **Select wires on this net** to select its visible segments on the current sheet. A palette stroke color change applies to the selection as one undoable edit.
 
 The drafting viewport fills the workspace. Model coordinates use positive X to the right and positive Y downward, with negative coordinates available. New sheets start with the print frame hidden. Use **Toggle print frame**, **Fit print frame**, **Fit selection**, or **Go to origin** in the command palette. **Fit drawing to view** includes visible off-frame objects. Pan with middle-button drag or Space + drag, and use the wheel to zoom around the pointer.
 
