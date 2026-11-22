@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 122);
+  assert.equal(items.length, 134);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -337,6 +337,18 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3045062', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3037151', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3044207', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3003347', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3001514', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3006056', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3006043', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3000571', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3005073', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3001501', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3004524', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3007327', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3003952', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3002908', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-0719139', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
@@ -359,7 +371,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -550,6 +562,32 @@ test('UT and ST feed-through order codes carry their verified connection methods
     const [panel] = part.physicalRepresentations;
     assert.equal(panel.width, part.specifications.dimensions.width.value);
     if (railDepths) assert.deepEqual([panel.width, panel.height, ...Object.values(panel.railDepths)], [width, height, ...railDepths]);
+  }
+});
+
+test('UK terminal blocks preserve separate conductor ranges and three documented rails', () => {
+  for (const [orderCode, area, minimumFlexible, maximumFlexible, depthOnNS32] of [
+    ['3003347', 2.5, 0.2, 2.5, 47],
+    ['3001514', 2.5, 0.2, 2.5, 52],
+    ['3006056', 16, 4, 16, 59],
+    ['3006043', 16, 4, 16, 59],
+    ['3000571', 16, 4, 16, 59],
+    ['3005073', 10, 0.5, 10, 52.3],
+    ['3001501', 2.5, 0.2, 2.5, 52],
+    ['3004524', 6, 0.2, 6, 52],
+    ['3007327', 4, 0.2, 4, 52],
+    ['3003952', 4, 0.2, 4, 52],
+    ['3002908', 4, 0.2, 4, 52],
+    ['0719139', 2.5, 0.2, 2.5, 52]
+  ]) {
+    const part = engine.component('phoenix-contact-' + orderCode);
+    assert.ok(part.sources[0].url.endsWith(orderCode));
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), ['screw', 'screw']);
+    assert.deepEqual(part.symbol.internalConnections, [['level-1-left', 'level-1-right']]);
+    assert.equal(part.specifications.ratedCrossSection.value, area);
+    assert.deepEqual(part.specifications.flexibleConductorRange, { minimum: minimumFlexible, maximum: maximumFlexible, unit: 'mm²' });
+    assert.deepEqual(part.specifications.mountingRails.value, ['NS 35/7.5', 'NS 35/15', 'NS 32']);
+    assert.equal(part.physicalRepresentations[0].railDepths['NS 32'], depthOnNS32);
   }
 });
 
