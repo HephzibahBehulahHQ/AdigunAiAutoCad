@@ -11,6 +11,8 @@ Use **Export full drawing as SVG** for all visible geometry, including off-frame
 
 Select one or more drawing objects and use **Export selection as SVG** to export just those objects, cropped to their bounds.
 
+Use **Export region as SVG** and drag a rectangle to crop the drawing view, including at negative coordinates. The SVG retains geometry outside the rectangle and clips it from view. Use selection export when the file should contain only specific objects.
+
 Set each paper margin independently in Properties. Margins position the print frame and its title block, and are saved with the sheet without moving drawing objects.
 
 For a custom sheet, choose **Custom** in the **Paper size** field in Properties, then set the width and height in millimetres. Print and frame SVG export use the saved dimensions.
