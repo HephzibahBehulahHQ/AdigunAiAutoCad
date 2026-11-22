@@ -1869,7 +1869,7 @@
           const location = { sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number };
           if (net.wireIds.length && openDisconnects.has(pin.instanceId)) {
             const pins = wiredDisconnectPins.get(pin.instanceId) || [];
-            pins.push(location);
+            pins.push({ location, netId });
             wiredDisconnectPins.set(pin.instanceId, pins);
           }
           if (wiredNetIds.has(netId) && earthPinsByComponent.get(pin.instanceId)?.has(pin.pinId)) {
@@ -1885,8 +1885,14 @@
     }
     for (const pins of wiredDisconnectPins.values()) {
       if (pins.length !== 2) continue;
-      add('ERC-OPEN-DISCONNECT', 'info', pins[0].ref + ' is modeled with its knife open.',
-        'Review the intended knife position in Properties. Other paths may still connect the two sides.', [pins[0]]);
+      const [first, second] = pins;
+      if (first.netId && first.netId === second.netId) {
+        add('ERC-BYPASSED-DISCONNECT', 'warning', first.location.ref + ' is modeled open, but both terminals remain on the same project net.',
+          'Trace the alternate connection before relying on the knife position to separate the two sides.', [first.location]);
+      } else {
+        add('ERC-OPEN-DISCONNECT', 'info', first.location.ref + ' is modeled with its knife open.',
+          'Review the intended knife position in Properties. This finding describes the drawing model.', [first.location]);
+      }
     }
     for (const signals of signalsByNet.values()) {
       for (const [outputRole, wrongInputRole] of [['analog-output', 'DI'], ['digital-output', 'AI']]) {

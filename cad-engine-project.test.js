@@ -1528,6 +1528,18 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   assert.deepEqual(opened.findings.filter(finding => finding.ruleId === 'ERC-OPEN-DISCONNECT')
     .map(finding => [finding.severity, finding.locations[0].objectId]), [['info', 'x14']]);
   assert.ok(openedNets.includes('S1:13,X14:2'));
+  const bypassedProject = structuredClone(reopened.project);
+  const [left, right] = engine.worldPins(disconnect);
+  bypassedProject.objects.push({
+    id: 'disconnect-bypass', kind: 'wire', sheetId: disconnect.sheetId, x: left.x, y: left.y,
+    x1: left.x, y1: left.y, x2: right.x, y2: right.y,
+    bends: [{ x: left.x, y: left.y + 30 }, { x: right.x, y: right.y + 30 }],
+    pinAttachments: { start: { instanceId: disconnect.id, pinId: left.id }, end: { instanceId: disconnect.id, pinId: right.id } }
+  });
+  const bypassed = engine.analyzeProject(bypassedProject);
+  assert.equal(bypassed.valid, true);
+  assert.deepEqual(bypassed.findings.filter(finding => finding.ruleId === 'ERC-BYPASSED-DISCONNECT')
+    .map(finding => [finding.severity, finding.locations[0].objectId]), [['warning', 'x14']]);
   assert.ok(openedNets.includes('H4:X1,X10:1,X10:2,X14:1,X1:1,X1:2'));
   assert.equal(engine.validateInstance({ ...disconnect, properties: { ...disconnect.properties, knifePosition: 'invalid' } }).valid, false);
   const schedule = engine.cableScheduleCsv(project);
