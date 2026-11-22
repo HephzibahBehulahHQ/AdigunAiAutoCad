@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.7",
+  "revision": "1.8",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -81,6 +81,12 @@
       "id": "pick-place-local-operator-station",
       "number": "A2/013",
       "name": "Local start and operational stop station",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-sensor-test-access",
+      "number": "A2/014",
+      "name": "Position sensor feed disconnect and test terminals",
       "projectSectionId": "A2"
     }
   ],
@@ -325,6 +331,58 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x26",
+      "componentId": "phoenix-contact-3210156",
+      "ref": "X26",
+      "x": 440,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT12",
+        "position": "1",
+        "marking": "Position sensor feed disconnect",
+        "comment": "",
+        "knifePosition": "closed"
+      },
+      "sheetId": "pick-place-sensor-test-access"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x27",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X27",
+      "x": 710,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT12",
+        "position": "2",
+        "marking": "Switched position sensor feed",
+        "comment": ""
+      },
+      "sheetId": "pick-place-sensor-test-access"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x28",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X28",
+      "x": 710,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT12",
+        "position": "3",
+        "marking": "Sensor 0 V test reference",
+        "comment": ""
+      },
+      "sheetId": "pick-place-sensor-test-access"
+    },
+    {
       "id": "sensor-feed-cabinet",
       "sheetId": "pick-place-plc",
       "kind": "wire",
@@ -347,6 +405,72 @@
     },
     {
       "id": "sensor-feed-field",
+      "sheetId": "pick-place-sensor-test-access",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 405,
+      "y": 290,
+      "x1": 405,
+      "y1": 290,
+      "x2": 215,
+      "y2": 290,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x26",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-test-switched-feed",
+      "sheetId": "pick-place-sensor-test-access",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 475,
+      "y": 290,
+      "x1": 475,
+      "y1": 290,
+      "x2": 675,
+      "y2": 290,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x26",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "x27",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "sensor-switched-feed-cabinet",
+      "sheetId": "pick-place-sensor-test-access",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 745,
+      "y": 290,
+      "x1": 745,
+      "y1": 290,
+      "x2": 960,
+      "y2": 290,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x27",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-switched-feed-field",
       "sheetId": "pick-place-position-sensors",
       "kind": "wire",
       "potential": "+24 V DC",
@@ -393,6 +517,47 @@
       "y1": 455,
       "x2": 215,
       "y2": 455
+    },
+    {
+      "id": "sensor-test-reference-cabinet",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 455,
+      "x1": 435,
+      "y1": 455,
+      "x2": 215,
+      "y2": 520,
+      "bends": [
+        {
+          "x": 435,
+          "y": 520
+        }
+      ]
+    },
+    {
+      "id": "sensor-test-reference-field",
+      "sheetId": "pick-place-sensor-test-access",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 745,
+      "y": 420,
+      "x1": 745,
+      "y1": 420,
+      "x2": 960,
+      "y2": 420,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x28",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
     },
     {
       "id": "b1-feed",
@@ -3024,6 +3189,22 @@
       "x": 105,
       "y": 588,
       "text": "W-03 carries the feed and both request inputs. S1 closes DI a.4 and S2 opens DI a.5 when pressed. Emergency-stop functions remain outside this drawing."
+    },
+    {
+      "id": "pick-place-sensor-test-access-note-0",
+      "sheetId": "pick-place-sensor-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "POSITION SENSOR FEED TEST ACCESS · XT12"
+    },
+    {
+      "id": "pick-place-sensor-test-access-note-1",
+      "sheetId": "pick-place-sensor-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "X26 disconnects the B1 and B2 feed. X27 and X28 expose the downstream +24 V and 0 V reference. Test equipment and procedures remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -3040,21 +3221,53 @@
           },
           "connector": {
             "direction": "left",
+            "targetSheetId": "pick-place-sensor-test-access",
+            "targetRef": "X26"
+          }
+        },
+        {
+          "sheetId": "pick-place-sensor-test-access",
+          "wireId": "sensor-feed-field",
+          "point": {
+            "x": 215,
+            "y": 290
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensor-switched-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-sensor-test-access",
+          "wireId": "sensor-switched-feed-cabinet",
+          "point": {
+            "x": 960,
+            "y": 290
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "pick-place-position-sensors",
             "targetRef": "B1"
           }
         },
         {
           "sheetId": "pick-place-position-sensors",
-          "wireId": "sensor-feed-field",
+          "wireId": "sensor-switched-feed-field",
           "point": {
             "x": 215,
             "y": 270
           },
           "connector": {
             "direction": "left",
-            "targetSheetId": "pick-place-plc",
-            "targetRef": "X1"
+            "targetSheetId": "pick-place-sensor-test-access",
+            "targetRef": "X27"
           }
         }
       ]
@@ -3087,6 +3300,38 @@
             "direction": "left",
             "targetSheetId": "pick-place-plc",
             "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensor-test-reference",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-position-sensors",
+          "wireId": "sensor-test-reference-cabinet",
+          "point": {
+            "x": 215,
+            "y": 520
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-sensor-test-access",
+            "targetRef": "X28"
+          }
+        },
+        {
+          "sheetId": "pick-place-sensor-test-access",
+          "wireId": "sensor-test-reference-field",
+          "point": {
+            "x": 960,
+            "y": 420
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-position-sensors",
+            "targetRef": "B2"
           }
         }
       ]

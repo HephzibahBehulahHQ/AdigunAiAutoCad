@@ -19,10 +19,11 @@ const power = 'pick-place-control-supply';
 const cabinetEarth = 'pick-place-cabinet-protective-earth';
 const fieldEarth = 'pick-place-field-protective-earth';
 const station = 'pick-place-local-operator-station';
+const sensorTest = 'pick-place-sensor-test-access';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.7',
+  revision: '1.8',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -38,7 +39,8 @@ const project = {
     { id: power, number: 'A2/010', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
     { id: cabinetEarth, number: 'A2/011', name: 'Cabinet protective-earth distribution', projectSectionId: 'A2' },
     { id: fieldEarth, number: 'A2/012', name: 'Remote valve and slide frame PE terminals', projectSectionId: 'A2' },
-    { id: station, number: 'A2/013', name: 'Local start and operational stop station', projectSectionId: 'A2' }
+    { id: station, number: 'A2/013', name: 'Local start and operational stop station', projectSectionId: 'A2' },
+    { id: sensorTest, number: 'A2/014', name: 'Position sensor feed disconnect and test terminals', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -102,10 +104,21 @@ const fieldPlus = { x: 390, y: 270 };
 const fieldCommon = { x: 435, y: 455 };
 const cabinetPort = (ref, connection, x, y, direction, bends) => ({ sheet: cabinet, ref, connection, edge: { x, y }, direction, bends });
 const fieldPort = (sheet, ref, connection, x, y, direction) => ({ sheet, ref, connection, edge: { x, y }, direction });
+const sensorDisconnect = device(sensorTest, 'X26', 'phoenix-contact-3210156', 440, 290,
+  { terminalStrip: 'XT12', position: '1', marking: 'Position sensor feed disconnect', knifePosition: 'closed' });
+const sensorTestFeed = terminal(sensorTest, 'X27', 710, 290, 'XT12', '2', 'Switched position sensor feed');
+const sensorTestCommon = terminal(sensorTest, 'X28', 710, 420, 'XT12', '3', 'Sensor 0 V test reference');
 connectSheets('sensor-feed', '+24 V DC', cabinetPort('X1', pin(plus, '1'), 215, 234, 'left'),
+  fieldPort(sensorTest, sensorDisconnect.ref, pin(sensorDisconnect, '1'), 215, 290, 'left'));
+wire(sensorTest, 'sensor-test-switched-feed', '+24 V DC', pin(sensorDisconnect, '2'), pin(sensorTestFeed, '1'));
+connectSheets('sensor-switched-feed', '+24 V DC',
+  fieldPort(sensorTest, sensorTestFeed.ref, pin(sensorTestFeed, '2'), 960, 290, 'right'),
   fieldPort(sensors, b1.ref, fieldPlus, 215, 270, 'left'));
 connectSheets('sensor-return', '0 V', cabinetPort('X2', pin(zero, '1'), 215, 280, 'left'),
   fieldPort(sensors, b2.ref, fieldCommon, 215, 455, 'left'));
+connectSheets('sensor-test-reference', '0 V',
+  { ...fieldPort(sensors, b2.ref, fieldCommon, 215, 520, 'left'), bends: [{ x: 435, y: 520 }] },
+  fieldPort(sensorTest, sensorTestCommon.ref, pin(sensorTestCommon, '2'), 960, 420, 'right'));
 wire(sensors, 'b1-feed', '+24 V DC', fieldPlus, pin(b1, '1'));
 wire(sensors, 'b2-feed', '+24 V DC', fieldPlus, pin(b2, '1'), [{ x: 390, y: 415 }]);
 wire(sensors, 'b1-return', '0 V', fieldCommon, pin(b1, '3'), [{ x: 435, y: 310 }]);
@@ -271,7 +284,8 @@ for (const [sheetId, title, text] of [
   [power, 'CONTROL SUPPLY · PS1', 'XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
   [cabinetEarth, 'CABINET PROTECTIVE EARTH · XT10', 'XT10 branches incoming PE to the controller enclosure terminal and the remote assembly. Physical bonds remain unassigned.'],
   [fieldEarth, 'REMOTE VALVE AND SLIDE PROTECTIVE EARTH · XT11', 'XT11 continues the incoming PE to the valve enclosure and slide frame terminals. Physical bonds and conductor sizes remain unassigned.'],
-  [station, 'LOCAL START AND OPERATIONAL STOP · S1 AND S2', 'W-03 carries the feed and both request inputs. S1 closes DI a.4 and S2 opens DI a.5 when pressed. Emergency-stop functions remain outside this drawing.']
+  [station, 'LOCAL START AND OPERATIONAL STOP · S1 AND S2', 'W-03 carries the feed and both request inputs. S1 closes DI a.4 and S2 opens DI a.5 when pressed. Emergency-stop functions remain outside this drawing.'],
+  [sensorTest, 'POSITION SENSOR FEED TEST ACCESS · XT12', 'X26 disconnects the B1 and B2 feed. X27 and X28 expose the downstream +24 V and 0 V reference. Test equipment and procedures remain unassigned.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
