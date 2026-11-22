@@ -1,0 +1,970 @@
+{
+  "product": "AdigunAiAutoCad",
+  "project": "Water-treatment dosing and pressure monitoring",
+  "revision": "1.0",
+  "description": "Two independent filter pressure inputs and an isolated dosing-enable contact interface.",
+  "activeSheet": "dosing-controller",
+  "sheets": [
+    {
+      "id": "dosing-controller",
+      "number": "A2/001",
+      "name": "PLC supply, analog inputs and dosing output",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-pressure-monitoring",
+      "number": "A2/002",
+      "name": "Filter inlet and outlet pressure transmitters",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "dosing-enable-interface",
+      "number": "A2/003",
+      "name": "Isolated chemical dosing enable contact",
+      "projectSectionId": "A2"
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 730,
+      "y": 360,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "dosing-controller"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x1",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X1",
+      "x": 370,
+      "y": 234,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "External control +24 V DC",
+        "comment": ""
+      },
+      "sheetId": "dosing-controller"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x2",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X2",
+      "x": 370,
+      "y": 292,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "External control 0 V",
+        "comment": ""
+      },
+      "sheetId": "dosing-controller"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b1",
+      "componentId": "ifm-pn2070",
+      "ref": "B1",
+      "x": 610,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "marking": "Filter inlet pressure",
+        "position": "",
+        "processPoint": "",
+        "signalConfigurationNote": "",
+        "comment": ""
+      },
+      "sheetId": "dosing-pressure-monitoring"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b2",
+      "componentId": "ifm-pn2070",
+      "ref": "B2",
+      "x": 610,
+      "y": 455,
+      "rotation": 0,
+      "properties": {
+        "marking": "Filter outlet pressure",
+        "position": "",
+        "processPoint": "",
+        "signalConfigurationNote": "",
+        "comment": ""
+      },
+      "sheetId": "dosing-pressure-monitoring"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k1",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K1",
+      "x": 605,
+      "y": 350,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Dosing-enable relay",
+        "comment": ""
+      },
+      "sheetId": "dosing-enable-interface"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x3",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X3",
+      "x": 905,
+      "y": 350,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "1",
+        "marking": "External dosing controller common",
+        "comment": ""
+      },
+      "sheetId": "dosing-enable-interface"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x4",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X4",
+      "x": 905,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "2",
+        "marking": "External dosing enable request",
+        "comment": ""
+      },
+      "sheetId": "dosing-enable-interface"
+    },
+    {
+      "id": "plc-power",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 405,
+      "y": 234,
+      "x1": 405,
+      "y1": 234,
+      "x2": 600,
+      "y2": 234,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-1"
+        }
+      }
+    },
+    {
+      "id": "plc-return",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 405,
+      "y": 292,
+      "x1": 405,
+      "y1": 292,
+      "x2": 600,
+      "y2": 252,
+      "bends": [
+        {
+          "x": 465,
+          "y": 292
+        },
+        {
+          "x": 465,
+          "y": 252
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-2"
+        }
+      }
+    },
+    {
+      "id": "plc-output-feed",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 490,
+      "y": 234,
+      "x1": 490,
+      "y1": 234,
+      "x2": 860,
+      "y2": 352,
+      "bends": [
+        {
+          "x": 490,
+          "y": 145
+        },
+        {
+          "x": 975,
+          "y": 145
+        },
+        {
+          "x": 975,
+          "y": 352
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x12-1"
+        }
+      }
+    },
+    {
+      "id": "plc-output-reference",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 465,
+      "y": 292,
+      "x1": 465,
+      "y1": 292,
+      "x2": 860,
+      "y2": 368,
+      "bends": [
+        {
+          "x": 465,
+          "y": 535
+        },
+        {
+          "x": 950,
+          "y": 535
+        },
+        {
+          "x": 950,
+          "y": 368
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x12-2"
+        }
+      }
+    },
+    {
+      "id": "plc-analog-reference",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 510,
+      "y": 252,
+      "x1": 510,
+      "y1": 252,
+      "x2": 860,
+      "y2": 234,
+      "bends": [
+        {
+          "x": 510,
+          "y": 175
+        },
+        {
+          "x": 910,
+          "y": 175
+        },
+        {
+          "x": 910,
+          "y": 234
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x11-1"
+        }
+      }
+    },
+    {
+      "id": "transmitter-feed-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 234,
+      "x1": 335,
+      "y1": 234,
+      "x2": 215,
+      "y2": 234,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "transmitter-feed-field",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 385,
+      "y": 265,
+      "x1": 385,
+      "y1": 265,
+      "x2": 215,
+      "y2": 265
+    },
+    {
+      "id": "transmitter-return-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 292,
+      "x1": 335,
+      "y1": 292,
+      "x2": 215,
+      "y2": 292,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "transmitter-return-field",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 445,
+      "y": 480,
+      "x1": 445,
+      "y1": 480,
+      "x2": 215,
+      "y2": 480
+    },
+    {
+      "id": "inlet-feed",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 385,
+      "y": 265,
+      "x1": 385,
+      "y1": 265,
+      "x2": 545,
+      "y2": 265,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "outlet-feed",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 385,
+      "y": 265,
+      "x1": 385,
+      "y1": 265,
+      "x2": 545,
+      "y2": 430,
+      "bends": [
+        {
+          "x": 385,
+          "y": 430
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b2",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "inlet-return",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 445,
+      "y": 480,
+      "x1": 445,
+      "y1": 480,
+      "x2": 545,
+      "y2": 315,
+      "bends": [
+        {
+          "x": 445,
+          "y": 315
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "outlet-return",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 445,
+      "y": 480,
+      "x1": 445,
+      "y1": 480,
+      "x2": 545,
+      "y2": 480,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b2",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "b1-voltage-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "B1 inlet pressure to AI 0",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 860,
+      "y": 252,
+      "x1": 860,
+      "y1": 252,
+      "x2": 1020,
+      "y2": 252,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x11-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "b1-voltage-field",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "B1 inlet pressure to AI 0",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 265,
+      "x1": 675,
+      "y1": 265,
+      "x2": 960,
+      "y2": 265,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b1",
+          "pinId": "pin-2-out2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "b2-voltage-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "B2 outlet pressure to AI 1",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 860,
+      "y": 270,
+      "x1": 860,
+      "y1": 270,
+      "x2": 1020,
+      "y2": 296,
+      "bends": [
+        {
+          "x": 935,
+          "y": 270
+        },
+        {
+          "x": 935,
+          "y": 296
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x11-3"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "b2-voltage-field",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "wire",
+      "potential": "B2 outlet pressure to AI 1",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 430,
+      "x1": 675,
+      "y1": 430,
+      "x2": 960,
+      "y2": 430,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b2",
+          "pinId": "pin-2-out2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "dosing-demand-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "DQ a.0 dosing enable",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 860,
+      "y": 384,
+      "x1": 860,
+      "y1": 384,
+      "x2": 1020,
+      "y2": 384,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x12-3"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "dosing-demand-field",
+      "sheetId": "dosing-enable-interface",
+      "kind": "wire",
+      "potential": "DQ a.0 dosing enable",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 535,
+      "y": 370,
+      "x1": 535,
+      "y1": 370,
+      "x2": 215,
+      "y2": 370,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "coil-a1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "dosing-return-cabinet",
+      "sheetId": "dosing-controller",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 950,
+      "y": 475,
+      "x1": 950,
+      "y1": 475,
+      "x2": 1020,
+      "y2": 475
+    },
+    {
+      "id": "dosing-return-field",
+      "sheetId": "dosing-enable-interface",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 535,
+      "y": 330,
+      "x1": 535,
+      "y1": 330,
+      "x2": 215,
+      "y2": 330,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "coil-a2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "dosing-contact-common",
+      "sheetId": "dosing-enable-interface",
+      "kind": "wire",
+      "potential": "Dosing contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 350,
+      "x1": 675,
+      "y1": 350,
+      "x2": 870,
+      "y2": 350,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "x3",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "dosing-contact-no",
+      "sheetId": "dosing-enable-interface",
+      "kind": "wire",
+      "potential": "Dosing contact enable",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 375,
+      "x1": 675,
+      "y1": 375,
+      "x2": 870,
+      "y2": 420,
+      "bends": [
+        {
+          "x": 770,
+          "y": 375
+        },
+        {
+          "x": 770,
+          "y": 420
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-14"
+        },
+        "end": {
+          "instanceId": "x4",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "dosing-controller-note-0",
+      "sheetId": "dosing-controller",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "WATER TREATMENT · DOSING AND PRESSURE CONTROL"
+    },
+    {
+      "id": "dosing-controller-note-1",
+      "sheetId": "dosing-controller",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "A1 receives two distinct pressure voltages. External controller power enters through XT1."
+    },
+    {
+      "id": "dosing-pressure-monitoring-note-0",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "FILTER INLET AND OUTLET PRESSURES · B1 AND B2"
+    },
+    {
+      "id": "dosing-pressure-monitoring-note-1",
+      "sheetId": "dosing-pressure-monitoring",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "Both OUT2 links assume voltage mode. Sensor suitability, range, scaling and filter differential limits remain unassigned."
+    },
+    {
+      "id": "dosing-enable-interface-note-0",
+      "sheetId": "dosing-enable-interface",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "CHEMICAL DOSING ENABLE INTERFACE · K1"
+    },
+    {
+      "id": "dosing-enable-interface-note-1",
+      "sheetId": "dosing-enable-interface",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "XT2 exposes a normally open enable contact. The external dosing controller, dose logic and permissives remain unassigned."
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "transmitter-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "transmitter-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 234
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-pressure-monitoring",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "dosing-pressure-monitoring",
+          "wireId": "transmitter-feed-field",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "transmitter-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "transmitter-return-cabinet",
+          "point": {
+            "x": 215,
+            "y": 292
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-pressure-monitoring",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "dosing-pressure-monitoring",
+          "wireId": "transmitter-return-field",
+          "point": {
+            "x": 215,
+            "y": 480
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b1-voltage",
+      "name": "B1 inlet pressure to AI 0",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "b1-voltage-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 252
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-pressure-monitoring",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "dosing-pressure-monitoring",
+          "wireId": "b1-voltage-field",
+          "point": {
+            "x": 960,
+            "y": 265
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b2-voltage",
+      "name": "B2 outlet pressure to AI 1",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "b2-voltage-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 296
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-pressure-monitoring",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "dosing-pressure-monitoring",
+          "wireId": "b2-voltage-field",
+          "point": {
+            "x": 960,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-demand",
+      "name": "DQ a.0 dosing enable",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-demand-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 384
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-enable-interface",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "dosing-enable-interface",
+          "wireId": "dosing-demand-field",
+          "point": {
+            "x": 215,
+            "y": 370
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dosing-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "dosing-controller",
+          "wireId": "dosing-return-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 475
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "dosing-enable-interface",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "dosing-enable-interface",
+          "wireId": "dosing-return-field",
+          "point": {
+            "x": 215,
+            "y": 330
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "dosing-controller",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    }
+  ],
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}
