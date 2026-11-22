@@ -621,11 +621,25 @@
     ['3031212', 'ST 2,5', 'st-25', 'Gray (RAL 7042)', 2.5, 24, 5.2, 48.5, 0.08, 4, 2.5],
     ['3037122', 'ST 2,5 BK', 'st-25-bk', 'Black (RAL 9005)', 2.5, 24, 5.2, 48.5, 0.08, 4, 2.5],
     ['3037106', 'ST 2,5 GN', 'st-25-gn', 'Green (RAL 6021)', 2.5, 24, 5.2, 48.5, 0.08, 4, 2.5],
-    ['3031364', 'ST 4', 'st-4', 'Gray (RAL 7042)', 4, 32, 6.2, 56, 0.08, 6, 4]
-  ].map(([id, model, slug, color, crossSection, current, width, height, minimumConductor, maximumConductor, maximumFlexibleConductor]) => {
+    ['3031364', 'ST 4', 'st-4', 'Gray (RAL 7042)', 4, 32, 6.2, 56, 0.08, 6, 4],
+    ['3044131', 'UT 6', 'ut-6', 'Gray (RAL 7042)', 6, 41, 8.2, 47.7, 0.2, 10, 10, 1000, [47.5, 55]],
+    ['3045185', 'UT 6 RD', 'ut-6-rd', 'Red (RAL 3001)', 6, 41, 8.2, 47.7, 0.2, 10, 10, 1000, [47.5, 55]],
+    ['3044160', 'UT 10', 'ut-10', 'Gray (RAL 7042)', 10, 57, 10.2, 47.7, 0.5, 16, 16, 1000, [47.5, 55]],
+    ['3044188', 'UT 10 BU', 'ut-10-bu', 'Blue (RAL 5015)', 10, 57, 10.2, 47.7, 0.5, 16, 16, 1000, [47.5, 55]],
+    ['3046320', 'UT 10 BK', 'ut-10-bk', 'Black (RAL 9005)', 10, 57, 10.2, 47.7, 0.5, 16, 16, 1000, [47.5, 55]],
+    ['3047468', 'UT 16 OG', 'ut-16-og', 'Orange (RAL 2003)', 16, 76, 12.2, 55.5, 1.5, 25, 25, 1000, [55, 62.5]],
+    ['3044238', 'UT 35 BU', 'ut-35-bu', 'Blue (RAL 5015)', 35, 125, 16, 61.2, 1.5, 50, 50, 1000, [65.7, 73.2]],
+    ['3044226', 'UT 35 BK', 'ut-35-bk', 'Black (RAL 9005)', 35, 125, 16, 61.2, 1.5, 50, 50, 1000, [65.7, 73.2]],
+    ['3047727', 'UT 35 IB', 'ut-35-ib', 'Gray (RAL 7042)', 35, 125, 16, 61.2, 1.5, 50, 50, 1000, [65.7, 73.2]],
+    ['3031076', 'ST 1,5', 'st-15', 'Gray (RAL 7042)', 1.5, 17.5, 4.2, 48.5, 0.08, 1.5, 1.5, 500, [36.5, 44]],
+    ['3031089', 'ST 1,5 BU', 'st-15-bu', 'Blue (RAL 5015)', 1.5, 17.5, 4.2, 48.5, 0.08, 1.5, 1.5, 500, [36.5, 44]],
+    ['3031490', 'ST 6 BU', 'st-6-bu', 'Blue (RAL 5015)', 6, 41, 8.2, 69.5, 0.2, 10, 6, 1000, [43.5, 51]],
+    ['3036149', 'ST 16', 'st-16', 'Gray (RAL 7042)', 16, 76, 12.2, 80, 0.2, 25, 16, 1000, [51.5, 59]],
+    ['3036152', 'ST 16 BU', 'st-16-bu', 'Blue (RAL 5015)', 16, 76, 12.2, 80, 0.2, 25, 16, 1000, [51.5, 59]]
+  ].map(([id, model, slug, color, crossSection, current, width, height, minimumConductor, maximumConductor, maximumFlexibleConductor, voltage, railDepths]) => {
     const screw = model.startsWith('UT ');
     return compactTerminal(id, model, 'https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-' + slug + '-' + id,
-      1, screw ? 1000 : 800, current, height, screw ? [47.5, 55] : [36.5, 44], false,
+      1, voltage ?? (screw ? 1000 : 800), current, height, railDepths ?? (screw ? [47.5, 55] : [36.5, 44]), false,
       { color, crossSection, width, minimumConductor, maximumConductor, maximumFlexibleConductor,
         connectionType: screw ? 'screw' : 'spring-cage', connectionMethod: screw ? 'Screw' : 'Spring-cage', retrievedAt: '2026-11-22' });
   });
