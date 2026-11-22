@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.8",
+  "revision": "3.9",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -191,6 +191,12 @@
       "id": "b3-switching-boundary",
       "number": "A2/030",
       "name": "XT18 B3 switching output boundary",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "b3-switching-relay",
+      "number": "A2/031",
+      "name": "K5 pressure status relay and dry output",
       "projectSectionId": "A2"
     }
   ],
@@ -4232,7 +4238,7 @@
       "sheetId": "ai1-pressure-sensor",
       "x": 110,
       "y": 490,
-      "text": "W-B3 terminates at XT17 on A2/029. OUT2 assumes voltage mode. OUT1 reaches XT18 without an assigned load.",
+      "text": "W-B3 terminates at XT17 on A2/029. OUT2 assumes voltage mode. OUT1 reaches K5 through XT18.",
       "stroke": "#13263b"
     },
     {
@@ -4356,7 +4362,7 @@
       "sheetId": "b3-switching-boundary",
       "x": 110,
       "y": 205,
-      "text": "XT18:1 brings OUT1 from W-B3 core 4 to an available cabinet terminal.",
+      "text": "XT18:1 brings OUT1 from W-B3 core 4 to K5 A1 on A2/031.",
       "stroke": "#13263b"
     },
     {
@@ -4374,7 +4380,247 @@
       "sheetId": "b3-switching-boundary",
       "x": 110,
       "y": 510,
-      "text": "The receiving device, switching parameters and sensing threshold remain unassigned.",
+      "text": "The relay interface assumes OUT1 sourcing mode. Switching parameters and sensing threshold remain unassigned.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-switching-relay-k5",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K5",
+      "x": 480,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "marking": "B3 pressure switching status"
+      },
+      "sheetId": "b3-switching-relay"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-switching-relay-x48",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X48",
+      "x": 790,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT19",
+        "position": "1",
+        "marking": "Dry contact common"
+      },
+      "sheetId": "b3-switching-relay"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-switching-relay-x49",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X49",
+      "x": 790,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT19",
+        "position": "2",
+        "marking": "Dry normally open output"
+      },
+      "sheetId": "b3-switching-relay"
+    },
+    {
+      "id": "b3-switching-relay-switch-send",
+      "kind": "wire",
+      "sheetId": "b3-switching-boundary",
+      "x": 585,
+      "y": 280,
+      "x1": 585,
+      "y1": 280,
+      "x2": 850,
+      "y2": 280,
+      "potential": "B3 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-switching-boundary-x46",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-switch-receive",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 210,
+      "y": 350,
+      "x1": 210,
+      "y1": 350,
+      "x2": 410,
+      "y2": 350,
+      "potential": "B3 switching output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-switching-relay-k5",
+          "pinId": "coil-a1"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-return-send",
+      "kind": "wire",
+      "sheetId": "b3-switching-boundary",
+      "x": 585,
+      "y": 385,
+      "x1": 585,
+      "y1": 385,
+      "x2": 850,
+      "y2": 385,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-switching-boundary-x47",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-return-receive",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 210,
+      "y": 310,
+      "x1": 210,
+      "y1": 310,
+      "x2": 410,
+      "y2": 310,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-switching-relay-k5",
+          "pinId": "coil-a2"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-common",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 550,
+      "y": 330,
+      "x1": 550,
+      "y1": 330,
+      "x2": 755,
+      "y2": 330,
+      "potential": "K5 dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-switching-relay-k5",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "b3-switching-relay-x48",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-no-pin",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 550,
+      "y": 355,
+      "x1": 550,
+      "y1": 355,
+      "x2": 645,
+      "y2": 355,
+      "potential": "K5 dry normally open output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-switching-relay-k5",
+          "pinId": "contact-14"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-no-drop",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 645,
+      "y": 355,
+      "x1": 645,
+      "y1": 355,
+      "x2": 645,
+      "y2": 420,
+      "potential": "K5 dry normally open output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "b3-switching-relay-no-terminal",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 645,
+      "y": 420,
+      "x1": 645,
+      "y1": 420,
+      "x2": 755,
+      "y2": 420,
+      "potential": "K5 dry normally open output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-switching-relay-x49",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "b3-switching-relay-title",
+      "kind": "text",
+      "sheetId": "b3-switching-relay",
+      "x": 110,
+      "y": 108,
+      "text": "XT19 · B3 PRESSURE STATUS RELAY",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-switching-relay-configuration",
+      "kind": "text",
+      "sheetId": "b3-switching-relay",
+      "x": 110,
+      "y": 210,
+      "text": "The circuit assumes B3 OUT1 is configured as a PNP sourcing output.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-switching-relay-terminal",
+      "kind": "text",
+      "sheetId": "b3-switching-relay",
+      "x": 110,
+      "y": 465,
+      "text": "K5 presents a dry common and normally open contact at XT19. Terminal 12 is unused.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-switching-relay-scope",
+      "kind": "text",
+      "sheetId": "b3-switching-relay",
+      "x": 110,
+      "y": 510,
+      "text": "Verify voltage at K5 and actual loading. Pressure setpoint, external load and protection remain unassigned.",
       "stroke": "#13263b"
     },
     {
@@ -7511,6 +7757,70 @@
             "direction": "left",
             "targetSheetId": "b3-field-terminations",
             "targetRef": "X44"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b3-switching-relay-switch",
+      "name": "K5 coil switch",
+      "endpoints": [
+        {
+          "sheetId": "b3-switching-boundary",
+          "wireId": "b3-switching-relay-switch-send",
+          "point": {
+            "x": 850,
+            "y": 280
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-switching-relay",
+            "targetRef": "K5"
+          }
+        },
+        {
+          "sheetId": "b3-switching-relay",
+          "wireId": "b3-switching-relay-switch-receive",
+          "point": {
+            "x": 210,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "b3-switching-boundary",
+            "targetRef": "X46"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b3-switching-relay-return",
+      "name": "K5 coil return",
+      "endpoints": [
+        {
+          "sheetId": "b3-switching-boundary",
+          "wireId": "b3-switching-relay-return-send",
+          "point": {
+            "x": 850,
+            "y": 385
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-switching-relay",
+            "targetRef": "K5"
+          }
+        },
+        {
+          "sheetId": "b3-switching-relay",
+          "wireId": "b3-switching-relay-return-receive",
+          "point": {
+            "x": 210,
+            "y": 310
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "b3-switching-boundary",
+            "targetRef": "X47"
           }
         }
       ]
