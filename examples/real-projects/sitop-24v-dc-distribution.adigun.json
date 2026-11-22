@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.1",
+  "revision": "3.2",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -155,6 +155,12 @@
       "id": "ai1-pressure-sensor",
       "number": "A2/024",
       "name": "B3 pressure sensor to AI1",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-b-monitor",
+      "number": "A2/025",
+      "name": "Branch B voltage-present relay and dry contacts",
       "projectSectionId": "A2"
     }
   ],
@@ -3922,6 +3928,304 @@
       "y": 490,
       "text": "The schematic assumes 0–10 V output mode. OUT1, process location, cable and scaling are unassigned.",
       "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-monitor-k4",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K4",
+      "x": 475,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "marking": "Branch B voltage present"
+      },
+      "sheetId": "branch-b-monitor"
+    },
+    {
+      "id": "branch-b-monitor-feed-send",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 315,
+      "y": 290,
+      "x1": 315,
+      "y1": 290,
+      "x2": 315,
+      "y2": 205,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-b-monitor-feed-receive",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 190,
+      "y": 350,
+      "x1": 190,
+      "y1": 350,
+      "x2": 405,
+      "y2": 350,
+      "potential": "+24 V DC",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-monitor-k4",
+          "pinId": "coil-a1"
+        }
+      }
+    },
+    {
+      "id": "branch-b-monitor-return-send",
+      "kind": "wire",
+      "sheetId": "branch-b",
+      "x": 315,
+      "y": 340,
+      "x1": 315,
+      "y1": 340,
+      "x2": 315,
+      "y2": 430,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-b-monitor-return-receive",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 190,
+      "y": 310,
+      "x1": 190,
+      "y1": 310,
+      "x2": 405,
+      "y2": 310,
+      "potential": "0 V DC",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-monitor-k4",
+          "pinId": "coil-a2"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-monitor-x30",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X30",
+      "x": 785,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "1",
+        "marking": "Dry contact common"
+      },
+      "sheetId": "branch-b-monitor"
+    },
+    {
+      "id": "branch-b-monitor-contact-11",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 545,
+      "y": 330,
+      "x1": 545,
+      "y1": 330,
+      "x2": 750,
+      "y2": 330,
+      "potential": "K4 Dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-monitor-k4",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "branch-b-monitor-x30",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-monitor-x31",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X31",
+      "x": 785,
+      "y": 240,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "2",
+        "marking": "Normally closed"
+      },
+      "sheetId": "branch-b-monitor"
+    },
+    {
+      "id": "branch-b-monitor-contact-12-pin",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 545,
+      "y": 305,
+      "x1": 545,
+      "y1": 305,
+      "x2": 625,
+      "y2": 305,
+      "potential": "K4 Normally closed",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-monitor-k4",
+          "pinId": "contact-12"
+        }
+      }
+    },
+    {
+      "id": "branch-b-monitor-contact-12-bend",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 625,
+      "y": 305,
+      "x1": 625,
+      "y1": 305,
+      "x2": 625,
+      "y2": 240,
+      "potential": "K4 Normally closed",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-b-monitor-contact-12-terminal",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 625,
+      "y": 240,
+      "x1": 625,
+      "y1": 240,
+      "x2": 750,
+      "y2": 240,
+      "potential": "K4 Normally closed",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-monitor-x31",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-monitor-x32",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X32",
+      "x": 785,
+      "y": 420,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT13",
+        "position": "3",
+        "marking": "Normally open"
+      },
+      "sheetId": "branch-b-monitor"
+    },
+    {
+      "id": "branch-b-monitor-contact-14-pin",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 545,
+      "y": 355,
+      "x1": 545,
+      "y1": 355,
+      "x2": 625,
+      "y2": 355,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-monitor-k4",
+          "pinId": "contact-14"
+        }
+      }
+    },
+    {
+      "id": "branch-b-monitor-contact-14-bend",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 625,
+      "y": 355,
+      "x1": 625,
+      "y1": 355,
+      "x2": 625,
+      "y2": 420,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "branch-b-monitor-contact-14-terminal",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 625,
+      "y": 420,
+      "x1": 625,
+      "y1": 420,
+      "x2": 750,
+      "y2": 420,
+      "potential": "K4 Normally open",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-monitor-x32",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "branch-b-monitor-title",
+      "kind": "text",
+      "sheetId": "branch-b-monitor",
+      "x": 110,
+      "y": 108,
+      "text": "XT13 · BRANCH B VOLTAGE-PRESENT CONTACTS",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-b-monitor-coil",
+      "kind": "text",
+      "sheetId": "branch-b-monitor",
+      "x": 110,
+      "y": 175,
+      "text": "K4 is wired in parallel with B2 on the downstream Branch B supply.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-b-monitor-contacts",
+      "kind": "text",
+      "sheetId": "branch-b-monitor",
+      "x": 110,
+      "y": 485,
+      "text": "XT13 presents dry COM, NC and NO terminals for external indication.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-b-monitor-scope",
+      "kind": "text",
+      "sheetId": "branch-b-monitor",
+      "x": 110,
+      "y": 525,
+      "text": "K4 reports coil energization. The receiving circuit, alarm thresholds and protection are unassigned.",
+      "stroke": "#13263b"
     }
   ],
   "crossSheetConnections": [
@@ -5771,6 +6075,70 @@
             "direction": "left",
             "targetSheetId": "spare-analog-interface",
             "targetRef": "X23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-b-monitor-feed",
+      "name": "Branch B K4 +24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "branch-b-monitor-feed-send",
+          "point": {
+            "x": 315,
+            "y": 205
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-monitor",
+            "targetRef": "K4"
+          }
+        },
+        {
+          "sheetId": "branch-b-monitor",
+          "wireId": "branch-b-monitor-feed-receive",
+          "point": {
+            "x": 190,
+            "y": 350
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-b-monitor-return",
+      "name": "Branch B K4 0 V DC",
+      "endpoints": [
+        {
+          "sheetId": "branch-b",
+          "wireId": "branch-b-monitor-return-send",
+          "point": {
+            "x": 315,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-monitor",
+            "targetRef": "K4"
+          }
+        },
+        {
+          "sheetId": "branch-b-monitor",
+          "wireId": "branch-b-monitor-return-receive",
+          "point": {
+            "x": 190,
+            "y": 310
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b",
+            "targetRef": "B2"
           }
         }
       ]
