@@ -959,7 +959,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const drag=objectDrag;
     objectDrag=null;
     drawing.style.cursor='default';
-    if(!drag.moved||JSON.stringify(state.objects)===drag.snapshot.objects)return;
+    if(!drag.moved){
+      if(drag.ids.length===1&&state.objects.some(object=>object.id===drag.id&&object.kind==='component-instance')){
+        openInspector('Properties');
+      }
+      return;
+    }
+    if(JSON.stringify(state.objects)===drag.snapshot.objects)return;
     if(rejectNewComponentOverlap(drag.snapshot,drag.ids))return;
     pushUndo(drag.snapshot);
     persist();
@@ -986,7 +992,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     $$('[data-draw]').forEach(x=>{const on=x.dataset.draw==='select';x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});
     drawing.style.cursor='default';
     setSelection([instance.id],true);
-    refreshSelectedProperties();
+    openInspector('Properties');
     persist();
     notify(item.name+' '+ref+' placed with verified pins and part data.');
     return true;

@@ -355,14 +355,17 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await wiringPage.mouse.click(point.x, point.y);
     };
     const terminalIds = [];
+    let propertiesViewportWidth;
     for (const x of [85, 210, 335]) {
       await wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]').click();
       await clickDrawingPoint(x, 110);
-      assert.equal(await wiringPage.locator('#rightPanel.open').count(), 0, 'placement keeps a closed inspector closed');
-      assert.equal((await wiringPage.locator('#drawing').boundingBox()).width, viewportSize.width,
-        'consecutive placements keep the same canvas width');
       const selected = wiringPage.locator('#userDrawings [data-object].selected-object');
-      terminalIds.push(await selected.getAttribute('data-object'));
+      const terminalId = await selected.getAttribute('data-object');
+      terminalIds.push(terminalId);
+      await wiringPage.locator('#rightPanel.open [data-symbol-scale="' + terminalId + '"]').waitFor();
+      const width = (await wiringPage.locator('#drawing').boundingBox()).width;
+      propertiesViewportWidth ??= width;
+      assert.equal(width, propertiesViewportWidth, 'consecutive placements keep the Properties dock stable');
     }
     assert.equal(new Set(terminalIds).size, 3);
     const pin = (objectId, number) => wiringPage.locator('#userDrawings [data-object="' + objectId + '"] [data-component-pin="connection-' + number + '"]');
@@ -703,6 +706,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     if (process.env.CAD_SCREENSHOT_DIR) await freeDraftingPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'free-drafting-canvas.png') });
     const quickInsert = freeDraftingPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]');
     await quickInsert.click({ modifiers: ['Shift'] });
+    await freeDraftingPage.locator('#rightPanel.open [data-symbol-scale]').waitFor();
     await quickInsert.click({ modifiers: ['Shift'] });
     const quickBounds = await freeDraftingPage.locator('#userDrawings > [data-object]').evaluateAll(nodes => nodes.slice(-2).map(node => {
       const { left, right, top, bottom } = node.getBoundingClientRect();
