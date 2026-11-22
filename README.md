@@ -47,7 +47,7 @@ Drawing Undo and Redo follow edit order across sheet navigation and reopen the s
 
 In **Electrical checks**, use **Export device index CSV** for component references and part numbers across the project, or **Export sheet index CSV** for sheet order, titles, paper formats, scales, and revisions.
 
-Use **Locate wire** in the current sheet's Wire List to zoom to the segment and open its Properties.
+Use **Find wires** in the current sheet's Wire List to search by wire ID, net, cable and core, or terminal reference. **Locate wire** zooms to the segment and opens its Properties.
 
 Electrical checks flags wired protective-earth terminals when their connected net has no explicit **PE** potential designation. The finding links to the affected terminals for review.
 
