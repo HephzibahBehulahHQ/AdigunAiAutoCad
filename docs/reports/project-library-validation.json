@@ -1394,7 +1394,7 @@
       "briefId": "46",
       "role": "standalone-example",
       "path": "examples/real-projects/irrigation-controller.adigun.json",
-      "revision": "1.1",
+      "revision": "1.2",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1411,43 +1411,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 96,
-        "additionalConnectedSheetsRequired": 66,
+        "additionalAuthoredSheetsRequired": 95,
+        "additionalConnectedSheetsRequired": 65,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "irrigation-plc",
         "sheetName": "Controller supply and I/O",
-        "segments": "27,9,29,9 29,9,29,13 29,13,44,13 27,18,29,18 29,18,29,15 29,15,44,15 40,15,40,24 40,24,44,24 76,13,85,13 85,13,85,2 85,2,34,2 34,2,34,15 33,13,33,0 33,0,93,0 93,0,93,28 93,28,76,28 38,15,38,50 38,50,88,50 88,50,88,30 88,30,76,30 30,13,30,6 30,6,0,6 34,15,34,42 34,42,0,42 76,15,100,15 44,26,0,26 76,32,100,32 88,42,100,42 33,0,0,0 44,29,42,29 42,29,42,34 42,34,0,34"
+        "segments": "27,9,29,9 29,9,29,13 29,13,44,13 27,18,29,18 29,18,29,15 29,15,44,15 40,15,40,24 40,24,44,24 76,13,85,13 85,13,85,2 85,2,34,2 34,2,34,15 33,13,33,0 33,0,93,0 93,0,93,28 93,28,76,28 38,15,38,50 38,50,88,50 88,50,88,30 88,30,76,30 30,13,30,6 30,6,0,6 34,15,34,42 34,42,0,42 76,15,100,15 44,26,0,26 76,32,100,32 88,42,100,42 33,0,0,0 44,29,42,29 42,29,42,34 42,34,0,34 30,11,0,11 44,31,43,31 43,31,43,38 43,38,0,38"
       },
-      "topologySha256": "de16a87692cc74bb6aa7e54d34c8c88ebdc2876f484a2db9ef9fce9269b352cb",
-      "electricalStructureSha256": "0dd64de50dd793f1e34caa017dd9a806a4e8de57bbc1a9e6d6d3033f52e4cc7d",
+      "topologySha256": "0f6ea139c8dad61464dcb3fe7383ffe6bb1f42c4b0ff03b825e2b8346a821a81",
+      "electricalStructureSha256": "4f0a03f42472d19e5b2de0196a11086419fb4cbfad2abc6189456173ac8e7d2c",
       "csvSha256": {
-        "bom": "b8521fe7548b21ff037e48fca1de81359113cde8330dc9a212a366dec249ed8d",
-        "wires": "d1d241021717fb9eb991d4a3ff181dbd50fc6b816c88c1eb4ffbe2b31d2ec5a6",
-        "terminals": "dcf155109ef606c86c6f54d699b8814352c09437a8aeb44856b858226235a5f9",
-        "plcIo": "78278c6fe9e14a6a2ab690ebb8ddeb1c4cdbae1db58e3ff2fcb6c8a493f7af79",
-        "cables": "210aca7a51f0a65e80e21dfaafeaaba29f8195b42a52e199c01d375408952eb6",
-        "devices": "3042e02b9216613fb351d8aff4fb513ff7df599d0076a369440638de8543f336",
-        "sheets": "37cfccbab3e4b4a581109a07a6bffc50dbe0d6d27f6764df7b4c751a593573fd"
+        "bom": "0494ce0ac7deb8d817f00d53e0275167c63205d1d28145fa3ac8ed08e49a40ac",
+        "wires": "0c1dbd73220957353773d1bbff07e8a68c02d63d569840b33a6acdb92a478691",
+        "terminals": "cc9e3cf1d520d0294b479688ead27e6ab94975728f4dd20496910275d109f300",
+        "plcIo": "b34fafefc95289e4d567a65f3f6df5bae8ee3b40180b3960eda1ec8c9f59755e",
+        "cables": "782becf6a53a9ef4a761c3fad2e09bc0235f844207e72ed5c73a94eac7800c52",
+        "devices": "2c2d82b0f66f6678a50bcf4406f29e9407d19fad71684085ae7c931b9bcb5a2e",
+        "sheets": "61882d1e66bc9029456a1c2bd5eceb4ebdd983d0075acd970e39a3bd15e8ab6c"
       },
       "metrics": {
-        "sheetCount": 4,
-        "authoredSheetCount": 4,
-        "connectedSheetCount": 4,
-        "contentObjectCount": 40,
+        "sheetCount": 5,
+        "authoredSheetCount": 5,
+        "connectedSheetCount": 5,
+        "contentObjectCount": 48,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 8,
-        "wireCount": 24,
-        "netCount": 16,
-        "globalNetCount": 8,
-        "crossSheetConnectionCount": 8,
+        "componentCount": 10,
+        "wireCount": 28,
+        "netCount": 19,
+        "globalNetCount": 9,
+        "crossSheetConnectionCount": 10,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 5,
-        "wireListRowCount": 24,
-        "terminalListRowCount": 8
+        "wireListRowCount": 28,
+        "terminalListRowCount": 12
       },
       "errors": []
     }

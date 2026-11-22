@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.1",
+  "revision": "1.2",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -27,6 +27,12 @@
       "id": "irrigation-operator",
       "number": "A2/004",
       "name": "Local irrigation request station",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-run-feedback",
+      "number": "A2/005",
+      "name": "Pump starter run feedback at XT3",
       "projectSectionId": "A2"
     }
   ],
@@ -166,6 +172,40 @@
         "comment": ""
       },
       "sheetId": "irrigation-operator"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x5",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X5",
+      "x": 470,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "1",
+        "marking": "Supply to external run contact",
+        "comment": ""
+      },
+      "sheetId": "irrigation-run-feedback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x6",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X6",
+      "x": 470,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "2",
+        "marking": "Return from external run contact",
+        "comment": ""
+      },
+      "sheetId": "irrigation-run-feedback"
     },
     {
       "id": "plc-supply",
@@ -764,6 +804,101 @@
       "coreId": "2"
     },
     {
+      "id": "run-feedback-feed-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 460,
+      "y": 220,
+      "x1": 460,
+      "y1": 220,
+      "x2": 215,
+      "y2": 220,
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "run-feedback-feed-remote",
+      "sheetId": "irrigation-run-feedback",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 265,
+      "x1": 215,
+      "y1": 265,
+      "x2": 435,
+      "y2": 265,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x5",
+          "pinId": "level-1-left"
+        }
+      },
+      "cableId": "W-02",
+      "coreId": "1"
+    },
+    {
+      "id": "run-feedback-input-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "XT3 run feedback to DI a.2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 570,
+      "y": 383,
+      "x1": 570,
+      "y1": 383,
+      "x2": 215,
+      "y2": 440,
+      "bends": [
+        {
+          "x": 565,
+          "y": 383
+        },
+        {
+          "x": 565,
+          "y": 440
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-9"
+        },
+        "end": null
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
+      "id": "run-feedback-input-remote",
+      "sheetId": "irrigation-run-feedback",
+      "kind": "wire",
+      "potential": "XT3 run feedback to DI a.2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 390,
+      "x1": 215,
+      "y1": 390,
+      "x2": 435,
+      "y2": 390,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x6",
+          "pinId": "level-1-left"
+        }
+      },
+      "cableId": "W-02",
+      "coreId": "2"
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -826,6 +961,22 @@
       "x": 105,
       "y": 585,
       "text": "W-01 carries supply and the momentary request to DI a.1. The input requests PLC action through the program."
+    },
+    {
+      "id": "irrigation-run-feedback-note-0",
+      "sheetId": "irrigation-run-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "PUMP STARTER RUN FEEDBACK · XT3"
+    },
+    {
+      "id": "irrigation-run-feedback-note-1",
+      "sheetId": "irrigation-run-feedback",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1."
     }
   ],
   "crossSheetConnections": [
@@ -1079,6 +1230,70 @@
           },
           "connector": {
             "direction": "right",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "run-feedback-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "run-feedback-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 220
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-run-feedback",
+            "targetRef": "X5"
+          }
+        },
+        {
+          "sheetId": "irrigation-run-feedback",
+          "wireId": "run-feedback-feed-remote",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "run-feedback-input",
+      "name": "XT3 run feedback to DI a.2",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "run-feedback-input-cabinet",
+          "point": {
+            "x": 215,
+            "y": 440
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-run-feedback",
+            "targetRef": "X6"
+          }
+        },
+        {
+          "sheetId": "irrigation-run-feedback",
+          "wireId": "run-feedback-input-remote",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
             "targetSheetId": "irrigation-plc",
             "targetRef": "A1"
           }
