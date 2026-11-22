@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.9",
+  "revision": "3.10",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -197,6 +197,12 @@
       "id": "b3-switching-relay",
       "number": "A2/031",
       "name": "K5 pressure status relay and dry output",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "b3-pressure-status-lamp",
+      "number": "A2/032",
+      "name": "XT20 externally powered B3 pressure indication",
       "projectSectionId": "A2"
     }
   ],
@@ -4620,7 +4626,201 @@
       "sheetId": "b3-switching-relay",
       "x": 110,
       "y": 510,
-      "text": "Verify voltage at K5 and actual loading. Pressure setpoint, external load and protection remain unassigned.",
+      "text": "Verify voltage at K5 and actual loading. See A2/032 for the external indicator circuit.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-pressure-status-lamp-h6",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H6",
+      "x": 620,
+      "y": 370,
+      "rotation": 0,
+      "properties": {
+        "marking": "B3 pressure switch indication"
+      },
+      "sheetId": "b3-pressure-status-lamp"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-pressure-status-lamp-x50",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X50",
+      "x": 480,
+      "y": 245,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT20",
+        "position": "1",
+        "marking": "External indicator +24 V"
+      },
+      "sheetId": "b3-pressure-status-lamp"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b3-pressure-status-lamp-x51",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X51",
+      "x": 850,
+      "y": 370,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT20",
+        "position": "2",
+        "marking": "External indicator 0 V"
+      },
+      "sheetId": "b3-pressure-status-lamp"
+    },
+    {
+      "id": "b3-pressure-status-lamp-core-1-relay",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 825,
+      "y": 330,
+      "x1": 825,
+      "y1": 330,
+      "x2": 950,
+      "y2": 330,
+      "potential": "K5 dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-switching-relay-x48",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-H6",
+      "coreId": "1"
+    },
+    {
+      "id": "b3-pressure-status-lamp-core-1-indicator",
+      "kind": "wire",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 900,
+      "y": 245,
+      "x1": 900,
+      "y1": 245,
+      "x2": 515,
+      "y2": 245,
+      "potential": "K5 dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-pressure-status-lamp-x50",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-H6",
+      "coreId": "1"
+    },
+    {
+      "id": "b3-pressure-status-lamp-core-2-relay",
+      "kind": "wire",
+      "sheetId": "b3-switching-relay",
+      "x": 825,
+      "y": 420,
+      "x1": 825,
+      "y1": 420,
+      "x2": 950,
+      "y2": 420,
+      "potential": "K5 dry normally open output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-switching-relay-x49",
+          "pinId": "level-1-right"
+        }
+      },
+      "cableId": "W-H6",
+      "coreId": "2"
+    },
+    {
+      "id": "b3-pressure-status-lamp-core-2-indicator",
+      "kind": "wire",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 210,
+      "y": 370,
+      "x1": 210,
+      "y1": 370,
+      "x2": 593,
+      "y2": 370,
+      "potential": "K5 dry normally open output",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "b3-pressure-status-lamp-h6",
+          "pinId": "x1"
+        }
+      },
+      "cableId": "W-H6",
+      "coreId": "2"
+    },
+    {
+      "id": "b3-pressure-status-lamp-lamp-return",
+      "kind": "wire",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 647,
+      "y": 370,
+      "x1": 647,
+      "y1": 370,
+      "x2": 815,
+      "y2": 370,
+      "potential": "H6 external indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b3-pressure-status-lamp-h6",
+          "pinId": "x2"
+        },
+        "end": {
+          "instanceId": "b3-pressure-status-lamp-x51",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "b3-pressure-status-lamp-title",
+      "kind": "text",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 110,
+      "y": 108,
+      "text": "XT20 · EXTERNALLY POWERED PRESSURE INDICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-pressure-status-lamp-common",
+      "kind": "text",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 110,
+      "y": 195,
+      "text": "XT20:1 supplies K5 common over W-H6 core 1.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-pressure-status-lamp-output",
+      "kind": "text",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 110,
+      "y": 455,
+      "text": "K5 normally open feeds H6 over core 2 when K5 is energized.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "b3-pressure-status-lamp-scope",
+      "kind": "text",
+      "sheetId": "b3-pressure-status-lamp",
+      "x": 110,
+      "y": 510,
+      "text": "XT20:2 returns to the external supply. The drawing leaves supply hardware and protection unassigned.",
       "stroke": "#13263b"
     },
     {
@@ -7821,6 +8021,70 @@
             "direction": "left",
             "targetSheetId": "b3-switching-boundary",
             "targetRef": "X47"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b3-pressure-status-lamp-core-1",
+      "name": "W-H6:1 · K5 dry contact common",
+      "endpoints": [
+        {
+          "sheetId": "b3-switching-relay",
+          "wireId": "b3-pressure-status-lamp-core-1-relay",
+          "point": {
+            "x": 950,
+            "y": 330
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-pressure-status-lamp",
+            "targetRef": "X50"
+          }
+        },
+        {
+          "sheetId": "b3-pressure-status-lamp",
+          "wireId": "b3-pressure-status-lamp-core-1-indicator",
+          "point": {
+            "x": 900,
+            "y": 245
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-switching-relay",
+            "targetRef": "X48"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b3-pressure-status-lamp-core-2",
+      "name": "W-H6:2 · K5 dry normally open output",
+      "endpoints": [
+        {
+          "sheetId": "b3-switching-relay",
+          "wireId": "b3-pressure-status-lamp-core-2-relay",
+          "point": {
+            "x": 950,
+            "y": 420
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "b3-pressure-status-lamp",
+            "targetRef": "H6"
+          }
+        },
+        {
+          "sheetId": "b3-pressure-status-lamp",
+          "wireId": "b3-pressure-status-lamp-core-2-indicator",
+          "point": {
+            "x": 210,
+            "y": 370
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "b3-switching-relay",
+            "targetRef": "X49"
           }
         }
       ]
