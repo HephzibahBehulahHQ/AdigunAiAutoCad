@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Relay changeover test bench",
-  "revision": "1.6",
+  "revision": "1.7",
   "description": "Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.",
   "activeSheet": "bench-coil-actuation",
   "sheets": [
@@ -51,6 +51,12 @@
       "id": "bench-coil-power-supply",
       "number": "A2/008",
       "name": "PS1 coil supply and incoming power boundary",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-protective-earth",
+      "number": "A2/009",
+      "name": "XT8 cabinet and indicator protective-earth boundaries",
       "projectSectionId": "A2"
     }
   ],
@@ -497,6 +503,161 @@
         "end": {
           "instanceId": "x2",
           "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x21",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X21",
+      "x": 300,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT8",
+        "position": "1",
+        "marking": "Incoming bench PE",
+        "comment": ""
+      },
+      "sheetId": "bench-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x22",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X22",
+      "x": 720,
+      "y": 300,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT8",
+        "position": "2",
+        "marking": "Bench cabinet PE boundary",
+        "comment": ""
+      },
+      "sheetId": "bench-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x23",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X23",
+      "x": 720,
+      "y": 425,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT8",
+        "position": "3",
+        "marking": "Indicator enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "bench-protective-earth"
+    },
+    {
+      "id": "bench-pe-send",
+      "sheetId": "bench-coil-power-supply",
+      "kind": "wire",
+      "x": 380,
+      "y": 420,
+      "x1": 380,
+      "y1": 420,
+      "x2": 380,
+      "y2": 470,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "bench-pe-receive",
+      "sheetId": "bench-protective-earth",
+      "kind": "wire",
+      "x": 165,
+      "y": 300,
+      "x1": 165,
+      "y1": 300,
+      "x2": 265,
+      "y2": 300,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x21",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "bench-pe-trunk",
+      "sheetId": "bench-protective-earth",
+      "kind": "wire",
+      "x": 335,
+      "y": 300,
+      "x1": 335,
+      "y1": 300,
+      "x2": 520,
+      "y2": 300,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x21",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "bench-cabinet-pe",
+      "sheetId": "bench-protective-earth",
+      "kind": "wire",
+      "x": 520,
+      "y": 300,
+      "x1": 520,
+      "y1": 300,
+      "x2": 685,
+      "y2": 300,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x22",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "bench-indicator-pe",
+      "sheetId": "bench-protective-earth",
+      "kind": "wire",
+      "x": 520,
+      "y": 300,
+      "x1": 520,
+      "y1": 300,
+      "x2": 685,
+      "y2": 425,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "bends": [
+        {
+          "x": 520,
+          "y": 425
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x23",
+          "pinId": "connection-1"
         }
       }
     },
@@ -1848,6 +2009,30 @@
       "x": 105,
       "y": 555,
       "text": "XT7 marks incoming L, N and PE. Incoming source, protection, and conductor sizing remain unassigned."
+    },
+    {
+      "id": "bench-protective-earth-note-0",
+      "sheetId": "bench-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · XT8 PROTECTIVE-EARTH BOUNDARIES"
+    },
+    {
+      "id": "bench-protective-earth-note-1",
+      "sheetId": "bench-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "XT8 routes PE from XT7 to the bench cabinet and indicator enclosure terminal boundaries."
+    },
+    {
+      "id": "bench-protective-earth-note-2",
+      "sheetId": "bench-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "Physical bonding, rail installation and protective-conductor sizing remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -1911,6 +2096,38 @@
             "direction": "left",
             "targetSheetId": "bench-coil-power-supply",
             "targetRef": "PS1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bench-pe",
+      "name": "Bench protective earth",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-power-supply",
+          "wireId": "bench-pe-send",
+          "point": {
+            "x": 380,
+            "y": 470
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-protective-earth",
+            "targetRef": "X21"
+          }
+        },
+        {
+          "sheetId": "bench-protective-earth",
+          "wireId": "bench-pe-receive",
+          "point": {
+            "x": 165,
+            "y": 300
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-coil-power-supply",
+            "targetRef": "X20"
           }
         }
       ]
