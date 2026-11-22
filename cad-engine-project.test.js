@@ -587,6 +587,16 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.mouse.up();
     await freeDraftingPage.getByRole('button', { name: 'Properties', exact: true }).click();
     const guide = freeDraftingPage.getByLabel('Guide 1 position (mm)');
+    const guideBeforeMove = await guide.inputValue();
+    const guideHandle = await freeDraftingPage.locator('[data-guide-handle="0"]').boundingBox();
+    assert.ok(guideHandle);
+    const guideX = guideHandle.x + guideHandle.width / 2, guideY = guideHandle.y + guideHandle.height / 2;
+    await freeDraftingPage.mouse.move(guideX, guideY);
+    await freeDraftingPage.mouse.down();
+    await freeDraftingPage.mouse.move(guideX, guideY + 24);
+    await freeDraftingPage.mouse.up();
+    assert.ok(Number(await guide.inputValue()) > Number(guideBeforeMove), 'the ruler handle moves the existing guide');
+    assert.equal(await freeDraftingPage.locator('[data-guide-position]').count(), 1);
     await guide.fill('92.5');
     await guide.press('Tab');
     await freeDraftingPage.getByRole('button', { name: 'Lock', exact: true }).click();

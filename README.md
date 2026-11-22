@@ -7,6 +7,8 @@ The drafting viewport fills the workspace. Model coordinates use positive X to t
 
 In **Drafting settings**, change the display grid and snap intervals independently. Select inches or millimetres for the ruler and cursor readout. Drag from the top ruler for a horizontal guide or from the left ruler for a vertical guide. The Guides controls let you enter exact positions, lock, hide, or delete guides. Guides save with the sheet and stay out of drawing exports.
 
+Drag a guide’s marker along its ruler to reposition it. Locked guides keep their position.
+
 Use **Export full drawing as SVG** for all visible geometry, including off-frame objects. **Export print frame as SVG** and **Print drawing** use the configured paper size and warn before clipping off-frame geometry.
 
 Select one or more drawing objects and use **Export selection as SVG** to export just those objects, cropped to their bounds.
