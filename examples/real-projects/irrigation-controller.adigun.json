@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.2",
+  "revision": "1.3",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -33,6 +33,12 @@
       "id": "irrigation-run-feedback",
       "number": "A2/005",
       "name": "Pump starter run feedback at XT3",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-run-indication",
+      "number": "A2/006",
+      "name": "Local pump run indication",
       "projectSectionId": "A2"
     }
   ],
@@ -206,6 +212,21 @@
         "comment": ""
       },
       "sheetId": "irrigation-run-feedback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "h1",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H1",
+      "x": 605,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "marking": "PLC pump run indication",
+        "comment": ""
+      },
+      "sheetId": "irrigation-run-indication"
     },
     {
       "id": "plc-supply",
@@ -899,6 +920,101 @@
       "coreId": "2"
     },
     {
+      "id": "run-indication-output-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "DQ a.1 to H1",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 830,
+      "y": 405,
+      "x1": 830,
+      "y1": 405,
+      "x2": 1020,
+      "y2": 430,
+      "bends": [
+        {
+          "x": 895,
+          "y": 405
+        },
+        {
+          "x": 895,
+          "y": 430
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x12-4"
+        },
+        "end": null
+      },
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "run-indication-output-remote",
+      "sheetId": "irrigation-run-indication",
+      "kind": "wire",
+      "potential": "DQ a.1 to H1",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 345,
+      "x1": 215,
+      "y1": 345,
+      "x2": 578,
+      "y2": 345,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "h1",
+          "pinId": "x1"
+        }
+      },
+      "cableId": "W-03",
+      "coreId": "1"
+    },
+    {
+      "id": "run-indication-common-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 925,
+      "y": 515,
+      "x1": 925,
+      "y1": 515,
+      "x2": 1020,
+      "y2": 515,
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
+      "id": "run-indication-common-remote",
+      "sheetId": "irrigation-run-indication",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 960,
+      "y": 345,
+      "x1": 960,
+      "y1": 345,
+      "x2": 632,
+      "y2": 345,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "h1",
+          "pinId": "x2"
+        }
+      },
+      "cableId": "W-03",
+      "coreId": "2"
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -977,6 +1093,22 @@
       "x": 105,
       "y": 585,
       "text": "XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1."
+    },
+    {
+      "id": "irrigation-run-indication-note-0",
+      "sheetId": "irrigation-run-indication",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "LOCAL PUMP RUN INDICATION · H1"
+    },
+    {
+      "id": "irrigation-run-indication-note-1",
+      "sheetId": "irrigation-run-indication",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -1294,6 +1426,70 @@
           },
           "connector": {
             "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "run-indication-output",
+      "name": "DQ a.1 to H1",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "run-indication-output-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 430
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-run-indication",
+            "targetRef": "H1"
+          }
+        },
+        {
+          "sheetId": "irrigation-run-indication",
+          "wireId": "run-indication-output-remote",
+          "point": {
+            "x": 215,
+            "y": 345
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "run-indication-common",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "run-indication-common-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 515
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-run-indication",
+            "targetRef": "H1"
+          }
+        },
+        {
+          "sheetId": "irrigation-run-indication",
+          "wireId": "run-indication-common-remote",
+          "point": {
+            "x": 960,
+            "y": 345
+          },
+          "connector": {
+            "direction": "right",
             "targetSheetId": "irrigation-plc",
             "targetRef": "A1"
           }

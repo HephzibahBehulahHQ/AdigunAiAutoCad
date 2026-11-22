@@ -11,8 +11,9 @@ const field = 'irrigation-pressure';
 const output = 'irrigation-request';
 const operator = 'irrigation-operator';
 const feedback = 'irrigation-run-feedback';
+const indication = 'irrigation-run-indication';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.2',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.3',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -20,7 +21,8 @@ const project = {
     { id: field, number: 'A2/002', name: 'Field pressure transmitter', projectSectionId: 'A2' },
     { id: output, number: 'A2/003', name: 'Isolated pump request', projectSectionId: 'A2' },
     { id: operator, number: 'A2/004', name: 'Local irrigation request station', projectSectionId: 'A2' },
-    { id: feedback, number: 'A2/005', name: 'Pump starter run feedback at XT3', projectSectionId: 'A2' }
+    { id: feedback, number: 'A2/005', name: 'Pump starter run feedback at XT3', projectSectionId: 'A2' },
+    { id: indication, number: 'A2/006', name: 'Local pump run indication', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -78,6 +80,8 @@ const request = device(operator, 'S1', 'schneider-electric-xb5aa31', 605, 345, {
 const feedbackFeed = terminal(feedback, 'X5', 470, 265, 'XT3', '1', 'Supply to external run contact');
 const feedbackReturn = terminal(feedback, 'X6', 470, 390, 'XT3', '2', 'Return from external run contact');
 
+const runLamp = device(indication, 'H1', 'schneider-electric-xb5avb3', 605, 345, { marking: 'PLC pump run indication' });
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -104,7 +108,11 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['run-feedback-feed', '+24 V DC', 'X1', { x: 460, y: 220 }, { x: 215, y: 220 },
     null, feedbackFeed, '1', 'left', ['W-02', '1']],
   ['run-feedback-input', 'XT3 run feedback to DI a.2', 'A1', pin(plc, 'X10:9'), { x: 215, y: 440 },
-    [{ x: 565, y: 383 }, { x: 565, y: 440 }], feedbackReturn, '1', 'left', ['W-02', '2']]
+    [{ x: 565, y: 383 }, { x: 565, y: 440 }], feedbackReturn, '1', 'left', ['W-02', '2']],
+  ['run-indication-output', 'DQ a.1 to H1', 'A1', pin(plc, 'X12:4'), { x: 1020, y: 430 },
+    [{ x: 895, y: 405 }, { x: 895, y: 430 }], runLamp, 'X1', 'left', ['W-03', '1']],
+  ['run-indication-common', '0 V', 'A1', { x: 925, y: 515 }, { x: 1020, y: 515 },
+    null, runLamp, 'X2', 'right', ['W-03', '2']]
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -123,7 +131,8 @@ for (const [sheetId, title, description] of [
   [field, 'IRRIGATION HEADER PRESSURE · B1', 'OUT2 assumes voltage mode. Pressure scaling, OUT1 setpoints and PLC program logic remain unassigned.'],
   [output, 'IRRIGATION PUMP REQUEST · K1', 'XT2 exposes the normally open demand contact. The external starter, motor feeder and safety controls remain outside this drawing.'],
   [operator, 'LOCAL IRRIGATION REQUEST · S1', 'W-01 carries supply and the momentary request to DI a.1. The input requests PLC action through the program.'],
-  [feedback, 'PUMP STARTER RUN FEEDBACK · XT3', 'XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1.']
+  [feedback, 'PUMP STARTER RUN FEEDBACK · XT3', 'XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1.'],
+  [indication, 'LOCAL PUMP RUN INDICATION · H1', 'W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
