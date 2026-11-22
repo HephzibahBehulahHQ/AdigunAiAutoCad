@@ -953,6 +953,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     });
     await linkedExample.mouse.click(nearFeed.x, nearFeed.y);
     await linkedExample.locator('#rightPanel.open [data-style-object="transducer-feed-1"][data-drawing-style="stroke"]').waitFor({ timeout: 5000 });
+    await linkedExample.getByRole('button', { name: 'Electrical checks', exact: true }).click();
+    await linkedExample.getByRole('button', { name: 'Locate wire transducer-return-1', exact: true }).click();
+    assert.match(await returnSegment.getAttribute('class'), /selected-object/);
+    await linkedExample.locator('#rightPanel.open [data-style-object="transducer-return-1"][data-drawing-style="stroke"]').waitFor();
     await linkedExample.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
