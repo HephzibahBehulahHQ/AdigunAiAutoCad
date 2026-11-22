@@ -61,6 +61,31 @@ test('DXF preserves disconnect knife position and symbol transform as geometry',
   }
 });
 
+test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const symbol = {
+    id: 'user-symbol-test', name: 'Test fixture',
+    geometry: [
+      { kind: 'rect', x: -10, y: -8, x2: 10, y2: 8 },
+      { kind: 'line', x: -18, y: 0, x2: -10, y2: 0 },
+      { kind: 'circle', x: 0, y: 0, x2: 4, y2: 0 }
+    ],
+    pins: [{ number: '1', x: -18, y: 0 }]
+  };
+  const instance = engine.createInstance(symbol.id, 100, 200, 'X1', symbol);
+  instance.rotation = 180;
+  instance.symbolScale = 2;
+  const exported = await globalThis.AdigunDXF.exportDrawing([instance]);
+  assert.deepEqual(exported.unsupported, []);
+  const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Custom geometry', 'custom-dxf');
+  assert.equal(project.objects.filter(object => object.kind === 'line').length, 5);
+  const circles = project.objects.filter(object => object.kind === 'circle');
+  assert.equal(circles.length, 2);
+  assert.ok(circles.some(circle => Math.abs(circle.x - 136) < 1e-7 && Math.abs(circle.y - 200) < 1e-7
+    && Math.abs(circle.x2 - circle.x - 6) < 1e-7 && circle.dxfLayer === 'devices'));
+});
+
 const sampleDxf = [
   '0', 'SECTION', '2', 'HEADER', '9', '$INSUNITS', '70', '1', '0', 'ENDSEC',
   '0', 'SECTION', '2', 'ENTITIES',

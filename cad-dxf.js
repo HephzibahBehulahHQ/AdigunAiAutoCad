@@ -69,6 +69,20 @@
     return { project, unsupported };
   }
 
+  function projectSymbolGeometry(symbol) {
+    const segments = [];
+    const circles = symbol.pins.map(pin => [pin.x, pin.y, 3]);
+    for (const { kind, x, y, x2, y2 } of symbol.geometry) {
+      if (kind === 'line') segments.push([x, y, x2, y2]);
+      else if (kind === 'rect') segments.push([x, y, x2, y], [x2, y, x2, y2], [x2, y2, x, y2], [x, y2, x, y]);
+      else circles.push([x, y, Math.hypot(x2 - x, y2 - y)]);
+    }
+    return {
+      segments: segments.filter(([ax, ay, bx, by]) => ax !== bx || ay !== by),
+      circles: circles.filter(([, , radius]) => radius > 0)
+    };
+  }
+
   async function exportDrawing(objects) {
     const { DxfWriter, Units, point3d } = await import('./vendor/dxf-writer-2.8.9.mjs');
     const writer = new DxfWriter();
@@ -89,9 +103,11 @@
         layers.add(layerName);
       };
       const engine = root.AdigunCADEngine;
-      if (kind === 'component-instance' && engine.component(object.componentId)?.family === 'disconnect-terminal'
-          && engine.validateInstance(object).valid) {
-        const { segments, circles } = engine.disconnectTerminalGeometry(object);
+      const component = kind === 'component-instance' ? engine.component(object.componentId, object.customSymbol) : null;
+      if (['disconnect-terminal', 'user-authored'].includes(component?.family) && engine.validateInstance(object).valid) {
+        const { segments, circles } = component.family === 'user-authored'
+          ? projectSymbolGeometry(object.customSymbol)
+          : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
         function toDxf(localX, localY) {
