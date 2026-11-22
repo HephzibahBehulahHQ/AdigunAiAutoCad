@@ -1857,12 +1857,21 @@
     }
     const signalsByNet = new Map();
     const earthByNet = new Map();
+    const openDisconnects = new Set(objects.filter(object => object.kind === 'component-instance'
+      && object.properties?.knifePosition !== 'closed'
+      && component(object.componentId, object.customSymbol)?.family === 'disconnect-terminal').map(object => object.id));
+    const wiredDisconnectPins = new Map();
     const wiredNetIds = new Set(globalNets.filter(net => net.wireIds.length).map(net => net.id));
     for (const sheet of reports) {
       for (const net of sheet.analysis.nets) {
         const netId = localToGlobal.get(net.id);
         for (const pin of net.pins) {
           const location = { sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number };
+          if (net.wireIds.length && openDisconnects.has(pin.instanceId)) {
+            const pins = wiredDisconnectPins.get(pin.instanceId) || [];
+            pins.push(location);
+            wiredDisconnectPins.set(pin.instanceId, pins);
+          }
           if (wiredNetIds.has(netId) && earthPinsByComponent.get(pin.instanceId)?.has(pin.pinId)) {
             if (!earthByNet.has(netId)) earthByNet.set(netId, []);
             earthByNet.get(netId).push(location);
@@ -1873,6 +1882,11 @@
           signalsByNet.get(netId).push({ role, location });
         }
       }
+    }
+    for (const pins of wiredDisconnectPins.values()) {
+      if (pins.length !== 2) continue;
+      add('ERC-OPEN-DISCONNECT', 'info', pins[0].ref + ' is modeled with its knife open.',
+        'Review the intended knife position in Properties. Other paths may still connect the two sides.', [pins[0]]);
     }
     for (const signals of signalsByNet.values()) {
       for (const [outputRole, wrongInputRole] of [['analog-output', 'DI'], ['digital-output', 'AI']]) {

@@ -974,6 +974,10 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.equal(await knifePosition.inputValue(), 'closed');
     await knifePosition.selectOption('open');
     await disconnectGlyph.locator('path[d="M-12 0L12 -11"]').waitFor({ state: 'attached' });
+    await disconnectPage.getByRole('button', { name: 'Electrical checks', exact: true }).click();
+    await disconnectPage.getByText('INFO · ERC-OPEN-DISCONNECT · X14 is modeled with its knife open.', { exact: true }).click();
+    await disconnectPage.locator('[data-finding-object="x14"]').click();
+    assert.equal(await knifePosition.inputValue(), 'open');
     await disconnectPage.locator('[data-action="undo"]').click();
     await disconnectGlyph.locator('path[d="M-12 0L12 0"]').waitFor({ state: 'attached' });
     await disconnectPage.close({ runBeforeUnload: false });
@@ -1518,7 +1522,11 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   disconnect.properties.knifePosition = 'open';
   const reopened = engine.parseProject(engine.serializeProject(project));
   assert.equal(reopened.valid, true);
-  const openedNets = membership(engine.analyzeProject(reopened.project));
+  const opened = engine.analyzeProject(reopened.project);
+  const openedNets = membership(opened);
+  assert.ok(!report.findings.some(finding => finding.ruleId === 'ERC-OPEN-DISCONNECT'));
+  assert.deepEqual(opened.findings.filter(finding => finding.ruleId === 'ERC-OPEN-DISCONNECT')
+    .map(finding => [finding.severity, finding.locations[0].objectId]), [['info', 'x14']]);
   assert.ok(openedNets.includes('S1:13,X14:2'));
   assert.ok(openedNets.includes('H4:X1,X10:1,X10:2,X14:1,X1:1,X1:2'));
   assert.equal(engine.validateInstance({ ...disconnect, properties: { ...disconnect.properties, knifePosition: 'invalid' } }).valid, false);
