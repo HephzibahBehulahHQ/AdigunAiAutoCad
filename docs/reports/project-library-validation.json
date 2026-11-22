@@ -20,6 +20,363 @@
       "requiredSheetCount": 5000,
       "qualifiedSheetCount": 0,
       "duplicateReleaseProjects": [],
+      "briefCoverage": [
+        {
+          "id": "01",
+          "category": "Industrial motor/control",
+          "title": "Reversing three-phase motor starter with interlocks",
+          "projectIds": [
+            "siemens-3rm12-reversing"
+          ],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "02",
+          "category": "Industrial motor/control",
+          "title": "Star–delta motor starter and timing sequence",
+          "projectIds": [
+            "star-delta-starter",
+            "star-delta-100-sheet"
+          ],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "03",
+          "category": "Industrial motor/control",
+          "title": "VFD-driven conveyor line with sensors and PLC",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "04",
+          "category": "Industrial motor/control",
+          "title": "Multi-axis servo motion cell with encoder feedback",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "05",
+          "category": "Industrial motor/control",
+          "title": "Soft-starter pump station with duty/standby operation",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "06",
+          "category": "Industrial motor/control",
+          "title": "Multi-motor production line with segmented MCC",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "07",
+          "category": "Industrial motor/control",
+          "title": "Industrial fan bank with process instrumentation",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "08",
+          "category": "Industrial motor/control",
+          "title": "Packaging machine power and PLC controls",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "09",
+          "category": "Industrial motor/control",
+          "title": "Hoist/crane control with advisory safety circuits",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "10",
+          "category": "Industrial motor/control",
+          "title": "Hydraulic power unit and electrovalve controls",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "11",
+          "category": "PLC, process and automation",
+          "title": "Modular PLC I/O cabinet with remote I/O",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "12",
+          "category": "PLC, process and automation",
+          "title": "Water-treatment dosing and monitoring plant",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "13",
+          "category": "PLC, process and automation",
+          "title": "Wastewater lift-station control and telemetry",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "14",
+          "category": "PLC, process and automation",
+          "title": "Food processing line with sensors and drives",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "15",
+          "category": "PLC, process and automation",
+          "title": "Chemical batch reactor instrumentation/control",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "16",
+          "category": "PLC, process and automation",
+          "title": "Brewery/CIP skid automation",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "17",
+          "category": "PLC, process and automation",
+          "title": "Industrial oven heating and temperature loops",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "18",
+          "category": "PLC, process and automation",
+          "title": "HVAC air-handling unit control system",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "19",
+          "category": "PLC, process and automation",
+          "title": "Cold-storage refrigeration supervisory controls",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "20",
+          "category": "PLC, process and automation",
+          "title": "Warehouse automated conveyor/sorter system",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "21",
+          "category": "Building, power and energy",
+          "title": "Commercial low-voltage distribution board",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "22",
+          "category": "Building, power and energy",
+          "title": "Industrial subdistribution and feeder schedules",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "23",
+          "category": "Building, power and energy",
+          "title": "Emergency lighting and transfer-control circuits",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "24",
+          "category": "Building, power and energy",
+          "title": "Building automation and field controller cabinets",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "25",
+          "category": "Building, power and energy",
+          "title": "Solar PV inverter and AC distribution documentation",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "26",
+          "category": "Building, power and energy",
+          "title": "Battery energy storage auxiliary/control circuits",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "27",
+          "category": "Building, power and energy",
+          "title": "EV charging site electrical/control schematics",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "28",
+          "category": "Building, power and energy",
+          "title": "Generator ATS supervisory/control panel",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "29",
+          "category": "Building, power and energy",
+          "title": "UPS monitoring and bypass control system",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "30",
+          "category": "Building, power and energy",
+          "title": "Data-center auxiliary electrical and alarm panels",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "31",
+          "category": "Manufacturing and robotics",
+          "title": "Robotic welding cell control cabinet",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "32",
+          "category": "Manufacturing and robotics",
+          "title": "CNC machine auxiliary electrical controls",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "33",
+          "category": "Manufacturing and robotics",
+          "title": "Assembly-line safety relay and access interlocks",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "34",
+          "category": "Manufacturing and robotics",
+          "title": "Pneumatic pick-and-place automation",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "35",
+          "category": "Manufacturing and robotics",
+          "title": "Injection molding machine auxiliary controls",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "36",
+          "category": "Manufacturing and robotics",
+          "title": "Printing press multi-drive control",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "37",
+          "category": "Manufacturing and robotics",
+          "title": "Textile production machine control system",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "38",
+          "category": "Manufacturing and robotics",
+          "title": "Pharmaceutical filling-line control",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "39",
+          "category": "Manufacturing and robotics",
+          "title": "Automated palletizer control",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "40",
+          "category": "Manufacturing and robotics",
+          "title": "Industrial test bench and instrumentation rack",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "41",
+          "category": "Specialized international designs",
+          "title": "IEC-style European machine control panel",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "42",
+          "category": "Specialized international designs",
+          "title": "NFPA 79-oriented US machine control panel",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "43",
+          "category": "Specialized international designs",
+          "title": "UL 508A-oriented panel documentation example",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "44",
+          "category": "Specialized international designs",
+          "title": "International terminal/cable marshalling cabinet",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "45",
+          "category": "Specialized international designs",
+          "title": "Marine auxiliary electrical control panel (advisory only)",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "46",
+          "category": "Specialized international designs",
+          "title": "Agricultural irrigation automation controller",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "47",
+          "category": "Specialized international designs",
+          "title": "Railway station auxiliary control circuits (not signaling safety design)",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "48",
+          "category": "Specialized international designs",
+          "title": "Mining ventilation auxiliary control panel (not hazardous-area certification)",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "49",
+          "category": "Specialized international designs",
+          "title": "Hospital facility auxiliary alarm/monitoring panel (not life-support design)",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        },
+        {
+          "id": "50",
+          "category": "Specialized international designs",
+          "title": "Modular training/commissioning lab with realistic PLC, motors and sensors",
+          "projectIds": [],
+          "qualifiedProjectId": null
+        }
+      ],
       "complete": false
     }
   },
@@ -28,6 +385,7 @@
       "id": "relay-contactor-24v",
       "title": "24 V DC relay-operated contactor coil",
       "topologyId": "relay-contactor-control",
+      "briefId": null,
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/24v-relay-contactor-control.adigun.json",
       "revision": "1.7",
@@ -161,6 +519,7 @@
       "id": "ifm-sensor-plc-input",
       "title": "IFM IFS204 sensor to Siemens S7-1200 input",
       "topologyId": "sensor-to-plc-input",
+      "briefId": null,
       "role": "standalone-example",
       "path": "examples/real-projects/ifm-ifs204-siemens-s7-1200-sensor-input.adigun.json",
       "revision": "1.0",
@@ -224,6 +583,7 @@
       "id": "siemens-3rm12-reversing",
       "title": "Siemens 3RM12 reversing starter",
       "topologyId": "reversing-starter",
+      "briefId": "01",
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/siemens-3rm12-reversing-starter.adigun.json",
       "revision": "1.7",
@@ -387,6 +747,7 @@
       "id": "dol-motor-feeder",
       "title": "DOL motor feeder",
       "topologyId": "direct-on-line-motor-feeder",
+      "briefId": null,
       "role": "standalone-example",
       "path": "examples/real-projects/siemens-schneider-sew-dol-starter.adigun.json",
       "revision": "1.0",
@@ -450,6 +811,7 @@
       "id": "star-delta-starter",
       "title": "Siemens/SEW star-delta starter",
       "topologyId": "star-delta-starter",
+      "briefId": "02",
       "role": "standalone-example",
       "path": "examples/real-projects/siemens-sew-star-delta-starter.adigun.json",
       "revision": "1.0",
@@ -515,6 +877,7 @@
       "id": "star-delta-100-sheet",
       "title": "Star-delta 100-sheet reference package",
       "topologyId": "star-delta-starter",
+      "briefId": "02",
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/siemens-sew-star-delta-reference.adigun.json",
       "revision": "Opening set 9.7",
@@ -666,6 +1029,7 @@
       "id": "dol-reference-opening",
       "title": "DOL motor feeder 100-sheet reference project opening",
       "topologyId": "direct-on-line-motor-feeder",
+      "briefId": null,
       "role": "multi-sheet-reference-package",
       "path": "examples/real-projects/siemens-schneider-sew-dol-reference.adigun.json",
       "revision": "A2/099",
@@ -828,6 +1192,7 @@
       "id": "sitop-24v-dc-distribution",
       "title": "SITOP 24 V DC two-branch terminal distribution",
       "topologyId": "dc-two-branch-terminal-distribution",
+      "briefId": null,
       "role": "standalone-example",
       "path": "examples/real-projects/sitop-24v-dc-distribution.adigun.json",
       "revision": "3.0",

@@ -33,7 +33,8 @@
       "path": "examples/real-projects/siemens-3rm12-reversing-starter.adigun.json",
       "role": "multi-sheet-reference-package",
       "domain": "Motor reversing",
-      "standardProfile": "IEC-style symbols"
+      "standardProfile": "IEC-style symbols",
+      "briefId": "01"
     },
     {
       "id": "dol-motor-feeder",
@@ -51,7 +52,8 @@
       "path": "examples/real-projects/siemens-sew-star-delta-starter.adigun.json",
       "role": "standalone-example",
       "domain": "Star-delta motor control",
-      "standardProfile": "IEC-style symbols"
+      "standardProfile": "IEC-style symbols",
+      "briefId": "02"
     },
     {
       "id": "star-delta-100-sheet",
@@ -61,7 +63,8 @@
       "role": "multi-sheet-reference-package",
       "extendsProjectId": "star-delta-starter",
       "domain": "Star-delta motor control",
-      "standardProfile": "IEC-style symbols"
+      "standardProfile": "IEC-style symbols",
+      "briefId": "02"
     },
     {
       "id": "dol-reference-opening",
@@ -81,6 +84,258 @@
       "role": "standalone-example",
       "domain": "DC distribution and PLC instrumentation",
       "standardProfile": "IEC-style symbols"
+    }
+  ],
+  "briefs": [
+    {
+      "id": "01",
+      "category": "Industrial motor/control",
+      "title": "Reversing three-phase motor starter with interlocks"
+    },
+    {
+      "id": "02",
+      "category": "Industrial motor/control",
+      "title": "Star–delta motor starter and timing sequence"
+    },
+    {
+      "id": "03",
+      "category": "Industrial motor/control",
+      "title": "VFD-driven conveyor line with sensors and PLC"
+    },
+    {
+      "id": "04",
+      "category": "Industrial motor/control",
+      "title": "Multi-axis servo motion cell with encoder feedback"
+    },
+    {
+      "id": "05",
+      "category": "Industrial motor/control",
+      "title": "Soft-starter pump station with duty/standby operation"
+    },
+    {
+      "id": "06",
+      "category": "Industrial motor/control",
+      "title": "Multi-motor production line with segmented MCC"
+    },
+    {
+      "id": "07",
+      "category": "Industrial motor/control",
+      "title": "Industrial fan bank with process instrumentation"
+    },
+    {
+      "id": "08",
+      "category": "Industrial motor/control",
+      "title": "Packaging machine power and PLC controls"
+    },
+    {
+      "id": "09",
+      "category": "Industrial motor/control",
+      "title": "Hoist/crane control with advisory safety circuits"
+    },
+    {
+      "id": "10",
+      "category": "Industrial motor/control",
+      "title": "Hydraulic power unit and electrovalve controls"
+    },
+    {
+      "id": "11",
+      "category": "PLC, process and automation",
+      "title": "Modular PLC I/O cabinet with remote I/O"
+    },
+    {
+      "id": "12",
+      "category": "PLC, process and automation",
+      "title": "Water-treatment dosing and monitoring plant"
+    },
+    {
+      "id": "13",
+      "category": "PLC, process and automation",
+      "title": "Wastewater lift-station control and telemetry"
+    },
+    {
+      "id": "14",
+      "category": "PLC, process and automation",
+      "title": "Food processing line with sensors and drives"
+    },
+    {
+      "id": "15",
+      "category": "PLC, process and automation",
+      "title": "Chemical batch reactor instrumentation/control"
+    },
+    {
+      "id": "16",
+      "category": "PLC, process and automation",
+      "title": "Brewery/CIP skid automation"
+    },
+    {
+      "id": "17",
+      "category": "PLC, process and automation",
+      "title": "Industrial oven heating and temperature loops"
+    },
+    {
+      "id": "18",
+      "category": "PLC, process and automation",
+      "title": "HVAC air-handling unit control system"
+    },
+    {
+      "id": "19",
+      "category": "PLC, process and automation",
+      "title": "Cold-storage refrigeration supervisory controls"
+    },
+    {
+      "id": "20",
+      "category": "PLC, process and automation",
+      "title": "Warehouse automated conveyor/sorter system"
+    },
+    {
+      "id": "21",
+      "category": "Building, power and energy",
+      "title": "Commercial low-voltage distribution board"
+    },
+    {
+      "id": "22",
+      "category": "Building, power and energy",
+      "title": "Industrial subdistribution and feeder schedules"
+    },
+    {
+      "id": "23",
+      "category": "Building, power and energy",
+      "title": "Emergency lighting and transfer-control circuits"
+    },
+    {
+      "id": "24",
+      "category": "Building, power and energy",
+      "title": "Building automation and field controller cabinets"
+    },
+    {
+      "id": "25",
+      "category": "Building, power and energy",
+      "title": "Solar PV inverter and AC distribution documentation"
+    },
+    {
+      "id": "26",
+      "category": "Building, power and energy",
+      "title": "Battery energy storage auxiliary/control circuits"
+    },
+    {
+      "id": "27",
+      "category": "Building, power and energy",
+      "title": "EV charging site electrical/control schematics"
+    },
+    {
+      "id": "28",
+      "category": "Building, power and energy",
+      "title": "Generator ATS supervisory/control panel"
+    },
+    {
+      "id": "29",
+      "category": "Building, power and energy",
+      "title": "UPS monitoring and bypass control system"
+    },
+    {
+      "id": "30",
+      "category": "Building, power and energy",
+      "title": "Data-center auxiliary electrical and alarm panels"
+    },
+    {
+      "id": "31",
+      "category": "Manufacturing and robotics",
+      "title": "Robotic welding cell control cabinet"
+    },
+    {
+      "id": "32",
+      "category": "Manufacturing and robotics",
+      "title": "CNC machine auxiliary electrical controls"
+    },
+    {
+      "id": "33",
+      "category": "Manufacturing and robotics",
+      "title": "Assembly-line safety relay and access interlocks"
+    },
+    {
+      "id": "34",
+      "category": "Manufacturing and robotics",
+      "title": "Pneumatic pick-and-place automation"
+    },
+    {
+      "id": "35",
+      "category": "Manufacturing and robotics",
+      "title": "Injection molding machine auxiliary controls"
+    },
+    {
+      "id": "36",
+      "category": "Manufacturing and robotics",
+      "title": "Printing press multi-drive control"
+    },
+    {
+      "id": "37",
+      "category": "Manufacturing and robotics",
+      "title": "Textile production machine control system"
+    },
+    {
+      "id": "38",
+      "category": "Manufacturing and robotics",
+      "title": "Pharmaceutical filling-line control"
+    },
+    {
+      "id": "39",
+      "category": "Manufacturing and robotics",
+      "title": "Automated palletizer control"
+    },
+    {
+      "id": "40",
+      "category": "Manufacturing and robotics",
+      "title": "Industrial test bench and instrumentation rack"
+    },
+    {
+      "id": "41",
+      "category": "Specialized international designs",
+      "title": "IEC-style European machine control panel"
+    },
+    {
+      "id": "42",
+      "category": "Specialized international designs",
+      "title": "NFPA 79-oriented US machine control panel"
+    },
+    {
+      "id": "43",
+      "category": "Specialized international designs",
+      "title": "UL 508A-oriented panel documentation example"
+    },
+    {
+      "id": "44",
+      "category": "Specialized international designs",
+      "title": "International terminal/cable marshalling cabinet"
+    },
+    {
+      "id": "45",
+      "category": "Specialized international designs",
+      "title": "Marine auxiliary electrical control panel (advisory only)"
+    },
+    {
+      "id": "46",
+      "category": "Specialized international designs",
+      "title": "Agricultural irrigation automation controller"
+    },
+    {
+      "id": "47",
+      "category": "Specialized international designs",
+      "title": "Railway station auxiliary control circuits (not signaling safety design)"
+    },
+    {
+      "id": "48",
+      "category": "Specialized international designs",
+      "title": "Mining ventilation auxiliary control panel (not hazardous-area certification)"
+    },
+    {
+      "id": "49",
+      "category": "Specialized international designs",
+      "title": "Hospital facility auxiliary alarm/monitoring panel (not life-support design)"
+    },
+    {
+      "id": "50",
+      "category": "Specialized international designs",
+      "title": "Modular training/commissioning lab with realistic PLC, motors and sensors"
     }
   ]
 }
