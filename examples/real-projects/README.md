@@ -26,7 +26,7 @@ This six-sheet reference extends brief 44. XT0 marks the external 24 V supply bo
 
 ## Pneumatic pick-and-place controls
 
-This four-sheet opening for brief 34 uses B1 and B2 to report the retracted and extended slide positions on separate PLC inputs. K1 and K2 expose isolated normally open vacuum and release pilot contacts at XT2 and XT3. The valve hardware, pneumatic circuit, and PLC motion and interlock logic remain unassigned.
+This five-sheet opening for brief 34 uses B1 and B2 to report the retracted and extended slide positions on separate PLC inputs. K1 and K2 expose isolated normally open vacuum and release pilot contacts at XT2 and XT3. XT4 and W-01 route the external vacuum-achieved contact to DI a.2 independently of the vacuum command. The valve hardware, pneumatic circuit, and PLC motion and interlock logic remain unassigned.
 
 Run `node scripts/author-pneumatic-pick-place.js --write` to regenerate the editable drawing.
 
