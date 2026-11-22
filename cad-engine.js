@@ -1808,9 +1808,13 @@
       net.localNetIds.forEach(function (id) { localToGlobal.set(id, net.id); });
     });
     const signalRolesByComponent = new Map();
+    const earthPinsByComponent = new Map();
     for (const object of objects) {
       if (object.kind !== 'component-instance') continue;
       const definition = component(object.componentId, object.customSymbol);
+      const earthPins = definition.symbol.pins.filter(pin => definition.family === 'protective-earth-terminal'
+        || pin.connectionType === 'protective-earth' || pin.localNumber.toUpperCase() === 'PE');
+      if (earthPins.length) earthPinsByComponent.set(object.id, new Set(earthPins.map(pin => pin.id)));
       if (definition.family === 'plc-cpu') {
         signalRolesByComponent.set(object.id, new Map(definition.symbol.pins.map(pin => [pin.id, plcChannelType(pin)])));
       } else if (definition.family === 'sensor-inductive-pnp') {
@@ -1821,14 +1825,21 @@
       }
     }
     const signalsByNet = new Map();
+    const earthByNet = new Map();
+    const wiredNetIds = new Set(globalNets.filter(net => net.wireIds.length).map(net => net.id));
     for (const sheet of reports) {
       for (const net of sheet.analysis.nets) {
         const netId = localToGlobal.get(net.id);
         for (const pin of net.pins) {
+          const location = { sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number };
+          if (wiredNetIds.has(netId) && earthPinsByComponent.get(pin.instanceId)?.has(pin.pinId)) {
+            if (!earthByNet.has(netId)) earthByNet.set(netId, []);
+            earthByNet.get(netId).push(location);
+          }
           const role = signalRolesByComponent.get(pin.instanceId)?.get(pin.pinId);
           if (!role) continue;
           if (!signalsByNet.has(netId)) signalsByNet.set(netId, []);
-          signalsByNet.get(netId).push({ role, location: { sheetId: sheet.id, objectId: pin.instanceId, ref: pin.ref, pinNumber: pin.number } });
+          signalsByNet.get(netId).push({ role, location });
         }
       }
     }
@@ -1877,6 +1888,12 @@
         netsByCableCore.get(key).push({ netId: netId, location: location, cable: cable, core: core });
       }
     });
+    for (const [netId, locations] of earthByNet) {
+      const assignments = potentialsByNet.get(netId) || [];
+      if (assignments.some(item => /^(?:PE|protective earth|protective conductor)$/i.test(item.potential))) continue;
+      add('ERC-PE-DESIGNATION-MISSING', 'warning', 'A net connected to a protective-earth terminal has no explicit PE potential designation.',
+        'Review the intended conductor and assign PE in the wire’s Potential field if appropriate.', locations);
+    }
     potentialsByNet.forEach(function (locations) {
       const names = new Set(locations.map(function (location) { return location.potential.toUpperCase(); }));
       if (names.size < 2) return;
