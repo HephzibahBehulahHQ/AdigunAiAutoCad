@@ -566,6 +566,18 @@
       { color, crossSection, width, minimumConductor, maximumConductor, connectionsPerLevel: 3, retrievedAt: '2026-11-22' }));
   const pttb25Terminal = compactTerminal('3210567', 'PTTB 2,5',
     'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567', 2, 500, 22, 68.2, [47.4, 54.9]);
+  const pttbTerminals = [
+    ['3211786', 'PTTB 4', '4-3211786', 'Gray (RAL 7042)', 4, 28, 6.2, 83.7, 0.2, 6, [47.3, 54.8]],
+    ['3211793', 'PTTB 4 BU', '4-bu-3211793', 'Blue (RAL 5015)', 4, 28, 6.2, 83.5, 0.2, 6, [47.5, 55]],
+    ['3211794', 'PTTB 4 WH', '4-wh-3211794', 'White (RAL 9010)', 4, 28, 6.2, 83.5, 0.2, 6, [47.5, 55]],
+    ['3211792', 'PTTB 4 OG', '4-og-3211792', 'Orange (RAL 2003)', 4, 28, 6.2, 83.5, 0.2, 6, [47.5, 55]],
+    ['3210570', 'PTTB 2,5 BU', '25-bu-3210570', 'Blue (RAL 5015)', 2.5, 22, 5.2, 68, 0.14, 4, [47.5, 55]],
+    ['1467082', 'PTTB 2,5 BK', '25-bk-1467082', 'Black (RAL 9005)', 2.5, 22, 5.2, 68, 0.14, 4, [47.5, 55]],
+    ['3208524', 'PTTB 1,5/S BU', '15s-bu-3208524', 'Blue (RAL 5015)', 1.5, 16, 3.5, 65.4, 0.14, 1.5, [42.6, 50.1]]
+  ].map(([id, model, sourcePath, color, crossSection, current, width, height, minimumConductor, maximumConductor, railDepths]) =>
+    compactTerminal(id, model, 'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-' + sourcePath,
+      2, 500, current, height, railDepths, false,
+      { color, crossSection, width, minimumConductor, maximumConductor, retrievedAt: '2026-11-22' }));
   const pt25DisconnectTerminal = compactTerminal('3210156', 'PT 2,5-MT',
     'https://www.phoenixcontact.com/en-us/products/disconnect-terminal-block-pt-25-mt-3210156?type=pdf',
     1, 400, 20, 62.2, [36.7, 44.2], true);
@@ -1312,7 +1324,7 @@
       documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
