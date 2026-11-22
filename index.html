@@ -1810,10 +1810,14 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         : findings.length
           ? '<div class="assistant-state"><span style="color:#f0bd4b">●</span><span><b>Review required</b><br>'+findings.map(escapeHtml).join('<br>')+'</span></div>'
           : '<div class="assistant-state"><span style="color:#73e6f4">●</span><span><b>No wire geometry issues found</b><br>Connectivity is based on authored wire endpoints and orthogonal bends.</span></div>';
+      const visibleWires=new Set(state.objects.filter(object=>object.kind==='wire'&&drawingObjectVisible(object)).map(object=>object.id));
       const wireRows=wireReport.rows.filter(row=>!state.projectModel||row.sheetId===state.sheet).map(function(row){
         const pins=row.netPinRefs.length?row.netPinRefs.join(', '):'No verified component pins are attached to this net.';
         return '<div class="inspector-block"><div class="property-row"><span>'+escapeHtml(row.wireId)+' · '+escapeHtml(row.netId)+'</span><strong>'+row.lengthMm.toFixed(3)+' mm</strong></div>'
-          +'<div class="notice">Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div></div>';
+          +'<div class="notice">Start '+row.startX+', '+row.startY+' · End '+row.endX+', '+row.endY+'<br>Net pins: '+escapeHtml(pins)+'</div>'
+          +'<button type="button" class="command-item" data-finding-sheet="'+escapeHtml(state.sheet)+'" data-finding-object="'+escapeHtml(row.wireId)+'"'
+          +(visibleWires.has(row.wireId)?'':' disabled title="Show the wire or its layer to locate it."')
+          +' aria-label="Locate wire '+escapeHtml(row.wireId)+'">Locate wire</button></div>';
       }).join('');
       const wireErrors=wireReport.errors.length
         ? '<p class="notice">Wire list export unavailable: '+wireReport.errors.map(escapeHtml).join('<br>')+'</p>'
