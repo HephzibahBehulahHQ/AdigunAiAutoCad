@@ -14,8 +14,9 @@ const feedback = 'irrigation-run-feedback';
 const indication = 'irrigation-run-indication';
 const fault = 'irrigation-starter-fault';
 const power = 'irrigation-control-supply';
+const earth = 'irrigation-protective-earth';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.5',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.6',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -26,7 +27,8 @@ const project = {
     { id: feedback, number: 'A2/005', name: 'Pump starter run feedback at XT3', projectSectionId: 'A2' },
     { id: indication, number: 'A2/006', name: 'Local pump run indication', projectSectionId: 'A2' },
     { id: fault, number: 'A2/007', name: 'Starter fault contact at XT4', projectSectionId: 'A2' },
-    { id: power, number: 'A2/008', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' }
+    { id: power, number: 'A2/008', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
+    { id: earth, number: 'A2/009', name: 'Cabinet and starter enclosure PE terminals', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -101,6 +103,24 @@ for (const [ref, position, input, y, part] of [
   wire(power, 'ps1-input-' + input.toLowerCase(), input, pin(terminal, '2'), end, bends);
 }
 
+const incomingEarth = project.objects.find(object => object.ref === 'X11');
+const [earthEntry, cabinetEarth, starterEarth] = [
+  ['X12', '1', 'PE from XT5', 380, 300],
+  ['X13', '2', 'Controller enclosure PE boundary', 780, 300],
+  ['X14', '3', 'Starter enclosure PE boundary', 780, 425]
+].map(([ref, position, marking, x, y]) => device(earth, ref, 'phoenix-contact-3209536', x, y,
+  { terminalStrip: 'XT6', position, marking }));
+const powerEarthEdge = { x: 215, y: 460 };
+const distributionEarthEdge = { x: 215, y: 300 };
+wire(power, 'enclosure-earth-cabinet', 'PE', pin(incomingEarth, '1'), powerEarthEdge);
+wire(earth, 'enclosure-earth-remote', 'PE', distributionEarthEdge, pin(earthEntry, '1'));
+link('enclosure-earth', 'XT6 enclosure protective earth',
+  [power, incomingEarth.ref, powerEarthEdge, 'left'], [earth, earthEntry.ref, distributionEarthEdge, 'left']);
+const earthBranch = { x: 575, y: 300 };
+wire(earth, 'enclosure-earth-trunk', 'PE', pin(earthEntry, '2'), earthBranch);
+wire(earth, 'controller-enclosure-earth', 'PE', earthBranch, pin(cabinetEarth, '1'));
+wire(earth, 'starter-enclosure-earth', 'PE', earthBranch, pin(starterEarth, '1'), [{ x: 575, y: 425 }]);
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -161,7 +181,8 @@ for (const [sheetId, title, description] of [
   [feedback, 'PUMP STARTER RUN FEEDBACK · XT3', 'XT3 is the boundary for the external normally open run contact. DI a.2 reports contact state independently of the request to K1.'],
   [indication, 'LOCAL PUMP RUN INDICATION · H1', 'W-03 carries DQ a.1 and 0 V. H1 follows the PLC output command. The logic linking DI a.2 to the indication remains unassigned.'],
   [fault, 'PUMP STARTER FAULT INPUT · XT4', 'W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact.'],
-  [power, 'CONTROL SUPPLY · PS1', 'XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned.']
+  [power, 'CONTROL SUPPLY · PS1', 'XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
+  [earth, 'ENCLOSURE PROTECTIVE EARTH · XT6', 'XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
