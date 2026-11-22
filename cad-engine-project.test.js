@@ -1376,6 +1376,21 @@ test('SITOP circuit source reproduces the published sheets', () => {
   execFileSync(process.execPath, [path.join(__dirname, 'scripts/author-sitop-sheets.js')]);
 });
 
+test('terminal-marshalling project regenerates and keeps its three field cable cores separate', () => {
+  execFileSync(process.execPath, [path.join(__dirname, 'scripts/author-terminal-marshalling.js')]);
+  const file = path.join(__dirname, 'examples/real-projects/terminal-marshalling.adigun.json');
+  const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
+  const analysis = engine.analyzeProject(project);
+  const nets = ['1', '3', '4'].map(number => analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'B1' && pin.number === number)));
+  assert.equal(new Set(nets.map(net => net.id)).size, 3);
+  for (const [net, terminal] of nets.map((net, index) => [net, ['X10:4', 'X10:5', 'X10:7'][index]])) {
+    assert.ok(net.pins.some(pin => pin.ref === 'A1' && pin.number === terminal));
+    assert.deepEqual([...net.sheetIds].sort(), ['marshalling-cabinet', 'marshalling-field']);
+  }
+  assert.equal(analysis.openEndpointCount, 0);
+  assert.equal(engine.cableScheduleCsv(project).trim().split('\r\n').length, 7);
+});
+
 test('PE designation check follows the connected net across sheets', () => {
   const fixture = path.join(__dirname, 'examples/real-projects/sitop-24v-dc-distribution.adigun.json');
   const project = JSON.parse(fs.readFileSync(fixture, 'utf8'));

@@ -16,6 +16,7 @@ on:
       - "docs/reports/project-library-validation.json"
       - "scripts/project-library-validation.js"
       - "scripts/author-sitop-sheets.js"
+      - "scripts/author-terminal-marshalling.js"
   push:
     branches: [main]
     paths:
@@ -32,6 +33,7 @@ on:
       - "docs/reports/project-library-validation.json"
       - "scripts/project-library-validation.js"
       - "scripts/author-sitop-sheets.js"
+      - "scripts/author-terminal-marshalling.js"
 
 permissions:
   contents: read

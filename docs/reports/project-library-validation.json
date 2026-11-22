@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 8,
-    "validatedArtifactCount": 8,
-    "distinctTopologyCount": 6,
+    "projectArtifactCount": 9,
+    "validatedArtifactCount": 9,
+    "distinctTopologyCount": 7,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -331,7 +331,9 @@
           "id": "44",
           "category": "Specialized international designs",
           "title": "International terminal/cable marshalling cabinet",
-          "projectIds": [],
+          "projectIds": [
+            "terminal-marshalling"
+          ],
           "qualifiedProjectId": null
         },
         {
@@ -1248,6 +1250,70 @@
         "bomRowCount": 12,
         "wireListRowCount": 143,
         "terminalListRowCount": 58
+      },
+      "errors": []
+    },
+    {
+      "id": "terminal-marshalling",
+      "title": "Controller-to-field terminal marshalling",
+      "topologyId": "two-ended-sensor-terminal-marshalling",
+      "briefId": "44",
+      "role": "standalone-example",
+      "path": "examples/real-projects/terminal-marshalling.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "releaseScale": {
+        "qualified": false,
+        "additionalAuthoredSheetsRequired": 98,
+        "additionalConnectedSheetsRequired": 68,
+        "sheetIdsWithoutElectricalConnectivity": []
+      },
+      "wirePreview": {
+        "sheetId": "marshalling-cabinet",
+        "sheetName": "Controller and XT1 terminals",
+        "segments": "64,0,92,0 92,0,92,13 92,13,100,13 64,9,81,9 81,9,81,16 81,16,100,16 29,22,63,22 63,22,63,23 63,23,100,23 29,28,63,28 63,28,63,27 63,27,100,27 94,16,94,27 94,27,94,30 94,30,100,30 29,46,70,46 70,46,70,33 70,33,100,33 16,22,0,22 16,28,0,28 16,46,0,46"
+      },
+      "topologySha256": "9a16654617fc57fe8cf3ab7396fdb9f08db86690a773b971b04e32e6e2377768",
+      "electricalStructureSha256": "1878f378280a7b0469dbfb4a8fc812512b74494ffdf636b4fedbb02d589abe1d",
+      "csvSha256": {
+        "bom": "4fc2cd57fa97beb8778f5df4d0eb7717c75e21002e13609f5d4e753bb3b9e84c",
+        "wires": "5afb7b644e1011b1d104cedcf085c33df1ee4e645438e60118a093524fd1772c",
+        "terminals": "d5bf93b691be8f1c5e4e9ca2061d3a7311db7de0823ddf27597d8f27086c1f77",
+        "plcIo": "7c19dd5c977f60ec180b6398908064402591afac33237058352b4ca2b422803f",
+        "cables": "f9e17dc91874f51b48ac2d296b012f8259ab945a5e0dbcfcde03d7de24857451",
+        "devices": "a1f0a29d5fa506c3464b081c3656b5588944a4b87794aa86e3d4698fa19c897f",
+        "sheets": "59befb3e102dec982ede39c9988402aadc8ec24792ce1c2ce0c396a5b3500956"
+      },
+      "metrics": {
+        "sheetCount": 2,
+        "authoredSheetCount": 2,
+        "connectedSheetCount": 2,
+        "contentObjectCount": 45,
+        "emptyContentSheetIds": [],
+        "repeatedContentSheets": [],
+        "componentCount": 8,
+        "wireCount": 31,
+        "netCount": 7,
+        "globalNetCount": 4,
+        "crossSheetConnectionCount": 3,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 4,
+        "wireListRowCount": 31,
+        "terminalListRowCount": 16
       },
       "errors": []
     }
