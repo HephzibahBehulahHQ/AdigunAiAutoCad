@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "SITOP 24 V DC two-branch terminal distribution",
-  "revision": "3.2",
+  "revision": "3.3",
   "description": "SITOP distribution, digital and analog sensor inputs, and CPU output with relay, contactor and feedback wiring.",
   "activeSheet": "supply",
   "theme": "light",
@@ -161,6 +161,12 @@
       "id": "branch-b-monitor",
       "number": "A2/025",
       "name": "Branch B voltage-present relay and dry contacts",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "branch-b-loss-alert",
+      "number": "A2/026",
+      "name": "Branch B loss indication from independent supply",
       "projectSectionId": "A2"
     }
   ],
@@ -4224,7 +4230,193 @@
       "sheetId": "branch-b-monitor",
       "x": 110,
       "y": 525,
-      "text": "K4 reports coil energization. The receiving circuit, alarm thresholds and protection are unassigned.",
+      "text": "K4 reports coil energization. See A2/026 for the independent supply and loss indicator.",
+      "stroke": "#13263b"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-loss-alert-h3",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H3",
+      "x": 620,
+      "y": 370,
+      "rotation": 0,
+      "properties": {
+        "marking": "Branch B loss indication"
+      },
+      "sheetId": "branch-b-loss-alert"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-loss-alert-x33",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X33",
+      "x": 430,
+      "y": 245,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT14",
+        "position": "1",
+        "marking": "Independent +24 V"
+      },
+      "sheetId": "branch-b-loss-alert"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "branch-b-loss-alert-x34",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X34",
+      "x": 850,
+      "y": 370,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT14",
+        "position": "2",
+        "marking": "Independent 0 V"
+      },
+      "sheetId": "branch-b-loss-alert"
+    },
+    {
+      "id": "branch-b-loss-alert-common-send",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 820,
+      "y": 330,
+      "x1": 820,
+      "y1": 330,
+      "x2": 940,
+      "y2": 330,
+      "potential": "K4 Dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-monitor-x30",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "branch-b-loss-alert-common-receive",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 940,
+      "y": 245,
+      "x1": 940,
+      "y1": 245,
+      "x2": 465,
+      "y2": 245,
+      "potential": "K4 Dry contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-loss-alert-x33",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "branch-b-loss-alert-nc-send",
+      "kind": "wire",
+      "sheetId": "branch-b-monitor",
+      "x": 820,
+      "y": 240,
+      "x1": 820,
+      "y1": 240,
+      "x2": 940,
+      "y2": 240,
+      "potential": "K4 Normally closed",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-monitor-x31",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "branch-b-loss-alert-nc-receive",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 215,
+      "y": 370,
+      "x1": 215,
+      "y1": 370,
+      "x2": 593,
+      "y2": 370,
+      "potential": "K4 Normally closed",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "end": {
+          "instanceId": "branch-b-loss-alert-h3",
+          "pinId": "x1"
+        }
+      }
+    },
+    {
+      "id": "branch-b-loss-alert-lamp-return",
+      "kind": "wire",
+      "sheetId": "branch-b-loss-alert",
+      "x": 647,
+      "y": 370,
+      "x1": 647,
+      "y1": 370,
+      "x2": 815,
+      "y2": 370,
+      "potential": "Independent indicator 0 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "branch-b-loss-alert-h3",
+          "pinId": "x2"
+        },
+        "end": {
+          "instanceId": "branch-b-loss-alert-x34",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "branch-b-loss-alert-title",
+      "kind": "text",
+      "sheetId": "branch-b-loss-alert",
+      "x": 110,
+      "y": 108,
+      "text": "XT14 · BRANCH B LOSS INDICATION",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-b-loss-alert-feed",
+      "kind": "text",
+      "sheetId": "branch-b-loss-alert",
+      "x": 110,
+      "y": 195,
+      "text": "XT14:1 supplies K4 common from an independent 24 V DC source.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-b-loss-alert-signal",
+      "kind": "text",
+      "sheetId": "branch-b-loss-alert",
+      "x": 110,
+      "y": 450,
+      "text": "K4 normally closed feeds H3 whenever K4 is de-energized and independent power is available.",
+      "stroke": "#13263b"
+    },
+    {
+      "id": "branch-b-loss-alert-scope",
+      "kind": "text",
+      "sheetId": "branch-b-loss-alert",
+      "x": 110,
+      "y": 505,
+      "text": "XT14:2 returns to the independent source. The drawing leaves that source and its protection unassigned.",
       "stroke": "#13263b"
     }
   ],
@@ -6139,6 +6331,70 @@
             "direction": "left",
             "targetSheetId": "branch-b",
             "targetRef": "B2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-b-loss-alert-common",
+      "name": "Branch B loss alert · Dry contact common",
+      "endpoints": [
+        {
+          "sheetId": "branch-b-monitor",
+          "wireId": "branch-b-loss-alert-common-send",
+          "point": {
+            "x": 940,
+            "y": 330
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-loss-alert",
+            "targetRef": "X33"
+          }
+        },
+        {
+          "sheetId": "branch-b-loss-alert",
+          "wireId": "branch-b-loss-alert-common-receive",
+          "point": {
+            "x": 940,
+            "y": 245
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-monitor",
+            "targetRef": "X30"
+          }
+        }
+      ]
+    },
+    {
+      "id": "branch-b-loss-alert-nc",
+      "name": "Branch B loss alert · Normally closed",
+      "endpoints": [
+        {
+          "sheetId": "branch-b-monitor",
+          "wireId": "branch-b-loss-alert-nc-send",
+          "point": {
+            "x": 940,
+            "y": 240
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "branch-b-loss-alert",
+            "targetRef": "H3"
+          }
+        },
+        {
+          "sheetId": "branch-b-loss-alert",
+          "wireId": "branch-b-loss-alert-nc-receive",
+          "point": {
+            "x": 215,
+            "y": 370
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "branch-b-monitor",
+            "targetRef": "X31"
           }
         }
       ]

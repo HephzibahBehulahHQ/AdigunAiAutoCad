@@ -13,13 +13,14 @@ const fieldIndicator = { id: 'field-indicator', number: 'A2/022', name: 'Externa
 const branchIndicator = { id: 'branch-a-indicator', number: 'A2/023', name: 'Branch A voltage indication', projectSectionId: 'A2' };
 const secondPressureSensor = { id: 'ai1-pressure-sensor', number: 'A2/024', name: 'B3 pressure sensor to AI1', projectSectionId: 'A2' };
 const branchBMonitor = { id: 'branch-b-monitor', number: 'A2/025', name: 'Branch B voltage-present relay and dry contacts', projectSectionId: 'A2' };
+const branchBLossAlert = { id: 'branch-b-loss-alert', number: 'A2/026', name: 'Branch B loss indication from independent supply', projectSectionId: 'A2' };
 const fieldSupplyPotential = 'External annunciator +24 V';
 const fieldRequestPotential = 'Annunciator switched +24 V';
-const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor];
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.2';
+project.revision = '3.3';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -268,7 +269,33 @@ author(branchBMonitor, ({ device, pin, wire, link, notes }) => {
     ['title', 108, 'XT13 · BRANCH B VOLTAGE-PRESENT CONTACTS'],
     ['coil', 175, 'K4 is wired in parallel with B2 on the downstream Branch B supply.'],
     ['contacts', 485, 'XT13 presents dry COM, NC and NO terminals for external indication.'],
-    ['scope', 525, 'K4 reports coil energization. The receiving circuit, alarm thresholds and protection are unassigned.']
+    ['scope', 525, 'K4 reports coil energization. See A2/026 for the independent supply and loss indicator.']
+  ]);
+});
+
+author(branchBLossAlert, ({ device, pin, wire, link, notes }) => {
+  const lamp = device('H3', 'schneider-electric-xb5avb3', 620, 370, { marking: 'Branch B loss indication' });
+  const feed = device('X33', 'phoenix-contact-3209510', 430, 245,
+    { terminalStrip: 'XT14', position: '1', marking: 'Independent +24 V' });
+  const returnTerminal = device('X34', 'phoenix-contact-3209510', 850, 370,
+    { terminalStrip: 'XT14', position: '2', marking: 'Independent 0 V' });
+  const monitorTerminals = ['x30', 'x31'].map(ref => project.objects.find(object => object.id === branchBMonitor.id + '-' + ref));
+  for (const [key, marking, terminal, destination, destinationPin, boundaryX, direction] of [
+    ['common', 'Dry contact common', monitorTerminals[0], feed, '2', 940, 'right'],
+    ['nc', 'Normally closed', monitorTerminals[1], lamp, 'X1', 215, 'left']
+  ]) {
+    const start = pin(terminal, '2'), end = pin(destination, destinationPin);
+    const potential = 'K4 ' + marking;
+    const send = wire(key + '-send', branchBMonitor.id, start, { x: 940, y: start.y }, potential);
+    const receive = wire(key + '-receive', branchBLossAlert.id, { x: boundaryX, y: end.y }, end, potential);
+    link(key, 'Branch B loss alert · ' + marking, send, receive, terminal.ref, destination.ref, ['right', direction]);
+  }
+  wire('lamp-return', branchBLossAlert.id, pin(lamp, 'X2'), pin(returnTerminal, '1'), 'Independent indicator 0 V');
+  notes([
+    ['title', 108, 'XT14 · BRANCH B LOSS INDICATION'],
+    ['feed', 195, 'XT14:1 supplies K4 common from an independent 24 V DC source.'],
+    ['signal', 450, 'K4 normally closed feeds H3 whenever K4 is de-energized and independent power is available.'],
+    ['scope', 505, 'XT14:2 returns to the independent source. The drawing leaves that source and its protection unassigned.']
   ]);
 });
 
