@@ -28,6 +28,10 @@ async function loadShellResource(request, cacheKey) {
   const cache = await caches.open(shellCacheName).catch(() => null);
   try {
     const response = await fetch(request);
+    if (response.status >= 500) {
+      const cached = await cache?.match(cacheKey);
+      return cached || response;
+    }
     if (response.ok && cache) await cache.put(cacheKey, response.clone()).catch(() => {});
     return response;
   } catch (error) {
