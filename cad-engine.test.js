@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 167);
+  assert.equal(items.length, 179);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -358,6 +358,18 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3004977', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3038011', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-0719139', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031241', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031393', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3036466', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031306', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031319', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3031445', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1002940', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044513', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044364', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1079167', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044542', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3044555', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
@@ -404,7 +416,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3031322', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3031416', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -688,6 +700,38 @@ test('multi-conductor protective-earth blocks connect all manufacturer-specified
       pinAttachments: { start: { instanceId: terminal.id, pinId: pin.id }, end: null }
     }));
     assert.deepEqual(engine.analyze([terminal, ...wires]).nets.map(net => net.wireIds), [wires.map(wire => wire.id)]);
+  }
+});
+
+test('ST and UT multi-conductor terminal blocks share one potential across every terminal', () => {
+  for (const [id, method, count, voltage, maximumFlexible] of [
+    ['3031241', 'spring-cage', 3, 800, 2.5],
+    ['3031393', 'spring-cage', 3, 800, 4],
+    ['3036466', 'spring-cage', 3, 1000, 6],
+    ['3031306', 'spring-cage', 4, 800, 2.5],
+    ['3031319', 'spring-cage', 4, 800, 2.5],
+    ['3031445', 'spring-cage', 4, 800, 4],
+    ['1002940', 'spring-cage', 4, 800, 4],
+    ['3044513', 'screw', 3, 500, 4],
+    ['3044364', 'screw', 3, 500, 6],
+    ['1079167', 'screw', 3, 500, 6],
+    ['3044542', 'screw', 4, 500, 4],
+    ['3044555', 'screw', 4, 500, 4]
+  ]) {
+    const part = engine.component('phoenix-contact-' + id);
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.equal(part.specifications.nominalVoltage.value, voltage);
+    assert.equal(part.specifications.flexibleConductorRange.maximum, maximumFlexible);
+    const block = engine.createInstance(part.id, 100, 100, 'X1');
+    const pins = engine.worldPins(block);
+    assert.equal(pins.length, count);
+    assert.ok(part.symbol.pins.every(pin => pin.connectionType === method));
+    const wires = pins.map((pin, index) => ({
+      id: 'signal-' + index, kind: 'wire', x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+      x2: pin.x + (pin.x < block.x ? -25 : 25), y2: pin.y,
+      pinAttachments: { start: { instanceId: block.id, pinId: pin.id }, end: null }
+    }));
+    assert.deepEqual(engine.analyze([block, ...wires]).nets.map(net => net.wireIds), [wires.map(wire => wire.id)]);
   }
 });
 
