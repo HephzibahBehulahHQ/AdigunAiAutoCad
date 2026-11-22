@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Relay changeover test bench",
-  "revision": "1.2",
+  "revision": "1.3",
   "description": "Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.",
   "activeSheet": "bench-coil-actuation",
   "sheets": [
@@ -106,12 +106,54 @@
       "sheetId": "bench-coil-actuation"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x14",
+      "componentId": "phoenix-contact-3210156",
+      "ref": "X14",
+      "x": 400,
+      "y": 320,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "3",
+        "marking": "Coil supply disconnect",
+        "comment": "",
+        "knifePosition": "closed"
+      },
+      "sheetId": "bench-coil-actuation"
+    },
+    {
       "id": "coil-feed",
       "sheetId": "bench-coil-actuation",
       "kind": "wire",
       "x": 335,
       "y": 320,
       "x1": 335,
+      "y1": 320,
+      "x2": 365,
+      "y2": 320,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "x14",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "coil-feed-switched-terminal",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 435,
+      "y": 320,
+      "x1": 435,
       "y1": 320,
       "x2": 445,
       "y2": 320,
@@ -120,7 +162,7 @@
       "strokeWidth": 1.5,
       "pinAttachments": {
         "start": {
-          "instanceId": "x1",
+          "instanceId": "x14",
           "pinId": "level-1-right"
         },
         "end": {
@@ -848,11 +890,11 @@
       "id": "coil-supply-plus-send",
       "sheetId": "bench-coil-actuation",
       "kind": "wire",
-      "x": 400,
+      "x": 350,
       "y": 320,
-      "x1": 400,
+      "x1": 350,
       "y1": 320,
-      "x2": 400,
+      "x2": 350,
       "y2": 405,
       "potential": "Coil supply +24 V",
       "stroke": "#38734b",
@@ -1159,7 +1201,7 @@
       "kind": "text",
       "x": 105,
       "y": 510,
-      "text": "S1 applies the XT1 coil supply to K1 A1. K1 A2 returns to XT1:2."
+      "text": "X14 disconnects the S1 feed. With X14 closed, S1 applies the XT1 coil supply to K1 A1."
     },
     {
       "id": "bench-coil-actuation-note-2",
@@ -1531,7 +1573,7 @@
           "sheetId": "bench-coil-actuation",
           "wireId": "coil-supply-plus-send",
           "point": {
-            "x": 400,
+            "x": 350,
             "y": 405
           },
           "connector": {

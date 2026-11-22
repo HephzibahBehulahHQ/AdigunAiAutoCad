@@ -11,7 +11,7 @@ const diagnostics = 'bench-coil-test-access';
 const contactTest = 'bench-contact-test-access';
 const supplyCheck = 'bench-supply-check';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.2',
+  product: 'AdigunAiAutoCad', project: 'Relay changeover test bench', revision: '1.3',
   description: 'Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.',
   activeSheet: actuation,
   sheets: [
@@ -64,7 +64,10 @@ const coilSupply = terminal(actuation, 'X1', 300, 320, 'XT1', '1', 'Coil supply 
 const coilReturn = terminal(actuation, 'X2', 300, 240, 'XT1', '2', 'Coil supply 0 V');
 const button = device(actuation, 'S1', 'schneider-electric-xb5aa31', 500, 320, { marking: 'Energize relay under test' });
 const relay = device(actuation, 'K1', 'phoenix-contact-2966171', 720, 345, { marking: 'Relay under test' });
-wire(actuation, 'coil-feed', 'Coil supply +24 V', pin(coilSupply, '2'), pin(button, '13'));
+const disconnect = device(actuation, 'X14', 'phoenix-contact-3210156', 400, 320,
+  { terminalStrip: 'XT1', position: '3', marking: 'Coil supply disconnect', knifePosition: 'closed' });
+wire(actuation, 'coil-feed', 'Coil supply +24 V', pin(coilSupply, '2'), pin(disconnect, '1'));
+wire(actuation, 'coil-feed-switched-terminal', 'Coil supply +24 V', pin(disconnect, '2'), pin(button, '13'));
 wire(actuation, 'coil-command', 'Switched coil supply', pin(button, '14'), pin(relay, 'A1'), [{ x: 600, y: 320 }, { x: 600, y: 365 }]);
 wire(actuation, 'coil-return', 'Coil supply 0 V', pin(coilReturn, '2'), pin(relay, 'A2'), [{ x: 625, y: 240 }, { x: 625, y: 325 }]);
 
@@ -123,7 +126,7 @@ const indicatorSupplyLamp = device(supplyCheck, 'H5', 'schneider-electric-xb5avb
 const indicatorPositive = pin(lampSupply, '1');
 const indicatorNegative = pin(lampReturn, '2');
 for (const [id, sheetId, sourceRef, lamp, ref, position, potential, start, end, lampPin, direction] of [
-  ['coil-supply-plus', actuation, 'X1', coilSupplyLamp, 'X10', '1', 'Coil supply +24 V', { x: 400, y: 320 }, { x: 400, y: 405 }, 'X1', 'right'],
+  ['coil-supply-plus', actuation, 'X1', coilSupplyLamp, 'X10', '1', 'Coil supply +24 V', { x: 350, y: 320 }, { x: 350, y: 405 }, 'X1', 'right'],
   ['coil-supply-minus', actuation, 'X2', coilSupplyLamp, 'X11', '2', 'Coil supply 0 V', { x: 540, y: 240 }, { x: 540, y: 185 }, 'X2', 'right'],
   ['indicator-supply-plus', indication, 'X3', indicatorSupplyLamp, 'X12', '3', 'Indicator supply +24 V', indicatorPositive, { x: 215, y: indicatorPositive.y }, 'X1', 'left'],
   ['indicator-supply-minus', indication, 'X4', indicatorSupplyLamp, 'X13', '4', 'Indicator supply 0 V', indicatorNegative, { x: 1030, y: indicatorNegative.y }, 'X2', 'right']
@@ -138,7 +141,7 @@ for (const [id, sheetId, sourceRef, lamp, ref, position, potential, start, end, 
 
 for (const [sheetId, title, lines] of [
   [actuation, 'RELAY TEST BENCH · COIL ACTUATION', [
-    'S1 applies the XT1 coil supply to K1 A1. K1 A2 returns to XT1:2.',
+    'X14 disconnects the S1 feed. With X14 closed, S1 applies the XT1 coil supply to K1 A1.',
     'W-T01 takes K1 common, normally closed and normally open terminals to the indication sheet.'
   ]],
   [indication, 'RELAY TEST BENCH · CHANGEOVER INDICATION', [

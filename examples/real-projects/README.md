@@ -30,6 +30,8 @@ This five-sheet opening for brief 40 uses a momentary push-button to energize a 
 
 Open **Relay changeover test bench** from Project Explorer. Run `node scripts/author-relay-test-bench.js --write` to regenerate the editable native project.
 
+On A2/001, select X14 and use **Knife position** in Properties to open or close the modeled terminal. Opening it splits the coil feed in Electrical checks while preserving the attached wires. The model uses local pin numbers 1 and 2. [Phoenix Contact PT 2,5‑MT datasheet](https://www.phoenixcontact.com/en-us/products/disconnect-terminal-block-pt-25-mt-3210156?type=pdf)
+
 # 24 V DC relay-operated contactor coil
 
 Open this project as an editable copy from **Project Explorer → List**.

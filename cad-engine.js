@@ -433,7 +433,7 @@
       retrievedAt: '2026-11-12'
     }]
   });
-  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths) {
+  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths, disconnect = false) {
     const pins = [], internalConnections = [];
     for (let level = 1; level <= levels; level += 1) {
       const y = (level - (levels + 1) / 2) * 30;
@@ -445,7 +445,8 @@
       });
       internalConnections.push(pair);
     }
-    const name = levels > 1 ? 'Double-level terminal block' : 'Feed-through terminal block';
+    const name = disconnect ? 'Knife-disconnect terminal block' : levels > 1 ? 'Double-level terminal block' : 'Feed-through terminal block';
+    const family = disconnect ? 'disconnect-terminal' : 'feedthrough-terminal';
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION,
       id: 'phoenix-contact-' + partNumber,
@@ -453,11 +454,11 @@
       manufacturerPartNumber: partNumber,
       model: model,
       name: name,
-      family: 'feedthrough-terminal',
+      family: family,
       referencePrefix: 'X',
-      category: terminalDefinition.category,
+      category: disconnect ? 'Electrical · Verified disconnect terminal' : terminalDefinition.category,
       symbol: {
-        id: 'terminal.feedthrough.' + partNumber + '.v1', view: 'schematic', unit: 'mm',
+        id: 'terminal.' + (disconnect ? 'disconnect' : 'feedthrough') + '.' + partNumber + '.v1', view: 'schematic', unit: 'mm',
         width: 70, height: levels > 1 ? 56 : 26, pins: pins, internalConnections: internalConnections,
         numberingNote: 'Connection numbers and level prefixes are model-local identifiers.'
       },
@@ -478,10 +479,15 @@
           depthOnNS35_15: { value: railDepths[1], unit: 'mm' }
         }
       },
-      instanceProperties: terminalDefinition.instanceProperties,
+      instanceProperties: disconnect ? {
+        ...terminalDefinition.instanceProperties,
+        knifePosition: { type: 'choice', default: 'open', choices: { open: 'Open', closed: 'Closed' } }
+      } : terminalDefinition.instanceProperties,
       sources: [{
         publisher: 'Phoenix Contact', title: model + ' · ' + name + ' · Item ' + partNumber, url: url,
-        documentRevision: null, revisionNote: 'Live manufacturer product catalog.', retrievedAt: '2026-11-21'
+        documentRevision: disconnect ? 'Catalog PDF · 2026-11-09' : null,
+        revisionNote: disconnect ? 'Manufacturer data for two push-in connections, rated values and DIN-rail dimensions.' : 'Live manufacturer product catalog.',
+        retrievedAt: disconnect ? '2026-11-22' : '2026-11-21'
       }]
     });
   }
@@ -490,6 +496,9 @@
     'https://www.phoenixcontact.com/en-pc/products/feed-through-terminal-block-pt-25-3209510', 1, 800, 24, 48.6, [36.8, 44.3]);
   const pttb25Terminal = compactTerminal('3210567', 'PTTB 2,5',
     'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567', 2, 500, 22, 68.2, [47.4, 54.9]);
+  const pt25DisconnectTerminal = compactTerminal('3210156', 'PT 2,5-MT',
+    'https://www.phoenixcontact.com/en-us/products/disconnect-terminal-block-pt-25-mt-3210156?type=pdf',
+    1, 400, 20, 62.2, [36.7, 44.2], true);
 
   const relayDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION,
@@ -1233,7 +1242,7 @@
       documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -1307,7 +1316,7 @@
     return Object.hasOwn(COMPONENTS, id) ? COMPONENTS[id] : customSymbol?.id === id ? customSymbolDefinition(customSymbol) : null;
   }
   function isTerminalDefinition(definition) {
-    return definition?.family === 'feedthrough-terminal' || definition?.family === 'protective-earth-terminal';
+    return ['feedthrough-terminal', 'protective-earth-terminal', 'disconnect-terminal'].includes(definition?.family);
   }
   function plcChannelType(pin) {
     return /^(DI|DQ|AI) /.exec(pin.name)?.[1];
@@ -1367,9 +1376,11 @@
         const rule = def.instanceProperties[name];
         const invalidNumber = rule.type === 'number' && value !== undefined && value !== null &&
           (!finite(value) || value < rule.minimum || value > rule.maximum);
-        const invalidString = rule.type !== 'number' && value !== undefined &&
+        const invalidString = rule.type === 'string' && value !== undefined &&
           (typeof value !== 'string' || value.length > rule.maximumLength);
-        if (invalidNumber || invalidString) {
+        const invalidChoice = rule.type === 'choice' && value !== undefined &&
+          (typeof value !== 'string' || !Object.hasOwn(rule.choices, value));
+        if (invalidNumber || invalidString || invalidChoice) {
           errors.push('Component property "' + name + '" is invalid.');
         }
       });
@@ -1709,6 +1720,7 @@
 
     validInstances.forEach(function (instance) {
       const def = component(instance.componentId, instance.customSymbol);
+      if (def.family === 'disconnect-terminal' && instance.properties.knifePosition !== 'closed') return;
       def.symbol.internalConnections.forEach(function (pair) {
         const first = pins.find(function (pin) { return pin.instanceId === instance.id && pin.pinId === pair[0]; });
         const second = pins.find(function (pin) { return pin.instanceId === instance.id && pin.pinId === pair[1]; });
