@@ -1,0 +1,28 @@
+name: Verify client release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release candidate
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Require the complete project library
+        run: node scripts/project-library-validation.js --check --require-release-scale
+      - name: Install pinned Playwright
+        run: npm install --no-save --package-lock=false playwright@1.65.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Verify editable CAD workflows
+        run: node --test cad-engine.test.js cad-engine-project.test.js
+        env:
+          CAD_BROWSER_WORKFLOW: "1"
