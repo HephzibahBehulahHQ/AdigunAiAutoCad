@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 159);
+  assert.equal(items.length, 167);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -394,7 +394,15 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3044212', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3215915', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3044241', 'protective-earth-terminal', 'X'],
-    ['phoenix-contact-3215928', 'protective-earth-terminal', 'X']
+    ['phoenix-contact-3215928', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3209565', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3211780', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3211809', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3212950', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3208745', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3044539', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3031322', 'protective-earth-terminal', 'X'],
+    ['phoenix-contact-3031416', 'protective-earth-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977']);
   for (const [id, height] of [
@@ -653,6 +661,33 @@ test('new protective conductor terminals retain the common PE potential and docu
     assert.equal(part.specifications.productStandard.value, 'IEC 60947-7-2');
     assert.equal(part.specifications.ratedCrossSection.value, area);
     assert.equal(part.specifications.flexibleConductorRange.maximum, maximumFlexible);
+  }
+});
+
+test('multi-conductor protective-earth blocks connect all manufacturer-specified conductors', () => {
+  for (const [id, count, method] of [
+    ['3209565', 3, 'push-in'],
+    ['3211780', 3, 'push-in'],
+    ['3211809', 4, 'push-in'],
+    ['3212950', 4, 'push-in'],
+    ['3208745', 3, 'push-in'],
+    ['3044539', 3, 'screw'],
+    ['3031322', 4, 'spring-cage'],
+    ['3031416', 3, 'spring-cage']
+  ]) {
+    const part = engine.component('phoenix-contact-' + id);
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.equal(part.specifications.connectionCount.value, count);
+    const terminal = engine.createInstance(part.id, 100, 100, 'X1');
+    const pins = engine.worldPins(terminal);
+    assert.equal(pins.length, count);
+    assert.ok(part.symbol.pins.every(pin => pin.connectionType === method));
+    const wires = pins.map((pin, index) => ({
+      id: 'pe-' + index, kind: 'wire', x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+      x2: pin.x + (pin.x < terminal.x ? -25 : 25), y2: pin.y,
+      pinAttachments: { start: { instanceId: terminal.id, pinId: pin.id }, end: null }
+    }));
+    assert.deepEqual(engine.analyze([terminal, ...wires]).nets.map(net => net.wireIds), [wires.map(wire => wire.id)]);
   }
 });
 

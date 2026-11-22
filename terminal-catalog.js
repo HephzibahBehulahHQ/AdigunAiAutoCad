@@ -154,7 +154,15 @@
       ['3044212', 'UT 16-PE', 'ut-16-pe', 'screw', 'Screw', 16, 1.5, 25, 25, 12.2, 55.5, 55, 62.5],
       ['3215915', 'UT 16-PE/S', 'ut-16-pes', 'screw', 'Screw', 16, 1.5, 25, 25, 12.2, 55.5, 55, 62.5, 'M4'],
       ['3044241', 'UT 35-PE', 'ut-35-pe', 'screw', 'Screw', 35, 1.5, 35, 35, 16, 61.2, 65.7, 73.2],
-      ['3215928', 'UT 35-PE/S', 'ut-35-pes', 'screw', 'Screw', 35, 1.5, 35, 35, 16, 60.2, 65.7, 73.2, 'M5']
+      ['3215928', 'UT 35-PE/S', 'ut-35-pes', 'screw', 'Screw', 35, 1.5, 35, 35, 16, 60.2, 65.7, 73.2, 'M5'],
+      ['3209565', 'PT 2,5-TWIN-PE', 'pt-25-twin-pe', 'push-in', 'Push-in', 2.5, 0.14, 4, 4, 5.2, 60.5, 36.8, 44.3, null, 3],
+      ['3211780', 'PT 4-TWIN-PE', 'pt-4-twin-pe', 'push-in', 'Push-in', 4, 0.2, 6, 6, 6.2, 66.5, 36.5, 44, null, 3],
+      ['3211809', 'PT 4-QUATTRO-PE', 'pt-4-quattro-pe', 'push-in', 'Push-in', 4, 0.2, 6, 6, 6.2, 76.9, 36.5, 44, null, 4],
+      ['3212950', 'PT 6-QUATTRO-PE', 'pt-6-quattro-pe', 'push-in', 'Push-in', 6, 0.5, 10, 10, 8.2, 90.5, 43.5, 51, null, 4],
+      ['3208745', 'PT 10-TWIN-PE', 'pt-10-twin-pe', 'push-in', 'Push-in', 10, 0.5, 16, 16, 10.2, 88.9, 50.5, 58, null, 3],
+      ['3044539', 'UT 2,5-TWIN-PE', 'ut-25-twin-pe', 'screw', 'Screw', 2.5, 0.14, 4, 4, 5.2, 57.8, 47.5, 55, null, 3],
+      ['3031322', 'ST 2,5-QUATTRO-PE', 'st-25-quattro-pe', 'spring-cage', 'Spring-cage', 2.5, 0.08, 4, 2.5, 5.2, 72, 36.5, 44, null, 4],
+      ['3031416', 'ST 4-TWIN-PE', 'st-4-twin-pe', 'spring-cage', 'Spring-cage', 4, 0.08, 6, 4, 6.2, 71.5, 36.5, 44, null, 3]
     ]
   };
 
