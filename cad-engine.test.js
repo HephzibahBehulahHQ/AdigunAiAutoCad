@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 134);
+  assert.equal(items.length, 143);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -348,6 +348,15 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3007327', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3003952', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3002908', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3005086', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-0711344', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3004362', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3003350', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-0719074', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3007330', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3004388', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3004977', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3038011', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-0719139', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -371,7 +380,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -578,6 +587,15 @@ test('UK terminal blocks preserve separate conductor ranges and three documented
     ['3007327', 4, 0.2, 4, 52],
     ['3003952', 4, 0.2, 4, 52],
     ['3002908', 4, 0.2, 4, 52],
+    ['3005086', 10, 0.5, 10, 52.3],
+    ['0711344', 4, 0.2, 4, 52],
+    ['3004362', 4, 0.2, 4, 52],
+    ['3003350', 2.5, 0.2, 2.5, 47],
+    ['0719074', 2.5, 0.2, 2.5, 47],
+    ['3007330', 4, 0.2, 4, 52],
+    ['3004388', 4, 0.2, 4, 52],
+    ['3004977', 6, 0.2, 6, 52],
+    ['3038011', 2.5, 0.2, 2.5, 47],
     ['0719139', 2.5, 0.2, 2.5, 52]
   ]) {
     const part = engine.component('phoenix-contact-' + orderCode);
