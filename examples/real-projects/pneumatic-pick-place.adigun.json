@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Pneumatic pick-and-place controls",
-  "revision": "1.4",
+  "revision": "1.5",
   "description": "Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.",
   "activeSheet": "pick-place-plc",
   "sheets": [
@@ -58,6 +58,12 @@
       "number": "A2/009",
       "name": "Opposite-command slide inhibit",
       "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-control-supply",
+      "number": "A2/010",
+      "name": "PS1 control supply and AC inlet",
+      "projectSectionId": "A2"
     }
   ],
   "objects": [
@@ -89,7 +95,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "1",
-        "marking": "External control feed",
+        "marking": "PS1 control feed",
         "comment": ""
       },
       "sheetId": "pick-place-plc"
@@ -106,7 +112,7 @@
       "properties": {
         "terminalStrip": "XT1",
         "position": "2",
-        "marking": "External control return",
+        "marking": "PS1 control return",
         "comment": ""
       },
       "sheetId": "pick-place-plc"
@@ -2003,6 +2009,247 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 585,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "marking": "Pneumatic cabinet control supply",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "pick-place-control-supply"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x17",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X17",
+      "x": 300,
+      "y": 230,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "1",
+        "marking": "Incoming L",
+        "comment": ""
+      },
+      "sheetId": "pick-place-control-supply"
+    },
+    {
+      "id": "ps1-input-l",
+      "sheetId": "pick-place-control-supply",
+      "kind": "wire",
+      "potential": "L",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 230,
+      "x1": 335,
+      "y1": 230,
+      "x2": 495,
+      "y2": 315,
+      "bends": [
+        {
+          "x": 405,
+          "y": 230
+        },
+        {
+          "x": 405,
+          "y": 315
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x17",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-l"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x18",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X18",
+      "x": 300,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "2",
+        "marking": "Incoming N",
+        "comment": ""
+      },
+      "sheetId": "pick-place-control-supply"
+    },
+    {
+      "id": "ps1-input-n",
+      "sheetId": "pick-place-control-supply",
+      "kind": "wire",
+      "potential": "N",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 345,
+      "x1": 335,
+      "y1": 345,
+      "x2": 495,
+      "y2": 345,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x18",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-n"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x19",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X19",
+      "x": 300,
+      "y": 460,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT9",
+        "position": "3",
+        "marking": "Incoming PE",
+        "comment": ""
+      },
+      "sheetId": "pick-place-control-supply"
+    },
+    {
+      "id": "ps1-input-pe",
+      "sheetId": "pick-place-control-supply",
+      "kind": "wire",
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 335,
+      "y": 460,
+      "x1": 335,
+      "y1": 460,
+      "x2": 495,
+      "y2": 375,
+      "bends": [
+        {
+          "x": 405,
+          "y": 460
+        },
+        {
+          "x": 405,
+          "y": 375
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x19",
+          "pinId": "connection-2"
+        },
+        "end": {
+          "instanceId": "ps1",
+          "pinId": "line-pe"
+        }
+      }
+    },
+    {
+      "id": "ps1-control-feed-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 300,
+      "y": 234,
+      "x1": 300,
+      "y1": 234,
+      "x2": 215,
+      "y2": 258,
+      "bends": [
+        {
+          "x": 300,
+          "y": 258
+        }
+      ]
+    },
+    {
+      "id": "ps1-control-feed-field",
+      "sheetId": "pick-place-control-supply",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 315,
+      "x1": 675,
+      "y1": 315,
+      "x2": 960,
+      "y2": 315,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "ps1",
+          "pinId": "output-positive"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "ps1-control-return-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 300,
+      "y": 280,
+      "x1": 300,
+      "y1": 280,
+      "x2": 215,
+      "y2": 308,
+      "bends": [
+        {
+          "x": 300,
+          "y": 308
+        }
+      ]
+    },
+    {
+      "id": "ps1-control-return-field",
+      "sheetId": "pick-place-control-supply",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 675,
+      "y": 375,
+      "x1": 675,
+      "y1": 375,
+      "x2": 960,
+      "y2": 375,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "ps1",
+          "pinId": "output-negative"
+        },
+        "end": null
+      }
+    },
+    {
       "id": "pick-place-plc-note-0",
       "sheetId": "pick-place-plc",
       "kind": "text",
@@ -2016,7 +2263,7 @@
       "kind": "text",
       "x": 105,
       "y": 588,
-      "text": "XT1 receives external 24 V DC. B1 and B2 report slide position. Four outputs command isolated pilot interfaces."
+      "text": "XT1 receives 24 V DC from PS1. B1 and B2 report slide position. Four outputs command isolated pilot interfaces."
     },
     {
       "id": "pick-place-position-sensors-note-0",
@@ -2145,6 +2392,22 @@
       "x": 105,
       "y": 588,
       "text": "Each asserted command opens the opposite pilot path after relay operation. Transition timing and safety functions remain outside this schematic."
+    },
+    {
+      "id": "pick-place-control-supply-note-0",
+      "sheetId": "pick-place-control-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "CONTROL SUPPLY · PS1"
+    },
+    {
+      "id": "pick-place-control-supply-note-1",
+      "sheetId": "pick-place-control-supply",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -2848,6 +3111,70 @@
             "direction": "right",
             "targetSheetId": "pick-place-slide-extend",
             "targetRef": "X12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ps1-control-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "ps1-control-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 258
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-control-supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "pick-place-control-supply",
+          "wireId": "ps1-control-feed-field",
+          "point": {
+            "x": 960,
+            "y": 315
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ps1-control-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "ps1-control-return-cabinet",
+          "point": {
+            "x": 215,
+            "y": 308
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-control-supply",
+            "targetRef": "PS1"
+          }
+        },
+        {
+          "sheetId": "pick-place-control-supply",
+          "wireId": "ps1-control-return-field",
+          "point": {
+            "x": 960,
+            "y": 375
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X2"
           }
         }
       ]

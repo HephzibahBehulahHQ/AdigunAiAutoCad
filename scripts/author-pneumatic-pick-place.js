@@ -15,10 +15,11 @@ const airPressure = 'pick-place-air-pressure-confirmation';
 const extend = 'pick-place-slide-extend';
 const retract = 'pick-place-slide-retract';
 const interlock = 'pick-place-slide-interlock';
+const power = 'pick-place-control-supply';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.4',
+  revision: '1.5',
   description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
@@ -30,7 +31,8 @@ const project = {
     { id: airPressure, number: 'A2/006', name: 'Compressed-air pressure switch interface', projectSectionId: 'A2' },
     { id: extend, number: 'A2/007', name: 'Slide extend pilot interface', projectSectionId: 'A2' },
     { id: retract, number: 'A2/008', name: 'Slide retract pilot interface', projectSectionId: 'A2' },
-    { id: interlock, number: 'A2/009', name: 'Opposite-command slide inhibit', projectSectionId: 'A2' }
+    { id: interlock, number: 'A2/009', name: 'Opposite-command slide inhibit', projectSectionId: 'A2' },
+    { id: power, number: 'A2/010', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -77,8 +79,8 @@ function connectSheets(id, potential, cabinetEnd, fieldEnd, cable) {
 }
 
 const plc = device(cabinet, 'A1', 'siemens-6es7212-1ae40-0xb0', 730, 360);
-const plus = terminal(cabinet, 'X1', 355, 234, 'XT1', '1', 'External control feed');
-const zero = terminal(cabinet, 'X2', 355, 280, 'XT1', '2', 'External control return');
+const plus = terminal(cabinet, 'X1', 355, 234, 'XT1', '1', 'PS1 control feed');
+const zero = terminal(cabinet, 'X2', 355, 280, 'XT1', '2', 'PS1 control return');
 const b1 = device(sensors, 'B1', 'ifm-ifs204', 630, 290, { marking: 'Slide retracted' });
 const b2 = device(sensors, 'B2', 'ifm-ifs204', 630, 435, { marking: 'Slide extended' });
 
@@ -182,8 +184,29 @@ for (const [sheet, request, pilotRef, marker, y, oppositeSheet, oppositeRef, ter
     pin(outgoing, '1'), [{ x: 715, y: y - 25 }, { x: 715, y: y - 55 }]);
 }
 
+const psu = device(power, 'PS1', 'siemens-sitop-psu100c-6ep1332-5ba00', 585, 345, { marking: 'Pneumatic cabinet control supply' });
+for (const [ref, position, input, y, part] of [
+  ['X17', '1', 'L', 230, 'phoenix-contact-3209510'],
+  ['X18', '2', 'N', 345, 'phoenix-contact-3209510'],
+  ['X19', '3', 'PE', 460, 'phoenix-contact-3209536']
+]) {
+  const entry = device(power, ref, part, 300, y, { terminalStrip: 'XT9', position, marking: 'Incoming ' + input });
+  const end = pin(psu, input);
+  const bends = y === end.y ? undefined : [{ x: 405, y }, { x: 405, y: end.y }];
+  wire(power, 'ps1-input-' + input.toLowerCase(), input, pin(entry, '2'), end, bends);
+}
+for (const [id, polarity, potential, boundary, startY, edgeY] of [
+  ['ps1-control-feed', '+', '+24 V DC', plus, 234, 258],
+  ['ps1-control-return', '-', '0 V', zero, 280, 308]
+]) {
+  const output = pin(psu, polarity);
+  connectSheets(id, potential,
+    cabinetPort(boundary.ref, { x: 300, y: startY }, 215, edgeY, 'left', [{ x: 300, y: edgeY }]),
+    fieldPort(power, psu.ref, output, 960, output.y, 'right'));
+}
+
 for (const [sheetId, title, text] of [
-  [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives external 24 V DC. B1 and B2 report slide position. Four outputs command isolated pilot interfaces.'],
+  [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives 24 V DC from PS1. B1 and B2 report slide position. Four outputs command isolated pilot interfaces.'],
   [sensors, 'SLIDE POSITION SENSORS · B1 AND B2', 'B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned.'],
   [vacuum, 'VACUUM PILOT INTERFACE · K1', 'XT2 exposes the isolated normally open vacuum demand contact. The valve and its electrical supply remain external.'],
   [release, 'RELEASE PILOT INTERFACE · K2', 'XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned.'],
@@ -191,7 +214,8 @@ for (const [sheetId, title, text] of [
   [airPressure, 'COMPRESSED-AIR PRESSURE SWITCH · XT5', 'W-02 carries the feed and DI a.3 return for an external air-pressure-ready contact. The switch, pressure threshold and PLC response remain unassigned.'],
   [extend, 'SLIDE EXTEND PILOT INTERFACE · K3', 'XT6 carries the extend contact to the opposite-command inhibit sheet. The directional valve and coil supply remain external.'],
   [retract, 'SLIDE RETRACT PILOT INTERFACE · K4', 'XT7 carries the retract contact to the opposite-command inhibit sheet. Motion sequencing remains unassigned.'],
-  [interlock, 'SLIDE OPPOSITE-COMMAND INHIBIT · K5 AND K6', 'Each asserted command opens the opposite pilot path after relay operation. Transition timing and safety functions remain outside this schematic.']
+  [interlock, 'SLIDE OPPOSITE-COMMAND INHIBIT · K5 AND K6', 'Each asserted command opens the opposite pilot path after relay operation. Transition timing and safety functions remain outside this schematic.'],
+  [power, 'CONTROL SUPPLY · PS1', 'XT9 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing and enclosure bonding remain unassigned.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label
