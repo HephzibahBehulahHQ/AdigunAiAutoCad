@@ -1449,7 +1449,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [26, 62, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [27, 64, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
@@ -1477,9 +1477,9 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['K2:12', 'X17:1', 'X17:2'],
     ['K2:14', 'X18:1', 'X18:2'],
     ['K4:11', 'X30:1', 'X30:2', 'X33:1', 'X33:2'],
-    ['K4:12', 'X31:1', 'X31:2', 'H3:X1'],
+    ['K4:12', 'X31:1', 'X31:2', 'X35:1', 'X35:2', 'X36:1', 'X36:2', 'H3:X1'],
     ['K4:14', 'X32:1', 'X32:2'],
-    ['H3:X2', 'X34:1', 'X34:2'],
+    ['H3:X2', 'X34:1', 'X34:2', 'X37:1', 'X37:2'],
     ['X20:1', 'X20:2', 'A1:X10:14']
   ]));
   const io = engine.plcIoList(reopened.project);
@@ -1489,7 +1489,11 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X11:3', 'X12:3', 'X12:4', 'X12:5']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
   const cables = engine.cableScheduleCsv(reopened.project);
-  assert.equal(cables.trim().split('\r\n').length, 8);
+  assert.equal(cables.trim().split('\r\n').length, 12);
+  for (const core of ['1', '2']) {
+    assert.match(cables, new RegExp('"W-H3","' + core + '","branch-b-loss-alert","branch-b-remote-indicator-core-' + core + '-send"'));
+    assert.match(cables, new RegExp('"W-H3","' + core + '","branch-b-remote-indicator","branch-b-remote-indicator-core-' + core + '-receive"'));
+  }
   assert.match(cables, /"W-B1","4","branch-a","b1-signal-send"/);
   assert.match(cables, /"W-B2","2","branch-b","b2-signal-send"/);
   assert.match(cables, /"W-B2","4","branch-b","b2-switch-send"/);
