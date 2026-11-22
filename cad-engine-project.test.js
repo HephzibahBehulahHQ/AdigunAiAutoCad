@@ -1394,6 +1394,11 @@ test('terminal-marshalling project regenerates and keeps its three field cable c
   assert.notEqual(start.id, stop.id);
   assert.deepEqual(start.pins.map(pin => pin.ref + ':' + pin.number).sort(), ['A1:X10:8', 'S1:14', 'X11:1', 'X11:2', 'X8:1', 'X8:2']);
   assert.deepEqual(stop.pins.map(pin => pin.ref + ':' + pin.number).sort(), ['A1:X10:9', 'S2:22', 'X12:1', 'X12:2', 'X9:1', 'X9:2']);
+  const pe = analysis.globalNets.find(net => net.pins.some(pin => pin.ref === 'X13'));
+  assert.notEqual(pe.id, nets[1].id, 'PE is separate from the 0 V control return');
+  assert.equal(new Set(pe.sheetIds).size, 4);
+  assert.deepEqual([...new Set(pe.pins.map(pin => pin.ref))].sort(), ['X13', 'X14', 'X15', 'X16', 'X17', 'X18']);
+  assert.ok(!analysis.findings.some(finding => finding.ruleId === 'ERC-PE-DESIGNATION-MISSING'));
   assert.equal(analysis.openEndpointCount, 0);
   assert.equal(engine.cableScheduleCsv(project).trim().split('\r\n').length, 13);
 });

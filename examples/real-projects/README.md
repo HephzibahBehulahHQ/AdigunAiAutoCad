@@ -16,7 +16,9 @@ Open **Controller-to-field terminal marshalling** from Project Explorer. The fir
 
 A2/003 adds an operator station on XT3. Three W-02 cores carry a common feed, a normally open Start request to DI a.1, and a normally closed operational Stop request to DI a.2. The stop contact documents a PLC input request. Emergency-stop and safety functions are outside the model.
 
-This three-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction, conductor sizing, and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
+A2/004 routes incoming protective earth through XT4 to the field equipment and operator enclosure terminal boundaries. This PE net stays separate from the control return. Physical bonding, rail mounting, and conductor sizing remain open for review.
+
+This four-sheet reference extends brief 44. XT0 marks the external 24 V supply boundary. Cable construction and PLC logic remain unassigned. Run `node scripts/author-terminal-marshalling.js --write` to regenerate the native drawing.
 
 # 24 V DC relay-operated contactor coil
 

@@ -9,14 +9,16 @@ const file = path.join(__dirname, '../examples/real-projects/terminal-marshallin
 const cabinet = 'marshalling-cabinet';
 const field = 'marshalling-field';
 const operator = 'marshalling-operator-station';
+const protectiveEarth = 'marshalling-protective-earth';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Controller-to-field terminal marshalling', revision: '1.1',
-  description: 'Feed-through marshalling for a 24 V PNP sensor and a separate two-button operator station, with identified cable cores.',
+  product: 'AdigunAiAutoCad', project: 'Controller-to-field terminal marshalling', revision: '1.2',
+  description: 'Feed-through marshalling for a 24 V sensor, a two-button operator station, and separate protective-earth boundaries.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'Controller and XT1 terminals', projectSectionId: 'A2' },
     { id: field, number: 'A2/002', name: 'Field XT2 and sensor wiring', projectSectionId: 'A2' },
-    { id: operator, number: 'A2/003', name: 'XT3 operator station requests', projectSectionId: 'A2' }
+    { id: operator, number: 'A2/003', name: 'XT3 operator station requests', projectSectionId: 'A2' },
+    { id: protectiveEarth, number: 'A2/004', name: 'Protective-earth terminal distribution', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -72,16 +74,21 @@ wire(field, 'sensor-power', sensorPlus, [pin(fieldSupply, '1:2'), pin(sensor, '1
 wire(field, 'sensor-ground', sensorReturn, [pin(fieldSupply, '2:2'), point(505, 375), point(505, 385), pin(sensor, '3')]);
 wire(field, 'sensor-output', switching, [pin(sensor, '4'), point(805, 365), point(805, 470), pin(fieldSignal, '2')]);
 
+function connectTerminals(key, name, potential, from, fromPin, to, toPin, cableCore, sourceBoundaryX = 190, targetBoundaryX = 190, wireIds = [key + '-source', key + '-target']) {
+  const source = pin(from, fromPin), target = pin(to, toPin);
+  const send = wire(from.sheetId, wireIds[0], potential, [source, point(sourceBoundaryX, source.y)], cableCore);
+  const receive = wire(to.sheetId, wireIds[1], potential, [target, point(targetBoundaryX, target.y)], cableCore);
+  project.crossSheetConnections.push({ id: key, name, endpoints: [
+    { sheetId: from.sheetId, wireId: send.id, point: point(send.x2, send.y2), connector: { direction: sourceBoundaryX > source.x ? 'right' : 'left', targetSheetId: to.sheetId, targetRef: to.ref } },
+    { sheetId: to.sheetId, wireId: receive.id, point: point(receive.x2, receive.y2), connector: { direction: targetBoundaryX > target.x ? 'right' : 'left', targetSheetId: from.sheetId, targetRef: from.ref } }
+  ] });
+}
+
 function connectCableCore(cableId, coreId, potential, from, fromPin, to, toPin, fieldBoundaryX = 190) {
   const key = cableId.toLowerCase().replace('-', '');
-  const source = pin(from, fromPin), target = pin(to, toPin);
-  const cableCore = { cableId, coreId };
-  const send = wire(cabinet, key + '-cabinet-' + coreId, potential, [source, point(190, source.y)], cableCore);
-  const receive = wire(to.sheetId, key + '-field-' + coreId, potential, [target, point(fieldBoundaryX, target.y)], cableCore);
-  project.crossSheetConnections.push({ id: key + '-core-' + coreId, name: cableId + ':' + coreId + ' · ' + potential, endpoints: [
-    { sheetId: cabinet, wireId: send.id, point: point(send.x2, send.y2), connector: { direction: 'left', targetSheetId: to.sheetId, targetRef: to.ref } },
-    { sheetId: to.sheetId, wireId: receive.id, point: point(receive.x2, receive.y2), connector: { direction: fieldBoundaryX > target.x ? 'right' : 'left', targetSheetId: cabinet, targetRef: from.ref } }
-  ] });
+  const wireIds = [key + '-cabinet-' + coreId, key + '-field-' + coreId];
+  connectTerminals(key + '-core-' + coreId, cableId + ':' + coreId + ' · ' + potential, potential,
+    from, fromPin, to, toPin, { cableId, coreId }, 190, fieldBoundaryX, wireIds);
 }
 
 for (const [core, potential, from, fromPin, to, toPin] of [
@@ -110,10 +117,25 @@ connectCableCore('W-02', '1', sensorPlus, operatorFeed, '1', stationFeed, '1');
 connectCableCore('W-02', '2', start, startInput, '1', stationStart, '2', 920);
 connectCableCore('W-02', '3', stop, stopInput, '1', stationStop, '2', 920);
 
+const peTerminal = (sheetId, ref, x, y, strip, position, marking) =>
+  terminal(sheetId, ref, x, y, strip, position, marking, 'phoenix-contact-3209536');
+const peSource = peTerminal(cabinet, 'X13', 310, 690, 'XT0', '3', 'Incoming PE boundary');
+const peEntry = peTerminal(protectiveEarth, 'X14', 310, 275, 'XT4', '1', 'PE entry');
+const peField = peTerminal(protectiveEarth, 'X15', 650, 275, 'XT4', '2', 'Field PE branch');
+const peOperator = peTerminal(protectiveEarth, 'X16', 650, 410, 'XT4', '3', 'Operator station PE branch');
+const fieldPeBoundary = peTerminal(field, 'X17', 410, 690, 'XT2', '3', 'Field equipment PE boundary');
+const operatorPeBoundary = peTerminal(operator, 'X18', 410, 715, 'XT3', '4', 'Operator enclosure PE boundary');
+wire(protectiveEarth, 'pe-trunk', 'PE', [pin(peEntry, '2'), pin(peField, '1')]);
+wire(protectiveEarth, 'pe-operator-branch', 'PE', [point(490, 275), point(490, 410), pin(peOperator, '1')]);
+connectTerminals('pe-incoming', 'Incoming PE', 'PE', peSource, '1', peEntry, '1');
+connectTerminals('pe-field', 'Field protective conductor', 'PE', peField, '2', fieldPeBoundary, '1', null, 870);
+connectTerminals('pe-operator', 'Operator station protective conductor', 'PE', peOperator, '2', operatorPeBoundary, '1', null, 870);
+
 for (const [sheetId, title, note] of [
   [cabinet, 'XT1 · CONTROLLER MARSHALLING', 'XT0 is the external supply boundary. A1 sensor supply feeds XT1; X10:7 receives the PNP switching signal.'],
   [field, 'XT2 · FIELD SENSOR MARSHALLING', 'W-01 cores 1, 2 and 3 carry sensor supply, return and switching signal through XT2.'],
-  [operator, 'XT3 · OPERATOR STATION MARSHALLING', 'W-02 carries a common feed, a normally open Start request and a normally closed operational Stop request.']
+  [operator, 'XT3 · OPERATOR STATION MARSHALLING', 'W-02 carries a common feed, a normally open Start request and a normally closed operational Stop request.'],
+  [protectiveEarth, 'XT4 · PROTECTIVE-EARTH DISTRIBUTION', 'Incoming PE is routed separately to the field equipment and operator enclosure terminal boundaries.']
 ]) {
   project.objects.push({ id: sheetId + '-title', sheetId, kind: 'text', x: 105, y: 97, text: title });
   project.objects.push({ id: sheetId + '-note', sheetId, kind: 'text', x: 105, y: 565, text: note });
@@ -122,6 +144,8 @@ for (const [sheetId, title, note] of [
 }
 project.objects.push({ id: operator + '-operational-scope', sheetId: operator, kind: 'text', x: 105, y: 640,
   text: 'The Stop contact documents a PLC input request. Emergency-stop and safety functions are outside this drawing.' });
+project.objects.push({ id: protectiveEarth + '-scope-review', sheetId: protectiveEarth, kind: 'text', x: 105, y: 640,
+  text: 'The drawing defines terminal connectivity. Physical bonding paths, rail mounting and protective-conductor sizing require review.' });
 
 const report = engine.analyzeProject(JSON.parse(engine.serializeProject(project)));
 const errors = (report.findings || []).filter(finding => finding.severity === 'error');

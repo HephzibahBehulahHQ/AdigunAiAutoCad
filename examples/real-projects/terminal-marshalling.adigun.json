@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Controller-to-field terminal marshalling",
-  "revision": "1.1",
-  "description": "Feed-through marshalling for a 24 V PNP sensor and a separate two-button operator station, with identified cable cores.",
+  "revision": "1.2",
+  "description": "Feed-through marshalling for a 24 V sensor, a two-button operator station, and separate protective-earth boundaries.",
   "activeSheet": "marshalling-cabinet",
   "sheets": [
     {
@@ -21,6 +21,12 @@
       "id": "marshalling-operator-station",
       "number": "A2/003",
       "name": "XT3 operator station requests",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "marshalling-protective-earth",
+      "number": "A2/004",
+      "name": "Protective-earth terminal distribution",
       "projectSectionId": "A2"
     }
   ],
@@ -1324,6 +1330,293 @@
       "coreId": "3"
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x13",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X13",
+      "x": 310,
+      "y": 690,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT0",
+        "position": "3",
+        "marking": "Incoming PE boundary",
+        "comment": ""
+      },
+      "sheetId": "marshalling-cabinet"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x14",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X14",
+      "x": 310,
+      "y": 275,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "PE entry",
+        "comment": ""
+      },
+      "sheetId": "marshalling-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x15",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X15",
+      "x": 650,
+      "y": 275,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "Field PE branch",
+        "comment": ""
+      },
+      "sheetId": "marshalling-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x16",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X16",
+      "x": 650,
+      "y": 410,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "3",
+        "marking": "Operator station PE branch",
+        "comment": ""
+      },
+      "sheetId": "marshalling-protective-earth"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x17",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X17",
+      "x": 410,
+      "y": 690,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "3",
+        "marking": "Field equipment PE boundary",
+        "comment": ""
+      },
+      "sheetId": "marshalling-field"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x18",
+      "componentId": "phoenix-contact-3209536",
+      "ref": "X18",
+      "x": 410,
+      "y": 715,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "4",
+        "marking": "Operator enclosure PE boundary",
+        "comment": ""
+      },
+      "sheetId": "marshalling-operator-station"
+    },
+    {
+      "id": "pe-trunk-1",
+      "kind": "wire",
+      "sheetId": "marshalling-protective-earth",
+      "x": 345,
+      "y": 275,
+      "x1": 345,
+      "y1": 275,
+      "x2": 615,
+      "y2": 275,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x14",
+          "pinId": "connection-2"
+        },
+        "end": {
+          "instanceId": "x15",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "pe-operator-branch-1",
+      "kind": "wire",
+      "sheetId": "marshalling-protective-earth",
+      "x": 490,
+      "y": 275,
+      "x1": 490,
+      "y1": 275,
+      "x2": 490,
+      "y2": 410,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "pe-operator-branch-2",
+      "kind": "wire",
+      "sheetId": "marshalling-protective-earth",
+      "x": 490,
+      "y": 410,
+      "x1": 490,
+      "y1": 410,
+      "x2": 615,
+      "y2": 410,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x16",
+          "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "id": "pe-incoming-source-1",
+      "kind": "wire",
+      "sheetId": "marshalling-cabinet",
+      "x": 275,
+      "y": 690,
+      "x1": 275,
+      "y1": 690,
+      "x2": 190,
+      "y2": 690,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x13",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pe-incoming-target-1",
+      "kind": "wire",
+      "sheetId": "marshalling-protective-earth",
+      "x": 275,
+      "y": 275,
+      "x1": 275,
+      "y1": 275,
+      "x2": 190,
+      "y2": 275,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x14",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pe-field-source-1",
+      "kind": "wire",
+      "sheetId": "marshalling-protective-earth",
+      "x": 685,
+      "y": 275,
+      "x1": 685,
+      "y1": 275,
+      "x2": 870,
+      "y2": 275,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x15",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pe-field-target-1",
+      "kind": "wire",
+      "sheetId": "marshalling-field",
+      "x": 375,
+      "y": 690,
+      "x1": 375,
+      "y1": 690,
+      "x2": 190,
+      "y2": 690,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x17",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pe-operator-source-1",
+      "kind": "wire",
+      "sheetId": "marshalling-protective-earth",
+      "x": 685,
+      "y": 410,
+      "x1": 685,
+      "y1": 410,
+      "x2": 870,
+      "y2": 410,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x16",
+          "pinId": "connection-2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pe-operator-target-1",
+      "kind": "wire",
+      "sheetId": "marshalling-operator-station",
+      "x": 375,
+      "y": 715,
+      "x1": 375,
+      "y1": 715,
+      "x2": 190,
+      "y2": 715,
+      "potential": "PE",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x18",
+          "pinId": "connection-1"
+        },
+        "end": null
+      }
+    },
+    {
       "id": "marshalling-cabinet-title",
       "sheetId": "marshalling-cabinet",
       "kind": "text",
@@ -1396,12 +1689,44 @@
       "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
     },
     {
+      "id": "marshalling-protective-earth-title",
+      "sheetId": "marshalling-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 97,
+      "text": "XT4 · PROTECTIVE-EARTH DISTRIBUTION"
+    },
+    {
+      "id": "marshalling-protective-earth-note",
+      "sheetId": "marshalling-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 565,
+      "text": "Incoming PE is routed separately to the field equipment and operator enclosure terminal boundaries."
+    },
+    {
+      "id": "marshalling-protective-earth-scope",
+      "sheetId": "marshalling-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 602,
+      "text": "Reference drawing. External supply hardware, cable construction, conductor sizing and PLC logic remain unassigned."
+    },
+    {
       "id": "marshalling-operator-station-operational-scope",
       "sheetId": "marshalling-operator-station",
       "kind": "text",
       "x": 105,
       "y": 640,
       "text": "The Stop contact documents a PLC input request. Emergency-stop and safety functions are outside this drawing."
+    },
+    {
+      "id": "marshalling-protective-earth-scope-review",
+      "sheetId": "marshalling-protective-earth",
+      "kind": "text",
+      "x": 105,
+      "y": 640,
+      "text": "The drawing defines terminal connectivity. Physical bonding paths, rail mounting and protective-conductor sizing require review."
     }
   ],
   "crossSheetConnections": [
@@ -1593,6 +1918,102 @@
             "direction": "right",
             "targetSheetId": "marshalling-cabinet",
             "targetRef": "X9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pe-incoming",
+      "name": "Incoming PE",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-cabinet",
+          "wireId": "pe-incoming-source-1",
+          "point": {
+            "x": 190,
+            "y": 690
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-protective-earth",
+            "targetRef": "X14"
+          }
+        },
+        {
+          "sheetId": "marshalling-protective-earth",
+          "wireId": "pe-incoming-target-1",
+          "point": {
+            "x": 190,
+            "y": 275
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-cabinet",
+            "targetRef": "X13"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pe-field",
+      "name": "Field protective conductor",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-protective-earth",
+          "wireId": "pe-field-source-1",
+          "point": {
+            "x": 870,
+            "y": 275
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-field",
+            "targetRef": "X17"
+          }
+        },
+        {
+          "sheetId": "marshalling-field",
+          "wireId": "pe-field-target-1",
+          "point": {
+            "x": 190,
+            "y": 690
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-protective-earth",
+            "targetRef": "X15"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pe-operator",
+      "name": "Operator station protective conductor",
+      "endpoints": [
+        {
+          "sheetId": "marshalling-protective-earth",
+          "wireId": "pe-operator-source-1",
+          "point": {
+            "x": 870,
+            "y": 410
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "marshalling-operator-station",
+            "targetRef": "X18"
+          }
+        },
+        {
+          "sheetId": "marshalling-operator-station",
+          "wireId": "pe-operator-target-1",
+          "point": {
+            "x": 190,
+            "y": 715
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "marshalling-protective-earth",
+            "targetRef": "X16"
           }
         }
       ]
