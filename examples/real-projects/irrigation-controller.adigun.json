@@ -1,7 +1,7 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Irrigation pressure monitoring and pump request",
-  "revision": "1.6",
+  "revision": "1.7",
   "description": "Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.",
   "activeSheet": "irrigation-plc",
   "sheets": [
@@ -57,6 +57,12 @@
       "id": "irrigation-protective-earth",
       "number": "A2/009",
       "name": "Cabinet and starter enclosure PE terminals",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "irrigation-alarm-interface",
+      "number": "A2/010",
+      "name": "Isolated starter fault annunciator interface",
       "projectSectionId": "A2"
     }
   ],
@@ -598,6 +604,166 @@
         "end": {
           "instanceId": "x14",
           "pinId": "connection-1"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k2",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K2",
+      "x": 590,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "PLC fault annunciator relay",
+        "comment": ""
+      },
+      "sheetId": "irrigation-alarm-interface"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x16",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X16",
+      "x": 910,
+      "y": 255,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "2",
+        "marking": "De-energized contact",
+        "comment": ""
+      },
+      "sheetId": "irrigation-alarm-interface"
+    },
+    {
+      "id": "alarm-contact-12",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "wire",
+      "potential": "De-energized contact",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 660,
+      "y": 320,
+      "x1": 660,
+      "y1": 320,
+      "x2": 875,
+      "y2": 255,
+      "bends": [
+        {
+          "x": 760,
+          "y": 320
+        },
+        {
+          "x": 760,
+          "y": 255
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "contact-12"
+        },
+        "end": {
+          "instanceId": "x16",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x15",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X15",
+      "x": 910,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "1",
+        "marking": "Alarm circuit common",
+        "comment": ""
+      },
+      "sheetId": "irrigation-alarm-interface"
+    },
+    {
+      "id": "alarm-contact-11",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "wire",
+      "potential": "Alarm circuit common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 660,
+      "y": 345,
+      "x1": 660,
+      "y1": 345,
+      "x2": 875,
+      "y2": 345,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "x15",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x17",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X17",
+      "x": 910,
+      "y": 435,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT7",
+        "position": "3",
+        "marking": "Energized contact",
+        "comment": ""
+      },
+      "sheetId": "irrigation-alarm-interface"
+    },
+    {
+      "id": "alarm-contact-14",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "wire",
+      "potential": "Energized contact",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 660,
+      "y": 370,
+      "x1": 660,
+      "y1": 370,
+      "x2": 875,
+      "y2": 435,
+      "bends": [
+        {
+          "x": 760,
+          "y": 370
+        },
+        {
+          "x": 760,
+          "y": 435
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "contact-14"
+        },
+        "end": {
+          "instanceId": "x17",
+          "pinId": "level-1-left"
         }
       }
     },
@@ -1587,6 +1753,111 @@
       }
     },
     {
+      "id": "fault-annunciation-output-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "DQ a.2 to K2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 830,
+      "y": 421,
+      "x1": 830,
+      "y1": 421,
+      "x2": 1020,
+      "y2": 454,
+      "bends": [
+        {
+          "x": 875,
+          "y": 421
+        },
+        {
+          "x": 875,
+          "y": 454
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x12-5"
+        },
+        "end": null
+      },
+      "cableId": "W-05",
+      "coreId": "1"
+    },
+    {
+      "id": "fault-annunciation-output-remote",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "wire",
+      "potential": "DQ a.2 to K2",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 365,
+      "x1": 215,
+      "y1": 365,
+      "x2": 520,
+      "y2": 365,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "k2",
+          "pinId": "coil-a1"
+        }
+      },
+      "cableId": "W-05",
+      "coreId": "1"
+    },
+    {
+      "id": "fault-annunciation-return-cabinet",
+      "sheetId": "irrigation-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 925,
+      "y": 535,
+      "x1": 925,
+      "y1": 535,
+      "x2": 1020,
+      "y2": 550,
+      "bends": [
+        {
+          "x": 950,
+          "y": 535
+        },
+        {
+          "x": 950,
+          "y": 550
+        }
+      ],
+      "cableId": "W-05",
+      "coreId": "2"
+    },
+    {
+      "id": "fault-annunciation-return-remote",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 215,
+      "y": 325,
+      "x1": 215,
+      "y1": 325,
+      "x2": 520,
+      "y2": 325,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "k2",
+          "pinId": "coil-a2"
+        }
+      },
+      "cableId": "W-05",
+      "coreId": "2"
+    },
+    {
       "id": "irrigation-plc-note-0",
       "sheetId": "irrigation-plc",
       "kind": "text",
@@ -1729,6 +2000,22 @@
       "x": 105,
       "y": 585,
       "text": "XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned."
+    },
+    {
+      "id": "irrigation-alarm-interface-note-0",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "STARTER FAULT ANNUNCIATOR INTERFACE · K2"
+    },
+    {
+      "id": "irrigation-alarm-interface-note-1",
+      "sheetId": "irrigation-alarm-interface",
+      "kind": "text",
+      "x": 105,
+      "y": 585,
+      "text": "DQ a.2 commands K2. XT7 exposes the changeover contacts. PLC alarm logic and the external annunciator supply and load remain unassigned."
     }
   ],
   "crossSheetConnections": [
@@ -2272,6 +2559,70 @@
             "direction": "right",
             "targetSheetId": "irrigation-plc",
             "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fault-annunciation-output",
+      "name": "DQ a.2 to K2",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "fault-annunciation-output-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 454
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-alarm-interface",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "irrigation-alarm-interface",
+          "wireId": "fault-annunciation-output-remote",
+          "point": {
+            "x": 215,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "fault-annunciation-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "irrigation-plc",
+          "wireId": "fault-annunciation-return-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 550
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "irrigation-alarm-interface",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "irrigation-alarm-interface",
+          "wireId": "fault-annunciation-return-remote",
+          "point": {
+            "x": 215,
+            "y": 325
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "irrigation-plc",
+            "targetRef": "A1"
           }
         }
       ]
