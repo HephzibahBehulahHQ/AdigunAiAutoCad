@@ -1,8 +1,8 @@
 {
   "product": "AdigunAiAutoCad",
   "project": "Relay changeover test bench",
-  "revision": "1.1",
-  "description": "Manual coil actuation, coil voltage test access, and separately powered NC and NO indication for an industrial relay test fixture.",
+  "revision": "1.2",
+  "description": "Manual coil actuation, dry contact indication, and separate coil, contact and supply diagnostics for an industrial relay test fixture.",
   "activeSheet": "bench-coil-actuation",
   "sheets": [
     {
@@ -21,6 +21,18 @@
       "id": "bench-coil-test-access",
       "number": "A2/003",
       "name": "XT3 relay coil voltage test access",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-contact-test-access",
+      "number": "A2/004",
+      "name": "XT4 NC and NO output test access",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "bench-supply-check",
+      "number": "A2/005",
+      "name": "XT5 independent supply presence checks",
       "projectSectionId": "A2"
     }
   ],
@@ -630,6 +642,510 @@
       }
     },
     {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x7",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X7",
+      "x": 540,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "1",
+        "marking": "Normally closed indication",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-test-access"
+    },
+    {
+      "id": "nc-test-send",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 420,
+      "y": 285,
+      "x1": 420,
+      "y1": 285,
+      "x2": 420,
+      "y2": 245,
+      "potential": "Normally closed indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "nc-test-receive",
+      "sheetId": "bench-contact-test-access",
+      "kind": "wire",
+      "x": 220,
+      "y": 265,
+      "x1": 220,
+      "y1": 265,
+      "x2": 505,
+      "y2": 265,
+      "potential": "Normally closed indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x7",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x8",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X8",
+      "x": 540,
+      "y": 340,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "2",
+        "marking": "Normally open indication",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-test-access"
+    },
+    {
+      "id": "no-test-send",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 420,
+      "y": 385,
+      "x1": 420,
+      "y1": 385,
+      "x2": 420,
+      "y2": 440,
+      "potential": "Normally open indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "no-test-receive",
+      "sheetId": "bench-contact-test-access",
+      "kind": "wire",
+      "x": 220,
+      "y": 340,
+      "x1": 220,
+      "y1": 340,
+      "x2": 505,
+      "y2": 340,
+      "potential": "Normally open indication",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x8",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x9",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X9",
+      "x": 540,
+      "y": 415,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT4",
+        "position": "3",
+        "marking": "Indicator supply 0 V",
+        "comment": ""
+      },
+      "sheetId": "bench-contact-test-access"
+    },
+    {
+      "id": "contact-reference-send",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 820,
+      "y": 335,
+      "x1": 820,
+      "y1": 335,
+      "x2": 820,
+      "y2": 455,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "contact-reference-receive",
+      "sheetId": "bench-contact-test-access",
+      "kind": "wire",
+      "x": 220,
+      "y": 415,
+      "x1": 220,
+      "y1": 415,
+      "x2": 505,
+      "y2": 415,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x9",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "h4",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H4",
+      "x": 605,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "marking": "Coil supply present",
+        "comment": ""
+      },
+      "sheetId": "bench-supply-check"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "h5",
+      "componentId": "schneider-electric-xb5avb3",
+      "ref": "H5",
+      "x": 605,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "marking": "Indicator supply present",
+        "comment": ""
+      },
+      "sheetId": "bench-supply-check"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x10",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X10",
+      "x": 370,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "1",
+        "marking": "Coil supply +24 V",
+        "comment": ""
+      },
+      "sheetId": "bench-supply-check"
+    },
+    {
+      "id": "coil-supply-plus-send",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 400,
+      "y": 320,
+      "x1": 400,
+      "y1": 320,
+      "x2": 400,
+      "y2": 405,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "coil-supply-plus-receive",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 215,
+      "y": 265,
+      "x1": 215,
+      "y1": 265,
+      "x2": 335,
+      "y2": 265,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x10",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "coil-supply-plus-lamp",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 405,
+      "y": 265,
+      "x1": 405,
+      "y1": 265,
+      "x2": 578,
+      "y2": 265,
+      "potential": "Coil supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x10",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "h4",
+          "pinId": "x1"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x11",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X11",
+      "x": 840,
+      "y": 265,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "2",
+        "marking": "Coil supply 0 V",
+        "comment": ""
+      },
+      "sheetId": "bench-supply-check"
+    },
+    {
+      "id": "coil-supply-minus-send",
+      "sheetId": "bench-coil-actuation",
+      "kind": "wire",
+      "x": 540,
+      "y": 240,
+      "x1": 540,
+      "y1": 240,
+      "x2": 540,
+      "y2": 185,
+      "potential": "Coil supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5
+    },
+    {
+      "id": "coil-supply-minus-receive",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 1010,
+      "y": 265,
+      "x1": 1010,
+      "y1": 265,
+      "x2": 875,
+      "y2": 265,
+      "potential": "Coil supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x11",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "coil-supply-minus-lamp",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 805,
+      "y": 265,
+      "x1": 805,
+      "y1": 265,
+      "x2": 632,
+      "y2": 265,
+      "potential": "Coil supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x11",
+          "pinId": "level-1-left"
+        },
+        "end": {
+          "instanceId": "h4",
+          "pinId": "x2"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x12",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X12",
+      "x": 370,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "3",
+        "marking": "Indicator supply +24 V",
+        "comment": ""
+      },
+      "sheetId": "bench-supply-check"
+    },
+    {
+      "id": "indicator-supply-plus-send",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 475,
+      "y": 220,
+      "x1": 475,
+      "y1": 220,
+      "x2": 215,
+      "y2": 220,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x3",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "indicator-supply-plus-receive",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 215,
+      "y": 390,
+      "x1": 215,
+      "y1": 390,
+      "x2": 335,
+      "y2": 390,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x12",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-plus-lamp",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 405,
+      "y": 390,
+      "x1": 405,
+      "y1": 390,
+      "x2": 578,
+      "y2": 390,
+      "potential": "Indicator supply +24 V",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x12",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "h5",
+          "pinId": "x1"
+        }
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x13",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X13",
+      "x": 840,
+      "y": 390,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT5",
+        "position": "4",
+        "marking": "Indicator supply 0 V",
+        "comment": ""
+      },
+      "sheetId": "bench-supply-check"
+    },
+    {
+      "id": "indicator-supply-minus-send",
+      "sheetId": "bench-contact-indication",
+      "kind": "wire",
+      "x": 925,
+      "y": 335,
+      "x1": 925,
+      "y1": 335,
+      "x2": 1030,
+      "y2": 335,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x4",
+          "pinId": "level-1-right"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "indicator-supply-minus-receive",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 1010,
+      "y": 390,
+      "x1": 1010,
+      "y1": 390,
+      "x2": 875,
+      "y2": 390,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "x13",
+          "pinId": "level-1-right"
+        }
+      }
+    },
+    {
+      "id": "indicator-supply-minus-lamp",
+      "sheetId": "bench-supply-check",
+      "kind": "wire",
+      "x": 805,
+      "y": 390,
+      "x1": 805,
+      "y1": 390,
+      "x2": 632,
+      "y2": 390,
+      "potential": "Indicator supply 0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x13",
+          "pinId": "level-1-left"
+        },
+        "end": {
+          "instanceId": "h5",
+          "pinId": "x2"
+        }
+      }
+    },
+    {
       "id": "bench-coil-actuation-note-0",
       "sheetId": "bench-coil-actuation",
       "kind": "text",
@@ -700,6 +1216,54 @@
       "x": 105,
       "y": 555,
       "text": "H3 indicates voltage at the test terminals. H1 and H2 on A2/002 show the resulting contact paths."
+    },
+    {
+      "id": "bench-contact-test-access-note-0",
+      "sheetId": "bench-contact-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · XT4 CONTACT OUTPUT TEST ACCESS"
+    },
+    {
+      "id": "bench-contact-test-access-note-1",
+      "sheetId": "bench-contact-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "XT4:1 and XT4:2 expose the powered NC and NO paths respectively. XT4:3 is their indicator supply reference."
+    },
+    {
+      "id": "bench-contact-test-access-note-2",
+      "sheetId": "bench-contact-test-access",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "This sheet leaves test equipment and measured values unassigned."
+    },
+    {
+      "id": "bench-supply-check-note-0",
+      "sheetId": "bench-supply-check",
+      "kind": "text",
+      "x": 105,
+      "y": 110,
+      "text": "RELAY TEST BENCH · XT5 INDEPENDENT SUPPLY CHECKS"
+    },
+    {
+      "id": "bench-supply-check-note-1",
+      "sheetId": "bench-supply-check",
+      "kind": "text",
+      "x": 105,
+      "y": 510,
+      "text": "H4 checks the incoming coil supply upstream of S1. H5 checks the separate indicator supply."
+    },
+    {
+      "id": "bench-supply-check-note-2",
+      "sheetId": "bench-supply-check",
+      "kind": "text",
+      "x": 105,
+      "y": 555,
+      "text": "The two returns remain independent. Lamp illumination indicates local voltage at each branch."
     }
   ],
   "crossSheetConnections": [
@@ -859,6 +1423,230 @@
             "direction": "right",
             "targetSheetId": "bench-coil-actuation",
             "targetRef": "K1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nc-test",
+      "name": "XT4 Normally closed indication",
+      "endpoints": [
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "nc-test-send",
+          "point": {
+            "x": 420,
+            "y": 245
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-test-access",
+            "targetRef": "X7"
+          }
+        },
+        {
+          "sheetId": "bench-contact-test-access",
+          "wireId": "nc-test-receive",
+          "point": {
+            "x": 220,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "H1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "no-test",
+      "name": "XT4 Normally open indication",
+      "endpoints": [
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "no-test-send",
+          "point": {
+            "x": 420,
+            "y": 440
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-test-access",
+            "targetRef": "X8"
+          }
+        },
+        {
+          "sheetId": "bench-contact-test-access",
+          "wireId": "no-test-receive",
+          "point": {
+            "x": 220,
+            "y": 340
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "H2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "contact-reference",
+      "name": "XT4 Indicator supply 0 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "contact-reference-send",
+          "point": {
+            "x": 820,
+            "y": 455
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-test-access",
+            "targetRef": "X9"
+          }
+        },
+        {
+          "sheetId": "bench-contact-test-access",
+          "wireId": "contact-reference-receive",
+          "point": {
+            "x": 220,
+            "y": 415
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "X4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "coil-supply-plus",
+      "name": "XT5 Coil supply +24 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "coil-supply-plus-send",
+          "point": {
+            "x": 400,
+            "y": 405
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-supply-check",
+            "targetRef": "X10"
+          }
+        },
+        {
+          "sheetId": "bench-supply-check",
+          "wireId": "coil-supply-plus-receive",
+          "point": {
+            "x": 215,
+            "y": 265
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "coil-supply-minus",
+      "name": "XT5 Coil supply 0 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-coil-actuation",
+          "wireId": "coil-supply-minus-send",
+          "point": {
+            "x": 540,
+            "y": 185
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-supply-check",
+            "targetRef": "X11"
+          }
+        },
+        {
+          "sheetId": "bench-supply-check",
+          "wireId": "coil-supply-minus-receive",
+          "point": {
+            "x": 1010,
+            "y": 265
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-coil-actuation",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indicator-supply-plus",
+      "name": "XT5 Indicator supply +24 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "indicator-supply-plus-send",
+          "point": {
+            "x": 215,
+            "y": 220
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-supply-check",
+            "targetRef": "X12"
+          }
+        },
+        {
+          "sheetId": "bench-supply-check",
+          "wireId": "indicator-supply-plus-receive",
+          "point": {
+            "x": 215,
+            "y": 390
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "X3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "indicator-supply-minus",
+      "name": "XT5 Indicator supply 0 V",
+      "endpoints": [
+        {
+          "sheetId": "bench-contact-indication",
+          "wireId": "indicator-supply-minus-send",
+          "point": {
+            "x": 1030,
+            "y": 335
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-supply-check",
+            "targetRef": "X13"
+          }
+        },
+        {
+          "sheetId": "bench-supply-check",
+          "wireId": "indicator-supply-minus-receive",
+          "point": {
+            "x": 1010,
+            "y": 390
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "bench-contact-indication",
+            "targetRef": "X4"
           }
         }
       ]
