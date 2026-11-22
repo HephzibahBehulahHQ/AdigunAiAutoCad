@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 61);
+  assert.equal(items.length, 68);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -276,6 +276,13 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3211255', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3211254', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211786', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211793', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211794', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3211792', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3210570', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-1467082', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3208524', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
     [contactorId, 'contactor', 'KM'],
@@ -298,7 +305,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3212147', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
-  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775']);
+  assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524']);
   for (const [id, height] of [
     ['3209523', 48.5],
     ['3212330', 48.5],
@@ -372,6 +379,40 @@ test('verified multi-conductor terminals connect all distinct anchors on one net
     assert.equal(result.nets.length, 1);
     assert.deepEqual(result.nets[0].wireIds, wires.map(wire => wire.id));
     assert.deepEqual(result.nets[0].pins.map(pin => pin.pinId), pins.map(pin => pin.id));
+  }
+});
+test('verified PTTB terminal blocks keep their two levels electrically isolated', () => {
+  const variants = [
+    ['3211786', 4, 28, 6.2, 83.7, 0.2, 6, 47.3, 54.8],
+    ['3211793', 4, 28, 6.2, 83.5, 0.2, 6, 47.5, 55],
+    ['3211794', 4, 28, 6.2, 83.5, 0.2, 6, 47.5, 55],
+    ['3211792', 4, 28, 6.2, 83.5, 0.2, 6, 47.5, 55],
+    ['3210570', 2.5, 22, 5.2, 68, 0.14, 4, 47.5, 55],
+    ['1467082', 2.5, 22, 5.2, 68, 0.14, 4, 47.5, 55],
+    ['3208524', 1.5, 16, 3.5, 65.4, 0.14, 1.5, 42.6, 50.1]
+  ];
+  for (const [orderCode, crossSection, current, width, height, minimum, maximum, depthOnLowRail, depthOnHighRail] of variants) {
+    const id = 'phoenix-contact-' + orderCode;
+    const part = engine.component(id);
+    const { specifications: spec } = part;
+    assert.deepEqual([spec.nominalVoltage.value, spec.nominalCurrent.value, spec.ratedCrossSection.value, spec.connectionCount.value],
+      [500, current, crossSection, 4]);
+    assert.deepEqual([spec.dimensions.width.value, spec.dimensions.height.value,
+      spec.dimensions.depthOnNS35_7_5.value, spec.dimensions.depthOnNS35_15.value], [width, height, depthOnLowRail, depthOnHighRail]);
+    assert.deepEqual(spec.rigidConductorRange, { minimum, maximum, unit: 'mm²' });
+    assert.deepEqual(spec.flexibleConductorRange, spec.rigidConductorRange);
+    assert.ok(part.sources[0].url.endsWith(orderCode));
+    const terminal = engine.createInstance(id, 100, 100, 'X1');
+    const pins = engine.worldPins(terminal);
+    assert.deepEqual(pins.map(pin => pin.number), ['1:1', '1:2', '2:1', '2:2']);
+    const wires = pins.map((pin, index) => ({
+      id: 'w' + index, kind: 'wire', x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+      x2: pin.x + (pin.x < terminal.x ? -25 : 25), y2: pin.y,
+      pinAttachments: { start: { instanceId: terminal.id, pinId: pin.id }, end: null }
+    }));
+    const nets = engine.analyze([terminal, ...wires]).nets;
+    assert.deepEqual(nets.map(net => net.wireIds), [['w0', 'w1'], ['w2', 'w3']]);
+    assert.deepEqual(nets.map(net => net.pins.map(pin => pin.number)), [['1:1', '1:2'], ['2:1', '2:2']]);
   }
 });
 test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
