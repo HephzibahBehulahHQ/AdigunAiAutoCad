@@ -9,6 +9,15 @@ require('./cad-engine.js');
 
 const engine = globalThis.AdigunCADEngine;
 
+test('manual wire bends stay fixed and orthogonal when attached ends move', () => {
+  const bends = [{ x: 30, y: 40 }, { x: 30, y: 60 }, { x: 80, y: 60 }];
+  const wire = { x1: 10, y1: 20, x2: 100, y2: 75, bends };
+  assert.deepEqual(engine.wireRoutePoints(wire), [
+    { x: 10, y: 20 }, { x: 30, y: 20 }, ...bends, { x: 80, y: 75 }, { x: 100, y: 75 }
+  ]);
+  assert.deepEqual(wire.bends, [{ x: 30, y: 40 }, { x: 30, y: 60 }, { x: 80, y: 60 }]);
+});
+
 test('viewport expansion and cursor zoom keep one uniform coordinate scale', () => {
   const camera = { x: -110, y: -40, w: 420, h: 297 };
   const viewport = engine.viewportViewBox(camera, 1200, 500);

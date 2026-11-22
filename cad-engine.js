@@ -1602,7 +1602,23 @@
   }
 
   function wireRoutePoints(wire) {
-    return [{ x: wire.x1, y: wire.y1 }, ...(wire.bends ?? [{ x: wire.x2, y: wire.y1 }]), { x: wire.x2, y: wire.y2 }];
+    const start = { x: wire.x1, y: wire.y1 };
+    const end = { x: wire.x2, y: wire.y2 };
+    if (!wire.bends?.length) return [start, { x: end.x, y: start.y }, end];
+
+    const route = [start];
+    const waypoints = [...wire.bends, end];
+    waypoints.forEach(function (point, index) {
+      const previous = route.at(-1);
+      if (previous.x !== point.x && previous.y !== point.y) {
+        // Approach the destination horizontally while leaving authored bends fixed.
+        route.push(index === waypoints.length - 1
+          ? { x: previous.x, y: point.y }
+          : { x: point.x, y: previous.y });
+      }
+      route.push(point);
+    });
+    return route;
   }
 
   function pointOnSegment(point, segment) {
