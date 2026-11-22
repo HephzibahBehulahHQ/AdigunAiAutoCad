@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 11,
-    "validatedArtifactCount": 11,
-    "distinctTopologyCount": 9,
+    "projectArtifactCount": 12,
+    "validatedArtifactCount": 12,
+    "distinctTopologyCount": 10,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -261,7 +261,9 @@
           "id": "34",
           "category": "Manufacturing and robotics",
           "title": "Pneumatic pick-and-place automation",
-          "projectIds": [],
+          "projectIds": [
+            "pneumatic-pick-place"
+          ],
           "qualifiedProjectId": null
         },
         {
@@ -1450,6 +1452,70 @@
         "bomRowCount": 10,
         "wireListRowCount": 73,
         "terminalListRowCount": 50
+      },
+      "errors": []
+    },
+    {
+      "id": "pneumatic-pick-place",
+      "title": "Pneumatic pick-and-place controls",
+      "topologyId": "pneumatic-two-position-two-isolated-pilot-interfaces",
+      "briefId": "34",
+      "role": "standalone-example",
+      "path": "examples/real-projects/pneumatic-pick-place.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "releaseScale": {
+        "qualified": false,
+        "additionalAuthoredSheetsRequired": 96,
+        "additionalConnectedSheetsRequired": 66,
+        "sheetIdsWithoutElectricalConnectivity": []
+      },
+      "wirePreview": {
+        "sheetId": "pick-place-plc",
+        "sheetName": "PLC power and I/O",
+        "segments": "22,11,48,11 22,17,30,17 30,17,30,13 30,13,48,13 37,13,37,22 37,22,48,22 31,11,31,0 31,0,93,0 93,0,93,26 93,26,80,26 30,17,30,48 30,48,89,48 89,48,89,28 89,28,80,28 13,11,0,11 13,17,0,17 48,25,42,25 42,25,42,27 42,27,0,27 48,27,45,27 45,27,45,33 45,33,0,33 80,30,88,30 88,30,88,33 88,33,100,33 89,41,100,41 80,32,86,32 86,32,86,37 86,37,100,37 89,48,100,48"
+      },
+      "topologySha256": "93d0907954fe270a0a84bca55aabbbf44680b3dd65bb6bc4d1d1ab3d8252d920",
+      "electricalStructureSha256": "f5c885e8499f9dc60152279f6ae39601847e1035e60a45fa62b32731e4fc5765",
+      "csvSha256": {
+        "bom": "e557b5d9045d16200ec7f62d8bd774918e2ac32f42ac50965f77f507fa11b938",
+        "wires": "f55fe94f2ef5657e8feaf680dd5d384e11ddd5be74bce473ca84376f2fc5ea58",
+        "terminals": "efae068d69f944325406c4d0344895c6eb99f0c1ef9b2694df8c045b15ad7d3a",
+        "plcIo": "df761d0558f0022104d8e2de7ada4d10c8fd749734aed1b125e1ddc878611e24",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208",
+        "devices": "976559e7a3ed92b4970fcaa8df3dec2141a49083338a0f77dc6c7c00872c281e",
+        "sheets": "486dee2c9f376937d49848b6b35dda15baef8012d35649bc9681f7e83561bf81"
+      },
+      "metrics": {
+        "sheetCount": 4,
+        "authoredSheetCount": 4,
+        "connectedSheetCount": 4,
+        "contentObjectCount": 48,
+        "emptyContentSheetIds": [],
+        "repeatedContentSheets": [],
+        "componentCount": 11,
+        "wireCount": 29,
+        "netCount": 18,
+        "globalNetCount": 10,
+        "crossSheetConnectionCount": 8,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 4,
+        "wireListRowCount": 29,
+        "terminalListRowCount": 12
       },
       "errors": []
     }

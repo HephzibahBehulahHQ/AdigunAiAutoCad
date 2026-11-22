@@ -114,6 +114,16 @@
       "domain": "Irrigation instrumentation and pump control",
       "standardProfile": "IEC-style symbols",
       "briefId": "46"
+    },
+    {
+      "id": "pneumatic-pick-place",
+      "title": "Pneumatic pick-and-place controls",
+      "topologyId": "pneumatic-two-position-two-isolated-pilot-interfaces",
+      "path": "examples/real-projects/pneumatic-pick-place.adigun.json",
+      "role": "standalone-example",
+      "domain": "Pneumatic automation controls",
+      "standardProfile": "IEC-style symbols",
+      "briefId": "34"
     }
   ],
   "briefs": [
