@@ -234,13 +234,16 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 27);
+  assert.equal(items.length, 30);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209523', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3212330', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209512', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209513', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209514', 'feedthrough-terminal', 'X'],
+    ['phoenix-contact-3209511', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210567', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3210156', 'disconnect-terminal', 'X'],
     [relayId, 'relay-module', 'K'],
@@ -265,7 +268,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3209536', 'protective-earth-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523']);
-  for (const id of ['3209523', '3212330', '3209512']) {
+  for (const id of ['3209523', '3212330', '3209512', '3209513', '3209514', '3209511']) {
     const terminal = engine.component('phoenix-contact-' + id);
     assert.equal(terminal.manufacturerPartNumber, id);
     assert.equal(terminal.specifications.dimensions.height.value, 48.5);
