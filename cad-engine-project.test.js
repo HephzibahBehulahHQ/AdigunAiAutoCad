@@ -1510,11 +1510,11 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   const file = path.join(__dirname, 'examples/real-projects/relay-test-bench.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [5, 12, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [6, 12, 0, 0]);
   const membership = analysis => analysis.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(membership(report), [
     'H1:X1,K1:12,X7:1,X7:2', 'H1:X2,H2:X2,H5:X2,X13:1,X13:2,X4:1,X4:2,X9:1,X9:2',
-    'H2:X1,K1:14,X8:1,X8:2', 'H5:X1,K1:11,X12:1,X12:2,X3:1,X3:2',
+    'H2:X1,K1:14,X8:1,X8:2', 'H5:X1,K1:11,X12:1,X12:2,X15:1,X15:2,X3:1,X3:2',
     'H3:X1,K1:A1,S1:14,X5:1,X5:2', 'H3:X2,H4:X2,K1:A2,X11:1,X11:2,X2:1,X2:2,X6:1,X6:2',
     'H4:X1,S1:13,X10:1,X10:2,X14:1,X14:2,X1:1,X1:2'
   ].sort());
@@ -1528,6 +1528,11 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   assert.deepEqual(opened.findings.filter(finding => finding.ruleId === 'ERC-OPEN-DISCONNECT')
     .map(finding => [finding.severity, finding.locations[0].objectId]), [['info', 'x14']]);
   assert.ok(openedNets.includes('S1:13,X14:2'));
+  const indicatorOpen = structuredClone(project);
+  indicatorOpen.objects.find(object => object.ref === 'X15').properties.knifePosition = 'open';
+  const indicatorOpenNets = membership(engine.analyzeProject(indicatorOpen));
+  assert.ok(indicatorOpenNets.includes('K1:11,X15:2'));
+  assert.ok(indicatorOpenNets.includes('H5:X1,X12:1,X12:2,X15:1,X3:1,X3:2'));
   const bypassedProject = structuredClone(reopened.project);
   const [left, right] = engine.worldPins(disconnect);
   bypassedProject.objects.push({
@@ -1545,7 +1550,8 @@ test('relay test bench regenerates with separate coil and indication supplies', 
   const schedule = engine.cableScheduleCsv(project);
   for (const core of ['1', '2', '3']) {
     assert.ok(schedule.includes(`"W-T01","${core}","bench-coil-actuation","fixture-core-${core}-relay"`));
-    assert.ok(schedule.includes(`"W-T01","${core}","bench-contact-indication","fixture-core-${core}-indicator"`));
+    const destination = core === '1' ? 'bench-indicator-disconnect' : 'bench-contact-indication';
+    assert.ok(schedule.includes(`"W-T01","${core}","${destination}","fixture-core-${core}-indicator"`));
   }
 });
 
