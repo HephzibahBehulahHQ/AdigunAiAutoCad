@@ -466,16 +466,16 @@
       specifications: {
         nominalVoltage: { value: voltage, unit: 'V' },
         nominalCurrent: { value: current, unit: 'A' },
-        ratedCrossSection: { value: 2.5, unit: 'mm²' },
-        rigidConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
-        flexibleConductorRange: { minimum: 0.14, maximum: 4, unit: 'mm²' },
+        ratedCrossSection: { value: variant.crossSection ?? 2.5, unit: 'mm²' },
+        rigidConductorRange: { minimum: variant.minimumConductor ?? 0.14, maximum: variant.maximumConductor ?? 4, unit: 'mm²' },
+        flexibleConductorRange: { minimum: variant.minimumConductor ?? 0.14, maximum: variant.maximumConductor ?? 4, unit: 'mm²' },
         ...(variant.color ? { color: { value: variant.color } } : {}),
         connectionCount: { value: levels * 2, unit: 'connections' },
         connectionMethod: { value: 'Push-in' },
         productStandard: { value: 'IEC 60947-7-1' },
         mountingRails: { value: ['NS 35/7.5', 'NS 35/15'] },
         dimensions: {
-          width: { value: 5.2, unit: 'mm' },
+          width: { value: variant.width ?? 5.2, unit: 'mm' },
           height: { value: height, unit: 'mm' },
           depthOnNS35_7_5: { value: railDepths[0], unit: 'mm' },
           depthOnNS35_15: { value: railDepths[1], unit: 'mm' }
@@ -512,6 +512,18 @@
     'https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-25-' + suffix.toLowerCase() + '-' + partNumber,
     1, 800, 24, height, [36.8, 44.3], false, { color, retrievedAt: '2026-11-22' }
   ));
+  const ptPowerTerminals = [
+    ['3211757', 'PT 4', '4-3211757', 'Gray (RAL 7042)', 4, 800, 32, 6.2, 56, 0.2, 6, [36.5, 44]],
+    ['3211760', 'PT 4 BU', '4-bu-3211760', 'Blue (RAL 5015)', 4, 800, 32, 6.2, 56, 0.2, 6, [36.5, 44]],
+    ['3211813', 'PT 6', '6-3211813', 'Gray (RAL 7042)', 6, 1000, 41, 8.2, 57.7, 0.5, 10, [43.5, 51]],
+    ['3211819', 'PT 6 BU', '6-bu-3211819', 'Blue (RAL 5015)', 6, 1000, 41, 8.2, 57.7, 0.5, 10, [43.5, 51]],
+    ['3212120', 'PT 10', '10-3212120', 'Gray (RAL 7042)', 10, 1000, 57, 10.2, 67.7, 0.5, 16, [50.5, 58]],
+    ['3212123', 'PT 10 BU', '10-bu-3212123', 'Blue (RAL 5015)', 10, 1000, 57, 10.2, 67.7, 0.5, 16, [50.5, 58]]
+  ].map(([id, model, sourcePath, color, crossSection, voltage, current, width, height, minimumConductor, maximumConductor, railDepths]) =>
+    compactTerminal(id, model,
+      'https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-' + sourcePath,
+      1, voltage, current, height, railDepths, false,
+      { color, crossSection, width, minimumConductor, maximumConductor, retrievedAt: '2026-11-22' }));
   const pttb25Terminal = compactTerminal('3210567', 'PTTB 2,5',
     'https://www.phoenixcontact.com/en-us/products/multi-level-terminal-block-pttb-25-3210567', 2, 500, 22, 68.2, [47.4, 54.9]);
   const pt25DisconnectTerminal = compactTerminal('3210156', 'PT 2,5-MT',
@@ -1260,7 +1272,7 @@
       documentRevision: null, revisionNote: 'Live manufacturer product catalog and connection data.', retrievedAt: '2026-11-21'
     }]
   });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

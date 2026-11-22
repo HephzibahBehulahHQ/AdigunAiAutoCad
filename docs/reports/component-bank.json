@@ -1,9 +1,9 @@
 {
   "summary": {
-    "manufacturerParts": 34,
+    "manufacturerParts": 40,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 34,
-    "partsWithPhysicalDimensions": 20,
+    "partsWithTerminalMaps": 40,
+    "partsWithPhysicalDimensions": 26,
     "partsWithPhysicalRepresentations": 0,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
@@ -52,6 +52,67 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 76,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 16,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 75.4,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 52.6,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 60.1,
+            "unit": "mm"
+          }
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -149,6 +210,64 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.6,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -249,6 +368,67 @@
         "width": 70,
         "height": 26
       },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 5.2,
@@ -347,6 +527,67 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Black (RAL 9005)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -447,6 +688,67 @@
         "width": 70,
         "height": 26
       },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Red (RAL 3001)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 5.2,
@@ -545,6 +847,67 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Green (RAL 6021)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -645,6 +1008,67 @@
         "width": 70,
         "height": 26
       },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "White (RAL 9010)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 5.2,
@@ -743,6 +1167,67 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Yellow (RAL 1018)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -843,6 +1328,67 @@
         "width": 70,
         "height": 26
       },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Antique pink (RAL 3014)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.6,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 5.2,
@@ -941,6 +1487,67 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Brown (RAL 8028)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -1041,6 +1648,67 @@
         "width": 70,
         "height": 26
       },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Orange (RAL 2003)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 5.2,
@@ -1140,6 +1808,67 @@
         "width": 70,
         "height": 26
       },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Violet (RAL 4005)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.6,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 5.2,
@@ -1186,6 +1915,966 @@
           "publisher": "Phoenix Contact",
           "title": "PT 2,5 VT · Feed-through terminal block · Item 1233140",
           "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-25-vt-1233140",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211757",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211757",
+      "model": "PT 4",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211757.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4 · Feed-through terminal block · Item 3211757",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-3211757",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211760",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211760",
+      "model": "PT 4 BU",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211760.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.2,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 36.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 44,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 4 BU · Feed-through terminal block · Item 3211760",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-4-bu-3211760",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211813",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211813",
+      "model": "PT 6",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211813.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 57.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 43.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 51,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 57.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 43.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 51,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 6 · Feed-through terminal block · Item 3211813",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-6-3211813",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3211819",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3211819",
+      "model": "PT 6 BU",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3211819.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 57.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 43.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 51,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 57.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 43.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 51,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 6 BU · Feed-through terminal block · Item 3211819",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-6-bu-3211819",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3212120",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3212120",
+      "model": "PT 10",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Gray (RAL 7042)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3212120.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 57,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 10,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Gray (RAL 7042)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 67.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 50.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 58,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 67.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 50.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 58,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 10 · Feed-through terminal block · Item 3212120",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-10-3212120",
+          "documentRevision": null,
+          "revisionNote": "Live manufacturer product catalog.",
+          "retrievedAt": "2026-11-22"
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "phoenix-contact-3212123",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Phoenix Contact",
+      "orderCode": "3212123",
+      "model": "PT 10 BU",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Blue (RAL 5015)"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "push-in"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.3212123.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 57,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 10,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "color": {
+          "value": "Blue (RAL 5015)"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 67.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 50.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 58,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 67.7,
+          "unit": "mm"
+        },
+        "depthOnNS35_7_5": {
+          "value": 50.5,
+          "unit": "mm"
+        },
+        "depthOnNS35_15": {
+          "value": 58,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Phoenix Contact",
+          "title": "PT 10 BU · Feed-through terminal block · Item 3212123",
+          "url": "https://www.phoenixcontact.com/en-us/products/feed-through-terminal-block-pt-10-bu-3212123",
           "documentRevision": null,
           "revisionNote": "Live manufacturer product catalog.",
           "retrievedAt": "2026-11-22"
@@ -1258,6 +2947,64 @@
         "unit": "mm",
         "width": 70,
         "height": 56
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 22,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 68.2,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 47.4,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 54.9,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -1355,6 +3102,64 @@
         "unit": "mm",
         "width": 70,
         "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 400,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-1"
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 62.2,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.7,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.2,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -1517,6 +3322,88 @@
         "unit": "mm",
         "width": 140,
         "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "coilInputRangeAt20C": {
+          "minimum": 18.5,
+          "maximum": 33.6,
+          "unit": "V DC"
+        },
+        "typicalInputCurrent": {
+          "value": 9,
+          "unit": "mA"
+        },
+        "responseTime": {
+          "value": 5,
+          "unit": "ms"
+        },
+        "releaseTime": {
+          "value": 8,
+          "unit": "ms"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "maximumSwitchingVoltage": {
+          "value": 250,
+          "unit": "V AC/DC",
+          "note": "Manufacturer installation note applies above 250 V between adjacent identical modules."
+        },
+        "limitingContinuousCurrent": {
+          "value": 6,
+          "unit": "A",
+          "note": "Manufacturer parameter; temperature and mounting derating apply."
+        },
+        "ratedImpulseWithstandVoltage": {
+          "value": 6,
+          "unit": "kV"
+        },
+        "windingContactTestVoltage": {
+          "value": 4,
+          "unit": "kV AC"
+        },
+        "contactStandard": {
+          "value": "IEC 60947-5-1"
+        },
+        "connectionMethod": {
+          "value": "Screw connection · M3 · 0.6–0.8 Nm"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 5,
+          "unit": "external electrical terminals"
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 80,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 94,
+            "unit": "mm"
+          }
+        },
+        "mountingRail": {
+          "value": "NS 35/7.5"
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -1741,6 +3628,224 @@
         "unit": "mm",
         "width": 280,
         "height": 130
+      },
+      "specifications": {
+        "poles": {
+          "value": "3P, 3 normally-open main poles"
+        },
+        "ac3RatedCurrent": {
+          "value": 9,
+          "unit": "A at ≤440 V AC"
+        },
+        "ac3RatedOperationalVoltage": {
+          "value": 440,
+          "unit": "V AC maximum for 9 A AC-3 rating"
+        },
+        "ratedOperationalVoltage": {
+          "value": 690,
+          "unit": "V AC maximum"
+        },
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "averageCoilConsumptionAtNominalUc": {
+          "value": 2.4,
+          "unit": "W",
+          "conditions": "Average at 20 °C and nominal control voltage (Uc)"
+        },
+        "averageCoilCurrentAt24V": {
+          "value": 100,
+          "unit": "mA",
+          "conditions": "Schneider Electric FAQ states 100 mA at 24 V DC"
+        },
+        "coilOperationalRangeAt60C": {
+          "minimum": 0.7,
+          "maximum": 1.25,
+          "unit": "× Uc"
+        },
+        "coilDropOutRangeAt60C": {
+          "minimum": 0.1,
+          "maximum": 0.25,
+          "unit": "× Uc"
+        },
+        "electricalDurabilityAc3": {
+          "value": 2,
+          "unit": "Mcycles",
+          "conditions": "9 A AC-3 at Ue ≤440 V AC"
+        },
+        "operatingRate": {
+          "value": 3600,
+          "unit": "cycles/h",
+          "conditions": "At ambient temperature ≤60 °C"
+        },
+        "ratedInsulationVoltage": {
+          "iecPowerCircuit": {
+            "value": 690,
+            "unit": "V",
+            "standard": "IEC 60947-4-1"
+          },
+          "iecSignallingCircuit": {
+            "value": 690,
+            "unit": "V",
+            "standard": "IEC 60947-1"
+          },
+          "csaPowerCircuit": {
+            "value": 600,
+            "unit": "V"
+          },
+          "ulPowerCircuit": {
+            "value": 600,
+            "unit": "V"
+          },
+          "csaSignallingCircuit": {
+            "value": 600,
+            "unit": "V"
+          },
+          "ulSignallingCircuit": {
+            "value": 600,
+            "unit": "V"
+          }
+        },
+        "ratedImpulseWithstandVoltage": {
+          "value": 6,
+          "unit": "kV",
+          "standard": "IEC 60947"
+        },
+        "auxiliaryContactComposition": {
+          "value": "1 mechanically-linked NO + 1 mechanically-linked NC"
+        },
+        "coilSuppressor": {
+          "value": "Built-in bidirectional peak-limiting diode"
+        },
+        "standards": {
+          "value": [
+            "IEC 60947-4-1",
+            "IEC 60947-5-1",
+            "UL 508"
+          ]
+        },
+        "terminalConnection": {
+          "value": "Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Philips No. 2 screwdriver"
+        },
+        "terminalConductorOptions": [
+          {
+            "circuit": "power",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 2.5
+          },
+          {
+            "circuit": "power",
+            "cableCount": 1,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 2,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 2.5
+          },
+          {
+            "circuit": "control",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 1,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 2,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          }
+        ],
+        "dimensions": {
+          "width": {
+            "value": 45,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 77,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 95,
+            "unit": "mm"
+          }
+        },
+        "mountingSupport": {
+          "value": [
+            "Rail",
+            "Plate"
+          ]
+        }
       },
       "physicalDimensions": {
         "width": {
@@ -1979,6 +4084,241 @@
         "width": 280,
         "height": 130
       },
+      "specifications": {
+        "poles": {
+          "value": "3P, 3 normally-open main poles"
+        },
+        "ac3RatedCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "ac3RatedOperationalVoltage": {
+          "value": 440,
+          "unit": "V AC maximum for 9 A AC-3 rating"
+        },
+        "ratedOperationalVoltage": {
+          "value": 690,
+          "unit": "V AC maximum"
+        },
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "averageCoilConsumptionAtNominalUc": {
+          "value": 2.4,
+          "unit": "W",
+          "conditions": "Average at 20 °C and nominal control voltage (Uc)"
+        },
+        "averageCoilCurrentAt24V": {
+          "value": 100,
+          "unit": "mA",
+          "conditions": "Schneider Electric FAQ states 100 mA at 24 V DC"
+        },
+        "coilOperationalRangeAt60C": {
+          "minimum": 0.7,
+          "maximum": 1.25,
+          "unit": "× Uc"
+        },
+        "coilDropOutRangeAt60C": {
+          "minimum": 0.1,
+          "maximum": 0.25,
+          "unit": "× Uc"
+        },
+        "electricalDurabilityAc3": {
+          "value": 2,
+          "unit": "Mcycles",
+          "conditions": "9 A AC-3 at Ue ≤440 V AC"
+        },
+        "operatingRate": {
+          "value": 3600,
+          "unit": "cycles/h",
+          "conditions": "At ambient temperature ≤60 °C"
+        },
+        "ratedInsulationVoltage": {
+          "iecPowerCircuit": {
+            "value": 690,
+            "unit": "V",
+            "standard": "IEC 60947-4-1"
+          },
+          "iecSignallingCircuit": {
+            "value": 690,
+            "unit": "V",
+            "standard": "IEC 60947-1"
+          },
+          "csaPowerCircuit": {
+            "value": 600,
+            "unit": "V"
+          },
+          "ulPowerCircuit": {
+            "value": 600,
+            "unit": "V"
+          },
+          "csaSignallingCircuit": {
+            "value": 600,
+            "unit": "V"
+          },
+          "ulSignallingCircuit": {
+            "value": 600,
+            "unit": "V"
+          }
+        },
+        "ratedImpulseWithstandVoltage": {
+          "value": 6,
+          "unit": "kV",
+          "standard": "IEC 60947"
+        },
+        "auxiliaryContactComposition": {
+          "value": "1 NO + 1 NC"
+        },
+        "coilSuppressor": {
+          "value": "Built-in bidirectional peak-limiting diode"
+        },
+        "standards": {
+          "value": [
+            "IEC 60947-4-1",
+            "IEC 60947-5-1",
+            "UL 508"
+          ]
+        },
+        "terminalConnection": {
+          "value": "Screw clamp; manufacturer torque 1.7 N·m for power and control terminals; flat Ø6 mm or Philips No. 2 screwdriver"
+        },
+        "terminalConductorOptions": [
+          {
+            "circuit": "power",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 2.5
+          },
+          {
+            "circuit": "power",
+            "cableCount": 1,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "power",
+            "cableCount": 2,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 2.5
+          },
+          {
+            "circuit": "control",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 2,
+            "cableStiffness": "flexible",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 1,
+            "cableStiffness": "flexible",
+            "cableEnd": "with cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 1,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          },
+          {
+            "circuit": "control",
+            "cableCount": 2,
+            "cableStiffness": "solid",
+            "cableEnd": "without cable end",
+            "minimumCrossSectionMm2": 1,
+            "maximumCrossSectionMm2": 4
+          }
+        ],
+        "dimensions": {
+          "width": {
+            "value": 45,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 77,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 95,
+            "unit": "mm"
+          }
+        },
+        "mountingSupport": {
+          "value": [
+            "Rail",
+            "Plate"
+          ]
+        },
+        "ratedOperationalCurrentAC3At400V": {
+          "value": 25,
+          "unit": "A"
+        },
+        "ratedMotorPowerAt400V": {
+          "value": 11,
+          "unit": "kW"
+        },
+        "frameSize": {
+          "value": "S0"
+        },
+        "connectionMethod": {
+          "value": "Spring-loaded terminal"
+        },
+        "coilSuppression": {
+          "value": "Plugged-in varistor"
+        }
+      },
       "physicalDimensions": {
         "width": {
           "value": 45,
@@ -2169,6 +4509,40 @@
         "width": 280,
         "height": 220
       },
+      "specifications": {
+        "productFamily": {
+          "value": "SIRIUS 3RU2"
+        },
+        "frameSize": {
+          "value": "S0"
+        },
+        "overloadTripClass": {
+          "value": 10,
+          "unit": "Class"
+        },
+        "adjustableOverloadRelease": {
+          "minimum": 11,
+          "maximum": 16,
+          "unit": "A"
+        },
+        "mainPoleCount": {
+          "value": 3
+        },
+        "ratedOperationalVoltage": {
+          "minimum": 20,
+          "maximum": 690,
+          "unit": "V AC"
+        },
+        "connectionMethod": {
+          "value": "Screw terminals"
+        },
+        "resetMode": {
+          "value": "Manual / automatic selectable"
+        },
+        "referenceCode": {
+          "value": "F"
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -2302,6 +4676,31 @@
         "width": 150,
         "height": 90
       },
+      "specifications": {
+        "function": {
+          "value": "Star-delta (wye-delta) timing relay"
+        },
+        "outputContacts": {
+          "value": "2 NO with shared root"
+        },
+        "timeRangeSeconds": {
+          "minimum": 3,
+          "maximum": 60,
+          "unit": "s"
+        },
+        "controlSupply": {
+          "minimum": 12,
+          "maximum": 240,
+          "unit": "V AC/DC"
+        },
+        "changeoverDelay": {
+          "value": 50,
+          "unit": "ms"
+        },
+        "connectionMethod": {
+          "value": "Spring-type push-in terminal"
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -2403,6 +4802,50 @@
         "width": 150,
         "height": 90
       },
+      "specifications": {
+        "productFamily": {
+          "value": "Harmony XB5"
+        },
+        "operatorProfile": {
+          "value": "Green flush, unmarked"
+        },
+        "operatorType": {
+          "value": "Spring return"
+        },
+        "contactComposition": {
+          "value": "1 NO"
+        },
+        "contactOperation": {
+          "value": "Slow-break"
+        },
+        "terminalDesignation": {
+          "value": "(13-14)NO"
+        },
+        "terminalConnection": {
+          "value": "Screw clamp"
+        },
+        "mountingDiameter": {
+          "value": 22,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "height": {
+            "value": 42,
+            "unit": "mm"
+          },
+          "width": {
+            "value": 30,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 52,
+            "unit": "mm"
+          }
+        },
+        "positiveOpening": {
+          "value": false
+        }
+      },
       "physicalDimensions": {
         "height": {
           "value": 42,
@@ -2502,6 +4945,50 @@
         "width": 150,
         "height": 90
       },
+      "specifications": {
+        "productFamily": {
+          "value": "Harmony XB5"
+        },
+        "operatorProfile": {
+          "value": "Red flush, unmarked"
+        },
+        "operatorType": {
+          "value": "Spring return"
+        },
+        "contactComposition": {
+          "value": "1 NC"
+        },
+        "contactOperation": {
+          "value": "Slow-break"
+        },
+        "terminalDesignation": {
+          "value": "(21-22)NC"
+        },
+        "terminalConnection": {
+          "value": "Screw clamp"
+        },
+        "mountingDiameter": {
+          "value": 22,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "height": {
+            "value": 42,
+            "unit": "mm"
+          },
+          "width": {
+            "value": 30,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 52,
+            "unit": "mm"
+          }
+        },
+        "positiveOpening": {
+          "value": true
+        }
+      },
       "physicalDimensions": {
         "height": {
           "value": 42,
@@ -2591,6 +5078,22 @@
         "unit": "mm",
         "width": 70,
         "height": 60
+      },
+      "specifications": {
+        "ratedSupplyVoltage": {
+          "value": 24,
+          "unit": "V AC/DC"
+        },
+        "mountingDiameter": {
+          "value": 22,
+          "unit": "mm"
+        },
+        "lightSource": {
+          "value": "Integral green LED"
+        },
+        "terminalConnection": {
+          "value": "Screw clamp"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -2720,6 +5223,41 @@
         "unit": "mm",
         "width": 180,
         "height": 220
+      },
+      "specifications": {
+        "productFamily": {
+          "value": "SIRIUS 3RV2"
+        },
+        "frameSize": {
+          "value": "S00"
+        },
+        "overloadTripClass": {
+          "value": 10,
+          "unit": "Class"
+        },
+        "adjustableOverloadRelease": {
+          "minimum": 7,
+          "maximum": 10,
+          "unit": "A"
+        },
+        "instantaneousShortCircuitRelease": {
+          "value": 130,
+          "unit": "A"
+        },
+        "mainPoleCount": {
+          "value": 3
+        },
+        "ratedOperationalVoltage": {
+          "minimum": 20,
+          "maximum": 690,
+          "unit": "V AC"
+        },
+        "connectionMethod": {
+          "value": "Screw terminals"
+        },
+        "referenceCode": {
+          "value": "Q"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -2875,6 +5413,49 @@
         "width": 180,
         "height": 220
       },
+      "specifications": {
+        "productFamily": {
+          "value": "SIRIUS 3RV2"
+        },
+        "frameSize": {
+          "value": "S00"
+        },
+        "overloadTripClass": {
+          "value": 10,
+          "unit": "Class"
+        },
+        "adjustableOverloadRelease": {
+          "minimum": 0.35,
+          "maximum": 0.5,
+          "unit": "A"
+        },
+        "instantaneousShortCircuitRelease": {
+          "value": 6.5,
+          "unit": "A"
+        },
+        "mainPoleCount": {
+          "value": 3
+        },
+        "ratedOperationalVoltage": {
+          "minimum": 20,
+          "maximum": 690,
+          "unit": "V AC"
+        },
+        "connectionMethod": {
+          "value": "Screw terminals"
+        },
+        "referenceCode": {
+          "value": "Q"
+        },
+        "ratedOperationalCurrent": {
+          "value": 0.5,
+          "unit": "A"
+        },
+        "ratedMotorPower400V": {
+          "value": 0.12,
+          "unit": "kW"
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -3028,6 +5609,45 @@
         "unit": "mm",
         "width": 180,
         "height": 220
+      },
+      "specifications": {
+        "productFamily": {
+          "value": "SIRIUS 3RV2"
+        },
+        "frameSize": {
+          "value": "S00"
+        },
+        "overloadTripClass": {
+          "value": 10,
+          "unit": "Class"
+        },
+        "adjustableOverloadRelease": {
+          "minimum": 10,
+          "maximum": 16,
+          "unit": "A"
+        },
+        "instantaneousShortCircuitRelease": {
+          "value": 208,
+          "unit": "A"
+        },
+        "mainPoleCount": {
+          "value": 3
+        },
+        "ratedOperationalVoltage": {
+          "minimum": 20,
+          "maximum": 690,
+          "unit": "V AC"
+        },
+        "connectionMethod": {
+          "value": "Screw terminals"
+        },
+        "referenceCode": {
+          "value": "Q"
+        },
+        "ratedOperationalCurrent": {
+          "value": 16,
+          "unit": "A"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -3265,6 +5885,59 @@
         "width": 240,
         "height": 220
       },
+      "specifications": {
+        "maximumRatedOperationalVoltage": {
+          "value": 500,
+          "unit": "V"
+        },
+        "ratedMotorPowerAt400V": {
+          "value": 0.12,
+          "unit": "kW",
+          "note": "Maximum motor power at 400 V AC per Siemens catalog."
+        },
+        "adjustableRatedOperationalCurrent": {
+          "minimum": 0.1,
+          "maximum": 0.5,
+          "unit": "A"
+        },
+        "controlSupplyVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "connectionMethod": {
+          "value": "Screw terminals"
+        },
+        "starterType": {
+          "value": "Standard reversing starter, 3RM12"
+        },
+        "mainCircuitTerminals": {
+          "value": [
+            "1/L1",
+            "3/L2",
+            "5/L3",
+            "2/T1",
+            "4/T2",
+            "6/T3"
+          ]
+        },
+        "controlCircuitTerminals": {
+          "value": [
+            "A1",
+            "A2",
+            "IN1",
+            "IN2",
+            "IN3",
+            "OUT"
+          ]
+        },
+        "faultSignalTerminals": {
+          "value": [
+            "95",
+            "96",
+            "98"
+          ]
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -3435,6 +6108,49 @@
         "width": 120,
         "height": 120
       },
+      "specifications": {
+        "frame": {
+          "value": "63M"
+        },
+        "ratedOutputPower": {
+          "value": 0.12,
+          "unit": "kW"
+        },
+        "ratedLineCurrentAt400V50Hz": {
+          "value": 0.405,
+          "unit": "A"
+        },
+        "ratedVoltage": {
+          "value": "230 V Δ / 400 V Y"
+        },
+        "ratedFrequency": {
+          "value": 50,
+          "unit": "Hz"
+        },
+        "ratedSpeed": {
+          "value": 1380,
+          "unit": "rpm"
+        },
+        "ratedTorque": {
+          "value": 0.83,
+          "unit": "Nm"
+        },
+        "powerFactor": {
+          "value": 0.64
+        },
+        "phaseCount": {
+          "value": 3
+        },
+        "mountingMethod": {
+          "value": "IEC foot-mounted IM B3"
+        },
+        "connectionMethod": {
+          "value": "Six-terminal motor board; bolted winding connections"
+        },
+        "supplyConnectionAt400V": {
+          "value": "Star (Y); U2/V2/W2 linked together"
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -3592,6 +6308,49 @@
         "unit": "mm",
         "width": 120,
         "height": 120
+      },
+      "specifications": {
+        "frame": {
+          "value": "132M"
+        },
+        "ratedOutputPower": {
+          "value": 7.5,
+          "unit": "kW"
+        },
+        "ratedLineCurrentAt400V50Hz": {
+          "value": 15.2,
+          "unit": "A"
+        },
+        "ratedVoltage": {
+          "value": "400 V Δ / 690 V Y"
+        },
+        "ratedFrequency": {
+          "value": 50,
+          "unit": "Hz"
+        },
+        "ratedSpeed": {
+          "value": 1468,
+          "unit": "rpm"
+        },
+        "ratedTorque": {
+          "value": 49,
+          "unit": "Nm"
+        },
+        "powerFactor": {
+          "value": 0.78
+        },
+        "phaseCount": {
+          "value": 3
+        },
+        "mountingMethod": {
+          "value": "IEC frame 132M; mounting variant not specified"
+        },
+        "connectionMethod": {
+          "value": "Six-terminal motor board; bolted winding connections"
+        },
+        "supplyConnectionAt400V": {
+          "value": "Delta (Δ) after star-delta transition"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -3891,6 +6650,36 @@
         "width": 260,
         "height": 290
       },
+      "specifications": {
+        "onboardDigitalInputs": {
+          "value": 8,
+          "unit": "24 V DC DI"
+        },
+        "onboardDigitalOutputs": {
+          "value": 6,
+          "unit": "24 V DC transistor DQ"
+        },
+        "onboardAnalogInputs": {
+          "value": 2,
+          "unit": "0–10 V DC AI"
+        },
+        "supplyVoltage": {
+          "minimum": 20.4,
+          "maximum": 28.8,
+          "unit": "V DC"
+        },
+        "programDataMemory": {
+          "value": 100,
+          "unit": "KB"
+        },
+        "terminalGroups": {
+          "value": [
+            "X10 · power, sensor supply and 8 DI",
+            "X11 · 2 AI and 2M",
+            "X12 · 6 DQ and load supplies"
+          ]
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -3987,6 +6776,34 @@
         "unit": "mm",
         "width": 100,
         "height": 70
+      },
+      "specifications": {
+        "operatingVoltage": {
+          "minimum": 10,
+          "maximum": 30,
+          "unit": "V DC"
+        },
+        "nominalSensingRange": {
+          "value": 4,
+          "unit": "mm"
+        },
+        "outputFunction": {
+          "value": "PNP normally open"
+        },
+        "maximumOutputCurrent": {
+          "value": 100,
+          "unit": "mA"
+        },
+        "maximumSwitchingFrequency": {
+          "value": 700,
+          "unit": "Hz"
+        },
+        "connection": {
+          "value": "M12 × 1 · A-coded · 3 gold-plated contacts"
+        },
+        "protection": {
+          "value": "IP67"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -4091,6 +6908,46 @@
         "unit": "mm",
         "width": 130,
         "height": 100
+      },
+      "specifications": {
+        "measuringRange": {
+          "minimum": 0,
+          "maximum": 400,
+          "unit": "bar relative pressure"
+        },
+        "operatingVoltage": {
+          "minimum": 18,
+          "maximum": 30,
+          "unit": "V DC"
+        },
+        "analogVoltageOutput": {
+          "minimum": 0,
+          "maximum": 10,
+          "unit": "V DC · scalable 1:5"
+        },
+        "analogCurrentOutput": {
+          "minimum": 4,
+          "maximum": 20,
+          "unit": "mA · scalable 1:5"
+        },
+        "voltageOutputMinimumLoad": {
+          "value": 2000,
+          "unit": "Ω"
+        },
+        "currentOutputMaximumLoad": {
+          "value": 500,
+          "unit": "Ω"
+        },
+        "processConnection": {
+          "value": "G 1/4 internal thread"
+        },
+        "electricalConnection": {
+          "value": "M12 × 1 · A-coded · 4-pin"
+        },
+        "currentConsumption": {
+          "value": "<35",
+          "unit": "mA"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -4222,6 +7079,41 @@
         "width": 180,
         "height": 160
       },
+      "specifications": {
+        "acInputVoltage": {
+          "minimum": 85,
+          "maximum": 264,
+          "unit": "V AC"
+        },
+        "dcInputVoltage": {
+          "minimum": 110,
+          "maximum": 300,
+          "unit": "V DC"
+        },
+        "outputVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedOutputCurrent": {
+          "value": 2.5,
+          "unit": "A"
+        },
+        "inputConnections": {
+          "value": "L, N, PE · one screw terminal each"
+        },
+        "outputConnections": {
+          "value": "+ · one screw terminal; − · two screw terminals"
+        },
+        "connectionSystem": {
+          "value": "Screw terminal"
+        },
+        "mounting": {
+          "value": "EN 60715 35 × 7.5/15 mm rail"
+        },
+        "degreeOfProtection": {
+          "value": "IP20"
+        }
+      },
       "physicalDimensions": null,
       "physicalRepresentations": [],
       "editableProperties": {
@@ -4296,6 +7188,44 @@
         "unit": "mm",
         "width": 70,
         "height": 36
+      },
+      "specifications": {
+        "ratedCrossSection": {
+          "value": 16,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.5,
+          "maximum": 25,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-2"
+        },
+        "groundingFoot": {
+          "value": true
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "color": {
+          "value": "Green-yellow"
+        }
       },
       "physicalDimensions": null,
       "physicalRepresentations": [],
@@ -4376,6 +7306,67 @@
         "unit": "mm",
         "width": 70,
         "height": 36
+      },
+      "specifications": {
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.14,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "connectionMethod": {
+          "value": "Push-in"
+        },
+        "productStandard": {
+          "value": "IEC 60947-7-2"
+        },
+        "groundingFoot": {
+          "value": true
+        },
+        "mountingRails": {
+          "value": [
+            "NS 35/7.5",
+            "NS 35/15"
+          ]
+        },
+        "color": {
+          "value": "Green-yellow"
+        },
+        "strippingLength": {
+          "minimum": 8,
+          "maximum": 10,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 48.5,
+            "unit": "mm"
+          },
+          "depthOnNS35_7_5": {
+            "value": 36.8,
+            "unit": "mm"
+          },
+          "depthOnNS35_15": {
+            "value": 44.3,
+            "unit": "mm"
+          }
+        }
       },
       "physicalDimensions": {
         "width": {

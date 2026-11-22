@@ -40,6 +40,7 @@ const parts = engine.catalog().map(item => {
     nodeGroups: symbol.internalConnections,
     electricalFunctions: part.electricalFunctions || null,
     geometry: { id: symbol.id, view: symbol.view, unit: symbol.unit, width: symbol.width, height: symbol.height },
+    specifications: part.specifications || null,
     physicalDimensions: part.specifications?.dimensions || null,
     physicalRepresentations: part.physicalRepresentations || [],
     editableProperties: part.instanceProperties,
