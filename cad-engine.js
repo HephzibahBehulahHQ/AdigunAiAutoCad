@@ -254,10 +254,14 @@
     return margins;
   }
 
-  function setProjectSheetPaperFormat(sheet, paperSize, orientation) {
-    if (!sheet || !Object.prototype.hasOwnProperty.call(PAPER_SIZES_MM, paperSize)) throw new Error('Choose a supported ISO paper size.');
+  function setProjectSheetPaperFormat(sheet, paperSize, orientation, customSize) {
+    if (!sheet || (paperSize !== 'Custom' && !Object.prototype.hasOwnProperty.call(PAPER_SIZES_MM, paperSize))) throw new Error('Choose a standard or custom paper size.');
+    let [width, height] = paperSize === 'Custom'
+      ? [customSize?.width ?? sheet.paperWidthMm ?? 420, customSize?.height ?? sheet.paperHeightMm ?? 297]
+      : PAPER_SIZES_MM[paperSize];
+    if (!finite(width) || !finite(height) || width <= 0 || height <= 0) throw new Error('Paper width and height must be positive numbers.');
+    if (customSize && paperSize === 'Custom') orientation = width >= height ? 'landscape' : 'portrait';
     if (orientation !== 'landscape' && orientation !== 'portrait') throw new Error('Choose landscape or portrait orientation.');
-    let width = PAPER_SIZES_MM[paperSize][0], height = PAPER_SIZES_MM[paperSize][1];
     if (orientation === 'portrait' && width > height || orientation === 'landscape' && height > width) {
       const swap = width; width = height; height = swap;
     }
@@ -1430,7 +1434,9 @@
         }
         if (sheetIds.has(sheet.id)) errors.push('Duplicate sheet ID: ' + sheet.id + '.');
         sheetIds.add(sheet.id);
-        if (sheet.paperMargins !== undefined) {
+        if (sheet.paperSize === 'Custom' && (!finite(sheet.paperWidthMm) || !finite(sheet.paperHeightMm)
+          || sheet.paperWidthMm <= 0 || sheet.paperHeightMm <= 0)) errors.push('Sheet ' + sheet.id + ' has invalid custom paper dimensions.');
+        if (sheet.paperMargins !== undefined || sheet.paperSize === 'Custom') {
           try { checkPaperMargins(projectSheetMargins(sheet), sheet.paperWidthMm || 420, sheet.paperHeightMm || 297); }
           catch (error) { errors.push('Sheet ' + sheet.id + ': ' + error.message); }
         }
