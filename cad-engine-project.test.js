@@ -539,7 +539,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await tapDrawingPoint(325, 185);
     await touchPin(2, 1).tap();
     assert.equal(await touchWires.count(), 2, 'touch taps finish a second wire with manual bends');
-    assert.match(await touchWires.nth(1).getAttribute('d'), /L285 165L325 185L/);
+    assert.equal(await touchWires.nth(1).getAttribute('d'), 'M270 100L285 100L285 165L325 165L325 185L350 185L350 100');
     await touchPage.getByRole('button', { name: 'Insert Phoenix Contact PT 2,5-PE terminal' }).tap();
     await tapDrawingPoint(235, 245);
     const placedEarth = touchPage.locator('#userDrawings [data-object].selected-object');

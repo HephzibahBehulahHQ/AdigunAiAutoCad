@@ -1611,8 +1611,11 @@
     waypoints.forEach(function (point, index) {
       const previous = route.at(-1);
       if (previous.x !== point.x && previous.y !== point.y) {
-        // Approach the destination horizontally while leaving authored bends fixed.
-        route.push(index === waypoints.length - 1
+        const beforePrevious = route.at(-2);
+        // Avoid folding the route back over its last segment when approaching the terminal.
+        const reversesVertical = beforePrevious?.x === previous.x
+          && (previous.y - beforePrevious.y) * (point.y - previous.y) < 0;
+        route.push(index === waypoints.length - 1 && !reversesVertical
           ? { x: previous.x, y: point.y }
           : { x: point.x, y: previous.y });
       }
