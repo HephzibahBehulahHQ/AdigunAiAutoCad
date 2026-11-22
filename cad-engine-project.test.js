@@ -705,6 +705,30 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     const [firstQuick, secondQuick] = quickBounds;
     assert.ok(firstQuick.right <= secondQuick.left || secondQuick.right <= firstQuick.left
       || firstQuick.bottom <= secondQuick.top || secondQuick.bottom <= firstQuick.top);
+    await freeDraftingPage.getByLabel('Display units').selectOption('mm');
+    await freeDraftingPage.locator('#openCommands').click();
+    await freeDraftingPage.getByRole('button', { name: 'Draw distance dimension' }).click();
+    const dimStart = await freePoint(0, 50), dimEnd = await freePoint(100, 50);
+    await freeDraftingPage.mouse.move(dimStart.x, dimStart.y);
+    await freeDraftingPage.mouse.down();
+    await freeDraftingPage.mouse.move(dimEnd.x, dimEnd.y, { steps: 4 });
+    await freeDraftingPage.mouse.up();
+    const dimension = freeDraftingPage.locator('#userDrawings [data-object]').filter({ hasText: /^100 mm$/ });
+    const dimensionId = await dimension.getAttribute('data-object');
+    await freeDraftingPage.getByRole('button', { name: 'Select and move', exact: true }).click();
+    await dimension.dispatchEvent('click', { bubbles: true });
+    await freeDraftingPage.locator('[data-dimension-coordinate="x2"]').fill('125');
+    await freeDraftingPage.locator('[data-dimension-coordinate="x2"]').press('Tab');
+    assert.match(await freeDraftingPage.locator('#userDrawings [data-object="' + dimensionId + '"]').textContent(), /125 mm/);
+    await freeDraftingPage.getByLabel('Display units').selectOption('in');
+    assert.match(await freeDraftingPage.locator('#userDrawings [data-object="' + dimensionId + '"]').textContent(), /4\.921 in/);
+    const writesBeforeDimension = await freeDraftingPage.evaluate(() => window.__savedProjectWrites.length);
+    await freeDraftingPage.keyboard.press('Control+Shift+S');
+    await freeDraftingPage.waitForFunction(count => window.__savedProjectWrites.length > count, writesBeforeDimension);
+    const dimensionProject = engine.parseProject(await freeDraftingPage.evaluate(() => window.__savedProjectWrites.at(-1)));
+    assert.equal(dimensionProject.valid, true, dimensionProject.errors.join(' '));
+    const savedDimension = dimensionProject.project.objects.find(object => object.id === dimensionId);
+    assert.deepEqual([savedDimension.x1, savedDimension.x2], [0, 125]);
     await freeDraftingPage.close({ runBeforeUnload: false });
 
     const symbolPage = await context.newPage();

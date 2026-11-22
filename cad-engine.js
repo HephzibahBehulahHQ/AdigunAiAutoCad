@@ -1471,6 +1471,9 @@
           validation.errors.forEach(function (error) { errors.push('Object ' + (object.ref || index + 1) + ': ' + error); });
         } else if (object.kind === 'catalog-symbol' || ['terminal', 'plc', 'motor', 'ground'].includes(object.kind)) {
           errors.push('Project contains a legacy visual-only component. It must be replaced with a verified component before import.');
+        } else if (object.kind === 'dimension') {
+          if (![object.x1, object.y1, object.x2, object.y2].every(finite)
+            || (object.x1 === object.x2 && object.y1 === object.y2)) errors.push('Dimension ' + (object.id || index + 1) + ' needs two distinct points.');
         } else if (object.kind === 'wire') {
           const label = 'Wire ' + (object.id || index + 1);
           if (![object.x1, object.y1, object.x2, object.y2].every(finite)) errors.push(label + ' has invalid coordinates.');
