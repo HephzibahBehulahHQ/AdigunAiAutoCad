@@ -16,8 +16,9 @@ const fault = 'irrigation-starter-fault';
 const power = 'irrigation-control-supply';
 const earth = 'irrigation-protective-earth';
 const alarm = 'irrigation-alarm-interface';
+const permissive = 'irrigation-source-permissive';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.7',
+  product: 'AdigunAiAutoCad', project: 'Irrigation pressure monitoring and pump request', revision: '1.8',
   description: 'Editable pressure instrumentation and isolated pump demand contact for an irrigation controller.',
   activeSheet: cabinet,
   sheets: [
@@ -30,7 +31,8 @@ const project = {
     { id: fault, number: 'A2/007', name: 'Starter fault contact at XT4', projectSectionId: 'A2' },
     { id: power, number: 'A2/008', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
     { id: earth, number: 'A2/009', name: 'Cabinet and starter enclosure PE terminals', projectSectionId: 'A2' },
-    { id: alarm, number: 'A2/010', name: 'Isolated starter fault annunciator interface', projectSectionId: 'A2' }
+    { id: alarm, number: 'A2/010', name: 'Isolated starter fault annunciator interface', projectSectionId: 'A2' },
+    { id: permissive, number: 'A2/011', name: 'Water source permissive at XT8', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -135,6 +137,9 @@ for (const [ref, position, contact, y, marking, bendX] of [
   wire(alarm, 'alarm-contact-' + contact, marking, start, pin(boundary, '1'), bends);
 }
 
+const levelFeed = terminal(permissive, 'X18', 470, 265, 'XT8', '1', 'Feed to external water-available contact');
+const levelReturn = terminal(permissive, 'X19', 470, 390, 'XT8', '2', 'Water-available contact return');
+
 wire(cabinet, 'plc-supply', '+24 V DC', pin(supply, '2'), pin(plc, 'X10:1'), [{ x: 450, y: 205 }, { x: 450, y: 239 }]);
 wire(cabinet, 'plc-common', '0 V', pin(common, '2'), pin(plc, 'X10:2'), [{ x: 450, y: 280 }, { x: 450, y: 257 }]);
 wire(cabinet, 'input-common', '0 V', { x: 535, y: 257 }, pin(plc, 'X10:6'), [{ x: 535, y: 329 }]);
@@ -157,19 +162,19 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['relay-common', '0 V', 'A1', { x: 925, y: 475 }, { x: 1020, y: 475 }, null, relay, 'A2', 'left'],
   ['operator-feed', '+24 V DC', 'X1', { x: 480, y: 135 }, { x: 215, y: 135 }, null, request, '13', 'left', ['W-01', '1']],
   ['operator-request', 'S1 request to DI a.1', 'A1', pin(plc, 'X10:8'), { x: 215, y: 405 },
-    [{ x: 555, y: 365 }, { x: 555, y: 405 }], request, '14', 'right', ['W-01', '2']],
+    [{ x: 540, y: 365 }, { x: 540, y: 405 }], request, '14', 'right', ['W-01', '2']],
   ['run-feedback-feed', '+24 V DC', 'X1', { x: 460, y: 230 }, { x: 215, y: 230 },
     null, feedbackFeed, '1', 'left', ['W-02', '1']],
   ['run-feedback-input', 'XT3 run feedback to DI a.2', 'A1', pin(plc, 'X10:9'), { x: 215, y: 440 },
-    [{ x: 565, y: 383 }, { x: 565, y: 440 }], feedbackReturn, '1', 'left', ['W-02', '2']],
+    [{ x: 550, y: 383 }, { x: 550, y: 440 }], feedbackReturn, '1', 'left', ['W-02', '2']],
   ['run-indication-output', 'DQ a.1 to H1', 'A1', pin(plc, 'X12:4'), { x: 1020, y: 430 },
     [{ x: 895, y: 405 }, { x: 895, y: 430 }], runLamp, 'X1', 'left', ['W-03', '1']],
   ['run-indication-common', '0 V', 'A1', { x: 925, y: 515 }, { x: 1020, y: 515 },
     null, runLamp, 'X2', 'right', ['W-03', '2']],
   ['starter-fault-feed', '+24 V DC', 'X1', { x: 460, y: 205 }, { x: 215, y: 205 },
     null, faultFeed, '1', 'left', ['W-04', '1']],
-  ['starter-fault-input', 'XT4 starter fault to DI a.3', 'A1', pin(plc, 'X10:10'), { x: 215, y: 510 },
-    [{ x: 568, y: 401 }, { x: 568, y: 510 }], faultReturn, '1', 'left', ['W-04', '2']],
+  ['starter-fault-input', 'XT4 starter fault to DI a.3', 'A1', pin(plc, 'X10:10'), { x: 215, y: 480 },
+    [{ x: 560, y: 401 }, { x: 560, y: 480 }], faultReturn, '1', 'left', ['W-04', '2']],
   ['control-feed', '+24 V DC', 'X1', pin(supply, '1'), { x: 215, y: 260 },
     [{ x: 315, y: 205 }, { x: 315, y: 260 }], psu, '+', 'right'],
   ['control-return', '0 V', 'X2', pin(common, '1'), { x: 215, y: 315 },
@@ -177,7 +182,11 @@ for (const [id, name, fromRef, from, fromEdge, bends, target, targetPin, side, c
   ['fault-annunciation-output', 'DQ a.2 to K2', 'A1', pin(plc, 'X12:5'), { x: 1020, y: 454 },
     [{ x: 875, y: 421 }, { x: 875, y: 454 }], alarmRelay, 'A1', 'left', ['W-05', '1']],
   ['fault-annunciation-return', '0 V', 'A1', { x: 925, y: 535 }, { x: 1020, y: 550 },
-    [{ x: 950, y: 535 }, { x: 950, y: 550 }], alarmRelay, 'A2', 'left', ['W-05', '2']]
+    [{ x: 950, y: 535 }, { x: 950, y: 550 }], alarmRelay, 'A2', 'left', ['W-05', '2']],
+  ['source-permissive-feed', '+24 V DC', 'X1', { x: 280, y: 135 }, { x: 215, y: 160 },
+    [{ x: 280, y: 160 }], levelFeed, '1', 'left', ['W-06', '1']],
+  ['source-permissive-input', 'XT8 water available to DI a.4', 'A1', pin(plc, 'X10:11'), { x: 215, y: 515 },
+    [{ x: 565, y: 419 }, { x: 565, y: 515 }], levelReturn, '1', 'left', ['W-06', '2']]
 ]) {
   const targetPoint = pin(target, targetPin);
   const targetEdge = { x: side === 'left' ? 215 : 960, y: targetPoint.y };
@@ -201,7 +210,8 @@ for (const [sheetId, title, description] of [
   [fault, 'PUMP STARTER FAULT INPUT · XT4', 'W-04 serves the external contact that closes on starter fault. DI a.3 observes the contact. Loss of the circuit is indistinguishable from an open contact.'],
   [power, 'CONTROL SUPPLY · PS1', 'XT5 marks the incoming L, N and PE boundary. PS1 feeds XT1. Upstream protection, conductor sizing remain unassigned.'],
   [earth, 'ENCLOSURE PROTECTIVE EARTH · XT6', 'XT6 carries PE from XT5 to the controller and starter enclosure terminal boundaries. Physical bonds, rails and conductor sizes remain unassigned.'],
-  [alarm, 'STARTER FAULT ANNUNCIATOR INTERFACE · K2', 'DQ a.2 commands K2. XT7 exposes the changeover contacts. PLC alarm logic and the external annunciator supply and load remain unassigned.']
+  [alarm, 'STARTER FAULT ANNUNCIATOR INTERFACE · K2', 'DQ a.2 commands K2. XT7 exposes the changeover contacts. PLC alarm logic and the external annunciator supply and load remain unassigned.'],
+  [permissive, 'WATER SOURCE PERMISSIVE · XT8', 'W-06 serves the external contact that closes when water is available. DI a.4 is a PLC input. Sensor selection and PLC permissive logic remain unassigned.']
 ]) {
   [title, description].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text
