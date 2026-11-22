@@ -1324,8 +1324,15 @@
     }]
   });
   const protectiveEarthVariants = terminalCatalog.protectiveEarthVariants.map(([id, model, slug, connectionType, connectionMethod, area, minimum, maximumRigid, maximumFlexible,
-    width, height, depthOnLowRail, depthOnHighRail, mountingScrew]) => {
+    width, height, depthOnLowRail, depthOnHighRail, mountingScrew, connectionCount = 2]) => {
     const base = phoenixProtectiveEarthTerminalDefinition;
+    const positions = connectionCount === 2 ? [[-35, 0], [35, 0]] :
+      [[-35, -8], [35, connectionCount === 3 ? 0 : -8], [-35, 8], [35, 8]].slice(0, connectionCount);
+    const pins = positions.map(([x, y], index) => {
+      const number = String(index + 1);
+      return { id: 'connection-' + number, localNumber: number, name: 'PE connection ' + number + ' · model-local index',
+        x, y, electricalType: 'passive', connectionType };
+    });
     return deepFreeze({
       ...base,
       id: 'phoenix-contact-' + id,
@@ -1335,7 +1342,9 @@
       symbol: {
         ...base.symbol,
         id: 'terminal.protective-earth.' + id + '.v1',
-        pins: base.symbol.pins.map(pin => ({ ...pin, connectionType }))
+        pins,
+        internalConnections: [pins.map(pin => pin.id)],
+        numberingNote: connectionCount === 2 ? base.symbol.numberingNote : 'Connection numbers are model-local. The documented grounding foot bonds the block to the rail and has no separate wire terminal.'
       },
       specifications: {
         ...base.specifications,
@@ -1343,6 +1352,7 @@
         rigidConductorRange: { minimum, maximum: maximumRigid, unit: 'mm²' },
         flexibleConductorRange: { minimum, maximum: maximumFlexible, unit: 'mm²' },
         connectionMethod: { value: connectionMethod },
+        connectionCount: { value: connectionCount, unit: 'connections' },
         ...(mountingScrew ? { groundingFootMountingScrew: { value: mountingScrew } } : {}),
         dimensions: {
           width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
@@ -1353,7 +1363,9 @@
       sources: [{
         publisher: 'Phoenix Contact', title: model + ' · Protective conductor terminal block · Item ' + id,
         url: 'https://www.phoenixcontact.com/en-us/products/ground-terminal-block-' + slug + '-' + id,
-        documentRevision: null, revisionNote: 'Manufacturer connection and dimension tables list two connections and a grounding foot.',
+        documentRevision: null, revisionNote: connectionCount === 2
+          ? 'Manufacturer connection and dimension tables list two connections and a grounding foot.'
+          : 'Manufacturer connection and dimension tables specify the connection count and grounding foot.',
         retrievedAt: '2026-11-22'
       }]
     });
