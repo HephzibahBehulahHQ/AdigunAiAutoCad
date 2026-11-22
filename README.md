@@ -9,6 +9,8 @@ In **Drafting settings**, change the display grid and snap intervals independent
 
 Drag a guide’s marker along its ruler to reposition it. Locked guides keep their position.
 
+Use **Draw distance dimension** and drag between two drawing points to add a measured annotation. Edit the endpoints in Properties. The label follows the sheet’s display units while the endpoints remain in millimetres. The dimension measures its own endpoints and can be repositioned independently.
+
 Use **Export full drawing as SVG** for all visible geometry, including off-frame objects. **Export print frame as SVG** and **Print drawing** use the configured paper size and warn before clipping off-frame geometry.
 
 Select one or more drawing objects and use **Export selection as SVG** to export just those objects, cropped to their bounds.
