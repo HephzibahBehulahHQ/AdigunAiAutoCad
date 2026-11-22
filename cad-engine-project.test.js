@@ -1501,7 +1501,7 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
   const copy = engine.copyExampleProject(source.project, 'distribution-test', 'Editable distribution');
   const reopened = engine.parseProject(engine.serializeProject(copy));
   const report = engine.analyzeProject(reopened.project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [31, 76, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount], [32, 78, 0]);
   const membership = groups => groups.map(pins => pins.sort().join(',')).sort();
   assert.deepEqual(membership(report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number))), membership([
     ['X7:1', 'X7:2', 'PS1:L'],
@@ -1514,8 +1514,9 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['X22:1', 'X22:2', 'A1:X11:3', 'B3:2', 'X43:1', 'X43:2'],
     ['B2:4', 'X12:1', 'X12:2', 'A1:X10:13'],
     ['B3:4', 'X45:1', 'X45:2', 'X46:1', 'X46:2', 'K5:A1'],
-    ['K5:11', 'X48:1', 'X48:2'],
-    ['K5:14', 'X49:1', 'X49:2'],
+    ['K5:11', 'X48:1', 'X48:2', 'X50:1', 'X50:2'],
+    ['K5:14', 'X49:1', 'X49:2', 'H6:X1'],
+    ['H6:X2', 'X51:1', 'X51:2'],
     ['KM1:A1', 'K1:14'],
     ['KM1:14', 'A1:X10:8'],
     ['A1:X12:3', 'K1:A1'],
@@ -1544,7 +1545,11 @@ test('SITOP distribution keeps both terminal branches on separate supply and ret
     ['X10:7', 'X10:8', 'X10:9', 'X10:10', 'X10:11', 'X10:12', 'X10:13', 'X10:14', 'X11:2', 'X11:3', 'X12:3', 'X12:4', 'X12:5']);
   assert.match(io.rows.find(row => row.terminal === 'X11:2').connectedPins[0], / B2:2$/);
   const cables = engine.cableScheduleCsv(reopened.project);
-  assert.equal(cables.trim().split('\r\n').length, 22);
+  assert.equal(cables.trim().split('\r\n').length, 26);
+  for (const core of ['1', '2']) {
+    assert.ok(cables.includes(`"W-H6","${core}","b3-switching-relay","b3-pressure-status-lamp-core-${core}-relay"`));
+    assert.ok(cables.includes(`"W-H6","${core}","b3-pressure-status-lamp","b3-pressure-status-lamp-core-${core}-indicator"`));
+  }
   for (const [core, route] of [['1', 'power'], ['2', 'signal'], ['3', 'return'], ['4', 'switch']]) {
     assert.ok(cables.includes(`"W-B3","${core}","b3-field-terminations","ai1-pressure-sensor-${route}-cable-send"`));
     assert.ok(cables.includes(`"W-B3","${core}","ai1-pressure-sensor","ai1-pressure-sensor-${route}"`));

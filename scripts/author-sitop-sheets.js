@@ -21,11 +21,12 @@ const indicatorSupplyTest = { id: 'indicator-supply-test', number: 'A2/028', nam
 const pressureTerminations = { id: 'b3-field-terminations', number: 'A2/029', name: 'XT17 B3 field cable terminations', projectSectionId: 'A2' };
 const pressureStatus = { id: 'b3-switching-boundary', number: 'A2/030', name: 'XT18 B3 switching output boundary', projectSectionId: 'A2' };
 const pressureRelay = { id: 'b3-switching-relay', number: 'A2/031', name: 'K5 pressure status relay and dry output', projectSectionId: 'A2' };
-const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest, pressureTerminations, pressureStatus, pressureRelay];
+const pressureLamp = { id: 'b3-pressure-status-lamp', number: 'A2/032', name: 'XT20 externally powered B3 pressure indication', projectSectionId: 'A2' };
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest, pressureTerminations, pressureStatus, pressureRelay, pressureLamp];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.9';
+project.revision = '3.10';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -307,7 +308,34 @@ author(pressureRelay, ({ device, pin, wire, link, notes }) => {
     ['title', 108, 'XT19 · B3 PRESSURE STATUS RELAY'],
     ['configuration', 210, 'The circuit assumes B3 OUT1 is configured as a PNP sourcing output.'],
     ['terminal', 465, 'K5 presents a dry common and normally open contact at XT19. Terminal 12 is unused.'],
-    ['scope', 510, 'Verify voltage at K5 and actual loading. Pressure setpoint, external load and protection remain unassigned.']
+    ['scope', 510, 'Verify voltage at K5 and actual loading. See A2/032 for the external indicator circuit.']
+  ]);
+});
+
+author(pressureLamp, ({ device, pin, wire, link, notes }) => {
+  const lamp = device('H6', 'schneider-electric-xb5avb3', 620, 370, { marking: 'B3 pressure switch indication' });
+  const supply = device('X50', 'phoenix-contact-3209510', 480, 245,
+    { terminalStrip: 'XT20', position: '1', marking: 'External indicator +24 V' });
+  const returnTerminal = device('X51', 'phoenix-contact-3209510', 850, 370,
+    { terminalStrip: 'XT20', position: '2', marking: 'External indicator 0 V' });
+  for (const [coreId, ref, potential, destination, pinNumber, boundaryX, direction] of [
+    ['1', 'X48', 'K5 dry contact common', supply, '2', 900, 'right'],
+    ['2', 'X49', 'K5 dry normally open output', lamp, 'X1', 210, 'left']
+  ]) {
+    const terminal = project.objects.find(object=>object.id===pressureRelay.id+'-'+ref.toLowerCase());
+    const start = pin(terminal, '2'), end = pin(destination, pinNumber);
+    const id = 'core-' + coreId;
+    const send = wire(id + '-relay', pressureRelay.id, start, { x: 950, y: start.y }, potential);
+    const receive = wire(id + '-indicator', pressureLamp.id, { x: boundaryX, y: end.y }, end, potential);
+    for (const segment of [send, receive]) Object.assign(segment, { cableId: 'W-H6', coreId });
+    link(id, 'W-H6:' + coreId + ' · ' + potential, send, receive, ref, destination.ref, ['right', direction]);
+  }
+  wire('lamp-return', pressureLamp.id, pin(lamp, 'X2'), pin(returnTerminal, '1'), 'H6 external indicator 0 V');
+  notes([
+    ['title', 108, 'XT20 · EXTERNALLY POWERED PRESSURE INDICATION'],
+    ['common', 195, 'XT20:1 supplies K5 common over W-H6 core 1.'],
+    ['output', 455, 'K5 normally open feeds H6 over core 2 when K5 is energized.'],
+    ['scope', 510, 'XT20:2 returns to the external supply. The drawing leaves supply hardware and protection unassigned.']
   ]);
 });
 
