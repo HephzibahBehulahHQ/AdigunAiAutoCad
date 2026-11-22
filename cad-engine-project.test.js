@@ -1997,17 +1997,23 @@ test('irrigation controller preserves separate field signals and an isolated pum
   const file = path.join(__dirname, 'examples/real-projects/irrigation-controller.adigun.json');
   const project = engine.parseProject(fs.readFileSync(file, 'utf8')).project;
   const report = engine.analyzeProject(project);
-  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [14, 25, 0, 0]);
+  assert.deepEqual([report.sheetCount, report.crossSheetConnectionCount, report.openEndpointCount, report.geometryErrorCount], [15, 27, 0, 0]);
   const nets = report.globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(',')).sort();
   assert.deepEqual(nets, [
-    'A1:X10:1,A1:X12:1,B1:1,PS1:+,S1:13,S2:21,X18:1,X18:2,X1:1,X1:2,X20:1,X20:2,X21:1,X21:2,X5:1,X5:2,X7:1,X7:2', 'A1:X10:10,X8:1,X8:2', 'A1:X10:11,X19:1,X19:2', 'A1:X10:12,S2:22', 'A1:X10:2,A1:X10:6,A1:X11:1,A1:X12:2,B1:3,H1:X2,K1:A2,K2:A2,PS1:-,X22:1,X22:2,X2:1,X2:2',
-    'A1:X10:7,B1:4', 'A1:X10:8,S1:14', 'A1:X10:9,X6:1,X6:2', 'A1:X11:2,B1:2', 'A1:X12:3,K1:A1', 'A1:X12:4,H1:X1', 'A1:X12:5,K2:A1', 'K1:11,X3:1,X3:2', 'K1:14,X4:1,X4:2', 'K2:11,X15:1,X15:2', 'K2:12,X16:1,X16:2', 'K2:14,X17:1,X17:2', 'PS1:L,X9:1,X9:2', 'PS1:N,X10:1,X10:2', 'PS1:PE,X11:1,X11:2,X12:1,X12:2,X13:1,X13:2,X14:1,X14:2'
+    'A1:X10:1,A1:X12:1,B1:1,PS1:+,S1:13,S2:21,X18:1,X18:2,X1:1,X1:2,X20:1,X20:2,X21:1,X21:2,X5:1,X5:2,X7:1,X7:2', 'A1:X10:10,X8:1,X8:2', 'A1:X10:11,X19:1,X19:2', 'A1:X10:12,S2:22', 'A1:X10:2,A1:X10:6,A1:X11:1,A1:X12:2,B1:3,H1:X2,K1:A2,K2:A2,PS1:-,X22:1,X22:2,X25:1,X25:2,X2:1,X2:2',
+    'A1:X10:7,B1:4', 'A1:X10:8,S1:14', 'A1:X10:9,X6:1,X6:2', 'A1:X11:2,B1:2', 'A1:X12:3,K1:A1,X23:1,X23:2,X24:1,X24:2', 'A1:X12:4,H1:X1', 'A1:X12:5,K2:A1', 'K1:11,X3:1,X3:2', 'K1:14,X4:1,X4:2', 'K2:11,X15:1,X15:2', 'K2:12,X16:1,X16:2', 'K2:14,X17:1,X17:2', 'PS1:L,X9:1,X9:2', 'PS1:N,X10:1,X10:2', 'PS1:PE,X11:1,X11:2,X12:1,X12:2,X13:1,X13:2,X14:1,X14:2'
   ]);
   const opened = structuredClone(project);
   opened.objects.find(object => object.ref === 'X20').properties.knifePosition = 'open';
   const openedNets = engine.analyzeProject(opened).globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(','));
   assert.ok(openedNets.includes('B1:1,X20:2,X21:1,X21:2'));
   assert.ok(openedNets.some(net => net.includes('PS1:+') && net.includes('X20:1') && !net.includes('B1:1')));
+  const demandOpened = structuredClone(project);
+  demandOpened.objects.find(object => object.ref === 'X23').properties.knifePosition = 'open';
+  const demandNets = engine.analyzeProject(demandOpened).globalNets.map(net => net.pins.map(pin => pin.ref + ':' + pin.number).sort().join(','));
+  assert.ok(demandNets.includes('A1:X12:3,X23:1'));
+  assert.ok(demandNets.includes('K1:A1,X23:2,X24:1,X24:2'));
+  assert.ok(demandNets.includes('A1:X10:9,X6:1,X6:2'));
   const schedule = project.objects.filter(object => object.sheetId === 'irrigation-plc-io-schedule');
   const channels = engine.plcIoList(project).rows.filter(row => row.connectedPins.length);
   assert.equal(channels.length, 10);
