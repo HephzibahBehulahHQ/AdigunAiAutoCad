@@ -870,6 +870,24 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     });
     assert.equal(cameraStats.nativeObjectCount, 1450);
     assert.equal(cameraStats.nativeNodesPreserved, true, 'camera motion does not rebuild the dense drawing');
+    const denseTerminal = densePage.locator('#userDrawings [data-object="scale-terminal-125"]');
+    await denseTerminal.dispatchEvent('dblclick', { bubbles: true });
+    await densePage.locator('#openCommands').click();
+    await densePage.locator('#commands').getByRole('button', { name: /Fit selection/ }).click();
+    await densePage.getByRole('button', { name: 'Draw wire', exact: true }).click();
+    const densePin = denseTerminal.locator('[data-component-pin="connection-2"]');
+    const anchor = await densePin.evaluate(marker => {
+      const point = new DOMPoint(Number(marker.getAttribute('cx')), Number(marker.getAttribute('cy'))).matrixTransform(marker.getScreenCTM());
+      return { x: point.x, y: point.y };
+    });
+    await densePage.mouse.move(anchor.x, anchor.y + 8);
+    const target = densePage.locator('[data-wire-pin-target="connection-2"]');
+    const resolved = await target.evaluate(marker => {
+      const point = new DOMPoint(Number(marker.getAttribute('cx')), Number(marker.getAttribute('cy'))).matrixTransform(marker.getScreenCTM());
+      return { x: point.x, y: point.y };
+    });
+    assert.ok(Math.hypot(resolved.x - anchor.x, resolved.y - anchor.y) < 0.1,
+      'dense sheet resolves the correct nearby terminal after camera changes: ' + JSON.stringify({ anchor, resolved }));
     const denseStats = { sheets: 1, components: 250, wireSegments: 1200, openMs, ...cameraStats };
     console.info('Dense Chromium drawing timings:', JSON.stringify(denseStats));
     if (process.env.CAD_SCREENSHOT_DIR) {

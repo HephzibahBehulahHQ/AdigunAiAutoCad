@@ -525,17 +525,32 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   }
   function undo(){applyDrawingHistory(state.undo,state.redo,'Drawing command undone.');}
   function redo(){applyDrawingHistory(state.redo,state.undo,'Drawing command restored.');}
-  let renderedWirePins=[];
+  let renderedWirePins=[],wirePinsSorted=false;
   function nearbyWirePin(point,radius=state.osnap?12:0){
     if(!(radius>0)||!renderedWirePins.length)return null;
     const screen=userDrawings.getScreenCTM();
     if(!screen)return null;
+    const determinant=Math.abs(screen.a*screen.d-screen.b*screen.c);
+    if(!determinant)return null;
+    const extentX=radius*Math.hypot(screen.d,screen.c)/determinant;
+    const extentY=radius*Math.hypot(screen.b,screen.a)/determinant;
+    if(!wirePinsSorted){renderedWirePins.sort((a,b)=>a.x-b.x);wirePinsSorted=true;}
+    let first=0,last=renderedWirePins.length;
+    while(first<last){
+      const middle=Math.floor((first+last)/2);
+      if(renderedWirePins[middle].x<point.x-extentX)first=middle+1;else last=middle;
+    }
     let nearest=null,best=radius*radius;
-    for(const anchor of renderedWirePins){
+    for(let index=first;index<renderedWirePins.length;index++){
+      const anchor=renderedWirePins[index];
       const x=anchor.x-point.x,y=anchor.y-point.y;
+      if(x>extentX)break;
+      if(Math.abs(y)>extentY)continue;
       const screenX=screen.a*x+screen.c*y,screenY=screen.b*x+screen.d*y;
       const distance=screenX*screenX+screenY*screenY;
-      if(distance<=best){nearest=anchor;best=distance;}
+      if(distance<best||distance===best&&(!nearest||anchor.order>nearest.order)){
+        nearest=anchor;best=distance;
+      }
     }
     return nearest;
   }
@@ -557,8 +572,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
     return nearbyWirePin(svgPoint(event),event.pointerType==='touch'?16:state.osnap?14:10);
   }
+  let lastWirePointerEvent=null,lastWirePointerPoint=null;
   function wirePointerPoint(event){
-    return wirePinPoint(event)||snapDrawingPoint(svgPoint(event));
+    if(event!==lastWirePointerEvent){
+      lastWirePointerEvent=event;
+      lastWirePointerPoint=wirePinPoint(event)||snapObjectPoint(svgPoint(event));
+    }
+    return lastWirePointerPoint;
   }
   function svgViewPoint(evt){const p=drawing.createSVGPoint();p.x=evt.clientX;p.y=evt.clientY;return p.matrixTransform(drawing.getScreenCTM().inverse());}
   function svgPoint(evt){const point=svgViewPoint(evt),transform=state.drawingTransform||{scale:1,x:0,y:0};return window.AdigunCADEngine.invertDrawingTransform({x:point.x,y:point.y},transform);}
@@ -1060,10 +1080,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     refreshSelectedProperties();
     notify('Object resized. Undo is available.');
   }
-  function renderObjects(){renderedWirePins=[];userDrawings.replaceChildren();applyProjectDrawingTransform();for(const obj of state.objects){let el;const stroke=obj.stroke||'#164eac',fill=obj.fill||'none',width=obj.strokeWidth||1.8;if(['wire','line','arrow','curve','freehand'].includes(obj.kind)){el=document.createElementNS('http://www.w3.org/2000/svg','path');let d;if(obj.kind==='wire')d=wirePath(obj);else if(obj.kind==='curve'){const cx=(obj.x1+obj.x2)/2,cy=Math.min(obj.y1,obj.y2)-Math.max(22,Math.abs(obj.x2-obj.x1)*.22);d=`M${obj.x1} ${obj.y1} Q${cx} ${cy} ${obj.x2} ${obj.y2}`;}else if(obj.kind==='freehand')d=(obj.points||[]).map((p,i)=>`${i?'L':'M'}${p.x} ${p.y}`).join(' ');else if(obj.kind==='arrow'){const a=Math.atan2(obj.y2-obj.y1,obj.x2-obj.x1),len=10,p1={x:obj.x2-len*Math.cos(a-Math.PI/6),y:obj.y2-len*Math.sin(a-Math.PI/6)},p2={x:obj.x2-len*Math.cos(a+Math.PI/6),y:obj.y2-len*Math.sin(a+Math.PI/6)};d=`M${obj.x1} ${obj.y1}L${obj.x2} ${obj.y2}M${p1.x} ${p1.y}L${obj.x2} ${obj.y2}L${p2.x} ${p2.y}`;}else d=`M${obj.x1} ${obj.y1}L${obj.x2} ${obj.y2}`;el.setAttribute('d',d);el.setAttribute('class',`drawing-object ${state.selectedObjectIds.includes(obj.id)||obj.id===state.selected?'selected-object':''}`);el.setAttribute('fill','none');el.setAttribute('stroke',stroke);el.setAttribute('stroke-width',width);el.setAttribute('stroke-linecap','round');el.setAttribute('stroke-linejoin','round');}
+  function renderObjects(){renderedWirePins=[];wirePinsSorted=false;userDrawings.replaceChildren();applyProjectDrawingTransform();for(const obj of state.objects){let el;const stroke=obj.stroke||'#164eac',fill=obj.fill||'none',width=obj.strokeWidth||1.8;if(['wire','line','arrow','curve','freehand'].includes(obj.kind)){el=document.createElementNS('http://www.w3.org/2000/svg','path');let d;if(obj.kind==='wire')d=wirePath(obj);else if(obj.kind==='curve'){const cx=(obj.x1+obj.x2)/2,cy=Math.min(obj.y1,obj.y2)-Math.max(22,Math.abs(obj.x2-obj.x1)*.22);d=`M${obj.x1} ${obj.y1} Q${cx} ${cy} ${obj.x2} ${obj.y2}`;}else if(obj.kind==='freehand')d=(obj.points||[]).map((p,i)=>`${i?'L':'M'}${p.x} ${p.y}`).join(' ');else if(obj.kind==='arrow'){const a=Math.atan2(obj.y2-obj.y1,obj.x2-obj.x1),len=10,p1={x:obj.x2-len*Math.cos(a-Math.PI/6),y:obj.y2-len*Math.sin(a-Math.PI/6)},p2={x:obj.x2-len*Math.cos(a+Math.PI/6),y:obj.y2-len*Math.sin(a+Math.PI/6)};d=`M${obj.x1} ${obj.y1}L${obj.x2} ${obj.y2}M${p1.x} ${p1.y}L${obj.x2} ${obj.y2}L${p2.x} ${p2.y}`;}else d=`M${obj.x1} ${obj.y1}L${obj.x2} ${obj.y2}`;el.setAttribute('d',d);el.setAttribute('class',`drawing-object ${state.selectedObjectIds.includes(obj.id)||obj.id===state.selected?'selected-object':''}`);el.setAttribute('fill','none');el.setAttribute('stroke',stroke);el.setAttribute('stroke-width',width);el.setAttribute('stroke-linecap','round');el.setAttribute('stroke-linejoin','round');}
         else if(obj.kind==='rect'||obj.kind==='ellipse'||obj.kind==='triangle'){const x=Math.min(obj.x,obj.x2),y=Math.min(obj.y,obj.y2),w=Math.max(2,Math.abs(obj.x2-obj.x)),h=Math.max(2,Math.abs(obj.y2-obj.y));if(obj.kind==='triangle'){el=document.createElementNS('http://www.w3.org/2000/svg','polygon');el.setAttribute('points',`${x+w/2},${y} ${x+w},${y+h} ${x},${y+h}`);}else{el=document.createElementNS('http://www.w3.org/2000/svg',obj.kind);if(obj.kind==='rect'){el.setAttribute('x',x);el.setAttribute('y',y);el.setAttribute('width',w);el.setAttribute('height',h);}else{el.setAttribute('cx',(x+x+w)/2);el.setAttribute('cy',(y+y+h)/2);el.setAttribute('rx',w/2);el.setAttribute('ry',h/2);}}el.setAttribute('fill',fill);el.setAttribute('stroke',stroke);el.setAttribute('stroke-width',width);el.setAttribute('class',`drawing-object ${state.selectedObjectIds.includes(obj.id)||obj.id===state.selected?'selected-object':''}`);}
         else if(obj.kind==='circle'){el=document.createElementNS('http://www.w3.org/2000/svg','circle');el.setAttribute('cx',obj.x);el.setAttribute('cy',obj.y);el.setAttribute('r',Math.max(2,Math.hypot(obj.x2-obj.x,obj.y2-obj.y)));el.setAttribute('fill',fill);el.setAttribute('stroke',stroke);el.setAttribute('stroke-width',width);el.setAttribute('class',`drawing-object ${state.selectedObjectIds.includes(obj.id)||obj.id===state.selected?'selected-object':''}`);}
-        else if(obj.kind==='component-instance'){const validation=window.AdigunCADEngine.validateInstance(obj);if(!validation.valid)continue;const item=catalogItemForObject(obj);if(!item)continue;el=buildCatalogGlyph(obj,item,stroke,width);markComponentPins(el,validation.definition);if(drawingObjectVisible(obj)){for(const pin of window.AdigunCADEngine.worldPins(obj)){renderedWirePins.push({x:pin.x,y:pin.y,attachment:{instanceId:obj.id,pinId:pin.id}});}}const description=componentHoverDescription(obj,validation.definition),title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=description;el.insertBefore(title,el.firstChild);el.setAttribute('aria-label',description);}
+        else if(obj.kind==='component-instance'){const validation=window.AdigunCADEngine.validateInstance(obj);if(!validation.valid)continue;const item=catalogItemForObject(obj);if(!item)continue;el=buildCatalogGlyph(obj,item,stroke,width);markComponentPins(el,validation.definition);if(drawingObjectVisible(obj)){for(const pin of window.AdigunCADEngine.worldPins(obj)){renderedWirePins.push({x:pin.x,y:pin.y,order:renderedWirePins.length,attachment:{instanceId:obj.id,pinId:pin.id}});}}const description=componentHoverDescription(obj,validation.definition),title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=description;el.insertBefore(title,el.firstChild);el.setAttribute('aria-label',description);}
         else if(obj.kind==='dimension'){el=buildDimension(obj,stroke,width);}
         else if(obj.kind==='text'){el=document.createElementNS('http://www.w3.org/2000/svg','text');el.setAttribute('x',obj.x);el.setAttribute('y',obj.y);el.setAttribute('font-size',Number.isFinite(obj.fontSize)&&obj.fontSize>0?obj.fontSize:12);el.setAttribute('fill',stroke);el.setAttribute('class',`drawing-object ${state.selectedObjectIds.includes(obj.id)||obj.id===state.selected?'selected-object':''}`);el.textContent=obj.text;}
         else {el=document.createElementNS('http://www.w3.org/2000/svg','g');el.setAttribute('transform',`translate(${obj.x} ${obj.y}) rotate(${obj.rotation||0})`);el.setAttribute('class',`drawing-object ${state.selectedObjectIds.includes(obj.id)||obj.id===state.selected?'selected-object':''}`);const shape=document.createElementNS('http://www.w3.org/2000/svg',obj.kind==='motor'?'circle':'rect');if(obj.kind==='motor'){shape.setAttribute('cx','0');shape.setAttribute('cy','0');shape.setAttribute('r','18');}else{shape.setAttribute('x','-21');shape.setAttribute('y','-14');shape.setAttribute('width','42');shape.setAttribute('height','28');}shape.setAttribute('fill','#fff');shape.setAttribute('stroke',stroke);shape.setAttribute('stroke-width','1.5');el.append(shape);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x','0');t.setAttribute('y','4');t.setAttribute('text-anchor','middle');t.setAttribute('font-size','9');t.setAttribute('fill',stroke);t.textContent=({terminal:'X1',relay:'K2',contact:'13/14',breaker:'F2',sensor:'B2',motor:'M2',plc:'I1',ground:'PE'})[obj.kind]||'DEV';el.append(t);}
