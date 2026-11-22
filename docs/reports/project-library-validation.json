@@ -1260,7 +1260,7 @@
       "briefId": "44",
       "role": "standalone-example",
       "path": "examples/real-projects/terminal-marshalling.adigun.json",
-      "revision": "1.1",
+      "revision": "1.2",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1277,43 +1277,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 97,
-        "additionalConnectedSheetsRequired": 67,
+        "additionalAuthoredSheetsRequired": 96,
+        "additionalConnectedSheetsRequired": 66,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "marshalling-cabinet",
         "sheetName": "Controller and XT1 terminals",
-        "segments": "64,0,92,0 92,0,92,13 92,13,100,13 64,9,81,9 81,9,81,16 81,16,100,16 29,22,63,22 63,22,63,23 63,23,100,23 29,28,63,28 63,28,63,27 63,27,100,27 94,16,94,27 94,27,94,30 94,30,100,30 29,46,70,46 70,46,70,33 70,33,100,33 16,22,0,22 16,28,0,28 16,46,0,46 58,22,58,15 58,15,29,15 29,54,75,54 75,54,75,37 75,37,100,37 29,61,80,61 80,61,80,40 80,40,100,40 16,15,0,15 16,54,0,54 16,61,0,61"
+        "segments": "64,0,92,0 92,0,92,13 92,13,100,13 64,9,81,9 81,9,81,16 81,16,100,16 29,22,63,22 63,22,63,23 63,23,100,23 29,28,63,28 63,28,63,27 63,27,100,27 94,16,94,27 94,27,94,30 94,30,100,30 29,46,70,46 70,46,70,33 70,33,100,33 16,22,0,22 16,28,0,28 16,46,0,46 58,22,58,15 58,15,29,15 29,54,75,54 75,54,75,37 75,37,100,37 29,61,80,61 80,61,80,40 80,40,100,40 16,15,0,15 16,54,0,54 16,61,0,61 16,93,0,93"
       },
-      "topologySha256": "e6f368e91d960435d7c9361a83e5748dc2438206a9cebae3d0aa317ec89c745b",
-      "electricalStructureSha256": "3658123cdb6dc93d596f23e71eab3dcbe1dfbf56b433f2671f852851b780780b",
+      "topologySha256": "75aa2f0eac1f45d14f6b226a614f46d1f3c5b33760750f693c92e4bddf9b5db4",
+      "electricalStructureSha256": "646b20788d74b0328e67d6aa02a5845ed6b88ccde8e7e15178e4866fea3c8446",
       "csvSha256": {
-        "bom": "acd4a064965da0d7f4adc8e0a441e7fb856b3e024a5d9b980d39aa4d3d01d1b6",
-        "wires": "51b5f3cf313a049711f03295440dfc5cadd24bfc08c5ec8eb88e1a8aae36b9be",
-        "terminals": "baeef4a3f6e741b96f44b4e55bc2dbaa6c0459b6b03ed8a979ef1cbca4c90240",
-        "plcIo": "cb43af25ab973b78be7027de375908f09c54f226601052e0c207b9bfae278a9b",
-        "cables": "377297a20491b69626e7308c6aa239fa3b6dc6f69661d6b0fa54b6417c52fa55",
-        "devices": "870bdccc36bac91a6e28b73622bbae09aec742f303b84d61873abca84903d135",
-        "sheets": "b93af64e0650fc1d5e7aa5975f975e1d6441a85722e975fb3b7f997753d61238"
+        "bom": "8b1c6ed763dbaacad54b4161cf66c633e7e51037b96a533cc37bfcb5913b7590",
+        "wires": "05d935db307d83df3cc906fe1e9e1d3f9f686c3fc1b808cf4af84dbec092e26b",
+        "terminals": "d9e5e8c7997334ea1a508d4287cb7d8ea5e27edcba8eeea36baced6d9d17ad25",
+        "plcIo": "084d8959569ea57e44074dc962c3715247a4ecc7dbc17f97093af7c794957f09",
+        "cables": "3bcb03c60dbcb2d0648e974eebd7f2d12b3f92c8c362170b08f52d0d27371064",
+        "devices": "808c8aac91a026467603e320216e71ffd69bd3d6a358ee54a74ba7b6b810c96e",
+        "sheets": "19a4739246f54fe6eb7343e2445893a188ffd3eff9c95313e206f593c067cdcb"
       },
       "metrics": {
-        "sheetCount": 3,
-        "authoredSheetCount": 3,
-        "connectedSheetCount": 3,
-        "contentObjectCount": 78,
+        "sheetCount": 4,
+        "authoredSheetCount": 4,
+        "connectedSheetCount": 4,
+        "contentObjectCount": 97,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 16,
-        "wireCount": 52,
-        "netCount": 12,
-        "globalNetCount": 6,
-        "crossSheetConnectionCount": 6,
+        "componentCount": 22,
+        "wireCount": 61,
+        "netCount": 16,
+        "globalNetCount": 7,
+        "crossSheetConnectionCount": 9,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
-        "bomRowCount": 6,
-        "wireListRowCount": 52,
-        "terminalListRowCount": 28
+        "bomRowCount": 7,
+        "wireListRowCount": 61,
+        "terminalListRowCount": 40
       },
       "errors": []
     }
