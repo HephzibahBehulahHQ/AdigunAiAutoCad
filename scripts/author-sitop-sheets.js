@@ -20,11 +20,12 @@ const remoteLossIndicator = { id: 'branch-b-remote-indicator', number: 'A2/027',
 const indicatorSupplyTest = { id: 'indicator-supply-test', number: 'A2/028', name: 'XT16 independent indicator supply test access', projectSectionId: 'A2' };
 const pressureTerminations = { id: 'b3-field-terminations', number: 'A2/029', name: 'XT17 B3 field cable terminations', projectSectionId: 'A2' };
 const pressureStatus = { id: 'b3-switching-boundary', number: 'A2/030', name: 'XT18 B3 switching output boundary', projectSectionId: 'A2' };
-const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest, pressureTerminations, pressureStatus];
+const pressureRelay = { id: 'b3-switching-relay', number: 'A2/031', name: 'K5 pressure status relay and dry output', projectSectionId: 'A2' };
+const authoredSheets = [annunciator, testAccess, fieldIndicator, branchIndicator, secondPressureSensor, branchBMonitor, branchBLossAlert, remoteLossIndicator, indicatorSupplyTest, pressureTerminations, pressureStatus, pressureRelay];
 const authoredObject = item => authoredSheets.some(sheet => item.id.startsWith(sheet.id + '-'));
 
 const project = structuredClone(source);
-project.revision = '3.8';
+project.revision = '3.9';
 project.sheets = project.sheets.filter(item => !authoredSheets.some(sheet => sheet.id === item.id));
 project.sheets.push(...authoredSheets);
 project.objects = project.objects.filter(object => !authoredObject(object));
@@ -251,7 +252,7 @@ author(secondPressureSensor, ({ device, pin, wire, link, notes }) => {
     ['title', 108, 'B3 · SECOND PRESSURE INPUT TO AI1'],
     ['input', 218, 'B3 OUT2 routes through XT9:1 to CPU AI1. B2 retains its own AI0 signal.'],
     ['return-note', 440, 'B3 L− returns via XT9:2 to the shared 2M and 0 V reference.'],
-    ['scope', 490, 'W-B3 terminates at XT17 on A2/029. OUT2 assumes voltage mode. OUT1 reaches XT18 without an assigned load.']
+    ['scope', 490, 'W-B3 terminates at XT17 on A2/029. OUT2 assumes voltage mode. OUT1 reaches K5 through XT18.']
   ]);
 });
 
@@ -274,9 +275,39 @@ author(pressureStatus, ({ device, pin, wire, link, notes }) => {
     wire('return-receive', pressureStatus.id, { x: 215, y: returnPin.y }, returnPin, '0 V DC'), 'X44', reference.ref);
   notes([
     ['title', 108, 'XT18 · B3 SWITCHING OUTPUT BOUNDARY'],
-    ['signal', 205, 'XT18:1 brings OUT1 from W-B3 core 4 to an available cabinet terminal.'],
+    ['signal', 205, 'XT18:1 brings OUT1 from W-B3 core 4 to K5 A1 on A2/031.'],
     ['reference', 465, 'XT18:2 provides the associated 0 V reference. AI1 stays on the separate OUT2 net.'],
-    ['scope', 510, 'The receiving device, switching parameters and sensing threshold remain unassigned.']
+    ['scope', 510, 'The relay interface assumes OUT1 sourcing mode. Switching parameters and sensing threshold remain unassigned.']
+  ]);
+});
+
+author(pressureRelay, ({ device, pin, wire, link, notes }) => {
+  const relay = device('K5', 'phoenix-contact-2966171', 480, 330, { marking: 'B3 pressure switching status' });
+  const common = device('X48', 'phoenix-contact-3209510', 790, 330,
+    { terminalStrip: 'XT19', position: '1', marking: 'Dry contact common' });
+  const contact = device('X49', 'phoenix-contact-3209510', 790, 420,
+    { terminalStrip: 'XT19', position: '2', marking: 'Dry normally open output' });
+  for (const [key, sourceRef, terminal, potential] of [
+    ['switch', 'X46', 'A1', 'B3 switching output'],
+    ['return', 'X47', 'A2', '0 V DC']
+  ]) {
+    const source = project.objects.find(object => object.id === pressureStatus.id + '-' + sourceRef.toLowerCase());
+    const start = pin(source, '2'), end = pin(relay, terminal);
+    const send = wire(key + '-send', pressureStatus.id, start, { x: 850, y: start.y }, potential);
+    const receive = wire(key + '-receive', pressureRelay.id, { x: 210, y: end.y }, end, potential);
+    link(key, 'K5 coil ' + key, send, receive, sourceRef, relay.ref);
+  }
+  wire('common', pressureRelay.id, pin(relay, '11'), pin(common, '1'), 'K5 dry contact common');
+  const no = pin(relay, '14'), output = pin(contact, '1');
+  const turn = { x: 645, y: no.y }, drop = { x: 645, y: output.y };
+  wire('no-pin', pressureRelay.id, no, turn, 'K5 dry normally open output');
+  wire('no-drop', pressureRelay.id, turn, drop, 'K5 dry normally open output');
+  wire('no-terminal', pressureRelay.id, drop, output, 'K5 dry normally open output');
+  notes([
+    ['title', 108, 'XT19 · B3 PRESSURE STATUS RELAY'],
+    ['configuration', 210, 'The circuit assumes B3 OUT1 is configured as a PNP sourcing output.'],
+    ['terminal', 465, 'K5 presents a dry common and normally open contact at XT19. Terminal 12 is unused.'],
+    ['scope', 510, 'Verify voltage at K5 and actual loading. Pressure setpoint, external load and protection remain unassigned.']
   ]);
 });
 
