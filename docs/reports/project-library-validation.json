@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 10,
-    "validatedArtifactCount": 10,
-    "distinctTopologyCount": 8,
+    "projectArtifactCount": 11,
+    "validatedArtifactCount": 11,
+    "distinctTopologyCount": 9,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -349,7 +349,9 @@
           "id": "46",
           "category": "Specialized international designs",
           "title": "Agricultural irrigation automation controller",
-          "projectIds": [],
+          "projectIds": [
+            "irrigation-controller"
+          ],
           "qualifiedProjectId": null
         },
         {
@@ -1382,6 +1384,70 @@
         "bomRowCount": 7,
         "wireListRowCount": 60,
         "terminalListRowCount": 50
+      },
+      "errors": []
+    },
+    {
+      "id": "irrigation-controller",
+      "title": "Irrigation pressure monitoring and pump request",
+      "topologyId": "irrigation-pressure-dual-output-isolated-request",
+      "briefId": "46",
+      "role": "standalone-example",
+      "path": "examples/real-projects/irrigation-controller.adigun.json",
+      "revision": "1.0",
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "releaseScale": {
+        "qualified": false,
+        "additionalAuthoredSheetsRequired": 97,
+        "additionalConnectedSheetsRequired": 67,
+        "sheetIdsWithoutElectricalConnectivity": []
+      },
+      "wirePreview": {
+        "sheetId": "irrigation-plc",
+        "sheetName": "Controller supply and I/O",
+        "segments": "27,9,29,9 29,9,29,13 29,13,44,13 27,18,29,18 29,18,29,15 29,15,44,15 40,15,40,24 40,24,44,24 76,13,85,13 85,13,85,2 85,2,34,2 34,2,34,15 33,13,33,0 33,0,93,0 93,0,93,28 93,28,76,28 38,15,38,50 38,50,88,50 88,50,88,30 88,30,76,30 30,13,30,6 30,6,0,6 34,15,34,42 34,42,0,42 76,15,100,15 44,26,0,26 76,32,100,32 88,42,100,42"
+      },
+      "topologySha256": "25c97fdbb0a71187e67b4d6b1961e568f2b18ed1f5f88d64573fd98492d7a656",
+      "electricalStructureSha256": "b9ed8ae929ee141a3b4da6963e05e9709b60459a755b0cd6fb5c9da9bbcae4d8",
+      "csvSha256": {
+        "bom": "9b57fdaf888a7873a0d88da444044d4baf1e6b60f57d8f8052423fe7c207bf5a",
+        "wires": "087c62a38ddb0dbe55484ca9788bc85091afc138f441db6b507b22928f38746e",
+        "terminals": "61a1d3d92f582d31a00951fa5d4cda24b2f13795e108cf7465609efd6b21f842",
+        "plcIo": "9e39741c67ce9a76d4230ae0fbff013b2598a83f7f6a12ea15903bbbcfbdd41a",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208",
+        "devices": "47df98f7346b05a2c6789729bc9cc2c984834cb308beac6dff9a2a664ae11214",
+        "sheets": "9806f0d43b49ef3c5c8502f851083915e7654ad184b179d47b2cf07ca57781d3"
+      },
+      "metrics": {
+        "sheetCount": 3,
+        "authoredSheetCount": 3,
+        "connectedSheetCount": 3,
+        "contentObjectCount": 33,
+        "emptyContentSheetIds": [],
+        "repeatedContentSheets": [],
+        "componentCount": 7,
+        "wireCount": 20,
+        "netCount": 13,
+        "globalNetCount": 7,
+        "crossSheetConnectionCount": 6,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 4,
+        "wireListRowCount": 20,
+        "terminalListRowCount": 8
       },
       "errors": []
     }

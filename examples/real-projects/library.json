@@ -104,6 +104,16 @@
       "domain": "Industrial test instrumentation",
       "standardProfile": "IEC-style symbols",
       "briefId": "40"
+    },
+    {
+      "id": "irrigation-controller",
+      "title": "Irrigation pressure monitoring and pump request",
+      "topologyId": "irrigation-pressure-dual-output-isolated-request",
+      "path": "examples/real-projects/irrigation-controller.adigun.json",
+      "role": "standalone-example",
+      "domain": "Irrigation instrumentation and pump control",
+      "standardProfile": "IEC-style symbols",
+      "briefId": "46"
     }
   ],
   "briefs": [
