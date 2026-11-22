@@ -7,6 +7,8 @@ Open the [pressure-sensor drawing](https://adigunaiautocad.hephzibahbehulah.com/
 
 While editing a published example, use **Copy source example sheet link** in the command palette to share the original drawing. Share the saved project file to send your edits.
 
+Right-click a wire and choose **Select wires on this net** to select its visible segments on the current sheet. A stroke color change applies to the selection as one undoable edit.
+
 The drafting viewport fills the workspace. Model coordinates use positive X to the right and positive Y downward, with negative coordinates available. New sheets start with the print frame hidden. Use **Toggle print frame**, **Fit print frame**, **Fit selection**, or **Go to origin** in the command palette. **Fit drawing to view** includes visible off-frame objects. Pan with middle-button drag or Space + drag, and use the wheel to zoom around the pointer.
 
 In **Drafting settings**, change the display grid and snap intervals independently. Select inches or millimetres for the ruler and cursor readout. Drag from the top ruler for a horizontal guide or from the left ruler for a vertical guide. The Guides controls let you enter exact positions, lock, hide, or delete guides. Guides save with the sheet and stay out of drawing exports.
@@ -25,7 +27,7 @@ Set each paper margin independently in Properties. Margins position the print fr
 
 For a custom sheet, choose **Custom** in the **Paper size** field in Properties, then set the width and height in millimetres. Print and frame SVG export use the saved dimensions.
 
-Open **Symbol Library**, pick a component, then click its position on the sheet. The component stays selected. Open **Properties** to edit its values. An open Properties panel updates automatically. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
+Open **Symbol Library**, pick a component, then click its position on the sheet. Placement opens **Properties** for the selected component. A click on a placed component opens its properties as well. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 

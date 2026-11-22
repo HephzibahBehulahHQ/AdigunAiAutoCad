@@ -355,14 +355,17 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await wiringPage.mouse.click(point.x, point.y);
     };
     const terminalIds = [];
+    let propertiesViewportWidth;
     for (const x of [85, 210, 335]) {
       await wiringPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]').click();
       await clickDrawingPoint(x, 110);
-      assert.equal(await wiringPage.locator('#rightPanel.open').count(), 0, 'placement keeps a closed inspector closed');
-      assert.equal((await wiringPage.locator('#drawing').boundingBox()).width, viewportSize.width,
-        'consecutive placements keep the same canvas width');
       const selected = wiringPage.locator('#userDrawings [data-object].selected-object');
-      terminalIds.push(await selected.getAttribute('data-object'));
+      const terminalId = await selected.getAttribute('data-object');
+      terminalIds.push(terminalId);
+      await wiringPage.locator('#rightPanel.open [data-symbol-scale="' + terminalId + '"]').waitFor();
+      const width = (await wiringPage.locator('#drawing').boundingBox()).width;
+      propertiesViewportWidth ??= width;
+      assert.equal(width, propertiesViewportWidth, 'consecutive placements keep the Properties dock stable');
     }
     assert.equal(new Set(terminalIds).size, 3);
     const pin = (objectId, number) => wiringPage.locator('#userDrawings [data-object="' + objectId + '"] [data-component-pin="connection-' + number + '"]');
@@ -703,6 +706,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     if (process.env.CAD_SCREENSHOT_DIR) await freeDraftingPage.screenshot({ path: path.join(process.env.CAD_SCREENSHOT_DIR, 'free-drafting-canvas.png') });
     const quickInsert = freeDraftingPage.locator('#symbolList [data-insert="phoenix-contact-3212144"]');
     await quickInsert.click({ modifiers: ['Shift'] });
+    await freeDraftingPage.locator('#rightPanel.open [data-symbol-scale]').waitFor();
     await quickInsert.click({ modifiers: ['Shift'] });
     const quickBounds = await freeDraftingPage.locator('#userDrawings > [data-object]').evaluateAll(nodes => nodes.slice(-2).map(node => {
       const { left, right, top, bottom } = node.getBoundingClientRect();
@@ -921,7 +925,28 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await linkedExample.goto(exampleLink.href);
     await linkedExample.getByText(/Example link could not be opened: The linked sheet/).first().waitFor();
     assert.equal(await linkedExample.locator('#sheetTabs .document-tab[data-sheet]').count(), 0);
-    await linkedExample.close();
+    exampleLink.searchParams.set('sheet', 'marshalling-analog-pressure');
+    await linkedExample.goto(exampleLink.href);
+    const feedSegment = linkedExample.locator('#userDrawings [data-object="transducer-feed-1"]');
+    const returnSegment = linkedExample.locator('#userDrawings [data-object="transducer-return-1"]');
+    await feedSegment.waitFor({ state: 'attached' });
+    const originalFeedColor = await feedSegment.getAttribute('stroke');
+    const originalReturnColor = await returnSegment.getAttribute('stroke');
+    const feedPoint = await feedSegment.evaluate(path => {
+      const center = path.getPointAtLength(path.getTotalLength() / 2).matrixTransform(path.getScreenCTM());
+      return { x: center.x, y: center.y };
+    });
+    await feedSegment.dispatchEvent('contextmenu', { bubbles: true, button: 2, clientX: feedPoint.x, clientY: feedPoint.y });
+    await linkedExample.getByRole('menuitem', { name: 'Select wires on this net' }).dispatchEvent('click', { bubbles: true });
+    const selectedWires = linkedExample.locator('#userDrawings path[data-object].selected-object');
+    assert.equal(await selectedWires.count(), 4);
+    await linkedExample.locator('[data-action="palette"]').click();
+    await linkedExample.locator('#paletteSwatches [data-color="#ed3f38"]').click();
+    assert.deepEqual(await selectedWires.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('stroke'))), Array(4).fill('#ed3f38'));
+    assert.equal(await returnSegment.getAttribute('stroke'), originalReturnColor);
+    await linkedExample.keyboard.press('Control+z');
+    assert.equal(await feedSegment.getAttribute('stroke'), originalFeedColor);
+    await linkedExample.close({ runBeforeUnload: false });
 
     const examplePage = await context.newPage();
     await examplePage.goto(address);
