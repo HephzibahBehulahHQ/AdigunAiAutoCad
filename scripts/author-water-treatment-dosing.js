@@ -12,8 +12,10 @@ const command = 'dosing-enable-interface';
 const ready = 'dosing-ready-feedback';
 const running = 'dosing-running-feedback';
 const fault = 'dosing-fault-feedback';
+const power = 'dosing-control-supply';
+const earth = 'dosing-protective-earth';
 const project = {
-  product: 'AdigunAiAutoCad', project: 'Water-treatment dosing and pressure monitoring', revision: '1.1',
+  product: 'AdigunAiAutoCad', project: 'Water-treatment dosing and pressure monitoring', revision: '1.2',
   description: 'Two independent filter pressure inputs and an isolated dosing-enable contact interface.',
   activeSheet: cabinet,
   sheets: [
@@ -22,7 +24,9 @@ const project = {
     { id: command, number: 'A2/003', name: 'Isolated chemical dosing enable contact', projectSectionId: 'A2' },
     { id: ready, number: 'A2/004', name: 'External dosing controller ready contact', projectSectionId: 'A2' },
     { id: running, number: 'A2/005', name: 'External dosing controller running contact', projectSectionId: 'A2' },
-    { id: fault, number: 'A2/006', name: 'External dosing controller fault contact', projectSectionId: 'A2' }
+    { id: fault, number: 'A2/006', name: 'External dosing controller fault contact', projectSectionId: 'A2' },
+    { id: power, number: 'A2/007', name: 'PS1 control supply and AC inlet', projectSectionId: 'A2' },
+    { id: earth, number: 'A2/008', name: 'Cabinet and dosing enclosure PE terminals', projectSectionId: 'A2' }
   ],
   objects: [], crossSheetConnections: []
 };
@@ -75,8 +79,8 @@ function connect(id, potential, cabinetPort, fieldPort, cable) {
 }
 
 const plc = device(cabinet, 'A1', 'siemens-6es7212-1ae40-0xb0', 730, 360);
-const source = terminal(cabinet, 'X1', 370, 234, 'XT1', '1', 'External control +24 V DC');
-const common = terminal(cabinet, 'X2', 370, 292, 'XT1', '2', 'External control 0 V');
+const source = terminal(cabinet, 'X1', 370, 234, 'XT1', '1', 'PS1 control +24 V DC');
+const common = terminal(cabinet, 'X2', 370, 292, 'XT1', '2', 'PS1 control 0 V');
 const inlet = device(sensing, 'B1', 'ifm-pn2070', 610, 290, { marking: 'Filter inlet pressure' });
 const outlet = device(sensing, 'B2', 'ifm-pn2070', 610, 455, { marking: 'Filter outlet pressure' });
 const relay = device(command, 'K1', 'phoenix-contact-2966171', 605, 350, { marking: 'Dosing-enable relay' });
@@ -138,13 +142,49 @@ for (const [sheet, stateLabel, inputPin, channel, strip, cableId, feedRef, retur
     port(sheet, feedback.ref, pin(feedback, '1'), 215, 390, 'left'), { cableId, coreId: '2' });
 }
 
+const ps1 = device(power, 'PS1', 'siemens-sitop-psu100c-6ep1332-5ba00', 585, 345, { marking: 'Dosing cabinet control supply' });
+const earthInlet = device(power, 'X13', 'phoenix-contact-3209536', 300, 460,
+  { terminalStrip: 'XT6', position: '3', marking: 'Incoming PE' });
+for (const [entry, input, y] of [
+  [terminal(power, 'X11', 300, 230, 'XT6', '1', 'Incoming L'), 'L', 230],
+  [terminal(power, 'X12', 300, 345, 'XT6', '2', 'Incoming N'), 'N', 345],
+  [earthInlet, 'PE', 460]
+]) {
+  const end = pin(ps1, input);
+  const bends = y === end.y ? undefined : [{ x: 405, y }, { x: 405, y: end.y }];
+  wire(power, 'ps1-input-' + input.toLowerCase(), input, pin(entry, '2'), end, bends);
+}
+for (const [id, polarity, potential, boundary, startY, edgeY] of [
+  ['control-power-feed', '+', '+24 V DC', source, 234, 260],
+  ['control-power-return', '-', '0 V', common, 292, 320]
+]) {
+  const output = pin(ps1, polarity);
+  connect(id, potential, port(cabinet, boundary.ref, { x: 302, y: startY }, 215, edgeY, 'left', [{ x: 302, y: edgeY }]),
+    port(power, ps1.ref, output, 960, output.y, 'right'));
+}
+
+const [earthEntry, cabinetEarth, dosingEarth] = [
+  ['X14', '1', 380, 300, 'PE from XT6'],
+  ['X15', '2', 785, 300, 'Control cabinet enclosure PE boundary'],
+  ['X16', '3', 785, 425, 'Dosing equipment enclosure PE boundary']
+].map(([ref, position, x, y, marking]) => device(earth, ref, 'phoenix-contact-3209536', x, y,
+  { terminalStrip: 'XT7', position, marking }));
+connect('cabinet-earth-feed', 'PE', port(power, earthInlet.ref, pin(earthInlet, '1'), 215, 460, 'left'),
+  port(earth, earthEntry.ref, pin(earthEntry, '1'), 215, 300, 'left'));
+const junction = { x: 575, y: 300 };
+wire(earth, 'earth-trunk', 'PE', pin(earthEntry, '2'), junction);
+wire(earth, 'controller-enclosure-earth', 'PE', junction, pin(cabinetEarth, '1'));
+wire(earth, 'dosing-enclosure-earth', 'PE', junction, pin(dosingEarth, '1'), [{ x: 575, y: 425 }]);
+
 for (const [sheetId, title, note] of [
-  [cabinet, 'WATER TREATMENT · DOSING AND PRESSURE CONTROL', 'A1 receives two distinct pressure voltages. External controller power enters through XT1.'],
+  [cabinet, 'WATER TREATMENT · DOSING AND PRESSURE CONTROL', 'A1 receives two distinct pressure voltages. PS1 feeds the control circuits through XT1.'],
   [sensing, 'FILTER INLET AND OUTLET PRESSURES · B1 AND B2', 'Both OUT2 links assume voltage mode. Sensor suitability, range, scaling and filter differential limits remain unassigned.'],
   [command, 'CHEMICAL DOSING ENABLE INTERFACE · K1', 'XT2 exposes a normally open enable contact. The external dosing controller, dose logic and permissives remain unassigned.'],
   [ready, 'EXTERNAL DOSING READY CONTACT · XT3', 'W-01 connects the external ready contact to DI a.0. Any program use of the ready input remains unassigned.'],
   [running, 'EXTERNAL DOSING RUNNING CONTACT · XT4', 'W-02 connects the external running contact to DI a.1. The input reports the external controller contact, independently of the enable command.'],
-  [fault, 'EXTERNAL DOSING FAULT CONTACT · XT5', 'W-03 connects the external contact that closes on fault to DI a.2. Contact selection and fault handling remain unassigned.']
+  [fault, 'EXTERNAL DOSING FAULT CONTACT · XT5', 'W-03 connects the external contact that closes on fault to DI a.2. Contact selection and fault handling remain unassigned.'],
+  [power, 'DOSING CABINET CONTROL SUPPLY · PS1', 'XT6 marks the incoming L, N and PE boundary. PS1 feeds XT1. Incoming protection and conductor sizing remain unassigned.'],
+  [earth, 'CABINET AND DOSING ENCLOSURE PROTECTIVE EARTH · XT7', 'XT7 carries PE to the cabinet and dosing equipment enclosure terminal boundaries. Physical bonding and conductor sizing remain unassigned.']
 ]) {
   [title, note].forEach((text, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 585 : 100, text

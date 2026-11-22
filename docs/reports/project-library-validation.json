@@ -1530,7 +1530,7 @@
       "briefId": "12",
       "role": "standalone-example",
       "path": "examples/real-projects/water-treatment-dosing.adigun.json",
-      "revision": "1.1",
+      "revision": "1.2",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1547,43 +1547,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 94,
-        "additionalConnectedSheetsRequired": 64,
+        "additionalAuthoredSheetsRequired": 92,
+        "additionalConnectedSheetsRequired": 62,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "dosing-controller",
         "sheetName": "PLC supply, analog inputs and dosing output",
-        "segments": "24,11,48,11 24,18,31,18 31,18,31,13 31,13,48,13 34,11,34,0 34,0,94,0 94,0,94,26 94,26,80,26 31,18,31,48 31,48,91,48 91,48,91,28 91,28,80,28 37,13,37,4 37,4,86,4 86,4,86,11 86,11,80,11 40,13,40,22 40,22,48,22 15,11,0,11 15,18,0,18 80,13,100,13 80,16,89,16 89,16,89,19 89,19,100,19 80,30,100,30 91,41,100,41 94,3,100,3 48,24,41,24 41,24,41,27 41,27,0,27 94,6,100,6 48,27,43,27 43,27,43,33 43,33,0,33 94,9,100,9 48,29,46,29 46,29,46,39 46,39,0,39"
+        "segments": "24,11,48,11 24,18,31,18 31,18,31,13 31,13,48,13 34,11,34,0 34,0,94,0 94,0,94,26 94,26,80,26 31,18,31,48 31,48,91,48 91,48,91,28 91,28,80,28 37,13,37,4 37,4,86,4 86,4,86,11 86,11,80,11 40,13,40,22 40,22,48,22 15,11,0,11 15,18,0,18 80,13,100,13 80,16,89,16 89,16,89,19 89,19,100,19 80,30,100,30 91,41,100,41 94,3,100,3 48,24,41,24 41,24,41,27 41,27,0,27 94,6,100,6 48,27,43,27 43,27,43,33 43,33,0,33 94,9,100,9 48,29,46,29 46,29,46,39 46,39,0,39 11,11,11,14 11,14,0,14 11,18,11,22 11,22,0,22"
       },
-      "topologySha256": "6661699600b6bdc767b7bbc9e7a97ed56010f8a4074977ce1cef314d7cc539aa",
-      "electricalStructureSha256": "c47277064cd4ed751d0da3def2312eb2710544c0222871bc5a0d3a52c826dc80",
+      "topologySha256": "0400b07278aec98a9e7eb36d8a7bf331cf588b1561581bfc7867193c15621ab2",
+      "electricalStructureSha256": "2383c522ca982e806f2ce33fe251f2b674a952c0c8d98ecfe2eb4d543cb00fa3",
       "csvSha256": {
-        "bom": "f89fbe6f71c0af6419d71d719f4d3578eb422ccc99921d8c2779a9a746fe7c5d",
-        "wires": "ced30bda74f0aa99f47e19dfe20357e994dfb6fbdf8d24e69fd5c53956006eae",
-        "terminals": "a7522f27998ca1e518762a9f45f2c86c330c13db9244d4c34dc3c525bca80932",
-        "plcIo": "bfeb52e08afe1ba14c987feac63322f413d9b332e2166dfcdf4c9d972356aad3",
-        "cables": "41b84403d486680e7236557c3df7cd0b462ddf4bda8f19590d866c81a1eef847",
-        "devices": "3e4b85201c7ffe8864609f444dbd5d713f1683de58d59de0939bbf490a2a5aa7",
-        "sheets": "f069f41a0497fad409e08031866b00889f4c6ffa6eee58bbf66b6251ccf3e435"
+        "bom": "dac89dd69e12b4539a5f91f0dda6eefdb2d3516ecee16e4d58627cdaecdaec1f",
+        "wires": "ef506fae07f1db2f8beb1916e461435a2082b0e9632f6a54614fa2141cf2323a",
+        "terminals": "ed2d46957cb4364a697d564db61a7926ee4371eb7f1abd7a35163f2bf2e10b3f",
+        "plcIo": "a4c70d03215f912632d9f105c32489b6ee664476f89e3ed1c87e1888a0123e18",
+        "cables": "2e043fc2982cdb02a934a074fa60430c379ebf1b8041231660518b3f76c84c29",
+        "devices": "f8fc0a049c93652704974501f912d577f25ead584dd1f45a08703c7ef4646433",
+        "sheets": "00db49a6e86488bad18f5364f25984216d4da37845febb9d38e1bb5b3d4d9ebf"
       },
       "metrics": {
-        "sheetCount": 6,
-        "authoredSheetCount": 6,
-        "connectedSheetCount": 6,
-        "contentObjectCount": 62,
+        "sheetCount": 8,
+        "authoredSheetCount": 8,
+        "connectedSheetCount": 8,
+        "contentObjectCount": 85,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 14,
-        "wireCount": 36,
-        "netCount": 22,
-        "globalNetCount": 10,
-        "crossSheetConnectionCount": 12,
+        "componentCount": 21,
+        "wireCount": 48,
+        "netCount": 28,
+        "globalNetCount": 13,
+        "crossSheetConnectionCount": 15,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
-        "bomRowCount": 4,
-        "wireListRowCount": 36,
-        "terminalListRowCount": 20
+        "bomRowCount": 6,
+        "wireListRowCount": 48,
+        "terminalListRowCount": 32
       },
       "errors": []
     }
