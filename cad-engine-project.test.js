@@ -925,7 +925,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await linkedExample.goto(exampleLink.href);
     const feedSegment = linkedExample.locator('#userDrawings [data-object="transducer-feed-1"]');
     const returnSegment = linkedExample.locator('#userDrawings [data-object="transducer-return-1"]');
-    await feedSegment.waitFor();
+    await feedSegment.waitFor({ state: 'attached' });
     const originalFeedColor = await feedSegment.getAttribute('stroke');
     const originalReturnColor = await returnSegment.getAttribute('stroke');
     await feedSegment.dispatchEvent('contextmenu', { bubbles: true, button: 2 });
