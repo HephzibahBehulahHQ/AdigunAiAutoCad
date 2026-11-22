@@ -19,6 +19,7 @@ on:
       - "scripts/author-terminal-marshalling.js"
       - "scripts/author-relay-test-bench.js"
       - "scripts/author-irrigation-controller.js"
+      - "scripts/author-pneumatic-pick-place.js"
   push:
     branches: [main]
     paths:
@@ -38,6 +39,7 @@ on:
       - "scripts/author-terminal-marshalling.js"
       - "scripts/author-relay-test-bench.js"
       - "scripts/author-irrigation-controller.js"
+      - "scripts/author-pneumatic-pick-place.js"
 
 permissions:
   contents: read

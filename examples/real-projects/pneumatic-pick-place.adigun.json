@@ -1,0 +1,1262 @@
+{
+  "product": "AdigunAiAutoCad",
+  "project": "Pneumatic pick-and-place controls",
+  "revision": "1.0",
+  "description": "Native PLC wiring for slide position sensing and isolated vacuum and release pilot interfaces.",
+  "activeSheet": "pick-place-plc",
+  "sheets": [
+    {
+      "id": "pick-place-plc",
+      "number": "A2/001",
+      "name": "PLC power and I/O",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-position-sensors",
+      "number": "A2/002",
+      "name": "Retracted and extended position sensing",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-vacuum-pilot",
+      "number": "A2/003",
+      "name": "Vacuum pilot interface",
+      "projectSectionId": "A2"
+    },
+    {
+      "id": "pick-place-release-pilot",
+      "number": "A2/004",
+      "name": "Release pilot interface",
+      "projectSectionId": "A2"
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "a1",
+      "componentId": "siemens-6es7212-1ae40-0xb0",
+      "ref": "A1",
+      "x": 730,
+      "y": 360,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "pick-place-plc"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x1",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X1",
+      "x": 355,
+      "y": 234,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "1",
+        "marking": "External control feed",
+        "comment": ""
+      },
+      "sheetId": "pick-place-plc"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x2",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X2",
+      "x": 355,
+      "y": 280,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT1",
+        "position": "2",
+        "marking": "External control return",
+        "comment": ""
+      },
+      "sheetId": "pick-place-plc"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b1",
+      "componentId": "ifm-ifs204",
+      "ref": "B1",
+      "x": 630,
+      "y": 290,
+      "rotation": 0,
+      "properties": {
+        "marking": "Slide retracted",
+        "position": "",
+        "sensingTarget": "",
+        "comment": ""
+      },
+      "sheetId": "pick-place-position-sensors"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "b2",
+      "componentId": "ifm-ifs204",
+      "ref": "B2",
+      "x": 630,
+      "y": 435,
+      "rotation": 0,
+      "properties": {
+        "marking": "Slide extended",
+        "position": "",
+        "sensingTarget": "",
+        "comment": ""
+      },
+      "sheetId": "pick-place-position-sensors"
+    },
+    {
+      "id": "cpu-feed",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 234,
+      "x1": 390,
+      "y1": 234,
+      "x2": 600,
+      "y2": 234,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-1"
+        }
+      }
+    },
+    {
+      "id": "cpu-return",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 280,
+      "x1": 390,
+      "y1": 280,
+      "x2": 600,
+      "y2": 252,
+      "bends": [
+        {
+          "x": 455,
+          "y": 280
+        },
+        {
+          "x": 455,
+          "y": 252
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-right"
+        },
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-2"
+        }
+      }
+    },
+    {
+      "id": "di-common",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 510,
+      "y": 252,
+      "x1": 510,
+      "y1": 252,
+      "x2": 600,
+      "y2": 324,
+      "bends": [
+        {
+          "x": 510,
+          "y": 324
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x10-6"
+        }
+      }
+    },
+    {
+      "id": "dq-feed",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 465,
+      "y": 234,
+      "x1": 465,
+      "y1": 234,
+      "x2": 860,
+      "y2": 352,
+      "bends": [
+        {
+          "x": 465,
+          "y": 144
+        },
+        {
+          "x": 960,
+          "y": 144
+        },
+        {
+          "x": 960,
+          "y": 352
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x12-1"
+        }
+      }
+    },
+    {
+      "id": "dq-common",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 455,
+      "y": 280,
+      "x1": 455,
+      "y1": 280,
+      "x2": 860,
+      "y2": 368,
+      "bends": [
+        {
+          "x": 455,
+          "y": 532
+        },
+        {
+          "x": 935,
+          "y": 532
+        },
+        {
+          "x": 935,
+          "y": 368
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "a1",
+          "pinId": "x12-2"
+        }
+      }
+    },
+    {
+      "id": "sensor-feed-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 320,
+      "y": 234,
+      "x1": 320,
+      "y1": 234,
+      "x2": 215,
+      "y2": 234,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x1",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-feed-field",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 270,
+      "x1": 390,
+      "y1": 270,
+      "x2": 215,
+      "y2": 270
+    },
+    {
+      "id": "sensor-return-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 320,
+      "y": 280,
+      "x1": 320,
+      "y1": 280,
+      "x2": 215,
+      "y2": 280,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "x2",
+          "pinId": "level-1-left"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "sensor-return-field",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 455,
+      "x1": 435,
+      "y1": 455,
+      "x2": 215,
+      "y2": 455
+    },
+    {
+      "id": "b1-feed",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 270,
+      "x1": 390,
+      "y1": 270,
+      "x2": 580,
+      "y2": 270,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "b2-feed",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "+24 V DC",
+      "stroke": "#b42318",
+      "strokeWidth": 1.5,
+      "x": 390,
+      "y": 270,
+      "x1": 390,
+      "y1": 270,
+      "x2": 580,
+      "y2": 415,
+      "bends": [
+        {
+          "x": 390,
+          "y": 415
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b2",
+          "pinId": "pin-1-lplus"
+        }
+      }
+    },
+    {
+      "id": "b1-return",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 455,
+      "x1": 435,
+      "y1": 455,
+      "x2": 580,
+      "y2": 310,
+      "bends": [
+        {
+          "x": 435,
+          "y": 310
+        }
+      ],
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b1",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "b2-return",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 435,
+      "y": 455,
+      "x1": 435,
+      "y1": 455,
+      "x2": 580,
+      "y2": 455,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "b2",
+          "pinId": "pin-3-lminus"
+        }
+      }
+    },
+    {
+      "id": "b1-signal-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "B1 retracted feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 342,
+      "x1": 600,
+      "y1": 342,
+      "x2": 215,
+      "y2": 365,
+      "bends": [
+        {
+          "x": 555,
+          "y": 342
+        },
+        {
+          "x": 555,
+          "y": 365
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-7"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "b1-signal-field",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "B1 retracted feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 680,
+      "y": 290,
+      "x1": 680,
+      "y1": 290,
+      "x2": 960,
+      "y2": 290,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b1",
+          "pinId": "pin-4-output"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "b2-signal-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "B2 extended feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 600,
+      "y": 360,
+      "x1": 600,
+      "y1": 360,
+      "x2": 215,
+      "y2": 410,
+      "bends": [
+        {
+          "x": 575,
+          "y": 360
+        },
+        {
+          "x": 575,
+          "y": 410
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x10-8"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "b2-signal-field",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "wire",
+      "potential": "B2 extended feedback",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 680,
+      "y": 435,
+      "x1": 680,
+      "y1": 435,
+      "x2": 960,
+      "y2": 435,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "b2",
+          "pinId": "pin-4-output"
+        },
+        "end": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k1",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K1",
+      "x": 600,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Vacuum pilot request relay",
+        "comment": ""
+      },
+      "sheetId": "pick-place-vacuum-pilot"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x3",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X3",
+      "x": 900,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "1",
+        "marking": "Vacuum pilot external common",
+        "comment": ""
+      },
+      "sheetId": "pick-place-vacuum-pilot"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x4",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X4",
+      "x": 900,
+      "y": 415,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT2",
+        "position": "2",
+        "marking": "Vacuum pilot external command",
+        "comment": ""
+      },
+      "sheetId": "pick-place-vacuum-pilot"
+    },
+    {
+      "id": "k1-contact-common",
+      "sheetId": "pick-place-vacuum-pilot",
+      "kind": "wire",
+      "potential": "Vacuum pilot contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 670,
+      "y": 345,
+      "x1": 670,
+      "y1": 345,
+      "x2": 865,
+      "y2": 345,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "x3",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "k1-contact-no",
+      "sheetId": "pick-place-vacuum-pilot",
+      "kind": "wire",
+      "potential": "Vacuum pilot contact NO",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 670,
+      "y": 370,
+      "x1": 670,
+      "y1": 370,
+      "x2": 865,
+      "y2": 415,
+      "bends": [
+        {
+          "x": 765,
+          "y": 370
+        },
+        {
+          "x": 765,
+          "y": 415
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "contact-14"
+        },
+        "end": {
+          "instanceId": "x4",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "k1-request-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "Vacuum pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 860,
+      "y": 384,
+      "x1": 860,
+      "y1": 384,
+      "x2": 1020,
+      "y2": 408,
+      "bends": [
+        {
+          "x": 920,
+          "y": 384
+        },
+        {
+          "x": 920,
+          "y": 408
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x12-3"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k1-request-field",
+      "sheetId": "pick-place-vacuum-pilot",
+      "kind": "wire",
+      "potential": "Vacuum pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 530,
+      "y": 365,
+      "x1": 530,
+      "y1": 365,
+      "x2": 215,
+      "y2": 365,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "coil-a1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k1-return-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 935,
+      "y": 475,
+      "x1": 935,
+      "y1": 475,
+      "x2": 1020,
+      "y2": 475
+    },
+    {
+      "id": "k1-return-field",
+      "sheetId": "pick-place-vacuum-pilot",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 530,
+      "y": 325,
+      "x1": 530,
+      "y1": 325,
+      "x2": 215,
+      "y2": 325,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k1",
+          "pinId": "coil-a2"
+        },
+        "end": null
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "k2",
+      "componentId": "phoenix-contact-2966171",
+      "ref": "K2",
+      "x": 600,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "",
+        "position": "",
+        "marking": "Release pilot request relay",
+        "comment": ""
+      },
+      "sheetId": "pick-place-release-pilot"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x5",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X5",
+      "x": 900,
+      "y": 345,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "1",
+        "marking": "Release pilot external common",
+        "comment": ""
+      },
+      "sheetId": "pick-place-release-pilot"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "x6",
+      "componentId": "phoenix-contact-3209510",
+      "ref": "X6",
+      "x": 900,
+      "y": 415,
+      "rotation": 0,
+      "properties": {
+        "terminalStrip": "XT3",
+        "position": "2",
+        "marking": "Release pilot external command",
+        "comment": ""
+      },
+      "sheetId": "pick-place-release-pilot"
+    },
+    {
+      "id": "k2-contact-common",
+      "sheetId": "pick-place-release-pilot",
+      "kind": "wire",
+      "potential": "Release pilot contact common",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 670,
+      "y": 345,
+      "x1": 670,
+      "y1": 345,
+      "x2": 865,
+      "y2": 345,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "contact-11"
+        },
+        "end": {
+          "instanceId": "x5",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "k2-contact-no",
+      "sheetId": "pick-place-release-pilot",
+      "kind": "wire",
+      "potential": "Release pilot contact NO",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 670,
+      "y": 370,
+      "x1": 670,
+      "y1": 370,
+      "x2": 865,
+      "y2": 415,
+      "bends": [
+        {
+          "x": 765,
+          "y": 370
+        },
+        {
+          "x": 765,
+          "y": 415
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "contact-14"
+        },
+        "end": {
+          "instanceId": "x6",
+          "pinId": "level-1-left"
+        }
+      }
+    },
+    {
+      "id": "k2-request-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "Release pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 860,
+      "y": 400,
+      "x1": 860,
+      "y1": 400,
+      "x2": 1020,
+      "y2": 442,
+      "bends": [
+        {
+          "x": 905,
+          "y": 400
+        },
+        {
+          "x": 905,
+          "y": 442
+        }
+      ],
+      "pinAttachments": {
+        "start": {
+          "instanceId": "a1",
+          "pinId": "x12-4"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k2-request-field",
+      "sheetId": "pick-place-release-pilot",
+      "kind": "wire",
+      "potential": "Release pilot request",
+      "stroke": "#38734b",
+      "strokeWidth": 1.5,
+      "x": 530,
+      "y": 365,
+      "x1": 530,
+      "y1": 365,
+      "x2": 215,
+      "y2": 365,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "coil-a1"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "k2-return-cabinet",
+      "sheetId": "pick-place-plc",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 935,
+      "y": 532,
+      "x1": 935,
+      "y1": 532,
+      "x2": 1020,
+      "y2": 532
+    },
+    {
+      "id": "k2-return-field",
+      "sheetId": "pick-place-release-pilot",
+      "kind": "wire",
+      "potential": "0 V",
+      "stroke": "#164eac",
+      "strokeWidth": 1.5,
+      "x": 530,
+      "y": 325,
+      "x1": 530,
+      "y1": 325,
+      "x2": 215,
+      "y2": 325,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "k2",
+          "pinId": "coil-a2"
+        },
+        "end": null
+      }
+    },
+    {
+      "id": "pick-place-plc-note-0",
+      "sheetId": "pick-place-plc",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "PNEUMATIC PICK-AND-PLACE · PLC WIRING"
+    },
+    {
+      "id": "pick-place-plc-note-1",
+      "sheetId": "pick-place-plc",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "XT1 receives external 24 V DC. Two separate inputs report slide position. Two outputs command isolated pilot interfaces."
+    },
+    {
+      "id": "pick-place-position-sensors-note-0",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "SLIDE POSITION SENSORS · B1 AND B2"
+    },
+    {
+      "id": "pick-place-position-sensors-note-1",
+      "sheetId": "pick-place-position-sensors",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned."
+    },
+    {
+      "id": "pick-place-vacuum-pilot-note-0",
+      "sheetId": "pick-place-vacuum-pilot",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "VACUUM PILOT INTERFACE · K1"
+    },
+    {
+      "id": "pick-place-vacuum-pilot-note-1",
+      "sheetId": "pick-place-vacuum-pilot",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "XT2 exposes the isolated normally open vacuum demand contact. The valve and its electrical supply remain external."
+    },
+    {
+      "id": "pick-place-release-pilot-note-0",
+      "sheetId": "pick-place-release-pilot",
+      "kind": "text",
+      "x": 105,
+      "y": 100,
+      "text": "RELEASE PILOT INTERFACE · K2"
+    },
+    {
+      "id": "pick-place-release-pilot-note-1",
+      "sheetId": "pick-place-release-pilot",
+      "kind": "text",
+      "x": 105,
+      "y": 588,
+      "text": "XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned."
+    }
+  ],
+  "crossSheetConnections": [
+    {
+      "id": "sensor-feed",
+      "name": "+24 V DC",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "sensor-feed-cabinet",
+          "point": {
+            "x": 215,
+            "y": 234
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-position-sensors",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "pick-place-position-sensors",
+          "wireId": "sensor-feed-field",
+          "point": {
+            "x": 215,
+            "y": 270
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensor-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "sensor-return-cabinet",
+          "point": {
+            "x": 215,
+            "y": 280
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-position-sensors",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "pick-place-position-sensors",
+          "wireId": "sensor-return-field",
+          "point": {
+            "x": 215,
+            "y": 455
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "X2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b1-signal",
+      "name": "B1 retracted feedback",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "b1-signal-cabinet",
+          "point": {
+            "x": 215,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-position-sensors",
+            "targetRef": "B1"
+          }
+        },
+        {
+          "sheetId": "pick-place-position-sensors",
+          "wireId": "b1-signal-field",
+          "point": {
+            "x": 960,
+            "y": 290
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b2-signal",
+      "name": "B2 extended feedback",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "b2-signal-cabinet",
+          "point": {
+            "x": 215,
+            "y": 410
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-position-sensors",
+            "targetRef": "B2"
+          }
+        },
+        {
+          "sheetId": "pick-place-position-sensors",
+          "wireId": "b2-signal-field",
+          "point": {
+            "x": 960,
+            "y": 435
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k1-request",
+      "name": "Vacuum pilot request",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "k1-request-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 408
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-vacuum-pilot",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "pick-place-vacuum-pilot",
+          "wireId": "k1-request-field",
+          "point": {
+            "x": 215,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k1-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "k1-return-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 475
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-vacuum-pilot",
+            "targetRef": "K1"
+          }
+        },
+        {
+          "sheetId": "pick-place-vacuum-pilot",
+          "wireId": "k1-return-field",
+          "point": {
+            "x": 215,
+            "y": 325
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k2-request",
+      "name": "Release pilot request",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "k2-request-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 442
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-release-pilot",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "pick-place-release-pilot",
+          "wireId": "k2-request-field",
+          "point": {
+            "x": 215,
+            "y": 365
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "k2-return",
+      "name": "0 V",
+      "endpoints": [
+        {
+          "sheetId": "pick-place-plc",
+          "wireId": "k2-return-cabinet",
+          "point": {
+            "x": 1020,
+            "y": 532
+          },
+          "connector": {
+            "direction": "right",
+            "targetSheetId": "pick-place-release-pilot",
+            "targetRef": "K2"
+          }
+        },
+        {
+          "sheetId": "pick-place-release-pilot",
+          "wireId": "k2-return-field",
+          "point": {
+            "x": 215,
+            "y": 325
+          },
+          "connector": {
+            "direction": "left",
+            "targetSheetId": "pick-place-plc",
+            "targetRef": "A1"
+          }
+        }
+      ]
+    }
+  ],
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}
