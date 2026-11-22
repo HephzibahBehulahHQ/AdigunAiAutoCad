@@ -410,12 +410,22 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
           const bounds = node.ownerSVGElement.getBoundingClientRect();
           return { x: point.x - bounds.left, y: point.y - bounds.top };
         });
-        await symbol.dragTo(wiringPage.locator('#drawing'), { targetPosition });
+        const bounds = await wiringPage.locator('#drawing').boundingBox();
+        const x = bounds.x + targetPosition.x, y = bounds.y + targetPosition.y;
+        await symbol.hover();
+        await wiringPage.mouse.down();
+        await wiringPage.mouse.move(x, y, { steps: 12 });
+        await wiringPage.mouse.move(x + 1, y);
+        await wiringPage.mouse.move(x, y);
+        await wiringPage.mouse.up();
       } else {
         await symbol.click();
         await clickDrawingPoint(x, 110);
       }
       const selected = wiringPage.locator('#userDrawings [data-object].selected-object');
+      await selected.waitFor({ timeout: 5000 }).catch(async () => {
+        throw new Error('Terminal was not placed: ' + await wiringPage.locator('#toast').textContent());
+      });
       const terminalId = await selected.getAttribute('data-object');
       terminalIds.push(terminalId);
       await wiringPage.locator('#rightPanel.open [data-symbol-scale="' + terminalId + '"]').waitFor();
