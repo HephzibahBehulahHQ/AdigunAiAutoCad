@@ -39,7 +39,10 @@
         || (entity.extrusionDirectionZ != null && entity.extrusionDirectionZ !== 1)) continue;
       const color = entity.color ?? document.tables?.layer?.layers?.[entity.layer]?.color;
       const stroke = Number.isInteger(color) && color > 0 && color < 0xffffff ? '#' + color.toString(16).padStart(6, '0') : '#164eac';
-      const add = geometry => objects.push({ id: 'dxf-' + (objects.length + 1), sheetId, stroke, dxfLayer: entity.layer || '0', ...geometry });
+      const lineTypeName = String(entity.lineType || '').toUpperCase();
+      const lineType = { ADIGUN_DASHED: 'dashed', ADIGUN_DOTTED: 'dotted' }[lineTypeName];
+      const add = geometry => objects.push({ id: 'dxf-' + (objects.length + 1), sheetId, stroke, dxfLayer: entity.layer || '0',
+        ...(lineType ? { lineType } : {}), ...geometry });
       if (entity.type === 'CIRCLE') {
         if (!isPoint(entity.center) || !Number.isFinite(entity.radius) || entity.radius <= 0) continue;
         const cx = x(entity.center), cy = y(entity.center);
@@ -88,6 +91,7 @@
     const writer = new DxfWriter();
     writer.setUnits(Units.Millimeters);
     const layers = new Set(['0']);
+    const lineTypes = new Set();
     const skipped = new Map();
     let entities = 0;
     for (const object of objects) {
@@ -96,6 +100,14 @@
       const layerName = String(object.dxfLayer || object.layer || (kind === 'wire' ? 'connections' : kind === 'component-instance' ? 'devices' : 'annotations'))
         .replace(/[<>/\\":;?*|=\x00-\x1f]/g, '_').slice(0, 255);
       const options = { layerName };
+      if (object.lineType === 'dashed' || object.lineType === 'dotted') {
+        const name = 'ADIGUN_' + object.lineType.toUpperCase();
+        if (!lineTypes.has(name)) {
+          writer.addLType(name, 'Adigun ' + object.lineType, object.lineType === 'dashed' ? [8, -5] : [1, -4]);
+          lineTypes.add(name);
+        }
+        options.lineType = name;
+      }
       if (/^#[\da-f]{6}$/i.test(object.stroke || '')) options.trueColor = object.stroke;
       const addLayer = () => {
         if (layers.has(layerName)) return;

@@ -106,14 +106,16 @@ test('DXF imports and exports supported planar geometry and reports skipped enti
   assert.equal(circle.kind, 'circle');
   assert.ok(Math.abs(circle.x2 - circle.x - 25.4) < 1e-9);
   assert.deepEqual(engine.parseProject(engine.serializeProject(project)).project.objects, project.objects);
-  const exported = await globalThis.AdigunDXF.exportDrawing([...project.objects,
-    { kind: 'wire', x1: 0, y1: 0, x2: 50, y2: 30, stroke: '#164eac' }, { kind: 'component-instance' }]);
+  const exported = await globalThis.AdigunDXF.exportDrawing([line, { ...circle, lineType: 'dotted' },
+    { kind: 'wire', x1: 0, y1: 0, x2: 50, y2: 30, stroke: '#164eac', lineType: 'dashed' }, { kind: 'component-instance' }]);
   assert.deepEqual(exported.unsupported, ['component-instance × 1']);
   assert.equal(new globalThis.DxfParser().parseSync(exported.text).header.$INSUNITS, 4);
   const reopened = globalThis.AdigunDXF.importDrawing(exported.text, 'Round trip', 'dxf-round-trip');
   const [restoredLine, restoredCircle, horizontal, vertical] = reopened.project.objects;
+  assert.deepEqual([restoredLine.lineType, restoredCircle.lineType, horizontal.lineType, vertical.lineType],
+    [undefined, 'dotted', 'dashed', 'dashed']);
   assert.deepEqual(restoredLine, line);
-  assert.deepEqual(restoredCircle, circle);
+  assert.deepEqual(restoredCircle, { ...circle, lineType: 'dotted' });
   assert.deepEqual([horizontal.x1, horizontal.y1, horizontal.x2, horizontal.y2, vertical.x1, vertical.y1, vertical.x2, vertical.y2],
     [0, 0, 50, 0, 50, 0, 50, 30]);
 });
