@@ -12,11 +12,13 @@ const vacuum = 'pick-place-vacuum-pilot';
 const release = 'pick-place-release-pilot';
 const confirmation = 'pick-place-vacuum-confirmation';
 const airPressure = 'pick-place-air-pressure-confirmation';
+const extend = 'pick-place-slide-extend';
+const retract = 'pick-place-slide-retract';
 const project = {
   product: 'AdigunAiAutoCad',
   project: 'Pneumatic pick-and-place controls',
-  revision: '1.2',
-  description: 'Native PLC wiring for slide position sensing and isolated vacuum and release pilot interfaces.',
+  revision: '1.3',
+  description: 'Native PLC wiring for slide position sensing and isolated vacuum, release, and slide motion pilot interfaces.',
   activeSheet: cabinet,
   sheets: [
     { id: cabinet, number: 'A2/001', name: 'PLC power and I/O', projectSectionId: 'A2' },
@@ -24,7 +26,9 @@ const project = {
     { id: vacuum, number: 'A2/003', name: 'Vacuum pilot interface', projectSectionId: 'A2' },
     { id: release, number: 'A2/004', name: 'Release pilot interface', projectSectionId: 'A2' },
     { id: confirmation, number: 'A2/005', name: 'Vacuum achieved switch interface', projectSectionId: 'A2' },
-    { id: airPressure, number: 'A2/006', name: 'Compressed-air pressure switch interface', projectSectionId: 'A2' }
+    { id: airPressure, number: 'A2/006', name: 'Compressed-air pressure switch interface', projectSectionId: 'A2' },
+    { id: extend, number: 'A2/007', name: 'Slide extend pilot interface', projectSectionId: 'A2' },
+    { id: retract, number: 'A2/008', name: 'Slide retract pilot interface', projectSectionId: 'A2' }
   ],
   objects: [],
   crossSheetConnections: []
@@ -82,7 +86,7 @@ wire(cabinet, 'di-common', '0 V', { x: 510, y: 252 }, pin(plc, 'X10:6'), [{ x: 5
 wire(cabinet, 'dq-feed', '+24 V DC', { x: 465, y: 234 }, pin(plc, 'X12:1'),
   [{ x: 465, y: 144 }, { x: 960, y: 144 }, { x: 960, y: 352 }]);
 wire(cabinet, 'dq-common', '0 V', { x: 455, y: 280 }, pin(plc, 'X12:2'),
-  [{ x: 455, y: 532 }, { x: 935, y: 532 }, { x: 935, y: 368 }]);
+  [{ x: 455, y: 602 }, { x: 935, y: 602 }, { x: 935, y: 368 }]);
 
 const fieldPlus = { x: 390, y: 270 };
 const fieldCommon = { x: 435, y: 455 };
@@ -130,8 +134,10 @@ connectSheets('air-pressure-confirmation', 'XT5 air pressure ready to DI a.3',
   { cableId: 'W-02', coreId: '2' });
 
 for (const [sheet, ref, terminalNumber, strip, commonRef, noRef, role, outputY, returnY, elbow] of [
-  [vacuum, 'K1', 'X12:3', 'XT2', 'X3', 'X4', 'Vacuum pilot', 408, 475, 920],
-  [release, 'K2', 'X12:4', 'XT3', 'X5', 'X6', 'Release pilot', 442, 532, 905]
+  [vacuum, 'K1', 'X12:3', 'XT2', 'X3', 'X4', 'Vacuum pilot', 408, 514, 920],
+  [release, 'K2', 'X12:4', 'XT3', 'X5', 'X6', 'Release pilot', 442, 538, 905],
+  [extend, 'K3', 'X12:5', 'XT6', 'X11', 'X12', 'Slide extend pilot', 466, 562, 895],
+  [retract, 'K4', 'X12:6', 'XT7', 'X13', 'X14', 'Slide retract pilot', 490, 586, 885]
 ]) {
   const relay = device(sheet, ref, 'phoenix-contact-2966171', 600, 345, { marking: role + ' request relay' });
   const common = terminal(sheet, commonRef, 900, 345, strip, '1', role + ' external common');
@@ -151,12 +157,14 @@ for (const [sheet, ref, terminalNumber, strip, commonRef, noRef, role, outputY, 
 }
 
 for (const [sheetId, title, text] of [
-  [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives external 24 V DC. Two separate inputs report slide position. Two outputs command isolated pilot interfaces.'],
+  [cabinet, 'PNEUMATIC PICK-AND-PLACE · PLC WIRING', 'XT1 receives external 24 V DC. B1 and B2 report slide position. Four outputs command isolated pilot interfaces.'],
   [sensors, 'SLIDE POSITION SENSORS · B1 AND B2', 'B1 and B2 report the two end positions separately. Mounting, target geometry and motion timing remain unassigned.'],
   [vacuum, 'VACUUM PILOT INTERFACE · K1', 'XT2 exposes the isolated normally open vacuum demand contact. The valve and its electrical supply remain external.'],
   [release, 'RELEASE PILOT INTERFACE · K2', 'XT3 exposes the isolated normally open release demand contact. PLC sequencing and pilot interlocking remain unassigned.'],
   [confirmation, 'VACUUM ACHIEVED SWITCH INTERFACE · XT4', 'W-01 carries the feed and DI a.2 return for an external contact that closes at the required vacuum. Sensor selection and threshold remain unassigned.'],
-  [airPressure, 'COMPRESSED-AIR PRESSURE SWITCH · XT5', 'W-02 carries the feed and DI a.3 return for an external air-pressure-ready contact. The switch, pressure threshold and PLC response remain unassigned.']
+  [airPressure, 'COMPRESSED-AIR PRESSURE SWITCH · XT5', 'W-02 carries the feed and DI a.3 return for an external air-pressure-ready contact. The switch, pressure threshold and PLC response remain unassigned.'],
+  [extend, 'SLIDE EXTEND PILOT INTERFACE · K3', 'XT6 exposes the isolated normally open extend demand contact. The directional valve and coil supply remain external.'],
+  [retract, 'SLIDE RETRACT PILOT INTERFACE · K4', 'XT7 exposes the isolated normally open retract demand contact. Mutual exclusion and motion sequencing remain unassigned.']
 ]) {
   [title, text].forEach((label, index) => project.objects.push({
     id: sheetId + '-note-' + index, sheetId, kind: 'text', x: 105, y: index ? 588 : 100, text: label

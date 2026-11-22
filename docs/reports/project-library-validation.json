@@ -1462,7 +1462,7 @@
       "briefId": "34",
       "role": "standalone-example",
       "path": "examples/real-projects/pneumatic-pick-place.adigun.json",
-      "revision": "1.2",
+      "revision": "1.3",
       "status": "passed",
       "checks": {
         "projectSchema": true,
@@ -1479,43 +1479,43 @@
       },
       "releaseScale": {
         "qualified": false,
-        "additionalAuthoredSheetsRequired": 94,
-        "additionalConnectedSheetsRequired": 64,
+        "additionalAuthoredSheetsRequired": 92,
+        "additionalConnectedSheetsRequired": 62,
         "sheetIdsWithoutElectricalConnectivity": []
       },
       "wirePreview": {
         "sheetId": "pick-place-plc",
         "sheetName": "PLC power and I/O",
-        "segments": "22,11,48,11 22,17,30,17 30,17,30,13 30,13,48,13 37,13,37,22 37,22,48,22 31,11,31,0 31,0,93,0 93,0,93,26 93,26,80,26 30,17,30,48 30,48,89,48 89,48,89,28 89,28,80,28 13,11,0,11 13,17,0,17 48,25,42,25 42,25,42,27 42,27,0,27 48,27,45,27 45,27,45,33 45,33,0,33 7,11,7,6 7,6,0,6 48,29,46,29 46,29,46,38 46,38,0,38 93,5,100,5 48,31,47,31 47,31,47,42 47,42,0,42 80,30,88,30 88,30,88,33 88,33,100,33 89,41,100,41 80,32,86,32 86,32,86,37 86,37,100,37 89,48,100,48"
+        "segments": "22,11,48,11 22,17,30,17 30,17,30,13 30,13,48,13 37,13,37,22 37,22,48,22 31,11,31,0 31,0,93,0 93,0,93,26 93,26,80,26 30,17,30,57 30,57,89,57 89,57,89,28 89,28,80,28 13,11,0,11 13,17,0,17 48,25,42,25 42,25,42,27 42,27,0,27 48,27,45,27 45,27,45,33 45,33,0,33 7,11,7,6 7,6,0,6 48,29,46,29 46,29,46,38 46,38,0,38 93,5,100,5 48,31,47,31 47,31,47,42 47,42,0,42 80,30,88,30 88,30,88,33 88,33,100,33 89,46,100,46 80,32,86,32 86,32,86,37 86,37,100,37 89,49,100,49 80,34,84,34 84,34,84,40 84,40,100,40 89,52,100,52 80,36,83,36 83,36,83,43 83,43,100,43 89,55,100,55"
       },
-      "topologySha256": "b193c38a001922ee3c9e2a77cf691abbc80531f6fe14aa2dabb2582fa433c3ab",
-      "electricalStructureSha256": "455d49385a5b8575f6e8c7516c3e134f36ae197dc6f8a3d20aa712965220af68",
+      "topologySha256": "5fb3c0426a3cc1bf9551d29c02983d5b3fa57b4b7a8cb168e02ae0a0a8d2f528",
+      "electricalStructureSha256": "ef62a7bd44985c1468ab1272e088246eb27e5a671f949e9023e8d24b89877e81",
       "csvSha256": {
-        "bom": "7818160d7822ecceb70b6bb394e89fd87ae001188af2896e057b72c955e6e9f1",
-        "wires": "87a267002b73709b1ff763bc3208a116cf434db8c1e314d05674ec50a354331f",
-        "terminals": "ff63bf5eb66e9eb7a4b8156235853ea17e49c66a4bff0f2e64126fb94fcf60a4",
-        "plcIo": "65ea4d2c8d9e30d11de0f58379efdad0160083d780f040f95da5cc57aedda228",
-        "cables": "85021be44ecbb6269300569476b0a406e60a3f60729959c8b82a8c9cb79ae8dd",
-        "devices": "8fd26bb47640b7c230d77928f0527bfd3f630f2d1a601ee95d47ba2fea2d72f0",
-        "sheets": "7446c326f964640fe88f4fca87bb4940165aa4bf52552fd778deccb9b8724e24"
+        "bom": "8c5478f65539e85996398dfcb448c24a63c385c922c0494ba47361d2a4610002",
+        "wires": "621c0a01a0fb01bb9eef3c931b14f74353e77bca03f483901c51f3503d1e0a82",
+        "terminals": "a2dc34416530a577900c6c74ee59aadef8c117f45e233846bc1a742cd3f89266",
+        "plcIo": "0b97f1c2b1d13a7ffbb06f98e2ae0cc20e0789aae44a4fbc6207a6af23a886ff",
+        "cables": "aadc2c7c2a4c84e36e98e8c5c8a9d8fe7eddc09fb1de8c83a50fbde85c5e7167",
+        "devices": "2c084a5ba4706c5ca723887d90bea80b4144dd3eda67dfe59ac2a15c164a0329",
+        "sheets": "35131f049f519445e8063620fe64343d697e24f5f2e5d336d6bf4f1bc57f1948"
       },
       "metrics": {
-        "sheetCount": 6,
-        "authoredSheetCount": 6,
-        "connectedSheetCount": 6,
-        "contentObjectCount": 64,
+        "sheetCount": 8,
+        "authoredSheetCount": 8,
+        "connectedSheetCount": 8,
+        "contentObjectCount": 86,
         "emptyContentSheetIds": [],
         "repeatedContentSheets": [],
-        "componentCount": 15,
-        "wireCount": 37,
-        "netCount": 24,
-        "globalNetCount": 12,
-        "crossSheetConnectionCount": 12,
+        "componentCount": 21,
+        "wireCount": 49,
+        "netCount": 34,
+        "globalNetCount": 18,
+        "crossSheetConnectionCount": 16,
         "openEndpointCount": 0,
         "geometryErrorCount": 0,
         "bomRowCount": 4,
-        "wireListRowCount": 37,
-        "terminalListRowCount": 20
+        "wireListRowCount": 49,
+        "terminalListRowCount": 28
       },
       "errors": []
     }
