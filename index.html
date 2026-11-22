@@ -1132,7 +1132,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
     const target=state.objects.find(function(object){return object.kind==='component-instance'&&object.ref===connector.targetRef;});
     if(!target)return;
-    state.selected=target.id;state.selectedObjectIds=[target.id];renderObjects();showObject(target);
+    setSelection([target.id],true);
+    openInspector('Properties');
     notify('Opened '+connector.targetSheetNumber+' · '+connector.targetRef+' from '+connector.name+'.');
   }
   const componentPropertyLabels={terminalStrip:'Terminal strip',position:'Position',marking:'Marking',comment:'Comment',
