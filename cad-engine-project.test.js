@@ -1359,6 +1359,22 @@ test('SITOP circuit source reproduces the published sheets', () => {
   execFileSync(process.execPath, [path.join(__dirname, 'scripts/author-sitop-sheets.js')]);
 });
 
+test('PE designation check follows the connected net across sheets', () => {
+  const fixture = path.join(__dirname, 'examples/real-projects/sitop-24v-dc-distribution.adigun.json');
+  const project = JSON.parse(fs.readFileSync(fixture, 'utf8'));
+  const peFinding = () => engine.analyzeProject(project).findings.find(finding => finding.ruleId === 'ERC-PE-DESIGNATION-MISSING');
+  assert.equal(peFinding(), undefined);
+  const peWires = project.objects.filter(object => object.kind === 'wire' && object.potential === 'PE');
+  assert.equal(new Set(peWires.map(wire => wire.sheetId)).size, 3);
+  for (const wire of peWires) delete wire.potential;
+  const warning = peFinding();
+  assert.equal(warning.severity, 'warning');
+  assert.equal(warning.editionMapping, null);
+  assert.deepEqual(warning.locations.map(pin => pin.ref + ':' + pin.pinNumber).sort(), ['PS1:PE', 'X21:1', 'X21:2', 'X9:1', 'X9:2']);
+  peWires[0].potential = 'Protective earth';
+  assert.equal(peFinding(), undefined, 'one designation applies to the complete connected net');
+});
+
 test('SITOP distribution keeps both terminal branches on separate supply and return nets', () => {
   const file = path.join(__dirname, 'examples/real-projects/sitop-24v-dc-distribution.adigun.json');
   const source = engine.parseProject(fs.readFileSync(file, 'utf8'));
