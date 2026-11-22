@@ -42,6 +42,25 @@ test('library structure fingerprint distinguishes terminal changes from renamed 
   routedNets[0].pins.find(pin => pin.ref === 'K10').number = '12';
   assert.notEqual(electricalStructureHash(renamedProject, routedNets), fingerprint);
 });
+test('DXF preserves disconnect knife position and symbol transform as geometry', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const disconnect = engine.createInstance('phoenix-contact-3210156', 100, 200, 'X1');
+  disconnect.rotation = 90;
+  disconnect.symbolScale = 2;
+  for (const [position, expected] of [['open', 122], ['closed', 100]]) {
+    disconnect.properties.knifePosition = position;
+    const exported = await globalThis.AdigunDXF.exportDrawing([disconnect]);
+    assert.deepEqual(exported.unsupported, []);
+    const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Disconnect geometry', 'disconnect-dxf');
+    const lines = project.objects.filter(object => object.kind === 'line');
+    assert.equal(lines.length, 3);
+    assert.ok(lines.some(line => Math.abs(line.x1 - 100) < 1e-7 && Math.abs(line.y1 - 176) < 1e-7
+      && Math.abs(line.x2 - expected) < 1e-7 && Math.abs(line.y2 - 224) < 1e-7));
+    assert.equal(project.objects.filter(object => object.kind === 'circle').length, 4);
+  }
+});
+
 const sampleDxf = [
   '0', 'SECTION', '2', 'HEADER', '9', '$INSUNITS', '70', '1', '0', 'ENDSEC',
   '0', 'SECTION', '2', 'ENTITIES',

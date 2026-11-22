@@ -1318,6 +1318,12 @@
   function isTerminalDefinition(definition) {
     return ['feedthrough-terminal', 'protective-earth-terminal', 'disconnect-terminal'].includes(definition?.family);
   }
+  function disconnectTerminalGeometry(instance) {
+    return {
+      segments: [[-35, 0, -12, 0], [12, 0, 35, 0], [-12, 0, 12, instance.properties?.knifePosition === 'closed' ? 0 : -11]],
+      circles: [[-35, 0, 3], [35, 0, 3], [-12, 0, 2], [12, 0, 2]]
+    };
+  }
   function plcChannelType(pin) {
     return /^(DI|DQ|AI) /.exec(pin.name)?.[1];
   }
@@ -2501,6 +2507,7 @@
     wireList: wireList,
     wireListCsv: wireListCsv,
     wireRoutePoints: wireRoutePoints,
+    disconnectTerminalGeometry: disconnectTerminalGeometry,
     cableScheduleCsv: cableScheduleCsv,
     terminalList: terminalList,
     terminalListCsv: terminalListCsv,

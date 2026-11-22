@@ -55,7 +55,7 @@ Electrical checks flags wired protective-earth terminals when their connected ne
 
 The browser bundles [dxf-parser 1.1.2](https://github.com/gdsestimating/dxf-parser) from its pinned npm tarball. The [parser license](vendor/dxf-parser-LICENSE.txt) and [bundled loglevel license](vendor/loglevel-LICENSE.txt) are included.
 
-In the command palette, **Export current sheet as DXF** writes visible lines, circles, and line segments from wires, rectangles and freehand paths in millimetres. The command reports skipped entities, including component symbols, text and unsupported shapes. Use native project JSON for electrical connectivity, sheet structure and drawing styles. The export uses [DXF Writer 2.8.9](https://github.com/dxfjs/writer) under its [MIT license](vendor/dxf-writer-LICENSE.txt).
+In the command palette, **Export current sheet as DXF** writes visible lines, circles, and line segments from wires, rectangles and freehand paths in millimetres. The PT 2,5-MT disconnect exports as line and circle geometry matching its saved knife position. The command reports other skipped component symbols, text and unsupported shapes. Use native project JSON for electrical connectivity, sheet structure and drawing styles. The export uses [DXF Writer 2.8.9](https://github.com/dxfjs/writer) under its [MIT license](vendor/dxf-writer-LICENSE.txt).
 
 Use **Print project set** in the command palette to print every sheet in project order. Choose **Save as PDF** in the browser print dialog for a single project PDF.
 
