@@ -116,7 +116,7 @@
       };
       const engine = root.AdigunCADEngine;
       const component = kind === 'component-instance' ? engine.component(object.componentId, object.customSymbol) : null;
-      const coilAndContact = ['modular-contactor', 'modular-step-relay'].includes(component?.family);
+      const coilAndContact = ['modular-contactor', 'modular-step-relay', 'industrial-motor-contactor'].includes(component?.family);
       const fuseLink = ['semiconductor-fuse-link', 'cylindrical-fuse-link'].includes(component?.family);
       if ((coilAndContact || fuseLink || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
