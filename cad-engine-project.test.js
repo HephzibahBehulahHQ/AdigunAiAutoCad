@@ -440,7 +440,7 @@ async function verifyDraftShortcuts(page,address){
   assert.ok(await drawing.locator('.selected-object').count()>1);
   await button('Clear selection').click();
   assert.equal(await drawing.locator('.selected-object').count(),0);
-  await page.setViewportSize({width:850,height:650});
+  await page.setViewportSize({width:500,height:650});
   await button('More drawing and editing tools').click();
   assert.equal(await page.locator('#draftToolsDock').isVisible(),true);
   await page.getByRole('dialog',{name:'More drawing and editing tools'}).waitFor();
