@@ -1611,21 +1611,26 @@
   });
 
 
-  const etiEtitecV = terminalCatalog.etiEtitecV.map(([code, series, voltage, topology, alarm]) => {
+  const etiSurgeProtectors = terminalCatalog.etiEtitecV.concat(terminalCatalog.etiEtitecC).map(([code, series, voltage, topology, alarm]) => {
     const id = 'eti-' + code;
-    const gasTube = topology.endsWith('+1');
-    const compact = series.startsWith('2');
+    const neutralOnly = topology === 'G';
+    const gasTube = neutralOnly || topology.endsWith('+1');
+    const groupC = series === 'C T2';
+    const groupCM = series === 'CM T23';
+    const groupV = !groupC && !groupCM;
+    const compact = groupCM || series.startsWith('2');
     const powerLabels = {
-      '1+0': ['L/N'], '2+0': ['L', 'N'], '1+1': ['L', 'N'],
+      G: ['N'], '1+0': ['L/N'], '2+0': ['L', 'N'], '1+1': ['L', 'N'],
       '3+0': ['L1', 'L2', 'L3'], '4+0': ['L1', 'L2', 'L3', 'N'], '3+1': ['L1', 'L2', 'L3', 'N']
     }[topology];
-    const hasSecondEarth = compact ? powerLabels.length === 4 : powerLabels.length > 1;
+    const hasSecondEarth = groupV && (compact ? powerLabels.length === 4 : powerLabels.length > 1);
+    const pen = groupC && topology === '3+0';
     const power = powerLabels.map((label, index) => ({
       id: 'power-' + label.toLowerCase().replace('/', '-'), localNumber: label, name: 'Power terminal ' + label,
       x: (index - (powerLabels.length - 1) / 2) * 28, y: -42, electricalType: 'passive', connectionType: 'screw'
     }));
-    const earth = (hasSecondEarth ? ['PE-1', 'PE-2'] : ['PE']).map((label, index) => ({
-      id: label.toLowerCase(), localNumber: label, manufacturerMarking: '⏚', name: 'Protective earth terminal',
+    const earth = (hasSecondEarth ? ['PE-1', 'PE-2'] : [pen ? 'PEN' : 'PE']).map((label, index) => ({
+      id: label.toLowerCase(), localNumber: label, manufacturerMarking: pen ? 'PEN' : '⏚', name: pen ? 'Combined protective earth and neutral terminal' : 'Protective earth terminal',
       x: hasSecondEarth ? (index * 2 - 1) * 14 : 0, y: 42, electricalType: 'passive', connectionType: 'screw'
     }));
     const contacts = alarm ? [['12', 'Remote contact NC'], ['11', 'Remote contact common'], ['14', 'Remote contact NO']].map(([number, name], index) => ({
@@ -1638,21 +1643,22 @@
       to: gasTube && pin !== n ? n.id : earth[0].id,
       technology: gasTube && pin === n ? 'Gas discharge tube' : 'MOV'
     }));
-    const width = 18 * (compact ? power.length / 2 : power.length);
-    const depth = series === 'T12' && gasTube ? 82 : 67;
-    const height = 90;
+    const nominalWidth = groupC ? 17.8 : 18;
+    const width = Number((nominalWidth * (compact ? power.length / 2 : power.length)).toFixed(1));
+    const depth = groupCM ? 70 : groupC ? 72.7 : series === 'T12' && gasTube ? 82 : 67;
+    const height = groupCM && power.length === 2 ? (alarm ? 105 : 97) : !groupV && alarm ? 99 : 90;
     const catalog = 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf';
-    const diagramPage = { T12: power.length === 1 ? 4 : 5, T2: power.length === 1 ? 6 : 7, '2T2': 9, '2T3': 11 }[series];
+    const diagramPage = { 'C T2': 30, 'CM T23': topology === '2+0' ? 33 : 34, T12: power.length === 1 ? 4 : 5, T2: power.length === 1 ? 6 : 7, '2T2': 9, '2T3': 11 }[series];
     const rating = series === 'T12' ? '12,5' : series === '2T3' ? '5' : '20';
     const nominalDischarge = series === '2T3' ? 5 : 20;
-    const maxDischarge = { T12: 50, T2: 40, '2T2': 40, '2T3': 15 }[series];
+    const maxDischarge = { 'C T2': 40, 'CM T23': 40, T12: 50, T2: 40, '2T2': 40, '2T3': 15 }[series];
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: 'ETITEC V ' + series + ' ' + voltage + '/' + rating + ' ' + topology + (alarm ? ' RC' : ''),
-      name: 'AC surge protective device', aliases: ['SPD', 'surge arrester', 'ETITEC V'],
+      model: (groupV ? 'ETITEC V ' : 'ETITEC ') + series + ' ' + voltage + '/' + rating + ' ' + topology + (alarm ? ' RC' : ''),
+      name: 'AC surge protective device', aliases: ['SPD', 'surge arrester', groupV ? 'ETITEC V' : 'ETITEC ' + series],
       family: 'surge-protective-device', referencePrefix: 'FV', category: 'Electrical · Verified protection device',
       symbol: {
-        id: 'spd.eti.v.' + topology.replace('+', '-') + (alarm ? '.rc' : '') + (hasSecondEarth ? '.dual-pe' : '') + '.v1',
+        id: 'spd.eti.' + (groupV ? 'v' : groupC ? 'c' : 'cm') + '.' + topology.toLowerCase().replace('+', '-') + (alarm ? '.rc' : '') + (hasSecondEarth ? '.dual-pe' : '') + '.v1',
         view: 'schematic', unit: 'mm', width: alarm ? 150 : Math.max(56, power.length * 28), height: 84,
         pins: [...power, ...earth, ...contacts], internalConnections: hasSecondEarth ? [earth.map(pin => pin.id)] : [],
         numberingNote: 'Two PE screws share the earth bus where fitted. PE-1 and PE-2 distinguish CAD anchors.'
@@ -1663,7 +1669,7 @@
         simulationNote: 'Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets.'
       },
       specifications: {
-        protectionClass: { value: { T12: 'Type 1 + 2', T2: 'Type 2', '2T2': 'Type 2', '2T3': 'Type 2 + 3' }[series] },
+        protectionClass: { value: { 'C T2': 'Type 2', 'CM T23': 'Type 2 + 3', T12: 'Type 1 + 2', T2: 'Type 2', '2T2': 'Type 2', '2T3': 'Type 2 + 3' }[series] },
         protectionConfiguration: { value: topology },
         continuousAcVoltage: { value: voltage, unit: 'V AC' },
         nominalDischargeCurrent: { value: nominalDischarge, unit: 'kA (8/20 µs)' },
@@ -1674,13 +1680,14 @@
       },
       physicalRepresentations: [{
         ...terminalPanelEnvelope(id, width, height), depth, sourceIndex: 1,
-        scope: 'Main housing envelope. The optional remote terminal projects another 9 mm in the height direction.'
+        scope: groupV ? 'Main housing envelope. The optional remote terminal projects another 9 mm in the height direction.'
+          : 'Manufacturer outline for the specified housing and remote-contact option.'
       }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact ETI order code, model and Uc.' },
-        { publisher: 'ETI', title: 'ETITEC V ' + series + ' · Wiring and dimensions', url: catalog + '#page=' + diagramPage,
+        { publisher: 'ETI', title: (groupV ? 'ETITEC V ' : 'ETITEC ') + series + ' · Wiring and dimensions', url: catalog + '#page=' + diagramPage,
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact.' }
       ]
     });
@@ -2204,7 +2211,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEtitecV).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiSurgeProtectors).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

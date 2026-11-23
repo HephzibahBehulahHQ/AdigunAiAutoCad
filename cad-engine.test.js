@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5342);
+  assert.equal(items.length, 5371);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1977,7 +1977,7 @@ test('ETI KZS-1M-FN breakers retain continuous neutral and separate functional e
 });
 
 test('ETITEC V retains distinct surge branches, common earth and isolated alarm contacts', () => {
-  const items = engine.catalog().filter(item => item.family === 'surge-protective-device');
+  const items = engine.catalog().filter(item => item.family === 'surge-protective-device' && item.name.startsWith('ETITEC V '));
   assert.equal(items.length, 60);
   for (const item of items) {
     const part = engine.component(item.id);
@@ -1993,6 +1993,26 @@ test('ETITEC V retains distinct surge branches, common earth and isolated alarm 
   const part = engine.component('eti-002442918');
   assert.deepEqual(part.electricalFunctions.surgeBranches.map(({from,to}) => [from,to]),
     [['power-l1','power-n'],['power-l2','power-n'],['power-l3','power-n'],['power-n','pe-1']]);
+});
+
+test('ETITEC C and CM preserve their single earth terminal and compact housing dimensions', () => {
+  const c = engine.catalog().filter(item => item.name.startsWith('ETITEC C T2 '));
+  const cm = engine.catalog().filter(item => item.name.startsWith('ETITEC CM T23 '));
+  assert.equal(c.length, 21);
+  assert.equal(cm.length, 8);
+  for (const item of [...c, ...cm]) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.symbol.pins.filter(pin => ['pe','pen'].includes(pin.id)).length, 1);
+    assert.equal(part.symbol.pins.some(pin => pin.id === 'alarm-11'), part.model.endsWith(' RC'));
+    assert.equal(part.specifications.maximumDischargeCurrent.value, 40);
+  }
+  const g = engine.component('eti-002440413');
+  assert.deepEqual(g.electricalFunctions.surgeBranches, [{from:'power-n',to:'pe',technology:'Gas discharge tube'}]);
+  const pen = engine.component('eti-002440399');
+  assert.ok(pen.symbol.pins.some(pin => pin.localNumber === 'PEN'));
+  const compact = engine.component('eti-002440655').physicalRepresentations[0];
+  assert.deepEqual([compact.width, compact.height, compact.depth], [18, 105, 70]);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
