@@ -855,7 +855,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         case'bottle-fuse-link':
         case'cylindrical-fuse-link': {
           const fuse=window.AdigunCADEngine.component(item.id);
-          rect(-15,-6,30,12);line(-36,0,36,0);
+          const geometry=window.AdigunCADEngine.fuseLinkGeometry();
+          for(const segment of geometry.segments)line(...segment);
+          for(const mark of geometry.circles)circle(...mark);
           label(fuse.specifications.nominalCurrent.value+' A',0,-11,7);
           break;
         }
