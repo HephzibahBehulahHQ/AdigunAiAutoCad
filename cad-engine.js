@@ -1390,7 +1390,7 @@
     .concat(terminalCatalog.weidmullerA2cTerminals, terminalCatalog.weidmullerA3cA4cTerminals, terminalCatalog.weidmullerZduTerminals,
       terminalCatalog.weidmullerDoubleLevelTerminals).map(
     ([id, model, slug, color, area, voltage, current, width, height, depth, minimumRigid, maximumRigid,
-      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionsPerLevel = 2, endCoverRequired = true, levels = 1]) => {
+      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionsPerLevel = 2, endCoverRequired = true, levels = 1, mountingRails = ['TS 35']]) => {
       const partId = 'weidmuller-' + id;
       const connectionCount = levels * connectionsPerLevel;
       const connectionType = /^(WDU|WDK) /.test(model) ? 'screw' : model.startsWith('ZDU ') ? 'tension-clamp' : 'push-in';
@@ -1422,7 +1422,7 @@
           flexibleConductorRange: { minimum: minimumFlexible, maximum: maximumFlexible, unit: 'mm²' },
           connectionMethod: { value: connectionMethod },
           connectionCount: { value: connectionCount, unit: 'connections' },
-          mountingRails: { value: ['TS 35'] },
+          mountingRails: { value: mountingRails },
           endCoverRequired: { value: endCoverRequired },
           color: { value: color },
           dimensions: { width: mm(width), height: mm(height), depth: mm(depth),
@@ -1436,7 +1436,7 @@
           documentRevision: null, retrievedAt: '2026-11-23',
           revisionNote: levels === 2 ? 'Manufacturer product data for two independent potentials, two clamping points per level and TS 35 mounting.'
             : 'Manufacturer product data for one potential and ' + (connectionCount === 2 ? 'two' : connectionCount) +
-            ' clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting.'
+            ' clamping points, solid-core and finely stranded wire ranges, and ' + mountingRails.join(' or ') + ' mounting.'
         }]
       });
     });

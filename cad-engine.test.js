@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 361);
+  assert.equal(items.length, 377);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -461,6 +461,22 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-1020360000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1020500000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1020580000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1024500000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1802780000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020020000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1037710000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020140000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020240000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1039600000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020340000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1833400000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020510000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1024650000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1024600000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1422440000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1820550000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1820560000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1028800000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1552790000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2508170000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2508020000', 'feedthrough-terminal', 'X'],
@@ -976,7 +992,8 @@ test('PT miniature and power feed-through blocks preserve ratings and panel widt
 });
 
 test('Weidmüller WDU blocks preserve the manufacturer identity, wire limits and TS 35 dimensions', () => {
-  for (const [id, width, depth, minimumRigid, maximumRigid, maximumFlexible, depthIncludingDINRail] of [
+  for (const [id, width, depth, minimumRigid, maximumRigid, maximumFlexible, depthIncludingDINRail,
+    endCoverRequired = true, rails = ['TS 35'], voltage, current] of [
     ['1020000000', 5.1, 46.5, 0.05, 4, 4],
     ['1020080000', 5.1, 46.5, 0.5, 4, 4],
     ['1020100000', 6.1, 46.5, 0.13, 6, 6, 47],
@@ -998,7 +1015,23 @@ test('Weidmüller WDU blocks preserve the manufacturer identity, wire limits and
     ['1020210000', 7.9, 46.5, 0.5, 10, 10, 47],
     ['1020360000', 9.9, 46.5, 1.31, 16, 16, 47],
     ['1020500000', 16, 62.5, 2.5, 16, 35, 63],
-    ['1020580000', 16, 62.5, 2.5, 16, 35, 63]
+    ['1020580000', 16, 62.5, 2.5, 16, 35, 63],
+    ['1024500000', 32, 117, 35, 150, 150, 125.5, false, ['TS 35'], 1000, 269],
+    ['1802780000', 36, 123.7, 70, 185, 240, 124, false, ['TS 32', 'TS 35'], 1000, 415],
+    ['1020020000', 5.1, 46.5, 0.05, 4, 4, null, true, ['TS 35'], 800, 24],
+    ['1037710000', 5.1, 46.5, 0.05, 4, 4, null, true, ['TS 35'], 800, 24],
+    ['1020140000', 6.1, 46.5, 0.13, 6, 6, 47, true, ['TS 35'], 800, 32],
+    ['1020240000', 7.9, 46.5, 0.22, 10, 10, 47, true, ['TS 35'], 800, 41],
+    ['1039600000', 7.9, 46.5, 0.22, 10, 10, 47, true, ['TS 35'], 800, 41],
+    ['1020340000', 9.9, 46.5, 1.31, 16, 16, 47, true, ['TS 35'], 1000, 57],
+    ['1833400000', 11.9, 62.5, 0.82, 16, 25, 63, true, ['TS 35'], 1000, 76],
+    ['1020510000', 16, 62.5, 2.5, 16, 35, 63, true, ['TS 35'], 1000, 125],
+    ['1024650000', 27, 107, 13.3, 16, 95, 115.5, false, ['TS 35'], 1000, 232],
+    ['1024600000', 27, 107, 13.3, 16, 95, 115.5, false, ['TS 35'], 1000, 232],
+    ['1422440000', 18.5, 69.6, 10, 16, 50, 70.6, false, ['TS 35'], 1000, 150],
+    ['1820550000', 27, 90, 16, 16, 120, 91, false, ['TS 35', 'TS 32 offset'], 1000, 269],
+    ['1820560000', 27, 90, 16, 16, 120, 91, false, ['TS 35'], 1000, 269],
+    ['1028800000', 16, 62.5, 2.5, 16, 35, 63, true, ['TS 35'], 1000, 125]
   ]) {
     const [result] = engine.catalog('weidmueller ' + id);
     const part = engine.component(result.id);
@@ -1006,12 +1039,13 @@ test('Weidmüller WDU blocks preserve the manufacturer identity, wire limits and
     assert.ok(part.sources[0].url.endsWith(id));
     assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), ['screw', 'screw']);
     assert.deepEqual(part.symbol.internalConnections, [['level-1-left', 'level-1-right']]);
-    assert.deepEqual(part.specifications.mountingRails.value, ['TS 35']);
+    assert.deepEqual(part.specifications.mountingRails.value, rails);
     assert.deepEqual(part.specifications.rigidConductorRange, { minimum: minimumRigid, maximum: maximumRigid, unit: 'mm²' });
     assert.equal(part.specifications.flexibleConductorRange.maximum, maximumFlexible);
-    assert.equal(part.specifications.endCoverRequired.value, true);
+    assert.equal(part.specifications.endCoverRequired.value, endCoverRequired);
+    if (voltage !== undefined) assert.deepEqual([part.specifications.nominalVoltage.value, part.specifications.nominalCurrent.value], [voltage, current]);
     const [outline] = part.physicalRepresentations;
-    assert.deepEqual([outline.width, outline.depth, outline.depthIncludingDINRail], [width, depth, depthIncludingDINRail]);
+    assert.deepEqual([outline.width, outline.depth, outline.depthIncludingDINRail], [width, depth, depthIncludingDINRail ?? undefined]);
     assert.deepEqual(outline.railDepths, {});
   }
 });
