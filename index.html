@@ -858,27 +858,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           label(fuse.specifications.nominalCurrent.value+' A',0,-11,7);
           break;
         }
+        case'modular-step-relay':
         case'modular-contactor': {
-          const part=window.AdigunCADEngine.component(item.id);
-          const pins=new Map(part.symbol.pins.map(pin=>[pin.id,pin]));
-          const [a1,a2]=part.electricalFunctions.coilTerminals.map(id=>pins.get(id));
-          line(a1.x,a1.y,a1.x,-8);
-          rect(a1.x-8,-8,16,16);
-          line(a2.x,8,a2.x,a2.y);
-          label(a1.localNumber,a1.x,-41,7);label(a2.localNumber,a2.x,46,7);
-          for(const pole of part.electricalFunctions.contactPoles){
-            const [top,bottom]=pole.terminals.map(id=>pins.get(id));
-            line(top.x,top.y,top.x,-9);
-            line(bottom.x,12,bottom.x,bottom.y);
-            if(pole.normallyClosed){
-              line(top.x,-9,top.x+5,-9);
-              line(bottom.x,12,top.x+5,-9);
-              if(pole.mirror)circle(top.x+5,-9,2.6);
-            }else{
-              line(bottom.x,12,bottom.x-7,-5);
-            }
-            label(top.manufacturerMarking||top.localNumber,top.x,-41,7);
-            label(bottom.manufacturerMarking||bottom.localNumber,bottom.x,46,7);
+          const engine=window.AdigunCADEngine;
+          const part=engine.component(item.id);
+          const geometry=engine.coilAndContactGeometry(obj,part);
+          for(const segment of geometry.segments)line(...segment);
+          for(const marker of geometry.circles)circle(...marker);
+          for(const pin of part.symbol.pins){
+            label(pin.manufacturerMarking||pin.localNumber,pin.x,pin.y<0?-41:46,7);
           }
           break;
         }
@@ -1368,7 +1356,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   }
   const componentPropertyLabels={terminalStrip:'Terminal strip',position:'Position',marking:'Marking',comment:'Comment',
     overloadSettingA:'Overload setting (A)',delaySeconds:'Transition time (s)',sensingTarget:'Sensing target',
-    processPoint:'Process point',signalConfigurationNote:'Signal configuration note',knifePosition:'Knife position'};
+    processPoint:'Process point',signalConfigurationNote:'Signal configuration note',knifePosition:'Knife position',switchingStep:'Switching step'};
   function componentPropertyFields(object,definition){
     return Object.entries(definition.instanceProperties).map(function([name,rule]){
       if(rule.type==='choice'){
@@ -1453,6 +1441,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.gaugeContactDiameter?[['Gauge contact diameter',spec.gaugeContactDiameter.value+' '+spec.gaugeContactDiameter.unit]]:[]),
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
+      : def.family==='modular-step-relay'
+      ? [['Coil voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
+        ['Rated contact current',spec.ratedContactCurrent.value+' A'],['Contact material',spec.contactMaterial.value],
+        ['Switching steps',String(spec.stepCount.value)],['Mounting',spec.mountingMethod.value]]
       : def.family==='modular-contactor'
       ? [['Contact configuration',spec.contactConfiguration.value],['Rated contact current',spec.ratedContactCurrent.value+' A'],
         ['AC coil voltage',spec.coilVoltageAC.value+' V AC'],['DC coil voltage',spec.coilVoltageDC.value+' V DC'],

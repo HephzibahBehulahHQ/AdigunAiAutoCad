@@ -61,6 +61,21 @@ test('DXF preserves disconnect knife position and symbol transform as geometry',
   }
 });
 
+test('DXF exports the selected Finder relay step as editable contact geometry', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const relay = engine.createInstance('finder-202882300000', 100, 200, 'K1');
+  const initial = await globalThis.AdigunDXF.exportDrawing([relay]);
+  relay.properties.switchingStep = '4';
+  const selected = await globalThis.AdigunDXF.exportDrawing([relay]);
+  assert.deepEqual(initial.unsupported, []);
+  assert.deepEqual(selected.unsupported, []);
+  const imported = globalThis.AdigunDXF.importDrawing(selected.text, 'Relay geometry', 'relay-dxf');
+  const segments = imported.project.objects.filter(object => object.kind === 'line');
+  assert.equal(segments.length, engine.coilAndContactGeometry(relay).segments.length);
+  assert.ok(segments.some(line => line.x1 === 132 && line.y1 === 191 && line.x2 === 137 && line.y2 === 191));
+});
+
 test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');

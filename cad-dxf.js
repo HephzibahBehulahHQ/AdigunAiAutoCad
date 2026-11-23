@@ -116,10 +116,11 @@
       };
       const engine = root.AdigunCADEngine;
       const component = kind === 'component-instance' ? engine.component(object.componentId, object.customSymbol) : null;
-      if (['disconnect-terminal', 'user-authored'].includes(component?.family) && engine.validateInstance(object).valid) {
+      const coilAndContact = ['modular-contactor', 'modular-step-relay'].includes(component?.family);
+      if ((coilAndContact || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
-          : engine.disconnectTerminalGeometry(object);
+          : coilAndContact ? engine.coilAndContactGeometry(object) : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
         function toDxf(localX, localY) {
