@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('6', 'P6', 'P10')][string]$Series = '6')
+param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('6', '10', 'P6', 'P10')][string]$Series = '6')
 
 $ErrorActionPreference = 'Stop'
 $settings = [Xml.XmlReaderSettings]::new()
@@ -36,7 +36,7 @@ try {
         }
         $width = @{ 1 = 17.6; 2 = 35.4; 3 = 53.4; 4 = 71 }[$poles]
         $voltage = if ($topology -eq '1p') { '230/400' } elseif ($topology -eq '1p+N') { '230' } else { '400' }
-        $capacity = if ($Series -eq 'P10') { 10 } else { 6 }
+        $capacity = if ($Series -eq 'P10' -or ($Series -eq '10' -and $current -le 40)) { 10 } else { 6 }
         if ($Series -eq '6') {
             if ($long -notmatch 'Short circuit capacity \(kA\) 6(?:/6)?(?:\s|,|$)') { continue }
         } else {
@@ -44,7 +44,14 @@ try {
             if ($voltage -notin '230','240','400','415' -or
                 ($values['EF009555'] -ne [string]$capacity -and $values['EF009556'] -ne [string]$capacity) -or
                 [int]$values['EF002950'] -ne $poles) { continue }
-            $width = [Math]::Round(17.8 * $poles, 1)
+            if ($Series -eq '10') {
+                if (($current -gt 40 -and $current -lt 50) -or
+                    $long -notmatch "Short circuit capacity \(kA\) $capacity(?:\s|,|$)" -or
+                    $long -notmatch 'Rated voltage \(V\) (230/400|230|400)(?:\s|,|$)') { continue }
+                $voltage = $Matches[1]
+            }
+            $moduleWidth = if ($Series -eq '10') { 17.6 } else { 17.8 }
+            $width = [Math]::Round($moduleWidth * $poles, 1)
         }
         if ($values['EF000889'] -cne $curve -or $values['EF000187'] -cne 'AC' -or
             $values['EF000227'] -notmatch '^\d+(?:[.,]\d+)?$' -or

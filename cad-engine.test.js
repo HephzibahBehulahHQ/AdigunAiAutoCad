@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3088);
+  assert.equal(items.length, 3166);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1672,6 +1672,22 @@ test('ETIMAT P-series breakers follow their separate terminal numbering and brea
       assert.equal(ratedBreakingCapacity.value, capacity);
       assert.deepEqual([dimensions.height.value, dimensions.depth.value], [88, 69.5]);
     }
+  }
+});
+
+test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams', () => {
+  const items = engine.catalog('ETI ETIMAT 10').filter(item => item.name.startsWith('ETIMAT 10 '));
+  assert.equal(items.length, 78);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { protectedPoles, switchedNeutral, nominalCurrent, ratedBreakingCapacity, dimensions } = part.specifications;
+    const terminals = Array.from({ length: protectedPoles.value }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]).flat();
+    if (switchedNeutral.value) terminals.push('02', '01');
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), terminals);
+    assert.ok(nominalCurrent.value <= 40);
+    assert.equal(ratedBreakingCapacity.value, 10);
+    assert.ok(Math.abs(dimensions.width.value - 17.6 * terminals.length / 2) < 1e-9);
+    assert.deepEqual([dimensions.height.value, dimensions.depth.value], [85, 67.7]);
   }
 });
 
