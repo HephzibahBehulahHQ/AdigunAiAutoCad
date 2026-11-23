@@ -1510,24 +1510,39 @@
   });
 
   const etiFuseDimensions = {
-    '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2]
+    '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2],
+    NH000: [78.6, 51.9, 21], NH00C: [79, 52, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
+    NH1C: [135, 61, 28], NH1: [135, 65, 46], NH2C: [150, 73, 46], NH2: [150, 73, 54],
+    NH3C: [150, 84, 54], NH3: [150, 84, 65], NH4a: [200, 121, 95]
   };
-  const etiCylindricalFuseLinks = terminalCatalog.etiCylindricalFuseLinks.map(([code, size, utilization, current, voltage, capacity]) => {
+  const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(terminalCatalog.etiKnifeBladeFuseLinks)
+    .map(([code, size, utilization, current, voltage, capacity]) => {
     const id = 'eti-' + code;
-    const [length, diameter] = etiFuseDimensions[size];
+    const knifeBlade = size.startsWith('NH');
+    const [length, height, depth = height] = etiFuseDimensions[size];
+    const format = knifeBlade ? size : 'CH' + size;
+    const contactName = knifeBlade ? 'blade contact' : 'end cap';
+    const contactType = knifeBlade ? 'knife-blade' : 'end-cap';
+    const terminalPrefix = knifeBlade ? 'blade-' : 'cap-';
+    const dimensionalSource = knifeBlade
+      ? size === 'NH000'
+        ? 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004181101-nh000-gg-2a-400v'
+        : 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/TD-NV.pdf#page=1'
+      : 'https://www.etigroup.eu/images/product_db/documents/en-GB/C_ENG.pdf#page=2';
     const pins = [
-      { id: 'cap-left', localNumber: 'L', name: 'Left end cap', x: -36, y: 0, electricalType: 'passive', connectionType: 'end-cap' },
-      { id: 'cap-right', localNumber: 'R', name: 'Right end cap', x: 36, y: 0, electricalType: 'passive', connectionType: 'end-cap' }
+      { id: terminalPrefix + 'left', localNumber: 'L', name: 'Left ' + contactName, x: -36, y: 0, electricalType: 'passive', connectionType: contactType },
+      { id: terminalPrefix + 'right', localNumber: 'R', name: 'Right ' + contactName, x: 36, y: 0, electricalType: 'passive', connectionType: contactType }
     ];
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: 'CH' + size + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V',
-      name: 'Cylindrical fuse link', aliases: ['CH' + size, 'fuse cartridge', utilization],
-      family: 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V',
+      name: knifeBlade ? 'Knife-blade fuse link' : 'Cylindrical fuse link',
+      aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization],
+      family: knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
-        id: 'fuse.eti.ch' + size + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
+        id: 'fuse.eti.' + format.toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
         internalConnections: [],
-        numberingNote: 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
+        numberingNote: knifeBlade ? 'L and R identify the two blade contacts in the CAD symbol.' : 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
       },
       electricalFunctions: {
         protectedTerminalPair: pins.map(pin => pin.id),
@@ -1536,20 +1551,22 @@
       specifications: {
         utilizationCategory: { value: utilization }, nominalCurrent: { value: current, unit: 'A' },
         nominalVoltage: { value: voltage, unit: 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
-        cartridgeSize: { value: size, unit: 'mm' },
-        dimensions: { width: { value: length, unit: 'mm' }, height: { value: diameter, unit: 'mm' }, depth: { value: diameter, unit: 'mm' } }
+        cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
+        dimensions: { width: { value: length, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
       },
       physicalRepresentations: [{
-        ...terminalPanelEnvelope(id, length, diameter), sourceIndex: 1, depth: diameter,
+        ...terminalPanelEnvelope(id, length, height), sourceIndex: 1, depth,
         scope: 'Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.'
       }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
-        { publisher: 'ETI', title: 'C / Cylindrical fuse-links',
-          url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/C_ENG.pdf#page=2',
-          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' }
+        { publisher: 'ETI', title: knifeBlade ? 'NV/NH knife-blade fuse-link dimensions' : 'C / Cylindrical fuse-links',
+          url: dimensionalSource,
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: knifeBlade
+            ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
+            : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' }
       ]
     });
   });
@@ -1854,7 +1871,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiCylindricalFuseLinks).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
