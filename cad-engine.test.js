@@ -1597,6 +1597,43 @@ test('direct catalog lookup matches searchable entries and protects the index', 
   assert.equal(engine.catalogItem('constructor'), null);
 });
 
+test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
+  const sheetId = 'catalog-check';
+  for (const item of engine.catalog()) {
+    const definition = engine.component(item.id);
+    const instance = engine.createInstance(item.id, 300, 300, item.tag + '1');
+    instance.sheetId = sheetId;
+    engine.moveInstance(instance, 350, 400);
+    engine.rotateInstance(instance, 90);
+    const pins = engine.worldPins(instance);
+    assert.equal(pins.length, definition.symbol.pins.length, item.id);
+    const wires = pins.map((pin, index) => ({
+      id: 'lead-' + index, kind: 'wire', sheetId,
+      x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+      x2: pin.x, y2: pin.y + 10, color: '#1565c0',
+      pinAttachments: { start: { instanceId: instance.id, pinId: pin.id }, end: null }
+    }));
+    const objects = [instance, ...wires];
+    if (definition.physicalRepresentations?.some(view => view.view === 'panel-front-envelope')) {
+      const envelope = engine.createPanelEnvelope(item.id, 'component-envelope', 650, 400);
+      assert.equal(envelope.manufacturerPartNumber, definition.manufacturerPartNumber, item.id);
+      objects.push({ ...envelope, sheetId });
+    }
+    const saved = engine.serializeProject({ project: 'Catalog check', sheets: [{ id: sheetId, name: 'Wiring' }], objects });
+    const reopened = engine.parseProject(saved);
+    assert.equal(reopened.valid, true, item.id + ': ' + reopened.errors.join(' '));
+    assert.deepEqual(reopened.project.objects, objects, item.id);
+    assert.deepEqual(engine.worldPins(reopened.project.objects[0]), pins, item.id);
+    const analyzed = engine.analyze(reopened.project.objects);
+    const reportedPins = new Set(analyzed.nets.flatMap(net => net.pins.map(pin => pin.number)));
+    for (const pin of pins) assert.ok(reportedPins.has(pin.number), item.id + ' terminal ' + pin.number);
+    const bom = engine.billOfMaterials(reopened.project.objects);
+    assert.equal(bom.valid, true, item.id);
+    assert.deepEqual(bom.rows.map(row => [row.componentId, row.partNumber, row.quantity]),
+      [[item.id, definition.manufacturerPartNumber, 1]], item.id);
+  }
+});
+
 test('every verified catalog part preserves its editable instance and pin anchors through native save', () => {
   for (const item of engine.catalog()) {
     const part = engine.component(item.id);
