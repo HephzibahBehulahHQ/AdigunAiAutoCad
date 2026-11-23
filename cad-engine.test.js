@@ -641,7 +641,15 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-3025940000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2539970000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2540040000', 'feedthrough-terminal', 'X'],
-    ['weidmuller-2552480000', 'feedthrough-terminal', 'X']
+    ['weidmuller-2552480000', 'feedthrough-terminal', 'X'],
+    ['siemens-6es7211-1ae40-0xb0', 'plc-cpu', 'A'],
+    ['siemens-6es7214-1ag40-0xb0', 'plc-cpu', 'A'],
+    ['siemens-6es7221-1bf32-0xb0', 'plc-digital-input', 'A'],
+    ['siemens-6es7221-1bh32-0xb0', 'plc-digital-input', 'A'],
+    ['siemens-6es7222-1hf32-0xb0', 'plc-digital-output', 'A'],
+    ['siemens-6es7222-1bh32-0xb0', 'plc-digital-output', 'A'],
+    ['siemens-6es7231-5nd32-0xb0', 'plc-analog-input', 'A'],
+    ['siemens-6es7232-4hb32-0xb0', 'plc-analog-output', 'A']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3208126', 'phoenix-contact-3212142', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555', 'phoenix-contact-3044649', 'phoenix-contact-3044791', 'phoenix-contact-3031283']);
   for (const [id, height] of [
