@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7888);
+  assert.equal(items.length, 7951);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2072,6 +2072,37 @@ test('ETI KZS-1M-FN breakers retain continuous neutral and separate functional e
     assert.equal(part.specifications.ratedBreakingCapacity.value, 10);
     assert.ok(part.sources[1].url.endsWith('#page=1'));
   }
+});
+
+test('Modular ETITEC surge protectors preserve hybrid, fuse and gas branches and their terminal buses', () => {
+  const items = engine.catalog('modular AC SPD').filter(item => item.family === 'surge-protective-device');
+  assert.equal(items.length, 63);
+  for (const { id } of items) {
+    const part = engine.component(id);
+    const pins = new Set(part.symbol.pins.map(pin => pin.id));
+    for (const branch of part.electricalFunctions.surgeBranches) {
+      assert.ok(pins.has(branch.from) && pins.has(branch.to));
+      assert.notEqual(branch.from, branch.to);
+    }
+    assert.ok(engine.modularSurgeGeometry(part).segments.flat().every(Number.isFinite));
+  }
+  const hybrid = engine.component('eti-002440551');
+  assert.deepEqual(hybrid.electricalFunctions.surgeBranches[0], {
+    from: 'power-l1', to: 'power-n', technology: 'GDT and MOV in series'
+  });
+  assert.deepEqual(hybrid.electricalFunctions.surgeBranches.at(-1), {
+    from: 'power-n', to: 'pe', technology: 'Gas discharge tube'
+  });
+  const fused = engine.component('eti-002440709');
+  assert.deepEqual(fused.symbol.internalConnections, [['pe-1', 'pe-2']]);
+  assert.equal(fused.electricalFunctions.surgeBranches[0].technology, 'Fused MOV');
+  const twin = engine.component('eti-002440563');
+  assert.equal(twin.symbol.pins.find(pin => pin.id === 'pe-1').y, -56);
+  assert.equal(twin.symbol.pins.find(pin => pin.id === 'power-n-1').y, 56);
+  assert.ok(twin.symbol.internalConnections.some(bus => bus.join() === 'power-l1-1,power-l1-2'));
+  assert.deepEqual(twin.electricalFunctions.surgeBranches.at(-1), {
+    from: 'pe-1', to: 'power-n-1', technology: 'Gas discharge tube'
+  });
 });
 
 test('ETITEC A retains distinct line and earth connections and order-specific surge ratings', () => {

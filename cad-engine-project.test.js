@@ -117,6 +117,18 @@ test('DXF exports the ETITEC A MOV, local disconnector and attachment marks', as
   assert.equal(project.objects.filter(object => object.kind === 'line').length, 11);
 });
 
+test('DXF exports duplicate terminal marks for the modular ETITEC SM power buses', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const device = engine.createInstance('eti-002440563', 200, 200, 'FV1');
+  const exported = await globalThis.AdigunDXF.exportDrawing([device]);
+  assert.deepEqual(exported.unsupported, []);
+  const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Twin terminal protection', 'etitec-sm-dxf');
+  const marks = project.objects.filter(object => object.kind === 'circle' && Math.abs(object.x2 - object.x - 2.6) < 1e-6);
+  assert.equal(marks.length, 13);
+  assert.deepEqual(marks.filter(pin => pin.y === 256).map(pin => pin.x), [192, 208]);
+});
+
 test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');
