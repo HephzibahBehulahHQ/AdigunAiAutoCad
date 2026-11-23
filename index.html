@@ -1337,7 +1337,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
         ['Contact configuration',spec.changeoverContactCount.value+' '+spec.changeoverContactCount.unit],
         ['Catalog contact current',spec.ratedContactCurrent.value+' '+spec.ratedContactCurrent.unit],
-        ['Contact material',spec.contactMaterial.value],['Enclosure',spec.enclosureVersion.value],
+        ['Contact material',spec.contactMaterial.value],
+        ...(spec.enclosureVersion ? [['Enclosure',spec.enclosureVersion.value]] : []),
+        ...(spec.environmentalProtection ? [['Environmental protection',spec.environmentalProtection.value]] : []),
+        ...(spec.options ? [['Options',spec.options.value]] : []),
+        ...(spec.terminalPinLength ? [['Terminal pin length',spec.terminalPinLength.value+' '+spec.terminalPinLength.unit]] : []),
+        ...(spec.socketWiringAbove10A ? [['Socket wiring above 10 A',spec.socketWiringAbove10A.value]] : []),
         ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],['Coil input range at 20 °C',spec.coilInputRangeAt20C.minimum+'–'+spec.coilInputRangeAt20C.maximum+' '+spec.coilInputRangeAt20C.unit],['Contact configuration',spec.changeoverContactCount.value+' '+spec.changeoverContactCount.unit],['Limiting continuous current',spec.limitingContinuousCurrent.value+' '+spec.limitingContinuousCurrent.unit],['Maximum switching voltage',spec.maximumSwitchingVoltage.value+' '+spec.maximumSwitchingVoltage.unit],['Screw conductor range',spec.rigidConductorRange.minimum+'–'+spec.rigidConductorRange.maximum+' '+spec.rigidConductorRange.unit],['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']];
     const specRows=rows.map(function(row){return '<div class="property-row"><span>'+escapeHtml(row[0])+'</span><strong>'+escapeHtml(row[1])+'</strong></div>';}).join('');

@@ -1518,6 +1518,9 @@
         specifications: {
           nominalCoilVoltage: coilVoltage,
           ratedContactCurrent: { value: current, unit: 'A' },
+          ...(pairedTerminals ? {
+            socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
+          } : {}),
           changeoverContactCount: { value: doublePole ? 2 : 1, unit: 'changeover contact' },
           contactMaterial: { value: material },
           ...(industrial ? {
@@ -1553,7 +1556,9 @@
           doublePole || pairedTerminals ? { publisher: 'Finder', title: 'Series 40 datasheet · ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
-            revisionNote: 'Pages ' + (pcbTenAmpRelay ? '4' : '3') + ' and 5 document the copper-side terminal diagram and ordering options.' } :
+            revisionNote: pairedTerminals
+              ? 'Pages 3 and 5 document terminal wiring and order options. Pages 12 and 14–16 specify parallel socket wiring above 10 A.'
+              : 'Pages ' + (pcbTenAmpRelay ? '4' : '3') + ' and 5 document the copper-side terminal diagram and ordering options.' } :
           { publisher: 'Finder', title: 'Series 40 datasheet · 40.31/40.51',
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VII-2026', retrievedAt: '2026-11-23',
