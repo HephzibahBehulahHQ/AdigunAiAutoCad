@@ -1694,6 +1694,90 @@
   });
 
 
+
+  const finderModularContactors = terminalCatalog.finderSeries22Contactors.map(
+    ([code, type, voltage, material, circuit, option, mirror]) => {
+      const id = 'finder-' + code;
+      const order = code.replace(/^(\d{2})(\d{2})(\d)(\d{3})(\d{4})$/, '$1.$2.$3.$4.$5');
+      const count = Number(type[1]);
+      const highCurrent = type === '44' || type === '64';
+      const compact32A = type === '72' || type === '74';
+      const ncIndices = {
+        '3': [], '4': Array.from({ length: count }, (_, index) => index),
+        '5': [1], '6': type === '34' ? [0, 3] : [1, 2],
+        '7': [mirror && highCurrent ? 1 : 3]
+      }[circuit];
+      const pins = [];
+      const addPair = (x, labels, kind, markings = labels) => labels.map((label, index) => {
+        const pin = {
+          id: (kind === 'Coil' ? 'coil-' : 'terminal-') + label.toLowerCase(),
+          localNumber: label, name: kind + ' terminal ' + label,
+          ...(markings[index] !== label ? { manufacturerMarking: markings[index] } : {}),
+          x, y: index ? 34 : -34, electricalType: kind === 'Coil' ? 'coil' : 'passive', connectionType: 'box-clamp'
+        };
+        pins.push(pin);
+        return pin.id;
+      });
+      const coil = addPair(-16 * count, ['A1','A2'], 'Coil');
+      const poles = Array.from({ length: count }, (_, index) => {
+        const normallyClosed = ncIndices.includes(index);
+        const labels = mirror && normallyClosed ? ['11','12'] : [String(index * 2 + 1), String(index * 2 + 2)];
+        const alternate = index === 3 && circuit === '3' && (highCurrent || type === '74');
+        const terminals = addPair((index + 1 - count / 2) * 32, labels,
+          normallyClosed ? 'Normally closed' : 'Normally open', alternate ? ['7 (13)','8 (14)'] : labels);
+        return { terminals, normallyClosed, ...(mirror && normallyClosed ? { mirror: true } : {}) };
+      });
+      const width = highCurrent ? 53.5 : count === 2 ? 17.5 : 35;
+      const height = highCurrent ? 95.8 : compact32A ? 85 : 88.8;
+      const current = type === '64' ? (circuit === '4' ? 50 : 63) : type === '44' ? 40 : compact32A ? 32 : 25;
+      const diagramPage = { '32': 3, '34': 4, '44': 5, '64': 5, '72': 6, '74': 6 }[type];
+      const options = { '1': 'Mechanical indicator', '2': 'Mechanical indicator + LED', '4': 'Auto-On-Off selector + mechanical indicator + LED' };
+      const coilAC = voltage === 230 && !compact32A ? '230–240' : voltage === 120 ? '110–125' : voltage;
+      const coilDC = voltage === 230 ? 220 : voltage === 120 && highCurrent ? 110 : coilAC;
+      const catalog = 'https://cdn.findernet.com/app/uploads/S22EN.pdf';
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'Finder', manufacturerPartNumber: order,
+        model: order, name: 'Series 22 modular contactor', aliases: ['Finder Series 22', '22.' + type, 'modular contactor'],
+        family: 'modular-contactor', referencePrefix: 'K', category: 'Electrical · Verified contactor',
+        symbol: {
+          id: 'contactor.finder.22.' + type + '.' + circuit + (mirror ? '.mirror' : '') + '.v1',
+          view: 'schematic', unit: 'mm', width: (count + 1) * 32, height: 68, pins, internalConnections: [],
+          numberingNote: 'The schematic groups the coil and contact poles. Alternate contact markings share one pair of physical terminals.'
+        },
+        electricalFunctions: {
+          coilTerminals: coil, contactPoles: poles,
+          simulationNote: 'The symbol shows the normal contact state. Static wiring reports keep the two ends of switching contacts separate.'
+        },
+        specifications: {
+          poleCount: { value: count }, contactConfiguration: { value: [count - ncIndices.length ? (count - ncIndices.length) + ' NO' : '', ncIndices.length ? ncIndices.length + ' NC' : ''].filter(Boolean).join(' + ') },
+          ratedContactCurrent: { value: current, unit: 'A' }, nominalCoilVoltage: { value: voltage, unit: 'V AC/DC (order code)' },
+          coilVoltageAC: { value: coilAC, unit: 'V AC' }, coilVoltageDC: { value: coilDC, unit: 'V DC' },
+          contactMaterial: { value: material === '1' ? 'AgNi' : 'AgSnO₂' }, option: { value: options[option] },
+          ...(mirror ? { mirrorContact: { value: true } } : {}),
+          mountingMethod: { value: '35 mm DIN rail' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), sourceIndex: 2,
+          scope: 'Manufacturer front outline without optional auxiliary blocks or wiring clearances.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'Finder', title: 'Finder BMEcat · Order ' + order,
+            url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
+            documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
+            revisionNote: highCurrent ? 'Exact order code and contact configuration. Use the series datasheet for current ratings because BMEcat transposes the 22.44 and 22.64 ratings.'
+              : 'Exact order code, coil type, contact configuration and material.' },
+          { publisher: 'Finder', title: 'Series 22 · Type 22.' + type, url: catalog + '#page=' + diagramPage,
+            documentRevision: '2026-07', retrievedAt: '2026-11-23', revisionNote: 'Contact and coil terminal maps, contact configuration and operating current.' },
+          { publisher: 'Finder', title: 'Series 22 · Outline drawings', url: catalog + '#page=14',
+            documentRevision: '2026-07', retrievedAt: '2026-11-23', revisionNote: 'Manufacturer front width and height.' },
+          { publisher: 'Finder', title: 'Series 22 · Coil specifications', url: catalog + '#page=11',
+            documentRevision: '2026-07', retrievedAt: '2026-11-23', revisionNote: 'Order-code voltages and AC and DC operating variants.' }
+        ]
+      });
+    });
+
   const etiEfiBreakers = terminalCatalog.etiEfiBreakers.map(
     ([code, series, poles, residualType, current, trip, voltage, capacity, variant, builtInDepth]) => {
       const id = 'eti-' + code;
@@ -2279,7 +2363,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, finderModularContactors).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
