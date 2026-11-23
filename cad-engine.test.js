@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 9905);
+  assert.equal(items.length, 10003);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1913,7 +1913,7 @@ test('ETI NH steel-cover fuse links retain order-specific dimensions and distinc
 });
 
 test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines', () => {
-  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link' && item.name.includes(' gPV '));
+  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link' && item.name.includes(' gPV ') && engine.component(item.id).sources[0].title.startsWith('ETI BMEcat'));
   assert.equal(items.length, 45);
   const dimensionsBySize = { '10x38': [38.2, 10.2], '10x85': [85, 10], '14x51': [51, 14.3] };
   for (const item of items) {
@@ -7466,4 +7466,22 @@ test('ETI Green Protect NH fuses distinguish mounting ends and isolate the power
   instance.properties.switchingStep = '2';
   assert.deepEqual(pins(), ['indicator-c','indicator-no']);
   assert.notDeepEqual(engine.fuseLinkGeometry(instance, part), healthy);
+});
+
+test('Green Protect cartridges retain three contact constructions and distinct ratings', () => {
+  const parts = engine.catalog('ETI Green Protect').filter(item => item.family === 'cylindrical-fuse-link');
+  assert.equal(parts.length, 98);
+  const cases = [
+    ['002625100','end-cap',38.2,2],
+    ['002625210','slotted-blade',106.8,2],
+    ['002626300','crimp',110,2],
+    ['002626102','slotted-blade',60,10]
+  ];
+  for (const [code, type, length, timeConstant] of cases) {
+    const part = engine.component('eti-' + code);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [type,type]);
+    assert.equal(part.physicalRepresentations[0].width, length);
+    assert.equal(part.specifications.ratedDcTimeConstant.value, timeConstant);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
 });

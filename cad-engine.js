@@ -2110,6 +2110,57 @@
     75: { contacts: 'knife-blade', sizes: { '00': [79, 56, 28], 1: [135, 62, 51], 2: [150, 71, 61], 3: [150, 84, 73] },
       combined: { 1: [135, 65, 46], 3: [150, 84, 65] } }
   };
+  const etiGreenProtectCartridges = terminalCatalog.etiGreenProtectCartridges.map(
+    ([code, size, form, curve, current, voltage, capacity, timeConstant, width, height, depth, page]) => {
+      const id = 'eti-' + code;
+      const { contactType, contactName, prefix } = {
+        CH: { contactType: 'end-cap', contactName: 'end cap', prefix: 'cap' },
+        'CH-SU': { contactType: 'slotted-blade', contactName: 'slotted tab', prefix: 'tab' },
+        'CH-IN': { contactType: 'crimp', contactName: 'in-line crimp barrel', prefix: 'crimp' }
+      }[form];
+      const pins = ['left', 'right'].map((side, index) => ({
+        id: prefix + '-' + side, localNumber: index ? 'R' : 'L', name: contactName + ' (' + side + ')',
+        x: index ? 36 : -36, y: 0, electricalType: 'passive', connectionType: contactType
+      }));
+      const catalog = 'https://www.etigroup.eu/images/product_db/documents/en-GB/Green-Protect.pdf#page=';
+      const drawing = { 7: 7, 10: 11, 13: 13, 21: 21, 22: 22, 24: 24 }[page];
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: form + ' ' + size + ' ' + curve + ' ' + current + 'A/' + voltage + 'V DC',
+        name: curve === 'gPV' ? 'Green Protect photovoltaic cartridge fuse' : 'Green Protect battery cartridge fuse',
+        aliases: ['ETI Green Protect', form, size, contactName],
+        family: 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+        symbol: { id: 'fuse.eti.green-protect.' + form.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
+          width: 72, height: 32, pins, internalConnections: [],
+          numberingNote: 'L and R distinguish the two interchangeable power terminals.' },
+        electricalFunctions: { protectedTerminalPair: pins.map(pin => pin.id),
+          continuityNote: 'The connection report preserves separate nets across the fuse.' },
+        specifications: {
+          cartridgeSize: { value: size, unit: 'mm' }, utilizationCategory: { value: curve },
+          nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V DC' },
+          ratedBreakingCapacity: { value: capacity, unit: 'kA' }, ratedDcTimeConstant: { value: timeConstant, unit: 'ms' },
+          terminationStyle: { value: contactName },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth,
+          scope: 'Net envelope including end contacts. Wire and holder clearances are separate.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code, contact type, DC ratings and net envelope. The lower published rating is used where sources differ.' },
+          { publisher: 'ETI', title: 'Green Protect · Cartridge order table and ratings',
+            url: catalog + page, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code, time constant and voltage class.' },
+          ...(drawing !== page ? [{ publisher: 'ETI', title: 'Green Protect · Cartridge terminal drawings',
+            url: catalog + drawing, documentRevision: null, retrievedAt: '2026-11-23',
+            revisionNote: 'End caps, slotted tabs and in-line crimp barrels.' }] : [])
+        ]
+      });
+    });
+
   const etiGreenProtectNhFuseLinks = terminalCatalog.etiGreenProtectNhFuseLinks.map(
     ([code, size, form, curve, current, voltage, capacity, timeConstant, indicator, width, height, depth, page, microswitch]) => {
       const id = 'eti-' + code;
@@ -3507,7 +3558,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks, etiGreenProtectCartridges).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
