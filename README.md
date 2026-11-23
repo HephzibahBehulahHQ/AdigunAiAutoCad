@@ -11,6 +11,8 @@ Click a wire to open **Properties** for its color, line weight, and line type. R
 
 The drafting viewport fills the workspace. Model coordinates use positive X to the right and positive Y downward, with negative coordinates available. New sheets start with the print frame hidden. Use **Toggle print frame**, **Fit print frame**, **Fit selection**, or **Go to origin** in the command palette. **Fit drawing to view** includes visible off-frame objects. Pan with middle-button drag or Space + drag, and use the wheel to zoom around the pointer.
 
+**Create Project** opens model space with numbered rulers. Add a sheet in Project Explorer and select it to draft on its numbered tab. You can draw beyond the configured paper margins and turn the paper frame on when checking printed output. Older projects without a saved frame preference also open in model space.
+
 In **Drafting settings**, change the display grid and snap intervals independently. Select inches or millimetres for the ruler and cursor readout. Drag from the top ruler for a horizontal guide or from the left ruler for a vertical guide. The Guides controls let you enter exact positions, lock, hide, or delete guides. Guides save with the sheet and stay out of drawing exports.
 
 Drag a guide’s marker along its ruler to reposition it. Locked guides keep their position.
