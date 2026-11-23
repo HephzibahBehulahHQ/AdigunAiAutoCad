@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 6591);
+  assert.equal(items.length, 6631);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2110,7 +2110,7 @@ test('Finder interface assemblies retain socket terminal designations, coil pola
 });
 
 test('ETI Ultra Quick aR fuses preserve four distinct terminal styles and nominal dimensions', () => {
-  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.name.includes(' aR '));
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.name.includes(' aR ') && item.id.startsWith('eti-004'));
   assert.equal(items.length, 393);
   assert.equal(new Set(items.map(item => item.id)).size, items.length);
   const samples = [
@@ -2134,6 +2134,21 @@ test('ETI Ultra Quick aR fuses preserve four distinct terminal styles and nomina
     assert.equal(part.specifications.ratedBreakingCapacity.value, 200);
     assert.equal(part.specifications.nominalVoltage.unit, 'V AC');
   }
+});
+
+test('ETI cylindrical aR fuse links preserve electrical caps and mechanical striker variants', () => {
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.name.includes(' aR ') && item.id.startsWith('eti-002'));
+  assert.equal(items.length, 40);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['cap-left', 'cap-right']);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), ['end-cap', 'end-cap']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.specifications.ratedBreakingCapacity.value, 200);
+    assert.equal(part.specifications.indicator?.value, item.name.includes('/P ') ? 'Striker pin' : undefined);
+  }
+  const view = engine.component('eti-002645125').physicalRepresentations[0];
+  assert.deepEqual([view.width, view.height, view.depth], [58, 22.3, 22.3]);
 });
 
 test('ETI Ultra Quick gR and gS retain voltage-specific capacities, indicators and terminals', () => {
