@@ -885,7 +885,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
             line(earth[0].x,34,pin.x,34);
             line(pin.x,34,pin.x,pin.y);
           }
-          label('PE',0,54,7);
+          label(earth[0].localNumber==='PEN'?'PEN':'PE',0,54,7);
           if(remoteChangeover){
             for(const [index,id] of [remoteChangeover.normallyClosed,remoteChangeover.common,remoteChangeover.normallyOpen].entries()){
               const pin=pins.get(id);

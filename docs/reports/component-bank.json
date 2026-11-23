@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 5342,
+    "manufacturerParts": 5371,
     "symbolFamilies": 24,
-    "partsWithTerminalMaps": 5342,
-    "partsWithPhysicalDimensions": 5328,
-    "partsWithPhysicalRepresentations": 5321,
+    "partsWithTerminalMaps": 5371,
+    "partsWithPhysicalDimensions": 5357,
+    "partsWithPhysicalRepresentations": 5350,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -1119513,6 +1119513,5389 @@
           "publisher": "ETI",
           "title": "ETITEC V 2T3 · Wiring and dimensions",
           "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440393",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440393",
+      "model": "ETITEC C T2 275/20 1+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l-n",
+          "localNumber": "L/N",
+          "name": "Power terminal L/N",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.1-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "1+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 17.8,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 17.8,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440393.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 17.8,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440393",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440394",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440394",
+      "model": "ETITEC C T2 275/20 1+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l-n",
+          "localNumber": "L/N",
+          "name": "Power terminal L/N",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.1-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "1+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 17.8,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 17.8,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440394.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 17.8,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440394",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440395",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440395",
+      "model": "ETITEC C T2 275/20 4+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.4-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 112,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "4+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 71.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 71.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440395.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 71.2,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440395",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440396",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440396",
+      "model": "ETITEC C T2 275/20 4+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.4-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "4+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 71.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 71.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440396.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 71.2,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440396",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440397",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440397",
+      "model": "ETITEC C T2 275/20 2+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.2-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "2+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 35.6,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 35.6,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440397.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 35.6,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440397",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440398",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440398",
+      "model": "ETITEC C T2 275/20 2+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.2-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "2+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 35.6,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 35.6,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440398.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 35.6,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440398",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440399",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440399",
+      "model": "ETITEC C T2 275/20 3+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pen",
+          "localNumber": "PEN",
+          "manufacturerMarking": "PEN",
+          "name": "Combined protective earth and neutral terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pen",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.3-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 84,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "3+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 53.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 53.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440399.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 53.4,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440399",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440400",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440400",
+      "model": "ETITEC C T2 275/20 3+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pen",
+          "localNumber": "PEN",
+          "manufacturerMarking": "PEN",
+          "name": "Combined protective earth and neutral terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pen",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.3-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "3+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 53.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 53.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440400.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 53.4,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440400",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440401",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440401",
+      "model": "ETITEC C T2 275/20 1+1",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.1-1.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "1+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 35.6,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 35.6,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440401.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 35.6,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440401",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440402",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440402",
+      "model": "ETITEC C T2 275/20 1+1 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.1-1.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "1+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 35.6,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 35.6,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440402.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 35.6,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440402",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440403",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440403",
+      "model": "ETITEC C T2 275/20 3+1",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.3-1.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 112,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "3+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 71.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 71.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440403.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 71.2,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440403",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440404",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440404",
+      "model": "ETITEC C T2 275/20 3+1 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.3-1.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "3+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 71.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 71.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440404.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 71.2,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440404",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440405",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440405",
+      "model": "ETITEC C T2 440/20 1+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l-n",
+          "localNumber": "L/N",
+          "name": "Power terminal L/N",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.1-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "1+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 17.8,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 17.8,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440405.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 17.8,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440405",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440406",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440406",
+      "model": "ETITEC C T2 440/20 1+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l-n",
+          "localNumber": "L/N",
+          "name": "Power terminal L/N",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.1-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "1+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 17.8,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 17.8,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440406.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 17.8,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440406",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440407",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440407",
+      "model": "ETITEC C T2 440/20 4+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.4-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 112,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "4+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 71.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 71.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440407.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 71.2,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440407",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440408",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440408",
+      "model": "ETITEC C T2 440/20 4+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.4-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "4+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 71.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 71.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440408.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 71.2,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440408",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440409",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440409",
+      "model": "ETITEC C T2 440/20 2+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.2-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "2+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 35.6,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 35.6,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440409.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 35.6,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440409",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440410",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440410",
+      "model": "ETITEC C T2 440/20 2+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.2-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "2+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 35.6,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 35.6,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440410.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 35.6,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440410",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440411",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440411",
+      "model": "ETITEC C T2 440/20 3+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pen",
+          "localNumber": "PEN",
+          "manufacturerMarking": "PEN",
+          "name": "Combined protective earth and neutral terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pen",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.3-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 84,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "3+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 53.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 53.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440411.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 53.4,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440411",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440412",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440412",
+      "model": "ETITEC C T2 440/20 3+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 28,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pen",
+          "localNumber": "PEN",
+          "manufacturerMarking": "PEN",
+          "name": "Combined protective earth and neutral terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pen",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pen",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.3-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "3+0"
+        },
+        "continuousAcVoltage": {
+          "value": 440,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 53.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 53.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440412.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 53.4,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440412",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440413",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440413",
+      "model": "ETITEC C T2 255/20 G",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC C T2"
+      ],
+      "terminals": [
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.c.g.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2"
+        },
+        "protectionConfiguration": {
+          "value": "G"
+        },
+        "continuousAcVoltage": {
+          "value": 255,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 17.8,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 72.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 17.8,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 72.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440413.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 17.8,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 72.7
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440413",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC C T2 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=30",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440650",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440650",
+      "model": "ETITEC CM T23 275/20 2+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.2-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "2+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 18,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 97,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 18,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 97,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440650.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 18,
+          "height": 97,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440650",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=33",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440651",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440651",
+      "model": "ETITEC CM T23 275/20 2+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.2-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "2+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 18,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 105,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 18,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 105,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440651.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 18,
+          "height": 105,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440651",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=33",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440652",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440652",
+      "model": "ETITEC CM T23 275/20 4+0",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.4-0.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 112,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "4+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 36,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 36,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440652.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 36,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440652",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=34",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440653",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440653",
+      "model": "ETITEC CM T23 275/20 4+0 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "pe",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "MOV"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.4-0.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "4+0"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 36,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 36,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440653.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 36,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440653",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=34",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440654",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440654",
+      "model": "ETITEC CM T23 275/20 1+1",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.1-1.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 56,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "1+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 18,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 97,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 18,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 97,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440654.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 18,
+          "height": 97,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440654",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=34",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440655",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440655",
+      "model": "ETITEC CM T23 275/20 1+1 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l",
+          "localNumber": "L",
+          "name": "Power terminal L",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.1-1.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "1+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 18,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 105,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 18,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 105,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440655.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 18,
+          "height": 105,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440655",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=34",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440656",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440656",
+      "model": "ETITEC CM T23 275/20 3+1",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.3-1.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 112,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "3+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": false
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 36,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 36,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440656.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 36,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440656",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=34",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002440657",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified protection device",
+      "family": "surge-protective-device",
+      "manufacturer": "ETI",
+      "orderCode": "002440657",
+      "model": "ETITEC CM T23 275/20 3+1 RC",
+      "function": "AC surge protective device",
+      "aliases": [
+        "SPD",
+        "surge arrester",
+        "ETITEC CM T23"
+      ],
+      "terminals": [
+        {
+          "id": "power-l1",
+          "localNumber": "L1",
+          "name": "Power terminal L1",
+          "x": -42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l2",
+          "localNumber": "L2",
+          "name": "Power terminal L2",
+          "x": -14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-l3",
+          "localNumber": "L3",
+          "name": "Power terminal L3",
+          "x": 14,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "power-n",
+          "localNumber": "N",
+          "name": "Power terminal N",
+          "x": 42,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "pe",
+          "localNumber": "PE",
+          "manufacturerMarking": "⏚",
+          "name": "Protective earth terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-12",
+          "localNumber": "12",
+          "name": "Remote contact NC",
+          "x": 66,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-11",
+          "localNumber": "11",
+          "name": "Remote contact common",
+          "x": 66,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "alarm-14",
+          "localNumber": "14",
+          "name": "Remote contact NO",
+          "x": 66,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "surgeBranches": [
+          {
+            "from": "power-l1",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l2",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-l3",
+            "to": "power-n",
+            "technology": "MOV"
+          },
+          {
+            "from": "power-n",
+            "to": "pe",
+            "technology": "Gas discharge tube"
+          }
+        ],
+        "remoteChangeover": {
+          "common": "alarm-11",
+          "normallyClosed": "alarm-12",
+          "normallyOpen": "alarm-14"
+        },
+        "simulationNote": "Static net reports join the earth bus and preserve the surge branches and alarm contacts as separate nets."
+      },
+      "geometry": {
+        "id": "spd.eti.cm.3-1.rc.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 150,
+        "height": 84
+      },
+      "specifications": {
+        "protectionClass": {
+          "value": "Type 2 + 3"
+        },
+        "protectionConfiguration": {
+          "value": "3+1"
+        },
+        "continuousAcVoltage": {
+          "value": 275,
+          "unit": "V AC"
+        },
+        "nominalDischargeCurrent": {
+          "value": 20,
+          "unit": "kA (8/20 µs)"
+        },
+        "maximumDischargeCurrent": {
+          "value": 40,
+          "unit": "kA (8/20 µs)"
+        },
+        "remoteSignalling": {
+          "value": true
+        },
+        "mountingMethod": {
+          "value": "35 mm DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 36,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 70,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 36,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 70,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002440657.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 36,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Manufacturer outline for the specified housing and remote-contact option.",
+          "depth": 70
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002440657",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact ETI order code, model and Uc."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETITEC CM T23 · Wiring and dimensions",
+          "url": "https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETITEC.pdf#page=34",
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "Manufacturer schematic, terminal positions and housing dimensions. The published RC suffix identifies the fitted contact."
