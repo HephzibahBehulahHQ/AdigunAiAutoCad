@@ -122,9 +122,11 @@
       const overheadSurgeArrester = component?.family === 'surge-protective-device' && component.specifications.localDisconnector;
       const modularSurgeProtector = component?.family === 'surge-protective-device' && component.specifications.surgeTechnology;
       const transformer = component?.family === 'single-phase-transformer';
-      if ((coilAndContact || fuseLink || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const camSwitch = component?.family === 'rotary-cam-switch';
+      if ((coilAndContact || fuseLink || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || camSwitch || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
+          : camSwitch ? engine.camSwitchGeometry(object, component)
           : coilAndContact ? engine.coilAndContactGeometry(object)
             : fuseLink ? engine.fuseLinkGeometry()
               : moldedCaseBreaker ? engine.moldedCaseBreakerGeometry(component)
