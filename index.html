@@ -873,10 +873,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         case'bottle-fuse-link':
         case'cylindrical-fuse-link': {
           const fuse=window.AdigunCADEngine.component(item.id);
-          const geometry=window.AdigunCADEngine.fuseLinkGeometry();
+          const geometry=window.AdigunCADEngine.fuseLinkGeometry(obj,fuse);
           for(const segment of geometry.segments)line(...segment);
           for(const mark of geometry.circles)circle(...mark);
           label(fuse.specifications.nominalCurrent.value+' A',0,-11,7);
+          if(fuse.electricalFunctions?.indicatorContacts)
+            for(const pin of fuse.symbol.pins.slice(2))label(pin.localNumber,pin.x,pin.y+8,7);
           break;
         }
         case'rotary-cam-switch': {
@@ -1437,8 +1439,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     return Object.entries(definition.instanceProperties).map(function([name,rule]){
       if(rule.type==='choice'){
         const fieldLabel=name==='switchingStep'
-          ? ({'rotary-cam-switch':'Selector position','industrial-motor-contactor':'Coil state',
-              'miniature-circuit-breaker':'Breaker position','residual-current-circuit-breaker':'Breaker position','modular-contactor':definition.specifications.manualOverride?.value?'Control position':'Coil state'}[definition.family]||componentPropertyLabels[name])
+          ? (definition.electricalFunctions?.indicatorContacts?'Indicator state':({'rotary-cam-switch':'Selector position','industrial-motor-contactor':'Coil state',
+              'miniature-circuit-breaker':'Breaker position','residual-current-circuit-breaker':'Breaker position','modular-contactor':definition.specifications.manualOverride?.value?'Control position':'Coil state'}[definition.family]||componentPropertyLabels[name]))
           : componentPropertyLabels[name]||name;
         const value=object.properties[name]??rule.default;
         const options=Object.entries(rule.choices).map(([id,label])=>
@@ -1530,6 +1532,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.indicator?[['Indicator',spec.indicator.value]]:[]),
         ...(spec.coverMaterial?[['Cover material',spec.coverMaterial.value]]:[]),
         ...(spec.productBrand?[['Product brand',spec.productBrand.value]]:[]),
+        ...(spec.terminationStyle?[['Terminations',spec.terminationStyle.value]]:[]),
+        ...(spec.indicatorContactCurrent?[['Indicator contact rating',spec.indicatorContactCurrent.value+' A · '+spec.indicatorContactVoltage.value+' V AC']]:[]),
         ...(spec.ratedTransformerPower?[['Rated transformer power',spec.ratedTransformerPower.value+' '+spec.ratedTransformerPower.unit]]:[]),
         ...(spec.ratedDcTimeConstant?[['Rated DC time constant',spec.ratedDcTimeConstant.value+' '+spec.ratedDcTimeConstant.unit]]:[]),
         ...(spec.fuseBase?[['Fuse base',spec.fuseBase.value]]:[]),
