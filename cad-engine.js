@@ -1387,11 +1387,12 @@
     });
   });
   const weidmullerFeedThroughTerminals = terminalCatalog.weidmullerWduTerminals
-    .concat(terminalCatalog.weidmullerA2cTerminals, terminalCatalog.weidmullerA3cA4cTerminals).map(
+    .concat(terminalCatalog.weidmullerA2cTerminals, terminalCatalog.weidmullerA3cA4cTerminals, terminalCatalog.weidmullerZduTerminals).map(
     ([id, model, slug, color, area, voltage, current, width, height, depth, minimumRigid, maximumRigid,
-      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionCount = 2]) => {
+      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionCount = 2, endCoverRequired = true]) => {
       const partId = 'weidmuller-' + id;
-      const screw = model.startsWith('WDU ');
+      const connectionType = model.startsWith('WDU ') ? 'screw' : model.startsWith('ZDU ') ? 'tension-clamp' : 'push-in';
+      const connectionMethod = { screw: 'Screw', 'tension-clamp': 'Tension-clamp', 'push-in': 'Push-in' }[connectionType];
       const mm = value => ({ value, unit: 'mm' });
       const mountedDepth = Number.isFinite(depthIncludingDINRail) ? { depthIncludingDINRail } : {};
       return deepFreeze({
@@ -1409,7 +1410,7 @@
           ...pt25Terminal.symbol,
           id: 'terminal.feedthrough.' + partId + '.v1',
           height: connectionCount > 2 ? 70 : pt25Terminal.symbol.height,
-          ...terminalPinMap(1, connectionCount, screw ? 'screw' : 'push-in')
+          ...terminalPinMap(1, connectionCount, connectionType)
         },
         specifications: {
           nominalVoltage: { value: voltage, unit: 'V' },
@@ -1417,10 +1418,10 @@
           ratedCrossSection: { value: area, unit: 'mm²' },
           rigidConductorRange: { minimum: minimumRigid, maximum: maximumRigid, unit: 'mm²' },
           flexibleConductorRange: { minimum: minimumFlexible, maximum: maximumFlexible, unit: 'mm²' },
-          connectionMethod: { value: screw ? 'Screw' : 'Push-in' },
+          connectionMethod: { value: connectionMethod },
           connectionCount: { value: connectionCount, unit: 'connections' },
           mountingRails: { value: ['TS 35'] },
-          endCoverRequired: { value: true },
+          endCoverRequired: { value: endCoverRequired },
           color: { value: color },
           dimensions: { width: mm(width), height: mm(height), depth: mm(depth),
             ...(Number.isFinite(depthIncludingDINRail) ? { depthIncludingDINRail: mm(depthIncludingDINRail) } : {}) }

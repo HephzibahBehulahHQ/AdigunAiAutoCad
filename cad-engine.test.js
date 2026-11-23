@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 294);
+  assert.equal(items.length, 325);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -529,7 +529,38 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-2051670000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1991820000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2876650000', 'feedthrough-terminal', 'X'],
-    ['weidmuller-1521700000', 'feedthrough-terminal', 'X']
+    ['weidmuller-1521700000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1775490000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1775500000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1768320000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608520000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1632050000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683590000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608630000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1746750000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683650000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1745230000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1745240000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608550000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683460000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1636830000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683630000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683390000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1739620000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1775550000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608540000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683340000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683400000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608570000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683440000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683430000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683420000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683320000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683330000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683260000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683270000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683620000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1636820000', 'feedthrough-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3208126', 'phoenix-contact-3212142', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555', 'phoenix-contact-3044649', 'phoenix-contact-3044791', 'phoenix-contact-3031283']);
   for (const [id, height] of [
@@ -1053,6 +1084,52 @@ test('Weidmüller A3C and A4C terminal blocks connect every documented anchor to
       pinAttachments: { start: { instanceId: block.id, pinId: pin.id }, end: null }
     }));
     assert.deepEqual(engine.analyze([block, ...wires]).nets.map(net => net.wireIds), [wires.map(wire => wire.id)]);
+  }
+});
+
+test('Weidmüller ZDU blocks preserve the tension-clamp method and specified end-cover requirements', () => {
+  for (const [id, count, voltage, current, maxFlexible, endCoverRequired] of [
+    ['1775490000', 2, 500, 17.5, 1.5, true],
+    ['1775500000', 2, 500, 17.5, 1.5, true],
+    ['1768320000', 3, 800, 76, 16, true],
+    ['1608520000', 2, 800, 24, 4, true],
+    ['1632050000', 2, 800, 32, 6, true],
+    ['1683590000', 2, 800, 32, 6, true],
+    ['1608630000', 2, 800, 41, 6, true],
+    ['1746750000', 2, 1000, 57, 10, true],
+    ['1683650000', 2, 800, 32, 6, true],
+    ['1745230000', 2, 1000, 76, 16, true],
+    ['1745240000', 2, 1000, 76, 16, true],
+    ['1608550000', 3, 800, 24, 4, true],
+    ['1683460000', 4, 800, 24, 4, true],
+    ['1636830000', 2, 800, 32, 6, true],
+    ['1683630000', 2, 800, 32, 6, true],
+    ['1683390000', 3, 800, 24, 4, true],
+    ['1739620000', 2, 800, 125, 35, false],
+    ['1775550000', 3, 500, 17.5, 1.5, true],
+    ['1608540000', 3, 800, 24, 4, true],
+    ['1683340000', 3, 800, 24, 4, true],
+    ['1683400000', 3, 800, 24, 4, true],
+    ['1608570000', 4, 800, 24, 4, true],
+    ['1683440000', 4, 800, 24, 4, true],
+    ['1683430000', 4, 800, 24, 4, true],
+    ['1683420000', 4, 800, 24, 4, true],
+    ['1683320000', 2, 800, 24, 4, true],
+    ['1683330000', 2, 800, 24, 4, true],
+    ['1683260000', 2, 800, 24, 4, true],
+    ['1683270000', 2, 800, 24, 4, true],
+    ['1683620000', 2, 800, 32, 6, true],
+    ['1636820000', 2, 800, 41, 6, true]
+  ]) {
+    const part = engine.component('weidmuller-' + id);
+    const specs = part.specifications;
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.deepEqual([specs.nominalVoltage.value, specs.nominalCurrent.value], [voltage, current]);
+    assert.equal(specs.flexibleConductorRange.maximum, maxFlexible);
+    assert.equal(specs.endCoverRequired.value, endCoverRequired);
+    assert.equal(specs.connectionCount.value, count);
+    assert.ok(part.symbol.pins.every(pin => pin.connectionType === 'tension-clamp'));
+    assert.deepEqual(part.symbol.internalConnections, [part.symbol.pins.map(pin => pin.id)]);
   }
 });
 
