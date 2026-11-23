@@ -1444,6 +1444,7 @@
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
+      const bistable = mode === 'AC/DC';
       const industrial = id.startsWith('46');
       const pcbTenAmpRelay = id.startsWith('4062');
       const pairedTerminals = id.startsWith('4061');
@@ -1453,11 +1454,21 @@
       const bladePositions = doublePole
         ? { A1: '8', A2: '1', 11: '3', 12: '2', 14: '4', 21: '6', 22: '7', 24: '5' }
         : { A1: '5', A2: '1', 11: '4', 12: '2', 14: '3' };
-      const firstContact = relayDefinition.electricalFunctions.changeoverContact;
-      const secondContact = {
-        ...firstContact, common: 'contact-21', normallyClosed: 'contact-22', normallyOpen: 'contact-24',
-        deenergizedConnections: [['contact-21', 'contact-22']], energizedConnections: [['contact-21', 'contact-24']]
+      const makeContact = (common, normallyClosed, normallyOpen) => {
+        const openPath = [[common, normallyOpen]];
+        const closedPath = [[common, normallyClosed]];
+        const { actuation, simulation } = relayDefinition.electricalFunctions.changeoverContact;
+        return {
+          common, normallyClosed, normallyOpen,
+          ...(bistable
+            ? { resetConnections: closedPath, setConnections: openPath }
+            : { deenergizedConnections: closedPath, energizedConnections: openPath }),
+          actuation,
+          simulation: bistable ? 'Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state.' : simulation
+        };
       };
+      const firstContact = makeContact('contact-11', 'contact-12', 'contact-14');
+      const secondContact = makeContact('contact-21', 'contact-22', 'contact-24');
       const symbolPins = relayDefinition.symbol.pins;
       const doublePolePins = [
         ...symbolPins.slice(0, 2),
@@ -1482,8 +1493,8 @@
         manufacturer: 'Finder',
         manufacturerPartNumber: code,
         model: code,
-        aliases: [id, 'Series ' + series, doublePole ? 'DPDT' : 'SPDT'],
-        name: doublePole ? 'Double-pole changeover relay' : 'Single-pole changeover relay',
+        aliases: [id, 'Series ' + series, doublePole ? 'DPDT' : 'SPDT', ...(bistable ? ['Latching', 'Bistable'] : [])],
+        name: (doublePole ? 'Double-pole ' : 'Single-pole ') + (bistable ? 'bistable ' : '') + 'changeover relay',
         family: 'relay-module',
         referencePrefix: 'K',
         category: industrial ? 'Electrical · Verified industrial relay' : 'Electrical · Verified interface relay',
@@ -1512,11 +1523,16 @@
             : 'Finder Series 40.31/40.51 connection diagram identifies A1, A2, 11, 12 and 14.'
         },
         electricalFunctions: {
-          coil: { pins: ['coil-a1', 'coil-a2'], nominalVoltage: coilVoltage },
+          coil: { pins: ['coil-a1', 'coil-a2'], nominalVoltage: coilVoltage,
+            ...(bistable ? { polarized: true, minimumSetResetPulseMs: 20 } : {}) },
           ...(doublePole ? { changeoverContacts: [firstContact, secondContact] } : { changeoverContact: firstContact })
         },
         specifications: {
           nominalCoilVoltage: coilVoltage,
+          ...(bistable ? {
+            coilOperation: { value: 'Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram.' },
+            minimumSetResetPulse: { value: 20, unit: 'ms' }
+          } : {}),
           ratedContactCurrent: { value: current, unit: 'A' },
           ...(pairedTerminals ? {
             socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
@@ -1549,6 +1565,10 @@
             url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
+          bistable ? { publisher: 'Finder', title: 'Series 40 datasheet · Bistable ' + relayType,
+            url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
+            documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
+            revisionNote: 'Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior.' } :
           industrial ? { publisher: 'Finder', title: 'Series 46 datasheet · ' + code.slice(0, 5),
             url: 'https://cdn.findernet.com/app/uploads/S46EN.pdf',
             documentRevision: 'IX-2026', retrievedAt: '2026-11-23',
