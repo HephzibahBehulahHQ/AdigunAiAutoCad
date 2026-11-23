@@ -2473,6 +2473,84 @@
     }
   );
 
+  const etiModularContactors = terminalCatalog.etiModularContactors.map(
+    ([code, series, current, config, voltage, operatingVoltage, manual, width, height, depth, page]) => {
+      const id = 'eti-' + code;
+      const model = series + ' ' + current + '-' + config + (manual ? '-R' : '') + '-' + voltage + 'V';
+      const noCount = Number(config[0]), ncCount = Number(config[1]);
+      const count = noCount + ncCount;
+      const ncColumns = { '01': [0], '11': [1], '02': [0, 1], '31': [3], '13': [0, 1, 2],
+        '22': [1, 2], '04': [0, 1, 2, 3] }[config] ?? [];
+      const alternateMarkings = series === 'R' && !manual
+        ? { '40': ['13', '14'], '31': ['21', '22'], '13': ['13', '14'] }[config] : null;
+      const dcCoil = series === 'RD';
+      const polarized = dcCoil && !(current === 32 || (!manual && series === 'RD' && config === '11'));
+      const pins = [];
+      const addPair = (labels, x, electricalType, mark = labels) => labels.map((localNumber, index) => {
+        const pinId = (electricalType === 'coil' ? 'coil-' : 'terminal-') + localNumber.toLowerCase();
+        pins.push({
+          id: pinId, localNumber, manufacturerMarking: mark[index],
+          name: (electricalType === 'coil' ? 'Coil ' : 'Contact ') + mark[index],
+          x, y: index ? 34 : -34, electricalType, connectionType: 'screw'
+        });
+        return pinId;
+      });
+      const coilTerminals = addPair(['A1', 'A2'], -count * 16, 'coil', polarized ? ['A1 (+)', 'A2 (−)'] : ['A1', 'A2']);
+      const contactPoles = Array.from({ length: count }, (_, index) => {
+        const normallyClosed = ncColumns.includes(index);
+        const labels = [1, 2].map(offset => (normallyClosed ? 'R' : '') + (index * 2 + offset));
+        const markings = index === 3 && alternateMarkings
+          ? labels.map((label, side) => label + ' / ' + alternateMarkings[side]) : labels;
+        return { normallyClosed, terminals: addPair(labels, (index + 1 - count / 2) * 32, 'passive', markings) };
+      });
+      const [released, pulledIn] = [true, false].map(closed =>
+        contactPoles.filter(pole => pole.normallyClosed === closed).map(pole => pole.terminals));
+      const switchingSequence = manual ? [released, pulledIn, released, pulledIn] : [released, pulledIn];
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model, name: series + ' modular contactor', aliases: ['ETICON', 'DIN rail contactor', ...(manual ? ['Manual override'] : [])],
+        family: 'modular-contactor', referencePrefix: 'K', category: 'Electrical · Verified contactor',
+        symbol: {
+          id: 'contactor.eti.modular.' + series.toLowerCase() + '.' + config + '.v1', view: 'schematic', unit: 'mm',
+          width: (count + 1) * 32, height: 68, pins, internalConnections: [],
+          numberingNote: 'NC contacts carry the R terminal prefix. Alternate markings identify the same screw terminal.'
+        },
+        electricalFunctions: {
+          coilTerminals, contactPoles, switchingSequence,
+          ...(polarized ? { coilPolarity: { positive: coilTerminals[0], negative: coilTerminals[1] } } : {})
+        },
+        specifications: {
+          contactConfiguration: { value: noCount + ' NO / ' + ncCount + ' NC' },
+          nominalCoilVoltage: { value: voltage, unit: dcCoil ? 'V AC/DC' : 'V AC' },
+          ratedOperationalVoltage: { value: operatingVoltage, unit: 'V AC' },
+          ratedContactCurrent: { value: current, unit: 'A' },
+          manualOverride: { value: manual }, mountingMethod: { value: '35 mm DIN rail' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
+            depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth,
+          scope: 'Manufacturer product envelope. DIN rail, wiring and heat-dissipation clearances are separate.'
+        }],
+        instanceProperties: {
+          switchingStep: { type: 'choice', default: '1', choices: manual
+            ? { 1: 'Auto · Coil de-energized', 2: 'Auto · Coil energized', 3: 'Manual Off', 4: 'Manual On' }
+            : { 1: 'De-energized', 2: 'Energized' } },
+          comment: { type: 'string', default: '', maximumLength: 160 }
+        },
+        sources: [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code, coil specification, ratings and net envelope.' },
+          { publisher: 'ETI', title: 'ETICON · Modular contactor tables and diagrams',
+            url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/ETICON_ENG.pdf#page=' + page,
+            documentRevision: null, retrievedAt: '2026-11-23',
+            revisionNote: 'Verifies order code, terminal designations, contact positions and manual control on R suffix variants.' }
+        ]
+      });
+    }
+  );
+
   const finderModularContactors = terminalCatalog.finderSeries22Contactors.map(
     ([code, type, voltage, material, circuit, option, mirror]) => {
       const id = 'finder-' + code;
@@ -3141,7 +3219,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

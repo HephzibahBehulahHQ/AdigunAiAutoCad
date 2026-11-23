@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8315);
+  assert.equal(items.length, 8429);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2259,7 +2259,7 @@ test('ETI CE and CEC miniature contactors retain their distinct contact layouts'
 });
 
 test('Finder Series 22 represents manufacturer-specific mixed and mirror contact order', () => {
-  const items = engine.catalog().filter(item => item.family === 'modular-contactor');
+  const items = engine.catalog().filter(item => item.id.startsWith('finder-') && item.family === 'modular-contactor');
   assert.equal(items.length, 157);
   for (const item of items) {
     const part = engine.component(item.id);
@@ -7253,4 +7253,29 @@ test('ETI CES contactors retain variant envelope, terminal markings and coil-sta
   }));
   assert.equal(project.valid, true);
   assert.deepEqual(connected(project.project.objects[0]), [['terminal-1','terminal-2'], ['terminal-21']]);
+});
+
+test('ETI R and RD modular contactors preserve contact markings and manual override', () => {
+  const parts = engine.catalog().filter(item => item.id.startsWith('eti-') && item.family === 'modular-contactor');
+  assert.equal(parts.length, 114);
+  const alternate = engine.component('eti-002463420');
+  assert.equal(alternate.symbol.pins.find(pin => pin.id === 'terminal-r7').manufacturerMarking, 'R7 / 21');
+  const id = 'eti-002464062';
+  const part = engine.component(id);
+  assert.deepEqual(part.specifications.nominalCoilVoltage, { value: 230, unit: 'V AC/DC' });
+  assert.equal(part.specifications.manualOverride.value, true);
+  assert.deepEqual(part.electricalFunctions.coilPolarity, { positive: 'coil-a1', negative: 'coil-a2' });
+  const component = engine.createInstance(id, 180, 140, 'K1');
+  const pin = engine.worldPins(component).find(terminal => terminal.id === 'terminal-r3');
+  const wire = { id: 'manual-override', kind: 'wire', x: pin.x, y: pin.y,
+    x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y - 20,
+    pinAttachments: { start: { instanceId: component.id, pinId: pin.id }, end: null } };
+  const connected = () => engine.analyze([component, wire]).nets
+    .find(net => net.pins.some(terminal => terminal.pinId === pin.id)).pins
+    .map(terminal => terminal.pinId).sort();
+  assert.deepEqual(connected(), ['terminal-r3','terminal-r4']);
+  component.properties.switchingStep = '4';
+  assert.deepEqual(connected(), ['terminal-r3']);
+  component.properties.switchingStep = '3';
+  assert.deepEqual(connected(), ['terminal-r3','terminal-r4']);
 });
