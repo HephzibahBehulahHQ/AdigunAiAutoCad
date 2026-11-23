@@ -838,6 +838,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           g.dataset.object=obj.id;
           return g;
         }
+        case'three-phase-capacitor': {
+          const engine=window.AdigunCADEngine;
+          const capacitor=engine.component(item.id);
+          const geometry=engine.deltaCapacitorGeometry(capacitor);
+          for(const segment of geometry.segments)line(...segment);
+          for(const marker of geometry.circles)circle(...marker);
+          for(const pin of capacitor.symbol.pins)label(pin.localNumber,pin.x,pin.y+(pin.y>30?10:-5),7);
+          break;
+        }
         case'nh-fuse-base': {
           const engine=window.AdigunCADEngine;
           const holder=engine.component(item.id);
@@ -1479,6 +1488,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const source=def.sources[0];
     const rows=def.family==='user-authored'?[]:def.family==='pushbutton' ? [['Operator profile',spec.operatorProfile.value],['Actuation',spec.operatorType.value],['Contact',spec.contactComposition.value],['Terminal pair',spec.terminalDesignation.value],['Connection',spec.terminalConnection.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Positive opening',spec.positiveOpening.value?'Yes':'No']] : def.family==='lamp'
       ? [['Rated supply',spec.ratedSupplyVoltage.value+' '+spec.ratedSupplyVoltage.unit],['Light source',spec.lightSource.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Connection',spec.terminalConnection.value]]
+      : def.family==='three-phase-capacitor'
+      ? [['Configuration',spec.configuration.value],['Winding',spec.winding.value],
+        ['Rated voltage',spec.nominalVoltage.value+' V AC'],['Rated frequency',spec.frequency.value+' Hz'],
+        ['Reactive power',spec.reactivePower.value+' kVAr'],['Capacitance',spec.phaseCapacitance.value+' µF per branch'],
+        ['Line current',spec.lineCurrent.value+' A'],['Phase terminals',spec.terminalType.value],
+        ['Dimensions','Ø '+spec.dimensions.width.value+' × '+spec.dimensions.height.value+' mm']]
       : def.family==='nh-fuse-base'
       ? [['Fuse size',spec.cartridgeSize.value],['Poles',String(spec.poles.value)],
         ['Terminal options',spec.terminalOptions.value],['Covers',spec.coverConfiguration.value],
