@@ -16,7 +16,7 @@ $records = [System.Collections.Generic.List[object]]::new()
 foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
     # Restrict each series to monostable changeover types with a verified terminal diagram.
-    $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([789])([0-9]{3})([0145])00([013])$' }
+    $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([789])([0-9]{3})([0145])0[02]([013])$' }
                 else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
     if ($id -cnotmatch $orderKey) { continue }
     $type = $Matches[1]
@@ -25,12 +25,17 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $voltage = [int]$Matches[3]
     $materialCode = $Matches[4]
     $version = $Matches[5]
-    if ($Series -eq '40' -and (($type -eq '61' -and $materialCode -notin '1', '4') -or
+    $shortPins = $Series -eq '40' -and $id[10] -eq '2'
+    if ($shortPins) {
+        if ($type -notin '31', '51', '61' -or $coilCode -notin '7', '9' -or $version -notin '0', '1' -or
+            $materialCode -notin '1', '4' -or ($type -ne '61' -and $materialCode -ne '1')) { continue }
+    } elseif ($Series -eq '40' -and (($type -eq '61' -and $materialCode -notin '1', '4') -or
         ($type -ne '61' -and $materialCode -eq '1'))) { continue }
     if (($version -in '3', '74' -and $coilCode -ne '9') -or ($version -eq '54' -and $coilCode -ne '8')) { continue }
     $details = $product.PRODUCT_DETAILS
     $features = $product.PRODUCT_FEATURES
     $description = [string]$details.DESCRIPTION_LONG
+    if ($shortPins -and $description -notmatch 'Type of electric connection: PCB connection') { continue }
     $mode = if ($coilCode -eq '8') { 'AC' } else { 'DC' }
     if ($Series -eq '40' -and $type -eq '62') {
         $coilVoltages = if ($mode -eq 'AC') { 110, 120, 230, 240 } else { 5, 6, 7, 9, 12, 14, 18, 21, 24, 28, 48, 60, 110, 125 }
@@ -62,6 +67,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
+    if ($shortPins -and $type -ne '61' -and $measurements[0] -ne 12) { continue }
     if ($type -eq '62' -and ($measurements[0] -ne 10 -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
     if ($Series -eq '40' -and $type -eq '61' -and ($measurements[0] -ne 16 -or $measurements[1] -ne 12.4 -or
