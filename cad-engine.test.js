@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5857);
+  assert.equal(items.length, 5944);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2088,6 +2088,25 @@ test('Finder Series 20 step selection updates continuity and survives a project 
   const reopened = engine.parseProject(saved);
   assert.equal(reopened.valid, true);
   assert.equal(reopened.project.objects[0].properties.switchingStep, '4');
+});
+
+test('Finder interface assemblies retain socket terminal designations, coil polarity and real parallel contacts', () => {
+  const items = engine.catalog().filter(item => /^finder-(48|58)/.test(item.id));
+  assert.equal(items.length, 87);
+  const baseCodes = items.map(item => item.id.slice(0, -3));
+  assert.equal(new Set(baseCodes).size, 87);
+  const box = engine.component('finder-583290240050spa');
+  assert.deepEqual(box.symbol.pins.map(pin => pin.localNumber), ['A2','A1','11','12','14','41','42','44']);
+  assert.equal(box.symbol.pins.find(pin => pin.localNumber === '41').socketPosition, 12);
+  assert.deepEqual(box.electricalFunctions.coil.polarity, { positive: 'A1', negative: 'A2' });
+  const pushIn = engine.component('finder-48p290245007sma');
+  assert.ok(pushIn.symbol.pins.every(pin => pin.connectionType === 'push-in'));
+  assert.equal(pushIn.electricalFunctions.coil.polarity, undefined);
+  const highCurrent = engine.component('finder-486180244060sma');
+  assert.deepEqual(highCurrent.symbol.internalConnections, [
+    ['contact-11','contact-21'], ['contact-12','contact-22'], ['contact-14','contact-24']
+  ]);
+  assert.equal(highCurrent.specifications.ratedContactCurrent.value, 16);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
