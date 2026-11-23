@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 10003);
+  assert.equal(items.length, 10011);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -641,7 +641,15 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-3025940000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2539970000', 'feedthrough-terminal', 'X'],
     ['weidmuller-2540040000', 'feedthrough-terminal', 'X'],
-    ['weidmuller-2552480000', 'feedthrough-terminal', 'X']
+    ['weidmuller-2552480000', 'feedthrough-terminal', 'X'],
+    ['siemens-6es7211-1ae40-0xb0', 'plc-cpu', 'A'],
+    ['siemens-6es7214-1ag40-0xb0', 'plc-cpu', 'A'],
+    ['siemens-6es7221-1bf32-0xb0', 'plc-digital-input', 'A'],
+    ['siemens-6es7221-1bh32-0xb0', 'plc-digital-input', 'A'],
+    ['siemens-6es7222-1hf32-0xb0', 'plc-digital-output', 'A'],
+    ['siemens-6es7222-1bh32-0xb0', 'plc-digital-output', 'A'],
+    ['siemens-6es7231-5nd32-0xb0', 'plc-analog-input', 'A'],
+    ['siemens-6es7232-4hb32-0xb0', 'plc-analog-output', 'A']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3208126', 'phoenix-contact-3212142', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555', 'phoenix-contact-3044649', 'phoenix-contact-3044791', 'phoenix-contact-3031283']);
   for (const [id, height] of [
@@ -1652,6 +1660,31 @@ test('direct catalog lookup matches searchable entries and protects the index', 
   }
   assert.equal(engine.catalogItem('missing-component'), null);
   assert.equal(engine.catalogItem('constructor'), null);
+});
+
+test('S7-1200 order codes preserve their exact connector schedules and distinct I/O families', () => {
+  const parts = engine.catalog('Siemens S7-1200').filter(part => part.plcType);
+  assert.equal(parts.length, 9);
+  assert.deepEqual([...new Set(parts.map(part => part.plcType))].sort(),
+    ['Analog input', 'Analog output', 'CPU', 'Digital input', 'Digital output']);
+  for (const [code, terminal, channel, count] of [
+    ['6ES7211-1AE40-0XB0', 'X12:6', 'DQ a.3', 21],
+    ['6ES7214-1AG40-0XB0', 'X12:12', 'DQ b.1', 35],
+    ['6ES7221-1BF32-0XB0', 'X11:7', 'DI a.7', 11],
+    ['6ES7221-1BH32-0XB0', 'X13:7', 'DI b.7', 21],
+    ['6ES7222-1HF32-0XB0', 'X11:3', 'DQ a.3', 13],
+    ['6ES7222-1BH32-0XB0', 'X13:7', 'DQ b.7', 19],
+    ['6ES7231-5ND32-0XB0', 'X11:7', 'AI 3-', 11],
+    ['6ES7232-4HB32-0XB0', 'X11:6', 'AQ 1M', 7]
+  ]) {
+    const part = engine.component('siemens-' + code.toLowerCase());
+    assert.equal(part.symbol.pins.length, count, code);
+    assert.equal(part.symbol.pins.find(pin => pin.localNumber === terminal)?.name, channel);
+    assert.equal(part.symbol.internalConnections.length, 0);
+    const device = engine.createInstance(part.id, 10, 20, 'A1');
+    assert.equal(engine.worldPins(device).length, count);
+    assert.ok(part.physicalRepresentations[0].width > 0);
+  }
 });
 
 test('ETITRAFO transformer orders preserve primary taps and the secondary winding layout', () => {
