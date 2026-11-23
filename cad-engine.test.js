@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3166);
+  assert.equal(items.length, 3204);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1675,20 +1675,30 @@ test('ETIMAT P-series breakers follow their separate terminal numbering and brea
   }
 });
 
-test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams', () => {
+test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams for both current ranges', () => {
   const items = engine.catalog('ETI ETIMAT 10').filter(item => item.name.startsWith('ETIMAT 10 '));
-  assert.equal(items.length, 78);
+  assert.equal(items.length, 116);
+  let highCurrentCount = 0;
   for (const item of items) {
     const part = engine.component(item.id);
     const { protectedPoles, switchedNeutral, nominalCurrent, ratedBreakingCapacity, dimensions } = part.specifications;
     const terminals = Array.from({ length: protectedPoles.value }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]).flat();
     if (switchedNeutral.value) terminals.push('02', '01');
     assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), terminals);
+    if (nominalCurrent.value >= 80) {
+      highCurrentCount++;
+      const capacity = nominalCurrent.value === 125 || (part.specifications.tripCurve.value === 'D' && nominalCurrent.value === 100) ? 15 : 20;
+      assert.equal(ratedBreakingCapacity.value, capacity);
+      assert.equal(part.specifications.breakingCapacityStandard.value, 'EN 60947-2');
+      assert.deepEqual([dimensions.width.value, dimensions.height.value], [27 * terminals.length / 2, 90]);
+      continue;
+    }
     assert.ok(nominalCurrent.value <= 40);
     assert.equal(ratedBreakingCapacity.value, 10);
     assert.ok(Math.abs(dimensions.width.value - 17.6 * terminals.length / 2) < 1e-9);
     assert.deepEqual([dimensions.height.value, dimensions.depth.value], [85, 67.7]);
   }
+  assert.equal(highCurrentCount, 38);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {

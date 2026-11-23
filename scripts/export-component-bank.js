@@ -59,7 +59,7 @@ const parts = engine.catalog().map(item => {
     if (view.depthIncludingDINRail !== undefined || dimensions?.depthIncludingDINRail) {
       documentedMeasurements.push([view.depthIncludingDINRail, dimensions?.depthIncludingDINRail]);
     }
-    if (!dimensions?.depth || dimensions?.depthOnNS35_7_5 || dimensions?.depthOnNS35_15 ||
+    if (dimensions?.depthOnNS35_7_5 || dimensions?.depthOnNS35_15 ||
         view.railDepths?.['NS 35/7.5'] !== undefined || view.railDepths?.['NS 35/15'] !== undefined) {
       documentedMeasurements.push([view.railDepths?.['NS 35/7.5'], dimensions?.depthOnNS35_7_5],
         [view.railDepths?.['NS 35/15'], dimensions?.depthOnNS35_15]);
