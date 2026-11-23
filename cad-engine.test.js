@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 1630);
+  assert.equal(items.length, 1924);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1473,6 +1473,27 @@ test('Finder Series 55 variants preserve PCB and socket pin assignments for each
     assert.deepEqual(part.symbol.internalConnections, []);
     const polarity = part.electricalFunctions.coil.polarity;
     assert.deepEqual(polarity, /(?:80|90|94)$/.test(item.id) ? { positive: 'A1', negative: 'A2' } : undefined);
+  }
+});
+
+test('Finder Series 60 variants carry exact socket and blade terminal assignments', () => {
+  const parts = engine.catalog('Finder Series 60').filter(item => item.id.startsWith('finder-60'));
+  assert.equal(parts.length, 294);
+  const physicalNumbers = {
+    '12': ['7', '2', '1', '4', '3', '8', '5', '6'],
+    '13': ['10', '2', '1', '4', '3', '6', '5', '7', '11', '8', '9'],
+    '62': ['B', 'A', '7', '1', '4', '9', '3', '6'],
+    '63': ['B', 'A', '7', '1', '4', '8', '2', '5', '9', '3', '6']
+  };
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    const orderCode = part.manufacturerPartNumber.replaceAll('.', '');
+    assert.deepEqual(part.symbol.pins.map(pin => pin.physicalNumber), physicalNumbers[orderCode.slice(2, 4)]);
+    assert.equal(part.electricalFunctions.changeoverContacts.length, Number(orderCode[3]));
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.specifications.ratedContactCurrent.value, orderCode[9] === '2' ? 6 : 10);
+    assert.deepEqual(part.electricalFunctions.coil.polarity,
+      /(?:60|70|74)$/.test(orderCode) ? { positive: 'A1', negative: 'A2' } : undefined);
   }
 });
 

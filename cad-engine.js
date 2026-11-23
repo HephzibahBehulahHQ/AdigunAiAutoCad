@@ -1440,14 +1440,17 @@
         }]
       });
     });
-  const finderRelays = terminalCatalog.finderSeries40Relays.concat(terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays).map(
+  const finderRelays = terminalCatalog.finderSeries40Relays.concat(
+    terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays, terminalCatalog.finderSeries60Relays).map(
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
       const bistable = mode === 'AC/DC';
       const industrial = id.startsWith('46');
-      const generalPurpose = id.startsWith('55');
-      const pcbMount = generalPurpose && id[2] === '1';
+      const series60 = id.startsWith('60');
+      const generalPurpose = series60 || id.startsWith('55');
+      const pcbMount = id.startsWith('551');
+      const flange = id.startsWith('606');
       const poleCount = generalPurpose ? Number(id[3]) : 0;
       const pcbTenAmpRelay = id.startsWith('4062');
       const socketCommon21 = id.startsWith('4051');
@@ -1479,7 +1482,13 @@
         3: { 11: 7, 12: 1, 14: 4, 21: 8, 22: 2, 24: 5, 31: 9, 32: 3, 34: 6 },
         4: { 11: 9, 12: 1, 14: 5, 21: 10, 22: 2, 24: 6, 31: 11, 32: 3, 34: 7, 41: 12, 42: 4, 44: 8 }
       };
-      const contactNumbers = poleCount === 2 ? [1, 4] : [1, 2, 3, 4].slice(0, poleCount);
+      const series60PinMap = {
+        '12': { A1: 2, A2: 7, 11: 1, 12: 4, 14: 3, 21: 8, 22: 5, 24: 6 },
+        '13': { A1: 2, A2: 10, 11: 1, 12: 4, 14: 3, 21: 6, 22: 5, 24: 7, 31: 11, 32: 8, 34: 9 },
+        '62': { A1: 'A', A2: 'B', 11: 7, 12: 1, 14: 4, 21: 9, 22: 3, 24: 6 },
+        '63': { A1: 'A', A2: 'B', 11: 7, 12: 1, 14: 4, 21: 8, 22: 2, 24: 5, 31: 9, 32: 3, 34: 6 }
+      };
+      const contactNumbers = poleCount === 2 && !series60 ? [1, 4] : [1, 2, 3, 4].slice(0, poleCount);
       const generalContacts = contactNumbers.map(n => makeContact('contact-' + n + '1', 'contact-' + n + '2', 'contact-' + n + '4'));
       const generalPins = [
         ...symbolPins.slice(0, 2),
@@ -1497,7 +1506,8 @@
         80: 'DC LED and diode', 90: 'Lockable test button, DC LED and diode',
         94: 'Lockable test button, DC LED, diode and mechanical indicator'
       };
-      const diode = generalPurpose && [80, 90, 94].includes(version);
+      const diode = series60 ? [60, 70, 74].includes(version) : generalPurpose && [80, 90, 94].includes(version);
+      const series60Option = { 60: optionLabel[80], 70: optionLabel[90], 74: optionLabel[94] };
       const doublePolePins = [
         ...symbolPins.slice(0, 2),
         ...symbolPins.slice(2).map(pin => ({ ...pin, y: pin.y - 35 })),
@@ -1535,9 +1545,11 @@
               return { ...pin, id: 'contact-21', localNumber: '21', connectionType: 'pcb-pin' };
             const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
             if (generalPurpose) {
-              const physicalNumber = String(({ A1: 13, A2: 14, ...socketPinMap[poleCount] })[pin.localNumber]);
-              return { ...pin, name: name + ' (pin ' + physicalNumber + ')', physicalNumber,
-                connectionType: pcbMount ? 'pcb-pin' : 'plug-in-pin' };
+              const numbers = series60 ? series60PinMap[id.slice(2, 4)] : { A1: 13, A2: 14, ...socketPinMap[poleCount] };
+              const physicalNumber = String(numbers[pin.localNumber]);
+              return { ...pin, localNumber: flange && pin.id.startsWith('contact-') ? physicalNumber : pin.localNumber,
+                name: name + (flange ? ' (blade ' : ' (pin ') + physicalNumber + ')', physicalNumber,
+                connectionType: flange ? 'faston-187' : pcbMount ? 'pcb-pin' : 'plug-in-pin' };
             }
             const physicalNumber = bladePositions[pin.localNumber];
             return industrial
@@ -1582,10 +1594,14 @@
           changeoverContactCount: { value: generalPurpose ? poleCount : doublePole ? 2 : 1, unit: 'changeover contact' },
           contactMaterial: { value: material },
           ...(generalPurpose ? {
-            mountingMethod: { value: pcbMount ? 'PCB mount' : 'Series 94 socket' },
+            mountingMethod: { value: flange ? 'Flange mount' : pcbMount ? 'PCB mount' : series60 ? 'Series 90 socket' : 'Series 94 socket' },
             environmentalProtection: { value: pcbMount && version === 1 ? 'RT III' : 'RT I' },
-            options: { value: optionLabel[version] },
-            ...(diode ? { coilPolarity: { value: 'A1 / pin 13 positive, A2 / pin 14 negative' } } : {})
+            options: { value: series60 && diode ? series60Option[version] : optionLabel[version] },
+            ...(series60 && id[9] === '2' ? { contactConstruction: { value: 'Bifurcated contacts' } } : {}),
+            ...(flange ? { terminalBladeWidth: { value: 4.8, unit: 'mm' }, terminalBladeThickness: { value: 0.8, unit: 'mm' } } : {}),
+            ...(diode ? { coilPolarity: { value: series60
+              ? 'A1 / pin 2 positive, A2 / pin ' + (poleCount === 2 ? 7 : 10) + ' negative'
+              : 'A1 / pin 13 positive, A2 / pin 14 negative' } } : {})
           } : industrial ? {
             terminalBladeWidth: { value: doublePole ? 2.5 : 4.8, unit: 'mm' },
             terminalBladeThickness: { value: 0.5, unit: 'mm' },
@@ -1612,10 +1628,11 @@
             url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
-          generalPurpose ? { publisher: 'Finder', title: 'Series 55 datasheet · ' + relayType,
-            url: 'https://cdn.findernet.com/app/uploads/S55EN.pdf',
+          generalPurpose ? { publisher: 'Finder', title: 'Series ' + series + ' datasheet · ' + relayType,
+            url: 'https://cdn.findernet.com/app/uploads/S' + series + 'EN.pdf',
             documentRevision: 'IX-2026', retrievedAt: '2026-11-23',
-            revisionNote: 'Pages 3–5 and 7 document the pin positions, rated current, coil options, mounting and outline.' } :
+            revisionNote: series60 ? 'Pages 3–6 and 9 document terminals, mounting, ordering and outline.'
+              : 'Pages 3–5 and 7 document the pin positions, rated current, coil options, mounting and outline.' } :
           socketCommon21 ? { publisher: 'Finder', title: 'Series 40 datasheet · 40.51',
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
