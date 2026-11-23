@@ -839,6 +839,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           return g;
         }
         case'knife-blade-fuse-link':
+        case'medium-voltage-fuse-link':
         case'cylindrical-fuse-link': {
           const fuse=window.AdigunCADEngine.component(item.id);
           rect(-15,-6,30,12);line(-36,0,36,0);
@@ -1337,6 +1338,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const source=def.sources[0];
     const rows=def.family==='user-authored'?[]:def.family==='pushbutton' ? [['Operator profile',spec.operatorProfile.value],['Actuation',spec.operatorType.value],['Contact',spec.contactComposition.value],['Terminal pair',spec.terminalDesignation.value],['Connection',spec.terminalConnection.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Positive opening',spec.positiveOpening.value?'Yes':'No']] : def.family==='lamp'
       ? [['Rated supply',spec.ratedSupplyVoltage.value+' '+spec.ratedSupplyVoltage.unit],['Light source',spec.lightSource.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Connection',spec.terminalConnection.value]]
+      : def.family==='medium-voltage-fuse-link'
+      ? [['IEC fitting length',spec.cartridgeSize.value+' '+spec.cartridgeSize.unit],['Utilization category',spec.utilizationCategory.value],
+        ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
+        ['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
+        ['Minimum breaking current',spec.minimumBreakingCurrent.value+' '+spec.minimumBreakingCurrent.unit],
+        ['Striker force',spec.strikerForce.value+' '+spec.strikerForce.unit],['Temperature limiter',spec.thermalStriker.value?'Yes':'No']]
       : def.family==='cylindrical-fuse-link'||def.family==='knife-blade-fuse-link'
       ? [['Cartridge size',[spec.cartridgeSize.value,spec.cartridgeSize.unit].filter(Boolean).join(' ')],['Utilization category',spec.utilizationCategory.value],
         ...(spec.insulatedGrippingLugs?[['Insulated gripping lugs','Yes']]:[]),

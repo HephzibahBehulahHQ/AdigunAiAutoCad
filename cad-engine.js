@@ -1596,6 +1596,53 @@
     });
   });
 
+  const etiMediumVoltageFuseLinks = terminalCatalog.etiMediumVoltageFuseLinks.map(
+    ([code, series, voltage, current, capacity, fittingLength, tubeDiameter, minimumBreakingCurrent]) => {
+      const id = 'eti-' + code;
+      const length = fittingLength + 2 * 33;
+      const thermalStriker = series === 'VVT-D3';
+      const pins = [
+        { id: 'cap-left', localNumber: 'L', name: 'Left end cap', x: -36, y: 0, electricalType: 'passive', connectionType: 'end-cap' },
+        { id: 'cap-right', localNumber: 'R', name: 'Right end cap', x: 36, y: 0, electricalType: 'passive', connectionType: 'end-cap' }
+      ];
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: series + ' ' + voltage + 'kV/' + current + 'A ' + fittingLength,
+        name: 'Medium-voltage fuse link', aliases: ['VV fuse', series, 'back-up fuse'],
+        family: 'medium-voltage-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+        symbol: {
+          id: 'fuse.eti.vv.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins, internalConnections: [],
+          numberingNote: 'L and R identify the electrical end caps. The striker is a mechanical actuator.'
+        },
+        electricalFunctions: {
+          protectedTerminalPair: pins.map(pin => pin.id),
+          continuityNote: 'An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets across the fuse.'
+        },
+        specifications: {
+          utilizationCategory: { value: 'Back-up' }, cartridgeSize: { value: fittingLength, unit: 'mm' },
+          nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'kV AC' },
+          ratedBreakingCapacity: { value: capacity, unit: 'kA' }, minimumBreakingCurrent: { value: minimumBreakingCurrent, unit: 'A' },
+          strikerForce: { value: thermalStriker ? 80 : 50, unit: 'N' }, thermalStriker: { value: thermalStriker },
+          dimensions: { width: { value: length, unit: 'mm' }, height: { value: tubeDiameter, unit: 'mm' }, depth: { value: tubeDiameter, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, length, tubeDiameter), sourceIndex: 1, depth: tubeDiameter,
+          scope: 'Nominal end-cap span and ceramic tube diameter. Collar tolerances and striker travel are separate.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+            documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, ratings, IEC fitting length and tube diameter.' },
+          { publisher: 'ETI', title: 'VV fuse dimensional drawing',
+            url: 'https://storage-api-pim.etigroup.eu/product_db/levels/2241/en-GB/dimension/2241_dimension.jpg',
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Drawing linked by the exact order code. Both 33 mm end caps extend beyond dimension e.' },
+          { publisher: 'ETI', title: 'VV high-voltage fuse links',
+            url: 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/VV.pdf#page=3',
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Contact-cap construction and VVC3 and VVT-D3 striker descriptions.' }
+        ]
+      });
+    });
+
   const finderRelays = terminalCatalog.finderSeries40Relays.concat(
     terminalCatalog.finderSeries41Relays, terminalCatalog.finderSeries43Relays, terminalCatalog.finderSeries45Relays,
     terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
@@ -1896,7 +1943,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

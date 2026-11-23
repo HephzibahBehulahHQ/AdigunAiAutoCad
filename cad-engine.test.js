@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 4116);
+  assert.equal(items.length, 4543);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1823,6 +1823,26 @@ test('ETI NH photovoltaic fuses retain the DC time constant and slotted contact 
   const rated70kA = engine.component('eti-004110714');
   assert.deepEqual(rated70kA.specifications.ratedBreakingCapacity, { value: 70, unit: 'kA' });
   assert.deepEqual(rated70kA.specifications.ratedDcTimeConstant, { value: 3, unit: 'ms' });
+});
+
+test('ETI VV fuses distinguish fitting length, end-cap span and striker variants', () => {
+  const items = engine.catalog().filter(item => item.family === 'medium-voltage-fuse-link');
+  assert.equal(items.length, 427);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { nominalVoltage, nominalCurrent, minimumBreakingCurrent, cartridgeSize, dimensions, thermalStriker, strikerForce } = part.specifications;
+    assert.equal(nominalVoltage.unit, 'kV AC');
+    assert.equal(dimensions.width.value, cartridgeSize.value + 66);
+    assert.ok([53, 68, 83.5].includes(dimensions.height.value));
+    assert.ok(minimumBreakingCurrent.value >= nominalCurrent.value);
+    assert.equal(thermalStriker.value, item.name.startsWith('VVT-D3 '));
+    assert.equal(strikerForce.value, thermalStriker.value ? 80 : 50);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['cap-left', 'cap-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const part = engine.component('eti-004220503');
+  assert.equal(part.physicalRepresentations[0].width, 358);
+  assert.deepEqual(part.specifications.ratedBreakingCapacity, { value: 63, unit: 'kA' });
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
