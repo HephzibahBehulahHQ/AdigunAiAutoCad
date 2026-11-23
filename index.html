@@ -1407,8 +1407,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function componentPropertyFields(object,definition){
     return Object.entries(definition.instanceProperties).map(function([name,rule]){
       if(rule.type==='choice'){
-        const fieldLabel=definition.family==='rotary-cam-switch'&&name==='switchingStep'
-          ?'Selector position':componentPropertyLabels[name]||name;
+        const fieldLabel=name==='switchingStep'
+          ? ({'rotary-cam-switch':'Selector position','industrial-motor-contactor':'Coil state'}[definition.family]||componentPropertyLabels[name])
+          : componentPropertyLabels[name]||name;
         const value=object.properties[name]??rule.default;
         const options=Object.entries(rule.choices).map(([id,label])=>
           '<option value="'+escapeHtml(id)+'"'+(id===value?' selected':'')+'>'+escapeHtml(label)+'</option>').join('');

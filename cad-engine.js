@@ -2355,11 +2355,16 @@
       });
     });
 
-  const etiMotorContactors = terminalCatalog.etiCemMotorContactors.concat(terminalCatalog.etiMiniatureMotorContactors).map(
-    ([code, frame, auxiliary, voltage, dc, ac1, ac3, power, operatingVoltage]) => {
+  const etiMotorContactors = terminalCatalog.etiCemMotorContactors.concat(
+    terminalCatalog.etiMiniatureMotorContactors, terminalCatalog.etiCesMotorContactors
+  ).map(
+    ([code, frame, auxiliary, voltage, dc, ac1, ac3, power, operatingVoltage, ces]) => {
       const id = 'eti-' + code;
       const miniature = typeof frame === 'string';
-      const frameName = miniature ? frame : 'CEM' + frame;
+      const frameName = ces ? 'CES ' + frame : miniature ? frame : 'CEM' + frame;
+      const frequency = ces?.frequency ?? '50/60';
+      const propertyChoices = { 1: 'De-energized', 2: 'Energized' };
+      const catalogUrl = 'https://www.etigroup.eu/images/product_db/documents/en-GB/ETICON_ENG.pdf#page=';
       const fourPole = auxiliary === '4P' || auxiliary === 'PR';
       const mixedMainContacts = auxiliary === 'PR';
       const mainPoleCount = fourPole ? 4 : 3;
@@ -2383,37 +2388,51 @@
       }));
       if (auxiliary === '10') pairs.push({ labels: ['13', '14'], kind: 'Auxiliary NO', normallyClosed: false });
       if (auxiliary === '01') pairs.push({ labels: ['21', '22'], kind: 'Auxiliary NC', normallyClosed: true });
+      if (auxiliary === '22') pairs.push(
+        { labels: ['13', '14'], kind: 'Auxiliary NO', normallyClosed: false },
+        { labels: ['21', '22'], kind: 'Auxiliary NC', normallyClosed: true },
+        { labels: ['31', '32'], kind: 'Auxiliary NC', normallyClosed: true },
+        { labels: ['43', '44'], kind: 'Auxiliary NO', normallyClosed: false }
+      );
       const coil = addPair(-pairs.length * 16, ['A1', 'A2'], 'Coil');
       const poles = pairs.map(({ labels, kind, normallyClosed }, index) => ({
         terminals: addPair((index + 1 - pairs.length / 2) * 32, labels, kind), normallyClosed
       }));
-      const [width, height, depth] = miniature ? (frame === 'CE07' ? [45, 42, 44] : [45, 58, 52])
+      const [width, height, depth] = ces ? ces.dimensions
+        : miniature ? (frame === 'CE07' ? [45, 42, 44] : [45, 58, 52])
         : frame <= 25 ? [45, 81, (frame === 25 ? 87 : 85) + (dc ? 30 : 0)]
         : frame <= 40 ? [55, 87, dc ? 134 : 98]
         : frame <= 80 ? [67.9, 117.3, 116] : [75.4, 117, 126];
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-        model: frameName + '.' + auxiliary + '-' + voltage + 'V-' + (dc ? 'DC' : '50/60Hz'),
-        name: miniature ? 'Miniature motor contactor' : 'CEM motor contactor',
+        model: frameName + '.' + auxiliary + '-' + voltage + 'V-' + (dc ? 'DC' : frequency + 'Hz'),
+        name: ces ? 'CES motor contactor' : miniature ? 'Miniature motor contactor' : 'CEM motor contactor',
         aliases: ['ETICON', frameName, fourPole ? 'four-pole motor contactor' : 'three-pole motor contactor'],
         family: 'industrial-motor-contactor', referencePrefix: 'K', category: 'Electrical · Verified contactor',
         symbol: {
-          id: 'contactor.eti.' + (miniature ? 'miniature.' : 'cem.') + auxiliary.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
+          id: 'contactor.eti.' + (ces ? 'ces.' : miniature ? 'miniature.' : 'cem.') + auxiliary.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
           width: (pairs.length + 1) * 32, height: 68, pins, internalConnections: [],
           numberingNote: fourPole ? 'A1 and A2 identify the coil. All four main contact pairs have distinct terminal IDs.'
             : 'A1 and A2 identify the coil. Three main line/load pairs and any built-in auxiliary pair have distinct terminal IDs.'
         },
         electricalFunctions: {
           coilTerminals: coil, contactPoles: poles,
-          simulationNote: 'Contacts are drawn in the normal state. Static wiring reports keep both sides of each contact separate.'
+          ...(ces ? {
+            switchingSequence: [true, false].map(normallyClosed =>
+              poles.filter(pole => pole.normallyClosed === normallyClosed).map(pole => pole.terminals))
+          } : {}),
+          simulationNote: ces ? 'The selected coil state determines contact continuity. Coil voltage is not simulated.'
+            : 'Contacts are drawn in the normal state. Static wiring reports keep both sides of each contact separate.'
         },
         specifications: {
           poleCount: { value: mainPoleCount },
           contactConfiguration: { value: auxiliary === '10' ? '3 main NO + 1 auxiliary NO'
-            : auxiliary === '01' ? '3 main NO + 1 auxiliary NC' : mixedMainContacts ? '2 main NO + 2 main NC'
+            : auxiliary === '01' ? '3 main NO + 1 auxiliary NC'
+              : auxiliary === '22' ? '3 main NO + 2 auxiliary NO + 2 auxiliary NC'
+                : mixedMainContacts ? '2 main NO + 2 main NC'
               : mainPoleCount + ' main NO' },
           nominalCoilVoltage: { value: voltage, unit: 'V ' + coilSupply },
-          ...(!dc ? { coilFrequency: { value: '50/60', unit: 'Hz' } } : {}),
+          ...(!dc ? { coilFrequency: { value: frequency, unit: 'Hz' } } : {}),
           ac1RatedCurrent: { value: ac1, unit: 'A' },
           ac3RatedCurrent: { value: ac3, unit: 'A at 400 V AC' },
           ac3RatedPower: { value: power, unit: 'kW at 400 V AC' },
@@ -2421,11 +2440,24 @@
           dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
         },
         physicalRepresentations: [{
-          ...terminalPanelEnvelope(id, width, height), depth, sourceIndex: 2,
+          ...terminalPanelEnvelope(id, width, height), depth, sourceIndex: ces && !dc ? 0 : 2,
           scope: 'Nominal contactor envelope without optional contact blocks, rail or wiring clearances.'
         }],
-        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
-        sources: [
+        instanceProperties: {
+          ...(ces ? { switchingStep: { type: 'choice', default: '1', choices: propertyChoices } } : {}),
+          comment: { type: 'string', default: '', maximumLength: 160 }
+        },
+        sources: ces ? [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code and variant-specific specifications and net dimensions.' },
+          { publisher: 'ETI', title: 'ETICON · CES ordering tables and wiring',
+            url: catalogUrl + ces.page, documentRevision: null, retrievedAt: '2026-11-23',
+            revisionNote: 'Exact order code, coil supply frequency, published AC-1/AC-3 ratings, and numbered contact pairs.' },
+          ...(dc ? [{ publisher: 'ETI', title: 'ETICON · CES DC-coil dimensional profiles',
+            url: catalogUrl + '74', documentRevision: null, retrievedAt: '2026-11-23',
+            revisionNote: 'DC coil body and rear mounting allowance for the bare contactor.' }] : [])
+        ] : [
           { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
             documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, coil, main ratings and auxiliary contact counts.' },
           { publisher: 'ETI', title: miniature ? 'ETICON · Miniature contactor tables and wiring diagrams' : 'ETICON motor contactors · CEM tables and wiring diagrams',
