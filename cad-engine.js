@@ -1509,6 +1509,51 @@
     });
   });
 
+  const etiFuseDimensions = {
+    '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2]
+  };
+  const etiCylindricalFuseLinks = terminalCatalog.etiCylindricalFuseLinks.map(([code, size, utilization, current, voltage, capacity]) => {
+    const id = 'eti-' + code;
+    const [length, diameter] = etiFuseDimensions[size];
+    const pins = [
+      { id: 'cap-left', localNumber: 'L', name: 'Left end cap', x: -36, y: 0, electricalType: 'passive', connectionType: 'end-cap' },
+      { id: 'cap-right', localNumber: 'R', name: 'Right end cap', x: 36, y: 0, electricalType: 'passive', connectionType: 'end-cap' }
+    ];
+    return deepFreeze({
+      schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+      model: 'CH' + size + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V',
+      name: 'Cylindrical fuse link', aliases: ['CH' + size, 'fuse cartridge', utilization],
+      family: 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+      symbol: {
+        id: 'fuse.eti.ch' + size + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
+        internalConnections: [],
+        numberingNote: 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
+      },
+      electricalFunctions: {
+        protectedTerminalPair: pins.map(pin => pin.id),
+        continuityNote: 'An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device.'
+      },
+      specifications: {
+        utilizationCategory: { value: utilization }, nominalCurrent: { value: current, unit: 'A' },
+        nominalVoltage: { value: voltage, unit: 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+        cartridgeSize: { value: size, unit: 'mm' },
+        dimensions: { width: { value: length, unit: 'mm' }, height: { value: diameter, unit: 'mm' }, depth: { value: diameter, unit: 'mm' } }
+      },
+      physicalRepresentations: [{
+        ...terminalPanelEnvelope(id, length, diameter), sourceIndex: 1, depth: diameter,
+        scope: 'Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.'
+      }],
+      instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+      sources: [
+        { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+          documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
+        { publisher: 'ETI', title: 'C / Cylindrical fuse-links',
+          url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/C_ENG.pdf#page=2',
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' }
+      ]
+    });
+  });
+
   const finderRelays = terminalCatalog.finderSeries40Relays.concat(
     terminalCatalog.finderSeries41Relays, terminalCatalog.finderSeries43Relays, terminalCatalog.finderSeries45Relays,
     terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
@@ -1809,7 +1854,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiCylindricalFuseLinks).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
