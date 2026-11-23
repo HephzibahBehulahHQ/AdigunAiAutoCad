@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 9066);
+  assert.equal(items.length, 9147);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -7357,4 +7357,33 @@ test('ETI Ultra Quick BS and bottle formats preserve the correct terminal mounti
   assert.equal(bottle.specifications.ratedDcVoltage.value, 315);
   assert.equal(bottle.specifications.ratedDcBreakingCapacity.value, 8);
   assert.equal(bottle.specifications.gaugeContactDiameter.value, 5);
+});
+
+test('ETI LPC delta capacitors preserve phase branches and protective earth across save and reopen', () => {
+  const items = engine.catalog().filter(item => item.family === 'three-phase-capacitor');
+  assert.equal(items.length, 81);
+  const sample = engine.component('eti-004656850');
+  assert.equal(sample.specifications.winding.value, 'Double winding');
+  assert.deepEqual(sample.symbol.pins.map(pin => pin.localNumber), ['R','S','T','PE']);
+  assert.deepEqual(sample.electricalFunctions.deltaBranches, [
+    { terminals: ['phase-r','phase-s'], capacitance: { value: 49.74, unit: 'µF' } },
+    { terminals: ['phase-s','phase-t'], capacitance: { value: 49.74, unit: 'µF' } },
+    { terminals: ['phase-t','phase-r'], capacitance: { value: 49.74, unit: 'µF' } }
+  ]);
+  const sheetId = 'delta-capacitor';
+  const instance = { ...engine.createInstance(sample.id, 120, 120, 'C1'), sheetId };
+  const wires = engine.worldPins(instance).map(pin => {
+    const sign = Math.sign(pin.y - instance.y);
+    return { id: 'wire-' + pin.id, kind: 'wire', sheetId, x: pin.x, y: pin.y,
+      x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y + 15 * sign,
+      pinAttachments: { start: { instanceId: instance.id, pinId: pin.id }, end: null } };
+  });
+  const reopened = engine.parseProject(engine.serializeProject({
+    project: 'LPC-DW', sheets: [{ id: sheetId, name: 'Wiring' }], objects: [instance, ...wires]
+  }));
+  assert.equal(reopened.valid, true);
+  const nets = engine.analyzeProject(reopened.project).globalNets;
+  assert.deepEqual(nets.map(net => net.pins.map(pin => pin.number)).flat().sort(), ['PE','R','S','T']);
+  assert.ok(nets.every(net => net.pins.length === 1));
+  assert.equal(engine.deltaCapacitorGeometry(sample).circles.length, 3);
 });

@@ -2866,6 +2866,65 @@
       });
     });
 
+  const etiLpcCapacitors = terminalCatalog.etiLpcCapacitors.map(
+    ([code, series, voltage, frequency, kvar, microfarads, amps, diameter, height, page]) => {
+      const id = 'eti-' + code;
+      const terminalType = page === 4 ? 'faston' : 'screw';
+      const phases = [
+        { id: 'phase-r', localNumber: 'R', x: 0, y: -43 },
+        { id: 'phase-s', localNumber: 'S', x: -48, y: 15 },
+        { id: 'phase-t', localNumber: 'T', x: 48, y: 15 }
+      ];
+      const pins = phases.map(pin => ({
+        ...pin, name: 'Phase ' + pin.localNumber, electricalType: 'passive', connectionType: terminalType
+      }));
+      pins.push({ id: 'earth', localNumber: 'PE', name: 'Case earth · M12 mounting stud',
+        x: 0, y: 47, electricalType: 'protective-earth', connectionType: 'threaded-stud' });
+      const deltaBranches = phases.map((pin, index) => ({
+        terminals: [pin.id, phases[(index + 1) % phases.length].id],
+        capacitance: { value: microfarads, unit: 'µF' }
+      }));
+      const catalog = 'https://www.etigroup.eu/images/product_db/documents/en-GB/CP.pdf#page=';
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: series + ' ' + kvar + ' kVAr · ' + voltage + ' V · ' + frequency + ' Hz',
+        name: 'Three-phase power-factor correction capacitor',
+        aliases: [series, 'Delta capacitor', 'PFC capacitor', 'Reactive power compensation'],
+        family: 'three-phase-capacitor', referencePrefix: 'C', category: 'Electrical · Verified capacitor',
+        symbol: { id: 'capacitor.eti.lpc.delta.v1', view: 'schematic', unit: 'mm', width: 96, height: 94,
+          pins, internalConnections: [],
+          numberingNote: 'ETI identifies the three phase contacts as R, S and T. The M12 mounting stud bonds the case to protective earth.' },
+        electricalFunctions: {
+          deltaBranches, caseEarthTerminal: 'earth', dischargeResistors: true,
+          continuityNote: 'Capacitive branches and discharge resistors are impedance paths. The connection report preserves separate phase nets and an isolated PE net.'
+        },
+        specifications: {
+          configuration: { value: 'Three-phase delta' }, winding: { value: series === 'LPC-DW' ? 'Double winding' : 'Single winding' },
+          nominalVoltage: { value: voltage, unit: 'V AC' }, frequency: { value: frequency, unit: 'Hz' },
+          reactivePower: { value: kvar, unit: 'kVAr' }, phaseCapacitance: { value: microfarads, unit: 'µF per branch' },
+          lineCurrent: { value: amps, unit: 'A' }, terminalType: { value: terminalType === 'faston' ? 'Faston 6.3 × 0.8 mm' : 'Screw' },
+          dimensions: { width: { value: diameter, unit: 'mm' }, height: { value: height, unit: 'mm' },
+            depth: { value: diameter, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, diameter, height), depth: diameter, sourceIndex: 1,
+          scope: 'Nominal diameter and overall height from the catalogue drawing and order table. Installation and ventilation clearances are separate.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Order identity and nominal electrical ratings.' },
+          { publisher: 'ETI', title: 'CP · LPC and LPC-DW order tables', url: catalog + page,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Order-specific diameter, height, terminal construction and ratings.' },
+          { publisher: 'ETI', title: 'CP · Delta wiring and discharge resistors', url: catalog + '3',
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Three phase terminals and capacitive connections.' },
+          { publisher: 'ETI', title: 'LPC/LPC-DW installation instructions',
+            url: 'https://storage-api-pim.etigroup.eu/product_db/levels/3824/en-GB/Instruction/3824_Instruction.pdf',
+            documentRevision: '1.3', retrievedAt: '2026-11-23', revisionNote: 'Grounding through the case mounting stud and connection construction.' }
+        ]
+      });
+    });
+
   const etiNhFuseBases = terminalCatalog.etiNhFuseBases.map(
     ([code, series, size, sideA, sideB, poles, current, fusePower, ip, width, height, depth, page]) => {
       const id = 'eti-' + code;
@@ -3327,7 +3386,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -3450,6 +3509,28 @@
       circles.push([left, 24, 1.25], [right, 24, 1.25]);
     }
     return { segments, circles };
+  }
+
+  function deltaCapacitorGeometry(definition) {
+    const vertices = [[0, -21], [-29, 15], [29, 15]];
+    const segments = definition.symbol.pins.slice(0, 3).map((pin, index) =>
+      [pin.x, pin.y, ...vertices[index]]);
+    for (let index = 0; index < vertices.length; index += 1) {
+      const [fromX, fromY] = vertices[index];
+      const [toX, toY] = vertices[(index + 1) % vertices.length];
+      const length = Math.hypot(toX - fromX, toY - fromY);
+      const ux = (toX - fromX) / length, uy = (toY - fromY) / length;
+      const middleX = (fromX + toX) / 2, middleY = (fromY + toY) / 2;
+      const plate = (offset) => {
+        const x = middleX + offset * ux, y = middleY + offset * uy;
+        segments.push([x - uy * 6, y + ux * 6, x + uy * 6, y - ux * 6]);
+        return [x, y];
+      };
+      segments.push([fromX, fromY, ...plate(-3)], [...plate(3), toX, toY]);
+    }
+    const earth = definition.symbol.pins.find(pin => pin.id === definition.electricalFunctions.caseEarthTerminal);
+    segments.push([earth.x, earth.y, 0, 30], [-12, 30, 12, 30]);
+    return { segments, circles: vertices.map(([x, y]) => [x, y, 1.5]) };
   }
 
   function transformerGeometry(definition) {
@@ -4852,6 +4933,7 @@
     overheadSurgeArresterGeometry: overheadSurgeArresterGeometry,
     modularSurgeGeometry: modularSurgeGeometry,
     transformerGeometry: transformerGeometry,
+    deltaCapacitorGeometry: deltaCapacitorGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
     camSwitchGeometry: camSwitchGeometry,
