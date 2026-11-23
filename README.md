@@ -29,6 +29,8 @@ For a custom sheet, choose **Custom** in the **Paper size** field in Properties,
 
 Open **Symbol Library**, pick a component to see its terminals in **Properties**, then click its position on the sheet. The placed component is selected and its instance properties are ready to edit. A click on a placed component opens its properties as well. Turn off **Snap** for unrestricted movement. Click a pin marker to attach a wire exactly there, or enable **Object Snap** to attach when clicking near a pin.
 
+Click **Project Explorer** or **Symbol Library** on the left rail to open or close that panel. The double-chevron button collapses the whole sidebar and restores the previous panel selection when reopened. In the library, filter **All parts** by category or type, browse **Common parts** for 100 representative manufacturer parts, or open **Project symbols** for definitions saved in your project.
+
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 
 The component bank inventory is available in [JSON](docs/reports/component-bank.json) and [CSV](docs/reports/component-bank.csv). It is generated from the same native definitions the editor uses. Physical dimensions in the inventory describe the manufacturer part. The schematic dimensions and terminal coordinates describe the editable symbol.

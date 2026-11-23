@@ -26,7 +26,23 @@
     .tree-row .detail{margin-left:auto}
   </style>
 <style>.drawing-wrap.blank-start #sheetDesign>:not(:first-child):not(#userDrawings):not(#customSheetFrame){display:none}.drawing-wrap.blank-sheet #sheetDesign>:not(:first-child):not(#userDrawings):not(#customSheetFrame){display:none}.drawing-wrap.blank-sheet #customSheetFrame{display:block!important}</style>
-<style>.zoom-menu{position:fixed;z-index:300;display:grid;grid-template-columns:repeat(2,minmax(58px,1fr));gap:3px;padding:6px;width:142px;border:1px solid #34465c;border-radius:4px;background:#101a29;box-shadow:0 10px 25px #02061799}.zoom-menu[hidden]{display:none}.zoom-menu button{padding:6px 8px;border-radius:3px;text-align:center;color:#dbe7f3;background:#142136}.zoom-menu button:hover,.zoom-menu button:focus-visible{background:#173c4b;color:white}</style>
+<style>
+    .sidepanel{grid-template-rows:none;grid-auto-rows:minmax(0,1fr)}
+    .sidepanel[hidden],.sidepanel .panel-section[hidden],.catalog-filters[hidden]{display:none}
+    .workspace.sidebar-collapsed:not(.maximized){grid-template-columns:36px 0 minmax(0,1fr) 36px}
+    #toggleSidebar{font-size:18px}
+    .catalog-filters{display:grid;gap:4px;padding:0 8px}
+    .catalog-filters label{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:4px;color:#b7c6d8}
+    .catalog-filters select{color:#e9f2fa;background:#0d1726;border:1px solid #32445a;border-radius:3px;padding:3px}
+    .symbol-count{padding:4px 8px;margin:0;color:#b7c6d8;font-size:10px}
+    .symbol-list{flex:1}
+    .symbol-row{text-align:left;width:100%;min-height:25px;height:auto}
+    @media(max-width:640px){
+      .workspace.mobile-tools:not(.maximized){grid-template-columns:34px minmax(0,1fr) 34px}
+      .workspace.mobile-tools .sidepanel:not([hidden]){display:grid;visibility:visible;pointer-events:auto;position:absolute;left:34px;top:68px;bottom:25px;width:min(245px,calc(100% - 68px));z-index:6}
+      .workspace.mobile-tools.maximized .sidepanel{visibility:hidden;pointer-events:none}
+    }
+    .zoom-menu{position:fixed;z-index:300;display:grid;grid-template-columns:repeat(2,minmax(58px,1fr));gap:3px;padding:6px;width:142px;border:1px solid #34465c;border-radius:4px;background:#101a29;box-shadow:0 10px 25px #02061799}.zoom-menu[hidden]{display:none}.zoom-menu button{padding:6px 8px;border-radius:3px;text-align:center;color:#dbe7f3;background:#142136}.zoom-menu button:hover,.zoom-menu button:focus-visible{background:#173c4b;color:white}</style>
 <style>.component-edit{box-sizing:border-box;min-width:0;width:100%;max-width:100%;background:#fff;border:1px solid #94a3b8;border-radius:4px;padding:4px 6px;color:#0b1220;font:inherit}.component-source{display:inline-block;margin-top:7px;color:#0891b2;overflow-wrap:anywhere}.component-specs{font-size:11px}</style><style>.resize-controls{pointer-events:none}.resize-outline{fill:none;stroke:#0891b2;stroke-dasharray:3 2;pointer-events:none}.resize-handle{fill:#22d3ee;stroke:#0b1220;cursor:nwse-resize;pointer-events:all}.resize-handle:focus{stroke:#fbbf24;outline:none}@media print{.resize-controls{display:none!important}}#svgPreviewDialog{width:min(900px,calc(100vw - 32px))}#svgPreviewImage{display:block;max-width:100%;max-height:68vh;margin:auto;background:white}#svgPreviewImage[hidden]{display:none}</style><style>@media screen{#canvasStage{padding:0}#drawingWrap{width:100%;height:100%;aspect-ratio:auto;box-shadow:none}#sheetBackground{fill:none}.drawing-wrap.free-drafting #customSheetFrame{display:none!important}}</style>
 </head>
 <body>
@@ -48,7 +64,7 @@
   </div>
   <div class="color-palette" id="colorPalette" role="dialog" aria-label="Color palette" hidden><div class="palette-head"><strong>Color palette</strong><span class="grow"></span><button type="button" class="palette-mode active" data-palette-mode="stroke" aria-pressed="true">Stroke</button><button type="button" class="palette-mode" data-palette-mode="fill" aria-pressed="false">Fill</button></div><div class="palette-swatches" id="paletteSwatches"></div><label class="palette-custom">Custom color <input id="customColor" type="color" value="#164eac" aria-label="Custom drawing color"></label><label class="palette-fill"><input id="paletteFillEnabled" type="checkbox"> Fill closed shapes</label></div>
   <div class="workspace" id="workspace">
-    <aside class="rail left" aria-label="Project navigation"><button data-tip="Project explorer" aria-label="Project explorer" aria-pressed="true" data-panel="project"><svg><use href="#i-folder"/></svg></button><button data-tip="Symbol library" aria-label="Symbol library" aria-pressed="false" data-panel="symbols"><svg><use href="#i-symbol"/></svg></button><button data-tip="Layers" aria-label="Layers" aria-pressed="false" data-panel="layers"><svg><use href="#i-layers"/></svg></button><div class="rail-spacer"></div><button data-tip="Workspace settings" aria-label="Workspace settings" data-action="settings"><svg><use href="#i-settings"/></svg></button></aside>
+    <aside class="rail left" aria-label="Project navigation"><button id="toggleSidebar" type="button" aria-label="Collapse sidebar" aria-expanded="true" aria-controls="sidepanel" data-tip="Collapse sidebar"><span aria-hidden="true">«</span></button><button data-tip="Project explorer" aria-label="Project explorer" aria-pressed="true" aria-controls="projectPanel" data-panel="project"><svg><use href="#i-folder"/></svg></button><button data-tip="Symbol library" aria-label="Symbol library" aria-pressed="true" aria-controls="symbolsPanel" data-panel="symbols"><svg><use href="#i-symbol"/></svg></button><button data-tip="Layers" aria-label="Layers" aria-pressed="false" data-panel="layers"><svg><use href="#i-layers"/></svg></button><div class="rail-spacer"></div><button data-tip="Workspace settings" aria-label="Workspace settings" data-action="settings"><svg><use href="#i-settings"/></svg></button></aside>
     <aside class="sidepanel" id="sidepanel" aria-label="Project and symbol panels">
       <section class="panel-section" id="projectPanel"><div class="panel-head"><span class="head-icon">▤</span><span>Project Explorer</span><span class="grow"></span><button aria-label="Collapse project explorer" id="collapseProject">−</button></div><label class="panel-search"><span>⌕</span><input id="projectSearch" type="search" placeholder="Find sheet or device" aria-label="Find sheet or device"></label><div class="tree" id="projectTree">
         <div class="tree-row selected" data-sheet="overview"><span class="caret">▾</span><span class="folder">▰</span><b>Z0010000</b><span>Control cabinet</span></div>
@@ -67,7 +83,7 @@
         <div class="tree-row tree-grand" data-sheet="terminals"><span class="file">▱</span><span>120 · Terminal strip</span><span class="detail">A3/120</span></div>
         <div class="tree-row tree-grand" data-sheet="bom"><span class="file">▱</span><span>200 · Bill of materials</span><span class="detail">A3/200</span></div>
       </div><div class="tree project-library-list" id="editableExampleProjects" role="list" aria-label="Editable example projects" style="display:none"></div><div class="notice" hidden><button type="button" id="recoverBrowserDraft">Recover browser draft</button></div><div class="panel-tabs"><button class="active" data-tree-view="tree">Tree</button><button data-tree-view="list">List</button></div></section>
-      <section class="panel-section" id="symbolsPanel"><div class="panel-head"><span class="head-icon">⊕</span><span>Symbols / Macros</span><span class="grow"></span><button aria-label="Search symbols" id="focusSymbols">⌕</button></div><label class="panel-search"><span>⌕</span><input id="symbolSearch" type="search" placeholder="Search symbols" aria-label="Search symbols"></label><div class="symbol-list" id="symbolList"><div class="library-group">▾ IEC-style symbols · built in</div><button class="symbol-row" data-insert="terminal"><span class="symbol-glyph">⊣</span><span>Terminal · 2-pin</span></button><button class="symbol-row" data-insert="relay"><span class="symbol-glyph">▱</span><span>Relay coil · K</span></button><button class="symbol-row" data-insert="contact"><span class="symbol-glyph">/</span><span>NO contact · 13 / 14</span></button><button class="symbol-row" data-insert="breaker"><span class="symbol-glyph">◈</span><span>Protective switch</span></button><button class="symbol-row" data-insert="sensor"><span class="symbol-glyph">◇</span><span>Sensor · 3-wire</span></button><button class="symbol-row" data-insert="motor"><span class="symbol-glyph">○</span><span>Three-phase motor</span></button><div class="library-group">PLC and distribution</div><button class="symbol-row" data-insert="plc"><span class="symbol-glyph">▣</span><span>PLC I/O module · 8-point</span></button><button class="symbol-row" data-insert="ground"><span class="symbol-glyph">⏚</span><span>Protective earth</span></button></div><div class="panel-tabs"><button class="active" data-symbol-view="library">Library</button><button data-symbol-view="macros">Macros</button></div></section>
+      <section class="panel-section" id="symbolsPanel"><div class="panel-head"><span class="head-icon">⊕</span><span>Symbols / Macros</span><span class="grow"></span><button aria-label="Search symbols" id="focusSymbols">⌕</button></div><label class="panel-search"><span>⌕</span><input id="symbolSearch" type="search" placeholder="Search symbols" aria-label="Search symbols"></label><div class="catalog-filters" id="catalogFilters"><label>Category <select id="symbolCategory" aria-label="Component category"></select></label><label>Type <select id="symbolType" aria-label="Component type"></select></label></div><p id="symbolCount" class="symbol-count" aria-live="polite"></p><div class="symbol-list" id="symbolList"></div><div class="panel-tabs" role="group" aria-label="Component collection"><button class="active" aria-pressed="true" data-symbol-view="library">All parts</button><button aria-pressed="false" data-symbol-view="common">Common parts</button><button aria-pressed="false" data-symbol-view="project">Project symbols</button></div></section>
     </aside>
     <section class="editor" aria-label="Electrical drawing editor">
       <div class="editor-tabs" id="sheetTabs" role="tablist" aria-label="Open drawing sheets"><button class="document-tab" role="tab" data-sheet="power" aria-selected="false">A1/010 · Power supply <span class="tab-close" role="button" tabindex="0" data-close-sheet="power" aria-label="Close Power supply tab">×</span></button><button class="document-tab" role="tab" data-sheet="control" aria-selected="true">A1/020 · Control circuit <span class="tab-close" role="button" tabindex="0" data-close-sheet="control" aria-label="Close Control circuit tab">×</span></button><button class="document-tab" role="tab" data-sheet="plc" aria-selected="false">A2/030 · PLC / I/O <span class="tab-close" role="button" tabindex="0" data-close-sheet="plc" aria-label="Close PLC / I/O tab">×</span></button><button class="document-tab add-sheet" id="newSheet" aria-label="Add sheet">+</button></div>
@@ -1278,13 +1294,67 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
     show(0);
   }
+  const nativeSidebarParts = window.AdigunCADEngine.catalog();
+  const sidebarFamilies = Map.groupBy(nativeSidebarParts, item => item.family);
+  const commonSidebarIds = new Set();
+  // Start with standard cabinet parts, then include representative variants across each family.
+  for(const id of [
+    'phoenix-contact-3209510', 'phoenix-contact-3209536', 'phoenix-contact-3210567',
+    'siemens-sitop-psu100c-6ep1332-5ba00', 'siemens-6es7212-1ae40-0xb0',
+    'phoenix-contact-2966171', 'schneider-electric-lc1d09bd', 'siemens-3ru2126-4ab0',
+    'siemens-3rv2011-1ja10', 'schneider-electric-xb5aa31', 'schneider-electric-xb5aa42',
+    'schneider-electric-xb5avb3', 'ifm-ifs204', 'ifm-pn2070'
+  ]){
+    if(window.AdigunCADEngine.catalogItem(id))commonSidebarIds.add(id);
+  }
+  const commonCandidates = [...sidebarFamilies.values()].map(parts => parts.filter(part => !commonSidebarIds.has(part.id)));
+  for(let index=0;commonSidebarIds.size<100 && commonCandidates.some(parts=>parts.length>index);index++){
+    for(const parts of commonCandidates){
+      if(parts[index])commonSidebarIds.add(parts[index].id);
+      if(commonSidebarIds.size===100)break;
+    }
+  }
+  let symbolView='library';
+  const categoryLabel=category=>category.replace(' · Verified ', ' / ').replace(/^([A-Za-z]+ \/ )([a-z])/,(_,prefix,initial)=>prefix+initial.toUpperCase());
+  const typeLabel=family=>family.replaceAll('-', ' ').replace(/^./,letter=>letter.toUpperCase());
+  function setCatalogOptions(select, values, label, display){
+    const selected=select.value;
+    select.replaceChildren(new Option(label,''));
+    for(const value of [...new Set(values)].sort((a,b)=>display(a).localeCompare(display(b)))){
+      select.add(new Option(display(value),value));
+    }
+    select.value=[...select.options].some(option=>option.value===selected)?selected:'';
+  }
   function renderSymbolSidebar(query){
     const host=$("#symbolList");
-    showCatalogPage(host,catalogItems(query),items=>{
+    const category=$("#symbolCategory"),type=$("#symbolType");
+    const all=symbolView==='common'?nativeSidebarParts.filter(item=>commonSidebarIds.has(item.id)):nativeSidebarParts;
+    setCatalogOptions(category,all.map(item=>item.category),'All categories',categoryLabel);
+    const categoryParts=category.value?all.filter(item=>item.category===category.value):all;
+    setCatalogOptions(type,categoryParts.map(item=>item.family),'All types',typeLabel);
+    $("#catalogFilters").hidden=symbolView==='project';
+    const filter=String(query??$("#symbolSearch").value).trim();
+    let results=catalogItems(filter).filter(item=>{
+      const project=item.category==='Project symbols';
+      if(symbolView==='project')return project;
+      if(project)return symbolView==='library'&&!category.value&&!type.value;
+      return (symbolView!=='common'||commonSidebarIds.has(item.id))
+        && (!category.value||item.category===category.value)
+        && (!type.value||item.family===type.value);
+    });
+    if(category.value||type.value||symbolView==='common'){
+      results.sort((a,b)=>a.category.localeCompare(b.category)||a.family.localeCompare(b.family));
+    }
+    const allParts=symbolView==='library'&&!filter&&!category.value&&!type.value;
+    const count=allParts?nativeSidebarParts.length:results.length;
+    const label=symbolView==='project'?'project symbols':symbolView==='common'?'common parts':'catalog parts';
+    $("#symbolCount").textContent=count.toLocaleString('en-US')+' '+label;
+    showCatalogPage(host,results,items=>{
       let group="";
       for(const item of items){
-        if(item.category!==group){
-          group=item.category;
+        const heading=item.family?categoryLabel(item.category)+' · '+typeLabel(item.family):item.category;
+        if(heading!==group){
+          group=heading;
           const head=document.createElement("div");
           head.className="library-group";head.textContent=group;host.append(head);
         }
@@ -1297,7 +1367,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       }
       if(!items.length){
         const empty=document.createElement("div");
-        empty.className="library-group";empty.textContent="No symbols match this search.";host.append(empty);
+        empty.className="library-group";
+        empty.textContent=symbolView==='project'&&!filter?'No project symbols. Use Create project symbol from selection to add one.':'No parts match the current filters.';
+        host.append(empty);
       }
     });
   }
@@ -2108,7 +2180,37 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     drawing.style.cursor='crosshair';
     notify('Drag a rectangle to export that region as SVG. Esc cancels.');
   }
-  function selectPanel(id){const project=id==='project',symbols=id==='symbols';$('#projectPanel').hidden=!project;$('#symbolsPanel').hidden=!symbols;if(id==='layers'){openInspector('Layers and visibility');return;}$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.panel===id)));}
+  const openSidebarPanels = new Set(['project', 'symbols']);
+  let sidebarExpanded = !matchMedia('(max-width:640px)').matches;
+  function syncSidebar(){
+    const visible = sidebarExpanded && openSidebarPanels.size > 0;
+    $('#sidepanel').hidden = !visible;
+    workspace.classList.toggle('sidebar-collapsed', !visible);
+    const toggle = $('#toggleSidebar');
+    const label = visible ? 'Collapse sidebar' : 'Expand sidebar';
+    toggle.setAttribute('aria-expanded', String(visible));
+    toggle.setAttribute('aria-label', label);
+    toggle.dataset.tip = label;
+    toggle.firstElementChild.textContent = visible ? '«' : '»';
+    for(const id of ['project', 'symbols']){
+      const open = visible && openSidebarPanels.has(id);
+      $('#' + id + 'Panel').hidden = !open;
+      $('[data-panel="' + id + '"]').setAttribute('aria-pressed', String(open));
+    }
+  }
+  function selectPanel(id){
+    if(id === 'layers'){openInspector('Layers and visibility');return;}
+    if(!sidebarExpanded){
+      openSidebarPanels.clear();
+      openSidebarPanels.add(id);
+      sidebarExpanded = true;
+    } else if(openSidebarPanels.has(id)){
+      openSidebarPanels.delete(id);
+    } else {
+      openSidebarPanels.add(id);
+    }
+    syncSidebar();
+  }
   async function exportDxf(){
     try{
       const result=await window.AdigunDXF.exportDrawing(state.objects.filter(drawingObjectVisible));
@@ -2420,7 +2522,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   $$('[data-inspector]').forEach(b=>b.addEventListener('click',()=>openInspector(b.dataset.inspector)));
 
   $$('[data-toggle]').forEach(b=>b.addEventListener('click',()=>{const key=b.dataset.toggle;state[key]=!state[key];b.setAttribute('aria-pressed',String(state[key]));if(key==='grid')applyView();persist();notify(`${key.toUpperCase()} ${state[key]?'on':'off'}.`);}));
-  $('#collapseProject').addEventListener('click',()=>{const hidden=$('#projectPanel').hidden;$('#projectPanel').hidden=!hidden;});$('#focusSymbols').addEventListener('click',()=>$('#symbolSearch').focus());$('#closeRightPanel').addEventListener('click',()=>{$('#rightPanel').classList.remove('open');workspace.classList.remove('inspector-open');});$('#maximize').addEventListener('click',()=>workspace.classList.toggle('maximized'));$('#newSheet').addEventListener('click',()=>$('#sheetDialog').showModal());
+  $('#toggleSidebar').addEventListener('click',()=>{
+    sidebarExpanded = $('#sidepanel').hidden;
+    if(sidebarExpanded && !openSidebarPanels.size)openSidebarPanels.add('project');
+    syncSidebar();
+  });
+  $('#collapseProject').addEventListener('click',()=>selectPanel('project'));$('#focusSymbols').addEventListener('click',()=>$('#symbolSearch').focus());$('#closeRightPanel').addEventListener('click',()=>{$('#rightPanel').classList.remove('open');workspace.classList.remove('inspector-open');});$('#maximize').addEventListener('click',()=>workspace.classList.toggle('maximized'));$('#newSheet').addEventListener('click',()=>$('#sheetDialog').showModal());
   $('#zoomValue').addEventListener('click',function(){const menu=$('#zoomMenu'),open=menu.hidden;menu.hidden=!open;$('#zoomValue').setAttribute('aria-expanded',String(open));if(open){const r=$('#zoomValue').getBoundingClientRect();menu.style.left=Math.max(8,Math.min(innerWidth-150,r.left))+'px';menu.style.bottom=(innerHeight-r.top+5)+'px';}});
   $('#zoomMenu').addEventListener('click',function(e){const b=e.target.closest('[data-zoom-preset]');if(!b)return;$('#zoomMenu').hidden=true;$('#zoomValue').setAttribute('aria-expanded','false');if(b.dataset.zoomPreset==='fit')runAction('fit');else setZoom(Number(b.dataset.zoomPreset));});
   document.addEventListener('click',function(e){if(!e.target.closest('#zoomMenu')&&!e.target.closest('#zoomValue')){$('#zoomMenu').hidden=true;$('#zoomValue').setAttribute('aria-expanded','false');}});
@@ -2459,6 +2566,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     draggedSymbol=null;
   });
   $('#symbolSearch').addEventListener('input',e=>renderSymbolSidebar(e.target.value));
+  $('#symbolCategory').addEventListener('change',()=>renderSymbolSidebar());
+  $('#symbolType').addEventListener('change',()=>renderSymbolSidebar());
 
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}const remove=e.target.closest('[data-delete-object]');if(remove)deleteObject(remove.dataset.deleteObject);});
   $('#inspectorContent').addEventListener('change',function(event){
@@ -2791,12 +2900,22 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function handleDeleteShortcut(event){if(event.key!=='Delete'&&event.key!=='Backspace')return false;const editable=event.target&&event.target.closest&&event.target.closest('input,textarea,select,[contenteditable="true"]');if(editable)return false;const selectedIds=state.selectedObjectIds||[];if(!selectedIds.length&&!state.selected)return false;event.preventDefault();if(selectedIds.length>1)deleteSelection();else deleteObject(state.selected||selectedIds[0]);return true;}
   document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.isComposing||svgPreviewDialog.open)return;if(e.key==='Escape'&&state.pendingMoveObjectId){e.preventDefault();state.pendingMoveObjectId=null;notify('Move cancelled.');return;}if(e.key==='Escape'&&!moduleMenu.hidden){e.preventDefault();closeModuleMenu(true);return;}if(e.key==='Escape'&&objectDrag){e.preventDefault();restoreDrawingHistory(objectDrag.snapshot);objectDrag=null;renderObjects();refreshSelectedProperties();drawing.style.cursor='default';return;}if(e.key==='Enter'&&wireReroute&&!e.target.closest?.('input,textarea,button,select,[contenteditable]')){e.preventDefault();finishWireReroute();return;}if(e.key==='Enter'&&wireStart&&wireBends.length&&!e.target.closest?.('input,textarea,button,select,[contenteditable]')){e.preventDefault();finishWire(wireBends.at(-1),wireBends.slice(0,-1));return;}if(e.key==='Escape'&&guideDrag){e.preventDefault();guideDrag=null;applyView();return;}if(e.key==='Escape'&&regionExport){e.preventDefault();cancelRegionExport();return;}if(e.key==='Escape'&&(wireStart||wireReconnection||wireReroute||['wire','dimension'].includes(state.tool)&&drawStart)){e.preventDefault();drawStart=null;clearWireDraft();drawing.style.cursor=state.tool==='select'?'default':'crosshair';return;}if(e.key==='Escape'&&state.pendingComponentId){e.preventDefault();cancelComponentPlacement();return;}if(e.ctrlKey&&e.key.toLowerCase()==='k'){closeModuleMenu(false);e.preventDefault();createPalette();$('#commands').showModal();$('#commandSearch').focus();return;}if(e.key==='Escape'&&$('#commands').open){$('#commands').close();return;}if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='s'){e.preventDefault();saveProjectAs();return;}if(e.ctrlKey&&e.key.toLowerCase()==='s'){e.preventDefault();saveLocal();return;}if(e.ctrlKey&&e.key.toLowerCase()==='o'){e.preventDefault();$('#openFile').click();return;}if(e.ctrlKey&&e.key.toLowerCase()==='p'){e.preventDefault();printActiveSheet();return;}if(e.target?.closest('input,textarea,select,[contenteditable]:not([contenteditable=false])'))return;if(e.ctrlKey&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}if((e.key==='Delete'||e.key==='Backspace')&&handleDeleteShortcut(e))return;if(e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='f'||e.key==='F'){runAction('fit');return;}const key=e.key.toLowerCase(),tool={v:'select',w:'wire',s:'symbol',l:'line',r:'rect',c:'circle',t:'text'}[key];if(tool){e.preventDefault();tool==='symbol'?openSymbolPicker():setTool(tool);}});
   $$('[data-tree-view]').forEach(b=>b.addEventListener('click',()=>{setProjectExplorerView(b.dataset.treeView);if(b.dataset.treeView==='list')renderEditableExampleProjects($('#projectSearch').value);}));
-  $$('[data-symbol-view]').forEach(b=>b.addEventListener('click',()=>{$$('[data-symbol-view]').forEach(x=>x.classList.toggle('active',x===b));notify(b.dataset.symbolView==='macros'?'No saved symbol macros exist in this project yet.':'Built-in IEC-style symbol library selected.');}));
+  $$('[data-symbol-view]').forEach(button=>button.addEventListener('click',()=>{
+    symbolView=button.dataset.symbolView;
+    $('#symbolCategory').value='';
+    $('#symbolType').value='';
+    $$('[data-symbol-view]').forEach(tab=>{
+      tab.classList.toggle('active',tab===button);
+      tab.setAttribute('aria-pressed',String(tab===button));
+    });
+    renderSymbolSidebar();
+  }));
   state.projectModel=null;state.projectName='';state.sheet=null;state.sheets=[];state.objects=[];state.sheetObjects=Object.create(null);state.sheetViews=Object.create(null);state.crossSheetConnections=[];const emptyProject=document.createElement('div');emptyProject.className='tree-row';emptyProject.textContent='No project open';$('#projectTree').replaceChildren(emptyProject);$$('#sheetTabs .document-tab[data-sheet]').forEach(function(tab){tab.remove();});$('#newSheet').hidden=true;const designation=$('#sheetDesignation');if(designation)designation.textContent='';wrap.classList.add('blank-start','blank-sheet');wrap.classList.toggle('dark-paper',state.theme==='dark');applyView();renderObjects();[['snap','snap'],['ortho','ortho'],['osnap','osnap']].forEach(([key])=>{const b=$(`[data-toggle="${key}"]`);b.setAttribute('aria-pressed',String(state[key]));});if(!state.grid)drawing.querySelector('rect').style.display='none';
   renderSymbolSidebar();
   setProjectExplorerView('list');
   renderEditableExampleProjects();
   if(matchMedia('(max-width:640px)').matches)workspace.classList.add('mobile-tools');
+  syncSidebar();
   initializing=false;
   $('#recoverBrowserDraft').addEventListener('click',recoverBrowserDraft);
   showBrowserDraft();
