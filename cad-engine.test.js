@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7248);
+  assert.equal(items.length, 7342);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1762,7 +1762,7 @@ test('ETI miniature fuses preserve table ratings and end-cap terminals across bo
 
 test('ETI NH gG fuse links preserve blade contacts and AC ratings across ten case sizes', () => {
   const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' &&
-    !item.name.includes('/I') && item.name.includes(' gG '));
+    !item.name.includes('/I') && item.name.includes(' gG ') && !engine.component(item.id).specifications.coverMaterial);
   assert.equal(items.length, 295);
   const envelopes = {
     NH000: [78.6, 51.9, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
@@ -1800,7 +1800,7 @@ test('ETI NH fuse variants preserve insulated grips and aM utilization ratings',
     assert.ok([500, 690].includes(voltage));
     assert.equal(part.specifications.ratedBreakingCapacity.value, voltage === 690 ? 100 : 120);
   }
-  const wiring = parts.filter(part => part.specifications.utilizationCategory.value === 'gF');
+  const wiring = parts.filter(part => part.specifications.utilizationCategory.value === 'gF' && !part.specifications.coverMaterial);
   const transformers = parts.filter(part => part.specifications.utilizationCategory.value === 'gTr');
   assert.equal(wiring.length, 22);
   assert.equal(transformers.length, 47);
@@ -1813,6 +1813,27 @@ test('ETI NH fuse variants preserve insulated grips and aM utilization ratings',
   const transformer = engine.component('eti-004116400');
   assert.deepEqual(transformer.specifications.ratedTransformerPower, { value: 50, unit: 'kVA' });
   assert.equal(transformer.specifications.nominalCurrent.value, 72);
+});
+
+test('ETI NH steel-cover fuse links retain order-specific dimensions and distinct gG and gF ratings', () => {
+  const items = engine.catalog('NH-Fe');
+  assert.equal(items.length, 94);
+  const envelopes = {
+    NH00: [78.8, 56.3, 29.5], NH1C: [136, 64.5, 29], NH1: [135.6, 64.5, 46],
+    NH2C: [150.2, 72.5, 46], NH2: [150.2, 72.5, 54]
+  };
+  for (const { id } of items) {
+    const part = engine.component(id);
+    const { coverMaterial, cartridgeSize, nominalVoltage, utilizationCategory, ratedBreakingCapacity } = part.specifications;
+    const { width, height, depth } = part.physicalRepresentations[0];
+    assert.equal(coverMaterial.value, 'Steel');
+    assert.deepEqual(nominalVoltage, { value: 500, unit: 'V AC' });
+    assert.equal(ratedBreakingCapacity.value, utilizationCategory.value === 'gF' ? 110 : 120);
+    assert.deepEqual([width, height, depth], envelopes[cartridgeSize.value]);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['blade-left', 'blade-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.ok(part.sources[1].url.includes(part.manufacturerPartNumber));
+  }
 });
 
 test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines', () => {

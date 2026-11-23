@@ -1547,7 +1547,9 @@
     terminalCatalog.etiMiniatureFuseLinks.map(([code, size, curve, current, voltage, capacity, page]) =>
       [code, size, curve, current, voltage, capacity, null, null, null, page]),
     terminalCatalog.etiNhSpecialtyFuseLinks.map(([code, size, curve, current, voltage, capacity, transformerPower, indicator]) =>
-      [code, size, curve, current, voltage, capacity, null, null, null, null, { transformerPower, indicator }])
+      [code, size, curve, current, voltage, capacity, null, null, null, null, { transformerPower, indicator }]),
+    terminalCatalog.etiNhSteelCoverFuseLinks.map(([code, size, curve, current, capacity, ...dimensions]) =>
+      [code, size, curve, current, 500, capacity, null, null, null, null, { steelCoverDimensions: dimensions, indicator: 'Combined indicator' }])
   ).map(([code, size, utilization, current, voltage, capacity, certification, timeConstant, dcCapacity, miniaturePage, specialty]) => {
     const id = 'eti-' + code;
     const knifeBlade = size.startsWith('NH');
@@ -1567,13 +1569,17 @@
     const arDimensions = cylindricalAr && caseSize === '22x58' ? [58, 22.3] : null;
     const grDimensions = cylindricalGr ? etiCylindricalGrDimensions[size] : null;
     const miniatureDimensions = miniaturePage ? size.split('x').map(Number).reverse() : null;
-    const [length, height, depth = height] = miniatureDimensions ?? grDimensions ?? arDimensions ?? batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
+    const steelCoverDimensions = specialty?.steelCoverDimensions;
+    const [length, height, depth = height] = steelCoverDimensions ?? miniatureDimensions ?? grDimensions ?? arDimensions ?? batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
     const format = knifeBlade ? size : 'CH' + size;
     const contactName = slottedCartridge ? 'slotted tab' : slottedBlade ? 'slotted blade contact' : knifeBlade ? 'blade contact' : 'end cap';
     const contactType = slottedCartridge || slottedBlade ? 'slotted-blade' : knifeBlade ? 'knife-blade' : 'end-cap';
     const terminalPrefix = slottedCartridge ? 'tab-' : knifeBlade ? 'blade-' : 'cap-';
     const batteryDrawingPage = voltage === 80 ? 70 : voltage === 440 ? 72 : slottedBlade ? 77 : 76;
-    const dimensionalSource = miniaturePage
+    const dimensionalSource = steelCoverDimensions
+      ? 'https://www.etipolam.com.pl/katalog-elektroniczny/wkladki-topikowe-nh/wkladki-bezpiecznikowe-nh-charakterystyka-'
+        + utilization.toLowerCase() + '/' + code + '-' + size.toLowerCase() + '-' + utilization.toLowerCase() + '-' + current + 'a-500v-g'
+      : miniaturePage
       ? 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/4ca01aa9-77fb-4c6b-a45f-64267dae64d2#page=' + miniaturePage
       : battery
       ? 'https://www.etigroup.eu/images/product_db/idents/en-GB/004184465_TD.pdf#page=' + batteryDrawingPage
@@ -1591,11 +1597,13 @@
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
       model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (directCurrent ? ' DC' : cylindricalGr ? ' AC/DC' : '')
-        + (specialty?.transformerPower ? '/' + specialty.transformerPower + 'kVA' : '') + (certification ? ' ' + certification : ''),
+        + (steelCoverDimensions ? ' G' : '') + (specialty?.transformerPower ? '/' + specialty.transformerPower + 'kVA' : '')
+        + (certification ? ' ' + certification : ''),
       name: miniaturePage ? 'Miniature fuse link' : knifeBlade ? 'Knife-blade fuse link' : 'Cylindrical fuse link',
       aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization,
         ...(miniaturePage ? ['miniature fuse', 'minifuse'] : []), ...(battery ? ['battery protection fuse'] : []),
-        ...(specialty?.transformerPower ? ['transformer protection fuse'] : [])],
+        ...(specialty?.transformerPower ? ['transformer protection fuse'] : []),
+        ...(steelCoverDimensions ? ['NH-Fe', 'steel cover'] : [])],
       family: cylindricalAr || cylindricalGr ? 'semiconductor-fuse-link' : knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
         id: 'fuse.eti.' + (battery ? size : knifeBlade ? caseSize : format).toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
@@ -1616,6 +1624,7 @@
         cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
         ...(striker || (battery && size.endsWith('/K')) ? { indicator: { value: 'Striker pin' } } : {}),
         ...(specialty?.indicator ? { indicator: { value: specialty.indicator } } : {}),
+        ...(steelCoverDimensions ? { coverMaterial: { value: 'Steel' } } : {}),
         ...(specialty?.transformerPower ? { ratedTransformerPower: { value: specialty.transformerPower, unit: 'kVA' } } : {}),
         ...(insulated ? { insulatedGrippingLugs: { value: true } } : {}),
         ...(timeConstant ? { ratedDcTimeConstant: { value: timeConstant, unit: 'ms' } } : {}),
@@ -1623,7 +1632,8 @@
       },
       physicalRepresentations: [{
         ...terminalPanelEnvelope(id, length, height), sourceIndex: 1, depth,
-        scope: miniaturePage ? 'Nominal length and diameter from the manufacturer cartridge size. Holder clearances and part-specific tolerances are separate.'
+        scope: steelCoverDimensions ? 'Net product envelope. The longitudinal dimension spans the two knife blade contacts.'
+          : miniaturePage ? 'Nominal length and diameter from the manufacturer cartridge size. Holder clearances and part-specific tolerances are separate.'
           : striker ? 'Nominal cartridge outline excluding actuated striker projection.'
           : slottedCartridge && directCurrent ? 'Cartridge envelope including slotted terminals at the maximum overall length. The drawing specifies a range of 105.6–108 mm.'
           : slottedCartridge ? 'Nominal cartridge envelope including both slotted terminals.'
@@ -1633,18 +1643,20 @@
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
-        { publisher: 'ETI', title: miniaturePage ? 'Minifuses · CH miniature fuse links' : cylindricalAr ? 'Ultra Quick · CH cylindrical aR fuse links'
+        { publisher: 'ETI', title: steelCoverDimensions ? 'ETI Polam · NH-Fe order ' + code
+          : miniaturePage ? 'Minifuses · CH miniature fuse links' : cylindricalAr ? 'Ultra Quick · CH cylindrical aR fuse links'
           : cylindricalGr ? 'Ultra Quick · CH cylindrical gR fuse links'
           : battery ? 'NH battery fuse · mechanical drawing' : cartridge ? 'CH photovoltaic cartridge dimensions'
           : photovoltaic ? 'Green Protect · NH photovoltaic fuse-link dimensions' : knifeBlade ? 'NV/NH knife-blade fuse-link dimensions' : 'C / Cylindrical fuse-links',
           url: dimensionalSource,
-          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: miniaturePage
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: steelCoverDimensions
+            ? 'Identifies the exact order code, steel covers, combination indicator, AC ratings and net product dimensions.' : miniaturePage
             ? 'Exact order-code table with cartridge size, operating characteristic, rated current, AC voltage and breaking capacity.' : cylindricalGr
             ? 'Exact order-code table, AC and DC ratings, and dimensioned drawings for standard end caps and SU slotted terminals.' : cartridge
             ? 'Net product dimensions for the corresponding photovoltaic cartridge size.' : knifeBlade
             ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
             : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' },
-        ...(specialty ? [{ publisher: 'ETI', title: 'NV/NH · Order-code and rating table',
+        ...(specialty && !steelCoverDimensions ? [{ publisher: 'ETI', title: 'NV/NH · Order-code and rating table',
           url: 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/NV_ENG.pdf#page=' + (utilization === 'aM' ? 10 : 11),
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Corroborates the exact order code and application-specific ratings.' }] : [])
       ]
