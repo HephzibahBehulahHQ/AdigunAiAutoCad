@@ -37,6 +37,10 @@ The sidebar keeps the collection tabs and page buttons below its scrolling list.
 
 The top **Documentation** menu opens the bill of materials, exports the wire list, and prints the project set. **Drawing Setup** opens the sheet’s drafting settings and controls its print frame. Open any top menu with a click or the Down Arrow key, then use the arrow keys and Enter to run a command.
 
+The icon rows include grid and terminal snap, Ortho, view and selection tools, horizontal and vertical lines, dimensioning, junctions, alignment, and symbol transforms. Hover over an icon for its full name. **More drawing and editing tools** lists the actions that fit outside the visible row.
+
+Use **Trim line** or **Extend line** to pick a straight drafting boundary and then the end of another straight line. **Offset line** copies the selected drafting line at a signed distance in millimetres. **Join wire crossing** creates an electrical junction at a crossing and draws a junction dot. **Mirror horizontally** and **Rotate 90° clockwise** preserve native component terminal attachments.
+
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 
 The component bank inventory is available in [JSON](docs/reports/component-bank.json) and [CSV](docs/reports/component-bank.csv). It is generated from the same native definitions the editor uses. Physical dimensions in the inventory describe the manufacturer part. The schematic dimensions and terminal coordinates describe the editable symbol.

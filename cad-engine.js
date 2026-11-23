@@ -4041,6 +4041,7 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
     if (instance.symbolScale !== undefined && (!finite(instance.symbolScale) || instance.symbolScale < 0.25 || instance.symbolScale > 4)) {
       errors.push('Component symbol scale must be between 0.25 and 4.');
     }
+    if (instance.mirrorX !== undefined && typeof instance.mirrorX !== 'boolean') errors.push('Component mirror must be a boolean.');
     if (![0, 90, 180, 270].includes(instance.rotation)) errors.push('Component rotation must be 0, 90, 180, or 270 degrees.');
     if (typeof instance.id !== 'string' || !instance.id || instance.id.length > 100) errors.push('Component instance ID is invalid.');
     if (typeof instance.ref !== 'string' || !instance.ref.trim() || instance.ref.length > 32) errors.push('Component reference is invalid.');
@@ -4089,14 +4090,15 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
     const angle = instance.rotation * Math.PI / 180;
     const scale = instance.symbolScale ?? 1;
     const cos = Math.cos(angle) * scale, sin = Math.sin(angle) * scale;
+    const mirror = instance.mirrorX ? -1 : 1;
     return result.definition.symbol.pins.map(function (pin) {
       return {
         id: pin.id,
         number: pin.localNumber,
         name: pin.name,
         electricalType: pin.electricalType,
-        x: instance.x + pin.x * cos - pin.y * sin,
-        y: instance.y + pin.x * sin + pin.y * cos
+        x: instance.x + pin.x * cos * mirror - pin.y * sin,
+        y: instance.y + pin.x * sin * mirror + pin.y * cos
       };
     });
   }
