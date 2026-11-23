@@ -15,8 +15,8 @@ $seen = @{}
 $records = [System.Collections.Generic.List[object]]::new()
 foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
-    # Restrict each series to the one-pole changeover types with a verified terminal diagram.
-    $orderKey = if ($Series -eq '40') { '^40(31|51)([789])([0-9]{3})([045])00([013])$' }
+    # Restrict each series to monostable changeover types with a verified terminal diagram.
+    $orderKey = if ($Series -eq '40') { '^40(31|51|52)([789])([0-9]{3})([045])00([013])$' }
                 else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
     if ($id -cnotmatch $orderKey) { continue }
     $doublePole = $Matches[1] -eq '52'
