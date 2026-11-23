@@ -862,6 +862,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           break;
         }
         case'modular-step-relay':
+        case'industrial-motor-contactor':
         case'modular-contactor': {
           const engine=window.AdigunCADEngine;
           const part=engine.component(item.id);
@@ -1449,6 +1450,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Coil voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
         ['Rated contact current',spec.ratedContactCurrent.value+' A'],['Contact material',spec.contactMaterial.value],
         ['Switching steps',String(spec.stepCount.value)],['Mounting',spec.mountingMethod.value]]
+      : def.family==='industrial-motor-contactor'
+      ? [['Contact configuration',spec.contactConfiguration.value],
+        ['Coil voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
+        ...(spec.coilFrequency?[['Coil frequency',spec.coilFrequency.value+' '+spec.coilFrequency.unit]]:[]),
+        ['AC-1 rated current',spec.ac1RatedCurrent.value+' '+spec.ac1RatedCurrent.unit],
+        ['AC-3 rated current',spec.ac3RatedCurrent.value+' '+spec.ac3RatedCurrent.unit],
+        ['AC-3 rated power',spec.ac3RatedPower.value+' '+spec.ac3RatedPower.unit],
+        ['Rated operational voltage',spec.ratedOperationalVoltage.value+' '+spec.ratedOperationalVoltage.unit],
+        ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : def.family==='modular-contactor'
       ? [['Contact configuration',spec.contactConfiguration.value],['Rated contact current',spec.ratedContactCurrent.value+' A'],
         ['AC coil voltage',spec.coilVoltageAC.value+' V AC'],['DC coil voltage',spec.coilVoltageDC.value+' V DC'],
