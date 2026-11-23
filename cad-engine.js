@@ -1596,6 +1596,58 @@
     });
   });
 
+  const etiEfhDcFuseHolders = terminalCatalog.etiEfhDcFuseHolders.map(
+    ([code, model, poles, current, voltage, cartridge, width, height, depth]) => {
+      const id = 'eti-' + code;
+      const rating = { '10x38': 3, '14x51': 5, '22x58': 9.5 }[cartridge];
+      const pins = [];
+      const protectedPairs = [];
+      for (let pole = 0; pole < poles; pole += 1) {
+        const x = (pole - (poles - 1) / 2) * 32;
+        const upper = String(2 * pole + 2);
+        const lower = String(2 * pole + 1);
+        pins.push(
+          { id: 'terminal-' + upper, localNumber: upper, name: 'Upper terminal', x, y: -35, electricalType: 'passive', connectionType: 'screw' },
+          { id: 'terminal-' + lower, localNumber: lower, name: 'Lower terminal', x, y: 35, electricalType: 'passive', connectionType: 'screw' }
+        );
+        protectedPairs.push(['terminal-' + upper, 'terminal-' + lower]);
+      }
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code, model,
+        name: 'Photovoltaic fuse holder', aliases: ['EFH DC', 'fuse base', 'CH' + cartridge],
+        family: 'cylindrical-fuse-holder', referencePrefix: 'F', category: 'Electrical · Verified fuse holder',
+        symbol: {
+          id: 'fuse-holder.eti.efh-dc.' + poles + 'p.v1', view: 'schematic', unit: 'mm', width: poles * 32, height: 70,
+          pins, internalConnections: [],
+          numberingNote: 'Even numbers identify upper screw terminals and odd numbers identify lower screw terminals in the CAD symbol.'
+        },
+        electricalFunctions: {
+          protectedTerminalPairs: protectedPairs,
+          continuityNote: 'The holder requires a separate fuse link for each protected pole. Static connectivity treats each pole as open.'
+        },
+        specifications: {
+          poles: { value: poles }, cartridgeSize: { value: cartridge, unit: 'mm' },
+          nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V DC' },
+          fusePowerLimit: { value: rating, unit: 'W' }, indicator: { value: /\bLED\b/.test(model) ? 'LED' : 'None' },
+          adapter: { value: /\bAD\b/.test(model) }, mountingMethod: { value: 'DIN rail' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), sourceIndex: 1, depth,
+          scope: 'Net closed-holder envelope. Allow separately for opening the cartridge carrier and routing conductors.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+            documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact holder order code, ratings, pole count and fit.' },
+          { publisher: 'ETI', title: model + ' · Net product dimensions', url: 'https://www.etigroup.eu/products-services/' + code,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Width, height and depth from the net product dimensions for this order code.' },
+          { publisher: 'ETI', title: 'EFH DC fuse holder technical data', url: 'https://www.etigroup.eu/images/product_db/idents/en-GB/002580006_TD.pdf',
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Cartridge sizes, allowed power dissipation per pole, and fuse holder construction.' }
+        ]
+      });
+    });
+
   const etiBottleFuseLinks = terminalCatalog.etiBottleFuseLinks.map(
     ([code, size, utilization, current, voltage, capacity, dcVoltage, dcCapacity, length, diameter, gauge, fuseBase]) => {
       const id = 'eti-' + code;
@@ -1989,7 +2041,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

@@ -838,6 +838,17 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           g.dataset.object=obj.id;
           return g;
         }
+        case'cylindrical-fuse-holder': {
+          const holder=window.AdigunCADEngine.component(item.id);
+          for(let index=0;index<holder.symbol.pins.length;index+=2){
+            const [top,bottom]=holder.symbol.pins.slice(index,index+2);
+            rect(top.x-7,-12,14,24);
+            line(top.x,top.y,top.x,-12);line(bottom.x,12,bottom.x,bottom.y);
+            circle(top.x,-10,1.6);circle(bottom.x,10,1.6);
+            label(top.localNumber,top.x+8,top.y+4,6);label(bottom.localNumber,bottom.x+8,bottom.y-2,6);
+          }
+          break;
+        }
         case'knife-blade-fuse-link':
         case'medium-voltage-fuse-link':
         case'bottle-fuse-link':
@@ -1339,6 +1350,11 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const source=def.sources[0];
     const rows=def.family==='user-authored'?[]:def.family==='pushbutton' ? [['Operator profile',spec.operatorProfile.value],['Actuation',spec.operatorType.value],['Contact',spec.contactComposition.value],['Terminal pair',spec.terminalDesignation.value],['Connection',spec.terminalConnection.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Positive opening',spec.positiveOpening.value?'Yes':'No']] : def.family==='lamp'
       ? [['Rated supply',spec.ratedSupplyVoltage.value+' '+spec.ratedSupplyVoltage.unit],['Light source',spec.lightSource.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Connection',spec.terminalConnection.value]]
+      : def.family==='cylindrical-fuse-holder'
+      ? [['Poles',String(spec.poles.value)],['Cartridge size',spec.cartridgeSize.value+' '+spec.cartridgeSize.unit],
+        ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
+        ['Fuse power limit per pole',spec.fusePowerLimit.value+' '+spec.fusePowerLimit.unit],
+        ['Indicator',spec.indicator.value],['Adapter',spec.adapter.value?'Yes':'No'],['Mounting',spec.mountingMethod.value]]
       : def.family==='medium-voltage-fuse-link'
       ? [['IEC fitting length',spec.cartridgeSize.value+' '+spec.cartridgeSize.unit],['Utilization category',spec.utilizationCategory.value],
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
