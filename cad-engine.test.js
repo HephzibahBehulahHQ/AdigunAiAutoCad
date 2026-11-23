@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7487);
+  assert.equal(items.length, 7619);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1645,7 +1645,7 @@ test('direct catalog lookup matches searchable entries and protects the index', 
 });
 
 test('ETIBREAK EB2 order codes retain separate switched pairs and voltage-specific breaking capacities', () => {
-  const items = engine.catalog('ETIBREAK').filter(item => item.family === 'molded-case-circuit-breaker');
+  const items = engine.catalog('ETIBREAK').filter(item => item.family === 'molded-case-circuit-breaker' && item.name.includes('EB2 '));
   assert.equal(items.length, 145);
   for (const { id } of items) {
     const part = engine.component(id);
@@ -1665,6 +1665,30 @@ test('ETIBREAK EB2 order codes retain separate switched pairs and voltage-specif
   assert.equal(sample.specifications.ratedServiceBreakingCapacity.value, 19);
   const view = sample.physicalRepresentations[0];
   assert.deepEqual([view.width, view.height, view.depth], [120, 155, 92]);
+});
+
+test('ETIBREAK EB2S preserves fixed and adjustable trips and distinct capacity test voltages', () => {
+  const entries = engine.catalog('EB2S').filter(item => item.family === 'molded-case-circuit-breaker');
+  assert.equal(entries.length, 132);
+  for (const { id } of entries) {
+    const part = engine.component(id);
+    const spec = part.specifications;
+    assert.equal(spec.ratedBreakingCapacity.unit, 'kA at 400 V AC');
+    assert.equal(spec.ratedServiceBreakingCapacity.unit, 'kA at 400 V AC');
+    assert.equal(part.symbol.pins.length, spec.poleCount.value * 2);
+    assert.equal(part.electricalFunctions.switchedPolePairs.length, spec.poleCount.value);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const fixed = engine.component('eti-004671814');
+  assert.equal(fixed.specifications.thermalAdjustment.value, 'Fixed');
+  assert.equal(fixed.specifications.magneticAdjustment.value, 'Fixed');
+  const adjustable = engine.component('eti-004671917');
+  assert.equal(adjustable.specifications.ratedServiceBreakingCapacity.value, 19);
+  assert.deepEqual(adjustable.specifications.ratedBreakingCapacityAt415, { value: '25/13', unit: 'kA at 415 V AC' });
+  assert.equal(adjustable.specifications.thermalAdjustment.value, '0.63–1 × In');
+  assert.equal(adjustable.specifications.magneticAdjustment.value, '5–11 × In');
+  const { width, height, depth } = adjustable.physicalRepresentations[0];
+  assert.deepEqual([width, height, depth], [140, 165, 92]);
 });
 
 test('ETIMAT 6 breakers expose documented protected and switched neutral poles', () => {
