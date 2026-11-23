@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 2359);
+  assert.equal(items.length, 2407);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1552,6 +1552,22 @@ test('Finder Series 41 low-profile relays preserve single, dual and paired-termi
       type === '4161' ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']] : []);
     assert.equal(part.specifications.contactPinPitch.value, single ? 3.5 : 5);
     assert.equal(part.specifications.dimensions.height.value, 15.7);
+  }
+});
+
+test('Finder Series 43 variants use the correct SPST and SPDT terminals and outlines', () => {
+  const items = engine.catalog('Finder Series 43').filter(item => item.id.startsWith('finder-43'));
+  assert.equal(items.length, 48);
+  const noParts = items.filter(item => engine.component(item.id).electricalFunctions.normallyOpenContacts);
+  assert.equal(noParts.length, 7);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const normallyOpen = Boolean(part.electricalFunctions.normallyOpenContacts);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber),
+      normallyOpen ? ['A2', 'A1', '11', '14'] : ['A2', 'A1', '11', '12', '14']);
+    assert.equal(part.specifications.contactPinPitch.value, normallyOpen ? 5 : 3.2);
+    assert.equal(part.physicalRepresentations[0].depth, normallyOpen ? 28.6 : 30.2);
+    assert.equal(part.physicalRepresentations[0].sourceIndex, 1);
   }
 });
 
