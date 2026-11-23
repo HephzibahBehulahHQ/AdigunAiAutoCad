@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 577);
+  assert.equal(items.length, 632);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1345,7 +1345,7 @@ test('Finder Series 40 catalog order codes carry five distinct schematic pins an
 });
 
 test('Finder 46.61 relays expose the verified Faston blade map and changeover states', () => {
-  const parts = engine.catalog('Finder Series 46').filter(item => item.id.startsWith('finder-46'));
+  const parts = engine.catalog('Finder Series 46').filter(item => item.id.startsWith('finder-4661'));
   assert.equal(parts.length, 39);
   for (const item of parts) {
     const part = engine.component(item.id);
@@ -1360,6 +1360,27 @@ test('Finder 46.61 relays expose the verified Faston blade map and changeover st
     assert.deepEqual(part.electricalFunctions.changeoverContact.energizedConnections, [['contact-11', 'contact-14']]);
     const [outline] = part.physicalRepresentations;
     assert.deepEqual([outline.width, outline.height, outline.depth], [12.4, 32.8, 29]);
+  }
+});
+
+test('Finder 46.52 relays expose separate, correctly mapped changeover poles', () => {
+  const parts = engine.catalog('Finder Series 46').filter(item => item.id.startsWith('finder-4652'));
+  assert.equal(parts.length, 55);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.pins.map(pin => [pin.localNumber, pin.physicalNumber]), [
+      ['A2', '1'], ['A1', '8'], ['11', '3'], ['12', '2'], ['14', '4'], ['21', '6'], ['22', '7'], ['24', '5']
+    ]);
+    assert.equal(new Set(part.symbol.pins.map(pin => [pin.x, pin.y].join(','))).size, 8);
+    assert.equal(part.specifications.ratedContactCurrent.value, 8);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const contacts = part.electricalFunctions.changeoverContacts;
+    assert.deepEqual(contacts.flatMap(contact => contact.deenergizedConnections), [
+      ['contact-11', 'contact-12'], ['contact-21', 'contact-22']
+    ]);
+    assert.deepEqual(contacts.flatMap(contact => contact.energizedConnections), [
+      ['contact-11', 'contact-14'], ['contact-21', 'contact-24']
+    ]);
   }
 });
 
