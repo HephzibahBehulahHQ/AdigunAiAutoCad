@@ -1494,7 +1494,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
       : def.family==='rotary-cam-switch'
-      ? [['Poles',String(spec.poleCount.value)],['Rated current',spec.ratedCurrent.value+' A'],
+      ? [['Poles',String(spec.poleCount.value)],['Selector sequence',spec.selectorPositions.value],
+        ['Rated current',spec.ratedCurrent.value+' A'],
         ['Maximum operating voltage',spec.maximumOperatingVoltage.value+' V AC'],
         ['Mounting',spec.mountingMethod.value],['Padlockable in off position',spec.lockableOff.value?'Yes':'No'],
         ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]

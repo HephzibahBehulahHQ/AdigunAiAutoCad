@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8199);
+  assert.equal(items.length, 8241);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -7164,7 +7164,7 @@ test('A2/096 records SEW motor temperature-sensor options without assigning inst
 
 test('ETI CS cam switches preserve pole isolation and selector continuity after reopening', () => {
   const items = engine.catalog().filter(item => /^eti-004773/.test(item.id));
-  assert.equal(items.length, 51);
+  assert.equal(items.length, 93);
   const partId = 'eti-004773079';
   const part = engine.component(partId);
   assert.equal(part.specifications.lockableOff.value, true);
@@ -7195,4 +7195,29 @@ test('ETI CS cam switches preserve pole isolation and selector continuity after 
   const restored = reopened.project.objects[0];
   assert.equal(restored.properties.switchingStep, '2');
   assert.deepEqual(connected(restored), ['terminal-1', 'terminal-2']);
+});
+
+test('ETI CS three-position selectors retain common links and alternate throws', () => {
+  const partId = 'eti-004773049';
+  const part = engine.component(partId);
+  assert.deepEqual(part.symbol.internalConnections, [
+    ['terminal-2', 'terminal-3'], ['terminal-6', 'terminal-7'], ['terminal-10', 'terminal-11']
+  ]);
+  assert.equal(engine.component('eti-004773120').specifications.selectorPositions.value, '1–0–2');
+  assert.equal(part.specifications.selectorPositions.value, '0–1–2');
+
+  const instance = engine.createInstance(partId, 100, 100, 'S1');
+  const pin = engine.worldPins(instance).find(item => item.id === 'terminal-2');
+  const wire = { id: 'selector-lead', kind: 'wire', x: pin.x, y: pin.y,
+    x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y + 15,
+    pinAttachments: { start: { instanceId: instance.id, pinId: pin.id }, end: null } };
+  const connected = () => engine.analyze([instance, wire]).nets
+    .find(net => net.pins.some(terminal => terminal.pinId === pin.id)).pins
+    .map(terminal => terminal.pinId).sort();
+
+  assert.deepEqual(connected(), ['terminal-2', 'terminal-3']);
+  instance.properties.switchingStep = '2';
+  assert.deepEqual(connected(), ['terminal-1', 'terminal-2', 'terminal-3']);
+  instance.properties.switchingStep = '3';
+  assert.deepEqual(connected(), ['terminal-2', 'terminal-3', 'terminal-4']);
 });

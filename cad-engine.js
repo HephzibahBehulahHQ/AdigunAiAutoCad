@@ -2288,32 +2288,48 @@
     ([code, program, poles, lockable, current, voltage, width, height, depth, page]) => {
       const id = 'eti-' + code;
       const model = 'CS ' + current + ' ' + program + ' U' + (lockable ? ' LK' : '');
+      const multistep = ['107', '123', '135'].includes(program);
+      const centerOff = ['51', '52', '53'].includes(program);
+      const changeover = multistep || centerOff;
+      const count = changeover ? poles * 2 : poles;
       const pins = [];
-      const contactPairs = Array.from({ length: poles }, (_, index) => {
-        const x = (index - (poles - 1) / 2) * 26;
+      const contactPairs = Array.from({ length: count }, (_, index) => {
+        const x = (index - (count - 1) / 2) * 26;
+        const numbers = changeover && index % 2 ? [index * 2 + 2, index * 2 + 1] : [index * 2 + 1, index * 2 + 2];
         return [-36, 36].map((y, side) => {
-          const localNumber = String(index * 2 + side + 1);
+          const localNumber = String(numbers[side]);
           const pinId = 'terminal-' + localNumber;
           pins.push({ id: pinId, localNumber, name: 'Terminal ' + localNumber, x, y,
             electricalType: 'passive', connectionType: 'screw' });
           return pinId;
         });
       });
+      const commonLinks = changeover
+        ? Array.from({ length: poles }, (_, index) => [contactPairs[index * 2][1], contactPairs[index * 2 + 1][1]])
+        : [];
+      const switchingSequence = changeover ? [
+        [], contactPairs.filter((_, index) => index % 2 === 0), contactPairs.filter((_, index) => index % 2 === 1)
+      ] : [[], contactPairs];
+      const choices = changeover ? { 1: '0 · Off', 2: '1', 3: '2' } : { 1: '0 · Off', 2: '1 · On' };
+      const schemePage = centerOff ? 71 : 69;
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-        model, name: 'ETISWITCH rotary cam switch', aliases: ['ON-OFF switch', 'Panel selector', model,
+        model, name: 'ETISWITCH rotary cam switch', aliases: [changeover ? 'Changeover switch' : 'ON-OFF switch', 'Panel selector', model,
           ...(lockable ? ['OFF-position padlocking'] : [])],
         family: 'rotary-cam-switch', referencePrefix: 'S', category: 'Electrical · Verified cam switch',
         symbol: {
           id: 'switch.eti.cs.' + program + '.v1', view: 'schematic', unit: 'mm',
-          width: poles * 26, height: 86, pins, internalConnections: [],
-          numberingNote: 'Each pole uses one numbered screw-terminal pair. All poles open at 0 and close at 1.'
+          width: count * 26, height: 86, pins, internalConnections: commonLinks,
+          numberingNote: changeover
+            ? 'Numbered screw terminals and common links follow the ETI connection diagram.'
+            : 'Each pole uses one numbered screw-terminal pair. All poles open at 0 and close at 1.'
         },
-        electricalFunctions: { contactPairs, switchingSequence: [[], contactPairs] },
+        electricalFunctions: { contactPairs, switchingSequence },
         specifications: {
           poleCount: { value: poles }, ratedCurrent: { value: current, unit: 'A' },
           maximumOperatingVoltage: { value: voltage, unit: 'V AC' },
           mountingMethod: { value: 'Front mounting' }, lockableOff: { value: lockable },
+          selectorPositions: { value: centerOff ? '1–0–2' : multistep ? '0–1–2' : '0–1' },
           dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
             depth: { value: depth, unit: 'mm' } }
         },
@@ -2322,16 +2338,19 @@
           scope: 'Manufacturer product envelope. Panel cutout and wiring clearances are separate.'
         }],
         instanceProperties: {
-          switchingStep: { type: 'choice', default: '1', choices: { 1: '0 · Off', 2: '1 · On' } },
+          switchingStep: { type: 'choice', default: '1', choices },
           comment: { type: 'string', default: '', maximumLength: 160 }
         },
         sources: [
           { publisher: 'ETI', title: 'ETI product record · Order ' + code,
             url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
             retrievedAt: '2026-11-23', revisionNote: 'Exact part number, pole count, electrical ratings and net dimensions.' },
-          { publisher: 'ETI', title: 'ETISWITCH · CS ordering and terminal diagrams',
+          { publisher: 'ETI', title: 'ETISWITCH · CS order tables',
             url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/ETISWITCH.pdf#page=' + page,
-            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Order code and numbered ON/OFF contact pairs.' }
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Order code, housing variant and switch program.' },
+          { publisher: 'ETI', title: 'ETISWITCH · Contact matrix and wiring diagram',
+            url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/ETISWITCH.pdf#page=' + schemePage,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Numbered contacts, selector positions and common links.' }
         ]
       });
     });
@@ -3198,13 +3217,19 @@
   }
 
   function camSwitchGeometry(instance, definition = component(instance.componentId)) {
-    const closed = selectedStepConnections(definition, instance).length > 0;
+    const closed = new Set(selectedStepConnections(definition, instance).map(([, lower]) => lower));
+    const pins = new Map(definition.symbol.pins.map(pin => [pin.id, pin]));
     const segments = [], circles = [];
-    for (const pin of definition.symbol.pins) {
+    for (const pin of pins.values()) {
       const jointY = Math.sign(pin.y) * 8;
       segments.push([pin.x, pin.y, pin.x, jointY]);
       circles.push([pin.x, jointY, 1.25]);
-      if (pin.y > 0) segments.push([pin.x, jointY, pin.x + (closed ? 0 : 8), -8]);
+      if (pin.y > 0) segments.push([pin.x, jointY, pin.x + (closed.has(pin.id) ? 0 : 8), -8]);
+    }
+    for (const [from, to] of definition.symbol.internalConnections) {
+      const left = pins.get(from).x, right = pins.get(to).x;
+      segments.push([left, 24, right, 24]);
+      circles.push([left, 24, 1.25], [right, 24, 1.25]);
     }
     return { segments, circles };
   }
@@ -3791,7 +3816,8 @@
       const def = component(instance.componentId, instance.customSymbol);
       if (def.family === 'disconnect-terminal' && instance.properties.knifePosition !== 'closed') return;
       const connections = def.electricalFunctions?.switchingSequence
-        ? selectedStepConnections(def, instance) : def.symbol.internalConnections;
+        ? def.symbol.internalConnections.concat(selectedStepConnections(def, instance))
+        : def.symbol.internalConnections;
       connections.forEach(function (group) {
         const nodes = group.map(id => pins.find(pin => pin.instanceId === instance.id && pin.pinId === id)).filter(Boolean);
         for (let index = 1; index < nodes.length; index += 1) join(nodes[0].node, nodes[index].node);
