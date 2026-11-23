@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 4653);
+  assert.equal(items.length, 4796);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1885,6 +1885,25 @@ test('ETI EFH DC fuse holders retain separate fuse poles and exact net dimension
   assert.equal(led.specifications.indicator.value, 'LED');
   assert.equal(led.specifications.nominalVoltage.value, 1100);
   assert.equal(led.physicalRepresentations[0].width, 54);
+});
+
+test('ETI KZS-4M RCBOs preserve terminal order and residual release ratings', () => {
+  const items = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker');
+  assert.equal(items.length, 143);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { residualCurrentType, ratedResidualCurrent, protectedPoles, switchedNeutral, ratedBreakingCapacity } = part.specifications;
+    const pins = protectedPoles.value === 2 ? ['4', '3', '2', '1'] : ['6', '5', '4', '3', '2', '1'];
+    if (switchedNeutral.value) pins.push('N-upper', 'N-lower');
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), pins.map(pin => 'terminal-' + pin));
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.ok(['A', 'AC', 'B'].includes(residualCurrentType.value));
+    assert.ok([30, 100, 300, 500].includes(ratedResidualCurrent.value));
+    assert.equal(ratedBreakingCapacity.value, switchedNeutral.value ? 6 : 10);
+  }
+  const neutral = engine.component('eti-002174625');
+  assert.equal(neutral.specifications.ratedResidualCurrent.value, 500);
+  assert.deepEqual(neutral.symbol.pins.slice(-2).map(pin => [pin.localNumber, pin.manufacturerMarking]), [['N-upper', 'N'], ['N-lower', 'N']]);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
