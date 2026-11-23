@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 2055);
+  assert.equal(items.length, 2248);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1519,6 +1519,24 @@ test('Finder Series 62 variants use their documented outer poles and omit unpopu
     }
   }
   assert.equal(normallyOpenCount, 30);
+});
+
+test('Finder Series 56 variants use the documented coil pins and contact positions', () => {
+  const parts = engine.catalog('Finder Series 56').filter(item => item.id.startsWith('finder-56'));
+  assert.equal(parts.length, 193);
+  assert.equal(parts.filter(item => engine.component(item.id).electricalFunctions.normallyOpenContacts).length, 16);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    const twoPoles = item.id[10] === '2';
+    const normallyOpen = Boolean(part.electricalFunctions.normallyOpenContacts);
+    const expected = twoPoles
+      ? normallyOpen ? ['8', '7', '5', '3', '6', '4'] : ['8', '7', '5', '1', '3', '6', '2', '4']
+      : ['14', '13', '9', '1', '5', '10', '2', '6', '11', '3', '7', '12', '4', '8'];
+    assert.deepEqual(part.symbol.pins.map(pin => pin.physicalNumber), expected);
+    assert.equal(part.specifications.ratedContactCurrent.value, 12);
+    if (normallyOpen) assert.equal(part.specifications.minimumContactGap.value, 1.5);
+    if (part.specifications.coilPolarity) assert.match(part.specifications.coilPolarity.value, /pin 7 positive/);
+  }
 });
 
 test('Finder short-pin PCB variants report the documented 3.5 mm terminal length', () => {
