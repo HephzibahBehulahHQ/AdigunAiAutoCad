@@ -10,7 +10,7 @@ $culture = [Globalization.CultureInfo]::InvariantCulture
 $knifeBlade = $Family -eq 'NH'
 $codePattern = if ($knifeBlade) { '^\d{9}$' } else { '^00265[12]\d{3}$' }
 $featureGroup = if ($knifeBlade) { 'EC000055' } else { 'EC002704' }
-$designation = if ($knifeBlade) { '(NH(?:000|00C|00|0|1C|1|2C|2|3C|3|4a)) (gG)' } else { 'CH(8x32|10x38|14x51|22x58) (gG|aM)' }
+$designation = if ($knifeBlade) { '(NH(?:000|00C|00|0|1C|1|2C|2|3C|3|4a)(?:/I)?) (gG|aM)' } else { 'CH(8x32|10x38|14x51|22x58) (gG|aM)' }
 
 try {
     while ($reader.Read()) {
@@ -28,7 +28,9 @@ try {
             $features.Element($ns + 'REFERENCE_FEATURE_GROUP_ID').Value -cne $featureGroup) { continue }
         $name = $details.Element($ns + 'DESCRIPTION_SHORT').Value
         if ($name -cnotmatch "^Fuse link, $designation (\d+(?:[.,]\d+)?)A/(\d+)V$") { continue }
-        $size = $Matches[1]
+        $format = $Matches[1]
+        $size = $format -replace '/I$', ''
+        $insulated = $format.EndsWith('/I')
         $category = $Matches[2]
         $current = [double]::Parse($Matches[3].Replace(',', '.'), $culture)
         $voltage = [int]$Matches[4]
@@ -43,11 +45,13 @@ try {
             $values[$feature.Element($ns + 'FNAME').Value] = $feature.Element($ns + 'FVALUE').Value
         }
         if ($knifeBlade) {
+            if (($insulated -and ($size -notin 'NH000','NH00','NH1C','NH1','NH2C','NH2','NH3' -or $values['EF012538'] -cne 'true')) -or
+                ($category -eq 'aM' -and ($size -ne 'NH000' -or $insulated))) { continue }
             if ($voltage -notin 400,500,690 -or $capacity -notin 50,100,120 -or
                 $values['EF000187'] -notin 'AC','AC/DC' -or
                 $values['EF015865'] -cne $size -or $values['EF017698'] -ne [string]$capacity -or
                 $values['EF007682'] -ne [string]$voltage -or
-                $values['EF002572'] -cnotmatch '^gG(?:\s|$)') { continue }
+                $values['EF002572'] -cnotmatch "^$category(?:\s|$)") { continue }
         } else {
             $expectedCapacity = if ($size -eq '8x32') { 20 } else { 120 }
             if ($capacity -ne $expectedCapacity -or $values['EF000187'] -cne 'AC' -or $values['EF005617'] -ne [string]$capacity -or
@@ -57,7 +61,7 @@ try {
             [double]::Parse($values['EF000227'].Replace(',', '.'), $culture) -ne $current) { continue }
         if ($seen.ContainsKey($code)) { throw "Duplicate ETI order code $code" }
         $seen[$code] = $true
-        $records.Add(@($code, $size, $category, $current, $voltage, $capacity))
+        $records.Add(@($code, $format, $category, $current, $voltage, $capacity))
     }
 } finally {
     $reader.Dispose()
