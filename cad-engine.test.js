@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8241);
+  assert.equal(items.length, 8315);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -7220,4 +7220,37 @@ test('ETI CS three-position selectors retain common links and alternate throws',
   assert.deepEqual(connected(), ['terminal-1', 'terminal-2', 'terminal-3']);
   instance.properties.switchingStep = '3';
   assert.deepEqual(connected(), ['terminal-2', 'terminal-3', 'terminal-4']);
+});
+
+test('ETI CES contactors retain variant envelope, terminal markings and coil-state continuity', () => {
+  assert.equal(engine.catalog('CES motor contactor').filter(item => item.id.startsWith('eti-004646')).length, 74);
+  const dc = engine.component('eti-004646504');
+  assert.deepEqual(dc.specifications.nominalCoilVoltage, { value: 24, unit: 'V DC' });
+  assert.equal(dc.physicalRepresentations[0].depth, 117);
+  assert.equal(engine.component('eti-004646502').specifications.coilFrequency.value, '50');
+  const id = 'eti-004646573';
+  const part = engine.component(id);
+  assert.equal(part.specifications.ac3RatedPower.value, 200);
+  assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber),
+    ['A1','A2','1','2','3','4','5','6','13','14','21','22','31','32','43','44']);
+
+  const sheetId = 'coil-test';
+  const contactor = { ...engine.createInstance(id, 180, 140, 'K1'), sheetId };
+  const inputs = ['terminal-1', 'terminal-21'];
+  const wires = engine.worldPins(contactor).filter(pin => inputs.includes(pin.id)).map(pin => ({
+    id: 'wire-' + pin.id, kind: 'wire', sheetId, x: pin.x, y: pin.y,
+    x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y - 20,
+    pinAttachments: { start: { instanceId: contactor.id, pinId: pin.id }, end: null }
+  }));
+  const connected = (drawing) => inputs.map(input => engine.analyze([drawing, ...wires]).nets
+    .find(net => net.pins.some(pin => pin.pinId === input)).pins.map(pin => pin.pinId).sort());
+  const normalGeometry = engine.coilAndContactGeometry(contactor);
+  assert.deepEqual(connected(contactor), [['terminal-1'], ['terminal-21','terminal-22']]);
+  contactor.properties.switchingStep = '2';
+  assert.notDeepEqual(engine.coilAndContactGeometry(contactor), normalGeometry);
+  const project = engine.parseProject(engine.serializeProject({
+    project: 'Contactor test', sheets: [{ id: sheetId, name: 'Wiring' }], objects: [contactor, ...wires]
+  }));
+  assert.equal(project.valid, true);
+  assert.deepEqual(connected(project.project.objects[0]), [['terminal-1','terminal-2'], ['terminal-21']]);
 });
