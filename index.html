@@ -840,7 +840,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         }
         case'relay-module':
         line(-70,-20,-42,-20);line(-70,20,-42,20);circle(-70,-20,2.6);circle(-70,20,2.6);
-        rect(-42,-18,28,36);label('K',-28,4,12);label('24 V DC',-28,-23,6);
+        rect(-42,-18,28,36);label('K',-28,4,12);const coil=window.AdigunCADEngine.component(item.id).specifications.nominalCoilVoltage;label(coil.value+' '+coil.unit,-28,-23,6);
         const mechanical=add('path',{d:'M-5 -25V25','stroke-dasharray':'3 3'});mechanical.setAttribute('aria-hidden','true');
         line(70,0,28,0);circle(70,0,2.6);circle(28,0,2.6);
         line(70,-25,50,-25);circle(70,-25,2.6);circle(50,-25,2.6);
@@ -1307,6 +1307,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Measuring range',spec.measuringRange.minimum+'–'+spec.measuringRange.maximum+' '+spec.measuringRange.unit],['Supply',spec.operatingVoltage.minimum+'–'+spec.operatingVoltage.maximum+' '+spec.operatingVoltage.unit],['Current consumption',spec.currentConsumption.value+' '+spec.currentConsumption.unit],['Process connection',spec.processConnection.value],['Electrical connection',spec.electricalConnection.value]]
       : def.family==='motor-induction'
       ? [['Frame',spec.frame.value],['Rated output',spec.ratedOutputPower.value+' '+spec.ratedOutputPower.unit],['Rated current at 400 V / 50 Hz',spec.ratedLineCurrentAt400V50Hz.value+' '+spec.ratedLineCurrentAt400V50Hz.unit],['Rated voltage',spec.ratedVoltage.value],['Frequency',spec.ratedFrequency.value+' '+spec.ratedFrequency.unit],['Rated speed',spec.ratedSpeed.value+' '+spec.ratedSpeed.unit],['Mounting',spec.mountingMethod.value],['Connection',spec.supplyConnectionAt400V.value]]
+      : def.family==='relay-module'&&spec.ratedContactCurrent
+      ? [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
+        ['Contact configuration',spec.changeoverContactCount.value+' '+spec.changeoverContactCount.unit],
+        ['Catalog contact current',spec.ratedContactCurrent.value+' '+spec.ratedContactCurrent.unit],
+        ['Contact material',spec.contactMaterial.value],['Enclosure',spec.enclosureVersion.value],
+        ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],['Coil input range at 20 °C',spec.coilInputRangeAt20C.minimum+'–'+spec.coilInputRangeAt20C.maximum+' '+spec.coilInputRangeAt20C.unit],['Contact configuration',spec.changeoverContactCount.value+' '+spec.changeoverContactCount.unit],['Limiting continuous current',spec.limitingContinuousCurrent.value+' '+spec.limitingContinuousCurrent.unit],['Maximum switching voltage',spec.maximumSwitchingVoltage.value+' '+spec.maximumSwitchingVoltage.unit],['Screw conductor range',spec.rigidConductorRange.minimum+'–'+spec.rigidConductorRange.maximum+' '+spec.rigidConductorRange.unit],['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']];
     const specRows=rows.map(function(row){return '<div class="property-row"><span>'+escapeHtml(row[0])+'</span><strong>'+escapeHtml(row[1])+'</strong></div>';}).join('');
     const pinSummary=def.symbol.pins.map(function(pin){return pin.localNumber+' '+pin.name;}).join(' · ');
