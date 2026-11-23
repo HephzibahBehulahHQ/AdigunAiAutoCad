@@ -1531,7 +1531,7 @@
               74: 'Lockable test button, non-polarized DC double LED and mechanical indicator'
             }[version] }
           } : {
-            terminalPinLength: { value: 5.2, unit: 'mm' },
+            terminalPinLength: { value: id[10] === '2' ? 3.5 : 5.2, unit: 'mm' },
             enclosureVersion: { value: { 0: 'Standard', 1: 'Wash tight', 3: 'High-temperature wash tight' }[version] }
           }),
           dimensions
