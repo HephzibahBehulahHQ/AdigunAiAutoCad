@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5944);
+  assert.equal(items.length, 6337);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2107,6 +2107,33 @@ test('Finder interface assemblies retain socket terminal designations, coil pola
     ['contact-11','contact-21'], ['contact-12','contact-22'], ['contact-14','contact-24']
   ]);
   assert.equal(highCurrent.specifications.ratedContactCurrent.value, 16);
+});
+
+test('ETI Ultra Quick aR fuses preserve four distinct terminal styles and nominal dimensions', () => {
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link');
+  assert.equal(items.length, 393);
+  assert.equal(new Set(items.map(item => item.id)).size, items.length);
+  const samples = [
+    ['eti-004371204', 'knife-blade', [78,51,30]],
+    ['eti-004393113', 'slotted-blade', [140,51,51]],
+    ['eti-004393713', 'slotted-blade', [140,56,51]],
+    ['eti-004373513', 'threaded-stud', [53,51,51]],
+    ['eti-004303514', 'threaded-stud', [75,51,51]],
+    ['eti-004362217', 'bolted-lug', [128,44,27]]
+  ];
+  for (const [id, type, dimensions] of samples) {
+    const part = engine.component(id);
+    const view = part.physicalRepresentations[0];
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [type,type]);
+    assert.deepEqual([view.width,view.height,view.depth], dimensions);
+  }
+  for (const item of items) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['contact-left','contact-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.specifications.ratedBreakingCapacity.value, 200);
+    assert.equal(part.specifications.nominalVoltage.unit, 'V AC');
+  }
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
