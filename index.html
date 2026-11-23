@@ -1383,6 +1383,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.terminalPolarity?[['Terminal polarity',spec.terminalPolarity.value]]:[]),
         ...(spec.connectionMethod?[['Connection',spec.connectionMethod.value]]:[]),
         ...(spec.ratedResidualCurrent?[['Residual current',spec.ratedResidualCurrent.value+' '+spec.ratedResidualCurrent.unit],['Residual release type',spec.residualCurrentType.value]]:[]),
+        ...(spec.supplyConnection?[['Supply connection',spec.supplyConnection.value]]:[]),
         ['Mounting',spec.mountingMethod.value]]
       : def.family==='motor-protection-breaker'
       ? [['Frame size',spec.frameSize.value],['Trip class',spec.overloadTripClass.value+' '+spec.overloadTripClass.unit],['Adjustable overload release',spec.adjustableOverloadRelease.minimum+'–'+spec.adjustableOverloadRelease.maximum+' '+spec.adjustableOverloadRelease.unit],['Instantaneous N-release',spec.instantaneousShortCircuitRelease.value+' '+spec.instantaneousShortCircuitRelease.unit],['Main poles',spec.mainPoleCount.value],['Rated operational voltage',spec.ratedOperationalVoltage.minimum+'–'+spec.ratedOperationalVoltage.maximum+' '+spec.ratedOperationalVoltage.unit],['Connection',spec.connectionMethod.value]]
