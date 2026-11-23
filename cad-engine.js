@@ -1441,7 +1441,8 @@
       });
     });
   const finderRelays = terminalCatalog.finderSeries40Relays.concat(
-    terminalCatalog.finderSeries41Relays, terminalCatalog.finderSeries43Relays, terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
+    terminalCatalog.finderSeries41Relays, terminalCatalog.finderSeries43Relays, terminalCatalog.finderSeries45Relays,
+    terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
     terminalCatalog.finderSeries56Relays, terminalCatalog.finderSeries60Relays,
     terminalCatalog.finderSeries62Relays, terminalCatalog.finderSeries66Relays).map(
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
@@ -1449,6 +1450,8 @@
       const partId = 'finder-' + id;
       const bistable = mode === 'AC/DC';
       const series43 = id.startsWith('43');
+      const series45 = id.startsWith('45');
+      const mixedMount = series45 && !id.startsWith('4531');
       const lowProfile = id.startsWith('41') || series43;
       const industrial = id.startsWith('46');
       const series56 = id.startsWith('56');
@@ -1459,7 +1462,8 @@
       const pcbMount = id.startsWith('551') || id.startsWith('564') || id.startsWith('622') || id.startsWith('662');
       const flange = id.startsWith('606');
       const faston250 = id.startsWith('628') || id.startsWith('668');
-      const normallyOpen = (series43 || series56 || series62 || series66) && ['3', '6'].includes(id[9]);
+      const normallyOpen = (series43 || series45 || series56 || series62 || series66) && ['3', '6'].includes(id[9]);
+      const normallyClosed = series45 && id[9] === '4';
       const poleCount = generalPurpose ? Number(id[3]) : 0;
       const pcbTenAmpRelay = id.startsWith('4062');
       const socketCommon21 = id.startsWith('4051');
@@ -1471,7 +1475,7 @@
         ? { A1: '8', A2: '1', 11: '3', 12: '2', 14: '4', 21: '6', 22: '7', 24: '5' }
         : { A1: '5', A2: '1', 11: '4', 12: '2', 14: '3' };
       const makeContact = (common, normallyClosed, normallyOpen) => {
-        const openPath = [[common, normallyOpen]];
+        const openPath = normallyOpen ? [[common, normallyOpen]] : [];
         const closedPath = normallyClosed ? [[common, normallyClosed]] : [];
         const { actuation, simulation } = relayDefinition.electricalFunctions.changeoverContact;
         return {
@@ -1483,7 +1487,8 @@
           simulation: bistable ? 'Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state.' : simulation
         };
       };
-      const firstContact = makeContact(socketCommon21 ? 'contact-21' : 'contact-11', normallyOpen ? null : 'contact-12', 'contact-14');
+      const firstContact = makeContact(socketCommon21 ? 'contact-21' : 'contact-11',
+        normallyOpen ? null : 'contact-12', normallyClosed ? null : 'contact-14');
       const secondContact = makeContact('contact-21', 'contact-22', 'contact-24');
       const symbolPins = relayDefinition.symbol.pins;
       const socketPinMap = {
@@ -1545,10 +1550,10 @@
         manufacturer: 'Finder',
         manufacturerPartNumber: code,
         model: code,
-        aliases: [id, 'Series ' + series, normallyOpen ? (series43 ? 'SPST-NO' : poleCount === 2 ? 'DPST-NO' : '3PST-NO')
+        aliases: [id, 'Series ' + series, normallyClosed ? 'SPST-NC' : normallyOpen ? (series43 || series45 ? 'SPST-NO' : poleCount === 2 ? 'DPST-NO' : '3PST-NO')
           : generalPurpose ? ({2:'DPDT',3:'3PDT',4:'4PDT'})[poleCount] : doublePole ? 'DPDT' : 'SPDT', ...(bistable ? ['Latching', 'Bistable'] : [])],
         name: (generalPurpose ? poleCount + '-pole ' : doublePole ? 'Double-pole ' : 'Single-pole ') + (bistable ? 'bistable ' : '')
-          + (normallyOpen ? 'normally open relay' : 'changeover relay'),
+          + (normallyOpen ? 'normally open relay' : normallyClosed ? 'normally closed relay' : 'changeover relay'),
         family: 'relay-module',
         referencePrefix: 'K',
         category: generalPurpose ? 'Electrical · Verified general purpose relay' : industrial ? 'Electrical · Verified industrial relay' : 'Electrical · Verified interface relay',
@@ -1557,7 +1562,8 @@
           id: 'relay.series' + series + '.' + partId + '.v1',
           height: generalPurpose ? poleCount * 70 : doublePole || pairedTerminals ? 140 : relayDefinition.symbol.height,
           pins: (generalPurpose ? generalPins : pairedTerminals ? pairedPins : doublePole ? doublePolePins
-            : normallyOpen ? symbolPins.filter(pin => pin.id !== 'contact-12') : symbolPins).map(pin => {
+            : normallyOpen ? symbolPins.filter(pin => pin.id !== 'contact-12')
+            : normallyClosed ? symbolPins.filter(pin => pin.id !== 'contact-14') : symbolPins).map(pin => {
             if (socketCommon21 && pin.id === 'contact-11')
               return { ...pin, id: 'contact-21', localNumber: '21', connectionType: 'pcb-pin' };
             const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
@@ -1575,12 +1581,13 @@
             const physicalNumber = bladePositions[pin.localNumber];
             return industrial
               ? { ...pin, name: name + ' (blade ' + physicalNumber + ')', connectionType: doublePole ? 'solder-blade' : 'faston-187', physicalNumber }
-              : { ...pin, name, connectionType: 'pcb-pin' };
+              : { ...pin, name, connectionType: mixedMount && pin.id.startsWith('contact-') ? 'faston-250' : 'pcb-pin' };
           }),
           internalConnections: pairedTerminals
             ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']]
             : relayDefinition.symbol.internalConnections,
-          numberingNote: lowProfile
+          numberingNote: series45 ? 'Finder ' + relayType + ' documents coil A1/A2, common 11 and the fitted contact terminal ' +
+            (normallyClosed ? '12.' : '14.') : lowProfile
             ? pairedTerminals ? 'Finder 41.61 connects 11–21, 12–22 and 14–24 on a single changeover pole.'
               : 'Finder ' + relayType + ' copper-side circuit diagram gives the terminal designations.'
             : generalPurpose
@@ -1603,6 +1610,7 @@
             ...(diode ? { polarity: { positive: 'A1', negative: 'A2' }, suppression: 'Integrated diode' } : {}) },
           ...(generalPurpose ? (normallyOpen ? { normallyOpenContacts: generalContacts } : { changeoverContacts: generalContacts })
             : normallyOpen ? { normallyOpenContacts: [firstContact] }
+            : normallyClosed ? { normallyClosedContacts: [firstContact] }
             : doublePole ? { changeoverContacts: [firstContact, secondContact] } : { changeoverContact: firstContact })
         },
         specifications: {
@@ -1621,9 +1629,12 @@
             socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
           } : {}),
           ...(normallyOpen ? {
-            normallyOpenContactCount: { value: series43 ? 1 : poleCount, unit: series43 ? 'normally open contact' : 'normally open contacts' },
-            ...(!series43 && (!series66 || id[9] === '6') ? { minimumContactGap: { value: series56 || series66 ? 1.5 : 3, unit: 'mm' } } : {})
-          } : { changeoverContactCount: { value: generalPurpose ? poleCount : doublePole ? 2 : 1, unit: 'changeover contact' } }),
+            normallyOpenContactCount: { value: series43 || series45 ? 1 : poleCount, unit: series43 || series45 ? 'normally open contact' : 'normally open contacts' },
+            ...(!series43 && (!series66 || id[9] === '6') && !id.startsWith('4571') ? {
+              minimumContactGap: { value: series45 && id[9] === '6' ? 3.6 : series56 || series66 ? 1.5 : 3, unit: 'mm' }
+            } : {})
+          } : normallyClosed ? { normallyClosedContactCount: { value: 1, unit: 'normally closed contact' } }
+            : { changeoverContactCount: { value: generalPurpose ? poleCount : doublePole ? 2 : 1, unit: 'changeover contact' } }),
           contactMaterial: { value: material },
           ...(generalPurpose ? {
             mountingMethod: { value: series66 ? (pcbMount ? 'PCB mount' : 'Top flange mount')
@@ -1652,6 +1663,10 @@
               54: 'Lockable test button, AC LED and mechanical indicator',
               74: 'Lockable test button, non-polarized DC double LED and mechanical indicator'
             }[version] }
+          } : series45 ? {
+            mountingMethod: { value: mixedMount ? 'PCB mount with Faston 250 contact terminals' : 'PCB mount' },
+            enclosureVersion: { value: version === 1 ? 'Wash tight (RT III)' : 'Flux proof (RT II)' },
+            ...(mixedMount ? { terminalBladeWidth: { value: 6.3, unit: 'mm' }, terminalBladeThickness: { value: 0.8, unit: 'mm' } } : {})
           } : lowProfile ? {
             mountingMethod: { value: 'PCB mount' },
             contactPinPitch: { value: series43 && !normallyOpen ? 3.2 : id.startsWith('4131') ? 3.5 : 5, unit: 'mm' },
@@ -1676,6 +1691,10 @@
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: series43 ? 'Exact supplier identity, coil voltage, contact configuration and rated current. Use the model-specific datasheet for the outline.'
               : 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
+          series45 ? { publisher: 'Finder', title: 'Series 45 datasheet · ' + relayType,
+            url: 'https://cdn.findernet.com/app/uploads/S45EN.pdf',
+            documentRevision: 'I-2026', retrievedAt: '2026-11-23',
+            revisionNote: 'Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline.' } :
           series43 ? { publisher: 'Finder', title: 'Series 43 datasheet · ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S43EN.pdf',
             documentRevision: 'XI-2026', retrievedAt: '2026-11-23',

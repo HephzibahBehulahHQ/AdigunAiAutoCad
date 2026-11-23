@@ -860,7 +860,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           label('A2',-70,-25,7);label('A1',-70,31,7);
           break;
         }
-        const contacts=relay.electricalFunctions.changeoverContacts||relay.electricalFunctions.normallyOpenContacts||[relay.electricalFunctions.changeoverContact];
+        const contacts=relay.electricalFunctions.changeoverContacts||relay.electricalFunctions.normallyOpenContacts
+          ||relay.electricalFunctions.normallyClosedContacts||[relay.electricalFunctions.changeoverContact];
         const halfSpan=Math.max(...relay.symbol.pins.map(pin=>Math.abs(pin.y)));
         const mechanical=add('path',{d:'M-5 '+(-halfSpan)+'V'+halfSpan,'stroke-dasharray':'3 3'});mechanical.setAttribute('aria-hidden','true');
         for(const contact of contacts){
@@ -1337,7 +1338,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Frame',spec.frame.value],['Rated output',spec.ratedOutputPower.value+' '+spec.ratedOutputPower.unit],['Rated current at 400 V / 50 Hz',spec.ratedLineCurrentAt400V50Hz.value+' '+spec.ratedLineCurrentAt400V50Hz.unit],['Rated voltage',spec.ratedVoltage.value],['Frequency',spec.ratedFrequency.value+' '+spec.ratedFrequency.unit],['Rated speed',spec.ratedSpeed.value+' '+spec.ratedSpeed.unit],['Mounting',spec.mountingMethod.value],['Connection',spec.supplyConnectionAt400V.value]]
       : def.family==='relay-module'&&spec.ratedContactCurrent
       ? [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
-        ['Contact configuration',(spec.normallyOpenContactCount||spec.changeoverContactCount).value+' '+(spec.normallyOpenContactCount||spec.changeoverContactCount).unit],
+        ['Contact configuration',(spec.normallyOpenContactCount||spec.normallyClosedContactCount||spec.changeoverContactCount).value+' '+(spec.normallyOpenContactCount||spec.normallyClosedContactCount||spec.changeoverContactCount).unit],
         ...(spec.normallyClosedRatedCurrent
           ? [['Normally open contact rating',spec.normallyOpenRatedCurrent.value+' '+spec.normallyOpenRatedCurrent.unit],
              ['Normally closed contact rating',spec.normallyClosedRatedCurrent.value+' '+spec.normallyClosedRatedCurrent.unit]]
