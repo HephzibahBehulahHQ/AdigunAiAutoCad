@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '43', '46', '55', '56', '60', '62')][string]$Series = '40')
+param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '43', '46', '55', '56', '60', '62', '66')][string]$Series = '40')
 
 $ErrorActionPreference = 'Stop'
 $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Archive).Path)
@@ -23,6 +23,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
                 elseif ($Series -eq '56') { '^56([34][24])([89])([0-9]{3})([04])[03]([0-9]{2})$' }
                 elseif ($Series -eq '60') { '^60([16][23])([89])([0-9]{3})([05])[02]([0-9]{2})$' }
                 elseif ($Series -eq '62') { '^62([238][23])([89])([0-9]{3})(4)[0356]([0-9]{2})$' }
+                elseif ($Series -eq '66') { '^66([28]2)([89])([0-9]{3})([14])[036]0([01])$' }
                 else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
     if ($id -cnotmatch $orderKey) { continue }
     $type = $Matches[1]
@@ -77,7 +78,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     $flange = $Series -eq '60' -and $type.StartsWith('6')
     $bifurcated = $Series -eq '60' -and $id[9] -eq '2'
-    $normallyOpen = $Series -in '43','56','62' -and $id[9] -in '3','6'
+    $normallyOpen = $Series -in '43','56','62','66' -and $id[9] -in '3','6'
     $contactDescription = if ($normallyOpen) { 'Contacts configuration: NO' } else { 'Contacts configuration: CO' }
     if ($Series -eq '60') {
         $coilVoltages = if ($mode -eq 'AC') { 6,12,24,48,60,110,120,230,240,400 } else { 6,12,24,48,60,110,125,220 }
@@ -148,6 +149,12 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     if ($Series -eq '43' -and ($voltage -notin 3,6,9,12,18,24,36,48 -or !$socketOptional -or
         $description -notmatch 'Type of electric connection: PCB connection')) { continue }
+    if ($Series -eq '66') {
+        $coilVoltages = if ($mode -eq 'AC') { 6,12,24,110,120,230,240 } else { 6,9,12,24,110,125 }
+        $connection = if ($type -eq '22') { 'PCB connection' } else { 'Soldering flag connection Faston 250' }
+        if ($voltage -notin $coilVoltages -or ($id[9] -eq '6' -and $mode -ne 'DC') -or !$socketOptional -or
+            $description -notmatch "Type of electric connection: $connection") { continue }
+    }
     $material = @{ '0' = 'AgNi'; '1' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
     if (!$verifiedMaterial.Success -or $verifiedMaterial.Groups[1].Value.Replace('₂', '2') -cne $material) { continue }
@@ -158,7 +165,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         ($Series -eq '40' -and !$socketOptional)) { continue }
     $values = @{}
     foreach ($feature in $features.FEATURE) { $values[[string]$feature.FNAME] = @($feature.FVALUE) }
-    $poles = if ($Series -in '55','56','60','62') { $type.Substring(1) } elseif ($doublePole) { '2' } else { '1' }
+    $poles = if ($Series -in '55','56','60','62','66') { $type.Substring(1) } elseif ($doublePole) { '2' } else { '1' }
     $noCount = if ($normallyOpen) { $poles } else { '0' }
     $coCount = if ($normallyOpen) { '0' } else { $poles }
     if ($Series -eq '41') {
@@ -170,6 +177,12 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     foreach ($key in 'EF000001', 'EF000008', 'EF000040', 'EF000049') {
         if ($values[$key].Count -ne 1 -or [string]$values[$key][0] -notmatch '^\d+(\.\d+)?$') { break }
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
+    }
+    if ($Series -eq '66') {
+        $expectedLength = if ($type -eq '22') { 51.5 } else { 68.5 }
+        $ratedCurrent = if ($normallyOpen) { 30 } else { 10 }
+        if ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 33.5 -or
+            $measurements[2] -ne 31 -or $measurements[3] -ne $expectedLength) { continue }
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
     if ($Series -eq '43') {
