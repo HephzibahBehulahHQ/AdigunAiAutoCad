@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 1924);
+  assert.equal(items.length, 2055);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1495,6 +1495,30 @@ test('Finder Series 60 variants carry exact socket and blade terminal assignment
     assert.deepEqual(part.electricalFunctions.coil.polarity,
       /(?:60|70|74)$/.test(orderCode) ? { positive: 'A1', negative: 'A2' } : undefined);
   }
+});
+
+test('Finder Series 62 variants use their documented outer poles and omit unpopulated NC terminals', () => {
+  const parts = engine.catalog('Finder Series 62').filter(item => item.id.startsWith('finder-62'));
+  assert.equal(parts.length, 131);
+  let normallyOpenCount = 0;
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    const twoPoles = part.manufacturerPartNumber[4] === '2';
+    const normallyOpen = Boolean(part.electricalFunctions.normallyOpenContacts);
+    if (normallyOpen) normallyOpenCount++;
+    const ends = normallyOpen ? ['7', '4', '8', '5', '9', '6'] : ['7', '1', '4', '8', '2', '5', '9', '3', '6'];
+    if (twoPoles) ends.splice(normallyOpen ? 2 : 3, normallyOpen ? 2 : 3);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.physicalNumber), ['B', 'A', ...ends]);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.specifications.ratedContactCurrent.value, 16);
+    assert.ok(part.specifications.options.value);
+    if (normallyOpen) {
+      assert.equal(part.specifications.minimumContactGap.value, 3);
+      for (const contact of part.electricalFunctions.normallyOpenContacts)
+        assert.deepEqual(contact.deenergizedConnections, []);
+    }
+  }
+  assert.equal(normallyOpenCount, 30);
 });
 
 test('Finder short-pin PCB variants report the documented 3.5 mm terminal length', () => {

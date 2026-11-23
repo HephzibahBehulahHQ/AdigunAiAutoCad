@@ -860,17 +860,19 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           label('A2',-70,-25,7);label('A1',-70,31,7);
           break;
         }
-        const contacts=relay.electricalFunctions.changeoverContacts||[relay.electricalFunctions.changeoverContact];
+        const contacts=relay.electricalFunctions.changeoverContacts||relay.electricalFunctions.normallyOpenContacts||[relay.electricalFunctions.changeoverContact];
         const halfSpan=Math.max(...relay.symbol.pins.map(pin=>Math.abs(pin.y)));
         const mechanical=add('path',{d:'M-5 '+(-halfSpan)+'V'+halfSpan,'stroke-dasharray':'3 3'});mechanical.setAttribute('aria-hidden','true');
         for(const contact of contacts){
           const [common,closed,open]=[contact.common,contact.normallyClosed,contact.normallyOpen]
             .map(id=>relay.symbol.pins.find(pin=>pin.id===id));
           for(const [pin,innerX,labelOffset] of [[common,28,-5],[closed,50,-5],[open,50,9]]){
+            if(!pin)continue;
             line(pin.x,pin.y,innerX,pin.y);circle(pin.x,pin.y,2.6);circle(innerX,pin.y,2.6);
             label(pin.localNumber,pin.x,pin.y+labelOffset,7);
           }
-          line(28,common.y,50,closed.y);
+          if(closed)line(28,common.y,50,closed.y);
+          else line(28,common.y,46,open.y-8);
         }
         label('A2',-70,-25,7);label('A1',-70,31,7);
         }
@@ -1335,7 +1337,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Frame',spec.frame.value],['Rated output',spec.ratedOutputPower.value+' '+spec.ratedOutputPower.unit],['Rated current at 400 V / 50 Hz',spec.ratedLineCurrentAt400V50Hz.value+' '+spec.ratedLineCurrentAt400V50Hz.unit],['Rated voltage',spec.ratedVoltage.value],['Frequency',spec.ratedFrequency.value+' '+spec.ratedFrequency.unit],['Rated speed',spec.ratedSpeed.value+' '+spec.ratedSpeed.unit],['Mounting',spec.mountingMethod.value],['Connection',spec.supplyConnectionAt400V.value]]
       : def.family==='relay-module'&&spec.ratedContactCurrent
       ? [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
-        ['Contact configuration',spec.changeoverContactCount.value+' '+spec.changeoverContactCount.unit],
+        ['Contact configuration',(spec.normallyOpenContactCount||spec.changeoverContactCount).value+' '+(spec.normallyOpenContactCount||spec.changeoverContactCount).unit],
         ['Catalog contact current',spec.ratedContactCurrent.value+' '+spec.ratedContactCurrent.unit],
         ...(spec.socketContactCurrentLimit ? [['Socket current limit',spec.socketContactCurrentLimit.value+' '+spec.socketContactCurrentLimit.unit]] : []),
         ['Contact material',spec.contactMaterial.value],
@@ -1345,6 +1347,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.mountingMethod ? [['Mounting',spec.mountingMethod.value]] : []),
         ...(spec.coilPolarity ? [['Coil polarity',spec.coilPolarity.value]] : []),
         ...(spec.contactConstruction ? [['Contact construction',spec.contactConstruction.value]] : []),
+        ...(spec.minimumContactGap ? [['Minimum contact gap',spec.minimumContactGap.value+' '+spec.minimumContactGap.unit]] : []),
+        ...(spec.coilContactSeparator ? [['Coil/contact insulation',spec.coilContactSeparator.value]] : []),
         ...(spec.terminalPinLength ? [['Terminal pin length',spec.terminalPinLength.value+' '+spec.terminalPinLength.unit]] : []),
         ...(spec.coilOperation ? [['Coil operation',spec.coilOperation.value],['Minimum set/reset pulse',spec.minimumSetResetPulse.value+' '+spec.minimumSetResetPulse.unit]] : []),
         ...(spec.socketWiringAbove10A ? [['Socket wiring above 10 A',spec.socketWiringAbove10A.value]] : []),
