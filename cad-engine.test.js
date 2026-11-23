@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 538);
+  assert.equal(items.length, 577);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1319,7 +1319,7 @@ test('Weidmüller WDK and A2T terminal blocks preserve two isolated levels', () 
 });
 
 test('Finder Series 40 catalog order codes carry five distinct schematic pins and source-backed dimensions', () => {
-  const parts = engine.catalog('Finder Series 40');
+  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-40'));
   assert.equal(parts.length, 132);
   assert.equal(new Set(parts.map(part => part.id)).size, parts.length);
   const coilTypes = new Set();
@@ -1342,6 +1342,25 @@ test('Finder Series 40 catalog order codes carry five distinct schematic pins an
     assert.deepEqual(part.physicalRepresentations.map(view => [view.width, view.height, view.depth]), [[12.4, 25, 29]]);
   }
   assert.equal(coilTypes.size, 2);
+});
+
+test('Finder 46.61 relays expose the verified Faston blade map and changeover states', () => {
+  const parts = engine.catalog('Finder Series 46').filter(item => item.id.startsWith('finder-46'));
+  assert.equal(parts.length, 39);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.pins.map(pin => [pin.localNumber, pin.physicalNumber, pin.connectionType]), [
+      ['A2', '1', 'faston-187'], ['A1', '5', 'faston-187'], ['11', '4', 'faston-187'],
+      ['12', '2', 'faston-187'], ['14', '3', 'faston-187']
+    ]);
+    assert.equal(part.specifications.ratedContactCurrent.value, 16);
+    assert.ok(part.specifications.options.value);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.deepEqual(part.electricalFunctions.changeoverContact.deenergizedConnections, [['contact-11', 'contact-12']]);
+    assert.deepEqual(part.electricalFunctions.changeoverContact.energizedConnections, [['contact-11', 'contact-14']]);
+    const [outline] = part.physicalRepresentations;
+    assert.deepEqual([outline.width, outline.height, outline.depth], [12.4, 32.8, 29]);
+  }
 });
 
 test('terminal panel envelopes use manufacturer dimensions independently of schematic scale', () => {

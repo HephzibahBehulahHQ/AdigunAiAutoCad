@@ -1440,10 +1440,13 @@
         }]
       });
     });
-  const finderSeries40Relays = terminalCatalog.finderSeries40Relays.map(
+  const finderSinglePoleRelays = terminalCatalog.finderSeries40Relays.concat(terminalCatalog.finderSeries46Relays).map(
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
+      const industrial = id.startsWith('46');
+      const series = industrial ? '46' : '40';
+      const bladePositions = { A1: '5', A2: '1', 11: '4', 12: '2', 14: '3' };
       const coilVoltage = { value: voltage, unit: 'V ' + mode };
       const dimensions = Object.fromEntries(Object.entries({ width, height, depth })
         .map(([name, value]) => [name, { value, unit: 'mm' }]));
@@ -1453,20 +1456,24 @@
         manufacturer: 'Finder',
         manufacturerPartNumber: code,
         model: code,
-        aliases: [id, 'Series 40', 'SPDT'],
+        aliases: [id, 'Series ' + series, 'SPDT'],
         name: 'Single-pole changeover relay',
         family: 'relay-module',
         referencePrefix: 'K',
-        category: 'Electrical · Verified interface relay',
+        category: industrial ? 'Electrical · Verified industrial relay' : 'Electrical · Verified interface relay',
         symbol: {
           ...relayDefinition.symbol,
-          id: 'relay.series40.' + partId + '.v1',
-          pins: relayDefinition.symbol.pins.map(pin => ({
-            ...pin,
-            name: pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name,
-            connectionType: 'pcb-pin'
-          })),
-          numberingNote: 'Finder Series 40.31/40.51 connection diagram identifies A1, A2, 11, 12 and 14.'
+          id: 'relay.series' + series + '.' + partId + '.v1',
+          pins: relayDefinition.symbol.pins.map(pin => {
+            const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
+            const physicalNumber = bladePositions[pin.localNumber];
+            return industrial
+              ? { ...pin, name: name + ' (blade ' + physicalNumber + ')', connectionType: 'faston-187', physicalNumber }
+              : { ...pin, name, connectionType: 'pcb-pin' };
+          }),
+          numberingNote: industrial
+            ? 'Finder 46.61 diagram maps A1/A2/11/12/14 to blade positions 5/1/4/2/3.'
+            : 'Finder Series 40.31/40.51 connection diagram identifies A1, A2, 11, 12 and 14.'
         },
         electricalFunctions: {
           coil: { pins: ['coil-a1', 'coil-a2'], nominalVoltage: coilVoltage },
@@ -1477,8 +1484,20 @@
           ratedContactCurrent: { value: current, unit: 'A' },
           changeoverContactCount: { value: 1, unit: 'changeover contact' },
           contactMaterial: { value: material },
-          terminalPinLength: { value: 5.2, unit: 'mm' },
-          enclosureVersion: { value: { 0: 'Standard', 1: 'Wash tight', 3: 'High-temperature wash tight' }[version] },
+          ...(industrial ? {
+            terminalBladeWidth: { value: 4.8, unit: 'mm' },
+            terminalBladeThickness: { value: 0.5, unit: 'mm' },
+            environmentalProtection: { value: 'RT II' },
+            options: { value: {
+              20: 'Mechanical indicator',
+              40: 'Lockable test button and mechanical indicator',
+              54: 'Lockable test button, AC LED and mechanical indicator',
+              74: 'Lockable test button, non-polarized DC double LED and mechanical indicator'
+            }[version] }
+          } : {
+            terminalPinLength: { value: 5.2, unit: 'mm' },
+            enclosureVersion: { value: { 0: 'Standard', 1: 'Wash tight', 3: 'High-temperature wash tight' }[version] }
+          }),
           dimensions
         },
         physicalRepresentations: [{
@@ -1491,6 +1510,10 @@
             url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
+          industrial ? { publisher: 'Finder', title: 'Series 46 datasheet · 46.61',
+            url: 'https://cdn.findernet.com/app/uploads/S46EN.pdf',
+            documentRevision: 'IX-2026', retrievedAt: '2026-11-23',
+            revisionNote: 'Pages 3 and 4 document the blade positions, coil ratings and ordering options.' } :
           { publisher: 'Finder', title: 'Series 40 datasheet · 40.31/40.51',
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VII-2026', retrievedAt: '2026-11-23',
@@ -1502,7 +1525,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderSeries40Relays).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderSinglePoleRelays).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

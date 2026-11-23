@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Archive)
+param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '46')][string]$Series = '40')
 
 $ErrorActionPreference = 'Stop'
 $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Archive).Path)
@@ -15,17 +15,23 @@ $seen = @{}
 $records = [System.Collections.Generic.List[object]]::new()
 foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
-    # The manufacturer order key limits this map to monostable one-pole CO relays with 5.2 mm pins.
-    if ($id -cnotmatch '^40(31|51)([789])([0-9]{3})([045])00([013])$') { continue }
+    # Restrict each series to the one-pole changeover types with a verified terminal diagram.
+    $orderKey = if ($Series -eq '40') { '^40(31|51)([789])([0-9]{3})([045])00([013])$' }
+                else { '^46(61)([89])([0-9]{3})([045])0(20|40|54|74)$' }
+    if ($id -cnotmatch $orderKey) { continue }
     $coilCode = $Matches[2]
     $voltage = [int]$Matches[3]
     $materialCode = $Matches[4]
     $version = $Matches[5]
-    if ($version -eq '3' -and $coilCode -ne '9') { continue }
+    if (($version -in '3', '74' -and $coilCode -ne '9') -or ($version -eq '54' -and $coilCode -ne '8')) { continue }
     $details = $product.PRODUCT_DETAILS
     $features = $product.PRODUCT_FEATURES
     $description = [string]$details.DESCRIPTION_LONG
     $mode = if ($coilCode -eq '8') { 'AC' } else { 'DC' }
+    if ($Series -eq '46') {
+        $coilVoltages = if ($mode -eq 'AC') { 12, 24, 48, 110, 120, 230, 240 } else { 12, 24, 48, 110, 125 }
+        if ($voltage -notin $coilVoltages -or $description -notmatch 'Type of electric connection: Plug-in connection Faston 187') { continue }
+    }
     $material = @{ '0' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
     if (!$verifiedMaterial.Success -or $verifiedMaterial.Groups[1].Value.Replace('₂', '2') -cne $material) { continue }
@@ -33,7 +39,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $features.REFERENCE_FEATURE_GROUP_ID -cne 'EC001437' -or $voltage -le 0 -or
         $description -notmatch 'Contacts configuration: CO' -or $description -notmatch 'Mono stable' -or
         $description -notmatch 'Polarity free' -or $description -notmatch "Coil version: $mode(?:\s|$)" -or
-        $description -notmatch "Volt ${mode}: $voltage V" -or $description -notmatch 'Complete with socket: no') { continue }
+        $description -notmatch "Volt ${mode}: $voltage V" -or
+        ($Series -eq '40' -and $description -notmatch 'Complete with socket: no')) { continue }
     $values = @{}
     foreach ($feature in $features.FEATURE) { $values[[string]$feature.FNAME] = @($feature.FVALUE) }
     if ([string]$values['EF008255'][0] -cne '0' -or [string]$values['EF008256'][0] -cne '0' -or
@@ -44,6 +51,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
+    if ($Series -eq '46' -and ($measurements[0] -ne 16 -or $measurements[1] -ne 12.4 -or
+        $measurements[2] -ne 32.8 -or $measurements[3] -ne 29)) { continue }
     $productLink = $product.SelectNodes('.//*[local-name()="UDX.EDXF.MIME_SOURCE"]') |
         Where-Object { $_.InnerText -ceq "https://www.findernet.com/en/p/$id" } | Select-Object -First 1
     if (!$productLink) { continue }
