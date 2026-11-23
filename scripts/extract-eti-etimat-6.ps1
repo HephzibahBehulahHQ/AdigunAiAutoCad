@@ -44,7 +44,12 @@ try {
             if ($voltage -notin '230','240','400','415' -or
                 ($values['EF009555'] -ne [string]$capacity -and $values['EF009556'] -ne [string]$capacity) -or
                 [int]$values['EF002950'] -ne $poles) { continue }
-            if ($Series -eq '10' -and $current -gt 40 -and $current -lt 50) { continue }
+            if ($Series -eq '10') {
+                if (($current -gt 40 -and $current -lt 50) -or
+                    $long -notmatch "Short circuit capacity \(kA\) $capacity(?:\s|,|$)" -or
+                    $long -notmatch 'Rated voltage \(V\) (230/400|230|400)(?:\s|,|$)') { continue }
+                $voltage = $Matches[1]
+            }
             $moduleWidth = if ($Series -eq '10') { 17.6 } else { 17.8 }
             $width = [Math]::Round($moduleWidth * $poles, 1)
         }

@@ -769057,7 +769057,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -769202,7 +769202,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -769347,7 +769347,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -769492,7 +769492,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -769637,7 +769637,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -769782,7 +769782,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -769927,7 +769927,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -770072,7 +770072,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -774353,7 +774353,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -774498,7 +774498,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -774643,7 +774643,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -774788,7 +774788,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -774933,7 +774933,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -775078,7 +775078,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -775223,7 +775223,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
@@ -775368,7 +775368,7 @@
           "unit": "A"
         },
         "nominalVoltage": {
-          "value": "400",
+          "value": "230/400",
           "unit": "V AC"
         },
         "tripCurve": {
