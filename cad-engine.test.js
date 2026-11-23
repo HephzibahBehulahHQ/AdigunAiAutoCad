@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5052);
+  assert.equal(items.length, 5282);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1800,6 +1800,25 @@ test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines',
   assert.equal(engine.component('eti-002625103').specifications.ratedBreakingCapacity.value, 10);
   assert.equal(engine.component('eti-002625085').specifications.ratedBreakingCapacity.value, 30);
   assert.equal(engine.component('eti-002625200').specifications.ratedBreakingCapacity.value, 50);
+});
+
+test('ETI NH battery fuses retain DC ratings and the contacts of each mounting format', () => {
+  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' && item.name.includes(' gBat '));
+  assert.equal(items.length, 230);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { cartridgeSize, nominalVoltage, ratedBreakingCapacity, ratedDcTimeConstant } = part.specifications;
+    assert.equal(nominalVoltage.unit, 'V DC');
+    assert.equal(ratedBreakingCapacity.value, nominalVoltage.value === 80 ? 50 : 30);
+    assert.ok(ratedDcTimeConstant.value > 0);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['blade-left', 'blade-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const contactType = cartridgeSize.value.endsWith('/110') ? 'slotted-blade' : 'knife-blade';
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [contactType, contactType]);
+    assert.equal(part.specifications.indicator?.value, cartridgeSize.value.endsWith('/K') ? 'Striker pin' : undefined);
+  }
+  const envelope = engine.component('eti-004723305').physicalRepresentations[0];
+  assert.deepEqual([envelope.width, envelope.height, envelope.depth], [140, 51, 46]);
 });
 
 test('ETI NH photovoltaic fuses retain the DC time constant and slotted contact forms', () => {
