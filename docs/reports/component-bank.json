@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 6591,
+    "manufacturerParts": 6631,
     "symbolFamilies": 28,
-    "partsWithTerminalMaps": 6591,
-    "partsWithPhysicalDimensions": 6577,
-    "partsWithPhysicalRepresentations": 6570,
+    "partsWithTerminalMaps": 6631,
+    "partsWithPhysicalDimensions": 6617,
+    "partsWithPhysicalRepresentations": 6610,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -950421,6 +950421,5574 @@
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "Nominal blade-to-blade length and end-view envelope for the listed NH fuse size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625005",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625005",
+      "model": "CH10x38 aR 6A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625005.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625005",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625006",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625006",
+      "model": "CH10x38 aR 8A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625006.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625006",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625007",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625007",
+      "model": "CH10x38 aR 10A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625007.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625007",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625008",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625008",
+      "model": "CH10x38 aR 12A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 12,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625008.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625008",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625009",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625009",
+      "model": "CH10x38 aR 16A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625009.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625009",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625011",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625011",
+      "model": "CH10x38 aR 20A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625011.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625011",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625013",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625013",
+      "model": "CH10x38 aR 25A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625013.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625013",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625015",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625015",
+      "model": "CH10x38 aR 32A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625015.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38,
+          "height": 10.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625015",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635007",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635007",
+      "model": "CH14x51 aR 10A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635007.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635007",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635008",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635008",
+      "model": "CH14x51 aR 12A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 12,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635008.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635008",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635009",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635009",
+      "model": "CH14x51 aR 16A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635009.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635009",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635011",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635011",
+      "model": "CH14x51 aR 20A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635011.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635011",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635013",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635013",
+      "model": "CH14x51 aR 25A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635013.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635013",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635015",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635015",
+      "model": "CH14x51 aR 32A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635015.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635015",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635017",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635017",
+      "model": "CH14x51 aR 40A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 40,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635017.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635017",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635019",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635019",
+      "model": "CH14x51 aR 50A/500V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 50,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635019.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635019",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635107",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635107",
+      "model": "CH14x51/P aR 10A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635107.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635107",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635108",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635108",
+      "model": "CH14x51/P aR 12A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 12,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635108.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635108",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635109",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635109",
+      "model": "CH14x51/P aR 16A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635109.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635109",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635111",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635111",
+      "model": "CH14x51/P aR 20A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635111.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635111",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635113",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635113",
+      "model": "CH14x51/P aR 25A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635113.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635113",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635115",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635115",
+      "model": "CH14x51/P aR 32A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635115.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635115",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635117",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635117",
+      "model": "CH14x51/P aR 40A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 40,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635117.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635117",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002635119",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002635119",
+      "model": "CH14x51/P aR 50A/500V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 50,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002635119.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002635119",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645011",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645011",
+      "model": "CH22x58 aR 20A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645011.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645011",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645013",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645013",
+      "model": "CH22x58 aR 25A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645013.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645013",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645015",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645015",
+      "model": "CH22x58 aR 32A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645015.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645015",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645017",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645017",
+      "model": "CH22x58 aR 40A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 40,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645017.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645017",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645019",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645019",
+      "model": "CH22x58 aR 50A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 50,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645019.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645019",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645021",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645021",
+      "model": "CH22x58 aR 63A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 63,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645021.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645021",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645023",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645023",
+      "model": "CH22x58 aR 80A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645023.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645023",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645025",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645025",
+      "model": "CH22x58 aR 100A/500V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645025.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645025",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645111",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645111",
+      "model": "CH22x58/P aR 20A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645111.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645111",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645113",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645113",
+      "model": "CH22x58/P aR 25A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645113.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645113",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645115",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645115",
+      "model": "CH22x58/P aR 32A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645115.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645115",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645117",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645117",
+      "model": "CH22x58/P aR 40A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 40,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645117.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645117",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645119",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645119",
+      "model": "CH22x58/P aR 50A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 50,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645119.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645119",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645121",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645121",
+      "model": "CH22x58/P aR 63A/690V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 63,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 690,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645121.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645121",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645123",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645123",
+      "model": "CH22x58/P aR 80A/600V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 600,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645123.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645123",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002645125",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "semiconductor-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002645125",
+      "model": "CH22x58/P aR 100A/500V",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH22x58/P",
+        "fuse cartridge",
+        "aR"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch22x58/p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "aR"
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 500,
+          "unit": "V AC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 200,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "22x58/P",
+          "unit": "mm"
+        },
+        "indicator": {
+          "value": "Striker pin"
+        },
+        "dimensions": {
+          "width": {
+            "value": 58,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 22.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 22.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 58,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 22.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 22.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002645125.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 58,
+          "height": 22.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline excluding actuated striker projection.",
+          "depth": 22.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002645125",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "Ultra Quick · CH cylindrical aR fuse links",
+          "url": "https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "CH mechanical drawing identifies both end caps and nominal envelope dimensions."
         }
       ],
       "status": "source-backed native part"
