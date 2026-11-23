@@ -105,6 +105,18 @@ test('DXF retains every EB2 pole terminal when exporting rotated breaker geometr
   ]);
 });
 
+test('DXF exports the ETITEC A MOV, local disconnector and attachment marks', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const arrester = engine.createInstance('eti-002442830', 100, 200, 'FV1');
+  const exported = await globalThis.AdigunDXF.exportDrawing([arrester]);
+  assert.deepEqual(exported.unsupported, []);
+  const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Overhead surge arrester', 'etitec-a-dxf');
+  const pins = project.objects.filter(object => object.kind === 'circle');
+  assert.deepEqual(pins.map(pin => [pin.x, pin.y]), [[100, 158], [100, 242]]);
+  assert.equal(project.objects.filter(object => object.kind === 'line').length, 11);
+});
+
 test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');

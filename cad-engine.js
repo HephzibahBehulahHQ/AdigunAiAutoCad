@@ -1813,6 +1813,70 @@
 
 
 
+  const etiOverheadLineTerminals = {
+    A: ['Bare-line clamp', 'clamp'], B: ['Double-sided insulation-piercing clamp', 'insulation-piercing'],
+    C: ['Single-sided insulation-piercing clamp', 'insulation-piercing'], D: ['Insulated flying lead', 'pigtail'],
+    E: ['M8 threaded stud', 'threaded-stud'], F: ['Double-sided ENSTO insulation-piercing clamp', 'insulation-piercing'],
+    F1: ['Single-sided ENSTO branching clamp', 'insulation-piercing'],
+    S: ['ENSTO insulation-piercing clamp with shear head', 'insulation-piercing'],
+    T: ['Insulated arm for TOGA clamp', 'extension-arm']
+  };
+  const etiOverheadSurgeProtectors = terminalCatalog.etiEtitecA.map(
+    ([code, voltage, discharge, line, earth, disconnector, maximum, protectionLevel]) => {
+      const id = 'eti-' + code;
+      const lineLead = etiOverheadLineTerminals[line];
+      const earthLead = earth === 'K';
+      const width = 49.8, height = 50.1, depth = 49.8;
+      const catalog = 'https://www.etipolam.com.pl/images/product_db/documents/pl-PL/05_ETITEC_PL_2021_2022.pdf';
+      const tablePage = { 280: 4, 440: 5, 500: 6, 660: 7 }[voltage];
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: 'ETITEC A ' + voltage + '/' + discharge + '/' + line + (earthLead ? 'K' : '') + (disconnector ? '-NO' : '-N'),
+        name: 'Overhead-line surge arrester', aliases: ['ETITEC A', 'Overhead line SPD', lineLead[0]],
+        family: 'surge-protective-device', referencePrefix: 'FV', category: 'Electrical · Verified protection device',
+        symbol: {
+          id: 'spd.eti.a.' + line.toLowerCase() + '.' + earth.toLowerCase() + (disconnector ? '.no' : '.n') + '.v1',
+          view: 'schematic', unit: 'mm', width: 56, height: 84, internalConnections: [],
+          pins: [
+            { id: 'power-l', localNumber: 'L', name: 'Line: ' + lineLead[0], x: 0, y: -42, electricalType: 'passive', connectionType: lineLead[1] },
+            { id: 'pe', localNumber: 'PE', name: earthLead ? 'Protective earth lead' : 'Protective earth terminal',
+              x: 0, y: 42, electricalType: 'passive', connectionType: earthLead ? 'pigtail' : 'bolted-lug' }
+          ],
+          numberingNote: 'L identifies the overhead line connection. PE identifies the lower terminal or factory-fitted earth lead.'
+        },
+        electricalFunctions: {
+          surgeBranches: [{ from: 'power-l', to: 'pe', technology: 'MOV' }],
+          simulationNote: 'The MOV limits transient voltage. Static wiring reports keep the line and earth on separate nets.'
+        },
+        specifications: {
+          protectionClass: { value: 'Type 2' }, protectionConfiguration: { value: 'L–PE' },
+          continuousAcVoltage: { value: voltage, unit: 'V AC' },
+          nominalDischargeCurrent: { value: discharge, unit: 'kA (8/20 µs)' },
+          maximumDischargeCurrent: { value: maximum, unit: 'kA (8/20 µs)' },
+          voltageProtectionLevel: { value: protectionLevel, unit: 'kV' },
+          lineConnection: { value: lineLead[0] }, earthConnection: { value: earthLead ? 'Factory-fitted earth lead' : 'PE lug terminal' },
+          ...(earthLead ? { earthLeadLength: { value: 700, unit: 'mm' } } : {}),
+          localDisconnector: { value: disconnector }, remoteSignalling: { value: false },
+          mountingMethod: { value: 'Direct mounting' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth, sourceIndex: 2,
+          scope: 'Main arrester body and threaded line stud. Connector clamps, the earth tab and flexible leads are outside this envelope.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+            documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact ETITEC A order code, model, MOV technology and electrical ratings.' },
+          { publisher: 'ETI Polam', title: 'ETITEC A · Order codes and upper/lower connection variants', url: catalog + '#page=' + tablePage,
+            documentRevision: '2021–2022', retrievedAt: '2026-11-23', revisionNote: 'Confirms the line and earth connector options and the order-code disconnector variant.' },
+          { publisher: 'ETI Polam', title: 'ETITEC A · Main body drawing', url: catalog + '#page=6',
+            documentRevision: '2021–2022', retrievedAt: '2026-11-23', revisionNote: 'The drawing identifies the body radius and height with the threaded stud.' }
+        ]
+      });
+    }
+  );
+
   const ultraQuickProfiles = {
     21: { contacts: 'knife-blade', sizes: { '00': [78, 51, 30] } },
     22: { contacts: 'knife-blade', sizes: { 1: [135, 62, 46], 2: [150, 71, 54], 3: [150, 84, 74] } },
@@ -2803,7 +2867,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -2908,6 +2972,17 @@
       }
     }
     return { segments, circles };
+  }
+
+  function overheadSurgeArresterGeometry(definition) {
+    const segments = [
+      [0, -42, 0, -24], [0, -10, 0, 42], [-4, -24, 4, -24], [4, -24, 4, -10],
+      [4, -10, -4, -10], [-4, -10, -4, -24], [-7, -10, 7, -24]
+    ];
+    if (definition.specifications.localDisconnector.value) {
+      segments.push([-3, -36, 3, -36], [3, -36, 3, -28], [3, -28, -3, -28], [-3, -28, -3, -36]);
+    }
+    return { segments, circles: [[0, -42, 2.6], [0, 42, 2.6]] };
   }
 
   function moldedCaseBreakerGeometry(definition) {
@@ -4159,6 +4234,7 @@
     wireRoutePoints: wireRoutePoints,
     fuseLinkGeometry: fuseLinkGeometry,
     moldedCaseBreakerGeometry: moldedCaseBreakerGeometry,
+    overheadSurgeArresterGeometry: overheadSurgeArresterGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
     cableScheduleCsv: cableScheduleCsv,

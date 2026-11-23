@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7619);
+  assert.equal(items.length, 7888);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2072,6 +2072,28 @@ test('ETI KZS-1M-FN breakers retain continuous neutral and separate functional e
     assert.equal(part.specifications.ratedBreakingCapacity.value, 10);
     assert.ok(part.sources[1].url.endsWith('#page=1'));
   }
+});
+
+test('ETITEC A retains distinct line and earth connections and order-specific surge ratings', () => {
+  const items = engine.catalog('Overhead line SPD').filter(item => item.family === 'surge-protective-device');
+  assert.equal(items.length, 269);
+  for (const { id } of items) {
+    const part = engine.component(id);
+    const { specifications, symbol } = part;
+    assert.deepEqual(symbol.pins.map(pin => pin.id), ['power-l', 'pe']);
+    assert.deepEqual(symbol.internalConnections, []);
+    assert.deepEqual(part.electricalFunctions.surgeBranches, [{ from: 'power-l', to: 'pe', technology: 'MOV' }]);
+    assert.equal(specifications.maximumDischargeCurrent.value, specifications.nominalDischargeCurrent.value === 5 ? 40 : 50);
+    assert.equal(specifications.localDisconnector.value, part.model.endsWith('-NO'));
+    assert.equal(specifications.remoteSignalling.value, false);
+  }
+  const stud = engine.component('eti-002441104');
+  assert.equal(stud.symbol.pins[0].connectionType, 'threaded-stud');
+  const lead = engine.component('eti-002442830');
+  assert.deepEqual(lead.symbol.pins.map(pin => pin.connectionType), ['insulation-piercing', 'pigtail']);
+  assert.equal(lead.specifications.voltageProtectionLevel.value, 1.9);
+  assert.equal(lead.specifications.earthLeadLength.value, 700);
+  assert.match(lead.physicalRepresentations[0].scope, /outside this envelope/);
 });
 
 test('ETITEC V retains distinct surge branches, common earth and isolated alarm contacts', () => {

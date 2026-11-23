@@ -119,12 +119,14 @@
       const coilAndContact = ['modular-contactor', 'modular-step-relay', 'industrial-motor-contactor'].includes(component?.family);
       const fuseLink = ['semiconductor-fuse-link', 'cylindrical-fuse-link', 'knife-blade-fuse-link'].includes(component?.family);
       const moldedCaseBreaker = component?.family === 'molded-case-circuit-breaker';
-      if ((coilAndContact || fuseLink || moldedCaseBreaker || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const overheadSurgeArrester = component?.family === 'surge-protective-device' && component.specifications.localDisconnector;
+      if ((coilAndContact || fuseLink || moldedCaseBreaker || overheadSurgeArrester || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
           : coilAndContact ? engine.coilAndContactGeometry(object)
             : fuseLink ? engine.fuseLinkGeometry()
-              : moldedCaseBreaker ? engine.moldedCaseBreakerGeometry(component) : engine.disconnectTerminalGeometry(object);
+              : moldedCaseBreaker ? engine.moldedCaseBreakerGeometry(component)
+                : overheadSurgeArrester ? engine.overheadSurgeArresterGeometry(component) : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
         function toDxf(localX, localY) {
