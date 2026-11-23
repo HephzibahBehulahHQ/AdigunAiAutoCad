@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '46', '55', '56', '60', '62')][string]$Series = '40')
+param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '46', '55', '56', '60', '62')][string]$Series = '40')
 
 $ErrorActionPreference = 'Stop'
 $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Archive).Path)
@@ -17,6 +17,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
     # Restrict each series to changeover types with a verified terminal diagram.
     $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([6789])([0-9]{3})([0145])0[02]([013])$' }
+                elseif ($Series -eq '41') { '^41(31|52|61)([89])([0-9]{3})([045])0(00|10|11|13|20)$' }
                 elseif ($Series -eq '55') { '^55([13][234])([89])([0-9]{3})([05])0([0-9]{2})$' }
                 elseif ($Series -eq '56') { '^56([34][24])([89])([0-9]{3})([04])[03]([0-9]{2})$' }
                 elseif ($Series -eq '60') { '^60([16][23])([89])([0-9]{3})([05])[02]([0-9]{2})$' }
@@ -133,6 +134,17 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $connection = if ($pcb) { 'PCB connection' } else { 'Plug-in connection' }
         if ($description -notmatch "Type of electric connection: $connection" -or !$socketOptional) { continue }
     }
+    if ($Series -eq '41') {
+        $coilVoltages = if ($mode -eq 'AC') { 24,230 } else { 5,6,12,24,48,60,110 }
+        if ($voltage -notin $coilVoltages -or !$socketOptional -or
+            $description -notmatch 'Type of electric connection: PCB connection' -or
+            ($mode -eq 'AC' -and ($version -ne '00' -or $materialCode -ne '0')) -or
+            ($mode -eq 'DC' -and $version -eq '00') -or
+            ($type -eq '31' -and $version -eq '13') -or
+            ($type -eq '52' -and $materialCode -eq '4') -or
+            ($type -eq '61' -and $materialCode -eq '5') -or
+            ($version -eq '20' -and ($type -eq '52' -or $voltage -notin 12,24 -or $materialCode -ne '0'))) { continue }
+    }
     $material = @{ '0' = 'AgNi'; '1' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
     if (!$verifiedMaterial.Success -or $verifiedMaterial.Groups[1].Value.Replace('₂', '2') -cne $material) { continue }
@@ -146,7 +158,10 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $poles = if ($Series -in '55','56','60','62') { $type.Substring(1) } elseif ($doublePole) { '2' } else { '1' }
     $noCount = if ($normallyOpen) { $poles } else { '0' }
     $coCount = if ($normallyOpen) { '0' } else { $poles }
-    if ([string]$values['EF008255'][0] -cne '0' -or [string]$values['EF008256'][0] -cne $noCount -or
+    if ($Series -eq '41') {
+        # Finder's description and order key identify CO even in records that enumerate both throws as separate contacts.
+        if ($description -notmatch "Nr.contacts: $poles\s+Contacts configuration: CO") { continue }
+    } elseif ([string]$values['EF008255'][0] -cne '0' -or [string]$values['EF008256'][0] -cne $noCount -or
         [string]$values['EF008257'][0] -cne $coCount) { continue }
     $measurements = @()
     foreach ($key in 'EF000001', 'EF000008', 'EF000040', 'EF000049') {
@@ -181,6 +196,11 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $height = switch ($type) { '42' {36.8} '44' {37.1} default {37.2} }
         if ($measurements[0] -ne 12 -or $measurements[1] -ne $width -or
             $measurements[2] -ne $height -or $measurements[3] -ne 27.7) { continue }
+    }
+    if ($Series -eq '41') {
+        $ratedCurrent = switch ($type) { '31' {12} '52' {8} '61' {16} }
+        if ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.6 -or
+            $measurements[2] -ne 15.7 -or $measurements[3] -ne 29) { continue }
     }
     if ($Series -eq '46' -and ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 32.8 -or $measurements[3] -ne 29)) { continue }

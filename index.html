@@ -1350,6 +1350,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.minimumContactGap ? [['Minimum contact gap',spec.minimumContactGap.value+' '+spec.minimumContactGap.unit]] : []),
         ...(spec.coilContactSeparator ? [['Coil/contact insulation',spec.coilContactSeparator.value]] : []),
         ...(spec.terminalPinLength ? [['Terminal pin length',spec.terminalPinLength.value+' '+spec.terminalPinLength.unit]] : []),
+        ...(spec.contactPinPitch ? [['Contact pin pitch',spec.contactPinPitch.value+' '+spec.contactPinPitch.unit]] : []),
         ...(spec.coilOperation ? [['Coil operation',spec.coilOperation.value],['Minimum set/reset pulse',spec.minimumSetResetPulse.value+' '+spec.minimumSetResetPulse.unit]] : []),
         ...(spec.socketWiringAbove10A ? [['Socket wiring above 10 A',spec.socketWiringAbove10A.value]] : []),
         ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]

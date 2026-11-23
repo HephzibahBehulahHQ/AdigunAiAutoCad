@@ -1441,12 +1441,13 @@
       });
     });
   const finderRelays = terminalCatalog.finderSeries40Relays.concat(
-    terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
+    terminalCatalog.finderSeries41Relays, terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
     terminalCatalog.finderSeries56Relays, terminalCatalog.finderSeries60Relays, terminalCatalog.finderSeries62Relays).map(
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
       const bistable = mode === 'AC/DC';
+      const lowProfile = id.startsWith('41');
       const industrial = id.startsWith('46');
       const series56 = id.startsWith('56');
       const series60 = id.startsWith('60');
@@ -1459,8 +1460,8 @@
       const poleCount = generalPurpose ? Number(id[3]) : 0;
       const pcbTenAmpRelay = id.startsWith('4062');
       const socketCommon21 = id.startsWith('4051');
-      const pairedTerminals = id.startsWith('4061');
-      const doublePole = id.startsWith('4652') || id.startsWith('4052') || pcbTenAmpRelay;
+      const pairedTerminals = id.startsWith('4061') || id.startsWith('4161');
+      const doublePole = id.startsWith('4652') || id.startsWith('4052') || id.startsWith('4152') || pcbTenAmpRelay;
       const relayType = code.slice(0, 5);
       const series = id.slice(0, 2);
       const bladePositions = doublePole
@@ -1574,7 +1575,10 @@
           internalConnections: pairedTerminals
             ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']]
             : relayDefinition.symbol.internalConnections,
-          numberingNote: generalPurpose
+          numberingNote: lowProfile
+            ? pairedTerminals ? 'Finder 41.61 connects 11–21, 12–22 and 14–24 on a single changeover pole.'
+              : 'Finder ' + relayType + ' copper-side circuit diagram gives the terminal designations.'
+            : generalPurpose
             ? 'Finder ' + relayType + ' circuit diagram gives the contact designations and physical pin positions.'
             : socketCommon21
             ? 'Finder identifies 21 as common, 12 as normally closed and 14 as normally open in compatible Series 95 sockets.'
@@ -1603,7 +1607,7 @@
           } : {}),
           ratedContactCurrent: { value: current, unit: 'A' },
           ...(socketCommon21 ? { socketContactCurrentLimit: { value: 10, unit: 'A' } } : {}),
-          ...(pairedTerminals ? {
+          ...(pairedTerminals && !lowProfile ? {
             socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
           } : {}),
           ...(normallyOpen ? {
@@ -1636,6 +1640,11 @@
               54: 'Lockable test button, AC LED and mechanical indicator',
               74: 'Lockable test button, non-polarized DC double LED and mechanical indicator'
             }[version] }
+          } : lowProfile ? {
+            mountingMethod: { value: 'PCB mount' },
+            contactPinPitch: { value: id.startsWith('4131') ? 3.5 : 5, unit: 'mm' },
+            enclosureVersion: { value: version === 11 ? 'Wash tight (RT III)' : version === 13
+              ? 'Special version (order suffix 3)' : 'Flux proof (RT II)' }
           } : {
             terminalPinLength: { value: id[10] === '2' ? 3.5 : 5.2, unit: 'mm' },
             enclosureVersion: { value: { 0: 'Standard', 1: 'Wash tight', 3: 'High-temperature wash tight' }[version] }
@@ -1652,6 +1661,10 @@
             url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
+          lowProfile ? { publisher: 'Finder', title: 'Series 41 datasheet · ' + relayType,
+            url: 'https://cdn.findernet.com/app/uploads/S41EN.pdf',
+            documentRevision: 'XI-2026', retrievedAt: '2026-11-23',
+            revisionNote: 'Pages 3, 6 and 9 document the copper-side terminal diagram, ordering and outline.' } :
           generalPurpose ? { publisher: 'Finder', title: 'Series ' + series + ' datasheet · ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S' + series + 'EN.pdf',
             documentRevision: series56 ? 'X-2026' : 'IX-2026', retrievedAt: '2026-11-23',
