@@ -450,9 +450,8 @@
     };
   }
 
-  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths, disconnect = false, variant = {}) {
+  function terminalPinMap(levels, connectionsPerLevel, connectionType) {
     const pins = [], internalConnections = [];
-    const connectionsPerLevel = variant.connectionsPerLevel ?? 2;
     const terminalPatterns = {
       2: [['left', -35, 0], ['right', 35, 0]],
       3: [['upper-left', -35, -13], ['right', 35, 0], ['lower-left', -35, 13]],
@@ -465,11 +464,17 @@
       const group = pattern.map(function ([position, x, offset], index) {
         const id = 'level-' + level + '-' + position;
         pins.push({ id: id, localNumber: prefix + (index + 1), name: 'Level ' + level + ', connection ' + (index + 1),
-          x: x, y: y + offset, electricalType: 'passive', connectionType: variant.connectionType ?? 'push-in' });
+          x: x, y: y + offset, electricalType: 'passive', connectionType: connectionType });
         return id;
       });
       internalConnections.push(group);
     }
+    return { pins, internalConnections };
+  }
+
+  function compactTerminal(partNumber, model, url, levels, voltage, current, height, railDepths, disconnect = false, variant = {}) {
+    const connectionsPerLevel = variant.connectionsPerLevel ?? 2;
+    const pinMap = terminalPinMap(levels, connectionsPerLevel, variant.connectionType ?? 'push-in');
     const name = disconnect ? 'Knife-disconnect terminal block' : levels === 3 ? 'Triple-level terminal block' : levels === 2 ? 'Double-level terminal block' : connectionsPerLevel > 2 ? 'Multi-conductor feed-through terminal block' : 'Feed-through terminal block';
     const width = variant.width ?? 5.2;
     const panelEnvelope = terminalPanelEnvelope(partNumber, width, height, railDepths);
@@ -488,7 +493,7 @@
       physicalRepresentations: [panelEnvelope],
       symbol: {
         id: 'terminal.' + (disconnect ? 'disconnect' : 'feedthrough') + '.' + partNumber + '.v1', view: 'schematic', unit: 'mm',
-        width: 70, height: connectionsPerLevel > 2 ? 70 : 26 + (levels - 1) * 30, pins: pins, internalConnections: internalConnections,
+        width: 70, height: connectionsPerLevel > 2 ? 70 : 26 + (levels - 1) * 30, ...pinMap,
         numberingNote: 'Connection numbers and level prefixes are model-local identifiers.'
       },
       specifications: {
@@ -1382,13 +1387,13 @@
     });
   });
   const weidmullerFeedThroughTerminals = terminalCatalog.weidmullerWduTerminals
-    .concat(terminalCatalog.weidmullerA2cTerminals).map(
+    .concat(terminalCatalog.weidmullerA2cTerminals, terminalCatalog.weidmullerA3cA4cTerminals).map(
     ([id, model, slug, color, area, voltage, current, width, height, depth, minimumRigid, maximumRigid,
-      minimumFlexible, maximumFlexible, depthIncludingDINRail]) => {
+      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionCount = 2]) => {
       const partId = 'weidmuller-' + id;
       const screw = model.startsWith('WDU ');
       const mm = value => ({ value, unit: 'mm' });
-      const mountedDepth = depthIncludingDINRail === undefined ? {} : { depthIncludingDINRail };
+      const mountedDepth = Number.isFinite(depthIncludingDINRail) ? { depthIncludingDINRail } : {};
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION,
         id: partId,
@@ -1396,14 +1401,15 @@
         manufacturerPartNumber: id,
         model,
         aliases: ['Weidmueller', color],
-        name: 'Feed-through terminal block',
+        name: connectionCount > 2 ? 'Multi-conductor feed-through terminal block' : 'Feed-through terminal block',
         family: 'feedthrough-terminal',
         referencePrefix: 'X',
         category: terminalDefinition.category,
         symbol: {
           ...pt25Terminal.symbol,
           id: 'terminal.feedthrough.' + partId + '.v1',
-          pins: pt25Terminal.symbol.pins.map(pin => ({ ...pin, connectionType: screw ? 'screw' : 'push-in' }))
+          height: connectionCount > 2 ? 70 : pt25Terminal.symbol.height,
+          ...terminalPinMap(1, connectionCount, screw ? 'screw' : 'push-in')
         },
         specifications: {
           nominalVoltage: { value: voltage, unit: 'V' },
@@ -1412,12 +1418,12 @@
           rigidConductorRange: { minimum: minimumRigid, maximum: maximumRigid, unit: 'mm²' },
           flexibleConductorRange: { minimum: minimumFlexible, maximum: maximumFlexible, unit: 'mm²' },
           connectionMethod: { value: screw ? 'Screw' : 'Push-in' },
-          connectionCount: { value: 2, unit: 'connections' },
+          connectionCount: { value: connectionCount, unit: 'connections' },
           mountingRails: { value: ['TS 35'] },
           endCoverRequired: { value: true },
           color: { value: color },
           dimensions: { width: mm(width), height: mm(height), depth: mm(depth),
-            ...(depthIncludingDINRail === undefined ? {} : { depthIncludingDINRail: mm(depthIncludingDINRail) }) }
+            ...(Number.isFinite(depthIncludingDINRail) ? { depthIncludingDINRail: mm(depthIncludingDINRail) } : {}) }
         },
         physicalRepresentations: [{ ...terminalPanelEnvelope(partId, width, height), depth, ...mountedDepth }],
         instanceProperties: terminalDefinition.instanceProperties,
@@ -1425,7 +1431,8 @@
           publisher: 'Weidmüller', title: model + ' · Feed-through terminal block · Item ' + id,
           url: 'https://eshop.weidmueller.com/en/' + slug + '/p/' + id,
           documentRevision: null, retrievedAt: '2026-11-23',
-          revisionNote: 'Manufacturer product data for one potential and two clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting.'
+          revisionNote: 'Manufacturer product data for one potential and ' + (connectionCount === 2 ? 'two' : connectionCount) +
+            ' clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting.'
         }]
       });
     });
