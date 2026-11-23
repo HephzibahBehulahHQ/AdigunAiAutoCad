@@ -125,9 +125,11 @@
       const camSwitch = component?.family === 'rotary-cam-switch';
       const nhFuseBase = component?.family === 'nh-fuse-base';
       const deltaCapacitor = component?.family === 'three-phase-capacitor';
-      if ((coilAndContact || fuseLink || nhFuseBase || deltaCapacitor || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || camSwitch || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const etimatBreaker = component?.family === 'miniature-circuit-breaker' && component.electricalFunctions.switchingSequence;
+      if ((coilAndContact || fuseLink || nhFuseBase || deltaCapacitor || etimatBreaker || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || camSwitch || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
+          : etimatBreaker ? engine.etimatBreakerGeometry(object, component)
           : deltaCapacitor ? engine.deltaCapacitorGeometry(component)
           : nhFuseBase ? engine.nhFuseBaseGeometry(component)
           : camSwitch ? engine.camSwitchGeometry(object, component)

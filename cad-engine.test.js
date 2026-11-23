@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 9147);
+  assert.equal(items.length, 9412);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1718,7 +1718,7 @@ test('ETIBREAK EB2S preserves fixed and adjustable trips and distinct capacity t
 
 test('ETIMAT 6 breakers expose documented protected and switched neutral poles', () => {
   const items = engine.catalog('ETI ETIMAT 6').filter(item => item.name.startsWith('ETIMAT 6 '));
-  assert.equal(items.length, 127);
+  assert.equal(items.length, 220);
   for (const item of items) {
     const definition = engine.component(item.id);
     const { protectedPoles, switchedNeutral, ratedBreakingCapacity } = definition.specifications;
@@ -1732,7 +1732,7 @@ test('ETIMAT 6 breakers expose documented protected and switched neutral poles',
 });
 
 test('ETIMAT P-series breakers follow their separate terminal numbering and breaking capacities', () => {
-  for (const [series, count, capacity] of [['P6', 135, 6], ['P10', 338, 10]]) {
+  for (const [series, count, capacity] of [['P6', 233, 6], ['P10', 356, 10]]) {
     const items = engine.catalog('ETI ETIMAT ' + series).filter(item => item.name.startsWith('ETIMAT ' + series + ' '));
     assert.equal(items.length, count);
     for (const item of items) {
@@ -1742,7 +1742,9 @@ test('ETIMAT P-series breakers follow their separate terminal numbering and brea
       if (switchedNeutral.value) terminals.push('01', '02');
       assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), terminals);
       assert.equal(ratedBreakingCapacity.value, capacity);
-      assert.deepEqual([dimensions.height.value, dimensions.depth.value], [88, 69.5]);
+      if (!part.instanceProperties.switchingStep) {
+        assert.deepEqual([dimensions.height.value, dimensions.depth.value], [88, 69.5]);
+      }
     }
   }
 });
@@ -1775,7 +1777,7 @@ test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams for both curr
 
 test('ETIMAT P10-DC exposes documented polarity for one- and two-pole breakers', () => {
   const items = engine.catalog('ETI ETIMAT P10-DC');
-  assert.equal(items.length, 72);
+  assert.equal(items.length, 114);
   for (const item of items) {
     const part = engine.component(item.id);
     const { protectedPoles, nominalVoltage, ratedBreakingCapacity, dimensions } = part.specifications;
@@ -7386,4 +7388,31 @@ test('ETI LPC delta capacitors preserve phase branches and protective earth acro
   assert.deepEqual(nets.map(net => net.pins.map(pin => pin.number)).flat().sort(), ['PE','R','S','T']);
   assert.ok(nets.every(net => net.pins.length === 1));
   assert.equal(engine.deltaCapacitorGeometry(sample).circles.length, 3);
+});
+
+test('Exact ASTI ETIMAT additions retain terminal markings, pole isolation and editable breaker position', () => {
+  const items = engine.catalog().filter(item => item.family === 'miniature-circuit-breaker')
+    .map(item => engine.component(item.id)).filter(part => part.instanceProperties.switchingStep);
+  assert.equal(items.length, 265);
+  const part = engine.component('eti-002191101');
+  assert.deepEqual(part.symbol.pins.map(pin => pin.manufacturerMarking || pin.localNumber), ['N','N','1','2']);
+  assert.equal(part.specifications.protectedPoles.value, 1);
+  assert.equal(part.specifications.dimensions.depth.value, 73.97);
+  const sheetId = 'compact-breaker';
+  const object = { ...engine.createInstance(part.id, 100, 100, 'Q1'), sheetId };
+  const pin = engine.worldPins(object).find(pin => pin.id === 'terminal-1');
+  const wire = { id: 'mcb-feed', kind: 'wire', sheetId, x: pin.x, y: pin.y,
+    x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y - 18,
+    pinAttachments: { start: { instanceId: object.id, pinId: pin.id }, end: null } };
+  const connected = (breaker) => engine.analyze([breaker, wire]).nets.find(net =>
+    net.pins.some(item => item.pinId === pin.id)).pins.map(item => item.pinId).sort();
+  assert.deepEqual(connected(object), ['terminal-1']);
+  const open = engine.etimatBreakerGeometry(object);
+  object.properties.switchingStep = '2';
+  assert.deepEqual(connected(object), ['terminal-1','terminal-2']);
+  assert.notDeepEqual(engine.etimatBreakerGeometry(object), open);
+  const saved = engine.serializeProject({ project: 'MCB test', sheets: [{ id: sheetId, name: 'Wiring' }], objects: [object, wire] });
+  const reopened = engine.parseProject(saved);
+  assert.equal(reopened.valid, true);
+  assert.deepEqual(connected(reopened.project.objects[0]), ['terminal-1','terminal-2']);
 });
