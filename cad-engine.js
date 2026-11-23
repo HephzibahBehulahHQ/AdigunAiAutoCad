@@ -1537,31 +1537,41 @@
     NH1: [135, 52, 46], NH2: [150, 61, 54], NH3: [150, 74, 64],
     'NHS1/110': [140, 51, 46], 'NHS2/110': [140, 59, 54], 'NHS3/110': [140, 70, 64]
   };
-  const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(terminalCatalog.etiKnifeBladeFuseLinks, terminalCatalog.etiNhBatteryFuseLinks, terminalCatalog.etiCylindricalArFuseLinks)
-    .map(([code, size, utilization, current, voltage, capacity, certification, timeConstant]) => {
+  const etiCylindricalGrDimensions = {
+    '10x38': [38, 10.3], '10x38SU': [60, 10.3, 11],
+    '10x85': [85, 10.3], '10x85SU': [108, 10.3, 11]
+  };
+  const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(
+    terminalCatalog.etiKnifeBladeFuseLinks, terminalCatalog.etiNhBatteryFuseLinks,
+    terminalCatalog.etiCylindricalArFuseLinks, terminalCatalog.etiCylindricalGrFuseLinks
+  ).map(([code, size, utilization, current, voltage, capacity, certification, timeConstant, dcCapacity]) => {
     const id = 'eti-' + code;
     const knifeBlade = size.startsWith('NH');
     const insulated = size.endsWith('/I');
     const cylindricalAr = !knifeBlade && utilization === 'aR';
+    const cylindricalGr = !knifeBlade && utilization === 'gR';
+    const slottedCartridge = cylindricalGr && size.endsWith('SU');
     const striker = cylindricalAr && size.endsWith('/P');
     const caseSize = insulated || striker ? size.slice(0, -2) : size;
     const photovoltaic = utilization === 'gPV';
     const battery = utilization === 'gBat';
-    const directCurrent = photovoltaic || battery;
+    const directCurrent = photovoltaic || battery || (cylindricalGr && voltage === 1200);
     const cartridge = photovoltaic && !knifeBlade ? etiPvCartridges[size] : null;
     const slottedBlade = directCurrent && knifeBlade && /^NH[SU]/.test(size);
     const batterySize = battery ? size.replace(/\/K$/, '') : null;
     const batteryDimensions = battery && voltage === 80 && size === 'NH1' ? [135, 65, 46] : nhBatteryDimensions[batterySize];
     const arDimensions = cylindricalAr && caseSize === '22x58' ? [58, 22.3] : null;
-    const [length, height, depth = height] = arDimensions ?? batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
+    const grDimensions = cylindricalGr ? etiCylindricalGrDimensions[size] : null;
+    const [length, height, depth = height] = grDimensions ?? arDimensions ?? batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
     const format = knifeBlade ? size : 'CH' + size;
-    const contactName = slottedBlade ? 'slotted blade contact' : knifeBlade ? 'blade contact' : 'end cap';
-    const contactType = slottedBlade ? 'slotted-blade' : knifeBlade ? 'knife-blade' : 'end-cap';
-    const terminalPrefix = knifeBlade ? 'blade-' : 'cap-';
+    const contactName = slottedCartridge ? 'slotted tab' : slottedBlade ? 'slotted blade contact' : knifeBlade ? 'blade contact' : 'end cap';
+    const contactType = slottedCartridge || slottedBlade ? 'slotted-blade' : knifeBlade ? 'knife-blade' : 'end-cap';
+    const terminalPrefix = slottedCartridge ? 'tab-' : knifeBlade ? 'blade-' : 'cap-';
     const batteryDrawingPage = voltage === 80 ? 70 : voltage === 440 ? 72 : slottedBlade ? 77 : 76;
     const dimensionalSource = battery
       ? 'https://www.etigroup.eu/images/product_db/idents/en-GB/004184465_TD.pdf#page=' + batteryDrawingPage
       : cylindricalAr ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12'
+      : cylindricalGr ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=' + (directCurrent ? 14 : 13)
       : cartridge ? 'https://www.etigroup.eu/products-services/' + cartridge.source
       : photovoltaic ? 'https://www.eti.si/images/userfiles/en-GB/documents/products/building_industry/Green_Protect.pdf#page=50' : knifeBlade
       ? nhFuseDimensionSources[size + ' ' + utilization + ' ' + voltage] ?? nhFuseDimensionSources[size]
@@ -1573,14 +1583,15 @@
     ];
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (directCurrent ? ' DC' : '') + (certification ? ' ' + certification : ''),
+      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (directCurrent ? ' DC' : cylindricalGr ? ' AC/DC' : '') + (certification ? ' ' + certification : ''),
       name: knifeBlade ? 'Knife-blade fuse link' : 'Cylindrical fuse link',
       aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization, ...(battery ? ['battery protection fuse'] : [])],
-      family: cylindricalAr ? 'semiconductor-fuse-link' : knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+      family: cylindricalAr || cylindricalGr ? 'semiconductor-fuse-link' : knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
         id: 'fuse.eti.' + (battery ? size : knifeBlade ? caseSize : format).toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
         internalConnections: [],
-        numberingNote: knifeBlade ? 'L and R identify the two blade contacts in the CAD symbol.' : 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
+        numberingNote: slottedCartridge ? 'L and R identify the two slotted SU terminal tabs in the CAD symbol.'
+          : knifeBlade ? 'L and R identify the two blade contacts in the CAD symbol.' : 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
       },
       electricalFunctions: {
         protectedTerminalPair: pins.map(pin => pin.id),
@@ -1589,6 +1600,9 @@
       specifications: {
         utilizationCategory: { value: utilization }, nominalCurrent: { value: current, unit: 'A' },
         nominalVoltage: { value: voltage, unit: directCurrent ? 'V DC' : 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+        ...(cylindricalGr && !directCurrent ? {
+          ratedDcVoltage: { value: voltage, unit: 'V DC' }, ratedDcBreakingCapacity: { value: dcCapacity, unit: 'kA' }
+        } : {}),
         cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
         ...(striker || (battery && size.endsWith('/K')) ? { indicator: { value: 'Striker pin' } } : {}),
         ...(insulated ? { insulatedGrippingLugs: { value: true } } : {}),
@@ -1598,6 +1612,8 @@
       physicalRepresentations: [{
         ...terminalPanelEnvelope(id, length, height), sourceIndex: 1, depth,
         scope: striker ? 'Nominal cartridge outline excluding actuated striker projection.'
+          : slottedCartridge && directCurrent ? 'Cartridge envelope including slotted terminals at the maximum overall length. The drawing specifies a range of 105.6–108 mm.'
+          : slottedCartridge ? 'Nominal cartridge envelope including both slotted terminals.'
           : 'Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.'
       }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
@@ -1605,10 +1621,12 @@
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
         { publisher: 'ETI', title: cylindricalAr ? 'Ultra Quick · CH cylindrical aR fuse links'
+          : cylindricalGr ? 'Ultra Quick · CH cylindrical gR fuse links'
           : battery ? 'NH battery fuse · mechanical drawing' : cartridge ? 'CH photovoltaic cartridge dimensions'
           : photovoltaic ? 'Green Protect · NH photovoltaic fuse-link dimensions' : knifeBlade ? 'NV/NH knife-blade fuse-link dimensions' : 'C / Cylindrical fuse-links',
           url: dimensionalSource,
-          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: cartridge
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: cylindricalGr
+            ? 'Exact order-code table, AC and DC ratings, and dimensioned drawings for standard end caps and SU slotted terminals.' : cartridge
             ? 'Net product dimensions for the corresponding photovoltaic cartridge size.' : knifeBlade
             ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
             : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' }

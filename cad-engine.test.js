@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 6631);
+  assert.equal(items.length, 6685);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2151,8 +2151,29 @@ test('ETI cylindrical aR fuse links preserve electrical caps and mechanical stri
   assert.deepEqual([view.width, view.height, view.depth], [58, 22.3, 22.3]);
 });
 
+test('ETI cylindrical gR fuses retain the AC and DC ratings and the correct terminal contacts', () => {
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.id.startsWith('eti-002') && item.name.includes(' gR '));
+  assert.equal(items.length, 54);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const slotted = item.name.includes('SU ');
+    const prefix = slotted ? 'tab-' : 'cap-';
+    const connectionType = slotted ? 'slotted-blade' : 'end-cap';
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [connectionType, connectionType]);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, [prefix + 'left', prefix + 'right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const dcOnly = item.name.includes('1200V');
+    assert.equal(part.specifications.ratedBreakingCapacity.value, dcOnly ? 30 : 50);
+    assert.equal(part.specifications.ratedDcBreakingCapacity?.value, dcOnly ? undefined : 8);
+    assert.equal(part.specifications.ratedDcTimeConstant.value, 2);
+  }
+  const part = engine.component('eti-002625231');
+  const view = part.physicalRepresentations[0];
+  assert.deepEqual([view.width, view.height, view.depth], [108, 10.3, 11]);
+});
+
 test('ETI Ultra Quick gR and gS retain voltage-specific capacities, indicators and terminals', () => {
-  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && / (gR|gS) /.test(item.name));
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.id.startsWith('eti-004') && / (gR|gS) /.test(item.name));
   assert.equal(items.length, 254);
   for (const item of items) {
     const part = engine.component(item.id);
