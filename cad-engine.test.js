@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 6685);
+  assert.equal(items.length, 6909);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1729,7 +1729,7 @@ test('ETIMAT P10-QC uses the Quick Connect terminal diagram', () => {
 });
 
 test('ETI CH cartridge dimensions and fuse terminals follow the manufacturer drawing', () => {
-  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link' && !item.name.includes(' gPV '));
+  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link' && / (gG|aM) /.test(item.name));
   assert.equal(items.length, 106);
   const envelopes = { '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2] };
   for (const item of items) {
@@ -1741,6 +1741,23 @@ test('ETI CH cartridge dimensions and fuse terminals follow the manufacturer dra
     assert.deepEqual(part.symbol.internalConnections, []);
     assert.equal(ratedBreakingCapacity.value, cartridgeSize.value === '8x32' ? 20 : 120);
   }
+});
+
+test('ETI miniature fuses preserve table ratings and end-cap terminals across both sizes', () => {
+  const items = engine.catalog('minifuse');
+  assert.equal(items.length, 224);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const size = part.specifications.cartridgeSize.value;
+    const { width, height, depth } = part.physicalRepresentations[0];
+    assert.deepEqual([width, height, depth], size === '5x20' ? [20, 5, 5] : [32, 6.3, 6.3]);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['cap-left', 'cap-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const fast = engine.component('eti-006710009').specifications;
+  assert.equal(fast.nominalCurrent.value, 0.1);
+  assert.equal(fast.ratedBreakingCapacity.value, 0.035);
+  assert.equal(engine.component('eti-006710319').specifications.ratedBreakingCapacity.value, 1.5);
 });
 
 test('ETI NH gG fuse links preserve blade contacts and AC ratings across ten case sizes', () => {
