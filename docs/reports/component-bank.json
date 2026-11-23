@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 955,
+    "manufacturerParts": 970,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 955,
-    "partsWithPhysicalDimensions": 941,
-    "partsWithPhysicalRepresentations": 934,
+    "partsWithTerminalMaps": 970,
+    "partsWithPhysicalDimensions": 956,
+    "partsWithPhysicalRepresentations": 949,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -73768,6 +73768,1362 @@
       "status": "source-backed native part"
     },
     {
+      "componentId": "finder-403160050000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.31.6.005.0000",
+      "model": "40.31.6.005.0000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "403160050000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 5,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-403160050000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 5,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-403160050000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 403160050000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.31",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.31.6.005.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/403160050000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-403160060000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.31.6.006.0000",
+      "model": "40.31.6.006.0000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "403160060000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-403160060000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-403160060000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 403160060000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.31",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.31.6.006.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/403160060000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-403160120000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.31.6.012.0000",
+      "model": "40.31.6.012.0000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "403160120000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-403160120000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-403160120000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 403160120000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.31",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.31.6.012.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/403160120000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-403160240000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.31.6.024.0000",
+      "model": "40.31.6.024.0000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "403160240000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-403160240000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-403160240000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 403160240000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.31",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.31.6.024.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/403160240000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-403160480000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.31.6.048.0000",
+      "model": "40.31.6.048.0000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "403160480000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 48,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-403160480000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 48,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-403160480000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 403160480000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.31",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.31.6.048.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/403160480000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-403161100000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.31.6.110.0000",
+      "model": "40.31.6.110.0000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "403161100000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 110,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-403161100000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 110,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-403161100000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 403161100000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.31",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.31.6.110.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/403161100000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
       "componentId": "finder-403170050000",
       "schemaVersion": 1,
       "category": "Electrical · Verified interface relay",
@@ -102785,6 +104141,1650 @@
           "publisher": "Finder",
           "title": "40.31.9.125.0003 · Manufacturer product record",
           "url": "https://www.findernet.com/en/p/403191250003",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-405260050000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.52.6.005.0000",
+      "model": "40.52.6.005.0000",
+      "function": "Double-pole bistable changeover relay",
+      "aliases": [
+        "405260050000",
+        "Series 40",
+        "DPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": -35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": -10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 70,
+          "y": 10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 70,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 5,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": "contact-14",
+            "resetConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          },
+          {
+            "common": "contact-21",
+            "normallyClosed": "contact-22",
+            "normallyOpen": "contact-24",
+            "resetConnections": [
+              [
+                "contact-21",
+                "contact-22"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-21",
+                "contact-24"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series40.finder-405260050000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 5,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 2,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-405260050000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 405260050000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.52",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.52.6.005.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/405260050000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-405260060000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.52.6.006.0000",
+      "model": "40.52.6.006.0000",
+      "function": "Double-pole bistable changeover relay",
+      "aliases": [
+        "405260060000",
+        "Series 40",
+        "DPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": -35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": -10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 70,
+          "y": 10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 70,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": "contact-14",
+            "resetConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          },
+          {
+            "common": "contact-21",
+            "normallyClosed": "contact-22",
+            "normallyOpen": "contact-24",
+            "resetConnections": [
+              [
+                "contact-21",
+                "contact-22"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-21",
+                "contact-24"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series40.finder-405260060000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 2,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-405260060000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 405260060000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.52",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.52.6.006.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/405260060000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-405260120000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.52.6.012.0000",
+      "model": "40.52.6.012.0000",
+      "function": "Double-pole bistable changeover relay",
+      "aliases": [
+        "405260120000",
+        "Series 40",
+        "DPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": -35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": -10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 70,
+          "y": 10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 70,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": "contact-14",
+            "resetConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          },
+          {
+            "common": "contact-21",
+            "normallyClosed": "contact-22",
+            "normallyOpen": "contact-24",
+            "resetConnections": [
+              [
+                "contact-21",
+                "contact-22"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-21",
+                "contact-24"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series40.finder-405260120000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 2,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-405260120000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 405260120000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.52",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.52.6.012.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/405260120000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-405260240000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.52.6.024.0000",
+      "model": "40.52.6.024.0000",
+      "function": "Double-pole bistable changeover relay",
+      "aliases": [
+        "405260240000",
+        "Series 40",
+        "DPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": -35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": -10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 70,
+          "y": 10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 70,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": "contact-14",
+            "resetConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          },
+          {
+            "common": "contact-21",
+            "normallyClosed": "contact-22",
+            "normallyOpen": "contact-24",
+            "resetConnections": [
+              [
+                "contact-21",
+                "contact-22"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-21",
+                "contact-24"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series40.finder-405260240000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 2,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-405260240000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 405260240000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.52",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.52.6.024.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/405260240000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-405260480000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.52.6.048.0000",
+      "model": "40.52.6.048.0000",
+      "function": "Double-pole bistable changeover relay",
+      "aliases": [
+        "405260480000",
+        "Series 40",
+        "DPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": -35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": -10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 70,
+          "y": 10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 70,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 48,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": "contact-14",
+            "resetConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          },
+          {
+            "common": "contact-21",
+            "normallyClosed": "contact-22",
+            "normallyOpen": "contact-24",
+            "resetConnections": [
+              [
+                "contact-21",
+                "contact-22"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-21",
+                "contact-24"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series40.finder-405260480000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 48,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 2,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-405260480000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 405260480000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.52",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.52.6.048.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/405260480000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-405261100000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.52.6.110.0000",
+      "model": "40.52.6.110.0000",
+      "function": "Double-pole bistable changeover relay",
+      "aliases": [
+        "405261100000",
+        "Series 40",
+        "DPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": -35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": -10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 35,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 70,
+          "y": 10,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 70,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 110,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": "contact-14",
+            "resetConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          },
+          {
+            "common": "contact-21",
+            "normallyClosed": "contact-22",
+            "normallyOpen": "contact-24",
+            "resetConnections": [
+              [
+                "contact-21",
+                "contact-22"
+              ]
+            ],
+            "setConnections": [
+              [
+                "contact-21",
+                "contact-24"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series40.finder-405261100000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 110,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "changeoverContactCount": {
+          "value": 2,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-405261100000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 405261100000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.52",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.52.6.110.0000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/405261100000",
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "Product link supplied in the manufacturer BMEcat record."
@@ -149336,6 +152336,813 @@
           "publisher": "Finder",
           "title": "40.52.9.125.5001 · Manufacturer product record",
           "url": "https://www.findernet.com/en/p/405291255001",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-406160064000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.61.6.006.4000",
+      "model": "40.61.6.006.4000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "406160064000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 45,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 23,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 67,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 45,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 23,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 67,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "contact-11",
+          "contact-21"
+        ],
+        [
+          "contact-12",
+          "contact-22"
+        ],
+        [
+          "contact-14",
+          "contact-24"
+        ]
+      ],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-406160064000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "socketWiringAbove10A": {
+          "value": "For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A."
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgSnO2"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-406160064000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 406160064000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.61",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.61.6.006.4000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/406160064000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-406160124000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.61.6.012.4000",
+      "model": "40.61.6.012.4000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "406160124000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 45,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 23,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 67,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 45,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 23,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 67,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "contact-11",
+          "contact-21"
+        ],
+        [
+          "contact-12",
+          "contact-22"
+        ],
+        [
+          "contact-14",
+          "contact-24"
+        ]
+      ],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-406160124000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "socketWiringAbove10A": {
+          "value": "For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A."
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgSnO2"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-406160124000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 406160124000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.61",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.61.6.012.4000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/406160124000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-406160244000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "40.61.6.024.4000",
+      "model": "40.61.6.024.4000",
+      "function": "Single-pole bistable changeover relay",
+      "aliases": [
+        "406160244000",
+        "Series 40",
+        "SPDT",
+        "Latching",
+        "Bistable"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 45,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 23,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 67,
+          "y": -60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-21",
+          "localNumber": "21",
+          "name": "Changeover common",
+          "x": 45,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-22",
+          "localNumber": "22",
+          "name": "Normally closed",
+          "x": 23,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-24",
+          "localNumber": "24",
+          "name": "Normally open",
+          "x": 67,
+          "y": 60,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "contact-11",
+          "contact-21"
+        ],
+        [
+          "contact-12",
+          "contact-22"
+        ],
+        [
+          "contact-14",
+          "contact-24"
+        ]
+      ],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V AC/DC"
+          },
+          "polarized": true,
+          "minimumSetResetPulseMs": 20
+        },
+        "changeoverContact": {
+          "common": "contact-11",
+          "normallyClosed": "contact-12",
+          "normallyOpen": "contact-14",
+          "resetConnections": [
+            [
+              "contact-11",
+              "contact-12"
+            ]
+          ],
+          "setConnections": [
+            [
+              "contact-11",
+              "contact-14"
+            ]
+          ],
+          "actuation": "coil-a1/coil-a2",
+          "simulation": "Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state."
+        }
+      },
+      "geometry": {
+        "id": "relay.series40.finder-406160244000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 140
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V AC/DC"
+        },
+        "coilOperation": {
+          "value": "Single-coil bistable. Set and reset use the external circuit in the manufacturer diagram."
+        },
+        "minimumSetResetPulse": {
+          "value": 20,
+          "unit": "ms"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "socketWiringAbove10A": {
+          "value": "For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A."
+        },
+        "changeoverContactCount": {
+          "value": 1,
+          "unit": "changeover contact"
+        },
+        "contactMaterial": {
+          "value": "AgSnO2"
+        },
+        "terminalPinLength": {
+          "value": 5.2,
+          "unit": "mm"
+        },
+        "enclosureVersion": {
+          "value": "Standard"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.4,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 25,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 29,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.4,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 25,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 29,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-406160244000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.4,
+          "height": 25,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 29
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 406160244000",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 40 datasheet · Bistable 40.61",
+          "url": "https://cdn.findernet.com/app/uploads/S40EN.pdf",
+          "documentRevision": "VIII-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 9–10 document terminals, ordering, polarized coil and separate set/reset behavior."
+        },
+        {
+          "publisher": "Finder",
+          "title": "40.61.6.024.4000 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/406160244000",
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "Product link supplied in the manufacturer BMEcat record."

@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 955);
+  assert.equal(items.length, 970);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1319,7 +1319,7 @@ test('Weidmüller WDK and A2T terminal blocks preserve two isolated levels', () 
 });
 
 test('Finder Series 40 catalog order codes carry five distinct schematic pins and source-backed dimensions', () => {
-  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-40(31|51)/.test(item.id));
+  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-40(31|51)[789]/.test(item.id));
   assert.equal(parts.length, 135);
   assert.equal(new Set(parts.map(part => part.id)).size, parts.length);
   const coilTypes = new Set();
@@ -1386,7 +1386,7 @@ test('Finder 46.52 relays expose separate, correctly mapped changeover poles', (
 
 test('Finder 40.52 and 40.62 PCB relays have eight terminals and two distinct switch poles', () => {
   const series = engine.catalog('Finder Series 40');
-  const eightAmp = series.filter(item => item.id.startsWith('finder-4052'));
+  const eightAmp = series.filter(item => /^finder-4052[789]/.test(item.id));
   const tenAmp = series.filter(item => item.id.startsWith('finder-4062'));
   assert.equal(eightAmp.length, 177);
   assert.equal(tenAmp.length, 32);
@@ -1404,7 +1404,7 @@ test('Finder 40.52 and 40.62 PCB relays have eight terminals and two distinct sw
 });
 
 test('Finder 40.61 relays permanently join paired terminals without joining the switched contacts', () => {
-  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-4061'));
+  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-4061[789]/.test(item.id));
   assert.equal(parts.length, 111);
   for (const item of parts) {
     const part = engine.component(item.id);
@@ -1423,6 +1423,23 @@ test('Finder 40.61 relays permanently join paired terminals without joining the 
   assert.deepEqual(engine.analyze([relay, ...wires]).nets.map(net => net.wireIds), [
     ['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']
   ]);
+});
+
+test('Finder bistable relays describe latched set and reset paths separately from static connectivity', () => {
+  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-40\d{2}6/.test(item.id));
+  assert.equal(parts.length, 15);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    assert.equal(part.electricalFunctions.coil.nominalVoltage.unit, 'V AC/DC');
+    assert.equal(part.electricalFunctions.coil.minimumSetResetPulseMs, 20);
+    const contacts = part.electricalFunctions.changeoverContacts || [part.electricalFunctions.changeoverContact];
+    for (const contact of contacts) {
+      assert.deepEqual(contact.resetConnections, [[contact.common, contact.normallyClosed]]);
+      assert.deepEqual(contact.setConnections, [[contact.common, contact.normallyOpen]]);
+      assert.equal(contact.deenergizedConnections, undefined);
+      assert.ok(part.symbol.internalConnections.every(pair => !pair.includes(contact.common) || !pair.includes(contact.normallyClosed)));
+    }
+  }
 });
 
 test('Finder short-pin PCB variants report the documented 3.5 mm terminal length', () => {
