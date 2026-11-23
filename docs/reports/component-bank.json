@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 3276,
+    "manufacturerParts": 3298,
     "symbolFamilies": 17,
-    "partsWithTerminalMaps": 3276,
-    "partsWithPhysicalDimensions": 3262,
-    "partsWithPhysicalRepresentations": 3255,
+    "partsWithTerminalMaps": 3298,
+    "partsWithPhysicalDimensions": 3284,
+    "partsWithPhysicalRepresentations": 3277,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -685359,6 +685359,4714 @@
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "ETIMAT 6 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906441",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906441",
+      "model": "ETIMAT P10-QC 3p+N D0.5",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D0.5"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 0.5,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906441.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906441",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906442",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906442",
+      "model": "ETIMAT P10-QC 3p+N D1",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D1"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 1,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906442.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906442",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906443",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906443",
+      "model": "ETIMAT P10-QC 3p+N D1.6",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D1.6"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 1.6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906443.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906443",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906444",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906444",
+      "model": "ETIMAT P10-QC 3p+N D2",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D2"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 2,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906444.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906444",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906445",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906445",
+      "model": "ETIMAT P10-QC 3p+N D3",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D3"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 3,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906445.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906445",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906446",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906446",
+      "model": "ETIMAT P10-QC 3p+N D4",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D4"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 4,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906446.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906446",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906447",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906447",
+      "model": "ETIMAT P10-QC 3p+N D6",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D6"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906447.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906447",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906448",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906448",
+      "model": "ETIMAT P10-QC 3p+N D10",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D10"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906448.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906448",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906449",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906449",
+      "model": "ETIMAT P10-QC 3p+N D13",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D13"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 13,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906449.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906449",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906450",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906450",
+      "model": "ETIMAT P10-QC 3p+N D16",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D16"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906450.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906450",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906451",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906451",
+      "model": "ETIMAT P10-QC 3p+N D20",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "D20"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906451.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906451",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906461",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906461",
+      "model": "ETIMAT P10-QC 3p+N K0.5",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K0.5"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 0.5,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906461.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906461",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906462",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906462",
+      "model": "ETIMAT P10-QC 3p+N K1",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K1"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 1,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906462.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906462",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906463",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906463",
+      "model": "ETIMAT P10-QC 3p+N K1.6",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K1.6"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 1.6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906463.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906463",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906464",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906464",
+      "model": "ETIMAT P10-QC 3p+N K2",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K2"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 2,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906464.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906464",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906465",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906465",
+      "model": "ETIMAT P10-QC 3p+N K3",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K3"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 3,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906465.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906465",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906466",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906466",
+      "model": "ETIMAT P10-QC 3p+N K4",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K4"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 4,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906466.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906466",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906467",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906467",
+      "model": "ETIMAT P10-QC 3p+N K6",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K6"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906467.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906467",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906468",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906468",
+      "model": "ETIMAT P10-QC 3p+N K10",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K10"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906468.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906468",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906469",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906469",
+      "model": "ETIMAT P10-QC 3p+N K13",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K13"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 13,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906469.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906469",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906470",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906470",
+      "model": "ETIMAT P10-QC 3p+N K16",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K16"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906470.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906470",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-001906471",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "001906471",
+      "model": "ETIMAT P10-QC 3p+N K20",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT P10-QC",
+        "MCB",
+        "K20"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimatp10-qc.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "K"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "connectionMethod": {
+          "value": "Quick Connect"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 72,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90.1,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 74.47,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 72,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90.1,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 74.47,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-001906471.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 72,
+          "height": 90.1,
+          "railDepths": {},
+          "sourceIndex": 2,
+          "scope": "Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.",
+          "depth": 74.47
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 001906471",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT P10-QC",
+          "url": "https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT P10-QC connection diagrams, dimensions and rating tables."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ETIMAT P10-QC net product dimensions",
+          "url": "https://www.etigroup.eu/products-services/291042103",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer net dimensions for the 3p+N housing."
         }
       ],
       "status": "source-backed native part"

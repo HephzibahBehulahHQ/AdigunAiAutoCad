@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3276);
+  assert.equal(items.length, 3298);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1713,6 +1713,18 @@ test('ETIMAT P10-DC exposes documented polarity for one- and two-pole breakers',
     assert.deepEqual(nominalVoltage, { value: onePole ? '220' : '440', unit: 'V DC' });
     assert.equal(ratedBreakingCapacity.value, 10);
     assert.deepEqual([dimensions.width.value, dimensions.height.value, dimensions.depth.value], [onePole ? 17.8 : 35.6, 89, 74.74]);
+  }
+});
+
+test('ETIMAT P10-QC uses the Quick Connect terminal diagram', () => {
+  const items = engine.catalog('ETI ETIMAT P10-QC');
+  assert.equal(items.length, 22);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), ['2', '1', '4', '3', '6', '5', '02', '01']);
+    assert.equal(part.specifications.connectionMethod.value, 'Quick Connect');
+    assert.equal(part.specifications.ratedBreakingCapacity.value, 10);
+    assert.deepEqual([part.specifications.dimensions.width.value, part.specifications.dimensions.height.value, part.specifications.dimensions.depth.value], [72, 90.1, 74.47]);
   }
 });
 

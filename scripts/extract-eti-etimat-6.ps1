@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('6', '10', '10-125', 'P6', 'P10', 'P10-DC')][string]$Series = '6')
+param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('6', '10', '10-125', 'P6', 'P10', 'P10-DC', 'P10-QC')][string]$Series = '6')
 
 $ErrorActionPreference = 'Stop'
 $settings = [Xml.XmlReaderSettings]::new()
@@ -8,8 +8,9 @@ $seen = @{}
 $records = [System.Collections.Generic.List[object]]::new()
 $highCurrent = $Series -eq '10-125'
 $dc = $Series -eq 'P10-DC'
+$quickConnect = $Series -eq 'P10-QC'
 $catalogSeries = if ($highCurrent) { '10' } else { $Series }
-$topologies = if ($dc) { '[12]p' } elseif ($highCurrent) { '3p\+N|[1234]p' } else { '1p\+N|3p\+N|[123]p' }
+$topologies = if ($dc) { '[12]p' } elseif ($quickConnect) { '3p\+N' } elseif ($highCurrent) { '3p\+N|[1234]p' } else { '1p\+N|3p\+N|[123]p' }
 
 try {
     while ($reader.Read()) {
@@ -25,7 +26,7 @@ try {
             $details.Element($ns + 'MANUFACTURER_NAME').Value -cne 'ETI' -or
             $features.Element($ns + 'REFERENCE_FEATURE_GROUP_ID').Value -cne 'EC000042') { continue }
         $short = $details.Element($ns + 'DESCRIPTION_SHORT').Value
-        $curves = if ($dc) { 'BCKZ' } elseif ($Series -eq 'P10') { 'BCDKZ' } else { 'BCD' }
+        $curves = if ($dc) { 'BCKZ' } elseif ($quickConnect) { 'BCDK' } elseif ($Series -eq 'P10') { 'BCDKZ' } else { 'BCD' }
         if ($short -cnotmatch "^(?:Miniature circuit breaker, )?ETIMAT $catalogSeries ($topologies) ([$curves])\s*(\d+(?:[.,]\d+)?)$") { continue }
         $topology = $Matches[1]
         $curve = $Matches[2]
@@ -41,7 +42,13 @@ try {
         $width = @{ 1 = 17.6; 2 = 35.4; 3 = 53.4; 4 = 71 }[$poles]
         $voltage = if ($topology -eq '1p') { '230/400' } elseif ($topology -eq '1p+N') { '230' } else { '400' }
         $capacity = if ($Series -eq 'P10' -or ($Series -eq '10' -and $current -le 40)) { 10 } else { 6 }
-        if ($dc) {
+        if ($quickConnect) {
+            if ($current -gt 20 -or ($curve -eq 'B' -and $current -lt 6) -or
+                $long -notmatch 'Number of poles 3\+N, Rated voltage \(V\) (400|415),' ) { continue }
+            $voltage = $Matches[1]
+            if ($long -notmatch 'Short circuit capacity \(kA\) 10,' -or $long -notmatch 'Voltage type AC$') { continue }
+            $width = 72
+        } elseif ($dc) {
             $voltage = if ($poles -eq 1) { '220' } else { '440' }
             if (($curve -in 'K','Z' -and $current -gt 32) -or
                 $long -notmatch "Number of poles $poles, Rated voltage \(V\) $voltage," -or
