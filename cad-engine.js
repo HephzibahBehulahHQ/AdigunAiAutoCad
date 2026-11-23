@@ -1677,8 +1677,8 @@
   const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(
     terminalCatalog.etiKnifeBladeFuseLinks, terminalCatalog.etiNhBatteryFuseLinks,
     terminalCatalog.etiCylindricalArFuseLinks, terminalCatalog.etiCylindricalGrFuseLinks,
-    terminalCatalog.etiMiniatureFuseLinks.map(([code, size, curve, current, voltage, capacity, page]) =>
-      [code, size, curve, current, voltage, capacity, null, null, null, page]),
+    terminalCatalog.etiMiniatureFuseLinks.map(([code, size, curve, current, voltage, capacity, page, exactProduct]) =>
+      [code, size, curve, current, voltage, capacity, null, null, null, page, exactProduct ? { exactProduct } : null]),
     terminalCatalog.etiNhSpecialtyFuseLinks.map(([code, size, curve, current, voltage, capacity, transformerPower, indicator]) =>
       [code, size, curve, current, voltage, capacity, null, null, null, null, { transformerPower, indicator }]),
     terminalCatalog.etiNhSteelCoverFuseLinks.map(([code, size, curve, current, capacity, ...dimensions]) =>
@@ -1713,7 +1713,8 @@
       ? 'https://www.etipolam.com.pl/katalog-elektroniczny/wkladki-topikowe-nh/wkladki-bezpiecznikowe-nh-charakterystyka-'
         + utilization.toLowerCase() + '/' + code + '-' + size.toLowerCase() + '-' + utilization.toLowerCase() + '-' + current + 'a-500v-g'
       : miniaturePage
-      ? 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/4ca01aa9-77fb-4c6b-a45f-64267dae64d2#page=' + miniaturePage
+      ? (specialty?.exactProduct ? 'https://storage-api-pim.etigroup.eu/product_db/levels/3228/en-GB/TD/3228_TD.pdf#page='
+        : 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/4ca01aa9-77fb-4c6b-a45f-64267dae64d2#page=') + miniaturePage
       : battery
       ? 'https://www.etigroup.eu/images/product_db/idents/en-GB/004184465_TD.pdf#page=' + batteryDrawingPage
       : cylindricalAr ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=12'
@@ -1774,7 +1775,11 @@
       }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
-        { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+        specialty?.exactProduct ? {
+          publisher: 'ETI', title: 'ETI product record · Order ' + code,
+          url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+          retrievedAt: '2026-11-23', revisionNote: 'Exact order code and electrical ratings. The lower published rating is used where the sources differ.'
+        } : { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
         { publisher: 'ETI', title: steelCoverDimensions ? 'ETI Polam · NH-Fe order ' + code
           : miniaturePage ? 'Minifuses · CH miniature fuse links' : cylindricalAr ? 'Ultra Quick · CH cylindrical aR fuse links'
@@ -1789,7 +1794,7 @@
             ? 'Net product dimensions for the corresponding photovoltaic cartridge size.' : knifeBlade
             ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
             : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' },
-        ...(specialty && !steelCoverDimensions ? [{ publisher: 'ETI', title: 'NV/NH · Order-code and rating table',
+        ...(specialty && !steelCoverDimensions && !miniaturePage ? [{ publisher: 'ETI', title: 'NV/NH · Order-code and rating table',
           url: 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/NV_ENG.pdf#page=' + (utilization === 'aM' ? 10 : 11),
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Corroborates the exact order code and application-specific ratings.' }] : [])
       ]
@@ -2826,6 +2831,69 @@
       });
     });
 
+  const etiNhFuseBases = terminalCatalog.etiNhFuseBases.map(
+    ([code, series, size, sideA, sideB, poles, current, fusePower, ip, width, height, depth, page]) => {
+      const id = 'eti-' + code;
+      const ceramic = series.startsWith('PK');
+      const pins = [], sharedEntries = [];
+      const fuseSockets = Array.from({ length: poles }, (_, index) => {
+        const x = (index - (poles - 1) / 2) * 48;
+        const socketSides = [sideA, sideB].map((terminalOption, side) => {
+          const twice = terminalOption.startsWith('2P');
+          const sign = side === 0 ? -1 : 1;
+          const entries = Array.from({ length: twice ? 2 : 1 }, (_, entry) => {
+            const designation = (side === 0 ? 'A' : 'B') + (index + 1) + (twice ? '.' + (entry + 1) : '');
+            const pinId = 'terminal-' + designation.toLowerCase();
+            pins.push({
+              id: pinId, localNumber: designation, name: 'Pole ' + (index + 1) + ' · Side ' + (side === 0 ? 'A' : 'B') + ' · ' + terminalOption,
+              x: x + (twice ? (entry === 0 ? -8 : 8) : 0), y: sign * 36,
+              electricalType: 'passive', connectionType: terminalOption.startsWith('M') ? 'bolted' : 'screw'
+            });
+            return pinId;
+          });
+          if (twice) sharedEntries.push(entries);
+          return entries;
+        });
+        return { x, sideA: socketSides[0], sideB: socketSides[1] };
+      });
+      const finish = series.endsWith('IP') ? 'Terminal and fuse covers' : series.endsWith('I') ? 'Terminal covers' : 'Base version';
+      const catalog = 'https://www.etigroup.eu/images/product_db/documents/en-GB/NV.pdf#page=';
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: series + ' ' + size + ' ' + sideA + '-' + sideB + ' ' + poles + 'p' + (ceramic ? ' S' : ''),
+        name: 'NH knife-blade fuse base', aliases: ['NH fuse holder', 'NV fuse base', 'NH' + size, ceramic ? 'Ceramic base' : 'Plastic base'],
+        family: 'nh-fuse-base', referencePrefix: 'F', category: 'Electrical · Verified fuse holder',
+        symbol: { id: 'fuse-base.eti.nh.' + poles + 'p.' + sideA.toLowerCase() + '.' + sideB.toLowerCase() + '.v1',
+          view: 'schematic', unit: 'mm', width: poles * 48, height: 80, pins, internalConnections: sharedEntries,
+          numberingNote: 'A and B identify the two ends shown in the manufacturer drawing. Decimal suffixes identify twin conductor entries.' },
+        electricalFunctions: {
+          fuseSockets,
+          continuityNote: 'Each empty fuse socket separates its two ends. Twin conductor entries on the same end share a terminal.'
+        },
+        specifications: {
+          poles: { value: poles }, cartridgeSize: { value: 'NH' + size },
+          terminalOptions: { value: sideA + ' / ' + sideB }, coverConfiguration: { value: finish },
+          nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: 690, unit: 'V AC' },
+          fusePowerLimit: { value: fusePower, unit: 'W' }, ingressProtection: { value: ip },
+          mountingMethod: { value: ceramic ? 'Base plate mounting' : '35 mm DIN rail or screw mounting' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth,
+          scope: 'Order-specific product envelope. Space for fuse removal, wiring and rail clearance is separate.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Exact order code, electrical ratings, fit, degree of protection and net product dimensions.' },
+          { publisher: 'ETI', title: 'NV/NH · Fuse base order table', url: catalog + page,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Exact order code, cover set, pole count and ordered terminal options.' },
+          { publisher: 'ETI', title: 'NV/NH · Terminal connection drawings', url: catalog + (ceramic ? 55 : 62),
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Terminal construction, conductor entries, and twin-clamp arrangements.' }
+        ]
+      });
+    });
+
   const etiBottleFuseLinks = terminalCatalog.etiBottleFuseLinks.map(
     ([code, size, utilization, current, voltage, capacity, dcVoltage, dcCapacity, length, diameter, gauge, fuseBase]) => {
       const id = 'eti-' + code;
@@ -3219,7 +3287,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -3479,6 +3547,29 @@
     const first = definition.symbol.pins[0].x;
     const last = definition.symbol.pins.at(-1).x;
     for (let x = first + 10; x < last + 10; x += 6) segments.push([x, 0, x + 3, 0]);
+    return { segments, circles };
+  }
+
+  function nhFuseBaseGeometry(definition) {
+    const pins = new Map(definition.symbol.pins.map(pin => [pin.id, pin]));
+    const segments = [], circles = [];
+    for (const socket of definition.electricalFunctions.fuseSockets) {
+      const x = socket.x;
+      segments.push([x - 8, -12, x + 8, -12], [x + 8, -12, x + 8, 12],
+        [x + 8, 12, x - 8, 12], [x - 8, 12, x - 8, -12]);
+      for (const side of [socket.sideA, socket.sideB]) {
+        const direction = Math.sign(pins.get(side[0]).y);
+        const contactY = direction * 9;
+        circles.push([x, contactY, 1.8]);
+        segments.push([x, direction * 23, x, contactY + direction * 1.8]);
+        for (const id of side) {
+          const pin = pins.get(id);
+          segments.push([pin.x, pin.y, pin.x, direction * 23]);
+          if (pin.x !== x) segments.push([pin.x, direction * 23, x, direction * 23]);
+        }
+        if (side.length > 1) circles.push([x, direction * 23, 1.4]);
+      }
+    }
     return { segments, circles };
   }
 
@@ -4716,6 +4807,7 @@
     wireListCsv: wireListCsv,
     wireRoutePoints: wireRoutePoints,
     fuseLinkGeometry: fuseLinkGeometry,
+    nhFuseBaseGeometry: nhFuseBaseGeometry,
     moldedCaseBreakerGeometry: moldedCaseBreakerGeometry,
     overheadSurgeArresterGeometry: overheadSurgeArresterGeometry,
     modularSurgeGeometry: modularSurgeGeometry,
