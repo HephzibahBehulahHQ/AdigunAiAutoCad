@@ -861,7 +861,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           break;
         }
         const contacts=relay.electricalFunctions.changeoverContacts||[relay.electricalFunctions.changeoverContact];
-        const halfSpan=contacts.length===1?25:60;
+        const halfSpan=Math.max(...relay.symbol.pins.map(pin=>Math.abs(pin.y)));
         const mechanical=add('path',{d:'M-5 '+(-halfSpan)+'V'+halfSpan,'stroke-dasharray':'3 3'});mechanical.setAttribute('aria-hidden','true');
         for(const contact of contacts){
           const [common,closed,open]=[contact.common,contact.normallyClosed,contact.normallyOpen]
@@ -1342,6 +1342,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.enclosureVersion ? [['Enclosure',spec.enclosureVersion.value]] : []),
         ...(spec.environmentalProtection ? [['Environmental protection',spec.environmentalProtection.value]] : []),
         ...(spec.options ? [['Options',spec.options.value]] : []),
+        ...(spec.mountingMethod ? [['Mounting',spec.mountingMethod.value]] : []),
+        ...(spec.coilPolarity ? [['Coil polarity',spec.coilPolarity.value]] : []),
         ...(spec.terminalPinLength ? [['Terminal pin length',spec.terminalPinLength.value+' '+spec.terminalPinLength.unit]] : []),
         ...(spec.coilOperation ? [['Coil operation',spec.coilOperation.value],['Minimum set/reset pulse',spec.minimumSetResetPulse.value+' '+spec.minimumSetResetPulse.unit]] : []),
         ...(spec.socketWiringAbove10A ? [['Socket wiring above 10 A',spec.socketWiringAbove10A.value]] : []),
