@@ -1513,21 +1513,30 @@
     '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2],
     NH000: [78.6, 51.9, 21], NH00C: [79, 52, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
     NH1C: [135, 61, 28], NH1: [135, 65, 46], NH2C: [150, 73, 46], NH2: [150, 73, 54],
-    NH3C: [150, 84, 54], NH3: [150, 84, 65], NH4a: [200, 121, 95]
+    NH3C: [150, 84, 54], NH3: [150, 84, 65], NH4a: [200, 121, 95],
+    'NH000/I': [78.6, 52, 21], 'NH3/I': [150.4, 83.4, 65]
+  };
+  const nhFuseDimensionSources = {
+    NH000: 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004181101-nh000-gg-2a-400v',
+    'NH000 aM 690': 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/am-characteristic/004181401-nh000-am-2a-690v',
+    'NH000 aM 500': 'https://www.fuse.etigroup.eu/products-and-solutions/fuse-links-nh/am-characteristic/004181414-nh000-am-100a-500v',
+    'NH000/I': 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004191101-nh000-i-gg-2a-400v',
+    'NH3/I': 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004196125-nh3-i-gg-250a-400v'
   };
   const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(terminalCatalog.etiKnifeBladeFuseLinks)
     .map(([code, size, utilization, current, voltage, capacity]) => {
     const id = 'eti-' + code;
     const knifeBlade = size.startsWith('NH');
-    const [length, height, depth = height] = etiFuseDimensions[size];
+    const insulated = size.endsWith('/I');
+    const caseSize = insulated ? size.slice(0, -2) : size;
+    const [length, height, depth = height] = etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
     const format = knifeBlade ? size : 'CH' + size;
     const contactName = knifeBlade ? 'blade contact' : 'end cap';
     const contactType = knifeBlade ? 'knife-blade' : 'end-cap';
     const terminalPrefix = knifeBlade ? 'blade-' : 'cap-';
     const dimensionalSource = knifeBlade
-      ? size === 'NH000'
-        ? 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004181101-nh000-gg-2a-400v'
-        : 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/TD-NV.pdf#page=1'
+      ? nhFuseDimensionSources[size + ' ' + utilization + ' ' + voltage] ?? nhFuseDimensionSources[size]
+        ?? 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/TD-NV.pdf#page=1'
       : 'https://www.etigroup.eu/images/product_db/documents/en-GB/C_ENG.pdf#page=2';
     const pins = [
       { id: terminalPrefix + 'left', localNumber: 'L', name: 'Left ' + contactName, x: -36, y: 0, electricalType: 'passive', connectionType: contactType },
@@ -1540,7 +1549,7 @@
       aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization],
       family: knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
-        id: 'fuse.eti.' + format.toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
+        id: 'fuse.eti.' + (knifeBlade ? caseSize : format).toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
         internalConnections: [],
         numberingNote: knifeBlade ? 'L and R identify the two blade contacts in the CAD symbol.' : 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
       },
@@ -1552,6 +1561,7 @@
         utilizationCategory: { value: utilization }, nominalCurrent: { value: current, unit: 'A' },
         nominalVoltage: { value: voltage, unit: 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
         cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
+        ...(insulated ? { insulatedGrippingLugs: { value: true } } : {}),
         dimensions: { width: { value: length, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
       },
       physicalRepresentations: [{

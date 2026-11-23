@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3699);
+  assert.equal(items.length, 3939);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1744,7 +1744,8 @@ test('ETI CH cartridge dimensions and fuse terminals follow the manufacturer dra
 });
 
 test('ETI NH gG fuse links preserve blade contacts and AC ratings across ten case sizes', () => {
-  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link');
+  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' &&
+    !item.name.includes('/I') && item.name.includes(' gG '));
   assert.equal(items.length, 295);
   const envelopes = {
     NH000: [78.6, 51.9, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
@@ -1762,6 +1763,25 @@ test('ETI NH gG fuse links preserve blade contacts and AC ratings across ten cas
     assert.equal(utilizationCategory.value, 'gG');
     assert.equal(nominalVoltage.unit, 'V AC');
     assert.ok([50, 100, 120].includes(ratedBreakingCapacity.value));
+  }
+});
+
+test('ETI NH fuse variants preserve insulated grips and aM utilization ratings', () => {
+  const parts = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link').map(item => engine.component(item.id));
+  const insulated = parts.filter(part => part.model.includes('/I'));
+  const motor = parts.filter(part => part.specifications.utilizationCategory.value === 'aM');
+  assert.equal(insulated.length, 226);
+  assert.equal(motor.length, 14);
+  for (const part of insulated) {
+    assert.equal(part.specifications.insulatedGrippingLugs.value, true);
+    assert.equal(part.specifications.utilizationCategory.value, 'gG');
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['blade-left', 'blade-right']);
+  }
+  for (const part of motor) {
+    assert.equal(part.specifications.cartridgeSize.value, 'NH000');
+    const voltage = part.specifications.nominalVoltage.value;
+    assert.ok([500, 690].includes(voltage));
+    assert.equal(part.specifications.ratedBreakingCapacity.value, voltage === 690 ? 100 : 120);
   }
 });
 
