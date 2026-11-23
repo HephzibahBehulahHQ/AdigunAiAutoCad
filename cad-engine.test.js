@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5282);
+  assert.equal(items.length, 5342);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1974,6 +1974,25 @@ test('ETI KZS-1M-FN breakers retain continuous neutral and separate functional e
     assert.equal(part.specifications.ratedBreakingCapacity.value, 10);
     assert.ok(part.sources[1].url.endsWith('#page=1'));
   }
+});
+
+test('ETITEC V retains distinct surge branches, common earth and isolated alarm contacts', () => {
+  const items = engine.catalog().filter(item => item.family === 'surge-protective-device');
+  assert.equal(items.length, 60);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const pins = new Map(part.symbol.pins.map(pin => [pin.id, pin]));
+    const branches = part.electricalFunctions.surgeBranches;
+    assert.ok(branches.every(branch => pins.has(branch.from) && pins.has(branch.to)));
+    assert.equal(branches.filter(branch => branch.technology === 'Gas discharge tube').length,
+      Number(part.specifications.protectionConfiguration.value.endsWith('+1')));
+    assert.equal(part.symbol.internalConnections.length, Number(pins.has('pe-2')));
+    assert.ok(part.symbol.internalConnections.flat().every(pin => pin.startsWith('pe')));
+    assert.equal(pins.has('alarm-11'), part.model.endsWith(' RC'));
+  }
+  const part = engine.component('eti-002442918');
+  assert.deepEqual(part.electricalFunctions.surgeBranches.map(({from,to}) => [from,to]),
+    [['power-l1','power-n'],['power-l2','power-n'],['power-l3','power-n'],['power-n','pe-1']]);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
