@@ -858,6 +858,45 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           label(fuse.specifications.nominalCurrent.value+' A',0,-11,7);
           break;
         }
+        case'surge-protective-device': {
+          const device=window.AdigunCADEngine.component(item.id);
+          const pins=new Map(device.symbol.pins.map(pin=>[pin.id,pin]));
+          const {surgeBranches,remoteChangeover}=device.electricalFunctions;
+          const earth=device.symbol.pins.filter(pin=>pin.id.startsWith('pe'));
+          for(const branch of surgeBranches){
+            const from=pins.get(branch.from),to=pins.get(branch.to);
+            const isGasTube=branch.technology==='Gas discharge tube';
+            const top=isGasTube?17:-24,bottom=top+14;
+            line(from.x,from.y,from.x,top);
+            if(isGasTube){
+              circle(from.x,top+7,7);
+              line(from.x-4,top+5,from.x+4,top+5);
+              line(from.x-4,top+9,from.x+4,top+9);
+            }else{
+              rect(from.x-4,top,8,14);
+              line(from.x-7,bottom,from.x+7,top);
+            }
+            const busY=to.id.startsWith('pe')?34:3;
+            line(from.x,bottom,from.x,busY);
+            line(from.x,busY,to.x,busY);
+            label(from.localNumber,from.x,-49,7);
+          }
+          for(const pin of earth){
+            line(earth[0].x,34,pin.x,34);
+            line(pin.x,34,pin.x,pin.y);
+          }
+          label('PE',0,54,7);
+          if(remoteChangeover){
+            for(const [index,id] of [remoteChangeover.normallyClosed,remoteChangeover.common,remoteChangeover.normallyOpen].entries()){
+              const pin=pins.get(id);
+              line(51,pin.y,pin.x,pin.y);
+              circle(51,pin.y,1.8);
+              label(pin.localNumber,pin.x,pin.y-5,6);
+              if(index===1)line(51,pin.y,46,pin.y-15);
+            }
+          }
+          break;
+        }
         case'residual-current-circuit-breaker':
         case'miniature-circuit-breaker': {
           const breaker=window.AdigunCADEngine.component(item.id);
@@ -1389,6 +1428,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.gaugeContactDiameter?[['Gauge contact diameter',spec.gaugeContactDiameter.value+' '+spec.gaugeContactDiameter.unit]]:[]),
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
+      : def.family==='surge-protective-device'
+      ? [['Protection class',spec.protectionClass.value],['Configuration',spec.protectionConfiguration.value],
+        ['Continuous AC voltage',spec.continuousAcVoltage.value+' '+spec.continuousAcVoltage.unit],
+        ['Nominal discharge current',spec.nominalDischargeCurrent.value+' '+spec.nominalDischargeCurrent.unit],
+        ['Maximum discharge current',spec.maximumDischargeCurrent.value+' '+spec.maximumDischargeCurrent.unit],
+        ...(spec.impulseCurrent?[['Impulse current',spec.impulseCurrent.value+' '+spec.impulseCurrent.unit]]:[]),
+        ['Remote signalling',spec.remoteSignalling.value?'Changeover contact':'None'],['Mounting',spec.mountingMethod.value]]
       : def.family==='miniature-circuit-breaker'||def.family==='residual-current-circuit-breaker'
       ? [['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         ['Trip curve',spec.tripCurve.value],['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
