@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 1096);
+  assert.equal(items.length, 1630);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1451,6 +1451,28 @@ test('Finder 40.51 variants expose terminal 21 as their only common terminal', (
     assert.equal(part.electricalFunctions.changeoverContact.common, 'contact-21');
     assert.equal(part.specifications.socketContactCurrentLimit.value, 10);
     assert.deepEqual(part.symbol.internalConnections, []);
+  }
+});
+
+test('Finder Series 55 variants preserve PCB and socket pin assignments for each pole count', () => {
+  const parts = engine.catalog('Finder Series 55').filter(item => item.id.startsWith('finder-55'));
+  assert.equal(parts.length, 534);
+  const maps = {
+    2: [['11', '9'], ['12', '1'], ['14', '5'], ['41', '12'], ['42', '4'], ['44', '8']],
+    3: [['11', '7'], ['12', '1'], ['14', '4'], ['21', '8'], ['22', '2'], ['24', '5'], ['31', '9'], ['32', '3'], ['34', '6']],
+    4: [['11', '9'], ['12', '1'], ['14', '5'], ['21', '10'], ['22', '2'], ['24', '6'], ['31', '11'], ['32', '3'], ['34', '7'],
+      ['41', '12'], ['42', '4'], ['44', '8']]
+  };
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    const poles = part.specifications.changeoverContactCount.value;
+    assert.deepEqual(part.symbol.pins.map(pin => [pin.localNumber, pin.physicalNumber]), [['A2', '14'], ['A1', '13'], ...maps[poles]]);
+    assert.equal(part.electricalFunctions.changeoverContacts.length, poles);
+    assert.equal(part.specifications.ratedContactCurrent.value, poles === 4 ? 7 : 10);
+    assert.ok(part.specifications.options.value);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const polarity = part.electricalFunctions.coil.polarity;
+    assert.deepEqual(polarity, /(?:80|90|94)$/.test(item.id) ? { positive: 'A1', negative: 'A2' } : undefined);
   }
 });
 

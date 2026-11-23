@@ -1440,18 +1440,21 @@
         }]
       });
     });
-  const finderRelays = terminalCatalog.finderSeries40Relays.concat(terminalCatalog.finderSeries46Relays).map(
+  const finderRelays = terminalCatalog.finderSeries40Relays.concat(terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays).map(
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
       const bistable = mode === 'AC/DC';
       const industrial = id.startsWith('46');
+      const generalPurpose = id.startsWith('55');
+      const pcbMount = generalPurpose && id[2] === '1';
+      const poleCount = generalPurpose ? Number(id[3]) : 0;
       const pcbTenAmpRelay = id.startsWith('4062');
       const socketCommon21 = id.startsWith('4051');
       const pairedTerminals = id.startsWith('4061');
       const doublePole = id.startsWith('4652') || id.startsWith('4052') || pcbTenAmpRelay;
       const relayType = code.slice(0, 5);
-      const series = industrial ? '46' : '40';
+      const series = id.slice(0, 2);
       const bladePositions = doublePole
         ? { A1: '8', A2: '1', 11: '3', 12: '2', 14: '4', 21: '6', 22: '7', 24: '5' }
         : { A1: '5', A2: '1', 11: '4', 12: '2', 14: '3' };
@@ -1471,6 +1474,30 @@
       const firstContact = makeContact(socketCommon21 ? 'contact-21' : 'contact-11', 'contact-12', 'contact-14');
       const secondContact = makeContact('contact-21', 'contact-22', 'contact-24');
       const symbolPins = relayDefinition.symbol.pins;
+      const socketPinMap = {
+        2: { 11: 9, 12: 1, 14: 5, 41: 12, 42: 4, 44: 8 },
+        3: { 11: 7, 12: 1, 14: 4, 21: 8, 22: 2, 24: 5, 31: 9, 32: 3, 34: 6 },
+        4: { 11: 9, 12: 1, 14: 5, 21: 10, 22: 2, 24: 6, 31: 11, 32: 3, 34: 7, 41: 12, 42: 4, 44: 8 }
+      };
+      const contactNumbers = poleCount === 2 ? [1, 4] : [1, 2, 3, 4].slice(0, poleCount);
+      const generalContacts = contactNumbers.map(n => makeContact('contact-' + n + '1', 'contact-' + n + '2', 'contact-' + n + '4'));
+      const generalPins = [
+        ...symbolPins.slice(0, 2),
+        ...contactNumbers.flatMap((n, index) => symbolPins.slice(2).map(pin => {
+          const localNumber = n + pin.localNumber[1];
+          return { ...pin, id: 'contact-' + localNumber, localNumber, y: pin.y + (index - (poleCount - 1) / 2) * 70 };
+        }))
+      ];
+      const optionLabel = {
+        0: 'Standard', 1: 'Wash tight (RT III)', 10: 'Lockable test button',
+        20: 'Mechanical indicator', 30: 'AC LED', 40: 'Lockable test button and mechanical indicator',
+        50: 'Lockable test button and AC LED', 54: 'Lockable test button, AC LED and mechanical indicator',
+        60: 'Non-polarized DC double LED', 70: 'Lockable test button and non-polarized DC double LED',
+        74: 'Lockable test button, non-polarized DC double LED and mechanical indicator',
+        80: 'DC LED and diode', 90: 'Lockable test button, DC LED and diode',
+        94: 'Lockable test button, DC LED, diode and mechanical indicator'
+      };
+      const diode = generalPurpose && [80, 90, 94].includes(version);
       const doublePolePins = [
         ...symbolPins.slice(0, 2),
         ...symbolPins.slice(2).map(pin => ({ ...pin, y: pin.y - 35 })),
@@ -1494,19 +1521,24 @@
         manufacturer: 'Finder',
         manufacturerPartNumber: code,
         model: code,
-        aliases: [id, 'Series ' + series, doublePole ? 'DPDT' : 'SPDT', ...(bistable ? ['Latching', 'Bistable'] : [])],
-        name: (doublePole ? 'Double-pole ' : 'Single-pole ') + (bistable ? 'bistable ' : '') + 'changeover relay',
+        aliases: [id, 'Series ' + series, generalPurpose ? ({2:'DPDT',3:'3PDT',4:'4PDT'})[poleCount] : doublePole ? 'DPDT' : 'SPDT', ...(bistable ? ['Latching', 'Bistable'] : [])],
+        name: (generalPurpose ? poleCount + '-pole ' : doublePole ? 'Double-pole ' : 'Single-pole ') + (bistable ? 'bistable ' : '') + 'changeover relay',
         family: 'relay-module',
         referencePrefix: 'K',
-        category: industrial ? 'Electrical · Verified industrial relay' : 'Electrical · Verified interface relay',
+        category: generalPurpose ? 'Electrical · Verified general purpose relay' : industrial ? 'Electrical · Verified industrial relay' : 'Electrical · Verified interface relay',
         symbol: {
           ...relayDefinition.symbol,
           id: 'relay.series' + series + '.' + partId + '.v1',
-          height: doublePole || pairedTerminals ? 140 : relayDefinition.symbol.height,
-          pins: (pairedTerminals ? pairedPins : doublePole ? doublePolePins : symbolPins).map(pin => {
+          height: generalPurpose ? poleCount * 70 : doublePole || pairedTerminals ? 140 : relayDefinition.symbol.height,
+          pins: (generalPurpose ? generalPins : pairedTerminals ? pairedPins : doublePole ? doublePolePins : symbolPins).map(pin => {
             if (socketCommon21 && pin.id === 'contact-11')
               return { ...pin, id: 'contact-21', localNumber: '21', connectionType: 'pcb-pin' };
             const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
+            if (generalPurpose) {
+              const physicalNumber = String(({ A1: 13, A2: 14, ...socketPinMap[poleCount] })[pin.localNumber]);
+              return { ...pin, name: name + ' (pin ' + physicalNumber + ')', physicalNumber,
+                connectionType: pcbMount ? 'pcb-pin' : 'plug-in-pin' };
+            }
             const physicalNumber = bladePositions[pin.localNumber];
             return industrial
               ? { ...pin, name: name + ' (blade ' + physicalNumber + ')', connectionType: doublePole ? 'solder-blade' : 'faston-187', physicalNumber }
@@ -1515,7 +1547,9 @@
           internalConnections: pairedTerminals
             ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']]
             : relayDefinition.symbol.internalConnections,
-          numberingNote: socketCommon21
+          numberingNote: generalPurpose
+            ? 'Finder ' + relayType + ' circuit diagram gives the contact designations and physical pin positions.'
+            : socketCommon21
             ? 'Finder identifies 21 as common, 12 as normally closed and 14 as normally open in compatible Series 95 sockets.'
             : pairedTerminals
             ? 'Finder 40.61 permanently links 11–21, 12–22 and 14–24 on one changeover pole.'
@@ -1529,8 +1563,10 @@
         },
         electricalFunctions: {
           coil: { pins: ['coil-a1', 'coil-a2'], nominalVoltage: coilVoltage,
-            ...(bistable ? { polarized: true, minimumSetResetPulseMs: 20 } : {}) },
-          ...(doublePole ? { changeoverContacts: [firstContact, secondContact] } : { changeoverContact: firstContact })
+            ...(bistable ? { polarized: true, minimumSetResetPulseMs: 20 } : {}),
+            ...(diode ? { polarity: { positive: 'A1', negative: 'A2' }, suppression: 'Integrated diode' } : {}) },
+          ...(generalPurpose ? { changeoverContacts: generalContacts }
+            : doublePole ? { changeoverContacts: [firstContact, secondContact] } : { changeoverContact: firstContact })
         },
         specifications: {
           nominalCoilVoltage: coilVoltage,
@@ -1543,9 +1579,14 @@
           ...(pairedTerminals ? {
             socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
           } : {}),
-          changeoverContactCount: { value: doublePole ? 2 : 1, unit: 'changeover contact' },
+          changeoverContactCount: { value: generalPurpose ? poleCount : doublePole ? 2 : 1, unit: 'changeover contact' },
           contactMaterial: { value: material },
-          ...(industrial ? {
+          ...(generalPurpose ? {
+            mountingMethod: { value: pcbMount ? 'PCB mount' : 'Series 94 socket' },
+            environmentalProtection: { value: pcbMount && version === 1 ? 'RT III' : 'RT I' },
+            options: { value: optionLabel[version] },
+            ...(diode ? { coilPolarity: { value: 'A1 / pin 13 positive, A2 / pin 14 negative' } } : {})
+          } : industrial ? {
             terminalBladeWidth: { value: doublePole ? 2.5 : 4.8, unit: 'mm' },
             terminalBladeThickness: { value: 0.5, unit: 'mm' },
             environmentalProtection: { value: 'RT II' },
@@ -1571,6 +1612,10 @@
             url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
+          generalPurpose ? { publisher: 'Finder', title: 'Series 55 datasheet · ' + relayType,
+            url: 'https://cdn.findernet.com/app/uploads/S55EN.pdf',
+            documentRevision: 'IX-2026', retrievedAt: '2026-11-23',
+            revisionNote: 'Pages 3–5 and 7 document the pin positions, rated current, coil options, mounting and outline.' } :
           socketCommon21 ? { publisher: 'Finder', title: 'Series 40 datasheet · 40.51',
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
