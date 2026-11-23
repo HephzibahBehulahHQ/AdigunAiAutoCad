@@ -1445,7 +1445,9 @@
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
       const industrial = id.startsWith('46');
-      const doublePole = id.startsWith('4652') || id.startsWith('4052');
+      const pcbTenAmpRelay = id.startsWith('4062');
+      const doublePole = id.startsWith('4652') || id.startsWith('4052') || pcbTenAmpRelay;
+      const relayType = code.slice(0, 5);
       const series = industrial ? '46' : '40';
       const bladePositions = doublePole
         ? { A1: '8', A2: '1', 11: '3', 12: '2', 14: '4', 21: '6', 22: '7', 24: '5' }
@@ -1492,7 +1494,7 @@
           numberingNote: doublePole && industrial
             ? 'Finder 46.52 diagram maps A1/A2/11/12/14/21/22/24 to blade positions 8/1/3/2/4/6/7/5.'
             : doublePole
-            ? 'Finder 40.52 copper-side diagram identifies A1, A2, 11, 12, 14, 21, 22 and 24.'
+            ? 'Finder ' + relayType + ' copper-side diagram identifies A1, A2, 11, 12, 14, 21, 22 and 24.'
             : industrial
             ? 'Finder 46.61 diagram maps A1/A2/11/12/14 to blade positions 5/1/4/2/3.'
             : 'Finder Series 40.31/40.51 connection diagram identifies A1, A2, 11, 12 and 14.'
@@ -1536,10 +1538,10 @@
             url: 'https://cdn.findernet.com/app/uploads/S46EN.pdf',
             documentRevision: 'IX-2026', retrievedAt: '2026-11-23',
             revisionNote: 'Pages 3 and 4 document the blade positions, coil ratings and ordering options.' } :
-          doublePole ? { publisher: 'Finder', title: 'Series 40 datasheet · 40.52',
+          doublePole ? { publisher: 'Finder', title: 'Series 40 datasheet · ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
-            revisionNote: 'Pages 3 and 5 document the copper-side terminal diagram and ordering options.' } :
+            revisionNote: 'Pages ' + (pcbTenAmpRelay ? '4' : '3') + ' and 5 document the copper-side terminal diagram and ordering options.' } :
           { publisher: 'Finder', title: 'Series 40 datasheet · 40.31/40.51',
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VII-2026', retrievedAt: '2026-11-23',
