@@ -1452,9 +1452,11 @@
     if (pSeries) terminalPairs.forEach(pair => pair.reverse());
     const pins = terminalPairs.flatMap(([top, bottom], index) => {
       const x = (index - (terminalPairs.length - 1) / 2) * 36;
+      const topPolarity = index ? '+' : '−';
+      const bottomPolarity = index ? '−' : '+';
       return [
-        { id: 'terminal-' + top, localNumber: top, name: 'Upper terminal' + (dc ? (index ? ' (+)' : ' (−)') : ''), x, y: -42, electricalType: 'passive', connectionType: 'screw' },
-        { id: 'terminal-' + bottom, localNumber: bottom, name: 'Lower terminal' + (dc ? (index ? ' (−)' : ' (+)') : ''), x, y: 42, electricalType: 'passive', connectionType: 'screw' }
+        { id: 'terminal-' + top, localNumber: top, name: 'Upper terminal' + (dc ? ' (' + topPolarity + ')' : ''), ...(dc ? { polarity: topPolarity } : {}), x, y: -42, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'terminal-' + bottom, localNumber: bottom, name: 'Lower terminal' + (dc ? ' (' + bottomPolarity + ')' : ''), ...(dc ? { polarity: bottomPolarity } : {}), x, y: 42, electricalType: 'passive', connectionType: 'screw' }
       ];
     });
     const model = 'ETIMAT ' + series + ' ' + topology + ' ' + curve + current;

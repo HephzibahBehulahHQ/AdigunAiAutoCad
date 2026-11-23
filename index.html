@@ -848,7 +848,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
             circle(top.x,top.y,2.6);circle(bottom.x,bottom.y,2.6);
             circle(top.x,-12,2);circle(bottom.x,12,2);
             line(bottom.x,12,bottom.x+9,-7);
-            label(top.localNumber,top.x,top.y-4,6);label(bottom.localNumber,bottom.x,bottom.y+9,6);
+            label(top.localNumber+(top.polarity||''),top.x,top.y-4,6);label(bottom.localNumber+(bottom.polarity||''),bottom.x,bottom.y+9,6);
           }
           if(breaker.symbol.pins.length>2){
             const first=breaker.symbol.pins[0],last=breaker.symbol.pins.at(-1);
@@ -1334,6 +1334,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         ['Trip curve',spec.tripCurve.value],['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
         ['Protected poles',String(spec.protectedPoles.value)],['Switched neutral',spec.switchedNeutral.value?'Yes':'No'],
+        ...(spec.terminalPolarity?[['Terminal polarity',spec.terminalPolarity.value]]:[]),
         ['Mounting',spec.mountingMethod.value]]
       : def.family==='motor-protection-breaker'
       ? [['Frame size',spec.frameSize.value],['Trip class',spec.overloadTripClass.value+' '+spec.overloadTripClass.unit],['Adjustable overload release',spec.adjustableOverloadRelease.minimum+'–'+spec.adjustableOverloadRelease.maximum+' '+spec.adjustableOverloadRelease.unit],['Instantaneous N-release',spec.instantaneousShortCircuitRelease.value+' '+spec.instantaneousShortCircuitRelease.unit],['Main poles',spec.mainPoleCount.value],['Rated operational voltage',spec.ratedOperationalVoltage.minimum+'–'+spec.ratedOperationalVoltage.maximum+' '+spec.ratedOperationalVoltage.unit],['Connection',spec.connectionMethod.value]]
