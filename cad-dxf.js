@@ -142,9 +142,10 @@
                     : transformer ? engine.transformerGeometry(component) : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
+        const mirror = object.mirrorX ? -1 : 1;
         function toDxf(localX, localY) {
-          return point3d(x + scale * (localX * cosine - localY * sine),
-            -(y + scale * (localX * sine + localY * cosine)));
+          return point3d(x + scale * (localX * cosine * mirror - localY * sine),
+            -(y + scale * (localX * sine * mirror + localY * cosine)));
         }
         addLayer();
         for (const [ax, ay, bx, by] of segments) writer.addLine(toDxf(ax, ay), toDxf(bx, by), options);

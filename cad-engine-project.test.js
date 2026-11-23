@@ -314,6 +314,141 @@ async function verifySidebarLayout(page, address) {
   await page.close();
 }
 
+async function verifyDraftShortcuts(page,address){
+  await page.setViewportSize({width:1920,height:950});
+  await page.goto(address);
+  page.setDefaultTimeout(8000);
+  const model=engine.createProjectModel('shortcut-project','Drafting shortcuts');
+  const sheet=engine.addProjectSheet(model,'A2','Drafting checks','shortcut-sheet');
+  model.activeSheetId=sheet.id;
+  const part={...engine.createInstance('phoenix-contact-3212144',115,210,'X1'),id:'shortcut-terminal'};
+  const pin=engine.worldPins(part)[0];
+  const segment=(id,kind,x1,y1,x2,y2)=>({id,kind,x:x1,y:y1,x1,y1,x2,y2,sheetId:sheet.id});
+  const objects=[
+    {...part,sheetId:sheet.id},
+    segment('boundary','line',230,50,230,150),
+    segment('trim-target','line',170,80,290,80),
+    segment('extend-target','line',240,110,300,110),
+    segment('cross-h','wire',270,200,370,200),
+    segment('cross-v','wire',320,160,320,245),
+    segment('arrange-1','line',60,260,80,260),
+    segment('arrange-2','line',140,280,160,280),
+    segment('arrange-3','line',270,266,290,266),
+    {...segment('attached','wire',pin.x,pin.y,pin.x-40,pin.y),
+      pinAttachments:{start:{instanceId:part.id,pinId:pin.id},end:null}}
+  ];
+  const initial=engine.serializeProject({
+    project:model.name,projectModel:model,sheets:[sheet],activeSheet:sheet.id,objects,
+    view:{x:0,y:0,w:420,h:297}
+  });
+  await page.locator('#openFile').setInputFiles({name:'Shortcuts.adigun.json',mimeType:'application/json',buffer:Buffer.from(initial)});
+  await page.locator('#sheetTabs .document-tab[data-sheet]').first().waitFor();
+  const drawing=page.locator('#userDrawings');
+  const object=id=>drawing.locator('[data-object="'+id+'"]');
+  const button=name=>page.getByRole('button',{name,exact:true});
+  for(const name of ['Snap to grid','Snap to terminals','Ortho lock']){
+    const tool=button(name);
+    const before=await tool.getAttribute('aria-pressed');
+    await tool.click();
+    assert.notEqual(await tool.getAttribute('aria-pressed'),before);
+    await tool.click();
+    assert.equal(await tool.getAttribute('aria-pressed'),before);
+  }
+  const screen=(x,y)=>drawing.evaluate((node,xy)=>{
+    const result=new DOMPoint(...xy).matrixTransform(node.getScreenCTM());
+    return [result.x,result.y];
+  },[x,y]);
+  const click=async(x,y)=>page.mouse.click(...await screen(x,y));
+  const drag=async(x1,y1,x2,y2)=>{
+    await page.mouse.move(...await screen(x1,y1));await page.mouse.down();
+    await page.mouse.move(...await screen(x2,y2),{steps:5});await page.mouse.up();
+  };
+  const save=async count=>{
+    await page.keyboard.press('Control+Shift+S');
+    await page.waitForFunction(expected=>window.__savedProjectWrites.length===expected,count);
+    const text=await page.evaluate(()=>window.__savedProjectWrites.at(-1));
+    const parsed=engine.parseProject(text);
+    assert.equal(parsed.valid,true,parsed.errors.join(' '));
+    return parsed.project;
+  };
+  await button('Horizontal line').click();
+  await drag(100,50,150,65);
+  await button('Vertical line').click();
+  await drag(100,75,120,120);
+  await button('Draw distance dimension').click();
+  await drag(120,135,150,150);
+  await button('Trim line').click();
+  await click(230,55);
+  await click(276,80);
+  assert.match(await object('trim-target').getAttribute('d'), /L230 80$/);
+  await button('Extend line').click();
+  await click(230,55);
+  await click(248,110);
+  assert.match(await object('extend-target').getAttribute('d'), /^M230 110/);
+  await button('Select and move').click();
+  await click(280,110);
+  page.once('dialog',dialog=>dialog.accept('12'));
+  await button('Offset line').click();
+  await page.waitForFunction(()=>document.querySelector('#toast').textContent.includes('12 mm'));
+  await button('Join wire crossing').click();
+  await click(320,200);
+  assert.equal(await drawing.locator('[data-wire-junction]').count(),1);
+  await click(320,200);
+  assert.equal(await drawing.locator('[data-wire-junction]').count(),1);
+  await button('Select and move').click();
+  await click(115,210);
+  await button('Mirror horizontally').click();
+  assert.ok((await object(part.id).getAttribute('transform')).includes('scale(-1 1)'));
+  await button('Rotate 90° clockwise').click();
+  const saved=await save(1);
+  const finalPart=saved.objects.find(item=>item.id===part.id);
+  const finalPin=engine.worldPins(finalPart).find(item=>item.id===pin.id);
+  const attached=saved.objects.find(item=>item.id==='attached');
+  assert.equal(finalPart.mirrorX,true);
+  assert.equal(finalPart.rotation,90);
+  assert.deepEqual([attached.x1,attached.y1],[finalPin.x,finalPin.y]);
+  assert.equal(attached.pinAttachments.start.pinId,pin.id);
+  const crossed=engine.analyzeProject(saved).globalNets.find(net=>net.wireIds.includes(sheet.id+':cross-h'));
+  assert.ok(crossed.wireIds.includes(sheet.id+':cross-v'));
+  const lines=saved.objects.filter(item=>!objects.some(original=>original.id===item.id)&&item.kind==='line');
+  assert.ok(lines.some(line=>line.x1===100&&line.x2===150&&line.y1===line.y2));
+  assert.ok(lines.some(line=>line.y1===75&&line.y2===120&&line.x1===line.x2));
+  assert.ok(lines.some(line=>line.y1===122&&line.y2===122));
+  assert.equal(saved.objects.filter(item=>item.kind==='dimension').length,1);
+  await click(70,260);
+  await page.keyboard.down('Control');
+  await click(150,280);
+  await click(280,266);
+  await page.keyboard.up('Control');
+  await button('Align top edges').click();
+  assert.match(await object('arrange-2').getAttribute('d'),/^M140 266/);
+  await button('Distribute horizontally').click();
+  assert.match(await object('arrange-2').getAttribute('d'),/^M165 266/);
+  await button('Undo').click();
+  await button('Undo').click();
+  await button('Clear selection').click();
+  await click(70,260);
+  await page.keyboard.down('Control');
+  await click(150,280);
+  await click(280,266);
+  await page.keyboard.up('Control');
+  await button('Align left edges').click();
+  assert.match(await object('arrange-1').getAttribute('d'),/^M270 260/);
+  await button('Distribute vertically').click();
+  assert.match(await object('arrange-3').getAttribute('d'),/^M270 270/);
+  await button('Select visible objects').click();
+  assert.ok(await drawing.locator('.selected-object').count()>1);
+  await button('Clear selection').click();
+  assert.equal(await drawing.locator('.selected-object').count(),0);
+  await page.setViewportSize({width:500,height:650});
+  await button('More drawing and editing tools').click();
+  assert.equal(await page.locator('#draftToolsDock').isVisible(),true);
+  await page.getByRole('dialog',{name:'More drawing and editing tools'}).waitFor();
+  await page.getByRole('dialog').getByRole('button',{name:'Horizontal line',exact:true}).click();
+  assert.match(await page.locator('#toast').textContent(),/Horizontal line/);
+  await page.close({runBeforeUnload:false});
+}
+
 async function verifyToolbar(toolbarPage, address) {
   toolbarPage.setDefaultTimeout(8000);
   await toolbarPage.goto(address);
@@ -563,6 +698,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await type.selectOption('');
 
     await verifySidebarLayout(await context.newPage(), address);
+    await verifyDraftShortcuts(await context.newPage(), address);
     await verifyToolbar(await context.newPage(), address);
 
     await page.getByRole('button', { name: 'New project' }).click();
@@ -1007,7 +1143,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await freeDraftingPage.getByRole('button', { name: 'Add sheet to A2' }).click();
     await freeDraftingPage.locator('#projectTree [data-sheet]').click();
     await freeDraftingPage.locator('#openCommands').click();
-    await freeDraftingPage.getByRole('button', { name: 'Go to origin' }).click();
+    await freeDraftingPage.locator('#commands').getByRole('button', { name: 'Go to origin' }).click();
     const freePoint = (x, y) => freeDraftingPage.locator('#userDrawings').evaluate((node, coordinates) => {
       const screen = new DOMPoint(...coordinates).matrixTransform(node.getScreenCTM());
       return { x: screen.x, y: screen.y };
@@ -1168,7 +1304,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       || firstQuick.bottom <= secondQuick.top || secondQuick.bottom <= firstQuick.top);
     await freeDraftingPage.getByLabel('Display units').selectOption('mm');
     await freeDraftingPage.locator('#openCommands').click();
-    await freeDraftingPage.getByRole('button', { name: 'Draw distance dimension' }).click();
+    await freeDraftingPage.locator('#commands').getByRole('button', { name: 'Draw distance dimension' }).click();
     const dimStart = await freePoint(0, 50), dimEnd = await freePoint(100, 50);
     await freeDraftingPage.mouse.move(dimStart.x, dimStart.y);
     await freeDraftingPage.mouse.down();
