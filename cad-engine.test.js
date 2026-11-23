@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 841);
+  assert.equal(items.length, 944);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1401,6 +1401,28 @@ test('Finder 40.52 and 40.62 PCB relays have eight terminals and two distinct sw
     assert.deepEqual(part.electricalFunctions.changeoverContacts.map(contact => contact.common), ['contact-11', 'contact-21']);
     assert.deepEqual(part.physicalRepresentations.map(view => [view.width, view.height, view.depth]), [[12.4, 25, 29]]);
   }
+});
+
+test('Finder 40.61 relays permanently join paired terminals without joining the switched contacts', () => {
+  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-4061'));
+  assert.equal(parts.length, 103);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    assert.equal(part.symbol.pins.length, 8);
+    assert.equal(part.specifications.ratedContactCurrent.value, 16);
+    assert.deepEqual(part.symbol.internalConnections, [
+      ['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']
+    ]);
+  }
+  const relay = engine.createInstance(parts[0].id, 100, 100, 'K1');
+  const wires = engine.worldPins(relay).filter(pin => pin.id.startsWith('contact-')).map(pin => ({
+    id: pin.id, kind: 'wire', x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+    x2: pin.x, y2: pin.y + (pin.y < relay.y ? -20 : 20),
+    pinAttachments: { start: { instanceId: relay.id, pinId: pin.id }, end: null }
+  }));
+  assert.deepEqual(engine.analyze([relay, ...wires]).nets.map(net => net.wireIds), [
+    ['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']
+  ]);
 });
 
 test('terminal panel envelopes use manufacturer dimensions independently of schematic scale', () => {

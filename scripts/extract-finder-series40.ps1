@@ -16,7 +16,7 @@ $records = [System.Collections.Generic.List[object]]::new()
 foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
     # Restrict each series to monostable changeover types with a verified terminal diagram.
-    $orderKey = if ($Series -eq '40') { '^40(31|51|52|62)([789])([0-9]{3})([045])00([013])$' }
+    $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([789])([0-9]{3})([0145])00([013])$' }
                 else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
     if ($id -cnotmatch $orderKey) { continue }
     $type = $Matches[1]
@@ -25,6 +25,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $voltage = [int]$Matches[3]
     $materialCode = $Matches[4]
     $version = $Matches[5]
+    if ($Series -eq '40' -and (($type -eq '61' -and $materialCode -notin '1', '4') -or
+        ($type -ne '61' -and $materialCode -eq '1'))) { continue }
     if (($version -in '3', '74' -and $coilCode -ne '9') -or ($version -eq '54' -and $coilCode -ne '8')) { continue }
     $details = $product.PRODUCT_DETAILS
     $features = $product.PRODUCT_FEATURES
@@ -40,7 +42,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         if ($voltage -notin $coilVoltages -or $description -notmatch "Type of electric connection: $connection" -or
             ($doublePole -and $materialCode -eq '4')) { continue }
     }
-    $material = @{ '0' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
+    $material = @{ '0' = 'AgNi'; '1' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
     if (!$verifiedMaterial.Success -or $verifiedMaterial.Groups[1].Value.Replace('₂', '2') -cne $material) { continue }
     if ($details.MANUFACTURER_PID -cne $id -or $details.MANUFACTURER_NAME -cne 'Finder Spa' -or
@@ -61,6 +63,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
     if ($type -eq '62' -and ($measurements[0] -ne 10 -or $measurements[1] -ne 12.4 -or
+        $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
+    if ($Series -eq '40' -and $type -eq '61' -and ($measurements[0] -ne 16 -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
     $ratedCurrent = if ($doublePole) { 8 } else { 16 }
     if ($Series -eq '46' -and ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.4 -or

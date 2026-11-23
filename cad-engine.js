@@ -1446,6 +1446,7 @@
       const partId = 'finder-' + id;
       const industrial = id.startsWith('46');
       const pcbTenAmpRelay = id.startsWith('4062');
+      const pairedTerminals = id.startsWith('4061');
       const doublePole = id.startsWith('4652') || id.startsWith('4052') || pcbTenAmpRelay;
       const relayType = code.slice(0, 5);
       const series = industrial ? '46' : '40';
@@ -1466,6 +1467,12 @@
           return { ...pin, id: 'contact-' + localNumber, localNumber, y: pin.y + 35 };
         })
       ];
+      const pairedPins = doublePolePins.map(pin => {
+        if (!pin.id.startsWith('contact-')) return pin;
+        const mirrored = Number(pin.localNumber) >= 20;
+        const x = { 1: 45, 2: 23, 4: 67 }[pin.localNumber[1]];
+        return { ...pin, x, y: mirrored ? 60 : -60 };
+      });
       const coilVoltage = { value: voltage, unit: 'V ' + mode };
       const dimensions = Object.fromEntries(Object.entries({ width, height, depth })
         .map(([name, value]) => [name, { value, unit: 'mm' }]));
@@ -1483,15 +1490,20 @@
         symbol: {
           ...relayDefinition.symbol,
           id: 'relay.series' + series + '.' + partId + '.v1',
-          height: doublePole ? 140 : relayDefinition.symbol.height,
-          pins: (doublePole ? doublePolePins : symbolPins).map(pin => {
+          height: doublePole || pairedTerminals ? 140 : relayDefinition.symbol.height,
+          pins: (pairedTerminals ? pairedPins : doublePole ? doublePolePins : symbolPins).map(pin => {
             const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
             const physicalNumber = bladePositions[pin.localNumber];
             return industrial
               ? { ...pin, name: name + ' (blade ' + physicalNumber + ')', connectionType: doublePole ? 'solder-blade' : 'faston-187', physicalNumber }
               : { ...pin, name, connectionType: 'pcb-pin' };
           }),
-          numberingNote: doublePole && industrial
+          internalConnections: pairedTerminals
+            ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']]
+            : relayDefinition.symbol.internalConnections,
+          numberingNote: pairedTerminals
+            ? 'Finder 40.61 permanently links 11–21, 12–22 and 14–24 on one changeover pole.'
+            : doublePole && industrial
             ? 'Finder 46.52 diagram maps A1/A2/11/12/14/21/22/24 to blade positions 8/1/3/2/4/6/7/5.'
             : doublePole
             ? 'Finder ' + relayType + ' copper-side diagram identifies A1, A2, 11, 12, 14, 21, 22 and 24.'
@@ -1538,7 +1550,7 @@
             url: 'https://cdn.findernet.com/app/uploads/S46EN.pdf',
             documentRevision: 'IX-2026', retrievedAt: '2026-11-23',
             revisionNote: 'Pages 3 and 4 document the blade positions, coil ratings and ordering options.' } :
-          doublePole ? { publisher: 'Finder', title: 'Series 40 datasheet · ' + relayType,
+          doublePole || pairedTerminals ? { publisher: 'Finder', title: 'Series 40 datasheet · ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
             revisionNote: 'Pages ' + (pcbTenAmpRelay ? '4' : '3') + ' and 5 document the copper-side terminal diagram and ordering options.' } :
