@@ -326,6 +326,48 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await page.locator('#editableExampleProjects [data-example-project]').first().waitFor();
     assert.ok(await page.locator('#editableExampleProjects [data-example-project]').count() > 0, 'Project Explorer lists editable examples at startup');
 
+    const projectPanel = page.locator('#projectPanel');
+    const symbolPanel = page.locator('#symbolsPanel');
+    await page.getByRole('button', { name: 'Project explorer', exact: true }).click();
+    assert.equal(await projectPanel.isVisible(), false);
+    assert.equal(await symbolPanel.isVisible(), true);
+    await page.getByRole('button', { name: 'Symbol library', exact: true }).click();
+    assert.equal(await page.locator('#sidepanel').isVisible(), false);
+    await page.getByRole('button', { name: 'Project explorer', exact: true }).click();
+    assert.equal(await projectPanel.isVisible(), true);
+    await page.getByRole('button', { name: 'Symbol library', exact: true }).click();
+    await page.getByRole('button', { name: 'Collapse sidebar' }).click();
+    assert.equal(await page.locator('#sidepanel').isVisible(), false);
+    await page.getByRole('button', { name: 'Expand sidebar' }).click();
+    assert.equal(await projectPanel.isVisible(), true);
+    assert.equal(await symbolPanel.isVisible(), true);
+
+    const count = page.locator('#symbolCount');
+    assert.equal(await count.textContent(), engine.catalog().length.toLocaleString('en-US') + ' catalog parts');
+    await page.getByRole('button', { name: 'Common parts', exact: true }).click();
+    assert.equal(await count.textContent(), '100 common parts');
+    const rows = page.locator('#symbolList [data-insert]');
+    const commonIds = await rows.evaluateAll(elements => elements.map(element => element.dataset.insert));
+    await page.getByRole('button', { name: 'Next', exact: true }).click();
+    commonIds.push(...await rows.evaluateAll(elements => elements.map(element => element.dataset.insert)));
+    assert.equal(new Set(commonIds).size, 100);
+    assert.ok(commonIds.every(id => engine.component(id)));
+    await page.getByRole('button', { name: 'Project symbols', exact: true }).click();
+    assert.equal(await rows.count(), 0);
+    await page.getByRole('button', { name: 'All parts', exact: true }).click();
+    const category = page.getByLabel('Component category');
+    const type = page.getByLabel('Component type');
+    const fuse = engine.catalogItem('eti-002625210');
+    await category.selectOption(fuse.category);
+    await type.selectOption(fuse.family);
+    const search = page.getByRole('searchbox', { name: 'Search symbols' });
+    await search.fill('002625210');
+    assert.equal(await rows.count(), 1);
+    assert.equal(await rows.first().getAttribute('data-insert'), fuse.id);
+    await search.fill('');
+    await category.selectOption('');
+    await type.selectOption('');
+
     await page.getByRole('button', { name: 'New project' }).click();
     assert.equal(await page.locator('#newProjectDialog #editableExampleProjects').count(), 0, 'New Project does not show example projects');
     assert.match(await page.locator('#blankProjectTemplate').innerText(), /A1[\s\S]*A2[\s\S]*A3[\s\S]*A4/);
