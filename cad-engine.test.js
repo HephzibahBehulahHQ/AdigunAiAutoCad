@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 809);
+  assert.equal(items.length, 841);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1384,14 +1384,18 @@ test('Finder 46.52 relays expose separate, correctly mapped changeover poles', (
   }
 });
 
-test('Finder 40.52 PCB relays have eight terminals and two distinct switch poles', () => {
-  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-4052'));
-  assert.equal(parts.length, 177);
+test('Finder 40.52 and 40.62 PCB relays have eight terminals and two distinct switch poles', () => {
+  const series = engine.catalog('Finder Series 40');
+  const eightAmp = series.filter(item => item.id.startsWith('finder-4052'));
+  const tenAmp = series.filter(item => item.id.startsWith('finder-4062'));
+  assert.equal(eightAmp.length, 177);
+  assert.equal(tenAmp.length, 32);
+  const parts = [...eightAmp, ...tenAmp];
   for (const item of parts) {
     const part = engine.component(item.id);
     assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), ['A2', 'A1', '11', '12', '14', '21', '22', '24']);
     assert.ok(part.symbol.pins.every(pin => pin.connectionType === 'pcb-pin'));
-    assert.equal(part.specifications.ratedContactCurrent.value, 8);
+    assert.equal(part.specifications.ratedContactCurrent.value, item.id.startsWith('finder-4062') ? 10 : 8);
     assert.equal(part.specifications.terminalPinLength.value, 5.2);
     assert.deepEqual(part.symbol.internalConnections, []);
     assert.deepEqual(part.electricalFunctions.changeoverContacts.map(contact => contact.common), ['contact-11', 'contact-21']);

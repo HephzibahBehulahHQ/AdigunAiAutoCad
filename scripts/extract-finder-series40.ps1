@@ -16,10 +16,11 @@ $records = [System.Collections.Generic.List[object]]::new()
 foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
     # Restrict each series to monostable changeover types with a verified terminal diagram.
-    $orderKey = if ($Series -eq '40') { '^40(31|51|52)([789])([0-9]{3})([045])00([013])$' }
+    $orderKey = if ($Series -eq '40') { '^40(31|51|52|62)([789])([0-9]{3})([045])00([013])$' }
                 else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
     if ($id -cnotmatch $orderKey) { continue }
-    $doublePole = $Matches[1] -eq '52'
+    $type = $Matches[1]
+    $doublePole = $type -in '52', '62'
     $coilCode = $Matches[2]
     $voltage = [int]$Matches[3]
     $materialCode = $Matches[4]
@@ -29,6 +30,10 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $features = $product.PRODUCT_FEATURES
     $description = [string]$details.DESCRIPTION_LONG
     $mode = if ($coilCode -eq '8') { 'AC' } else { 'DC' }
+    if ($Series -eq '40' -and $type -eq '62') {
+        $coilVoltages = if ($mode -eq 'AC') { 110, 120, 230, 240 } else { 5, 6, 7, 9, 12, 14, 18, 21, 24, 28, 48, 60, 110, 125 }
+        if ($materialCode -eq '5' -or $version -eq '3' -or $voltage -notin $coilVoltages) { continue }
+    }
     if ($Series -eq '46') {
         $coilVoltages = if ($mode -eq 'AC') { 12, 24, 48, 110, 120, 230, 240 } else { 12, 24, 48, 110, 125 }
         $connection = if ($doublePole) { 'Plug-in connection\s{2,}' } else { 'Plug-in connection Faston 187' }
@@ -55,6 +60,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
+    if ($type -eq '62' -and ($measurements[0] -ne 10 -or $measurements[1] -ne 12.4 -or
+        $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
     $ratedCurrent = if ($doublePole) { 8 } else { 16 }
     if ($Series -eq '46' -and ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 32.8 -or $measurements[3] -ne 29)) { continue }
