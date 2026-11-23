@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3204);
+  assert.equal(items.length, 3276);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1699,6 +1699,21 @@ test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams for both curr
     assert.deepEqual([dimensions.height.value, dimensions.depth.value], [85, 67.7]);
   }
   assert.equal(highCurrentCount, 38);
+});
+
+test('ETIMAT P10-DC exposes documented polarity for one- and two-pole breakers', () => {
+  const items = engine.catalog('ETI ETIMAT P10-DC');
+  assert.equal(items.length, 72);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { protectedPoles, nominalVoltage, ratedBreakingCapacity, dimensions } = part.specifications;
+    const onePole = protectedPoles.value === 1;
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), onePole ? ['1', '2'] : ['1', '2', '3', '4']);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.name.slice(-3)), onePole ? ['(−)', '(+)'] : ['(−)', '(+)', '(+)', '(−)']);
+    assert.deepEqual(nominalVoltage, { value: onePole ? '220' : '440', unit: 'V DC' });
+    assert.equal(ratedBreakingCapacity.value, 10);
+    assert.deepEqual([dimensions.width.value, dimensions.height.value, dimensions.depth.value], [onePole ? 17.8 : 35.6, 89, 74.74]);
+  }
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
