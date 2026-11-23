@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 2248);
+  assert.equal(items.length, 2359);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1536,6 +1536,22 @@ test('Finder Series 56 variants use the documented coil pins and contact positio
     assert.equal(part.specifications.ratedContactCurrent.value, 12);
     if (normallyOpen) assert.equal(part.specifications.minimumContactGap.value, 1.5);
     if (part.specifications.coilPolarity) assert.match(part.specifications.coilPolarity.value, /pin 7 positive/);
+  }
+});
+
+test('Finder Series 41 low-profile relays preserve single, dual and paired-terminal topologies', () => {
+  const parts = engine.catalog('Finder Series 41').filter(item => item.id.startsWith('finder-41'));
+  assert.equal(parts.length, 111);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    const type = item.id.slice(7, 11);
+    const single = type === '4131';
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber),
+      single ? ['A2', 'A1', '11', '12', '14'] : ['A2', 'A1', '11', '12', '14', '21', '22', '24']);
+    assert.deepEqual(part.symbol.internalConnections,
+      type === '4161' ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']] : []);
+    assert.equal(part.specifications.contactPinPitch.value, single ? 3.5 : 5);
+    assert.equal(part.specifications.dimensions.height.value, 15.7);
   }
 });
 
