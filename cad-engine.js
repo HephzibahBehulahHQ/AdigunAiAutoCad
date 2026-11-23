@@ -1440,10 +1440,10 @@
         }]
       });
     });
-  const etiEtimatBreakers = terminalCatalog.etiEtimat6Breakers.concat(terminalCatalog.etiEtimatPBreakers)
+  const etiEtimatBreakers = terminalCatalog.etiEtimat6Breakers.concat(terminalCatalog.etiEtimatPBreakers, terminalCatalog.etiEtimat10Breakers)
     .map(([code, topology, curve, current, voltage, width, series = '6']) => {
     const id = 'eti-' + code;
-    const pSeries = series !== '6';
+    const pSeries = series.startsWith('P');
     const protectedPoles = Number(topology[0]);
     const terminalPairs = Array.from({ length: protectedPoles }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
     if (topology.endsWith('+N')) terminalPairs.push(['02', '01']);
@@ -1470,7 +1470,7 @@
       specifications: {
         protectedPoles: { value: protectedPoles }, switchedNeutral: { value: topology.endsWith('+N') },
         nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
-        tripCurve: { value: curve }, ratedBreakingCapacity: { value: series === 'P10' ? 10 : 6, unit: 'kA' },
+        tripCurve: { value: curve }, ratedBreakingCapacity: { value: series === 'P10' || (series === '10' && current <= 40) ? 10 : 6, unit: 'kA' },
         mountingMethod: { value: 'DIN rail' },
         dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
       },
@@ -1481,8 +1481,12 @@
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with trip curve, current and pole configuration.' },
         { publisher: 'ETI', title: 'ASTI catalog · ETIMAT ' + series,
-          url: pSeries ? 'https://www.etigroup.eu/images/product_db/levels/en-GB/' + (series === 'P6' ? '7678' : '6929') + '_TD.pdf'
-            : 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf',
+          url: {
+            '6': 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf',
+            '10': 'https://etiprom.nt-rt.ru/images/manuals/ASTI%20ETIMAT%20ST-68%2C%20ETIMAT%206%2C%20ETIMAT%2010.pdf#page=7',
+            P6: 'https://www.etigroup.eu/images/product_db/levels/en-GB/7678_TD.pdf',
+            P10: 'https://www.etigroup.eu/images/product_db/levels/en-GB/6929_TD.pdf'
+          }[series],
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'ETIMAT ' + series + ' connection diagrams, dimensions and rating tables.' }
       ]
     });
