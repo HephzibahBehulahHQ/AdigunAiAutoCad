@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8772);
+  assert.equal(items.length, 8969);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2333,7 +2333,7 @@ test('Finder interface assemblies retain socket terminal designations, coil pola
 });
 
 test('ETI Ultra Quick aR fuses preserve four distinct terminal styles and nominal dimensions', () => {
-  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.name.includes(' aR ') && item.id.startsWith('eti-004'));
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.name.includes(' aR ') && item.id.startsWith('eti-004') && engine.component(item.id).sources[0].title.startsWith('ETI BMEcat'));
   assert.equal(items.length, 393);
   assert.equal(new Set(items.map(item => item.id)).size, items.length);
   const samples = [
@@ -2397,7 +2397,7 @@ test('ETI cylindrical gR fuses retain the AC and DC ratings and the correct term
 
 test('ETI Ultra Quick gR and gS retain voltage-specific capacities, indicators and terminals', () => {
   const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.id.startsWith('eti-004') && / (gR|gS) /.test(item.name));
-  assert.equal(items.length, 254);
+  assert.equal(items.length, 340);
   for (const item of items) {
     const part = engine.component(item.id);
     assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['contact-left','contact-right']);
@@ -7321,4 +7321,20 @@ test('Additional ETI NH fuse links preserve variant-specific envelope, indicator
   assert.equal(gf.specifications.nominalVoltage.value, 500);
   assert.equal(gf.specifications.ratedBreakingCapacity.value, 100);
   assert.equal(gf.physicalRepresentations[0].width, 135.6);
+});
+
+test('New ETI Ultra Quick NH variants match the exact contact profiles and ratings', () => {
+  const parts = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link')
+    .map(item => engine.component(item.id))
+    .filter(part => part.sources[0].title.startsWith('ETI product record') && part.sources[1]?.url.includes('UltraQuick.pdf'));
+  assert.equal(parts.length, 197);
+  for (const part of parts) {
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['contact-left', 'contact-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const sample = ['004331018','004331102','004735140'].map(code => engine.component('eti-' + code));
+  assert.deepEqual(sample.map(part => part.symbol.pins[0].connectionType), ['knife-blade','slotted-blade','threaded-terminal']);
+  assert.deepEqual(sample.map(part => part.physicalRepresentations[0].width), [79.4,104.8,85]);
+  assert.equal(sample[2].specifications.contactThread.value,'M12');
+  assert.equal(engine.component('eti-004304221').specifications.nominalVoltage.value,1000);
 });
