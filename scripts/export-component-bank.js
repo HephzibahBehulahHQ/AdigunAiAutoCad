@@ -106,8 +106,17 @@ const summary = {
 const columns = Object.keys(parts[0]);
 const escapeCsv = value => '"' + String(value == null ? '' : typeof value === 'object' ? JSON.stringify(value) : value)
   .replaceAll('"', '""') + '"';
+const inventoryJson = [
+  '{',
+  '  "summary": ' + JSON.stringify(summary) + ',',
+  '  "parts": [',
+  parts.map(part => '    ' + JSON.stringify(part)).join(',\n'),
+  '  ]',
+  '}',
+  ''
+].join('\n');
 const files = {
-  'component-bank.json': JSON.stringify({ summary, parts }, null, 2) + '\n',
+  'component-bank.json': inventoryJson,
   'component-bank.csv': [columns.join(','), ...parts.map(part => columns.map(column => escapeCsv(part[column])).join(','))].join('\n') + '\n'
 };
 for (const [name, contents] of Object.entries(files)) {
