@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '46', '55', '60', '62')][string]$Series = '40')
+param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '46', '55', '56', '60', '62')][string]$Series = '40')
 
 $ErrorActionPreference = 'Stop'
 $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Archive).Path)
@@ -18,6 +18,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     # Restrict each series to changeover types with a verified terminal diagram.
     $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([6789])([0-9]{3})([0145])0[02]([013])$' }
                 elseif ($Series -eq '55') { '^55([13][234])([89])([0-9]{3})([05])0([0-9]{2})$' }
+                elseif ($Series -eq '56') { '^56([34][24])([89])([0-9]{3})([04])[03]([0-9]{2})$' }
                 elseif ($Series -eq '60') { '^60([16][23])([89])([0-9]{3})([05])[02]([0-9]{2})$' }
                 elseif ($Series -eq '62') { '^62([238][23])([89])([0-9]{3})(4)[0356]([0-9]{2})$' }
                 else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
@@ -74,7 +75,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     $flange = $Series -eq '60' -and $type.StartsWith('6')
     $bifurcated = $Series -eq '60' -and $id[9] -eq '2'
-    $normallyOpen = $Series -eq '62' -and $id[9] -in '3','6'
+    $normallyOpen = $Series -in '56','62' -and $id[9] -in '3','6'
     $contactDescription = if ($normallyOpen) { 'Contacts configuration: NO' } else { 'Contacts configuration: CO' }
     if ($Series -eq '60') {
         $coilVoltages = if ($mode -eq 'AC') { 6,12,24,48,60,110,120,230,240,400 } else { 6,12,24,48,60,110,125,220 }
@@ -116,6 +117,22 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         }
         if ($description -notmatch "Type of electric connection: $connection" -or !$socketOptional) { continue }
     }
+    if ($Series -eq '56') {
+        $pcb = $type.StartsWith('4')
+        $coilVoltages = if ($mode -eq 'AC') { 6,12,24,48,60,110,120,230,240,400 } else { 6,12,24,48,60,110,125,220 }
+        if ($type -eq '32' -and $mode -eq 'DC') { $coilVoltages += 36 }
+        $options = if ($pcb) { '00' } elseif ($normallyOpen) { '00','30','50' }
+                   elseif ($mode -eq 'AC') { '00','20','30','40','50','54' }
+                   elseif ($type -eq '32') { '00','20','40','60','70','74','80','90','94' }
+                   else { '00','20','40','60','70','74' }
+        if ($voltage -notin $coilVoltages -or $version -notin $options -or
+            ($voltage -eq 400 -and !$type.EndsWith('4')) -or
+            ($normallyOpen -and ($mode -ne 'AC' -or !$type.EndsWith('2'))) -or
+            ($voltage -in 220,400 -and $version -notin '00','20','40')) { continue }
+        if ($version -in '80','90','94') { $operation = 'Polarized\s+Mono stable' }
+        $connection = if ($pcb) { 'PCB connection' } else { 'Plug-in connection' }
+        if ($description -notmatch "Type of electric connection: $connection" -or !$socketOptional) { continue }
+    }
     $material = @{ '0' = 'AgNi'; '1' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
     if (!$verifiedMaterial.Success -or $verifiedMaterial.Groups[1].Value.Replace('₂', '2') -cne $material) { continue }
@@ -126,7 +143,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         ($Series -eq '40' -and !$socketOptional)) { continue }
     $values = @{}
     foreach ($feature in $features.FEATURE) { $values[[string]$feature.FNAME] = @($feature.FVALUE) }
-    $poles = if ($Series -in '55','60','62') { $type.Substring(1) } elseif ($doublePole) { '2' } else { '1' }
+    $poles = if ($Series -in '55','56','60','62') { $type.Substring(1) } elseif ($doublePole) { '2' } else { '1' }
     $noCount = if ($normallyOpen) { $poles } else { '0' }
     $coCount = if ($normallyOpen) { '0' } else { $poles }
     if ([string]$values['EF008255'][0] -cne '0' -or [string]$values['EF008256'][0] -cne $noCount -or
@@ -159,6 +176,12 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     if ($Series -eq '62' -and ($measurements[0] -ne 16 -or $measurements[1] -ne 38.2 -or
         $measurements[2] -notin 49.1,68 -or $measurements[3] -ne 35.8)) { continue }
+    if ($Series -eq '56') {
+        $width = if ($poles -eq '2') { 20.7 } else { 40.8 }
+        $height = switch ($type) { '42' {36.8} '44' {37.1} default {37.2} }
+        if ($measurements[0] -ne 12 -or $measurements[1] -ne $width -or
+            $measurements[2] -ne $height -or $measurements[3] -ne 27.7) { continue }
+    }
     if ($Series -eq '46' -and ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 32.8 -or $measurements[3] -ne 29)) { continue }
     $productLink = $product.SelectNodes('.//*[local-name()="UDX.EDXF.MIME_SOURCE"]') |
