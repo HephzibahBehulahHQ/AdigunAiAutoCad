@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3984);
+  assert.equal(items.length, 4116);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1800,6 +1800,29 @@ test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines',
   assert.equal(engine.component('eti-002625103').specifications.ratedBreakingCapacity.value, 10);
   assert.equal(engine.component('eti-002625085').specifications.ratedBreakingCapacity.value, 30);
   assert.equal(engine.component('eti-002625200').specifications.ratedBreakingCapacity.value, 50);
+});
+
+test('ETI NH photovoltaic fuses retain the DC time constant and slotted contact forms', () => {
+  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' && item.name.includes(' gPV '));
+  assert.equal(items.length, 132);
+  const caseDimensions = {
+    NH1XL: [192, 67, 51], NH2XL: [208, 71, 61], NH3L: [208, 87, 73],
+    NHS1XL: [200, 51, 51], NHS2XL: [200, 61, 61], NHS3L: [200, 73, 73],
+    NHU1XL: [200, 51, 51], NHU2XL: [200, 61, 61], NHU3L: [200, 73, 73]
+  };
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { nominalVoltage, ratedDcTimeConstant, ratedBreakingCapacity, cartridgeSize, dimensions } = part.specifications;
+    assert.equal(nominalVoltage.unit, 'V DC');
+    assert.ok([2, 3, 5].includes(ratedDcTimeConstant.value));
+    assert.ok([10, 30, 50, 70].includes(ratedBreakingCapacity.value));
+    assert.deepEqual([dimensions.width.value, dimensions.height.value, dimensions.depth.value], caseDimensions[cartridgeSize.value]);
+    const contactType = /^NH[SU]/.test(cartridgeSize.value) ? 'slotted-blade' : 'knife-blade';
+    assert.deepEqual(part.symbol.pins.map(pin => [pin.id, pin.connectionType]), [['blade-left', contactType], ['blade-right', contactType]]);
+  }
+  const rated70kA = engine.component('eti-004110714');
+  assert.deepEqual(rated70kA.specifications.ratedBreakingCapacity, { value: 70, unit: 'kA' });
+  assert.deepEqual(rated70kA.specifications.ratedDcTimeConstant, { value: 3, unit: 'ms' });
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
