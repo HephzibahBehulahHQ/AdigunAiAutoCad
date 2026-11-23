@@ -51,10 +51,19 @@ const parts = engine.catalog().map(item => {
     const dimensions = part.specifications?.dimensions;
     const documentedMeasurements = [
       [view.width, dimensions?.width],
-      [view.height, dimensions?.height],
-      [view.railDepths?.['NS 35/7.5'], dimensions?.depthOnNS35_7_5],
-      [view.railDepths?.['NS 35/15'], dimensions?.depthOnNS35_15]
+      [view.height, dimensions?.height]
     ];
+    if (view.depth !== undefined || dimensions?.depth) {
+      documentedMeasurements.push([view.depth, dimensions?.depth]);
+    }
+    if (view.depthIncludingDINRail !== undefined || dimensions?.depthIncludingDINRail) {
+      documentedMeasurements.push([view.depthIncludingDINRail, dimensions?.depthIncludingDINRail]);
+    }
+    if (!dimensions?.depth || dimensions?.depthOnNS35_7_5 || dimensions?.depthOnNS35_15 ||
+        view.railDepths?.['NS 35/7.5'] !== undefined || view.railDepths?.['NS 35/15'] !== undefined) {
+      documentedMeasurements.push([view.railDepths?.['NS 35/7.5'], dimensions?.depthOnNS35_7_5],
+        [view.railDepths?.['NS 35/15'], dimensions?.depthOnNS35_15]);
+    }
     if (view.railDepths?.['NS 32'] !== undefined || dimensions?.depthOnNS32) {
       documentedMeasurements.push([view.railDepths?.['NS 32'], dimensions?.depthOnNS32]);
     }

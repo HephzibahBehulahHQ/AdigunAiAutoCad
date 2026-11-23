@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 203);
+  assert.equal(items.length, 213);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -438,7 +438,17 @@ test('catalog contains only source-backed engineering components', () => {
     ['phoenix-contact-3208745', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3044539', 'protective-earth-terminal', 'X'],
     ['phoenix-contact-3031322', 'protective-earth-terminal', 'X'],
-    ['phoenix-contact-3031416', 'protective-earth-terminal', 'X']
+    ['phoenix-contact-3031416', 'protective-earth-terminal', 'X'],
+    ['weidmuller-1020000000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020080000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020100000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020180000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020200000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020280000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020300000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020380000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020400000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1020480000', 'feedthrough-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3208126', 'phoenix-contact-3212142', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555', 'phoenix-contact-3044649', 'phoenix-contact-3044791', 'phoenix-contact-3031283']);
   for (const [id, height] of [
@@ -814,6 +824,35 @@ test('PT miniature and power feed-through blocks preserve ratings and panel widt
     assert.deepEqual([part.specifications.nominalVoltage.value, part.specifications.nominalCurrent.value], [voltage, current]);
     const [outline] = part.physicalRepresentations;
     assert.deepEqual([outline.width, outline.height], [width, height]);
+  }
+});
+
+test('Weidmüller WDU blocks preserve the manufacturer identity, wire limits and TS 35 dimensions', () => {
+  for (const [id, width, depth, minimumRigid, maximumRigid, maximumFlexible, depthIncludingDINRail] of [
+    ['1020000000', 5.1, 46.5, 0.05, 4, 4],
+    ['1020080000', 5.1, 46.5, 0.5, 4, 4],
+    ['1020100000', 6.1, 46.5, 0.13, 6, 6, 47],
+    ['1020180000', 6.1, 46.5, 0.13, 6, 6, 47],
+    ['1020200000', 7.9, 46.5, 0.5, 10, 10, 47],
+    ['1020280000', 7.9, 46.5, 0.22, 10, 10, 47],
+    ['1020300000', 9.9, 46.5, 1.31, 16, 16, 47],
+    ['1020380000', 9.9, 46.5, 1.31, 16, 16, 47],
+    ['1020400000', 11.9, 62.5, 0.82, 16, 25, 63],
+    ['1020480000', 11.9, 62.5, 0.82, 16, 25, 63]
+  ]) {
+    const [result] = engine.catalog('weidmueller ' + id);
+    const part = engine.component(result.id);
+    assert.equal(part.manufacturer, 'Weidmüller');
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), ['screw', 'screw']);
+    assert.deepEqual(part.symbol.internalConnections, [['level-1-left', 'level-1-right']]);
+    assert.deepEqual(part.specifications.mountingRails.value, ['TS 35']);
+    assert.deepEqual(part.specifications.rigidConductorRange, { minimum: minimumRigid, maximum: maximumRigid, unit: 'mm²' });
+    assert.equal(part.specifications.flexibleConductorRange.maximum, maximumFlexible);
+    assert.equal(part.specifications.endCoverRequired.value, true);
+    const [outline] = part.physicalRepresentations;
+    assert.deepEqual([outline.width, outline.depth, outline.depthIncludingDINRail], [width, depth, depthIncludingDINRail]);
+    assert.deepEqual(outline.railDepths, {});
   }
 });
 
