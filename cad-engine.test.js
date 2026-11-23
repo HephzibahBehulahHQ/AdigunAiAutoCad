@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 6337);
+  assert.equal(items.length, 6591);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2110,7 +2110,7 @@ test('Finder interface assemblies retain socket terminal designations, coil pola
 });
 
 test('ETI Ultra Quick aR fuses preserve four distinct terminal styles and nominal dimensions', () => {
-  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link');
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.name.includes(' aR '));
   assert.equal(items.length, 393);
   assert.equal(new Set(items.map(item => item.id)).size, items.length);
   const samples = [
@@ -2134,6 +2134,30 @@ test('ETI Ultra Quick aR fuses preserve four distinct terminal styles and nomina
     assert.equal(part.specifications.ratedBreakingCapacity.value, 200);
     assert.equal(part.specifications.nominalVoltage.unit, 'V AC');
   }
+});
+
+test('ETI Ultra Quick gR and gS retain voltage-specific capacities, indicators and terminals', () => {
+  const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && / (gR|gS) /.test(item.name));
+  assert.equal(items.length, 254);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['contact-left','contact-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const dc = engine.component('eti-004110550');
+  assert.equal(dc.specifications.indicator.value, 'Striker pin');
+  assert.equal(dc.specifications.nominalVoltage.unit, 'V DC');
+  assert.equal(dc.specifications.ratedDcTimeConstant.value, 5);
+  assert.equal(dc.specifications.ratedBreakingCapacity.value, 10);
+  assert.equal(dc.physicalRepresentations[0].height, 61.5);
+  assert.equal(engine.component('eti-004110500').specifications.ratedBreakingCapacity.value, 20);
+  const gS = engine.component('eti-004184504');
+  assert.equal(gS.specifications.utilizationCategory.value, 'gS');
+  assert.equal(gS.specifications.nominalVoltage.value, 800);
+  assert.equal(gS.specifications.ratedBreakingCapacity.value, 30);
+  const threaded = engine.component('eti-004713509');
+  assert.equal(threaded.specifications.contactThread.value, 'M10');
+  assert.equal(threaded.symbol.pins[0].connectionType, 'threaded-stud');
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {

@@ -1711,27 +1711,44 @@
     31: { contacts: 'slotted-blade', sizes: { '00': [105, 51, 30] } },
     32: { contacts: 'bolted-lug', sizes: { 0: [128, 44, 27] } },
     33: { contacts: 'slotted-blade', sizes: { 1: [140, 51, 51], 2: [140, 60, 60], 3: [140, 75, 75] } },
-    34: { contacts: 'threaded-stud', sizes: { 1: [75, 51, 51], 2: [75, 60, 60], 3: [75, 75, 75] } }
+    34: { contacts: 'threaded-stud', sizes: { 1: [75, 51, 51], 2: [75, 60, 60], 3: [75, 75, 75] } },
+    40: { contacts: 'knife-blade', sizes: { '000': [78, 42, 21] } },
+    41: { contacts: 'knife-blade', sizes: { 1: [135, 52, 46], 2: [150, 61, 54], 3: [150, 74, 64] } },
+    42: { contacts: 'knife-blade', sizes: { 4: [200, 122, 95], '4a': [200, 122, 95] } },
+    43: { contacts: 'knife-blade', sizes: { 0: [125, 60, 30], '1C': [135, 65, 30] } },
+    44: { contacts: 'knife-blade', sizes: { '1XL': [194, 52, 46], '2XL': [209, 61, 54], '3L': [209, 74, 64] },
+      striker: { '1XL': [194, 61.5, 46], '2XL': [209, 71, 54], '3L': [209, 82, 64] } },
+    45: { contacts: 'slotted-blade', sizes: { '000': [101, 40, 21] } },
+    46: { contacts: 'slotted-blade', sizes: { 1: [140, 51, 46], 2: [140, 59, 54], 3: [140, 70, 64] } },
+    47: { contacts: 'threaded-stud', sizes: { 1: [85, 50, 46], 2: [72, 59, 54], 3: [83, 70, 64] } },
+    48: { contacts: 'knife-blade', sizes: { '000': [78, 52, 21], '00': [78, 52, 30] } },
+    49: { contacts: 'knife-blade', sizes: { 1: [135, 62, 46], 2: [150, 71, 54], 3: [150, 84, 64] },
+      combined: { 1: [135, 65, 46], 3: [150, 84, 65] } },
+    50: { contacts: 'slotted-blade', sizes: { 1: [140, 51, 51], 2: [140, 60, 60], 3: [140, 75, 75] } },
+    75: { contacts: 'knife-blade', sizes: { '00': [79, 56, 28], 1: [135, 62, 51], 2: [150, 71, 61], 3: [150, 84, 73] },
+      combined: { 1: [135, 65, 46], 3: [150, 84, 65] } }
   };
-  const etiUltraQuickFuses = terminalCatalog.etiUltraQuickFuses.map(([code, format, series, current, voltage, page]) => {
+  const etiUltraQuickFuses = terminalCatalog.etiUltraQuickFuses.concat(terminalCatalog.etiUltraQuickFullRangeFuses).map(
+    ([code, format, series, current, voltage, page, category = 'aR', capacity = 200, timeConstant, indicator]) => {
     const id = 'eti-' + code;
-    const size = /^NH[SG]?(\d+)/.exec(format)[1];
+    const size = /^NH[SG]?([^/]+)/.exec(format)[1];
     const profile = ultraQuickProfiles[page];
-    const [width, bodyHeight, depth] = profile.sizes[size];
+    const [width, bodyHeight, depth] = profile[indicator]?.[size] ?? profile.sizes[size];
     const centreIndicator = format.endsWith('/M');
     const height = centreIndicator && page !== 27 ? bodyHeight + 5 : bodyHeight;
-    const contact = { 'slotted-blade': 'slotted blade', 'knife-blade': 'blade', 'threaded-stud': 'threaded contact', 'bolted-lug': 'bolted lug' }[profile.contacts];
+    const contacts = page === 42 && size === '4' ? 'slotted-blade' : profile.contacts;
+    const contact = { 'slotted-blade': 'slotted blade', 'knife-blade': 'blade', 'threaded-stud': 'threaded contact', 'bolted-lug': 'bolted lug' }[contacts];
     const pins = ['left', 'right'].map((side, index) => ({
       id: 'contact-' + side, localNumber: index ? 'R' : 'L', name: contact + (index ? ' (right)' : ' (left)'),
-      x: index ? 36 : -36, y: 0, electricalType: 'passive', connectionType: profile.contacts
+      x: index ? 36 : -36, y: 0, electricalType: 'passive', connectionType: contacts
     }));
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: [format, series, 'aR', current + 'A/' + voltage + 'V'].filter(Boolean).join(' '),
+      model: [format, series, category, current + 'A/' + voltage + 'V' + (timeConstant ? ' DC' : '')].filter(Boolean).join(' '),
       name: 'Ultra Quick semiconductor fuse link', aliases: ['ETI Ultra Quick', 'semiconductor fuse', format, series].filter(Boolean),
       family: 'semiconductor-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
-        id: 'fuse.eti.ultraquick.' + profile.contacts + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32,
+        id: 'fuse.eti.ultraquick.' + contacts + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32,
         pins, internalConnections: [], numberingNote: 'L and R distinguish the two electrical ends in the CAD symbol.'
       },
       electricalFunctions: {
@@ -1739,11 +1756,14 @@
         continuityNote: 'An intact fuse conducts through its fusible element. Static connectivity reports preserve each side of the protection device.'
       },
       specifications: {
-        utilizationCategory: { value: 'aR' }, cartridgeSize: { value: format },
-        nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
-        ratedBreakingCapacity: { value: 200, unit: 'kA' },
+        utilizationCategory: { value: category }, cartridgeSize: { value: format },
+        nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: timeConstant ? 'V DC' : 'V AC' },
+        ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+        ...(timeConstant ? { ratedDcTimeConstant: { value: timeConstant, unit: 'ms' } } : {}),
+        ...(indicator === 'striker' ? { indicator: { value: 'Striker pin' } } : {}),
+        ...(indicator === 'combined' ? { indicator: { value: 'Combined visual trip indication' } } : {}),
         ...(centreIndicator ? { indicator: { value: 'Centre trip indicator for optional MK microswitch' } } : {}),
-        ...(profile.contacts === 'threaded-stud' ? { contactThread: { value: { 1: 'M8', 2: 'M10', 3: 'M12' }[size] } } : {}),
+        ...(profile.contacts === 'threaded-stud' ? { contactThread: { value: page === 47 ? 'M10' : { 1: 'M8', 2: 'M10', 3: 'M12' }[size] } } : {}),
         dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
       },
       physicalRepresentations: [{
@@ -1753,9 +1773,10 @@
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
-          documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, current, AC voltage and utilization category.' },
+          documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: category === 'aR' ? 'Exact order code, current, AC voltage and utilization category.' : 'Exact order code, voltage type, current and utilization category.' },
         { publisher: 'ETI', title: 'Ultra Quick · ' + format + ' mechanical drawing',
-          url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=' + page,
+          url: page === 75 ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/Green-Protect.pdf#page=75'
+            : 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=' + page,
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Terminal style, nominal envelope dimensions and indicator projection.' }
       ]
     });
@@ -2686,6 +2707,13 @@
       }
     }
     return { segments, circles };
+  }
+
+  function fuseLinkGeometry() {
+    return {
+      segments: [[-36, 0, 36, 0], [-15, -6, 15, -6], [15, -6, 15, 6], [15, 6, -15, 6], [-15, 6, -15, -6]],
+      circles: [[-36, 0, 2.6], [36, 0, 2.6]]
+    };
   }
 
   function disconnectTerminalGeometry(instance) {
@@ -3913,6 +3941,7 @@
     wireList: wireList,
     wireListCsv: wireListCsv,
     wireRoutePoints: wireRoutePoints,
+    fuseLinkGeometry: fuseLinkGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
     cableScheduleCsv: cableScheduleCsv,
