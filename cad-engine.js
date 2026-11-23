@@ -1445,23 +1445,25 @@
     const id = 'eti-' + code;
     const pSeries = series.startsWith('P');
     const dc = series === 'P10-DC';
+    const quickConnect = series === 'P10-QC';
     const highCurrent = series === '10' && current >= 80;
     const protectedPoles = Number(topology[0]);
     const terminalPairs = Array.from({ length: protectedPoles }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
     if (topology.endsWith('+N')) terminalPairs.push(['02', '01']);
-    if (pSeries) terminalPairs.forEach(pair => pair.reverse());
+    if (pSeries && !quickConnect) terminalPairs.forEach(pair => pair.reverse());
+    const terminalHardware = quickConnect ? {} : { connectionType: 'screw' };
     const pins = terminalPairs.flatMap(([top, bottom], index) => {
       const x = (index - (terminalPairs.length - 1) / 2) * 36;
       const topPolarity = index ? '+' : '−';
       const bottomPolarity = index ? '−' : '+';
       return [
-        { id: 'terminal-' + top, localNumber: top, name: 'Upper terminal' + (dc ? ' (' + topPolarity + ')' : ''), ...(dc ? { polarity: topPolarity } : {}), x, y: -42, electricalType: 'passive', connectionType: 'screw' },
-        { id: 'terminal-' + bottom, localNumber: bottom, name: 'Lower terminal' + (dc ? ' (' + bottomPolarity + ')' : ''), ...(dc ? { polarity: bottomPolarity } : {}), x, y: 42, electricalType: 'passive', connectionType: 'screw' }
+        { id: 'terminal-' + top, localNumber: top, name: 'Upper terminal' + (dc ? ' (' + topPolarity + ')' : ''), ...(dc ? { polarity: topPolarity } : {}), x, y: -42, electricalType: 'passive', ...terminalHardware },
+        { id: 'terminal-' + bottom, localNumber: bottom, name: 'Lower terminal' + (dc ? ' (' + bottomPolarity + ')' : ''), ...(dc ? { polarity: bottomPolarity } : {}), x, y: 42, electricalType: 'passive', ...terminalHardware }
       ];
     });
     const model = 'ETIMAT ' + series + ' ' + topology + ' ' + curve + current;
-    const height = dc ? 89 : highCurrent ? 90 : pSeries ? 88 : 85;
-    const depth = dc ? 74.74 : pSeries ? 69.5 : 67.7;
+    const height = quickConnect ? 90.1 : dc ? 89 : highCurrent ? 90 : pSeries ? 88 : 85;
+    const depth = quickConnect ? 74.47 : dc ? 74.74 : pSeries ? 69.5 : 67.7;
     const depthSpec = highCurrent ? {} : { depth: { value: depth, unit: 'mm' } };
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code, model,
@@ -1476,13 +1478,14 @@
         protectedPoles: { value: protectedPoles }, switchedNeutral: { value: topology.endsWith('+N') },
         nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: dc ? 'V DC' : 'V AC' },
         tripCurve: { value: curve },
-        ratedBreakingCapacity: { value: catalogCapacity ?? (dc || series === 'P10' || (series === '10' && current <= 40) ? 10 : 6), unit: 'kA' },
+        ratedBreakingCapacity: { value: catalogCapacity ?? (dc || quickConnect || series === 'P10' || (series === '10' && current <= 40) ? 10 : 6), unit: 'kA' },
+        ...(quickConnect ? { connectionMethod: { value: 'Quick Connect' } } : {}),
         ...(dc ? { terminalPolarity: { value: protectedPoles === 1 ? '1− / 2+' : '1− / 2+ / 3+ / 4−' } } : {}),
         ...(highCurrent ? { breakingCapacityStandard: { value: 'EN 60947-2' } } : {}),
         mountingMethod: { value: 'DIN rail' },
         dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, ...depthSpec }
       },
-      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: dc ? 2 : 1, ...(highCurrent ? {} : { depth }),
+      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: dc || quickConnect ? 2 : 1, ...(highCurrent ? {} : { depth }),
         scope: highCurrent ? 'Catalog front outline. Depth and installation clearances are outside this view.'
           : 'Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.' }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
@@ -1495,11 +1498,12 @@
             '10': 'https://etiprom.nt-rt.ru/images/manuals/ASTI%20ETIMAT%20ST-68%2C%20ETIMAT%206%2C%20ETIMAT%2010.pdf#page=7',
             P6: 'https://www.etigroup.eu/images/product_db/levels/en-GB/7678_TD.pdf',
             P10: 'https://www.etigroup.eu/images/product_db/levels/en-GB/6929_TD.pdf',
+            'P10-QC': 'https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=11',
             'P10-DC': 'https://www.etigroup.eu/images/product_db/idents/en-GB/002061866_TD.pdf#page=12'
           }[series],
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: dc ? 'Polarity, connection diagrams and rating table.' : 'ETIMAT ' + series + ' connection diagrams, dimensions and rating tables.' },
-        ...(dc ? [{ publisher: 'ETI', title: 'ETIMAT P10-DC net product dimensions',
-          url: 'https://www.etigroup.eu/products-services/' + (protectedPoles === 1 ? '001903010' : '001903228'),
+        ...(dc || quickConnect ? [{ publisher: 'ETI', title: 'ETIMAT ' + series + ' net product dimensions',
+          url: 'https://www.etigroup.eu/products-services/' + (quickConnect ? '291042103' : protectedPoles === 1 ? '001903010' : '001903228'),
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Manufacturer net dimensions for the ' + topology + ' housing.' }] : [])
       ]
     });
