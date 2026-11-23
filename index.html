@@ -392,7 +392,8 @@
       componentFootprints.set(key,local);
     }
     const scale=object.symbolScale??1;
-    const matrix=new DOMMatrix().translate(object.x,object.y).rotate(object.rotation||0).scale(object.mirrorX?-scale:scale,scale);
+    const matrix=new DOMMatrix().translate(object.x,object.y).rotate(object.rotation||0).scale(scale);
+    if(object.mirrorX)matrix.scaleSelf(-1,1);
     const stroke=(object.strokeWidth||1.8)*scale/2;
     const corners=[[local.x,local.y],[local.x+local.width,local.y],[local.x,local.y+local.height],[local.x+local.width,local.y+local.height]]
       .map(([x,y])=>new DOMPoint(x,y).matrixTransform(matrix));

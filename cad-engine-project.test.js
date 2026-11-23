@@ -331,6 +331,9 @@ async function verifyDraftShortcuts(page,address){
     segment('extend-target','line',240,110,300,110),
     segment('cross-h','wire',270,200,370,200),
     segment('cross-v','wire',320,160,320,245),
+    segment('arrange-1','line',60,260,80,260),
+    segment('arrange-2','line',140,280,160,280),
+    segment('arrange-3','line',270,266,290,266),
     {...segment('attached','wire',pin.x,pin.y,pin.x-40,pin.y),
       pinAttachments:{start:{instanceId:part.id,pinId:pin.id},end:null}}
   ];
@@ -412,6 +415,27 @@ async function verifyDraftShortcuts(page,address){
   assert.ok(lines.some(line=>line.y1===75&&line.y2===120&&line.x1===line.x2));
   assert.ok(lines.some(line=>line.y1===122&&line.y2===122));
   assert.equal(saved.objects.filter(item=>item.kind==='dimension').length,1);
+  await click(70,260);
+  await page.keyboard.down('Control');
+  await click(150,280);
+  await click(280,266);
+  await page.keyboard.up('Control');
+  await button('Align top edges').click();
+  assert.match(await object('arrange-2').getAttribute('d'),/^M140 266/);
+  await button('Distribute horizontally').click();
+  assert.match(await object('arrange-2').getAttribute('d'),/^M165 266/);
+  await button('Undo').click();
+  await button('Undo').click();
+  await button('Clear selection').click();
+  await click(70,260);
+  await page.keyboard.down('Control');
+  await click(150,280);
+  await click(280,266);
+  await page.keyboard.up('Control');
+  await button('Align left edges').click();
+  assert.match(await object('arrange-1').getAttribute('d'),/^M270 260/);
+  await button('Distribute vertically').click();
+  assert.match(await object('arrange-3').getAttribute('d'),/^M270 270/);
   await button('Select visible objects').click();
   assert.ok(await drawing.locator('.selected-object').count()>1);
   await button('Clear selection').click();
