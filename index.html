@@ -861,6 +861,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           label(fuse.specifications.nominalCurrent.value+' A',0,-11,7);
           break;
         }
+        case'rotary-cam-switch': {
+          const engine=window.AdigunCADEngine;
+          const part=engine.component(item.id);
+          const geometry=engine.camSwitchGeometry(obj,part);
+          for(const segment of geometry.segments)line(...segment);
+          for(const marker of geometry.circles)circle(...marker);
+          for(const pin of part.symbol.pins)label(pin.localNumber,pin.x,pin.y<0?-40:44,7);
+          break;
+        }
         case'modular-step-relay':
         case'industrial-motor-contactor':
         case'modular-contactor': {
@@ -1398,11 +1407,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function componentPropertyFields(object,definition){
     return Object.entries(definition.instanceProperties).map(function([name,rule]){
       if(rule.type==='choice'){
+        const fieldLabel=definition.family==='rotary-cam-switch'&&name==='switchingStep'
+          ?'Selector position':componentPropertyLabels[name]||name;
         const value=object.properties[name]??rule.default;
         const options=Object.entries(rule.choices).map(([id,label])=>
           '<option value="'+escapeHtml(id)+'"'+(id===value?' selected':'')+'>'+escapeHtml(label)+'</option>').join('');
-        return '<label class="property-row"><span>'+escapeHtml(componentPropertyLabels[name]||name)+'</span>'
-          +'<select class="component-edit" aria-label="'+escapeHtml(componentPropertyLabels[name]||name)+'" data-component-property="'+escapeHtml(name)+'" data-component-object="'+escapeHtml(object.id)+'"'
+        return '<label class="property-row"><span>'+escapeHtml(fieldLabel)+'</span>'
+          +'<select class="component-edit" aria-label="'+escapeHtml(fieldLabel)+'" data-component-property="'+escapeHtml(name)+'" data-component-object="'+escapeHtml(object.id)+'"'
           +(object.locked?' disabled':'')+'>'+options+'</select></label>';
       }
       const attributes=rule.type==='number'
@@ -1482,6 +1493,11 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.gaugeContactDiameter?[['Gauge contact diameter',spec.gaugeContactDiameter.value+' '+spec.gaugeContactDiameter.unit]]:[]),
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
+      : def.family==='rotary-cam-switch'
+      ? [['Poles',String(spec.poleCount.value)],['Rated current',spec.ratedCurrent.value+' A'],
+        ['Maximum operating voltage',spec.maximumOperatingVoltage.value+' V AC'],
+        ['Mounting',spec.mountingMethod.value],['Padlockable in off position',spec.lockableOff.value?'Yes':'No'],
+        ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : def.family==='modular-step-relay'
       ? [['Coil voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
         ['Rated contact current',spec.ratedContactCurrent.value+' A'],['Contact material',spec.contactMaterial.value],

@@ -2284,6 +2284,58 @@
     });
   });
 
+  const etiCamSwitches = terminalCatalog.etiCamSwitches.map(
+    ([code, program, poles, lockable, current, voltage, width, height, depth, page]) => {
+      const id = 'eti-' + code;
+      const model = 'CS ' + current + ' ' + program + ' U' + (lockable ? ' LK' : '');
+      const pins = [];
+      const contactPairs = Array.from({ length: poles }, (_, index) => {
+        const x = (index - (poles - 1) / 2) * 26;
+        return [-36, 36].map((y, side) => {
+          const localNumber = String(index * 2 + side + 1);
+          const pinId = 'terminal-' + localNumber;
+          pins.push({ id: pinId, localNumber, name: 'Terminal ' + localNumber, x, y,
+            electricalType: 'passive', connectionType: 'screw' });
+          return pinId;
+        });
+      });
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model, name: 'ETISWITCH rotary cam switch', aliases: ['ON-OFF switch', 'Panel selector', model,
+          ...(lockable ? ['OFF-position padlocking'] : [])],
+        family: 'rotary-cam-switch', referencePrefix: 'S', category: 'Electrical · Verified cam switch',
+        symbol: {
+          id: 'switch.eti.cs.' + program + '.v1', view: 'schematic', unit: 'mm',
+          width: poles * 26, height: 86, pins, internalConnections: [],
+          numberingNote: 'Each pole uses one numbered screw-terminal pair. All poles open at 0 and close at 1.'
+        },
+        electricalFunctions: { contactPairs, switchingSequence: [[], contactPairs] },
+        specifications: {
+          poleCount: { value: poles }, ratedCurrent: { value: current, unit: 'A' },
+          maximumOperatingVoltage: { value: voltage, unit: 'V AC' },
+          mountingMethod: { value: 'Front mounting' }, lockableOff: { value: lockable },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
+            depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth,
+          scope: 'Manufacturer product envelope. Panel cutout and wiring clearances are separate.'
+        }],
+        instanceProperties: {
+          switchingStep: { type: 'choice', default: '1', choices: { 1: '0 · Off', 2: '1 · On' } },
+          comment: { type: 'string', default: '', maximumLength: 160 }
+        },
+        sources: [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact part number, pole count, electrical ratings and net dimensions.' },
+          { publisher: 'ETI', title: 'ETISWITCH · CS ordering and terminal diagrams',
+            url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/ETISWITCH.pdf#page=' + page,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Order code and numbered ON/OFF contact pairs.' }
+        ]
+      });
+    });
+
   const etiMotorContactors = terminalCatalog.etiCemMotorContactors.concat(terminalCatalog.etiMiniatureMotorContactors).map(
     ([code, frame, auxiliary, voltage, dc, ac1, ac3, power, operatingVoltage]) => {
       const id = 'eti-' + code;
@@ -3038,7 +3090,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -3141,6 +3193,18 @@
       } else {
         segments.push([bottom.x, 12, bottom.x-7, -5]);
       }
+    }
+    return { segments, circles };
+  }
+
+  function camSwitchGeometry(instance, definition = component(instance.componentId)) {
+    const closed = selectedStepConnections(definition, instance).length > 0;
+    const segments = [], circles = [];
+    for (const pin of definition.symbol.pins) {
+      const jointY = Math.sign(pin.y) * 8;
+      segments.push([pin.x, pin.y, pin.x, jointY]);
+      circles.push([pin.x, jointY, 1.25]);
+      if (pin.y > 0) segments.push([pin.x, jointY, pin.x + (closed ? 0 : 8), -8]);
     }
     return { segments, circles };
   }
@@ -4522,6 +4586,7 @@
     transformerGeometry: transformerGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
+    camSwitchGeometry: camSwitchGeometry,
     cableScheduleCsv: cableScheduleCsv,
     terminalList: terminalList,
     terminalListCsv: terminalListCsv,

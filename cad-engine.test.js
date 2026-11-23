@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8148);
+  assert.equal(items.length, 8199);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -7160,4 +7160,39 @@ test('A2/096 records SEW motor temperature-sensor options without assigning inst
   assert.ok(text.includes('section 3.2.2, p. 66'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-002-line-05')?.text.includes('100 authored sheets. The drawing set meets its 100-sheet target.'));
   assert.ok(project.objects.find(object=>object.id==='dol-ref-004-line-31')?.text.includes('A2/096 | M1 temperature-sensor options'));
+});
+
+test('ETI CS cam switches preserve pole isolation and selector continuity after reopening', () => {
+  const items = engine.catalog().filter(item => /^eti-004773/.test(item.id));
+  assert.equal(items.length, 51);
+  const partId = 'eti-004773079';
+  const part = engine.component(partId);
+  assert.equal(part.specifications.lockableOff.value, true);
+  assert.equal(part.physicalRepresentations[0].depth, 182.8);
+  assert.deepEqual(part.electricalFunctions.switchingSequence, [[], [
+    ['terminal-1', 'terminal-2'], ['terminal-3', 'terminal-4'],
+    ['terminal-5', 'terminal-6'], ['terminal-7', 'terminal-8']
+  ]]);
+
+  const sheetId = 'cam-check';
+  const instance = { ...engine.createInstance(partId, 100, 100, 'S1'), sheetId };
+  const pin = engine.worldPins(instance).find(item => item.id === 'terminal-1');
+  const lead = { id: 'cam-lead', kind: 'wire', sheetId, x: pin.x, y: pin.y,
+    x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y - 20,
+    pinAttachments: { start: { instanceId: instance.id, pinId: pin.id }, end: null } };
+  const connected = (drawing) => engine.analyze([drawing, lead]).nets
+    .find(net => net.pins.some(terminal => terminal.pinId === pin.id)).pins
+    .map(terminal => terminal.pinId).sort();
+
+  assert.deepEqual(connected(instance), ['terminal-1']);
+  const offGeometry = engine.camSwitchGeometry(instance);
+  instance.properties.switchingStep = '2';
+  assert.deepEqual(connected(instance), ['terminal-1', 'terminal-2']);
+  assert.notDeepEqual(engine.camSwitchGeometry(instance), offGeometry);
+  const saved = engine.serializeProject({ project: 'Cam switch', sheets: [{ id: sheetId, name: 'Wiring' }], objects: [instance] });
+  const reopened = engine.parseProject(saved);
+  assert.equal(reopened.valid, true);
+  const restored = reopened.project.objects[0];
+  assert.equal(restored.properties.switchingStep, '2');
+  assert.deepEqual(connected(restored), ['terminal-1', 'terminal-2']);
 });
