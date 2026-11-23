@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 377);
+  assert.equal(items.length, 392);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -594,6 +594,21 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-1772080000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1770370000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1770840000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1775480000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1775540000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608510000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683640000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1608620000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1746760000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1767690000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683300000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683290000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1636780000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1933700000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1739630000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1775610000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-7907420000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1683280000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1021500000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1021580000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1021560000', 'feedthrough-terminal', 'X'],
@@ -1206,7 +1221,22 @@ test('Weidmüller ZDU blocks preserve the tension-clamp method and specified end
     ['1772070000', 2, 800, 24, 2.5, true],
     ['1772080000', 2, 800, 24, 2.5, true],
     ['1770370000', 2, 800, 32, 4, true],
-    ['1770840000', 2, 800, 32, 4, true]
+    ['1770840000', 2, 800, 32, 4, true],
+    ['1775480000', 2, 500, 17.5, 1.5, true],
+    ['1775540000', 3, 500, 17.5, 1.5, true],
+    ['1608510000', 2, 800, 24, 4, true],
+    ['1683640000', 2, 800, 32, 6, true],
+    ['1608620000', 2, 800, 41, 10, true],
+    ['1746760000', 2, 1000, 57, 10, true],
+    ['1767690000', 3, 800, 57, 10, true],
+    ['1683300000', 2, 800, 24, 4, true],
+    ['1683290000', 2, 800, 24, 4, true],
+    ['1636780000', 2, 800, 24, 4, true],
+    ['1933700000', 2, 800, 24, 2.5, true],
+    ['1739630000', 2, 800, 125, 35, false],
+    ['1775610000', 4, 500, 17.5, 1.5, true],
+    ['7907420000', 3, 800, 41, 6, true],
+    ['1683280000', 2, 800, 24, 4, true]
   ]) {
     const part = engine.component('weidmuller-' + id);
     const specs = part.specifications;
