@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8429);
+  assert.equal(items.length, 8618);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1817,7 +1817,7 @@ test('ETI CH cartridge dimensions and fuse terminals follow the manufacturer dra
 
 test('ETI miniature fuses preserve table ratings and end-cap terminals across both sizes', () => {
   const items = engine.catalog('minifuse');
-  assert.equal(items.length, 224);
+  assert.equal(items.length, 229);
   for (const item of items) {
     const part = engine.component(item.id);
     const size = part.specifications.cartridgeSize.value;
@@ -7278,4 +7278,27 @@ test('ETI R and RD modular contactors preserve contact markings and manual overr
   assert.deepEqual(connected(), ['terminal-r3']);
   component.properties.switchingStep = '3';
   assert.deepEqual(connected(), ['terminal-r3','terminal-r4']);
+});
+
+test('ETI NH fuse bases expose actual conductor entries while keeping open sockets and poles isolated', () => {
+  assert.equal(engine.catalog().filter(item => item.family === 'nh-fuse-base').length, 184);
+  const id = 'eti-004132128';
+  const part = engine.component(id);
+  assert.equal(part.specifications.cartridgeSize.value, 'NH00');
+  assert.equal(part.specifications.coverConfiguration.value, 'Terminal and fuse covers');
+  assert.equal(part.symbol.pins.length, 12);
+  assert.equal(part.symbol.internalConnections.length, 6);
+  assert.equal(part.physicalRepresentations[0].depth, 93.25);
+  assert.equal(engine.nhFuseBaseGeometry(part).circles.length, 12);
+  const sheetId = 'nh-base';
+  const base = { ...engine.createInstance(id, 100, 100, 'F1'), sheetId };
+  const pin = engine.worldPins(base).find(terminal => terminal.id === 'terminal-a1.1');
+  const wire = { id: 'nh-base-feed', kind: 'wire', sheetId, x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+    x2: pin.x, y2: pin.y - 20, pinAttachments: { start: { instanceId: base.id, pinId: pin.id }, end: null } };
+  const saved = engine.serializeProject({ project: 'Base test', sheets: [{ id: sheetId, name: 'Wiring' }], objects: [base, wire] });
+  const reopened = engine.parseProject(saved);
+  assert.equal(reopened.valid, true);
+  const net = engine.analyzeProject(reopened.project).globalNets.find(item => item.wireIds.includes(sheetId + ':' + wire.id));
+  assert.deepEqual(net.pins.map(p => p.pinId).sort(), ['terminal-a1.1', 'terminal-a1.2']);
+  assert.equal(engine.component('eti-006710234').specifications.nominalVoltage.value, 440);
 });

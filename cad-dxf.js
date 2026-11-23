@@ -123,9 +123,11 @@
       const modularSurgeProtector = component?.family === 'surge-protective-device' && component.specifications.surgeTechnology;
       const transformer = component?.family === 'single-phase-transformer';
       const camSwitch = component?.family === 'rotary-cam-switch';
-      if ((coilAndContact || fuseLink || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || camSwitch || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const nhFuseBase = component?.family === 'nh-fuse-base';
+      if ((coilAndContact || fuseLink || nhFuseBase || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || camSwitch || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
+          : nhFuseBase ? engine.nhFuseBaseGeometry(component)
           : camSwitch ? engine.camSwitchGeometry(object, component)
           : coilAndContact ? engine.coilAndContactGeometry(object)
             : fuseLink ? engine.fuseLinkGeometry()

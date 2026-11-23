@@ -838,6 +838,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           g.dataset.object=obj.id;
           return g;
         }
+        case'nh-fuse-base': {
+          const engine=window.AdigunCADEngine;
+          const holder=engine.component(item.id);
+          const geometry=engine.nhFuseBaseGeometry(holder);
+          for(const segment of geometry.segments)line(...segment);
+          for(const marker of geometry.circles)circle(...marker);
+          for(const pin of holder.symbol.pins)label(pin.localNumber,pin.x,pin.y+(pin.y<0?-5:8),5.5);
+          break;
+        }
         case'cylindrical-fuse-holder': {
           const holder=window.AdigunCADEngine.component(item.id);
           for(let index=0;index<holder.symbol.pins.length;index+=2){
@@ -1470,6 +1479,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     const source=def.sources[0];
     const rows=def.family==='user-authored'?[]:def.family==='pushbutton' ? [['Operator profile',spec.operatorProfile.value],['Actuation',spec.operatorType.value],['Contact',spec.contactComposition.value],['Terminal pair',spec.terminalDesignation.value],['Connection',spec.terminalConnection.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Positive opening',spec.positiveOpening.value?'Yes':'No']] : def.family==='lamp'
       ? [['Rated supply',spec.ratedSupplyVoltage.value+' '+spec.ratedSupplyVoltage.unit],['Light source',spec.lightSource.value],['Mounting diameter',spec.mountingDiameter.value+' '+spec.mountingDiameter.unit],['Connection',spec.terminalConnection.value]]
+      : def.family==='nh-fuse-base'
+      ? [['Fuse size',spec.cartridgeSize.value],['Poles',String(spec.poles.value)],
+        ['Terminal options',spec.terminalOptions.value],['Covers',spec.coverConfiguration.value],
+        ['Rated current',spec.nominalCurrent.value+' A'],['Rated voltage',spec.nominalVoltage.value+' V AC'],
+        ['Fuse power limit',spec.fusePowerLimit.value+' W'],['Ingress protection',spec.ingressProtection.value],
+        ['Mounting',spec.mountingMethod.value],
+        ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : def.family==='cylindrical-fuse-holder'
       ? [['Poles',String(spec.poles.value)],['Cartridge size',spec.cartridgeSize.value+' '+spec.cartridgeSize.unit],
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
