@@ -234,8 +234,8 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 2488);
-  assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
+  assert.equal(items.length, 2615);
+  assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209523', 'feedthrough-terminal', 'X'],
@@ -1642,6 +1642,21 @@ test('direct catalog lookup matches searchable entries and protects the index', 
   }
   assert.equal(engine.catalogItem('missing-component'), null);
   assert.equal(engine.catalogItem('constructor'), null);
+});
+
+test('ETIMAT 6 breakers expose documented protected and switched neutral poles', () => {
+  const items = engine.catalog('ETI ETIMAT 6');
+  assert.equal(items.length, 127);
+  for (const item of items) {
+    const definition = engine.component(item.id);
+    const { protectedPoles, switchedNeutral, ratedBreakingCapacity } = definition.specifications;
+    const numbers = Array.from({ length: protectedPoles.value }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
+    if (switchedNeutral.value) numbers.push(['02', '01']);
+    assert.deepEqual(definition.symbol.pins.map(pin => pin.localNumber), numbers.flat());
+    assert.deepEqual(definition.electricalFunctions.switchedPolePairs, numbers.map(pair => pair.map(number => 'terminal-' + number)));
+    assert.deepEqual(definition.symbol.internalConnections, []);
+    assert.equal(ratedBreakingCapacity.value, 6);
+  }
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
