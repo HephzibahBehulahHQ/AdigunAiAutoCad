@@ -858,17 +858,22 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           label(fuse.specifications.nominalCurrent.value+' A',0,-11,7);
           break;
         }
+        case'residual-current-circuit-breaker':
         case'miniature-circuit-breaker': {
           const breaker=window.AdigunCADEngine.component(item.id);
           const rating=breaker.specifications;
           label(rating.tripCurve.value+rating.nominalCurrent.value,0,-53,7);
+          if(rating.ratedResidualCurrent){
+            label(rating.residualCurrentType.value+' · '+rating.ratedResidualCurrent.value+' mA',0,59,7);
+          }
           for(let index=0;index<breaker.symbol.pins.length;index+=2){
             const [top,bottom]=breaker.symbol.pins.slice(index,index+2);
             line(top.x,top.y,top.x,-12);line(bottom.x,12,bottom.x,bottom.y);
             circle(top.x,top.y,2.6);circle(bottom.x,bottom.y,2.6);
             circle(top.x,-12,2);circle(bottom.x,12,2);
             line(bottom.x,12,bottom.x+9,-7);
-            label(top.localNumber+(top.polarity||''),top.x,top.y-4,6);label(bottom.localNumber+(bottom.polarity||''),bottom.x,bottom.y+9,6);
+            label((top.manufacturerMarking||top.localNumber)+(top.polarity||''),top.x,top.y-4,6);
+            label((bottom.manufacturerMarking||bottom.localNumber)+(bottom.polarity||''),bottom.x,bottom.y+9,6);
           }
           if(breaker.symbol.pins.length>2){
             const first=breaker.symbol.pins[0],last=breaker.symbol.pins.at(-1);
@@ -1371,12 +1376,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.gaugeContactDiameter?[['Gauge contact diameter',spec.gaugeContactDiameter.value+' '+spec.gaugeContactDiameter.unit]]:[]),
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
-      : def.family==='miniature-circuit-breaker'
+      : def.family==='miniature-circuit-breaker'||def.family==='residual-current-circuit-breaker'
       ? [['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         ['Trip curve',spec.tripCurve.value],['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
         ['Protected poles',String(spec.protectedPoles.value)],['Switched neutral',spec.switchedNeutral.value?'Yes':'No'],
         ...(spec.terminalPolarity?[['Terminal polarity',spec.terminalPolarity.value]]:[]),
         ...(spec.connectionMethod?[['Connection',spec.connectionMethod.value]]:[]),
+        ...(spec.ratedResidualCurrent?[['Residual current',spec.ratedResidualCurrent.value+' '+spec.ratedResidualCurrent.unit],['Residual release type',spec.residualCurrentType.value]]:[]),
         ['Mounting',spec.mountingMethod.value]]
       : def.family==='motor-protection-breaker'
       ? [['Frame size',spec.frameSize.value],['Trip class',spec.overloadTripClass.value+' '+spec.overloadTripClass.unit],['Adjustable overload release',spec.adjustableOverloadRelease.minimum+'–'+spec.adjustableOverloadRelease.maximum+' '+spec.adjustableOverloadRelease.unit],['Instantaneous N-release',spec.instantaneousShortCircuitRelease.value+' '+spec.instantaneousShortCircuitRelease.unit],['Main poles',spec.mainPoleCount.value],['Rated operational voltage',spec.ratedOperationalVoltage.minimum+'–'+spec.ratedOperationalVoltage.maximum+' '+spec.ratedOperationalVoltage.unit],['Connection',spec.connectionMethod.value]]
