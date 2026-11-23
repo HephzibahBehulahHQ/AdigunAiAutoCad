@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 632);
+  assert.equal(items.length, 809);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1319,7 +1319,7 @@ test('Weidmüller WDK and A2T terminal blocks preserve two isolated levels', () 
 });
 
 test('Finder Series 40 catalog order codes carry five distinct schematic pins and source-backed dimensions', () => {
-  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-40'));
+  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-40(31|51)/.test(item.id));
   assert.equal(parts.length, 132);
   assert.equal(new Set(parts.map(part => part.id)).size, parts.length);
   const coilTypes = new Set();
@@ -1381,6 +1381,21 @@ test('Finder 46.52 relays expose separate, correctly mapped changeover poles', (
     assert.deepEqual(contacts.flatMap(contact => contact.energizedConnections), [
       ['contact-11', 'contact-14'], ['contact-21', 'contact-24']
     ]);
+  }
+});
+
+test('Finder 40.52 PCB relays have eight terminals and two distinct switch poles', () => {
+  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-4052'));
+  assert.equal(parts.length, 177);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), ['A2', 'A1', '11', '12', '14', '21', '22', '24']);
+    assert.ok(part.symbol.pins.every(pin => pin.connectionType === 'pcb-pin'));
+    assert.equal(part.specifications.ratedContactCurrent.value, 8);
+    assert.equal(part.specifications.terminalPinLength.value, 5.2);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.deepEqual(part.electricalFunctions.changeoverContacts.map(contact => contact.common), ['contact-11', 'contact-21']);
+    assert.deepEqual(part.physicalRepresentations.map(view => [view.width, view.height, view.depth]), [[12.4, 25, 29]]);
   }
 });
 
