@@ -76,18 +76,19 @@ test('DXF exports the selected Finder relay step as editable contact geometry', 
   assert.ok(segments.some(line => line.x1 === 132 && line.y1 === 191 && line.x2 === 137 && line.y2 === 191));
 });
 
-test('DXF exports Ultra Quick fuse symbols with editable terminal marks', async () => {
+test('DXF exports Ultra Quick and miniature fuse symbols with editable terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');
-  const fuse = engine.createInstance('eti-004110550', 100, 200, 'F1');
-  fuse.rotation = 90;
-  const exported = await globalThis.AdigunDXF.exportDrawing([fuse]);
-  assert.deepEqual(exported.unsupported, []);
-  const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Fuse geometry', 'fuse-dxf');
-  const contacts = project.objects.filter(object => object.kind === 'circle');
-  assert.equal(contacts.length, 2);
-  assert.deepEqual(contacts.map(pin => [pin.x,pin.y]), [[100,164],[100,236]]);
-  assert.equal(project.objects.filter(object => object.kind === 'line').length, 5);
+  for (const code of ['eti-004110550', 'eti-006710319']) {
+    const fuse = engine.createInstance(code, 100, 200, 'F1');
+    fuse.rotation = 90;
+    const exported = await globalThis.AdigunDXF.exportDrawing([fuse]);
+    assert.deepEqual(exported.unsupported, []);
+    const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Fuse geometry', 'fuse-dxf');
+    const contacts = project.objects.filter(object => object.kind === 'circle');
+    assert.deepEqual(contacts.map(pin => [pin.x,pin.y]), [[100,164],[100,236]]);
+    assert.equal(project.objects.filter(object => object.kind === 'line').length, 5);
+  }
 });
 
 test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {

@@ -117,11 +117,12 @@
       const engine = root.AdigunCADEngine;
       const component = kind === 'component-instance' ? engine.component(object.componentId, object.customSymbol) : null;
       const coilAndContact = ['modular-contactor', 'modular-step-relay'].includes(component?.family);
-      if ((coilAndContact || ['disconnect-terminal', 'user-authored', 'semiconductor-fuse-link'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const fuseLink = ['semiconductor-fuse-link', 'cylindrical-fuse-link'].includes(component?.family);
+      if ((coilAndContact || fuseLink || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
           : coilAndContact ? engine.coilAndContactGeometry(object)
-            : component.family === 'semiconductor-fuse-link' ? engine.fuseLinkGeometry() : engine.disconnectTerminalGeometry(object);
+            : fuseLink ? engine.fuseLinkGeometry() : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
         function toDxf(localX, localY) {
