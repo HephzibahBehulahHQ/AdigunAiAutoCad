@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5577);
+  assert.equal(items.length, 5734);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2035,6 +2035,28 @@ test('ETI EFI-P RCCBs preserve left and right neutral terminal positions and con
   const lowVoltage = engine.component('eti-002061750');
   assert.equal(lowVoltage.specifications.nominalVoltage.value, '190/230');
   assert.equal(lowVoltage.specifications.systemVoltageDesignation.value, 127);
+});
+
+test('Finder Series 22 represents manufacturer-specific mixed and mirror contact order', () => {
+  const items = engine.catalog().filter(item => item.family === 'modular-contactor');
+  assert.equal(items.length, 157);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { contactPoles, coilTerminals } = part.electricalFunctions;
+    assert.equal(contactPoles.length, part.specifications.poleCount.value);
+    assert.deepEqual(coilTerminals, ['coil-a1','coil-a2']);
+    assert.equal(part.symbol.pins.length, (contactPoles.length + 1) * 2);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const mirrors = contactPoles.filter(pole => pole.mirror);
+    assert.equal(mirrors.length, Number(part.manufacturerPartNumber.endsWith('17')));
+    assert.ok(mirrors.every(pole => pole.normallyClosed && pole.terminals.join('/') === 'terminal-11/terminal-12'));
+    if (part.model.startsWith('22.44.')) assert.equal(part.specifications.ratedContactCurrent.value, 40);
+    if (part.model.startsWith('22.64.')) assert.equal(part.specifications.ratedContactCurrent.value, part.model.endsWith('4410') ? 50 : 63);
+  }
+  const mixed25A = items.find(item => /^22\.34\..*\.[14]6[24]0\b/.test(item.name));
+  const mixed40A = items.find(item => /^22\.44\..*\.4610\b/.test(item.name));
+  assert.deepEqual(engine.component(mixed25A.id).electricalFunctions.contactPoles.map(pole=>pole.normallyClosed), [true,false,false,true]);
+  assert.deepEqual(engine.component(mixed40A.id).electricalFunctions.contactPoles.map(pole=>pole.normallyClosed), [false,true,true,false]);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
