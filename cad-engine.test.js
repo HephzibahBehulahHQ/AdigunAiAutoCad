@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5734);
+  assert.equal(items.length, 5857);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2057,6 +2057,37 @@ test('Finder Series 22 represents manufacturer-specific mixed and mirror contact
   const mixed40A = items.find(item => /^22\.44\..*\.4610\b/.test(item.name));
   assert.deepEqual(engine.component(mixed25A.id).electricalFunctions.contactPoles.map(pole=>pole.normallyClosed), [true,false,false,true]);
   assert.deepEqual(engine.component(mixed40A.id).electricalFunctions.contactPoles.map(pole=>pole.normallyClosed), [false,true,true,false]);
+});
+
+test('Finder Series 20 step selection updates continuity and survives a project round-trip', () => {
+  const items = engine.catalog().filter(item => item.family === 'modular-step-relay');
+  assert.equal(items.length, 123);
+  const partId = 'finder-202882300000';
+  const part = engine.component(partId);
+  const firstPole = ['terminal-1', 'terminal-2'];
+  const secondPole = ['terminal-3', 'terminal-4'];
+  assert.deepEqual(part.electricalFunctions.switchingSequence, [[], [firstPole], [], [secondPole]]);
+  const sheetId = 'step-check';
+  const instance = { ...engine.createInstance(partId, 100, 100, 'K1'), sheetId };
+  const joined = (drawing, terminals) => {
+    const pin = engine.worldPins(drawing).find(point => point.id === terminals[0]);
+    const wire = { id: 'test-wire', kind: 'wire', sheetId, x: pin.x, y: pin.y,
+      x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y - 10,
+      pinAttachments: { start: { instanceId: drawing.id, pinId: pin.id }, end: null } };
+    return engine.analyze([drawing, wire]).nets.some(net => terminals.every(
+      id => net.pins.some(terminal => terminal.pinId === id)
+    ));
+  };
+  assert.equal(joined(instance, firstPole), false);
+  const initialGeometry = engine.coilAndContactGeometry(instance);
+  instance.properties.switchingStep = '4';
+  assert.equal(joined(instance, firstPole), false);
+  assert.equal(joined(instance, secondPole), true);
+  assert.notDeepEqual(engine.coilAndContactGeometry(instance), initialGeometry);
+  const saved = engine.serializeProject({ project: 'Step check', sheets: [{ id: sheetId, name: 'Wiring' }], objects: [instance] });
+  const reopened = engine.parseProject(saved);
+  assert.equal(reopened.valid, true);
+  assert.equal(reopened.project.objects[0].properties.switchingStep, '4');
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {

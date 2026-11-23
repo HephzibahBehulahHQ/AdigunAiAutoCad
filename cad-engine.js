@@ -1695,6 +1695,76 @@
 
 
 
+
+  const finderStepRelays = terminalCatalog.finderSeries20Relays.map(([code, type, supply, voltage, material]) => {
+    const id = 'finder-' + code;
+    const order = code.replace(/^(\d{2})(\d{2})(\d)(\d{3})(\d{4})$/, '$1.$2.$3.$4.$5');
+    // Each character describes whether that pole is closed at the documented step.
+    const sequence = {
+      '21': ['0','1'], '22': ['00','11'], '23': ['01','10'], '24': ['00','11','01','10'],
+      '26': ['00','10','11'], '27': ['00','11','10'], '28': ['00','10','00','01']
+    }[type];
+    const count = sequence[0].length;
+    const pins = [];
+    const makePair = (ids, labels, x, coil = false) => ids.map((pinId, index) => {
+      pins.push({
+        id: pinId, localNumber: labels[index], name: coil ? 'Coil ' + labels[index] : 'Switch contact ' + labels[index],
+        x, y: index ? 34 : -34, electricalType: coil ? 'coil' : 'passive', connectionType: 'box-clamp'
+      });
+      return pinId;
+    });
+    const coil = makePair(['coil-a1','coil-a2'], ['A1','A2'], -16 * count, true);
+    const contactPoles = Array.from({ length: count }, (_, index) => {
+      const labels = [String(2 * index + 1), String(2 * index + 2)];
+      return {
+        terminals: makePair(labels.map(label => 'terminal-' + label), labels, (index + 1 - count / 2) * 32),
+        normallyClosed: sequence[0][index] === '1'
+      };
+    });
+    const switchingSequence = sequence.map(state => contactPoles.flatMap((pole, index) => state[index] === '1' ? [pole.terminals] : []));
+    const choices = Object.fromEntries(sequence.map((state, index) => [
+      String(index + 1), 'Step ' + (index + 1) + ' · ' + Array.from(state, digit => digit === '1' ? 'Closed' : 'Open').join(' / ')
+    ]));
+    const catalog = 'https://cdn.findernet.com/app/uploads/S20EN.pdf';
+    return deepFreeze({
+      schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'Finder', manufacturerPartNumber: order,
+      model: '20.' + type + ' · ' + voltage + ' V ' + supply, name: 'Series 20 modular step relay',
+      aliases: ['Finder Series 20', '20.' + type, 'impulse relay', 'step relay'],
+      family: 'modular-step-relay', referencePrefix: 'K', category: 'Electrical · Verified step relay',
+      symbol: {
+        id: 'relay.finder.20.' + type + '.v1', view: 'schematic', unit: 'mm', width: (count + 1) * 32, height: 68,
+        pins, internalConnections: [], numberingNote: 'A1 and A2 are coil terminals. Numbered contact terminals follow the Finder diagram.'
+      },
+      electricalFunctions: {
+        coilTerminals: coil, contactPoles, switchingSequence,
+        simulationNote: 'The selected drawing step determines the depicted continuity. The model does not apply coil pulses automatically.'
+      },
+      specifications: {
+        nominalCoilVoltage: { value: voltage, unit: 'V ' + supply }, ratedContactCurrent: { value: 16, unit: 'A' },
+        stepCount: { value: sequence.length }, contactMaterial: { value: material === '0' ? 'AgNi' : 'AgSnO₂' },
+        mountingMethod: { value: '35 mm DIN rail' },
+        dimensions: { width: { value: 17.5, unit: 'mm' }, height: { value: 87.5, unit: 'mm' } }
+      },
+      physicalRepresentations: [{
+        ...terminalPanelEnvelope(id, 17.5, 87.5), sourceIndex: 2,
+        scope: 'Manufacturer front outline. Mounting and wiring clearances are separate.'
+      }],
+      instanceProperties: {
+        switchingStep: { type: 'choice', default: '1', choices },
+        comment: { type: 'string', default: '', maximumLength: 160 }
+      },
+      sources: [
+        { publisher: 'Finder', title: 'Finder BMEcat · Order ' + order,
+          url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
+          documentRevision: '2026-08-24', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, coil supply type and contact count.' },
+        { publisher: 'Finder', title: 'Series 20 · Ordering and switching sequences', url: catalog + '#page=4',
+          documentRevision: '2026-04', retrievedAt: '2026-11-23', revisionNote: 'Coil ratings, order-code contact material and terminal closure sequence.' },
+        { publisher: 'Finder', title: 'Series 20 · Wiring and outline drawings', url: catalog + '#page=5',
+          documentRevision: '2026-04', retrievedAt: '2026-11-23', revisionNote: 'Terminal designations and front dimensions.' }
+      ]
+    });
+  });
+
   const finderModularContactors = terminalCatalog.finderSeries22Contactors.map(
     ([code, type, voltage, material, circuit, option, mirror]) => {
       const id = 'finder-' + code;
@@ -2363,7 +2433,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, finderModularContactors).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, finderModularContactors, finderStepRelays).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -2439,6 +2509,37 @@
   function isTerminalDefinition(definition) {
     return ['feedthrough-terminal', 'protective-earth-terminal', 'disconnect-terminal'].includes(definition?.family);
   }
+
+  function selectedStepConnections(definition, instance) {
+    const step = Number(instance.properties?.switchingStep ?? 1);
+    return definition.electricalFunctions.switchingSequence?.[step - 1] ?? [];
+  }
+
+  function coilAndContactGeometry(instance, definition = component(instance.componentId)) {
+    const pins = new Map(definition.symbol.pins.map(pin => [pin.id, pin]));
+    const { coilTerminals, contactPoles, switchingSequence } = definition.electricalFunctions;
+    const [a1, a2] = coilTerminals.map(id => pins.get(id));
+    const x = a1.x;
+    const segments = [
+      [x, a1.y, x, -8], [x, 8, x, a2.y],
+      [x-8, -8, x+8, -8], [x+8, -8, x+8, 8], [x+8, 8, x-8, 8], [x-8, 8, x-8, -8]
+    ];
+    const circles = [];
+    const closedTerminals = new Set(selectedStepConnections(definition, instance).map(([terminal]) => terminal));
+    for (const pole of contactPoles) {
+      const [top, bottom] = pole.terminals.map(id => pins.get(id));
+      const closed = switchingSequence ? closedTerminals.has(top.id) : pole.normallyClosed;
+      segments.push([top.x, top.y, top.x, -9], [bottom.x, 12, bottom.x, bottom.y]);
+      if (closed) {
+        segments.push([top.x, -9, top.x+5, -9], [bottom.x, 12, top.x+5, -9]);
+        if (pole.mirror) circles.push([top.x+5, -9, 2.6]);
+      } else {
+        segments.push([bottom.x, 12, bottom.x-7, -5]);
+      }
+    }
+    return { segments, circles };
+  }
+
   function disconnectTerminalGeometry(instance) {
     return {
       segments: [[-35, 0, -12, 0], [12, 0, 35, 0], [-12, 0, 12, instance.properties?.knifePosition === 'closed' ? 0 : -11]],
@@ -2875,7 +2976,9 @@
     validInstances.forEach(function (instance) {
       const def = component(instance.componentId, instance.customSymbol);
       if (def.family === 'disconnect-terminal' && instance.properties.knifePosition !== 'closed') return;
-      def.symbol.internalConnections.forEach(function (group) {
+      const connections = def.electricalFunctions?.switchingSequence
+        ? selectedStepConnections(def, instance) : def.symbol.internalConnections;
+      connections.forEach(function (group) {
         const nodes = group.map(id => pins.find(pin => pin.instanceId === instance.id && pin.pinId === id)).filter(Boolean);
         for (let index = 1; index < nodes.length; index += 1) join(nodes[0].node, nodes[index].node);
       });
@@ -3663,6 +3766,7 @@
     wireListCsv: wireListCsv,
     wireRoutePoints: wireRoutePoints,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
+    coilAndContactGeometry: coilAndContactGeometry,
     cableScheduleCsv: cableScheduleCsv,
     terminalList: terminalList,
     terminalListCsv: terminalListCsv,
