@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 213);
+  assert.equal(items.length, 238);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -448,7 +448,32 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-1020300000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1020380000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1020400000', 'feedthrough-terminal', 'X'],
-    ['weidmuller-1020480000', 'feedthrough-terminal', 'X']
+    ['weidmuller-1020480000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552790000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2508170000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2508020000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552830000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552820000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521850000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521880000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051180000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051310000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2534380000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051210000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1991790000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1992110000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2490360000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2490370000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2876670000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2876660000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2494000000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2862830000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2494100000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521980000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2876690000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521900000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521930000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521970000', 'feedthrough-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3208126', 'phoenix-contact-3212142', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555', 'phoenix-contact-3044649', 'phoenix-contact-3044791', 'phoenix-contact-3031283']);
   for (const [id, height] of [
@@ -853,6 +878,48 @@ test('Weidmüller WDU blocks preserve the manufacturer identity, wire limits and
     const [outline] = part.physicalRepresentations;
     assert.deepEqual([outline.width, outline.depth, outline.depthIncludingDINRail], [width, depth, depthIncludingDINRail]);
     assert.deepEqual(outline.railDepths, {});
+  }
+});
+
+test('Weidmüller A2C variants retain push-in terminals and each documented conductor range', () => {
+  for (const [id, voltage, current, solidLimit, flexibleLimit, width, depth] of [
+    ['1552790000', 500, 17.5, 1.5, 1.5, 3.5, 33.5],
+    ['2508170000', 500, 17.5, 1.5, 1.5, 3.5, 33.5],
+    ['2508020000', 500, 17.5, 1.5, 1.5, 3.5, 33.5],
+    ['1552830000', 500, 17.5, 1.5, 1.5, 3.5, 33.5],
+    ['1552820000', 500, 17.5, 1.5, 1.5, 3.5, 33.5],
+    ['1521850000', 800, 24, 2.5, 4, 5.1, 36.5],
+    ['1521880000', 800, 24, 2.5, 4, 5.1, 36.5],
+    ['2051180000', 800, 32, 4, 6, 6.1, 39.5],
+    ['2051310000', 800, 32, 4, 6, 6.1, 39.5],
+    ['2534380000', 800, 32, 4, 6, 6.1, 39.5],
+    ['2051210000', 800, 32, 4, 6, 6.1, 39.5],
+    ['1991790000', 800, 41, 6, 10, 8.1, 45.5],
+    ['1992110000', 800, 41, 6, 10, 8.1, 45.5],
+    ['2490360000', 1000, 57, 10, 16, 10, 51.5],
+    ['2490370000', 1000, 57, 10, 16, 10, 51.5],
+    ['2876670000', 1000, 57, 10, 16, 10, 51.5],
+    ['2876660000', 1000, 57, 10, 16, 10, 51.5],
+    ['2494000000', 1000, 76, 16, 25, 12, 51.5],
+    ['2862830000', 1000, 76, 16, 25, 12, 51.5],
+    ['2494100000', 1000, 76, 16, 25, 12, 51.5],
+    ['1521980000', 800, 24, 2.5, 4, 5.1, 36.5],
+    ['2876690000', 1000, 57, 10, 16, 10, 51.5],
+    ['1521900000', 800, 24, 2.5, 4, 5.1, 36.5],
+    ['1521930000', 800, 24, 2.5, 4, 5.1, 36.5],
+    ['1521970000', 800, 24, 2.5, 4, 5.1, 36.5]
+  ]) {
+    const [item] = engine.catalog('weidmueller ' + id);
+    const part = engine.component(item.id);
+    const specs = part.specifications;
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), ['push-in', 'push-in']);
+    assert.deepEqual(part.symbol.internalConnections, [['level-1-left', 'level-1-right']]);
+    assert.deepEqual([specs.nominalVoltage.value, specs.nominalCurrent.value], [voltage, current]);
+    assert.deepEqual([specs.rigidConductorRange.maximum, specs.flexibleConductorRange.maximum], [solidLimit, flexibleLimit]);
+    assert.equal(specs.endCoverRequired.value, true);
+    const [outline] = part.physicalRepresentations;
+    assert.deepEqual([outline.width, outline.depth], [width, depth]);
   }
 });
 
