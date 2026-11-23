@@ -1697,6 +1697,70 @@
 
 
 
+
+  const ultraQuickProfiles = {
+    21: { contacts: 'knife-blade', sizes: { '00': [78, 51, 30] } },
+    22: { contacts: 'knife-blade', sizes: { 1: [135, 62, 46], 2: [150, 71, 54], 3: [150, 84, 74] } },
+    23: { contacts: 'slotted-blade', sizes: { '000': [101, 40, 21], '00': [105, 51, 30] } },
+    24: { contacts: 'slotted-blade', sizes: { 1: [110, 51, 51], 2: [110, 60, 60], 3: [110, 75, 75] } },
+    25: { contacts: 'slotted-blade', sizes: { 1: [140, 51, 51], 2: [140, 60, 60], 3: [140, 75, 75] } },
+    26: { contacts: 'threaded-stud', sizes: { 1: [53, 51, 51], 2: [53, 60, 60], 3: [53, 75, 75] } },
+    27: { contacts: 'threaded-stud', sizes: { 1: [53, 56, 51], 2: [53, 65, 60], 3: [53, 80, 75] } },
+    28: { contacts: 'knife-blade', sizes: { 0: [125, 59.5, 30] } },
+    29: { contacts: 'knife-blade', sizes: { 1: [135, 62, 51], 2: [150, 71, 54], 3: [150, 84, 74] } },
+    31: { contacts: 'slotted-blade', sizes: { '00': [105, 51, 30] } },
+    32: { contacts: 'bolted-lug', sizes: { 0: [128, 44, 27] } },
+    33: { contacts: 'slotted-blade', sizes: { 1: [140, 51, 51], 2: [140, 60, 60], 3: [140, 75, 75] } },
+    34: { contacts: 'threaded-stud', sizes: { 1: [75, 51, 51], 2: [75, 60, 60], 3: [75, 75, 75] } }
+  };
+  const etiUltraQuickFuses = terminalCatalog.etiUltraQuickFuses.map(([code, format, series, current, voltage, page]) => {
+    const id = 'eti-' + code;
+    const size = /^NH[SG]?(\d+)/.exec(format)[1];
+    const profile = ultraQuickProfiles[page];
+    const [width, bodyHeight, depth] = profile.sizes[size];
+    const centreIndicator = format.endsWith('/M');
+    const height = centreIndicator && page !== 27 ? bodyHeight + 5 : bodyHeight;
+    const contact = { 'slotted-blade': 'slotted blade', 'knife-blade': 'blade', 'threaded-stud': 'threaded contact', 'bolted-lug': 'bolted lug' }[profile.contacts];
+    const pins = ['left', 'right'].map((side, index) => ({
+      id: 'contact-' + side, localNumber: index ? 'R' : 'L', name: contact + (index ? ' (right)' : ' (left)'),
+      x: index ? 36 : -36, y: 0, electricalType: 'passive', connectionType: profile.contacts
+    }));
+    return deepFreeze({
+      schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+      model: [format, series, 'aR', current + 'A/' + voltage + 'V'].filter(Boolean).join(' '),
+      name: 'Ultra Quick semiconductor fuse link', aliases: ['ETI Ultra Quick', 'semiconductor fuse', format, series].filter(Boolean),
+      family: 'semiconductor-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+      symbol: {
+        id: 'fuse.eti.ultraquick.' + profile.contacts + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32,
+        pins, internalConnections: [], numberingNote: 'L and R distinguish the two electrical ends in the CAD symbol.'
+      },
+      electricalFunctions: {
+        protectedTerminalPair: pins.map(pin => pin.id),
+        continuityNote: 'An intact fuse conducts through its fusible element. Static connectivity reports preserve each side of the protection device.'
+      },
+      specifications: {
+        utilizationCategory: { value: 'aR' }, cartridgeSize: { value: format },
+        nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
+        ratedBreakingCapacity: { value: 200, unit: 'kA' },
+        ...(centreIndicator ? { indicator: { value: 'Centre trip indicator for optional MK microswitch' } } : {}),
+        ...(profile.contacts === 'threaded-stud' ? { contactThread: { value: { 1: 'M8', 2: 'M10', 3: 'M12' }[size] } } : {}),
+        dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+      },
+      physicalRepresentations: [{
+        ...terminalPanelEnvelope(id, width, height), sourceIndex: 1, depth,
+        scope: 'Nominal fuse outline including end contacts. Optional microswitch housing and installation clearances are separate.'
+      }],
+      instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+      sources: [
+        { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+          documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, current, AC voltage and utilization category.' },
+        { publisher: 'ETI', title: 'Ultra Quick · ' + format + ' mechanical drawing',
+          url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=' + page,
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Terminal style, nominal envelope dimensions and indicator projection.' }
+      ]
+    });
+  });
+
   const finderInterfaceModules = terminalCatalog.finderInterfaceModules.map(
     ([code, type, voltage, supply, options, poles, current]) => {
       const id = 'finder-' + code.toLowerCase();
@@ -2517,7 +2581,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, finderModularContactors, finderStepRelays, finderInterfaceModules).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

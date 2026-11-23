@@ -849,6 +849,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           }
           break;
         }
+        case'semiconductor-fuse-link':
         case'knife-blade-fuse-link':
         case'medium-voltage-fuse-link':
         case'bottle-fuse-link':
@@ -1430,9 +1431,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
         ['Minimum breaking current',spec.minimumBreakingCurrent.value+' '+spec.minimumBreakingCurrent.unit],
         ['Striker force',spec.strikerForce.value+' '+spec.strikerForce.unit],['Temperature limiter',spec.thermalStriker.value?'Yes':'No']]
-      : def.family==='cylindrical-fuse-link'||def.family==='knife-blade-fuse-link'||def.family==='bottle-fuse-link'
+      : def.family==='semiconductor-fuse-link'||def.family==='cylindrical-fuse-link'||def.family==='knife-blade-fuse-link'||def.family==='bottle-fuse-link'
       ? [['Cartridge size',[spec.cartridgeSize.value,spec.cartridgeSize.unit].filter(Boolean).join(' ')],['Utilization category',spec.utilizationCategory.value],
         ...(spec.insulatedGrippingLugs?[['Insulated gripping lugs','Yes']]:[]),
+        ...(spec.contactThread?[['Contact thread',spec.contactThread.value]]:[]),
         ...(spec.indicator?[['Indicator',spec.indicator.value]]:[]),
         ...(spec.ratedDcTimeConstant?[['Rated DC time constant',spec.ratedDcTimeConstant.value+' '+spec.ratedDcTimeConstant.unit]]:[]),
         ...(spec.fuseBase?[['Fuse base',spec.fuseBase.value]]:[]),
