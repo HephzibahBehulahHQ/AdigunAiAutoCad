@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 392,
+    "manufacturerParts": 406,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 392,
-    "partsWithPhysicalDimensions": 378,
-    "partsWithPhysicalRepresentations": 371,
+    "partsWithTerminalMaps": 406,
+    "partsWithPhysicalDimensions": 392,
+    "partsWithPhysicalRepresentations": 385,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -67463,6 +67463,2628 @@
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "Manufacturer product data for one potential and two clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1683360000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1683360000",
+      "model": "ZDU 2.5/3AN GN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Green"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1683360000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Green"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 64.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 64.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1683360000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 64.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5/3AN GN · Feed-through terminal block · Item 1683360000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-53an-gn/p/1683360000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 3 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1683480000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1683480000",
+      "model": "ZDU 2.5/4AN WS",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "White"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1683480000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "White"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 79.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 79.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1683480000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 79.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5/4AN WS · Feed-through terminal block · Item 1683480000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-54an-ws/p/1683480000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1608580000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1608580000",
+      "model": "ZDU 2.5/4AN BL",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1608580000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 79.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 79.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1608580000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 79.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5/4AN BL · Feed-through terminal block · Item 1608580000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-54an-bl/p/1608580000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-7904180000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "7904180000",
+      "model": "ZDU 4/3AN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Dark beige"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-7904180000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.13,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.13,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Dark beige"
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 83.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 43,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 43.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 83.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 43,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 43.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-7904180000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.1,
+          "height": 83.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 43,
+          "depthIncludingDINRail": 43.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 4/3AN · Feed-through terminal block · Item 7904180000",
+          "url": "https://eshop.weidmueller.com/en/zdu-43an/p/7904180000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 3 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-7904290000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "7904290000",
+      "model": "ZDU 4/4AN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Dark beige"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-7904290000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.13,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.13,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Dark beige"
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 104.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 43,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 43.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 104.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 43,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 43.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-7904290000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.1,
+          "height": 104.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 43,
+          "depthIncludingDINRail": 43.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 4/4AN · Feed-through terminal block · Item 7904290000",
+          "url": "https://eshop.weidmueller.com/en/zdu-44an/p/7904290000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-7904300000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "7904300000",
+      "model": "ZDU 4/4AN BL",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-7904300000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 4,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.13,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.13,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 6.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 104.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 43,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 43.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 6.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 104.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 43,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 43.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-7904300000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 6.1,
+          "height": 104.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 43,
+          "depthIncludingDINRail": 43.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 4/4AN BL · Feed-through terminal block · Item 7904300000",
+          "url": "https://eshop.weidmueller.com/en/zdu-44an-bl/p/7904300000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-7907410000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "7907410000",
+      "model": "ZDU 6/3AN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Dark beige"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-7907410000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 41,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 6,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.22,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.22,
+          "maximum": 6,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Dark beige"
+        },
+        "dimensions": {
+          "width": {
+            "value": 8.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 45,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 45.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 8.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 45,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 45.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-7907410000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 8.1,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 45,
+          "depthIncludingDINRail": 45.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 6/3AN · Feed-through terminal block · Item 7907410000",
+          "url": "https://eshop.weidmueller.com/en/zdu-63an/p/7907410000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 3 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1767700000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1767700000",
+      "model": "ZDU 10/3AN BL",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1767700000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 57,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 10,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 1.31,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 1.31,
+          "maximum": 10,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 49.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 50.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 49.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 50.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1767700000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 10,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 49.5,
+          "depthIncludingDINRail": 50.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 10/3AN BL · Feed-through terminal block · Item 1767700000",
+          "url": "https://eshop.weidmueller.com/en/zdu-103an-bl/p/1767700000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 3 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1768330000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1768330000",
+      "model": "ZDU 16/3AN BL",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1768330000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 76,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 16,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 1.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 1.5,
+          "maximum": 16,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 99,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 50.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 51.5,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 99,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 50.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 51.5,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1768330000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.1,
+          "height": 99,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 50.5,
+          "depthIncludingDINRail": 51.5
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 16/3AN BL · Feed-through terminal block · Item 1768330000",
+          "url": "https://eshop.weidmueller.com/en/zdu-163an-bl/p/1768330000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 3 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1933710000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1933710000",
+      "model": "ZDU 2.5N BL",
+      "function": "Feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-left",
+          "level-1-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1933710000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 26
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 2,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 50.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 50.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1933710000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 50.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5N BL · Feed-through terminal block · Item 1933710000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-5n-bl/p/1933710000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and two clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1933730000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1933730000",
+      "model": "ZDU 2.5N/3AN BL",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-right",
+          "level-1-lower-left"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1933730000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 3,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 56.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 56.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1933730000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 56.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5N/3AN BL · Feed-through terminal block · Item 1933730000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-5n3an-bl/p/1933730000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 3 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1933750000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1933750000",
+      "model": "ZDU 2.5N/4AN BL",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Blue"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1933750000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Blue"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 60,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 60,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1933750000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 60,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5N/4AN BL · Feed-through terminal block · Item 1933750000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-5n4an-bl/p/1933750000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1933740000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1933740000",
+      "model": "ZDU 2.5N/4AN",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Dark beige"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1933740000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Dark beige"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 60,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 60,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1933740000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 60,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5N/4AN · Feed-through terminal block · Item 1933740000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-5n4an/p/1933740000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "weidmuller-1316890000",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified DIN-rail terminal",
+      "family": "feedthrough-terminal",
+      "manufacturer": "Weidmüller",
+      "orderCode": "1316890000",
+      "model": "ZDU 2.5N/4AN OR",
+      "function": "Multi-conductor feed-through terminal block",
+      "aliases": [
+        "Weidmueller",
+        "Orange"
+      ],
+      "terminals": [
+        {
+          "id": "level-1-upper-left",
+          "localNumber": "1",
+          "name": "Level 1, connection 1",
+          "x": -35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-upper-right",
+          "localNumber": "2",
+          "name": "Level 1, connection 2",
+          "x": 35,
+          "y": -13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-left",
+          "localNumber": "3",
+          "name": "Level 1, connection 3",
+          "x": -35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        },
+        {
+          "id": "level-1-lower-right",
+          "localNumber": "4",
+          "name": "Level 1, connection 4",
+          "x": 35,
+          "y": 13,
+          "electricalType": "passive",
+          "connectionType": "tension-clamp"
+        }
+      ],
+      "nodeGroups": [
+        [
+          "level-1-upper-left",
+          "level-1-upper-right",
+          "level-1-lower-left",
+          "level-1-lower-right"
+        ]
+      ],
+      "electricalFunctions": null,
+      "geometry": {
+        "id": "terminal.feedthrough.weidmuller-1316890000.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 70,
+        "height": 70
+      },
+      "specifications": {
+        "nominalVoltage": {
+          "value": 800,
+          "unit": "V"
+        },
+        "nominalCurrent": {
+          "value": 24,
+          "unit": "A"
+        },
+        "ratedCrossSection": {
+          "value": 2.5,
+          "unit": "mm²"
+        },
+        "rigidConductorRange": {
+          "minimum": 0.05,
+          "maximum": 4,
+          "unit": "mm²"
+        },
+        "flexibleConductorRange": {
+          "minimum": 0.05,
+          "maximum": 2.5,
+          "unit": "mm²"
+        },
+        "connectionMethod": {
+          "value": "Tension-clamp"
+        },
+        "connectionCount": {
+          "value": 4,
+          "unit": "connections"
+        },
+        "mountingRails": {
+          "value": [
+            "TS 35"
+          ]
+        },
+        "endCoverRequired": {
+          "value": true
+        },
+        "color": {
+          "value": "Orange"
+        },
+        "dimensions": {
+          "width": {
+            "value": 5.1,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 60,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 38.5,
+            "unit": "mm"
+          },
+          "depthIncludingDINRail": {
+            "value": 39,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 5.1,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 60,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 38.5,
+          "unit": "mm"
+        },
+        "depthIncludingDINRail": {
+          "value": 39,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.weidmuller-1316890000.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 5.1,
+          "height": 60,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer width and height only. Clearances, terminal locations, and rail mounting datums are unspecified.",
+          "depth": 38.5,
+          "depthIncludingDINRail": 39
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Weidmüller",
+          "title": "ZDU 2.5N/4AN OR · Feed-through terminal block · Item 1316890000",
+          "url": "https://eshop.weidmueller.com/en/zdu-2-5n4an-or/p/1316890000",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Manufacturer product data for one potential and 4 clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting."
         }
       ],
       "status": "source-backed native part"
