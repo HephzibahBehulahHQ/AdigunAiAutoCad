@@ -1509,9 +1509,11 @@
     });
   });
 
-  const etiEb2Breakers = terminalCatalog.etiEb2Breakers.map(
-    ([code, model, frame, poleCount, current, voltage, icu, ics, width, height, depth, connection, dcVoltage]) => {
+  const etiMoldedCaseBreakers = terminalCatalog.etiEb2Breakers.concat(terminalCatalog.etiEb2sBreakers).map(
+    ([code, model, frame, poleCount, current, voltage, icu, ics, width, height, depth, connection, dcVoltage, tripOption, capacityAt415]) => {
       const id = 'eti-' + code;
+      const series = tripOption ? 'EB2S' : 'EB2';
+      const capacityUnit = tripOption ? 'kA at 400 V AC' : 'kA at 415 V AC';
       const pins = Array.from({ length: poleCount }, (_, index) => {
         const pole = index + 1;
         const x = (index - (poleCount - 1) / 2) * 36;
@@ -1522,10 +1524,10 @@
       }).flat();
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-        model, name: 'ETIBREAK EB2 molded-case circuit breaker', aliases: ['MCCB', 'ETIBREAK', 'EB2 ' + frame],
+        model, name: 'ETIBREAK ' + series + ' molded-case circuit breaker', aliases: ['MCCB', 'ETIBREAK', series + ' ' + frame],
         family: 'molded-case-circuit-breaker', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
         symbol: {
-          id: 'breaker.eti.eb2.' + poleCount + 'p.v1', view: 'schematic', unit: 'mm', width: poleCount * 36, height: 84,
+          id: 'breaker.eti.' + series.toLowerCase() + '.' + poleCount + 'p.v1', view: 'schematic', unit: 'mm', width: poleCount * 36, height: 84,
           pins, internalConnections: [], numberingNote: 'L and T are CAD labels for the line and load positions of each documented pole.'
         },
         electricalFunctions: {
@@ -1538,8 +1540,13 @@
           nominalCurrent: { value: current, unit: 'A' },
           nominalVoltage: { value: voltage, unit: 'V AC' },
           ...(dcVoltage ? { ratedDcVoltage: { value: dcVoltage, unit: 'V DC' } } : {}),
-          ratedBreakingCapacity: { value: icu, unit: 'kA at 415 V AC' },
-          ratedServiceBreakingCapacity: { value: ics, unit: 'kA at 415 V AC' },
+          ratedBreakingCapacity: { value: icu, unit: capacityUnit },
+          ratedServiceBreakingCapacity: { value: ics, unit: capacityUnit },
+          ...(capacityAt415 ? { ratedBreakingCapacityAt415: { value: capacityAt415.join('/'), unit: 'kA at 415 V AC' } } : {}),
+          ...(tripOption ? {
+            thermalAdjustment: { value: tripOption === 'A' ? '0.63–1 × In' : 'Fixed' },
+            magneticAdjustment: { value: tripOption === 'A' && frame === 250 ? '5–11 × In' : 'Fixed' }
+          } : {}),
           ...(connection ? { connectionMethod: { value: connection } } : {}),
           dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
         },
@@ -1551,11 +1558,14 @@
         sources: [
           { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
             documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact model, poles, current and Icu/Ics at 415 V AC.' },
-          { publisher: 'ETI', title: 'ETIBREAK EB2 · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
+          { publisher: 'ETI', title: 'ETIBREAK ' + series + ' · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
             documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Corroborates the order-code electrical ratings and supplies its net product envelope.' },
           { publisher: 'ETI', title: 'ETIBREAK · Frame diagrams and terminal arrangements',
-            url: 'https://www.eti.si/images/userfiles/en-GB/documents/products/building_industry/ETIBREAK_TD_2019.pdf',
-            documentRevision: '2019', retrievedAt: '2026-11-23', revisionNote: 'Shows distinct line and load contacts for each of the three- and four-pole frame layouts.' }
+            url: tripOption ? 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/ETIBREAK_ENG.pdf'
+              : 'https://www.eti.si/images/userfiles/en-GB/documents/products/building_industry/ETIBREAK_TD_2019.pdf',
+            documentRevision: tripOption ? null : '2019', retrievedAt: '2026-11-23', revisionNote: tripOption
+              ? 'Shows frame terminal arrangements, Icu/Ics at 400 V AC and thermal and magnetic trip settings.'
+              : 'Shows distinct line and load contacts for each of the three- and four-pole frame layouts.' }
         ]
       });
     }
@@ -2793,7 +2803,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiEb2Breakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

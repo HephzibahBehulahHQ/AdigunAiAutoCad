@@ -1497,6 +1497,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.ratedDcVoltage?[['Rated DC voltage',spec.ratedDcVoltage.value+' '+spec.ratedDcVoltage.unit]]:[]),
         ['Ultimate breaking capacity (Icu)',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
         ['Service breaking capacity (Ics)',spec.ratedServiceBreakingCapacity.value+' '+spec.ratedServiceBreakingCapacity.unit],
+        ...(spec.ratedBreakingCapacityAt415?[['Icu/Ics at 415 V AC',spec.ratedBreakingCapacityAt415.value+' kA']]:[]),
+        ...(spec.thermalAdjustment?[['Thermal adjustment',spec.thermalAdjustment.value],['Magnetic adjustment',spec.magneticAdjustment.value]]:[]),
         ...(spec.connectionMethod?[['Connection',spec.connectionMethod.value]]:[]),
         ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : def.family==='miniature-circuit-breaker'||def.family==='residual-current-circuit-breaker'
