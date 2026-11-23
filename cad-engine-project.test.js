@@ -529,6 +529,20 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     assert.match(await page.locator('#blankProjectTemplate').innerText(), /A1[\s\S]*A2[\s\S]*A3[\s\S]*A4/);
     await page.locator('#newProjectName').fill('Browser local save test');
     await page.locator('#createProject').click();
+    assert.equal(await page.locator('#customSheetFrame').isVisible(), false, 'creating a project shows model space without a paper rectangle');
+    assert.match(await page.locator('#draftingContext').innerText(), /Browser local save test · Add a sheet/);
+    assert.equal(await page.locator('#draftingMode').textContent(), 'Model · mm');
+    const draftingBounds = await page.locator('#drawing').evaluate(node => {
+      const grid = node.querySelector('#viewportGrid').getBoundingClientRect();
+      const viewport = node.getBoundingClientRect();
+      return {
+        widthDelta: Math.abs(grid.width - viewport.width),
+        heightDelta: Math.abs(grid.height - viewport.height),
+        rulerLabels: [...node.querySelectorAll('#draftingRulers text')].map(label => label.textContent)
+      };
+    });
+    assert.ok(draftingBounds.widthDelta < 1 && draftingBounds.heightDelta < 1);
+    assert.ok(draftingBounds.rulerLabels.filter(label => /^-?\d/.test(label)).length > 3);
     for (const section of ['A1', 'A2', 'A3', 'A4']) {
       assert.equal(await page.locator('#projectTree b').filter({ hasText: new RegExp('^' + section + '$') }).count(), 1);
     }
@@ -547,10 +561,12 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await sheetNameInput.press('Enter');
     assert.match(await sheetRow.getAttribute('aria-label'), /^A2\/0001 · Incoming power$/);
     assert.equal(await page.locator('#customSheetFrame').isVisible(), false, 'a new sheet starts in free drafting mode');
+    assert.equal(await page.locator('#draftingContext').isVisible(), false);
     await page.locator('#openCommands').click();
     await page.getByRole('button', { name: 'Toggle print frame' }).click();
     const titleBlock = page.locator('#projectTitleBlockDynamic [data-title-block="frame"]');
     await titleBlock.waitFor();
+    assert.equal(await page.locator('#draftingMode').textContent(), 'A3 frame · mm');
     const titleBlockRows = await page.locator('#projectTitleBlockDynamic [data-title-block-row]').evaluateAll(nodes => nodes.map(node => node.dataset.titleBlockRow));
     assert.deepEqual(titleBlockRows, ['branding', 'project', 'job-manager', 'customer-site', 'sheet', 'drawing', 'approvals', 'date-status', 'notes']);
     assert.match(await page.locator('#projectTitleBlockDynamic [data-title-block-row="branding"]').textContent(), /Hephzibah Behulah · AdigunAiAutoCad/);
@@ -1419,6 +1435,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
       await copyPage.locator('#projectTree [data-section-row]').first().waitFor({ timeout: 5000 });
       assert.equal(await copyPage.locator('#projectTree [data-section-row]').count(), 4, entry.title + ' opens with the A1–A4 project sections');
       await copyPage.locator('#projectTree [data-sheet="' + sheetId + '"]').click();
+      assert.equal(await copyPage.locator('#customSheetFrame').isVisible(), false, 'sheets without an explicit frame setting open in model space');
       const drawn = copyPage.locator('#userDrawings [data-object="' + component.id + '"]');
       const inheritedGraphics = await copyPage.locator('#sheetDesign > :not(:first-child):not(#userDrawings):not(#customSheetFrame)')
         .evaluateAll(nodes => nodes.filter(node => getComputedStyle(node).display !== 'none').length);
