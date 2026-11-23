@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8618);
+  assert.equal(items.length, 8772);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1834,7 +1834,8 @@ test('ETI miniature fuses preserve table ratings and end-cap terminals across bo
 
 test('ETI NH gG fuse links preserve blade contacts and AC ratings across ten case sizes', () => {
   const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' &&
-    !item.name.includes('/I') && item.name.includes(' gG ') && !engine.component(item.id).specifications.coverMaterial);
+    !item.name.includes('/I') && item.name.includes(' gG ') && !engine.component(item.id).specifications.coverMaterial &&
+    engine.component(item.id).sources[0].title.startsWith('ETI BMEcat'));
   assert.equal(items.length, 295);
   const envelopes = {
     NH000: [78.6, 51.9, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
@@ -1874,11 +1875,12 @@ test('ETI NH fuse variants preserve insulated grips and aM utilization ratings',
   }
   const wiring = parts.filter(part => part.specifications.utilizationCategory.value === 'gF' && !part.specifications.coverMaterial);
   const transformers = parts.filter(part => part.specifications.utilizationCategory.value === 'gTr');
-  assert.equal(wiring.length, 22);
+  assert.equal(wiring.length, 58);
   assert.equal(transformers.length, 47);
   for (const part of [...wiring, ...transformers]) {
     assert.equal(part.specifications.ratedBreakingCapacity.value, 100);
-    assert.equal(part.specifications.nominalVoltage.value, 400);
+    assert.ok((part.specifications.utilizationCategory.value === 'gF' ? [400, 500] : [400])
+      .includes(part.specifications.nominalVoltage.value));
     assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['blade-left', 'blade-right']);
     assert.deepEqual(part.symbol.internalConnections, []);
   }
@@ -7301,4 +7303,22 @@ test('ETI NH fuse bases expose actual conductor entries while keeping open socke
   const net = engine.analyzeProject(reopened.project).globalNets.find(item => item.wireIds.includes(sheetId + ':' + wire.id));
   assert.deepEqual(net.pins.map(p => p.pinId).sort(), ['terminal-a1.1', 'terminal-a1.2']);
   assert.equal(engine.component('eti-006710234').specifications.nominalVoltage.value, 440);
+});
+
+test('Additional ETI NH fuse links preserve variant-specific envelope, indicator and NH4 blade shape', () => {
+  const parts = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link')
+    .map(item => engine.component(item.id))
+    .filter(part => part.sources[2]?.url.includes('/en-GB/NV.pdf#page='));
+  assert.equal(parts.length, 154);
+  const nh4 = engine.component('eti-004116101');
+  assert.equal(nh4.specifications.cartridgeSize.value, 'NH4');
+  assert.deepEqual(nh4.symbol.pins.map(pin => pin.connectionType), ['slotted-blade', 'slotted-blade']);
+  assert.equal(nh4.physicalRepresentations[0].width, 200);
+  const striker = engine.component('eti-004111182');
+  assert.equal(striker.specifications.indicator.value, 'Striker pin');
+  assert.deepEqual(striker.symbol.internalConnections, []);
+  const gf = engine.component('eti-004139110');
+  assert.equal(gf.specifications.nominalVoltage.value, 500);
+  assert.equal(gf.specifications.ratedBreakingCapacity.value, 100);
+  assert.equal(gf.physicalRepresentations[0].width, 135.6);
 });

@@ -1681,6 +1681,8 @@
       [code, size, curve, current, voltage, capacity, null, null, null, page, exactProduct ? { exactProduct } : null]),
     terminalCatalog.etiNhSpecialtyFuseLinks.map(([code, size, curve, current, voltage, capacity, transformerPower, indicator]) =>
       [code, size, curve, current, voltage, capacity, null, null, null, null, { transformerPower, indicator }]),
+    terminalCatalog.etiNhCatalogFuseLinks.map(([code, size, curve, current, voltage, capacity, indicator, length, height, depth, page]) =>
+      [code, size, curve, current, voltage, capacity, null, null, null, null, { nhPage: page, nhEnvelope: [length, height, depth], indicator }]),
     terminalCatalog.etiNhSteelCoverFuseLinks.map(([code, size, curve, current, capacity, ...dimensions]) =>
       [code, size, curve, current, 500, capacity, null, null, null, null, { steelCoverDimensions: dimensions, indicator: 'Combined indicator' }])
   ).map(([code, size, utilization, current, voltage, capacity, certification, timeConstant, dcCapacity, miniaturePage, specialty]) => {
@@ -1696,14 +1698,14 @@
     const battery = utilization === 'gBat';
     const directCurrent = photovoltaic || battery || (cylindricalGr && voltage === 1200);
     const cartridge = photovoltaic && !knifeBlade ? etiPvCartridges[size] : null;
-    const slottedBlade = directCurrent && knifeBlade && /^NH[SU]/.test(size);
+    const slottedBlade = size === 'NH4' || (directCurrent && knifeBlade && /^NH[SU]/.test(size));
     const batterySize = battery ? size.replace(/\/K$/, '') : null;
     const batteryDimensions = battery && voltage === 80 && size === 'NH1' ? [135, 65, 46] : nhBatteryDimensions[batterySize];
     const arDimensions = cylindricalAr && caseSize === '22x58' ? [58, 22.3] : null;
     const grDimensions = cylindricalGr ? etiCylindricalGrDimensions[size] : null;
     const miniatureDimensions = miniaturePage ? size.split('x').map(Number).reverse() : null;
     const steelCoverDimensions = specialty?.steelCoverDimensions;
-    const [length, height, depth = height] = steelCoverDimensions ?? miniatureDimensions ?? grDimensions ?? arDimensions ?? batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
+    const [length, height, depth = height] = specialty?.nhEnvelope ?? steelCoverDimensions ?? miniatureDimensions ?? grDimensions ?? arDimensions ?? batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
     const format = knifeBlade ? size : 'CH' + size;
     const contactName = slottedCartridge ? 'slotted tab' : slottedBlade ? 'slotted blade contact' : knifeBlade ? 'blade contact' : 'end cap';
     const contactType = slottedCartridge || slottedBlade ? 'slotted-blade' : knifeBlade ? 'knife-blade' : 'end-cap';
@@ -1712,6 +1714,8 @@
     const dimensionalSource = steelCoverDimensions
       ? 'https://www.etipolam.com.pl/katalog-elektroniczny/wkladki-topikowe-nh/wkladki-bezpiecznikowe-nh-charakterystyka-'
         + utilization.toLowerCase() + '/' + code + '-' + size.toLowerCase() + '-' + utilization.toLowerCase() + '-' + current + 'a-500v-g'
+      : specialty?.nhPage
+      ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/NV.pdf#page=' + (utilization === 'gF' ? 44 : 13)
       : miniaturePage
       ? (specialty?.exactProduct ? 'https://storage-api-pim.etigroup.eu/product_db/levels/3228/en-GB/TD/3228_TD.pdf#page='
         : 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/4ca01aa9-77fb-4c6b-a45f-64267dae64d2#page=') + miniaturePage
@@ -1766,7 +1770,8 @@
       },
       physicalRepresentations: [{
         ...terminalPanelEnvelope(id, length, height), sourceIndex: 1, depth,
-        scope: steelCoverDimensions ? 'Net product envelope. The longitudinal dimension spans the two knife blade contacts.'
+        scope: (steelCoverDimensions || specialty?.nhEnvelope)
+            ? 'Net product envelope. The longitudinal dimension spans the two blade contacts.'
           : miniaturePage ? 'Nominal length and diameter from the manufacturer cartridge size. Holder clearances and part-specific tolerances are separate.'
           : striker ? 'Nominal cartridge outline excluding actuated striker projection.'
           : slottedCartridge && directCurrent ? 'Cartridge envelope including slotted terminals at the maximum overall length. The drawing specifies a range of 105.6–108 mm.'
@@ -1775,10 +1780,10 @@
       }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
-        specialty?.exactProduct ? {
+        specialty?.exactProduct || specialty?.nhPage ? {
           publisher: 'ETI', title: 'ETI product record · Order ' + code,
           url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
-          retrievedAt: '2026-11-23', revisionNote: 'Exact order code and electrical ratings. The lower published rating is used where the sources differ.'
+          retrievedAt: '2026-11-23', revisionNote: 'Exact order code, ratings and product dimensions. The lower published rating is used where the sources differ.'
         } : { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
         { publisher: 'ETI', title: steelCoverDimensions ? 'ETI Polam · NH-Fe order ' + code
@@ -1795,7 +1800,8 @@
             ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
             : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' },
         ...(specialty && !steelCoverDimensions && !miniaturePage ? [{ publisher: 'ETI', title: 'NV/NH · Order-code and rating table',
-          url: 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/NV_ENG.pdf#page=' + (utilization === 'aM' ? 10 : 11),
+          url: specialty.nhPage ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/NV.pdf#page=' + specialty.nhPage
+            : 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/NV_ENG.pdf#page=' + (utilization === 'aM' ? 10 : 11),
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Corroborates the exact order code and application-specific ratings.' }] : [])
       ]
     });
