@@ -1966,9 +1966,14 @@
     });
   });
 
-  const etiCemContactors = terminalCatalog.etiCemMotorContactors.map(
+  const etiMotorContactors = terminalCatalog.etiCemMotorContactors.concat(terminalCatalog.etiMiniatureMotorContactors).map(
     ([code, frame, auxiliary, voltage, dc, ac1, ac3, power, operatingVoltage]) => {
       const id = 'eti-' + code;
+      const miniature = typeof frame === 'string';
+      const frameName = miniature ? frame : 'CEM' + frame;
+      const fourPole = auxiliary === '4P' || auxiliary === 'PR';
+      const mixedMainContacts = auxiliary === 'PR';
+      const mainPoleCount = fourPole ? 4 : 3;
       const coilSupply = dc ? 'DC' : 'AC';
       const pins = [];
       const addPair = (x, labels, kind) => labels.map((label, index) => {
@@ -1981,38 +1986,43 @@
         pins.push(pin);
         return pin.id;
       });
-      const pairs = [
-        { labels: ['1/L1', '2/T1'], kind: 'Main pole 1', normallyClosed: false },
-        { labels: ['3/L2', '4/T2'], kind: 'Main pole 2', normallyClosed: false },
-        { labels: ['5/L3', '6/T3'], kind: 'Main pole 3', normallyClosed: false },
-        ...(auxiliary === '10' ? [{ labels: ['13', '14'], kind: 'Auxiliary NO', normallyClosed: false }] : []),
-        ...(auxiliary === '01' ? [{ labels: ['21', '22'], kind: 'Auxiliary NC', normallyClosed: true }] : [])
-      ];
+      const mainLabels = mixedMainContacts ? [['1', '2'], ['3', '4'], ['R1', 'R2'], ['R3', 'R4']]
+        : fourPole ? [['1', '2'], ['3', '4'], ['5', '6'], ['7', '8']]
+          : [['1/L1', '2/T1'], ['3/L2', '4/T2'], ['5/L3', '6/T3']];
+      const pairs = mainLabels.map((labels, index) => ({
+        labels, kind: 'Main pole ' + (index + 1), normallyClosed: mixedMainContacts && index >= 2
+      }));
+      if (auxiliary === '10') pairs.push({ labels: ['13', '14'], kind: 'Auxiliary NO', normallyClosed: false });
+      if (auxiliary === '01') pairs.push({ labels: ['21', '22'], kind: 'Auxiliary NC', normallyClosed: true });
       const coil = addPair(-pairs.length * 16, ['A1', 'A2'], 'Coil');
       const poles = pairs.map(({ labels, kind, normallyClosed }, index) => ({
         terminals: addPair((index + 1 - pairs.length / 2) * 32, labels, kind), normallyClosed
       }));
-      const [width, height, depth] = frame <= 25 ? [45, 81, (frame === 25 ? 87 : 85) + (dc ? 30 : 0)]
+      const [width, height, depth] = miniature ? (frame === 'CE07' ? [45, 42, 44] : [45, 58, 52])
+        : frame <= 25 ? [45, 81, (frame === 25 ? 87 : 85) + (dc ? 30 : 0)]
         : frame <= 40 ? [55, 87, dc ? 134 : 98]
         : frame <= 80 ? [67.9, 117.3, 116] : [75.4, 117, 126];
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-        model: 'CEM' + frame + '.' + auxiliary + '-' + voltage + 'V-' + (dc ? 'DC' : '50/60Hz'),
-        name: 'CEM motor contactor', aliases: ['ETICON', 'CEM' + frame, 'three-pole motor contactor'],
+        model: frameName + '.' + auxiliary + '-' + voltage + 'V-' + (dc ? 'DC' : '50/60Hz'),
+        name: miniature ? 'Miniature motor contactor' : 'CEM motor contactor',
+        aliases: ['ETICON', frameName, fourPole ? 'four-pole motor contactor' : 'three-pole motor contactor'],
         family: 'industrial-motor-contactor', referencePrefix: 'K', category: 'Electrical · Verified contactor',
         symbol: {
-          id: 'contactor.eti.cem.' + auxiliary + '.v1', view: 'schematic', unit: 'mm',
+          id: 'contactor.eti.' + (miniature ? 'miniature.' : 'cem.') + auxiliary.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
           width: (pairs.length + 1) * 32, height: 68, pins, internalConnections: [],
-          numberingNote: 'A1 and A2 identify the coil. Three main line/load pairs and any built-in auxiliary pair have distinct terminal IDs.'
+          numberingNote: fourPole ? 'A1 and A2 identify the coil. All four main contact pairs have distinct terminal IDs.'
+            : 'A1 and A2 identify the coil. Three main line/load pairs and any built-in auxiliary pair have distinct terminal IDs.'
         },
         electricalFunctions: {
           coilTerminals: coil, contactPoles: poles,
           simulationNote: 'Contacts are drawn in the normal state. Static wiring reports keep both sides of each contact separate.'
         },
         specifications: {
-          poleCount: { value: 3 },
+          poleCount: { value: mainPoleCount },
           contactConfiguration: { value: auxiliary === '10' ? '3 main NO + 1 auxiliary NO'
-            : auxiliary === '01' ? '3 main NO + 1 auxiliary NC' : '3 main NO' },
+            : auxiliary === '01' ? '3 main NO + 1 auxiliary NC' : mixedMainContacts ? '2 main NO + 2 main NC'
+              : mainPoleCount + ' main NO' },
           nominalCoilVoltage: { value: voltage, unit: 'V ' + coilSupply },
           ...(!dc ? { coilFrequency: { value: '50/60', unit: 'Hz' } } : {}),
           ac1RatedCurrent: { value: ac1, unit: 'A' },
@@ -2029,11 +2039,13 @@
         sources: [
           { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
             documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, coil, main ratings and auxiliary contact counts.' },
-          { publisher: 'ETI', title: 'ETICON motor contactors · CEM tables and wiring diagrams',
-            url: 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/Motor_contactors_2020.pdf',
-            documentRevision: '2020', retrievedAt: '2026-11-23', revisionNote: 'Corroborates the order code and shows the coil, three main poles and model-specific auxiliary circuit.' },
-          { publisher: 'ETI', title: 'ETICON · CEM technical data and dimensional drawings',
-            url: 'https://files.eti.si/levels/en-GB/741_TD.pdf', documentRevision: null, retrievedAt: '2026-11-23',
+          { publisher: 'ETI', title: miniature ? 'ETICON · Miniature contactor tables and wiring diagrams' : 'ETICON motor contactors · CEM tables and wiring diagrams',
+            url: miniature ? 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/New_catalogue/ETICON.pdf'
+              : 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/Motor_contactors_2020.pdf',
+            documentRevision: miniature ? null : '2020', retrievedAt: '2026-11-23',
+            revisionNote: 'Identifies the coil, main poles and model-specific auxiliary circuit.' },
+          { publisher: 'ETI', title: miniature ? 'ETICON · CE and CEC dimensional drawings' : 'ETICON · CEM technical data and dimensional drawings',
+            url: miniature ? 'https://files.eti.si/levels/uk-UA/693_TD.pdf' : 'https://files.eti.si/levels/en-GB/741_TD.pdf', documentRevision: null, retrievedAt: '2026-11-23',
             revisionNote: 'Dimensioned contactor profiles for the listed frames and coil supply types.' }
         ]
       });
@@ -2708,7 +2720,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiCemContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

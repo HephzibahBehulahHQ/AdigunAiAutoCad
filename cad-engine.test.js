@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7007);
+  assert.equal(items.length, 7115);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2055,7 +2055,7 @@ test('ETI EFI-P RCCBs preserve left and right neutral terminal positions and con
 });
 
 test('ETI CEM contactors keep coil, line/load and optional auxiliary terminals distinct', () => {
-  const items = engine.catalog().filter(item => item.family === 'industrial-motor-contactor');
+  const items = engine.catalog('CEM motor contactor').filter(item => item.family === 'industrial-motor-contactor');
   assert.equal(items.length, 98);
   for (const { id } of items) {
     const part = engine.component(id);
@@ -2075,6 +2075,28 @@ test('ETI CEM contactors keep coil, line/load and optional auxiliary terminals d
   const dc = engine.component('eti-004652201');
   assert.deepEqual(dc.specifications.nominalCoilVoltage, { value: 220, unit: 'V DC' });
   assert.equal(dc.physicalRepresentations[0].depth, 126);
+});
+
+test('ETI CE and CEC miniature contactors retain their distinct contact layouts', () => {
+  const items = engine.catalog('miniature motor contactor').filter(item => item.family === 'industrial-motor-contactor');
+  assert.equal(items.length, 108);
+  const cases = [
+    ['eti-004641020', [45, 42, 44], [['terminal-13', 'terminal-14']], [false, false, false, false], 3],
+    ['eti-004641056', [45, 58, 52], [['terminal-21', 'terminal-22']], [false, false, false, true], 3],
+    ['eti-004641210', [45, 58, 52], [['terminal-7', 'terminal-8']], [false, false, false, false], 4],
+    ['eti-004641214', [45, 58, 52], [['terminal-r1', 'terminal-r2'], ['terminal-r3', 'terminal-r4']], [false, false, true, true], 4]
+  ];
+  for (const [id, dimensions, distinctPairs, states, count] of cases) {
+    const part = engine.component(id);
+    const { contactPoles, coilTerminals } = part.electricalFunctions;
+    assert.deepEqual(coilTerminals, ['coil-a1', 'coil-a2']);
+    assert.deepEqual(contactPoles.map(pole => pole.normallyClosed), states);
+    assert.deepEqual(contactPoles.slice(-distinctPairs.length).map(pole => pole.terminals), distinctPairs);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.specifications.poleCount.value, count);
+    const view = part.physicalRepresentations[0];
+    assert.deepEqual([view.width, view.height, view.depth], dimensions);
+  }
 });
 
 test('Finder Series 22 represents manufacturer-specific mixed and mirror contact order', () => {
