@@ -1381,6 +1381,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       : def.family==='cylindrical-fuse-link'||def.family==='knife-blade-fuse-link'||def.family==='bottle-fuse-link'
       ? [['Cartridge size',[spec.cartridgeSize.value,spec.cartridgeSize.unit].filter(Boolean).join(' ')],['Utilization category',spec.utilizationCategory.value],
         ...(spec.insulatedGrippingLugs?[['Insulated gripping lugs','Yes']]:[]),
+        ...(spec.indicator?[['Indicator',spec.indicator.value]]:[]),
         ...(spec.ratedDcTimeConstant?[['Rated DC time constant',spec.ratedDcTimeConstant.value+' '+spec.ratedDcTimeConstant.unit]]:[]),
         ...(spec.fuseBase?[['Fuse base',spec.fuseBase.value]]:[]),
         ...(spec.ratedDcVoltage?[['Rated DC voltage',spec.ratedDcVoltage.value+' '+spec.ratedDcVoltage.unit]]:[]),

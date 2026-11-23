@@ -1531,21 +1531,34 @@
     '10x85': { dimensions: [85, 10], source: '002625200' },
     '14x51': { dimensions: [51, 14.3], source: '002637109' }
   };
-  const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(terminalCatalog.etiKnifeBladeFuseLinks)
+  // Overall longitudinal span, end-view height and end-view width from ETI's battery fuse drawings.
+  const nhBatteryDimensions = {
+    NH000: [79, 52, 21], NH00: [79, 56, 28], NH1C: [135, 61, 28],
+    NH1: [135, 52, 46], NH2: [150, 61, 54], NH3: [150, 74, 64],
+    'NHS1/110': [140, 51, 46], 'NHS2/110': [140, 59, 54], 'NHS3/110': [140, 70, 64]
+  };
+  const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(terminalCatalog.etiKnifeBladeFuseLinks, terminalCatalog.etiNhBatteryFuseLinks)
     .map(([code, size, utilization, current, voltage, capacity, certification, timeConstant]) => {
     const id = 'eti-' + code;
     const knifeBlade = size.startsWith('NH');
     const insulated = size.endsWith('/I');
     const caseSize = insulated ? size.slice(0, -2) : size;
     const photovoltaic = utilization === 'gPV';
+    const battery = utilization === 'gBat';
+    const directCurrent = photovoltaic || battery;
     const cartridge = photovoltaic && !knifeBlade ? etiPvCartridges[size] : null;
-    const slottedBlade = photovoltaic && knifeBlade && /^NH[SU]/.test(size);
-    const [length, height, depth = height] = cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
+    const slottedBlade = directCurrent && knifeBlade && /^NH[SU]/.test(size);
+    const batterySize = battery ? size.replace(/\/K$/, '') : null;
+    const batteryDimensions = battery && voltage === 80 && size === 'NH1' ? [135, 65, 46] : nhBatteryDimensions[batterySize];
+    const [length, height, depth = height] = batteryDimensions ?? cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
     const format = knifeBlade ? size : 'CH' + size;
     const contactName = slottedBlade ? 'slotted blade contact' : knifeBlade ? 'blade contact' : 'end cap';
     const contactType = slottedBlade ? 'slotted-blade' : knifeBlade ? 'knife-blade' : 'end-cap';
     const terminalPrefix = knifeBlade ? 'blade-' : 'cap-';
-    const dimensionalSource = cartridge ? 'https://www.etigroup.eu/products-services/' + cartridge.source
+    const batteryDrawingPage = voltage === 80 ? 70 : voltage === 440 ? 72 : slottedBlade ? 77 : 76;
+    const dimensionalSource = battery
+      ? 'https://www.etigroup.eu/images/product_db/idents/en-GB/004184465_TD.pdf#page=' + batteryDrawingPage
+      : cartridge ? 'https://www.etigroup.eu/products-services/' + cartridge.source
       : photovoltaic ? 'https://www.eti.si/images/userfiles/en-GB/documents/products/building_industry/Green_Protect.pdf#page=50' : knifeBlade
       ? nhFuseDimensionSources[size + ' ' + utilization + ' ' + voltage] ?? nhFuseDimensionSources[size]
         ?? 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/TD-NV.pdf#page=1'
@@ -1556,12 +1569,12 @@
     ];
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (photovoltaic ? ' DC' : '') + (certification ? ' ' + certification : ''),
+      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (directCurrent ? ' DC' : '') + (certification ? ' ' + certification : ''),
       name: knifeBlade ? 'Knife-blade fuse link' : 'Cylindrical fuse link',
-      aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization],
+      aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization, ...(battery ? ['battery protection fuse'] : [])],
       family: knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
-        id: 'fuse.eti.' + (knifeBlade ? caseSize : format).toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
+        id: 'fuse.eti.' + (battery ? size : knifeBlade ? caseSize : format).toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
         internalConnections: [],
         numberingNote: knifeBlade ? 'L and R identify the two blade contacts in the CAD symbol.' : 'L and R identify the two interchangeable metal end caps in the CAD symbol.'
       },
@@ -1571,8 +1584,9 @@
       },
       specifications: {
         utilizationCategory: { value: utilization }, nominalCurrent: { value: current, unit: 'A' },
-        nominalVoltage: { value: voltage, unit: photovoltaic ? 'V DC' : 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+        nominalVoltage: { value: voltage, unit: directCurrent ? 'V DC' : 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
         cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
+        ...(battery && size.endsWith('/K') ? { indicator: { value: 'Striker pin' } } : {}),
         ...(insulated ? { insulatedGrippingLugs: { value: true } } : {}),
         ...(timeConstant ? { ratedDcTimeConstant: { value: timeConstant, unit: 'ms' } } : {}),
         dimensions: { width: { value: length, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
@@ -1585,7 +1599,7 @@
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
-        { publisher: 'ETI', title: cartridge ? 'CH photovoltaic cartridge dimensions'
+        { publisher: 'ETI', title: battery ? 'NH battery fuse · mechanical drawing' : cartridge ? 'CH photovoltaic cartridge dimensions'
           : photovoltaic ? 'Green Protect · NH photovoltaic fuse-link dimensions' : knifeBlade ? 'NV/NH knife-blade fuse-link dimensions' : 'C / Cylindrical fuse-links',
           url: dimensionalSource,
           documentRevision: null, retrievedAt: '2026-11-23', revisionNote: cartridge
