@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 3939,
+    "manufacturerParts": 3984,
     "symbolFamilies": 19,
-    "partsWithTerminalMaps": 3939,
-    "partsWithPhysicalDimensions": 3925,
-    "partsWithPhysicalRepresentations": 3918,
+    "partsWithTerminalMaps": 3984,
+    "partsWithPhysicalDimensions": 3970,
+    "partsWithPhysicalRepresentations": 3963,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -804140,6 +804140,6216 @@
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625065",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625065",
+      "model": "CH10x38 gPV 2A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 2,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625065.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625065",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625067",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625067",
+      "model": "CH10x38 gPV 3A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 3,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625067.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625067",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625068",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625068",
+      "model": "CH10x38 gPV 3.5A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 3.5,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625068.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625068",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625069",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625069",
+      "model": "CH10x38 gPV 4A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 4,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625069.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625069",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625070",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625070",
+      "model": "CH10x38 gPV 5A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 5,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625070.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625070",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625071",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625071",
+      "model": "CH10x38 gPV 6A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625071.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625071",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625072",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625072",
+      "model": "CH10x38 gPV 7A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 7,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625072.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625072",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625073",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625073",
+      "model": "CH10x38 gPV 8A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625073.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625073",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625075",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625075",
+      "model": "CH10x38 gPV 10A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625075.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625075",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625077",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625077",
+      "model": "CH10x38 gPV 12A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 12,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625077.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625077",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625078",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625078",
+      "model": "CH10x38 gPV 13A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 13,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625078.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625078",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625079",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625079",
+      "model": "CH10x38 gPV 14A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 14,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625079.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625079",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625080",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625080",
+      "model": "CH10x38 gPV 15A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 15,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625080.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625080",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625081",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625081",
+      "model": "CH10x38 gPV 16A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625081.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625081",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625085",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625085",
+      "model": "CH10x38 gPV 20A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625085.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625085",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625103",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625103",
+      "model": "CH10x38 gPV 6A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625103.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625103",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625104",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625104",
+      "model": "CH10x38 gPV 8A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625104.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625104",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625105",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625105",
+      "model": "CH10x38 gPV 10A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625105.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625105",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625106",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625106",
+      "model": "CH10x38 gPV 12A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 12,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625106.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625106",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625107",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625107",
+      "model": "CH10x38 gPV 16A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625107.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625107",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625109",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625109",
+      "model": "CH10x38 gPV 25A/900V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 900,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625109.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625109",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625110",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625110",
+      "model": "CH10x38 gPV 7A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 7,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625110.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625110",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625112",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625112",
+      "model": "CH10x38 gPV 15A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 15,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625112.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625112",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625134",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625134",
+      "model": "CH10x38 gPV 0.5A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 0.5,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625134.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625134",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625136",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625136",
+      "model": "CH10x38 gPV 14A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 14,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625136.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625136",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625137",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625137",
+      "model": "CH10x38 gPV 13A/1000V DC UL",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 13,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625137.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625137",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625138",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625138",
+      "model": "CH10x38 gPV 1A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 1,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625138.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625138",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625139",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625139",
+      "model": "CH10x38 gPV 25A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x38",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x38.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x38",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 38.2,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10.2,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10.2,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 38.2,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10.2,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10.2,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625139.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 38.2,
+          "height": 10.2,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10.2
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625139",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625085",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625200",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625200",
+      "model": "CH10x85 gPV 2A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 2,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625200.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625200",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625241",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625241",
+      "model": "CH10x85 gPV 3A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 3,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625241.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625241",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625274",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625274",
+      "model": "CH10x85 gPV 4A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 4,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625274.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625274",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625276",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625276",
+      "model": "CH10x85 gPV 5A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 5,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625276.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625276",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625277",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625277",
+      "model": "CH10x85 gPV 6A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 6,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625277.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625277",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625279",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625279",
+      "model": "CH10x85 gPV 8A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 8,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625279.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625279",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625280",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625280",
+      "model": "CH10x85 gPV 10A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625280.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625280",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625282",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625282",
+      "model": "CH10x85 gPV 12A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 12,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625282.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625282",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625285",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625285",
+      "model": "CH10x85 gPV 15A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 15,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625285.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625285",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002625286",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002625286",
+      "model": "CH10x85 gPV 16A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002625286.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002625286",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002626234",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002626234",
+      "model": "CH10x85 gPV 20A/1500V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH10x85",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch10x85.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1500,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 50,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "10x85",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 85,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 10,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 10,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 85,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 10,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 10,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002626234.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 85,
+          "height": 10,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 10
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002626234",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002625200",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002637105",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002637105",
+      "model": "CH14x51 gPV 16A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002637105.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002637105",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002637109",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002637107",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002637107",
+      "model": "CH14x51 gPV 20A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 20,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002637107.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002637107",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002637109",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002637109",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002637109",
+      "model": "CH14x51 gPV 25A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 25,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002637109.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002637109",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002637109",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002637111",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002637111",
+      "model": "CH14x51 gPV 32A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 32,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002637111.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002637111",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002637109",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002637115",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002637115",
+      "model": "CH14x51 gPV 36A/1000V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 36,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1000,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 10,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002637115.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002637115",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002637109",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002637185",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified fuse link",
+      "family": "cylindrical-fuse-link",
+      "manufacturer": "ETI",
+      "orderCode": "002637185",
+      "model": "CH14x51 gPV 16A/1100V DC",
+      "function": "Cylindrical fuse link",
+      "aliases": [
+        "CH14x51",
+        "fuse cartridge",
+        "gPV"
+      ],
+      "terminals": [
+        {
+          "id": "cap-left",
+          "localNumber": "L",
+          "name": "Left end cap",
+          "x": -36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        },
+        {
+          "id": "cap-right",
+          "localNumber": "R",
+          "name": "Right end cap",
+          "x": 36,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "end-cap"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "protectedTerminalPair": [
+          "cap-left",
+          "cap-right"
+        ],
+        "continuityNote": "An intact fuse conducts through its fusible element. Connectivity reports preserve separate nets on the two sides of the protection device."
+      },
+      "geometry": {
+        "id": "fuse.eti.ch14x51.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 32
+      },
+      "specifications": {
+        "utilizationCategory": {
+          "value": "gPV"
+        },
+        "nominalCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": 1100,
+          "unit": "V DC"
+        },
+        "ratedBreakingCapacity": {
+          "value": 30,
+          "unit": "kA"
+        },
+        "cartridgeSize": {
+          "value": "14x51",
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 51,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 14.3,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 14.3,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 51,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 14.3,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 14.3,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002637185.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 51,
+          "height": 14.3,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Nominal cartridge outline. Fuse holder dimensions, installation clearances and dimensional tolerances are separate.",
+          "depth": 14.3
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002637185",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with utilization category and ratings."
+        },
+        {
+          "publisher": "ETI",
+          "title": "CH photovoltaic cartridge dimensions",
+          "url": "https://www.etigroup.eu/products-services/002637109",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Net product dimensions for the corresponding photovoltaic cartridge size."
         }
       ],
       "status": "source-backed native part"

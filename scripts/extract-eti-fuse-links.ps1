@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('CH', 'NH')][string]$Family = 'CH')
+param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('CH', 'NH', 'CH-PV')][string]$Family = 'CH')
 
 $ErrorActionPreference = 'Stop'
 $settings = [Xml.XmlReaderSettings]::new()
@@ -8,9 +8,14 @@ $records = [System.Collections.Generic.List[object]]::new()
 $seen = @{}
 $culture = [Globalization.CultureInfo]::InvariantCulture
 $knifeBlade = $Family -eq 'NH'
-$codePattern = if ($knifeBlade) { '^\d{9}$' } else { '^00265[12]\d{3}$' }
+$photovoltaic = $Family -eq 'CH-PV'
+$codePattern = if ($knifeBlade -or $photovoltaic) { '^\d{9}$' } else { '^00265[12]\d{3}$' }
 $featureGroup = if ($knifeBlade) { 'EC000055' } else { 'EC002704' }
-$designation = if ($knifeBlade) { '(NH(?:000|00C|00|0|1C|1|2C|2|3C|3|4a)(?:/I)?) (gG|aM)' } else { 'CH(8x32|10x38|14x51|22x58) (gG|aM)' }
+$designation = if ($knifeBlade) { '(NH(?:000|00C|00|0|1C|1|2C|2|3C|3|4a)(?:/I)?) (gG|aM)' }
+    elseif ($photovoltaic) { 'CH(10x38|10x85|14x51) (gPV)' }
+    else { 'CH(8x32|10x38|14x51|22x58) (gG|aM)' }
+$ratingPattern = if ($photovoltaic) { '(\d+(?:[.,]\d+)?)A(?:/|\s+)(\d+)V(?:\s+(DC|UL))?' } else { '(\d+(?:[.,]\d+)?)A/(\d+)V' }
+$voltageType = if ($photovoltaic) { 'DC' } else { 'AC' }
 
 try {
     while ($reader.Read()) {
@@ -27,24 +32,31 @@ try {
             $details.Element($ns + 'MANUFACTURER_NAME').Value -cne 'ETI' -or
             $features.Element($ns + 'REFERENCE_FEATURE_GROUP_ID').Value -cne $featureGroup) { continue }
         $name = $details.Element($ns + 'DESCRIPTION_SHORT').Value
-        if ($name -cnotmatch "^Fuse link, $designation (\d+(?:[.,]\d+)?)A/(\d+)V$") { continue }
+        if ($name -cnotmatch "^Fuse link, $designation $ratingPattern$") { continue }
         $format = $Matches[1]
         $size = $format -replace '/I$', ''
         $insulated = $format.EndsWith('/I')
         $category = $Matches[2]
         $current = [double]::Parse($Matches[3].Replace(',', '.'), $culture)
         $voltage = [int]$Matches[4]
+        $label = $Matches[5]
         $physicalSize = if ($size -eq '8x32') { '8x3[12]' } else { $size }
         $description = $details.Element($ns + 'DESCRIPTION_LONG').Value
         if ($description -notmatch "Size $physicalSize," -or
             $description -cnotmatch "(?:Time-Current Characteristic|Characteristics) $category(?:,|$)") { continue }
-        if ($description -notmatch 'Breaking capacity AC \(kA\) (\d+),') { continue }
+        if ($description -notmatch "Breaking capacity $voltageType \(kA\) (\d+),") { continue }
         $capacity = [int]$Matches[1]
         $values = @{}
         foreach ($feature in $features.Elements($ns + 'FEATURE')) {
             $values[$feature.Element($ns + 'FNAME').Value] = $feature.Element($ns + 'FVALUE').Value
         }
-        if ($knifeBlade) {
+        if ($photovoltaic) {
+            if ($capacity -notin 10,30,50 -or $description -notmatch "Rated DC voltage \(V\) $voltage," -or
+                $description -notmatch 'Standards IEC 60269-6(?:,|$)' -or
+                ($values.ContainsKey('EF000228') -and $values['EF000228'] -ne [string]$voltage) -or
+                $description -notmatch 'Rated current \(A\) (\d+(?:[.,]\d+)?),' -or
+                [double]::Parse($Matches[1].Replace(',', '.'), $culture) -ne $current) { continue }
+        } elseif ($knifeBlade) {
             if (($insulated -and ($size -notin 'NH000','NH00','NH1C','NH1','NH2C','NH2','NH3' -or $values['EF012538'] -cne 'true')) -or
                 ($category -eq 'aM' -and ($size -ne 'NH000' -or $insulated))) { continue }
             if ($voltage -notin 400,500,690 -or $capacity -notin 50,100,120 -or
@@ -57,11 +69,14 @@ try {
             if ($capacity -ne $expectedCapacity -or $values['EF000187'] -cne 'AC' -or $values['EF005617'] -ne [string]$capacity -or
                 $values['EF000228'] -ne [string]$voltage) { continue }
         }
-        if ($values['EF000227'] -notmatch '^\d+(?:[.,]\d+)?$' -or
-            [double]::Parse($values['EF000227'].Replace(',', '.'), $culture) -ne $current) { continue }
+        if ((-not $photovoltaic -or $values.ContainsKey('EF000227')) -and
+            ($values['EF000227'] -notmatch '^\d+(?:[.,]\d+)?$' -or
+             [double]::Parse($values['EF000227'].Replace(',', '.'), $culture) -ne $current)) { continue }
         if ($seen.ContainsKey($code)) { throw "Duplicate ETI order code $code" }
         $seen[$code] = $true
-        $records.Add(@($code, $format, $category, $current, $voltage, $capacity))
+        $record = @($code, $format, $category, $current, $voltage, $capacity)
+        if ($photovoltaic -and $label -eq 'UL') { $record += $label }
+        $records.Add($record)
     }
 } finally {
     $reader.Dispose()

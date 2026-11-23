@@ -1523,18 +1523,25 @@
     'NH000/I': 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004191101-nh000-i-gg-2a-400v',
     'NH3/I': 'https://www.etigroup.eu/products-and-solutions/fuse-links-nh/gg-characteristic/004196125-nh3-i-gg-250a-400v'
   };
+  const etiPvCartridges = {
+    '10x38': { dimensions: [38.2, 10.2], source: '002625085' },
+    '10x85': { dimensions: [85, 10], source: '002625200' },
+    '14x51': { dimensions: [51, 14.3], source: '002637109' }
+  };
   const etiFuseLinks = terminalCatalog.etiCylindricalFuseLinks.concat(terminalCatalog.etiKnifeBladeFuseLinks)
-    .map(([code, size, utilization, current, voltage, capacity]) => {
+    .map(([code, size, utilization, current, voltage, capacity, certification]) => {
     const id = 'eti-' + code;
     const knifeBlade = size.startsWith('NH');
     const insulated = size.endsWith('/I');
     const caseSize = insulated ? size.slice(0, -2) : size;
-    const [length, height, depth = height] = etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
+    const photovoltaic = utilization === 'gPV';
+    const cartridge = photovoltaic ? etiPvCartridges[size] : null;
+    const [length, height, depth = height] = cartridge?.dimensions ?? etiFuseDimensions[size] ?? etiFuseDimensions[caseSize];
     const format = knifeBlade ? size : 'CH' + size;
     const contactName = knifeBlade ? 'blade contact' : 'end cap';
     const contactType = knifeBlade ? 'knife-blade' : 'end-cap';
     const terminalPrefix = knifeBlade ? 'blade-' : 'cap-';
-    const dimensionalSource = knifeBlade
+    const dimensionalSource = cartridge ? 'https://www.etigroup.eu/products-services/' + cartridge.source : knifeBlade
       ? nhFuseDimensionSources[size + ' ' + utilization + ' ' + voltage] ?? nhFuseDimensionSources[size]
         ?? 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/TD-NV.pdf#page=1'
       : 'https://www.etigroup.eu/images/product_db/documents/en-GB/C_ENG.pdf#page=2';
@@ -1544,7 +1551,7 @@
     ];
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V',
+      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (photovoltaic ? ' DC' : '') + (certification ? ' ' + certification : ''),
       name: knifeBlade ? 'Knife-blade fuse link' : 'Cylindrical fuse link',
       aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization],
       family: knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
@@ -1559,7 +1566,7 @@
       },
       specifications: {
         utilizationCategory: { value: utilization }, nominalCurrent: { value: current, unit: 'A' },
-        nominalVoltage: { value: voltage, unit: 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+        nominalVoltage: { value: voltage, unit: photovoltaic ? 'V DC' : 'V AC' }, ratedBreakingCapacity: { value: capacity, unit: 'kA' },
         cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
         ...(insulated ? { insulatedGrippingLugs: { value: true } } : {}),
         dimensions: { width: { value: length, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
@@ -1572,9 +1579,10 @@
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with utilization category and ratings.' },
-        { publisher: 'ETI', title: knifeBlade ? 'NV/NH knife-blade fuse-link dimensions' : 'C / Cylindrical fuse-links',
+        { publisher: 'ETI', title: photovoltaic ? 'CH photovoltaic cartridge dimensions' : knifeBlade ? 'NV/NH knife-blade fuse-link dimensions' : 'C / Cylindrical fuse-links',
           url: dimensionalSource,
-          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: knifeBlade
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: photovoltaic
+            ? 'Net product dimensions for the corresponding photovoltaic cartridge size.' : knifeBlade
             ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
             : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' }
       ]
