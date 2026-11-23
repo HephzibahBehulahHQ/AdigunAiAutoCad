@@ -1440,30 +1440,36 @@
         }]
       });
     });
-  const etiEtimatBreakers = terminalCatalog.etiEtimat6Breakers.concat(terminalCatalog.etiEtimatPBreakers, terminalCatalog.etiEtimat10Breakers)
-    .map(([code, topology, curve, current, voltage, width, series = '6', catalogCapacity]) => {
+  const etiEtimatBreakers = terminalCatalog.etiEtimat6Breakers.concat(
+    terminalCatalog.etiEtimatPBreakers, terminalCatalog.etiEtimat10Breakers, terminalCatalog.etiEtimatAstiBreakers
+  ).map(([code, topology, curve, current, voltage, width, series = '6', catalogCapacity, exact]) => {
     const id = 'eti-' + code;
     const pSeries = series.startsWith('P');
     const dc = series === 'P10-DC';
     const quickConnect = series === 'P10-QC';
     const highCurrent = series === '10' && current >= 80;
     const protectedPoles = Number(topology[0]);
+    const compact = series === '1N';
     const terminalPairs = Array.from({ length: protectedPoles }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
-    if (topology.endsWith('+N')) terminalPairs.push(['02', '01']);
+    if (compact) terminalPairs.unshift(['N-upper', 'N-lower']);
+    else if (topology.endsWith('+N')) terminalPairs.push(['02', '01']);
+    if (compact) terminalPairs[1].reverse();
     if (pSeries && !quickConnect) terminalPairs.forEach(pair => pair.reverse());
+    const switchedPolePairs = terminalPairs.map(pair => pair.map(number => 'terminal-' + number));
+    const asti = 'https://www.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf#page=';
     const terminalHardware = quickConnect ? {} : { connectionType: 'screw' };
     const pins = terminalPairs.flatMap(([top, bottom], index) => {
       const x = (index - (terminalPairs.length - 1) / 2) * 36;
       const topPolarity = index ? '+' : '−';
       const bottomPolarity = index ? '−' : '+';
       return [
-        { id: 'terminal-' + top, localNumber: top, name: 'Upper terminal' + (dc ? ' (' + topPolarity + ')' : ''), ...(dc ? { polarity: topPolarity } : {}), x, y: -42, electricalType: 'passive', ...terminalHardware },
-        { id: 'terminal-' + bottom, localNumber: bottom, name: 'Lower terminal' + (dc ? ' (' + bottomPolarity + ')' : ''), ...(dc ? { polarity: bottomPolarity } : {}), x, y: 42, electricalType: 'passive', ...terminalHardware }
+        { id: 'terminal-' + top, localNumber: top, ...(top === 'N-upper' ? { manufacturerMarking: 'N' } : {}), name: 'Upper terminal' + (dc ? ' (' + topPolarity + ')' : ''), ...(dc ? { polarity: topPolarity } : {}), x, y: -42, electricalType: 'passive', ...terminalHardware },
+        { id: 'terminal-' + bottom, localNumber: bottom, ...(bottom === 'N-lower' ? { manufacturerMarking: 'N' } : {}), name: 'Lower terminal' + (dc ? ' (' + bottomPolarity + ')' : ''), ...(dc ? { polarity: bottomPolarity } : {}), x, y: 42, electricalType: 'passive', ...terminalHardware }
       ];
     });
     const model = 'ETIMAT ' + series + ' ' + topology + ' ' + curve + current;
-    const height = quickConnect ? 90.1 : dc ? 89 : highCurrent ? 90 : pSeries ? 88 : 85;
-    const depth = quickConnect ? 74.47 : dc ? 74.74 : pSeries ? 69.5 : 67.7;
+    const height = exact?.height ?? (quickConnect ? 90.1 : dc ? 89 : highCurrent ? 90 : pSeries ? 88 : 85);
+    const depth = exact?.depth ?? (quickConnect ? 74.47 : dc ? 74.74 : pSeries ? 69.5 : 67.7);
     const depthSpec = highCurrent ? {} : { depth: { value: depth, unit: 'mm' } };
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code, model,
@@ -1472,8 +1478,12 @@
       symbol: { id: 'breaker.etimat' + series.toLowerCase() + '.' + topology.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
         width: Math.max(42, terminalPairs.length * 36), height: 84, pins, internalConnections: [],
         numberingNote: 'Terminal numbers and switched-neutral positions follow the ETIMAT ' + series + ' connection diagrams.' },
-      electricalFunctions: { switchedPolePairs: terminalPairs.map(pair => pair.map(number => 'terminal-' + number)),
-        simulationNote: 'Static connectivity reports the attached wires and does not assume that the breaker is closed.' },
+      electricalFunctions: {
+        switchedPolePairs,
+        ...(exact ? { switchingSequence: [[], switchedPolePairs] } : {}),
+        simulationNote: exact ? 'The selected breaker position determines pole continuity. The model does not simulate automatic tripping.'
+          : 'Static connectivity reports the attached wires and does not assume that the breaker is closed.'
+      },
       specifications: {
         protectedPoles: { value: protectedPoles }, switchedNeutral: { value: topology.endsWith('+N') },
         nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: dc ? 'V DC' : 'V AC' },
@@ -1485,11 +1495,22 @@
         mountingMethod: { value: 'DIN rail' },
         dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, ...depthSpec }
       },
-      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: dc || quickConnect ? 2 : 1, ...(highCurrent ? {} : { depth }),
+      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: exact ? 0 : dc || quickConnect ? 2 : 1, ...(highCurrent ? {} : { depth }),
         scope: highCurrent ? 'Catalog front outline. Depth and installation clearances are outside this view.'
           : 'Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.' }],
-      instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
-      sources: [
+      instanceProperties: {
+        ...(exact ? { switchingStep: { type: 'choice', default: '1', choices: { 1: 'Open', 2: 'Closed' } } } : {}),
+        comment: { type: 'string', default: '', maximumLength: 160 }
+      },
+      sources: exact ? [
+        { publisher: 'ETI', title: 'ETI product record · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Exact order code, electrical ratings and net product dimensions.' },
+        { publisher: 'ETI', title: 'ASTI · Order table', url: asti + exact.page, documentRevision: null,
+          retrievedAt: '2026-11-23', revisionNote: 'Exact catalogue order code, pole count and operating curve.' },
+        { publisher: 'ETI', title: 'ASTI · ETIMAT terminal diagrams',
+          url: asti + ({ '6': 4, '1N': 11, P6: 17, P10: 27, 'P10-DC': 43 })[series], documentRevision: null,
+          retrievedAt: '2026-11-23', revisionNote: 'Terminal order, protected poles and switched neutral; polarity for DC variants.' }
+      ] : [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with trip curve, current and pole configuration.' },
         { publisher: 'ETI', title: 'ASTI catalog · ETIMAT ' + series,
@@ -3511,6 +3532,19 @@
     return { segments, circles };
   }
 
+  function etimatBreakerGeometry(instance, definition = component(instance.componentId)) {
+    const segments = [], circles = [];
+    const closed = selectedStepConnections(definition, instance).length > 0;
+    const pins = definition.symbol.pins;
+    for (let index = 0; index < pins.length; index += 2) {
+      const [top, bottom] = pins.slice(index, index + 2);
+      segments.push([top.x, top.y, top.x, -12], [bottom.x, 12, bottom.x, bottom.y],
+        [bottom.x, 12, bottom.x + (closed ? 0 : 9), closed ? -12 : -7]);
+      circles.push([top.x, top.y, 2.6], [bottom.x, bottom.y, 2.6], [top.x, -12, 2], [bottom.x, 12, 2]);
+    }
+    return { segments, circles };
+  }
+
   function deltaCapacitorGeometry(definition) {
     const vertices = [[0, -21], [-29, 15], [29, 15]];
     const segments = definition.symbol.pins.slice(0, 3).map((pin, index) =>
@@ -4934,6 +4968,7 @@
     modularSurgeGeometry: modularSurgeGeometry,
     transformerGeometry: transformerGeometry,
     deltaCapacitorGeometry: deltaCapacitorGeometry,
+    etimatBreakerGeometry: etimatBreakerGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
     camSwitchGeometry: camSwitchGeometry,

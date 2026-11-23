@@ -983,14 +983,22 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           if(rating.ratedResidualCurrent){
             label(rating.residualCurrentType.value+' · '+rating.ratedResidualCurrent.value+' mA',0,59,7);
           }
+          const positionGeometry=breaker.electricalFunctions?.switchingSequence
+            ? window.AdigunCADEngine.etimatBreakerGeometry(obj,breaker) : null;
+          if(positionGeometry){
+            for(const segment of positionGeometry.segments)line(...segment);
+            for(const marker of positionGeometry.circles)circle(...marker);
+          }
           const hasFactoryLeads=breaker.symbol.pins.some(pin=>pin.id==='lead-FE-white');
           const switchedPinCount=hasFactoryLeads?2:breaker.symbol.pins.length;
           for(let index=0;index<switchedPinCount;index+=2){
             const [top,bottom]=breaker.symbol.pins.slice(index,index+2);
-            line(top.x,top.y,top.x,-12);line(bottom.x,12,bottom.x,bottom.y);
-            circle(top.x,top.y,2.6);circle(bottom.x,bottom.y,2.6);
-            circle(top.x,-12,2);circle(bottom.x,12,2);
-            line(bottom.x,12,bottom.x+9,-7);
+            if(!positionGeometry){
+              line(top.x,top.y,top.x,-12);line(bottom.x,12,bottom.x,bottom.y);
+              circle(top.x,top.y,2.6);circle(bottom.x,bottom.y,2.6);
+              circle(top.x,-12,2);circle(bottom.x,12,2);
+              line(bottom.x,12,bottom.x+9,-7);
+            }
             label((top.manufacturerMarking||top.localNumber)+(top.polarity||''),top.x,top.y-4,6);
             label((bottom.manufacturerMarking||bottom.localNumber)+(bottom.polarity||''),bottom.x,bottom.y+9,6);
           }
@@ -1427,7 +1435,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       if(rule.type==='choice'){
         const fieldLabel=name==='switchingStep'
           ? ({'rotary-cam-switch':'Selector position','industrial-motor-contactor':'Coil state',
-              'modular-contactor':definition.specifications.manualOverride?.value?'Control position':'Coil state'}[definition.family]||componentPropertyLabels[name])
+              'miniature-circuit-breaker':'Breaker position','modular-contactor':definition.specifications.manualOverride?.value?'Control position':'Coil state'}[definition.family]||componentPropertyLabels[name])
           : componentPropertyLabels[name]||name;
         const value=object.properties[name]??rule.default;
         const options=Object.entries(rule.choices).map(([id,label])=>
