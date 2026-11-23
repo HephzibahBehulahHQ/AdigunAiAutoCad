@@ -1509,6 +1509,58 @@
     });
   });
 
+  const etiEb2Breakers = terminalCatalog.etiEb2Breakers.map(
+    ([code, model, frame, poleCount, current, voltage, icu, ics, width, height, depth, connection, dcVoltage]) => {
+      const id = 'eti-' + code;
+      const pins = Array.from({ length: poleCount }, (_, index) => {
+        const pole = index + 1;
+        const x = (index - (poleCount - 1) / 2) * 36;
+        return [
+          { id: 'line-' + pole, localNumber: 'L' + pole, name: 'Pole ' + pole + ' line terminal', x, y: -42, electricalType: 'passive' },
+          { id: 'load-' + pole, localNumber: 'T' + pole, name: 'Pole ' + pole + ' load terminal', x, y: 42, electricalType: 'passive' }
+        ];
+      }).flat();
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model, name: 'ETIBREAK EB2 molded-case circuit breaker', aliases: ['MCCB', 'ETIBREAK', 'EB2 ' + frame],
+        family: 'molded-case-circuit-breaker', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
+        symbol: {
+          id: 'breaker.eti.eb2.' + poleCount + 'p.v1', view: 'schematic', unit: 'mm', width: poleCount * 36, height: 84,
+          pins, internalConnections: [], numberingNote: 'L and T are CAD labels for the line and load positions of each documented pole.'
+        },
+        electricalFunctions: {
+          switchedPolePairs: Array.from({ length: poleCount }, (_, index) => ['line-' + (index + 1), 'load-' + (index + 1)]),
+          simulationNote: 'The contacts are drawn open. Static wiring reports keep both sides of each pole separate.'
+        },
+        specifications: {
+          poleCount: { value: poleCount },
+          ratedFrameCurrent: { value: frame, unit: 'A' },
+          nominalCurrent: { value: current, unit: 'A' },
+          nominalVoltage: { value: voltage, unit: 'V AC' },
+          ...(dcVoltage ? { ratedDcVoltage: { value: dcVoltage, unit: 'V DC' } } : {}),
+          ratedBreakingCapacity: { value: icu, unit: 'kA at 415 V AC' },
+          ratedServiceBreakingCapacity: { value: ics, unit: 'kA at 415 V AC' },
+          ...(connection ? { connectionMethod: { value: connection } } : {}),
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth, sourceIndex: 1,
+          scope: 'Manufacturer net product dimensions for this order code. Panel cutouts and installation clearances are separate.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+            documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact model, poles, current and Icu/Ics at 415 V AC.' },
+          { publisher: 'ETI', title: 'ETIBREAK EB2 · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Corroborates the order-code electrical ratings and supplies its net product envelope.' },
+          { publisher: 'ETI', title: 'ETIBREAK · Frame diagrams and terminal arrangements',
+            url: 'https://www.eti.si/images/userfiles/en-GB/documents/products/building_industry/ETIBREAK_TD_2019.pdf',
+            documentRevision: '2019', retrievedAt: '2026-11-23', revisionNote: 'Shows distinct line and load contacts for each of the three- and four-pole frame layouts.' }
+        ]
+      });
+    }
+  );
+
   const etiFuseDimensions = {
     '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2],
     NH000: [78.6, 51.9, 21], NH00C: [79, 52, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
@@ -2741,7 +2793,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiEb2Breakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -2845,6 +2897,21 @@
         segments.push([bottom.x, 12, bottom.x-7, -5]);
       }
     }
+    return { segments, circles };
+  }
+
+  function moldedCaseBreakerGeometry(definition) {
+    const segments = [];
+    const circles = [];
+    for (let index = 0; index < definition.symbol.pins.length; index += 2) {
+      const [line, load] = definition.symbol.pins.slice(index, index + 2);
+      const x = line.x;
+      segments.push([x, line.y, x, -12], [x, 12, x, load.y], [x, 12, x + 9, -7]);
+      circles.push([x, line.y, 2.6], [x, load.y, 2.6], [x, -12, 2], [x, 12, 2]);
+    }
+    const first = definition.symbol.pins[0].x;
+    const last = definition.symbol.pins.at(-1).x;
+    for (let x = first + 10; x < last + 10; x += 6) segments.push([x, 0, x + 3, 0]);
     return { segments, circles };
   }
 
@@ -4081,6 +4148,7 @@
     wireListCsv: wireListCsv,
     wireRoutePoints: wireRoutePoints,
     fuseLinkGeometry: fuseLinkGeometry,
+    moldedCaseBreakerGeometry: moldedCaseBreakerGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
     cableScheduleCsv: cableScheduleCsv,

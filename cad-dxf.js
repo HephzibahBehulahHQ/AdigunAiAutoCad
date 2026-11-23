@@ -118,11 +118,13 @@
       const component = kind === 'component-instance' ? engine.component(object.componentId, object.customSymbol) : null;
       const coilAndContact = ['modular-contactor', 'modular-step-relay', 'industrial-motor-contactor'].includes(component?.family);
       const fuseLink = ['semiconductor-fuse-link', 'cylindrical-fuse-link', 'knife-blade-fuse-link'].includes(component?.family);
-      if ((coilAndContact || fuseLink || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const moldedCaseBreaker = component?.family === 'molded-case-circuit-breaker';
+      if ((coilAndContact || fuseLink || moldedCaseBreaker || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
           : coilAndContact ? engine.coilAndContactGeometry(object)
-            : fuseLink ? engine.fuseLinkGeometry() : engine.disconnectTerminalGeometry(object);
+            : fuseLink ? engine.fuseLinkGeometry()
+              : moldedCaseBreaker ? engine.moldedCaseBreakerGeometry(component) : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
         function toDxf(localX, localY) {
