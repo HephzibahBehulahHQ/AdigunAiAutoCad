@@ -840,6 +840,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         }
         case'knife-blade-fuse-link':
         case'medium-voltage-fuse-link':
+        case'bottle-fuse-link':
         case'cylindrical-fuse-link': {
           const fuse=window.AdigunCADEngine.component(item.id);
           rect(-15,-6,30,12);line(-36,0,36,0);
@@ -1344,10 +1345,14 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],
         ['Minimum breaking current',spec.minimumBreakingCurrent.value+' '+spec.minimumBreakingCurrent.unit],
         ['Striker force',spec.strikerForce.value+' '+spec.strikerForce.unit],['Temperature limiter',spec.thermalStriker.value?'Yes':'No']]
-      : def.family==='cylindrical-fuse-link'||def.family==='knife-blade-fuse-link'
+      : def.family==='cylindrical-fuse-link'||def.family==='knife-blade-fuse-link'||def.family==='bottle-fuse-link'
       ? [['Cartridge size',[spec.cartridgeSize.value,spec.cartridgeSize.unit].filter(Boolean).join(' ')],['Utilization category',spec.utilizationCategory.value],
         ...(spec.insulatedGrippingLugs?[['Insulated gripping lugs','Yes']]:[]),
         ...(spec.ratedDcTimeConstant?[['Rated DC time constant',spec.ratedDcTimeConstant.value+' '+spec.ratedDcTimeConstant.unit]]:[]),
+        ...(spec.fuseBase?[['Fuse base',spec.fuseBase.value]]:[]),
+        ...(spec.ratedDcVoltage?[['Rated DC voltage',spec.ratedDcVoltage.value+' '+spec.ratedDcVoltage.unit]]:[]),
+        ...(spec.ratedDcBreakingCapacity?[['DC breaking capacity',spec.ratedDcBreakingCapacity.value+' '+spec.ratedDcBreakingCapacity.unit]]:[]),
+        ...(spec.gaugeContactDiameter?[['Gauge contact diameter',spec.gaugeContactDiameter.value+' '+spec.gaugeContactDiameter.unit]]:[]),
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
       : def.family==='miniature-circuit-breaker'
