@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 4633);
+  assert.equal(items.length, 4653);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1863,6 +1863,28 @@ test('ETI D and D0 bottle fuses retain separate AC and DC ratings and contact ge
   const longDiii = engine.component('eti-002313501');
   assert.equal(longDiii.specifications.dimensions.width.value, 70);
   assert.equal(longDiii.specifications.ratedDcVoltage.value, 600);
+});
+
+test('ETI EFH DC fuse holders retain separate fuse poles and exact net dimensions', () => {
+  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-holder');
+  assert.equal(items.length, 20);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { poles, nominalVoltage, cartridgeSize } = part.specifications;
+    const pairs = poles.value === 1 ? [['terminal-2', 'terminal-1']] : [['terminal-2', 'terminal-1'], ['terminal-4', 'terminal-3']];
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), pairs.flat());
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPairs, pairs);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.ok(['10x38', '14x51', '22x58'].includes(cartridgeSize.value));
+    assert.equal(nominalVoltage.unit, 'V DC');
+  }
+  const adapter = engine.component('eti-002540501');
+  assert.equal(adapter.specifications.adapter.value, true);
+  assert.equal(adapter.specifications.dimensions.depth.value, 71.25);
+  const led = engine.component('eti-002560215');
+  assert.equal(led.specifications.indicator.value, 'LED');
+  assert.equal(led.specifications.nominalVoltage.value, 1100);
+  assert.equal(led.physicalRepresentations[0].width, 54);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
