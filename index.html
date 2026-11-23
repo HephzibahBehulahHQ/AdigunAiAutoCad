@@ -877,6 +877,13 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         case'surge-protective-device': {
           const engine=window.AdigunCADEngine;
           const device=engine.component(item.id);
+          if(device.specifications.surgeTechnology){
+            const geometry=engine.modularSurgeGeometry(device);
+            for(const segment of geometry.segments)line(...segment);
+            for(const marker of geometry.circles)circle(...marker);
+            for(const pin of device.symbol.pins)label(pin.localNumber,pin.x,pin.y+(pin.y===-56?-5:9),6);
+            break;
+          }
           if(device.specifications.localDisconnector){
             const geometry=engine.overheadSurgeArresterGeometry(device);
             for(const segment of geometry.segments)line(...segment);
@@ -1489,6 +1496,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ['Continuous AC voltage',spec.continuousAcVoltage.value+' '+spec.continuousAcVoltage.unit],
         ['Nominal discharge current',spec.nominalDischargeCurrent.value+' '+spec.nominalDischargeCurrent.unit],
         ['Maximum discharge current',spec.maximumDischargeCurrent.value+' '+spec.maximumDischargeCurrent.unit],
+        ...(spec.surgeTechnology?[['Line branch technology',spec.surgeTechnology.value]]:[]),
         ...(spec.voltageProtectionLevel?[['Voltage protection level',spec.voltageProtectionLevel.value+' '+spec.voltageProtectionLevel.unit]]:[]),
         ...(spec.lineConnection?[['Line connection',spec.lineConnection.value],['Earth connection',spec.earthConnection.value]]:[]),
         ...(spec.earthLeadLength?[['Earth lead length',spec.earthLeadLength.value+' '+spec.earthLeadLength.unit]]:[]),
