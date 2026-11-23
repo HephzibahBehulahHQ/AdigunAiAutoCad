@@ -2762,12 +2762,17 @@
       });
     });
 
-  const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(terminalCatalog.etiKzs2mBreakers, terminalCatalog.etiKzsUniBreakers, terminalCatalog.etiKzsFnBreakers).map(
-    ([code, topology, residualType, curve, current, trip, voltage, capacity, series = '4M']) => {
+  const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(
+    terminalCatalog.etiKzs2mBreakers, terminalCatalog.etiKzsUniBreakers, terminalCatalog.etiKzsFnBreakers,
+    terminalCatalog.etiKzsAstiBreakers
+  ).map(
+    ([code, topology, residualType, curve, current, trip, voltage, capacity, series = '4M', exact]) => {
       const id = 'eti-' + code;
       const uni = series === '1M-UNI';
       const factoryLeads = series === '1M-FN';
-      const [width, height, depth] = uni ? [17.9, 88.2, 73.97] : factoryLeads ? [17.4, 126.4]
+      const afdd = series === 'AFDD';
+      const [width, height, depth] = exact ? [exact.width, exact.height, exact.depth]
+        : uni ? [17.9, 88.2, 73.97] : factoryLeads ? [17.4, 126.4]
         : [{ '4M': 70.4, '2M': 35, '2M2p': 35.6 }[series], series === '2M2p' ? 88.4 : 88];
       const astiReference = 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/56448a67-7ee8-49ec-934f-f3a2e1dc19bd';
       const diagram = uni ? 'https://storage-api-pim.etigroup.eu/product_db/levels/7605/en-GB/Instruction/7605_Instruction.pdf' : series === '2M'
@@ -2776,7 +2781,7 @@
       const protectedPoles = Number(topology[0]);
       const neutral = topology.endsWith('+N');
       const pairs = Array.from({ length: protectedPoles }, (_, index) => {
-        const pole = protectedPoles - index;
+        const pole = afdd ? index + 1 : protectedPoles - index;
         return [String(2 * pole), String(2 * pole - 1)];
       });
       if (neutral && !factoryLeads) pairs.push(['N-upper', 'N-lower']);
@@ -2792,37 +2797,61 @@
         { id: 'lead-N-blue', localNumber: 'N-blue', manufacturerMarking: 'N', name: 'Blue line neutral lead', x: 0, y: 42, electricalType: 'passive', connectionType: 'pigtail' },
         { id: 'lead-FE-white', localNumber: 'FE', manufacturerMarking: 'FE', name: 'White functional earth lead', x: 36, y: 42, electricalType: 'passive', connectionType: 'pigtail' }
       );
+      const switchedPolePairs = pairs.map(pair => pair.map(terminal => 'terminal-' + terminal));
+      const astisite = 'https://www.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf#page=';
+      const exactDiagram = afdd ? 'https://storage-api-pim.etigroup.eu/product_db/levels/6189/en-GB/Instruction/6189_Instruction.pdf' : diagram;
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-        model: 'KZS-' + series + (series === '4M' || uni ? ' ' + topology : '') + ' ' + residualType + ' ' + curve + current + '/' + trip / 1000,
-        name: 'Residual-current circuit breaker with overcurrent protection', aliases: ['KZS-' + series, 'RCBO', 'RCD'],
+        model: 'KZS-' + series + (afdd ? ' 3M2p' : series === '4M' || uni ? ' ' + topology : '') + ' '
+          + residualType + (exact?.shortDelay ? ' G/KV ' : ' ') + curve + current + '/' + trip / 1000,
+        name: afdd ? 'Arc-fault detection device with residual-current and overcurrent protection'
+          : 'Residual-current circuit breaker with overcurrent protection',
+        aliases: ['KZS-' + series, 'RCBO', 'RCD', ...(afdd ? ['AFDD', 'Arc-fault detection'] : [])],
         family: 'residual-current-circuit-breaker', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
         symbol: {
           id: 'breaker.eti.kzs' + series.toLowerCase() + '.' + topology.toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: (factoryLeads ? 3 : pairs.length) * 36, height: 84,
           pins, internalConnections: factoryLeads ? [['terminal-N-upper', 'lead-N-blue']] : [], numberingNote: factoryLeads ? 'N load is continuous with the blue lead. The white FE lead is a separate functional earth connection.' : 'Terminal order is preserved from the ASTI connection diagram. The two neutral anchors have distinct IDs.'
         },
         electricalFunctions: {
-          switchedPolePairs: pairs.map(pair => pair.map(terminal => 'terminal-' + terminal)),
-          simulationNote: 'Static connectivity records wiring on each side of the breaker. Its switching and residual-current test functions are not simulated.'
+          switchedPolePairs,
+          ...(exact ? { switchingSequence: [[], switchedPolePairs] } : {}),
+          simulationNote: exact ? 'The selected breaker position determines pole continuity. Protective trips and the test button are not simulated.'
+            : 'Static connectivity records wiring on each side of the breaker. Its switching and residual-current test functions are not simulated.'
         },
         specifications: {
           protectedPoles: { value: protectedPoles }, switchedNeutral: { value: neutral && !factoryLeads }, tripCurve: { value: curve },
           nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
           residualCurrentType: { value: residualType }, ratedResidualCurrent: { value: trip, unit: 'mA' },
           ratedBreakingCapacity: { value: capacity, unit: 'kA' },
-          ...(uni ? { supplyConnection: { value: 'Top or bottom' } } : factoryLeads ? { supplyConnection: { value: 'Bottom' } } : { builtInDepth: { value: 69, unit: 'mm' } }),
+          ...(uni || afdd ? { supplyConnection: { value: 'Top or bottom' } } : factoryLeads ? { supplyConnection: { value: 'Bottom' } } : { builtInDepth: { value: 69, unit: 'mm' } }),
+          ...(afdd ? { arcFaultDetection: { value: true } } : {}),
+          ...(exact?.shortDelay ? { trippingDelay: { value: 'G/KV short time delay' } } : {}),
           mountingMethod: { value: 'DIN rail' },
           dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
             ...(depth ? { depth: { value: depth, unit: 'mm' } } : {}) }
         },
         physicalRepresentations: [{
-          ...terminalPanelEnvelope(id, width, height), sourceIndex: uni ? 2 : 1, ...(depth ? { depth } : {}),
-          scope: uni ? 'Net device envelope. Rail and installation clearances are separate.'
+          ...terminalPanelEnvelope(id, width, height), sourceIndex: exact ? 0 : uni ? 2 : 1, ...(depth ? { depth } : {}),
+          scope: exact ? 'Net product envelope. Factory lead routing and installation clearances are separate.'
+            : uni ? 'Net device envelope. Rail and installation clearances are separate.'
             : factoryLeads ? 'Front body outline from the drawing. Factory leads and mounting clearances are excluded.'
             : 'Nominal front outline from the drawing. Allow separately for rail position, operating clearance and connected conductors.'
         }],
-        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
-        sources: [
+        instanceProperties: {
+          ...(exact ? { switchingStep: { type: 'choice', default: '1', choices: { 1: 'Open', 2: 'Closed' } } } : {}),
+          comment: { type: 'string', default: '', maximumLength: 160 }
+        },
+        sources: exact ? [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code, breaker ratings and net envelope.' },
+          { publisher: 'ETI', title: 'ASTI · Residual-current breaker order table',
+            url: astisite + exact.page, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code and breaker configuration.' },
+          { publisher: 'ETI', title: 'KZS · Terminal wiring diagram',
+            url: exactDiagram, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Terminal numbers, switching and any auxiliary leads.' }
+        ] : [
           { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
             documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code and ETIM residual current, rating and release type.' },
           { publisher: 'ETI', title: 'ASTI technical data · KZS-' + series + ' ' + topology,
@@ -3535,12 +3564,20 @@
   function etimatBreakerGeometry(instance, definition = component(instance.componentId)) {
     const segments = [], circles = [];
     const closed = selectedStepConnections(definition, instance).length > 0;
-    const pins = definition.symbol.pins;
-    for (let index = 0; index < pins.length; index += 2) {
-      const [top, bottom] = pins.slice(index, index + 2);
+    const pins = new Map(definition.symbol.pins.map(pin => [pin.id, pin]));
+    for (const pair of definition.electricalFunctions.switchedPolePairs) {
+      const [top, bottom] = pair.map(id => pins.get(id));
       segments.push([top.x, top.y, top.x, -12], [bottom.x, 12, bottom.x, bottom.y],
         [bottom.x, 12, bottom.x + (closed ? 0 : 9), closed ? -12 : -7]);
       circles.push([top.x, top.y, 2.6], [bottom.x, bottom.y, 2.6], [top.x, -12, 2], [bottom.x, 12, 2]);
+    }
+    const functionalEarth = pins.get('lead-FE-white');
+    if (functionalEarth) {
+      const neutral = pins.get('terminal-N-upper'), lead = pins.get('lead-N-blue');
+      const x = functionalEarth.x;
+      segments.push([neutral.x, neutral.y, lead.x, lead.y], [x, 7, x, functionalEarth.y],
+        [x-8,-7,x+8,-7], [x+8,-7,x+8,7], [x+8,7,x-8,7], [x-8,7,x-8,-7]);
+      for (const pin of [neutral, lead, functionalEarth]) circles.push([pin.x, pin.y, 2.6]);
     }
     return { segments, circles };
   }

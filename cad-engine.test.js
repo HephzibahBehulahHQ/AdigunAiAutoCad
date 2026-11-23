@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 9412);
+  assert.equal(items.length, 9536);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2035,7 +2035,7 @@ test('ETI EFH DC fuse holders retain separate fuse poles and exact net dimension
 
 test('ETI KZS-4M RCBOs preserve terminal order and residual release ratings', () => {
   const items = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker' && item.name.startsWith('KZS-4M '));
-  assert.equal(items.length, 143);
+  assert.equal(items.length, 200);
   for (const item of items) {
     const part = engine.component(item.id);
     const { residualCurrentType, ratedResidualCurrent, protectedPoles, switchedNeutral, ratedBreakingCapacity } = part.specifications;
@@ -2054,7 +2054,7 @@ test('ETI KZS-4M RCBOs preserve terminal order and residual release ratings', ()
 
 test('ETI KZS-2M variants use the separate neutral and two-protected-pole diagrams', () => {
   for (const [series, count, terminals, dimensions] of [
-    ['KZS-2M', 110, ['2', '1', 'N-upper', 'N-lower'], [35, 88]],
+    ['KZS-2M', 142, ['2', '1', 'N-upper', 'N-lower'], [35, 88]],
     ['KZS-2M2p', 30, ['4', '3', '2', '1'], [35.6, 88.4]]
   ]) {
     const items = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker' && item.name.startsWith(series + ' '));
@@ -2067,7 +2067,9 @@ test('ETI KZS-2M variants use the separate neutral and two-protected-pole diagra
       assert.equal(specs.protectedPoles.value, series === 'KZS-2M' ? 1 : 2);
       assert.equal(specs.switchedNeutral.value, series === 'KZS-2M');
       assert.equal(specs.ratedBreakingCapacity.value, 10);
-      assert.deepEqual([specs.dimensions.width.value, specs.dimensions.height.value], dimensions);
+      if (!part.instanceProperties.switchingStep) {
+        assert.deepEqual([specs.dimensions.width.value, specs.dimensions.height.value], dimensions);
+      }
     }
   }
 });
@@ -2090,7 +2092,7 @@ test('ETI KZS-1M UNI breakers have distinct line and neutral attachment IDs', ()
 
 test('ETI KZS-1M-FN breakers retain continuous neutral and separate functional earth', () => {
   const items = engine.catalog().filter(item => item.name.startsWith('KZS-1M-FN '));
-  assert.equal(items.length, 44);
+  assert.equal(items.length, 63);
   for (const item of items) {
     const part = engine.component(item.id);
     assert.deepEqual(part.symbol.pins.map(pin => pin.id),
@@ -2099,7 +2101,7 @@ test('ETI KZS-1M-FN breakers retain continuous neutral and separate functional e
     assert.deepEqual(part.symbol.internalConnections, [['terminal-N-upper', 'lead-N-blue']]);
     assert.equal(part.specifications.switchedNeutral.value, false);
     assert.equal(part.specifications.ratedBreakingCapacity.value, 10);
-    assert.ok(part.sources[1].url.endsWith('#page=1'));
+    assert.ok(part.sources[part.instanceProperties.switchingStep ? 2 : 1].url.endsWith('#page=1'));
   }
 });
 
@@ -7415,4 +7417,23 @@ test('Exact ASTI ETIMAT additions retain terminal markings, pole isolation and e
   const reopened = engine.parseProject(saved);
   assert.equal(reopened.valid, true);
   assert.deepEqual(connected(reopened.project.objects[0]), ['terminal-1','terminal-2']);
+});
+
+test('ASTI RCBO and AFDD additions preserve ganged contacts and the permanent factory neutral', () => {
+  const parts = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker')
+    .map(item => engine.component(item.id)).filter(part => part.instanceProperties.switchingStep);
+  assert.equal(parts.length, 124);
+  const afdd = engine.component('eti-002173811');
+  assert.equal(afdd.specifications.arcFaultDetection.value, true);
+  assert.deepEqual(afdd.symbol.pins.map(pin => pin.localNumber), ['2','1','4','3']);
+  assert.deepEqual(afdd.electricalFunctions.switchingSequence, [
+    [], [['terminal-2','terminal-1'],['terminal-4','terminal-3']]
+  ]);
+  assert.equal(engine.component('eti-002174101').specifications.trippingDelay.value, 'G/KV short time delay');
+  const fn = engine.createInstance('eti-002175582', 100, 100, 'Q1');
+  assert.deepEqual(engine.component(fn.componentId).symbol.internalConnections, [['terminal-N-upper','lead-N-blue']]);
+  const off = engine.etimatBreakerGeometry(fn);
+  fn.properties.switchingStep = '2';
+  assert.notDeepEqual(engine.etimatBreakerGeometry(fn), off);
+  assert.equal(engine.component('eti-002173397').specifications.nominalVoltage.value, '120');
 });
