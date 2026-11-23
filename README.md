@@ -33,7 +33,7 @@ Shift-click a sidebar symbol to quick-insert it at a clear location in the visib
 
 The component bank inventory is available in [JSON](docs/reports/component-bank.json) and [CSV](docs/reports/component-bank.csv). It is generated from the same native definitions the editor uses. Physical dimensions in the inventory describe the manufacturer part. The schematic dimensions and terminal coordinates describe the editable symbol.
 
-For supported terminal blocks, pick the part and check **Place panel outline** in Properties before clicking the sheet. The outline uses the manufacturer width and height in millimetres. Consult the manufacturer documentation for installation clearance and mounting locations.
+For components with a physical view, pick the part and check **Place panel outline** in Properties before clicking the sheet. The outline uses the manufacturer width and height in millimetres. Consult the manufacturer documentation for installation clearance and mounting locations.
 
 With a sheet open, you can also drag a symbol from the sidebar and drop it on the drawing. The preview marks overlaps, and a successful drop opens Properties.
 
