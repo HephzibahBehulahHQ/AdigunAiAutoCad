@@ -3558,7 +3558,64 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks, etiGreenProtectCartridges).map(part => [part.id, part])) });
+function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufacturer body envelope. Installation clearances and mounting cutouts are unspecified.') {
+    const dimensions = measurements
+      ? Object.fromEntries(Object.entries(measurements).map(([key, value]) => [key, { value, unit: 'mm' }]))
+      : definition.specifications.dimensions;
+    const { width, height, depth, depthOnNS35_7_5, depthOnNS35_15 } = dimensions;
+    const railDepths = depthOnNS35_7_5 ? [depthOnNS35_7_5.value, depthOnNS35_15.value] : [];
+    const sources = evidence ? [...definition.sources, {
+      publisher: definition.manufacturer, title: evidence[0], url: evidence[1],
+      documentRevision: null, revisionNote: scope, retrievedAt: '2026-11-23'
+    }] : definition.sources;
+    const envelope = {
+      ...terminalPanelEnvelope(definition.id, width.value, height.value, railDepths),
+      ...(depth ? { depth: depth.value } : {}),
+      sourceIndex: evidence ? sources.length - 1 : 0,
+      scope
+    };
+    return deepFreeze({
+      ...definition, sources, specifications: { ...definition.specifications, dimensions },
+      physicalRepresentations: [envelope]
+    });
+  }
+
+  const breakerBody = { width: 45, height: 97, depth: 92 };
+  const breakerBodyEvidence = ['SIRIUS 3RV2 circuit breakers, Figure C-5',
+    'https://support.industry.siemens.com/cs/attachments/60279172/manual_SIRIUS_circuit_breaker_3RV_en-US.pdf#page=268'];
+  const breakerBodyScope = 'Bare screw-terminal breaker shown in Figure C-5. Accessories and installation clearances are unspecified.';
+  const catalogPanelParts = [
+    withPanelEnvelope(terminalDefinition),
+    withPanelEnvelope(relayDefinition),
+    withPanelEnvelope(contactorDefinition),
+    withPanelEnvelope(siemensPowerContactorDefinition, { width: 45, height: 102, depth: 107 }),
+    withPanelEnvelope(siemensOverloadRelayDefinition, { width: 45, height: 85, depth: 85 },
+      ['3RU2126-4AB0 product dimensions', 'https://simplicityhub.siemens.com/th/en/products/generic-overload-relay-1116-a-thermal-for-motor-protection-size-s0-class-10-prod0000110831']),
+    withPanelEnvelope(siemensStarDeltaTimerDefinition, { width: 22.5, height: 100, depth: 90 }),
+    withPanelEnvelope(schneiderStartPushButtonDefinition),
+    withPanelEnvelope(schneiderStopPushButtonDefinition),
+    withPanelEnvelope(schneiderPilotLightDefinition, { width: 30, height: 42, depth: 54 }),
+    withPanelEnvelope(motorProtectionBreakerDefinition, breakerBody, breakerBodyEvidence, breakerBodyScope),
+    withPanelEnvelope(lowRangeMotorProtectionBreakerDefinition, breakerBody, breakerBodyEvidence, breakerBodyScope),
+    withPanelEnvelope(starDeltaMotorProtectionBreakerDefinition, breakerBody, breakerBodyEvidence, breakerBodyScope),
+    withPanelEnvelope(motorStarterDefinition, { width: 22.5, height: 100, depth: 141.6 },
+      ['3RM1201-1AA04 technical data', 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=3RM12011AA04']),
+    withPanelEnvelope(siemensCpuDefinition, { width: 90, height: 100, depth: 75 }),
+    withPanelEnvelope(ifmInductiveSensorDefinition, { width: 12, height: 45, depth: 12 }, null,
+      'Longitudinal outline of the M12 threaded housing. Removable locknuts and mating connector are outside this envelope.'),
+    withPanelEnvelope(ifmPressureSensorDefinition, { width: 34, height: 90.7, depth: 34 }, null,
+      'Longitudinal outline of the pressure sensor housing. Mating fittings and installation clearances are unspecified.'),
+    withPanelEnvelope(siemensSitopPsuDefinition, { width: 45, height: 80, depth: 100 },
+      ['SITOP PSU100C 60 W and 100 W operating instructions, A5E41553504-1-XA',
+        'https://cache.industry.siemens.com/dl/files/785/55017785/att_919303/v1/A5E41553504-1-XA_OP-INST_SITOP-PSU100C-60W-100W_2017-05-09.pdf?download=true']),
+    withPanelEnvelope(phoenixProtectiveEarthTerminalDefinition, {
+      width: 12.2, height: 75.4, depthOnNS35_7_5: 52.6, depthOnNS35_15: 60.1
+    }),
+    withPanelEnvelope(pt25ProtectiveEarthTerminal)
+  ];
+
+
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks, etiGreenProtectCartridges).map(part => [part.id, part])), ...Object.fromEntries(catalogPanelParts.map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

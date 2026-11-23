@@ -1633,6 +1633,16 @@ test('terminal panel envelopes use manufacturer dimensions independently of sche
   assert.equal(engine.createPanelEnvelope('unknown', 'missing', 0, 0), null);
 });
 
+test('the component bank retains at least 10,000 order codes with a placeable physical view', () => {
+  const physicalParts = engine.catalog().filter(({ id }) => engine.component(id).physicalRepresentations?.length);
+  assert.ok(physicalParts.length >= 10000, `Found ${physicalParts.length} physical components`);
+  const contactor = engine.component('siemens-3rt2026-2kb40');
+  const [view] = contactor.physicalRepresentations;
+  assert.deepEqual([view.width, view.height, view.depth], [45, 102, 107]);
+  assert.match(contactor.sources[view.sourceIndex].url, /3RT2026-2KB40/);
+  assert.equal(engine.createPanelEnvelope(contactor.id, 'front', 10, 20).y2, 122);
+});
+
 test('direct catalog lookup matches searchable entries and protects the index', () => {
   for (const item of engine.catalog()) {
     const direct = engine.catalogItem(item.id);
