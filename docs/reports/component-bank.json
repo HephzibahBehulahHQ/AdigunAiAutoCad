@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 3166,
+    "manufacturerParts": 3200,
     "symbolFamilies": 17,
-    "partsWithTerminalMaps": 3166,
-    "partsWithPhysicalDimensions": 3152,
-    "partsWithPhysicalRepresentations": 3145,
+    "partsWithTerminalMaps": 3200,
+    "partsWithPhysicalDimensions": 3186,
+    "partsWithPhysicalRepresentations": 3179,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -766968,6 +766968,6052 @@
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "ETIMAT P10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002121731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002121731",
+      "model": "ETIMAT 10 1p B80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.1p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 42,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 1
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "240/415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 27,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 27,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002121731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 27,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002121731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002121732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002121732",
+      "model": "ETIMAT 10 1p B100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.1p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 42,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 1
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "240/415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 27,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 27,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002121732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 27,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002121732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002121733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002121733",
+      "model": "ETIMAT 10 1p B125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.1p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 42,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 1
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "240/415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 27,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 27,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002121733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 27,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002121733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002123731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002123731",
+      "model": "ETIMAT 10 2p B80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002123731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002123731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002123732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002123732",
+      "model": "ETIMAT 10 2p B100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002123732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002123732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002123733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002123733",
+      "model": "ETIMAT 10 2p B125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002123733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002123733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002125731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002125731",
+      "model": "ETIMAT 10 3p B80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002125731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002125731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002125732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002125732",
+      "model": "ETIMAT 10 3p B100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002125732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002125732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002125733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002125733",
+      "model": "ETIMAT 10 3p B125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002125733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002125733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002126731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002126731",
+      "model": "ETIMAT 10 3p+N B80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002126731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002126731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002126732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002126732",
+      "model": "ETIMAT 10 3p+N B100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002126732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002126732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002126733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002126733",
+      "model": "ETIMAT 10 3p+N B125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002126733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002126733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002127731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002127731",
+      "model": "ETIMAT 10 4p B80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-8",
+          "localNumber": "8",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-7",
+          "localNumber": "7",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-8",
+            "terminal-7"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.4p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 4
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002127731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002127731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002127732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002127732",
+      "model": "ETIMAT 10 4p B100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-8",
+          "localNumber": "8",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-7",
+          "localNumber": "7",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-8",
+            "terminal-7"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.4p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 4
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002127732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002127732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002127733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002127733",
+      "model": "ETIMAT 10 4p B125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "B125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-8",
+          "localNumber": "8",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-7",
+          "localNumber": "7",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-8",
+            "terminal-7"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.4p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 4
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "B"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002127733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002127733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002131731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002131731",
+      "model": "ETIMAT 10 1p C80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.1p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 42,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 1
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "240/415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 27,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 27,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002131731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 27,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002131731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002131732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002131732",
+      "model": "ETIMAT 10 1p C100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.1p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 42,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 1
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "240/415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 27,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 27,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002131732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 27,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002131732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002131733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002131733",
+      "model": "ETIMAT 10 1p C125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.1p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 42,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 1
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "240/415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 27,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 27,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002131733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 27,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002131733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002133731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002133731",
+      "model": "ETIMAT 10 2p C80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002133731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002133731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002133732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002133732",
+      "model": "ETIMAT 10 2p C100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002133732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002133732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002133733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002133733",
+      "model": "ETIMAT 10 2p C125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002133733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002133733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002135731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002135731",
+      "model": "ETIMAT 10 3p C80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002135731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002135731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002135732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002135732",
+      "model": "ETIMAT 10 3p C100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002135732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002135732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002135733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002135733",
+      "model": "ETIMAT 10 3p C125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002135733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002135733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002136731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002136731",
+      "model": "ETIMAT 10 3p+N C80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002136731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002136731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002136732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002136732",
+      "model": "ETIMAT 10 3p+N C100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002136732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002136732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002136733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002136733",
+      "model": "ETIMAT 10 3p+N C125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-02",
+          "localNumber": "02",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-01",
+          "localNumber": "01",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-02",
+            "terminal-01"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p+n.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": true
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002136733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002136733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002137731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002137731",
+      "model": "ETIMAT 10 4p C80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-8",
+          "localNumber": "8",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-7",
+          "localNumber": "7",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-8",
+            "terminal-7"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.4p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 4
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002137731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002137731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002137732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002137732",
+      "model": "ETIMAT 10 4p C100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-8",
+          "localNumber": "8",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-7",
+          "localNumber": "7",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-8",
+            "terminal-7"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.4p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 4
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002137732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002137732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002137733",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002137733",
+      "model": "ETIMAT 10 4p C125",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "C125"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-8",
+          "localNumber": "8",
+          "name": "Upper terminal",
+          "x": 54,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-7",
+          "localNumber": "7",
+          "name": "Lower terminal",
+          "x": 54,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ],
+          [
+            "terminal-8",
+            "terminal-7"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.4p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 144,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 4
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 125,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "C"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 108,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 108,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002137733.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 108,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002137733",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002153731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002153731",
+      "model": "ETIMAT 10 2p D80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "D80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002153731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002153731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002153732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002153732",
+      "model": "ETIMAT 10 2p D100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "D100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 18,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 18,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.2p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 72,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 2
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 54,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 54,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002153732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 54,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002153732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002155731",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002155731",
+      "model": "ETIMAT 10 3p D80",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "D80"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 80,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 20,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002155731.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002155731",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "eti-002155732",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified circuit breaker",
+      "family": "miniature-circuit-breaker",
+      "manufacturer": "ETI",
+      "orderCode": "002155732",
+      "model": "ETIMAT 10 3p D100",
+      "function": "Miniature circuit breaker",
+      "aliases": [
+        "ETIMAT 10",
+        "MCB",
+        "D100"
+      ],
+      "terminals": [
+        {
+          "id": "terminal-2",
+          "localNumber": "2",
+          "name": "Upper terminal",
+          "x": -36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-1",
+          "localNumber": "1",
+          "name": "Lower terminal",
+          "x": -36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-4",
+          "localNumber": "4",
+          "name": "Upper terminal",
+          "x": 0,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-3",
+          "localNumber": "3",
+          "name": "Lower terminal",
+          "x": 0,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-6",
+          "localNumber": "6",
+          "name": "Upper terminal",
+          "x": 36,
+          "y": -42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        },
+        {
+          "id": "terminal-5",
+          "localNumber": "5",
+          "name": "Lower terminal",
+          "x": 36,
+          "y": 42,
+          "electricalType": "passive",
+          "connectionType": "screw"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "switchedPolePairs": [
+          [
+            "terminal-2",
+            "terminal-1"
+          ],
+          [
+            "terminal-4",
+            "terminal-3"
+          ],
+          [
+            "terminal-6",
+            "terminal-5"
+          ]
+        ],
+        "simulationNote": "Static connectivity reports the attached wires and does not assume that the breaker is closed."
+      },
+      "geometry": {
+        "id": "breaker.etimat10.3p.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 108,
+        "height": 84
+      },
+      "specifications": {
+        "protectedPoles": {
+          "value": 3
+        },
+        "switchedNeutral": {
+          "value": false
+        },
+        "nominalCurrent": {
+          "value": 100,
+          "unit": "A"
+        },
+        "nominalVoltage": {
+          "value": "415",
+          "unit": "V AC"
+        },
+        "tripCurve": {
+          "value": "D"
+        },
+        "ratedBreakingCapacity": {
+          "value": 15,
+          "unit": "kA"
+        },
+        "breakingCapacityStandard": {
+          "value": "EN 60947-2"
+        },
+        "mountingMethod": {
+          "value": "DIN rail"
+        },
+        "dimensions": {
+          "width": {
+            "value": 81,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 90,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 81,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 90,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.eti-002155732.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 81,
+          "height": 90,
+          "railDepths": {},
+          "sourceIndex": 1,
+          "scope": "Catalog front outline. Depth and installation clearances are outside this view."
+        }
+      ],
+      "editableProperties": {
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "ETI",
+          "title": "ETI BMEcat · Order 002155732",
+          "url": "https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml",
+          "documentRevision": "2025-12-04",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact order code with trip curve, current and pole configuration."
+        },
+        {
+          "publisher": "ETI",
+          "title": "ASTI catalog · ETIMAT 10",
+          "url": "https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "ETIMAT 10 connection diagrams, dimensions and rating tables."
         }
       ],
       "status": "source-backed native part"

@@ -1441,9 +1441,10 @@
       });
     });
   const etiEtimatBreakers = terminalCatalog.etiEtimat6Breakers.concat(terminalCatalog.etiEtimatPBreakers, terminalCatalog.etiEtimat10Breakers)
-    .map(([code, topology, curve, current, voltage, width, series = '6']) => {
+    .map(([code, topology, curve, current, voltage, width, series = '6', catalogCapacity]) => {
     const id = 'eti-' + code;
     const pSeries = series.startsWith('P');
+    const highCurrent = series === '10' && current >= 80;
     const protectedPoles = Number(topology[0]);
     const terminalPairs = Array.from({ length: protectedPoles }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
     if (topology.endsWith('+N')) terminalPairs.push(['02', '01']);
@@ -1456,8 +1457,9 @@
       ];
     });
     const model = 'ETIMAT ' + series + ' ' + topology + ' ' + curve + current;
-    const height = pSeries ? 88 : 85;
+    const height = highCurrent ? 90 : pSeries ? 88 : 85;
     const depth = pSeries ? 69.5 : 67.7;
+    const depthSpec = highCurrent ? {} : { depth: { value: depth, unit: 'mm' } };
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code, model,
       name: 'Miniature circuit breaker', aliases: ['ETIMAT ' + series, 'MCB', curve + current],
@@ -1470,18 +1472,21 @@
       specifications: {
         protectedPoles: { value: protectedPoles }, switchedNeutral: { value: topology.endsWith('+N') },
         nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
-        tripCurve: { value: curve }, ratedBreakingCapacity: { value: series === 'P10' || (series === '10' && current <= 40) ? 10 : 6, unit: 'kA' },
+        tripCurve: { value: curve },
+        ratedBreakingCapacity: { value: catalogCapacity ?? (series === 'P10' || (series === '10' && current <= 40) ? 10 : 6), unit: 'kA' },
+        ...(highCurrent ? { breakingCapacityStandard: { value: 'EN 60947-2' } } : {}),
         mountingMethod: { value: 'DIN rail' },
-        dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, ...depthSpec }
       },
-      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: 1, depth,
-        scope: 'Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.' }],
+      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: 1, ...(highCurrent ? {} : { depth }),
+        scope: highCurrent ? 'Catalog front outline. Depth and installation clearances are outside this view.'
+          : 'Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.' }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with trip curve, current and pole configuration.' },
         { publisher: 'ETI', title: 'ASTI catalog · ETIMAT ' + series,
-          url: {
+          url: highCurrent ? 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf' : {
             '6': 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf',
             '10': 'https://etiprom.nt-rt.ru/images/manuals/ASTI%20ETIMAT%20ST-68%2C%20ETIMAT%206%2C%20ETIMAT%2010.pdf#page=7',
             P6: 'https://www.etigroup.eu/images/product_db/levels/en-GB/7678_TD.pdf',
