@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 2407);
+  assert.equal(items.length, 2464);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1568,6 +1568,21 @@ test('Finder Series 43 variants use the correct SPST and SPDT terminals and outl
     assert.equal(part.specifications.contactPinPitch.value, normallyOpen ? 5 : 3.2);
     assert.equal(part.physicalRepresentations[0].depth, normallyOpen ? 28.6 : 30.2);
     assert.equal(part.physicalRepresentations[0].sourceIndex, 1);
+  }
+});
+
+test('Finder Series 66 variants carry distinct throw ratings and physical terminal positions', () => {
+  const parts = engine.catalog('Finder Series 66').filter(item => item.id.startsWith('finder-66'));
+  assert.equal(parts.length, 57);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    const normallyOpen = Boolean(part.electricalFunctions.normallyOpenContacts);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.physicalNumber),
+      normallyOpen ? ['1', '0', '4', '2', '8', '6'] : ['1', '0', '4', '3', '2', '8', '7', '6']);
+    assert.equal(part.specifications.ratedContactCurrent.value, normallyOpen ? 30 : 10);
+    if (!normallyOpen) assert.equal(part.specifications.normallyOpenRatedCurrent.value, 30);
+    assert.equal(part.specifications.minimumContactGap?.value, item.id[16] === '6' ? 1.5 : undefined);
+    assert.equal(part.physicalRepresentations[0].depth, item.id.startsWith('finder-662') ? 51.5 : 68.5);
   }
 });
 

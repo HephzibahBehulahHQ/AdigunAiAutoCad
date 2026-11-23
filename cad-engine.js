@@ -1442,7 +1442,8 @@
     });
   const finderRelays = terminalCatalog.finderSeries40Relays.concat(
     terminalCatalog.finderSeries41Relays, terminalCatalog.finderSeries43Relays, terminalCatalog.finderSeries46Relays, terminalCatalog.finderSeries55Relays,
-    terminalCatalog.finderSeries56Relays, terminalCatalog.finderSeries60Relays, terminalCatalog.finderSeries62Relays).map(
+    terminalCatalog.finderSeries56Relays, terminalCatalog.finderSeries60Relays,
+    terminalCatalog.finderSeries62Relays, terminalCatalog.finderSeries66Relays).map(
     ([id, voltage, mode, material, version, current, width, height, depth]) => {
       const code = id.replace(/^(..)(..)(.)(...)(....)$/, '$1.$2.$3.$4.$5');
       const partId = 'finder-' + id;
@@ -1453,11 +1454,12 @@
       const series56 = id.startsWith('56');
       const series60 = id.startsWith('60');
       const series62 = id.startsWith('62');
-      const generalPurpose = series56 || series60 || series62 || id.startsWith('55');
-      const pcbMount = id.startsWith('551') || id.startsWith('564') || id.startsWith('622');
+      const series66 = id.startsWith('66');
+      const generalPurpose = series56 || series60 || series62 || series66 || id.startsWith('55');
+      const pcbMount = id.startsWith('551') || id.startsWith('564') || id.startsWith('622') || id.startsWith('662');
       const flange = id.startsWith('606');
-      const faston250 = id.startsWith('628');
-      const normallyOpen = (series43 || series56 || series62) && ['3', '6'].includes(id[9]);
+      const faston250 = id.startsWith('628') || id.startsWith('668');
+      const normallyOpen = (series43 || series56 || series62 || series66) && ['3', '6'].includes(id[9]);
       const poleCount = generalPurpose ? Number(id[3]) : 0;
       const pcbTenAmpRelay = id.startsWith('4062');
       const socketCommon21 = id.startsWith('4051');
@@ -1497,7 +1499,7 @@
       };
       const series62PinMap = { A1: 'A', A2: 'B', 11: 7, 12: 1, 14: 4, 21: 8, 22: 2, 24: 5, 31: 9, 32: 3, 34: 6 };
       const contactNumbers = poleCount === 2 && series62 ? [1, 3]
-        : poleCount === 2 && !series60 && !series56 ? [1, 4] : [1, 2, 3, 4].slice(0, poleCount);
+        : poleCount === 2 && !series60 && !series56 && !series66 ? [1, 4] : [1, 2, 3, 4].slice(0, poleCount);
       const generalContacts = contactNumbers.map(n => makeContact('contact-' + n + '1',
         normallyOpen ? null : 'contact-' + n + '2', 'contact-' + n + '4'));
       const contactPins = symbolPins.slice(2).filter(pin => !normallyOpen || pin.localNumber[1] !== '2');
@@ -1560,7 +1562,8 @@
               return { ...pin, id: 'contact-21', localNumber: '21', connectionType: 'pcb-pin' };
             const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
             if (generalPurpose) {
-              const numbers = series62 ? series62PinMap : series60 ? series60PinMap[id.slice(2, 4)]
+              const numbers = series66 ? { A1: 0, A2: 1, 11: 4, 12: 3, 14: 2, 21: 8, 22: 7, 24: 6 }
+                : series62 ? series62PinMap : series60 ? series60PinMap[id.slice(2, 4)]
                 : series56 && poleCount === 2 ? { A1: 7, A2: 8, 11: 5, 12: 1, 14: 3, 21: 6, 22: 2, 24: 4 }
                 : { A1: 13, A2: 14, ...socketPinMap[poleCount] };
               const physicalNumber = String(numbers[pin.localNumber]);
@@ -1609,22 +1612,28 @@
             minimumSetResetPulse: { value: 20, unit: 'ms' }
           } : {}),
           ratedContactCurrent: { value: current, unit: 'A' },
+          ...(series66 && !normallyOpen ? {
+            normallyOpenRatedCurrent: { value: 30, unit: 'A' },
+            normallyClosedRatedCurrent: { value: 10, unit: 'A' }
+          } : {}),
           ...(socketCommon21 ? { socketContactCurrentLimit: { value: 10, unit: 'A' } } : {}),
           ...(pairedTerminals && !lowProfile ? {
             socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
           } : {}),
           ...(normallyOpen ? {
             normallyOpenContactCount: { value: series43 ? 1 : poleCount, unit: series43 ? 'normally open contact' : 'normally open contacts' },
-            ...(!series43 ? { minimumContactGap: { value: series56 ? 1.5 : 3, unit: 'mm' } } : {})
+            ...(!series43 && (!series66 || id[9] === '6') ? { minimumContactGap: { value: series56 || series66 ? 1.5 : 3, unit: 'mm' } } : {})
           } : { changeoverContactCount: { value: generalPurpose ? poleCount : doublePole ? 2 : 1, unit: 'changeover contact' } }),
           contactMaterial: { value: material },
           ...(generalPurpose ? {
-            mountingMethod: { value: series62
+            mountingMethod: { value: series66 ? (pcbMount ? 'PCB mount' : 'Top flange mount')
+              : series62
               ? pcbMount ? 'PCB mount' : faston250 ? (version === 9 ? 'Faston 250, without rear flange' : 'Rear flange mount')
                 : (version % 10 === 6 ? 'Rear flange mount or Series 92 socket' : 'Series 92 socket')
               : flange ? 'Flange mount' : pcbMount ? 'PCB mount'
                 : series56 ? 'Series 96 socket or Faston 187' : series60 ? 'Series 90 socket' : 'Series 94 socket' },
-            environmentalProtection: { value: pcbMount && version === 1 ? 'RT III' : 'RT I' },
+            environmentalProtection: { value: series66 ? (version === 1 ? 'RT III' : 'RT II')
+              : pcbMount && version === 1 ? 'RT III' : 'RT I' },
             options: { value: (series60 || series62) && diode ? series60Option[optionCode] : optionLabel[optionCode] },
             ...(series62 && ['5', '6'].includes(id[9]) ? { coilContactSeparator: { value: 'Additional physical separator' } } : {}),
             ...(faston250 ? { terminalBladeWidth: { value: 6.3, unit: 'mm' }, terminalBladeThickness: { value: 0.8, unit: 'mm' } } : {}),
@@ -1677,8 +1686,9 @@
             revisionNote: 'Pages 3, 6 and 9 document the copper-side terminal diagram, ordering and outline.' } :
           generalPurpose ? { publisher: 'Finder', title: 'Series ' + series + ' datasheet · ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S' + series + 'EN.pdf',
-            documentRevision: series56 ? 'X-2026' : 'IX-2026', retrievedAt: '2026-11-23',
-            revisionNote: series62 ? 'Pages 3–5, 7 and 12–13 document terminals, mounting, ordering and outline.'
+            documentRevision: series66 ? 'II-2026' : series56 ? 'X-2026' : 'IX-2026', retrievedAt: '2026-11-23',
+            revisionNote: series66 ? 'Pages 3–6 and 10 document terminal designations, separate NO and NC ratings, and mounting outlines.'
+              : series62 ? 'Pages 3–5, 7 and 12–13 document terminals, mounting, ordering and outline.'
               : series60 ? 'Pages 3–6 and 9 document terminals, mounting, ordering and outline.'
               : series56 ? 'Pages 3–5 and 8 document terminals, mounting, ordering and outline.'
               : 'Pages 3–5 and 7 document the pin positions, rated current, coil options, mounting and outline.' } :
