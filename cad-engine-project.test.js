@@ -76,10 +76,10 @@ test('DXF exports the selected Finder relay step as editable contact geometry', 
   assert.ok(segments.some(line => line.x1 === 132 && line.y1 === 191 && line.x2 === 137 && line.y2 === 191));
 });
 
-test('DXF exports Ultra Quick and miniature fuse symbols with editable terminal marks', async () => {
+test('DXF exports Ultra Quick, miniature and NH fuse symbols with editable terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');
-  for (const code of ['eti-004110550', 'eti-006710319']) {
+  for (const code of ['eti-004110550', 'eti-006710319', 'eti-004116400']) {
     const fuse = engine.createInstance(code, 100, 200, 'F1');
     fuse.rotation = 90;
     const exported = await globalThis.AdigunDXF.exportDrawing([fuse]);

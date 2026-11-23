@@ -1545,8 +1545,10 @@
     terminalCatalog.etiKnifeBladeFuseLinks, terminalCatalog.etiNhBatteryFuseLinks,
     terminalCatalog.etiCylindricalArFuseLinks, terminalCatalog.etiCylindricalGrFuseLinks,
     terminalCatalog.etiMiniatureFuseLinks.map(([code, size, curve, current, voltage, capacity, page]) =>
-      [code, size, curve, current, voltage, capacity, null, null, null, page])
-  ).map(([code, size, utilization, current, voltage, capacity, certification, timeConstant, dcCapacity, miniaturePage]) => {
+      [code, size, curve, current, voltage, capacity, null, null, null, page]),
+    terminalCatalog.etiNhSpecialtyFuseLinks.map(([code, size, curve, current, voltage, capacity, transformerPower, indicator]) =>
+      [code, size, curve, current, voltage, capacity, null, null, null, null, { transformerPower, indicator }])
+  ).map(([code, size, utilization, current, voltage, capacity, certification, timeConstant, dcCapacity, miniaturePage, specialty]) => {
     const id = 'eti-' + code;
     const knifeBlade = size.startsWith('NH');
     const insulated = size.endsWith('/I');
@@ -1588,10 +1590,12 @@
     ];
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (directCurrent ? ' DC' : cylindricalGr ? ' AC/DC' : '') + (certification ? ' ' + certification : ''),
+      model: format + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V' + (directCurrent ? ' DC' : cylindricalGr ? ' AC/DC' : '')
+        + (specialty?.transformerPower ? '/' + specialty.transformerPower + 'kVA' : '') + (certification ? ' ' + certification : ''),
       name: miniaturePage ? 'Miniature fuse link' : knifeBlade ? 'Knife-blade fuse link' : 'Cylindrical fuse link',
       aliases: [format, knifeBlade ? 'NH fuse' : 'fuse cartridge', utilization,
-        ...(miniaturePage ? ['miniature fuse', 'minifuse'] : []), ...(battery ? ['battery protection fuse'] : [])],
+        ...(miniaturePage ? ['miniature fuse', 'minifuse'] : []), ...(battery ? ['battery protection fuse'] : []),
+        ...(specialty?.transformerPower ? ['transformer protection fuse'] : [])],
       family: cylindricalAr || cylindricalGr ? 'semiconductor-fuse-link' : knifeBlade ? 'knife-blade-fuse-link' : 'cylindrical-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
         id: 'fuse.eti.' + (battery ? size : knifeBlade ? caseSize : format).toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins,
@@ -1611,6 +1615,8 @@
         } : {}),
         cartridgeSize: knifeBlade ? { value: size } : { value: size, unit: 'mm' },
         ...(striker || (battery && size.endsWith('/K')) ? { indicator: { value: 'Striker pin' } } : {}),
+        ...(specialty?.indicator ? { indicator: { value: specialty.indicator } } : {}),
+        ...(specialty?.transformerPower ? { ratedTransformerPower: { value: specialty.transformerPower, unit: 'kVA' } } : {}),
         ...(insulated ? { insulatedGrippingLugs: { value: true } } : {}),
         ...(timeConstant ? { ratedDcTimeConstant: { value: timeConstant, unit: 'ms' } } : {}),
         dimensions: { width: { value: length, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
@@ -1637,7 +1643,10 @@
             ? 'Exact order-code table, AC and DC ratings, and dimensioned drawings for standard end caps and SU slotted terminals.' : cartridge
             ? 'Net product dimensions for the corresponding photovoltaic cartridge size.' : knifeBlade
             ? 'Nominal blade-to-blade length and end-view envelope for the listed NH fuse size.'
-            : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' }
+            : 'CH mechanical drawing identifies both end caps and nominal envelope dimensions.' },
+        ...(specialty ? [{ publisher: 'ETI', title: 'NV/NH · Order-code and rating table',
+          url: 'https://www.etigroup.eu/images/userfiles/en-GB/documents/products/building_industry/NV_ENG.pdf#page=' + (utilization === 'aM' ? 10 : 11),
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Corroborates the exact order code and application-specific ratings.' }] : [])
       ]
     });
   });

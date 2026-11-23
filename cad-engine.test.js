@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7115);
+  assert.equal(items.length, 7248);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1787,19 +1787,32 @@ test('ETI NH fuse variants preserve insulated grips and aM utilization ratings',
   const parts = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link').map(item => engine.component(item.id));
   const insulated = parts.filter(part => part.model.includes('/I'));
   const motor = parts.filter(part => part.specifications.utilizationCategory.value === 'aM');
-  assert.equal(insulated.length, 226);
-  assert.equal(motor.length, 14);
+  assert.equal(insulated.filter(part => part.specifications.utilizationCategory.value === 'gG').length, 226);
+  assert.equal(motor.length, 78);
+  assert.deepEqual([...new Set(motor.map(part => part.specifications.cartridgeSize.value))].sort(),
+    ['NH0', 'NH00', 'NH000', 'NH1', 'NH2', 'NH2C', 'NH3', 'NH4a']);
   for (const part of insulated) {
     assert.equal(part.specifications.insulatedGrippingLugs.value, true);
-    assert.equal(part.specifications.utilizationCategory.value, 'gG');
     assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['blade-left', 'blade-right']);
   }
   for (const part of motor) {
-    assert.equal(part.specifications.cartridgeSize.value, 'NH000');
     const voltage = part.specifications.nominalVoltage.value;
     assert.ok([500, 690].includes(voltage));
     assert.equal(part.specifications.ratedBreakingCapacity.value, voltage === 690 ? 100 : 120);
   }
+  const wiring = parts.filter(part => part.specifications.utilizationCategory.value === 'gF');
+  const transformers = parts.filter(part => part.specifications.utilizationCategory.value === 'gTr');
+  assert.equal(wiring.length, 22);
+  assert.equal(transformers.length, 47);
+  for (const part of [...wiring, ...transformers]) {
+    assert.equal(part.specifications.ratedBreakingCapacity.value, 100);
+    assert.equal(part.specifications.nominalVoltage.value, 400);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['blade-left', 'blade-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const transformer = engine.component('eti-004116400');
+  assert.deepEqual(transformer.specifications.ratedTransformerPower, { value: 50, unit: 'kVA' });
+  assert.equal(transformer.specifications.nominalCurrent.value, 72);
 });
 
 test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines', () => {
