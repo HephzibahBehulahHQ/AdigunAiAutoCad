@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Catalog)
+param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('4M','2M','2M2p')][string]$Series = '4M')
 
 $ErrorActionPreference = 'Stop'
 $settings = [Xml.XmlReaderSettings]::new()
@@ -7,6 +7,8 @@ $reader = [Xml.XmlReader]::Create((Resolve-Path -LiteralPath $Catalog).Path, $se
 $records = [System.Collections.Generic.List[object]]::new()
 $seen = @{}
 $culture = [Globalization.CultureInfo]::InvariantCulture
+$catalogModel = if ($Series -eq '4M') { 'KZS-4M (3p\+N|3p|2p)' } else { "KZS-$Series" }
+$ratingPattern = '(AC|A|B) ([BC])(\d+)/(0[.,]\d+)'
 
 try {
     while ($reader.Read()) {
@@ -23,19 +25,23 @@ try {
             $details.Element($ns + 'MANUFACTURER_NAME').Value -cne 'ETI' -or
             $features.Element($ns + 'REFERENCE_FEATURE_GROUP_ID').Value -cne 'EC000905') { continue }
         $name = $details.Element($ns + 'DESCRIPTION_SHORT').Value
-        if ($name -cnotmatch '^RCBO, KZS-4M (3p\+N|3p|2p) (AC|A|B) ([BC])(\d+)/(0[.,]\d+)$') { continue }
-        $topology = $Matches[1]
-        $residualType = $Matches[2]
-        $curve = $Matches[3]
-        $current = [int]$Matches[4]
-        $trip = [decimal]::Parse($Matches[5].Replace(',', '.'), $culture)
+        if ($name -cnotmatch "^RCBO, $catalogModel $ratingPattern$") { continue }
+        $offset = if ($Series -eq '4M') { 1 } else { 0 }
+        $topology = if ($Series -eq '4M') { $Matches[1] } elseif ($Series -eq '2M') { '1p+N' } else { '2p' }
+        $residualType = $Matches[$offset + 1]
+        $curve = $Matches[$offset + 2]
+        $current = [int]$Matches[$offset + 3]
+        $trip = [decimal]::Parse($Matches[$offset + 4].Replace(',', '.'), $culture)
         $protected = [int][string]$topology[0]
         $neutral = $topology.EndsWith('+N')
-        $capacity = if ($neutral) { 6 } else { 10 }
-        if (($topology -eq '2p') -ne ($residualType -eq 'B')) { continue }
+        if ($Series -eq '4M' -and (($topology -eq '2p') -ne ($residualType -eq 'B'))) { continue }
+        if (($Series -eq '2M2p' -and $residualType -ne 'A') -or ($Series -eq '2M' -and $residualType -eq 'B')) { continue }
         $description = $details.Element($ns + 'DESCRIPTION_LONG').Value
         $poleDescription = [regex]::Escape($topology.Replace('p', ''))
-        if ($description -notmatch "Short circuit capacity \(kA\) $capacity/$capacity(?:,|$)" -or
+        if ($description -notmatch 'Short circuit capacity \(kA\) (\d+)/\1(?:,|$)') { continue }
+        $capacity = [int]$Matches[1]
+        if (($Series -eq '4M' -and $capacity -ne $(if ($neutral) { 6 } else { 10 })) -or
+            ($Series -ne '4M' -and $capacity -ne 10) -or
             $description -notmatch "Number of poles $poleDescription," -or
             $description -cnotmatch "Residual current type $residualType," -or
             $description -notmatch "Rated current \(A\) $current/$current,") { continue }
@@ -44,7 +50,7 @@ try {
             $values[$feature.Element($ns + 'FNAME').Value] = $feature.Element($ns + 'FVALUE').Value
         }
         $voltage = [int]$values['EF000228']
-        $validVoltages = if ($protected -eq 2) { 230,240 } else { 400,415 }
+        $validVoltages = if ($protected -le 2) { 230,240 } else { 400,415 }
         if ($voltage -notin $validVoltages -or $values['EF002560'] -cnotin $residualType,'Other' -or
             $values['EF000889'] -cne $curve -or $values['EF012628'] -ne [string]$capacity -or
             $values['EF000227'] -ne [string]$current -or
@@ -54,7 +60,9 @@ try {
             [decimal]::Parse($values['EF002358'].Replace(',', '.'), $culture) -ne $trip) { continue }
         if ($seen.ContainsKey($code)) { throw "Duplicate ETI order code $code" }
         $seen[$code] = $true
-        $records.Add(@($code, $topology, $residualType, $curve, $current, [int]($trip * 1000), $voltage, $capacity))
+        $record = @($code, $topology, $residualType, $curve, $current, [int]($trip * 1000), $voltage, $capacity)
+        if ($Series -ne '4M') { $record += $Series }
+        $records.Add($record)
     }
 } finally {
     $reader.Dispose()

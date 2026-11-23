@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 4796);
+  assert.equal(items.length, 4936);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1888,7 +1888,7 @@ test('ETI EFH DC fuse holders retain separate fuse poles and exact net dimension
 });
 
 test('ETI KZS-4M RCBOs preserve terminal order and residual release ratings', () => {
-  const items = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker');
+  const items = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker' && item.name.startsWith('KZS-4M '));
   assert.equal(items.length, 143);
   for (const item of items) {
     const part = engine.component(item.id);
@@ -1904,6 +1904,26 @@ test('ETI KZS-4M RCBOs preserve terminal order and residual release ratings', ()
   const neutral = engine.component('eti-002174625');
   assert.equal(neutral.specifications.ratedResidualCurrent.value, 500);
   assert.deepEqual(neutral.symbol.pins.slice(-2).map(pin => [pin.localNumber, pin.manufacturerMarking]), [['N-upper', 'N'], ['N-lower', 'N']]);
+});
+
+test('ETI KZS-2M variants use the separate neutral and two-protected-pole diagrams', () => {
+  for (const [series, count, terminals, dimensions] of [
+    ['KZS-2M', 110, ['2', '1', 'N-upper', 'N-lower'], [35, 88]],
+    ['KZS-2M2p', 30, ['4', '3', '2', '1'], [35.6, 88.4]]
+  ]) {
+    const items = engine.catalog().filter(item => item.family === 'residual-current-circuit-breaker' && item.name.startsWith(series + ' '));
+    assert.equal(items.length, count);
+    for (const item of items) {
+      const part = engine.component(item.id);
+      const specs = part.specifications;
+      assert.deepEqual(part.symbol.pins.map(pin => pin.id), terminals.map(terminal => 'terminal-' + terminal));
+      assert.deepEqual(part.symbol.internalConnections, []);
+      assert.equal(specs.protectedPoles.value, series === 'KZS-2M' ? 1 : 2);
+      assert.equal(specs.switchedNeutral.value, series === 'KZS-2M');
+      assert.equal(specs.ratedBreakingCapacity.value, 10);
+      assert.deepEqual([specs.dimensions.width.value, specs.dimensions.height.value], dimensions);
+    }
+  }
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
