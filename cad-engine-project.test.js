@@ -129,6 +129,18 @@ test('DXF exports duplicate terminal marks for the modular ETITEC SM power buses
   assert.deepEqual(marks.filter(pin => pin.y === 256).map(pin => pin.x), [192, 208]);
 });
 
+test('DXF round-trips all five primary taps and four independent secondary terminal marks', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const transformer = engine.createInstance('eti-003801812', 100, 200, 'T1');
+  const exported = await globalThis.AdigunDXF.exportDrawing([transformer]);
+  assert.deepEqual(exported.unsupported, []);
+  const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'ETITRAFO winding layout', 'etitrafo-dxf');
+  const marks = project.objects.filter(object => object.kind === 'circle');
+  assert.deepEqual(marks.filter(pin => pin.y === 154).map(pin => pin.x), [36, 68, 100, 132, 164]);
+  assert.deepEqual(marks.filter(pin => pin.y === 246).map(pin => pin.x), [52, 84, 116, 148]);
+});
+
 test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');

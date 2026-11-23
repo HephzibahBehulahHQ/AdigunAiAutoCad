@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7951);
+  assert.equal(items.length, 8148);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1642,6 +1642,31 @@ test('direct catalog lookup matches searchable entries and protects the index', 
   }
   assert.equal(engine.catalogItem('missing-component'), null);
   assert.equal(engine.catalogItem('constructor'), null);
+});
+
+test('ETITRAFO transformer orders preserve primary taps and the secondary winding layout', () => {
+  const items = engine.catalog('ETITRAFO').filter(item => item.family === 'single-phase-transformer');
+  assert.equal(items.length, 197);
+  for (const { id } of items) {
+    const part = engine.component(id);
+    const { primaryWinding, secondaryWindings } = part.electricalFunctions;
+    assert.deepEqual([...primaryWinding, ...secondaryWindings.flat()], part.symbol.pins.map(pin => pin.id));
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.ok(engine.transformerGeometry(part).segments.flat().every(Number.isFinite));
+  }
+  const tapped = engine.component('eti-003801121');
+  assert.deepEqual(tapped.symbol.pins.map(pin => pin.manufacturerMarking), ['0', '230', '400', '12', '0', '12']);
+  assert.deepEqual(tapped.specifications.apparentPower, { value: 40, unit: 'VA' });
+  const dual = engine.component('eti-003801812');
+  assert.deepEqual(dual.electricalFunctions.primaryWinding, ['primary-minus15', 'primary-0', 'primary-plus15', 'primary-230', 'primary-400']);
+  assert.deepEqual(dual.electricalFunctions.secondaryWindings, [
+    ['secondary-1-1', 'secondary-1-2'], ['secondary-2-1', 'secondary-2-2']
+  ]);
+  assert.deepEqual(dual.specifications.secondaryVoltage, { value: '2 × 12', unit: 'V AC' });
+  assert.equal(dual.specifications.enclosureRating.value, 'IP20');
+  const single = engine.component('eti-003801862');
+  assert.equal(single.specifications.secondaryWindingArrangement.value, 'Single secondary winding');
+  assert.equal(engine.component('eti-003801831').specifications.transformerClassification.value, 'Insulating transformer');
 });
 
 test('ETIBREAK EB2 order codes retain separate switched pairs and voltage-specific breaking capacities', () => {

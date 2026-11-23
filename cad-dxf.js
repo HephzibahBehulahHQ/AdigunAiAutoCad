@@ -121,14 +121,16 @@
       const moldedCaseBreaker = component?.family === 'molded-case-circuit-breaker';
       const overheadSurgeArrester = component?.family === 'surge-protective-device' && component.specifications.localDisconnector;
       const modularSurgeProtector = component?.family === 'surge-protective-device' && component.specifications.surgeTechnology;
-      if ((coilAndContact || fuseLink || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
+      const transformer = component?.family === 'single-phase-transformer';
+      if ((coilAndContact || fuseLink || moldedCaseBreaker || overheadSurgeArrester || modularSurgeProtector || transformer || ['disconnect-terminal', 'user-authored'].includes(component?.family)) && engine.validateInstance(object).valid) {
         const { segments, circles } = component.family === 'user-authored'
           ? projectSymbolGeometry(object.customSymbol)
           : coilAndContact ? engine.coilAndContactGeometry(object)
             : fuseLink ? engine.fuseLinkGeometry()
               : moldedCaseBreaker ? engine.moldedCaseBreakerGeometry(component)
                 : overheadSurgeArrester ? engine.overheadSurgeArresterGeometry(component)
-                  : modularSurgeProtector ? engine.modularSurgeGeometry(component) : engine.disconnectTerminalGeometry(object);
+                  : modularSurgeProtector ? engine.modularSurgeGeometry(component)
+                    : transformer ? engine.transformerGeometry(component) : engine.disconnectTerminalGeometry(object);
         const angle = object.rotation * Math.PI / 180;
         const cosine = Math.cos(angle), sine = Math.sin(angle), scale = object.symbolScale ?? 1;
         function toDxf(localX, localY) {

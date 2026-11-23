@@ -1509,6 +1509,77 @@
     });
   });
 
+  const etiSinglePhaseTransformers = terminalCatalog.etiSinglePhaseTransformers.map(
+    ([code, model, page, thermal, euro, din, insulating, secondary, power, width, height, depth, ip]) => {
+      const id = 'eti-' + code;
+      const primaryVoltages = euro ? [-15, 0, 15, 230, 400] : [0, 230, 400];
+      const secondaryWindings = secondary.split(' ').map(group => group.split('-').map(Number));
+      const dualSecondary = secondaryWindings.length === 2;
+      const centerTap = secondaryWindings[0].length === 3;
+      const arrangement = dualSecondary ? 'Two independent secondary windings' : centerTap ? 'Center-tapped secondary' : 'Single secondary winding';
+      const primaryPins = primaryVoltages.map((voltage, index) => {
+        const correction = voltage === -15 || voltage === 15;
+        const label = voltage === -15 ? '−15' : voltage === 15 ? '+15' : String(voltage);
+        return {
+          id: 'primary-' + (voltage === -15 ? 'minus15' : voltage === 15 ? 'plus15' : voltage),
+          localNumber: 'P:' + label, manufacturerMarking: label,
+          name: 'Primary ' + label + ' V' + (correction ? ' correction tap' : ' terminal'),
+          x: (index - (primaryVoltages.length - 1) / 2) * 32, y: -46, electricalType: 'passive'
+        };
+      });
+      const secondaryPins = secondaryWindings.map((taps, winding) => taps.map((voltage, index) => {
+        const center = dualSecondary ? (winding === 0 ? -32 : 32) : 0;
+        const spacing = dualSecondary ? 32 : centerTap ? 48 : 96;
+        return {
+          id: 'secondary-' + (winding + 1) + '-' + (index + 1),
+          localNumber: 'S' + (dualSecondary ? winding + 1 : '') + ':' + (index + 1), manufacturerMarking: String(voltage),
+          name: 'Secondary' + (dualSecondary ? ' winding ' + (winding + 1) : '') + ' terminal ' + (index + 1) + ' (' + voltage + ' V)',
+          x: center + (index - (taps.length - 1) / 2) * spacing, y: 46, electricalType: 'passive'
+        };
+      }));
+      const classification = insulating ? 'Insulating transformer' : 'Safety transformer';
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model, name: 'ETITRAFO single-phase transformer', aliases: ['ETITRAFO', classification, ...(euro ? ['EURO transformer'] : [])],
+        family: 'single-phase-transformer', referencePrefix: 'T', category: 'Electrical · Verified transformer',
+        symbol: {
+          id: 'transformer.eti.' + (euro ? 'euro' : 'standard') + '.' + (dualSecondary ? 'dual' : centerTap ? 'center-tap' : 'single') + '.v1',
+          view: 'schematic', unit: 'mm', width: euro ? 160 : 128, height: 92,
+          pins: [...primaryPins, ...secondaryPins.flat()], internalConnections: [],
+          numberingNote: 'The catalog voltage markings are shown on the windings. Repeated markings have distinct CAD terminal IDs.'
+        },
+        electricalFunctions: {
+          primaryWinding: primaryPins.map(pin => pin.id),
+          secondaryWindings: secondaryPins.map(group => group.map(pin => pin.id)),
+          simulationNote: 'Windings transfer energy magnetically. Static wiring reports preserve the distinct terminals and the primary-to-secondary isolation.'
+        },
+        specifications: {
+          transformerClassification: { value: classification },
+          primaryVoltage: { value: '230 / 400', unit: 'V AC' },
+          ...(euro ? { primaryCorrectionTaps: { value: '−15 / +15', unit: 'V' } } : {}),
+          secondaryVoltage: { value: dualSecondary ? '2 × ' + secondaryWindings[0][1] : secondary.replaceAll('-', '–'), unit: 'V AC' },
+          secondaryWindingArrangement: { value: arrangement },
+          apparentPower: { value: power, unit: 'VA' },
+          insulationThermalClass: { value: thermal }, enclosureRating: { value: ip },
+          mountingMethod: { value: din ? 'DIN rail' : 'Mounting plate' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth, sourceIndex: 1,
+          scope: 'Catalog front envelope. Mounting clearance and terminal access are separate.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+            documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact model, VA rating, voltage and enclosure designation.' },
+          { publisher: 'ETI', title: 'ETITRAFO · Order table and winding diagram',
+            url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/ETITRAFO.pdf#page=' + page,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Documents the primary taps, secondary winding terminals, mounting and order-specific outline.' }
+        ]
+      });
+    }
+  );
+
   const etiMoldedCaseBreakers = terminalCatalog.etiEb2Breakers.concat(terminalCatalog.etiEb2sBreakers).map(
     ([code, model, frame, poleCount, current, voltage, icu, ics, width, height, depth, connection, dcVoltage, tripOption, capacityAt415]) => {
       const id = 'eti-' + code;
@@ -2967,7 +3038,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -3072,6 +3143,33 @@
       }
     }
     return { segments, circles };
+  }
+
+  function transformerGeometry(definition) {
+    const { primaryWinding, secondaryWindings } = definition.electricalFunctions;
+    const pins = new Map(definition.symbol.pins.map(pin => [pin.id, pin]));
+    const segments = [[-42, -2, 42, -2], [-42, 2, 42, 2]];
+    const appendWinding = (terminals, baseline, direction) => {
+      const windingPins = terminals.map(id => pins.get(id));
+      for (const pin of windingPins) segments.push([pin.x, pin.y, pin.x, baseline]);
+      for (let index = 1; index < windingPins.length; index++) {
+        const start = windingPins[index - 1].x;
+        const end = windingPins[index].x;
+        const loops = Math.max(2, Math.round((end - start) / 10));
+        const steps = loops * 6;
+        let x = start, y = baseline;
+        for (let step = 1; step <= steps; step++) {
+          const nextX = start + (end - start) * step / steps;
+          const nextY = baseline + direction * 5 * Math.sin(Math.PI * (step % 6) / 6);
+          segments.push([x, y, nextX, nextY]);
+          x = nextX;
+          y = nextY;
+        }
+      }
+    };
+    appendWinding(primaryWinding, -13, 1);
+    for (const winding of secondaryWindings) appendWinding(winding, 13, -1);
+    return { segments, circles: definition.symbol.pins.map(({ x, y }) => [x, y, 2.6]) };
   }
 
   function modularSurgeGeometry(definition) {
@@ -4421,6 +4519,7 @@
     moldedCaseBreakerGeometry: moldedCaseBreakerGeometry,
     overheadSurgeArresterGeometry: overheadSurgeArresterGeometry,
     modularSurgeGeometry: modularSurgeGeometry,
+    transformerGeometry: transformerGeometry,
     disconnectTerminalGeometry: disconnectTerminalGeometry,
     coilAndContactGeometry: coilAndContactGeometry,
     cableScheduleCsv: cableScheduleCsv,

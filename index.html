@@ -928,6 +928,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           }
           break;
         }
+        case'single-phase-transformer': {
+          const engine=window.AdigunCADEngine;
+          const transformer=engine.component(item.id);
+          const geometry=engine.transformerGeometry(transformer);
+          for(const segment of geometry.segments)line(...segment);
+          for(const marker of geometry.circles)circle(...marker);
+          for(const pin of transformer.symbol.pins)label(pin.manufacturerMarking,pin.x,pin.y+(pin.y<0?-5:9),7);
+          break;
+        }
         case'molded-case-circuit-breaker': {
           const engine=window.AdigunCADEngine;
           const breaker=engine.component(item.id);
@@ -1511,6 +1520,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.tripIndication?[['Trip indication',spec.tripIndication.value]]:[]),
         ...(spec.systemVoltageDesignation?[['System voltage designation',spec.systemVoltageDesignation.value+' V']]:[]),
         ['Mounting',spec.mountingMethod.value],['Built-in depth',spec.builtInDepth.value+' mm']]
+      : def.family==='single-phase-transformer'
+      ? [['Transformer',spec.transformerClassification.value],['Primary voltage',spec.primaryVoltage.value+' '+spec.primaryVoltage.unit],
+        ...(spec.primaryCorrectionTaps?[['Primary correction taps',spec.primaryCorrectionTaps.value+' '+spec.primaryCorrectionTaps.unit]]:[]),
+        ['Secondary voltage',spec.secondaryVoltage.value+' '+spec.secondaryVoltage.unit],
+        ['Secondary windings',spec.secondaryWindingArrangement.value],
+        ['Apparent power',spec.apparentPower.value+' '+spec.apparentPower.unit],
+        ['Thermal class',spec.insulationThermalClass.value],['Enclosure',spec.enclosureRating.value],
+        ['Mounting',spec.mountingMethod.value],
+        ['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : def.family==='molded-case-circuit-breaker'
       ? [['Poles',String(spec.poleCount.value)],['Frame current',spec.ratedFrameCurrent.value+' '+spec.ratedFrameCurrent.unit],
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
