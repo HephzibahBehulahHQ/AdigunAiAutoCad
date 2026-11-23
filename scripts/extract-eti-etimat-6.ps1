@@ -43,10 +43,12 @@ try {
         if ($highCurrent) {
             if ($current -notin 80,100,125 -or ($curve -eq 'D' -and ($current -eq 125 -or $topology -eq '4p'))) { continue }
             $capacity = if ($current -eq 125 -or ($curve -eq 'D' -and $current -eq 100)) { 15 } else { 20 }
-            if ($long -notmatch "Short circuit capacity \(kA\) $capacity(?:\s|,|$)" -or
+            $poleDescription = [regex]::Escape($topology.Replace('p', ''))
+            if ($long -notmatch "Number of poles $poleDescription," -or
+                $long -notmatch "Short circuit capacity \(kA\) $capacity(?:\s|,|$)" -or
                 ($values['EF009557'] -ne [string]$capacity -and $values['EF009558'] -ne [string]$capacity) -or
                 $long -notmatch 'Voltage type AC(?:\s|,|$)' -or
-                $long -notmatch 'Rated voltage \(V\) (240/415|240|415)(?:\s|,|$)') { continue }
+                $long -notmatch 'Rated voltage \(V\) (240/415|230/400|240|415|230|400)(?:\s|,|$)') { continue }
             $voltage = $Matches[1]
             $width = 27 * $poles
         } elseif ($Series -eq '6') {
@@ -68,7 +70,8 @@ try {
         if ($values['EF000889'] -cne $curve -or (-not $highCurrent -and $values['EF000187'] -cne 'AC') -or
             $values['EF000227'] -notmatch '^\d+(?:[.,]\d+)?$' -or
             [double]::Parse($values['EF000227'].Replace(',', '.'), [Globalization.CultureInfo]::InvariantCulture) -ne $current -or
-            [int]$values['EF005548'] -ne $protected -or [int]$values['EF008618'] -ne $poles -or
+            ((-not $highCurrent -or $values.ContainsKey('EF005548')) -and [int]$values['EF005548'] -ne $protected) -or
+            [int]$values['EF008618'] -ne $poles -or
             (-not $highCurrent -and ($current -lt 0.5 -or $current -gt 63))) { continue }
         if ($seen.ContainsKey($id)) { throw "Duplicate ETI order code $id" }
         $seen[$id] = $true

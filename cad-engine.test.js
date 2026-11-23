@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3200);
+  assert.equal(items.length, 3204);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1677,7 +1677,7 @@ test('ETIMAT P-series breakers follow their separate terminal numbering and brea
 
 test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams for both current ranges', () => {
   const items = engine.catalog('ETI ETIMAT 10').filter(item => item.name.startsWith('ETIMAT 10 '));
-  assert.equal(items.length, 112);
+  assert.equal(items.length, 116);
   let highCurrentCount = 0;
   for (const item of items) {
     const part = engine.component(item.id);
@@ -1698,7 +1698,7 @@ test('ETIMAT 10 breakers follow the ASTI wiring and panel diagrams for both curr
     assert.ok(Math.abs(dimensions.width.value - 17.6 * terminals.length / 2) < 1e-9);
     assert.deepEqual([dimensions.height.value, dimensions.depth.value], [85, 67.7]);
   }
-  assert.equal(highCurrentCount, 34);
+  assert.equal(highCurrentCount, 38);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
