@@ -1,10 +1,10 @@
 {
   "summary": {
-    "manufacturerParts": 2464,
+    "manufacturerParts": 2488,
     "symbolFamilies": 16,
-    "partsWithTerminalMaps": 2464,
-    "partsWithPhysicalDimensions": 2450,
-    "partsWithPhysicalRepresentations": 2443,
+    "partsWithTerminalMaps": 2488,
+    "partsWithPhysicalDimensions": 2474,
+    "partsWithPhysicalRepresentations": 2467,
     "customDefinitions": 0,
     "importOnlyOrLegacyRecords": 0
   },
@@ -255523,6 +255523,5038 @@
           "publisher": "Finder",
           "title": "43.41.7.048.5001 · Manufacturer product record",
           "url": "https://www.findernet.com/en/p/434170485001",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453170060310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.7.006.0310",
+      "model": "45.31.7.006.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453170060310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453170060310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453170060310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453170060310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.7.006.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453170060310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453170120310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.7.012.0310",
+      "model": "45.31.7.012.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453170120310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453170120310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453170120310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453170120310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.7.012.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453170120310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453170124310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.7.012.4310",
+      "model": "45.31.7.012.4310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453170124310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453170124310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgSnO2"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453170124310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453170124310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.7.012.4310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453170124310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453170240310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.7.024.0310",
+      "model": "45.31.7.024.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453170240310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453170240310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453170240310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453170240310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.7.024.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453170240310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453170244310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.7.024.4310",
+      "model": "45.31.7.024.4310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453170244310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453170244310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgSnO2"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453170244310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453170244310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.7.024.4310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453170244310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453170600310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.7.060.0310",
+      "model": "45.31.7.060.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453170600310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 60,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453170600310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 60,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453170600310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453170600310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.7.060.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453170600310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453190060610",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.9.006.0610",
+      "model": "45.31.9.006.0610",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453190060610",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453190060610.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3.6,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453190060610.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453190060610",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.9.006.0610 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453190060610",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453190120610",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.9.012.0610",
+      "model": "45.31.9.012.0610",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453190120610",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453190120610.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3.6,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453190120610.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453190120610",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.9.012.0610 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453190120610",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-453190240610",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.31.9.024.0610",
+      "model": "45.31.9.024.0610",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "453190240610",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-453190240610.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 10,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3.6,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 31.4,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 31.4,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-453190240610.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 31.4
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 453190240610",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.31",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.31.9.024.0610 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/453190240610",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170061310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.006.1310",
+      "model": "45.71.7.006.1310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "457170061310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170061310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170061310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170061310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.006.1310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170061310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170061410",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.006.1410",
+      "model": "45.71.7.006.1410",
+      "function": "Single-pole normally closed relay",
+      "aliases": [
+        "457170061410",
+        "Series 45",
+        "SPST-NC"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V DC"
+          }
+        },
+        "normallyClosedContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": null,
+            "deenergizedConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "energizedConnections": [],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170061410.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyClosedContactCount": {
+          "value": 1,
+          "unit": "normally closed contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170061410.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170061410",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.006.1410 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170061410",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170121310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.012.1310",
+      "model": "45.71.7.012.1310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "457170121310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170121310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170121310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170121310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.012.1310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170121310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170121410",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.012.1410",
+      "model": "45.71.7.012.1410",
+      "function": "Single-pole normally closed relay",
+      "aliases": [
+        "457170121410",
+        "Series 45",
+        "SPST-NC"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyClosedContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": null,
+            "deenergizedConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "energizedConnections": [],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170121410.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyClosedContactCount": {
+          "value": 1,
+          "unit": "normally closed contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170121410.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170121410",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.012.1410 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170121410",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170241310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.024.1310",
+      "model": "45.71.7.024.1310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "457170241310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170241310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170241310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170241310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.024.1310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170241310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170241311",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.024.1311",
+      "model": "45.71.7.024.1311",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "457170241311",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170241311.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Wash tight (RT III)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170241311.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170241311",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.024.1311 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170241311",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170241410",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.024.1410",
+      "model": "45.71.7.024.1410",
+      "function": "Single-pole normally closed relay",
+      "aliases": [
+        "457170241410",
+        "Series 45",
+        "SPST-NC"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-12",
+          "localNumber": "12",
+          "name": "Normally closed",
+          "x": 70,
+          "y": -25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyClosedContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": "contact-12",
+            "normallyOpen": null,
+            "deenergizedConnections": [
+              [
+                "contact-11",
+                "contact-12"
+              ]
+            ],
+            "energizedConnections": [],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170241410.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyClosedContactCount": {
+          "value": 1,
+          "unit": "normally closed contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170241410.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170241410",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.024.1410 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170241410",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-457170481310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.71.7.048.1310",
+      "model": "45.71.7.048.1310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "457170481310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 48,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-457170481310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 48,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-457170481310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 457170481310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.71",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.71.7.048.1310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/457170481310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170060310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.006.0310",
+      "model": "45.91.7.006.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170060310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 6,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170060310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 6,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170060310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170060310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.006.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170060310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170120310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.012.0310",
+      "model": "45.91.7.012.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170120310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170120310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170120310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170120310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.012.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170120310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170120311",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.012.0311",
+      "model": "45.91.7.012.0311",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170120311",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 12,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170120311.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 12,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Wash tight (RT III)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170120311.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170120311",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.012.0311 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170120311",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170240310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.024.0310",
+      "model": "45.91.7.024.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170240310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170240310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170240310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170240310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.024.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170240310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170240311",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.024.0311",
+      "model": "45.91.7.024.0311",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170240311",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 24,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170240311.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 24,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Wash tight (RT III)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170240311.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170240311",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.024.0311 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170240311",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170480310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.048.0310",
+      "model": "45.91.7.048.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170480310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 48,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170480310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 48,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170480310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170480310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.048.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170480310",
+          "documentRevision": null,
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Product link supplied in the manufacturer BMEcat record."
+        }
+      ],
+      "status": "source-backed native part"
+    },
+    {
+      "componentId": "finder-459170600310",
+      "schemaVersion": 1,
+      "category": "Electrical · Verified interface relay",
+      "family": "relay-module",
+      "manufacturer": "Finder",
+      "orderCode": "45.91.7.060.0310",
+      "model": "45.91.7.060.0310",
+      "function": "Single-pole normally open relay",
+      "aliases": [
+        "459170600310",
+        "Series 45",
+        "SPST-NO"
+      ],
+      "terminals": [
+        {
+          "id": "coil-a2",
+          "localNumber": "A2",
+          "name": "Coil terminal A2",
+          "x": -70,
+          "y": -20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "coil-a1",
+          "localNumber": "A1",
+          "name": "Coil terminal A1",
+          "x": -70,
+          "y": 20,
+          "electricalType": "passive",
+          "connectionType": "pcb-pin"
+        },
+        {
+          "id": "contact-11",
+          "localNumber": "11",
+          "name": "Changeover common",
+          "x": 70,
+          "y": 0,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        },
+        {
+          "id": "contact-14",
+          "localNumber": "14",
+          "name": "Normally open",
+          "x": 70,
+          "y": 25,
+          "electricalType": "passive",
+          "connectionType": "faston-250"
+        }
+      ],
+      "nodeGroups": [],
+      "electricalFunctions": {
+        "coil": {
+          "pins": [
+            "coil-a1",
+            "coil-a2"
+          ],
+          "nominalVoltage": {
+            "value": 60,
+            "unit": "V DC"
+          }
+        },
+        "normallyOpenContacts": [
+          {
+            "common": "contact-11",
+            "normallyClosed": null,
+            "normallyOpen": "contact-14",
+            "deenergizedConnections": [],
+            "energizedConnections": [
+              [
+                "contact-11",
+                "contact-14"
+              ]
+            ],
+            "actuation": "coil-a1/coil-a2",
+            "simulation": "Not simulated; static connectivity reports only user-authored wires and does not assume a relay state."
+          }
+        ]
+      },
+      "geometry": {
+        "id": "relay.series45.finder-459170600310.v1",
+        "view": "schematic",
+        "unit": "mm",
+        "width": 140,
+        "height": 60
+      },
+      "specifications": {
+        "nominalCoilVoltage": {
+          "value": 60,
+          "unit": "V DC"
+        },
+        "ratedContactCurrent": {
+          "value": 16,
+          "unit": "A"
+        },
+        "normallyOpenContactCount": {
+          "value": 1,
+          "unit": "normally open contact"
+        },
+        "minimumContactGap": {
+          "value": 3,
+          "unit": "mm"
+        },
+        "contactMaterial": {
+          "value": "AgNi"
+        },
+        "mountingMethod": {
+          "value": "PCB mount with Faston 250 contact terminals"
+        },
+        "enclosureVersion": {
+          "value": "Flux proof (RT II)"
+        },
+        "terminalBladeWidth": {
+          "value": 6.3,
+          "unit": "mm"
+        },
+        "terminalBladeThickness": {
+          "value": 0.8,
+          "unit": "mm"
+        },
+        "dimensions": {
+          "width": {
+            "value": 12.5,
+            "unit": "mm"
+          },
+          "height": {
+            "value": 28.5,
+            "unit": "mm"
+          },
+          "depth": {
+            "value": 40.7,
+            "unit": "mm"
+          }
+        }
+      },
+      "physicalDimensions": {
+        "width": {
+          "value": 12.5,
+          "unit": "mm"
+        },
+        "height": {
+          "value": 28.5,
+          "unit": "mm"
+        },
+        "depth": {
+          "value": 40.7,
+          "unit": "mm"
+        }
+      },
+      "physicalRepresentations": [
+        {
+          "id": "terminal.panel-envelope.finder-459170600310.v1",
+          "view": "panel-front-envelope",
+          "unit": "mm",
+          "width": 12.5,
+          "height": 28.5,
+          "railDepths": {},
+          "sourceIndex": 0,
+          "scope": "Manufacturer overall relay dimensions. Socket, clearances and mounting datums are unspecified.",
+          "depth": 40.7
+        }
+      ],
+      "editableProperties": {
+        "terminalStrip": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "position": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 24
+        },
+        "marking": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 40
+        },
+        "comment": {
+          "type": "string",
+          "default": "",
+          "maximumLength": 160
+        }
+      },
+      "sourceEvidence": [
+        {
+          "publisher": "Finder",
+          "title": "Finder BMEcat · Order 459170600310",
+          "url": "https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip",
+          "documentRevision": "2026-08-24",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions."
+        },
+        {
+          "publisher": "Finder",
+          "title": "Series 45 datasheet · 45.91",
+          "url": "https://cdn.findernet.com/app/uploads/S45EN.pdf",
+          "documentRevision": "I-2026",
+          "retrievedAt": "2026-11-23",
+          "revisionNote": "Pages 3–5 and 7 document the terminal diagram, mounting, ordering and outline."
+        },
+        {
+          "publisher": "Finder",
+          "title": "45.91.7.060.0310 · Manufacturer product record",
+          "url": "https://www.findernet.com/en/p/459170600310",
           "documentRevision": null,
           "retrievedAt": "2026-11-23",
           "revisionNote": "Product link supplied in the manufacturer BMEcat record."

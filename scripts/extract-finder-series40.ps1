@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '43', '46', '55', '56', '60', '62', '66')][string]$Series = '40')
+param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '43', '45', '46', '55', '56', '60', '62', '66')][string]$Series = '40')
 
 $ErrorActionPreference = 'Stop'
 $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Archive).Path)
@@ -19,6 +19,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([6789])([0-9]{3})([0145])0[02]([013])$' }
                 elseif ($Series -eq '41') { '^41(31|52|61)([89])([0-9]{3})([045])0(00|10|11|13|20)$' }
                 elseif ($Series -eq '43') { '^43(41)(7)([0-9]{3})([045])[03]0([01])$' }
+                elseif ($Series -eq '45') { '^45(31|71|91)([79])([0-9]{3})([014])[346]1([01])$' }
                 elseif ($Series -eq '55') { '^55([13][234])([89])([0-9]{3})([05])0([0-9]{2})$' }
                 elseif ($Series -eq '56') { '^56([34][24])([89])([0-9]{3})([04])[03]([0-9]{2})$' }
                 elseif ($Series -eq '60') { '^60([16][23])([89])([0-9]{3})([05])[02]([0-9]{2})$' }
@@ -78,8 +79,10 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     $flange = $Series -eq '60' -and $type.StartsWith('6')
     $bifurcated = $Series -eq '60' -and $id[9] -eq '2'
-    $normallyOpen = $Series -in '43','56','62','66' -and $id[9] -in '3','6'
-    $contactDescription = if ($normallyOpen) { 'Contacts configuration: NO' } else { 'Contacts configuration: CO' }
+    $normallyOpen = $Series -in '43','45','56','62','66' -and $id[9] -in '3','6'
+    $normallyClosed = $Series -eq '45' -and $id[9] -eq '4'
+    $contactDescription = if ($normallyOpen) { 'Contacts configuration: NO' }
+                          elseif ($normallyClosed) { 'Contacts configuration: NC' } else { 'Contacts configuration: CO' }
     if ($Series -eq '60') {
         $coilVoltages = if ($mode -eq 'AC') { 6,12,24,48,60,110,120,230,240,400 } else { 6,12,24,48,60,110,125,220 }
         $options = if ($flange) { '00' }
@@ -149,6 +152,18 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     if ($Series -eq '43' -and ($voltage -notin 3,6,9,12,18,24,36,48 -or !$socketOptional -or
         $description -notmatch 'Type of electric connection: PCB connection')) { continue }
+    if ($Series -eq '45') {
+        $circuit = $id[9]
+        $validOrder = switch ($type) {
+            '31' { $version -eq '0' -and (($coilCode -eq '7' -and $materialCode -in '0','4' -and $circuit -eq '3') -or
+                ($coilCode -eq '9' -and $materialCode -eq '0' -and $circuit -eq '6')) }
+            '71' { $coilCode -eq '7' -and $materialCode -eq '1' -and $circuit -in '3','4' }
+            '91' { $coilCode -eq '7' -and $materialCode -eq '0' -and $circuit -eq '3' }
+        }
+        $connection = if ($type -eq '31') { 'PCB connection' } else { 'Soldering flag connection Faston 250' }
+        if (!$validOrder -or $voltage -notin 6,12,24,48,60 -or !$socketOptional -or
+            $description -notmatch "Type of electric connection: $connection") { continue }
+    }
     if ($Series -eq '66') {
         $coilVoltages = if ($mode -eq 'AC') { 6,12,24,110,120,230,240 } else { 6,9,12,24,110,125 }
         $connection = if ($type -eq '22') { 'PCB connection' } else { 'Soldering flag connection Faston 250' }
@@ -167,11 +182,12 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     foreach ($feature in $features.FEATURE) { $values[[string]$feature.FNAME] = @($feature.FVALUE) }
     $poles = if ($Series -in '55','56','60','62','66') { $type.Substring(1) } elseif ($doublePole) { '2' } else { '1' }
     $noCount = if ($normallyOpen) { $poles } else { '0' }
-    $coCount = if ($normallyOpen) { '0' } else { $poles }
+    $ncCount = if ($normallyClosed) { $poles } else { '0' }
+    $coCount = if ($normallyOpen -or $normallyClosed) { '0' } else { $poles }
     if ($Series -eq '41') {
         # Finder's description and order key identify CO even in records that enumerate both throws as separate contacts.
         if ($description -notmatch "Nr.contacts: $poles\s+Contacts configuration: CO") { continue }
-    } elseif ([string]$values['EF008255'][0] -cne '0' -or [string]$values['EF008256'][0] -cne $noCount -or
+    } elseif ([string]$values['EF008255'][0] -cne $ncCount -or [string]$values['EF008256'][0] -cne $noCount -or
         [string]$values['EF008257'][0] -cne $coCount) { continue }
     $measurements = @()
     foreach ($key in 'EF000001', 'EF000008', 'EF000040', 'EF000049') {
@@ -189,6 +205,12 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         if ($measurements[0] -ne 10 -or $measurements[1] -ne 10.2 -or $measurements[2] -ne 15.4 -or
             $measurements[3] -notin 28.6,30.2 -or (!$normallyOpen -and $measurements[3] -ne 30.2)) { continue }
         if ($normallyOpen) { $measurements[3] = 28.6 } # Use the type-specific outline in the manufacturer datasheet.
+    }
+    if ($Series -eq '45') {
+        $expectedLength = if ($type -eq '31') { 31.4 } else { 40.7 }
+        $ratedCurrent = if ($circuit -eq '6') { 10 } else { 16 }
+        if ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.5 -or
+            $measurements[2] -ne 28.5 -or $measurements[3] -ne $expectedLength) { continue }
     }
     if ($type -eq '51' -and ($measurements[0] -notin 10,12 -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
