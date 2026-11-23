@@ -964,7 +964,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           line(a.x,15,b.x,-15);
           for(const [x,y] of [[a.x,15],[b.x,-15],[c.x,-15]])circle(x,y,2.6);
           add('path',{d:'M-5 0H16','stroke-dasharray':'3 3'}).setAttribute('aria-hidden','true');
-          label('A2',-70,-25,7);label('A1',-70,31,7);
+          label('A2'+(relay.symbol.pins.find(pin=>pin.id==='coil-a2')?.polarity||''),-70,-25,7);label('A1'+(relay.symbol.pins.find(pin=>pin.id==='coil-a1')?.polarity||''),-70,31,7);
           break;
         }
         const contacts=relay.electricalFunctions.changeoverContacts||relay.electricalFunctions.normallyOpenContacts
@@ -982,7 +982,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           if(closed)line(28,common.y,50,closed.y);
           else line(28,common.y,46,open.y-8);
         }
-        label('A2',-70,-25,7);label('A1',-70,31,7);
+        label('A2'+(relay.symbol.pins.find(pin=>pin.id==='coil-a2')?.polarity||''),-70,-25,7);label('A1'+(relay.symbol.pins.find(pin=>pin.id==='coil-a1')?.polarity||''),-70,31,7);
         }
         break;case'power-supply-ac-dc':{rect(-55,-58,110,116);label('SITOP PSU100C',0,-24,8);label('24 V DC · 2.5 A',0,1,8);label('AC/DC',0,21,7);const supplyPins=window.AdigunCADEngine.component(item.id).symbol.pins;supplyPins.forEach(function(pin){const left=pin.x<0,x=pin.x,y=pin.y;line(x,y,left?-55:55,y);circle(x,y,2.6);const t=add('text',{x:left?x-5:x+5,y:y+2,'text-anchor':left?'end':'start','font-size':6,fill:stroke,stroke:'none','font-family':'Arial, sans-serif'});t.textContent=pin.localNumber;});label(obj.ref||'PS',0,82,7);break;}case'plc-cpu':{rect(-90,-140,180,280);label('SIMATIC S7-1200',0,-118,10);label('CPU 1212C',0,-103,9);label('DC / DC / DC',0,-88,7);const plcPins=window.AdigunCADEngine.component(item.id).symbol.pins;plcPins.forEach(function(pin){const left=pin.x<0,x=pin.x,y=pin.y;line(x,y,left?-90:90,y);circle(x,y,2.2);const t=add('text',{x:left?x-5:x+5,y:y+2,'text-anchor':left?'end':'start','font-size':5.4,fill:stroke,stroke:'none','font-family':'Arial, sans-serif'});t.textContent=pin.localNumber+' '+pin.name;});label(obj.ref||'A1',0,157,8);break;}case'sensor-inductive-pnp':{rect(-31,-22,62,44);path('M-19 8L-8 -8L3 8Z');line(3,0,19,0);label('IFS204',0,-30,7);label('4 mm',0,17,6);const sensorPins=window.AdigunCADEngine.component(item.id).symbol.pins;sensorPins.forEach(function(pin){line(pin.x,pin.y,pin.x<0?-31:31,pin.y);circle(pin.x,pin.y,2.4);const labelX=pin.x<0?pin.x-5:pin.x+5,t=add('text',{x:labelX,y:pin.y+2,'text-anchor':pin.x<0?'end':'start','font-size':6,fill:stroke,stroke:'none','font-family':'Arial, sans-serif'});t.textContent=pin.localNumber+' '+pin.name;});label(obj.ref||'B1',0,40,7);break;}case'sensor-pressure-analog':{rect(-42,-47,84,94,3);label('PN2070',0,-24,8);label('0–400 bar',0,-7,6);label('OUT2 · analog',0,9,5);label('OUT1 / IO-Link',0,24,5);const pressurePins=window.AdigunCADEngine.component(item.id).symbol.pins;pressurePins.forEach(function(pin){line(pin.x,pin.y,pin.x<0?-42:42,pin.y);circle(pin.x,pin.y,2.4);const labelX=pin.x<0?pin.x-5:pin.x+5,t=add('text',{x:labelX,y:pin.y+2,'text-anchor':pin.x<0?'end':'start','font-size':6,fill:stroke,stroke:'none','font-family':'Arial, sans-serif'});t.textContent=pin.localNumber;});label(obj.ref||'B1',0,64,7);break;}case'protective-earth-terminal':{rect(-15,-11,30,22);const pins=window.AdigunCADEngine.component(item.id).symbol.pins;for(const pin of pins){line(pin.x,pin.y,pin.x<0?-15:15,pin.y);circle(pin.x,pin.y,3);}label('PE',0,3,6);line(0,11,0,18);line(-10,18,10,18);line(-6,22,6,22);line(-2,26,2,26);break;}case'disconnect-terminal':{const geometry=window.AdigunCADEngine.disconnectTerminalGeometry(obj);geometry.segments.forEach(segment=>line(...segment));geometry.circles.forEach(mark=>circle(...mark));label('1',-35,-7,6);label('2',35,-7,6);label(obj.ref||'X',0,17,7);break;}case'feedthrough-terminal':{
   const def=window.AdigunCADEngine.component(item.id);
@@ -1017,7 +1017,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       marker.dataset.componentPin=pin.id;
       marker.setAttribute('pointer-events','all');
       const title=document.createElementNS(namespace,'title');
-      title.textContent=pin.localNumber+' · '+pin.name;
+      title.textContent=pin.localNumber+' · '+pin.name+(pin.socketPosition?' · Socket position '+pin.socketPosition:'');
       marker.append(title);
     }
   }
