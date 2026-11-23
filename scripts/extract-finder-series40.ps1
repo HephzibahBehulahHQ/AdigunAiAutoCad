@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '46', '55', '56', '60', '62')][string]$Series = '40')
+param([Parameter(Mandatory)][string]$Archive, [ValidateSet('40', '41', '43', '46', '55', '56', '60', '62')][string]$Series = '40')
 
 $ErrorActionPreference = 'Stop'
 $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Archive).Path)
@@ -18,6 +18,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     # Restrict each series to changeover types with a verified terminal diagram.
     $orderKey = if ($Series -eq '40') { '^40(31|51|52|61|62)([6789])([0-9]{3})([0145])0[02]([013])$' }
                 elseif ($Series -eq '41') { '^41(31|52|61)([89])([0-9]{3})([045])0(00|10|11|13|20)$' }
+                elseif ($Series -eq '43') { '^43(41)(7)([0-9]{3})([045])[03]0([01])$' }
                 elseif ($Series -eq '55') { '^55([13][234])([89])([0-9]{3})([05])0([0-9]{2})$' }
                 elseif ($Series -eq '56') { '^56([34][24])([89])([0-9]{3})([04])[03]([0-9]{2})$' }
                 elseif ($Series -eq '60') { '^60([16][23])([89])([0-9]{3})([05])[02]([0-9]{2})$' }
@@ -76,7 +77,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     }
     $flange = $Series -eq '60' -and $type.StartsWith('6')
     $bifurcated = $Series -eq '60' -and $id[9] -eq '2'
-    $normallyOpen = $Series -in '56','62' -and $id[9] -in '3','6'
+    $normallyOpen = $Series -in '43','56','62' -and $id[9] -in '3','6'
     $contactDescription = if ($normallyOpen) { 'Contacts configuration: NO' } else { 'Contacts configuration: CO' }
     if ($Series -eq '60') {
         $coilVoltages = if ($mode -eq 'AC') { 6,12,24,48,60,110,120,230,240,400 } else { 6,12,24,48,60,110,125,220 }
@@ -145,6 +146,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
             ($type -eq '61' -and $materialCode -eq '5') -or
             ($version -eq '20' -and ($type -eq '52' -or $voltage -notin 12,24 -or $materialCode -ne '0'))) { continue }
     }
+    if ($Series -eq '43' -and ($voltage -notin 3,6,9,12,18,24,36,48 -or !$socketOptional -or
+        $description -notmatch 'Type of electric connection: PCB connection')) { continue }
     $material = @{ '0' = 'AgNi'; '1' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
     if (!$verifiedMaterial.Success -or $verifiedMaterial.Groups[1].Value.Replace('₂', '2') -cne $material) { continue }
@@ -169,6 +172,11 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
+    if ($Series -eq '43') {
+        if ($measurements[0] -ne 10 -or $measurements[1] -ne 10.2 -or $measurements[2] -ne 15.4 -or
+            $measurements[3] -notin 28.6,30.2 -or (!$normallyOpen -and $measurements[3] -ne 30.2)) { continue }
+        if ($normallyOpen) { $measurements[3] = 28.6 } # Use the type-specific outline in the manufacturer datasheet.
+    }
     if ($type -eq '51' -and ($measurements[0] -notin 10,12 -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
     if ($shortPins -and $type -ne '61' -and $measurements[0] -ne 12) { continue }
