@@ -27,7 +27,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $version = $Matches[5]
     $shortPins = $Series -eq '40' -and $id[10] -eq '2'
     $bistable = $coilCode -eq '6'
-    if ($bistable -and ($type -notin '31', '52', '61' -or $shortPins -or $version -ne '0' -or
+    if ($bistable -and ($type -notin '31', '51', '52', '61' -or $shortPins -or $version -ne '0' -or
         $voltage -notin 5, 6, 12, 24, 48, 110 -or ($type -ne '61' -and $materialCode -ne '0'))) { continue }
     if ($shortPins) {
         if ($type -notin '31', '51', '61' -or $coilCode -notin '7', '9' -or $version -notin '0', '1' -or
@@ -38,6 +38,9 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $details = $product.PRODUCT_DETAILS
     $features = $product.PRODUCT_FEATURES
     $description = [string]$details.DESCRIPTION_LONG
+    $socketOptional = $description -match 'Complete with socket: no' -or
+        ($type -eq '51' -and $description -match '^PCB/Plug-in relays' -and
+         $description -match 'Accessories: Socket S\.95' -and $description -notmatch 'Complete with socket: yes')
     if ($shortPins -and $description -notmatch 'Type of electric connection: PCB connection') { continue }
     $mode = if ($bistable) { 'AC/DC' } elseif ($coilCode -eq '8') { 'AC' } else { 'DC' }
     $operation = if ($bistable) { 'Polarized\s+Bistable' } else { 'Polarity free\s+Mono stable' }
@@ -60,7 +63,7 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $features.REFERENCE_FEATURE_GROUP_ID -cne 'EC001437' -or $voltage -le 0 -or
         $description -notmatch 'Contacts configuration: CO' -or $description -notmatch $operation -or
         $description -notmatch "Coil version: $mode(?:\s|$)" -or !$voltagesAgree -or
-        ($Series -eq '40' -and $description -notmatch 'Complete with socket: no')) { continue }
+        ($Series -eq '40' -and !$socketOptional)) { continue }
     $values = @{}
     foreach ($feature in $features.FEATURE) { $values[[string]$feature.FNAME] = @($feature.FVALUE) }
     $poles = if ($doublePole) { '2' } else { '1' }
@@ -72,6 +75,8 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
+    if ($type -eq '51' -and ($measurements[0] -notin 10,12 -or $measurements[1] -ne 12.4 -or
+        $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }
     if ($shortPins -and $type -ne '61' -and $measurements[0] -ne 12) { continue }
     if ($type -eq '62' -and ($measurements[0] -ne 10 -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 25 -or $measurements[3] -ne 29)) { continue }

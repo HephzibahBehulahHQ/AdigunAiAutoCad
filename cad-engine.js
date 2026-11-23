@@ -1447,6 +1447,7 @@
       const bistable = mode === 'AC/DC';
       const industrial = id.startsWith('46');
       const pcbTenAmpRelay = id.startsWith('4062');
+      const socketCommon21 = id.startsWith('4051');
       const pairedTerminals = id.startsWith('4061');
       const doublePole = id.startsWith('4652') || id.startsWith('4052') || pcbTenAmpRelay;
       const relayType = code.slice(0, 5);
@@ -1467,7 +1468,7 @@
           simulation: bistable ? 'Contact state is retained after a set or reset pulse. Static connectivity does not simulate the latched state.' : simulation
         };
       };
-      const firstContact = makeContact('contact-11', 'contact-12', 'contact-14');
+      const firstContact = makeContact(socketCommon21 ? 'contact-21' : 'contact-11', 'contact-12', 'contact-14');
       const secondContact = makeContact('contact-21', 'contact-22', 'contact-24');
       const symbolPins = relayDefinition.symbol.pins;
       const doublePolePins = [
@@ -1503,6 +1504,8 @@
           id: 'relay.series' + series + '.' + partId + '.v1',
           height: doublePole || pairedTerminals ? 140 : relayDefinition.symbol.height,
           pins: (pairedTerminals ? pairedPins : doublePole ? doublePolePins : symbolPins).map(pin => {
+            if (socketCommon21 && pin.id === 'contact-11')
+              return { ...pin, id: 'contact-21', localNumber: '21', connectionType: 'pcb-pin' };
             const name = pin.id.startsWith('coil-') ? 'Coil terminal ' + pin.localNumber : pin.name;
             const physicalNumber = bladePositions[pin.localNumber];
             return industrial
@@ -1512,7 +1515,9 @@
           internalConnections: pairedTerminals
             ? [['contact-11', 'contact-21'], ['contact-12', 'contact-22'], ['contact-14', 'contact-24']]
             : relayDefinition.symbol.internalConnections,
-          numberingNote: pairedTerminals
+          numberingNote: socketCommon21
+            ? 'Finder identifies 21 as common, 12 as normally closed and 14 as normally open in compatible Series 95 sockets.'
+            : pairedTerminals
             ? 'Finder 40.61 permanently links 11–21, 12–22 and 14–24 on one changeover pole.'
             : doublePole && industrial
             ? 'Finder 46.52 diagram maps A1/A2/11/12/14/21/22/24 to blade positions 8/1/3/2/4/6/7/5.'
@@ -1534,6 +1539,7 @@
             minimumSetResetPulse: { value: 20, unit: 'ms' }
           } : {}),
           ratedContactCurrent: { value: current, unit: 'A' },
+          ...(socketCommon21 ? { socketContactCurrentLimit: { value: 10, unit: 'A' } } : {}),
           ...(pairedTerminals ? {
             socketWiringAbove10A: { value: 'For compatible Series 95 sockets, externally parallel 11–21, 12–22 and 14–24 above 10 A.' }
           } : {}),
@@ -1565,6 +1571,10 @@
             url: 'https://cdn.findernet.com/app/uploads/FINBMECAT_ENG_20260824_3996421788343213.zip',
             documentRevision: '2026-08-24', retrievedAt: '2026-11-23',
             revisionNote: 'Exact supplier and manufacturer identity, coil voltage, contact configuration, rated current and dimensions.' },
+          socketCommon21 ? { publisher: 'Finder', title: 'Series 40 datasheet · 40.51',
+            url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
+            documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
+            revisionNote: 'Pages 3–5 and 9–10 document hardware and coil options. Pages 12 and 14–16 specify the 21–12–14 socket terminal map.' } :
           bistable ? { publisher: 'Finder', title: 'Series 40 datasheet · Bistable ' + relayType,
             url: 'https://cdn.findernet.com/app/uploads/S40EN.pdf',
             documentRevision: 'VIII-2026', retrievedAt: '2026-11-23',
