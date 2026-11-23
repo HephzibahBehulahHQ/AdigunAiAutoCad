@@ -875,7 +875,15 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           break;
         }
         case'surge-protective-device': {
-          const device=window.AdigunCADEngine.component(item.id);
+          const engine=window.AdigunCADEngine;
+          const device=engine.component(item.id);
+          if(device.specifications.localDisconnector){
+            const geometry=engine.overheadSurgeArresterGeometry(device);
+            for(const segment of geometry.segments)line(...segment);
+            for(const marker of geometry.circles)circle(...marker);
+            label('L',0,-49,7);label('PE',0,54,7);
+            break;
+          }
           const pins=new Map(device.symbol.pins.map(pin=>[pin.id,pin]));
           const {surgeBranches,remoteChangeover}=device.electricalFunctions;
           const earth=device.symbol.pins.filter(pin=>pin.id.startsWith('pe'));
@@ -1481,6 +1489,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ['Continuous AC voltage',spec.continuousAcVoltage.value+' '+spec.continuousAcVoltage.unit],
         ['Nominal discharge current',spec.nominalDischargeCurrent.value+' '+spec.nominalDischargeCurrent.unit],
         ['Maximum discharge current',spec.maximumDischargeCurrent.value+' '+spec.maximumDischargeCurrent.unit],
+        ...(spec.voltageProtectionLevel?[['Voltage protection level',spec.voltageProtectionLevel.value+' '+spec.voltageProtectionLevel.unit]]:[]),
+        ...(spec.lineConnection?[['Line connection',spec.lineConnection.value],['Earth connection',spec.earthConnection.value]]:[]),
+        ...(spec.earthLeadLength?[['Earth lead length',spec.earthLeadLength.value+' '+spec.earthLeadLength.unit]]:[]),
+        ...(spec.localDisconnector?[['Local disconnector',spec.localDisconnector.value?'Fitted':'None']]:[]),
         ...(spec.impulseCurrent?[['Impulse current',spec.impulseCurrent.value+' '+spec.impulseCurrent.unit]]:[]),
         ['Remote signalling',spec.remoteSignalling.value?'Changeover contact':'None'],['Mounting',spec.mountingMethod.value]]
       : def.family==='residual-current-switch'
