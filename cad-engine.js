@@ -1236,6 +1236,7 @@
   const siemensCpuDefinition = deepFreeze({
     schemaVersion: COMPONENT_SCHEMA_VERSION, id: 'siemens-6es7212-1ae40-0xb0', manufacturer: 'Siemens', manufacturerPartNumber: '6ES7212-1AE40-0XB0',
     model: 'SIMATIC S7-1200 CPU 1212C DC/DC/DC', name: 'Compact PLC CPU', family: 'plc-cpu', referencePrefix: 'A', category: 'Automation · Verified PLC CPU',
+    plc: { series: 'S7-1200', type: 'CPU' },
     symbol: { id: 'plc.siemens.cpu-1212c.dcdcdc.v2', view: 'schematic', unit: 'mm', width: 260, height: 290, pins: siemensCpuPins, internalConnections: [], numberingNote: 'Terminal group and pin identities X10, X11 and X12 match Siemens System Manual V4.7, Table A-50. Pin coordinates are schematic connection points, not physical connector geometry.' },
     specifications: {
       onboardDigitalInputs: { value: 8, unit: '24 V DC DI' }, onboardDigitalOutputs: { value: 6, unit: '24 V DC transistor DQ' }, onboardAnalogInputs: { value: 2, unit: '0–10 V DC AI' },
@@ -3580,6 +3581,93 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
     });
   }
 
+  function plcChannels(prefix, count, start = 0) {
+    return Array.from({ length: count }, (_, index) => prefix + (index + start));
+  }
+
+  function createS7Part(orderCode, model, type, table, mechanicalWidth, connectors, channels) {
+    const id = 'siemens-' + orderCode.toLowerCase();
+    const family = type === 'CPU' ? 'plc-cpu' : 'plc-' + type.toLowerCase().replaceAll(' ', '-');
+    const pins = [];
+    const sides = [[], []];
+    for (const [connector, names] of Object.entries(connectors)) {
+      const side = sides[type === 'CPU' ? Number(connector !== 'X10') : Number(connector.slice(-1)) % 2];
+      const x = side === sides[0] ? -118 : 118;
+      if (side.length) side.push(null);
+      names.forEach((name, index) => {
+        if (!name) return;
+        const channel = plcChannelType({ name });
+        const electricalType = channel === 'DI' || channel === 'AI' ? 'input'
+          : channel === 'DQ' || (channel === 'AQ' && !name.endsWith('M')) ? 'output' : 'passive';
+        side.push({ id: connector.toLowerCase() + '-' + (index + 1), localNumber: connector + ':' + (index + 1),
+          name, x, electricalType, connectionType: 'plug-in terminal' });
+      });
+    }
+    sides.forEach(side => side.forEach((pin, index) => {
+      if (pin) pins.push({ ...pin, y: (index - (side.length - 1) / 2) * 14 });
+    }));
+    const definition = {
+      schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'Siemens', manufacturerPartNumber: orderCode,
+      model: 'SIMATIC S7-1200 ' + model, name: type === 'CPU' ? 'Compact PLC CPU' : type + ' module',
+      category: 'Automation · Verified PLC ' + (type === 'CPU' ? 'CPU' : 'I/O'),
+      family, referencePrefix: 'A', plc: { series: 'S7-1200', type, label: model },
+      symbol: { id: 'plc.' + id + '.v1', view: 'schematic', unit: 'mm', width: 236,
+        height: Math.max(100, Math.max(...sides.map(side => side.length)) * 14 + 24),
+        pins, internalConnections: [], numberingNote: 'Connector and position numbers follow Siemens Table ' + table + '. Unassigned positions are omitted.' },
+      specifications: { channels: { value: channels } },
+      instanceProperties: siemensCpuDefinition.instanceProperties,
+      sources: [
+        { publisher: 'Siemens', title: 'SIMATIC S7-1200 System Manual V4.7 · Table ' + table,
+          url: 'https://cache.industry.siemens.com/dl/files/302/109977302/att_1307432/v1/s71200_system_manual_en-US.pdf',
+          documentRevision: 'V4.7 · 12/2024 · A5E02486680-AQ', revisionNote: 'Exact terminal assignment and module specification.',
+          retrievedAt: '2026-11-23' }
+      ]
+    };
+    return withPanelEnvelope(definition, { width: mechanicalWidth, height: 100, depth: 75 },
+      [orderCode + ' · Siemens technical data', 'https://support.industry.siemens.com/teddatasheet/?caller=SIOS&format=pdf&language=en&mlfbs=' + orderCode]);
+  }
+
+  const cpuDcInput = ['L+ / 24 V DC', 'M / 24 V DC', 'Functional Earth', 'L+ / 24 V DC Sensor Out', 'M / 24 V DC Sensor Out', '1M'];
+  const cpuAnalog = ['2M', 'AI 0', 'AI 1'];
+  const dcSupply = ['L+ / 24 V DC', 'M / 24 V DC', 'Functional Earth'];
+  const siemensS7Parts = [
+    createS7Part('6ES7211-1AE40-0XB0', 'CPU 1211C DC/DC/DC', 'CPU', 'A-31', 90, {
+      X10: [...cpuDcInput, ...plcChannels('DI a.', 6)], X11: cpuAnalog,
+      X12: ['3L+', '3M', ...plcChannels('DQ a.', 4)]
+    }, '6 DI · 4 DQ · 2 AI'),
+    createS7Part('6ES7214-1AG40-0XB0', 'CPU 1214C DC/DC/DC', 'CPU', 'A-69', 110, {
+      X10: [...cpuDcInput, ...plcChannels('DI a.', 8), ...plcChannels('DI b.', 6)], X11: cpuAnalog,
+      X12: ['3L+', '3M', ...plcChannels('DQ a.', 8), ...plcChannels('DQ b.', 2)]
+    }, '14 DI · 10 DQ · 2 AI'),
+    createS7Part('6ES7221-1BF32-0XB0', 'SM 1221 · 8 DI', 'Digital input', 'A-113', 45, {
+      X10: ['Functional Earth', null, '1M', ...plcChannels('DI a.', 4)],
+      X11: [null, null, '2M', ...plcChannels('DI a.', 4, 4)]
+    }, '8 DI · 24 V DC'),
+    createS7Part('6ES7221-1BH32-0XB0', 'SM 1221 · 16 DI', 'Digital input', 'A-114', 45, {
+      X10: [null, null, '1M', ...plcChannels('DI a.', 4)],
+      X11: ['Functional Earth', null, '2M', ...plcChannels('DI a.', 4, 4)],
+      X12: [null, null, '3M', ...plcChannels('DI b.', 4)],
+      X13: [null, null, '4M', ...plcChannels('DI b.', 4, 4)]
+    }, '16 DI · 24 V DC'),
+    createS7Part('6ES7222-1HF32-0XB0', 'SM 1222 · 8 relay DQ', 'Digital output', 'A-120', 45, {
+      X10: [...dcSupply, '1L', ...plcChannels('DQ a.', 3)],
+      X11: [null, '2L', ...plcChannels('DQ a.', 5, 3)]
+    }, '8 relay DQ'),
+    createS7Part('6ES7222-1BH32-0XB0', 'SM 1222 · 16 transistor DQ', 'Digital output', 'A-126', 45, {
+      X10: dcSupply.slice(0, 2).concat(null, plcChannels('DQ a.', 4)),
+      X11: ['Functional Earth', null, null, ...plcChannels('DQ a.', 4, 4)],
+      X12: [null, null, null, ...plcChannels('DQ b.', 4)],
+      X13: [null, null, null, ...plcChannels('DQ b.', 4, 4)]
+    }, '16 transistor DQ · 24 V DC'),
+    createS7Part('6ES7231-5ND32-0XB0', 'SM 1231 · 4 AI, 16-bit', 'Analog input', 'A-152', 45, {
+      X10: [...dcSupply, 'AI 0+', 'AI 0-', 'AI 1+', 'AI 1-'],
+      X11: [null, null, null, 'AI 2+', 'AI 2-', 'AI 3+', 'AI 3-']
+    }, '4 differential AI'),
+    createS7Part('6ES7232-4HB32-0XB0', 'SM 1232 · 2 AQ', 'Analog output', 'A-157', 45, {
+      X10: dcSupply, X11: [null, null, null, 'AQ 0M', 'AQ 0', 'AQ 1M', 'AQ 1']
+    }, '2 AQ · voltage or current')
+  ];
+
   const breakerBody = { width: 45, height: 97, depth: 92 };
   const breakerBodyEvidence = ['SIRIUS 3RV2 circuit breakers, Figure C-5',
     'https://support.industry.siemens.com/cs/attachments/60279172/manual_SIRIUS_circuit_breaker_3RV_en-US.pdf#page=268'];
@@ -3615,7 +3703,7 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
   ];
 
 
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks, etiGreenProtectCartridges).map(part => [part.id, part])), ...Object.fromEntries(catalogPanelParts.map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks, etiGreenProtectCartridges, siemensS7Parts).map(part => [part.id, part])), ...Object.fromEntries(catalogPanelParts.map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -3967,16 +4055,17 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
     };
   }
   function plcChannelType(pin) {
-    return /^(DI|DQ|AI) /.exec(pin.name)?.[1];
+    return /^(DI|DQ|AI|AQ) /.exec(pin.name)?.[1];
   }
   function normalizeCatalogText(value) {
     return String(value).normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
   }
   const catalogIndex = Object.values(COMPONENTS).map(function (def) {
     const item = { id: def.id, componentId: def.id, name: def.model + ' · ' + def.manufacturerPartNumber,
-      category: def.category, family: def.family, tag: def.referencePrefix || 'X' };
+      category: def.category, family: def.family, tag: def.referencePrefix || 'X',
+      ...(def.plc ? { manufacturer: def.manufacturer, series: def.plc.series, plcType: def.plc.type } : {}) };
     const fields = [def.id, def.name, def.model, def.manufacturerPartNumber, def.manufacturer,
-      def.category, def.family, ...(def.aliases || [])].map(normalizeCatalogText);
+      def.category, def.family, def.plc?.type || '', ...(def.aliases || [])].map(normalizeCatalogText);
     return { item, fields };
   });
   const catalogItemsById = new Map(catalogIndex.map(({ item }) => [item.id, item]));
@@ -4525,7 +4614,7 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
       const earthPins = definition.symbol.pins.filter(pin => definition.family === 'protective-earth-terminal'
         || pin.connectionType === 'protective-earth' || pin.localNumber.toUpperCase() === 'PE');
       if (earthPins.length) earthPinsByComponent.set(object.id, new Set(earthPins.map(pin => pin.id)));
-      if (definition.family === 'plc-cpu') {
+      if (definition.plc) {
         signalRolesByComponent.set(object.id, new Map(definition.symbol.pins.map(pin => [pin.id, plcChannelType(pin)])));
       } else if (definition.family === 'sensor-inductive-pnp') {
         signalRolesByComponent.set(object.id, new Map([[definition.electricalFunctions.output.outputPin, 'digital-output']]));
@@ -5053,7 +5142,7 @@ function withPanelEnvelope(definition, measurements, evidence, scope = 'Manufact
     for (const object of project.objects) {
       if (object?.kind !== 'component-instance') continue;
       const definition = component(object.componentId, object.customSymbol);
-      if (definition?.family !== 'plc-cpu') continue;
+      if (!definition?.plc) continue;
       const sheet = sheetNumbers.get(object.sheetId || analysis.sheets[0].id);
       for (const pin of definition.symbol.pins) {
         const type = plcChannelType(pin);

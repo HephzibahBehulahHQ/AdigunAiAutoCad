@@ -54,7 +54,7 @@
     .project-example-title small{color:#9fb0c4;font-size:9px}
     .catalog-filters{display:grid;gap:4px;padding:0 8px}
     .catalog-filters label{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:4px;color:#b7c6d8}
-    .catalog-filters select{min-width:0;text-overflow:ellipsis;color:#e9f2fa;background:#0d1726;border:1px solid #32445a;border-radius:3px;padding:3px}
+    .catalog-filters label[hidden]{display:none}.catalog-filters select{min-width:0;text-overflow:ellipsis;color:#e9f2fa;background:#0d1726;border:1px solid #32445a;border-radius:3px;padding:3px}
     .symbol-count{padding:4px 8px;margin:0;color:#b7c6d8;font-size:10px}
     .symbol-list{flex:1}
     .symbol-row{text-align:left;width:100%;min-height:27px;height:auto;gap:5px}
@@ -110,7 +110,7 @@
         <div class="tree-row tree-grand" data-sheet="terminals"><span class="file">▱</span><span>120 · Terminal strip</span><span class="detail">A3/120</span></div>
         <div class="tree-row tree-grand" data-sheet="bom"><span class="file">▱</span><span>200 · Bill of materials</span><span class="detail">A3/200</span></div>
       </div><div class="tree project-library-list" id="editableExampleProjects" role="list" aria-label="Editable example projects" style="display:none"></div><div class="notice" hidden><button type="button" id="recoverBrowserDraft">Recover browser draft</button></div><div class="panel-tabs"><button class="active" data-tree-view="tree">Tree</button><button data-tree-view="list">List</button></div></section>
-      <section class="panel-section" id="symbolsPanel"><div class="panel-head"><span class="head-icon">⊕</span><span>Symbols / Macros</span><span class="grow"></span><button aria-label="Search symbols" id="focusSymbols">⌕</button></div><label class="panel-search"><span>⌕</span><input id="symbolSearch" type="search" placeholder="Search symbols" aria-label="Search symbols"></label><div class="catalog-filters" id="catalogFilters"><label>Category <select id="symbolCategory" aria-label="Component category"></select></label><label>Type <select id="symbolType" aria-label="Component type"></select></label></div><p id="symbolCount" class="symbol-count" aria-live="polite"></p><div class="symbol-list" id="symbolList"></div><div class="catalog-pages" id="catalogPages"></div><div class="panel-tabs" role="group" aria-label="Component collection"><button class="active" aria-pressed="true" data-symbol-view="library">All parts</button><button aria-pressed="false" data-symbol-view="common">Common parts</button><button aria-pressed="false" data-symbol-view="project">Project symbols</button></div></section>
+      <section class="panel-section" id="symbolsPanel"><div class="panel-head"><span class="head-icon">⊕</span><span>Symbols / Macros</span><span class="grow"></span><button aria-label="Search symbols" id="focusSymbols">⌕</button></div><label class="panel-search"><span>⌕</span><input id="symbolSearch" type="search" placeholder="Search symbols" aria-label="Search symbols"></label><div class="catalog-filters" id="catalogFilters"><label id="symbolCategoryField">Category <select id="symbolCategory" aria-label="Component category"></select></label><label hidden id="plcManufacturerField">Maker <select id="plcManufacturer" aria-label="PLC manufacturer"></select></label><label hidden id="plcSeriesField">Series <select id="plcSeries" aria-label="PLC series"></select></label><label>Type <select id="symbolType" aria-label="Component type"></select></label></div><p id="symbolCount" class="symbol-count" aria-live="polite"></p><div class="symbol-list" id="symbolList"></div><div class="catalog-pages" id="catalogPages"></div><div class="panel-tabs" role="group" aria-label="Component collection"><button class="active" aria-pressed="true" data-symbol-view="library">All parts</button><button aria-pressed="false" data-symbol-view="common">Common parts</button><button aria-pressed="false" data-symbol-view="project">Project symbols</button></div></section>
     </aside>
     <section class="editor" aria-label="Electrical drawing editor">
       <div class="editor-tabs" id="sheetTabs" role="tablist" aria-label="Open drawing sheets"><button class="document-tab" role="tab" data-sheet="power" aria-selected="false">A1/010 · Power supply <span class="tab-close" role="button" tabindex="0" data-close-sheet="power" aria-label="Close Power supply tab">×</span></button><button class="document-tab" role="tab" data-sheet="control" aria-selected="true">A1/020 · Control circuit <span class="tab-close" role="button" tabindex="0" data-close-sheet="control" aria-label="Close Control circuit tab">×</span></button><button class="document-tab" role="tab" data-sheet="plc" aria-selected="false">A2/030 · PLC / I/O <span class="tab-close" role="button" tabindex="0" data-close-sheet="plc" aria-label="Close PLC / I/O tab">×</span></button><span id="draftingContext" class="drafting-context" hidden></span><button class="document-tab add-sheet" id="newSheet" aria-label="Add sheet">+</button></div>
@@ -901,7 +901,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function toggleObjectHidden(id){const obj=state.objects.find(function(item){return item.id===id;});if(!obj)return;pushUndo();obj.hidden=!obj.hidden;renderObjects();persist();notify(obj.hidden?'Object hidden. Right-click the blank canvas to show hidden objects.':'Object shown.');}
   function flipObject(id,axis){const obj=state.objects.find(function(item){return item.id===id;});if(!obj||obj.kind==='component-instance')return;pushUndo();if(axis==='x')obj.flipX=!obj.flipX;else obj.flipY=!obj.flipY;renderObjects();persist();notify(axis==='x'?'Object flipped horizontally.':'Object flipped vertically.');}
   function finishObjectMove(id,point){const obj=state.objects.find(function(item){return item.id===id;});if(!obj)return;const destination=snapObjectPoint(point),dx=destination.x-(Number(obj.x)||0),dy=destination.y-(Number(obj.y)||0);state.pendingMoveObjectId=null;if(Math.abs(dx)<1e-6&&Math.abs(dy)<1e-6){notify('Object is already at that point.');return;}const snapshot=drawingHistoryEntry();translateObjectGeometry(obj,dx,dy);if(rejectNewComponentOverlap(snapshot,[id]))return;pushUndo(snapshot);state.selected=id;renderObjects();persist();refreshSelectedProperties();notify('Object moved to the selected point.');}
-  function buildCatalogGlyph(obj,item,stroke,width){const ns='http://www.w3.org/2000/svg',g=document.createElementNS(ns,'g');g.setAttribute('transform','translate('+obj.x+' '+obj.y+') rotate('+(obj.rotation||0)+') scale('+(obj.symbolScale??1)+')'+(obj.mirrorX?' scale(-1 1)':''));g.setAttribute('stroke',stroke);g.setAttribute('stroke-width',width);g.setAttribute('stroke-linecap','round');g.setAttribute('stroke-linejoin','round');g.setAttribute('fill','none');g.setAttribute('class','drawing-object '+(obj.id===state.selected?'selected-object':''));const add=function(tag,a){const e=document.createElementNS(ns,tag);Object.keys(a||{}).forEach(k=>e.setAttribute(k,String(a[k])));g.append(e);return e;},line=function(a,b,c,d){return add('path',{d:'M'+a+' '+b+'L'+c+' '+d});},path=function(d){return add('path',{d:d});},rect=function(x,y,w,h){return add('rect',{x:x,y:y,width:w,height:h});},circle=function(x,y,r){return add('circle',{cx:x,cy:y,r:r});},label=function(v,x,y,z){const t=add('text',{x:x||0,y:y||4,'text-anchor':'middle','font-size':z||9,fill:stroke,stroke:'none','font-family':'Arial, sans-serif','font-weight':'600'});t.textContent=v;if(obj.mirrorX)t.setAttribute('transform','translate('+2*(x||0)+' 0) scale(-1 1)');};switch(item.family){case'user-authored':{const symbol=obj.customSymbol||item.customSymbol;for(const shape of symbol.geometry){if(shape.kind==='line')line(shape.x,shape.y,shape.x2,shape.y2);else if(shape.kind==='rect')rect(Math.min(shape.x,shape.x2),Math.min(shape.y,shape.y2),Math.abs(shape.x2-shape.x),Math.abs(shape.y2-shape.y));else circle(shape.x,shape.y,Math.hypot(shape.x2-shape.x,shape.y2-shape.y));}for(const pin of symbol.pins){circle(pin.x,pin.y,3);label(pin.number,pin.x,pin.y-6,6);}break;}case'contactor':
+  function buildCatalogGlyph(obj,item,stroke,width){const ns='http://www.w3.org/2000/svg',g=document.createElementNS(ns,'g');g.setAttribute('transform','translate('+obj.x+' '+obj.y+') rotate('+(obj.rotation||0)+') scale('+(obj.symbolScale??1)+')'+(obj.mirrorX?' scale(-1 1)':''));g.setAttribute('stroke',stroke);g.setAttribute('stroke-width',width);g.setAttribute('stroke-linecap','round');g.setAttribute('stroke-linejoin','round');g.setAttribute('fill','none');g.setAttribute('class','drawing-object '+(obj.id===state.selected?'selected-object':''));const add=function(tag,a){const e=document.createElementNS(ns,tag);Object.keys(a||{}).forEach(k=>e.setAttribute(k,String(a[k])));g.append(e);return e;},line=function(a,b,c,d){return add('path',{d:'M'+a+' '+b+'L'+c+' '+d});},path=function(d){return add('path',{d:d});},rect=function(x,y,w,h){return add('rect',{x:x,y:y,width:w,height:h});},circle=function(x,y,r){return add('circle',{cx:x,cy:y,r:r});},label=function(v,x,y,z){const t=add('text',{x:x||0,y:y||4,'text-anchor':'middle','font-size':z||9,fill:stroke,stroke:'none','font-family':'Arial, sans-serif','font-weight':'600'});t.textContent=v;if(obj.mirrorX)t.setAttribute('transform','translate('+2*(x||0)+' 0) scale(-1 1)');return t;};const plcDevice=item.plcType&&window.AdigunCADEngine.component(item.id);const plc=plcDevice?.plc;if(plc?.label){const {height,pins}=plcDevice.symbol;rect(-100,-height/2,200,height,4);label(plc.label,0,-height/2+10,8);for(const pin of pins){const left=pin.x<0,edge=left?-100:100;line(pin.x,pin.y,edge,pin.y);circle(pin.x,pin.y,2.6);const terminal=label(pin.localNumber+' '+pin.name,edge+(left?4:-4),pin.y+2,5.5);terminal.setAttribute('text-anchor',left?'start':'end');}label(obj.ref||item.tag,0,height/2-6,7);g.dataset.object=obj.id;return g;}switch(item.family){case'user-authored':{const symbol=obj.customSymbol||item.customSymbol;for(const shape of symbol.geometry){if(shape.kind==='line')line(shape.x,shape.y,shape.x2,shape.y2);else if(shape.kind==='rect')rect(Math.min(shape.x,shape.x2),Math.min(shape.y,shape.y2),Math.abs(shape.x2-shape.x),Math.abs(shape.y2-shape.y));else circle(shape.x,shape.y,Math.hypot(shape.x2-shape.x,shape.y2-shape.y));}for(const pin of symbol.pins){circle(pin.x,pin.y,3);label(pin.number,pin.x,pin.y-6,6);}break;}case'contactor':
         line(-120,-25,-97,-25);line(-120,25,-97,25);circle(-120,-25,2.6);circle(-120,25,2.6);
         rect(-97,-18,28,36);path('M-91 -8a4 8 0 0 1 8 0a4 8 0 0 1 8 0');label('24 V DC',-83,-23,6);
         path('M-40 -32V32').setAttribute('stroke-dasharray','3 3');
@@ -1387,6 +1387,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     }
   }
   let symbolView='library';
+  let plcBrowsing=false;
   const categoryLabel=category=>category.replace(' · Verified ', ' / ').replace(/^([A-Za-z]+ \/ )([a-z])/,(_,prefix,initial)=>prefix+initial.toUpperCase());
   const typeLabel=family=>family.replaceAll('-', ' ').replace(/^./,letter=>letter.toUpperCase());
   function setCatalogOptions(select, values, label, display){
@@ -1400,13 +1401,28 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   function renderSymbolSidebar(query){
     const host=$("#symbolList");
     const category=$("#symbolCategory"),type=$("#symbolType");
-    const all=symbolView==='common'?nativeSidebarParts.filter(item=>commonSidebarIds.has(item.id)):nativeSidebarParts;
-    setCatalogOptions(category,all.map(item=>item.category),'All categories',categoryLabel);
-    const categoryParts=category.value?all.filter(item=>item.category===category.value):all;
-    setCatalogOptions(type,categoryParts.map(item=>item.family),'All types',typeLabel);
+    const maker=$("#plcManufacturer"),series=$("#plcSeries");
+    $("#symbolCategoryField").hidden=plcBrowsing;
+    $("#plcManufacturerField").hidden=!plcBrowsing;
+    $("#plcSeriesField").hidden=!plcBrowsing;
+    const all=plcBrowsing?nativeSidebarParts.filter(item=>item.plcType)
+      :symbolView==='common'?nativeSidebarParts.filter(item=>commonSidebarIds.has(item.id)):nativeSidebarParts;
+    if(plcBrowsing){
+      setCatalogOptions(maker,all.map(item=>item.manufacturer),'All manufacturers',value=>value);
+      const manufacturerParts=all.filter(item=>!maker.value||item.manufacturer===maker.value);
+      setCatalogOptions(series,manufacturerParts.map(item=>item.series),'All series',value=>value);
+      const types=manufacturerParts.filter(item=>!series.value||item.series===series.value);
+      setCatalogOptions(type,types.map(item=>item.plcType),'All module types',value=>value);
+    }else{
+      setCatalogOptions(category,all.map(item=>item.category),'All categories',categoryLabel);
+      const categoryParts=category.value?all.filter(item=>item.category===category.value):all;
+      setCatalogOptions(type,categoryParts.map(item=>item.family),'All types',typeLabel);
+    }
     $("#catalogFilters").hidden=symbolView==='project';
     const filter=String(query??$("#symbolSearch").value).trim();
     let results=catalogItems(filter).filter(item=>{
+      if(plcBrowsing)return item.plcType&&(!maker.value||item.manufacturer===maker.value)
+        &&(!series.value||item.series===series.value)&&(!type.value||item.plcType===type.value);
       const project=item.category==='Project symbols';
       if(symbolView==='project')return project;
       if(project)return symbolView==='library'&&!category.value&&!type.value;
@@ -1417,9 +1433,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     if(category.value||type.value||symbolView==='common'){
       results.sort((a,b)=>a.category.localeCompare(b.category)||a.family.localeCompare(b.family));
     }
-    const allParts=symbolView==='library'&&!filter&&!category.value&&!type.value;
+    const allParts=!plcBrowsing&&symbolView==='library'&&!filter&&!category.value&&!type.value;
     const count=allParts?nativeSidebarParts.length:results.length;
-    const label=symbolView==='project'?'project symbols':symbolView==='common'?'common parts':'catalog parts';
+    const label=plcBrowsing?'PLC parts':symbolView==='project'?'project symbols':symbolView==='common'?'common parts':'catalog parts';
     $("#symbolCount").textContent=count.toLocaleString('en-US')+' '+label;
     showCatalogPage(host,results,items=>{
       let group="";
@@ -1797,6 +1813,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Rated voltage',spec.maximumRatedOperationalVoltage.value+' '+spec.maximumRatedOperationalVoltage.unit],['Motor power at 400 V',spec.ratedMotorPowerAt400V.value+' '+spec.ratedMotorPowerAt400V.unit],['Adjustable current',spec.adjustableRatedOperationalCurrent.minimum+'–'+spec.adjustableRatedOperationalCurrent.maximum+' '+spec.adjustableRatedOperationalCurrent.unit],['Control supply',spec.controlSupplyVoltage.value+' '+spec.controlSupplyVoltage.unit],['Connection',spec.connectionMethod.value]]
       : def.family==='power-supply-ac-dc'
       ? [['AC input range',spec.acInputVoltage.minimum+'–'+spec.acInputVoltage.maximum+' '+spec.acInputVoltage.unit],['DC input range',spec.dcInputVoltage.minimum+'–'+spec.dcInputVoltage.maximum+' '+spec.dcInputVoltage.unit],['Rated output',spec.outputVoltage.value+' '+spec.outputVoltage.unit],['Rated output current',spec.ratedOutputCurrent.value+' '+spec.ratedOutputCurrent.unit],['Input terminals',spec.inputConnections.value],['Output terminals',spec.outputConnections.value]]
+       : def.plc?.label
+      ? [['Series',def.plc.series],['Module type',def.plc.type],['Channels',spec.channels.value],['Dimensions',spec.dimensions.width.value+' × '+spec.dimensions.height.value+' × '+spec.dimensions.depth.value+' mm']]
       : def.family==='plc-cpu'
       ? [['Digital inputs',spec.onboardDigitalInputs.value+' × 24 V DC'],['Digital outputs',spec.onboardDigitalOutputs.value+' × 24 V DC transistor'],['Analog inputs',spec.onboardAnalogInputs.value+' × 0–10 V DC'],['Supply',spec.supplyVoltage.minimum+'–'+spec.supplyVoltage.maximum+' '+spec.supplyVoltage.unit],['Program/data memory',spec.programDataMemory.value+' '+spec.programDataMemory.unit]]
       : def.family==='sensor-inductive-pnp'
@@ -2677,10 +2695,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     openSymbolPicker();
     $('#symbolSearch').value='';
     $('[data-symbol-view="library"]').click();
-    const plc=catalogItemById(insertionShortcuts.plc);
-    $('#symbolCategory').value=plc.category;
-    renderSymbolSidebar();
-    $('#symbolType').value=plc.family;
+    plcBrowsing=true;
+    $('#plcManufacturer').value='';
+    $('#plcSeries').value='';
+    $('#symbolType').value='';
     renderSymbolSidebar();
   }
   function createPalette(){
@@ -3034,6 +3052,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   $('#symbolSearch').addEventListener('input',e=>renderSymbolSidebar(e.target.value));
   $('#symbolCategory').addEventListener('change',()=>renderSymbolSidebar());
   $('#symbolType').addEventListener('change',()=>renderSymbolSidebar());
+  $('#plcManufacturer').addEventListener('change',()=>renderSymbolSidebar());
+  $('#plcSeries').addEventListener('change',()=>renderSymbolSidebar());
 
   $('#rightPanel').addEventListener('click',e=>{const rotate=e.target.closest('[data-rotate-object]');if(rotate){rotateObject(rotate.dataset.rotateObject);return;}const remove=e.target.closest('[data-delete-object]');if(remove)deleteObject(remove.dataset.deleteObject);});
   $('#inspectorContent').addEventListener('change',function(event){
@@ -3374,6 +3394,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   document.addEventListener('keydown',e=>{if(e.defaultPrevented||e.isComposing||svgPreviewDialog.open)return;if(e.key==='Escape'&&state.pendingMoveObjectId){e.preventDefault();state.pendingMoveObjectId=null;notify('Move cancelled.');return;}if(e.key==='Escape'&&!moduleMenu.hidden){e.preventDefault();closeModuleMenu(true);return;}if(e.key==='Escape'&&objectDrag){e.preventDefault();restoreDrawingHistory(objectDrag.snapshot);objectDrag=null;renderObjects();refreshSelectedProperties();drawing.style.cursor='default';return;}if(e.key==='Enter'&&wireReroute&&!e.target.closest?.('input,textarea,button,select,[contenteditable]')){e.preventDefault();finishWireReroute();return;}if(e.key==='Enter'&&wireStart&&wireBends.length&&!e.target.closest?.('input,textarea,button,select,[contenteditable]')){e.preventDefault();finishWire(wireBends.at(-1),wireBends.slice(0,-1));return;}if(e.key==='Escape'&&guideDrag){e.preventDefault();guideDrag=null;applyView();return;}if(e.key==='Escape'&&regionExport){e.preventDefault();cancelRegionExport();return;}if(e.key==='Escape'&&(wireStart||wireReconnection||wireReroute||['wire','dimension'].includes(state.tool)&&drawStart)){e.preventDefault();drawStart=null;clearWireDraft();drawing.style.cursor=state.tool==='select'?'default':'crosshair';return;}if(e.key==='Escape'&&['trim','extend','junction','horizontal','vertical'].includes(state.tool)){e.preventDefault();drawStart=null;setTool('select');return;}if(e.key==='Escape'&&state.pendingComponentId){e.preventDefault();cancelComponentPlacement();return;}if(e.ctrlKey&&e.key.toLowerCase()==='k'){closeModuleMenu(false);e.preventDefault();createPalette();$('#commands').showModal();$('#commandSearch').focus();return;}if(e.key==='Escape'&&$('#commands').open){$('#commands').close();return;}if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='s'){e.preventDefault();saveProjectAs();return;}if(e.ctrlKey&&e.key.toLowerCase()==='s'){e.preventDefault();saveLocal();return;}if(e.ctrlKey&&e.key.toLowerCase()==='o'){e.preventDefault();$('#openFile').click();return;}if(e.ctrlKey&&e.key.toLowerCase()==='p'){e.preventDefault();printActiveSheet();return;}if(e.target?.closest('input,textarea,select,[contenteditable]:not([contenteditable=false])'))return;if(e.ctrlKey&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo();return;}if((e.key==='Delete'||e.key==='Backspace')&&handleDeleteShortcut(e))return;if(e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==='f'||e.key==='F'){runAction('fit');return;}const key=e.key.toLowerCase(),tool={v:'select',w:'wire',s:'symbol',l:'line',r:'rect',c:'circle',t:'text'}[key];if(tool){e.preventDefault();tool==='symbol'?openSymbolPicker():setTool(tool);}});
   $$('[data-tree-view]').forEach(b=>b.addEventListener('click',()=>{setProjectExplorerView(b.dataset.treeView);if(b.dataset.treeView==='list')renderEditableExampleProjects($('#projectSearch').value);}));
   $$('[data-symbol-view]').forEach(button=>button.addEventListener('click',()=>{
+    plcBrowsing=false;
     symbolView=button.dataset.symbolView;
     $('#symbolCategory').value='';
     $('#symbolType').value='';

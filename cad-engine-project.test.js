@@ -505,8 +505,13 @@ async function verifyToolbar(toolbarPage, address) {
 
   await moduleAction('Automation', 'Browse PLC Components');
   const plcPart=engine.catalogItem('siemens-6es7212-1ae40-0xb0');
-  assert.equal(await toolbarPage.getByLabel('Component type').inputValue(), plcPart.family);
+  assert.equal(await toolbarPage.getByLabel('Component type').inputValue(), '');
+  assert.equal(await toolbarPage.locator('#symbolList [data-insert]').count(), 9);
   assert.equal(await toolbarPage.locator('#symbolList [data-insert="' + plcPart.id + '"]').isVisible(), true);
+  await toolbarPage.getByLabel('PLC manufacturer').selectOption('Siemens');
+  await toolbarPage.getByLabel('PLC series').selectOption('S7-1200');
+  await toolbarPage.getByLabel('Component type').selectOption('Digital input');
+  assert.equal(await toolbarPage.locator('#symbolList [data-insert]').count(), 2);
   for (const [shortcut, part] of [
     ['terminal', /3212144/], ['plc', /6ES7212-1AE40-0XB0/], ['motor', /DRN63MS4/], ['ground', /3209536/]
   ]) {
