@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 9536);
+  assert.equal(items.length, 9905);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1930,7 +1930,7 @@ test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines',
 });
 
 test('ETI NH battery fuses retain DC ratings and the contacts of each mounting format', () => {
-  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' && item.name.includes(' gBat '));
+  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' && item.name.includes(' gBat ') && engine.component(item.id).sources[0].title.startsWith('ETI BMEcat'));
   assert.equal(items.length, 230);
   for (const item of items) {
     const part = engine.component(item.id);
@@ -1949,7 +1949,7 @@ test('ETI NH battery fuses retain DC ratings and the contacts of each mounting f
 });
 
 test('ETI NH photovoltaic fuses retain the DC time constant and slotted contact forms', () => {
-  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' && item.name.includes(' gPV '));
+  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link' && item.name.includes(' gPV ') && engine.component(item.id).sources[0].title.startsWith('ETI BMEcat'));
   assert.equal(items.length, 132);
   const caseDimensions = {
     NH1XL: [192, 67, 51], NH2XL: [208, 71, 61], NH3L: [208, 87, 73],
@@ -2401,7 +2401,7 @@ test('ETI cylindrical gR fuses retain the AC and DC ratings and the correct term
 
 test('ETI Ultra Quick gR and gS retain voltage-specific capacities, indicators and terminals', () => {
   const items = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link' && item.id.startsWith('eti-004') && / (gR|gS) /.test(item.name));
-  assert.equal(items.length, 340);
+  assert.equal(items.length, 354);
   for (const item of items) {
     const part = engine.component(item.id);
     assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['contact-left','contact-right']);
@@ -7436,4 +7436,34 @@ test('ASTI RCBO and AFDD additions preserve ganged contacts and the permanent fa
   fn.properties.switchingStep = '2';
   assert.notDeepEqual(engine.etimatBreakerGeometry(fn), off);
   assert.equal(engine.component('eti-002173397').specifications.nominalVoltage.value, '120');
+});
+
+test('ETI Green Protect NH fuses distinguish mounting ends and isolate the powered fuse from its indicator', () => {
+  const parts = engine.catalog('ETI Green Protect').map(item => engine.component(item.id))
+    .filter(part => part.sources[1]?.title === 'Green Protect · Order table and ratings');
+  assert.equal(parts.length, 369);
+  const expected = [
+    ['004109000','slotted-blade','Axial and transverse slots'],
+    ['004109020','slotted-blade','Two axial slots'],
+    ['004109120','slotted-blade','Two transverse slots'],
+    ['004109040','threaded-terminal','Flush threaded ends']
+  ];
+  for (const [code, type, description] of expected) {
+    const part = engine.component('eti-' + code);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.connectionType), [type,type]);
+    assert.equal(part.specifications.terminationStyle.value,description);
+  }
+  const instance = engine.createInstance('eti-004109060', 100, 100, 'F1');
+  const part = engine.component(instance.componentId);
+  const pin = engine.worldPins(instance).find(item => item.id === 'indicator-c');
+  const lead = { id: 'indicator-wire', kind: 'wire', x: pin.x, y: pin.y,
+    x1: pin.x, y1: pin.y, x2: pin.x, y2: pin.y + 16,
+    pinAttachments: { start: { instanceId: instance.id, pinId: pin.id }, end: null } };
+  const pins = () => engine.analyze([instance, lead]).nets.find(net =>
+    net.pins.some(item => item.pinId === pin.id)).pins.map(item => item.pinId).sort();
+  assert.deepEqual(pins(), ['indicator-c','indicator-nc']);
+  const healthy = engine.fuseLinkGeometry(instance, part);
+  instance.properties.switchingStep = '2';
+  assert.deepEqual(pins(), ['indicator-c','indicator-no']);
+  assert.notDeepEqual(engine.fuseLinkGeometry(instance, part), healthy);
 });

@@ -2110,6 +2110,77 @@
     75: { contacts: 'knife-blade', sizes: { '00': [79, 56, 28], 1: [135, 62, 51], 2: [150, 71, 61], 3: [150, 84, 73] },
       combined: { 1: [135, 65, 46], 3: [150, 84, 65] } }
   };
+  const etiGreenProtectNhFuseLinks = terminalCatalog.etiGreenProtectNhFuseLinks.map(
+    ([code, size, form, curve, current, voltage, capacity, timeConstant, indicator, width, height, depth, page, microswitch]) => {
+      const id = 'eti-' + code;
+      const contactType = form === 'NH' ? 'knife-blade' : form === 'NH-G' ? 'threaded-terminal' : 'slotted-blade';
+      const contacts = ['contact-left', 'contact-right'];
+      const pins = contacts.map((pinId, index) => ({
+        id: pinId, localNumber: index ? 'R' : 'L', name: (index ? 'Right ' : 'Left ') +
+          ({ 'knife-blade': 'knife blade', 'threaded-terminal': 'flush threaded terminal', 'slotted-blade': 'slotted bolted tab' }[contactType]),
+        x: index ? 36 : -36, y: 0, electricalType: 'passive', connectionType: contactType
+      }));
+      const indicatorContacts = { common: 'indicator-c', normallyClosed: 'indicator-nc', normallyOpen: 'indicator-no' };
+      if (microswitch) pins.push(
+        { id: indicatorContacts.common, localNumber: 'C', name: 'Microswitch common', x: 0, y: 46,
+          electricalType: 'passive', connectionType: 'faston' },
+        { id: indicatorContacts.normallyClosed, localNumber: 'NC', name: 'Microswitch normally closed', x: -26, y: 46,
+          electricalType: 'passive', connectionType: 'faston' },
+        { id: indicatorContacts.normallyOpen, localNumber: 'NO', name: 'Microswitch normally open', x: 26, y: 46,
+          electricalType: 'passive', connectionType: 'faston' }
+      );
+      const catalog = 'https://www.etigroup.eu/images/product_db/documents/en-GB/Green-Protect.pdf#page=';
+      const drawings = { 45: 46, 53: 54, 56: 57, 65: 66, 82: 83, 95: 96, 99: 100, 105: 106, 110: 111, 116: 117, 122: 123, 124: 125 };
+      const formLabel = { NH: 'Knife blades', 'NH-G': 'Flush threaded ends',
+        'NH-S': 'Axial and transverse slots', 'NH-U': 'Two axial slots', 'NH-E': 'Two transverse slots' }[form];
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: [size, form === 'NH' ? null : form, curve, current + 'A/' + voltage + 'V', microswitch ? 'with microswitch' : null].filter(Boolean).join(' '),
+        name: curve === 'gPV' ? 'Green Protect photovoltaic fuse link'
+          : /Bat/.test(curve) ? 'Green Protect battery fuse link' : 'Green Protect NH fuse link',
+        aliases: ['ETI Green Protect', size, form, curve, formLabel],
+        family: ['aR', 'gS', 'aBat'].includes(curve) ? 'semiconductor-fuse-link' : 'knife-blade-fuse-link',
+        referencePrefix: 'F', category: 'Electrical · Verified fuse link',
+        symbol: {
+          id: 'fuse.eti.green-protect.' + form.toLowerCase() + (microswitch ? '.indicator' : '') + '.v1',
+          view: 'schematic', unit: 'mm', width: 72, height: microswitch ? 112 : 32, pins, internalConnections: [],
+          numberingNote: 'L and R identify the power terminals. C, NC and NO, where fitted, identify the indicator microswitch.'
+        },
+        electricalFunctions: {
+          protectedTerminalPair: contacts,
+          ...(microswitch ? { indicatorContacts, switchingSequence: [
+            [[indicatorContacts.common, indicatorContacts.normallyClosed]],
+            [[indicatorContacts.common, indicatorContacts.normallyOpen]]
+          ] } : {}),
+          continuityNote: 'The power terminals remain separate in the connection report. The fitted indicator switch follows the selected state.'
+        },
+        specifications: {
+          cartridgeSize: { value: size }, utilizationCategory: { value: curve },
+          nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: timeConstant ? 'V DC' : 'V AC' },
+          ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+          ...(timeConstant ? { ratedDcTimeConstant: { value: timeConstant, unit: 'ms' } } : {}),
+          indicator: { value: indicator }, terminationStyle: { value: formLabel },
+          ...(microswitch ? { indicatorContactCurrent: { value: 5, unit: 'A' }, indicatorContactVoltage: { value: 250, unit: 'V AC' } } : {}),
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), depth,
+          scope: 'Exact net envelope. Holder, mounting and wire clearances are separate.'
+        }],
+        instanceProperties: {
+          ...(microswitch ? { switchingStep: { type: 'choice', default: '1', choices: { 1: 'Fuse intact', 2: 'Fuse operated' } } } : {}),
+          comment: { type: 'string', default: '', maximumLength: 160 }
+        },
+        sources: [
+          { publisher: 'ETI', title: 'ETI product record · Order ' + code, url: 'https://www.etigroup.eu/products-services/' + code,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Exact order code, electrical ratings and net envelope.' },
+          { publisher: 'ETI', title: 'Green Protect · Order table and ratings', url: catalog + page,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Mounting type, application ratings and availability of fitted indicator contacts.' },
+          { publisher: 'ETI', title: 'Green Protect · End contact drawings', url: catalog + drawings[page],
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Mechanical contact style and mounting orientation.' }
+        ]
+      });
+    });
   const etiUltraQuickFuses = terminalCatalog.etiUltraQuickFuses.concat(
     terminalCatalog.etiUltraQuickFullRangeFuses,
     terminalCatalog.etiUltraQuickBsFuseLinks.map(
@@ -3436,7 +3507,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiMoldedCaseBreakers, etiSinglePhaseTransformers, etiCamSwitches, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiLpcCapacitors, etiNhFuseBases, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors, etiModularSurgeProtectors, etiOverheadSurgeProtectors, etiMotorContactors, etiModularContactors, finderModularContactors, finderStepRelays, finderInterfaceModules, etiUltraQuickFuses, etiGreenProtectNhFuseLinks).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;
@@ -3765,11 +3836,20 @@
     return { segments, circles };
   }
 
-  function fuseLinkGeometry() {
-    return {
-      segments: [[-36, 0, 36, 0], [-15, -6, 15, -6], [15, -6, 15, 6], [15, 6, -15, 6], [-15, 6, -15, -6]],
-      circles: [[-36, 0, 2.6], [36, 0, 2.6]]
-    };
+  function fuseLinkGeometry(instance, definition) {
+    const segments = [[-36, 0, 36, 0], [-15, -6, 15, -6], [15, -6, 15, 6], [15, 6, -15, 6], [-15, 6, -15, -6]];
+    const circles = [[-36, 0, 2.6], [36, 0, 2.6]];
+    const indicator = definition?.electricalFunctions?.indicatorContacts;
+    if (indicator) {
+      const [c, nc, no] = [indicator.common, indicator.normallyClosed, indicator.normallyOpen].map(id =>
+        definition.symbol.pins.find(pin => pin.id === id));
+      const closedId = selectedStepConnections(definition, instance)[0]?.[1] ?? nc.id;
+      const closed = closedId === nc.id ? nc : no;
+      segments.push([c.x, c.y, c.x, 22], [nc.x, nc.y, nc.x, 16], [no.x, no.y, no.x, 16],
+        [c.x, 22, closed.x, 16]);
+      circles.push([nc.x, 16, 1.6], [no.x, 16, 1.6]);
+    }
+    return { segments, circles };
   }
 
   function disconnectTerminalGeometry(instance) {

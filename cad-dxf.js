@@ -135,7 +135,7 @@
           : nhFuseBase ? engine.nhFuseBaseGeometry(component)
           : camSwitch ? engine.camSwitchGeometry(object, component)
           : coilAndContact ? engine.coilAndContactGeometry(object)
-            : fuseLink ? engine.fuseLinkGeometry()
+            : fuseLink ? engine.fuseLinkGeometry(object, component)
               : moldedCaseBreaker ? engine.moldedCaseBreakerGeometry(component)
                 : overheadSurgeArrester ? engine.overheadSurgeArresterGeometry(component)
                   : modularSurgeProtector ? engine.modularSurgeGeometry(component)
