@@ -1337,6 +1337,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Coil nominal voltage',spec.nominalCoilVoltage.value+' '+spec.nominalCoilVoltage.unit],
         ['Contact configuration',spec.changeoverContactCount.value+' '+spec.changeoverContactCount.unit],
         ['Catalog contact current',spec.ratedContactCurrent.value+' '+spec.ratedContactCurrent.unit],
+        ...(spec.socketContactCurrentLimit ? [['Socket current limit',spec.socketContactCurrentLimit.value+' '+spec.socketContactCurrentLimit.unit]] : []),
         ['Contact material',spec.contactMaterial.value],
         ...(spec.enclosureVersion ? [['Enclosure',spec.enclosureVersion.value]] : []),
         ...(spec.environmentalProtection ? [['Environmental protection',spec.environmentalProtection.value]] : []),

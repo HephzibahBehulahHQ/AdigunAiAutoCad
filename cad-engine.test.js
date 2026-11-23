@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 970);
+  assert.equal(items.length, 1096);
   assert.deepEqual(items.filter(item => !item.id.startsWith('finder-')).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1319,7 +1319,7 @@ test('Weidmüller WDK and A2T terminal blocks preserve two isolated levels', () 
 });
 
 test('Finder Series 40 catalog order codes carry five distinct schematic pins and source-backed dimensions', () => {
-  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-40(31|51)[789]/.test(item.id));
+  const parts = engine.catalog('Finder Series 40').filter(item => /^finder-4031[789]/.test(item.id));
   assert.equal(parts.length, 135);
   assert.equal(new Set(parts.map(part => part.id)).size, parts.length);
   const coilTypes = new Set();
@@ -1427,7 +1427,7 @@ test('Finder 40.61 relays permanently join paired terminals without joining the 
 
 test('Finder bistable relays describe latched set and reset paths separately from static connectivity', () => {
   const parts = engine.catalog('Finder Series 40').filter(item => /^finder-40\d{2}6/.test(item.id));
-  assert.equal(parts.length, 15);
+  assert.equal(parts.length, 21);
   for (const item of parts) {
     const part = engine.component(item.id);
     assert.equal(part.electricalFunctions.coil.nominalVoltage.unit, 'V AC/DC');
@@ -1439,6 +1439,18 @@ test('Finder bistable relays describe latched set and reset paths separately fro
       assert.equal(contact.deenergizedConnections, undefined);
       assert.ok(part.symbol.internalConnections.every(pair => !pair.includes(contact.common) || !pair.includes(contact.normallyClosed)));
     }
+  }
+});
+
+test('Finder 40.51 variants expose terminal 21 as their only common terminal', () => {
+  const parts = engine.catalog('Finder Series 40').filter(item => item.id.startsWith('finder-4051'));
+  assert.equal(parts.length, 126);
+  for (const item of parts) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), ['A2', 'A1', '21', '12', '14']);
+    assert.equal(part.electricalFunctions.changeoverContact.common, 'contact-21');
+    assert.equal(part.specifications.socketContactCurrentLimit.value, 10);
+    assert.deepEqual(part.symbol.internalConnections, []);
   }
 });
 
