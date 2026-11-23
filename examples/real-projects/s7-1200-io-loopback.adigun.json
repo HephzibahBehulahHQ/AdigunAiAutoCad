@@ -76,7 +76,8 @@
         "terminals": [],
         "connections": [],
         "crossReferences": [],
-        "showPrintFrame": false
+        "showPrintFrame": false,
+        "drawingFitToPage": true
       }
     ],
     "activeSheetId": "plc-loopback",
@@ -116,7 +117,8 @@
       "terminals": [],
       "connections": [],
       "crossReferences": [],
-      "showPrintFrame": false
+      "showPrintFrame": false,
+      "drawingFitToPage": true
     }
   ],
   "objects": [
