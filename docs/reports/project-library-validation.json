@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "status": "passed",
   "summary": {
-    "projectArtifactCount": 13,
-    "validatedArtifactCount": 13,
-    "distinctTopologyCount": 11,
+    "projectArtifactCount": 14,
+    "validatedArtifactCount": 14,
+    "distinctTopologyCount": 12,
     "distinct100SheetTopologyCount": 3,
     "firstScaleGate": {
       "requiredDistinct100SheetProjects": 5,
@@ -1584,6 +1584,70 @@
         "bomRowCount": 6,
         "wireListRowCount": 48,
         "terminalListRowCount": 32
+      },
+      "errors": []
+    },
+    {
+      "id": "s7-1200-io-loopback",
+      "title": "Siemens S7-1200 digital I/O loopback",
+      "topologyId": "plc-module-digital-loopback",
+      "briefId": null,
+      "role": "standalone-example",
+      "path": "examples/real-projects/s7-1200-io-loopback.adigun.json",
+      "revision": null,
+      "status": "passed",
+      "checks": {
+        "projectSchema": true,
+        "nativeRoundTrip": true,
+        "csvExportRoundTrip": true,
+        "allSheetsHaveEditableContent": true,
+        "sourceBackedBom": true,
+        "connectedWireList": true,
+        "terminalList": true,
+        "uniqueTerminalPositions": true,
+        "cableAssignments": true,
+        "noElectricalRuleErrors": true,
+        "zeroGeometryErrors": true
+      },
+      "releaseScale": {
+        "qualified": false,
+        "additionalAuthoredSheetsRequired": 99,
+        "additionalConnectedSheetsRequired": 69,
+        "sheetIdsWithoutElectricalConnectivity": []
+      },
+      "wirePreview": {
+        "sheetId": "plc-loopback",
+        "sheetName": "Digital I/O loopback",
+        "segments": "77,3,93,3 93,3,93,30 93,30,100,30 82,3,82,0 82,0,3,0 3,0,3,20 3,20,8,20 77,11,90,11 90,11,90,31 90,31,100,31 84,11,84,16 84,16,5,16 5,16,5,22 5,22,8,22 5,22,5,29 5,29,8,29 49,16,49,35 49,35,55,35 100,33,94,33 94,33,94,61 94,61,45,61 45,61,45,37 45,37,55,37 45,61,0,61 0,61,0,31 0,31,8,31"
+      },
+      "topologySha256": "c7a022ab63af9eb4f0213a8c1c159169dcd9e5a61f0dfc5f53735c48a74b60d2",
+      "electricalStructureSha256": "60409925cbdb37d221402656a899d62a728b2f632ec7a161531af6138cdfb31b",
+      "csvSha256": {
+        "bom": "fea31c5cc056673184ea8cae1dc697ad64afa55a1962ae2d7babb6f1df5c3f41",
+        "wires": "2e9099815fa6de4dbb97c0c6b6e2c852a0860011a204a4df028d1dfc4cc5de41",
+        "terminals": "67d614575de0df59651b06182cddaaf37c321a368c3a4de6cf903d34d92e0dd1",
+        "plcIo": "2eaaef3b895e69d0d4a6fed034c85c0dba569dead634323cbbe4df872b049006",
+        "cables": "70f19f2a41c85a30621df2a2a5540f3d49b1c0413fc1b2f04cd452131ddf3208",
+        "devices": "ffd92df0b1ceeaa11f75f4e4f23fb391f47fc3d179954eec40e9482ed9971819",
+        "sheets": "4b56cae3fb68bdf67b72f2d303c09a0f23b6bbd6244ec01d95fc6bc3a7416c2b"
+      },
+      "metrics": {
+        "sheetCount": 1,
+        "authoredSheetCount": 1,
+        "connectedSheetCount": 1,
+        "contentObjectCount": 16,
+        "emptyContentSheetIds": [],
+        "repeatedContentSheets": [],
+        "componentCount": 4,
+        "wireCount": 8,
+        "netCount": 3,
+        "globalNetCount": 3,
+        "crossSheetConnectionCount": 0,
+        "openEndpointCount": 0,
+        "geometryErrorCount": 0,
+        "bomRowCount": 4,
+        "wireListRowCount": 8,
+        "terminalListRowCount": 0
       },
       "errors": []
     }

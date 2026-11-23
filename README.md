@@ -5,6 +5,8 @@ This is adigunAiAutoCad Project
 
 Open the [pressure-sensor drawing](https://adigunaiautocad.hephzibahbehulah.com/?example=terminal-marshalling&sheet=marshalling-analog-pressure) directly as an editable copy. Example links use the catalog ID in `example` and optionally the stable drawing ID in `sheet`. Save the copy locally to keep your edits.
 
+Use **Automation → Browse PLC Components** to filter the PLC library by manufacturer, series, and module type. Open the [Siemens S7-1200 digital I/O loopback](https://adigunaiautocad.hephzibahbehulah.com/?example=s7-1200-io-loopback&sheet=plc-loopback) to trace one SM 1222 output to an SM 1221 input and a CPU input. **Automation → Export PLC I/O List** exports the exact module terminals and connected pin references.
+
 While editing a published example, use **Copy source example sheet link** in the command palette to share the original drawing. Share the saved project file to send your edits.
 
 Click a wire to open **Properties** for its color, line weight, and line type. Right-click a wire and choose **Select wires on this net** to select its visible segments on the current sheet. A palette stroke color change applies to the selection as one undoable edit.

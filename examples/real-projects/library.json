@@ -134,6 +134,15 @@
       "domain": "Water-treatment instrumentation and dosing controls",
       "standardProfile": "IEC-style symbols",
       "briefId": "12"
+    },
+    {
+      "id": "s7-1200-io-loopback",
+      "title": "Siemens S7-1200 digital I/O loopback",
+      "topologyId": "plc-module-digital-loopback",
+      "path": "examples/real-projects/s7-1200-io-loopback.adigun.json",
+      "role": "standalone-example",
+      "domain": "PLC I/O commissioning",
+      "standardProfile": "IEC-style symbols"
     }
   ],
   "briefs": [
