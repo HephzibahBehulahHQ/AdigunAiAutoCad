@@ -1693,6 +1693,74 @@
     });
   });
 
+
+  const etiEfiBreakers = terminalCatalog.etiEfiBreakers.map(
+    ([code, series, poles, residualType, current, trip, voltage, capacity, variant, builtInDepth]) => {
+      const id = 'eti-' + code;
+      const neutralLeft = variant === 'NL';
+      const pairs = Array.from({ length: poles - 1 }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
+      const neutral = ['N-upper', 'N-lower'];
+      if (neutralLeft) pairs.unshift(neutral);
+      else pairs.push(neutral);
+      const pins = pairs.flatMap(([upper, lower], index) => {
+        const x = (index - (poles - 1) / 2) * 36;
+        return [[upper, -42, 'Upper'], [lower, 42, 'Lower']].map(([number, y, position]) => ({
+          id: 'terminal-' + number, localNumber: number, name: position + (number.startsWith('N') ? ' neutral terminal' : ' line terminal'),
+          ...(number.startsWith('N') ? { manufacturerMarking: 'N' } : {}),
+          x, y, electricalType: 'passive', connectionType: 'screw'
+        }));
+      });
+      const width = poles * 18;
+      const height = 87.5;
+      const drawing = 'https://files.eti.si/levels/en-GB/6843_TD.pdf';
+      const voltageLabel = [...new Set(voltage)].join('/');
+      const variantSource = variant === 'X'
+        ? 'https://www.etigroup.eu/images/product_db/levels/en-GB/6847_TD.pdf#page=4'
+        : series.startsWith('EFI6') ? 'https://www.etigroup.eu/images/product_db/documents/pl-PL/02_ASTI_PL_2022_2023.pdf'
+          : variant === '127V' ? 'https://www.eti.si/images/userfiles/en-GB/documents/products/building_industry/Asti_2021.pdf'
+            : null;
+      return deepFreeze({
+        schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
+        model: [series, residualType, variant === 'X' ? 'X' : '', current + '/' + trip / 1000, variant === 'X' ? '' : variant].filter(Boolean).join(' '),
+        name: 'Residual-current circuit breaker', aliases: [series, 'RCCB', 'RCD'],
+        family: 'residual-current-switch', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
+        symbol: {
+          id: 'rccb.eti.efi.' + poles + (neutralLeft ? '.neutral-left' : '.neutral-right') + '.v1',
+          view: 'schematic', unit: 'mm', width: poles * 36, height: 84, pins, internalConnections: [],
+          numberingNote: 'Terminal positions follow the manufacturer diagram. Both neutral anchors are marked N and have separate CAD IDs.'
+        },
+        electricalFunctions: {
+          switchedPolePairs: pairs.map(pair => pair.map(number => 'terminal-' + number)),
+          simulationNote: 'The poles switch together. Connectivity reports keep line and load nets separate and do not simulate protection or a test-button cycle.'
+        },
+        specifications: {
+          poleCount: { value: poles }, switchedNeutral: { value: true }, neutralPosition: { value: neutralLeft ? 'Left' : 'Right' },
+          nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltageLabel, unit: 'V AC' },
+          residualCurrentType: { value: residualType }, ratedResidualCurrent: { value: trip, unit: 'mA' },
+          conditionalShortCircuitCurrent: { value: capacity, unit: 'kA' },
+          ...(series.endsWith('R') ? { tripIndication: { value: 'Reset variant' } } : {}),
+          ...(variant === '127V' ? { systemVoltageDesignation: { value: 127, unit: 'V' } } : {}),
+          mountingMethod: { value: '35 mm DIN rail' }, builtInDepth: { value: builtInDepth, unit: 'mm' },
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' } }
+        },
+        physicalRepresentations: [{
+          ...terminalPanelEnvelope(id, width, height), sourceIndex: 1,
+          scope: 'Nominal manufacturer front outline. Mounting depth is listed separately.'
+        }],
+        instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
+        sources: [
+          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+            documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, residual-current rating, voltage and conditional short-circuit current.' },
+          { publisher: 'ETI', title: 'ASTI technical data · EFI-P' + poles, url: drawing + '#page=' + (poles === 2 ? 39 : 42),
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Frame dimensions and DIN enclosure outline.' },
+          ...(poles === 4 ? [{ publisher: 'ETI', title: 'EFI-P4 terminal order', url: drawing + '#page=41',
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Separate left- and right-neutral wiring diagrams.' }] : []),
+          ...(variantSource ? [{ publisher: 'ETI', title: 'ETI · ' + series + (variant ? ' ' + variant : ''), url: variantSource,
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Commercial and technical data for the order-code variant.' }] : [])
+        ]
+      });
+    });
+
   const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(terminalCatalog.etiKzs2mBreakers, terminalCatalog.etiKzsUniBreakers, terminalCatalog.etiKzsFnBreakers).map(
     ([code, topology, residualType, curve, current, trip, voltage, capacity, series = '4M']) => {
       const id = 'eti-' + code;
@@ -2211,7 +2279,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiSurgeProtectors).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers, etiFuseLinks, etiMediumVoltageFuseLinks, etiBottleFuseLinks, etiEfhDcFuseHolders, etiKzsBreakers, etiEfiBreakers, etiSurgeProtectors).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

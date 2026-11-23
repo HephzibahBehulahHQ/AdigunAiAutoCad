@@ -897,11 +897,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           }
           break;
         }
+        case'residual-current-switch':
         case'residual-current-circuit-breaker':
         case'miniature-circuit-breaker': {
           const breaker=window.AdigunCADEngine.component(item.id);
           const rating=breaker.specifications;
-          label(rating.tripCurve.value+rating.nominalCurrent.value,0,-53,7);
+          label(rating.tripCurve?rating.tripCurve.value+rating.nominalCurrent.value:rating.nominalCurrent.value+' A',0,-53,7);
           if(rating.ratedResidualCurrent){
             label(rating.residualCurrentType.value+' · '+rating.ratedResidualCurrent.value+' mA',0,59,7);
           }
@@ -1435,6 +1436,14 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ['Maximum discharge current',spec.maximumDischargeCurrent.value+' '+spec.maximumDischargeCurrent.unit],
         ...(spec.impulseCurrent?[['Impulse current',spec.impulseCurrent.value+' '+spec.impulseCurrent.unit]]:[]),
         ['Remote signalling',spec.remoteSignalling.value?'Changeover contact':'None'],['Mounting',spec.mountingMethod.value]]
+      : def.family==='residual-current-switch'
+      ? [['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated AC voltage',spec.nominalVoltage.value+' V'],
+        ['Residual-current type',spec.residualCurrentType.value],['Rated residual current',spec.ratedResidualCurrent.value+' mA'],
+        ['Conditional short-circuit current',spec.conditionalShortCircuitCurrent.value+' kA'],
+        ['Switched poles',String(spec.poleCount.value)],['Neutral position',spec.neutralPosition.value],
+        ...(spec.tripIndication?[['Trip indication',spec.tripIndication.value]]:[]),
+        ...(spec.systemVoltageDesignation?[['System voltage designation',spec.systemVoltageDesignation.value+' V']]:[]),
+        ['Mounting',spec.mountingMethod.value],['Built-in depth',spec.builtInDepth.value+' mm']]
       : def.family==='miniature-circuit-breaker'||def.family==='residual-current-circuit-breaker'
       ? [['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         ['Trip curve',spec.tripCurve.value],['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],

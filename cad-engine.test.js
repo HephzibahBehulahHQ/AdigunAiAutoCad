@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 5371);
+  assert.equal(items.length, 5577);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -2013,6 +2013,28 @@ test('ETITEC C and CM preserve their single earth terminal and compact housing d
   assert.ok(pen.symbol.pins.some(pin => pin.localNumber === 'PEN'));
   const compact = engine.component('eti-002440655').physicalRepresentations[0];
   assert.deepEqual([compact.width, compact.height, compact.depth], [18, 105, 70]);
+});
+
+test('ETI EFI-P RCCBs preserve left and right neutral terminal positions and conditional ratings', () => {
+  const items = engine.catalog().filter(item => item.family === 'residual-current-switch');
+  assert.equal(items.length, 206);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { poleCount, neutralPosition, switchedNeutral, conditionalShortCircuitCurrent } = part.specifications;
+    assert.equal(part.symbol.pins.length, poleCount.value * 2);
+    assert.equal(part.electricalFunctions.switchedPolePairs.length, poleCount.value);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const offset = neutralPosition.value === 'Left' ? 0 : part.symbol.pins.length - 2;
+    assert.deepEqual(part.symbol.pins.slice(offset, offset + 2).map(pin => pin.id), ['terminal-N-upper','terminal-N-lower']);
+    assert.equal(switchedNeutral.value, true);
+    assert.equal(conditionalShortCircuitCurrent.value, part.model.startsWith('EFI6-') ? 6 : 10);
+    assert.equal(part.specifications.tripCurve, undefined);
+  }
+  const nl = engine.component('eti-002061843');
+  assert.deepEqual(nl.symbol.pins.filter(pin => pin.y < 0).map(pin => pin.localNumber), ['N-upper','2','4','6']);
+  const lowVoltage = engine.component('eti-002061750');
+  assert.equal(lowVoltage.specifications.nominalVoltage.value, '190/230');
+  assert.equal(lowVoltage.specifications.systemVoltageDesignation.value, 127);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
