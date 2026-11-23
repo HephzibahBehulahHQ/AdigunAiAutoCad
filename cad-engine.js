@@ -1387,11 +1387,13 @@
     });
   });
   const weidmullerFeedThroughTerminals = terminalCatalog.weidmullerWduTerminals
-    .concat(terminalCatalog.weidmullerA2cTerminals, terminalCatalog.weidmullerA3cA4cTerminals, terminalCatalog.weidmullerZduTerminals).map(
+    .concat(terminalCatalog.weidmullerA2cTerminals, terminalCatalog.weidmullerA3cA4cTerminals, terminalCatalog.weidmullerZduTerminals,
+      terminalCatalog.weidmullerDoubleLevelTerminals).map(
     ([id, model, slug, color, area, voltage, current, width, height, depth, minimumRigid, maximumRigid,
-      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionCount = 2, endCoverRequired = true]) => {
+      minimumFlexible, maximumFlexible, depthIncludingDINRail, connectionsPerLevel = 2, endCoverRequired = true, levels = 1]) => {
       const partId = 'weidmuller-' + id;
-      const connectionType = model.startsWith('WDU ') ? 'screw' : model.startsWith('ZDU ') ? 'tension-clamp' : 'push-in';
+      const connectionCount = levels * connectionsPerLevel;
+      const connectionType = /^(WDU|WDK) /.test(model) ? 'screw' : model.startsWith('ZDU ') ? 'tension-clamp' : 'push-in';
       const connectionMethod = { screw: 'Screw', 'tension-clamp': 'Tension-clamp', 'push-in': 'Push-in' }[connectionType];
       const mm = value => ({ value, unit: 'mm' });
       const mountedDepth = Number.isFinite(depthIncludingDINRail) ? { depthIncludingDINRail } : {};
@@ -1402,15 +1404,15 @@
         manufacturerPartNumber: id,
         model,
         aliases: ['Weidmueller', color],
-        name: connectionCount > 2 ? 'Multi-conductor feed-through terminal block' : 'Feed-through terminal block',
+        name: levels === 2 ? 'Double-level terminal block' : connectionCount > 2 ? 'Multi-conductor feed-through terminal block' : 'Feed-through terminal block',
         family: 'feedthrough-terminal',
         referencePrefix: 'X',
         category: terminalDefinition.category,
         symbol: {
           ...pt25Terminal.symbol,
           id: 'terminal.feedthrough.' + partId + '.v1',
-          height: connectionCount > 2 ? 70 : pt25Terminal.symbol.height,
-          ...terminalPinMap(1, connectionCount, connectionType)
+          height: connectionsPerLevel > 2 ? 70 : 26 + (levels - 1) * 30,
+          ...terminalPinMap(levels, connectionsPerLevel, connectionType)
         },
         specifications: {
           nominalVoltage: { value: voltage, unit: 'V' },
@@ -1432,7 +1434,8 @@
           publisher: 'Weidmüller', title: model + ' · Feed-through terminal block · Item ' + id,
           url: 'https://eshop.weidmueller.com/en/' + slug + '/p/' + id,
           documentRevision: null, retrievedAt: '2026-11-23',
-          revisionNote: 'Manufacturer product data for one potential and ' + (connectionCount === 2 ? 'two' : connectionCount) +
+          revisionNote: levels === 2 ? 'Manufacturer product data for two independent potentials, two clamping points per level and TS 35 mounting.'
+            : 'Manufacturer product data for one potential and ' + (connectionCount === 2 ? 'two' : connectionCount) +
             ' clamping points, solid-core and finely stranded wire ranges, and TS 35 mounting.'
         }]
       });
