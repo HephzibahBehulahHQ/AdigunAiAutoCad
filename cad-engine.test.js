@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3404);
+  assert.equal(items.length, 3699);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1740,6 +1740,28 @@ test('ETI CH cartridge dimensions and fuse terminals follow the manufacturer dra
     assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['cap-left', 'cap-right']);
     assert.deepEqual(part.symbol.internalConnections, []);
     assert.equal(ratedBreakingCapacity.value, cartridgeSize.value === '8x32' ? 20 : 120);
+  }
+});
+
+test('ETI NH gG fuse links preserve blade contacts and AC ratings across ten case sizes', () => {
+  const items = engine.catalog().filter(item => item.family === 'knife-blade-fuse-link');
+  assert.equal(items.length, 295);
+  const envelopes = {
+    NH000: [78.6, 51.9, 21], NH00: [79, 56, 28], NH0: [125, 56, 28],
+    NH1C: [135, 61, 28], NH1: [135, 65, 46], NH2C: [150, 73, 46], NH2: [150, 73, 54],
+    NH3C: [150, 84, 54], NH3: [150, 84, 65], NH4a: [200, 121, 95]
+  };
+  assert.deepEqual([...new Set(items.map(item => engine.component(item.id).specifications.cartridgeSize.value))].sort(), Object.keys(envelopes).sort());
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { dimensions, cartridgeSize, nominalVoltage, utilizationCategory, ratedBreakingCapacity } = part.specifications;
+    assert.deepEqual([dimensions.width.value, dimensions.height.value, dimensions.depth.value], envelopes[cartridgeSize.value]);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['blade-left', 'blade-right']);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['blade-left', 'blade-right']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(utilizationCategory.value, 'gG');
+    assert.equal(nominalVoltage.unit, 'V AC');
+    assert.ok([50, 100, 120].includes(ratedBreakingCapacity.value));
   }
 });
 
