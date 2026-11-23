@@ -117,7 +117,7 @@
       const engine = root.AdigunCADEngine;
       const component = kind === 'component-instance' ? engine.component(object.componentId, object.customSymbol) : null;
       const coilAndContact = ['modular-contactor', 'modular-step-relay', 'industrial-motor-contactor'].includes(component?.family);
-      const fuseLink = ['semiconductor-fuse-link', 'cylindrical-fuse-link', 'knife-blade-fuse-link'].includes(component?.family);
+      const fuseLink = ['semiconductor-fuse-link', 'cylindrical-fuse-link', 'knife-blade-fuse-link', 'bottle-fuse-link'].includes(component?.family);
       const moldedCaseBreaker = component?.family === 'molded-case-circuit-breaker';
       const overheadSurgeArrester = component?.family === 'surge-protective-device' && component.specifications.localDisconnector;
       const modularSurgeProtector = component?.family === 'surge-protective-device' && component.specifications.surgeTechnology;

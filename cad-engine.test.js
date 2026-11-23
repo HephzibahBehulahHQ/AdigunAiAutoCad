@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 8969);
+  assert.equal(items.length, 9066);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1991,7 +1991,7 @@ test('ETI VV fuses distinguish fitting length, end-cap span and striker variants
 
 test('ETI D and D0 bottle fuses retain separate AC and DC ratings and contact geometry', () => {
   const items = engine.catalog().filter(item => item.family === 'bottle-fuse-link');
-  assert.equal(items.length, 90);
+  assert.equal(items.length, 123);
   for (const item of items) {
     const part = engine.component(item.id);
     assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['cap-head', 'cap-foot']);
@@ -7326,7 +7326,8 @@ test('Additional ETI NH fuse links preserve variant-specific envelope, indicator
 test('New ETI Ultra Quick NH variants match the exact contact profiles and ratings', () => {
   const parts = engine.catalog().filter(item => item.family === 'semiconductor-fuse-link')
     .map(item => engine.component(item.id))
-    .filter(part => part.sources[0].title.startsWith('ETI product record') && part.sources[1]?.url.includes('UltraQuick.pdf'));
+    .filter(part => part.sources[0].title.startsWith('ETI product record') &&
+      part.specifications.cartridgeSize.value.startsWith('NH') && part.sources[1]?.url.includes('UltraQuick.pdf'));
   assert.equal(parts.length, 197);
   for (const part of parts) {
     assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['contact-left', 'contact-right']);
@@ -7337,4 +7338,23 @@ test('New ETI Ultra Quick NH variants match the exact contact profiles and ratin
   assert.deepEqual(sample.map(part => part.physicalRepresentations[0].width), [79.4,104.8,85]);
   assert.equal(sample[2].specifications.contactThread.value,'M12');
   assert.equal(engine.component('eti-004304221').specifications.nominalVoltage.value,1000);
+});
+
+test('ETI Ultra Quick BS and bottle formats preserve the correct terminal mounting and AC/DC ratings', () => {
+  const links = engine.catalog().filter(item => /^eti-00475/.test(item.id))
+    .map(item => engine.component(item.id)).filter(part => part.specifications.productBrand?.value === 'Italweber');
+  assert.equal(links.length, 64);
+  for (const part of links) {
+    assert.ok(part.symbol.pins.every(pin => pin.connectionType === 'bolted-lug'));
+    assert.equal(part.specifications.ratedDcBreakingCapacity.value, 100);
+    assert.deepEqual(part.symbol.internalConnections, []);
+  }
+  const bs = engine.component('eti-004750001');
+  assert.equal(bs.physicalRepresentations[0].width, 47);
+  assert.equal(bs.specifications.ratedDcVoltage.value, 120);
+  const bottle = engine.component('eti-004325001');
+  assert.equal(bottle.specifications.fuseBase.value, 'R 2″');
+  assert.equal(bottle.specifications.ratedDcVoltage.value, 315);
+  assert.equal(bottle.specifications.ratedDcBreakingCapacity.value, 8);
+  assert.equal(bottle.specifications.gaugeContactDiameter.value, 5);
 });

@@ -2091,6 +2091,11 @@
   };
   const etiUltraQuickFuses = terminalCatalog.etiUltraQuickFuses.concat(
     terminalCatalog.etiUltraQuickFullRangeFuses,
+    terminalCatalog.etiUltraQuickBsFuseLinks.map(
+      ([code, size, model, current, voltage, capacity, dcVoltage, dcCapacity, width, height, depth, page]) =>
+        [code, size, '', current, voltage, page, 'aR', capacity, null, null,
+          { model, brand: 'Italweber', envelope: [width, height, depth], dcVoltage, dcCapacity }]
+    ),
     terminalCatalog.etiUltraQuickNhCatalogVariants.map(
       ([code, size, model, category, current, voltage, capacity, indicator, width, height, depth, page, dcVoltage, dcCapacity]) =>
         [code, size, '', current, voltage, page, category, capacity, null, null,
@@ -2099,12 +2104,12 @@
   ).map(
     ([code, format, series, current, voltage, page, category = 'aR', capacity = 200, timeConstant, indicator, exact]) => {
     const id = 'eti-' + code;
-    const size = /^NH[SG]?([^/]+)/.exec(format)[1];
+    const size = exact?.brand ? format : /^NH[SG]?([^/]+)/.exec(format)[1];
     const profile = ultraQuickProfiles[page];
     const [width, bodyHeight, depth] = exact?.envelope ?? profile[indicator]?.[size] ?? profile.sizes[size];
     const centreIndicator = format.endsWith('/M');
     const height = centreIndicator && page !== 27 ? bodyHeight + 5 : bodyHeight;
-    const contacts = exact ? (page === 36 ? 'threaded-terminal'
+    const contacts = exact ? (exact.brand ? 'bolted-lug' : page === 36 ? 'threaded-terminal'
       : [19, 20, 35, 37, 39].includes(page) ? 'slotted-blade' : 'knife-blade')
       : page === 42 && size === '4' ? 'slotted-blade' : profile.contacts;
     const contact = { 'slotted-blade': 'slotted blade', 'knife-blade': 'blade', 'threaded-stud': 'threaded contact',
@@ -2115,9 +2120,9 @@
     }));
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-      model: exact?.model ? [format, exact.model, category].join(' ')
+      model: exact?.model ? (exact.brand ? [exact.model, category] : [format, exact.model, category]).join(' ')
         : [format, series, category, current + 'A/' + voltage + 'V' + (timeConstant ? ' DC' : '')].filter(Boolean).join(' '),
-      name: 'Ultra Quick semiconductor fuse link', aliases: ['ETI Ultra Quick', 'semiconductor fuse', format, series].filter(Boolean),
+      name: 'Ultra Quick semiconductor fuse link', aliases: ['ETI Ultra Quick', 'semiconductor fuse', format, series, exact?.brand].filter(Boolean),
       family: 'semiconductor-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
       symbol: {
         id: 'fuse.eti.ultraquick.' + contacts + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32,
@@ -2138,7 +2143,8 @@
         ...(contacts === 'threaded-stud' || contacts === 'threaded-terminal'
           ? { contactThread: { value: page === 47 ? 'M10' : { 1: 'M8', 2: 'M10', 3: 'M12' }[size] } } : {}),
         ...(exact ? {
-          indicator: { value: exact.indicator },
+          ...(exact.indicator ? { indicator: { value: exact.indicator } } : {}),
+          ...(exact.brand ? { productBrand: { value: exact.brand } } : {}),
           ...(exact.dcVoltage ? { ratedDcVoltage: { value: exact.dcVoltage, unit: 'V DC' },
             ratedDcBreakingCapacity: { value: exact.dcCapacity, unit: 'kA' } } : {})
         } : {}),
@@ -2159,7 +2165,9 @@
         { publisher: 'ETI', title: 'Ultra Quick · ' + format + ' mechanical drawing',
           url: page === 75 ? 'https://www.etigroup.eu/images/product_db/documents/en-GB/Green-Protect.pdf#page=75'
             : 'https://www.etigroup.eu/images/product_db/documents/en-GB/UltraQuick.pdf#page=' + page,
-          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Terminal style, nominal envelope dimensions and indicator projection.' }
+          documentRevision: null, retrievedAt: '2026-11-23',
+          revisionNote: exact?.brand ? 'ETI order table and bolted-lug outline. The catalogue identifies the Italweber brand.'
+            : 'Terminal style, nominal envelope dimensions and indicator projection.' }
       ]
     });
   });
@@ -2921,8 +2929,8 @@
       });
     });
 
-  const etiBottleFuseLinks = terminalCatalog.etiBottleFuseLinks.map(
-    ([code, size, utilization, current, voltage, capacity, dcVoltage, dcCapacity, length, diameter, gauge, fuseBase]) => {
+  const etiBottleFuseLinks = terminalCatalog.etiBottleFuseLinks.concat(terminalCatalog.etiUltraQuickBottleFuseLinks).map(
+    ([code, size, utilization, current, voltage, capacity, dcVoltage, dcCapacity, length, diameter, gauge, fuseBase, page, orderModel]) => {
       const id = 'eti-' + code;
       const envelopeDiameter = Math.max(diameter, gauge ?? 0);
       const d0 = size.startsWith('D0');
@@ -2933,7 +2941,8 @@
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
         model: size + ' ' + utilization + ' ' + current + 'A/' + voltage + 'V',
-        name: 'Bottle fuse link', aliases: [d0 ? 'Neozed' : 'Diazed', fuseBase],
+        name: page ? 'Ultra Quick bottle fuse link' : 'Bottle fuse link',
+        aliases: [d0 ? 'Neozed' : 'Diazed', fuseBase, ...(page ? ['Ultra Quick', orderModel] : [])],
         family: 'bottle-fuse-link', referencePrefix: 'F', category: 'Electrical · Verified fuse link',
         symbol: {
           id: 'fuse.eti.' + size.toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: 72, height: 32, pins, internalConnections: [],
@@ -2958,10 +2967,14 @@
         }],
         instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
         sources: [
-          { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
+          page ? { publisher: 'ETI', title: 'ETI product record · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null,
+            retrievedAt: '2026-11-23', revisionNote: 'Exact order code, product dimensions and AC/DC electrical ratings.' }
+          : { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
             documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code, cartridge size and AC and DC ratings.' },
-          { publisher: 'ETI', title: (d0 ? 'D0' : 'D') + ' low-voltage fuse-link dimensions',
-            url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/' + (d0 ? 'D0_ENG.pdf#page=3' : 'D_ENG.pdf#page=' + (size === 'DI' ? '4' : '5')),
+          { publisher: 'ETI', title: page ? 'Ultra Quick · Bottle fuse order table and dimensions' : (d0 ? 'D0' : 'D') + ' low-voltage fuse-link dimensions',
+            url: 'https://www.etigroup.eu/images/product_db/documents/en-GB/' +
+              (page ? 'UltraQuick.pdf#page=' + page : d0 ? 'D0_ENG.pdf#page=3' : 'D_ENG.pdf#page=' + (size === 'DI' ? '4' : '5')),
             documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Axial dimensions, head and foot contacts, and corresponding fuse base.' }
         ]
       });
