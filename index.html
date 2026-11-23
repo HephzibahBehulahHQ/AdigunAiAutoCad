@@ -981,7 +981,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           const rating=breaker.specifications;
           label(rating.tripCurve?rating.tripCurve.value+rating.nominalCurrent.value:rating.nominalCurrent.value+' A',0,-53,7);
           if(rating.ratedResidualCurrent){
-            label(rating.residualCurrentType.value+' · '+rating.ratedResidualCurrent.value+' mA',0,59,7);
+            label(rating.residualCurrentType.value+' · '+rating.ratedResidualCurrent.value+' mA'
+              +(rating.arcFaultDetection?.value?' · AFDD':''),0,59,7);
           }
           const positionGeometry=breaker.electricalFunctions?.switchingSequence
             ? window.AdigunCADEngine.etimatBreakerGeometry(obj,breaker) : null;
@@ -1004,12 +1005,14 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           }
           if(hasFactoryLeads){
             const [, , neutral, blueLead, earthLead]=breaker.symbol.pins;
-            line(neutral.x,neutral.y,blueLead.x,blueLead.y);
-            rect(earthLead.x-8,-7,16,14);
+            if(!positionGeometry){
+              line(neutral.x,neutral.y,blueLead.x,blueLead.y);
+              rect(earthLead.x-8,-7,16,14);
+              line(earthLead.x,7,earthLead.x,earthLead.y);
+            }
             label('IΔ',earthLead.x,3,7);
-            line(earthLead.x,7,earthLead.x,earthLead.y);
             for(const pin of [neutral,blueLead,earthLead]){
-              circle(pin.x,pin.y,2.6);
+              if(!positionGeometry)circle(pin.x,pin.y,2.6);
               label(pin.manufacturerMarking,pin.x,pin.y+(pin.y<0?-4:9),6);
             }
           }else if(breaker.symbol.pins.length>2){
@@ -1435,7 +1438,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       if(rule.type==='choice'){
         const fieldLabel=name==='switchingStep'
           ? ({'rotary-cam-switch':'Selector position','industrial-motor-contactor':'Coil state',
-              'miniature-circuit-breaker':'Breaker position','modular-contactor':definition.specifications.manualOverride?.value?'Control position':'Coil state'}[definition.family]||componentPropertyLabels[name])
+              'miniature-circuit-breaker':'Breaker position','residual-current-circuit-breaker':'Breaker position','modular-contactor':definition.specifications.manualOverride?.value?'Control position':'Coil state'}[definition.family]||componentPropertyLabels[name])
           : componentPropertyLabels[name]||name;
         const value=object.properties[name]??rule.default;
         const options=Object.entries(rule.choices).map(([id,label])=>
@@ -1612,6 +1615,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         ...(spec.terminalPolarity?[['Terminal polarity',spec.terminalPolarity.value]]:[]),
         ...(spec.connectionMethod?[['Connection',spec.connectionMethod.value]]:[]),
         ...(spec.ratedResidualCurrent?[['Residual current',spec.ratedResidualCurrent.value+' '+spec.ratedResidualCurrent.unit],['Residual release type',spec.residualCurrentType.value]]:[]),
+        ...(spec.trippingDelay?[['Trip delay',spec.trippingDelay.value]]:[]),
+        ...(spec.arcFaultDetection?[['Arc-fault detection','Yes']]:[]),
         ...(spec.supplyConnection?[['Supply connection',spec.supplyConnection.value]]:[]),
         ['Mounting',spec.mountingMethod.value]]
       : def.family==='motor-protection-breaker'
