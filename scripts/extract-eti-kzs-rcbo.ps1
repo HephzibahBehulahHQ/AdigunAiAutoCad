@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('4M','2M','2M2p','1M-UNI')][string]$Series = '4M')
+param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('4M','2M','2M2p','1M-UNI','1M-FN')][string]$Series = '4M')
 
 $ErrorActionPreference = 'Stop'
 $settings = [Xml.XmlReaderSettings]::new()
@@ -31,7 +31,7 @@ try {
         $name = $details.Element($ns + 'DESCRIPTION_SHORT').Value
         if ($name -cnotmatch "^RCBO, $catalogModel $ratingPattern$") { continue }
         $offset = if ($Series -eq '4M') { 1 } else { 0 }
-        $topology = if ($Series -eq '4M') { $Matches[1] } elseif ($Series -in '2M','1M-UNI') { '1p+N' } else { '2p' }
+        $topology = if ($Series -eq '4M') { $Matches[1] } elseif ($Series -in '2M','1M-UNI','1M-FN') { '1p+N' } else { '2p' }
         $residualType = $Matches[$offset + 1]
         $curve = $Matches[$offset + 2]
         $current = [int]$Matches[$offset + 3]

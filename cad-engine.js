@@ -1596,49 +1596,55 @@
     });
   });
 
-  const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(terminalCatalog.etiKzs2mBreakers, terminalCatalog.etiKzsUniBreakers).map(
+  const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(terminalCatalog.etiKzs2mBreakers, terminalCatalog.etiKzsUniBreakers, terminalCatalog.etiKzsFnBreakers).map(
     ([code, topology, residualType, curve, current, trip, voltage, capacity, series = '4M']) => {
       const id = 'eti-' + code;
       const uni = series === '1M-UNI';
-      const [width, height, depth] = uni ? [17.9, 88.2, 73.97]
+      const factoryLeads = series === '1M-FN';
+      const [width, height, depth] = uni ? [17.9, 88.2, 73.97] : factoryLeads ? [17.4, 126.4]
         : [{ '4M': 70.4, '2M': 35, '2M2p': 35.6 }[series], series === '2M2p' ? 88.4 : 88];
       const astiReference = 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/56448a67-7ee8-49ec-934f-f3a2e1dc19bd';
       const diagram = uni ? 'https://storage-api-pim.etigroup.eu/product_db/levels/7605/en-GB/Instruction/7605_Instruction.pdf' : series === '2M'
         ? 'https://www.etigroup.eu/images/product_db/levels/en-GB/159_Instruction_manual.pdf'
-        : astiReference + '#page=' + (series === '2M2p' ? '4' : topology === '3p' ? '5' : '6');
+        : astiReference + '#page=' + (factoryLeads ? '1' : series === '2M2p' ? '4' : topology === '3p' ? '5' : '6');
       const protectedPoles = Number(topology[0]);
       const neutral = topology.endsWith('+N');
       const pairs = Array.from({ length: protectedPoles }, (_, index) => {
         const pole = protectedPoles - index;
         return [String(2 * pole), String(2 * pole - 1)];
       });
-      if (neutral) pairs.push(['N-upper', 'N-lower']);
+      if (neutral && !factoryLeads) pairs.push(['N-upper', 'N-lower']);
       const pins = pairs.flatMap(([upper, lower], index) => {
-        const x = (index - (pairs.length - 1) / 2) * 36;
+        const x = factoryLeads ? -36 : (index - (pairs.length - 1) / 2) * 36;
         return [
           { id: 'terminal-' + upper, localNumber: upper, ...(upper === 'N-upper' ? { manufacturerMarking: 'N' } : {}), name: 'Upper terminal', x, y: -42, electricalType: 'passive', connectionType: 'screw' },
           { id: 'terminal-' + lower, localNumber: lower, ...(lower === 'N-lower' ? { manufacturerMarking: 'N' } : {}), name: 'Lower terminal', x, y: 42, electricalType: 'passive', connectionType: 'screw' }
         ];
       });
+      if (factoryLeads) pins.push(
+        { id: 'terminal-N-upper', localNumber: 'N-upper', manufacturerMarking: 'N', name: 'Load neutral screw', x: 0, y: -42, electricalType: 'passive', connectionType: 'screw' },
+        { id: 'lead-N-blue', localNumber: 'N-blue', manufacturerMarking: 'N', name: 'Blue line neutral lead', x: 0, y: 42, electricalType: 'passive', connectionType: 'pigtail' },
+        { id: 'lead-FE-white', localNumber: 'FE', manufacturerMarking: 'FE', name: 'White functional earth lead', x: 36, y: 42, electricalType: 'passive', connectionType: 'pigtail' }
+      );
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
         model: 'KZS-' + series + (series === '4M' || uni ? ' ' + topology : '') + ' ' + residualType + ' ' + curve + current + '/' + trip / 1000,
         name: 'Residual-current circuit breaker with overcurrent protection', aliases: ['KZS-' + series, 'RCBO', 'RCD'],
         family: 'residual-current-circuit-breaker', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
         symbol: {
-          id: 'breaker.eti.kzs' + series.toLowerCase() + '.' + topology.toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: pairs.length * 36, height: 84,
-          pins, internalConnections: [], numberingNote: 'Terminal order is preserved from the ASTI connection diagram. The two neutral anchors have distinct IDs.'
+          id: 'breaker.eti.kzs' + series.toLowerCase() + '.' + topology.toLowerCase() + '.v1', view: 'schematic', unit: 'mm', width: (factoryLeads ? 3 : pairs.length) * 36, height: 84,
+          pins, internalConnections: factoryLeads ? [['terminal-N-upper', 'lead-N-blue']] : [], numberingNote: factoryLeads ? 'N load is continuous with the blue lead. The white FE lead is a separate functional earth connection.' : 'Terminal order is preserved from the ASTI connection diagram. The two neutral anchors have distinct IDs.'
         },
         electricalFunctions: {
           switchedPolePairs: pairs.map(pair => pair.map(terminal => 'terminal-' + terminal)),
           simulationNote: 'Static connectivity records wiring on each side of the breaker. Its switching and residual-current test functions are not simulated.'
         },
         specifications: {
-          protectedPoles: { value: protectedPoles }, switchedNeutral: { value: neutral }, tripCurve: { value: curve },
+          protectedPoles: { value: protectedPoles }, switchedNeutral: { value: neutral && !factoryLeads }, tripCurve: { value: curve },
           nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
           residualCurrentType: { value: residualType }, ratedResidualCurrent: { value: trip, unit: 'mA' },
           ratedBreakingCapacity: { value: capacity, unit: 'kA' },
-          ...(uni ? { supplyConnection: { value: 'Top or bottom' } } : { builtInDepth: { value: 69, unit: 'mm' } }),
+          ...(uni ? { supplyConnection: { value: 'Top or bottom' } } : factoryLeads ? { supplyConnection: { value: 'Bottom' } } : { builtInDepth: { value: 69, unit: 'mm' } }),
           mountingMethod: { value: 'DIN rail' },
           dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
             ...(depth ? { depth: { value: depth, unit: 'mm' } } : {}) }
@@ -1646,6 +1652,7 @@
         physicalRepresentations: [{
           ...terminalPanelEnvelope(id, width, height), sourceIndex: uni ? 2 : 1, ...(depth ? { depth } : {}),
           scope: uni ? 'Net device envelope. Rail and installation clearances are separate.'
+            : factoryLeads ? 'Front body outline from the drawing. Factory leads and mounting clearances are excluded.'
             : 'Nominal front outline from the drawing. Allow separately for rail position, operating clearance and connected conductors.'
         }],
         instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },

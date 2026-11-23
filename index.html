@@ -866,7 +866,9 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
           if(rating.ratedResidualCurrent){
             label(rating.residualCurrentType.value+' · '+rating.ratedResidualCurrent.value+' mA',0,59,7);
           }
-          for(let index=0;index<breaker.symbol.pins.length;index+=2){
+          const hasFactoryLeads=breaker.symbol.pins.some(pin=>pin.id==='lead-FE-white');
+          const switchedPinCount=hasFactoryLeads?2:breaker.symbol.pins.length;
+          for(let index=0;index<switchedPinCount;index+=2){
             const [top,bottom]=breaker.symbol.pins.slice(index,index+2);
             line(top.x,top.y,top.x,-12);line(bottom.x,12,bottom.x,bottom.y);
             circle(top.x,top.y,2.6);circle(bottom.x,bottom.y,2.6);
@@ -875,7 +877,17 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
             label((top.manufacturerMarking||top.localNumber)+(top.polarity||''),top.x,top.y-4,6);
             label((bottom.manufacturerMarking||bottom.localNumber)+(bottom.polarity||''),bottom.x,bottom.y+9,6);
           }
-          if(breaker.symbol.pins.length>2){
+          if(hasFactoryLeads){
+            const [, , neutral, blueLead, earthLead]=breaker.symbol.pins;
+            line(neutral.x,neutral.y,blueLead.x,blueLead.y);
+            rect(earthLead.x-8,-7,16,14);
+            label('IΔ',earthLead.x,3,7);
+            line(earthLead.x,7,earthLead.x,earthLead.y);
+            for(const pin of [neutral,blueLead,earthLead]){
+              circle(pin.x,pin.y,2.6);
+              label(pin.manufacturerMarking,pin.x,pin.y+(pin.y<0?-4:9),6);
+            }
+          }else if(breaker.symbol.pins.length>2){
             const first=breaker.symbol.pins[0],last=breaker.symbol.pins.at(-1);
             add('path',{d:'M'+(first.x+10)+' 0H'+(last.x+10),'stroke-dasharray':'3 3'}).setAttribute('aria-hidden','true');
           }
