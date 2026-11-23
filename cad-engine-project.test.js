@@ -274,6 +274,160 @@ test('canvas audit reflects the current local Save As and reopen limits', () => 
   assert.match(audit, /native file picker is mocked/);
 });
 
+async function verifyToolbar(toolbarPage, address) {
+  toolbarPage.setDefaultTimeout(8000);
+  await toolbarPage.goto(address);
+  const top = toolbarPage.getByRole('toolbar', { name: 'Drawing commands' });
+  const tool = name => top.getByRole('button', { name, exact: true });
+  const moduleAction = async (module, action) => {
+    await toolbarPage.getByRole('button', { name: module, exact: true }).click();
+    await toolbarPage.getByRole('menuitem', { name: action, exact: true }).click();
+    assert.equal(await toolbarPage.locator('#moduleMenu').isVisible(), false);
+  };
+  const assertInspector = async title => {
+    assert.equal(await toolbarPage.locator('#rightPanelTitle').textContent(), title);
+    await toolbarPage.locator('#closeRightPanel').click();
+  };
+  const downloadFrom = async (action, filename) => {
+    const event = toolbarPage.waitForEvent('download');
+    await action();
+    const download = await event;
+    assert.match(download.suggestedFilename(), filename);
+    return fs.readFileSync(await download.path(), 'utf8');
+  };
+  const chooser = toolbarPage.waitForEvent('filechooser');
+  await tool('Open project file').click();
+  assert.ok(await chooser);
+  await tool('New project').click();
+  await toolbarPage.locator('#createProject').click();
+  await moduleAction('Panel Design', 'Add Sheet');
+  await toolbarPage.locator('#sheetDialog').waitFor();
+  await toolbarPage.getByLabel('Project section', { exact: true }).selectOption('A2');
+  await toolbarPage.locator('#sheetDialog [data-new-sheet="Control circuit"]').click();
+  const addedSheet=toolbarPage.locator('#projectTree [data-sheet]').first();
+  assert.match(await addedSheet.innerText(), /A2\/0001[\s\S]*Control circuit/);
+  await addedSheet.click();
+  await moduleAction('Panel Design', 'Properties');
+  await assertInspector('Properties');
+  await moduleAction('Panel Design', 'Layers and Visibility');
+  await assertInspector('Layers and visibility');
+  await moduleAction('Electrical', 'Electrical Checks');
+  await assertInspector('Electrical checks');
+  await moduleAction('Electrical', 'Project Explorer');
+  assert.equal(await toolbarPage.locator('#projectPanel').isVisible(), true);
+  await toolbarPage.getByRole('button', { name: 'Electrical', exact: true }).press('ArrowDown');
+  await toolbarPage.keyboard.press('ArrowDown');
+  await toolbarPage.keyboard.press('Enter');
+  assert.equal(await toolbarPage.locator('#symbolSearch').evaluate(node => node === document.activeElement), true);
+  await tool('Insert symbol').click();
+  assert.equal(await toolbarPage.locator('#symbolsPanel').isVisible(), true);
+  await toolbarPage.locator('#openCommands').click();
+  await toolbarPage.locator('#commands').waitFor();
+  await toolbarPage.keyboard.press('Escape');
+  await toolbarPage.locator('#maximize').click();
+  assert.equal(await toolbarPage.locator('#workspace').evaluate(node => node.classList.contains('maximized')), true);
+  await toolbarPage.locator('#maximize').click();
+
+  await moduleAction('Automation', 'Browse PLC Components');
+  const plcPart=engine.catalogItem('siemens-6es7212-1ae40-0xb0');
+  assert.equal(await toolbarPage.getByLabel('Component type').inputValue(), plcPart.family);
+  assert.equal(await toolbarPage.locator('#symbolList [data-insert="' + plcPart.id + '"]').isVisible(), true);
+  for (const [shortcut, part] of [
+    ['terminal', /3212144/], ['plc', /6ES7212-1AE40-0XB0/], ['motor', /DRN63MS4/], ['ground', /3209536/]
+  ]) {
+    await top.locator('[data-insert-tool="' + shortcut + '"]').click();
+    assert.match(await toolbarPage.locator('#selectionDetails').innerText(), part);
+    await toolbarPage.keyboard.press('Escape');
+  }
+  await toolbarPage.locator('#closeRightPanel').click();
+  await moduleAction('Drawing Setup', 'Drafting Settings');
+  assert.equal(await toolbarPage.locator('[data-drafting-interval="gridIntervalMm"]').evaluate(node => node === document.activeElement), true);
+  await assertInspector('Properties');
+  await moduleAction('Drawing Setup', 'Toggle Print Frame');
+  assert.match(await toolbarPage.locator('#toast').innerText(), /Print frame shown/);
+  await moduleAction('Drawing Setup', 'Fit Print Frame');
+  await tool('Fit drawing to view').click();
+  const zoom = toolbarPage.locator('#zoomValue');
+  const zoomBefore = Number.parseInt(await zoom.innerText(), 10);
+  await tool('Zoom in').click();
+  assert.equal(Number.parseInt(await zoom.innerText(), 10), zoomBefore + 10);
+  await tool('Zoom out').click();
+  assert.equal(Number.parseInt(await zoom.innerText(), 10), zoomBefore);
+  await tool('Toggle drawing paper theme').click();
+  assert.equal(await toolbarPage.locator('#drawingWrap').evaluate(node => node.classList.contains('dark-paper')), true);
+  await tool('Toggle drawing paper theme').click();
+  await tool('Toggle drawing grid').click();
+  assert.equal(await tool('Toggle drawing grid').getAttribute('aria-pressed'), 'false');
+  await tool('Toggle drawing grid').click();
+  await tool('Pan sheet').click();
+  const transform = toolbarPage.locator('#userDrawings');
+  const drawingPosition = () => transform.evaluate(node => {
+    const { e, f } = node.getScreenCTM();
+    return [e, f];
+  });
+  const drawingBefore = await drawingPosition();
+  const box = await toolbarPage.locator('#drawing').boundingBox();
+  const x = box.x + box.width / 2;
+  const y = box.y + box.height / 2;
+  const drag = async (fromX, fromY, toX, toY) => {
+    await toolbarPage.mouse.move(fromX, fromY);
+    await toolbarPage.mouse.down();
+    await toolbarPage.mouse.move(toX, toY, { steps: 5 });
+    await toolbarPage.mouse.up();
+  };
+  await drag(x, y - 150, x + 25, y - 135);
+  assert.notDeepEqual(await drawingPosition(), drawingBefore);
+  const drawn = toolbarPage.locator('#userDrawings [data-object]');
+  for (const [index, name] of [
+    'Draw line', 'Draw rectangle', 'Draw circle', 'Freehand pencil', 'Draw ellipse',
+    'Draw Bézier curve', 'Draw triangle', 'Draw arrow'
+  ].entries()) {
+    await tool(name).click();
+    const startX=x-175+(index%4)*100;
+    const startY=y-95+Math.floor(index/4)*100;
+    await drag(startX,startY,startX+55,startY+36);
+    assert.equal(await drawn.count(), index + 1, name);
+  }
+  await tool('Add text note').click();
+  toolbarPage.once('dialog', dialog => dialog.accept('Toolbar wiring audit'));
+  await toolbarPage.mouse.click(x + 175, y - 95);
+  assert.equal(await drawn.count(), 9);
+  await tool('Undo').click();
+  assert.equal(await drawn.count(), 8);
+  await tool('Redo').click();
+  assert.equal(await drawn.count(), 9);
+
+  await tool('Select and move').click();
+  await toolbarPage.mouse.click(x - 75, y - 76);
+  const rectangle = toolbarPage.locator('#userDrawings rect[data-object]').first();
+  await rectangle.waitFor();
+  await tool('Open color palette').click();
+  await toolbarPage.getByRole('button', { name: 'Set stroke #ed3f38' }).click();
+  assert.equal(await rectangle.getAttribute('stroke'), '#ed3f38');
+  await tool('Toggle shape fill').click();
+  assert.notEqual(await rectangle.getAttribute('fill'), 'none');
+  await tool('Undo').click();
+  assert.equal(await rectangle.getAttribute('fill'), 'none');
+  await moduleAction('Documentation', 'Bill of Materials');
+  await assertInspector('Bill of materials');
+  assert.match(await downloadFrom(()=>moduleAction('Documentation', 'Export Wire List CSV'), /wire-list.*csv$/i), /wire/i);
+  assert.match(await downloadFrom(()=>moduleAction('Automation', 'Export PLC I/O List'), /plc-io-list.*csv$/i), /sheet/i);
+  assert.match(await downloadFrom(()=>tool('Export drawing as SVG').click(), /\.svg$/i), /Toolbar wiring audit/);
+  const toolbarSave=await downloadFrom(()=>tool('Save project locally').click(), /\.json$/i);
+  assert.equal(engine.parseProject(toolbarSave).valid,true);
+  await toolbarPage.evaluate(()=>{
+    window.__toolbarPrints=0;
+    window.print=()=>{window.__toolbarPrints++;};
+    window.confirm=()=>true;
+  });
+  await tool('Print drawing').click();
+  await toolbarPage.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
+  await moduleAction('Documentation', 'Print Project Set');
+  await toolbarPage.waitForFunction(()=>window.__toolbarPrints===2);
+  await toolbarPage.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
+  await toolbarPage.close({ runBeforeUnload: false });
+}
+
 test('browser workflow creates, edits, saves, closes, and reopens a native project', {
   skip: process.env.CAD_BROWSER_WORKFLOW !== '1' ? 'Enable the pinned Chromium workflow in CI.' : false
 }, async () => {
@@ -367,6 +521,8 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await search.fill('');
     await category.selectOption('');
     await type.selectOption('');
+
+    await verifyToolbar(await context.newPage(), address);
 
     await page.getByRole('button', { name: 'New project' }).click();
     assert.equal(await page.locator('#newProjectDialog #editableExampleProjects').count(), 0, 'New Project does not show example projects');

@@ -31,6 +31,8 @@ Open **Symbol Library**, pick a component to see its terminals in **Properties**
 
 Click **Project Explorer** or **Symbol Library** on the left rail to open or close that panel. The double-chevron button collapses the whole sidebar and restores the previous panel selection when reopened. In the library, filter **All parts** by category or type, browse **Common parts** for 100 representative manufacturer parts, or open **Project symbols** for definitions saved in your project.
 
+The top **Documentation** menu opens the bill of materials, exports the wire list, and prints the project set. **Drawing Setup** opens the sheet’s drafting settings and controls its print frame. Open any top menu with a click or the Down Arrow key, then use the arrow keys and Enter to run a command.
+
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
 
 The component bank inventory is available in [JSON](docs/reports/component-bank.json) and [CSV](docs/reports/component-bank.csv). It is generated from the same native definitions the editor uses. Physical dimensions in the inventory describe the manufacturer part. The schematic dimensions and terminal coordinates describe the editable symbol.
