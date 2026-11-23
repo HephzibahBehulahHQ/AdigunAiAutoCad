@@ -17,8 +17,9 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $id = [string]$product.SUPPLIER_PID
     # Restrict each series to the one-pole changeover types with a verified terminal diagram.
     $orderKey = if ($Series -eq '40') { '^40(31|51)([789])([0-9]{3})([045])00([013])$' }
-                else { '^46(61)([89])([0-9]{3})([045])0(20|40|54|74)$' }
+                else { '^46(61|52)([89])([0-9]{3})([045])0(20|40|54|74)$' }
     if ($id -cnotmatch $orderKey) { continue }
+    $doublePole = $Matches[1] -eq '52'
     $coilCode = $Matches[2]
     $voltage = [int]$Matches[3]
     $materialCode = $Matches[4]
@@ -30,7 +31,9 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
     $mode = if ($coilCode -eq '8') { 'AC' } else { 'DC' }
     if ($Series -eq '46') {
         $coilVoltages = if ($mode -eq 'AC') { 12, 24, 48, 110, 120, 230, 240 } else { 12, 24, 48, 110, 125 }
-        if ($voltage -notin $coilVoltages -or $description -notmatch 'Type of electric connection: Plug-in connection Faston 187') { continue }
+        $connection = if ($doublePole) { 'Plug-in connection\s{2,}' } else { 'Plug-in connection Faston 187' }
+        if ($voltage -notin $coilVoltages -or $description -notmatch "Type of electric connection: $connection" -or
+            ($doublePole -and $materialCode -eq '4')) { continue }
     }
     $material = @{ '0' = 'AgNi'; '4' = 'AgSnO2'; '5' = 'AgNi+Au' }[$materialCode]
     $verifiedMaterial = [regex]::Match($description, 'Contact Material: ([^ ]+)')
@@ -43,15 +46,17 @@ foreach ($product in $catalog.SelectNodes('//*[local-name()="PRODUCT"]')) {
         ($Series -eq '40' -and $description -notmatch 'Complete with socket: no')) { continue }
     $values = @{}
     foreach ($feature in $features.FEATURE) { $values[[string]$feature.FNAME] = @($feature.FVALUE) }
+    $poles = if ($doublePole) { '2' } else { '1' }
     if ([string]$values['EF008255'][0] -cne '0' -or [string]$values['EF008256'][0] -cne '0' -or
-        [string]$values['EF008257'][0] -cne '1') { continue }
+        [string]$values['EF008257'][0] -cne $poles) { continue }
     $measurements = @()
     foreach ($key in 'EF000001', 'EF000008', 'EF000040', 'EF000049') {
         if ($values[$key].Count -ne 1 -or [string]$values[$key][0] -notmatch '^\d+(\.\d+)?$') { break }
         $measurements += [double]::Parse($values[$key][0], [Globalization.CultureInfo]::InvariantCulture)
     }
     if ($measurements.Count -ne 4 -or @($measurements | Where-Object { $_ -le 0 }).Count) { continue }
-    if ($Series -eq '46' -and ($measurements[0] -ne 16 -or $measurements[1] -ne 12.4 -or
+    $ratedCurrent = if ($doublePole) { 8 } else { 16 }
+    if ($Series -eq '46' -and ($measurements[0] -ne $ratedCurrent -or $measurements[1] -ne 12.4 -or
         $measurements[2] -ne 32.8 -or $measurements[3] -ne 29)) { continue }
     $productLink = $product.SelectNodes('.//*[local-name()="UDX.EDXF.MIME_SOURCE"]') |
         Where-Object { $_.InnerText -ceq "https://www.findernet.com/en/p/$id" } | Select-Object -First 1
