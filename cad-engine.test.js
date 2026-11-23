@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 4543);
+  assert.equal(items.length, 4633);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1843,6 +1843,26 @@ test('ETI VV fuses distinguish fitting length, end-cap span and striker variants
   const part = engine.component('eti-004220503');
   assert.equal(part.physicalRepresentations[0].width, 358);
   assert.deepEqual(part.specifications.ratedBreakingCapacity, { value: 63, unit: 'kA' });
+});
+
+test('ETI D and D0 bottle fuses retain separate AC and DC ratings and contact geometry', () => {
+  const items = engine.catalog().filter(item => item.family === 'bottle-fuse-link');
+  assert.equal(items.length, 90);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['cap-head', 'cap-foot']);
+    assert.deepEqual(part.electricalFunctions.protectedTerminalPair, ['cap-head', 'cap-foot']);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    assert.equal(part.specifications.nominalVoltage.unit, 'V AC');
+  }
+  const d02 = engine.component('eti-002212005');
+  assert.equal(d02.specifications.fuseBase.value, 'E18');
+  assert.deepEqual(d02.specifications.ratedDcVoltage, { value: 250, unit: 'V DC' });
+  assert.deepEqual(d02.specifications.ratedDcBreakingCapacity, { value: 8, unit: 'kA' });
+  assert.equal(d02.specifications.dimensions.height.value, 15.9);
+  const longDiii = engine.component('eti-002313501');
+  assert.equal(longDiii.specifications.dimensions.width.value, 70);
+  assert.equal(longDiii.specifications.ratedDcVoltage.value, 600);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
