@@ -1440,11 +1440,14 @@
         }]
       });
     });
-  const etiEtimat6Breakers = terminalCatalog.etiEtimat6Breakers.map(([code, topology, curve, current, voltage, width]) => {
+  const etiEtimatBreakers = terminalCatalog.etiEtimat6Breakers.concat(terminalCatalog.etiEtimatPBreakers)
+    .map(([code, topology, curve, current, voltage, width, series = '6']) => {
     const id = 'eti-' + code;
+    const pSeries = series !== '6';
     const protectedPoles = Number(topology[0]);
     const terminalPairs = Array.from({ length: protectedPoles }, (_, index) => [String(2 * index + 2), String(2 * index + 1)]);
     if (topology.endsWith('+N')) terminalPairs.push(['02', '01']);
+    if (pSeries) terminalPairs.forEach(pair => pair.reverse());
     const pins = terminalPairs.flatMap(([top, bottom], index) => {
       const x = (index - (terminalPairs.length - 1) / 2) * 36;
       return [
@@ -1452,31 +1455,35 @@
         { id: 'terminal-' + bottom, localNumber: bottom, name: 'Lower terminal', x, y: 42, electricalType: 'passive', connectionType: 'screw' }
       ];
     });
-    const model = 'ETIMAT 6 ' + topology + ' ' + curve + current;
+    const model = 'ETIMAT ' + series + ' ' + topology + ' ' + curve + current;
+    const height = pSeries ? 88 : 85;
+    const depth = pSeries ? 69.5 : 67.7;
     return deepFreeze({
       schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code, model,
-      name: 'Miniature circuit breaker', aliases: ['ETIMAT 6', 'MCB', curve + current],
+      name: 'Miniature circuit breaker', aliases: ['ETIMAT ' + series, 'MCB', curve + current],
       family: 'miniature-circuit-breaker', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
-      symbol: { id: 'breaker.etimat6.' + topology.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
+      symbol: { id: 'breaker.etimat' + series.toLowerCase() + '.' + topology.toLowerCase() + '.v1', view: 'schematic', unit: 'mm',
         width: Math.max(42, terminalPairs.length * 36), height: 84, pins, internalConnections: [],
-        numberingNote: 'Terminal numbers and switched-neutral positions follow the ETIMAT 6 connection diagrams.' },
+        numberingNote: 'Terminal numbers and switched-neutral positions follow the ETIMAT ' + series + ' connection diagrams.' },
       electricalFunctions: { switchedPolePairs: terminalPairs.map(pair => pair.map(number => 'terminal-' + number)),
         simulationNote: 'Static connectivity reports the attached wires and does not assume that the breaker is closed.' },
       specifications: {
         protectedPoles: { value: protectedPoles }, switchedNeutral: { value: topology.endsWith('+N') },
         nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
-        tripCurve: { value: curve }, ratedBreakingCapacity: { value: 6, unit: 'kA' },
+        tripCurve: { value: curve }, ratedBreakingCapacity: { value: series === 'P10' ? 10 : 6, unit: 'kA' },
         mountingMethod: { value: 'DIN rail' },
-        dimensions: { width: { value: width, unit: 'mm' }, height: { value: 85, unit: 'mm' }, depth: { value: 67.7, unit: 'mm' } }
+        dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' }, depth: { value: depth, unit: 'mm' } }
       },
-      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, 85), sourceIndex: 1, depth: 67.7,
+      physicalRepresentations: [{ ...terminalPanelEnvelope(id, width, height), sourceIndex: 1, depth,
         scope: 'Catalog breaker envelope. Rail, busbar, terminal clearances and accessories are separate.' }],
       instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
       sources: [
         { publisher: 'ETI', title: 'ETI BMEcat · Order ' + code, url: 'https://files.eti.si/BMECat/Products_BMECat_2025_12_04.xml',
           documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code with trip curve, current and pole configuration.' },
-        { publisher: 'ETI', title: 'ASTI catalog · ETIMAT 6', url: 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf',
-          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'ETIMAT 6 connection diagrams, dimensions and rating tables.' }
+        { publisher: 'ETI', title: 'ASTI catalog · ETIMAT ' + series,
+          url: pSeries ? 'https://www.etigroup.eu/images/product_db/levels/en-GB/' + (series === 'P6' ? '7678' : '6929') + '_TD.pdf'
+            : 'https://www.eplan.etigroup.eu/images/product_db/documents/en-GB/Asti.pdf',
+          documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'ETIMAT ' + series + ' connection diagrams, dimensions and rating tables.' }
       ]
     });
   });
@@ -1781,7 +1788,7 @@
         ]
       });
     });
-  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimat6Breakers).map(part => [part.id, part])) });
+  const COMPONENTS = Object.freeze({ [terminalDefinition.id]: terminalDefinition, [pt25Terminal.id]: pt25Terminal, ...Object.fromEntries(pt25ColorVariants.concat(ptPowerTerminals, ptQuattroTerminals, ptTwinTerminals).map(part => [part.id, part])), [pttb25Terminal.id]: pttb25Terminal, ...Object.fromEntries(pttbTerminals.concat(tripleLevelTerminals, screwAndSpringTerminals, ukTerminals, screwAndSpringMultiConductorTerminals).map(part => [part.id, part])), [pt25DisconnectTerminal.id]: pt25DisconnectTerminal, [relayDefinition.id]: relayDefinition, [contactorDefinition.id]: contactorDefinition, [siemensPowerContactorDefinition.id]: siemensPowerContactorDefinition, [siemensOverloadRelayDefinition.id]: siemensOverloadRelayDefinition, [siemensStarDeltaTimerDefinition.id]: siemensStarDeltaTimerDefinition, [schneiderStartPushButtonDefinition.id]: schneiderStartPushButtonDefinition, [schneiderStopPushButtonDefinition.id]: schneiderStopPushButtonDefinition, [schneiderPilotLightDefinition.id]: schneiderPilotLightDefinition, [motorProtectionBreakerDefinition.id]: motorProtectionBreakerDefinition, [lowRangeMotorProtectionBreakerDefinition.id]: lowRangeMotorProtectionBreakerDefinition, [starDeltaMotorProtectionBreakerDefinition.id]: starDeltaMotorProtectionBreakerDefinition, [motorStarterDefinition.id]: motorStarterDefinition, [motorDefinition.id]: motorDefinition, [sewStarDeltaMotorDefinition.id]: sewStarDeltaMotorDefinition, [siemensCpuDefinition.id]: siemensCpuDefinition, [ifmInductiveSensorDefinition.id]: ifmInductiveSensorDefinition, [ifmPressureSensorDefinition.id]: ifmPressureSensorDefinition, [siemensSitopPsuDefinition.id]: siemensSitopPsuDefinition, [phoenixProtectiveEarthTerminalDefinition.id]: phoenixProtectiveEarthTerminalDefinition, [pt25ProtectiveEarthTerminal.id]: pt25ProtectiveEarthTerminal, ...Object.fromEntries(protectiveEarthVariants.concat(weidmullerFeedThroughTerminals, finderRelays, etiEtimatBreakers).map(part => [part.id, part])) });
 
   function reorderObject(objects,id,direction) {
     if (!Array.isArray(objects) || (direction !== 1 && direction !== -1)) return false;

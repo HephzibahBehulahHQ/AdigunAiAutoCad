@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 2615);
+  assert.equal(items.length, 3088);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1645,7 +1645,7 @@ test('direct catalog lookup matches searchable entries and protects the index', 
 });
 
 test('ETIMAT 6 breakers expose documented protected and switched neutral poles', () => {
-  const items = engine.catalog('ETI ETIMAT 6');
+  const items = engine.catalog('ETI ETIMAT 6').filter(item => item.name.startsWith('ETIMAT 6 '));
   assert.equal(items.length, 127);
   for (const item of items) {
     const definition = engine.component(item.id);
@@ -1656,6 +1656,22 @@ test('ETIMAT 6 breakers expose documented protected and switched neutral poles',
     assert.deepEqual(definition.electricalFunctions.switchedPolePairs, numbers.map(pair => pair.map(number => 'terminal-' + number)));
     assert.deepEqual(definition.symbol.internalConnections, []);
     assert.equal(ratedBreakingCapacity.value, 6);
+  }
+});
+
+test('ETIMAT P-series breakers follow their separate terminal numbering and breaking capacities', () => {
+  for (const [series, count, capacity] of [['P6', 135, 6], ['P10', 338, 10]]) {
+    const items = engine.catalog('ETI ETIMAT ' + series).filter(item => item.name.startsWith('ETIMAT ' + series + ' '));
+    assert.equal(items.length, count);
+    for (const item of items) {
+      const part = engine.component(item.id);
+      const { protectedPoles, switchedNeutral, ratedBreakingCapacity, dimensions } = part.specifications;
+      const terminals = Array.from({ length: protectedPoles.value }, (_, index) => [String(2 * index + 1), String(2 * index + 2)]).flat();
+      if (switchedNeutral.value) terminals.push('01', '02');
+      assert.deepEqual(part.symbol.pins.map(pin => pin.localNumber), terminals);
+      assert.equal(ratedBreakingCapacity.value, capacity);
+      assert.deepEqual([dimensions.height.value, dimensions.depth.value], [88, 69.5]);
+    }
   }
 });
 
