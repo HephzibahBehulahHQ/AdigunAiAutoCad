@@ -1,0 +1,501 @@
+{
+  "project": "Siemens S7-1200 digital I/O loopback",
+  "projectModel": {
+    "id": "s7-1200-io-loopback",
+    "name": "Siemens S7-1200 digital I/O loopback",
+    "metadata": {
+      "title": "Siemens S7-1200 digital I/O loopback",
+      "jobNumber": "",
+      "manager": "",
+      "customer": "",
+      "site": "",
+      "drawnBy": "",
+      "designer": "",
+      "checkedBy": "",
+      "approvedBy": "",
+      "drawingDate": "",
+      "notes": "24 V DC digital loopback for channel tracing. Incoming AC and functional-earth wiring are outside this signal sheet.",
+      "issueStatus": ""
+    },
+    "sections": [
+      {
+        "id": "A1",
+        "name": "General information",
+        "purpose": "Overview, title page, devices, symbols, abbreviations, and design basis.",
+        "order": 1,
+        "collapsed": false
+      },
+      {
+        "id": "A2",
+        "name": "Electrical design",
+        "purpose": "Connected schematics, power and control circuits, terminals, cables, protection, and earthing.",
+        "order": 2,
+        "collapsed": false
+      },
+      {
+        "id": "A3",
+        "name": "Panel layout and installation",
+        "purpose": "Physical arrangement, mounting, cable routing, and installation details.",
+        "order": 3,
+        "collapsed": false
+      },
+      {
+        "id": "A4",
+        "name": "Final documentation",
+        "purpose": "Material lists, connection reports, inspections, commissioning, and handover.",
+        "order": 4,
+        "collapsed": false
+      }
+    ],
+    "sheets": [
+      {
+        "id": "plc-loopback",
+        "projectId": "s7-1200-io-loopback",
+        "sectionId": "A2",
+        "sectionOrder": 1,
+        "order": 1,
+        "number": "A2/0001",
+        "name": "Digital I/O loopback",
+        "customName": true,
+        "revision": "",
+        "revisionDate": "",
+        "contentType": "drawing",
+        "scope": "",
+        "description": "",
+        "drawnBy": "",
+        "checkedBy": "",
+        "approvedBy": "",
+        "scale": "1:1",
+        "paperSize": "A0",
+        "orientation": "landscape",
+        "paperWidthMm": 1189,
+        "paperHeightMm": 841,
+        "issueStatus": "",
+        "notes": "",
+        "devices": [],
+        "terminals": [],
+        "connections": [],
+        "crossReferences": [],
+        "showPrintFrame": false,
+        "drawingFitToPage": true
+      }
+    ],
+    "activeSheetId": "plc-loopback",
+    "openTabs": [
+      "plc-loopback"
+    ],
+    "crossSheetConnections": [],
+    "diagnostics": []
+  },
+  "activeSheet": "plc-loopback",
+  "sheets": [
+    {
+      "id": "plc-loopback",
+      "projectId": "s7-1200-io-loopback",
+      "sectionId": "A2",
+      "sectionOrder": 1,
+      "order": 1,
+      "number": "A2/0001",
+      "name": "Digital I/O loopback",
+      "customName": true,
+      "revision": "",
+      "revisionDate": "",
+      "contentType": "drawing",
+      "scope": "",
+      "description": "",
+      "drawnBy": "",
+      "checkedBy": "",
+      "approvedBy": "",
+      "scale": "1:1",
+      "paperSize": "A0",
+      "orientation": "landscape",
+      "paperWidthMm": 1189,
+      "paperHeightMm": 841,
+      "issueStatus": "",
+      "notes": "",
+      "devices": [],
+      "terminals": [],
+      "connections": [],
+      "crossReferences": [],
+      "showPrintFrame": false,
+      "drawingFitToPage": true
+    }
+  ],
+  "objects": [
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s7-1200-io-loopback-a1",
+      "componentId": "siemens-6es7214-1ag40-0xb0",
+      "ref": "A1",
+      "x": 275,
+      "y": 330,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "plc-loopback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s7-1200-io-loopback-a2",
+      "componentId": "siemens-6es7221-1bf32-0xb0",
+      "ref": "A2",
+      "x": 640,
+      "y": 335,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "plc-loopback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s7-1200-io-loopback-a3",
+      "componentId": "siemens-6es7222-1bh32-0xb0",
+      "ref": "A3",
+      "x": 1000,
+      "y": 340,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "plc-loopback"
+    },
+    {
+      "schemaVersion": 1,
+      "kind": "component-instance",
+      "id": "s7-1200-io-loopback-ps1",
+      "componentId": "siemens-sitop-psu100c-6ep1332-5ba00",
+      "ref": "PS1",
+      "x": 610,
+      "y": 90,
+      "rotation": 0,
+      "properties": {
+        "marking": "",
+        "position": "",
+        "comment": ""
+      },
+      "sheetId": "plc-loopback"
+    },
+    {
+      "id": "supply-dq",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 700,
+      "y": 60,
+      "x1": 700,
+      "y1": 60,
+      "x2": 882,
+      "y2": 270,
+      "bends": [
+        {
+          "x": 825,
+          "y": 60
+        },
+        {
+          "x": 825,
+          "y": 270
+        }
+      ],
+      "stroke": "#b91c1c",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s7-1200-io-loopback-ps1",
+          "pinId": "output-positive"
+        },
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a3",
+          "pinId": "x10-1"
+        }
+      }
+    },
+    {
+      "id": "supply-cpu",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 740,
+      "y": 60,
+      "x1": 740,
+      "y1": 60,
+      "x2": 157,
+      "y2": 197,
+      "bends": [
+        {
+          "x": 740,
+          "y": 35
+        },
+        {
+          "x": 110,
+          "y": 35
+        },
+        {
+          "x": 110,
+          "y": 197
+        }
+      ],
+      "stroke": "#b91c1c",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a1",
+          "pinId": "x10-1"
+        }
+      }
+    },
+    {
+      "id": "return-dq",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 700,
+      "y": 120,
+      "x1": 700,
+      "y1": 120,
+      "x2": 882,
+      "y2": 284,
+      "bends": [
+        {
+          "x": 805,
+          "y": 120
+        },
+        {
+          "x": 805,
+          "y": 284
+        }
+      ],
+      "stroke": "#1d4ed8",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s7-1200-io-loopback-ps1",
+          "pinId": "output-negative"
+        },
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a3",
+          "pinId": "x10-2"
+        }
+      }
+    },
+    {
+      "id": "return-cpu",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 755,
+      "y": 120,
+      "x1": 755,
+      "y1": 120,
+      "x2": 157,
+      "y2": 211,
+      "bends": [
+        {
+          "x": 755,
+          "y": 165
+        },
+        {
+          "x": 130,
+          "y": 165
+        },
+        {
+          "x": 130,
+          "y": 211
+        }
+      ],
+      "stroke": "#1d4ed8",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a1",
+          "pinId": "x10-2"
+        }
+      }
+    },
+    {
+      "id": "return-cpu-input",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 130,
+      "y": 211,
+      "x1": 130,
+      "y1": 211,
+      "x2": 157,
+      "y2": 267,
+      "bends": [
+        {
+          "x": 130,
+          "y": 267
+        }
+      ],
+      "stroke": "#1d4ed8",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a1",
+          "pinId": "x10-6"
+        }
+      }
+    },
+    {
+      "id": "return-di",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 477,
+      "y": 165,
+      "x1": 477,
+      "y1": 165,
+      "x2": 522,
+      "y2": 314,
+      "bends": [
+        {
+          "x": 477,
+          "y": 314
+        }
+      ],
+      "stroke": "#1d4ed8",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a2",
+          "pinId": "x10-3"
+        }
+      }
+    },
+    {
+      "id": "loopback-di",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 882,
+      "y": 298,
+      "x1": 882,
+      "y1": 298,
+      "x2": 522,
+      "y2": 328,
+      "bends": [
+        {
+          "x": 835,
+          "y": 298
+        },
+        {
+          "x": 835,
+          "y": 520
+        },
+        {
+          "x": 445,
+          "y": 520
+        },
+        {
+          "x": 445,
+          "y": 328
+        }
+      ],
+      "stroke": "#25344b",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": {
+          "instanceId": "s7-1200-io-loopback-a3",
+          "pinId": "x10-4"
+        },
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a2",
+          "pinId": "x10-4"
+        }
+      }
+    },
+    {
+      "id": "loopback-cpu",
+      "kind": "wire",
+      "sheetId": "plc-loopback",
+      "x": 445,
+      "y": 520,
+      "x1": 445,
+      "y1": 520,
+      "x2": 157,
+      "y2": 281,
+      "bends": [
+        {
+          "x": 90,
+          "y": 520
+        },
+        {
+          "x": 90,
+          "y": 281
+        }
+      ],
+      "stroke": "#25344b",
+      "strokeWidth": 1.8,
+      "pinAttachments": {
+        "start": null,
+        "end": {
+          "instanceId": "s7-1200-io-loopback-a1",
+          "pinId": "x10-7"
+        }
+      }
+    },
+    {
+      "id": "drawing-title",
+      "kind": "text",
+      "text": "S7-1200 DIGITAL I/O LOOPBACK",
+      "sheetId": "plc-loopback",
+      "x": 75,
+      "y": 75,
+      "stroke": "#25344b"
+    },
+    {
+      "id": "supply-label",
+      "kind": "text",
+      "text": "PS1 · 24 V DC",
+      "sheetId": "plc-loopback",
+      "x": 697,
+      "y": 91,
+      "stroke": "#25344b"
+    },
+    {
+      "id": "signal-label",
+      "kind": "text",
+      "text": "A3 DQ a.0 → A2 DI a.0 and A1 DI a.0",
+      "sheetId": "plc-loopback",
+      "x": 490,
+      "y": 545,
+      "stroke": "#25344b"
+    },
+    {
+      "id": "scope-note",
+      "kind": "text",
+      "text": "Signal sheet · Incoming AC and functional-earth wiring are outside this drawing.",
+      "sheetId": "plc-loopback",
+      "x": 75,
+      "y": 580,
+      "stroke": "#25344b"
+    }
+  ],
+  "view": {
+    "x": 25,
+    "y": 10,
+    "w": 1150,
+    "h": 620
+  },
+  "sheetViews": {
+    "plc-loopback": {
+      "x": 25,
+      "y": 10,
+      "w": 1150,
+      "h": 620
+    }
+  },
+  "format": "adigun-ai-autocad-workspace",
+  "version": 2,
+  "componentSchemaVersion": 1,
+  "netSchemaVersion": 1
+}

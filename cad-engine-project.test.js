@@ -449,6 +449,45 @@ async function verifyDraftShortcuts(page,address){
   await page.close({runBeforeUnload:false});
 }
 
+async function verifyPlcLoopback(page,address){
+  await page.goto(address+'?example=s7-1200-io-loopback&sheet=plc-loopback');
+  const module=page.locator('#userDrawings [data-object="s7-1200-io-loopback-a2"]');
+  const wire=page.locator('#userDrawings [data-object="loopback-di"]');
+  await module.waitFor();
+  const before=await wire.getAttribute('d');
+  await module.locator('text').filter({hasText:/^A2$/}).click();
+  assert.match(await page.locator('#selectionDetails').innerText(),/8 DI/);
+  await page.keyboard.press('ArrowDown');
+  assert.notEqual(await wire.getAttribute('d'),before,'the wire follows the moved expansion input');
+  const savedPath=await wire.getAttribute('d');
+  await page.keyboard.press('Control+Shift+S');
+  await page.waitForFunction(()=>window.__savedProjectWrites.length===1);
+  const saved=await page.evaluate(()=>window.__savedProjectWrites[0]);
+  const parsed=engine.parseProject(saved);
+  assert.equal(parsed.valid,true,parsed.errors.join(' '));
+  const moved=parsed.project.objects.find(object=>object.id==='s7-1200-io-loopback-a2');
+  assert.ok(moved.y>335);
+  const attached=parsed.project.objects.find(object=>object.id==='loopback-di');
+  const pin=engine.worldPins(moved).find(item=>item.id==='x10-4');
+  assert.deepEqual([attached.x2,attached.y2],[pin.x,pin.y]);
+  assert.deepEqual(attached.pinAttachments.end,{instanceId:moved.id,pinId:pin.id});
+  await page.locator('#openFile').setInputFiles({name:'Loopback.adigun.json',mimeType:'application/json',buffer:Buffer.from(saved)});
+  await page.getByRole('button',{name:'Automation',exact:true}).click();
+  const download=page.waitForEvent('download');
+  await page.getByRole('menuitem',{name:'Export PLC I/O List',exact:true}).click();
+  const path=await (await download).path();
+  const csv=fs.readFileSync(path,'utf8');
+  assert.equal(csv,engine.plcIoListCsv(parsed.project));
+  assert.equal(await wire.getAttribute('d'),savedPath);
+  const report=engine.plcIoList(parsed.project);
+  const rows=report.rows.filter(row=>row.connectedPins.length);
+  assert.deepEqual(rows.map(row=>[row.ref,row.terminal,row.type]),[
+    ['A1','X10:7','DI'],['A2','X10:4','DI'],['A3','X10:4','DQ']
+  ]);
+  assert.equal(new Set(rows.map(row=>row.netId)).size,1);
+  await page.close({runBeforeUnload:false});
+}
+
 async function verifyToolbar(toolbarPage, address) {
   toolbarPage.setDefaultTimeout(8000);
   await toolbarPage.goto(address);
@@ -704,6 +743,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
 
     await verifySidebarLayout(await context.newPage(), address);
     await verifyDraftShortcuts(await context.newPage(), address);
+    await verifyPlcLoopback(await context.newPage(), address);
     await verifyToolbar(await context.newPage(), address);
 
     await page.getByRole('button', { name: 'New project' }).click();
