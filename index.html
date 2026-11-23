@@ -1341,7 +1341,7 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ? [['Cartridge size',[spec.cartridgeSize.value,spec.cartridgeSize.unit].filter(Boolean).join(' ')],['Utilization category',spec.utilizationCategory.value],
         ...(spec.insulatedGrippingLugs?[['Insulated gripping lugs','Yes']]:[]),
         ['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
-        ['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
+        [spec.nominalVoltage.unit==='V DC'?'DC breaking capacity':'Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit]]
       : def.family==='miniature-circuit-breaker'
       ? [['Rated current',spec.nominalCurrent.value+' '+spec.nominalCurrent.unit],['Rated voltage',spec.nominalVoltage.value+' '+spec.nominalVoltage.unit],
         ['Trip curve',spec.tripCurve.value],['Breaking capacity',spec.ratedBreakingCapacity.value+' '+spec.ratedBreakingCapacity.unit],

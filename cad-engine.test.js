@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 3939);
+  assert.equal(items.length, 3984);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1729,7 +1729,7 @@ test('ETIMAT P10-QC uses the Quick Connect terminal diagram', () => {
 });
 
 test('ETI CH cartridge dimensions and fuse terminals follow the manufacturer drawing', () => {
-  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link');
+  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link' && !item.name.includes(' gPV '));
   assert.equal(items.length, 106);
   const envelopes = { '8x32': [31.5, 8.5], '10x38': [38, 10.3], '14x51': [51, 14.3], '22x58': [58, 22.2] };
   for (const item of items) {
@@ -1783,6 +1783,23 @@ test('ETI NH fuse variants preserve insulated grips and aM utilization ratings',
     assert.ok([500, 690].includes(voltage));
     assert.equal(part.specifications.ratedBreakingCapacity.value, voltage === 690 ? 100 : 120);
   }
+});
+
+test('ETI photovoltaic fuses expose DC ratings and distinct cartridge outlines', () => {
+  const items = engine.catalog().filter(item => item.family === 'cylindrical-fuse-link' && item.name.includes(' gPV '));
+  assert.equal(items.length, 45);
+  const dimensionsBySize = { '10x38': [38.2, 10.2], '10x85': [85, 10], '14x51': [51, 14.3] };
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const { nominalVoltage, ratedBreakingCapacity, cartridgeSize, dimensions } = part.specifications;
+    assert.equal(nominalVoltage.unit, 'V DC');
+    assert.ok([10, 30, 50].includes(ratedBreakingCapacity.value));
+    assert.deepEqual([dimensions.width.value, dimensions.height.value], dimensionsBySize[cartridgeSize.value]);
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), ['cap-left', 'cap-right']);
+  }
+  assert.equal(engine.component('eti-002625103').specifications.ratedBreakingCapacity.value, 10);
+  assert.equal(engine.component('eti-002625085').specifications.ratedBreakingCapacity.value, 30);
+  assert.equal(engine.component('eti-002625200').specifications.ratedBreakingCapacity.value, 50);
 });
 
 test('every manufacturer part round-trips after placement, movement, rotation and wiring', () => {
