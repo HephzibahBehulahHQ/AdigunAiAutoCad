@@ -274,6 +274,46 @@ test('canvas audit reflects the current local Save As and reopen limits', () => 
   assert.match(audit, /native file picker is mocked/);
 });
 
+async function verifySidebarLayout(page, address) {
+  await page.goto(address);
+  await page.locator('#editableExampleProjects [data-example-project]').first().waitFor();
+  for (const [width, height] of [[1440, 900], [850, 620], [641, 560], [430, 730]]) {
+    await page.setViewportSize({ width, height });
+    await page.waitForFunction(mobile => document.querySelector('#workspace').classList.contains('mobile-tools') === mobile, width <= 640);
+    const layout = await page.locator('#sidepanel').evaluate(sidebar => {
+      const [canvas, common, catalog, projects, pagination] = [
+        '#canvasStage', '[data-symbol-view="common"]', '#symbolList', '#editableExampleProjects', '#catalogPages'
+      ].map(selector => document.querySelector(selector));
+      const side = sidebar.getBoundingClientRect();
+      const tab = common.getBoundingClientRect();
+      const pages = pagination.getBoundingClientRect();
+      return {
+        sideWidth: side.width,
+        canvasLeft: canvas.getBoundingClientRect().left,
+        sideRight: side.right,
+        commonVisible: tab.width > 0 && tab.left >= side.left && tab.right <= side.right && tab.bottom <= side.bottom,
+        paginationVisible: pages.height > 0 && pages.bottom <= tab.top,
+        catalogOverflow: catalog.scrollWidth - catalog.clientWidth,
+        projectOverflow: projects.scrollWidth - projects.clientWidth
+      };
+    });
+    assert.ok(layout.sideWidth > 0 && layout.sideWidth <= 232, JSON.stringify(layout));
+    assert.ok(layout.canvasLeft >= layout.sideRight - 1, 'the sidebar and canvas are docked side by side');
+    assert.ok(layout.commonVisible && layout.paginationVisible, JSON.stringify(layout));
+    assert.ok(layout.catalogOverflow <= 1 && layout.projectOverflow <= 1, JSON.stringify(layout));
+  }
+  const canvas=page.locator('#canvasStage');
+  const openWidth=(await canvas.boundingBox()).width;
+  await page.getByRole('button', { name: 'Collapse sidebar' }).click();
+  assert.ok((await canvas.boundingBox()).width > openWidth + 100, 'collapsing the sidebar gives the grid its space back');
+  await page.getByRole('button', { name: 'Expand sidebar' }).click();
+  await page.locator('#symbolSearch').fill('6ES7212-1AE40-0XB0');
+  const longPart=page.locator('#symbolList [data-insert="siemens-6es7212-1ae40-0xb0"]');
+  assert.equal(await longPart.locator('.symbol-order-code').textContent(), '6ES7212-1AE40-0XB0');
+  assert.match(await longPart.getAttribute('title'), /SIMATIC S7-1200 CPU 1212C/);
+  await page.close();
+}
+
 async function verifyToolbar(toolbarPage, address) {
   toolbarPage.setDefaultTimeout(8000);
   await toolbarPage.goto(address);
@@ -522,6 +562,7 @@ test('browser workflow creates, edits, saves, closes, and reopens a native proje
     await category.selectOption('');
     await type.selectOption('');
 
+    await verifySidebarLayout(await context.newPage(), address);
     await verifyToolbar(await context.newPage(), address);
 
     await page.getByRole('button', { name: 'New project' }).click();
