@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('4M','2M','2M2p')][string]$Series = '4M')
+param([Parameter(Mandatory)][string]$Catalog, [ValidateSet('4M','2M','2M2p','1M-UNI')][string]$Series = '4M')
 
 $ErrorActionPreference = 'Stop'
 $settings = [Xml.XmlReaderSettings]::new()
@@ -7,7 +7,11 @@ $reader = [Xml.XmlReader]::Create((Resolve-Path -LiteralPath $Catalog).Path, $se
 $records = [System.Collections.Generic.List[object]]::new()
 $seen = @{}
 $culture = [Globalization.CultureInfo]::InvariantCulture
-$catalogModel = if ($Series -eq '4M') { 'KZS-4M (3p\+N|3p|2p)' } else { "KZS-$Series" }
+$catalogModel = switch ($Series) {
+    '4M' { 'KZS-4M (3p\+N|3p|2p)' }
+    '1M-UNI' { 'KZS-1M-UNI 1p\+N' }
+    default { "KZS-$Series" }
+}
 $ratingPattern = '(AC|A|B) ([BC])(\d+)/(0[.,]\d+)'
 
 try {
@@ -27,7 +31,7 @@ try {
         $name = $details.Element($ns + 'DESCRIPTION_SHORT').Value
         if ($name -cnotmatch "^RCBO, $catalogModel $ratingPattern$") { continue }
         $offset = if ($Series -eq '4M') { 1 } else { 0 }
-        $topology = if ($Series -eq '4M') { $Matches[1] } elseif ($Series -eq '2M') { '1p+N' } else { '2p' }
+        $topology = if ($Series -eq '4M') { $Matches[1] } elseif ($Series -in '2M','1M-UNI') { '1p+N' } else { '2p' }
         $residualType = $Matches[$offset + 1]
         $curve = $Matches[$offset + 2]
         $current = [int]$Matches[$offset + 3]
@@ -35,13 +39,13 @@ try {
         $protected = [int][string]$topology[0]
         $neutral = $topology.EndsWith('+N')
         if ($Series -eq '4M' -and (($topology -eq '2p') -ne ($residualType -eq 'B'))) { continue }
-        if (($Series -eq '2M2p' -and $residualType -ne 'A') -or ($Series -eq '2M' -and $residualType -eq 'B')) { continue }
+        if (($Series -eq '2M2p' -and $residualType -ne 'A') -or ($Series -in '2M','1M-UNI' -and $residualType -eq 'B')) { continue }
         $description = $details.Element($ns + 'DESCRIPTION_LONG').Value
         $poleDescription = [regex]::Escape($topology.Replace('p', ''))
         if ($description -notmatch 'Short circuit capacity \(kA\) (\d+)/\1(?:,|$)') { continue }
         $capacity = [int]$Matches[1]
-        if (($Series -eq '4M' -and $capacity -ne $(if ($neutral) { 6 } else { 10 })) -or
-            ($Series -ne '4M' -and $capacity -ne 10) -or
+        $expectedCapacity = if ($Series -eq '1M-UNI' -or ($Series -eq '4M' -and $neutral)) { 6 } else { 10 }
+        if ($capacity -ne $expectedCapacity -or
             $description -notmatch "Number of poles $poleDescription," -or
             $description -cnotmatch "Residual current type $residualType," -or
             $description -notmatch "Rated current \(A\) $current/$current,") { continue }

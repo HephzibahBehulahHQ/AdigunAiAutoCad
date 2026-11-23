@@ -1596,13 +1596,14 @@
     });
   });
 
-  const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(terminalCatalog.etiKzs2mBreakers).map(
+  const etiKzsBreakers = terminalCatalog.etiKzs4mBreakers.concat(terminalCatalog.etiKzs2mBreakers, terminalCatalog.etiKzsUniBreakers).map(
     ([code, topology, residualType, curve, current, trip, voltage, capacity, series = '4M']) => {
       const id = 'eti-' + code;
-      const width = { '4M': 70.4, '2M': 35, '2M2p': 35.6 }[series];
-      const height = series === '2M2p' ? 88.4 : 88;
+      const uni = series === '1M-UNI';
+      const [width, height, depth] = uni ? [17.9, 88.2, 73.97]
+        : [{ '4M': 70.4, '2M': 35, '2M2p': 35.6 }[series], series === '2M2p' ? 88.4 : 88];
       const astiReference = 'https://storage-api-pim.etigroup.eu/api/asset-storage/asset/56448a67-7ee8-49ec-934f-f3a2e1dc19bd';
-      const diagram = series === '2M'
+      const diagram = uni ? 'https://storage-api-pim.etigroup.eu/product_db/levels/7605/en-GB/Instruction/7605_Instruction.pdf' : series === '2M'
         ? 'https://www.etigroup.eu/images/product_db/levels/en-GB/159_Instruction_manual.pdf'
         : astiReference + '#page=' + (series === '2M2p' ? '4' : topology === '3p' ? '5' : '6');
       const protectedPoles = Number(topology[0]);
@@ -1621,7 +1622,7 @@
       });
       return deepFreeze({
         schemaVersion: COMPONENT_SCHEMA_VERSION, id, manufacturer: 'ETI', manufacturerPartNumber: code,
-        model: 'KZS-' + series + (series === '4M' ? ' ' + topology : '') + ' ' + residualType + ' ' + curve + current + '/' + trip / 1000,
+        model: 'KZS-' + series + (series === '4M' || uni ? ' ' + topology : '') + ' ' + residualType + ' ' + curve + current + '/' + trip / 1000,
         name: 'Residual-current circuit breaker with overcurrent protection', aliases: ['KZS-' + series, 'RCBO', 'RCD'],
         family: 'residual-current-circuit-breaker', referencePrefix: 'Q', category: 'Electrical · Verified circuit breaker',
         symbol: {
@@ -1636,13 +1637,16 @@
           protectedPoles: { value: protectedPoles }, switchedNeutral: { value: neutral }, tripCurve: { value: curve },
           nominalCurrent: { value: current, unit: 'A' }, nominalVoltage: { value: voltage, unit: 'V AC' },
           residualCurrentType: { value: residualType }, ratedResidualCurrent: { value: trip, unit: 'mA' },
-          ratedBreakingCapacity: { value: capacity, unit: 'kA' }, builtInDepth: { value: 69, unit: 'mm' },
+          ratedBreakingCapacity: { value: capacity, unit: 'kA' },
+          ...(uni ? { supplyConnection: { value: 'Top or bottom' } } : { builtInDepth: { value: 69, unit: 'mm' } }),
           mountingMethod: { value: 'DIN rail' },
-          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' } }
+          dimensions: { width: { value: width, unit: 'mm' }, height: { value: height, unit: 'mm' },
+            ...(depth ? { depth: { value: depth, unit: 'mm' } } : {}) }
         },
         physicalRepresentations: [{
-          ...terminalPanelEnvelope(id, width, height), sourceIndex: 1,
-          scope: 'Nominal front outline from the drawing. Allow separately for rail position, operating clearance and connected conductors.'
+          ...terminalPanelEnvelope(id, width, height), sourceIndex: uni ? 2 : 1, ...(depth ? { depth } : {}),
+          scope: uni ? 'Net device envelope. Rail and installation clearances are separate.'
+            : 'Nominal front outline from the drawing. Allow separately for rail position, operating clearance and connected conductors.'
         }],
         instanceProperties: { comment: { type: 'string', default: '', maximumLength: 160 } },
         sources: [
@@ -1650,7 +1654,10 @@
             documentRevision: '2025-12-04', retrievedAt: '2026-11-23', revisionNote: 'Exact order code and ETIM residual current, rating and release type.' },
           { publisher: 'ETI', title: 'ASTI technical data · KZS-' + series + ' ' + topology,
             url: diagram,
-            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Terminal wiring and nominal front dimensions for the pole configuration.' }
+            documentRevision: null, retrievedAt: '2026-11-23', revisionNote: 'Terminal wiring and nominal front dimensions for the pole configuration.' },
+          ...(uni ? [{ publisher: 'ETI', title: 'KZS-1M UNI · Net dimensions · Order ' + code,
+            url: 'https://www.etigroup.eu/products-services/' + code, documentRevision: null, retrievedAt: '2026-11-23',
+            revisionNote: 'Exact order code net width, height and depth.' }] : [])
         ]
       });
     });

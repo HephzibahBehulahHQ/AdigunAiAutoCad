@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 4936);
+  assert.equal(items.length, 5008);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1923,6 +1923,22 @@ test('ETI KZS-2M variants use the separate neutral and two-protected-pole diagra
       assert.equal(specs.ratedBreakingCapacity.value, 10);
       assert.deepEqual([specs.dimensions.width.value, specs.dimensions.height.value], dimensions);
     }
+  }
+});
+
+test('ETI KZS-1M UNI breakers have distinct line and neutral attachment IDs', () => {
+  const items = engine.catalog().filter(item => item.name.startsWith('KZS-1M-UNI '));
+  assert.equal(items.length, 72);
+  for (const item of items) {
+    const part = engine.component(item.id);
+    const specs = part.specifications;
+    assert.deepEqual(part.symbol.pins.map(pin => [pin.id, pin.manufacturerMarking || pin.localNumber]),
+      [['terminal-2', '2'], ['terminal-1', '1'], ['terminal-N-upper', 'N'], ['terminal-N-lower', 'N']]);
+    assert.equal(specs.supplyConnection.value, 'Top or bottom');
+    assert.equal(specs.ratedBreakingCapacity.value, 6);
+    assert.ok([10, 30, 100].includes(specs.ratedResidualCurrent.value));
+    assert.deepEqual([specs.dimensions.width.value, specs.dimensions.height.value, specs.dimensions.depth.value], [17.9, 88.2, 73.97]);
+    assert.equal(part.physicalRepresentations[0].sourceIndex, 2);
   }
 });
 
