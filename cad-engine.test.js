@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 238);
+  assert.equal(items.length, 268);
   assert.deepEqual(items.map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -473,7 +473,37 @@ test('catalog contains only source-backed engineering components', () => {
     ['weidmuller-2876690000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1521900000', 'feedthrough-terminal', 'X'],
     ['weidmuller-1521930000', 'feedthrough-terminal', 'X'],
-    ['weidmuller-1521970000', 'feedthrough-terminal', 'X']
+    ['weidmuller-1521970000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552740000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2534480000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552780000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552770000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521740000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521830000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2003120000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521800000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521780000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051240000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051320000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051280000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521870000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1991830000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552720000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1552700000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2534470000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2534260000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521690000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521720000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521820000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-1521770000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051500000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051540000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051660000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051610000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2051520000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2881450000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2881470000', 'feedthrough-terminal', 'X'],
+    ['weidmuller-2881460000', 'feedthrough-terminal', 'X']
   ]);
   assert.deepEqual(engine.catalog('phoenix blue ral5015').map(item => item.id), ['phoenix-contact-3209523', 'phoenix-contact-3211760', 'phoenix-contact-3211819', 'phoenix-contact-3212123', 'phoenix-contact-3208126', 'phoenix-contact-3212142', 'phoenix-contact-3211022', 'phoenix-contact-3209581', 'phoenix-contact-3211802', 'phoenix-contact-3209552', 'phoenix-contact-3211775', 'phoenix-contact-3211793', 'phoenix-contact-3210570', 'phoenix-contact-3208524', 'phoenix-contact-3210509', 'phoenix-contact-3002389', 'phoenix-contact-3038710', 'phoenix-contact-3044089', 'phoenix-contact-3044188', 'phoenix-contact-3044238', 'phoenix-contact-3031089', 'phoenix-contact-3031490', 'phoenix-contact-3036152', 'phoenix-contact-3031377', 'phoenix-contact-3036123', 'phoenix-contact-3031225', 'phoenix-contact-3044115', 'phoenix-contact-3044144', 'phoenix-contact-3044209', 'phoenix-contact-3001514', 'phoenix-contact-3006056', 'phoenix-contact-3005086', 'phoenix-contact-3003350', 'phoenix-contact-3004388', 'phoenix-contact-3004977', 'phoenix-contact-3031319', 'phoenix-contact-3044555', 'phoenix-contact-3044649', 'phoenix-contact-3044791', 'phoenix-contact-3031283']);
   for (const [id, height] of [
@@ -920,6 +950,57 @@ test('Weidmüller A2C variants retain push-in terminals and each documented cond
     assert.equal(specs.endCoverRequired.value, true);
     const [outline] = part.physicalRepresentations;
     assert.deepEqual([outline.width, outline.depth], [width, depth]);
+  }
+});
+
+test('Weidmüller A3C and A4C terminal blocks connect every documented anchor to the same net', () => {
+  for (const [id, count, solidLimit, flexibleLimit] of [
+    ['1552740000', 3, 1.5, 1.5],
+    ['2534480000', 3, 1.5, 1.5],
+    ['1552780000', 3, 1.5, 1.5],
+    ['1552770000', 3, 1.5, 1.5],
+    ['1521740000', 3, 2.5, 4],
+    ['1521830000', 3, 2.5, 4],
+    ['2003120000', 3, 2.5, 4],
+    ['1521800000', 3, 2.5, 4],
+    ['1521780000', 3, 2.5, 4],
+    ['2051240000', 3, 4, 6],
+    ['2051320000', 3, 4, 6],
+    ['2051280000', 3, 4, 6],
+    ['1521870000', 3, 2.5, 4],
+    ['1991830000', 3, 6, 10],
+    ['1552720000', 4, 1.5, 1.5],
+    ['1552700000', 4, 1.5, 1.5],
+    ['2534470000', 4, 1.5, 1.5],
+    ['2534260000', 4, 1.5, 1.5],
+    ['1521690000', 4, 2.5, 4],
+    ['1521720000', 4, 2.5, 4],
+    ['1521820000', 4, 2.5, 4],
+    ['1521770000', 4, 2.5, 4],
+    ['2051500000', 4, 4, 6],
+    ['2051540000', 4, 4, 6],
+    ['2051660000', 4, 4, 6],
+    ['2051610000', 4, 4, 6],
+    ['2051520000', 4, 4, 6],
+    ['2881450000', 4, 6, 10],
+    ['2881470000', 4, 6, 10],
+    ['2881460000', 4, 6, 10]
+  ]) {
+    const part = engine.component('weidmuller-' + id);
+    assert.ok(part.sources[0].url.endsWith(id));
+    assert.equal(part.specifications.connectionCount.value, count);
+    assert.equal(part.specifications.rigidConductorRange.maximum, solidLimit);
+    assert.equal(part.specifications.flexibleConductorRange.maximum, flexibleLimit);
+    const block = engine.createInstance(part.id, 100, 100, 'X1');
+    const pins = engine.worldPins(block);
+    assert.equal(pins.length, count);
+    assert.ok(part.symbol.pins.every(pin => pin.connectionType === 'push-in'));
+    const wires = pins.map((pin, index) => ({
+      id: 'wdu-' + index, kind: 'wire', x: pin.x, y: pin.y, x1: pin.x, y1: pin.y,
+      x2: pin.x + (pin.x < block.x ? -25 : 25), y2: pin.y,
+      pinAttachments: { start: { instanceId: block.id, pinId: pin.id }, end: null }
+    }));
+    assert.deepEqual(engine.analyze([block, ...wires]).nets.map(net => net.wireIds), [wires.map(wire => wire.id)]);
   }
 });
 
