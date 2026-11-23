@@ -91,6 +91,20 @@ test('DXF exports Ultra Quick, miniature and NH fuse symbols with editable termi
   }
 });
 
+test('DXF retains every EB2 pole terminal when exporting rotated breaker geometry', async () => {
+  globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
+  require('./cad-dxf');
+  const breaker = engine.createInstance('eti-004671027', 100, 200, 'Q1');
+  breaker.rotation = 90;
+  const exported = await globalThis.AdigunDXF.exportDrawing([breaker]);
+  assert.deepEqual(exported.unsupported, []);
+  const { project } = globalThis.AdigunDXF.importDrawing(exported.text, 'Breaker geometry', 'eb2-dxf');
+  const terminals = project.objects.filter(object => object.kind === 'circle' && Math.abs(object.x2 - object.x - 2.6) < 1e-6);
+  assert.deepEqual(terminals.map(pin => [pin.x, pin.y]), [
+    [142, 146], [58, 146], [142, 182], [58, 182], [142, 218], [58, 218], [142, 254], [58, 254]
+  ]);
+});
+
 test('DXF exports editable custom symbol shapes and transformed terminal marks', async () => {
   globalThis.DxfParser = require('./vendor/dxf-parser-1.1.2');
   require('./cad-dxf');

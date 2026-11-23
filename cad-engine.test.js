@@ -234,7 +234,7 @@ test('catalog contains only source-backed engineering components', () => {
     ['siemens-sitop-psu100c-6ep1332-5ba00']);
   assert.ok(engine.catalog('phoenix PT 2.5').some(item => item.id === 'phoenix-contact-3209510'));
   assert.deepEqual(engine.catalog('unlisted manufacturer 987654321'), []);
-  assert.equal(items.length, 7342);
+  assert.equal(items.length, 7487);
   assert.deepEqual(items.filter(item => !/^(finder|eti)-/.test(item.id)).map(item => [item.componentId, item.family, item.tag]), [
     [componentId, 'feedthrough-terminal', 'X'],
     ['phoenix-contact-3209510', 'feedthrough-terminal', 'X'],
@@ -1642,6 +1642,29 @@ test('direct catalog lookup matches searchable entries and protects the index', 
   }
   assert.equal(engine.catalogItem('missing-component'), null);
   assert.equal(engine.catalogItem('constructor'), null);
+});
+
+test('ETIBREAK EB2 order codes retain separate switched pairs and voltage-specific breaking capacities', () => {
+  const items = engine.catalog('ETIBREAK').filter(item => item.family === 'molded-case-circuit-breaker');
+  assert.equal(items.length, 145);
+  for (const { id } of items) {
+    const part = engine.component(id);
+    const poles = part.specifications.poleCount.value;
+    const pairs = Array.from({ length: poles }, (_, index) => ['line-' + (index + 1), 'load-' + (index + 1)]);
+    assert.ok([3, 4].includes(poles));
+    assert.deepEqual(part.symbol.pins.map(pin => pin.id), pairs.flat());
+    assert.deepEqual(part.electricalFunctions.switchedPolePairs, pairs);
+    assert.deepEqual(part.symbol.internalConnections, []);
+    const { ratedBreakingCapacity: icu, ratedServiceBreakingCapacity: ics } = part.specifications;
+    assert.equal(icu.unit, 'kA at 415 V AC');
+    assert.equal(ics.unit, icu.unit);
+    assert.ok(icu.value >= ics.value);
+  }
+  const sample = engine.component('eti-004671027');
+  assert.equal(sample.specifications.ratedBreakingCapacity.value, 25);
+  assert.equal(sample.specifications.ratedServiceBreakingCapacity.value, 19);
+  const view = sample.physicalRepresentations[0];
+  assert.deepEqual([view.width, view.height, view.depth], [120, 155, 92]);
 });
 
 test('ETIMAT 6 breakers expose documented protected and switched neutral poles', () => {
