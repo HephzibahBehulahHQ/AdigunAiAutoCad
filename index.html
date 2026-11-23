@@ -27,21 +27,47 @@
   </style>
 <style>.drawing-wrap.blank-start #sheetDesign>:not(:first-child):not(#userDrawings):not(#customSheetFrame){display:none}.drawing-wrap.blank-sheet #sheetDesign>:not(:first-child):not(#userDrawings):not(#customSheetFrame){display:none}</style>
 <style>
-    .sidepanel{grid-template-rows:none;grid-auto-rows:minmax(0,1fr)}
+    .workspace{--rail-width:36px;--sidebar-width:clamp(198px,19vw,232px);grid-template-columns:var(--rail-width) var(--sidebar-width) minmax(0,1fr) var(--rail-width)}
+    .workspace .rail.left{grid-column:1;grid-row:1}
+    .workspace .sidepanel{grid-column:2;grid-row:1}
+    .workspace .editor{grid-column:3;grid-row:1}
+    .workspace .rail.right{grid-column:4;grid-row:1}
+    .sidepanel{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-auto-rows:minmax(0,1fr)}
     .sidepanel[hidden],.sidepanel .panel-section[hidden],.catalog-filters[hidden]{display:none}
-    .workspace.sidebar-collapsed:not(.maximized){grid-template-columns:36px 0 minmax(0,1fr) 36px}
+    .workspace.sidebar-collapsed{--sidebar-width:0px}
+    .workspace.maximized{grid-template-columns:0 0 minmax(0,1fr) 0}
     .workspace.maximized .rightpanel{display:none}
     #toggleSidebar{font-size:18px}
+    .sidepanel .panel-section,.sidepanel .tree,.sidepanel .symbol-list{min-width:0}
+    .sidepanel .tree,.sidepanel .symbol-list{min-height:0;overflow-x:hidden;overflow-y:auto}
+    .sidepanel .panel-tabs{display:grid;grid-auto-columns:minmax(0,1fr);grid-auto-flow:column}
+    .sidepanel .panel-tabs button{min-width:0;padding:3px;white-space:normal;line-height:1.15}
+    .sidepanel [aria-label="Component collection"]{height:34px}
+    #projectTree .tree-row>span:not(.folder,.file,.detail),.project-example-title,.project-example-title>span,.project-example-title small,.symbol-name,.symbol-order-code{
+      min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+    }
+    .project-example-row{min-height:30px;height:auto;width:100%;text-align:left;gap:4px}
+    .project-example-row canvas{width:26px;height:24px;flex:none}
+    .project-example-row b{flex:none}
+    .project-example-title{flex:1;display:block}
+    .project-example-title>span{display:block}
+    .project-example-title small{color:#9fb0c4;font-size:9px}
     .catalog-filters{display:grid;gap:4px;padding:0 8px}
     .catalog-filters label{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:4px;color:#b7c6d8}
-    .catalog-filters select{color:#e9f2fa;background:#0d1726;border:1px solid #32445a;border-radius:3px;padding:3px}
+    .catalog-filters select{min-width:0;text-overflow:ellipsis;color:#e9f2fa;background:#0d1726;border:1px solid #32445a;border-radius:3px;padding:3px}
     .symbol-count{padding:4px 8px;margin:0;color:#b7c6d8;font-size:10px}
     .symbol-list{flex:1}
-    .symbol-row{text-align:left;width:100%;min-height:25px;height:auto}
+    .symbol-row{text-align:left;width:100%;min-height:27px;height:auto;gap:5px}
+    .symbol-glyph{flex:0 0 18px}
+    .symbol-label{display:grid;min-width:0;flex:1}
+    .symbol-order-code{color:#9fb0c4;font:9px ui-monospace,monospace}
+    .catalog-pages{flex:none}
     @media(max-width:640px){
-      .workspace.mobile-tools:not(.maximized){grid-template-columns:34px minmax(0,1fr) 34px}
-      .workspace.mobile-tools .sidepanel:not([hidden]){display:grid;visibility:visible;pointer-events:auto;position:absolute;left:34px;top:68px;bottom:25px;width:min(245px,calc(100% - 68px));z-index:6}
-      .workspace.mobile-tools.maximized .sidepanel{visibility:hidden;pointer-events:none}
+      .workspace.mobile-tools:not(.maximized){--rail-width:34px;--sidebar-width:min(205px,49vw);grid-template-columns:var(--rail-width) var(--sidebar-width) minmax(0,1fr) 0}
+      .workspace.mobile-tools.sidebar-collapsed{--sidebar-width:0px}
+      .workspace.mobile-tools .rail.left{width:auto}
+      .workspace.mobile-tools:not(.maximized) .sidepanel:not([hidden]){display:grid;visibility:visible;pointer-events:auto}
+      .workspace.mobile-tools.maximized .rail{visibility:hidden;pointer-events:none}
     }
     .zoom-menu{position:fixed;z-index:300;display:grid;grid-template-columns:repeat(2,minmax(58px,1fr));gap:3px;padding:6px;width:142px;border:1px solid #34465c;border-radius:4px;background:#101a29;box-shadow:0 10px 25px #02061799}.zoom-menu[hidden]{display:none}.zoom-menu button{padding:6px 8px;border-radius:3px;text-align:center;color:#dbe7f3;background:#142136}.zoom-menu button:hover,.zoom-menu button:focus-visible{background:#173c4b;color:white}</style>
 <style>.drafting-context{align-self:center;padding:0 10px;color:#b9c8d8;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.component-edit{box-sizing:border-box;min-width:0;width:100%;max-width:100%;background:#fff;border:1px solid #94a3b8;border-radius:4px;padding:4px 6px;color:#0b1220;font:inherit}.component-source{display:inline-block;margin-top:7px;color:#0891b2;overflow-wrap:anywhere}.component-specs{font-size:11px}</style><style>.resize-controls{pointer-events:none}.resize-outline{fill:none;stroke:#0891b2;stroke-dasharray:3 2;pointer-events:none}.resize-handle{fill:#22d3ee;stroke:#0b1220;cursor:nwse-resize;pointer-events:all}.resize-handle:focus{stroke:#fbbf24;outline:none}@media print{.resize-controls{display:none!important}}#svgPreviewDialog{width:min(900px,calc(100vw - 32px))}#svgPreviewImage{display:block;max-width:100%;max-height:68vh;margin:auto;background:white}#svgPreviewImage[hidden]{display:none}</style><style>@media screen{#canvasStage{padding:0}#drawingWrap{width:100%;height:100%;aspect-ratio:auto;box-shadow:none}#sheetBackground{fill:none}}</style>
@@ -84,7 +110,7 @@
         <div class="tree-row tree-grand" data-sheet="terminals"><span class="file">▱</span><span>120 · Terminal strip</span><span class="detail">A3/120</span></div>
         <div class="tree-row tree-grand" data-sheet="bom"><span class="file">▱</span><span>200 · Bill of materials</span><span class="detail">A3/200</span></div>
       </div><div class="tree project-library-list" id="editableExampleProjects" role="list" aria-label="Editable example projects" style="display:none"></div><div class="notice" hidden><button type="button" id="recoverBrowserDraft">Recover browser draft</button></div><div class="panel-tabs"><button class="active" data-tree-view="tree">Tree</button><button data-tree-view="list">List</button></div></section>
-      <section class="panel-section" id="symbolsPanel"><div class="panel-head"><span class="head-icon">⊕</span><span>Symbols / Macros</span><span class="grow"></span><button aria-label="Search symbols" id="focusSymbols">⌕</button></div><label class="panel-search"><span>⌕</span><input id="symbolSearch" type="search" placeholder="Search symbols" aria-label="Search symbols"></label><div class="catalog-filters" id="catalogFilters"><label>Category <select id="symbolCategory" aria-label="Component category"></select></label><label>Type <select id="symbolType" aria-label="Component type"></select></label></div><p id="symbolCount" class="symbol-count" aria-live="polite"></p><div class="symbol-list" id="symbolList"></div><div class="panel-tabs" role="group" aria-label="Component collection"><button class="active" aria-pressed="true" data-symbol-view="library">All parts</button><button aria-pressed="false" data-symbol-view="common">Common parts</button><button aria-pressed="false" data-symbol-view="project">Project symbols</button></div></section>
+      <section class="panel-section" id="symbolsPanel"><div class="panel-head"><span class="head-icon">⊕</span><span>Symbols / Macros</span><span class="grow"></span><button aria-label="Search symbols" id="focusSymbols">⌕</button></div><label class="panel-search"><span>⌕</span><input id="symbolSearch" type="search" placeholder="Search symbols" aria-label="Search symbols"></label><div class="catalog-filters" id="catalogFilters"><label>Category <select id="symbolCategory" aria-label="Component category"></select></label><label>Type <select id="symbolType" aria-label="Component type"></select></label></div><p id="symbolCount" class="symbol-count" aria-live="polite"></p><div class="symbol-list" id="symbolList"></div><div class="catalog-pages" id="catalogPages"></div><div class="panel-tabs" role="group" aria-label="Component collection"><button class="active" aria-pressed="true" data-symbol-view="library">All parts</button><button aria-pressed="false" data-symbol-view="common">Common parts</button><button aria-pressed="false" data-symbol-view="project">Project symbols</button></div></section>
     </aside>
     <section class="editor" aria-label="Electrical drawing editor">
       <div class="editor-tabs" id="sheetTabs" role="tablist" aria-label="Open drawing sheets"><button class="document-tab" role="tab" data-sheet="power" aria-selected="false">A1/010 · Power supply <span class="tab-close" role="button" tabindex="0" data-close-sheet="power" aria-label="Close Power supply tab">×</span></button><button class="document-tab" role="tab" data-sheet="control" aria-selected="true">A1/020 · Control circuit <span class="tab-close" role="button" tabindex="0" data-close-sheet="control" aria-label="Close Control circuit tab">×</span></button><button class="document-tab" role="tab" data-sheet="plc" aria-selected="false">A2/030 · PLC / I/O <span class="tab-close" role="button" tabindex="0" data-close-sheet="plc" aria-label="Close PLC / I/O tab">×</span></button><span id="draftingContext" class="drafting-context" hidden></span><button class="document-tab add-sheet" id="newSheet" aria-label="Add sheet">+</button></div>
@@ -1298,9 +1324,12 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   }
   function showCatalogPage(host,items,renderItems){
     const pageSize=80;
+    const footer=$("#catalogPages");
     function show(offset){
       host.replaceChildren();
+      footer.replaceChildren();
       renderItems(items.slice(offset,offset+pageSize));
+      host.scrollTop=0;
       if(items.length<=pageSize)return;
       const navigation=document.createElement("div");
       navigation.className="panel-tabs";
@@ -1311,10 +1340,10 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
       ]){
         const button=document.createElement("button");
         button.type="button";button.textContent=label;button.disabled=disabled;
-        button.addEventListener("click",()=>{show(start);host.scrollTop=0;host.querySelector("button")?.focus();});
+        button.addEventListener("click",()=>{show(start);host.querySelector("button")?.focus();});
         navigation.append(button);
       }
-      host.append(navigation);
+      footer.append(navigation);
     }
     show(0);
   }
@@ -1384,9 +1413,23 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         }
         const button=document.createElement("button");
         button.className="symbol-row";button.draggable=true;button.dataset.insert=item.id;
+        button.title=item.name;
+        button.setAttribute("aria-label",item.name);
         const glyph=document.createElement("span");
         glyph.className="symbol-glyph";glyph.textContent=item.tag.slice(0,3);
-        const label=document.createElement("span");label.textContent=item.name;
+        const label=document.createElement("span");
+        label.className="symbol-label";
+        const name=document.createElement("span");
+        name.className="symbol-name";
+        const separator=item.customSymbol?-1:item.name.lastIndexOf(" · ");
+        name.textContent=separator<0?item.name:item.name.slice(0,separator);
+        label.append(name);
+        if(separator>=0){
+          const code=document.createElement("small");
+          code.className="symbol-order-code";
+          code.textContent=item.name.slice(separator+3);
+          label.append(code);
+        }
         button.append(glyph,label);host.append(button);
       }
       if(!items.length){
@@ -2205,7 +2248,8 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
     notify('Drag a rectangle to export that region as SVG. Esc cancels.');
   }
   const openSidebarPanels = new Set(['project', 'symbols']);
-  let sidebarExpanded = !matchMedia('(max-width:640px)').matches;
+  const compactSidebarMedia=matchMedia('(max-width:640px)');
+  let sidebarExpanded = !compactSidebarMedia.matches;
   function syncSidebar(){
     const visible = sidebarExpanded && openSidebarPanels.size > 0;
     $('#sidepanel').hidden = !visible;
@@ -2983,14 +3027,16 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
         button.setAttribute('aria-label','Open '+entry.title+' as an editable copy');
         const description=[entry.domain,entry.standardProfile,sheets,connectedSheets,complexity,status,scaleStatus].filter(Boolean).join(' · ');
         button.setAttribute('aria-description',description);
-        button.title=description;
+        button.title=entry.title+' — '+description;
         const preview=metrics?renderExamplePreview(validation.wirePreview):null;
         if(preview)button.style.height='auto';
         const number=document.createElement('b');
         number.textContent=String(index+1).padStart(2,'0');
         const title=document.createElement('span');
         title.className='project-example-title';
-        title.textContent=entry.title;
+        const name=document.createElement('span');
+        name.textContent=entry.title;
+        title.append(name);
         const metadata=document.createElement('small');
         metadata.style.display='block';
         metadata.textContent=[entry.domain,scaleStatus].filter(Boolean).join(' · ');
@@ -3099,7 +3145,11 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   renderSymbolSidebar();
   setProjectExplorerView('list');
   renderEditableExampleProjects();
-  if(matchMedia('(max-width:640px)').matches)workspace.classList.add('mobile-tools');
+  workspace.classList.toggle('mobile-tools',compactSidebarMedia.matches);
+  compactSidebarMedia.addEventListener('change',event=>{
+    workspace.classList.toggle('mobile-tools',event.matches);
+    syncSidebar();
+  });
   syncSidebar();
   initializing=false;
   $('#recoverBrowserDraft').addEventListener('click',recoverBrowserDraft);

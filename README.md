@@ -33,6 +33,8 @@ Open **Symbol Library**, pick a component to see its terminals in **Properties**
 
 Click **Project Explorer** or **Symbol Library** on the left rail to open or close that panel. The double-chevron button collapses the whole sidebar and restores the previous panel selection when reopened. In the library, filter **All parts** by category or type, browse **Common parts** for 100 representative manufacturer parts, or open **Project symbols** for definitions saved in your project.
 
+The sidebar keeps the collection tabs and page buttons below its scrolling list. Each catalog row shows the model and order code, with the full name available on hover. Collapse the sidebar to expand the drawing area on a narrow screen.
+
 The top **Documentation** menu opens the bill of materials, exports the wire list, and prints the project set. **Drawing Setup** opens the sheet’s drafting settings and controls its print frame. Open any top menu with a click or the Down Arrow key, then use the arrow keys and Enter to run a command.
 
 Shift-click a sidebar symbol to quick-insert it at a clear location in the visible drawing. If no candidate fits, the editor opens the placement preview so you can choose a spot.
