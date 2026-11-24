@@ -81,7 +81,14 @@
     <nav class="topnav" aria-label="Workspace modules"><button aria-haspopup="menu" aria-expanded="false" aria-controls="moduleMenu" data-module="Electrical">Electrical</button><button aria-haspopup="menu" aria-expanded="false" aria-controls="moduleMenu" data-module="Automation">Automation</button><button aria-haspopup="menu" aria-expanded="false" aria-controls="moduleMenu" data-module="Panel Design">Panel Design</button><button aria-haspopup="menu" aria-expanded="false" aria-controls="moduleMenu" data-module="Documentation">Documentation</button><button aria-haspopup="menu" aria-expanded="false" aria-controls="moduleMenu" data-module="Drawing Setup">Drawing Setup</button></nav>
     <div class="module-menu" id="moduleMenu" hidden role="menu" aria-labelledby="moduleMenuTitle"><div class="module-menu-head" id="moduleMenuTitle">Electrical</div><div class="module-menu-actions" id="moduleMenuActions"></div></div>
     <div class="draft-tool-strip" id="upperDraftTools" aria-label="Drafting controls" role="group"></div><span id="draftToolsDock" hidden></span><button class="search-command" id="openCommands" aria-label="Open command palette (Control K)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Commands</span><kbd>Ctrl K</kbd></button><button class="window-control" id="maximize" aria-label="Toggle compact canvas" aria-pressed="false">□</button>
+    <select id="cadLanguage" aria-label="Language" title="Language" style="flex:none;min-width:0;max-width:clamp(54px,10vw,145px);height:28px;background:#111e30;color:#e8f1fa;border:1px solid #34465c;border-radius:4px;padding-inline:4px">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="yo">Yorùbá</option>
+      <option value="pcm">Nigerian Pidgin</option>
+    </select>
   </header>
+
   <div class="toolbar" role="toolbar" aria-label="Drawing commands">
     <div class="tool-group"><button class="tool" data-action="new" data-tip="New project" aria-label="New project"><svg><use href="#i-file"/></svg></button><button class="tool" data-action="open" data-tip="Open project file" aria-label="Open project file"><svg><use href="#i-folder"/></svg></button><button class="tool" data-action="save" data-tip="Save project locally" aria-label="Save project locally"><svg><use href="#i-save"/></svg></button><button class="tool" data-action="print" data-tip="Print drawing" aria-label="Print drawing"><svg><use href="#i-print"/></svg></button></div>
     <div class="tool-group"><button class="tool" data-action="undo" data-tip="Undo drawing command · Ctrl Z" aria-label="Undo" disabled><svg><use href="#i-undo"/></svg></button><button class="tool" data-action="redo" data-tip="Redo drawing command · Ctrl Shift Z" aria-label="Redo" disabled><svg><use href="#i-redo"/></svg></button></div>
@@ -3427,7 +3434,45 @@ function renderCustomSheetNavigation(){if(state.projectModel){$('#newSheet').hid
   document.addEventListener('keyup',event=>{if(event.code==='Space')spacePan=false;});
   window.addEventListener('blur',()=>{spacePan=false;});
   window.addEventListener('beforeunload',e=>{flushBrowserDraft();if(!dirty)return;e.preventDefault();e.returnValue='';});
-})();</script>
+})();
+    {
+      const picker = document.querySelector('#cadLanguage');
+      const labels = {
+        en: ['Language', 'Electrical', 'Automation', 'Panel Design', 'Documentation', 'Drawing Setup', 'Commands', 'Account'],
+        de: ['Sprache', 'Elektrotechnik', 'Automatisierung', 'Schaltschrankdesign', 'Dokumentation', 'Zeichnungseinstellungen', 'Befehle', 'Konto'],
+        yo: ['Èdè', 'Ẹ̀rọ iná', 'Ìṣàkóso aládàáṣiṣẹ́', 'Àpẹrẹ pánẹ́lì', 'Àkọsílẹ̀', 'Ètò àwòrán', 'Àwọn àṣẹ', 'Àkọọ́lẹ̀'],
+        pcm: ['Language', 'Electrical', 'Automation', 'Panel design', 'How e work', 'Drawing setup', 'Commands', 'Account'],
+      };
+      const storageKey = 'adigunaiautocad-language';
+      const applyLanguage = () => {
+        const language = picker.value;
+        const [name, ...translations] = labels[language];
+        document.documentElement.lang = language;
+        picker.setAttribute('aria-label', name);
+        picker.title = name;
+        document.querySelectorAll('.topnav [data-module]').forEach((button, index) => {
+          button.textContent = translations[index];
+        });
+        document.querySelector('#openCommands span').textContent = translations[5];
+        document.querySelector('#openCommands').setAttribute('aria-label', `${translations[5]} (Ctrl+K)`);
+        const account = document.querySelector('.cad-account-launch');
+        if (account) {
+          account.querySelector('span').textContent = translations[6];
+          account.setAttribute('aria-label', translations[6]);
+          account.title = translations[6];
+        }
+      };
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (Object.hasOwn(labels, saved)) picker.value = saved;
+      } catch { /* The switcher still works when storage is unavailable. */ }
+      picker.addEventListener('change', () => {
+        applyLanguage();
+        try { localStorage.setItem(storageKey, picker.value); } catch { /* Keep the current selection. */ }
+      });
+      applyLanguage();
+    }
+  </script>
 </body>
 </html>
 
