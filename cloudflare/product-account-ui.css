@@ -15,7 +15,11 @@
 .product-account input, .product-account select { width: 100%; }
 .product-account button { margin: .25rem .25rem .25rem 0; }
 .product-account [role="status"] { min-height: 1.5em; }
-.topbar .cad-account-launch { flex: 0 0 auto; min-width: 42px; padding-inline: .65rem; }
+.topbar .cad-account-launch { position: relative; flex: 0 0 auto; min-width: 42px; padding-inline: .65rem; }
+.topbar .cad-account-launch::after { position: absolute; top: 3px; right: 3px; width: 8px; height: 8px; border: 1px solid #0d1727; border-radius: 50%; content: ""; background: #7a8798; }
+.topbar .cad-account-launch[data-account-state="active"]::after { background: #36d399; box-shadow: 0 0 8px #36d39988; }
+.topbar .cad-account-launch[data-account-state="unknown"]::after { background: #f5b942; }
 @media (max-width: 900px) {
   .topbar .cad-account-launch span { display: none; }
 }
+

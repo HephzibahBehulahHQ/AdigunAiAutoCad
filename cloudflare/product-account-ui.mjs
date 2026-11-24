@@ -20,6 +20,23 @@ const errors = {
 export function mountProductAccount() {
   const workspace = document.querySelector("#app");
   const accountButton = workspace.querySelector(".cad-account-launch");
+  const accountStateLabels = {
+    en: ["Account active", "Account signed out", "Account status unverified"],
+    de: ["Konto aktiv", "Abgemeldet", "Kontostatus nicht bestätigt"],
+    yo: ["Àkọọ́lẹ̀ ṣiṣẹ́", "Ìwọ ti jáde", "A kò tíì jẹ́rìí sí àkọọ́lẹ̀"],
+    pcm: ["Account active", "You don sign out", "We never confirm account status"],
+  };
+  const languagePicker = document.querySelector("#cadLanguage");
+  const accountStatusLabel = (state) => {
+    const labels = accountStateLabels[languagePicker?.value] || accountStateLabels.en;
+    return labels[state === "active" ? 0 : state === "signed-out" ? 1 : 2];
+  };
+  const setAccountState = (state) => {
+    accountButton.dataset.accountState = state;
+    accountButton.setAttribute("aria-label", accountStatusLabel(state));
+    accountButton.title = accountStatusLabel(state);
+  };
+  setAccountState("unknown");
 
   const dialog = document.createElement("dialog");
   dialog.className = "product-account";
@@ -91,6 +108,7 @@ export function mountProductAccount() {
   function updateAccess(result) {
     clearTimeout(timer);
     signedIn = result.step === "signed-in";
+    setAccountState(signedIn ? "active" : "signed-out");
     if (typeof result.trialAvailable === "boolean") trialAvailable = result.trialAvailable;
     const remaining = Number(result.remainingMs) || 0;
     workspace.inert = !signedIn && remaining <= 0;
@@ -126,6 +144,7 @@ export function mountProductAccount() {
     password.autocomplete = mode.value === "sign-in" ? "current-password" : "new-password";
   });
   accountButton.addEventListener("click", showAccount);
+  languagePicker?.addEventListener("change", () => setAccountState(accountButton.dataset.accountState || "unknown"));
   close.addEventListener("click", () => dialog.close());
   dialog.addEventListener("cancel", (event) => {
     if (workspace.inert) event.preventDefault();
@@ -169,9 +188,11 @@ export function mountProductAccount() {
     });
   });
   void accountRequest({ step: "guest" }).then(updateAccess, () => {
+    setAccountState("unknown");
     message.textContent = "Account service unavailable. Try again.";
     showAccount();
   });
 }
 
 mountProductAccount();
+

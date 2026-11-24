@@ -1,0 +1,23 @@
+.adigun-bot{position:fixed;right:18px;bottom:18px;z-index:1000;color:#e9f2fa;font:13px/1.45 Inter,ui-sans-serif,system-ui,sans-serif}
+.adigun-bot-launch{display:flex;align-items:center;gap:9px;min-height:48px;padding:0 15px;border:1px solid #22d3ee;border-radius:999px;background:#0b2232;color:#e8fbff;box-shadow:0 10px 30px #02061780;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.adigun-bot-launch:hover{transform:translateY(-2px);border-color:#d4af37;box-shadow:0 0 22px #22d3ee55}
+.adigun-bot-launch svg{width:21px;height:21px;fill:none;stroke:#22d3ee;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.adigun-bot-panel{position:absolute;right:0;bottom:60px;display:grid;grid-template-rows:auto auto minmax(90px,1fr) auto;width:min(370px,calc(100vw - 28px));height:min(470px,calc(100dvh - 100px));border:1px solid #22d3ee66;border-radius:12px;background:#0b1220;box-shadow:0 18px 50px #020617c9;overflow:hidden}
+.adigun-bot-panel[hidden]{display:none}
+.adigun-bot-panel>header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #28384d;background:#111c2d}
+.adigun-bot-panel>header strong{color:#f7fbff;font-size:14px}
+.adigun-bot-panel>header button{width:29px;height:29px;border:1px solid #34465c;border-radius:7px;color:#b9c8d8;font-size:19px;cursor:pointer}
+.adigun-bot-intro{margin:0;padding:10px 14px;border-bottom:1px solid #28384d;color:#aebed0;font-size:12px}
+.adigun-bot-log{display:flex;flex-direction:column;gap:9px;overflow-y:auto;padding:12px}
+.adigun-bot-message{display:grid;gap:4px;max-width:92%;margin:0;padding:9px 11px;border:1px solid #28384d;border-radius:10px;background:#111c2d;white-space:pre-wrap;overflow-wrap:anywhere}
+.adigun-bot-message.user{align-self:flex-end;border-color:#176577;background:#103242}
+.adigun-bot-message strong{color:#22d3ee;font-size:10px}
+.adigun-bot-message span{color:#e3edf8}
+.adigun-bot-panel form{display:grid;grid-template-columns:1fr auto;gap:8px;padding:10px;border-top:1px solid #28384d;background:#111c2d}
+.adigun-bot-panel textarea{min-width:0;resize:vertical;max-height:100px;padding:8px 10px;border:1px solid #34465c;border-radius:8px;background:#0b1220;color:#eef6ff;font:inherit}
+.adigun-bot-panel form button{align-self:end;min-height:37px;padding:0 12px;border:1px solid #22d3ee;border-radius:8px;background:#133747;color:#e8fbff;cursor:pointer}
+.adigun-bot-panel form button:disabled{opacity:.5;cursor:wait}
+.adigun-bot .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:600px){.adigun-bot{right:12px;bottom:12px}.adigun-bot-panel{width:calc(100vw - 24px);height:min(420px,calc(100dvh - 88px))}}
+@media(prefers-reduced-motion:reduce){.adigun-bot-launch{transition:none}.adigun-bot-launch:hover{transform:none}}
+
