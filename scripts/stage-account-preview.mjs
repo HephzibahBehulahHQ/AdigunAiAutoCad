@@ -36,15 +36,18 @@ const accountButton = '<button type="button" class="search-command cad-account-l
 const version = createHash("sha256")
   .update(await readFile(new URL("cloudflare/product-account-ui.mjs", root)))
   .update(await readFile(new URL("cloudflare/product-account-ui.css", root)))
+  .update(await readFile(new URL("cloudflare/product-bot-ui.mjs", root)))
+  .update(await readFile(new URL("cloudflare/product-bot-ui.css", root)))
   .digest("hex").slice(0, 12);
 await writeFile(index, (html.slice(0, toolbarEnd) + accountButton + html.slice(toolbarEnd))
-  .replace("</head>", `<link rel="stylesheet" href="./product-account-ui.css?v=${version}">\n</head>`)
-  .replace("</body>", `<script type="module" src="./product-account-ui.mjs?v=${version}"></script>\n</body>`));
+  .replace("</head>", `<link rel="stylesheet" href="./product-account-ui.css?v=${version}">\n<link rel="stylesheet" href="./product-bot-ui.css?v=${version}">\n</head>`)
+  .replace("</body>", `<script type="module" src="./product-account-ui.mjs?v=${version}"></script>\n<script type="module" src="./product-bot-ui.mjs?v=${version}"></script>\n</body>`));
 const serviceWorker = new URL("service-worker.js", output);
 const shell = await readFile(serviceWorker, "utf8");
 await writeFile(serviceWorker, shell
   .replace("adigun-editor-shell-v2", `adigun-editor-account-shell-${version}`)
   .replace("cache.addAll([editorUrl, ...scripts]))", "cache.addAll([editorUrl, ...scripts])).then(() => self.skipWaiting())"));
-for (const asset of ["product-account-ui.mjs", "product-account-ui.css"]) {
+for (const asset of ["product-account-ui.mjs", "product-account-ui.css", "product-bot-ui.mjs", "product-bot-ui.css"]) {
   await copyFile(new URL("cloudflare/" + asset, root), new URL(asset, output));
 }
+
