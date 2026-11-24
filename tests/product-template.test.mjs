@@ -6,6 +6,9 @@ const account = await readFile(new URL("../cloudflare/product-account-ui.mjs", i
 const accountCss = await readFile(new URL("../cloudflare/product-account-ui.css", import.meta.url), "utf8");
 const stage = await readFile(new URL("../scripts/stage-account-preview.mjs", import.meta.url), "utf8");
 const wrangler = await readFile(new URL("../wrangler.toml", import.meta.url), "utf8");
+const botUi = await readFile(new URL("../cloudflare/product-bot-ui.mjs", import.meta.url), "utf8");
+const botCss = await readFile(new URL("../cloudflare/product-bot-ui.css", import.meta.url), "utf8");
+const help = await readFile(new URL("../docs/HELP.md", import.meta.url), "utf8");
 
 test("product account icon reflects verified active, signed-out, and unknown states", () => {
   for (const state of ['"active"', '"signed-out"', '"unknown"']) assert.ok(account.includes(state));
@@ -32,3 +35,16 @@ test("both preview and production route the BOT API through the Worker", () => {
     assert.match(route, /"\/api\/bot"/);
   }
 });
+
+test("floating BOT supports window controls, keyboard movement, and local preferences", () => {
+  for (const feature of ["data-minimize", "data-maximize", "data-drag-handle", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "localStorage", "ResizeObserver"]) {
+    assert.ok(botUi.includes(feature), `missing ${feature}`);
+  }
+  assert.match(botCss, /resize:\s*both/);
+  assert.match(botCss, /\.is-minimized/);
+  assert.match(botCss, /\.is-maximized/);
+  assert.match(help, /Using the Adigun BOT Floating Window/);
+  assert.match(help, /device/);
+  assert.match(help, /cannot inspect or edit/);
+});
+
