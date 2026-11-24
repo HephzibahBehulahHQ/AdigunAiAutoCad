@@ -21,9 +21,11 @@ export function mountProductAccount() {
   const workspace = document.querySelector("#app");
   const accountButton = document.createElement("button");
   accountButton.type = "button";
-  accountButton.className = "powerlab-account-launch";
-  accountButton.textContent = "Account";
-  document.body.append(accountButton);
+  accountButton.className = "search-command cad-account-launch";
+  accountButton.setAttribute("aria-label", "Account");
+  accountButton.title = "Account";
+  accountButton.innerHTML = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20v-2a7 7 0 0 1 14 0v2"/></svg><span>Account</span>';
+  workspace.querySelector(".topbar").append(accountButton);
 
   const dialog = document.createElement("dialog");
   dialog.className = "product-account";
