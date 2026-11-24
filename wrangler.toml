@@ -17,6 +17,14 @@ name = "ACCOUNT_LIMITER"
 namespace_id = "1"
 simple = { limit = 10, period = 60 }
 
+[ai]
+binding = "AI"
+
+[[ratelimits]]
+name = "BOT_LIMITER"
+namespace_id = "3"
+simple = { limit = 20, period = 60 }
+
 [env.production]
 name = "adigunaiautocad-product"
 workers_dev = false
@@ -35,3 +43,12 @@ run_worker_first = ["/api/account"]
 name = "ACCOUNT_LIMITER"
 namespace_id = "2"
 simple = { limit = 10, period = 60 }
+
+[env.production.ai]
+binding = "AI"
+
+[[env.production.ratelimits]]
+name = "BOT_LIMITER"
+namespace_id = "4"
+simple = { limit = 20, period = 60 }
+
