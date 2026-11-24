@@ -5,6 +5,8 @@ on:
     paths:
       - "cloudflare/**"
       - "tests/product-account-worker.test.mjs"
+      - "tests/product-bot.test.mjs"
+      - "tests/product-template.test.mjs"
       - "supabase/migrations/**"
       - "scripts/stage-account-preview.mjs"
       - "wrangler.toml"
@@ -34,6 +36,8 @@ on:
     paths:
       - "cloudflare/**"
       - "tests/product-account-worker.test.mjs"
+      - "tests/product-bot.test.mjs"
+      - "tests/product-template.test.mjs"
       - "supabase/migrations/**"
       - "scripts/stage-account-preview.mjs"
       - "wrangler.toml"
@@ -88,6 +92,7 @@ jobs:
       - name: Verify account Worker and preview packaging
         run: |
           node --test tests/product-account-worker.test.mjs
+          node --test tests/product-bot.test.mjs tests/product-template.test.mjs
           node scripts/stage-account-preview.mjs
       - name: Upload editor verification screenshots
         if: always()
@@ -95,3 +100,4 @@ jobs:
         with:
           name: cad-editor-verification
           path: ${{ runner.temp }}/cad-screenshots
+
