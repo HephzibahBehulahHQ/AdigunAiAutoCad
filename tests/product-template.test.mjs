@@ -9,6 +9,7 @@ const wrangler = await readFile(new URL("../wrangler.toml", import.meta.url), "u
 const botUi = await readFile(new URL("../cloudflare/product-bot-ui.mjs", import.meta.url), "utf8");
 const botCss = await readFile(new URL("../cloudflare/product-bot-ui.css", import.meta.url), "utf8");
 const help = await readFile(new URL("../docs/HELP.md", import.meta.url), "utf8");
+const deploy = await readFile(new URL("../.github/workflows/cloudflare-worker.yml", import.meta.url), "utf8");
 
 test("product account icon reflects verified active, signed-out, and unknown states", () => {
   for (const state of ['"active"', '"signed-out"', '"unknown"']) assert.ok(account.includes(state));
@@ -48,3 +49,13 @@ test("floating BOT supports window controls, keyboard movement, and local prefer
   assert.match(help, /cannot inspect or edit/);
 });
 
+
+
+test("production Worker release uses protected credentials and verifies the route", () => {
+  assert.match(deploy, /environment: cloudflare-production/);
+  assert.match(deploy, /secrets\\.CLOUDFLARE_API_TOKEN/);
+  assert.match(deploy, /vars\\.CLOUDFLARE_ACCOUNT_ID/);
+  assert.match(deploy, /deploy --env production/);
+  assert.match(deploy, /adigunaiautocad\\.hephzibahbehulah\\.com\\/api\\/bot/);
+  assert.match(deploy, /test "\\$status" = "405"/);
+});
