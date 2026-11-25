@@ -57,7 +57,8 @@ async function componentBankReport(request, env, filename) {
 export default {
   fetch(request, env) {
     const path = new URL(request.url).pathname;
-    if (path === "/docs/reports/component-bank.csv") return componentBankReport(request, env, "component-bank.csv");\n    if (path === "/docs/reports/component-bank.json") return componentBankReport(request, env, "component-bank.json");
+    if (path === "/docs/reports/component-bank.csv") return componentBankReport(request, env, "component-bank.csv");
+    if (path === "/docs/reports/component-bank.json") return componentBankReport(request, env, "component-bank.json");
     if (path === "/api/account")
       return accountWorker.fetch(request, env);
     if (path === "/api/bot") return productBot.fetch(request, env);
