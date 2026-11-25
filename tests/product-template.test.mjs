@@ -51,11 +51,12 @@ test("floating BOT supports window controls, keyboard movement, and local prefer
 
 
 
+
 test("production Worker release uses protected credentials and verifies the route", () => {
   assert.match(deploy, /environment: cloudflare-production/);
-  assert.match(deploy, /secrets\\.CLOUDFLARE_API_TOKEN/);
-  assert.match(deploy, /vars\\.CLOUDFLARE_ACCOUNT_ID/);
+  assert.ok(deploy.includes("secrets.CLOUDFLARE_API_TOKEN"));
+  assert.ok(deploy.includes("vars.CLOUDFLARE_ACCOUNT_ID"));
   assert.match(deploy, /deploy --env production/);
-  assert.match(deploy, /adigunaiautocad\\.hephzibahbehulah\\.com\\/api\\/bot/);
-  assert.match(deploy, /test "\\$status" = "405"/);
+  assert.ok(deploy.includes("adigunaiautocad.hephzibahbehulah.com/api/bot"));
+  assert.ok(deploy.includes('test "$status" = "405"'));
 });
