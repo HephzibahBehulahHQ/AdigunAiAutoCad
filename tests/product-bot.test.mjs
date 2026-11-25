@@ -128,3 +128,27 @@ test("the Worker rejects a component inventory manifest with a size mismatch", a
   assert.equal(response.status, 502);
 });
 
+
+test("the Worker serves the JSON inventory at its existing URL", async () => {
+  const source = new TextEncoder().encode('{"components":[{"id":"Q1"}]}');
+  const path = "/docs/reports/component-bank.json.part-001";
+  const manifest = {
+    version: 1,
+    bytes: source.byteLength,
+    parts: [{ path, bytes: source.byteLength }],
+  };
+  const assets = {
+    fetch: async (request) => {
+      const pathname = new URL(request.url).pathname;
+      if (pathname === "/docs/reports/component-bank.json.parts.json") return Response.json(manifest);
+      return pathname === path ? new Response(source) : new Response(null, { status: 404 });
+    },
+  };
+  const response = await productWorker.fetch(
+    new Request(origin + "/docs/reports/component-bank.json"),
+    { ASSETS: assets },
+  );
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type"), /application\/json/);
+  assert.deepEqual(await response.json(), { components: [{ id: "Q1" }] });
+});
