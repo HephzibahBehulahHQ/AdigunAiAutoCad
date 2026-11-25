@@ -60,6 +60,9 @@ test("production Worker release uses protected credentials and verifies the rout
   assert.match(deploy, /deploy --env production/);
   assert.ok(deploy.includes("adigunaiautocad.hephzibahbehulah.com/api/bot"));
   assert.ok(deploy.includes('test "$status" = "405"'));
+  assert.ok(deploy.includes("Verify streamed component inventory reports"));
+  assert.ok(deploy.includes("%{size_download}"));
+  assert.ok(deploy.includes("component-bank.$report"));
 });
 
 test("Worker report assets stay below the per-file limit and keep the CSV URL", () => {

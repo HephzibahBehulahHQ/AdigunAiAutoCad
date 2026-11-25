@@ -53,4 +53,18 @@ jobs:
         run: |
           status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' https://adigunaiautocad.hephzibahbehulah.com/api/bot)"
           test "$status" = "405"
+      - name: Verify streamed component inventory reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://adigunaiautocad.hephzibahbehulah.com"
+          for report in csv json; do
+            url="$base/docs/reports/component-bank.$report"
+            headers="$(curl --fail --silent --show-error --head --retry 3 --retry-delay 2 "$url")"
+            expected="$(printf '%s\n' "$headers" | awk 'tolower($1) == "content-length:" { gsub("\r", "", $2); print $2 }')"
+            test -n "$expected"
+            actual="$(curl --fail --silent --show-error --output /dev/null --write-out '%{size_download}' --retry 3 --retry-delay 2 "$url")"
+            test "$actual" = "$expected"
+            printf '%s: verified %s bytes\n' "$report" "$actual"
+          done
 
