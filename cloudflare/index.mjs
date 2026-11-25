@@ -57,7 +57,8 @@ async function componentBankCsv(request, env) {
 export default {
   fetch(request, env) {
     const path = new URL(request.url).pathname;
-    if (path === "/docs/reports/component-bank.csv") return componentBankCsv(request, env);\n    if (path === "/api/account")
+    if (path === "/docs/reports/component-bank.csv") return componentBankCsv(request, env);
+    if (path === "/api/account")
       return accountWorker.fetch(request, env);
     if (path === "/api/bot") return productBot.fetch(request, env);
     return env.ASSETS.fetch(request);
