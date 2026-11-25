@@ -10,7 +10,7 @@ PRODUCT_ACCOUNT_PREFIX = "adigunaiautocad_preview"
 [assets]
 directory = ".wrangler/account-assets"
 binding = "ASSETS"
-run_worker_first = ["/api/account", "/api/bot", "/docs/reports/component-bank.csv"]
+run_worker_first = ["/api/account", "/api/bot", "/docs/reports/component-bank.csv", "/docs/reports/component-bank.json"]
 
 [[ratelimits]]
 name = "ACCOUNT_LIMITER"
@@ -37,7 +37,7 @@ PRODUCT_ACCOUNT_PREFIX = "adigunaiautocad"
 [env.production.assets]
 directory = ".wrangler/account-assets"
 binding = "ASSETS"
-run_worker_first = ["/api/account", "/api/bot", "/docs/reports/component-bank.csv"]
+run_worker_first = ["/api/account", "/api/bot", "/docs/reports/component-bank.csv", "/docs/reports/component-bank.json"]
 
 [[env.production.ratelimits]]
 name = "ACCOUNT_LIMITER"

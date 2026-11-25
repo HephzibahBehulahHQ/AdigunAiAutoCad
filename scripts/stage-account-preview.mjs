@@ -7,7 +7,7 @@ const assets = [
   "index.html", "terminal-catalog.js", "cad-engine.js", "cad-dxf.js",
   "service-worker.js", "CNAME", ".nojekyll",
   "docs/reports/project-library-validation.json",
-  "docs/reports/component-bank.json",
+
   "examples/real-projects/library.json",
   "vendor/dxf-parser-1.1.2.js", "vendor/dxf-writer-2.8.9.mjs",
 ];
@@ -26,36 +26,36 @@ for (const asset of assets) {
   await copyFile(new URL(asset, root), target);
 }
 
-const componentBankCsv = new URL("docs/reports/component-bank.csv", root);
-const componentBankSource = await readFile(componentBankCsv);
-if (process.env.ADIGUN_ACCOUNT_ASSETS_DIR) {
-  const target = new URL("docs/reports/component-bank.csv", output);
-  await mkdir(new URL(".", target), { recursive: true });
-  await copyFile(componentBankCsv, target);
-} else {
+for (const extension of ["csv", "json"]) {
+  const filename = `component-bank.${extension}`;
+  const report = new URL(`docs/reports/${filename}`, root);
+  const source = await readFile(report);
+  if (process.env.ADIGUN_ACCOUNT_ASSETS_DIR) {
+    const target = new URL(`docs/reports/${filename}`, output);
+    await mkdir(new URL(".", target), { recursive: true });
+    await copyFile(report, target);
+    continue;
+  }
+
   const chunkBytes = 8 * 1024 * 1024;
   const parts = [];
-  for (let start = 0; start < componentBankSource.length;) {
-    let end = Math.min(start + chunkBytes, componentBankSource.length);
-    if (end < componentBankSource.length) {
-      const newline = componentBankSource.lastIndexOf(0x0a, end - 1);
+  for (let start = 0; start < source.length;) {
+    let end = Math.min(start + chunkBytes, source.length);
+    if (extension === "csv" && end < source.length) {
+      const newline = source.lastIndexOf(0x0a, end - 1);
       if (newline < start) throw new Error("A component-bank CSV row exceeds the 8 MiB asset chunk size");
       end = newline + 1;
     }
-    const path = `docs/reports/component-bank.csv.part-${String(parts.length + 1).padStart(3, "0")}`;
+    const path = `docs/reports/${filename}.part-${String(parts.length + 1).padStart(3, "0")}`;
     const target = new URL(path, output);
-    const chunk = componentBankSource.subarray(start, end);
+    const chunk = source.subarray(start, end);
     await mkdir(new URL(".", target), { recursive: true });
     await writeFile(target, chunk);
     parts.push({ path: `/${path}`, bytes: chunk.byteLength });
     start = end;
   }
-  const manifest = {
-    version: 1,
-    bytes: componentBankSource.byteLength,
-    parts,
-  };
-  const target = new URL("docs/reports/component-bank.csv.parts.json", output);
+  const manifest = { version: 1, bytes: source.byteLength, parts };
+  const target = new URL(`docs/reports/${filename}.parts.json`, output);
   await writeFile(target, JSON.stringify(manifest) + "\n");
 }
 
