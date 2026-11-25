@@ -6,6 +6,7 @@ on:
     paths:
       - "cloudflare/**"
       - "wrangler.toml"
+      - ".github/workflows/cloudflare-worker.yml"
       - "scripts/stage-account-preview.mjs"
       - "index.html"
       - "terminal-catalog.js"
