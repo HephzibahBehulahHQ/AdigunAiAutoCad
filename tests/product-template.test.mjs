@@ -54,6 +54,7 @@ test("floating BOT supports window controls, keyboard movement, and local prefer
 
 test("production Worker release uses protected credentials and verifies the route", () => {
   assert.match(deploy, /environment: cloudflare-production/);
+  assert.ok(deploy.includes(".github/workflows/cloudflare-worker.yml"));
   assert.ok(deploy.includes("secrets.CLOUDFLARE_API_TOKEN"));
   assert.ok(deploy.includes("vars.CLOUDFLARE_ACCOUNT_ID"));
   assert.match(deploy, /deploy --env production/);
