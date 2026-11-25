@@ -80,8 +80,8 @@ test("invalid messages, oversized bodies and non-POST methods are rejected", asy
 test("the Worker streams the component inventory from bounded static chunks", async () => {
   const encoder = new TextEncoder();
   const chunks = [
-    encoder.encode("id,name\\n"),
-    encoder.encode("1,Relay\\n"),
+    encoder.encode("id,name\n"),
+    encoder.encode("1,Relay\n"),
   ];
   const paths = chunks.map((_, index) =>
     `/docs/reports/component-bank.csv.part-${String(index + 1).padStart(3, "0")}`);
@@ -101,9 +101,9 @@ test("the Worker streams the component inventory from bounded static chunks", as
     { ASSETS: assets },
   );
   assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type"), /text\\/csv/);
+  assert.match(response.headers.get("content-type"), /text\/csv/);
   assert.equal(response.headers.get("content-length"), String(manifest.bytes));
-  assert.equal(await response.text(), "id,name\\n1,Relay\\n");
+  assert.equal(await response.text(), "id,name\n1,Relay\n");
 
   const head = await productWorker.fetch(
     new Request(`${origin}/docs/reports/component-bank.csv`, { method: "HEAD" }),
