@@ -77,3 +77,54 @@ test("invalid messages, oversized bodies and non-POST methods are rejected", asy
   assert.equal(method.status, 405);
 });
 
+test("the Worker streams the component inventory from bounded static chunks", async () => {
+  const encoder = new TextEncoder();
+  const chunks = [
+    encoder.encode("id,name\n"),
+    encoder.encode("1,Relay\n"),
+  ];
+  const paths = chunks.map((_, index) =>
+    `/docs/reports/component-bank.csv.part-${String(index + 1).padStart(3, "0")}`);
+  const manifest = {
+    version: 1,
+    bytes: chunks.reduce((total, chunk) => total + chunk.byteLength, 0),
+    parts: chunks.map((chunk, index) => ({ path: paths[index], bytes: chunk.byteLength })),
+  };
+  const responseFor = (path) => {
+    if (path === "/docs/reports/component-bank.csv.parts.json") return Response.json(manifest);
+    const index = paths.indexOf(path);
+    return index < 0 ? new Response(null, { status: 404 }) : new Response(chunks[index]);
+  };
+  const assets = { fetch: async (request) => responseFor(new URL(request.url).pathname) };
+  const response = await productWorker.fetch(
+    new Request(`${origin}/docs/reports/component-bank.csv`),
+    { ASSETS: assets },
+  );
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type"), /text\/csv/);
+  assert.equal(response.headers.get("content-length"), String(manifest.bytes));
+  assert.equal(await response.text(), "id,name\n1,Relay\n");
+
+  const head = await productWorker.fetch(
+    new Request(`${origin}/docs/reports/component-bank.csv`, { method: "HEAD" }),
+    { ASSETS: assets },
+  );
+  assert.equal(head.status, 200);
+  assert.equal(await head.text(), "");
+});
+
+test("the Worker rejects a component inventory manifest with a size mismatch", async () => {
+  const assets = {
+    fetch: async () => Response.json({
+      version: 1,
+      bytes: 100,
+      parts: [{ path: "/docs/reports/component-bank.csv.part-001", bytes: 12 }],
+    }),
+  };
+  const response = await productWorker.fetch(
+    new Request(`${origin}/docs/reports/component-bank.csv`),
+    { ASSETS: assets },
+  );
+  assert.equal(response.status, 502);
+});
+

@@ -61,3 +61,12 @@ test("production Worker release uses protected credentials and verifies the rout
   assert.ok(deploy.includes("adigunaiautocad.hephzibahbehulah.com/api/bot"));
   assert.ok(deploy.includes('test "$status" = "405"'));
 });
+
+test("Worker report assets stay below the per-file limit and keep the CSV URL", () => {
+  assert.match(stage, /chunkBytes = 8 \* 1024 \* 1024/);
+  assert.ok(stage.includes("component-bank.csv.parts.json"));
+  assert.ok(stage.includes("component-bank.csv.part-"));
+  const routes = [...wrangler.matchAll(/run_worker_first\s*=\s*\[([^\]]+)\]/g)].map((match) => match[1]);
+  assert.equal(routes.length, 2);
+  for (const route of routes) assert.ok(route.includes('"/docs/reports/component-bank.csv"'));
+});
