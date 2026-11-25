@@ -1,0 +1,55 @@
+name: Deploy AutoCAD product Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cloudflare/**"
+      - "wrangler.toml"
+      - "scripts/stage-account-preview.mjs"
+      - "index.html"
+      - "terminal-catalog.js"
+      - "cad-engine.js"
+      - "cad-dxf.js"
+      - "service-worker.js"
+      - "examples/**"
+      - "docs/reports/**"
+      - "vendor/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: adigunaiautocad-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: cloudflare-production
+    steps:
+      - name: Checkout product source
+        uses: actions/checkout@v4
+      - name: Stage the product Worker assets
+        run: node scripts/stage-account-preview.mjs
+      - name: Validate account, BOT and product template
+        run: node --test tests/product-account-worker.test.mjs tests/product-bot.test.mjs tests/product-template.test.mjs
+      - name: Check Worker entrypoints
+        run: |
+          node --check cloudflare/index.mjs
+          node --check cloudflare/account.mjs
+          node --check cloudflare/product-bot.mjs
+      - name: Deploy production Worker
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.136.3"
+          command: deploy --env production
+      - name: Verify the deployed BOT route
+        run: |
+          status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' https://adigunaiautocad.hephzibahbehulah.com/api/bot)"
+          test "$status" = "405"
+
